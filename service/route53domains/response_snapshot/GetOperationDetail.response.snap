@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Domains_v20140515.GetOperationDetail
+
+{"DomainName":"__DomainName__","LastUpdatedDate":946684800,"Message":"__Message__","OperationId":"__OperationId__","Status":"SUBMITTED","StatusFlag":"PENDING_ACCEPTANCE","SubmittedDate":946684800,"Type":"REGISTER_DOMAIN"}

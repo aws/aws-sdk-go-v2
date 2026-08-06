@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSFMS_20180101.ListComplianceStatus
+
+{"NextToken":"__NextToken__","PolicyComplianceStatusList":[{"EvaluationResults":[{"ComplianceStatus":"COMPLIANT","EvaluationLimitExceeded":true,"ViolatorCount":1},{"ComplianceStatus":"COMPLIANT","EvaluationLimitExceeded":true,"ViolatorCount":1}],"IssueInfoMap":{"key0":"__Value__"},"LastUpdated":946684800,"MemberAccount":"__MemberAccount__","PolicyId":"__PolicyId__","PolicyName":"__PolicyName__","PolicyOwner":"__PolicyOwner__"},{"EvaluationResults":[{"ComplianceStatus":"COMPLIANT","EvaluationLimitExceeded":true,"ViolatorCount":1},{"ComplianceStatus":"COMPLIANT","EvaluationLimitExceeded":true,"ViolatorCount":1}],"IssueInfoMap":{"key0":"__Value__"},"LastUpdated":946684800,"MemberAccount":"__MemberAccount__","PolicyId":"__PolicyId__","PolicyName":"__PolicyName__","PolicyOwner":"__PolicyOwner__"}]}

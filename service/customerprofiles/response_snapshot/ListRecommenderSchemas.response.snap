@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RecommenderSchemas":[{"CreatedAt":946684800,"Fields":{"key0":[{"ContentType":"STRING","FeatureType":"TEXTUAL","TargetFieldName":"__TargetFieldName__"},{"ContentType":"STRING","FeatureType":"TEXTUAL","TargetFieldName":"__TargetFieldName__"}]},"RecommenderSchemaName":"__RecommenderSchemaName__","Status":"ACTIVE"},{"CreatedAt":946684800,"Fields":{"key0":[{"ContentType":"STRING","FeatureType":"TEXTUAL","TargetFieldName":"__TargetFieldName__"},{"ContentType":"STRING","FeatureType":"TEXTUAL","TargetFieldName":"__TargetFieldName__"}]},"RecommenderSchemaName":"__RecommenderSchemaName__","Status":"ACTIVE"}]}

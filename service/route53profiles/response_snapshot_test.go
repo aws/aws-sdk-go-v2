@@ -129,7 +129,21 @@ func TestCheckResponseSnapshot_AssociateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateProfile(context.Background(), &AssociateProfileInput{})
+	got, err := svc.AssociateProfile(context.Background(), &AssociateProfileInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		Name:       ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +176,12 @@ func TestCheckResponseSnapshot_AssociateResourceToProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateResourceToProfile(context.Background(), &AssociateResourceToProfileInput{})
+	got, err := svc.AssociateResourceToProfile(context.Background(), &AssociateResourceToProfileInput{
+		ProfileId:          ptr.String("__ProfileId__"),
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		Name:               ptr.String("__Name__"),
+		ResourceProperties: ptr.String("__ResourceProperties__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -194,7 +213,20 @@ func TestCheckResponseSnapshot_CreateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProfile(context.Background(), &CreateProfileInput{})
+	got, err := svc.CreateProfile(context.Background(), &CreateProfileInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,7 +258,9 @@ func TestCheckResponseSnapshot_DeleteProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProfile(context.Background(), &DeleteProfileInput{})
+	got, err := svc.DeleteProfile(context.Background(), &DeleteProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -257,7 +291,10 @@ func TestCheckResponseSnapshot_DisassociateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateProfile(context.Background(), &DisassociateProfileInput{})
+	got, err := svc.DisassociateProfile(context.Background(), &DisassociateProfileInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -290,7 +327,10 @@ func TestCheckResponseSnapshot_DisassociateResourceFromProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateResourceFromProfile(context.Background(), &DisassociateResourceFromProfileInput{})
+	got, err := svc.DisassociateResourceFromProfile(context.Background(), &DisassociateResourceFromProfileInput{
+		ProfileId:   ptr.String("__ProfileId__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +362,9 @@ func TestCheckResponseSnapshot_GetProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfile(context.Background(), &GetProfileInput{})
+	got, err := svc.GetProfile(context.Background(), &GetProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -353,7 +395,9 @@ func TestCheckResponseSnapshot_GetProfileAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfileAssociation(context.Background(), &GetProfileAssociationInput{})
+	got, err := svc.GetProfileAssociation(context.Background(), &GetProfileAssociationInput{
+		ProfileAssociationId: ptr.String("__ProfileAssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -386,7 +430,9 @@ func TestCheckResponseSnapshot_GetProfileResourceAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfileResourceAssociation(context.Background(), &GetProfileResourceAssociationInput{})
+	got, err := svc.GetProfileResourceAssociation(context.Background(), &GetProfileResourceAssociationInput{
+		ProfileResourceAssociationId: ptr.String("__ProfileResourceAssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -431,7 +477,12 @@ func TestCheckResponseSnapshot_ListProfileAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfileAssociations(context.Background(), &ListProfileAssociationsInput{})
+	got, err := svc.ListProfileAssociations(context.Background(), &ListProfileAssociationsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		ProfileId:  ptr.String("__ProfileId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -480,7 +531,12 @@ func TestCheckResponseSnapshot_ListProfileResourceAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfileResourceAssociations(context.Background(), &ListProfileResourceAssociationsInput{})
+	got, err := svc.ListProfileResourceAssociations(context.Background(), &ListProfileResourceAssociationsInput{
+		ProfileId:    ptr.String("__ProfileId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -515,7 +571,10 @@ func TestCheckResponseSnapshot_ListProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfiles(context.Background(), &ListProfilesInput{})
+	got, err := svc.ListProfiles(context.Background(), &ListProfilesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -538,7 +597,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -557,7 +618,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -576,7 +642,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -609,7 +681,11 @@ func TestCheckResponseSnapshot_UpdateProfileResourceAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProfileResourceAssociation(context.Background(), &UpdateProfileResourceAssociationInput{})
+	got, err := svc.UpdateProfileResourceAssociation(context.Background(), &UpdateProfileResourceAssociationInput{
+		ProfileResourceAssociationId: ptr.String("__ProfileResourceAssociationId__"),
+		Name:                         ptr.String("__Name__"),
+		ResourceProperties:           ptr.String("__ResourceProperties__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -630,7 +706,21 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{})
+	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		Name:       ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -655,7 +745,21 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{})
+	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		Name:       ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -680,7 +784,12 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResourceToProfile(context.Background(), &AssociateResourceToProfileInput{})
+	_, opErr := svc.AssociateResourceToProfile(context.Background(), &AssociateResourceToProfileInput{
+		ProfileId:          ptr.String("__ProfileId__"),
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		Name:               ptr.String("__Name__"),
+		ResourceProperties: ptr.String("__ResourceProperties__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -705,7 +814,12 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListProfileAssociations(context.Background(), &ListProfileAssociationsInput{})
+	_, opErr := svc.ListProfileAssociations(context.Background(), &ListProfileAssociationsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		ProfileId:  ptr.String("__ProfileId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -731,7 +845,21 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{})
+	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		Name:       ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -757,7 +885,21 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{})
+	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		Name:       ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -783,7 +925,21 @@ func TestCheckResponseSnapshot_Error_ResourceExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{})
+	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		Name:       ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -809,7 +965,21 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{})
+	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		Name:       ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -834,7 +1004,21 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{})
+	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		Name:       ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -859,7 +1043,21 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{})
+	_, opErr := svc.AssociateProfile(context.Background(), &AssociateProfileInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		Name:       ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"CreatedAt":946684800,"DomainName":"__DomainName__","EventTriggerNames":["__Member__","__Member__"],"IsUnstructured":true,"LastUpdatedAt":946684800,"ObjectTypeName":"__ObjectTypeName__","ObjectTypeNames":{"key0":"__Value__"},"RoleArn":"__RoleArn__","Scope":"PROFILE","Tags":{"key0":"__Value__"},"Uri":"__Uri__","WorkflowId":"__WorkflowId__"},{"CreatedAt":946684800,"DomainName":"__DomainName__","EventTriggerNames":["__Member__","__Member__"],"IsUnstructured":true,"LastUpdatedAt":946684800,"ObjectTypeName":"__ObjectTypeName__","ObjectTypeNames":{"key0":"__Value__"},"RoleArn":"__RoleArn__","Scope":"PROFILE","Tags":{"key0":"__Value__"},"Uri":"__Uri__","WorkflowId":"__WorkflowId__"}],"NextToken":"__NextToken__"}

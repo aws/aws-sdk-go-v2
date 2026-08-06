@@ -176,7 +176,9 @@ func TestCheckResponseSnapshot_EndpointWithHostLabelOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EndpointWithHostLabelOperation(context.Background(), &EndpointWithHostLabelOperationInput{})
+	got, err := svc.EndpointWithHostLabelOperation(context.Background(), &EndpointWithHostLabelOperationInput{
+		Label: ptr.String("Label-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +348,13 @@ func TestCheckResponseSnapshot_NestedStructures(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NestedStructures(context.Background(), &NestedStructuresInput{})
+	got, err := svc.NestedStructures(context.Background(), &NestedStructuresInput{
+		Nested: &types.StructArg{
+			StringArg:    ptr.String("__StringArg__"),
+			OtherArg:     ptr.Bool(true),
+			RecursiveArg: nil,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -403,7 +411,10 @@ func TestCheckResponseSnapshot_PutWithContentEncoding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutWithContentEncoding(context.Background(), &PutWithContentEncodingInput{})
+	got, err := svc.PutWithContentEncoding(context.Background(), &PutWithContentEncodingInput{
+		Encoding: ptr.String("__Encoding__"),
+		Data:     ptr.String("__Data__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -422,7 +433,9 @@ func TestCheckResponseSnapshot_QueryIdempotencyTokenAutoFill(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryIdempotencyTokenAutoFill(context.Background(), &QueryIdempotencyTokenAutoFillInput{})
+	got, err := svc.QueryIdempotencyTokenAutoFill(context.Background(), &QueryIdempotencyTokenAutoFillInput{
+		Token: ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -441,7 +454,38 @@ func TestCheckResponseSnapshot_QueryLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryLists(context.Background(), &QueryListsInput{})
+	got, err := svc.QueryLists(context.Background(), &QueryListsInput{
+		ListArg: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ComplexListArg: []types.GreetingStruct{
+			{
+				Hi: ptr.String("__Hi__"),
+			},
+			{
+				Hi: ptr.String("__Hi__"),
+			},
+		},
+		FlattenedListArg: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ListArgWithXmlNameMember: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FlattenedListArgWithXmlName: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NestedWithList: &types.NestedStructWithList{
+			ListArg: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -460,7 +504,39 @@ func TestCheckResponseSnapshot_QueryMaps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryMaps(context.Background(), &QueryMapsInput{})
+	got, err := svc.QueryMaps(context.Background(), &QueryMapsInput{
+		MapArg: map[string]string{
+			"key0": "__Value__",
+		},
+		RenamedMapArg: map[string]string{
+			"key0": "__Value__",
+		},
+		ComplexMapArg: map[string]types.GreetingStruct{
+			"key0": {
+				Hi: ptr.String("__Hi__"),
+			},
+		},
+		MapWithXmlMemberName: map[string]string{
+			"key0": "__Value__",
+		},
+		FlattenedMap: map[string]string{
+			"key0": "__Value__",
+		},
+		FlattenedMapWithXmlName: map[string]string{
+			"key0": "__Value__",
+		},
+		MapOfLists: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NestedStructWithMap: &types.NestedStructWithMap{
+			MapArg: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -479,7 +555,11 @@ func TestCheckResponseSnapshot_QueryTimestamps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryTimestamps(context.Background(), &QueryTimestampsInput{})
+	got, err := svc.QueryTimestamps(context.Background(), &QueryTimestampsInput{
+		NormalFormat: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EpochMember:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EpochTarget:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -525,7 +605,17 @@ func TestCheckResponseSnapshot_SimpleInputParams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SimpleInputParams(context.Background(), &SimpleInputParamsInput{})
+	got, err := svc.SimpleInputParams(context.Background(), &SimpleInputParamsInput{
+		Foo:         ptr.String("__Foo__"),
+		Bar:         ptr.String("__Bar__"),
+		Baz:         ptr.Bool(true),
+		Bam:         ptr.Int32(1),
+		FloatValue:  ptr.Float32(1.0),
+		Boo:         ptr.Float64(1.0),
+		Qux:         []byte("blob"),
+		FooEnum:     types.FooEnum("Foo"),
+		IntegerEnum: types.IntegerEnum(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}

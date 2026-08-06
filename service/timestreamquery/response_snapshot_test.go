@@ -119,7 +119,9 @@ func TestCheckResponseSnapshot_CancelQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	got, err := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +142,109 @@ func TestCheckResponseSnapshot_CreateScheduledQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateScheduledQuery(context.Background(), &CreateScheduledQueryInput{})
+	got, err := svc.CreateScheduledQuery(context.Background(), &CreateScheduledQueryInput{
+		Name:        ptr.String("__Name__"),
+		QueryString: ptr.String("__QueryString__"),
+		ScheduleConfiguration: &types.ScheduleConfiguration{
+			ScheduleExpression: ptr.String("__ScheduleExpression__"),
+		},
+		NotificationConfiguration: &types.NotificationConfiguration{
+			SnsConfiguration: &types.SnsConfiguration{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+		},
+		TargetConfiguration: &types.TargetConfiguration{
+			TimestreamConfiguration: &types.TimestreamConfiguration{
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+				TimeColumn:   ptr.String("__TimeColumn__"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						Name:               ptr.String("__Name__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+					{
+						Name:               ptr.String("__Name__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+				},
+				MultiMeasureMappings: &types.MultiMeasureMappings{
+					TargetMultiMeasureName: ptr.String("__TargetMultiMeasureName__"),
+					MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+						},
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+						},
+					},
+				},
+				MixedMeasureMappings: []types.MixedMeasureMapping{
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("BIGINT"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+							},
+						},
+					},
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("BIGINT"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+							},
+						},
+					},
+				},
+				MeasureNameColumn: ptr.String("__MeasureNameColumn__"),
+			},
+		},
+		ClientToken:                    ptr.String("__ClientToken__"),
+		ScheduledQueryExecutionRoleArn: ptr.String("__ScheduledQueryExecutionRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		ErrorReportConfiguration: &types.ErrorReportConfiguration{
+			S3Configuration: &types.S3Configuration{
+				BucketName:       ptr.String("__BucketName__"),
+				ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+				EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +263,9 @@ func TestCheckResponseSnapshot_DeleteScheduledQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScheduledQuery(context.Background(), &DeleteScheduledQueryInput{})
+	got, err := svc.DeleteScheduledQuery(context.Background(), &DeleteScheduledQueryInput{
+		ScheduledQueryArn: ptr.String("__ScheduledQueryArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +576,9 @@ func TestCheckResponseSnapshot_DescribeScheduledQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScheduledQuery(context.Background(), &DescribeScheduledQueryInput{})
+	got, err := svc.DescribeScheduledQuery(context.Background(), &DescribeScheduledQueryInput{
+		ScheduledQueryArn: ptr.String("__ScheduledQueryArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -489,7 +597,14 @@ func TestCheckResponseSnapshot_ExecuteScheduledQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteScheduledQuery(context.Background(), &ExecuteScheduledQueryInput{})
+	got, err := svc.ExecuteScheduledQuery(context.Background(), &ExecuteScheduledQueryInput{
+		ScheduledQueryArn: ptr.String("__ScheduledQueryArn__"),
+		InvocationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:       ptr.String("__ClientToken__"),
+		QueryInsights: &types.ScheduledQueryInsights{
+			Mode: types.ScheduledQueryInsightsMode("ENABLED_WITH_RATE_CONTROL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -556,7 +671,10 @@ func TestCheckResponseSnapshot_ListScheduledQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListScheduledQueries(context.Background(), &ListScheduledQueriesInput{})
+	got, err := svc.ListScheduledQueries(context.Background(), &ListScheduledQueriesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -587,7 +705,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -714,7 +836,10 @@ func TestCheckResponseSnapshot_PrepareQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PrepareQuery(context.Background(), &PrepareQueryInput{})
+	got, err := svc.PrepareQuery(context.Background(), &PrepareQueryInput{
+		QueryString:  ptr.String("__QueryString__"),
+		ValidateOnly: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -877,7 +1002,15 @@ func TestCheckResponseSnapshot_Query(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Query(context.Background(), &QueryInput{})
+	got, err := svc.Query(context.Background(), &QueryInput{
+		QueryString: ptr.String("__QueryString__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxRows:     ptr.Int32(1),
+		QueryInsights: &types.QueryInsights{
+			Mode: types.QueryInsightsMode("ENABLED_WITH_RATE_CONTROL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -896,7 +1029,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -915,7 +1060,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -954,7 +1105,22 @@ func TestCheckResponseSnapshot_UpdateAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{})
+	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{
+		MaxQueryTCU:       ptr.Int32(1),
+		QueryPricingModel: types.QueryPricingModel("BYTES_SCANNED"),
+		QueryCompute: &types.QueryComputeRequest{
+			ComputeMode: types.ComputeMode("ON_DEMAND"),
+			ProvisionedCapacity: &types.ProvisionedCapacityRequest{
+				TargetQueryTCU: ptr.Int32(1),
+				NotificationConfiguration: &types.AccountSettingsNotificationConfiguration{
+					SnsConfiguration: &types.SnsConfiguration{
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -973,7 +1139,10 @@ func TestCheckResponseSnapshot_UpdateScheduledQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateScheduledQuery(context.Background(), &UpdateScheduledQueryInput{})
+	got, err := svc.UpdateScheduledQuery(context.Background(), &UpdateScheduledQueryInput{
+		ScheduledQueryArn: ptr.String("__ScheduledQueryArn__"),
+		State:             types.ScheduledQueryState("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -994,7 +1163,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1019,7 +1190,109 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateScheduledQuery(context.Background(), &CreateScheduledQueryInput{})
+	_, opErr := svc.CreateScheduledQuery(context.Background(), &CreateScheduledQueryInput{
+		Name:        ptr.String("__Name__"),
+		QueryString: ptr.String("__QueryString__"),
+		ScheduleConfiguration: &types.ScheduleConfiguration{
+			ScheduleExpression: ptr.String("__ScheduleExpression__"),
+		},
+		NotificationConfiguration: &types.NotificationConfiguration{
+			SnsConfiguration: &types.SnsConfiguration{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+		},
+		TargetConfiguration: &types.TargetConfiguration{
+			TimestreamConfiguration: &types.TimestreamConfiguration{
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+				TimeColumn:   ptr.String("__TimeColumn__"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						Name:               ptr.String("__Name__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+					{
+						Name:               ptr.String("__Name__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+				},
+				MultiMeasureMappings: &types.MultiMeasureMappings{
+					TargetMultiMeasureName: ptr.String("__TargetMultiMeasureName__"),
+					MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+						},
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+						},
+					},
+				},
+				MixedMeasureMappings: []types.MixedMeasureMapping{
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("BIGINT"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+							},
+						},
+					},
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("BIGINT"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+							},
+						},
+					},
+				},
+				MeasureNameColumn: ptr.String("__MeasureNameColumn__"),
+			},
+		},
+		ClientToken:                    ptr.String("__ClientToken__"),
+		ScheduledQueryExecutionRoleArn: ptr.String("__ScheduledQueryExecutionRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		ErrorReportConfiguration: &types.ErrorReportConfiguration{
+			S3Configuration: &types.S3Configuration{
+				BucketName:       ptr.String("__BucketName__"),
+				ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+				EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1044,7 +1317,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1069,7 +1344,9 @@ func TestCheckResponseSnapshot_Error_InvalidEndpointException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1094,7 +1371,15 @@ func TestCheckResponseSnapshot_Error_QueryExecutionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Query(context.Background(), &QueryInput{})
+	_, opErr := svc.Query(context.Background(), &QueryInput{
+		QueryString: ptr.String("__QueryString__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxRows:     ptr.Int32(1),
+		QueryInsights: &types.QueryInsights{
+			Mode: types.QueryInsightsMode("ENABLED_WITH_RATE_CONTROL"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1120,7 +1405,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteScheduledQuery(context.Background(), &DeleteScheduledQueryInput{})
+	_, opErr := svc.DeleteScheduledQuery(context.Background(), &DeleteScheduledQueryInput{
+		ScheduledQueryArn: ptr.String("__ScheduledQueryArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1145,7 +1432,109 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateScheduledQuery(context.Background(), &CreateScheduledQueryInput{})
+	_, opErr := svc.CreateScheduledQuery(context.Background(), &CreateScheduledQueryInput{
+		Name:        ptr.String("__Name__"),
+		QueryString: ptr.String("__QueryString__"),
+		ScheduleConfiguration: &types.ScheduleConfiguration{
+			ScheduleExpression: ptr.String("__ScheduleExpression__"),
+		},
+		NotificationConfiguration: &types.NotificationConfiguration{
+			SnsConfiguration: &types.SnsConfiguration{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+		},
+		TargetConfiguration: &types.TargetConfiguration{
+			TimestreamConfiguration: &types.TimestreamConfiguration{
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+				TimeColumn:   ptr.String("__TimeColumn__"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						Name:               ptr.String("__Name__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+					{
+						Name:               ptr.String("__Name__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+				},
+				MultiMeasureMappings: &types.MultiMeasureMappings{
+					TargetMultiMeasureName: ptr.String("__TargetMultiMeasureName__"),
+					MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+						},
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+						},
+					},
+				},
+				MixedMeasureMappings: []types.MixedMeasureMapping{
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("BIGINT"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+							},
+						},
+					},
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("BIGINT"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("BIGINT"),
+							},
+						},
+					},
+				},
+				MeasureNameColumn: ptr.String("__MeasureNameColumn__"),
+			},
+		},
+		ClientToken:                    ptr.String("__ClientToken__"),
+		ScheduledQueryExecutionRoleArn: ptr.String("__ScheduledQueryExecutionRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		ErrorReportConfiguration: &types.ErrorReportConfiguration{
+			S3Configuration: &types.S3Configuration{
+				BucketName:       ptr.String("__BucketName__"),
+				ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+				EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1170,7 +1559,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1195,7 +1586,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

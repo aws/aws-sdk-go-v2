@@ -153,7 +153,34 @@ func TestCheckResponseSnapshot_GetEstimatedCarbonEmissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEstimatedCarbonEmissions(context.Background(), &GetEstimatedCarbonEmissionsInput{})
+	got, err := svc.GetEstimatedCarbonEmissions(context.Background(), &GetEstimatedCarbonEmissionsInput{
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		GroupBy: []types.Dimension{
+			types.Dimension("USAGE_ACCOUNT_ID"),
+			types.Dimension("USAGE_ACCOUNT_ID"),
+		},
+		FilterBy: &types.FilterExpression{
+			Dimensions: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		EmissionsTypes: []types.EmissionsType{
+			types.EmissionsType("TOTAL_LBM_CARBON_EMISSIONS"),
+			types.EmissionsType("TOTAL_LBM_CARBON_EMISSIONS"),
+		},
+		Granularity: types.TimeGranularity("YEARLY_CALENDAR"),
+		GranularityConfiguration: &types.GranularityConfiguration{
+			FiscalYearStartMonth: ptr.Int32(1),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +211,18 @@ func TestCheckResponseSnapshot_GetEstimatedCarbonEmissionsDimensionValues(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEstimatedCarbonEmissionsDimensionValues(context.Background(), &GetEstimatedCarbonEmissionsDimensionValuesInput{})
+	got, err := svc.GetEstimatedCarbonEmissionsDimensionValues(context.Background(), &GetEstimatedCarbonEmissionsDimensionValuesInput{
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Dimensions: []types.Dimension{
+			types.Dimension("USAGE_ACCOUNT_ID"),
+			types.Dimension("USAGE_ACCOUNT_ID"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -239,7 +277,31 @@ func TestCheckResponseSnapshot_GetEstimatedWaterAllocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEstimatedWaterAllocation(context.Background(), &GetEstimatedWaterAllocationInput{})
+	got, err := svc.GetEstimatedWaterAllocation(context.Background(), &GetEstimatedWaterAllocationInput{
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		GroupBy: []types.Dimension{
+			types.Dimension("USAGE_ACCOUNT_ID"),
+			types.Dimension("USAGE_ACCOUNT_ID"),
+		},
+		FilterBy: &types.FilterExpression{
+			Dimensions: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AllocationTypes: []types.WaterAllocationType{
+			types.WaterAllocationType("TOTAL_WATER_WITHDRAWALS"),
+			types.WaterAllocationType("TOTAL_WATER_WITHDRAWALS"),
+		},
+		Granularity: types.TimeGranularity("YEARLY_CALENDAR"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +332,18 @@ func TestCheckResponseSnapshot_GetEstimatedWaterAllocationDimensionValues(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEstimatedWaterAllocationDimensionValues(context.Background(), &GetEstimatedWaterAllocationDimensionValuesInput{})
+	got, err := svc.GetEstimatedWaterAllocationDimensionValues(context.Background(), &GetEstimatedWaterAllocationDimensionValuesInput{
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Dimensions: []types.Dimension{
+			types.Dimension("USAGE_ACCOUNT_ID"),
+			types.Dimension("USAGE_ACCOUNT_ID"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -291,7 +364,34 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetEstimatedCarbonEmissions(context.Background(), &GetEstimatedCarbonEmissionsInput{})
+	_, opErr := svc.GetEstimatedCarbonEmissions(context.Background(), &GetEstimatedCarbonEmissionsInput{
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		GroupBy: []types.Dimension{
+			types.Dimension("USAGE_ACCOUNT_ID"),
+			types.Dimension("USAGE_ACCOUNT_ID"),
+		},
+		FilterBy: &types.FilterExpression{
+			Dimensions: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		EmissionsTypes: []types.EmissionsType{
+			types.EmissionsType("TOTAL_LBM_CARBON_EMISSIONS"),
+			types.EmissionsType("TOTAL_LBM_CARBON_EMISSIONS"),
+		},
+		Granularity: types.TimeGranularity("YEARLY_CALENDAR"),
+		GranularityConfiguration: &types.GranularityConfiguration{
+			FiscalYearStartMonth: ptr.Int32(1),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -316,7 +416,34 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetEstimatedCarbonEmissions(context.Background(), &GetEstimatedCarbonEmissionsInput{})
+	_, opErr := svc.GetEstimatedCarbonEmissions(context.Background(), &GetEstimatedCarbonEmissionsInput{
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		GroupBy: []types.Dimension{
+			types.Dimension("USAGE_ACCOUNT_ID"),
+			types.Dimension("USAGE_ACCOUNT_ID"),
+		},
+		FilterBy: &types.FilterExpression{
+			Dimensions: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		EmissionsTypes: []types.EmissionsType{
+			types.EmissionsType("TOTAL_LBM_CARBON_EMISSIONS"),
+			types.EmissionsType("TOTAL_LBM_CARBON_EMISSIONS"),
+		},
+		Granularity: types.TimeGranularity("YEARLY_CALENDAR"),
+		GranularityConfiguration: &types.GranularityConfiguration{
+			FiscalYearStartMonth: ptr.Int32(1),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -341,7 +468,34 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetEstimatedCarbonEmissions(context.Background(), &GetEstimatedCarbonEmissionsInput{})
+	_, opErr := svc.GetEstimatedCarbonEmissions(context.Background(), &GetEstimatedCarbonEmissionsInput{
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		GroupBy: []types.Dimension{
+			types.Dimension("USAGE_ACCOUNT_ID"),
+			types.Dimension("USAGE_ACCOUNT_ID"),
+		},
+		FilterBy: &types.FilterExpression{
+			Dimensions: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		EmissionsTypes: []types.EmissionsType{
+			types.EmissionsType("TOTAL_LBM_CARBON_EMISSIONS"),
+			types.EmissionsType("TOTAL_LBM_CARBON_EMISSIONS"),
+		},
+		Granularity: types.TimeGranularity("YEARLY_CALENDAR"),
+		GranularityConfiguration: &types.GranularityConfiguration{
+			FiscalYearStartMonth: ptr.Int32(1),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -366,7 +520,34 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetEstimatedCarbonEmissions(context.Background(), &GetEstimatedCarbonEmissionsInput{})
+	_, opErr := svc.GetEstimatedCarbonEmissions(context.Background(), &GetEstimatedCarbonEmissionsInput{
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		GroupBy: []types.Dimension{
+			types.Dimension("USAGE_ACCOUNT_ID"),
+			types.Dimension("USAGE_ACCOUNT_ID"),
+		},
+		FilterBy: &types.FilterExpression{
+			Dimensions: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		EmissionsTypes: []types.EmissionsType{
+			types.EmissionsType("TOTAL_LBM_CARBON_EMISSIONS"),
+			types.EmissionsType("TOTAL_LBM_CARBON_EMISSIONS"),
+		},
+		Granularity: types.TimeGranularity("YEARLY_CALENDAR"),
+		GranularityConfiguration: &types.GranularityConfiguration{
+			FiscalYearStartMonth: ptr.Int32(1),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

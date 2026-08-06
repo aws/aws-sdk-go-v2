@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"evaluators":[{"createdAt":946684800,"description":"__Description__","evaluatorArn":"__EvaluatorArn__","evaluatorId":"__EvaluatorId__","evaluatorName":"__EvaluatorName__","evaluatorType":"Builtin","kmsKeyArn":"__KmsKeyArn__","level":"TOOL_CALL","lockedForModification":true,"status":"ACTIVE","updatedAt":946684800},{"createdAt":946684800,"description":"__Description__","evaluatorArn":"__EvaluatorArn__","evaluatorId":"__EvaluatorId__","evaluatorName":"__EvaluatorName__","evaluatorType":"Builtin","kmsKeyArn":"__KmsKeyArn__","level":"TOOL_CALL","lockedForModification":true,"status":"ACTIVE","updatedAt":946684800}],"nextToken":"__NextToken__"}

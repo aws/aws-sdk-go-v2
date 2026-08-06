@@ -121,7 +121,24 @@ func TestCheckResponseSnapshot_CreateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetSchema: &types.DatasetSchema{
+			InlineDataSchema: ptr.String("__InlineDataSchema__"),
+		},
+		ServerSideKmsKeyId: ptr.String("__ServerSideKmsKeyId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -145,7 +162,43 @@ func TestCheckResponseSnapshot_CreateInferenceScheduler(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInferenceScheduler(context.Background(), &CreateInferenceSchedulerInput{})
+	got, err := svc.CreateInferenceScheduler(context.Background(), &CreateInferenceSchedulerInput{
+		ModelName:                ptr.String("__ModelName__"),
+		InferenceSchedulerName:   ptr.String("__InferenceSchedulerName__"),
+		DataDelayOffsetInMinutes: ptr.Int64(1),
+		DataUploadFrequency:      types.DataUploadFrequency("PT5M"),
+		DataInputConfiguration: &types.InferenceInputConfiguration{
+			S3InputConfiguration: &types.InferenceS3InputConfiguration{
+				Bucket: ptr.String("__Bucket__"),
+				Prefix: ptr.String("__Prefix__"),
+			},
+			InputTimeZoneOffset: ptr.String("__InputTimeZoneOffset__"),
+			InferenceInputNameConfiguration: &types.InferenceInputNameConfiguration{
+				TimestampFormat:             ptr.String("__TimestampFormat__"),
+				ComponentTimestampDelimiter: ptr.String("__ComponentTimestampDelimiter__"),
+			},
+		},
+		DataOutputConfiguration: &types.InferenceOutputConfiguration{
+			S3OutputConfiguration: &types.InferenceS3OutputConfiguration{
+				Bucket: ptr.String("__Bucket__"),
+				Prefix: ptr.String("__Prefix__"),
+			},
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		RoleArn:            ptr.String("__RoleArn__"),
+		ServerSideKmsKeyId: ptr.String("__ServerSideKmsKeyId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -166,7 +219,16 @@ func TestCheckResponseSnapshot_CreateLabel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLabel(context.Background(), &CreateLabelInput{})
+	got, err := svc.CreateLabel(context.Background(), &CreateLabelInput{
+		LabelGroupName: ptr.String("__LabelGroupName__"),
+		StartTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Rating:         types.LabelRating("ANOMALY"),
+		FaultCode:      ptr.String("__FaultCode__"),
+		Notes:          ptr.String("__Notes__"),
+		Equipment:      ptr.String("__Equipment__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +250,24 @@ func TestCheckResponseSnapshot_CreateLabelGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLabelGroup(context.Background(), &CreateLabelGroupInput{})
+	got, err := svc.CreateLabelGroup(context.Background(), &CreateLabelGroupInput{
+		LabelGroupName: ptr.String("__LabelGroupName__"),
+		FaultCodes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -210,7 +289,48 @@ func TestCheckResponseSnapshot_CreateModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateModel(context.Background(), &CreateModelInput{})
+	got, err := svc.CreateModel(context.Background(), &CreateModelInput{
+		ModelName:   ptr.String("__ModelName__"),
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetSchema: &types.DatasetSchema{
+			InlineDataSchema: ptr.String("__InlineDataSchema__"),
+		},
+		LabelsInputConfiguration: &types.LabelsInputConfiguration{
+			S3InputConfiguration: &types.LabelsS3InputConfiguration{
+				Bucket: ptr.String("__Bucket__"),
+				Prefix: ptr.String("__Prefix__"),
+			},
+			LabelGroupName: ptr.String("__LabelGroupName__"),
+		},
+		ClientToken:             ptr.String("__ClientToken__"),
+		TrainingDataStartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TrainingDataEndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EvaluationDataStartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EvaluationDataEndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RoleArn:                 ptr.String("__RoleArn__"),
+		DataPreProcessingConfiguration: &types.DataPreProcessingConfiguration{
+			TargetSamplingRate: types.TargetSamplingRate("PT1S"),
+		},
+		ServerSideKmsKeyId: ptr.String("__ServerSideKmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		OffCondition: ptr.String("__OffCondition__"),
+		ModelDiagnosticsOutputConfiguration: &types.ModelDiagnosticsOutputConfiguration{
+			S3OutputConfiguration: &types.ModelDiagnosticsS3OutputConfiguration{
+				Bucket: ptr.String("__Bucket__"),
+				Prefix: ptr.String("__Prefix__"),
+			},
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -233,7 +353,14 @@ func TestCheckResponseSnapshot_CreateRetrainingScheduler(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRetrainingScheduler(context.Background(), &CreateRetrainingSchedulerInput{})
+	got, err := svc.CreateRetrainingScheduler(context.Background(), &CreateRetrainingSchedulerInput{
+		ModelName:           ptr.String("__ModelName__"),
+		RetrainingStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RetrainingFrequency: ptr.String("__RetrainingFrequency__"),
+		LookbackWindow:      ptr.String("__LookbackWindow__"),
+		PromoteMode:         types.ModelPromoteMode("MANAGED"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +379,9 @@ func TestCheckResponseSnapshot_DeleteDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{})
+	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{
+		DatasetName: ptr.String("__DatasetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -271,7 +400,9 @@ func TestCheckResponseSnapshot_DeleteInferenceScheduler(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInferenceScheduler(context.Background(), &DeleteInferenceSchedulerInput{})
+	got, err := svc.DeleteInferenceScheduler(context.Background(), &DeleteInferenceSchedulerInput{
+		InferenceSchedulerName: ptr.String("__InferenceSchedulerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -290,7 +421,10 @@ func TestCheckResponseSnapshot_DeleteLabel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLabel(context.Background(), &DeleteLabelInput{})
+	got, err := svc.DeleteLabel(context.Background(), &DeleteLabelInput{
+		LabelGroupName: ptr.String("__LabelGroupName__"),
+		LabelId:        ptr.String("__LabelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -309,7 +443,9 @@ func TestCheckResponseSnapshot_DeleteLabelGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLabelGroup(context.Background(), &DeleteLabelGroupInput{})
+	got, err := svc.DeleteLabelGroup(context.Background(), &DeleteLabelGroupInput{
+		LabelGroupName: ptr.String("__LabelGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -328,7 +464,9 @@ func TestCheckResponseSnapshot_DeleteModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteModel(context.Background(), &DeleteModelInput{})
+	got, err := svc.DeleteModel(context.Background(), &DeleteModelInput{
+		ModelName: ptr.String("__ModelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -347,7 +485,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -366,7 +506,9 @@ func TestCheckResponseSnapshot_DeleteRetrainingScheduler(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRetrainingScheduler(context.Background(), &DeleteRetrainingSchedulerInput{})
+	got, err := svc.DeleteRetrainingScheduler(context.Background(), &DeleteRetrainingSchedulerInput{
+		ModelName: ptr.String("__ModelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -442,7 +584,9 @@ func TestCheckResponseSnapshot_DescribeDataIngestionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataIngestionJob(context.Background(), &DescribeDataIngestionJobInput{})
+	got, err := svc.DescribeDataIngestionJob(context.Background(), &DescribeDataIngestionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -518,7 +662,9 @@ func TestCheckResponseSnapshot_DescribeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{})
+	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{
+		DatasetName: ptr.String("__DatasetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -568,7 +714,9 @@ func TestCheckResponseSnapshot_DescribeInferenceScheduler(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInferenceScheduler(context.Background(), &DescribeInferenceSchedulerInput{})
+	got, err := svc.DescribeInferenceScheduler(context.Background(), &DescribeInferenceSchedulerInput{
+		InferenceSchedulerName: ptr.String("__InferenceSchedulerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -598,7 +746,10 @@ func TestCheckResponseSnapshot_DescribeLabel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLabel(context.Background(), &DescribeLabelInput{})
+	got, err := svc.DescribeLabel(context.Background(), &DescribeLabelInput{
+		LabelGroupName: ptr.String("__LabelGroupName__"),
+		LabelId:        ptr.String("__LabelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -626,7 +777,9 @@ func TestCheckResponseSnapshot_DescribeLabelGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLabelGroup(context.Background(), &DescribeLabelGroupInput{})
+	got, err := svc.DescribeLabelGroup(context.Background(), &DescribeLabelGroupInput{
+		LabelGroupName: ptr.String("__LabelGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -702,7 +855,9 @@ func TestCheckResponseSnapshot_DescribeModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeModel(context.Background(), &DescribeModelInput{})
+	got, err := svc.DescribeModel(context.Background(), &DescribeModelInput{
+		ModelName: ptr.String("__ModelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -774,7 +929,10 @@ func TestCheckResponseSnapshot_DescribeModelVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeModelVersion(context.Background(), &DescribeModelVersionInput{})
+	got, err := svc.DescribeModelVersion(context.Background(), &DescribeModelVersionInput{
+		ModelName:    ptr.String("__ModelName__"),
+		ModelVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -798,7 +956,9 @@ func TestCheckResponseSnapshot_DescribeResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResourcePolicy(context.Background(), &DescribeResourcePolicyInput{})
+	got, err := svc.DescribeResourcePolicy(context.Background(), &DescribeResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -827,7 +987,9 @@ func TestCheckResponseSnapshot_DescribeRetrainingScheduler(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRetrainingScheduler(context.Background(), &DescribeRetrainingSchedulerInput{})
+	got, err := svc.DescribeRetrainingScheduler(context.Background(), &DescribeRetrainingSchedulerInput{
+		ModelName: ptr.String("__ModelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -851,7 +1013,22 @@ func TestCheckResponseSnapshot_ImportDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportDataset(context.Background(), &ImportDatasetInput{})
+	got, err := svc.ImportDataset(context.Background(), &ImportDatasetInput{
+		SourceDatasetArn:   ptr.String("__SourceDatasetArn__"),
+		DatasetName:        ptr.String("__DatasetName__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		ServerSideKmsKeyId: ptr.String("__ServerSideKmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -876,7 +1053,32 @@ func TestCheckResponseSnapshot_ImportModelVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportModelVersion(context.Background(), &ImportModelVersionInput{})
+	got, err := svc.ImportModelVersion(context.Background(), &ImportModelVersionInput{
+		SourceModelVersionArn: ptr.String("__SourceModelVersionArn__"),
+		ModelName:             ptr.String("__ModelName__"),
+		DatasetName:           ptr.String("__DatasetName__"),
+		LabelsInputConfiguration: &types.LabelsInputConfiguration{
+			S3InputConfiguration: &types.LabelsS3InputConfiguration{
+				Bucket: ptr.String("__Bucket__"),
+				Prefix: ptr.String("__Prefix__"),
+			},
+			LabelGroupName: ptr.String("__LabelGroupName__"),
+		},
+		ClientToken:        ptr.String("__ClientToken__"),
+		RoleArn:            ptr.String("__RoleArn__"),
+		ServerSideKmsKeyId: ptr.String("__ServerSideKmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InferenceDataImportStrategy: types.InferenceDataImportStrategy("NO_IMPORT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -925,7 +1127,12 @@ func TestCheckResponseSnapshot_ListDataIngestionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataIngestionJobs(context.Background(), &ListDataIngestionJobsInput{})
+	got, err := svc.ListDataIngestionJobs(context.Background(), &ListDataIngestionJobsInput{
+		DatasetName: ptr.String("__DatasetName__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		Status:      types.IngestionJobStatus("IN_PROGRESS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -960,7 +1167,11 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{})
+	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+		DatasetNameBeginsWith: ptr.String("__DatasetNameBeginsWith__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -999,7 +1210,13 @@ func TestCheckResponseSnapshot_ListInferenceEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInferenceEvents(context.Background(), &ListInferenceEventsInput{})
+	got, err := svc.ListInferenceEvents(context.Background(), &ListInferenceEventsInput{
+		NextToken:              ptr.String("__NextToken__"),
+		MaxResults:             ptr.Int32(1),
+		InferenceSchedulerName: ptr.String("__InferenceSchedulerName__"),
+		IntervalStartTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IntervalEndTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1092,7 +1309,14 @@ func TestCheckResponseSnapshot_ListInferenceExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInferenceExecutions(context.Background(), &ListInferenceExecutionsInput{})
+	got, err := svc.ListInferenceExecutions(context.Background(), &ListInferenceExecutionsInput{
+		NextToken:              ptr.String("__NextToken__"),
+		MaxResults:             ptr.Int32(1),
+		InferenceSchedulerName: ptr.String("__InferenceSchedulerName__"),
+		DataStartTimeAfter:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DataEndTimeBefore:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:                 types.InferenceExecutionStatus("IN_PROGRESS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1135,7 +1359,13 @@ func TestCheckResponseSnapshot_ListInferenceSchedulers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInferenceSchedulers(context.Background(), &ListInferenceSchedulersInput{})
+	got, err := svc.ListInferenceSchedulers(context.Background(), &ListInferenceSchedulersInput{
+		NextToken:                        ptr.String("__NextToken__"),
+		MaxResults:                       ptr.Int32(1),
+		InferenceSchedulerNameBeginsWith: ptr.String("__InferenceSchedulerNameBeginsWith__"),
+		ModelName:                        ptr.String("__ModelName__"),
+		Status:                           types.InferenceSchedulerStatus("PENDING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1170,7 +1400,11 @@ func TestCheckResponseSnapshot_ListLabelGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLabelGroups(context.Background(), &ListLabelGroupsInput{})
+	got, err := svc.ListLabelGroups(context.Background(), &ListLabelGroupsInput{
+		LabelGroupNameBeginsWith: ptr.String("__LabelGroupNameBeginsWith__"),
+		NextToken:                ptr.String("__NextToken__"),
+		MaxResults:               ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1215,7 +1449,15 @@ func TestCheckResponseSnapshot_ListLabels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLabels(context.Background(), &ListLabelsInput{})
+	got, err := svc.ListLabels(context.Background(), &ListLabelsInput{
+		LabelGroupName:    ptr.String("__LabelGroupName__"),
+		IntervalStartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IntervalEndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FaultCode:         ptr.String("__FaultCode__"),
+		Equipment:         ptr.String("__Equipment__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1258,7 +1500,17 @@ func TestCheckResponseSnapshot_ListModelVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListModelVersions(context.Background(), &ListModelVersionsInput{})
+	got, err := svc.ListModelVersions(context.Background(), &ListModelVersionsInput{
+		ModelName:          ptr.String("__ModelName__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+		Status:             types.ModelVersionStatus("IN_PROGRESS"),
+		SourceType:         types.ModelVersionSourceType("TRAINING"),
+		CreatedAtEndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAtStartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxModelVersion:    ptr.Int64(1),
+		MinModelVersion:    ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1327,7 +1579,13 @@ func TestCheckResponseSnapshot_ListModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListModels(context.Background(), &ListModelsInput{})
+	got, err := svc.ListModels(context.Background(), &ListModelsInput{
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+		Status:                types.ModelStatus("IN_PROGRESS"),
+		ModelNameBeginsWith:   ptr.String("__ModelNameBeginsWith__"),
+		DatasetNameBeginsWith: ptr.String("__DatasetNameBeginsWith__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1366,7 +1624,12 @@ func TestCheckResponseSnapshot_ListRetrainingSchedulers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRetrainingSchedulers(context.Background(), &ListRetrainingSchedulersInput{})
+	got, err := svc.ListRetrainingSchedulers(context.Background(), &ListRetrainingSchedulersInput{
+		ModelNameBeginsWith: ptr.String("__ModelNameBeginsWith__"),
+		Status:              types.RetrainingSchedulerStatus("PENDING"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1467,7 +1730,12 @@ func TestCheckResponseSnapshot_ListSensorStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSensorStatistics(context.Background(), &ListSensorStatisticsInput{})
+	got, err := svc.ListSensorStatistics(context.Background(), &ListSensorStatisticsInput{
+		DatasetName:    ptr.String("__DatasetName__"),
+		IngestionJobId: ptr.String("__IngestionJobId__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1497,7 +1765,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1519,7 +1789,12 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn:      ptr.String("__ResourceArn__"),
+		ResourcePolicy:   ptr.String("__ResourcePolicy__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1541,7 +1816,18 @@ func TestCheckResponseSnapshot_StartDataIngestionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDataIngestionJob(context.Background(), &StartDataIngestionJobInput{})
+	got, err := svc.StartDataIngestionJob(context.Background(), &StartDataIngestionJobInput{
+		DatasetName: ptr.String("__DatasetName__"),
+		IngestionInputConfiguration: &types.IngestionInputConfiguration{
+			S3InputConfiguration: &types.IngestionS3InputConfiguration{
+				Bucket:     ptr.String("__Bucket__"),
+				Prefix:     ptr.String("__Prefix__"),
+				KeyPattern: ptr.String("__KeyPattern__"),
+			},
+		},
+		RoleArn:     ptr.String("__RoleArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1566,7 +1852,9 @@ func TestCheckResponseSnapshot_StartInferenceScheduler(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartInferenceScheduler(context.Background(), &StartInferenceSchedulerInput{})
+	got, err := svc.StartInferenceScheduler(context.Background(), &StartInferenceSchedulerInput{
+		InferenceSchedulerName: ptr.String("__InferenceSchedulerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1589,7 +1877,9 @@ func TestCheckResponseSnapshot_StartRetrainingScheduler(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRetrainingScheduler(context.Background(), &StartRetrainingSchedulerInput{})
+	got, err := svc.StartRetrainingScheduler(context.Background(), &StartRetrainingSchedulerInput{
+		ModelName: ptr.String("__ModelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1614,7 +1904,9 @@ func TestCheckResponseSnapshot_StopInferenceScheduler(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopInferenceScheduler(context.Background(), &StopInferenceSchedulerInput{})
+	got, err := svc.StopInferenceScheduler(context.Background(), &StopInferenceSchedulerInput{
+		InferenceSchedulerName: ptr.String("__InferenceSchedulerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1637,7 +1929,9 @@ func TestCheckResponseSnapshot_StopRetrainingScheduler(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopRetrainingScheduler(context.Background(), &StopRetrainingSchedulerInput{})
+	got, err := svc.StopRetrainingScheduler(context.Background(), &StopRetrainingSchedulerInput{
+		ModelName: ptr.String("__ModelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1656,7 +1950,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1675,7 +1981,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1701,7 +2013,10 @@ func TestCheckResponseSnapshot_UpdateActiveModelVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateActiveModelVersion(context.Background(), &UpdateActiveModelVersionInput{})
+	got, err := svc.UpdateActiveModelVersion(context.Background(), &UpdateActiveModelVersionInput{
+		ModelName:    ptr.String("__ModelName__"),
+		ModelVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1720,7 +2035,30 @@ func TestCheckResponseSnapshot_UpdateInferenceScheduler(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInferenceScheduler(context.Background(), &UpdateInferenceSchedulerInput{})
+	got, err := svc.UpdateInferenceScheduler(context.Background(), &UpdateInferenceSchedulerInput{
+		InferenceSchedulerName:   ptr.String("__InferenceSchedulerName__"),
+		DataDelayOffsetInMinutes: ptr.Int64(1),
+		DataUploadFrequency:      types.DataUploadFrequency("PT5M"),
+		DataInputConfiguration: &types.InferenceInputConfiguration{
+			S3InputConfiguration: &types.InferenceS3InputConfiguration{
+				Bucket: ptr.String("__Bucket__"),
+				Prefix: ptr.String("__Prefix__"),
+			},
+			InputTimeZoneOffset: ptr.String("__InputTimeZoneOffset__"),
+			InferenceInputNameConfiguration: &types.InferenceInputNameConfiguration{
+				TimestampFormat:             ptr.String("__TimestampFormat__"),
+				ComponentTimestampDelimiter: ptr.String("__ComponentTimestampDelimiter__"),
+			},
+		},
+		DataOutputConfiguration: &types.InferenceOutputConfiguration{
+			S3OutputConfiguration: &types.InferenceS3OutputConfiguration{
+				Bucket: ptr.String("__Bucket__"),
+				Prefix: ptr.String("__Prefix__"),
+			},
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1739,7 +2077,13 @@ func TestCheckResponseSnapshot_UpdateLabelGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLabelGroup(context.Background(), &UpdateLabelGroupInput{})
+	got, err := svc.UpdateLabelGroup(context.Background(), &UpdateLabelGroupInput{
+		LabelGroupName: ptr.String("__LabelGroupName__"),
+		FaultCodes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1758,7 +2102,24 @@ func TestCheckResponseSnapshot_UpdateModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateModel(context.Background(), &UpdateModelInput{})
+	got, err := svc.UpdateModel(context.Background(), &UpdateModelInput{
+		ModelName: ptr.String("__ModelName__"),
+		LabelsInputConfiguration: &types.LabelsInputConfiguration{
+			S3InputConfiguration: &types.LabelsS3InputConfiguration{
+				Bucket: ptr.String("__Bucket__"),
+				Prefix: ptr.String("__Prefix__"),
+			},
+			LabelGroupName: ptr.String("__LabelGroupName__"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		ModelDiagnosticsOutputConfiguration: &types.ModelDiagnosticsOutputConfiguration{
+			S3OutputConfiguration: &types.ModelDiagnosticsS3OutputConfiguration{
+				Bucket: ptr.String("__Bucket__"),
+				Prefix: ptr.String("__Prefix__"),
+			},
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1777,7 +2138,13 @@ func TestCheckResponseSnapshot_UpdateRetrainingScheduler(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRetrainingScheduler(context.Background(), &UpdateRetrainingSchedulerInput{})
+	got, err := svc.UpdateRetrainingScheduler(context.Background(), &UpdateRetrainingSchedulerInput{
+		ModelName:           ptr.String("__ModelName__"),
+		RetrainingStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RetrainingFrequency: ptr.String("__RetrainingFrequency__"),
+		LookbackWindow:      ptr.String("__LookbackWindow__"),
+		PromoteMode:         types.ModelPromoteMode("MANAGED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1798,7 +2165,24 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetSchema: &types.DatasetSchema{
+			InlineDataSchema: ptr.String("__InlineDataSchema__"),
+		},
+		ServerSideKmsKeyId: ptr.String("__ServerSideKmsKeyId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1823,7 +2207,24 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetSchema: &types.DatasetSchema{
+			InlineDataSchema: ptr.String("__InlineDataSchema__"),
+		},
+		ServerSideKmsKeyId: ptr.String("__ServerSideKmsKeyId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1848,7 +2249,24 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetSchema: &types.DatasetSchema{
+			InlineDataSchema: ptr.String("__InlineDataSchema__"),
+		},
+		ServerSideKmsKeyId: ptr.String("__ServerSideKmsKeyId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1873,7 +2291,43 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInferenceScheduler(context.Background(), &CreateInferenceSchedulerInput{})
+	_, opErr := svc.CreateInferenceScheduler(context.Background(), &CreateInferenceSchedulerInput{
+		ModelName:                ptr.String("__ModelName__"),
+		InferenceSchedulerName:   ptr.String("__InferenceSchedulerName__"),
+		DataDelayOffsetInMinutes: ptr.Int64(1),
+		DataUploadFrequency:      types.DataUploadFrequency("PT5M"),
+		DataInputConfiguration: &types.InferenceInputConfiguration{
+			S3InputConfiguration: &types.InferenceS3InputConfiguration{
+				Bucket: ptr.String("__Bucket__"),
+				Prefix: ptr.String("__Prefix__"),
+			},
+			InputTimeZoneOffset: ptr.String("__InputTimeZoneOffset__"),
+			InferenceInputNameConfiguration: &types.InferenceInputNameConfiguration{
+				TimestampFormat:             ptr.String("__TimestampFormat__"),
+				ComponentTimestampDelimiter: ptr.String("__ComponentTimestampDelimiter__"),
+			},
+		},
+		DataOutputConfiguration: &types.InferenceOutputConfiguration{
+			S3OutputConfiguration: &types.InferenceS3OutputConfiguration{
+				Bucket: ptr.String("__Bucket__"),
+				Prefix: ptr.String("__Prefix__"),
+			},
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		RoleArn:            ptr.String("__RoleArn__"),
+		ServerSideKmsKeyId: ptr.String("__ServerSideKmsKeyId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1898,7 +2352,24 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetSchema: &types.DatasetSchema{
+			InlineDataSchema: ptr.String("__InlineDataSchema__"),
+		},
+		ServerSideKmsKeyId: ptr.String("__ServerSideKmsKeyId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1923,7 +2394,24 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetSchema: &types.DatasetSchema{
+			InlineDataSchema: ptr.String("__InlineDataSchema__"),
+		},
+		ServerSideKmsKeyId: ptr.String("__ServerSideKmsKeyId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1948,7 +2436,24 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetSchema: &types.DatasetSchema{
+			InlineDataSchema: ptr.String("__InlineDataSchema__"),
+		},
+		ServerSideKmsKeyId: ptr.String("__ServerSideKmsKeyId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

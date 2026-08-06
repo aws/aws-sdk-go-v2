@@ -131,7 +131,13 @@ func TestCheckResponseSnapshot_BatchDeleteRecipeVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteRecipeVersion(context.Background(), &BatchDeleteRecipeVersionInput{})
+	got, err := svc.BatchDeleteRecipeVersion(context.Background(), &BatchDeleteRecipeVersionInput{
+		Name: ptr.String("__Name__"),
+		RecipeVersions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -152,7 +158,94 @@ func TestCheckResponseSnapshot_CreateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		Name:   ptr.String("__Name__"),
+		Format: types.InputFormat("CSV"),
+		FormatOptions: &types.FormatOptions{
+			Json: &types.JsonOptions{
+				MultiLine: true,
+			},
+			Excel: &types.ExcelOptions{
+				SheetNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SheetIndexes: []int32{
+					1,
+					1,
+				},
+				HeaderRow: ptr.Bool(true),
+			},
+			Csv: &types.CsvOptions{
+				Delimiter: ptr.String("__Delimiter__"),
+				HeaderRow: ptr.Bool(true),
+			},
+		},
+		Input: &types.Input{
+			S3InputDefinition: &types.S3Location{
+				Bucket:      ptr.String("__Bucket__"),
+				Key:         ptr.String("__Key__"),
+				BucketOwner: ptr.String("__BucketOwner__"),
+			},
+			DataCatalogInputDefinition: &types.DataCatalogInputDefinition{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+				TempDirectory: &types.S3Location{
+					Bucket:      ptr.String("__Bucket__"),
+					Key:         ptr.String("__Key__"),
+					BucketOwner: ptr.String("__BucketOwner__"),
+				},
+			},
+			DatabaseInputDefinition: &types.DatabaseInputDefinition{
+				GlueConnectionName: ptr.String("__GlueConnectionName__"),
+				DatabaseTableName:  ptr.String("__DatabaseTableName__"),
+				TempDirectory: &types.S3Location{
+					Bucket:      ptr.String("__Bucket__"),
+					Key:         ptr.String("__Key__"),
+					BucketOwner: ptr.String("__BucketOwner__"),
+				},
+				QueryString: ptr.String("__QueryString__"),
+			},
+			Metadata: &types.Metadata{
+				SourceArn: ptr.String("__SourceArn__"),
+			},
+		},
+		PathOptions: &types.PathOptions{
+			LastModifiedDateCondition: &types.FilterExpression{
+				Expression: ptr.String("__Expression__"),
+				ValuesMap: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			FilesLimit: &types.FilesLimit{
+				MaxFiles:  ptr.Int32(1),
+				OrderedBy: types.OrderedBy("LAST_MODIFIED_DATE"),
+				Order:     types.Order("DESCENDING"),
+			},
+			Parameters: map[string]types.DatasetParameter{
+				"key0": {
+					Name: ptr.String("__Name__"),
+					Type: types.ParameterType("Datetime"),
+					DatetimeOptions: &types.DatetimeOptions{
+						Format:         ptr.String("__Format__"),
+						TimezoneOffset: ptr.String("__TimezoneOffset__"),
+						LocaleCode:     ptr.String("__LocaleCode__"),
+					},
+					CreateColumn: true,
+					Filter: &types.FilterExpression{
+						Expression: ptr.String("__Expression__"),
+						ValuesMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,7 +266,157 @@ func TestCheckResponseSnapshot_CreateProfileJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProfileJob(context.Background(), &CreateProfileJobInput{})
+	got, err := svc.CreateProfileJob(context.Background(), &CreateProfileJobInput{
+		DatasetName:      ptr.String("__DatasetName__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		EncryptionMode:   types.EncryptionMode("SSE-KMS"),
+		Name:             ptr.String("__Name__"),
+		LogSubscription:  types.LogSubscription("ENABLE"),
+		MaxCapacity:      1,
+		MaxRetries:       1,
+		OutputLocation: &types.S3Location{
+			Bucket:      ptr.String("__Bucket__"),
+			Key:         ptr.String("__Key__"),
+			BucketOwner: ptr.String("__BucketOwner__"),
+		},
+		Configuration: &types.ProfileConfiguration{
+			DatasetStatisticsConfiguration: &types.StatisticsConfiguration{
+				IncludedStatistics: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Overrides: []types.StatisticOverride{
+					{
+						Statistic: ptr.String("__Statistic__"),
+						Parameters: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						Statistic: ptr.String("__Statistic__"),
+						Parameters: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			ProfileColumns: []types.ColumnSelector{
+				{
+					Regex: ptr.String("__Regex__"),
+					Name:  ptr.String("__Name__"),
+				},
+				{
+					Regex: ptr.String("__Regex__"),
+					Name:  ptr.String("__Name__"),
+				},
+			},
+			ColumnStatisticsConfigurations: []types.ColumnStatisticsConfiguration{
+				{
+					Selectors: []types.ColumnSelector{
+						{
+							Regex: ptr.String("__Regex__"),
+							Name:  ptr.String("__Name__"),
+						},
+						{
+							Regex: ptr.String("__Regex__"),
+							Name:  ptr.String("__Name__"),
+						},
+					},
+					Statistics: &types.StatisticsConfiguration{
+						IncludedStatistics: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Overrides: []types.StatisticOverride{
+							{
+								Statistic: ptr.String("__Statistic__"),
+								Parameters: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							{
+								Statistic: ptr.String("__Statistic__"),
+								Parameters: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+						},
+					},
+				},
+				{
+					Selectors: []types.ColumnSelector{
+						{
+							Regex: ptr.String("__Regex__"),
+							Name:  ptr.String("__Name__"),
+						},
+						{
+							Regex: ptr.String("__Regex__"),
+							Name:  ptr.String("__Name__"),
+						},
+					},
+					Statistics: &types.StatisticsConfiguration{
+						IncludedStatistics: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Overrides: []types.StatisticOverride{
+							{
+								Statistic: ptr.String("__Statistic__"),
+								Parameters: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							{
+								Statistic: ptr.String("__Statistic__"),
+								Parameters: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+						},
+					},
+				},
+			},
+			EntityDetectorConfiguration: &types.EntityDetectorConfiguration{
+				EntityTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllowedStatistics: []types.AllowedStatistics{
+					{
+						Statistics: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Statistics: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		ValidationConfigurations: []types.ValidationConfiguration{
+			{
+				RulesetArn:     ptr.String("__RulesetArn__"),
+				ValidationMode: types.ValidationMode("CHECK_ALL"),
+			},
+			{
+				RulesetArn:     ptr.String("__RulesetArn__"),
+				ValidationMode: types.ValidationMode("CHECK_ALL"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Timeout: 1,
+		JobSample: &types.JobSample{
+			Mode: types.SampleMode("FULL_DATASET"),
+			Size: ptr.Int64(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -194,7 +437,19 @@ func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{})
+	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{
+		DatasetName: ptr.String("__DatasetName__"),
+		Name:        ptr.String("__Name__"),
+		RecipeName:  ptr.String("__RecipeName__"),
+		Sample: &types.Sample{
+			Size: ptr.Int32(1),
+			Type: types.SampleType("FIRST_N"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -215,7 +470,55 @@ func TestCheckResponseSnapshot_CreateRecipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRecipe(context.Background(), &CreateRecipeInput{})
+	got, err := svc.CreateRecipe(context.Background(), &CreateRecipeInput{
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Steps: []types.RecipeStep{
+			{
+				Action: &types.RecipeAction{
+					Operation: ptr.String("__Operation__"),
+					Parameters: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				ConditionExpressions: []types.ConditionExpression{
+					{
+						Condition:    ptr.String("__Condition__"),
+						Value:        ptr.String("__Value__"),
+						TargetColumn: ptr.String("__TargetColumn__"),
+					},
+					{
+						Condition:    ptr.String("__Condition__"),
+						Value:        ptr.String("__Value__"),
+						TargetColumn: ptr.String("__TargetColumn__"),
+					},
+				},
+			},
+			{
+				Action: &types.RecipeAction{
+					Operation: ptr.String("__Operation__"),
+					Parameters: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				ConditionExpressions: []types.ConditionExpression{
+					{
+						Condition:    ptr.String("__Condition__"),
+						Value:        ptr.String("__Value__"),
+						TargetColumn: ptr.String("__TargetColumn__"),
+					},
+					{
+						Condition:    ptr.String("__Condition__"),
+						Value:        ptr.String("__Value__"),
+						TargetColumn: ptr.String("__TargetColumn__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -236,7 +539,137 @@ func TestCheckResponseSnapshot_CreateRecipeJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRecipeJob(context.Background(), &CreateRecipeJobInput{})
+	got, err := svc.CreateRecipeJob(context.Background(), &CreateRecipeJobInput{
+		DatasetName:      ptr.String("__DatasetName__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		EncryptionMode:   types.EncryptionMode("SSE-KMS"),
+		Name:             ptr.String("__Name__"),
+		LogSubscription:  types.LogSubscription("ENABLE"),
+		MaxCapacity:      1,
+		MaxRetries:       1,
+		Outputs: []types.Output{
+			{
+				CompressionFormat: types.CompressionFormat("GZIP"),
+				Format:            types.OutputFormat("CSV"),
+				PartitionColumns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Location: &types.S3Location{
+					Bucket:      ptr.String("__Bucket__"),
+					Key:         ptr.String("__Key__"),
+					BucketOwner: ptr.String("__BucketOwner__"),
+				},
+				Overwrite: true,
+				FormatOptions: &types.OutputFormatOptions{
+					Csv: &types.CsvOutputOptions{
+						Delimiter: ptr.String("__Delimiter__"),
+					},
+				},
+				MaxOutputFiles: ptr.Int32(1),
+			},
+			{
+				CompressionFormat: types.CompressionFormat("GZIP"),
+				Format:            types.OutputFormat("CSV"),
+				PartitionColumns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Location: &types.S3Location{
+					Bucket:      ptr.String("__Bucket__"),
+					Key:         ptr.String("__Key__"),
+					BucketOwner: ptr.String("__BucketOwner__"),
+				},
+				Overwrite: true,
+				FormatOptions: &types.OutputFormatOptions{
+					Csv: &types.CsvOutputOptions{
+						Delimiter: ptr.String("__Delimiter__"),
+					},
+				},
+				MaxOutputFiles: ptr.Int32(1),
+			},
+		},
+		DataCatalogOutputs: []types.DataCatalogOutput{
+			{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+				S3Options: &types.S3TableOutputOptions{
+					Location: &types.S3Location{
+						Bucket:      ptr.String("__Bucket__"),
+						Key:         ptr.String("__Key__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+				DatabaseOptions: &types.DatabaseTableOutputOptions{
+					TempDirectory: &types.S3Location{
+						Bucket:      ptr.String("__Bucket__"),
+						Key:         ptr.String("__Key__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+					TableName: ptr.String("__TableName__"),
+				},
+				Overwrite: true,
+			},
+			{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+				S3Options: &types.S3TableOutputOptions{
+					Location: &types.S3Location{
+						Bucket:      ptr.String("__Bucket__"),
+						Key:         ptr.String("__Key__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+				DatabaseOptions: &types.DatabaseTableOutputOptions{
+					TempDirectory: &types.S3Location{
+						Bucket:      ptr.String("__Bucket__"),
+						Key:         ptr.String("__Key__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+					TableName: ptr.String("__TableName__"),
+				},
+				Overwrite: true,
+			},
+		},
+		DatabaseOutputs: []types.DatabaseOutput{
+			{
+				GlueConnectionName: ptr.String("__GlueConnectionName__"),
+				DatabaseOptions: &types.DatabaseTableOutputOptions{
+					TempDirectory: &types.S3Location{
+						Bucket:      ptr.String("__Bucket__"),
+						Key:         ptr.String("__Key__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+					TableName: ptr.String("__TableName__"),
+				},
+				DatabaseOutputMode: types.DatabaseOutputMode("NEW_TABLE"),
+			},
+			{
+				GlueConnectionName: ptr.String("__GlueConnectionName__"),
+				DatabaseOptions: &types.DatabaseTableOutputOptions{
+					TempDirectory: &types.S3Location{
+						Bucket:      ptr.String("__Bucket__"),
+						Key:         ptr.String("__Key__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+					TableName: ptr.String("__TableName__"),
+				},
+				DatabaseOutputMode: types.DatabaseOutputMode("NEW_TABLE"),
+			},
+		},
+		ProjectName: ptr.String("__ProjectName__"),
+		RecipeReference: &types.RecipeReference{
+			Name:          ptr.String("__Name__"),
+			RecipeVersion: ptr.String("__RecipeVersion__"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Timeout: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -257,7 +690,62 @@ func TestCheckResponseSnapshot_CreateRuleset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRuleset(context.Background(), &CreateRulesetInput{})
+	got, err := svc.CreateRuleset(context.Background(), &CreateRulesetInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		TargetArn:   ptr.String("__TargetArn__"),
+		Rules: []types.Rule{
+			{
+				Name:            ptr.String("__Name__"),
+				Disabled:        true,
+				CheckExpression: ptr.String("__CheckExpression__"),
+				SubstitutionMap: map[string]string{
+					"key0": "__Value__",
+				},
+				Threshold: &types.Threshold{
+					Value: 1.0,
+					Type:  types.ThresholdType("GREATER_THAN_OR_EQUAL"),
+					Unit:  types.ThresholdUnit("COUNT"),
+				},
+				ColumnSelectors: []types.ColumnSelector{
+					{
+						Regex: ptr.String("__Regex__"),
+						Name:  ptr.String("__Name__"),
+					},
+					{
+						Regex: ptr.String("__Regex__"),
+						Name:  ptr.String("__Name__"),
+					},
+				},
+			},
+			{
+				Name:            ptr.String("__Name__"),
+				Disabled:        true,
+				CheckExpression: ptr.String("__CheckExpression__"),
+				SubstitutionMap: map[string]string{
+					"key0": "__Value__",
+				},
+				Threshold: &types.Threshold{
+					Value: 1.0,
+					Type:  types.ThresholdType("GREATER_THAN_OR_EQUAL"),
+					Unit:  types.ThresholdUnit("COUNT"),
+				},
+				ColumnSelectors: []types.ColumnSelector{
+					{
+						Regex: ptr.String("__Regex__"),
+						Name:  ptr.String("__Name__"),
+					},
+					{
+						Regex: ptr.String("__Regex__"),
+						Name:  ptr.String("__Name__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +766,17 @@ func TestCheckResponseSnapshot_CreateSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSchedule(context.Background(), &CreateScheduleInput{})
+	got, err := svc.CreateSchedule(context.Background(), &CreateScheduleInput{
+		JobNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CronExpression: ptr.String("__CronExpression__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +797,9 @@ func TestCheckResponseSnapshot_DeleteDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{})
+	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -320,7 +820,9 @@ func TestCheckResponseSnapshot_DeleteJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteJob(context.Background(), &DeleteJobInput{})
+	got, err := svc.DeleteJob(context.Background(), &DeleteJobInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +843,9 @@ func TestCheckResponseSnapshot_DeleteProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{})
+	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -363,7 +867,10 @@ func TestCheckResponseSnapshot_DeleteRecipeVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRecipeVersion(context.Background(), &DeleteRecipeVersionInput{})
+	got, err := svc.DeleteRecipeVersion(context.Background(), &DeleteRecipeVersionInput{
+		Name:          ptr.String("__Name__"),
+		RecipeVersion: ptr.String("__RecipeVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -384,7 +891,9 @@ func TestCheckResponseSnapshot_DeleteRuleset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRuleset(context.Background(), &DeleteRulesetInput{})
+	got, err := svc.DeleteRuleset(context.Background(), &DeleteRulesetInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -405,7 +914,9 @@ func TestCheckResponseSnapshot_DeleteSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSchedule(context.Background(), &DeleteScheduleInput{})
+	got, err := svc.DeleteSchedule(context.Background(), &DeleteScheduleInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -517,7 +1028,9 @@ func TestCheckResponseSnapshot_DescribeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{})
+	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -804,7 +1317,9 @@ func TestCheckResponseSnapshot_DescribeJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeJob(context.Background(), &DescribeJobInput{})
+	got, err := svc.DescribeJob(context.Background(), &DescribeJobInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1084,7 +1599,10 @@ func TestCheckResponseSnapshot_DescribeJobRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeJobRun(context.Background(), &DescribeJobRunInput{})
+	got, err := svc.DescribeJobRun(context.Background(), &DescribeJobRunInput{
+		Name:  ptr.String("__Name__"),
+		RunId: ptr.String("__RunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1123,7 +1641,9 @@ func TestCheckResponseSnapshot_DescribeProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProject(context.Background(), &DescribeProjectInput{})
+	got, err := svc.DescribeProject(context.Background(), &DescribeProjectInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1199,7 +1719,10 @@ func TestCheckResponseSnapshot_DescribeRecipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRecipe(context.Background(), &DescribeRecipeInput{})
+	got, err := svc.DescribeRecipe(context.Background(), &DescribeRecipeInput{
+		Name:          ptr.String("__Name__"),
+		RecipeVersion: ptr.String("__RecipeVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1278,7 +1801,9 @@ func TestCheckResponseSnapshot_DescribeRuleset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRuleset(context.Background(), &DescribeRulesetInput{})
+	got, err := svc.DescribeRuleset(context.Background(), &DescribeRulesetInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1312,7 +1837,9 @@ func TestCheckResponseSnapshot_DescribeSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSchedule(context.Background(), &DescribeScheduleInput{})
+	got, err := svc.DescribeSchedule(context.Background(), &DescribeScheduleInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1525,7 +2052,10 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{})
+	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1836,7 +2366,11 @@ func TestCheckResponseSnapshot_ListJobRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobRuns(context.Background(), &ListJobRunsInput{})
+	got, err := svc.ListJobRuns(context.Background(), &ListJobRunsInput{
+		Name:       ptr.String("__Name__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2163,7 +2697,12 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobs(context.Background(), &ListJobsInput{})
+	got, err := svc.ListJobs(context.Background(), &ListJobsInput{
+		DatasetName: ptr.String("__DatasetName__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		ProjectName: ptr.String("__ProjectName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2228,7 +2767,10 @@ func TestCheckResponseSnapshot_ListProjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProjects(context.Background(), &ListProjectsInput{})
+	got, err := svc.ListProjects(context.Background(), &ListProjectsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2367,7 +2909,11 @@ func TestCheckResponseSnapshot_ListRecipeVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecipeVersions(context.Background(), &ListRecipeVersionsInput{})
+	got, err := svc.ListRecipeVersions(context.Background(), &ListRecipeVersionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2506,7 +3052,11 @@ func TestCheckResponseSnapshot_ListRecipes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecipes(context.Background(), &ListRecipesInput{})
+	got, err := svc.ListRecipes(context.Background(), &ListRecipesInput{
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		RecipeVersion: ptr.String("__RecipeVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2559,7 +3109,11 @@ func TestCheckResponseSnapshot_ListRulesets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRulesets(context.Background(), &ListRulesetsInput{})
+	got, err := svc.ListRulesets(context.Background(), &ListRulesetsInput{
+		TargetArn:  ptr.String("__TargetArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2616,7 +3170,11 @@ func TestCheckResponseSnapshot_ListSchedules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSchedules(context.Background(), &ListSchedulesInput{})
+	got, err := svc.ListSchedules(context.Background(), &ListSchedulesInput{
+		JobName:    ptr.String("__JobName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2639,7 +3197,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2660,7 +3220,10 @@ func TestCheckResponseSnapshot_PublishRecipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishRecipe(context.Background(), &PublishRecipeInput{})
+	got, err := svc.PublishRecipe(context.Background(), &PublishRecipeInput{
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2683,7 +3246,43 @@ func TestCheckResponseSnapshot_SendProjectSessionAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendProjectSessionAction(context.Background(), &SendProjectSessionActionInput{})
+	got, err := svc.SendProjectSessionAction(context.Background(), &SendProjectSessionActionInput{
+		Preview: true,
+		Name:    ptr.String("__Name__"),
+		RecipeStep: &types.RecipeStep{
+			Action: &types.RecipeAction{
+				Operation: ptr.String("__Operation__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			ConditionExpressions: []types.ConditionExpression{
+				{
+					Condition:    ptr.String("__Condition__"),
+					Value:        ptr.String("__Value__"),
+					TargetColumn: ptr.String("__TargetColumn__"),
+				},
+				{
+					Condition:    ptr.String("__Condition__"),
+					Value:        ptr.String("__Value__"),
+					TargetColumn: ptr.String("__TargetColumn__"),
+				},
+			},
+		},
+		StepIndex:       ptr.Int32(1),
+		ClientSessionId: ptr.String("__ClientSessionId__"),
+		ViewFrame: &types.ViewFrame{
+			StartColumnIndex: ptr.Int32(1),
+			ColumnRange:      ptr.Int32(1),
+			HiddenColumns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StartRowIndex: ptr.Int32(1),
+			RowRange:      ptr.Int32(1),
+			Analytics:     types.AnalyticsMode("ENABLE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2704,7 +3303,9 @@ func TestCheckResponseSnapshot_StartJobRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartJobRun(context.Background(), &StartJobRunInput{})
+	got, err := svc.StartJobRun(context.Background(), &StartJobRunInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2726,7 +3327,10 @@ func TestCheckResponseSnapshot_StartProjectSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartProjectSession(context.Background(), &StartProjectSessionInput{})
+	got, err := svc.StartProjectSession(context.Background(), &StartProjectSessionInput{
+		Name:          ptr.String("__Name__"),
+		AssumeControl: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2747,7 +3351,10 @@ func TestCheckResponseSnapshot_StopJobRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopJobRun(context.Background(), &StopJobRunInput{})
+	got, err := svc.StopJobRun(context.Background(), &StopJobRunInput{
+		Name:  ptr.String("__Name__"),
+		RunId: ptr.String("__RunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2766,7 +3373,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2785,7 +3397,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2806,7 +3424,91 @@ func TestCheckResponseSnapshot_UpdateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataset(context.Background(), &UpdateDatasetInput{})
+	got, err := svc.UpdateDataset(context.Background(), &UpdateDatasetInput{
+		Name:   ptr.String("__Name__"),
+		Format: types.InputFormat("CSV"),
+		FormatOptions: &types.FormatOptions{
+			Json: &types.JsonOptions{
+				MultiLine: true,
+			},
+			Excel: &types.ExcelOptions{
+				SheetNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SheetIndexes: []int32{
+					1,
+					1,
+				},
+				HeaderRow: ptr.Bool(true),
+			},
+			Csv: &types.CsvOptions{
+				Delimiter: ptr.String("__Delimiter__"),
+				HeaderRow: ptr.Bool(true),
+			},
+		},
+		Input: &types.Input{
+			S3InputDefinition: &types.S3Location{
+				Bucket:      ptr.String("__Bucket__"),
+				Key:         ptr.String("__Key__"),
+				BucketOwner: ptr.String("__BucketOwner__"),
+			},
+			DataCatalogInputDefinition: &types.DataCatalogInputDefinition{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+				TempDirectory: &types.S3Location{
+					Bucket:      ptr.String("__Bucket__"),
+					Key:         ptr.String("__Key__"),
+					BucketOwner: ptr.String("__BucketOwner__"),
+				},
+			},
+			DatabaseInputDefinition: &types.DatabaseInputDefinition{
+				GlueConnectionName: ptr.String("__GlueConnectionName__"),
+				DatabaseTableName:  ptr.String("__DatabaseTableName__"),
+				TempDirectory: &types.S3Location{
+					Bucket:      ptr.String("__Bucket__"),
+					Key:         ptr.String("__Key__"),
+					BucketOwner: ptr.String("__BucketOwner__"),
+				},
+				QueryString: ptr.String("__QueryString__"),
+			},
+			Metadata: &types.Metadata{
+				SourceArn: ptr.String("__SourceArn__"),
+			},
+		},
+		PathOptions: &types.PathOptions{
+			LastModifiedDateCondition: &types.FilterExpression{
+				Expression: ptr.String("__Expression__"),
+				ValuesMap: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			FilesLimit: &types.FilesLimit{
+				MaxFiles:  ptr.Int32(1),
+				OrderedBy: types.OrderedBy("LAST_MODIFIED_DATE"),
+				Order:     types.Order("DESCENDING"),
+			},
+			Parameters: map[string]types.DatasetParameter{
+				"key0": {
+					Name: ptr.String("__Name__"),
+					Type: types.ParameterType("Datetime"),
+					DatetimeOptions: &types.DatetimeOptions{
+						Format:         ptr.String("__Format__"),
+						TimezoneOffset: ptr.String("__TimezoneOffset__"),
+						LocaleCode:     ptr.String("__LocaleCode__"),
+					},
+					CreateColumn: true,
+					Filter: &types.FilterExpression{
+						Expression: ptr.String("__Expression__"),
+						ValuesMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2827,7 +3529,153 @@ func TestCheckResponseSnapshot_UpdateProfileJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProfileJob(context.Background(), &UpdateProfileJobInput{})
+	got, err := svc.UpdateProfileJob(context.Background(), &UpdateProfileJobInput{
+		Configuration: &types.ProfileConfiguration{
+			DatasetStatisticsConfiguration: &types.StatisticsConfiguration{
+				IncludedStatistics: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Overrides: []types.StatisticOverride{
+					{
+						Statistic: ptr.String("__Statistic__"),
+						Parameters: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						Statistic: ptr.String("__Statistic__"),
+						Parameters: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			ProfileColumns: []types.ColumnSelector{
+				{
+					Regex: ptr.String("__Regex__"),
+					Name:  ptr.String("__Name__"),
+				},
+				{
+					Regex: ptr.String("__Regex__"),
+					Name:  ptr.String("__Name__"),
+				},
+			},
+			ColumnStatisticsConfigurations: []types.ColumnStatisticsConfiguration{
+				{
+					Selectors: []types.ColumnSelector{
+						{
+							Regex: ptr.String("__Regex__"),
+							Name:  ptr.String("__Name__"),
+						},
+						{
+							Regex: ptr.String("__Regex__"),
+							Name:  ptr.String("__Name__"),
+						},
+					},
+					Statistics: &types.StatisticsConfiguration{
+						IncludedStatistics: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Overrides: []types.StatisticOverride{
+							{
+								Statistic: ptr.String("__Statistic__"),
+								Parameters: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							{
+								Statistic: ptr.String("__Statistic__"),
+								Parameters: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+						},
+					},
+				},
+				{
+					Selectors: []types.ColumnSelector{
+						{
+							Regex: ptr.String("__Regex__"),
+							Name:  ptr.String("__Name__"),
+						},
+						{
+							Regex: ptr.String("__Regex__"),
+							Name:  ptr.String("__Name__"),
+						},
+					},
+					Statistics: &types.StatisticsConfiguration{
+						IncludedStatistics: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Overrides: []types.StatisticOverride{
+							{
+								Statistic: ptr.String("__Statistic__"),
+								Parameters: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							{
+								Statistic: ptr.String("__Statistic__"),
+								Parameters: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+						},
+					},
+				},
+			},
+			EntityDetectorConfiguration: &types.EntityDetectorConfiguration{
+				EntityTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllowedStatistics: []types.AllowedStatistics{
+					{
+						Statistics: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Statistics: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		EncryptionMode:   types.EncryptionMode("SSE-KMS"),
+		Name:             ptr.String("__Name__"),
+		LogSubscription:  types.LogSubscription("ENABLE"),
+		MaxCapacity:      1,
+		MaxRetries:       1,
+		OutputLocation: &types.S3Location{
+			Bucket:      ptr.String("__Bucket__"),
+			Key:         ptr.String("__Key__"),
+			BucketOwner: ptr.String("__BucketOwner__"),
+		},
+		ValidationConfigurations: []types.ValidationConfiguration{
+			{
+				RulesetArn:     ptr.String("__RulesetArn__"),
+				ValidationMode: types.ValidationMode("CHECK_ALL"),
+			},
+			{
+				RulesetArn:     ptr.String("__RulesetArn__"),
+				ValidationMode: types.ValidationMode("CHECK_ALL"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Timeout: 1,
+		JobSample: &types.JobSample{
+			Mode: types.SampleMode("FULL_DATASET"),
+			Size: ptr.Int64(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2849,7 +3697,14 @@ func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProject(context.Background(), &UpdateProjectInput{})
+	got, err := svc.UpdateProject(context.Background(), &UpdateProjectInput{
+		Sample: &types.Sample{
+			Size: ptr.Int32(1),
+			Type: types.SampleType("FIRST_N"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Name:    ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2870,7 +3725,52 @@ func TestCheckResponseSnapshot_UpdateRecipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRecipe(context.Background(), &UpdateRecipeInput{})
+	got, err := svc.UpdateRecipe(context.Background(), &UpdateRecipeInput{
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Steps: []types.RecipeStep{
+			{
+				Action: &types.RecipeAction{
+					Operation: ptr.String("__Operation__"),
+					Parameters: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				ConditionExpressions: []types.ConditionExpression{
+					{
+						Condition:    ptr.String("__Condition__"),
+						Value:        ptr.String("__Value__"),
+						TargetColumn: ptr.String("__TargetColumn__"),
+					},
+					{
+						Condition:    ptr.String("__Condition__"),
+						Value:        ptr.String("__Value__"),
+						TargetColumn: ptr.String("__TargetColumn__"),
+					},
+				},
+			},
+			{
+				Action: &types.RecipeAction{
+					Operation: ptr.String("__Operation__"),
+					Parameters: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				ConditionExpressions: []types.ConditionExpression{
+					{
+						Condition:    ptr.String("__Condition__"),
+						Value:        ptr.String("__Value__"),
+						TargetColumn: ptr.String("__TargetColumn__"),
+					},
+					{
+						Condition:    ptr.String("__Condition__"),
+						Value:        ptr.String("__Value__"),
+						TargetColumn: ptr.String("__TargetColumn__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2891,7 +3791,128 @@ func TestCheckResponseSnapshot_UpdateRecipeJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRecipeJob(context.Background(), &UpdateRecipeJobInput{})
+	got, err := svc.UpdateRecipeJob(context.Background(), &UpdateRecipeJobInput{
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		EncryptionMode:   types.EncryptionMode("SSE-KMS"),
+		Name:             ptr.String("__Name__"),
+		LogSubscription:  types.LogSubscription("ENABLE"),
+		MaxCapacity:      1,
+		MaxRetries:       1,
+		Outputs: []types.Output{
+			{
+				CompressionFormat: types.CompressionFormat("GZIP"),
+				Format:            types.OutputFormat("CSV"),
+				PartitionColumns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Location: &types.S3Location{
+					Bucket:      ptr.String("__Bucket__"),
+					Key:         ptr.String("__Key__"),
+					BucketOwner: ptr.String("__BucketOwner__"),
+				},
+				Overwrite: true,
+				FormatOptions: &types.OutputFormatOptions{
+					Csv: &types.CsvOutputOptions{
+						Delimiter: ptr.String("__Delimiter__"),
+					},
+				},
+				MaxOutputFiles: ptr.Int32(1),
+			},
+			{
+				CompressionFormat: types.CompressionFormat("GZIP"),
+				Format:            types.OutputFormat("CSV"),
+				PartitionColumns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Location: &types.S3Location{
+					Bucket:      ptr.String("__Bucket__"),
+					Key:         ptr.String("__Key__"),
+					BucketOwner: ptr.String("__BucketOwner__"),
+				},
+				Overwrite: true,
+				FormatOptions: &types.OutputFormatOptions{
+					Csv: &types.CsvOutputOptions{
+						Delimiter: ptr.String("__Delimiter__"),
+					},
+				},
+				MaxOutputFiles: ptr.Int32(1),
+			},
+		},
+		DataCatalogOutputs: []types.DataCatalogOutput{
+			{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+				S3Options: &types.S3TableOutputOptions{
+					Location: &types.S3Location{
+						Bucket:      ptr.String("__Bucket__"),
+						Key:         ptr.String("__Key__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+				DatabaseOptions: &types.DatabaseTableOutputOptions{
+					TempDirectory: &types.S3Location{
+						Bucket:      ptr.String("__Bucket__"),
+						Key:         ptr.String("__Key__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+					TableName: ptr.String("__TableName__"),
+				},
+				Overwrite: true,
+			},
+			{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+				S3Options: &types.S3TableOutputOptions{
+					Location: &types.S3Location{
+						Bucket:      ptr.String("__Bucket__"),
+						Key:         ptr.String("__Key__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+				DatabaseOptions: &types.DatabaseTableOutputOptions{
+					TempDirectory: &types.S3Location{
+						Bucket:      ptr.String("__Bucket__"),
+						Key:         ptr.String("__Key__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+					TableName: ptr.String("__TableName__"),
+				},
+				Overwrite: true,
+			},
+		},
+		DatabaseOutputs: []types.DatabaseOutput{
+			{
+				GlueConnectionName: ptr.String("__GlueConnectionName__"),
+				DatabaseOptions: &types.DatabaseTableOutputOptions{
+					TempDirectory: &types.S3Location{
+						Bucket:      ptr.String("__Bucket__"),
+						Key:         ptr.String("__Key__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+					TableName: ptr.String("__TableName__"),
+				},
+				DatabaseOutputMode: types.DatabaseOutputMode("NEW_TABLE"),
+			},
+			{
+				GlueConnectionName: ptr.String("__GlueConnectionName__"),
+				DatabaseOptions: &types.DatabaseTableOutputOptions{
+					TempDirectory: &types.S3Location{
+						Bucket:      ptr.String("__Bucket__"),
+						Key:         ptr.String("__Key__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+					TableName: ptr.String("__TableName__"),
+				},
+				DatabaseOutputMode: types.DatabaseOutputMode("NEW_TABLE"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Timeout: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2912,7 +3933,58 @@ func TestCheckResponseSnapshot_UpdateRuleset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRuleset(context.Background(), &UpdateRulesetInput{})
+	got, err := svc.UpdateRuleset(context.Background(), &UpdateRulesetInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Rules: []types.Rule{
+			{
+				Name:            ptr.String("__Name__"),
+				Disabled:        true,
+				CheckExpression: ptr.String("__CheckExpression__"),
+				SubstitutionMap: map[string]string{
+					"key0": "__Value__",
+				},
+				Threshold: &types.Threshold{
+					Value: 1.0,
+					Type:  types.ThresholdType("GREATER_THAN_OR_EQUAL"),
+					Unit:  types.ThresholdUnit("COUNT"),
+				},
+				ColumnSelectors: []types.ColumnSelector{
+					{
+						Regex: ptr.String("__Regex__"),
+						Name:  ptr.String("__Name__"),
+					},
+					{
+						Regex: ptr.String("__Regex__"),
+						Name:  ptr.String("__Name__"),
+					},
+				},
+			},
+			{
+				Name:            ptr.String("__Name__"),
+				Disabled:        true,
+				CheckExpression: ptr.String("__CheckExpression__"),
+				SubstitutionMap: map[string]string{
+					"key0": "__Value__",
+				},
+				Threshold: &types.Threshold{
+					Value: 1.0,
+					Type:  types.ThresholdType("GREATER_THAN_OR_EQUAL"),
+					Unit:  types.ThresholdUnit("COUNT"),
+				},
+				ColumnSelectors: []types.ColumnSelector{
+					{
+						Regex: ptr.String("__Regex__"),
+						Name:  ptr.String("__Name__"),
+					},
+					{
+						Regex: ptr.String("__Regex__"),
+						Name:  ptr.String("__Name__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2933,7 +4005,14 @@ func TestCheckResponseSnapshot_UpdateSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSchedule(context.Background(), &UpdateScheduleInput{})
+	got, err := svc.UpdateSchedule(context.Background(), &UpdateScheduleInput{
+		JobNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CronExpression: ptr.String("__CronExpression__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2954,7 +4033,94 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		Name:   ptr.String("__Name__"),
+		Format: types.InputFormat("CSV"),
+		FormatOptions: &types.FormatOptions{
+			Json: &types.JsonOptions{
+				MultiLine: true,
+			},
+			Excel: &types.ExcelOptions{
+				SheetNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SheetIndexes: []int32{
+					1,
+					1,
+				},
+				HeaderRow: ptr.Bool(true),
+			},
+			Csv: &types.CsvOptions{
+				Delimiter: ptr.String("__Delimiter__"),
+				HeaderRow: ptr.Bool(true),
+			},
+		},
+		Input: &types.Input{
+			S3InputDefinition: &types.S3Location{
+				Bucket:      ptr.String("__Bucket__"),
+				Key:         ptr.String("__Key__"),
+				BucketOwner: ptr.String("__BucketOwner__"),
+			},
+			DataCatalogInputDefinition: &types.DataCatalogInputDefinition{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+				TempDirectory: &types.S3Location{
+					Bucket:      ptr.String("__Bucket__"),
+					Key:         ptr.String("__Key__"),
+					BucketOwner: ptr.String("__BucketOwner__"),
+				},
+			},
+			DatabaseInputDefinition: &types.DatabaseInputDefinition{
+				GlueConnectionName: ptr.String("__GlueConnectionName__"),
+				DatabaseTableName:  ptr.String("__DatabaseTableName__"),
+				TempDirectory: &types.S3Location{
+					Bucket:      ptr.String("__Bucket__"),
+					Key:         ptr.String("__Key__"),
+					BucketOwner: ptr.String("__BucketOwner__"),
+				},
+				QueryString: ptr.String("__QueryString__"),
+			},
+			Metadata: &types.Metadata{
+				SourceArn: ptr.String("__SourceArn__"),
+			},
+		},
+		PathOptions: &types.PathOptions{
+			LastModifiedDateCondition: &types.FilterExpression{
+				Expression: ptr.String("__Expression__"),
+				ValuesMap: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			FilesLimit: &types.FilesLimit{
+				MaxFiles:  ptr.Int32(1),
+				OrderedBy: types.OrderedBy("LAST_MODIFIED_DATE"),
+				Order:     types.Order("DESCENDING"),
+			},
+			Parameters: map[string]types.DatasetParameter{
+				"key0": {
+					Name: ptr.String("__Name__"),
+					Type: types.ParameterType("Datetime"),
+					DatetimeOptions: &types.DatetimeOptions{
+						Format:         ptr.String("__Format__"),
+						TimezoneOffset: ptr.String("__TimezoneOffset__"),
+						LocaleCode:     ptr.String("__LocaleCode__"),
+					},
+					CreateColumn: true,
+					Filter: &types.FilterExpression{
+						Expression: ptr.String("__Expression__"),
+						ValuesMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2979,7 +4145,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteRecipeVersion(context.Background(), &BatchDeleteRecipeVersionInput{})
+	_, opErr := svc.BatchDeleteRecipeVersion(context.Background(), &BatchDeleteRecipeVersionInput{
+		Name: ptr.String("__Name__"),
+		RecipeVersions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3004,7 +4176,19 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateProject(context.Background(), &CreateProjectInput{})
+	_, opErr := svc.CreateProject(context.Background(), &CreateProjectInput{
+		DatasetName: ptr.String("__DatasetName__"),
+		Name:        ptr.String("__Name__"),
+		RecipeName:  ptr.String("__RecipeName__"),
+		Sample: &types.Sample{
+			Size: ptr.Int32(1),
+			Type: types.SampleType("FIRST_N"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3029,7 +4213,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteRecipeVersion(context.Background(), &BatchDeleteRecipeVersionInput{})
+	_, opErr := svc.BatchDeleteRecipeVersion(context.Background(), &BatchDeleteRecipeVersionInput{
+		Name: ptr.String("__Name__"),
+		RecipeVersions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3054,7 +4244,94 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		Name:   ptr.String("__Name__"),
+		Format: types.InputFormat("CSV"),
+		FormatOptions: &types.FormatOptions{
+			Json: &types.JsonOptions{
+				MultiLine: true,
+			},
+			Excel: &types.ExcelOptions{
+				SheetNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SheetIndexes: []int32{
+					1,
+					1,
+				},
+				HeaderRow: ptr.Bool(true),
+			},
+			Csv: &types.CsvOptions{
+				Delimiter: ptr.String("__Delimiter__"),
+				HeaderRow: ptr.Bool(true),
+			},
+		},
+		Input: &types.Input{
+			S3InputDefinition: &types.S3Location{
+				Bucket:      ptr.String("__Bucket__"),
+				Key:         ptr.String("__Key__"),
+				BucketOwner: ptr.String("__BucketOwner__"),
+			},
+			DataCatalogInputDefinition: &types.DataCatalogInputDefinition{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+				TempDirectory: &types.S3Location{
+					Bucket:      ptr.String("__Bucket__"),
+					Key:         ptr.String("__Key__"),
+					BucketOwner: ptr.String("__BucketOwner__"),
+				},
+			},
+			DatabaseInputDefinition: &types.DatabaseInputDefinition{
+				GlueConnectionName: ptr.String("__GlueConnectionName__"),
+				DatabaseTableName:  ptr.String("__DatabaseTableName__"),
+				TempDirectory: &types.S3Location{
+					Bucket:      ptr.String("__Bucket__"),
+					Key:         ptr.String("__Key__"),
+					BucketOwner: ptr.String("__BucketOwner__"),
+				},
+				QueryString: ptr.String("__QueryString__"),
+			},
+			Metadata: &types.Metadata{
+				SourceArn: ptr.String("__SourceArn__"),
+			},
+		},
+		PathOptions: &types.PathOptions{
+			LastModifiedDateCondition: &types.FilterExpression{
+				Expression: ptr.String("__Expression__"),
+				ValuesMap: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			FilesLimit: &types.FilesLimit{
+				MaxFiles:  ptr.Int32(1),
+				OrderedBy: types.OrderedBy("LAST_MODIFIED_DATE"),
+				Order:     types.Order("DESCENDING"),
+			},
+			Parameters: map[string]types.DatasetParameter{
+				"key0": {
+					Name: ptr.String("__Name__"),
+					Type: types.ParameterType("Datetime"),
+					DatetimeOptions: &types.DatetimeOptions{
+						Format:         ptr.String("__Format__"),
+						TimezoneOffset: ptr.String("__TimezoneOffset__"),
+						LocaleCode:     ptr.String("__LocaleCode__"),
+					},
+					CreateColumn: true,
+					Filter: &types.FilterExpression{
+						Expression: ptr.String("__Expression__"),
+						ValuesMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3079,7 +4356,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteRecipeVersion(context.Background(), &BatchDeleteRecipeVersionInput{})
+	_, opErr := svc.BatchDeleteRecipeVersion(context.Background(), &BatchDeleteRecipeVersionInput{
+		Name: ptr.String("__Name__"),
+		RecipeVersions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

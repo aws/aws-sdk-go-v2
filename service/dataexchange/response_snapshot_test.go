@@ -131,7 +131,9 @@ func TestCheckResponseSnapshot_AcceptDataGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{})
+	got, err := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{
+		DataGrantArn: ptr.String("__DataGrantArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -150,7 +152,9 @@ func TestCheckResponseSnapshot_CancelJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelJob(context.Background(), &CancelJobInput{})
+	got, err := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -187,7 +191,17 @@ func TestCheckResponseSnapshot_CreateDataGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataGrant(context.Background(), &CreateDataGrantInput{})
+	got, err := svc.CreateDataGrant(context.Background(), &CreateDataGrantInput{
+		Name:                   ptr.String("__Name__"),
+		GrantDistributionScope: types.GrantDistributionScope("AWS_ORGANIZATION"),
+		ReceiverPrincipal:      ptr.String("__ReceiverPrincipal__"),
+		SourceDataSetId:        ptr.String("__SourceDataSetId__"),
+		EndsAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:            ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +237,14 @@ func TestCheckResponseSnapshot_CreateDataSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataSet(context.Background(), &CreateDataSetInput{})
+	got, err := svc.CreateDataSet(context.Background(), &CreateDataSetInput{
+		AssetType:   types.AssetType("S3_SNAPSHOT"),
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +288,28 @@ func TestCheckResponseSnapshot_CreateEventAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEventAction(context.Background(), &CreateEventActionInput{})
+	got, err := svc.CreateEventAction(context.Background(), &CreateEventActionInput{
+		Action: &types.Action{
+			ExportRevisionToS3: &types.AutoExportRevisionToS3RequestDetails{
+				Encryption: &types.ExportServerSideEncryption{
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					Type:      types.ServerSideEncryptionTypes("aws:kms"),
+				},
+				RevisionDestination: &types.AutoExportRevisionDestinationEntry{
+					Bucket:     ptr.String("__Bucket__"),
+					KeyPattern: ptr.String("__KeyPattern__"),
+				},
+			},
+		},
+		Event: &types.Event{
+			RevisionPublished: &types.RevisionPublished{
+				DataSetId: ptr.String("__DataSetId__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -522,7 +564,183 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateJob(context.Background(), &CreateJobInput{})
+	got, err := svc.CreateJob(context.Background(), &CreateJobInput{
+		AssetConfiguration: &types.AssetConfiguration{
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		Details: &types.RequestDetails{
+			ExportAssetToSignedUrl: &types.ExportAssetToSignedUrlRequestDetails{
+				AssetId:    ptr.String("__AssetId__"),
+				DataSetId:  ptr.String("__DataSetId__"),
+				RevisionId: ptr.String("__RevisionId__"),
+			},
+			ExportAssetsToS3: &types.ExportAssetsToS3RequestDetails{
+				AssetDestinations: []types.AssetDestinationEntry{
+					{
+						AssetId: ptr.String("__AssetId__"),
+						Bucket:  ptr.String("__Bucket__"),
+						Key:     ptr.String("__Key__"),
+					},
+					{
+						AssetId: ptr.String("__AssetId__"),
+						Bucket:  ptr.String("__Bucket__"),
+						Key:     ptr.String("__Key__"),
+					},
+				},
+				DataSetId: ptr.String("__DataSetId__"),
+				Encryption: &types.ExportServerSideEncryption{
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					Type:      types.ServerSideEncryptionTypes("aws:kms"),
+				},
+				RevisionId: ptr.String("__RevisionId__"),
+			},
+			ExportRevisionsToS3: &types.ExportRevisionsToS3RequestDetails{
+				DataSetId: ptr.String("__DataSetId__"),
+				Encryption: &types.ExportServerSideEncryption{
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					Type:      types.ServerSideEncryptionTypes("aws:kms"),
+				},
+				RevisionDestinations: []types.RevisionDestinationEntry{
+					{
+						Bucket:     ptr.String("__Bucket__"),
+						KeyPattern: ptr.String("__KeyPattern__"),
+						RevisionId: ptr.String("__RevisionId__"),
+					},
+					{
+						Bucket:     ptr.String("__Bucket__"),
+						KeyPattern: ptr.String("__KeyPattern__"),
+						RevisionId: ptr.String("__RevisionId__"),
+					},
+				},
+			},
+			ImportAssetFromSignedUrl: &types.ImportAssetFromSignedUrlRequestDetails{
+				AssetName:  ptr.String("__AssetName__"),
+				DataSetId:  ptr.String("__DataSetId__"),
+				Md5Hash:    ptr.String("__Md5Hash__"),
+				RevisionId: ptr.String("__RevisionId__"),
+			},
+			ImportAssetsFromS3: &types.ImportAssetsFromS3RequestDetails{
+				AssetSources: []types.AssetSourceEntry{
+					{
+						Bucket: ptr.String("__Bucket__"),
+						Key:    ptr.String("__Key__"),
+					},
+					{
+						Bucket: ptr.String("__Bucket__"),
+						Key:    ptr.String("__Key__"),
+					},
+				},
+				DataSetId:  ptr.String("__DataSetId__"),
+				RevisionId: ptr.String("__RevisionId__"),
+			},
+			ImportAssetsFromRedshiftDataShares: &types.ImportAssetsFromRedshiftDataSharesRequestDetails{
+				AssetSources: []types.RedshiftDataShareAssetSourceEntry{
+					{
+						DataShareArn: ptr.String("__DataShareArn__"),
+					},
+					{
+						DataShareArn: ptr.String("__DataShareArn__"),
+					},
+				},
+				DataSetId:  ptr.String("__DataSetId__"),
+				RevisionId: ptr.String("__RevisionId__"),
+			},
+			ImportAssetFromApiGatewayApi: &types.ImportAssetFromApiGatewayApiRequestDetails{
+				ApiDescription:          ptr.String("__ApiDescription__"),
+				ApiId:                   ptr.String("__ApiId__"),
+				ApiKey:                  ptr.String("__ApiKey__"),
+				ApiName:                 ptr.String("__ApiName__"),
+				ApiSpecificationMd5Hash: ptr.String("__ApiSpecificationMd5Hash__"),
+				DataSetId:               ptr.String("__DataSetId__"),
+				ProtocolType:            types.ProtocolType("REST"),
+				RevisionId:              ptr.String("__RevisionId__"),
+				Stage:                   ptr.String("__Stage__"),
+			},
+			CreateS3DataAccessFromS3Bucket: &types.CreateS3DataAccessFromS3BucketRequestDetails{
+				AssetSource: &types.S3DataAccessAssetSourceEntry{
+					Bucket: ptr.String("__Bucket__"),
+					KeyPrefixes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Keys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					KmsKeysToGrant: []types.KmsKeyToGrant{
+						{
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
+						},
+						{
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
+						},
+					},
+				},
+				DataSetId:  ptr.String("__DataSetId__"),
+				RevisionId: ptr.String("__RevisionId__"),
+			},
+			ImportAssetsFromLakeFormationTagPolicy: &types.ImportAssetsFromLakeFormationTagPolicyRequestDetails{
+				CatalogId: ptr.String("__CatalogId__"),
+				Database: &types.DatabaseLFTagPolicyAndPermissions{
+					Expression: []types.LFTag{
+						{
+							TagKey: ptr.String("__TagKey__"),
+							TagValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							TagKey: ptr.String("__TagKey__"),
+							TagValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Permissions: []types.DatabaseLFTagPolicyPermission{
+						types.DatabaseLFTagPolicyPermission("DESCRIBE"),
+						types.DatabaseLFTagPolicyPermission("DESCRIBE"),
+					},
+				},
+				Table: &types.TableLFTagPolicyAndPermissions{
+					Expression: []types.LFTag{
+						{
+							TagKey: ptr.String("__TagKey__"),
+							TagValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							TagKey: ptr.String("__TagKey__"),
+							TagValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Permissions: []types.TableTagPolicyLFPermission{
+						types.TableTagPolicyLFPermission("DESCRIBE"),
+						types.TableTagPolicyLFPermission("DESCRIBE"),
+					},
+				},
+				RoleArn:    ptr.String("__RoleArn__"),
+				DataSetId:  ptr.String("__DataSetId__"),
+				RevisionId: ptr.String("__RevisionId__"),
+			},
+		},
+		Type: types.Type("IMPORT_ASSETS_FROM_S3"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -556,7 +774,13 @@ func TestCheckResponseSnapshot_CreateRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRevision(context.Background(), &CreateRevisionInput{})
+	got, err := svc.CreateRevision(context.Background(), &CreateRevisionInput{
+		Comment:   ptr.String("__Comment__"),
+		DataSetId: ptr.String("__DataSetId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -575,7 +799,11 @@ func TestCheckResponseSnapshot_DeleteAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAsset(context.Background(), &DeleteAssetInput{})
+	got, err := svc.DeleteAsset(context.Background(), &DeleteAssetInput{
+		AssetId:    ptr.String("__AssetId__"),
+		DataSetId:  ptr.String("__DataSetId__"),
+		RevisionId: ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -594,7 +822,9 @@ func TestCheckResponseSnapshot_DeleteDataGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataGrant(context.Background(), &DeleteDataGrantInput{})
+	got, err := svc.DeleteDataGrant(context.Background(), &DeleteDataGrantInput{
+		DataGrantId: ptr.String("__DataGrantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -613,7 +843,9 @@ func TestCheckResponseSnapshot_DeleteDataSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataSet(context.Background(), &DeleteDataSetInput{})
+	got, err := svc.DeleteDataSet(context.Background(), &DeleteDataSetInput{
+		DataSetId: ptr.String("__DataSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -632,7 +864,9 @@ func TestCheckResponseSnapshot_DeleteEventAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventAction(context.Background(), &DeleteEventActionInput{})
+	got, err := svc.DeleteEventAction(context.Background(), &DeleteEventActionInput{
+		EventActionId: ptr.String("__EventActionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -651,7 +885,10 @@ func TestCheckResponseSnapshot_DeleteRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRevision(context.Background(), &DeleteRevisionInput{})
+	got, err := svc.DeleteRevision(context.Background(), &DeleteRevisionInput{
+		DataSetId:  ptr.String("__DataSetId__"),
+		RevisionId: ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -775,7 +1012,11 @@ func TestCheckResponseSnapshot_GetAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAsset(context.Background(), &GetAssetInput{})
+	got, err := svc.GetAsset(context.Background(), &GetAssetInput{
+		AssetId:    ptr.String("__AssetId__"),
+		DataSetId:  ptr.String("__DataSetId__"),
+		RevisionId: ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -812,7 +1053,9 @@ func TestCheckResponseSnapshot_GetDataGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataGrant(context.Background(), &GetDataGrantInput{})
+	got, err := svc.GetDataGrant(context.Background(), &GetDataGrantInput{
+		DataGrantId: ptr.String("__DataGrantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -848,7 +1091,9 @@ func TestCheckResponseSnapshot_GetDataSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataSet(context.Background(), &GetDataSetInput{})
+	got, err := svc.GetDataSet(context.Background(), &GetDataSetInput{
+		DataSetId: ptr.String("__DataSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -892,7 +1137,9 @@ func TestCheckResponseSnapshot_GetEventAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventAction(context.Background(), &GetEventActionInput{})
+	got, err := svc.GetEventAction(context.Background(), &GetEventActionInput{
+		EventActionId: ptr.String("__EventActionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1147,7 +1394,9 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJob(context.Background(), &GetJobInput{})
+	got, err := svc.GetJob(context.Background(), &GetJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1180,7 +1429,9 @@ func TestCheckResponseSnapshot_GetReceivedDataGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReceivedDataGrant(context.Background(), &GetReceivedDataGrantInput{})
+	got, err := svc.GetReceivedDataGrant(context.Background(), &GetReceivedDataGrantInput{
+		DataGrantArn: ptr.String("__DataGrantArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1214,7 +1465,10 @@ func TestCheckResponseSnapshot_GetRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRevision(context.Background(), &GetRevisionInput{})
+	got, err := svc.GetRevision(context.Background(), &GetRevisionInput{
+		DataSetId:  ptr.String("__DataSetId__"),
+		RevisionId: ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1265,7 +1519,10 @@ func TestCheckResponseSnapshot_ListDataGrants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataGrants(context.Background(), &ListDataGrantsInput{})
+	got, err := svc.ListDataGrants(context.Background(), &ListDataGrantsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1314,7 +1571,11 @@ func TestCheckResponseSnapshot_ListDataSetRevisions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSetRevisions(context.Background(), &ListDataSetRevisionsInput{})
+	got, err := svc.ListDataSetRevisions(context.Background(), &ListDataSetRevisionsInput{
+		DataSetId:  ptr.String("__DataSetId__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1367,7 +1628,11 @@ func TestCheckResponseSnapshot_ListDataSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSets(context.Background(), &ListDataSetsInput{})
+	got, err := svc.ListDataSets(context.Background(), &ListDataSetsInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+		Origin:     ptr.String("__Origin__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1436,7 +1701,11 @@ func TestCheckResponseSnapshot_ListEventActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventActions(context.Background(), &ListEventActionsInput{})
+	got, err := svc.ListEventActions(context.Background(), &ListEventActionsInput{
+		EventSourceId: ptr.String("__EventSourceId__"),
+		MaxResults:    1,
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1933,7 +2202,12 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobs(context.Background(), &ListJobsInput{})
+	got, err := svc.ListJobs(context.Background(), &ListJobsInput{
+		DataSetId:  ptr.String("__DataSetId__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+		RevisionId: ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1982,7 +2256,14 @@ func TestCheckResponseSnapshot_ListReceivedDataGrants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReceivedDataGrants(context.Background(), &ListReceivedDataGrantsInput{})
+	got, err := svc.ListReceivedDataGrants(context.Background(), &ListReceivedDataGrantsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AcceptanceState: []types.AcceptanceStateFilterValue{
+			types.AcceptanceStateFilterValue("PENDING_RECEIVER_ACCEPTANCE"),
+			types.AcceptanceStateFilterValue("PENDING_RECEIVER_ACCEPTANCE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2211,7 +2492,12 @@ func TestCheckResponseSnapshot_ListRevisionAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRevisionAssets(context.Background(), &ListRevisionAssetsInput{})
+	got, err := svc.ListRevisionAssets(context.Background(), &ListRevisionAssetsInput{
+		DataSetId:  ptr.String("__DataSetId__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+		RevisionId: ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2234,7 +2520,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2265,7 +2553,11 @@ func TestCheckResponseSnapshot_RevokeRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeRevision(context.Background(), &RevokeRevisionInput{})
+	got, err := svc.RevokeRevision(context.Background(), &RevokeRevisionInput{
+		DataSetId:         ptr.String("__DataSetId__"),
+		RevisionId:        ptr.String("__RevisionId__"),
+		RevocationComment: ptr.String("__RevocationComment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2275,27 +2567,7 @@ func TestCheckResponseSnapshot_RevokeRevision(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_SendApiAsset(t *testing.T) {
-	want := &SendApiAssetOutput{
-		Body: ptr.String("__Body__"),
-		ResponseHeaders: map[string]string{
-			"key0": "__Value__",
-		},
-	}
-	status, header, body, err := serdeRespReadSnapshot("SendApiAsset.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendApiAsset(context.Background(), &SendApiAssetInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "SendApiAsset.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_SendDataSetNotification(t *testing.T) {
@@ -2308,7 +2580,87 @@ func TestCheckResponseSnapshot_SendDataSetNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendDataSetNotification(context.Background(), &SendDataSetNotificationInput{})
+	got, err := svc.SendDataSetNotification(context.Background(), &SendDataSetNotificationInput{
+		Scope: &types.ScopeDetails{
+			LakeFormationTagPolicies: []types.LakeFormationTagPolicyDetails{
+				{
+					Database: ptr.String("__Database__"),
+					Table:    ptr.String("__Table__"),
+				},
+				{
+					Database: ptr.String("__Database__"),
+					Table:    ptr.String("__Table__"),
+				},
+			},
+			RedshiftDataShares: []types.RedshiftDataShareDetails{
+				{
+					Arn:      ptr.String("__Arn__"),
+					Database: ptr.String("__Database__"),
+					Function: ptr.String("__Function__"),
+					Table:    ptr.String("__Table__"),
+					Schema:   ptr.String("__Schema__"),
+					View:     ptr.String("__View__"),
+				},
+				{
+					Arn:      ptr.String("__Arn__"),
+					Database: ptr.String("__Database__"),
+					Function: ptr.String("__Function__"),
+					Table:    ptr.String("__Table__"),
+					Schema:   ptr.String("__Schema__"),
+					View:     ptr.String("__View__"),
+				},
+			},
+			S3DataAccesses: []types.S3DataAccessDetails{
+				{
+					KeyPrefixes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Keys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					KeyPrefixes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Keys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Comment:     ptr.String("__Comment__"),
+		DataSetId:   ptr.String("__DataSetId__"),
+		Details: &types.NotificationDetails{
+			DataUpdate: &types.DataUpdateRequestDetails{
+				DataUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			Deprecation: &types.DeprecationRequestDetails{
+				DeprecationAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			SchemaChange: &types.SchemaChangeRequestDetails{
+				Changes: []types.SchemaChangeDetails{
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.SchemaChangeType("ADD"),
+						Description: ptr.String("__Description__"),
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.SchemaChangeType("ADD"),
+						Description: ptr.String("__Description__"),
+					},
+				},
+				SchemaChangeAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		Type: types.NotificationType("DATA_DELAY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2327,7 +2679,9 @@ func TestCheckResponseSnapshot_StartJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartJob(context.Background(), &StartJobInput{})
+	got, err := svc.StartJob(context.Background(), &StartJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2346,7 +2700,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2365,7 +2724,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2486,7 +2851,12 @@ func TestCheckResponseSnapshot_UpdateAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAsset(context.Background(), &UpdateAssetInput{})
+	got, err := svc.UpdateAsset(context.Background(), &UpdateAssetInput{
+		AssetId:    ptr.String("__AssetId__"),
+		DataSetId:  ptr.String("__DataSetId__"),
+		Name:       ptr.String("__Name__"),
+		RevisionId: ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2519,7 +2889,11 @@ func TestCheckResponseSnapshot_UpdateDataSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataSet(context.Background(), &UpdateDataSetInput{})
+	got, err := svc.UpdateDataSet(context.Background(), &UpdateDataSetInput{
+		DataSetId:   ptr.String("__DataSetId__"),
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2560,7 +2934,21 @@ func TestCheckResponseSnapshot_UpdateEventAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEventAction(context.Background(), &UpdateEventActionInput{})
+	got, err := svc.UpdateEventAction(context.Background(), &UpdateEventActionInput{
+		Action: &types.Action{
+			ExportRevisionToS3: &types.AutoExportRevisionToS3RequestDetails{
+				Encryption: &types.ExportServerSideEncryption{
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					Type:      types.ServerSideEncryptionTypes("aws:kms"),
+				},
+				RevisionDestination: &types.AutoExportRevisionDestinationEntry{
+					Bucket:     ptr.String("__Bucket__"),
+					KeyPattern: ptr.String("__KeyPattern__"),
+				},
+			},
+		},
+		EventActionId: ptr.String("__EventActionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2591,7 +2979,12 @@ func TestCheckResponseSnapshot_UpdateRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRevision(context.Background(), &UpdateRevisionInput{})
+	got, err := svc.UpdateRevision(context.Background(), &UpdateRevisionInput{
+		Comment:    ptr.String("__Comment__"),
+		DataSetId:  ptr.String("__DataSetId__"),
+		Finalized:  ptr.Bool(true),
+		RevisionId: ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2612,7 +3005,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{})
+	_, opErr := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{
+		DataGrantArn: ptr.String("__DataGrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2639,7 +3034,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{})
+	_, opErr := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{
+		DataGrantArn: ptr.String("__DataGrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2664,7 +3061,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{})
+	_, opErr := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{
+		DataGrantArn: ptr.String("__DataGrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2691,7 +3090,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{})
+	_, opErr := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{
+		DataGrantArn: ptr.String("__DataGrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2718,7 +3119,17 @@ func TestCheckResponseSnapshot_Error_ServiceLimitExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataGrant(context.Background(), &CreateDataGrantInput{})
+	_, opErr := svc.CreateDataGrant(context.Background(), &CreateDataGrantInput{
+		Name:                   ptr.String("__Name__"),
+		GrantDistributionScope: types.GrantDistributionScope("AWS_ORGANIZATION"),
+		ReceiverPrincipal:      ptr.String("__ReceiverPrincipal__"),
+		SourceDataSetId:        ptr.String("__SourceDataSetId__"),
+		EndsAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:            ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2743,7 +3154,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{})
+	_, opErr := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{
+		DataGrantArn: ptr.String("__DataGrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2769,7 +3182,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{})
+	_, opErr := svc.AcceptDataGrant(context.Background(), &AcceptDataGrantInput{
+		DataGrantArn: ptr.String("__DataGrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

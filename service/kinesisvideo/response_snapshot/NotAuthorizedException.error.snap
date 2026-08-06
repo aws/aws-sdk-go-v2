@@ -1,0 +1,4 @@
+401
+Content-Type: application/json
+
+{"__type":"NotAuthorizedException","Message":"__Message__"}

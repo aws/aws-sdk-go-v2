@@ -119,7 +119,10 @@ func TestCheckResponseSnapshot_AcknowledgeJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcknowledgeJob(context.Background(), &AcknowledgeJobInput{})
+	got, err := svc.AcknowledgeJob(context.Background(), &AcknowledgeJobInput{
+		JobId: ptr.String("__JobId__"),
+		Nonce: ptr.String("__Nonce__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +143,11 @@ func TestCheckResponseSnapshot_AcknowledgeThirdPartyJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcknowledgeThirdPartyJob(context.Background(), &AcknowledgeThirdPartyJobInput{})
+	got, err := svc.AcknowledgeThirdPartyJob(context.Background(), &AcknowledgeThirdPartyJobInput{
+		JobId:       ptr.String("__JobId__"),
+		Nonce:       ptr.String("__Nonce__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -212,7 +219,55 @@ func TestCheckResponseSnapshot_CreateCustomActionType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomActionType(context.Background(), &CreateCustomActionTypeInput{})
+	got, err := svc.CreateCustomActionType(context.Background(), &CreateCustomActionTypeInput{
+		Category: types.ActionCategory("Source"),
+		Provider: ptr.String("__Provider__"),
+		Version:  ptr.String("__Version__"),
+		Settings: &types.ActionTypeSettings{
+			ThirdPartyConfigurationUrl: ptr.String("__ThirdPartyConfigurationUrl__"),
+			EntityUrlTemplate:          ptr.String("__EntityUrlTemplate__"),
+			ExecutionUrlTemplate:       ptr.String("__ExecutionUrlTemplate__"),
+			RevisionUrlTemplate:        ptr.String("__RevisionUrlTemplate__"),
+		},
+		ConfigurationProperties: []types.ActionConfigurationProperty{
+			{
+				Name:        ptr.String("__Name__"),
+				Required:    true,
+				Key:         true,
+				Secret:      true,
+				Queryable:   true,
+				Description: ptr.String("__Description__"),
+				Type:        types.ActionConfigurationPropertyType("String"),
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Required:    true,
+				Key:         true,
+				Secret:      true,
+				Queryable:   true,
+				Description: ptr.String("__Description__"),
+				Type:        types.ActionConfigurationPropertyType("String"),
+			},
+		},
+		InputArtifactDetails: &types.ArtifactDetails{
+			MinimumCount: 1,
+			MaximumCount: 1,
+		},
+		OutputArtifactDetails: &types.ArtifactDetails{
+			MinimumCount: 1,
+			MaximumCount: 1,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1549,7 +1604,1325 @@ func TestCheckResponseSnapshot_CreatePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	got, err := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		Pipeline: &types.PipelineDeclaration{
+			Name:    ptr.String("__Name__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			ArtifactStore: &types.ArtifactStore{
+				Type:     types.ArtifactStoreType("S3"),
+				Location: ptr.String("__Location__"),
+				EncryptionKey: &types.EncryptionKey{
+					Id:   ptr.String("__Id__"),
+					Type: types.EncryptionKeyType("KMS"),
+				},
+			},
+			ArtifactStores: map[string]types.ArtifactStore{
+				"key0": {
+					Type:     types.ArtifactStoreType("S3"),
+					Location: ptr.String("__Location__"),
+					EncryptionKey: &types.EncryptionKey{
+						Id:   ptr.String("__Id__"),
+						Type: types.EncryptionKeyType("KMS"),
+					},
+				},
+			},
+			Stages: []types.StageDeclaration{
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Version:       ptr.Int32(1),
+			ExecutionMode: types.ExecutionMode("QUEUED"),
+			PipelineType:  types.PipelineType("V1"),
+			Variables: []types.PipelineVariableDeclaration{
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+			},
+			Triggers: []types.PipelineTriggerDeclaration{
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1568,7 +2941,11 @@ func TestCheckResponseSnapshot_DeleteCustomActionType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomActionType(context.Background(), &DeleteCustomActionTypeInput{})
+	got, err := svc.DeleteCustomActionType(context.Background(), &DeleteCustomActionTypeInput{
+		Category: types.ActionCategory("Source"),
+		Provider: ptr.String("__Provider__"),
+		Version:  ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1587,7 +2964,9 @@ func TestCheckResponseSnapshot_DeletePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePipeline(context.Background(), &DeletePipelineInput{})
+	got, err := svc.DeletePipeline(context.Background(), &DeletePipelineInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1606,7 +2985,9 @@ func TestCheckResponseSnapshot_DeleteWebhook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWebhook(context.Background(), &DeleteWebhookInput{})
+	got, err := svc.DeleteWebhook(context.Background(), &DeleteWebhookInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1625,7 +3006,9 @@ func TestCheckResponseSnapshot_DeregisterWebhookWithThirdParty(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterWebhookWithThirdParty(context.Background(), &DeregisterWebhookWithThirdPartyInput{})
+	got, err := svc.DeregisterWebhookWithThirdParty(context.Background(), &DeregisterWebhookWithThirdPartyInput{
+		WebhookName: ptr.String("__WebhookName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1644,7 +3027,12 @@ func TestCheckResponseSnapshot_DisableStageTransition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableStageTransition(context.Background(), &DisableStageTransitionInput{})
+	got, err := svc.DisableStageTransition(context.Background(), &DisableStageTransitionInput{
+		PipelineName:   ptr.String("__PipelineName__"),
+		StageName:      ptr.String("__StageName__"),
+		TransitionType: types.StageTransitionType("Inbound"),
+		Reason:         ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1663,7 +3051,11 @@ func TestCheckResponseSnapshot_EnableStageTransition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableStageTransition(context.Background(), &EnableStageTransitionInput{})
+	got, err := svc.EnableStageTransition(context.Background(), &EnableStageTransitionInput{
+		PipelineName:   ptr.String("__PipelineName__"),
+		StageName:      ptr.String("__StageName__"),
+		TransitionType: types.StageTransitionType("Inbound"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1750,7 +3142,12 @@ func TestCheckResponseSnapshot_GetActionType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetActionType(context.Background(), &GetActionTypeInput{})
+	got, err := svc.GetActionType(context.Background(), &GetActionTypeInput{
+		Category: types.ActionCategory("Source"),
+		Owner:    ptr.String("__Owner__"),
+		Provider: ptr.String("__Provider__"),
+		Version:  ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1857,7 +3254,9 @@ func TestCheckResponseSnapshot_GetJobDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJobDetails(context.Background(), &GetJobDetailsInput{})
+	got, err := svc.GetJobDetails(context.Background(), &GetJobDetailsInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3190,7 +4589,10 @@ func TestCheckResponseSnapshot_GetPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPipeline(context.Background(), &GetPipelineInput{})
+	got, err := svc.GetPipeline(context.Background(), &GetPipelineInput{
+		Name:    ptr.String("__Name__"),
+		Version: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3254,7 +4656,10 @@ func TestCheckResponseSnapshot_GetPipelineExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPipelineExecution(context.Background(), &GetPipelineExecutionInput{})
+	got, err := svc.GetPipelineExecution(context.Background(), &GetPipelineExecutionInput{
+		PipelineName:        ptr.String("__PipelineName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4192,7 +5597,9 @@ func TestCheckResponseSnapshot_GetPipelineState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPipelineState(context.Background(), &GetPipelineStateInput{})
+	got, err := svc.GetPipelineState(context.Background(), &GetPipelineStateInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4299,7 +5706,10 @@ func TestCheckResponseSnapshot_GetThirdPartyJobDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetThirdPartyJobDetails(context.Background(), &GetThirdPartyJobDetailsInput{})
+	got, err := svc.GetThirdPartyJobDetails(context.Background(), &GetThirdPartyJobDetailsInput{
+		JobId:       ptr.String("__JobId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4472,7 +5882,18 @@ func TestCheckResponseSnapshot_ListActionExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListActionExecutions(context.Background(), &ListActionExecutionsInput{})
+	got, err := svc.ListActionExecutions(context.Background(), &ListActionExecutionsInput{
+		PipelineName: ptr.String("__PipelineName__"),
+		Filter: &types.ActionExecutionFilter{
+			PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+			LatestInPipelineExecution: &types.LatestInPipelineExecutionFilter{
+				PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+				StartTimeRange:      types.StartTimeRange("Latest"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4579,7 +6000,11 @@ func TestCheckResponseSnapshot_ListActionTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListActionTypes(context.Background(), &ListActionTypesInput{})
+	got, err := svc.ListActionTypes(context.Background(), &ListActionTypesInput{
+		ActionOwnerFilter: types.ActionOwner("AWS"),
+		NextToken:         ptr.String("__NextToken__"),
+		RegionFilter:      ptr.String("__RegionFilter__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4660,7 +6085,28 @@ func TestCheckResponseSnapshot_ListDeployActionExecutionTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeployActionExecutionTargets(context.Background(), &ListDeployActionExecutionTargetsInput{})
+	got, err := svc.ListDeployActionExecutionTargets(context.Background(), &ListDeployActionExecutionTargetsInput{
+		PipelineName:      ptr.String("__PipelineName__"),
+		ActionExecutionId: ptr.String("__ActionExecutionId__"),
+		Filters: []types.TargetFilter{
+			{
+				Name: types.TargetFilterName("TARGET_STATUS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.TargetFilterName("TARGET_STATUS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4749,7 +6195,16 @@ func TestCheckResponseSnapshot_ListPipelineExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPipelineExecutions(context.Background(), &ListPipelineExecutionsInput{})
+	got, err := svc.ListPipelineExecutions(context.Background(), &ListPipelineExecutionsInput{
+		PipelineName: ptr.String("__PipelineName__"),
+		MaxResults:   ptr.Int32(1),
+		Filter: &types.PipelineExecutionFilter{
+			SucceededInStage: &types.SucceededInStageFilter{
+				StageName: ptr.String("__StageName__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4788,7 +6243,10 @@ func TestCheckResponseSnapshot_ListPipelines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPipelines(context.Background(), &ListPipelinesInput{})
+	got, err := svc.ListPipelines(context.Background(), &ListPipelinesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4919,7 +6377,18 @@ func TestCheckResponseSnapshot_ListRuleExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRuleExecutions(context.Background(), &ListRuleExecutionsInput{})
+	got, err := svc.ListRuleExecutions(context.Background(), &ListRuleExecutionsInput{
+		PipelineName: ptr.String("__PipelineName__"),
+		Filter: &types.RuleExecutionFilter{
+			PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+			LatestInPipelineExecution: &types.LatestInPipelineExecutionFilter{
+				PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+				StartTimeRange:      types.StartTimeRange("Latest"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5017,7 +6486,10 @@ func TestCheckResponseSnapshot_ListRuleTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRuleTypes(context.Background(), &ListRuleTypesInput{})
+	got, err := svc.ListRuleTypes(context.Background(), &ListRuleTypesInput{
+		RuleOwnerFilter: types.RuleOwner("AWS"),
+		RegionFilter:    ptr.String("__RegionFilter__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5048,7 +6520,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5145,7 +6621,10 @@ func TestCheckResponseSnapshot_ListWebhooks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWebhooks(context.Background(), &ListWebhooksInput{})
+	got, err := svc.ListWebhooks(context.Background(), &ListWebhooksInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5164,7 +6643,12 @@ func TestCheckResponseSnapshot_OverrideStageCondition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OverrideStageCondition(context.Background(), &OverrideStageConditionInput{})
+	got, err := svc.OverrideStageCondition(context.Background(), &OverrideStageConditionInput{
+		PipelineName:        ptr.String("__PipelineName__"),
+		StageName:           ptr.String("__StageName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		ConditionType:       types.ConditionType("BEFORE_ENTRY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5362,7 +6846,18 @@ func TestCheckResponseSnapshot_PollForJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PollForJobs(context.Background(), &PollForJobsInput{})
+	got, err := svc.PollForJobs(context.Background(), &PollForJobsInput{
+		ActionTypeId: &types.ActionTypeId{
+			Category: types.ActionCategory("Source"),
+			Owner:    types.ActionOwner("AWS"),
+			Provider: ptr.String("__Provider__"),
+			Version:  ptr.String("__Version__"),
+		},
+		MaxBatchSize: ptr.Int32(1),
+		QueryParam: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5392,7 +6887,15 @@ func TestCheckResponseSnapshot_PollForThirdPartyJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PollForThirdPartyJobs(context.Background(), &PollForThirdPartyJobsInput{})
+	got, err := svc.PollForThirdPartyJobs(context.Background(), &PollForThirdPartyJobsInput{
+		ActionTypeId: &types.ActionTypeId{
+			Category: types.ActionCategory("Source"),
+			Owner:    types.ActionOwner("AWS"),
+			Provider: ptr.String("__Provider__"),
+			Version:  ptr.String("__Version__"),
+		},
+		MaxBatchSize: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5414,7 +6917,16 @@ func TestCheckResponseSnapshot_PutActionRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutActionRevision(context.Background(), &PutActionRevisionInput{})
+	got, err := svc.PutActionRevision(context.Background(), &PutActionRevisionInput{
+		PipelineName: ptr.String("__PipelineName__"),
+		StageName:    ptr.String("__StageName__"),
+		ActionName:   ptr.String("__ActionName__"),
+		ActionRevision: &types.ActionRevision{
+			RevisionId:       ptr.String("__RevisionId__"),
+			RevisionChangeId: ptr.String("__RevisionChangeId__"),
+			Created:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5435,7 +6947,16 @@ func TestCheckResponseSnapshot_PutApprovalResult(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutApprovalResult(context.Background(), &PutApprovalResultInput{})
+	got, err := svc.PutApprovalResult(context.Background(), &PutApprovalResultInput{
+		PipelineName: ptr.String("__PipelineName__"),
+		StageName:    ptr.String("__StageName__"),
+		ActionName:   ptr.String("__ActionName__"),
+		Result: &types.ApprovalResult{
+			Summary: ptr.String("__Summary__"),
+			Status:  types.ApprovalStatus("Approved"),
+		},
+		Token: ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5454,7 +6975,14 @@ func TestCheckResponseSnapshot_PutJobFailureResult(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutJobFailureResult(context.Background(), &PutJobFailureResultInput{})
+	got, err := svc.PutJobFailureResult(context.Background(), &PutJobFailureResultInput{
+		JobId: ptr.String("__JobId__"),
+		FailureDetails: &types.FailureDetails{
+			Type:                types.FailureType("JobFailed"),
+			Message:             ptr.String("__Message__"),
+			ExternalExecutionId: ptr.String("__ExternalExecutionId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5473,7 +7001,24 @@ func TestCheckResponseSnapshot_PutJobSuccessResult(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutJobSuccessResult(context.Background(), &PutJobSuccessResultInput{})
+	got, err := svc.PutJobSuccessResult(context.Background(), &PutJobSuccessResultInput{
+		JobId: ptr.String("__JobId__"),
+		CurrentRevision: &types.CurrentRevision{
+			Revision:         ptr.String("__Revision__"),
+			ChangeIdentifier: ptr.String("__ChangeIdentifier__"),
+			Created:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RevisionSummary:  ptr.String("__RevisionSummary__"),
+		},
+		ContinuationToken: ptr.String("__ContinuationToken__"),
+		ExecutionDetails: &types.ExecutionDetails{
+			Summary:             ptr.String("__Summary__"),
+			ExternalExecutionId: ptr.String("__ExternalExecutionId__"),
+			PercentComplete:     ptr.Int32(1),
+		},
+		OutputVariables: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5492,7 +7037,15 @@ func TestCheckResponseSnapshot_PutThirdPartyJobFailureResult(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutThirdPartyJobFailureResult(context.Background(), &PutThirdPartyJobFailureResultInput{})
+	got, err := svc.PutThirdPartyJobFailureResult(context.Background(), &PutThirdPartyJobFailureResultInput{
+		JobId:       ptr.String("__JobId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		FailureDetails: &types.FailureDetails{
+			Type:                types.FailureType("JobFailed"),
+			Message:             ptr.String("__Message__"),
+			ExternalExecutionId: ptr.String("__ExternalExecutionId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5511,7 +7064,22 @@ func TestCheckResponseSnapshot_PutThirdPartyJobSuccessResult(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutThirdPartyJobSuccessResult(context.Background(), &PutThirdPartyJobSuccessResultInput{})
+	got, err := svc.PutThirdPartyJobSuccessResult(context.Background(), &PutThirdPartyJobSuccessResultInput{
+		JobId:       ptr.String("__JobId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		CurrentRevision: &types.CurrentRevision{
+			Revision:         ptr.String("__Revision__"),
+			ChangeIdentifier: ptr.String("__ChangeIdentifier__"),
+			Created:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RevisionSummary:  ptr.String("__RevisionSummary__"),
+		},
+		ContinuationToken: ptr.String("__ContinuationToken__"),
+		ExecutionDetails: &types.ExecutionDetails{
+			Summary:             ptr.String("__Summary__"),
+			ExternalExecutionId: ptr.String("__ExternalExecutionId__"),
+			PercentComplete:     ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5568,7 +7136,38 @@ func TestCheckResponseSnapshot_PutWebhook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutWebhook(context.Background(), &PutWebhookInput{})
+	got, err := svc.PutWebhook(context.Background(), &PutWebhookInput{
+		Webhook: &types.WebhookDefinition{
+			Name:           ptr.String("__Name__"),
+			TargetPipeline: ptr.String("__TargetPipeline__"),
+			TargetAction:   ptr.String("__TargetAction__"),
+			Filters: []types.WebhookFilterRule{
+				{
+					JsonPath:    ptr.String("__JsonPath__"),
+					MatchEquals: ptr.String("__MatchEquals__"),
+				},
+				{
+					JsonPath:    ptr.String("__JsonPath__"),
+					MatchEquals: ptr.String("__MatchEquals__"),
+				},
+			},
+			Authentication: types.WebhookAuthenticationType("GITHUB_HMAC"),
+			AuthenticationConfiguration: &types.WebhookAuthConfiguration{
+				AllowedIPRange: ptr.String("__AllowedIPRange__"),
+				SecretToken:    ptr.String("__SecretToken__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5587,7 +7186,9 @@ func TestCheckResponseSnapshot_RegisterWebhookWithThirdParty(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterWebhookWithThirdParty(context.Background(), &RegisterWebhookWithThirdPartyInput{})
+	got, err := svc.RegisterWebhookWithThirdParty(context.Background(), &RegisterWebhookWithThirdPartyInput{
+		WebhookName: ptr.String("__WebhookName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5608,7 +7209,12 @@ func TestCheckResponseSnapshot_RetryStageExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RetryStageExecution(context.Background(), &RetryStageExecutionInput{})
+	got, err := svc.RetryStageExecution(context.Background(), &RetryStageExecutionInput{
+		PipelineName:        ptr.String("__PipelineName__"),
+		StageName:           ptr.String("__StageName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		RetryMode:           types.StageRetryMode("FAILED_ACTIONS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5629,7 +7235,11 @@ func TestCheckResponseSnapshot_RollbackStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RollbackStage(context.Background(), &RollbackStageInput{})
+	got, err := svc.RollbackStage(context.Background(), &RollbackStageInput{
+		PipelineName:              ptr.String("__PipelineName__"),
+		StageName:                 ptr.String("__StageName__"),
+		TargetPipelineExecutionId: ptr.String("__TargetPipelineExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5650,7 +7260,32 @@ func TestCheckResponseSnapshot_StartPipelineExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartPipelineExecution(context.Background(), &StartPipelineExecutionInput{})
+	got, err := svc.StartPipelineExecution(context.Background(), &StartPipelineExecutionInput{
+		Name: ptr.String("__Name__"),
+		Variables: []types.PipelineVariable{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SourceRevisions: []types.SourceRevisionOverride{
+			{
+				ActionName:    ptr.String("__ActionName__"),
+				RevisionType:  types.SourceRevisionType("COMMIT_ID"),
+				RevisionValue: ptr.String("__RevisionValue__"),
+			},
+			{
+				ActionName:    ptr.String("__ActionName__"),
+				RevisionType:  types.SourceRevisionType("COMMIT_ID"),
+				RevisionValue: ptr.String("__RevisionValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5671,7 +7306,12 @@ func TestCheckResponseSnapshot_StopPipelineExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopPipelineExecution(context.Background(), &StopPipelineExecutionInput{})
+	got, err := svc.StopPipelineExecution(context.Background(), &StopPipelineExecutionInput{
+		PipelineName:        ptr.String("__PipelineName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		Abandon:             true,
+		Reason:              ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5690,7 +7330,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5709,7 +7361,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5728,7 +7386,75 @@ func TestCheckResponseSnapshot_UpdateActionType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateActionType(context.Background(), &UpdateActionTypeInput{})
+	got, err := svc.UpdateActionType(context.Background(), &UpdateActionTypeInput{
+		ActionType: &types.ActionTypeDeclaration{
+			Description: ptr.String("__Description__"),
+			Executor: &types.ActionTypeExecutor{
+				Configuration: &types.ExecutorConfiguration{
+					LambdaExecutorConfiguration: &types.LambdaExecutorConfiguration{
+						LambdaFunctionArn: ptr.String("__LambdaFunctionArn__"),
+					},
+					JobWorkerExecutorConfiguration: &types.JobWorkerExecutorConfiguration{
+						PollingAccounts: []string{
+							"__Member__",
+							"__Member__",
+						},
+						PollingServicePrincipals: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Type:                     types.ExecutorType("JobWorker"),
+				PolicyStatementsTemplate: ptr.String("__PolicyStatementsTemplate__"),
+				JobTimeout:               ptr.Int32(1),
+			},
+			Id: &types.ActionTypeIdentifier{
+				Category: types.ActionCategory("Source"),
+				Owner:    ptr.String("__Owner__"),
+				Provider: ptr.String("__Provider__"),
+				Version:  ptr.String("__Version__"),
+			},
+			InputArtifactDetails: &types.ActionTypeArtifactDetails{
+				MinimumCount: 1,
+				MaximumCount: 1,
+			},
+			OutputArtifactDetails: &types.ActionTypeArtifactDetails{
+				MinimumCount: 1,
+				MaximumCount: 1,
+			},
+			Permissions: &types.ActionTypePermissions{
+				AllowedAccounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Properties: []types.ActionTypeProperty{
+				{
+					Name:        ptr.String("__Name__"),
+					Optional:    true,
+					Key:         true,
+					NoEcho:      true,
+					Queryable:   true,
+					Description: ptr.String("__Description__"),
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Optional:    true,
+					Key:         true,
+					NoEcho:      true,
+					Queryable:   true,
+					Description: ptr.String("__Description__"),
+				},
+			},
+			Urls: &types.ActionTypeUrls{
+				ConfigurationUrl:     ptr.String("__ConfigurationUrl__"),
+				EntityUrlTemplate:    ptr.String("__EntityUrlTemplate__"),
+				ExecutionUrlTemplate: ptr.String("__ExecutionUrlTemplate__"),
+				RevisionUrlTemplate:  ptr.String("__RevisionUrlTemplate__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7055,7 +8781,1315 @@ func TestCheckResponseSnapshot_UpdatePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePipeline(context.Background(), &UpdatePipelineInput{})
+	got, err := svc.UpdatePipeline(context.Background(), &UpdatePipelineInput{
+		Pipeline: &types.PipelineDeclaration{
+			Name:    ptr.String("__Name__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			ArtifactStore: &types.ArtifactStore{
+				Type:     types.ArtifactStoreType("S3"),
+				Location: ptr.String("__Location__"),
+				EncryptionKey: &types.EncryptionKey{
+					Id:   ptr.String("__Id__"),
+					Type: types.EncryptionKeyType("KMS"),
+				},
+			},
+			ArtifactStores: map[string]types.ArtifactStore{
+				"key0": {
+					Type:     types.ArtifactStoreType("S3"),
+					Location: ptr.String("__Location__"),
+					EncryptionKey: &types.EncryptionKey{
+						Id:   ptr.String("__Id__"),
+						Type: types.EncryptionKeyType("KMS"),
+					},
+				},
+			},
+			Stages: []types.StageDeclaration{
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Version:       ptr.Int32(1),
+			ExecutionMode: types.ExecutionMode("QUEUED"),
+			PipelineType:  types.PipelineType("V1"),
+			Variables: []types.PipelineVariableDeclaration{
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+			},
+			Triggers: []types.PipelineTriggerDeclaration{
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7076,7 +10110,28 @@ func TestCheckResponseSnapshot_Error_ActionExecutionNotFoundException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListDeployActionExecutionTargets(context.Background(), &ListDeployActionExecutionTargetsInput{})
+	_, opErr := svc.ListDeployActionExecutionTargets(context.Background(), &ListDeployActionExecutionTargetsInput{
+		PipelineName:      ptr.String("__PipelineName__"),
+		ActionExecutionId: ptr.String("__ActionExecutionId__"),
+		Filters: []types.TargetFilter{
+			{
+				Name: types.TargetFilterName("TARGET_STATUS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.TargetFilterName("TARGET_STATUS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7101,7 +10156,16 @@ func TestCheckResponseSnapshot_Error_ActionNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutActionRevision(context.Background(), &PutActionRevisionInput{})
+	_, opErr := svc.PutActionRevision(context.Background(), &PutActionRevisionInput{
+		PipelineName: ptr.String("__PipelineName__"),
+		StageName:    ptr.String("__StageName__"),
+		ActionName:   ptr.String("__ActionName__"),
+		ActionRevision: &types.ActionRevision{
+			RevisionId:       ptr.String("__RevisionId__"),
+			RevisionChangeId: ptr.String("__RevisionChangeId__"),
+			Created:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7126,7 +10190,12 @@ func TestCheckResponseSnapshot_Error_ActionTypeNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetActionType(context.Background(), &GetActionTypeInput{})
+	_, opErr := svc.GetActionType(context.Background(), &GetActionTypeInput{
+		Category: types.ActionCategory("Source"),
+		Owner:    ptr.String("__Owner__"),
+		Provider: ptr.String("__Provider__"),
+		Version:  ptr.String("__Version__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7151,7 +10220,16 @@ func TestCheckResponseSnapshot_Error_ApprovalAlreadyCompletedException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutApprovalResult(context.Background(), &PutApprovalResultInput{})
+	_, opErr := svc.PutApprovalResult(context.Background(), &PutApprovalResultInput{
+		PipelineName: ptr.String("__PipelineName__"),
+		StageName:    ptr.String("__StageName__"),
+		ActionName:   ptr.String("__ActionName__"),
+		Result: &types.ApprovalResult{
+			Summary: ptr.String("__Summary__"),
+			Status:  types.ApprovalStatus("Approved"),
+		},
+		Token: ptr.String("__Token__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7176,7 +10254,55 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomActionType(context.Background(), &CreateCustomActionTypeInput{})
+	_, opErr := svc.CreateCustomActionType(context.Background(), &CreateCustomActionTypeInput{
+		Category: types.ActionCategory("Source"),
+		Provider: ptr.String("__Provider__"),
+		Version:  ptr.String("__Version__"),
+		Settings: &types.ActionTypeSettings{
+			ThirdPartyConfigurationUrl: ptr.String("__ThirdPartyConfigurationUrl__"),
+			EntityUrlTemplate:          ptr.String("__EntityUrlTemplate__"),
+			ExecutionUrlTemplate:       ptr.String("__ExecutionUrlTemplate__"),
+			RevisionUrlTemplate:        ptr.String("__RevisionUrlTemplate__"),
+		},
+		ConfigurationProperties: []types.ActionConfigurationProperty{
+			{
+				Name:        ptr.String("__Name__"),
+				Required:    true,
+				Key:         true,
+				Secret:      true,
+				Queryable:   true,
+				Description: ptr.String("__Description__"),
+				Type:        types.ActionConfigurationPropertyType("String"),
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Required:    true,
+				Key:         true,
+				Secret:      true,
+				Queryable:   true,
+				Description: ptr.String("__Description__"),
+				Type:        types.ActionConfigurationPropertyType("String"),
+			},
+		},
+		InputArtifactDetails: &types.ArtifactDetails{
+			MinimumCount: 1,
+			MaximumCount: 1,
+		},
+		OutputArtifactDetails: &types.ArtifactDetails{
+			MinimumCount: 1,
+			MaximumCount: 1,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7201,7 +10327,12 @@ func TestCheckResponseSnapshot_Error_ConcurrentPipelineExecutionsLimitExceededEx
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.OverrideStageCondition(context.Background(), &OverrideStageConditionInput{})
+	_, opErr := svc.OverrideStageCondition(context.Background(), &OverrideStageConditionInput{
+		PipelineName:        ptr.String("__PipelineName__"),
+		StageName:           ptr.String("__StageName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		ConditionType:       types.ConditionType("BEFORE_ENTRY"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7226,7 +10357,12 @@ func TestCheckResponseSnapshot_Error_ConditionNotOverridableException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.OverrideStageCondition(context.Background(), &OverrideStageConditionInput{})
+	_, opErr := svc.OverrideStageCondition(context.Background(), &OverrideStageConditionInput{
+		PipelineName:        ptr.String("__PipelineName__"),
+		StageName:           ptr.String("__StageName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		ConditionType:       types.ConditionType("BEFORE_ENTRY"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7251,7 +10387,12 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.OverrideStageCondition(context.Background(), &OverrideStageConditionInput{})
+	_, opErr := svc.OverrideStageCondition(context.Background(), &OverrideStageConditionInput{
+		PipelineName:        ptr.String("__PipelineName__"),
+		StageName:           ptr.String("__StageName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		ConditionType:       types.ConditionType("BEFORE_ENTRY"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7276,7 +10417,12 @@ func TestCheckResponseSnapshot_Error_DuplicatedStopRequestException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StopPipelineExecution(context.Background(), &StopPipelineExecutionInput{})
+	_, opErr := svc.StopPipelineExecution(context.Background(), &StopPipelineExecutionInput{
+		PipelineName:        ptr.String("__PipelineName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		Abandon:             true,
+		Reason:              ptr.String("__Reason__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7301,7 +10447,1325 @@ func TestCheckResponseSnapshot_Error_InvalidActionDeclarationException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		Pipeline: &types.PipelineDeclaration{
+			Name:    ptr.String("__Name__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			ArtifactStore: &types.ArtifactStore{
+				Type:     types.ArtifactStoreType("S3"),
+				Location: ptr.String("__Location__"),
+				EncryptionKey: &types.EncryptionKey{
+					Id:   ptr.String("__Id__"),
+					Type: types.EncryptionKeyType("KMS"),
+				},
+			},
+			ArtifactStores: map[string]types.ArtifactStore{
+				"key0": {
+					Type:     types.ArtifactStoreType("S3"),
+					Location: ptr.String("__Location__"),
+					EncryptionKey: &types.EncryptionKey{
+						Id:   ptr.String("__Id__"),
+						Type: types.EncryptionKeyType("KMS"),
+					},
+				},
+			},
+			Stages: []types.StageDeclaration{
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Version:       ptr.Int32(1),
+			ExecutionMode: types.ExecutionMode("QUEUED"),
+			PipelineType:  types.PipelineType("V1"),
+			Variables: []types.PipelineVariableDeclaration{
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+			},
+			Triggers: []types.PipelineTriggerDeclaration{
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7326,7 +11790,16 @@ func TestCheckResponseSnapshot_Error_InvalidApprovalTokenException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutApprovalResult(context.Background(), &PutApprovalResultInput{})
+	_, opErr := svc.PutApprovalResult(context.Background(), &PutApprovalResultInput{
+		PipelineName: ptr.String("__PipelineName__"),
+		StageName:    ptr.String("__StageName__"),
+		ActionName:   ptr.String("__ActionName__"),
+		Result: &types.ApprovalResult{
+			Summary: ptr.String("__Summary__"),
+			Status:  types.ApprovalStatus("Approved"),
+		},
+		Token: ptr.String("__Token__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7351,7 +11824,11 @@ func TestCheckResponseSnapshot_Error_InvalidArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7376,7 +11853,1325 @@ func TestCheckResponseSnapshot_Error_InvalidBlockerDeclarationException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		Pipeline: &types.PipelineDeclaration{
+			Name:    ptr.String("__Name__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			ArtifactStore: &types.ArtifactStore{
+				Type:     types.ArtifactStoreType("S3"),
+				Location: ptr.String("__Location__"),
+				EncryptionKey: &types.EncryptionKey{
+					Id:   ptr.String("__Id__"),
+					Type: types.EncryptionKeyType("KMS"),
+				},
+			},
+			ArtifactStores: map[string]types.ArtifactStore{
+				"key0": {
+					Type:     types.ArtifactStoreType("S3"),
+					Location: ptr.String("__Location__"),
+					EncryptionKey: &types.EncryptionKey{
+						Id:   ptr.String("__Id__"),
+						Type: types.EncryptionKeyType("KMS"),
+					},
+				},
+			},
+			Stages: []types.StageDeclaration{
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Version:       ptr.Int32(1),
+			ExecutionMode: types.ExecutionMode("QUEUED"),
+			PipelineType:  types.PipelineType("V1"),
+			Variables: []types.PipelineVariableDeclaration{
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+			},
+			Triggers: []types.PipelineTriggerDeclaration{
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7401,7 +13196,11 @@ func TestCheckResponseSnapshot_Error_InvalidClientTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcknowledgeThirdPartyJob(context.Background(), &AcknowledgeThirdPartyJobInput{})
+	_, opErr := svc.AcknowledgeThirdPartyJob(context.Background(), &AcknowledgeThirdPartyJobInput{
+		JobId:       ptr.String("__JobId__"),
+		Nonce:       ptr.String("__Nonce__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7426,7 +13225,10 @@ func TestCheckResponseSnapshot_Error_InvalidJobException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetThirdPartyJobDetails(context.Background(), &GetThirdPartyJobDetailsInput{})
+	_, opErr := svc.GetThirdPartyJobDetails(context.Background(), &GetThirdPartyJobDetailsInput{
+		JobId:       ptr.String("__JobId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7451,7 +13253,14 @@ func TestCheckResponseSnapshot_Error_InvalidJobStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutJobFailureResult(context.Background(), &PutJobFailureResultInput{})
+	_, opErr := svc.PutJobFailureResult(context.Background(), &PutJobFailureResultInput{
+		JobId: ptr.String("__JobId__"),
+		FailureDetails: &types.FailureDetails{
+			Type:                types.FailureType("JobFailed"),
+			Message:             ptr.String("__Message__"),
+			ExternalExecutionId: ptr.String("__ExternalExecutionId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7476,7 +13285,18 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListActionExecutions(context.Background(), &ListActionExecutionsInput{})
+	_, opErr := svc.ListActionExecutions(context.Background(), &ListActionExecutionsInput{
+		PipelineName: ptr.String("__PipelineName__"),
+		Filter: &types.ActionExecutionFilter{
+			PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+			LatestInPipelineExecution: &types.LatestInPipelineExecutionFilter{
+				PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+				StartTimeRange:      types.StartTimeRange("Latest"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7501,7 +13321,10 @@ func TestCheckResponseSnapshot_Error_InvalidNonceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcknowledgeJob(context.Background(), &AcknowledgeJobInput{})
+	_, opErr := svc.AcknowledgeJob(context.Background(), &AcknowledgeJobInput{
+		JobId: ptr.String("__JobId__"),
+		Nonce: ptr.String("__Nonce__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7526,7 +13349,1325 @@ func TestCheckResponseSnapshot_Error_InvalidStageDeclarationException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		Pipeline: &types.PipelineDeclaration{
+			Name:    ptr.String("__Name__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			ArtifactStore: &types.ArtifactStore{
+				Type:     types.ArtifactStoreType("S3"),
+				Location: ptr.String("__Location__"),
+				EncryptionKey: &types.EncryptionKey{
+					Id:   ptr.String("__Id__"),
+					Type: types.EncryptionKeyType("KMS"),
+				},
+			},
+			ArtifactStores: map[string]types.ArtifactStore{
+				"key0": {
+					Type:     types.ArtifactStoreType("S3"),
+					Location: ptr.String("__Location__"),
+					EncryptionKey: &types.EncryptionKey{
+						Id:   ptr.String("__Id__"),
+						Type: types.EncryptionKeyType("KMS"),
+					},
+				},
+			},
+			Stages: []types.StageDeclaration{
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Version:       ptr.Int32(1),
+			ExecutionMode: types.ExecutionMode("QUEUED"),
+			PipelineType:  types.PipelineType("V1"),
+			Variables: []types.PipelineVariableDeclaration{
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+			},
+			Triggers: []types.PipelineTriggerDeclaration{
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7551,7 +14692,1325 @@ func TestCheckResponseSnapshot_Error_InvalidStructureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		Pipeline: &types.PipelineDeclaration{
+			Name:    ptr.String("__Name__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			ArtifactStore: &types.ArtifactStore{
+				Type:     types.ArtifactStoreType("S3"),
+				Location: ptr.String("__Location__"),
+				EncryptionKey: &types.EncryptionKey{
+					Id:   ptr.String("__Id__"),
+					Type: types.EncryptionKeyType("KMS"),
+				},
+			},
+			ArtifactStores: map[string]types.ArtifactStore{
+				"key0": {
+					Type:     types.ArtifactStoreType("S3"),
+					Location: ptr.String("__Location__"),
+					EncryptionKey: &types.EncryptionKey{
+						Id:   ptr.String("__Id__"),
+						Type: types.EncryptionKeyType("KMS"),
+					},
+				},
+			},
+			Stages: []types.StageDeclaration{
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Version:       ptr.Int32(1),
+			ExecutionMode: types.ExecutionMode("QUEUED"),
+			PipelineType:  types.PipelineType("V1"),
+			Variables: []types.PipelineVariableDeclaration{
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+			},
+			Triggers: []types.PipelineTriggerDeclaration{
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7576,7 +16035,55 @@ func TestCheckResponseSnapshot_Error_InvalidTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomActionType(context.Background(), &CreateCustomActionTypeInput{})
+	_, opErr := svc.CreateCustomActionType(context.Background(), &CreateCustomActionTypeInput{
+		Category: types.ActionCategory("Source"),
+		Provider: ptr.String("__Provider__"),
+		Version:  ptr.String("__Version__"),
+		Settings: &types.ActionTypeSettings{
+			ThirdPartyConfigurationUrl: ptr.String("__ThirdPartyConfigurationUrl__"),
+			EntityUrlTemplate:          ptr.String("__EntityUrlTemplate__"),
+			ExecutionUrlTemplate:       ptr.String("__ExecutionUrlTemplate__"),
+			RevisionUrlTemplate:        ptr.String("__RevisionUrlTemplate__"),
+		},
+		ConfigurationProperties: []types.ActionConfigurationProperty{
+			{
+				Name:        ptr.String("__Name__"),
+				Required:    true,
+				Key:         true,
+				Secret:      true,
+				Queryable:   true,
+				Description: ptr.String("__Description__"),
+				Type:        types.ActionConfigurationPropertyType("String"),
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Required:    true,
+				Key:         true,
+				Secret:      true,
+				Queryable:   true,
+				Description: ptr.String("__Description__"),
+				Type:        types.ActionConfigurationPropertyType("String"),
+			},
+		},
+		InputArtifactDetails: &types.ArtifactDetails{
+			MinimumCount: 1,
+			MaximumCount: 1,
+		},
+		OutputArtifactDetails: &types.ArtifactDetails{
+			MinimumCount: 1,
+			MaximumCount: 1,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7601,7 +16108,38 @@ func TestCheckResponseSnapshot_Error_InvalidWebhookAuthenticationParametersExcep
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutWebhook(context.Background(), &PutWebhookInput{})
+	_, opErr := svc.PutWebhook(context.Background(), &PutWebhookInput{
+		Webhook: &types.WebhookDefinition{
+			Name:           ptr.String("__Name__"),
+			TargetPipeline: ptr.String("__TargetPipeline__"),
+			TargetAction:   ptr.String("__TargetAction__"),
+			Filters: []types.WebhookFilterRule{
+				{
+					JsonPath:    ptr.String("__JsonPath__"),
+					MatchEquals: ptr.String("__MatchEquals__"),
+				},
+				{
+					JsonPath:    ptr.String("__JsonPath__"),
+					MatchEquals: ptr.String("__MatchEquals__"),
+				},
+			},
+			Authentication: types.WebhookAuthenticationType("GITHUB_HMAC"),
+			AuthenticationConfiguration: &types.WebhookAuthConfiguration{
+				AllowedIPRange: ptr.String("__AllowedIPRange__"),
+				SecretToken:    ptr.String("__SecretToken__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7626,7 +16164,38 @@ func TestCheckResponseSnapshot_Error_InvalidWebhookFilterPatternException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutWebhook(context.Background(), &PutWebhookInput{})
+	_, opErr := svc.PutWebhook(context.Background(), &PutWebhookInput{
+		Webhook: &types.WebhookDefinition{
+			Name:           ptr.String("__Name__"),
+			TargetPipeline: ptr.String("__TargetPipeline__"),
+			TargetAction:   ptr.String("__TargetAction__"),
+			Filters: []types.WebhookFilterRule{
+				{
+					JsonPath:    ptr.String("__JsonPath__"),
+					MatchEquals: ptr.String("__MatchEquals__"),
+				},
+				{
+					JsonPath:    ptr.String("__JsonPath__"),
+					MatchEquals: ptr.String("__MatchEquals__"),
+				},
+			},
+			Authentication: types.WebhookAuthenticationType("GITHUB_HMAC"),
+			AuthenticationConfiguration: &types.WebhookAuthConfiguration{
+				AllowedIPRange: ptr.String("__AllowedIPRange__"),
+				SecretToken:    ptr.String("__SecretToken__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7651,7 +16220,10 @@ func TestCheckResponseSnapshot_Error_JobNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcknowledgeJob(context.Background(), &AcknowledgeJobInput{})
+	_, opErr := svc.AcknowledgeJob(context.Background(), &AcknowledgeJobInput{
+		JobId: ptr.String("__JobId__"),
+		Nonce: ptr.String("__Nonce__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7676,7 +16248,55 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomActionType(context.Background(), &CreateCustomActionTypeInput{})
+	_, opErr := svc.CreateCustomActionType(context.Background(), &CreateCustomActionTypeInput{
+		Category: types.ActionCategory("Source"),
+		Provider: ptr.String("__Provider__"),
+		Version:  ptr.String("__Version__"),
+		Settings: &types.ActionTypeSettings{
+			ThirdPartyConfigurationUrl: ptr.String("__ThirdPartyConfigurationUrl__"),
+			EntityUrlTemplate:          ptr.String("__EntityUrlTemplate__"),
+			ExecutionUrlTemplate:       ptr.String("__ExecutionUrlTemplate__"),
+			RevisionUrlTemplate:        ptr.String("__RevisionUrlTemplate__"),
+		},
+		ConfigurationProperties: []types.ActionConfigurationProperty{
+			{
+				Name:        ptr.String("__Name__"),
+				Required:    true,
+				Key:         true,
+				Secret:      true,
+				Queryable:   true,
+				Description: ptr.String("__Description__"),
+				Type:        types.ActionConfigurationPropertyType("String"),
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Required:    true,
+				Key:         true,
+				Secret:      true,
+				Queryable:   true,
+				Description: ptr.String("__Description__"),
+				Type:        types.ActionConfigurationPropertyType("String"),
+			},
+		},
+		InputArtifactDetails: &types.ArtifactDetails{
+			MinimumCount: 1,
+			MaximumCount: 1,
+		},
+		OutputArtifactDetails: &types.ArtifactDetails{
+			MinimumCount: 1,
+			MaximumCount: 1,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7701,7 +16321,12 @@ func TestCheckResponseSnapshot_Error_NotLatestPipelineExecutionException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.OverrideStageCondition(context.Background(), &OverrideStageConditionInput{})
+	_, opErr := svc.OverrideStageCondition(context.Background(), &OverrideStageConditionInput{
+		PipelineName:        ptr.String("__PipelineName__"),
+		StageName:           ptr.String("__StageName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		ConditionType:       types.ConditionType("BEFORE_ENTRY"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7726,7 +16351,24 @@ func TestCheckResponseSnapshot_Error_OutputVariablesSizeExceededException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutJobSuccessResult(context.Background(), &PutJobSuccessResultInput{})
+	_, opErr := svc.PutJobSuccessResult(context.Background(), &PutJobSuccessResultInput{
+		JobId: ptr.String("__JobId__"),
+		CurrentRevision: &types.CurrentRevision{
+			Revision:         ptr.String("__Revision__"),
+			ChangeIdentifier: ptr.String("__ChangeIdentifier__"),
+			Created:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RevisionSummary:  ptr.String("__RevisionSummary__"),
+		},
+		ContinuationToken: ptr.String("__ContinuationToken__"),
+		ExecutionDetails: &types.ExecutionDetails{
+			Summary:             ptr.String("__Summary__"),
+			ExternalExecutionId: ptr.String("__ExternalExecutionId__"),
+			PercentComplete:     ptr.Int32(1),
+		},
+		OutputVariables: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7751,7 +16393,10 @@ func TestCheckResponseSnapshot_Error_PipelineExecutionNotFoundException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetPipelineExecution(context.Background(), &GetPipelineExecutionInput{})
+	_, opErr := svc.GetPipelineExecution(context.Background(), &GetPipelineExecutionInput{
+		PipelineName:        ptr.String("__PipelineName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7776,7 +16421,12 @@ func TestCheckResponseSnapshot_Error_PipelineExecutionNotStoppableException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StopPipelineExecution(context.Background(), &StopPipelineExecutionInput{})
+	_, opErr := svc.StopPipelineExecution(context.Background(), &StopPipelineExecutionInput{
+		PipelineName:        ptr.String("__PipelineName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		Abandon:             true,
+		Reason:              ptr.String("__Reason__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7801,7 +16451,11 @@ func TestCheckResponseSnapshot_Error_PipelineExecutionOutdatedException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RollbackStage(context.Background(), &RollbackStageInput{})
+	_, opErr := svc.RollbackStage(context.Background(), &RollbackStageInput{
+		PipelineName:              ptr.String("__PipelineName__"),
+		StageName:                 ptr.String("__StageName__"),
+		TargetPipelineExecutionId: ptr.String("__TargetPipelineExecutionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7826,7 +16480,1325 @@ func TestCheckResponseSnapshot_Error_PipelineNameInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		Pipeline: &types.PipelineDeclaration{
+			Name:    ptr.String("__Name__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			ArtifactStore: &types.ArtifactStore{
+				Type:     types.ArtifactStoreType("S3"),
+				Location: ptr.String("__Location__"),
+				EncryptionKey: &types.EncryptionKey{
+					Id:   ptr.String("__Id__"),
+					Type: types.EncryptionKeyType("KMS"),
+				},
+			},
+			ArtifactStores: map[string]types.ArtifactStore{
+				"key0": {
+					Type:     types.ArtifactStoreType("S3"),
+					Location: ptr.String("__Location__"),
+					EncryptionKey: &types.EncryptionKey{
+						Id:   ptr.String("__Id__"),
+						Type: types.EncryptionKeyType("KMS"),
+					},
+				},
+			},
+			Stages: []types.StageDeclaration{
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Blockers: []types.BlockerDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.BlockerType("Schedule"),
+						},
+					},
+					Actions: []types.ActionDeclaration{
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ActionTypeId: &types.ActionTypeId{
+								Category: types.ActionCategory("Source"),
+								Owner:    types.ActionOwner("AWS"),
+								Provider: ptr.String("__Provider__"),
+								Version:  ptr.String("__Version__"),
+							},
+							RunOrder: ptr.Int32(1),
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							Commands: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputArtifacts: []types.OutputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									Files: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							InputArtifacts: []types.InputArtifact{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							OutputVariables: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn:          ptr.String("__RoleArn__"),
+							Region:           ptr.String("__Region__"),
+							Namespace:        ptr.String("__Namespace__"),
+							TimeoutInMinutes: ptr.Int32(1),
+							EnvironmentVariables: []types.EnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+									Type:  types.EnvironmentVariableType("PLAINTEXT"),
+								},
+							},
+						},
+					},
+					OnFailure: &types.FailureConditions{
+						Result: types.Result("ROLLBACK"),
+						RetryConfiguration: &types.RetryConfiguration{
+							RetryMode: types.StageRetryMode("FAILED_ACTIONS"),
+						},
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					OnSuccess: &types.SuccessConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+					BeforeEntry: &types.BeforeEntryConditions{
+						Conditions: []types.Condition{
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+							{
+								Result: types.Result("ROLLBACK"),
+								Rules: []types.RuleDeclaration{
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+									{
+										Name: ptr.String("__Name__"),
+										RuleTypeId: &types.RuleTypeId{
+											Category: types.RuleCategory("Rule"),
+											Owner:    types.RuleOwner("AWS"),
+											Provider: ptr.String("__Provider__"),
+											Version:  ptr.String("__Version__"),
+										},
+										Configuration: map[string]string{
+											"key0": "__Value__",
+										},
+										Commands: []string{
+											"__Member__",
+											"__Member__",
+										},
+										InputArtifacts: []types.InputArtifact{
+											{
+												Name: ptr.String("__Name__"),
+											},
+											{
+												Name: ptr.String("__Name__"),
+											},
+										},
+										RoleArn:          ptr.String("__RoleArn__"),
+										Region:           ptr.String("__Region__"),
+										TimeoutInMinutes: ptr.Int32(1),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Version:       ptr.Int32(1),
+			ExecutionMode: types.ExecutionMode("QUEUED"),
+			PipelineType:  types.PipelineType("V1"),
+			Variables: []types.PipelineVariableDeclaration{
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+				{
+					Name:         ptr.String("__Name__"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Description:  ptr.String("__Description__"),
+				},
+			},
+			Triggers: []types.PipelineTriggerDeclaration{
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					ProviderType: types.PipelineTriggerProviderType("CodeStarSourceConnection"),
+					GitConfiguration: &types.GitConfiguration{
+						SourceActionName: ptr.String("__SourceActionName__"),
+						Push: []types.GitPushFilter{
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Tags: &types.GitTagFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						PullRequest: []types.GitPullRequestFilter{
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							{
+								Events: []types.GitPullRequestEventType{
+									types.GitPullRequestEventType("OPEN"),
+									types.GitPullRequestEventType("OPEN"),
+								},
+								Branches: &types.GitBranchFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FilePaths: &types.GitFilePathFilterCriteria{
+									Includes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Excludes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7851,7 +17823,12 @@ func TestCheckResponseSnapshot_Error_PipelineNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisableStageTransition(context.Background(), &DisableStageTransitionInput{})
+	_, opErr := svc.DisableStageTransition(context.Background(), &DisableStageTransitionInput{
+		PipelineName:   ptr.String("__PipelineName__"),
+		StageName:      ptr.String("__StageName__"),
+		TransitionType: types.StageTransitionType("Inbound"),
+		Reason:         ptr.String("__Reason__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7876,7 +17853,10 @@ func TestCheckResponseSnapshot_Error_PipelineVersionNotFoundException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetPipeline(context.Background(), &GetPipelineInput{})
+	_, opErr := svc.GetPipeline(context.Background(), &GetPipelineInput{
+		Name:    ptr.String("__Name__"),
+		Version: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7901,7 +17881,75 @@ func TestCheckResponseSnapshot_Error_RequestFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateActionType(context.Background(), &UpdateActionTypeInput{})
+	_, opErr := svc.UpdateActionType(context.Background(), &UpdateActionTypeInput{
+		ActionType: &types.ActionTypeDeclaration{
+			Description: ptr.String("__Description__"),
+			Executor: &types.ActionTypeExecutor{
+				Configuration: &types.ExecutorConfiguration{
+					LambdaExecutorConfiguration: &types.LambdaExecutorConfiguration{
+						LambdaFunctionArn: ptr.String("__LambdaFunctionArn__"),
+					},
+					JobWorkerExecutorConfiguration: &types.JobWorkerExecutorConfiguration{
+						PollingAccounts: []string{
+							"__Member__",
+							"__Member__",
+						},
+						PollingServicePrincipals: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Type:                     types.ExecutorType("JobWorker"),
+				PolicyStatementsTemplate: ptr.String("__PolicyStatementsTemplate__"),
+				JobTimeout:               ptr.Int32(1),
+			},
+			Id: &types.ActionTypeIdentifier{
+				Category: types.ActionCategory("Source"),
+				Owner:    ptr.String("__Owner__"),
+				Provider: ptr.String("__Provider__"),
+				Version:  ptr.String("__Version__"),
+			},
+			InputArtifactDetails: &types.ActionTypeArtifactDetails{
+				MinimumCount: 1,
+				MaximumCount: 1,
+			},
+			OutputArtifactDetails: &types.ActionTypeArtifactDetails{
+				MinimumCount: 1,
+				MaximumCount: 1,
+			},
+			Permissions: &types.ActionTypePermissions{
+				AllowedAccounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Properties: []types.ActionTypeProperty{
+				{
+					Name:        ptr.String("__Name__"),
+					Optional:    true,
+					Key:         true,
+					NoEcho:      true,
+					Queryable:   true,
+					Description: ptr.String("__Description__"),
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Optional:    true,
+					Key:         true,
+					NoEcho:      true,
+					Queryable:   true,
+					Description: ptr.String("__Description__"),
+				},
+			},
+			Urls: &types.ActionTypeUrls{
+				ConfigurationUrl:     ptr.String("__ConfigurationUrl__"),
+				EntityUrlTemplate:    ptr.String("__EntityUrlTemplate__"),
+				ExecutionUrlTemplate: ptr.String("__ExecutionUrlTemplate__"),
+				RevisionUrlTemplate:  ptr.String("__RevisionUrlTemplate__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7926,7 +17974,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7951,7 +18003,12 @@ func TestCheckResponseSnapshot_Error_StageNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisableStageTransition(context.Background(), &DisableStageTransitionInput{})
+	_, opErr := svc.DisableStageTransition(context.Background(), &DisableStageTransitionInput{
+		PipelineName:   ptr.String("__PipelineName__"),
+		StageName:      ptr.String("__StageName__"),
+		TransitionType: types.StageTransitionType("Inbound"),
+		Reason:         ptr.String("__Reason__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7976,7 +18033,12 @@ func TestCheckResponseSnapshot_Error_StageNotRetryableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RetryStageExecution(context.Background(), &RetryStageExecutionInput{})
+	_, opErr := svc.RetryStageExecution(context.Background(), &RetryStageExecutionInput{
+		PipelineName:        ptr.String("__PipelineName__"),
+		StageName:           ptr.String("__StageName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		RetryMode:           types.StageRetryMode("FAILED_ACTIONS"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8001,7 +18063,55 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomActionType(context.Background(), &CreateCustomActionTypeInput{})
+	_, opErr := svc.CreateCustomActionType(context.Background(), &CreateCustomActionTypeInput{
+		Category: types.ActionCategory("Source"),
+		Provider: ptr.String("__Provider__"),
+		Version:  ptr.String("__Version__"),
+		Settings: &types.ActionTypeSettings{
+			ThirdPartyConfigurationUrl: ptr.String("__ThirdPartyConfigurationUrl__"),
+			EntityUrlTemplate:          ptr.String("__EntityUrlTemplate__"),
+			ExecutionUrlTemplate:       ptr.String("__ExecutionUrlTemplate__"),
+			RevisionUrlTemplate:        ptr.String("__RevisionUrlTemplate__"),
+		},
+		ConfigurationProperties: []types.ActionConfigurationProperty{
+			{
+				Name:        ptr.String("__Name__"),
+				Required:    true,
+				Key:         true,
+				Secret:      true,
+				Queryable:   true,
+				Description: ptr.String("__Description__"),
+				Type:        types.ActionConfigurationPropertyType("String"),
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Required:    true,
+				Key:         true,
+				Secret:      true,
+				Queryable:   true,
+				Description: ptr.String("__Description__"),
+				Type:        types.ActionConfigurationPropertyType("String"),
+			},
+		},
+		InputArtifactDetails: &types.ArtifactDetails{
+			MinimumCount: 1,
+			MaximumCount: 1,
+		},
+		OutputArtifactDetails: &types.ArtifactDetails{
+			MinimumCount: 1,
+			MaximumCount: 1,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8026,7 +18136,11 @@ func TestCheckResponseSnapshot_Error_UnableToRollbackStageException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RollbackStage(context.Background(), &RollbackStageInput{})
+	_, opErr := svc.RollbackStage(context.Background(), &RollbackStageInput{
+		PipelineName:              ptr.String("__PipelineName__"),
+		StageName:                 ptr.String("__StageName__"),
+		TargetPipelineExecutionId: ptr.String("__TargetPipelineExecutionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8051,7 +18165,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcknowledgeJob(context.Background(), &AcknowledgeJobInput{})
+	_, opErr := svc.AcknowledgeJob(context.Background(), &AcknowledgeJobInput{
+		JobId: ptr.String("__JobId__"),
+		Nonce: ptr.String("__Nonce__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8074,7 +18191,9 @@ func TestCheckResponseSnapshot_Error_WebhookNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterWebhookWithThirdParty(context.Background(), &DeregisterWebhookWithThirdPartyInput{})
+	_, opErr := svc.DeregisterWebhookWithThirdParty(context.Background(), &DeregisterWebhookWithThirdPartyInput{
+		WebhookName: ptr.String("__WebhookName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

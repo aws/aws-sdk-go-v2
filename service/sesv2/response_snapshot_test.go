@@ -154,7 +154,30 @@ func TestCheckResponseSnapshot_BatchGetMetricData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{})
+	got, err := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{
+		Queries: []types.BatchGetMetricDataQuery{
+			{
+				Id:        ptr.String("__Id__"),
+				Namespace: types.MetricNamespace("VDM"),
+				Metric:    types.Metric("SEND"),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Id:        ptr.String("__Id__"),
+				Namespace: types.MetricNamespace("VDM"),
+				Metric:    types.Metric("SEND"),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,7 +196,9 @@ func TestCheckResponseSnapshot_CancelExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelExportJob(context.Background(), &CancelExportJobInput{})
+	got, err := svc.CancelExportJob(context.Background(), &CancelExportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -192,7 +217,61 @@ func TestCheckResponseSnapshot_CreateConfigurationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	got, err := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		TrackingOptions: &types.TrackingOptions{
+			CustomRedirectDomain: ptr.String("__CustomRedirectDomain__"),
+			HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
+		},
+		DeliveryOptions: &types.DeliveryOptions{
+			TlsPolicy:          types.TlsPolicy("REQUIRE"),
+			SendingPoolName:    ptr.String("__SendingPoolName__"),
+			MaxDeliverySeconds: ptr.Int64(1),
+		},
+		ReputationOptions: &types.ReputationOptions{
+			ReputationMetricsEnabled: true,
+			LastFreshStart:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SendingOptions: &types.SendingOptions{
+			SendingEnabled: true,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SuppressionOptions: &types.SuppressionOptions{
+			SuppressedReasons: []types.SuppressionListReason{
+				types.SuppressionListReason("BOUNCE"),
+				types.SuppressionListReason("BOUNCE"),
+			},
+			SuppressionScope: types.SuppressionListScope("ACCOUNT"),
+			ValidationOptions: &types.SuppressionValidationOptions{
+				ConditionThreshold: &types.SuppressionConditionThreshold{
+					ConditionThresholdEnabled: types.FeatureStatus("ENABLED"),
+					OverallConfidenceThreshold: &types.SuppressionConfidenceThreshold{
+						ConfidenceVerdictThreshold: types.SuppressionConfidenceVerdictThreshold("MEDIUM"),
+					},
+				},
+			},
+		},
+		VdmOptions: &types.VdmOptions{
+			DashboardOptions: &types.DashboardOptions{
+				EngagementMetrics: types.FeatureStatus("ENABLED"),
+			},
+			GuardianOptions: &types.GuardianOptions{
+				OptimizedSharedDelivery: types.FeatureStatus("ENABLED"),
+			},
+		},
+		ArchivingOptions: &types.ArchivingOptions{
+			ArchiveArn: ptr.String("__ArchiveArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +290,44 @@ func TestCheckResponseSnapshot_CreateConfigurationSetEventDestination(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{})
+	got, err := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestinationName: ptr.String("__EventDestinationName__"),
+		EventDestination: &types.EventDestinationDefinition{
+			Enabled: true,
+			MatchingEventTypes: []types.EventType{
+				types.EventType("SEND"),
+				types.EventType("SEND"),
+			},
+			KinesisFirehoseDestination: &types.KinesisFirehoseDestination{
+				IamRoleArn:        ptr.String("__IamRoleArn__"),
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+			},
+			CloudWatchDestination: &types.CloudWatchDestination{
+				DimensionConfigurations: []types.CloudWatchDimensionConfiguration{
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("MESSAGE_TAG"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("MESSAGE_TAG"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+				},
+			},
+			SnsDestination: &types.SnsDestination{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			EventBridgeDestination: &types.EventBridgeDestination{
+				EventBusArn: ptr.String("__EventBusArn__"),
+			},
+			PinpointDestination: &types.PinpointDestination{
+				ApplicationArn: ptr.String("__ApplicationArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -230,7 +346,22 @@ func TestCheckResponseSnapshot_CreateContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContact(context.Background(), &CreateContactInput{})
+	got, err := svc.CreateContact(context.Background(), &CreateContactInput{
+		ContactListName: ptr.String("__ContactListName__"),
+		EmailAddress:    ptr.String("__EmailAddress__"),
+		TopicPreferences: []types.TopicPreference{
+			{
+				TopicName:          ptr.String("__TopicName__"),
+				SubscriptionStatus: types.SubscriptionStatus("OPT_IN"),
+			},
+			{
+				TopicName:          ptr.String("__TopicName__"),
+				SubscriptionStatus: types.SubscriptionStatus("OPT_IN"),
+			},
+		},
+		UnsubscribeAll: true,
+		AttributesData: ptr.String("__AttributesData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -249,7 +380,34 @@ func TestCheckResponseSnapshot_CreateContactList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContactList(context.Background(), &CreateContactListInput{})
+	got, err := svc.CreateContactList(context.Background(), &CreateContactListInput{
+		ContactListName: ptr.String("__ContactListName__"),
+		Topics: []types.Topic{
+			{
+				TopicName:                 ptr.String("__TopicName__"),
+				DisplayName:               ptr.String("__DisplayName__"),
+				Description:               ptr.String("__Description__"),
+				DefaultSubscriptionStatus: types.SubscriptionStatus("OPT_IN"),
+			},
+			{
+				TopicName:                 ptr.String("__TopicName__"),
+				DisplayName:               ptr.String("__DisplayName__"),
+				Description:               ptr.String("__Description__"),
+				DefaultSubscriptionStatus: types.SubscriptionStatus("OPT_IN"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -268,7 +426,24 @@ func TestCheckResponseSnapshot_CreateCustomVerificationEmailTemplate(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomVerificationEmailTemplate(context.Background(), &CreateCustomVerificationEmailTemplateInput{})
+	got, err := svc.CreateCustomVerificationEmailTemplate(context.Background(), &CreateCustomVerificationEmailTemplateInput{
+		TemplateName:     ptr.String("__TemplateName__"),
+		FromEmailAddress: ptr.String("__FromEmailAddress__"),
+		TemplateSubject:  ptr.String("__TemplateSubject__"),
+		TemplateContent:  ptr.String("__TemplateContent__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SuccessRedirectionURL: ptr.String("__SuccessRedirectionURL__"),
+		FailureRedirectionURL: ptr.String("__FailureRedirectionURL__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -287,7 +462,20 @@ func TestCheckResponseSnapshot_CreateDedicatedIpPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDedicatedIpPool(context.Background(), &CreateDedicatedIpPoolInput{})
+	got, err := svc.CreateDedicatedIpPool(context.Background(), &CreateDedicatedIpPoolInput{
+		PoolName: ptr.String("__PoolName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ScalingMode: types.ScalingMode("STANDARD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -309,7 +497,111 @@ func TestCheckResponseSnapshot_CreateDeliverabilityTestReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeliverabilityTestReport(context.Background(), &CreateDeliverabilityTestReportInput{})
+	got, err := svc.CreateDeliverabilityTestReport(context.Background(), &CreateDeliverabilityTestReportInput{
+		ReportName:       ptr.String("__ReportName__"),
+		FromEmailAddress: ptr.String("__FromEmailAddress__"),
+		Content: &types.EmailContent{
+			Simple: &types.Message{
+				Subject: &types.Content{
+					Data:    ptr.String("__Data__"),
+					Charset: ptr.String("__Charset__"),
+				},
+				Body: &types.Body{
+					Text: &types.Content{
+						Data:    ptr.String("__Data__"),
+						Charset: ptr.String("__Charset__"),
+					},
+					Html: &types.Content{
+						Data:    ptr.String("__Data__"),
+						Charset: ptr.String("__Charset__"),
+					},
+				},
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+			Raw: &types.RawMessage{
+				Data: []byte("blob"),
+			},
+			Template: &types.Template{
+				TemplateName: ptr.String("__TemplateName__"),
+				TemplateArn:  ptr.String("__TemplateArn__"),
+				TemplateContent: &types.EmailTemplateContent{
+					Subject: ptr.String("__Subject__"),
+					Text:    ptr.String("__Text__"),
+					Html:    ptr.String("__Html__"),
+				},
+				TemplateData: ptr.String("__TemplateData__"),
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -344,7 +636,26 @@ func TestCheckResponseSnapshot_CreateEmailIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEmailIdentity(context.Background(), &CreateEmailIdentityInput{})
+	got, err := svc.CreateEmailIdentity(context.Background(), &CreateEmailIdentityInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DkimSigningAttributes: &types.DkimSigningAttributes{
+			DomainSigningSelector:         ptr.String("__DomainSigningSelector__"),
+			DomainSigningPrivateKey:       ptr.String("__DomainSigningPrivateKey__"),
+			NextSigningKeyLength:          types.DkimSigningKeyLength("RSA_1024_BIT"),
+			DomainSigningAttributesOrigin: types.DkimSigningAttributesOrigin("AWS_SES"),
+		},
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -363,7 +674,11 @@ func TestCheckResponseSnapshot_CreateEmailIdentityPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEmailIdentityPolicy(context.Background(), &CreateEmailIdentityPolicyInput{})
+	got, err := svc.CreateEmailIdentityPolicy(context.Background(), &CreateEmailIdentityPolicyInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+		PolicyName:    ptr.String("__PolicyName__"),
+		Policy:        ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -382,7 +697,24 @@ func TestCheckResponseSnapshot_CreateEmailTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEmailTemplate(context.Background(), &CreateEmailTemplateInput{})
+	got, err := svc.CreateEmailTemplate(context.Background(), &CreateEmailTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		TemplateContent: &types.EmailTemplateContent{
+			Subject: ptr.String("__Subject__"),
+			Text:    ptr.String("__Text__"),
+			Html:    ptr.String("__Html__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -403,7 +735,92 @@ func TestCheckResponseSnapshot_CreateExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExportJob(context.Background(), &CreateExportJobInput{})
+	got, err := svc.CreateExportJob(context.Background(), &CreateExportJobInput{
+		ExportDataSource: &types.ExportDataSource{
+			MetricsDataSource: &types.MetricsDataSource{
+				Dimensions: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Namespace: types.MetricNamespace("VDM"),
+				Metrics: []types.ExportMetric{
+					{
+						Name:        types.Metric("SEND"),
+						Aggregation: types.MetricAggregation("RATE"),
+					},
+					{
+						Name:        types.Metric("SEND"),
+						Aggregation: types.MetricAggregation("RATE"),
+					},
+				},
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			MessageInsightsDataSource: &types.MessageInsightsDataSource{
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Include: &types.MessageInsightsFilters{
+					FromEmailAddress: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Destination: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Subject: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Isp: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LastDeliveryEvent: []types.DeliveryEventType{
+						types.DeliveryEventType("SEND"),
+						types.DeliveryEventType("SEND"),
+					},
+					LastEngagementEvent: []types.EngagementEventType{
+						types.EngagementEventType("OPEN"),
+						types.EngagementEventType("OPEN"),
+					},
+				},
+				Exclude: &types.MessageInsightsFilters{
+					FromEmailAddress: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Destination: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Subject: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Isp: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LastDeliveryEvent: []types.DeliveryEventType{
+						types.DeliveryEventType("SEND"),
+						types.DeliveryEventType("SEND"),
+					},
+					LastEngagementEvent: []types.EngagementEventType{
+						types.EngagementEventType("OPEN"),
+						types.EngagementEventType("OPEN"),
+					},
+				},
+				MaxResults: ptr.Int32(1),
+			},
+		},
+		ExportDestination: &types.ExportDestination{
+			DataFormat: types.DataFormat("CSV"),
+			S3Url:      ptr.String("__S3Url__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -424,7 +841,21 @@ func TestCheckResponseSnapshot_CreateImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateImportJob(context.Background(), &CreateImportJobInput{})
+	got, err := svc.CreateImportJob(context.Background(), &CreateImportJobInput{
+		ImportDestination: &types.ImportDestination{
+			SuppressionListDestination: &types.SuppressionListDestination{
+				SuppressionListImportAction: types.SuppressionListImportAction("DELETE"),
+			},
+			ContactListDestination: &types.ContactListDestination{
+				ContactListName:         ptr.String("__ContactListName__"),
+				ContactListImportAction: types.ContactListImportAction("DELETE"),
+			},
+		},
+		ImportDataSource: &types.ImportDataSource{
+			S3Url:      ptr.String("__S3Url__"),
+			DataFormat: types.DataFormat("CSV"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -446,7 +877,29 @@ func TestCheckResponseSnapshot_CreateMultiRegionEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMultiRegionEndpoint(context.Background(), &CreateMultiRegionEndpointInput{})
+	got, err := svc.CreateMultiRegionEndpoint(context.Background(), &CreateMultiRegionEndpointInput{
+		EndpointName: ptr.String("__EndpointName__"),
+		Details: &types.Details{
+			RoutesDetails: []types.RouteDetails{
+				{
+					Region: ptr.String("__Region__"),
+				},
+				{
+					Region: ptr.String("__Region__"),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -488,7 +941,26 @@ func TestCheckResponseSnapshot_CreateTenant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTenant(context.Background(), &CreateTenantInput{})
+	got, err := svc.CreateTenant(context.Background(), &CreateTenantInput{
+		TenantName: ptr.String("__TenantName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SuppressionAttributes: &types.TenantSuppressionAttributes{
+			SuppressedReasons: []types.SuppressionListReason{
+				types.SuppressionListReason("BOUNCE"),
+				types.SuppressionListReason("BOUNCE"),
+			},
+			SuppressionScope: types.SuppressionListScope("ACCOUNT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -507,7 +979,10 @@ func TestCheckResponseSnapshot_CreateTenantResourceAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTenantResourceAssociation(context.Background(), &CreateTenantResourceAssociationInput{})
+	got, err := svc.CreateTenantResourceAssociation(context.Background(), &CreateTenantResourceAssociationInput{
+		TenantName:  ptr.String("__TenantName__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -526,7 +1001,9 @@ func TestCheckResponseSnapshot_DeleteConfigurationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigurationSet(context.Background(), &DeleteConfigurationSetInput{})
+	got, err := svc.DeleteConfigurationSet(context.Background(), &DeleteConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -545,7 +1022,10 @@ func TestCheckResponseSnapshot_DeleteConfigurationSetEventDestination(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigurationSetEventDestination(context.Background(), &DeleteConfigurationSetEventDestinationInput{})
+	got, err := svc.DeleteConfigurationSetEventDestination(context.Background(), &DeleteConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestinationName: ptr.String("__EventDestinationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -564,7 +1044,10 @@ func TestCheckResponseSnapshot_DeleteContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContact(context.Background(), &DeleteContactInput{})
+	got, err := svc.DeleteContact(context.Background(), &DeleteContactInput{
+		ContactListName: ptr.String("__ContactListName__"),
+		EmailAddress:    ptr.String("__EmailAddress__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -583,7 +1066,9 @@ func TestCheckResponseSnapshot_DeleteContactList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContactList(context.Background(), &DeleteContactListInput{})
+	got, err := svc.DeleteContactList(context.Background(), &DeleteContactListInput{
+		ContactListName: ptr.String("__ContactListName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -602,7 +1087,9 @@ func TestCheckResponseSnapshot_DeleteCustomVerificationEmailTemplate(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomVerificationEmailTemplate(context.Background(), &DeleteCustomVerificationEmailTemplateInput{})
+	got, err := svc.DeleteCustomVerificationEmailTemplate(context.Background(), &DeleteCustomVerificationEmailTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -621,7 +1108,9 @@ func TestCheckResponseSnapshot_DeleteDedicatedIpPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDedicatedIpPool(context.Background(), &DeleteDedicatedIpPoolInput{})
+	got, err := svc.DeleteDedicatedIpPool(context.Background(), &DeleteDedicatedIpPoolInput{
+		PoolName: ptr.String("__PoolName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -640,7 +1129,9 @@ func TestCheckResponseSnapshot_DeleteEmailIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEmailIdentity(context.Background(), &DeleteEmailIdentityInput{})
+	got, err := svc.DeleteEmailIdentity(context.Background(), &DeleteEmailIdentityInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -659,7 +1150,10 @@ func TestCheckResponseSnapshot_DeleteEmailIdentityPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEmailIdentityPolicy(context.Background(), &DeleteEmailIdentityPolicyInput{})
+	got, err := svc.DeleteEmailIdentityPolicy(context.Background(), &DeleteEmailIdentityPolicyInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+		PolicyName:    ptr.String("__PolicyName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -678,7 +1172,9 @@ func TestCheckResponseSnapshot_DeleteEmailTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEmailTemplate(context.Background(), &DeleteEmailTemplateInput{})
+	got, err := svc.DeleteEmailTemplate(context.Background(), &DeleteEmailTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -699,7 +1195,9 @@ func TestCheckResponseSnapshot_DeleteMultiRegionEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMultiRegionEndpoint(context.Background(), &DeleteMultiRegionEndpointInput{})
+	got, err := svc.DeleteMultiRegionEndpoint(context.Background(), &DeleteMultiRegionEndpointInput{
+		EndpointName: ptr.String("__EndpointName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -718,7 +1216,10 @@ func TestCheckResponseSnapshot_DeleteSuppressedDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSuppressedDestination(context.Background(), &DeleteSuppressedDestinationInput{})
+	got, err := svc.DeleteSuppressedDestination(context.Background(), &DeleteSuppressedDestinationInput{
+		EmailAddress: ptr.String("__EmailAddress__"),
+		TenantName:   ptr.String("__TenantName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -737,7 +1238,9 @@ func TestCheckResponseSnapshot_DeleteTenant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTenant(context.Background(), &DeleteTenantInput{})
+	got, err := svc.DeleteTenant(context.Background(), &DeleteTenantInput{
+		TenantName: ptr.String("__TenantName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -756,7 +1259,10 @@ func TestCheckResponseSnapshot_DeleteTenantResourceAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTenantResourceAssociation(context.Background(), &DeleteTenantResourceAssociationInput{})
+	got, err := svc.DeleteTenantResourceAssociation(context.Background(), &DeleteTenantResourceAssociationInput{
+		TenantName:  ptr.String("__TenantName__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -860,7 +1366,12 @@ func TestCheckResponseSnapshot_GetBlacklistReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBlacklistReports(context.Background(), &GetBlacklistReportsInput{})
+	got, err := svc.GetBlacklistReports(context.Background(), &GetBlacklistReportsInput{
+		BlacklistItemNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -933,7 +1444,9 @@ func TestCheckResponseSnapshot_GetConfigurationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfigurationSet(context.Background(), &GetConfigurationSetInput{})
+	got, err := svc.GetConfigurationSet(context.Background(), &GetConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1025,7 +1538,9 @@ func TestCheckResponseSnapshot_GetConfigurationSetEventDestinations(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfigurationSetEventDestinations(context.Background(), &GetConfigurationSetEventDestinationsInput{})
+	got, err := svc.GetConfigurationSetEventDestinations(context.Background(), &GetConfigurationSetEventDestinationsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1071,7 +1586,10 @@ func TestCheckResponseSnapshot_GetContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContact(context.Background(), &GetContactInput{})
+	got, err := svc.GetContact(context.Background(), &GetContactInput{
+		ContactListName: ptr.String("__ContactListName__"),
+		EmailAddress:    ptr.String("__EmailAddress__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1119,7 +1637,9 @@ func TestCheckResponseSnapshot_GetContactList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContactList(context.Background(), &GetContactListInput{})
+	got, err := svc.GetContactList(context.Background(), &GetContactListInput{
+		ContactListName: ptr.String("__ContactListName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1155,7 +1675,9 @@ func TestCheckResponseSnapshot_GetCustomVerificationEmailTemplate(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCustomVerificationEmailTemplate(context.Background(), &GetCustomVerificationEmailTemplateInput{})
+	got, err := svc.GetCustomVerificationEmailTemplate(context.Background(), &GetCustomVerificationEmailTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1181,7 +1703,9 @@ func TestCheckResponseSnapshot_GetDedicatedIp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDedicatedIp(context.Background(), &GetDedicatedIpInput{})
+	got, err := svc.GetDedicatedIp(context.Background(), &GetDedicatedIpInput{
+		Ip: ptr.String("__Ip__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1205,7 +1729,9 @@ func TestCheckResponseSnapshot_GetDedicatedIpPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDedicatedIpPool(context.Background(), &GetDedicatedIpPoolInput{})
+	got, err := svc.GetDedicatedIpPool(context.Background(), &GetDedicatedIpPoolInput{
+		PoolName: ptr.String("__PoolName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1240,7 +1766,11 @@ func TestCheckResponseSnapshot_GetDedicatedIps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDedicatedIps(context.Background(), &GetDedicatedIpsInput{})
+	got, err := svc.GetDedicatedIps(context.Background(), &GetDedicatedIpsInput{
+		PoolName:  ptr.String("__PoolName__"),
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1379,7 +1909,9 @@ func TestCheckResponseSnapshot_GetDeliverabilityTestReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeliverabilityTestReport(context.Background(), &GetDeliverabilityTestReportInput{})
+	got, err := svc.GetDeliverabilityTestReport(context.Background(), &GetDeliverabilityTestReportInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1421,7 +1953,9 @@ func TestCheckResponseSnapshot_GetDomainDeliverabilityCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainDeliverabilityCampaign(context.Background(), &GetDomainDeliverabilityCampaignInput{})
+	got, err := svc.GetDomainDeliverabilityCampaign(context.Background(), &GetDomainDeliverabilityCampaignInput{
+		CampaignId: ptr.String("__CampaignId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1518,7 +2052,11 @@ func TestCheckResponseSnapshot_GetDomainStatisticsReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainStatisticsReport(context.Background(), &GetDomainStatisticsReportInput{})
+	got, err := svc.GetDomainStatisticsReport(context.Background(), &GetDomainStatisticsReportInput{
+		Domain:    ptr.String("__Domain__"),
+		StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1563,7 +2101,9 @@ func TestCheckResponseSnapshot_GetEmailAddressInsights(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEmailAddressInsights(context.Background(), &GetEmailAddressInsightsInput{})
+	got, err := svc.GetEmailAddressInsights(context.Background(), &GetEmailAddressInsightsInput{
+		EmailAddress: ptr.String("__EmailAddress__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1629,7 +2169,9 @@ func TestCheckResponseSnapshot_GetEmailIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEmailIdentity(context.Background(), &GetEmailIdentityInput{})
+	got, err := svc.GetEmailIdentity(context.Background(), &GetEmailIdentityInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1652,7 +2194,9 @@ func TestCheckResponseSnapshot_GetEmailIdentityPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEmailIdentityPolicies(context.Background(), &GetEmailIdentityPoliciesInput{})
+	got, err := svc.GetEmailIdentityPolicies(context.Background(), &GetEmailIdentityPoliciesInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1688,7 +2232,9 @@ func TestCheckResponseSnapshot_GetEmailTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEmailTemplate(context.Background(), &GetEmailTemplateInput{})
+	got, err := svc.GetEmailTemplate(context.Background(), &GetEmailTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1805,7 +2351,9 @@ func TestCheckResponseSnapshot_GetExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExportJob(context.Background(), &GetExportJobInput{})
+	got, err := svc.GetExportJob(context.Background(), &GetExportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1848,7 +2396,9 @@ func TestCheckResponseSnapshot_GetImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImportJob(context.Background(), &GetImportJobInput{})
+	got, err := svc.GetImportJob(context.Background(), &GetImportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1955,7 +2505,9 @@ func TestCheckResponseSnapshot_GetMessageInsights(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMessageInsights(context.Background(), &GetMessageInsightsInput{})
+	got, err := svc.GetMessageInsights(context.Background(), &GetMessageInsightsInput{
+		MessageId: ptr.String("__MessageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1988,7 +2540,9 @@ func TestCheckResponseSnapshot_GetMultiRegionEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMultiRegionEndpoint(context.Background(), &GetMultiRegionEndpointInput{})
+	got, err := svc.GetMultiRegionEndpoint(context.Background(), &GetMultiRegionEndpointInput{
+		EndpointName: ptr.String("__EndpointName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2025,7 +2579,10 @@ func TestCheckResponseSnapshot_GetReputationEntity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReputationEntity(context.Background(), &GetReputationEntityInput{})
+	got, err := svc.GetReputationEntity(context.Background(), &GetReputationEntityInput{
+		ReputationEntityReference: ptr.String("__ReputationEntityReference__"),
+		ReputationEntityType:      types.ReputationEntityType("RESOURCE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2055,7 +2612,10 @@ func TestCheckResponseSnapshot_GetSuppressedDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSuppressedDestination(context.Background(), &GetSuppressedDestinationInput{})
+	got, err := svc.GetSuppressedDestination(context.Background(), &GetSuppressedDestinationInput{
+		EmailAddress: ptr.String("__EmailAddress__"),
+		TenantName:   ptr.String("__TenantName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2099,7 +2659,9 @@ func TestCheckResponseSnapshot_GetTenant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTenant(context.Background(), &GetTenantInput{})
+	got, err := svc.GetTenant(context.Background(), &GetTenantInput{
+		TenantName: ptr.String("__TenantName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2124,7 +2686,10 @@ func TestCheckResponseSnapshot_ListConfigurationSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfigurationSets(context.Background(), &ListConfigurationSetsInput{})
+	got, err := svc.ListConfigurationSets(context.Background(), &ListConfigurationSetsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2155,7 +2720,10 @@ func TestCheckResponseSnapshot_ListContactLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContactLists(context.Background(), &ListContactListsInput{})
+	got, err := svc.ListContactLists(context.Background(), &ListContactListsInput{
+		PageSize:  ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2228,7 +2796,18 @@ func TestCheckResponseSnapshot_ListContacts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContacts(context.Background(), &ListContactsInput{})
+	got, err := svc.ListContacts(context.Background(), &ListContactsInput{
+		ContactListName: ptr.String("__ContactListName__"),
+		Filter: &types.ListContactsFilter{
+			FilteredStatus: types.SubscriptionStatus("OPT_IN"),
+			TopicFilter: &types.TopicFilter{
+				TopicName:                         ptr.String("__TopicName__"),
+				UseDefaultIfPreferenceUnavailable: true,
+			},
+		},
+		PageSize:  ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2265,7 +2844,10 @@ func TestCheckResponseSnapshot_ListCustomVerificationEmailTemplates(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomVerificationEmailTemplates(context.Background(), &ListCustomVerificationEmailTemplatesInput{})
+	got, err := svc.ListCustomVerificationEmailTemplates(context.Background(), &ListCustomVerificationEmailTemplatesInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2290,7 +2872,10 @@ func TestCheckResponseSnapshot_ListDedicatedIpPools(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDedicatedIpPools(context.Background(), &ListDedicatedIpPoolsInput{})
+	got, err := svc.ListDedicatedIpPools(context.Background(), &ListDedicatedIpPoolsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2329,7 +2914,10 @@ func TestCheckResponseSnapshot_ListDeliverabilityTestReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeliverabilityTestReports(context.Background(), &ListDeliverabilityTestReportsInput{})
+	got, err := svc.ListDeliverabilityTestReports(context.Background(), &ListDeliverabilityTestReportsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2396,7 +2984,13 @@ func TestCheckResponseSnapshot_ListDomainDeliverabilityCampaigns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainDeliverabilityCampaigns(context.Background(), &ListDomainDeliverabilityCampaignsInput{})
+	got, err := svc.ListDomainDeliverabilityCampaigns(context.Background(), &ListDomainDeliverabilityCampaignsInput{
+		StartDate:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SubscribedDomain: ptr.String("__SubscribedDomain__"),
+		NextToken:        ptr.String("__NextToken__"),
+		PageSize:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2431,7 +3025,10 @@ func TestCheckResponseSnapshot_ListEmailIdentities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEmailIdentities(context.Background(), &ListEmailIdentitiesInput{})
+	got, err := svc.ListEmailIdentities(context.Background(), &ListEmailIdentitiesInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2462,7 +3059,10 @@ func TestCheckResponseSnapshot_ListEmailTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEmailTemplates(context.Background(), &ListEmailTemplatesInput{})
+	got, err := svc.ListEmailTemplates(context.Background(), &ListEmailTemplatesInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2499,7 +3099,12 @@ func TestCheckResponseSnapshot_ListExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExportJobs(context.Background(), &ListExportJobsInput{})
+	got, err := svc.ListExportJobs(context.Background(), &ListExportJobsInput{
+		NextToken:        ptr.String("__NextToken__"),
+		PageSize:         ptr.Int32(1),
+		ExportSourceType: types.ExportSourceType("METRICS_DATA"),
+		JobStatus:        types.JobStatus("CREATED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2554,7 +3159,11 @@ func TestCheckResponseSnapshot_ListImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImportJobs(context.Background(), &ListImportJobsInput{})
+	got, err := svc.ListImportJobs(context.Background(), &ListImportJobsInput{
+		ImportDestinationType: types.ImportDestinationType("SUPPRESSION_LIST"),
+		NextToken:             ptr.String("__NextToken__"),
+		PageSize:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2599,7 +3208,10 @@ func TestCheckResponseSnapshot_ListMultiRegionEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMultiRegionEndpoints(context.Background(), &ListMultiRegionEndpointsInput{})
+	got, err := svc.ListMultiRegionEndpoints(context.Background(), &ListMultiRegionEndpointsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2640,7 +3252,13 @@ func TestCheckResponseSnapshot_ListRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{})
+	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2697,7 +3315,13 @@ func TestCheckResponseSnapshot_ListReputationEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReputationEntities(context.Background(), &ListReputationEntitiesInput{})
+	got, err := svc.ListReputationEntities(context.Background(), &ListReputationEntitiesInput{
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2732,7 +3356,11 @@ func TestCheckResponseSnapshot_ListResourceTenants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceTenants(context.Background(), &ListResourceTenantsInput{})
+	got, err := svc.ListResourceTenants(context.Background(), &ListResourceTenantsInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		PageSize:    ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2765,7 +3393,17 @@ func TestCheckResponseSnapshot_ListSuppressedDestinations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSuppressedDestinations(context.Background(), &ListSuppressedDestinationsInput{})
+	got, err := svc.ListSuppressedDestinations(context.Background(), &ListSuppressedDestinationsInput{
+		TenantName: ptr.String("__TenantName__"),
+		Reasons: []types.SuppressionListReason{
+			types.SuppressionListReason("BOUNCE"),
+			types.SuppressionListReason("BOUNCE"),
+		},
+		StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2795,7 +3433,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2826,7 +3466,14 @@ func TestCheckResponseSnapshot_ListTenantResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTenantResources(context.Background(), &ListTenantResourcesInput{})
+	got, err := svc.ListTenantResources(context.Background(), &ListTenantResourcesInput{
+		TenantName: ptr.String("__TenantName__"),
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
+		PageSize:  ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2861,7 +3508,10 @@ func TestCheckResponseSnapshot_ListTenants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTenants(context.Background(), &ListTenantsInput{})
+	got, err := svc.ListTenants(context.Background(), &ListTenantsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2880,7 +3530,9 @@ func TestCheckResponseSnapshot_PutAccountDedicatedIpWarmupAttributes(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountDedicatedIpWarmupAttributes(context.Background(), &PutAccountDedicatedIpWarmupAttributesInput{})
+	got, err := svc.PutAccountDedicatedIpWarmupAttributes(context.Background(), &PutAccountDedicatedIpWarmupAttributesInput{
+		AutoWarmupEnabled: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2899,7 +3551,17 @@ func TestCheckResponseSnapshot_PutAccountDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountDetails(context.Background(), &PutAccountDetailsInput{})
+	got, err := svc.PutAccountDetails(context.Background(), &PutAccountDetailsInput{
+		MailType:           types.MailType("MARKETING"),
+		WebsiteURL:         ptr.String("__WebsiteURL__"),
+		ContactLanguage:    types.ContactLanguage("EN"),
+		UseCaseDescription: ptr.String("__UseCaseDescription__"),
+		AdditionalContactEmailAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ProductionAccessEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2918,7 +3580,9 @@ func TestCheckResponseSnapshot_PutAccountPricingAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountPricingAttributes(context.Background(), &PutAccountPricingAttributesInput{})
+	got, err := svc.PutAccountPricingAttributes(context.Background(), &PutAccountPricingAttributesInput{
+		Plan: types.PricingPlan("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2937,7 +3601,9 @@ func TestCheckResponseSnapshot_PutAccountSendingAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountSendingAttributes(context.Background(), &PutAccountSendingAttributesInput{})
+	got, err := svc.PutAccountSendingAttributes(context.Background(), &PutAccountSendingAttributesInput{
+		SendingEnabled: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2956,7 +3622,20 @@ func TestCheckResponseSnapshot_PutAccountSuppressionAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountSuppressionAttributes(context.Background(), &PutAccountSuppressionAttributesInput{})
+	got, err := svc.PutAccountSuppressionAttributes(context.Background(), &PutAccountSuppressionAttributesInput{
+		SuppressedReasons: []types.SuppressionListReason{
+			types.SuppressionListReason("BOUNCE"),
+			types.SuppressionListReason("BOUNCE"),
+		},
+		ValidationAttributes: &types.SuppressionValidationAttributes{
+			ConditionThreshold: &types.SuppressionConditionThreshold{
+				ConditionThresholdEnabled: types.FeatureStatus("ENABLED"),
+				OverallConfidenceThreshold: &types.SuppressionConfidenceThreshold{
+					ConfidenceVerdictThreshold: types.SuppressionConfidenceVerdictThreshold("MEDIUM"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2975,7 +3654,17 @@ func TestCheckResponseSnapshot_PutAccountVdmAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountVdmAttributes(context.Background(), &PutAccountVdmAttributesInput{})
+	got, err := svc.PutAccountVdmAttributes(context.Background(), &PutAccountVdmAttributesInput{
+		VdmAttributes: &types.VdmAttributes{
+			VdmEnabled: types.FeatureStatus("ENABLED"),
+			DashboardAttributes: &types.DashboardAttributes{
+				EngagementMetrics: types.FeatureStatus("ENABLED"),
+			},
+			GuardianAttributes: &types.GuardianAttributes{
+				OptimizedSharedDelivery: types.FeatureStatus("ENABLED"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2994,7 +3683,10 @@ func TestCheckResponseSnapshot_PutConfigurationSetArchivingOptions(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfigurationSetArchivingOptions(context.Background(), &PutConfigurationSetArchivingOptionsInput{})
+	got, err := svc.PutConfigurationSetArchivingOptions(context.Background(), &PutConfigurationSetArchivingOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		ArchiveArn:           ptr.String("__ArchiveArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3013,7 +3705,12 @@ func TestCheckResponseSnapshot_PutConfigurationSetDeliveryOptions(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfigurationSetDeliveryOptions(context.Background(), &PutConfigurationSetDeliveryOptionsInput{})
+	got, err := svc.PutConfigurationSetDeliveryOptions(context.Background(), &PutConfigurationSetDeliveryOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		TlsPolicy:            types.TlsPolicy("REQUIRE"),
+		SendingPoolName:      ptr.String("__SendingPoolName__"),
+		MaxDeliverySeconds:   ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3032,7 +3729,10 @@ func TestCheckResponseSnapshot_PutConfigurationSetReputationOptions(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfigurationSetReputationOptions(context.Background(), &PutConfigurationSetReputationOptionsInput{})
+	got, err := svc.PutConfigurationSetReputationOptions(context.Background(), &PutConfigurationSetReputationOptionsInput{
+		ConfigurationSetName:     ptr.String("__ConfigurationSetName__"),
+		ReputationMetricsEnabled: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3051,7 +3751,10 @@ func TestCheckResponseSnapshot_PutConfigurationSetSendingOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfigurationSetSendingOptions(context.Background(), &PutConfigurationSetSendingOptionsInput{})
+	got, err := svc.PutConfigurationSetSendingOptions(context.Background(), &PutConfigurationSetSendingOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		SendingEnabled:       true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3070,7 +3773,22 @@ func TestCheckResponseSnapshot_PutConfigurationSetSuppressionOptions(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfigurationSetSuppressionOptions(context.Background(), &PutConfigurationSetSuppressionOptionsInput{})
+	got, err := svc.PutConfigurationSetSuppressionOptions(context.Background(), &PutConfigurationSetSuppressionOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		SuppressionScope:     types.SuppressionListScope("ACCOUNT"),
+		SuppressedReasons: []types.SuppressionListReason{
+			types.SuppressionListReason("BOUNCE"),
+			types.SuppressionListReason("BOUNCE"),
+		},
+		ValidationOptions: &types.SuppressionValidationOptions{
+			ConditionThreshold: &types.SuppressionConditionThreshold{
+				ConditionThresholdEnabled: types.FeatureStatus("ENABLED"),
+				OverallConfidenceThreshold: &types.SuppressionConfidenceThreshold{
+					ConfidenceVerdictThreshold: types.SuppressionConfidenceVerdictThreshold("MEDIUM"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3089,7 +3807,11 @@ func TestCheckResponseSnapshot_PutConfigurationSetTrackingOptions(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfigurationSetTrackingOptions(context.Background(), &PutConfigurationSetTrackingOptionsInput{})
+	got, err := svc.PutConfigurationSetTrackingOptions(context.Background(), &PutConfigurationSetTrackingOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		CustomRedirectDomain: ptr.String("__CustomRedirectDomain__"),
+		HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3108,7 +3830,17 @@ func TestCheckResponseSnapshot_PutConfigurationSetVdmOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfigurationSetVdmOptions(context.Background(), &PutConfigurationSetVdmOptionsInput{})
+	got, err := svc.PutConfigurationSetVdmOptions(context.Background(), &PutConfigurationSetVdmOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		VdmOptions: &types.VdmOptions{
+			DashboardOptions: &types.DashboardOptions{
+				EngagementMetrics: types.FeatureStatus("ENABLED"),
+			},
+			GuardianOptions: &types.GuardianOptions{
+				OptimizedSharedDelivery: types.FeatureStatus("ENABLED"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3127,7 +3859,10 @@ func TestCheckResponseSnapshot_PutDedicatedIpInPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDedicatedIpInPool(context.Background(), &PutDedicatedIpInPoolInput{})
+	got, err := svc.PutDedicatedIpInPool(context.Background(), &PutDedicatedIpInPoolInput{
+		Ip:                  ptr.String("__Ip__"),
+		DestinationPoolName: ptr.String("__DestinationPoolName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3146,7 +3881,10 @@ func TestCheckResponseSnapshot_PutDedicatedIpPoolScalingAttributes(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDedicatedIpPoolScalingAttributes(context.Background(), &PutDedicatedIpPoolScalingAttributesInput{})
+	got, err := svc.PutDedicatedIpPoolScalingAttributes(context.Background(), &PutDedicatedIpPoolScalingAttributesInput{
+		PoolName:    ptr.String("__PoolName__"),
+		ScalingMode: types.ScalingMode("STANDARD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3165,7 +3903,10 @@ func TestCheckResponseSnapshot_PutDedicatedIpWarmupAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDedicatedIpWarmupAttributes(context.Background(), &PutDedicatedIpWarmupAttributesInput{})
+	got, err := svc.PutDedicatedIpWarmupAttributes(context.Background(), &PutDedicatedIpWarmupAttributesInput{
+		Ip:               ptr.String("__Ip__"),
+		WarmupPercentage: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3184,7 +3925,33 @@ func TestCheckResponseSnapshot_PutDeliverabilityDashboardOption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDeliverabilityDashboardOption(context.Background(), &PutDeliverabilityDashboardOptionInput{})
+	got, err := svc.PutDeliverabilityDashboardOption(context.Background(), &PutDeliverabilityDashboardOptionInput{
+		DashboardEnabled: true,
+		SubscribedDomains: []types.DomainDeliverabilityTrackingOption{
+			{
+				Domain:                ptr.String("__Domain__"),
+				SubscriptionStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InboxPlacementTrackingOption: &types.InboxPlacementTrackingOption{
+					Global: true,
+					TrackedIsps: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				Domain:                ptr.String("__Domain__"),
+				SubscriptionStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InboxPlacementTrackingOption: &types.InboxPlacementTrackingOption{
+					Global: true,
+					TrackedIsps: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3203,7 +3970,10 @@ func TestCheckResponseSnapshot_PutEmailIdentityConfigurationSetAttributes(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEmailIdentityConfigurationSetAttributes(context.Background(), &PutEmailIdentityConfigurationSetAttributesInput{})
+	got, err := svc.PutEmailIdentityConfigurationSetAttributes(context.Background(), &PutEmailIdentityConfigurationSetAttributesInput{
+		EmailIdentity:        ptr.String("__EmailIdentity__"),
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3222,7 +3992,10 @@ func TestCheckResponseSnapshot_PutEmailIdentityDkimAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEmailIdentityDkimAttributes(context.Background(), &PutEmailIdentityDkimAttributesInput{})
+	got, err := svc.PutEmailIdentityDkimAttributes(context.Background(), &PutEmailIdentityDkimAttributesInput{
+		EmailIdentity:  ptr.String("__EmailIdentity__"),
+		SigningEnabled: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3248,7 +4021,16 @@ func TestCheckResponseSnapshot_PutEmailIdentityDkimSigningAttributes(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEmailIdentityDkimSigningAttributes(context.Background(), &PutEmailIdentityDkimSigningAttributesInput{})
+	got, err := svc.PutEmailIdentityDkimSigningAttributes(context.Background(), &PutEmailIdentityDkimSigningAttributesInput{
+		EmailIdentity:           ptr.String("__EmailIdentity__"),
+		SigningAttributesOrigin: types.DkimSigningAttributesOrigin("AWS_SES"),
+		SigningAttributes: &types.DkimSigningAttributes{
+			DomainSigningSelector:         ptr.String("__DomainSigningSelector__"),
+			DomainSigningPrivateKey:       ptr.String("__DomainSigningPrivateKey__"),
+			NextSigningKeyLength:          types.DkimSigningKeyLength("RSA_1024_BIT"),
+			DomainSigningAttributesOrigin: types.DkimSigningAttributesOrigin("AWS_SES"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3267,7 +4049,10 @@ func TestCheckResponseSnapshot_PutEmailIdentityFeedbackAttributes(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEmailIdentityFeedbackAttributes(context.Background(), &PutEmailIdentityFeedbackAttributesInput{})
+	got, err := svc.PutEmailIdentityFeedbackAttributes(context.Background(), &PutEmailIdentityFeedbackAttributesInput{
+		EmailIdentity:          ptr.String("__EmailIdentity__"),
+		EmailForwardingEnabled: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3286,7 +4071,11 @@ func TestCheckResponseSnapshot_PutEmailIdentityMailFromAttributes(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEmailIdentityMailFromAttributes(context.Background(), &PutEmailIdentityMailFromAttributesInput{})
+	got, err := svc.PutEmailIdentityMailFromAttributes(context.Background(), &PutEmailIdentityMailFromAttributesInput{
+		EmailIdentity:       ptr.String("__EmailIdentity__"),
+		MailFromDomain:      ptr.String("__MailFromDomain__"),
+		BehaviorOnMxFailure: types.BehaviorOnMxFailure("USE_DEFAULT_VALUE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3305,7 +4094,11 @@ func TestCheckResponseSnapshot_PutSuppressedDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSuppressedDestination(context.Background(), &PutSuppressedDestinationInput{})
+	got, err := svc.PutSuppressedDestination(context.Background(), &PutSuppressedDestinationInput{
+		EmailAddress: ptr.String("__EmailAddress__"),
+		Reason:       types.SuppressionListReason("BOUNCE"),
+		TenantName:   ptr.String("__TenantName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3324,7 +4117,14 @@ func TestCheckResponseSnapshot_PutTenantSuppressionAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTenantSuppressionAttributes(context.Background(), &PutTenantSuppressionAttributesInput{})
+	got, err := svc.PutTenantSuppressionAttributes(context.Background(), &PutTenantSuppressionAttributesInput{
+		TenantName: ptr.String("__TenantName__"),
+		SuppressedReasons: []types.SuppressionListReason{
+			types.SuppressionListReason("BOUNCE"),
+			types.SuppressionListReason("BOUNCE"),
+		},
+		SuppressionScope: types.SuppressionListScope("ACCOUNT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3356,7 +4156,155 @@ func TestCheckResponseSnapshot_SendBulkEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendBulkEmail(context.Background(), &SendBulkEmailInput{})
+	got, err := svc.SendBulkEmail(context.Background(), &SendBulkEmailInput{
+		FromEmailAddress:            ptr.String("__FromEmailAddress__"),
+		FromEmailAddressIdentityArn: ptr.String("__FromEmailAddressIdentityArn__"),
+		ReplyToAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FeedbackForwardingEmailAddress:            ptr.String("__FeedbackForwardingEmailAddress__"),
+		FeedbackForwardingEmailAddressIdentityArn: ptr.String("__FeedbackForwardingEmailAddressIdentityArn__"),
+		DefaultEmailTags: []types.MessageTag{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DefaultContent: &types.BulkEmailContent{
+			Template: &types.Template{
+				TemplateName: ptr.String("__TemplateName__"),
+				TemplateArn:  ptr.String("__TemplateArn__"),
+				TemplateContent: &types.EmailTemplateContent{
+					Subject: ptr.String("__Subject__"),
+					Text:    ptr.String("__Text__"),
+					Html:    ptr.String("__Html__"),
+				},
+				TemplateData: ptr.String("__TemplateData__"),
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+		},
+		BulkEmailEntries: []types.BulkEmailEntry{
+			{
+				Destination: &types.Destination{
+					ToAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CcAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					BccAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ReplacementTags: []types.MessageTag{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ReplacementEmailContent: &types.ReplacementEmailContent{
+					ReplacementTemplate: &types.ReplacementTemplate{
+						ReplacementTemplateData: ptr.String("__ReplacementTemplateData__"),
+					},
+				},
+				ReplacementHeaders: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				Destination: &types.Destination{
+					ToAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CcAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					BccAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ReplacementTags: []types.MessageTag{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ReplacementEmailContent: &types.ReplacementEmailContent{
+					ReplacementTemplate: &types.ReplacementTemplate{
+						ReplacementTemplateData: ptr.String("__ReplacementTemplateData__"),
+					},
+				},
+				ReplacementHeaders: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EndpointId:           ptr.String("__EndpointId__"),
+		TenantName:           ptr.String("__TenantName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3377,7 +4325,11 @@ func TestCheckResponseSnapshot_SendCustomVerificationEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendCustomVerificationEmail(context.Background(), &SendCustomVerificationEmailInput{})
+	got, err := svc.SendCustomVerificationEmail(context.Background(), &SendCustomVerificationEmailInput{
+		EmailAddress:         ptr.String("__EmailAddress__"),
+		TemplateName:         ptr.String("__TemplateName__"),
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3398,7 +4350,138 @@ func TestCheckResponseSnapshot_SendEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendEmail(context.Background(), &SendEmailInput{})
+	got, err := svc.SendEmail(context.Background(), &SendEmailInput{
+		FromEmailAddress:            ptr.String("__FromEmailAddress__"),
+		FromEmailAddressIdentityArn: ptr.String("__FromEmailAddressIdentityArn__"),
+		Destination: &types.Destination{
+			ToAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CcAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BccAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ReplyToAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FeedbackForwardingEmailAddress:            ptr.String("__FeedbackForwardingEmailAddress__"),
+		FeedbackForwardingEmailAddressIdentityArn: ptr.String("__FeedbackForwardingEmailAddressIdentityArn__"),
+		Content: &types.EmailContent{
+			Simple: &types.Message{
+				Subject: &types.Content{
+					Data:    ptr.String("__Data__"),
+					Charset: ptr.String("__Charset__"),
+				},
+				Body: &types.Body{
+					Text: &types.Content{
+						Data:    ptr.String("__Data__"),
+						Charset: ptr.String("__Charset__"),
+					},
+					Html: &types.Content{
+						Data:    ptr.String("__Data__"),
+						Charset: ptr.String("__Charset__"),
+					},
+				},
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+			Raw: &types.RawMessage{
+				Data: []byte("blob"),
+			},
+			Template: &types.Template{
+				TemplateName: ptr.String("__TemplateName__"),
+				TemplateArn:  ptr.String("__TemplateArn__"),
+				TemplateContent: &types.EmailTemplateContent{
+					Subject: ptr.String("__Subject__"),
+					Text:    ptr.String("__Text__"),
+					Html:    ptr.String("__Html__"),
+				},
+				TemplateData: ptr.String("__TemplateData__"),
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+		},
+		EmailTags: []types.MessageTag{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EndpointId:           ptr.String("__EndpointId__"),
+		TenantName:           ptr.String("__TenantName__"),
+		ListManagementOptions: &types.ListManagementOptions{
+			ContactListName: ptr.String("__ContactListName__"),
+			TopicName:       ptr.String("__TopicName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3417,7 +4500,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3438,7 +4533,10 @@ func TestCheckResponseSnapshot_TestRenderEmailTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestRenderEmailTemplate(context.Background(), &TestRenderEmailTemplateInput{})
+	got, err := svc.TestRenderEmailTemplate(context.Background(), &TestRenderEmailTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		TemplateData: ptr.String("__TemplateData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3457,7 +4555,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3476,7 +4580,44 @@ func TestCheckResponseSnapshot_UpdateConfigurationSetEventDestination(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfigurationSetEventDestination(context.Background(), &UpdateConfigurationSetEventDestinationInput{})
+	got, err := svc.UpdateConfigurationSetEventDestination(context.Background(), &UpdateConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestinationName: ptr.String("__EventDestinationName__"),
+		EventDestination: &types.EventDestinationDefinition{
+			Enabled: true,
+			MatchingEventTypes: []types.EventType{
+				types.EventType("SEND"),
+				types.EventType("SEND"),
+			},
+			KinesisFirehoseDestination: &types.KinesisFirehoseDestination{
+				IamRoleArn:        ptr.String("__IamRoleArn__"),
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+			},
+			CloudWatchDestination: &types.CloudWatchDestination{
+				DimensionConfigurations: []types.CloudWatchDimensionConfiguration{
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("MESSAGE_TAG"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("MESSAGE_TAG"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+				},
+			},
+			SnsDestination: &types.SnsDestination{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			EventBridgeDestination: &types.EventBridgeDestination{
+				EventBusArn: ptr.String("__EventBusArn__"),
+			},
+			PinpointDestination: &types.PinpointDestination{
+				ApplicationArn: ptr.String("__ApplicationArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3495,7 +4636,22 @@ func TestCheckResponseSnapshot_UpdateContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContact(context.Background(), &UpdateContactInput{})
+	got, err := svc.UpdateContact(context.Background(), &UpdateContactInput{
+		ContactListName: ptr.String("__ContactListName__"),
+		EmailAddress:    ptr.String("__EmailAddress__"),
+		TopicPreferences: []types.TopicPreference{
+			{
+				TopicName:          ptr.String("__TopicName__"),
+				SubscriptionStatus: types.SubscriptionStatus("OPT_IN"),
+			},
+			{
+				TopicName:          ptr.String("__TopicName__"),
+				SubscriptionStatus: types.SubscriptionStatus("OPT_IN"),
+			},
+		},
+		UnsubscribeAll: true,
+		AttributesData: ptr.String("__AttributesData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3514,7 +4670,24 @@ func TestCheckResponseSnapshot_UpdateContactList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactList(context.Background(), &UpdateContactListInput{})
+	got, err := svc.UpdateContactList(context.Background(), &UpdateContactListInput{
+		ContactListName: ptr.String("__ContactListName__"),
+		Topics: []types.Topic{
+			{
+				TopicName:                 ptr.String("__TopicName__"),
+				DisplayName:               ptr.String("__DisplayName__"),
+				Description:               ptr.String("__Description__"),
+				DefaultSubscriptionStatus: types.SubscriptionStatus("OPT_IN"),
+			},
+			{
+				TopicName:                 ptr.String("__TopicName__"),
+				DisplayName:               ptr.String("__DisplayName__"),
+				Description:               ptr.String("__Description__"),
+				DefaultSubscriptionStatus: types.SubscriptionStatus("OPT_IN"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3533,7 +4706,14 @@ func TestCheckResponseSnapshot_UpdateCustomVerificationEmailTemplate(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCustomVerificationEmailTemplate(context.Background(), &UpdateCustomVerificationEmailTemplateInput{})
+	got, err := svc.UpdateCustomVerificationEmailTemplate(context.Background(), &UpdateCustomVerificationEmailTemplateInput{
+		TemplateName:          ptr.String("__TemplateName__"),
+		FromEmailAddress:      ptr.String("__FromEmailAddress__"),
+		TemplateSubject:       ptr.String("__TemplateSubject__"),
+		TemplateContent:       ptr.String("__TemplateContent__"),
+		SuccessRedirectionURL: ptr.String("__SuccessRedirectionURL__"),
+		FailureRedirectionURL: ptr.String("__FailureRedirectionURL__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3552,7 +4732,11 @@ func TestCheckResponseSnapshot_UpdateEmailIdentityPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEmailIdentityPolicy(context.Background(), &UpdateEmailIdentityPolicyInput{})
+	got, err := svc.UpdateEmailIdentityPolicy(context.Background(), &UpdateEmailIdentityPolicyInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+		PolicyName:    ptr.String("__PolicyName__"),
+		Policy:        ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3571,7 +4755,14 @@ func TestCheckResponseSnapshot_UpdateEmailTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEmailTemplate(context.Background(), &UpdateEmailTemplateInput{})
+	got, err := svc.UpdateEmailTemplate(context.Background(), &UpdateEmailTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		TemplateContent: &types.EmailTemplateContent{
+			Subject: ptr.String("__Subject__"),
+			Text:    ptr.String("__Text__"),
+			Html:    ptr.String("__Html__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3590,7 +4781,11 @@ func TestCheckResponseSnapshot_UpdateReputationEntityCustomerManagedStatus(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateReputationEntityCustomerManagedStatus(context.Background(), &UpdateReputationEntityCustomerManagedStatusInput{})
+	got, err := svc.UpdateReputationEntityCustomerManagedStatus(context.Background(), &UpdateReputationEntityCustomerManagedStatusInput{
+		ReputationEntityType:      types.ReputationEntityType("RESOURCE"),
+		ReputationEntityReference: ptr.String("__ReputationEntityReference__"),
+		SendingStatus:             types.SendingStatus("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3609,7 +4804,11 @@ func TestCheckResponseSnapshot_UpdateReputationEntityPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateReputationEntityPolicy(context.Background(), &UpdateReputationEntityPolicyInput{})
+	got, err := svc.UpdateReputationEntityPolicy(context.Background(), &UpdateReputationEntityPolicyInput{
+		ReputationEntityType:      types.ReputationEntityType("RESOURCE"),
+		ReputationEntityReference: ptr.String("__ReputationEntityReference__"),
+		ReputationEntityPolicy:    ptr.String("__ReputationEntityPolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3630,7 +4829,111 @@ func TestCheckResponseSnapshot_Error_AccountSuspendedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeliverabilityTestReport(context.Background(), &CreateDeliverabilityTestReportInput{})
+	_, opErr := svc.CreateDeliverabilityTestReport(context.Background(), &CreateDeliverabilityTestReportInput{
+		ReportName:       ptr.String("__ReportName__"),
+		FromEmailAddress: ptr.String("__FromEmailAddress__"),
+		Content: &types.EmailContent{
+			Simple: &types.Message{
+				Subject: &types.Content{
+					Data:    ptr.String("__Data__"),
+					Charset: ptr.String("__Charset__"),
+				},
+				Body: &types.Body{
+					Text: &types.Content{
+						Data:    ptr.String("__Data__"),
+						Charset: ptr.String("__Charset__"),
+					},
+					Html: &types.Content{
+						Data:    ptr.String("__Data__"),
+						Charset: ptr.String("__Charset__"),
+					},
+				},
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+			Raw: &types.RawMessage{
+				Data: []byte("blob"),
+			},
+			Template: &types.Template{
+				TemplateName: ptr.String("__TemplateName__"),
+				TemplateArn:  ptr.String("__TemplateArn__"),
+				TemplateContent: &types.EmailTemplateContent{
+					Subject: ptr.String("__Subject__"),
+					Text:    ptr.String("__Text__"),
+					Html:    ptr.String("__Html__"),
+				},
+				TemplateData: ptr.String("__TemplateData__"),
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3655,7 +4958,61 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		TrackingOptions: &types.TrackingOptions{
+			CustomRedirectDomain: ptr.String("__CustomRedirectDomain__"),
+			HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
+		},
+		DeliveryOptions: &types.DeliveryOptions{
+			TlsPolicy:          types.TlsPolicy("REQUIRE"),
+			SendingPoolName:    ptr.String("__SendingPoolName__"),
+			MaxDeliverySeconds: ptr.Int64(1),
+		},
+		ReputationOptions: &types.ReputationOptions{
+			ReputationMetricsEnabled: true,
+			LastFreshStart:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SendingOptions: &types.SendingOptions{
+			SendingEnabled: true,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SuppressionOptions: &types.SuppressionOptions{
+			SuppressedReasons: []types.SuppressionListReason{
+				types.SuppressionListReason("BOUNCE"),
+				types.SuppressionListReason("BOUNCE"),
+			},
+			SuppressionScope: types.SuppressionListScope("ACCOUNT"),
+			ValidationOptions: &types.SuppressionValidationOptions{
+				ConditionThreshold: &types.SuppressionConditionThreshold{
+					ConditionThresholdEnabled: types.FeatureStatus("ENABLED"),
+					OverallConfidenceThreshold: &types.SuppressionConfidenceThreshold{
+						ConfidenceVerdictThreshold: types.SuppressionConfidenceVerdictThreshold("MEDIUM"),
+					},
+				},
+			},
+		},
+		VdmOptions: &types.VdmOptions{
+			DashboardOptions: &types.DashboardOptions{
+				EngagementMetrics: types.FeatureStatus("ENABLED"),
+			},
+			GuardianOptions: &types.GuardianOptions{
+				OptimizedSharedDelivery: types.FeatureStatus("ENABLED"),
+			},
+		},
+		ArchivingOptions: &types.ArchivingOptions{
+			ArchiveArn: ptr.String("__ArchiveArn__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3680,7 +5037,30 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{})
+	_, opErr := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{
+		Queries: []types.BatchGetMetricDataQuery{
+			{
+				Id:        ptr.String("__Id__"),
+				Namespace: types.MetricNamespace("VDM"),
+				Metric:    types.Metric("SEND"),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Id:        ptr.String("__Id__"),
+				Namespace: types.MetricNamespace("VDM"),
+				Metric:    types.Metric("SEND"),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3705,7 +5085,61 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		TrackingOptions: &types.TrackingOptions{
+			CustomRedirectDomain: ptr.String("__CustomRedirectDomain__"),
+			HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
+		},
+		DeliveryOptions: &types.DeliveryOptions{
+			TlsPolicy:          types.TlsPolicy("REQUIRE"),
+			SendingPoolName:    ptr.String("__SendingPoolName__"),
+			MaxDeliverySeconds: ptr.Int64(1),
+		},
+		ReputationOptions: &types.ReputationOptions{
+			ReputationMetricsEnabled: true,
+			LastFreshStart:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SendingOptions: &types.SendingOptions{
+			SendingEnabled: true,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SuppressionOptions: &types.SuppressionOptions{
+			SuppressedReasons: []types.SuppressionListReason{
+				types.SuppressionListReason("BOUNCE"),
+				types.SuppressionListReason("BOUNCE"),
+			},
+			SuppressionScope: types.SuppressionListScope("ACCOUNT"),
+			ValidationOptions: &types.SuppressionValidationOptions{
+				ConditionThreshold: &types.SuppressionConditionThreshold{
+					ConditionThresholdEnabled: types.FeatureStatus("ENABLED"),
+					OverallConfidenceThreshold: &types.SuppressionConfidenceThreshold{
+						ConfidenceVerdictThreshold: types.SuppressionConfidenceVerdictThreshold("MEDIUM"),
+					},
+				},
+			},
+		},
+		VdmOptions: &types.VdmOptions{
+			DashboardOptions: &types.DashboardOptions{
+				EngagementMetrics: types.FeatureStatus("ENABLED"),
+			},
+			GuardianOptions: &types.GuardianOptions{
+				OptimizedSharedDelivery: types.FeatureStatus("ENABLED"),
+			},
+		},
+		ArchivingOptions: &types.ArchivingOptions{
+			ArchiveArn: ptr.String("__ArchiveArn__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3730,7 +5164,17 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutAccountDetails(context.Background(), &PutAccountDetailsInput{})
+	_, opErr := svc.PutAccountDetails(context.Background(), &PutAccountDetailsInput{
+		MailType:           types.MailType("MARKETING"),
+		WebsiteURL:         ptr.String("__WebsiteURL__"),
+		ContactLanguage:    types.ContactLanguage("EN"),
+		UseCaseDescription: ptr.String("__UseCaseDescription__"),
+		AdditionalContactEmailAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ProductionAccessEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3755,7 +5199,30 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{})
+	_, opErr := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{
+		Queries: []types.BatchGetMetricDataQuery{
+			{
+				Id:        ptr.String("__Id__"),
+				Namespace: types.MetricNamespace("VDM"),
+				Metric:    types.Metric("SEND"),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Id:        ptr.String("__Id__"),
+				Namespace: types.MetricNamespace("VDM"),
+				Metric:    types.Metric("SEND"),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3780,7 +5247,17 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListSuppressedDestinations(context.Background(), &ListSuppressedDestinationsInput{})
+	_, opErr := svc.ListSuppressedDestinations(context.Background(), &ListSuppressedDestinationsInput{
+		TenantName: ptr.String("__TenantName__"),
+		Reasons: []types.SuppressionListReason{
+			types.SuppressionListReason("BOUNCE"),
+			types.SuppressionListReason("BOUNCE"),
+		},
+		StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3805,7 +5282,61 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		TrackingOptions: &types.TrackingOptions{
+			CustomRedirectDomain: ptr.String("__CustomRedirectDomain__"),
+			HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
+		},
+		DeliveryOptions: &types.DeliveryOptions{
+			TlsPolicy:          types.TlsPolicy("REQUIRE"),
+			SendingPoolName:    ptr.String("__SendingPoolName__"),
+			MaxDeliverySeconds: ptr.Int64(1),
+		},
+		ReputationOptions: &types.ReputationOptions{
+			ReputationMetricsEnabled: true,
+			LastFreshStart:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SendingOptions: &types.SendingOptions{
+			SendingEnabled: true,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SuppressionOptions: &types.SuppressionOptions{
+			SuppressedReasons: []types.SuppressionListReason{
+				types.SuppressionListReason("BOUNCE"),
+				types.SuppressionListReason("BOUNCE"),
+			},
+			SuppressionScope: types.SuppressionListScope("ACCOUNT"),
+			ValidationOptions: &types.SuppressionValidationOptions{
+				ConditionThreshold: &types.SuppressionConditionThreshold{
+					ConditionThresholdEnabled: types.FeatureStatus("ENABLED"),
+					OverallConfidenceThreshold: &types.SuppressionConfidenceThreshold{
+						ConfidenceVerdictThreshold: types.SuppressionConfidenceVerdictThreshold("MEDIUM"),
+					},
+				},
+			},
+		},
+		VdmOptions: &types.VdmOptions{
+			DashboardOptions: &types.DashboardOptions{
+				EngagementMetrics: types.FeatureStatus("ENABLED"),
+			},
+			GuardianOptions: &types.GuardianOptions{
+				OptimizedSharedDelivery: types.FeatureStatus("ENABLED"),
+			},
+		},
+		ArchivingOptions: &types.ArchivingOptions{
+			ArchiveArn: ptr.String("__ArchiveArn__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3830,7 +5361,111 @@ func TestCheckResponseSnapshot_Error_MailFromDomainNotVerifiedException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeliverabilityTestReport(context.Background(), &CreateDeliverabilityTestReportInput{})
+	_, opErr := svc.CreateDeliverabilityTestReport(context.Background(), &CreateDeliverabilityTestReportInput{
+		ReportName:       ptr.String("__ReportName__"),
+		FromEmailAddress: ptr.String("__FromEmailAddress__"),
+		Content: &types.EmailContent{
+			Simple: &types.Message{
+				Subject: &types.Content{
+					Data:    ptr.String("__Data__"),
+					Charset: ptr.String("__Charset__"),
+				},
+				Body: &types.Body{
+					Text: &types.Content{
+						Data:    ptr.String("__Data__"),
+						Charset: ptr.String("__Charset__"),
+					},
+					Html: &types.Content{
+						Data:    ptr.String("__Data__"),
+						Charset: ptr.String("__Charset__"),
+					},
+				},
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+			Raw: &types.RawMessage{
+				Data: []byte("blob"),
+			},
+			Template: &types.Template{
+				TemplateName: ptr.String("__TemplateName__"),
+				TemplateArn:  ptr.String("__TemplateArn__"),
+				TemplateContent: &types.EmailTemplateContent{
+					Subject: ptr.String("__Subject__"),
+					Text:    ptr.String("__Text__"),
+					Html:    ptr.String("__Html__"),
+				},
+				TemplateData: ptr.String("__TemplateData__"),
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3855,7 +5490,111 @@ func TestCheckResponseSnapshot_Error_MessageRejected(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeliverabilityTestReport(context.Background(), &CreateDeliverabilityTestReportInput{})
+	_, opErr := svc.CreateDeliverabilityTestReport(context.Background(), &CreateDeliverabilityTestReportInput{
+		ReportName:       ptr.String("__ReportName__"),
+		FromEmailAddress: ptr.String("__FromEmailAddress__"),
+		Content: &types.EmailContent{
+			Simple: &types.Message{
+				Subject: &types.Content{
+					Data:    ptr.String("__Data__"),
+					Charset: ptr.String("__Charset__"),
+				},
+				Body: &types.Body{
+					Text: &types.Content{
+						Data:    ptr.String("__Data__"),
+						Charset: ptr.String("__Charset__"),
+					},
+					Html: &types.Content{
+						Data:    ptr.String("__Data__"),
+						Charset: ptr.String("__Charset__"),
+					},
+				},
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+			Raw: &types.RawMessage{
+				Data: []byte("blob"),
+			},
+			Template: &types.Template{
+				TemplateName: ptr.String("__TemplateName__"),
+				TemplateArn:  ptr.String("__TemplateArn__"),
+				TemplateContent: &types.EmailTemplateContent{
+					Subject: ptr.String("__Subject__"),
+					Text:    ptr.String("__Text__"),
+					Html:    ptr.String("__Html__"),
+				},
+				TemplateData: ptr.String("__TemplateData__"),
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3880,7 +5619,30 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{})
+	_, opErr := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{
+		Queries: []types.BatchGetMetricDataQuery{
+			{
+				Id:        ptr.String("__Id__"),
+				Namespace: types.MetricNamespace("VDM"),
+				Metric:    types.Metric("SEND"),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Id:        ptr.String("__Id__"),
+				Namespace: types.MetricNamespace("VDM"),
+				Metric:    types.Metric("SEND"),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3905,7 +5667,111 @@ func TestCheckResponseSnapshot_Error_SendingPausedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeliverabilityTestReport(context.Background(), &CreateDeliverabilityTestReportInput{})
+	_, opErr := svc.CreateDeliverabilityTestReport(context.Background(), &CreateDeliverabilityTestReportInput{
+		ReportName:       ptr.String("__ReportName__"),
+		FromEmailAddress: ptr.String("__FromEmailAddress__"),
+		Content: &types.EmailContent{
+			Simple: &types.Message{
+				Subject: &types.Content{
+					Data:    ptr.String("__Data__"),
+					Charset: ptr.String("__Charset__"),
+				},
+				Body: &types.Body{
+					Text: &types.Content{
+						Data:    ptr.String("__Data__"),
+						Charset: ptr.String("__Charset__"),
+					},
+					Html: &types.Content{
+						Data:    ptr.String("__Data__"),
+						Charset: ptr.String("__Charset__"),
+					},
+				},
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+			Raw: &types.RawMessage{
+				Data: []byte("blob"),
+			},
+			Template: &types.Template{
+				TemplateName: ptr.String("__TemplateName__"),
+				TemplateArn:  ptr.String("__TemplateArn__"),
+				TemplateContent: &types.EmailTemplateContent{
+					Subject: ptr.String("__Subject__"),
+					Text:    ptr.String("__Text__"),
+					Html:    ptr.String("__Html__"),
+				},
+				TemplateData: ptr.String("__TemplateData__"),
+				Headers: []types.MessageHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Attachments: []types.Attachment{
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+					{
+						RawContent:              []byte("blob"),
+						ContentDisposition:      types.AttachmentContentDisposition("ATTACHMENT"),
+						FileName:                ptr.String("__FileName__"),
+						ContentDescription:      ptr.String("__ContentDescription__"),
+						ContentId:               ptr.String("__ContentId__"),
+						ContentTransferEncoding: types.AttachmentContentTransferEncoding("BASE64"),
+						ContentType:             ptr.String("__ContentType__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3930,7 +5796,30 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{})
+	_, opErr := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{
+		Queries: []types.BatchGetMetricDataQuery{
+			{
+				Id:        ptr.String("__Id__"),
+				Namespace: types.MetricNamespace("VDM"),
+				Metric:    types.Metric("SEND"),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Id:        ptr.String("__Id__"),
+				Namespace: types.MetricNamespace("VDM"),
+				Metric:    types.Metric("SEND"),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

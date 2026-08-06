@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.DescribeVTLDevices
+
+{"GatewayARN":"__GatewayARN__","Marker":"__Marker__","VTLDevices":[{"DeviceiSCSIAttributes":{"ChapEnabled":true,"NetworkInterfaceId":"__NetworkInterfaceId__","NetworkInterfacePort":1,"TargetARN":"__TargetARN__"},"VTLDeviceARN":"__VTLDeviceARN__","VTLDeviceProductIdentifier":"__VTLDeviceProductIdentifier__","VTLDeviceType":"__VTLDeviceType__","VTLDeviceVendor":"__VTLDeviceVendor__"},{"DeviceiSCSIAttributes":{"ChapEnabled":true,"NetworkInterfaceId":"__NetworkInterfaceId__","NetworkInterfacePort":1,"TargetARN":"__TargetARN__"},"VTLDeviceARN":"__VTLDeviceARN__","VTLDeviceProductIdentifier":"__VTLDeviceProductIdentifier__","VTLDeviceType":"__VTLDeviceType__","VTLDeviceVendor":"__VTLDeviceVendor__"}]}

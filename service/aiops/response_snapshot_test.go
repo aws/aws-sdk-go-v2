@@ -118,7 +118,37 @@ func TestCheckResponseSnapshot_CreateInvestigationGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{})
+	got, err := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{
+		Name:    ptr.String("__Name__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionConfigurationType("AWS_OWNED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		RetentionInDays: ptr.Int64(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagKeyBoundaries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChatbotNotificationChannel: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		IsCloudTrailEventHistoryEnabled: ptr.Bool(true),
+		CrossAccountConfigurations: []types.CrossAccountConfiguration{
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -137,7 +167,9 @@ func TestCheckResponseSnapshot_DeleteInvestigationGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInvestigationGroup(context.Background(), &DeleteInvestigationGroupInput{})
+	got, err := svc.DeleteInvestigationGroup(context.Background(), &DeleteInvestigationGroupInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -156,7 +188,9 @@ func TestCheckResponseSnapshot_DeleteInvestigationGroupPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInvestigationGroupPolicy(context.Background(), &DeleteInvestigationGroupPolicyInput{})
+	got, err := svc.DeleteInvestigationGroupPolicy(context.Background(), &DeleteInvestigationGroupPolicyInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -207,7 +241,9 @@ func TestCheckResponseSnapshot_GetInvestigationGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInvestigationGroup(context.Background(), &GetInvestigationGroupInput{})
+	got, err := svc.GetInvestigationGroup(context.Background(), &GetInvestigationGroupInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -229,7 +265,9 @@ func TestCheckResponseSnapshot_GetInvestigationGroupPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInvestigationGroupPolicy(context.Background(), &GetInvestigationGroupPolicyInput{})
+	got, err := svc.GetInvestigationGroupPolicy(context.Background(), &GetInvestigationGroupPolicyInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -260,7 +298,10 @@ func TestCheckResponseSnapshot_ListInvestigationGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvestigationGroups(context.Background(), &ListInvestigationGroupsInput{})
+	got, err := svc.ListInvestigationGroups(context.Background(), &ListInvestigationGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -283,7 +324,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -304,7 +347,10 @@ func TestCheckResponseSnapshot_PutInvestigationGroupPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutInvestigationGroupPolicy(context.Background(), &PutInvestigationGroupPolicyInput{})
+	got, err := svc.PutInvestigationGroupPolicy(context.Background(), &PutInvestigationGroupPolicyInput{
+		Identifier: ptr.String("__Identifier__"),
+		Policy:     ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -323,7 +369,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -342,7 +393,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -361,7 +418,33 @@ func TestCheckResponseSnapshot_UpdateInvestigationGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInvestigationGroup(context.Background(), &UpdateInvestigationGroupInput{})
+	got, err := svc.UpdateInvestigationGroup(context.Background(), &UpdateInvestigationGroupInput{
+		Identifier: ptr.String("__Identifier__"),
+		RoleArn:    ptr.String("__RoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionConfigurationType("AWS_OWNED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		TagKeyBoundaries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChatbotNotificationChannel: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		IsCloudTrailEventHistoryEnabled: ptr.Bool(true),
+		CrossAccountConfigurations: []types.CrossAccountConfiguration{
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -382,7 +465,37 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{})
+	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{
+		Name:    ptr.String("__Name__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionConfigurationType("AWS_OWNED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		RetentionInDays: ptr.Int64(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagKeyBoundaries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChatbotNotificationChannel: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		IsCloudTrailEventHistoryEnabled: ptr.Bool(true),
+		CrossAccountConfigurations: []types.CrossAccountConfiguration{
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -407,7 +520,37 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{})
+	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{
+		Name:    ptr.String("__Name__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionConfigurationType("AWS_OWNED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		RetentionInDays: ptr.Int64(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagKeyBoundaries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChatbotNotificationChannel: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		IsCloudTrailEventHistoryEnabled: ptr.Bool(true),
+		CrossAccountConfigurations: []types.CrossAccountConfiguration{
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -432,7 +575,37 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{})
+	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{
+		Name:    ptr.String("__Name__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionConfigurationType("AWS_OWNED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		RetentionInDays: ptr.Int64(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagKeyBoundaries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChatbotNotificationChannel: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		IsCloudTrailEventHistoryEnabled: ptr.Bool(true),
+		CrossAccountConfigurations: []types.CrossAccountConfiguration{
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -457,7 +630,37 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{})
+	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{
+		Name:    ptr.String("__Name__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionConfigurationType("AWS_OWNED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		RetentionInDays: ptr.Int64(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagKeyBoundaries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChatbotNotificationChannel: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		IsCloudTrailEventHistoryEnabled: ptr.Bool(true),
+		CrossAccountConfigurations: []types.CrossAccountConfiguration{
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -482,7 +685,37 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{})
+	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{
+		Name:    ptr.String("__Name__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionConfigurationType("AWS_OWNED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		RetentionInDays: ptr.Int64(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagKeyBoundaries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChatbotNotificationChannel: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		IsCloudTrailEventHistoryEnabled: ptr.Bool(true),
+		CrossAccountConfigurations: []types.CrossAccountConfiguration{
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -511,7 +744,37 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{})
+	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{
+		Name:    ptr.String("__Name__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionConfigurationType("AWS_OWNED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		RetentionInDays: ptr.Int64(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagKeyBoundaries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChatbotNotificationChannel: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		IsCloudTrailEventHistoryEnabled: ptr.Bool(true),
+		CrossAccountConfigurations: []types.CrossAccountConfiguration{
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -536,7 +799,37 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{})
+	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{
+		Name:    ptr.String("__Name__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionConfigurationType("AWS_OWNED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		RetentionInDays: ptr.Int64(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagKeyBoundaries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChatbotNotificationChannel: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		IsCloudTrailEventHistoryEnabled: ptr.Bool(true),
+		CrossAccountConfigurations: []types.CrossAccountConfiguration{
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -561,7 +854,37 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{})
+	_, opErr := svc.CreateInvestigationGroup(context.Background(), &CreateInvestigationGroupInput{
+		Name:    ptr.String("__Name__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionConfigurationType("AWS_OWNED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		RetentionInDays: ptr.Int64(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagKeyBoundaries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChatbotNotificationChannel: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		IsCloudTrailEventHistoryEnabled: ptr.Bool(true),
+		CrossAccountConfigurations: []types.CrossAccountConfiguration{
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+			{
+				SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

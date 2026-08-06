@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"DeploymentDurationInMinutes":1,"Description":"__Description__","FinalBakeTimeInMinutes":1,"GrowthFactor":1,"GrowthType":"LINEAR","Id":"__Id__","Name":"__Name__","ReplicateTo":"NONE"},{"DeploymentDurationInMinutes":1,"Description":"__Description__","FinalBakeTimeInMinutes":1,"GrowthFactor":1,"GrowthType":"LINEAR","Id":"__Id__","Name":"__Name__","ReplicateTo":"NONE"}],"NextToken":"__NextToken__"}

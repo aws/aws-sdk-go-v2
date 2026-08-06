@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"notificationHubRegion":"__NotificationHubRegion__","statusSummary":{"reason":"__Reason__","status":"ACTIVE"}}

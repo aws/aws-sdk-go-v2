@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdTimestamp":946684800,"databaseArn":"__DatabaseArn__","databaseName":"__DatabaseName__","description":"__Description__","environmentId":"__EnvironmentId__","lastCompletedChangesetId":"__LastCompletedChangesetId__","lastModifiedTimestamp":946684800,"numBytes":1,"numChangesets":1,"numFiles":1}

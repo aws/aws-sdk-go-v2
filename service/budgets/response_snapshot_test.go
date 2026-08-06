@@ -117,7 +117,170 @@ func TestCheckResponseSnapshot_CreateBudget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBudget(context.Background(), &CreateBudgetInput{})
+	got, err := svc.CreateBudget(context.Background(), &CreateBudgetInput{
+		AccountId: ptr.String("__AccountId__"),
+		Budget: &types.Budget{
+			BudgetName: ptr.String("__BudgetName__"),
+			BudgetLimit: &types.Spend{
+				Amount: ptr.String("__Amount__"),
+				Unit:   ptr.String("__Unit__"),
+			},
+			PlannedBudgetLimits: map[string]types.Spend{
+				"key0": {
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			CostFilters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostTypes: &types.CostTypes{
+				IncludeTax:               ptr.Bool(true),
+				IncludeSubscription:      ptr.Bool(true),
+				UseBlended:               ptr.Bool(true),
+				IncludeRefund:            ptr.Bool(true),
+				IncludeCredit:            ptr.Bool(true),
+				IncludeUpfront:           ptr.Bool(true),
+				IncludeRecurring:         ptr.Bool(true),
+				IncludeOtherSubscription: ptr.Bool(true),
+				IncludeSupport:           ptr.Bool(true),
+				IncludeDiscount:          ptr.Bool(true),
+				UseAmortized:             ptr.Bool(true),
+			},
+			TimeUnit: types.TimeUnit("DAILY"),
+			TimePeriod: &types.TimePeriod{
+				Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			CalculatedSpend: &types.CalculatedSpend{
+				ActualSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+				ForecastedSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			BudgetType:      types.BudgetType("USAGE"),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AutoAdjustData: &types.AutoAdjustData{
+				AutoAdjustType: types.AutoAdjustType("HISTORICAL"),
+				HistoricalOptions: &types.HistoricalOptions{
+					BudgetAdjustmentPeriod:   ptr.Int32(1),
+					LookBackAvailablePeriods: ptr.Int32(1),
+				},
+				LastAutoAdjustTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			FilterExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.ExpressionDimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			Metrics: []types.Metric{
+				types.Metric("BlendedCost"),
+				types.Metric("BlendedCost"),
+			},
+			BillingViewArn: ptr.String("__BillingViewArn__"),
+			HealthStatus: &types.HealthStatus{
+				Status:          types.HealthStatusValue("HEALTHY"),
+				StatusReason:    types.HealthStatusReason("BILLING_VIEW_NO_ACCESS"),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NotificationsWithSubscribers: []types.NotificationWithSubscribers{
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +303,70 @@ func TestCheckResponseSnapshot_CreateBudgetAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBudgetAction(context.Background(), &CreateBudgetActionInput{})
+	got, err := svc.CreateBudgetAction(context.Background(), &CreateBudgetActionInput{
+		AccountId:        ptr.String("__AccountId__"),
+		BudgetName:       ptr.String("__BudgetName__"),
+		NotificationType: types.NotificationType("ACTUAL"),
+		ActionType:       types.ActionType("APPLY_IAM_POLICY"),
+		ActionThreshold: &types.ActionThreshold{
+			ActionThresholdValue: 1.0,
+			ActionThresholdType:  types.ThresholdType("PERCENTAGE"),
+		},
+		Definition: &types.Definition{
+			IamActionDefinition: &types.IamActionDefinition{
+				PolicyArn: ptr.String("__PolicyArn__"),
+				Roles: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Users: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ScpActionDefinition: &types.ScpActionDefinition{
+				PolicyId: ptr.String("__PolicyId__"),
+				TargetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SsmActionDefinition: &types.SsmActionDefinition{
+				ActionSubType: types.ActionSubType("STOP_EC2_INSTANCES"),
+				Region:        ptr.String("__Region__"),
+				InstanceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		ApprovalModel:    types.ApprovalModel("AUTOMATIC"),
+		Subscribers: []types.Subscriber{
+			{
+				SubscriptionType: types.SubscriptionType("SNS"),
+				Address:          ptr.String("__Address__"),
+			},
+			{
+				SubscriptionType: types.SubscriptionType("SNS"),
+				Address:          ptr.String("__Address__"),
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +385,27 @@ func TestCheckResponseSnapshot_CreateNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNotification(context.Background(), &CreateNotificationInput{})
+	got, err := svc.CreateNotification(context.Background(), &CreateNotificationInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		Notification: &types.Notification{
+			NotificationType:   types.NotificationType("ACTUAL"),
+			ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+			Threshold:          1.0,
+			ThresholdType:      types.ThresholdType("PERCENTAGE"),
+			NotificationState:  types.NotificationState("OK"),
+		},
+		Subscribers: []types.Subscriber{
+			{
+				SubscriptionType: types.SubscriptionType("SNS"),
+				Address:          ptr.String("__Address__"),
+			},
+			{
+				SubscriptionType: types.SubscriptionType("SNS"),
+				Address:          ptr.String("__Address__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +424,21 @@ func TestCheckResponseSnapshot_CreateSubscriber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSubscriber(context.Background(), &CreateSubscriberInput{})
+	got, err := svc.CreateSubscriber(context.Background(), &CreateSubscriberInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		Notification: &types.Notification{
+			NotificationType:   types.NotificationType("ACTUAL"),
+			ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+			Threshold:          1.0,
+			ThresholdType:      types.ThresholdType("PERCENTAGE"),
+			NotificationState:  types.NotificationState("OK"),
+		},
+		Subscriber: &types.Subscriber{
+			SubscriptionType: types.SubscriptionType("SNS"),
+			Address:          ptr.String("__Address__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -197,7 +457,10 @@ func TestCheckResponseSnapshot_DeleteBudget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBudget(context.Background(), &DeleteBudgetInput{})
+	got, err := svc.DeleteBudget(context.Background(), &DeleteBudgetInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +537,11 @@ func TestCheckResponseSnapshot_DeleteBudgetAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBudgetAction(context.Background(), &DeleteBudgetActionInput{})
+	got, err := svc.DeleteBudgetAction(context.Background(), &DeleteBudgetActionInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		ActionId:   ptr.String("__ActionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -293,7 +560,17 @@ func TestCheckResponseSnapshot_DeleteNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNotification(context.Background(), &DeleteNotificationInput{})
+	got, err := svc.DeleteNotification(context.Background(), &DeleteNotificationInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		Notification: &types.Notification{
+			NotificationType:   types.NotificationType("ACTUAL"),
+			ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+			Threshold:          1.0,
+			ThresholdType:      types.ThresholdType("PERCENTAGE"),
+			NotificationState:  types.NotificationState("OK"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -312,7 +589,21 @@ func TestCheckResponseSnapshot_DeleteSubscriber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSubscriber(context.Background(), &DeleteSubscriberInput{})
+	got, err := svc.DeleteSubscriber(context.Background(), &DeleteSubscriberInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		Notification: &types.Notification{
+			NotificationType:   types.NotificationType("ACTUAL"),
+			ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+			Threshold:          1.0,
+			ThresholdType:      types.ThresholdType("PERCENTAGE"),
+			NotificationState:  types.NotificationState("OK"),
+		},
+		Subscriber: &types.Subscriber{
+			SubscriptionType: types.SubscriptionType("SNS"),
+			Address:          ptr.String("__Address__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -443,7 +734,11 @@ func TestCheckResponseSnapshot_DescribeBudget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBudget(context.Background(), &DescribeBudgetInput{})
+	got, err := svc.DescribeBudget(context.Background(), &DescribeBudgetInput{
+		AccountId:            ptr.String("__AccountId__"),
+		BudgetName:           ptr.String("__BudgetName__"),
+		ShowFilterExpression: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -520,7 +815,11 @@ func TestCheckResponseSnapshot_DescribeBudgetAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBudgetAction(context.Background(), &DescribeBudgetActionInput{})
+	got, err := svc.DescribeBudgetAction(context.Background(), &DescribeBudgetActionInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		ActionId:   ptr.String("__ActionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -669,7 +968,17 @@ func TestCheckResponseSnapshot_DescribeBudgetActionHistories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBudgetActionHistories(context.Background(), &DescribeBudgetActionHistoriesInput{})
+	got, err := svc.DescribeBudgetActionHistories(context.Background(), &DescribeBudgetActionHistoriesInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		ActionId:   ptr.String("__ActionId__"),
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -802,7 +1111,11 @@ func TestCheckResponseSnapshot_DescribeBudgetActionsForAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBudgetActionsForAccount(context.Background(), &DescribeBudgetActionsForAccountInput{})
+	got, err := svc.DescribeBudgetActionsForAccount(context.Background(), &DescribeBudgetActionsForAccountInput{
+		AccountId:  ptr.String("__AccountId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -935,7 +1248,12 @@ func TestCheckResponseSnapshot_DescribeBudgetActionsForBudget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBudgetActionsForBudget(context.Background(), &DescribeBudgetActionsForBudgetInput{})
+	got, err := svc.DescribeBudgetActionsForBudget(context.Background(), &DescribeBudgetActionsForBudgetInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -996,7 +1314,11 @@ func TestCheckResponseSnapshot_DescribeBudgetNotificationsForAccount(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBudgetNotificationsForAccount(context.Background(), &DescribeBudgetNotificationsForAccountInput{})
+	got, err := svc.DescribeBudgetNotificationsForAccount(context.Background(), &DescribeBudgetNotificationsForAccountInput{
+		AccountId:  ptr.String("__AccountId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1120,7 +1442,16 @@ func TestCheckResponseSnapshot_DescribeBudgetPerformanceHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBudgetPerformanceHistory(context.Background(), &DescribeBudgetPerformanceHistoryInput{})
+	got, err := svc.DescribeBudgetPerformanceHistory(context.Background(), &DescribeBudgetPerformanceHistoryInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1365,7 +1696,12 @@ func TestCheckResponseSnapshot_DescribeBudgets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBudgets(context.Background(), &DescribeBudgetsInput{})
+	got, err := svc.DescribeBudgets(context.Background(), &DescribeBudgetsInput{
+		AccountId:            ptr.String("__AccountId__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		ShowFilterExpression: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1402,7 +1738,12 @@ func TestCheckResponseSnapshot_DescribeNotificationsForBudget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeNotificationsForBudget(context.Background(), &DescribeNotificationsForBudgetInput{})
+	got, err := svc.DescribeNotificationsForBudget(context.Background(), &DescribeNotificationsForBudgetInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1433,7 +1774,19 @@ func TestCheckResponseSnapshot_DescribeSubscribersForNotification(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSubscribersForNotification(context.Background(), &DescribeSubscribersForNotificationInput{})
+	got, err := svc.DescribeSubscribersForNotification(context.Background(), &DescribeSubscribersForNotificationInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		Notification: &types.Notification{
+			NotificationType:   types.NotificationType("ACTUAL"),
+			ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+			Threshold:          1.0,
+			ThresholdType:      types.ThresholdType("PERCENTAGE"),
+			NotificationState:  types.NotificationState("OK"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1457,7 +1810,12 @@ func TestCheckResponseSnapshot_ExecuteBudgetAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteBudgetAction(context.Background(), &ExecuteBudgetActionInput{})
+	got, err := svc.ExecuteBudgetAction(context.Background(), &ExecuteBudgetActionInput{
+		AccountId:     ptr.String("__AccountId__"),
+		BudgetName:    ptr.String("__BudgetName__"),
+		ActionId:      ptr.String("__ActionId__"),
+		ExecutionType: types.ExecutionType("APPROVE_BUDGET_ACTION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1487,7 +1845,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1506,7 +1866,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1525,7 +1897,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		ResourceTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1544,7 +1922,120 @@ func TestCheckResponseSnapshot_UpdateBudget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBudget(context.Background(), &UpdateBudgetInput{})
+	got, err := svc.UpdateBudget(context.Background(), &UpdateBudgetInput{
+		AccountId: ptr.String("__AccountId__"),
+		NewBudget: &types.Budget{
+			BudgetName: ptr.String("__BudgetName__"),
+			BudgetLimit: &types.Spend{
+				Amount: ptr.String("__Amount__"),
+				Unit:   ptr.String("__Unit__"),
+			},
+			PlannedBudgetLimits: map[string]types.Spend{
+				"key0": {
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			CostFilters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostTypes: &types.CostTypes{
+				IncludeTax:               ptr.Bool(true),
+				IncludeSubscription:      ptr.Bool(true),
+				UseBlended:               ptr.Bool(true),
+				IncludeRefund:            ptr.Bool(true),
+				IncludeCredit:            ptr.Bool(true),
+				IncludeUpfront:           ptr.Bool(true),
+				IncludeRecurring:         ptr.Bool(true),
+				IncludeOtherSubscription: ptr.Bool(true),
+				IncludeSupport:           ptr.Bool(true),
+				IncludeDiscount:          ptr.Bool(true),
+				UseAmortized:             ptr.Bool(true),
+			},
+			TimeUnit: types.TimeUnit("DAILY"),
+			TimePeriod: &types.TimePeriod{
+				Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			CalculatedSpend: &types.CalculatedSpend{
+				ActualSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+				ForecastedSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			BudgetType:      types.BudgetType("USAGE"),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AutoAdjustData: &types.AutoAdjustData{
+				AutoAdjustType: types.AutoAdjustType("HISTORICAL"),
+				HistoricalOptions: &types.HistoricalOptions{
+					BudgetAdjustmentPeriod:   ptr.Int32(1),
+					LookBackAvailablePeriods: ptr.Int32(1),
+				},
+				LastAutoAdjustTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			FilterExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.ExpressionDimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			Metrics: []types.Metric{
+				types.Metric("BlendedCost"),
+				types.Metric("BlendedCost"),
+			},
+			BillingViewArn: ptr.String("__BillingViewArn__"),
+			HealthStatus: &types.HealthStatus{
+				Status:          types.HealthStatusValue("HEALTHY"),
+				StatusReason:    types.HealthStatusReason("BILLING_VIEW_NO_ACCESS"),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1676,7 +2167,60 @@ func TestCheckResponseSnapshot_UpdateBudgetAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBudgetAction(context.Background(), &UpdateBudgetActionInput{})
+	got, err := svc.UpdateBudgetAction(context.Background(), &UpdateBudgetActionInput{
+		AccountId:        ptr.String("__AccountId__"),
+		BudgetName:       ptr.String("__BudgetName__"),
+		ActionId:         ptr.String("__ActionId__"),
+		NotificationType: types.NotificationType("ACTUAL"),
+		ActionThreshold: &types.ActionThreshold{
+			ActionThresholdValue: 1.0,
+			ActionThresholdType:  types.ThresholdType("PERCENTAGE"),
+		},
+		Definition: &types.Definition{
+			IamActionDefinition: &types.IamActionDefinition{
+				PolicyArn: ptr.String("__PolicyArn__"),
+				Roles: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Users: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ScpActionDefinition: &types.ScpActionDefinition{
+				PolicyId: ptr.String("__PolicyId__"),
+				TargetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SsmActionDefinition: &types.SsmActionDefinition{
+				ActionSubType: types.ActionSubType("STOP_EC2_INSTANCES"),
+				Region:        ptr.String("__Region__"),
+				InstanceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		ApprovalModel:    types.ApprovalModel("AUTOMATIC"),
+		Subscribers: []types.Subscriber{
+			{
+				SubscriptionType: types.SubscriptionType("SNS"),
+				Address:          ptr.String("__Address__"),
+			},
+			{
+				SubscriptionType: types.SubscriptionType("SNS"),
+				Address:          ptr.String("__Address__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1695,7 +2239,24 @@ func TestCheckResponseSnapshot_UpdateNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNotification(context.Background(), &UpdateNotificationInput{})
+	got, err := svc.UpdateNotification(context.Background(), &UpdateNotificationInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		OldNotification: &types.Notification{
+			NotificationType:   types.NotificationType("ACTUAL"),
+			ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+			Threshold:          1.0,
+			ThresholdType:      types.ThresholdType("PERCENTAGE"),
+			NotificationState:  types.NotificationState("OK"),
+		},
+		NewNotification: &types.Notification{
+			NotificationType:   types.NotificationType("ACTUAL"),
+			ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+			Threshold:          1.0,
+			ThresholdType:      types.ThresholdType("PERCENTAGE"),
+			NotificationState:  types.NotificationState("OK"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1714,7 +2275,25 @@ func TestCheckResponseSnapshot_UpdateSubscriber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubscriber(context.Background(), &UpdateSubscriberInput{})
+	got, err := svc.UpdateSubscriber(context.Background(), &UpdateSubscriberInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		Notification: &types.Notification{
+			NotificationType:   types.NotificationType("ACTUAL"),
+			ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+			Threshold:          1.0,
+			ThresholdType:      types.ThresholdType("PERCENTAGE"),
+			NotificationState:  types.NotificationState("OK"),
+		},
+		OldSubscriber: &types.Subscriber{
+			SubscriptionType: types.SubscriptionType("SNS"),
+			Address:          ptr.String("__Address__"),
+		},
+		NewSubscriber: &types.Subscriber{
+			SubscriptionType: types.SubscriptionType("SNS"),
+			Address:          ptr.String("__Address__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1735,7 +2314,170 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{})
+	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{
+		AccountId: ptr.String("__AccountId__"),
+		Budget: &types.Budget{
+			BudgetName: ptr.String("__BudgetName__"),
+			BudgetLimit: &types.Spend{
+				Amount: ptr.String("__Amount__"),
+				Unit:   ptr.String("__Unit__"),
+			},
+			PlannedBudgetLimits: map[string]types.Spend{
+				"key0": {
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			CostFilters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostTypes: &types.CostTypes{
+				IncludeTax:               ptr.Bool(true),
+				IncludeSubscription:      ptr.Bool(true),
+				UseBlended:               ptr.Bool(true),
+				IncludeRefund:            ptr.Bool(true),
+				IncludeCredit:            ptr.Bool(true),
+				IncludeUpfront:           ptr.Bool(true),
+				IncludeRecurring:         ptr.Bool(true),
+				IncludeOtherSubscription: ptr.Bool(true),
+				IncludeSupport:           ptr.Bool(true),
+				IncludeDiscount:          ptr.Bool(true),
+				UseAmortized:             ptr.Bool(true),
+			},
+			TimeUnit: types.TimeUnit("DAILY"),
+			TimePeriod: &types.TimePeriod{
+				Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			CalculatedSpend: &types.CalculatedSpend{
+				ActualSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+				ForecastedSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			BudgetType:      types.BudgetType("USAGE"),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AutoAdjustData: &types.AutoAdjustData{
+				AutoAdjustType: types.AutoAdjustType("HISTORICAL"),
+				HistoricalOptions: &types.HistoricalOptions{
+					BudgetAdjustmentPeriod:   ptr.Int32(1),
+					LookBackAvailablePeriods: ptr.Int32(1),
+				},
+				LastAutoAdjustTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			FilterExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.ExpressionDimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			Metrics: []types.Metric{
+				types.Metric("BlendedCost"),
+				types.Metric("BlendedCost"),
+			},
+			BillingViewArn: ptr.String("__BillingViewArn__"),
+			HealthStatus: &types.HealthStatus{
+				Status:          types.HealthStatusValue("HEALTHY"),
+				StatusReason:    types.HealthStatusReason("BILLING_VIEW_NO_ACCESS"),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NotificationsWithSubscribers: []types.NotificationWithSubscribers{
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1760,7 +2502,170 @@ func TestCheckResponseSnapshot_Error_BillingViewHealthStatusException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{})
+	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{
+		AccountId: ptr.String("__AccountId__"),
+		Budget: &types.Budget{
+			BudgetName: ptr.String("__BudgetName__"),
+			BudgetLimit: &types.Spend{
+				Amount: ptr.String("__Amount__"),
+				Unit:   ptr.String("__Unit__"),
+			},
+			PlannedBudgetLimits: map[string]types.Spend{
+				"key0": {
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			CostFilters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostTypes: &types.CostTypes{
+				IncludeTax:               ptr.Bool(true),
+				IncludeSubscription:      ptr.Bool(true),
+				UseBlended:               ptr.Bool(true),
+				IncludeRefund:            ptr.Bool(true),
+				IncludeCredit:            ptr.Bool(true),
+				IncludeUpfront:           ptr.Bool(true),
+				IncludeRecurring:         ptr.Bool(true),
+				IncludeOtherSubscription: ptr.Bool(true),
+				IncludeSupport:           ptr.Bool(true),
+				IncludeDiscount:          ptr.Bool(true),
+				UseAmortized:             ptr.Bool(true),
+			},
+			TimeUnit: types.TimeUnit("DAILY"),
+			TimePeriod: &types.TimePeriod{
+				Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			CalculatedSpend: &types.CalculatedSpend{
+				ActualSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+				ForecastedSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			BudgetType:      types.BudgetType("USAGE"),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AutoAdjustData: &types.AutoAdjustData{
+				AutoAdjustType: types.AutoAdjustType("HISTORICAL"),
+				HistoricalOptions: &types.HistoricalOptions{
+					BudgetAdjustmentPeriod:   ptr.Int32(1),
+					LookBackAvailablePeriods: ptr.Int32(1),
+				},
+				LastAutoAdjustTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			FilterExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.ExpressionDimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			Metrics: []types.Metric{
+				types.Metric("BlendedCost"),
+				types.Metric("BlendedCost"),
+			},
+			BillingViewArn: ptr.String("__BillingViewArn__"),
+			HealthStatus: &types.HealthStatus{
+				Status:          types.HealthStatusValue("HEALTHY"),
+				StatusReason:    types.HealthStatusReason("BILLING_VIEW_NO_ACCESS"),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NotificationsWithSubscribers: []types.NotificationWithSubscribers{
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1785,7 +2690,170 @@ func TestCheckResponseSnapshot_Error_CreationLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{})
+	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{
+		AccountId: ptr.String("__AccountId__"),
+		Budget: &types.Budget{
+			BudgetName: ptr.String("__BudgetName__"),
+			BudgetLimit: &types.Spend{
+				Amount: ptr.String("__Amount__"),
+				Unit:   ptr.String("__Unit__"),
+			},
+			PlannedBudgetLimits: map[string]types.Spend{
+				"key0": {
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			CostFilters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostTypes: &types.CostTypes{
+				IncludeTax:               ptr.Bool(true),
+				IncludeSubscription:      ptr.Bool(true),
+				UseBlended:               ptr.Bool(true),
+				IncludeRefund:            ptr.Bool(true),
+				IncludeCredit:            ptr.Bool(true),
+				IncludeUpfront:           ptr.Bool(true),
+				IncludeRecurring:         ptr.Bool(true),
+				IncludeOtherSubscription: ptr.Bool(true),
+				IncludeSupport:           ptr.Bool(true),
+				IncludeDiscount:          ptr.Bool(true),
+				UseAmortized:             ptr.Bool(true),
+			},
+			TimeUnit: types.TimeUnit("DAILY"),
+			TimePeriod: &types.TimePeriod{
+				Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			CalculatedSpend: &types.CalculatedSpend{
+				ActualSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+				ForecastedSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			BudgetType:      types.BudgetType("USAGE"),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AutoAdjustData: &types.AutoAdjustData{
+				AutoAdjustType: types.AutoAdjustType("HISTORICAL"),
+				HistoricalOptions: &types.HistoricalOptions{
+					BudgetAdjustmentPeriod:   ptr.Int32(1),
+					LookBackAvailablePeriods: ptr.Int32(1),
+				},
+				LastAutoAdjustTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			FilterExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.ExpressionDimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			Metrics: []types.Metric{
+				types.Metric("BlendedCost"),
+				types.Metric("BlendedCost"),
+			},
+			BillingViewArn: ptr.String("__BillingViewArn__"),
+			HealthStatus: &types.HealthStatus{
+				Status:          types.HealthStatusValue("HEALTHY"),
+				StatusReason:    types.HealthStatusReason("BILLING_VIEW_NO_ACCESS"),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NotificationsWithSubscribers: []types.NotificationWithSubscribers{
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1810,7 +2878,170 @@ func TestCheckResponseSnapshot_Error_DuplicateRecordException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{})
+	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{
+		AccountId: ptr.String("__AccountId__"),
+		Budget: &types.Budget{
+			BudgetName: ptr.String("__BudgetName__"),
+			BudgetLimit: &types.Spend{
+				Amount: ptr.String("__Amount__"),
+				Unit:   ptr.String("__Unit__"),
+			},
+			PlannedBudgetLimits: map[string]types.Spend{
+				"key0": {
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			CostFilters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostTypes: &types.CostTypes{
+				IncludeTax:               ptr.Bool(true),
+				IncludeSubscription:      ptr.Bool(true),
+				UseBlended:               ptr.Bool(true),
+				IncludeRefund:            ptr.Bool(true),
+				IncludeCredit:            ptr.Bool(true),
+				IncludeUpfront:           ptr.Bool(true),
+				IncludeRecurring:         ptr.Bool(true),
+				IncludeOtherSubscription: ptr.Bool(true),
+				IncludeSupport:           ptr.Bool(true),
+				IncludeDiscount:          ptr.Bool(true),
+				UseAmortized:             ptr.Bool(true),
+			},
+			TimeUnit: types.TimeUnit("DAILY"),
+			TimePeriod: &types.TimePeriod{
+				Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			CalculatedSpend: &types.CalculatedSpend{
+				ActualSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+				ForecastedSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			BudgetType:      types.BudgetType("USAGE"),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AutoAdjustData: &types.AutoAdjustData{
+				AutoAdjustType: types.AutoAdjustType("HISTORICAL"),
+				HistoricalOptions: &types.HistoricalOptions{
+					BudgetAdjustmentPeriod:   ptr.Int32(1),
+					LookBackAvailablePeriods: ptr.Int32(1),
+				},
+				LastAutoAdjustTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			FilterExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.ExpressionDimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			Metrics: []types.Metric{
+				types.Metric("BlendedCost"),
+				types.Metric("BlendedCost"),
+			},
+			BillingViewArn: ptr.String("__BillingViewArn__"),
+			HealthStatus: &types.HealthStatus{
+				Status:          types.HealthStatusValue("HEALTHY"),
+				StatusReason:    types.HealthStatusReason("BILLING_VIEW_NO_ACCESS"),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NotificationsWithSubscribers: []types.NotificationWithSubscribers{
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1835,7 +3066,11 @@ func TestCheckResponseSnapshot_Error_ExpiredNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeBudgetNotificationsForAccount(context.Background(), &DescribeBudgetNotificationsForAccountInput{})
+	_, opErr := svc.DescribeBudgetNotificationsForAccount(context.Background(), &DescribeBudgetNotificationsForAccountInput{
+		AccountId:  ptr.String("__AccountId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1860,7 +3095,170 @@ func TestCheckResponseSnapshot_Error_InternalErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{})
+	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{
+		AccountId: ptr.String("__AccountId__"),
+		Budget: &types.Budget{
+			BudgetName: ptr.String("__BudgetName__"),
+			BudgetLimit: &types.Spend{
+				Amount: ptr.String("__Amount__"),
+				Unit:   ptr.String("__Unit__"),
+			},
+			PlannedBudgetLimits: map[string]types.Spend{
+				"key0": {
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			CostFilters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostTypes: &types.CostTypes{
+				IncludeTax:               ptr.Bool(true),
+				IncludeSubscription:      ptr.Bool(true),
+				UseBlended:               ptr.Bool(true),
+				IncludeRefund:            ptr.Bool(true),
+				IncludeCredit:            ptr.Bool(true),
+				IncludeUpfront:           ptr.Bool(true),
+				IncludeRecurring:         ptr.Bool(true),
+				IncludeOtherSubscription: ptr.Bool(true),
+				IncludeSupport:           ptr.Bool(true),
+				IncludeDiscount:          ptr.Bool(true),
+				UseAmortized:             ptr.Bool(true),
+			},
+			TimeUnit: types.TimeUnit("DAILY"),
+			TimePeriod: &types.TimePeriod{
+				Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			CalculatedSpend: &types.CalculatedSpend{
+				ActualSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+				ForecastedSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			BudgetType:      types.BudgetType("USAGE"),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AutoAdjustData: &types.AutoAdjustData{
+				AutoAdjustType: types.AutoAdjustType("HISTORICAL"),
+				HistoricalOptions: &types.HistoricalOptions{
+					BudgetAdjustmentPeriod:   ptr.Int32(1),
+					LookBackAvailablePeriods: ptr.Int32(1),
+				},
+				LastAutoAdjustTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			FilterExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.ExpressionDimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			Metrics: []types.Metric{
+				types.Metric("BlendedCost"),
+				types.Metric("BlendedCost"),
+			},
+			BillingViewArn: ptr.String("__BillingViewArn__"),
+			HealthStatus: &types.HealthStatus{
+				Status:          types.HealthStatusValue("HEALTHY"),
+				StatusReason:    types.HealthStatusReason("BILLING_VIEW_NO_ACCESS"),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NotificationsWithSubscribers: []types.NotificationWithSubscribers{
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1885,7 +3283,17 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeBudgetActionHistories(context.Background(), &DescribeBudgetActionHistoriesInput{})
+	_, opErr := svc.DescribeBudgetActionHistories(context.Background(), &DescribeBudgetActionHistoriesInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		ActionId:   ptr.String("__ActionId__"),
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1910,7 +3318,170 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{})
+	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{
+		AccountId: ptr.String("__AccountId__"),
+		Budget: &types.Budget{
+			BudgetName: ptr.String("__BudgetName__"),
+			BudgetLimit: &types.Spend{
+				Amount: ptr.String("__Amount__"),
+				Unit:   ptr.String("__Unit__"),
+			},
+			PlannedBudgetLimits: map[string]types.Spend{
+				"key0": {
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			CostFilters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostTypes: &types.CostTypes{
+				IncludeTax:               ptr.Bool(true),
+				IncludeSubscription:      ptr.Bool(true),
+				UseBlended:               ptr.Bool(true),
+				IncludeRefund:            ptr.Bool(true),
+				IncludeCredit:            ptr.Bool(true),
+				IncludeUpfront:           ptr.Bool(true),
+				IncludeRecurring:         ptr.Bool(true),
+				IncludeOtherSubscription: ptr.Bool(true),
+				IncludeSupport:           ptr.Bool(true),
+				IncludeDiscount:          ptr.Bool(true),
+				UseAmortized:             ptr.Bool(true),
+			},
+			TimeUnit: types.TimeUnit("DAILY"),
+			TimePeriod: &types.TimePeriod{
+				Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			CalculatedSpend: &types.CalculatedSpend{
+				ActualSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+				ForecastedSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			BudgetType:      types.BudgetType("USAGE"),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AutoAdjustData: &types.AutoAdjustData{
+				AutoAdjustType: types.AutoAdjustType("HISTORICAL"),
+				HistoricalOptions: &types.HistoricalOptions{
+					BudgetAdjustmentPeriod:   ptr.Int32(1),
+					LookBackAvailablePeriods: ptr.Int32(1),
+				},
+				LastAutoAdjustTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			FilterExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.ExpressionDimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			Metrics: []types.Metric{
+				types.Metric("BlendedCost"),
+				types.Metric("BlendedCost"),
+			},
+			BillingViewArn: ptr.String("__BillingViewArn__"),
+			HealthStatus: &types.HealthStatus{
+				Status:          types.HealthStatusValue("HEALTHY"),
+				StatusReason:    types.HealthStatusReason("BILLING_VIEW_NO_ACCESS"),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NotificationsWithSubscribers: []types.NotificationWithSubscribers{
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1935,7 +3506,170 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{})
+	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{
+		AccountId: ptr.String("__AccountId__"),
+		Budget: &types.Budget{
+			BudgetName: ptr.String("__BudgetName__"),
+			BudgetLimit: &types.Spend{
+				Amount: ptr.String("__Amount__"),
+				Unit:   ptr.String("__Unit__"),
+			},
+			PlannedBudgetLimits: map[string]types.Spend{
+				"key0": {
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			CostFilters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostTypes: &types.CostTypes{
+				IncludeTax:               ptr.Bool(true),
+				IncludeSubscription:      ptr.Bool(true),
+				UseBlended:               ptr.Bool(true),
+				IncludeRefund:            ptr.Bool(true),
+				IncludeCredit:            ptr.Bool(true),
+				IncludeUpfront:           ptr.Bool(true),
+				IncludeRecurring:         ptr.Bool(true),
+				IncludeOtherSubscription: ptr.Bool(true),
+				IncludeSupport:           ptr.Bool(true),
+				IncludeDiscount:          ptr.Bool(true),
+				UseAmortized:             ptr.Bool(true),
+			},
+			TimeUnit: types.TimeUnit("DAILY"),
+			TimePeriod: &types.TimePeriod{
+				Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			CalculatedSpend: &types.CalculatedSpend{
+				ActualSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+				ForecastedSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			BudgetType:      types.BudgetType("USAGE"),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AutoAdjustData: &types.AutoAdjustData{
+				AutoAdjustType: types.AutoAdjustType("HISTORICAL"),
+				HistoricalOptions: &types.HistoricalOptions{
+					BudgetAdjustmentPeriod:   ptr.Int32(1),
+					LookBackAvailablePeriods: ptr.Int32(1),
+				},
+				LastAutoAdjustTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			FilterExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.ExpressionDimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			Metrics: []types.Metric{
+				types.Metric("BlendedCost"),
+				types.Metric("BlendedCost"),
+			},
+			BillingViewArn: ptr.String("__BillingViewArn__"),
+			HealthStatus: &types.HealthStatus{
+				Status:          types.HealthStatusValue("HEALTHY"),
+				StatusReason:    types.HealthStatusReason("BILLING_VIEW_NO_ACCESS"),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NotificationsWithSubscribers: []types.NotificationWithSubscribers{
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1960,7 +3694,11 @@ func TestCheckResponseSnapshot_Error_ResourceLockedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteBudgetAction(context.Background(), &DeleteBudgetActionInput{})
+	_, opErr := svc.DeleteBudgetAction(context.Background(), &DeleteBudgetActionInput{
+		AccountId:  ptr.String("__AccountId__"),
+		BudgetName: ptr.String("__BudgetName__"),
+		ActionId:   ptr.String("__ActionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1985,7 +3723,170 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{})
+	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{
+		AccountId: ptr.String("__AccountId__"),
+		Budget: &types.Budget{
+			BudgetName: ptr.String("__BudgetName__"),
+			BudgetLimit: &types.Spend{
+				Amount: ptr.String("__Amount__"),
+				Unit:   ptr.String("__Unit__"),
+			},
+			PlannedBudgetLimits: map[string]types.Spend{
+				"key0": {
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			CostFilters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostTypes: &types.CostTypes{
+				IncludeTax:               ptr.Bool(true),
+				IncludeSubscription:      ptr.Bool(true),
+				UseBlended:               ptr.Bool(true),
+				IncludeRefund:            ptr.Bool(true),
+				IncludeCredit:            ptr.Bool(true),
+				IncludeUpfront:           ptr.Bool(true),
+				IncludeRecurring:         ptr.Bool(true),
+				IncludeOtherSubscription: ptr.Bool(true),
+				IncludeSupport:           ptr.Bool(true),
+				IncludeDiscount:          ptr.Bool(true),
+				UseAmortized:             ptr.Bool(true),
+			},
+			TimeUnit: types.TimeUnit("DAILY"),
+			TimePeriod: &types.TimePeriod{
+				Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			CalculatedSpend: &types.CalculatedSpend{
+				ActualSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+				ForecastedSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			BudgetType:      types.BudgetType("USAGE"),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AutoAdjustData: &types.AutoAdjustData{
+				AutoAdjustType: types.AutoAdjustType("HISTORICAL"),
+				HistoricalOptions: &types.HistoricalOptions{
+					BudgetAdjustmentPeriod:   ptr.Int32(1),
+					LookBackAvailablePeriods: ptr.Int32(1),
+				},
+				LastAutoAdjustTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			FilterExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.ExpressionDimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			Metrics: []types.Metric{
+				types.Metric("BlendedCost"),
+				types.Metric("BlendedCost"),
+			},
+			BillingViewArn: ptr.String("__BillingViewArn__"),
+			HealthStatus: &types.HealthStatus{
+				Status:          types.HealthStatusValue("HEALTHY"),
+				StatusReason:    types.HealthStatusReason("BILLING_VIEW_NO_ACCESS"),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NotificationsWithSubscribers: []types.NotificationWithSubscribers{
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2010,7 +3911,170 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{})
+	_, opErr := svc.CreateBudget(context.Background(), &CreateBudgetInput{
+		AccountId: ptr.String("__AccountId__"),
+		Budget: &types.Budget{
+			BudgetName: ptr.String("__BudgetName__"),
+			BudgetLimit: &types.Spend{
+				Amount: ptr.String("__Amount__"),
+				Unit:   ptr.String("__Unit__"),
+			},
+			PlannedBudgetLimits: map[string]types.Spend{
+				"key0": {
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			CostFilters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostTypes: &types.CostTypes{
+				IncludeTax:               ptr.Bool(true),
+				IncludeSubscription:      ptr.Bool(true),
+				UseBlended:               ptr.Bool(true),
+				IncludeRefund:            ptr.Bool(true),
+				IncludeCredit:            ptr.Bool(true),
+				IncludeUpfront:           ptr.Bool(true),
+				IncludeRecurring:         ptr.Bool(true),
+				IncludeOtherSubscription: ptr.Bool(true),
+				IncludeSupport:           ptr.Bool(true),
+				IncludeDiscount:          ptr.Bool(true),
+				UseAmortized:             ptr.Bool(true),
+			},
+			TimeUnit: types.TimeUnit("DAILY"),
+			TimePeriod: &types.TimePeriod{
+				Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			CalculatedSpend: &types.CalculatedSpend{
+				ActualSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+				ForecastedSpend: &types.Spend{
+					Amount: ptr.String("__Amount__"),
+					Unit:   ptr.String("__Unit__"),
+				},
+			},
+			BudgetType:      types.BudgetType("USAGE"),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AutoAdjustData: &types.AutoAdjustData{
+				AutoAdjustType: types.AutoAdjustType("HISTORICAL"),
+				HistoricalOptions: &types.HistoricalOptions{
+					BudgetAdjustmentPeriod:   ptr.Int32(1),
+					LookBackAvailablePeriods: ptr.Int32(1),
+				},
+				LastAutoAdjustTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			FilterExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.ExpressionDimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			Metrics: []types.Metric{
+				types.Metric("BlendedCost"),
+				types.Metric("BlendedCost"),
+			},
+			BillingViewArn: ptr.String("__BillingViewArn__"),
+			HealthStatus: &types.HealthStatus{
+				Status:          types.HealthStatusValue("HEALTHY"),
+				StatusReason:    types.HealthStatusReason("BILLING_VIEW_NO_ACCESS"),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NotificationsWithSubscribers: []types.NotificationWithSubscribers{
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+			{
+				Notification: &types.Notification{
+					NotificationType:   types.NotificationType("ACTUAL"),
+					ComparisonOperator: types.ComparisonOperator("GREATER_THAN"),
+					Threshold:          1.0,
+					ThresholdType:      types.ThresholdType("PERCENTAGE"),
+					NotificationState:  types.NotificationState("OK"),
+				},
+				Subscribers: []types.Subscriber{
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+					{
+						SubscriptionType: types.SubscriptionType("SNS"),
+						Address:          ptr.String("__Address__"),
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

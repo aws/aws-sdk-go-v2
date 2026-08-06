@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_AcceptInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	got, err := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		GraphArn: ptr.String("__GraphArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -171,7 +173,13 @@ func TestCheckResponseSnapshot_BatchGetGraphMemberDatasources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetGraphMemberDatasources(context.Background(), &BatchGetGraphMemberDatasourcesInput{})
+	got, err := svc.BatchGetGraphMemberDatasources(context.Background(), &BatchGetGraphMemberDatasourcesInput{
+		GraphArn: ptr.String("__GraphArn__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,7 +233,12 @@ func TestCheckResponseSnapshot_BatchGetMembershipDatasources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetMembershipDatasources(context.Background(), &BatchGetMembershipDatasourcesInput{})
+	got, err := svc.BatchGetMembershipDatasources(context.Background(), &BatchGetMembershipDatasourcesInput{
+		GraphArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +259,11 @@ func TestCheckResponseSnapshot_CreateGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGraph(context.Background(), &CreateGraphInput{})
+	got, err := svc.CreateGraph(context.Background(), &CreateGraphInput{
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -328,7 +345,21 @@ func TestCheckResponseSnapshot_CreateMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMembers(context.Background(), &CreateMembersInput{})
+	got, err := svc.CreateMembers(context.Background(), &CreateMembersInput{
+		GraphArn:                 ptr.String("__GraphArn__"),
+		Message:                  ptr.String("__Message__"),
+		DisableEmailNotification: true,
+		Accounts: []types.Account{
+			{
+				AccountId:    ptr.String("__AccountId__"),
+				EmailAddress: ptr.String("__EmailAddress__"),
+			},
+			{
+				AccountId:    ptr.String("__AccountId__"),
+				EmailAddress: ptr.String("__EmailAddress__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -347,7 +378,9 @@ func TestCheckResponseSnapshot_DeleteGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGraph(context.Background(), &DeleteGraphInput{})
+	got, err := svc.DeleteGraph(context.Background(), &DeleteGraphInput{
+		GraphArn: ptr.String("__GraphArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -381,7 +414,13 @@ func TestCheckResponseSnapshot_DeleteMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMembers(context.Background(), &DeleteMembersInput{})
+	got, err := svc.DeleteMembers(context.Background(), &DeleteMembersInput{
+		GraphArn: ptr.String("__GraphArn__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +441,9 @@ func TestCheckResponseSnapshot_DescribeOrganizationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrganizationConfiguration(context.Background(), &DescribeOrganizationConfigurationInput{})
+	got, err := svc.DescribeOrganizationConfiguration(context.Background(), &DescribeOrganizationConfigurationInput{
+		GraphArn: ptr.String("__GraphArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -440,7 +481,9 @@ func TestCheckResponseSnapshot_DisassociateMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMembership(context.Background(), &DisassociateMembershipInput{})
+	got, err := svc.DisassociateMembership(context.Background(), &DisassociateMembershipInput{
+		GraphArn: ptr.String("__GraphArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -459,7 +502,9 @@ func TestCheckResponseSnapshot_EnableOrganizationAdminAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableOrganizationAdminAccount(context.Background(), &EnableOrganizationAdminAccountInput{})
+	got, err := svc.EnableOrganizationAdminAccount(context.Background(), &EnableOrganizationAdminAccountInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -489,7 +534,10 @@ func TestCheckResponseSnapshot_GetInvestigation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInvestigation(context.Background(), &GetInvestigationInput{})
+	got, err := svc.GetInvestigation(context.Background(), &GetInvestigationInput{
+		GraphArn:        ptr.String("__GraphArn__"),
+		InvestigationId: ptr.String("__InvestigationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -571,7 +619,13 @@ func TestCheckResponseSnapshot_GetMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMembers(context.Background(), &GetMembersInput{})
+	got, err := svc.GetMembers(context.Background(), &GetMembersInput{
+		GraphArn: ptr.String("__GraphArn__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -602,7 +656,11 @@ func TestCheckResponseSnapshot_ListDatasourcePackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasourcePackages(context.Background(), &ListDatasourcePackagesInput{})
+	got, err := svc.ListDatasourcePackages(context.Background(), &ListDatasourcePackagesInput{
+		GraphArn:   ptr.String("__GraphArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -633,7 +691,10 @@ func TestCheckResponseSnapshot_ListGraphs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGraphs(context.Background(), &ListGraphsInput{})
+	got, err := svc.ListGraphs(context.Background(), &ListGraphsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -750,7 +811,13 @@ func TestCheckResponseSnapshot_ListIndicators(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIndicators(context.Background(), &ListIndicatorsInput{})
+	got, err := svc.ListIndicators(context.Background(), &ListIndicatorsInput{
+		GraphArn:        ptr.String("__GraphArn__"),
+		InvestigationId: ptr.String("__InvestigationId__"),
+		IndicatorType:   types.IndicatorType("TTP_OBSERVED"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -791,7 +858,33 @@ func TestCheckResponseSnapshot_ListInvestigations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvestigations(context.Background(), &ListInvestigationsInput{})
+	got, err := svc.ListInvestigations(context.Background(), &ListInvestigationsInput{
+		GraphArn:   ptr.String("__GraphArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		FilterCriteria: &types.FilterCriteria{
+			Severity: &types.StringFilter{
+				Value: ptr.String("__Value__"),
+			},
+			Status: &types.StringFilter{
+				Value: ptr.String("__Value__"),
+			},
+			State: &types.StringFilter{
+				Value: ptr.String("__Value__"),
+			},
+			EntityArn: &types.StringFilter{
+				Value: ptr.String("__Value__"),
+			},
+			CreatedTime: &types.DateFilter{
+				StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		SortCriteria: &types.SortCriteria{
+			Field:     types.Field("SEVERITY"),
+			SortOrder: types.SortOrder("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -864,7 +957,10 @@ func TestCheckResponseSnapshot_ListInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvitations(context.Background(), &ListInvitationsInput{})
+	got, err := svc.ListInvitations(context.Background(), &ListInvitationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -937,7 +1033,11 @@ func TestCheckResponseSnapshot_ListMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMembers(context.Background(), &ListMembersInput{})
+	got, err := svc.ListMembers(context.Background(), &ListMembersInput{
+		GraphArn:   ptr.String("__GraphArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -970,7 +1070,10 @@ func TestCheckResponseSnapshot_ListOrganizationAdminAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrganizationAdminAccounts(context.Background(), &ListOrganizationAdminAccountsInput{})
+	got, err := svc.ListOrganizationAdminAccounts(context.Background(), &ListOrganizationAdminAccountsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -993,7 +1096,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1012,7 +1117,9 @@ func TestCheckResponseSnapshot_RejectInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectInvitation(context.Background(), &RejectInvitationInput{})
+	got, err := svc.RejectInvitation(context.Background(), &RejectInvitationInput{
+		GraphArn: ptr.String("__GraphArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1033,7 +1140,12 @@ func TestCheckResponseSnapshot_StartInvestigation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartInvestigation(context.Background(), &StartInvestigationInput{})
+	got, err := svc.StartInvestigation(context.Background(), &StartInvestigationInput{
+		GraphArn:       ptr.String("__GraphArn__"),
+		EntityArn:      ptr.String("__EntityArn__"),
+		ScopeStartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ScopeEndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1052,7 +1164,10 @@ func TestCheckResponseSnapshot_StartMonitoringMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMonitoringMember(context.Background(), &StartMonitoringMemberInput{})
+	got, err := svc.StartMonitoringMember(context.Background(), &StartMonitoringMemberInput{
+		GraphArn:  ptr.String("__GraphArn__"),
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1071,7 +1186,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1090,7 +1210,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1109,7 +1235,13 @@ func TestCheckResponseSnapshot_UpdateDatasourcePackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDatasourcePackages(context.Background(), &UpdateDatasourcePackagesInput{})
+	got, err := svc.UpdateDatasourcePackages(context.Background(), &UpdateDatasourcePackagesInput{
+		GraphArn: ptr.String("__GraphArn__"),
+		DatasourcePackages: []types.DatasourcePackage{
+			types.DatasourcePackage("DETECTIVE_CORE"),
+			types.DatasourcePackage("DETECTIVE_CORE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1128,7 +1260,11 @@ func TestCheckResponseSnapshot_UpdateInvestigationState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInvestigationState(context.Background(), &UpdateInvestigationStateInput{})
+	got, err := svc.UpdateInvestigationState(context.Background(), &UpdateInvestigationStateInput{
+		GraphArn:        ptr.String("__GraphArn__"),
+		InvestigationId: ptr.String("__InvestigationId__"),
+		State:           types.State("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1147,7 +1283,10 @@ func TestCheckResponseSnapshot_UpdateOrganizationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOrganizationConfiguration(context.Background(), &UpdateOrganizationConfigurationInput{})
+	got, err := svc.UpdateOrganizationConfiguration(context.Background(), &UpdateOrganizationConfigurationInput{
+		GraphArn:   ptr.String("__GraphArn__"),
+		AutoEnable: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1172,7 +1311,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		GraphArn: ptr.String("__GraphArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1197,7 +1338,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		GraphArn: ptr.String("__GraphArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1222,7 +1365,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		GraphArn: ptr.String("__GraphArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1247,7 +1392,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		GraphArn: ptr.String("__GraphArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1276,7 +1423,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGraph(context.Background(), &CreateGraphInput{})
+	_, opErr := svc.CreateGraph(context.Background(), &CreateGraphInput{
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1301,7 +1452,9 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeOrganizationConfiguration(context.Background(), &DescribeOrganizationConfigurationInput{})
+	_, opErr := svc.DescribeOrganizationConfiguration(context.Background(), &DescribeOrganizationConfigurationInput{
+		GraphArn: ptr.String("__GraphArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1328,7 +1481,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		GraphArn: ptr.String("__GraphArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

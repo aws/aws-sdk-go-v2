@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"experimentTemplates":[{"arn":"__Arn__","creationTime":946684800,"description":"__Description__","id":"__Id__","lastUpdateTime":946684800,"tags":{"key0":"__Value__"}},{"arn":"__Arn__","creationTime":946684800,"description":"__Description__","id":"__Id__","lastUpdateTime":946684800,"tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

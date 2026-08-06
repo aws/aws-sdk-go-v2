@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.DescribeParameterGroups
+
+{"NextToken":"__NextToken__","ParameterGroups":[{"ARN":"__ARN__","Description":"__Description__","Family":"__Family__","Name":"__Name__"},{"ARN":"__ARN__","Description":"__Description__","Family":"__Family__","Name":"__Name__"}]}

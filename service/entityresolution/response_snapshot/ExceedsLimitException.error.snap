@@ -1,0 +1,4 @@
+402
+Content-Type: application/json
+
+{"__type":"ExceedsLimitException","message":"__Message__","quotaName":"__QuotaName__","quotaValue":1}

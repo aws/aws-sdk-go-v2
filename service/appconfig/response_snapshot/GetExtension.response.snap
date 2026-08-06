@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Actions":{"key0":[{"Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__","Uri":"__Uri__"},{"Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__","Uri":"__Uri__"}]},"Arn":"__Arn__","Description":"__Description__","Id":"__Id__","Name":"__Name__","Parameters":{"key0":{"Description":"__Description__","Dynamic":true,"Required":true}},"VersionNumber":1}

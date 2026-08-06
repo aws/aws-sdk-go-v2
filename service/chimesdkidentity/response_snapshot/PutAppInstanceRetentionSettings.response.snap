@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AppInstanceRetentionSettings":{"ChannelRetentionSettings":{"RetentionDays":1}},"InitiateDeletionTimestamp":946684800}

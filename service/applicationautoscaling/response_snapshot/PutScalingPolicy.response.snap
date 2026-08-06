@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AnyScaleFrontendService.PutScalingPolicy
+
+{"Alarms":[{"AlarmARN":"__AlarmARN__","AlarmName":"__AlarmName__"},{"AlarmARN":"__AlarmARN__","AlarmName":"__AlarmName__"}],"PolicyARN":"__PolicyARN__"}

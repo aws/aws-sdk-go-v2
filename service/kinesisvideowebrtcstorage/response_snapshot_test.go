@@ -116,7 +116,9 @@ func TestCheckResponseSnapshot_JoinStorageSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JoinStorageSession(context.Background(), &JoinStorageSessionInput{})
+	got, err := svc.JoinStorageSession(context.Background(), &JoinStorageSessionInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -135,7 +137,10 @@ func TestCheckResponseSnapshot_JoinStorageSessionAsViewer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JoinStorageSessionAsViewer(context.Background(), &JoinStorageSessionAsViewerInput{})
+	got, err := svc.JoinStorageSessionAsViewer(context.Background(), &JoinStorageSessionAsViewerInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ClientId:   ptr.String("__ClientId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -156,7 +161,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.JoinStorageSession(context.Background(), &JoinStorageSessionInput{})
+	_, opErr := svc.JoinStorageSession(context.Background(), &JoinStorageSessionInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -181,7 +188,9 @@ func TestCheckResponseSnapshot_Error_ClientLimitExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.JoinStorageSession(context.Background(), &JoinStorageSessionInput{})
+	_, opErr := svc.JoinStorageSession(context.Background(), &JoinStorageSessionInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -206,7 +215,9 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.JoinStorageSession(context.Background(), &JoinStorageSessionInput{})
+	_, opErr := svc.JoinStorageSession(context.Background(), &JoinStorageSessionInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -231,7 +242,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.JoinStorageSession(context.Background(), &JoinStorageSessionInput{})
+	_, opErr := svc.JoinStorageSession(context.Background(), &JoinStorageSessionInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

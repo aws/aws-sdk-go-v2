@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"job":{"instanceId":"__InstanceId__","jobId":"__JobId__","message":"__Message__","s3uri":"__S3uri__","status":"NEW"}}

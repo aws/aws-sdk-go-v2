@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_AssociateAccessGrantsIdentityCenter(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAccessGrantsIdentityCenter(context.Background(), &AssociateAccessGrantsIdentityCenterInput{})
+	got, err := svc.AssociateAccessGrantsIdentityCenter(context.Background(), &AssociateAccessGrantsIdentityCenterInput{
+		AccountId:         ptr.String("AccountId-value"),
+		IdentityCenterArn: ptr.String("__IdentityCenterArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -151,7 +154,30 @@ func TestCheckResponseSnapshot_CreateAccessGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessGrant(context.Background(), &CreateAccessGrantInput{})
+	got, err := svc.CreateAccessGrant(context.Background(), &CreateAccessGrantInput{
+		AccountId:              ptr.String("AccountId-value"),
+		AccessGrantsLocationId: ptr.String("__AccessGrantsLocationId__"),
+		AccessGrantsLocationConfiguration: &types.AccessGrantsLocationConfiguration{
+			S3SubPrefix: ptr.String("__S3SubPrefix__"),
+		},
+		Grantee: &types.Grantee{
+			GranteeType:       types.GranteeType("DIRECTORY_USER"),
+			GranteeIdentifier: ptr.String("__GranteeIdentifier__"),
+		},
+		Permission:     types.Permission("READ"),
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		S3PrefixType:   types.S3PrefixType("Object"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -177,7 +203,20 @@ func TestCheckResponseSnapshot_CreateAccessGrantsInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessGrantsInstance(context.Background(), &CreateAccessGrantsInstanceInput{})
+	got, err := svc.CreateAccessGrantsInstance(context.Background(), &CreateAccessGrantsInstanceInput{
+		AccountId:         ptr.String("AccountId-value"),
+		IdentityCenterArn: ptr.String("__IdentityCenterArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +241,21 @@ func TestCheckResponseSnapshot_CreateAccessGrantsLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessGrantsLocation(context.Background(), &CreateAccessGrantsLocationInput{})
+	got, err := svc.CreateAccessGrantsLocation(context.Background(), &CreateAccessGrantsLocationInput{
+		AccountId:     ptr.String("AccountId-value"),
+		LocationScope: ptr.String("__LocationScope__"),
+		IAMRoleArn:    ptr.String("__IAMRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +277,41 @@ func TestCheckResponseSnapshot_CreateAccessPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{})
+	got, err := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+		Bucket:    ptr.String("__Bucket__"),
+		VpcConfiguration: &types.VpcConfiguration{
+			VpcId: ptr.String("__VpcId__"),
+		},
+		PublicAccessBlockConfiguration: &types.PublicAccessBlockConfiguration{
+			BlockPublicAcls:       ptr.Bool(true),
+			IgnorePublicAcls:      ptr.Bool(true),
+			BlockPublicPolicy:     ptr.Bool(true),
+			RestrictPublicBuckets: ptr.Bool(true),
+		},
+		BucketAccountId: ptr.String("__BucketAccountId__"),
+		Scope: &types.Scope{
+			Prefixes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Permissions: []types.ScopePermission{
+				types.ScopePermission("GetObject"),
+				types.ScopePermission("GetObject"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -249,7 +336,44 @@ func TestCheckResponseSnapshot_CreateAccessPointForObjectLambda(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessPointForObjectLambda(context.Background(), &CreateAccessPointForObjectLambdaInput{})
+	got, err := svc.CreateAccessPointForObjectLambda(context.Background(), &CreateAccessPointForObjectLambdaInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+		Configuration: &types.ObjectLambdaConfiguration{
+			SupportingAccessPoint:    ptr.String("__SupportingAccessPoint__"),
+			CloudWatchMetricsEnabled: true,
+			AllowedFeatures: []types.ObjectLambdaAllowedFeature{
+				types.ObjectLambdaAllowedFeature("GetObject-Range"),
+				types.ObjectLambdaAllowedFeature("GetObject-Range"),
+			},
+			TransformationConfigurations: []types.ObjectLambdaTransformationConfiguration{
+				{
+					Actions: []types.ObjectLambdaTransformationConfigurationAction{
+						types.ObjectLambdaTransformationConfigurationAction("GetObject"),
+						types.ObjectLambdaTransformationConfigurationAction("GetObject"),
+					},
+					ContentTransformation: &types.ObjectLambdaContentTransformationMemberAwsLambda{
+						Value: types.AwsLambdaTransformation{
+							FunctionArn:     ptr.String("__FunctionArn__"),
+							FunctionPayload: ptr.String("__FunctionPayload__"),
+						},
+					},
+				},
+				{
+					Actions: []types.ObjectLambdaTransformationConfigurationAction{
+						types.ObjectLambdaTransformationConfigurationAction("GetObject"),
+						types.ObjectLambdaTransformationConfigurationAction("GetObject"),
+					},
+					ContentTransformation: &types.ObjectLambdaContentTransformationMemberAwsLambda{
+						Value: types.AwsLambdaTransformation{
+							FunctionArn:     ptr.String("__FunctionArn__"),
+							FunctionPayload: ptr.String("__FunctionPayload__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -271,7 +395,20 @@ func TestCheckResponseSnapshot_CreateBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBucket(context.Background(), &CreateBucketInput{})
+	got, err := svc.CreateBucket(context.Background(), &CreateBucketInput{
+		ACL:    types.BucketCannedACL("private"),
+		Bucket: ptr.String("__Bucket__"),
+		CreateBucketConfiguration: &types.CreateBucketConfiguration{
+			LocationConstraint: types.BucketLocationConstraint("EU"),
+		},
+		GrantFullControl:           ptr.String("__GrantFullControl__"),
+		GrantRead:                  ptr.String("__GrantRead__"),
+		GrantReadACP:               ptr.String("__GrantReadACP__"),
+		GrantWrite:                 ptr.String("__GrantWrite__"),
+		GrantWriteACP:              ptr.String("__GrantWriteACP__"),
+		ObjectLockEnabledForBucket: true,
+		OutpostId:                  ptr.String("__OutpostId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -292,7 +429,242 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateJob(context.Background(), &CreateJobInput{})
+	got, err := svc.CreateJob(context.Background(), &CreateJobInput{
+		AccountId:            ptr.String("AccountId-value"),
+		ConfirmationRequired: ptr.Bool(true),
+		Operation: &types.JobOperation{
+			LambdaInvoke: &types.LambdaInvokeOperation{
+				FunctionArn:             ptr.String("__FunctionArn__"),
+				InvocationSchemaVersion: ptr.String("__InvocationSchemaVersion__"),
+				UserArguments: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			S3PutObjectCopy: &types.S3CopyObjectOperation{
+				TargetResource:          ptr.String("__TargetResource__"),
+				CannedAccessControlList: types.S3CannedAccessControlList("private"),
+				AccessControlGrants: []types.S3Grant{
+					{
+						Grantee: &types.S3Grantee{
+							TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+							Identifier:     ptr.String("__Identifier__"),
+							DisplayName:    ptr.String("__DisplayName__"),
+						},
+						Permission: types.S3Permission("FULL_CONTROL"),
+					},
+					{
+						Grantee: &types.S3Grantee{
+							TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+							Identifier:     ptr.String("__Identifier__"),
+							DisplayName:    ptr.String("__DisplayName__"),
+						},
+						Permission: types.S3Permission("FULL_CONTROL"),
+					},
+				},
+				MetadataDirective:       types.S3MetadataDirective("COPY"),
+				ModifiedSinceConstraint: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				NewObjectMetadata: &types.S3ObjectMetadata{
+					CacheControl:       ptr.String("__CacheControl__"),
+					ContentDisposition: ptr.String("__ContentDisposition__"),
+					ContentEncoding:    ptr.String("__ContentEncoding__"),
+					ContentLanguage:    ptr.String("__ContentLanguage__"),
+					UserMetadata: map[string]string{
+						"key0": "__Value__",
+					},
+					ContentLength:    ptr.Int64(1),
+					ContentMD5:       ptr.String("__ContentMD5__"),
+					ContentType:      ptr.String("__ContentType__"),
+					HttpExpiresDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					RequesterCharged: true,
+					SSEAlgorithm:     types.S3SSEAlgorithm("AES256"),
+				},
+				NewObjectTagging: []types.S3Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RedirectLocation:          ptr.String("__RedirectLocation__"),
+				RequesterPays:             true,
+				StorageClass:              types.S3StorageClass("STANDARD"),
+				UnModifiedSinceConstraint: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SSEAwsKmsKeyId:            ptr.String("__SSEAwsKmsKeyId__"),
+				TargetKeyPrefix:           ptr.String("__TargetKeyPrefix__"),
+				ObjectLockLegalHoldStatus: types.S3ObjectLockLegalHoldStatus("OFF"),
+				ObjectLockMode:            types.S3ObjectLockMode("COMPLIANCE"),
+				ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				BucketKeyEnabled:          true,
+				ChecksumAlgorithm:         types.S3ChecksumAlgorithm("CRC32"),
+			},
+			S3PutObjectAcl: &types.S3SetObjectAclOperation{
+				AccessControlPolicy: &types.S3AccessControlPolicy{
+					AccessControlList: &types.S3AccessControlList{
+						Owner: &types.S3ObjectOwner{
+							ID:          ptr.String("__ID__"),
+							DisplayName: ptr.String("__DisplayName__"),
+						},
+						Grants: []types.S3Grant{
+							{
+								Grantee: &types.S3Grantee{
+									TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+									Identifier:     ptr.String("__Identifier__"),
+									DisplayName:    ptr.String("__DisplayName__"),
+								},
+								Permission: types.S3Permission("FULL_CONTROL"),
+							},
+							{
+								Grantee: &types.S3Grantee{
+									TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+									Identifier:     ptr.String("__Identifier__"),
+									DisplayName:    ptr.String("__DisplayName__"),
+								},
+								Permission: types.S3Permission("FULL_CONTROL"),
+							},
+						},
+					},
+					CannedAccessControlList: types.S3CannedAccessControlList("private"),
+				},
+			},
+			S3PutObjectTagging: &types.S3SetObjectTaggingOperation{
+				TagSet: []types.S3Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			S3DeleteObjectTagging: &types.S3DeleteObjectTaggingOperation{},
+			S3InitiateRestoreObject: &types.S3InitiateRestoreObjectOperation{
+				ExpirationInDays: ptr.Int32(1),
+				GlacierJobTier:   types.S3GlacierJobTier("BULK"),
+			},
+			S3PutObjectLegalHold: &types.S3SetObjectLegalHoldOperation{
+				LegalHold: &types.S3ObjectLockLegalHold{
+					Status: types.S3ObjectLockLegalHoldStatus("OFF"),
+				},
+			},
+			S3PutObjectRetention: &types.S3SetObjectRetentionOperation{
+				BypassGovernanceRetention: ptr.Bool(true),
+				Retention: &types.S3Retention{
+					RetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Mode:            types.S3ObjectLockRetentionMode("COMPLIANCE"),
+				},
+			},
+			S3ReplicateObject: &types.S3ReplicateObjectOperation{},
+			S3ComputeObjectChecksum: &types.S3ComputeObjectChecksumOperation{
+				ChecksumAlgorithm: types.ComputeObjectChecksumAlgorithm("CRC32"),
+				ChecksumType:      types.ComputeObjectChecksumType("FULL_OBJECT"),
+			},
+			S3UpdateObjectEncryption: &types.S3UpdateObjectEncryptionOperation{
+				ObjectEncryption: &types.ObjectEncryption{
+					SSEKMS: &types.S3UpdateObjectEncryptionSSEKMS{
+						KMSKeyArn:        ptr.String("__KMSKeyArn__"),
+						BucketKeyEnabled: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		Report: &types.JobReport{
+			Bucket:              ptr.String("__Bucket__"),
+			Format:              types.JobReportFormat("Report_CSV_20180820"),
+			Enabled:             true,
+			Prefix:              ptr.String("__Prefix__"),
+			ReportScope:         types.JobReportScope("AllTasks"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Manifest: &types.JobManifest{
+			Spec: &types.JobManifestSpec{
+				Format: types.JobManifestFormat("S3BatchOperations_CSV_20180820"),
+				Fields: []types.JobManifestFieldName{
+					types.JobManifestFieldName("Ignore"),
+					types.JobManifestFieldName("Ignore"),
+				},
+			},
+			Location: &types.JobManifestLocation{
+				ObjectArn:       ptr.String("__ObjectArn__"),
+				ObjectVersionId: ptr.String("__ObjectVersionId__"),
+				ETag:            ptr.String("__ETag__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Priority:    ptr.Int32(1),
+		RoleArn:     ptr.String("__RoleArn__"),
+		Tags: []types.S3Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ManifestGenerator: &types.JobManifestGeneratorMemberS3JobManifestGenerator{
+			Value: types.S3JobManifestGenerator{
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				SourceBucket:        ptr.String("__SourceBucket__"),
+				ManifestOutputLocation: &types.S3ManifestOutputLocation{
+					ExpectedManifestBucketOwner: ptr.String("__ExpectedManifestBucketOwner__"),
+					Bucket:                      ptr.String("__Bucket__"),
+					ManifestPrefix:              ptr.String("__ManifestPrefix__"),
+					ManifestEncryption: &types.GeneratedManifestEncryption{
+						SSES3: &types.SSES3Encryption{},
+						SSEKMS: &types.SSEKMSEncryption{
+							KeyId: ptr.String("__KeyId__"),
+						},
+					},
+					ManifestFormat: types.GeneratedManifestFormat("S3InventoryReport_CSV_20211130"),
+				},
+				Filter: &types.JobManifestGeneratorFilter{
+					EligibleForReplication: ptr.Bool(true),
+					CreatedAfter:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CreatedBefore:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ObjectReplicationStatuses: []types.ReplicationStatus{
+						types.ReplicationStatus("COMPLETED"),
+						types.ReplicationStatus("COMPLETED"),
+					},
+					KeyNameConstraint: &types.KeyNameConstraint{
+						MatchAnyPrefix: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchAnySuffix: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchAnySubstring: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ObjectSizeGreaterThanBytes: ptr.Int64(1),
+					ObjectSizeLessThanBytes:    ptr.Int64(1),
+					MatchAnyStorageClass: []types.S3StorageClass{
+						types.S3StorageClass("STANDARD"),
+						types.S3StorageClass("STANDARD"),
+					},
+					MatchAnyObjectEncryption: []types.ObjectEncryptionFilter{
+						&types.ObjectEncryptionFilterMemberSSES3{
+							Value: types.SSES3Filter{},
+						},
+						&types.ObjectEncryptionFilterMemberSSES3{
+							Value: types.SSES3Filter{},
+						},
+					},
+				},
+				EnableManifestOutput: true,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +685,29 @@ func TestCheckResponseSnapshot_CreateMultiRegionAccessPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMultiRegionAccessPoint(context.Background(), &CreateMultiRegionAccessPointInput{})
+	got, err := svc.CreateMultiRegionAccessPoint(context.Background(), &CreateMultiRegionAccessPointInput{
+		AccountId:   ptr.String("AccountId-value"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Details: &types.CreateMultiRegionAccessPointInput{
+			Name: ptr.String("__Name__"),
+			PublicAccessBlock: &types.PublicAccessBlockConfiguration{
+				BlockPublicAcls:       ptr.Bool(true),
+				IgnorePublicAcls:      ptr.Bool(true),
+				BlockPublicPolicy:     ptr.Bool(true),
+				RestrictPublicBuckets: ptr.Bool(true),
+			},
+			Regions: []types.Region{
+				{
+					Bucket:          ptr.String("__Bucket__"),
+					BucketAccountId: ptr.String("__BucketAccountId__"),
+				},
+				{
+					Bucket:          ptr.String("__Bucket__"),
+					BucketAccountId: ptr.String("__BucketAccountId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -332,7 +726,107 @@ func TestCheckResponseSnapshot_CreateStorageLensGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStorageLensGroup(context.Background(), &CreateStorageLensGroupInput{})
+	got, err := svc.CreateStorageLensGroup(context.Background(), &CreateStorageLensGroupInput{
+		AccountId: ptr.String("AccountId-value"),
+		StorageLensGroup: &types.StorageLensGroup{
+			Name: ptr.String("__Name__"),
+			Filter: &types.StorageLensGroupFilter{
+				MatchAnyPrefix: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchAnySuffix: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchAnyTag: []types.S3Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				MatchObjectAge: &types.MatchObjectAge{
+					DaysGreaterThan: 1,
+					DaysLessThan:    1,
+				},
+				MatchObjectSize: &types.MatchObjectSize{
+					BytesGreaterThan: 1,
+					BytesLessThan:    1,
+				},
+				And: &types.StorageLensGroupAndOperator{
+					MatchAnyPrefix: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchAnySuffix: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchAnyTag: []types.S3Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					MatchObjectAge: &types.MatchObjectAge{
+						DaysGreaterThan: 1,
+						DaysLessThan:    1,
+					},
+					MatchObjectSize: &types.MatchObjectSize{
+						BytesGreaterThan: 1,
+						BytesLessThan:    1,
+					},
+				},
+				Or: &types.StorageLensGroupOrOperator{
+					MatchAnyPrefix: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchAnySuffix: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchAnyTag: []types.S3Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					MatchObjectAge: &types.MatchObjectAge{
+						DaysGreaterThan: 1,
+						DaysLessThan:    1,
+					},
+					MatchObjectSize: &types.MatchObjectSize{
+						BytesGreaterThan: 1,
+						BytesLessThan:    1,
+					},
+				},
+			},
+			StorageLensGroupArn: ptr.String("__StorageLensGroupArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -351,7 +845,10 @@ func TestCheckResponseSnapshot_DeleteAccessGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessGrant(context.Background(), &DeleteAccessGrantInput{})
+	got, err := svc.DeleteAccessGrant(context.Background(), &DeleteAccessGrantInput{
+		AccountId:     ptr.String("AccountId-value"),
+		AccessGrantId: ptr.String("__AccessGrantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -370,7 +867,9 @@ func TestCheckResponseSnapshot_DeleteAccessGrantsInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessGrantsInstance(context.Background(), &DeleteAccessGrantsInstanceInput{})
+	got, err := svc.DeleteAccessGrantsInstance(context.Background(), &DeleteAccessGrantsInstanceInput{
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -389,7 +888,9 @@ func TestCheckResponseSnapshot_DeleteAccessGrantsInstanceResourcePolicy(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessGrantsInstanceResourcePolicy(context.Background(), &DeleteAccessGrantsInstanceResourcePolicyInput{})
+	got, err := svc.DeleteAccessGrantsInstanceResourcePolicy(context.Background(), &DeleteAccessGrantsInstanceResourcePolicyInput{
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -408,7 +909,10 @@ func TestCheckResponseSnapshot_DeleteAccessGrantsLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessGrantsLocation(context.Background(), &DeleteAccessGrantsLocationInput{})
+	got, err := svc.DeleteAccessGrantsLocation(context.Background(), &DeleteAccessGrantsLocationInput{
+		AccountId:              ptr.String("AccountId-value"),
+		AccessGrantsLocationId: ptr.String("__AccessGrantsLocationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -427,7 +931,10 @@ func TestCheckResponseSnapshot_DeleteAccessPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessPoint(context.Background(), &DeleteAccessPointInput{})
+	got, err := svc.DeleteAccessPoint(context.Background(), &DeleteAccessPointInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -446,7 +953,10 @@ func TestCheckResponseSnapshot_DeleteAccessPointForObjectLambda(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessPointForObjectLambda(context.Background(), &DeleteAccessPointForObjectLambdaInput{})
+	got, err := svc.DeleteAccessPointForObjectLambda(context.Background(), &DeleteAccessPointForObjectLambdaInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,7 +975,10 @@ func TestCheckResponseSnapshot_DeleteAccessPointPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessPointPolicy(context.Background(), &DeleteAccessPointPolicyInput{})
+	got, err := svc.DeleteAccessPointPolicy(context.Background(), &DeleteAccessPointPolicyInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -484,7 +997,10 @@ func TestCheckResponseSnapshot_DeleteAccessPointPolicyForObjectLambda(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessPointPolicyForObjectLambda(context.Background(), &DeleteAccessPointPolicyForObjectLambdaInput{})
+	got, err := svc.DeleteAccessPointPolicyForObjectLambda(context.Background(), &DeleteAccessPointPolicyForObjectLambdaInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -503,7 +1019,10 @@ func TestCheckResponseSnapshot_DeleteAccessPointScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessPointScope(context.Background(), &DeleteAccessPointScopeInput{})
+	got, err := svc.DeleteAccessPointScope(context.Background(), &DeleteAccessPointScopeInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -522,7 +1041,10 @@ func TestCheckResponseSnapshot_DeleteBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucket(context.Background(), &DeleteBucketInput{})
+	got, err := svc.DeleteBucket(context.Background(), &DeleteBucketInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -541,7 +1063,10 @@ func TestCheckResponseSnapshot_DeleteBucketLifecycleConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketLifecycleConfiguration(context.Background(), &DeleteBucketLifecycleConfigurationInput{})
+	got, err := svc.DeleteBucketLifecycleConfiguration(context.Background(), &DeleteBucketLifecycleConfigurationInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -560,7 +1085,10 @@ func TestCheckResponseSnapshot_DeleteBucketPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketPolicy(context.Background(), &DeleteBucketPolicyInput{})
+	got, err := svc.DeleteBucketPolicy(context.Background(), &DeleteBucketPolicyInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -579,7 +1107,10 @@ func TestCheckResponseSnapshot_DeleteBucketReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketReplication(context.Background(), &DeleteBucketReplicationInput{})
+	got, err := svc.DeleteBucketReplication(context.Background(), &DeleteBucketReplicationInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -598,7 +1129,10 @@ func TestCheckResponseSnapshot_DeleteBucketTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketTagging(context.Background(), &DeleteBucketTaggingInput{})
+	got, err := svc.DeleteBucketTagging(context.Background(), &DeleteBucketTaggingInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -617,7 +1151,10 @@ func TestCheckResponseSnapshot_DeleteJobTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteJobTagging(context.Background(), &DeleteJobTaggingInput{})
+	got, err := svc.DeleteJobTagging(context.Background(), &DeleteJobTaggingInput{
+		AccountId: ptr.String("AccountId-value"),
+		JobId:     ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -638,7 +1175,13 @@ func TestCheckResponseSnapshot_DeleteMultiRegionAccessPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMultiRegionAccessPoint(context.Background(), &DeleteMultiRegionAccessPointInput{})
+	got, err := svc.DeleteMultiRegionAccessPoint(context.Background(), &DeleteMultiRegionAccessPointInput{
+		AccountId:   ptr.String("AccountId-value"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Details: &types.DeleteMultiRegionAccessPointInput{
+			Name: ptr.String("__Name__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -657,7 +1200,9 @@ func TestCheckResponseSnapshot_DeletePublicAccessBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePublicAccessBlock(context.Background(), &DeletePublicAccessBlockInput{})
+	got, err := svc.DeletePublicAccessBlock(context.Background(), &DeletePublicAccessBlockInput{
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -676,7 +1221,10 @@ func TestCheckResponseSnapshot_DeleteStorageLensConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStorageLensConfiguration(context.Background(), &DeleteStorageLensConfigurationInput{})
+	got, err := svc.DeleteStorageLensConfiguration(context.Background(), &DeleteStorageLensConfigurationInput{
+		ConfigId:  ptr.String("__ConfigId__"),
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -695,7 +1243,10 @@ func TestCheckResponseSnapshot_DeleteStorageLensConfigurationTagging(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStorageLensConfigurationTagging(context.Background(), &DeleteStorageLensConfigurationTaggingInput{})
+	got, err := svc.DeleteStorageLensConfigurationTagging(context.Background(), &DeleteStorageLensConfigurationTaggingInput{
+		ConfigId:  ptr.String("__ConfigId__"),
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -714,7 +1265,10 @@ func TestCheckResponseSnapshot_DeleteStorageLensGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStorageLensGroup(context.Background(), &DeleteStorageLensGroupInput{})
+	got, err := svc.DeleteStorageLensGroup(context.Background(), &DeleteStorageLensGroupInput{
+		Name:      ptr.String("__Name__"),
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -992,7 +1546,10 @@ func TestCheckResponseSnapshot_DescribeJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeJob(context.Background(), &DescribeJobInput{})
+	got, err := svc.DescribeJob(context.Background(), &DescribeJobInput{
+		AccountId: ptr.String("AccountId-value"),
+		JobId:     ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1066,7 +1623,10 @@ func TestCheckResponseSnapshot_DescribeMultiRegionAccessPointOperation(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMultiRegionAccessPointOperation(context.Background(), &DescribeMultiRegionAccessPointOperationInput{})
+	got, err := svc.DescribeMultiRegionAccessPointOperation(context.Background(), &DescribeMultiRegionAccessPointOperationInput{
+		AccountId:       ptr.String("AccountId-value"),
+		RequestTokenARN: ptr.String("__RequestTokenARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1085,7 +1645,9 @@ func TestCheckResponseSnapshot_DissociateAccessGrantsIdentityCenter(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DissociateAccessGrantsIdentityCenter(context.Background(), &DissociateAccessGrantsIdentityCenterInput{})
+	got, err := svc.DissociateAccessGrantsIdentityCenter(context.Background(), &DissociateAccessGrantsIdentityCenterInput{
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1119,7 +1681,10 @@ func TestCheckResponseSnapshot_GetAccessGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessGrant(context.Background(), &GetAccessGrantInput{})
+	got, err := svc.GetAccessGrant(context.Background(), &GetAccessGrantInput{
+		AccountId:     ptr.String("AccountId-value"),
+		AccessGrantId: ptr.String("__AccessGrantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1145,7 +1710,9 @@ func TestCheckResponseSnapshot_GetAccessGrantsInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessGrantsInstance(context.Background(), &GetAccessGrantsInstanceInput{})
+	got, err := svc.GetAccessGrantsInstance(context.Background(), &GetAccessGrantsInstanceInput{
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1167,7 +1734,10 @@ func TestCheckResponseSnapshot_GetAccessGrantsInstanceForPrefix(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessGrantsInstanceForPrefix(context.Background(), &GetAccessGrantsInstanceForPrefixInput{})
+	got, err := svc.GetAccessGrantsInstanceForPrefix(context.Background(), &GetAccessGrantsInstanceForPrefixInput{
+		AccountId: ptr.String("AccountId-value"),
+		S3Prefix:  ptr.String("__S3Prefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1190,7 +1760,9 @@ func TestCheckResponseSnapshot_GetAccessGrantsInstanceResourcePolicy(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessGrantsInstanceResourcePolicy(context.Background(), &GetAccessGrantsInstanceResourcePolicyInput{})
+	got, err := svc.GetAccessGrantsInstanceResourcePolicy(context.Background(), &GetAccessGrantsInstanceResourcePolicyInput{
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1215,7 +1787,10 @@ func TestCheckResponseSnapshot_GetAccessGrantsLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessGrantsLocation(context.Background(), &GetAccessGrantsLocationInput{})
+	got, err := svc.GetAccessGrantsLocation(context.Background(), &GetAccessGrantsLocationInput{
+		AccountId:              ptr.String("AccountId-value"),
+		AccessGrantsLocationId: ptr.String("__AccessGrantsLocationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1256,7 +1831,10 @@ func TestCheckResponseSnapshot_GetAccessPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessPoint(context.Background(), &GetAccessPointInput{})
+	got, err := svc.GetAccessPoint(context.Background(), &GetAccessPointInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1310,7 +1888,10 @@ func TestCheckResponseSnapshot_GetAccessPointConfigurationForObjectLambda(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessPointConfigurationForObjectLambda(context.Background(), &GetAccessPointConfigurationForObjectLambdaInput{})
+	got, err := svc.GetAccessPointConfigurationForObjectLambda(context.Background(), &GetAccessPointConfigurationForObjectLambdaInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1342,7 +1923,10 @@ func TestCheckResponseSnapshot_GetAccessPointForObjectLambda(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessPointForObjectLambda(context.Background(), &GetAccessPointForObjectLambdaInput{})
+	got, err := svc.GetAccessPointForObjectLambda(context.Background(), &GetAccessPointForObjectLambdaInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1363,7 +1947,10 @@ func TestCheckResponseSnapshot_GetAccessPointPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessPointPolicy(context.Background(), &GetAccessPointPolicyInput{})
+	got, err := svc.GetAccessPointPolicy(context.Background(), &GetAccessPointPolicyInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1384,7 +1971,10 @@ func TestCheckResponseSnapshot_GetAccessPointPolicyForObjectLambda(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessPointPolicyForObjectLambda(context.Background(), &GetAccessPointPolicyForObjectLambdaInput{})
+	got, err := svc.GetAccessPointPolicyForObjectLambda(context.Background(), &GetAccessPointPolicyForObjectLambdaInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1407,7 +1997,10 @@ func TestCheckResponseSnapshot_GetAccessPointPolicyStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessPointPolicyStatus(context.Background(), &GetAccessPointPolicyStatusInput{})
+	got, err := svc.GetAccessPointPolicyStatus(context.Background(), &GetAccessPointPolicyStatusInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1430,7 +2023,10 @@ func TestCheckResponseSnapshot_GetAccessPointPolicyStatusForObjectLambda(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessPointPolicyStatusForObjectLambda(context.Background(), &GetAccessPointPolicyStatusForObjectLambdaInput{})
+	got, err := svc.GetAccessPointPolicyStatusForObjectLambda(context.Background(), &GetAccessPointPolicyStatusForObjectLambdaInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1460,7 +2056,10 @@ func TestCheckResponseSnapshot_GetAccessPointScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessPointScope(context.Background(), &GetAccessPointScopeInput{})
+	got, err := svc.GetAccessPointScope(context.Background(), &GetAccessPointScopeInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1483,7 +2082,10 @@ func TestCheckResponseSnapshot_GetBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucket(context.Background(), &GetBucketInput{})
+	got, err := svc.GetBucket(context.Background(), &GetBucketInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1629,7 +2231,10 @@ func TestCheckResponseSnapshot_GetBucketLifecycleConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketLifecycleConfiguration(context.Background(), &GetBucketLifecycleConfigurationInput{})
+	got, err := svc.GetBucketLifecycleConfiguration(context.Background(), &GetBucketLifecycleConfigurationInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1650,7 +2255,10 @@ func TestCheckResponseSnapshot_GetBucketPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketPolicy(context.Background(), &GetBucketPolicyInput{})
+	got, err := svc.GetBucketPolicy(context.Background(), &GetBucketPolicyInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1803,7 +2411,10 @@ func TestCheckResponseSnapshot_GetBucketReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketReplication(context.Background(), &GetBucketReplicationInput{})
+	got, err := svc.GetBucketReplication(context.Background(), &GetBucketReplicationInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1833,7 +2444,10 @@ func TestCheckResponseSnapshot_GetBucketTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketTagging(context.Background(), &GetBucketTaggingInput{})
+	got, err := svc.GetBucketTagging(context.Background(), &GetBucketTaggingInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1855,7 +2469,10 @@ func TestCheckResponseSnapshot_GetBucketVersioning(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketVersioning(context.Background(), &GetBucketVersioningInput{})
+	got, err := svc.GetBucketVersioning(context.Background(), &GetBucketVersioningInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1886,7 +2503,15 @@ func TestCheckResponseSnapshot_GetDataAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataAccess(context.Background(), &GetDataAccessInput{})
+	got, err := svc.GetDataAccess(context.Background(), &GetDataAccessInput{
+		AccountId:       ptr.String("AccountId-value"),
+		Target:          ptr.String("__Target__"),
+		Permission:      types.Permission("READ"),
+		DurationSeconds: ptr.Int32(1),
+		Privilege:       types.Privilege("Minimal"),
+		TargetType:      types.S3PrefixType("Object"),
+		AuditContext:    ptr.String("__AuditContext__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1916,7 +2541,10 @@ func TestCheckResponseSnapshot_GetJobTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJobTagging(context.Background(), &GetJobTaggingInput{})
+	got, err := svc.GetJobTagging(context.Background(), &GetJobTaggingInput{
+		AccountId: ptr.String("AccountId-value"),
+		JobId:     ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1960,7 +2588,10 @@ func TestCheckResponseSnapshot_GetMultiRegionAccessPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMultiRegionAccessPoint(context.Background(), &GetMultiRegionAccessPointInput{})
+	got, err := svc.GetMultiRegionAccessPoint(context.Background(), &GetMultiRegionAccessPointInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1988,7 +2619,10 @@ func TestCheckResponseSnapshot_GetMultiRegionAccessPointPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMultiRegionAccessPointPolicy(context.Background(), &GetMultiRegionAccessPointPolicyInput{})
+	got, err := svc.GetMultiRegionAccessPointPolicy(context.Background(), &GetMultiRegionAccessPointPolicyInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2011,7 +2645,10 @@ func TestCheckResponseSnapshot_GetMultiRegionAccessPointPolicyStatus(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMultiRegionAccessPointPolicyStatus(context.Background(), &GetMultiRegionAccessPointPolicyStatusInput{})
+	got, err := svc.GetMultiRegionAccessPointPolicyStatus(context.Background(), &GetMultiRegionAccessPointPolicyStatusInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2044,7 +2681,10 @@ func TestCheckResponseSnapshot_GetMultiRegionAccessPointRoutes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMultiRegionAccessPointRoutes(context.Background(), &GetMultiRegionAccessPointRoutesInput{})
+	got, err := svc.GetMultiRegionAccessPointRoutes(context.Background(), &GetMultiRegionAccessPointRoutesInput{
+		AccountId: ptr.String("AccountId-value"),
+		Mrap:      ptr.String("__Mrap__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2070,7 +2710,9 @@ func TestCheckResponseSnapshot_GetPublicAccessBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPublicAccessBlock(context.Background(), &GetPublicAccessBlockInput{})
+	got, err := svc.GetPublicAccessBlock(context.Background(), &GetPublicAccessBlockInput{
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2226,7 +2868,10 @@ func TestCheckResponseSnapshot_GetStorageLensConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStorageLensConfiguration(context.Background(), &GetStorageLensConfigurationInput{})
+	got, err := svc.GetStorageLensConfiguration(context.Background(), &GetStorageLensConfigurationInput{
+		ConfigId:  ptr.String("__ConfigId__"),
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2256,7 +2901,10 @@ func TestCheckResponseSnapshot_GetStorageLensConfigurationTagging(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStorageLensConfigurationTagging(context.Background(), &GetStorageLensConfigurationTaggingInput{})
+	got, err := svc.GetStorageLensConfigurationTagging(context.Background(), &GetStorageLensConfigurationTaggingInput{
+		ConfigId:  ptr.String("__ConfigId__"),
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2364,7 +3012,10 @@ func TestCheckResponseSnapshot_GetStorageLensGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStorageLensGroup(context.Background(), &GetStorageLensGroupInput{})
+	got, err := svc.GetStorageLensGroup(context.Background(), &GetStorageLensGroupInput{
+		Name:      ptr.String("__Name__"),
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2419,7 +3070,16 @@ func TestCheckResponseSnapshot_ListAccessGrants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessGrants(context.Background(), &ListAccessGrantsInput{})
+	got, err := svc.ListAccessGrants(context.Background(), &ListAccessGrantsInput{
+		AccountId:         ptr.String("AccountId-value"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        1,
+		GranteeType:       types.GranteeType("DIRECTORY_USER"),
+		GranteeIdentifier: ptr.String("__GranteeIdentifier__"),
+		Permission:        types.Permission("READ"),
+		GrantScope:        ptr.String("__GrantScope__"),
+		ApplicationArn:    ptr.String("__ApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2458,7 +3118,11 @@ func TestCheckResponseSnapshot_ListAccessGrantsInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessGrantsInstances(context.Background(), &ListAccessGrantsInstancesInput{})
+	got, err := svc.ListAccessGrantsInstances(context.Background(), &ListAccessGrantsInstancesInput{
+		AccountId:  ptr.String("AccountId-value"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2495,7 +3159,12 @@ func TestCheckResponseSnapshot_ListAccessGrantsLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessGrantsLocations(context.Background(), &ListAccessGrantsLocationsInput{})
+	got, err := svc.ListAccessGrantsLocations(context.Background(), &ListAccessGrantsLocationsInput{
+		AccountId:     ptr.String("AccountId-value"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    1,
+		LocationScope: ptr.String("__LocationScope__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2544,7 +3213,14 @@ func TestCheckResponseSnapshot_ListAccessPoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessPoints(context.Background(), &ListAccessPointsInput{})
+	got, err := svc.ListAccessPoints(context.Background(), &ListAccessPointsInput{
+		AccountId:      ptr.String("AccountId-value"),
+		Bucket:         ptr.String("__Bucket__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     1,
+		DataSourceId:   ptr.String("__DataSourceId__"),
+		DataSourceType: ptr.String("__DataSourceType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2593,7 +3269,12 @@ func TestCheckResponseSnapshot_ListAccessPointsForDirectoryBuckets(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessPointsForDirectoryBuckets(context.Background(), &ListAccessPointsForDirectoryBucketsInput{})
+	got, err := svc.ListAccessPointsForDirectoryBuckets(context.Background(), &ListAccessPointsForDirectoryBucketsInput{
+		AccountId:       ptr.String("AccountId-value"),
+		DirectoryBucket: ptr.String("__DirectoryBucket__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2632,7 +3313,11 @@ func TestCheckResponseSnapshot_ListAccessPointsForObjectLambda(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessPointsForObjectLambda(context.Background(), &ListAccessPointsForObjectLambdaInput{})
+	got, err := svc.ListAccessPointsForObjectLambda(context.Background(), &ListAccessPointsForObjectLambdaInput{
+		AccountId:  ptr.String("AccountId-value"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2665,7 +3350,13 @@ func TestCheckResponseSnapshot_ListCallerAccessGrants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCallerAccessGrants(context.Background(), &ListCallerAccessGrantsInput{})
+	got, err := svc.ListCallerAccessGrants(context.Background(), &ListCallerAccessGrantsInput{
+		AccountId:            ptr.String("AccountId-value"),
+		GrantScope:           ptr.String("__GrantScope__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           1,
+		AllowedByApplication: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2722,7 +3413,15 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobs(context.Background(), &ListJobsInput{})
+	got, err := svc.ListJobs(context.Background(), &ListJobsInput{
+		AccountId: ptr.String("AccountId-value"),
+		JobStatuses: []types.JobStatus{
+			types.JobStatus("Active"),
+			types.JobStatus("Active"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2793,7 +3492,11 @@ func TestCheckResponseSnapshot_ListMultiRegionAccessPoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMultiRegionAccessPoints(context.Background(), &ListMultiRegionAccessPointsInput{})
+	got, err := svc.ListMultiRegionAccessPoints(context.Background(), &ListMultiRegionAccessPointsInput{
+		AccountId:  ptr.String("AccountId-value"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2830,7 +3533,12 @@ func TestCheckResponseSnapshot_ListRegionalBuckets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRegionalBuckets(context.Background(), &ListRegionalBucketsInput{})
+	got, err := svc.ListRegionalBuckets(context.Background(), &ListRegionalBucketsInput{
+		AccountId:  ptr.String("AccountId-value"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+		OutpostId:  ptr.String("__OutpostId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2865,7 +3573,10 @@ func TestCheckResponseSnapshot_ListStorageLensConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStorageLensConfigurations(context.Background(), &ListStorageLensConfigurationsInput{})
+	got, err := svc.ListStorageLensConfigurations(context.Background(), &ListStorageLensConfigurationsInput{
+		AccountId: ptr.String("AccountId-value"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2898,7 +3609,10 @@ func TestCheckResponseSnapshot_ListStorageLensGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStorageLensGroups(context.Background(), &ListStorageLensGroupsInput{})
+	got, err := svc.ListStorageLensGroups(context.Background(), &ListStorageLensGroupsInput{
+		AccountId: ptr.String("AccountId-value"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2928,7 +3642,10 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		AccountId:   ptr.String("AccountId-value"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2951,7 +3668,11 @@ func TestCheckResponseSnapshot_PutAccessGrantsInstanceResourcePolicy(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccessGrantsInstanceResourcePolicy(context.Background(), &PutAccessGrantsInstanceResourcePolicyInput{})
+	got, err := svc.PutAccessGrantsInstanceResourcePolicy(context.Background(), &PutAccessGrantsInstanceResourcePolicyInput{
+		AccountId:    ptr.String("AccountId-value"),
+		Policy:       ptr.String("__Policy__"),
+		Organization: ptr.String("__Organization__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2970,7 +3691,44 @@ func TestCheckResponseSnapshot_PutAccessPointConfigurationForObjectLambda(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccessPointConfigurationForObjectLambda(context.Background(), &PutAccessPointConfigurationForObjectLambdaInput{})
+	got, err := svc.PutAccessPointConfigurationForObjectLambda(context.Background(), &PutAccessPointConfigurationForObjectLambdaInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+		Configuration: &types.ObjectLambdaConfiguration{
+			SupportingAccessPoint:    ptr.String("__SupportingAccessPoint__"),
+			CloudWatchMetricsEnabled: true,
+			AllowedFeatures: []types.ObjectLambdaAllowedFeature{
+				types.ObjectLambdaAllowedFeature("GetObject-Range"),
+				types.ObjectLambdaAllowedFeature("GetObject-Range"),
+			},
+			TransformationConfigurations: []types.ObjectLambdaTransformationConfiguration{
+				{
+					Actions: []types.ObjectLambdaTransformationConfigurationAction{
+						types.ObjectLambdaTransformationConfigurationAction("GetObject"),
+						types.ObjectLambdaTransformationConfigurationAction("GetObject"),
+					},
+					ContentTransformation: &types.ObjectLambdaContentTransformationMemberAwsLambda{
+						Value: types.AwsLambdaTransformation{
+							FunctionArn:     ptr.String("__FunctionArn__"),
+							FunctionPayload: ptr.String("__FunctionPayload__"),
+						},
+					},
+				},
+				{
+					Actions: []types.ObjectLambdaTransformationConfigurationAction{
+						types.ObjectLambdaTransformationConfigurationAction("GetObject"),
+						types.ObjectLambdaTransformationConfigurationAction("GetObject"),
+					},
+					ContentTransformation: &types.ObjectLambdaContentTransformationMemberAwsLambda{
+						Value: types.AwsLambdaTransformation{
+							FunctionArn:     ptr.String("__FunctionArn__"),
+							FunctionPayload: ptr.String("__FunctionPayload__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2989,7 +3747,11 @@ func TestCheckResponseSnapshot_PutAccessPointPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccessPointPolicy(context.Background(), &PutAccessPointPolicyInput{})
+	got, err := svc.PutAccessPointPolicy(context.Background(), &PutAccessPointPolicyInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+		Policy:    ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3008,7 +3770,11 @@ func TestCheckResponseSnapshot_PutAccessPointPolicyForObjectLambda(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccessPointPolicyForObjectLambda(context.Background(), &PutAccessPointPolicyForObjectLambdaInput{})
+	got, err := svc.PutAccessPointPolicyForObjectLambda(context.Background(), &PutAccessPointPolicyForObjectLambdaInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+		Policy:    ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3027,7 +3793,20 @@ func TestCheckResponseSnapshot_PutAccessPointScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccessPointScope(context.Background(), &PutAccessPointScopeInput{})
+	got, err := svc.PutAccessPointScope(context.Background(), &PutAccessPointScopeInput{
+		AccountId: ptr.String("AccountId-value"),
+		Name:      ptr.String("__Name__"),
+		Scope: &types.Scope{
+			Prefixes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Permissions: []types.ScopePermission{
+				types.ScopePermission("GetObject"),
+				types.ScopePermission("GetObject"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3046,7 +3825,138 @@ func TestCheckResponseSnapshot_PutBucketLifecycleConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketLifecycleConfiguration(context.Background(), &PutBucketLifecycleConfigurationInput{})
+	got, err := svc.PutBucketLifecycleConfiguration(context.Background(), &PutBucketLifecycleConfigurationInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+		LifecycleConfiguration: &types.LifecycleConfiguration{
+			Rules: []types.LifecycleRule{
+				{
+					Expiration: &types.LifecycleExpiration{
+						Date:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Days:                      1,
+						ExpiredObjectDeleteMarker: true,
+					},
+					ID: ptr.String("__ID__"),
+					Filter: &types.LifecycleRuleFilter{
+						Prefix: ptr.String("__Prefix__"),
+						Tag: &types.S3Tag{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						And: &types.LifecycleRuleAndOperator{
+							Prefix: ptr.String("__Prefix__"),
+							Tags: []types.S3Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							ObjectSizeGreaterThan: ptr.Int64(1),
+							ObjectSizeLessThan:    ptr.Int64(1),
+						},
+						ObjectSizeGreaterThan: ptr.Int64(1),
+						ObjectSizeLessThan:    ptr.Int64(1),
+					},
+					Status: types.ExpirationStatus("Enabled"),
+					Transitions: []types.Transition{
+						{
+							Date:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Days:         1,
+							StorageClass: types.TransitionStorageClass("GLACIER"),
+						},
+						{
+							Date:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Days:         1,
+							StorageClass: types.TransitionStorageClass("GLACIER"),
+						},
+					},
+					NoncurrentVersionTransitions: []types.NoncurrentVersionTransition{
+						{
+							NoncurrentDays: 1,
+							StorageClass:   types.TransitionStorageClass("GLACIER"),
+						},
+						{
+							NoncurrentDays: 1,
+							StorageClass:   types.TransitionStorageClass("GLACIER"),
+						},
+					},
+					NoncurrentVersionExpiration: &types.NoncurrentVersionExpiration{
+						NoncurrentDays:          1,
+						NewerNoncurrentVersions: ptr.Int32(1),
+					},
+					AbortIncompleteMultipartUpload: &types.AbortIncompleteMultipartUpload{
+						DaysAfterInitiation: 1,
+					},
+				},
+				{
+					Expiration: &types.LifecycleExpiration{
+						Date:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Days:                      1,
+						ExpiredObjectDeleteMarker: true,
+					},
+					ID: ptr.String("__ID__"),
+					Filter: &types.LifecycleRuleFilter{
+						Prefix: ptr.String("__Prefix__"),
+						Tag: &types.S3Tag{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						And: &types.LifecycleRuleAndOperator{
+							Prefix: ptr.String("__Prefix__"),
+							Tags: []types.S3Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							ObjectSizeGreaterThan: ptr.Int64(1),
+							ObjectSizeLessThan:    ptr.Int64(1),
+						},
+						ObjectSizeGreaterThan: ptr.Int64(1),
+						ObjectSizeLessThan:    ptr.Int64(1),
+					},
+					Status: types.ExpirationStatus("Enabled"),
+					Transitions: []types.Transition{
+						{
+							Date:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Days:         1,
+							StorageClass: types.TransitionStorageClass("GLACIER"),
+						},
+						{
+							Date:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Days:         1,
+							StorageClass: types.TransitionStorageClass("GLACIER"),
+						},
+					},
+					NoncurrentVersionTransitions: []types.NoncurrentVersionTransition{
+						{
+							NoncurrentDays: 1,
+							StorageClass:   types.TransitionStorageClass("GLACIER"),
+						},
+						{
+							NoncurrentDays: 1,
+							StorageClass:   types.TransitionStorageClass("GLACIER"),
+						},
+					},
+					NoncurrentVersionExpiration: &types.NoncurrentVersionExpiration{
+						NoncurrentDays:          1,
+						NewerNoncurrentVersions: ptr.Int32(1),
+					},
+					AbortIncompleteMultipartUpload: &types.AbortIncompleteMultipartUpload{
+						DaysAfterInitiation: 1,
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3065,7 +3975,12 @@ func TestCheckResponseSnapshot_PutBucketPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketPolicy(context.Background(), &PutBucketPolicyInput{})
+	got, err := svc.PutBucketPolicy(context.Background(), &PutBucketPolicyInput{
+		AccountId:                     ptr.String("AccountId-value"),
+		Bucket:                        ptr.String("__Bucket__"),
+		ConfirmRemoveSelfBucketAccess: true,
+		Policy:                        ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3084,7 +3999,143 @@ func TestCheckResponseSnapshot_PutBucketReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketReplication(context.Background(), &PutBucketReplicationInput{})
+	got, err := svc.PutBucketReplication(context.Background(), &PutBucketReplicationInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+		ReplicationConfiguration: &types.ReplicationConfiguration{
+			Role: ptr.String("__Role__"),
+			Rules: []types.ReplicationRule{
+				{
+					ID:       ptr.String("__ID__"),
+					Priority: ptr.Int32(1),
+					Prefix:   ptr.String("__Prefix__"),
+					Filter: &types.ReplicationRuleFilter{
+						Prefix: ptr.String("__Prefix__"),
+						Tag: &types.S3Tag{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						And: &types.ReplicationRuleAndOperator{
+							Prefix: ptr.String("__Prefix__"),
+							Tags: []types.S3Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Status: types.ReplicationRuleStatus("Enabled"),
+					SourceSelectionCriteria: &types.SourceSelectionCriteria{
+						SseKmsEncryptedObjects: &types.SseKmsEncryptedObjects{
+							Status: types.SseKmsEncryptedObjectsStatus("Enabled"),
+						},
+						ReplicaModifications: &types.ReplicaModifications{
+							Status: types.ReplicaModificationsStatus("Enabled"),
+						},
+					},
+					ExistingObjectReplication: &types.ExistingObjectReplication{
+						Status: types.ExistingObjectReplicationStatus("Enabled"),
+					},
+					Destination: &types.Destination{
+						Account: ptr.String("__Account__"),
+						Bucket:  ptr.String("__Bucket__"),
+						ReplicationTime: &types.ReplicationTime{
+							Status: types.ReplicationTimeStatus("Enabled"),
+							Time: &types.ReplicationTimeValue{
+								Minutes: ptr.Int32(1),
+							},
+						},
+						AccessControlTranslation: &types.AccessControlTranslation{
+							Owner: types.OwnerOverride("Destination"),
+						},
+						EncryptionConfiguration: &types.EncryptionConfiguration{
+							ReplicaKmsKeyID: ptr.String("__ReplicaKmsKeyID__"),
+						},
+						Metrics: &types.Metrics{
+							Status: types.MetricsStatus("Enabled"),
+							EventThreshold: &types.ReplicationTimeValue{
+								Minutes: ptr.Int32(1),
+							},
+						},
+						StorageClass: types.ReplicationStorageClass("STANDARD"),
+					},
+					DeleteMarkerReplication: &types.DeleteMarkerReplication{
+						Status: types.DeleteMarkerReplicationStatus("Enabled"),
+					},
+					Bucket: ptr.String("__Bucket__"),
+				},
+				{
+					ID:       ptr.String("__ID__"),
+					Priority: ptr.Int32(1),
+					Prefix:   ptr.String("__Prefix__"),
+					Filter: &types.ReplicationRuleFilter{
+						Prefix: ptr.String("__Prefix__"),
+						Tag: &types.S3Tag{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						And: &types.ReplicationRuleAndOperator{
+							Prefix: ptr.String("__Prefix__"),
+							Tags: []types.S3Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Status: types.ReplicationRuleStatus("Enabled"),
+					SourceSelectionCriteria: &types.SourceSelectionCriteria{
+						SseKmsEncryptedObjects: &types.SseKmsEncryptedObjects{
+							Status: types.SseKmsEncryptedObjectsStatus("Enabled"),
+						},
+						ReplicaModifications: &types.ReplicaModifications{
+							Status: types.ReplicaModificationsStatus("Enabled"),
+						},
+					},
+					ExistingObjectReplication: &types.ExistingObjectReplication{
+						Status: types.ExistingObjectReplicationStatus("Enabled"),
+					},
+					Destination: &types.Destination{
+						Account: ptr.String("__Account__"),
+						Bucket:  ptr.String("__Bucket__"),
+						ReplicationTime: &types.ReplicationTime{
+							Status: types.ReplicationTimeStatus("Enabled"),
+							Time: &types.ReplicationTimeValue{
+								Minutes: ptr.Int32(1),
+							},
+						},
+						AccessControlTranslation: &types.AccessControlTranslation{
+							Owner: types.OwnerOverride("Destination"),
+						},
+						EncryptionConfiguration: &types.EncryptionConfiguration{
+							ReplicaKmsKeyID: ptr.String("__ReplicaKmsKeyID__"),
+						},
+						Metrics: &types.Metrics{
+							Status: types.MetricsStatus("Enabled"),
+							EventThreshold: &types.ReplicationTimeValue{
+								Minutes: ptr.Int32(1),
+							},
+						},
+						StorageClass: types.ReplicationStorageClass("STANDARD"),
+					},
+					DeleteMarkerReplication: &types.DeleteMarkerReplication{
+						Status: types.DeleteMarkerReplicationStatus("Enabled"),
+					},
+					Bucket: ptr.String("__Bucket__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3103,7 +4154,22 @@ func TestCheckResponseSnapshot_PutBucketTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketTagging(context.Background(), &PutBucketTaggingInput{})
+	got, err := svc.PutBucketTagging(context.Background(), &PutBucketTaggingInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+		Tagging: &types.Tagging{
+			TagSet: []types.S3Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3122,7 +4188,15 @@ func TestCheckResponseSnapshot_PutBucketVersioning(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketVersioning(context.Background(), &PutBucketVersioningInput{})
+	got, err := svc.PutBucketVersioning(context.Background(), &PutBucketVersioningInput{
+		AccountId: ptr.String("AccountId-value"),
+		Bucket:    ptr.String("__Bucket__"),
+		MFA:       ptr.String("__MFA__"),
+		VersioningConfiguration: &types.VersioningConfiguration{
+			MFADelete: types.MFADelete("Enabled"),
+			Status:    types.BucketVersioningStatus("Enabled"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3141,7 +4215,20 @@ func TestCheckResponseSnapshot_PutJobTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutJobTagging(context.Background(), &PutJobTaggingInput{})
+	got, err := svc.PutJobTagging(context.Background(), &PutJobTaggingInput{
+		AccountId: ptr.String("AccountId-value"),
+		JobId:     ptr.String("__JobId__"),
+		Tags: []types.S3Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3162,7 +4249,14 @@ func TestCheckResponseSnapshot_PutMultiRegionAccessPointPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMultiRegionAccessPointPolicy(context.Background(), &PutMultiRegionAccessPointPolicyInput{})
+	got, err := svc.PutMultiRegionAccessPointPolicy(context.Background(), &PutMultiRegionAccessPointPolicyInput{
+		AccountId:   ptr.String("AccountId-value"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Details: &types.PutMultiRegionAccessPointPolicyInput{
+			Name:   ptr.String("__Name__"),
+			Policy: ptr.String("__Policy__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3181,7 +4275,15 @@ func TestCheckResponseSnapshot_PutPublicAccessBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPublicAccessBlock(context.Background(), &PutPublicAccessBlockInput{})
+	got, err := svc.PutPublicAccessBlock(context.Background(), &PutPublicAccessBlockInput{
+		PublicAccessBlockConfiguration: &types.PublicAccessBlockConfiguration{
+			BlockPublicAcls:       ptr.Bool(true),
+			IgnorePublicAcls:      ptr.Bool(true),
+			BlockPublicPolicy:     ptr.Bool(true),
+			RestrictPublicBuckets: ptr.Bool(true),
+		},
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3200,7 +4302,156 @@ func TestCheckResponseSnapshot_PutStorageLensConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutStorageLensConfiguration(context.Background(), &PutStorageLensConfigurationInput{})
+	got, err := svc.PutStorageLensConfiguration(context.Background(), &PutStorageLensConfigurationInput{
+		ConfigId:  ptr.String("__ConfigId__"),
+		AccountId: ptr.String("AccountId-value"),
+		StorageLensConfiguration: &types.StorageLensConfiguration{
+			Id: ptr.String("__Id__"),
+			AccountLevel: &types.AccountLevel{
+				ActivityMetrics: &types.ActivityMetrics{
+					IsEnabled: true,
+				},
+				BucketLevel: &types.BucketLevel{
+					ActivityMetrics: &types.ActivityMetrics{
+						IsEnabled: true,
+					},
+					PrefixLevel: &types.PrefixLevel{
+						StorageMetrics: &types.PrefixLevelStorageMetrics{
+							IsEnabled: true,
+							SelectionCriteria: &types.SelectionCriteria{
+								Delimiter:                 ptr.String("__Delimiter__"),
+								MaxDepth:                  ptr.Int32(1),
+								MinStorageBytesPercentage: ptr.Float64(1.0),
+							},
+						},
+					},
+					AdvancedCostOptimizationMetrics: &types.AdvancedCostOptimizationMetrics{
+						IsEnabled: true,
+					},
+					AdvancedDataProtectionMetrics: &types.AdvancedDataProtectionMetrics{
+						IsEnabled: true,
+					},
+					DetailedStatusCodesMetrics: &types.DetailedStatusCodesMetrics{
+						IsEnabled: true,
+					},
+					AdvancedPerformanceMetrics: &types.AdvancedPerformanceMetrics{
+						IsEnabled: true,
+					},
+				},
+				AdvancedCostOptimizationMetrics: &types.AdvancedCostOptimizationMetrics{
+					IsEnabled: true,
+				},
+				AdvancedDataProtectionMetrics: &types.AdvancedDataProtectionMetrics{
+					IsEnabled: true,
+				},
+				DetailedStatusCodesMetrics: &types.DetailedStatusCodesMetrics{
+					IsEnabled: true,
+				},
+				AdvancedPerformanceMetrics: &types.AdvancedPerformanceMetrics{
+					IsEnabled: true,
+				},
+				StorageLensGroupLevel: &types.StorageLensGroupLevel{
+					SelectionCriteria: &types.StorageLensGroupLevelSelectionCriteria{
+						Include: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Exclude: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			Include: &types.Include{
+				Buckets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Exclude: &types.Exclude{
+				Buckets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DataExport: &types.StorageLensDataExport{
+				S3BucketDestination: &types.S3BucketDestination{
+					Format:              types.Format("CSV"),
+					OutputSchemaVersion: types.OutputSchemaVersion("V_1"),
+					AccountId:           ptr.String("__AccountId__"),
+					Arn:                 ptr.String("__Arn__"),
+					Prefix:              ptr.String("__Prefix__"),
+					Encryption: &types.StorageLensDataExportEncryption{
+						SSES3: &types.SSES3{},
+						SSEKMS: &types.SSEKMS{
+							KeyId: ptr.String("__KeyId__"),
+						},
+					},
+				},
+				CloudWatchMetrics: &types.CloudWatchMetrics{
+					IsEnabled: true,
+				},
+				StorageLensTableDestination: &types.StorageLensTableDestination{
+					IsEnabled: true,
+					Encryption: &types.StorageLensDataExportEncryption{
+						SSES3: &types.SSES3{},
+						SSEKMS: &types.SSEKMS{
+							KeyId: ptr.String("__KeyId__"),
+						},
+					},
+				},
+			},
+			ExpandedPrefixesDataExport: &types.StorageLensExpandedPrefixesDataExport{
+				S3BucketDestination: &types.S3BucketDestination{
+					Format:              types.Format("CSV"),
+					OutputSchemaVersion: types.OutputSchemaVersion("V_1"),
+					AccountId:           ptr.String("__AccountId__"),
+					Arn:                 ptr.String("__Arn__"),
+					Prefix:              ptr.String("__Prefix__"),
+					Encryption: &types.StorageLensDataExportEncryption{
+						SSES3: &types.SSES3{},
+						SSEKMS: &types.SSEKMS{
+							KeyId: ptr.String("__KeyId__"),
+						},
+					},
+				},
+				StorageLensTableDestination: &types.StorageLensTableDestination{
+					IsEnabled: true,
+					Encryption: &types.StorageLensDataExportEncryption{
+						SSES3: &types.SSES3{},
+						SSEKMS: &types.SSEKMS{
+							KeyId: ptr.String("__KeyId__"),
+						},
+					},
+				},
+			},
+			IsEnabled: true,
+			AwsOrg: &types.StorageLensAwsOrg{
+				Arn: ptr.String("__Arn__"),
+			},
+			StorageLensArn:  ptr.String("__StorageLensArn__"),
+			PrefixDelimiter: ptr.String("__PrefixDelimiter__"),
+		},
+		Tags: []types.StorageLensTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3219,7 +4470,20 @@ func TestCheckResponseSnapshot_PutStorageLensConfigurationTagging(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutStorageLensConfigurationTagging(context.Background(), &PutStorageLensConfigurationTaggingInput{})
+	got, err := svc.PutStorageLensConfigurationTagging(context.Background(), &PutStorageLensConfigurationTaggingInput{
+		ConfigId:  ptr.String("__ConfigId__"),
+		AccountId: ptr.String("AccountId-value"),
+		Tags: []types.StorageLensTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3238,7 +4502,22 @@ func TestCheckResponseSnapshot_SubmitMultiRegionAccessPointRoutes(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubmitMultiRegionAccessPointRoutes(context.Background(), &SubmitMultiRegionAccessPointRoutesInput{})
+	got, err := svc.SubmitMultiRegionAccessPointRoutes(context.Background(), &SubmitMultiRegionAccessPointRoutesInput{
+		AccountId: ptr.String("AccountId-value"),
+		Mrap:      ptr.String("__Mrap__"),
+		RouteUpdates: []types.MultiRegionAccessPointRoute{
+			{
+				Bucket:                ptr.String("__Bucket__"),
+				Region:                ptr.String("__Region__"),
+				TrafficDialPercentage: ptr.Int32(1),
+			},
+			{
+				Bucket:                ptr.String("__Bucket__"),
+				Region:                ptr.String("__Region__"),
+				TrafficDialPercentage: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3257,7 +4536,20 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		AccountId:   ptr.String("AccountId-value"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3276,7 +4568,14 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		AccountId:   ptr.String("AccountId-value"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3301,7 +4600,11 @@ func TestCheckResponseSnapshot_UpdateAccessGrantsLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccessGrantsLocation(context.Background(), &UpdateAccessGrantsLocationInput{})
+	got, err := svc.UpdateAccessGrantsLocation(context.Background(), &UpdateAccessGrantsLocationInput{
+		AccountId:              ptr.String("AccountId-value"),
+		AccessGrantsLocationId: ptr.String("__AccessGrantsLocationId__"),
+		IAMRoleArn:             ptr.String("__IAMRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3323,7 +4626,11 @@ func TestCheckResponseSnapshot_UpdateJobPriority(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateJobPriority(context.Background(), &UpdateJobPriorityInput{})
+	got, err := svc.UpdateJobPriority(context.Background(), &UpdateJobPriorityInput{
+		AccountId: ptr.String("AccountId-value"),
+		JobId:     ptr.String("__JobId__"),
+		Priority:  1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3346,7 +4653,12 @@ func TestCheckResponseSnapshot_UpdateJobStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateJobStatus(context.Background(), &UpdateJobStatusInput{})
+	got, err := svc.UpdateJobStatus(context.Background(), &UpdateJobStatusInput{
+		AccountId:          ptr.String("AccountId-value"),
+		JobId:              ptr.String("__JobId__"),
+		RequestedJobStatus: types.RequestedJobStatus("Cancelled"),
+		StatusUpdateReason: ptr.String("__StatusUpdateReason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3365,7 +4677,98 @@ func TestCheckResponseSnapshot_UpdateStorageLensGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStorageLensGroup(context.Background(), &UpdateStorageLensGroupInput{})
+	got, err := svc.UpdateStorageLensGroup(context.Background(), &UpdateStorageLensGroupInput{
+		Name:      ptr.String("__Name__"),
+		AccountId: ptr.String("AccountId-value"),
+		StorageLensGroup: &types.StorageLensGroup{
+			Name: ptr.String("__Name__"),
+			Filter: &types.StorageLensGroupFilter{
+				MatchAnyPrefix: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchAnySuffix: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchAnyTag: []types.S3Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				MatchObjectAge: &types.MatchObjectAge{
+					DaysGreaterThan: 1,
+					DaysLessThan:    1,
+				},
+				MatchObjectSize: &types.MatchObjectSize{
+					BytesGreaterThan: 1,
+					BytesLessThan:    1,
+				},
+				And: &types.StorageLensGroupAndOperator{
+					MatchAnyPrefix: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchAnySuffix: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchAnyTag: []types.S3Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					MatchObjectAge: &types.MatchObjectAge{
+						DaysGreaterThan: 1,
+						DaysLessThan:    1,
+					},
+					MatchObjectSize: &types.MatchObjectSize{
+						BytesGreaterThan: 1,
+						BytesLessThan:    1,
+					},
+				},
+				Or: &types.StorageLensGroupOrOperator{
+					MatchAnyPrefix: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchAnySuffix: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchAnyTag: []types.S3Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					MatchObjectAge: &types.MatchObjectAge{
+						DaysGreaterThan: 1,
+						DaysLessThan:    1,
+					},
+					MatchObjectSize: &types.MatchObjectSize{
+						BytesGreaterThan: 1,
+						BytesLessThan:    1,
+					},
+				},
+			},
+			StorageLensGroupArn: ptr.String("__StorageLensGroupArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3386,7 +4789,242 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{})
+	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{
+		AccountId:            ptr.String("AccountId-value"),
+		ConfirmationRequired: ptr.Bool(true),
+		Operation: &types.JobOperation{
+			LambdaInvoke: &types.LambdaInvokeOperation{
+				FunctionArn:             ptr.String("__FunctionArn__"),
+				InvocationSchemaVersion: ptr.String("__InvocationSchemaVersion__"),
+				UserArguments: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			S3PutObjectCopy: &types.S3CopyObjectOperation{
+				TargetResource:          ptr.String("__TargetResource__"),
+				CannedAccessControlList: types.S3CannedAccessControlList("private"),
+				AccessControlGrants: []types.S3Grant{
+					{
+						Grantee: &types.S3Grantee{
+							TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+							Identifier:     ptr.String("__Identifier__"),
+							DisplayName:    ptr.String("__DisplayName__"),
+						},
+						Permission: types.S3Permission("FULL_CONTROL"),
+					},
+					{
+						Grantee: &types.S3Grantee{
+							TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+							Identifier:     ptr.String("__Identifier__"),
+							DisplayName:    ptr.String("__DisplayName__"),
+						},
+						Permission: types.S3Permission("FULL_CONTROL"),
+					},
+				},
+				MetadataDirective:       types.S3MetadataDirective("COPY"),
+				ModifiedSinceConstraint: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				NewObjectMetadata: &types.S3ObjectMetadata{
+					CacheControl:       ptr.String("__CacheControl__"),
+					ContentDisposition: ptr.String("__ContentDisposition__"),
+					ContentEncoding:    ptr.String("__ContentEncoding__"),
+					ContentLanguage:    ptr.String("__ContentLanguage__"),
+					UserMetadata: map[string]string{
+						"key0": "__Value__",
+					},
+					ContentLength:    ptr.Int64(1),
+					ContentMD5:       ptr.String("__ContentMD5__"),
+					ContentType:      ptr.String("__ContentType__"),
+					HttpExpiresDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					RequesterCharged: true,
+					SSEAlgorithm:     types.S3SSEAlgorithm("AES256"),
+				},
+				NewObjectTagging: []types.S3Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RedirectLocation:          ptr.String("__RedirectLocation__"),
+				RequesterPays:             true,
+				StorageClass:              types.S3StorageClass("STANDARD"),
+				UnModifiedSinceConstraint: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SSEAwsKmsKeyId:            ptr.String("__SSEAwsKmsKeyId__"),
+				TargetKeyPrefix:           ptr.String("__TargetKeyPrefix__"),
+				ObjectLockLegalHoldStatus: types.S3ObjectLockLegalHoldStatus("OFF"),
+				ObjectLockMode:            types.S3ObjectLockMode("COMPLIANCE"),
+				ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				BucketKeyEnabled:          true,
+				ChecksumAlgorithm:         types.S3ChecksumAlgorithm("CRC32"),
+			},
+			S3PutObjectAcl: &types.S3SetObjectAclOperation{
+				AccessControlPolicy: &types.S3AccessControlPolicy{
+					AccessControlList: &types.S3AccessControlList{
+						Owner: &types.S3ObjectOwner{
+							ID:          ptr.String("__ID__"),
+							DisplayName: ptr.String("__DisplayName__"),
+						},
+						Grants: []types.S3Grant{
+							{
+								Grantee: &types.S3Grantee{
+									TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+									Identifier:     ptr.String("__Identifier__"),
+									DisplayName:    ptr.String("__DisplayName__"),
+								},
+								Permission: types.S3Permission("FULL_CONTROL"),
+							},
+							{
+								Grantee: &types.S3Grantee{
+									TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+									Identifier:     ptr.String("__Identifier__"),
+									DisplayName:    ptr.String("__DisplayName__"),
+								},
+								Permission: types.S3Permission("FULL_CONTROL"),
+							},
+						},
+					},
+					CannedAccessControlList: types.S3CannedAccessControlList("private"),
+				},
+			},
+			S3PutObjectTagging: &types.S3SetObjectTaggingOperation{
+				TagSet: []types.S3Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			S3DeleteObjectTagging: &types.S3DeleteObjectTaggingOperation{},
+			S3InitiateRestoreObject: &types.S3InitiateRestoreObjectOperation{
+				ExpirationInDays: ptr.Int32(1),
+				GlacierJobTier:   types.S3GlacierJobTier("BULK"),
+			},
+			S3PutObjectLegalHold: &types.S3SetObjectLegalHoldOperation{
+				LegalHold: &types.S3ObjectLockLegalHold{
+					Status: types.S3ObjectLockLegalHoldStatus("OFF"),
+				},
+			},
+			S3PutObjectRetention: &types.S3SetObjectRetentionOperation{
+				BypassGovernanceRetention: ptr.Bool(true),
+				Retention: &types.S3Retention{
+					RetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Mode:            types.S3ObjectLockRetentionMode("COMPLIANCE"),
+				},
+			},
+			S3ReplicateObject: &types.S3ReplicateObjectOperation{},
+			S3ComputeObjectChecksum: &types.S3ComputeObjectChecksumOperation{
+				ChecksumAlgorithm: types.ComputeObjectChecksumAlgorithm("CRC32"),
+				ChecksumType:      types.ComputeObjectChecksumType("FULL_OBJECT"),
+			},
+			S3UpdateObjectEncryption: &types.S3UpdateObjectEncryptionOperation{
+				ObjectEncryption: &types.ObjectEncryption{
+					SSEKMS: &types.S3UpdateObjectEncryptionSSEKMS{
+						KMSKeyArn:        ptr.String("__KMSKeyArn__"),
+						BucketKeyEnabled: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		Report: &types.JobReport{
+			Bucket:              ptr.String("__Bucket__"),
+			Format:              types.JobReportFormat("Report_CSV_20180820"),
+			Enabled:             true,
+			Prefix:              ptr.String("__Prefix__"),
+			ReportScope:         types.JobReportScope("AllTasks"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Manifest: &types.JobManifest{
+			Spec: &types.JobManifestSpec{
+				Format: types.JobManifestFormat("S3BatchOperations_CSV_20180820"),
+				Fields: []types.JobManifestFieldName{
+					types.JobManifestFieldName("Ignore"),
+					types.JobManifestFieldName("Ignore"),
+				},
+			},
+			Location: &types.JobManifestLocation{
+				ObjectArn:       ptr.String("__ObjectArn__"),
+				ObjectVersionId: ptr.String("__ObjectVersionId__"),
+				ETag:            ptr.String("__ETag__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Priority:    ptr.Int32(1),
+		RoleArn:     ptr.String("__RoleArn__"),
+		Tags: []types.S3Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ManifestGenerator: &types.JobManifestGeneratorMemberS3JobManifestGenerator{
+			Value: types.S3JobManifestGenerator{
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				SourceBucket:        ptr.String("__SourceBucket__"),
+				ManifestOutputLocation: &types.S3ManifestOutputLocation{
+					ExpectedManifestBucketOwner: ptr.String("__ExpectedManifestBucketOwner__"),
+					Bucket:                      ptr.String("__Bucket__"),
+					ManifestPrefix:              ptr.String("__ManifestPrefix__"),
+					ManifestEncryption: &types.GeneratedManifestEncryption{
+						SSES3: &types.SSES3Encryption{},
+						SSEKMS: &types.SSEKMSEncryption{
+							KeyId: ptr.String("__KeyId__"),
+						},
+					},
+					ManifestFormat: types.GeneratedManifestFormat("S3InventoryReport_CSV_20211130"),
+				},
+				Filter: &types.JobManifestGeneratorFilter{
+					EligibleForReplication: ptr.Bool(true),
+					CreatedAfter:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CreatedBefore:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ObjectReplicationStatuses: []types.ReplicationStatus{
+						types.ReplicationStatus("COMPLETED"),
+						types.ReplicationStatus("COMPLETED"),
+					},
+					KeyNameConstraint: &types.KeyNameConstraint{
+						MatchAnyPrefix: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchAnySuffix: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchAnySubstring: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ObjectSizeGreaterThanBytes: ptr.Int64(1),
+					ObjectSizeLessThanBytes:    ptr.Int64(1),
+					MatchAnyStorageClass: []types.S3StorageClass{
+						types.S3StorageClass("STANDARD"),
+						types.S3StorageClass("STANDARD"),
+					},
+					MatchAnyObjectEncryption: []types.ObjectEncryptionFilter{
+						&types.ObjectEncryptionFilterMemberSSES3{
+							Value: types.SSES3Filter{},
+						},
+						&types.ObjectEncryptionFilterMemberSSES3{
+							Value: types.SSES3Filter{},
+						},
+					},
+				},
+				EnableManifestOutput: true,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3409,7 +5047,20 @@ func TestCheckResponseSnapshot_Error_BucketAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBucket(context.Background(), &CreateBucketInput{})
+	_, opErr := svc.CreateBucket(context.Background(), &CreateBucketInput{
+		ACL:    types.BucketCannedACL("private"),
+		Bucket: ptr.String("__Bucket__"),
+		CreateBucketConfiguration: &types.CreateBucketConfiguration{
+			LocationConstraint: types.BucketLocationConstraint("EU"),
+		},
+		GrantFullControl:           ptr.String("__GrantFullControl__"),
+		GrantRead:                  ptr.String("__GrantRead__"),
+		GrantReadACP:               ptr.String("__GrantReadACP__"),
+		GrantWrite:                 ptr.String("__GrantWrite__"),
+		GrantWriteACP:              ptr.String("__GrantWriteACP__"),
+		ObjectLockEnabledForBucket: true,
+		OutpostId:                  ptr.String("__OutpostId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3432,7 +5083,20 @@ func TestCheckResponseSnapshot_Error_BucketAlreadyOwnedByYou(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBucket(context.Background(), &CreateBucketInput{})
+	_, opErr := svc.CreateBucket(context.Background(), &CreateBucketInput{
+		ACL:    types.BucketCannedACL("private"),
+		Bucket: ptr.String("__Bucket__"),
+		CreateBucketConfiguration: &types.CreateBucketConfiguration{
+			LocationConstraint: types.BucketLocationConstraint("EU"),
+		},
+		GrantFullControl:           ptr.String("__GrantFullControl__"),
+		GrantRead:                  ptr.String("__GrantRead__"),
+		GrantReadACP:               ptr.String("__GrantReadACP__"),
+		GrantWrite:                 ptr.String("__GrantWrite__"),
+		GrantWriteACP:              ptr.String("__GrantWriteACP__"),
+		ObjectLockEnabledForBucket: true,
+		OutpostId:                  ptr.String("__OutpostId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3457,7 +5121,242 @@ func TestCheckResponseSnapshot_Error_IdempotencyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{})
+	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{
+		AccountId:            ptr.String("AccountId-value"),
+		ConfirmationRequired: ptr.Bool(true),
+		Operation: &types.JobOperation{
+			LambdaInvoke: &types.LambdaInvokeOperation{
+				FunctionArn:             ptr.String("__FunctionArn__"),
+				InvocationSchemaVersion: ptr.String("__InvocationSchemaVersion__"),
+				UserArguments: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			S3PutObjectCopy: &types.S3CopyObjectOperation{
+				TargetResource:          ptr.String("__TargetResource__"),
+				CannedAccessControlList: types.S3CannedAccessControlList("private"),
+				AccessControlGrants: []types.S3Grant{
+					{
+						Grantee: &types.S3Grantee{
+							TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+							Identifier:     ptr.String("__Identifier__"),
+							DisplayName:    ptr.String("__DisplayName__"),
+						},
+						Permission: types.S3Permission("FULL_CONTROL"),
+					},
+					{
+						Grantee: &types.S3Grantee{
+							TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+							Identifier:     ptr.String("__Identifier__"),
+							DisplayName:    ptr.String("__DisplayName__"),
+						},
+						Permission: types.S3Permission("FULL_CONTROL"),
+					},
+				},
+				MetadataDirective:       types.S3MetadataDirective("COPY"),
+				ModifiedSinceConstraint: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				NewObjectMetadata: &types.S3ObjectMetadata{
+					CacheControl:       ptr.String("__CacheControl__"),
+					ContentDisposition: ptr.String("__ContentDisposition__"),
+					ContentEncoding:    ptr.String("__ContentEncoding__"),
+					ContentLanguage:    ptr.String("__ContentLanguage__"),
+					UserMetadata: map[string]string{
+						"key0": "__Value__",
+					},
+					ContentLength:    ptr.Int64(1),
+					ContentMD5:       ptr.String("__ContentMD5__"),
+					ContentType:      ptr.String("__ContentType__"),
+					HttpExpiresDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					RequesterCharged: true,
+					SSEAlgorithm:     types.S3SSEAlgorithm("AES256"),
+				},
+				NewObjectTagging: []types.S3Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RedirectLocation:          ptr.String("__RedirectLocation__"),
+				RequesterPays:             true,
+				StorageClass:              types.S3StorageClass("STANDARD"),
+				UnModifiedSinceConstraint: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SSEAwsKmsKeyId:            ptr.String("__SSEAwsKmsKeyId__"),
+				TargetKeyPrefix:           ptr.String("__TargetKeyPrefix__"),
+				ObjectLockLegalHoldStatus: types.S3ObjectLockLegalHoldStatus("OFF"),
+				ObjectLockMode:            types.S3ObjectLockMode("COMPLIANCE"),
+				ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				BucketKeyEnabled:          true,
+				ChecksumAlgorithm:         types.S3ChecksumAlgorithm("CRC32"),
+			},
+			S3PutObjectAcl: &types.S3SetObjectAclOperation{
+				AccessControlPolicy: &types.S3AccessControlPolicy{
+					AccessControlList: &types.S3AccessControlList{
+						Owner: &types.S3ObjectOwner{
+							ID:          ptr.String("__ID__"),
+							DisplayName: ptr.String("__DisplayName__"),
+						},
+						Grants: []types.S3Grant{
+							{
+								Grantee: &types.S3Grantee{
+									TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+									Identifier:     ptr.String("__Identifier__"),
+									DisplayName:    ptr.String("__DisplayName__"),
+								},
+								Permission: types.S3Permission("FULL_CONTROL"),
+							},
+							{
+								Grantee: &types.S3Grantee{
+									TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+									Identifier:     ptr.String("__Identifier__"),
+									DisplayName:    ptr.String("__DisplayName__"),
+								},
+								Permission: types.S3Permission("FULL_CONTROL"),
+							},
+						},
+					},
+					CannedAccessControlList: types.S3CannedAccessControlList("private"),
+				},
+			},
+			S3PutObjectTagging: &types.S3SetObjectTaggingOperation{
+				TagSet: []types.S3Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			S3DeleteObjectTagging: &types.S3DeleteObjectTaggingOperation{},
+			S3InitiateRestoreObject: &types.S3InitiateRestoreObjectOperation{
+				ExpirationInDays: ptr.Int32(1),
+				GlacierJobTier:   types.S3GlacierJobTier("BULK"),
+			},
+			S3PutObjectLegalHold: &types.S3SetObjectLegalHoldOperation{
+				LegalHold: &types.S3ObjectLockLegalHold{
+					Status: types.S3ObjectLockLegalHoldStatus("OFF"),
+				},
+			},
+			S3PutObjectRetention: &types.S3SetObjectRetentionOperation{
+				BypassGovernanceRetention: ptr.Bool(true),
+				Retention: &types.S3Retention{
+					RetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Mode:            types.S3ObjectLockRetentionMode("COMPLIANCE"),
+				},
+			},
+			S3ReplicateObject: &types.S3ReplicateObjectOperation{},
+			S3ComputeObjectChecksum: &types.S3ComputeObjectChecksumOperation{
+				ChecksumAlgorithm: types.ComputeObjectChecksumAlgorithm("CRC32"),
+				ChecksumType:      types.ComputeObjectChecksumType("FULL_OBJECT"),
+			},
+			S3UpdateObjectEncryption: &types.S3UpdateObjectEncryptionOperation{
+				ObjectEncryption: &types.ObjectEncryption{
+					SSEKMS: &types.S3UpdateObjectEncryptionSSEKMS{
+						KMSKeyArn:        ptr.String("__KMSKeyArn__"),
+						BucketKeyEnabled: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		Report: &types.JobReport{
+			Bucket:              ptr.String("__Bucket__"),
+			Format:              types.JobReportFormat("Report_CSV_20180820"),
+			Enabled:             true,
+			Prefix:              ptr.String("__Prefix__"),
+			ReportScope:         types.JobReportScope("AllTasks"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Manifest: &types.JobManifest{
+			Spec: &types.JobManifestSpec{
+				Format: types.JobManifestFormat("S3BatchOperations_CSV_20180820"),
+				Fields: []types.JobManifestFieldName{
+					types.JobManifestFieldName("Ignore"),
+					types.JobManifestFieldName("Ignore"),
+				},
+			},
+			Location: &types.JobManifestLocation{
+				ObjectArn:       ptr.String("__ObjectArn__"),
+				ObjectVersionId: ptr.String("__ObjectVersionId__"),
+				ETag:            ptr.String("__ETag__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Priority:    ptr.Int32(1),
+		RoleArn:     ptr.String("__RoleArn__"),
+		Tags: []types.S3Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ManifestGenerator: &types.JobManifestGeneratorMemberS3JobManifestGenerator{
+			Value: types.S3JobManifestGenerator{
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				SourceBucket:        ptr.String("__SourceBucket__"),
+				ManifestOutputLocation: &types.S3ManifestOutputLocation{
+					ExpectedManifestBucketOwner: ptr.String("__ExpectedManifestBucketOwner__"),
+					Bucket:                      ptr.String("__Bucket__"),
+					ManifestPrefix:              ptr.String("__ManifestPrefix__"),
+					ManifestEncryption: &types.GeneratedManifestEncryption{
+						SSES3: &types.SSES3Encryption{},
+						SSEKMS: &types.SSEKMSEncryption{
+							KeyId: ptr.String("__KeyId__"),
+						},
+					},
+					ManifestFormat: types.GeneratedManifestFormat("S3InventoryReport_CSV_20211130"),
+				},
+				Filter: &types.JobManifestGeneratorFilter{
+					EligibleForReplication: ptr.Bool(true),
+					CreatedAfter:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CreatedBefore:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ObjectReplicationStatuses: []types.ReplicationStatus{
+						types.ReplicationStatus("COMPLETED"),
+						types.ReplicationStatus("COMPLETED"),
+					},
+					KeyNameConstraint: &types.KeyNameConstraint{
+						MatchAnyPrefix: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchAnySuffix: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchAnySubstring: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ObjectSizeGreaterThanBytes: ptr.Int64(1),
+					ObjectSizeLessThanBytes:    ptr.Int64(1),
+					MatchAnyStorageClass: []types.S3StorageClass{
+						types.S3StorageClass("STANDARD"),
+						types.S3StorageClass("STANDARD"),
+					},
+					MatchAnyObjectEncryption: []types.ObjectEncryptionFilter{
+						&types.ObjectEncryptionFilterMemberSSES3{
+							Value: types.SSES3Filter{},
+						},
+						&types.ObjectEncryptionFilterMemberSSES3{
+							Value: types.SSES3Filter{},
+						},
+					},
+				},
+				EnableManifestOutput: true,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3482,7 +5381,242 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{})
+	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{
+		AccountId:            ptr.String("AccountId-value"),
+		ConfirmationRequired: ptr.Bool(true),
+		Operation: &types.JobOperation{
+			LambdaInvoke: &types.LambdaInvokeOperation{
+				FunctionArn:             ptr.String("__FunctionArn__"),
+				InvocationSchemaVersion: ptr.String("__InvocationSchemaVersion__"),
+				UserArguments: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			S3PutObjectCopy: &types.S3CopyObjectOperation{
+				TargetResource:          ptr.String("__TargetResource__"),
+				CannedAccessControlList: types.S3CannedAccessControlList("private"),
+				AccessControlGrants: []types.S3Grant{
+					{
+						Grantee: &types.S3Grantee{
+							TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+							Identifier:     ptr.String("__Identifier__"),
+							DisplayName:    ptr.String("__DisplayName__"),
+						},
+						Permission: types.S3Permission("FULL_CONTROL"),
+					},
+					{
+						Grantee: &types.S3Grantee{
+							TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+							Identifier:     ptr.String("__Identifier__"),
+							DisplayName:    ptr.String("__DisplayName__"),
+						},
+						Permission: types.S3Permission("FULL_CONTROL"),
+					},
+				},
+				MetadataDirective:       types.S3MetadataDirective("COPY"),
+				ModifiedSinceConstraint: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				NewObjectMetadata: &types.S3ObjectMetadata{
+					CacheControl:       ptr.String("__CacheControl__"),
+					ContentDisposition: ptr.String("__ContentDisposition__"),
+					ContentEncoding:    ptr.String("__ContentEncoding__"),
+					ContentLanguage:    ptr.String("__ContentLanguage__"),
+					UserMetadata: map[string]string{
+						"key0": "__Value__",
+					},
+					ContentLength:    ptr.Int64(1),
+					ContentMD5:       ptr.String("__ContentMD5__"),
+					ContentType:      ptr.String("__ContentType__"),
+					HttpExpiresDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					RequesterCharged: true,
+					SSEAlgorithm:     types.S3SSEAlgorithm("AES256"),
+				},
+				NewObjectTagging: []types.S3Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RedirectLocation:          ptr.String("__RedirectLocation__"),
+				RequesterPays:             true,
+				StorageClass:              types.S3StorageClass("STANDARD"),
+				UnModifiedSinceConstraint: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SSEAwsKmsKeyId:            ptr.String("__SSEAwsKmsKeyId__"),
+				TargetKeyPrefix:           ptr.String("__TargetKeyPrefix__"),
+				ObjectLockLegalHoldStatus: types.S3ObjectLockLegalHoldStatus("OFF"),
+				ObjectLockMode:            types.S3ObjectLockMode("COMPLIANCE"),
+				ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				BucketKeyEnabled:          true,
+				ChecksumAlgorithm:         types.S3ChecksumAlgorithm("CRC32"),
+			},
+			S3PutObjectAcl: &types.S3SetObjectAclOperation{
+				AccessControlPolicy: &types.S3AccessControlPolicy{
+					AccessControlList: &types.S3AccessControlList{
+						Owner: &types.S3ObjectOwner{
+							ID:          ptr.String("__ID__"),
+							DisplayName: ptr.String("__DisplayName__"),
+						},
+						Grants: []types.S3Grant{
+							{
+								Grantee: &types.S3Grantee{
+									TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+									Identifier:     ptr.String("__Identifier__"),
+									DisplayName:    ptr.String("__DisplayName__"),
+								},
+								Permission: types.S3Permission("FULL_CONTROL"),
+							},
+							{
+								Grantee: &types.S3Grantee{
+									TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+									Identifier:     ptr.String("__Identifier__"),
+									DisplayName:    ptr.String("__DisplayName__"),
+								},
+								Permission: types.S3Permission("FULL_CONTROL"),
+							},
+						},
+					},
+					CannedAccessControlList: types.S3CannedAccessControlList("private"),
+				},
+			},
+			S3PutObjectTagging: &types.S3SetObjectTaggingOperation{
+				TagSet: []types.S3Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			S3DeleteObjectTagging: &types.S3DeleteObjectTaggingOperation{},
+			S3InitiateRestoreObject: &types.S3InitiateRestoreObjectOperation{
+				ExpirationInDays: ptr.Int32(1),
+				GlacierJobTier:   types.S3GlacierJobTier("BULK"),
+			},
+			S3PutObjectLegalHold: &types.S3SetObjectLegalHoldOperation{
+				LegalHold: &types.S3ObjectLockLegalHold{
+					Status: types.S3ObjectLockLegalHoldStatus("OFF"),
+				},
+			},
+			S3PutObjectRetention: &types.S3SetObjectRetentionOperation{
+				BypassGovernanceRetention: ptr.Bool(true),
+				Retention: &types.S3Retention{
+					RetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Mode:            types.S3ObjectLockRetentionMode("COMPLIANCE"),
+				},
+			},
+			S3ReplicateObject: &types.S3ReplicateObjectOperation{},
+			S3ComputeObjectChecksum: &types.S3ComputeObjectChecksumOperation{
+				ChecksumAlgorithm: types.ComputeObjectChecksumAlgorithm("CRC32"),
+				ChecksumType:      types.ComputeObjectChecksumType("FULL_OBJECT"),
+			},
+			S3UpdateObjectEncryption: &types.S3UpdateObjectEncryptionOperation{
+				ObjectEncryption: &types.ObjectEncryption{
+					SSEKMS: &types.S3UpdateObjectEncryptionSSEKMS{
+						KMSKeyArn:        ptr.String("__KMSKeyArn__"),
+						BucketKeyEnabled: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		Report: &types.JobReport{
+			Bucket:              ptr.String("__Bucket__"),
+			Format:              types.JobReportFormat("Report_CSV_20180820"),
+			Enabled:             true,
+			Prefix:              ptr.String("__Prefix__"),
+			ReportScope:         types.JobReportScope("AllTasks"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Manifest: &types.JobManifest{
+			Spec: &types.JobManifestSpec{
+				Format: types.JobManifestFormat("S3BatchOperations_CSV_20180820"),
+				Fields: []types.JobManifestFieldName{
+					types.JobManifestFieldName("Ignore"),
+					types.JobManifestFieldName("Ignore"),
+				},
+			},
+			Location: &types.JobManifestLocation{
+				ObjectArn:       ptr.String("__ObjectArn__"),
+				ObjectVersionId: ptr.String("__ObjectVersionId__"),
+				ETag:            ptr.String("__ETag__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Priority:    ptr.Int32(1),
+		RoleArn:     ptr.String("__RoleArn__"),
+		Tags: []types.S3Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ManifestGenerator: &types.JobManifestGeneratorMemberS3JobManifestGenerator{
+			Value: types.S3JobManifestGenerator{
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				SourceBucket:        ptr.String("__SourceBucket__"),
+				ManifestOutputLocation: &types.S3ManifestOutputLocation{
+					ExpectedManifestBucketOwner: ptr.String("__ExpectedManifestBucketOwner__"),
+					Bucket:                      ptr.String("__Bucket__"),
+					ManifestPrefix:              ptr.String("__ManifestPrefix__"),
+					ManifestEncryption: &types.GeneratedManifestEncryption{
+						SSES3: &types.SSES3Encryption{},
+						SSEKMS: &types.SSEKMSEncryption{
+							KeyId: ptr.String("__KeyId__"),
+						},
+					},
+					ManifestFormat: types.GeneratedManifestFormat("S3InventoryReport_CSV_20211130"),
+				},
+				Filter: &types.JobManifestGeneratorFilter{
+					EligibleForReplication: ptr.Bool(true),
+					CreatedAfter:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CreatedBefore:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ObjectReplicationStatuses: []types.ReplicationStatus{
+						types.ReplicationStatus("COMPLETED"),
+						types.ReplicationStatus("COMPLETED"),
+					},
+					KeyNameConstraint: &types.KeyNameConstraint{
+						MatchAnyPrefix: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchAnySuffix: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchAnySubstring: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ObjectSizeGreaterThanBytes: ptr.Int64(1),
+					ObjectSizeLessThanBytes:    ptr.Int64(1),
+					MatchAnyStorageClass: []types.S3StorageClass{
+						types.S3StorageClass("STANDARD"),
+						types.S3StorageClass("STANDARD"),
+					},
+					MatchAnyObjectEncryption: []types.ObjectEncryptionFilter{
+						&types.ObjectEncryptionFilterMemberSSES3{
+							Value: types.SSES3Filter{},
+						},
+						&types.ObjectEncryptionFilterMemberSSES3{
+							Value: types.SSES3Filter{},
+						},
+					},
+				},
+				EnableManifestOutput: true,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3507,7 +5641,15 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListJobs(context.Background(), &ListJobsInput{})
+	_, opErr := svc.ListJobs(context.Background(), &ListJobsInput{
+		AccountId: ptr.String("AccountId-value"),
+		JobStatuses: []types.JobStatus{
+			types.JobStatus("Active"),
+			types.JobStatus("Active"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3532,7 +5674,15 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListJobs(context.Background(), &ListJobsInput{})
+	_, opErr := svc.ListJobs(context.Background(), &ListJobsInput{
+		AccountId: ptr.String("AccountId-value"),
+		JobStatuses: []types.JobStatus{
+			types.JobStatus("Active"),
+			types.JobStatus("Active"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3557,7 +5707,12 @@ func TestCheckResponseSnapshot_Error_JobStatusException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateJobStatus(context.Background(), &UpdateJobStatusInput{})
+	_, opErr := svc.UpdateJobStatus(context.Background(), &UpdateJobStatusInput{
+		AccountId:          ptr.String("AccountId-value"),
+		JobId:              ptr.String("__JobId__"),
+		RequestedJobStatus: types.RequestedJobStatus("Cancelled"),
+		StatusUpdateReason: ptr.String("__StatusUpdateReason__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3582,7 +5737,9 @@ func TestCheckResponseSnapshot_Error_NoSuchPublicAccessBlockConfiguration(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetPublicAccessBlock(context.Background(), &GetPublicAccessBlockInput{})
+	_, opErr := svc.GetPublicAccessBlock(context.Background(), &GetPublicAccessBlockInput{
+		AccountId: ptr.String("AccountId-value"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3607,7 +5764,10 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteJobTagging(context.Background(), &DeleteJobTaggingInput{})
+	_, opErr := svc.DeleteJobTagging(context.Background(), &DeleteJobTaggingInput{
+		AccountId: ptr.String("AccountId-value"),
+		JobId:     ptr.String("__JobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3632,7 +5792,242 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{})
+	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{
+		AccountId:            ptr.String("AccountId-value"),
+		ConfirmationRequired: ptr.Bool(true),
+		Operation: &types.JobOperation{
+			LambdaInvoke: &types.LambdaInvokeOperation{
+				FunctionArn:             ptr.String("__FunctionArn__"),
+				InvocationSchemaVersion: ptr.String("__InvocationSchemaVersion__"),
+				UserArguments: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			S3PutObjectCopy: &types.S3CopyObjectOperation{
+				TargetResource:          ptr.String("__TargetResource__"),
+				CannedAccessControlList: types.S3CannedAccessControlList("private"),
+				AccessControlGrants: []types.S3Grant{
+					{
+						Grantee: &types.S3Grantee{
+							TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+							Identifier:     ptr.String("__Identifier__"),
+							DisplayName:    ptr.String("__DisplayName__"),
+						},
+						Permission: types.S3Permission("FULL_CONTROL"),
+					},
+					{
+						Grantee: &types.S3Grantee{
+							TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+							Identifier:     ptr.String("__Identifier__"),
+							DisplayName:    ptr.String("__DisplayName__"),
+						},
+						Permission: types.S3Permission("FULL_CONTROL"),
+					},
+				},
+				MetadataDirective:       types.S3MetadataDirective("COPY"),
+				ModifiedSinceConstraint: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				NewObjectMetadata: &types.S3ObjectMetadata{
+					CacheControl:       ptr.String("__CacheControl__"),
+					ContentDisposition: ptr.String("__ContentDisposition__"),
+					ContentEncoding:    ptr.String("__ContentEncoding__"),
+					ContentLanguage:    ptr.String("__ContentLanguage__"),
+					UserMetadata: map[string]string{
+						"key0": "__Value__",
+					},
+					ContentLength:    ptr.Int64(1),
+					ContentMD5:       ptr.String("__ContentMD5__"),
+					ContentType:      ptr.String("__ContentType__"),
+					HttpExpiresDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					RequesterCharged: true,
+					SSEAlgorithm:     types.S3SSEAlgorithm("AES256"),
+				},
+				NewObjectTagging: []types.S3Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RedirectLocation:          ptr.String("__RedirectLocation__"),
+				RequesterPays:             true,
+				StorageClass:              types.S3StorageClass("STANDARD"),
+				UnModifiedSinceConstraint: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SSEAwsKmsKeyId:            ptr.String("__SSEAwsKmsKeyId__"),
+				TargetKeyPrefix:           ptr.String("__TargetKeyPrefix__"),
+				ObjectLockLegalHoldStatus: types.S3ObjectLockLegalHoldStatus("OFF"),
+				ObjectLockMode:            types.S3ObjectLockMode("COMPLIANCE"),
+				ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				BucketKeyEnabled:          true,
+				ChecksumAlgorithm:         types.S3ChecksumAlgorithm("CRC32"),
+			},
+			S3PutObjectAcl: &types.S3SetObjectAclOperation{
+				AccessControlPolicy: &types.S3AccessControlPolicy{
+					AccessControlList: &types.S3AccessControlList{
+						Owner: &types.S3ObjectOwner{
+							ID:          ptr.String("__ID__"),
+							DisplayName: ptr.String("__DisplayName__"),
+						},
+						Grants: []types.S3Grant{
+							{
+								Grantee: &types.S3Grantee{
+									TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+									Identifier:     ptr.String("__Identifier__"),
+									DisplayName:    ptr.String("__DisplayName__"),
+								},
+								Permission: types.S3Permission("FULL_CONTROL"),
+							},
+							{
+								Grantee: &types.S3Grantee{
+									TypeIdentifier: types.S3GranteeTypeIdentifier("id"),
+									Identifier:     ptr.String("__Identifier__"),
+									DisplayName:    ptr.String("__DisplayName__"),
+								},
+								Permission: types.S3Permission("FULL_CONTROL"),
+							},
+						},
+					},
+					CannedAccessControlList: types.S3CannedAccessControlList("private"),
+				},
+			},
+			S3PutObjectTagging: &types.S3SetObjectTaggingOperation{
+				TagSet: []types.S3Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			S3DeleteObjectTagging: &types.S3DeleteObjectTaggingOperation{},
+			S3InitiateRestoreObject: &types.S3InitiateRestoreObjectOperation{
+				ExpirationInDays: ptr.Int32(1),
+				GlacierJobTier:   types.S3GlacierJobTier("BULK"),
+			},
+			S3PutObjectLegalHold: &types.S3SetObjectLegalHoldOperation{
+				LegalHold: &types.S3ObjectLockLegalHold{
+					Status: types.S3ObjectLockLegalHoldStatus("OFF"),
+				},
+			},
+			S3PutObjectRetention: &types.S3SetObjectRetentionOperation{
+				BypassGovernanceRetention: ptr.Bool(true),
+				Retention: &types.S3Retention{
+					RetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Mode:            types.S3ObjectLockRetentionMode("COMPLIANCE"),
+				},
+			},
+			S3ReplicateObject: &types.S3ReplicateObjectOperation{},
+			S3ComputeObjectChecksum: &types.S3ComputeObjectChecksumOperation{
+				ChecksumAlgorithm: types.ComputeObjectChecksumAlgorithm("CRC32"),
+				ChecksumType:      types.ComputeObjectChecksumType("FULL_OBJECT"),
+			},
+			S3UpdateObjectEncryption: &types.S3UpdateObjectEncryptionOperation{
+				ObjectEncryption: &types.ObjectEncryption{
+					SSEKMS: &types.S3UpdateObjectEncryptionSSEKMS{
+						KMSKeyArn:        ptr.String("__KMSKeyArn__"),
+						BucketKeyEnabled: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		Report: &types.JobReport{
+			Bucket:              ptr.String("__Bucket__"),
+			Format:              types.JobReportFormat("Report_CSV_20180820"),
+			Enabled:             true,
+			Prefix:              ptr.String("__Prefix__"),
+			ReportScope:         types.JobReportScope("AllTasks"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Manifest: &types.JobManifest{
+			Spec: &types.JobManifestSpec{
+				Format: types.JobManifestFormat("S3BatchOperations_CSV_20180820"),
+				Fields: []types.JobManifestFieldName{
+					types.JobManifestFieldName("Ignore"),
+					types.JobManifestFieldName("Ignore"),
+				},
+			},
+			Location: &types.JobManifestLocation{
+				ObjectArn:       ptr.String("__ObjectArn__"),
+				ObjectVersionId: ptr.String("__ObjectVersionId__"),
+				ETag:            ptr.String("__ETag__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Priority:    ptr.Int32(1),
+		RoleArn:     ptr.String("__RoleArn__"),
+		Tags: []types.S3Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ManifestGenerator: &types.JobManifestGeneratorMemberS3JobManifestGenerator{
+			Value: types.S3JobManifestGenerator{
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				SourceBucket:        ptr.String("__SourceBucket__"),
+				ManifestOutputLocation: &types.S3ManifestOutputLocation{
+					ExpectedManifestBucketOwner: ptr.String("__ExpectedManifestBucketOwner__"),
+					Bucket:                      ptr.String("__Bucket__"),
+					ManifestPrefix:              ptr.String("__ManifestPrefix__"),
+					ManifestEncryption: &types.GeneratedManifestEncryption{
+						SSES3: &types.SSES3Encryption{},
+						SSEKMS: &types.SSEKMSEncryption{
+							KeyId: ptr.String("__KeyId__"),
+						},
+					},
+					ManifestFormat: types.GeneratedManifestFormat("S3InventoryReport_CSV_20211130"),
+				},
+				Filter: &types.JobManifestGeneratorFilter{
+					EligibleForReplication: ptr.Bool(true),
+					CreatedAfter:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CreatedBefore:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ObjectReplicationStatuses: []types.ReplicationStatus{
+						types.ReplicationStatus("COMPLETED"),
+						types.ReplicationStatus("COMPLETED"),
+					},
+					KeyNameConstraint: &types.KeyNameConstraint{
+						MatchAnyPrefix: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchAnySuffix: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchAnySubstring: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ObjectSizeGreaterThanBytes: ptr.Int64(1),
+					ObjectSizeLessThanBytes:    ptr.Int64(1),
+					MatchAnyStorageClass: []types.S3StorageClass{
+						types.S3StorageClass("STANDARD"),
+						types.S3StorageClass("STANDARD"),
+					},
+					MatchAnyObjectEncryption: []types.ObjectEncryptionFilter{
+						&types.ObjectEncryptionFilterMemberSSES3{
+							Value: types.SSES3Filter{},
+						},
+						&types.ObjectEncryptionFilterMemberSSES3{
+							Value: types.SSES3Filter{},
+						},
+					},
+				},
+				EnableManifestOutput: true,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3657,7 +6052,20 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutJobTagging(context.Background(), &PutJobTaggingInput{})
+	_, opErr := svc.PutJobTagging(context.Background(), &PutJobTaggingInput{
+		AccountId: ptr.String("AccountId-value"),
+		JobId:     ptr.String("__JobId__"),
+		Tags: []types.S3Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

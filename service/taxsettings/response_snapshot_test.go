@@ -130,7 +130,12 @@ func TestCheckResponseSnapshot_BatchDeleteTaxRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteTaxRegistration(context.Background(), &BatchDeleteTaxRegistrationInput{})
+	got, err := svc.BatchDeleteTaxRegistration(context.Background(), &BatchDeleteTaxRegistrationInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +216,12 @@ func TestCheckResponseSnapshot_BatchGetTaxExemptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetTaxExemptions(context.Background(), &BatchGetTaxExemptionsInput{})
+	got, err := svc.BatchGetTaxExemptions(context.Background(), &BatchGetTaxExemptionsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -244,7 +254,154 @@ func TestCheckResponseSnapshot_BatchPutTaxRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchPutTaxRegistration(context.Background(), &BatchPutTaxRegistrationInput{})
+	got, err := svc.BatchPutTaxRegistration(context.Background(), &BatchPutTaxRegistrationInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TaxRegistrationEntry: &types.TaxRegistrationEntry{
+			RegistrationId:   ptr.String("__RegistrationId__"),
+			RegistrationType: types.TaxRegistrationType("VAT"),
+			LegalName:        ptr.String("__LegalName__"),
+			LegalAddress: &types.Address{
+				AddressLine1:     ptr.String("__AddressLine1__"),
+				AddressLine2:     ptr.String("__AddressLine2__"),
+				AddressLine3:     ptr.String("__AddressLine3__"),
+				DistrictOrCounty: ptr.String("__DistrictOrCounty__"),
+				City:             ptr.String("__City__"),
+				StateOrRegion:    ptr.String("__StateOrRegion__"),
+				PostalCode:       ptr.String("__PostalCode__"),
+				CountryCode:      ptr.String("__CountryCode__"),
+			},
+			Sector: types.Sector("Business"),
+			AdditionalTaxInformation: &types.AdditionalInfoRequest{
+				MalaysiaAdditionalInfo: &types.MalaysiaAdditionalInfo{
+					ServiceTaxCodes: []types.MalaysiaServiceTaxCode{
+						types.MalaysiaServiceTaxCode("Consultancy"),
+						types.MalaysiaServiceTaxCode("Consultancy"),
+					},
+					TaxInformationNumber:       ptr.String("__TaxInformationNumber__"),
+					BusinessRegistrationNumber: ptr.String("__BusinessRegistrationNumber__"),
+				},
+				IsraelAdditionalInfo: &types.IsraelAdditionalInfo{
+					DealerType:   types.IsraelDealerType("Authorized"),
+					CustomerType: types.IsraelCustomerType("Business"),
+				},
+				EstoniaAdditionalInfo: &types.EstoniaAdditionalInfo{
+					RegistryCommercialCode: ptr.String("__RegistryCommercialCode__"),
+				},
+				CanadaAdditionalInfo: &types.CanadaAdditionalInfo{
+					ProvincialSalesTaxId:       ptr.String("__ProvincialSalesTaxId__"),
+					CanadaQuebecSalesTaxNumber: ptr.String("__CanadaQuebecSalesTaxNumber__"),
+					CanadaRetailSalesTaxNumber: ptr.String("__CanadaRetailSalesTaxNumber__"),
+					IsResellerAccount:          ptr.Bool(true),
+				},
+				SpainAdditionalInfo: &types.SpainAdditionalInfo{
+					RegistrationType: types.RegistrationType("Intra-EU"),
+				},
+				KenyaAdditionalInfo: &types.KenyaAdditionalInfo{
+					PersonType: types.PersonType("Legal Person"),
+				},
+				SouthKoreaAdditionalInfo: &types.SouthKoreaAdditionalInfo{
+					BusinessRepresentativeName: ptr.String("__BusinessRepresentativeName__"),
+					LineOfBusiness:             ptr.String("__LineOfBusiness__"),
+					ItemOfBusiness:             ptr.String("__ItemOfBusiness__"),
+				},
+				TurkeyAdditionalInfo: &types.TurkeyAdditionalInfo{
+					TaxOffice:      ptr.String("__TaxOffice__"),
+					KepEmailId:     ptr.String("__KepEmailId__"),
+					SecondaryTaxId: ptr.String("__SecondaryTaxId__"),
+					Industries:     types.Industries("CirculatingOrg"),
+				},
+				GeorgiaAdditionalInfo: &types.GeorgiaAdditionalInfo{
+					PersonType: types.PersonType("Legal Person"),
+				},
+				ItalyAdditionalInfo: &types.ItalyAdditionalInfo{
+					SdiAccountId: ptr.String("__SdiAccountId__"),
+					CigNumber:    ptr.String("__CigNumber__"),
+					CupNumber:    ptr.String("__CupNumber__"),
+					TaxCode:      ptr.String("__TaxCode__"),
+					CustomerType: types.CustomerType("Business"),
+				},
+				RomaniaAdditionalInfo: &types.RomaniaAdditionalInfo{
+					TaxRegistrationNumberType: types.TaxRegistrationNumberType("TaxRegistrationNumber"),
+				},
+				UkraineAdditionalInfo: &types.UkraineAdditionalInfo{
+					UkraineTrnType: types.UkraineTrnType("Business"),
+				},
+				PolandAdditionalInfo: &types.PolandAdditionalInfo{
+					IndividualRegistrationNumber: ptr.String("__IndividualRegistrationNumber__"),
+					IsGroupVatEnabled:            ptr.Bool(true),
+					TaxRegistrationNumberType:    types.PolandTaxRegistrationNumberType("EUTaxRegistrationNumber"),
+				},
+				SaudiArabiaAdditionalInfo: &types.SaudiArabiaAdditionalInfo{
+					TaxRegistrationNumberType: types.SaudiArabiaTaxRegistrationNumberType("TaxRegistrationNumber"),
+				},
+				IndonesiaAdditionalInfo: &types.IndonesiaAdditionalInfo{
+					TaxRegistrationNumberType:   types.IndonesiaTaxRegistrationNumberType("NIK"),
+					PpnExceptionDesignationCode: ptr.String("__PpnExceptionDesignationCode__"),
+					DecisionNumber:              ptr.String("__DecisionNumber__"),
+				},
+				VietnamAdditionalInfo: &types.VietnamAdditionalInfo{
+					EnterpriseIdentificationNumber:  ptr.String("__EnterpriseIdentificationNumber__"),
+					ElectronicTransactionCodeNumber: ptr.String("__ElectronicTransactionCodeNumber__"),
+					PaymentVoucherNumber:            ptr.String("__PaymentVoucherNumber__"),
+					PaymentVoucherNumberDate:        ptr.String("__PaymentVoucherNumberDate__"),
+				},
+				EgyptAdditionalInfo: &types.EgyptAdditionalInfo{
+					UniqueIdentificationNumber:               ptr.String("__UniqueIdentificationNumber__"),
+					UniqueIdentificationNumberExpirationDate: ptr.String("__UniqueIdentificationNumberExpirationDate__"),
+				},
+				GreeceAdditionalInfo: &types.GreeceAdditionalInfo{
+					ContractingAuthorityCode: ptr.String("__ContractingAuthorityCode__"),
+				},
+				UzbekistanAdditionalInfo: &types.UzbekistanAdditionalInfo{
+					TaxRegistrationNumberType: types.UzbekistanTaxRegistrationNumberType("Business"),
+					VatRegistrationNumber:     ptr.String("__VatRegistrationNumber__"),
+				},
+				PhilippinesAdditionalInfo: &types.PhilippinesAdditionalInfo{
+					IsVatRegistered: ptr.Bool(true),
+				},
+				BelgiumAdditionalInfo: &types.BelgiumAdditionalInfo{
+					PeppolId:              ptr.String("__PeppolId__"),
+					IsMercuriusBoxEnabled: ptr.Bool(true),
+				},
+				ChileAdditionalInfo: &types.ChileAdditionalInfo{
+					DocumentType:     types.ChileDocumentType("Invoice"),
+					BusinessActivity: ptr.String("__BusinessActivity__"),
+				},
+				FranceAdditionalInfo: &types.FranceAdditionalInfo{
+					SirenNumber: ptr.String("__SirenNumber__"),
+				},
+			},
+			VerificationDetails: &types.VerificationDetails{
+				DateOfBirth: ptr.String("__DateOfBirth__"),
+				TaxRegistrationDocuments: []types.TaxRegistrationDocument{
+					{
+						S3Location: &types.SourceS3Location{
+							Bucket: ptr.String("__Bucket__"),
+							Key:    ptr.String("__Key__"),
+						},
+						File: &types.TaxRegistrationDocFile{
+							FileName:    ptr.String("__FileName__"),
+							FileContent: []byte("blob"),
+						},
+					},
+					{
+						S3Location: &types.SourceS3Location{
+							Bucket: ptr.String("__Bucket__"),
+							Key:    ptr.String("__Key__"),
+						},
+						File: &types.TaxRegistrationDocFile{
+							FileName:    ptr.String("__FileName__"),
+							FileContent: []byte("blob"),
+						},
+					},
+				},
+			},
+			CertifiedEmailId: ptr.String("__CertifiedEmailId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -263,7 +420,9 @@ func TestCheckResponseSnapshot_DeleteSupplementalTaxRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSupplementalTaxRegistration(context.Background(), &DeleteSupplementalTaxRegistrationInput{})
+	got, err := svc.DeleteSupplementalTaxRegistration(context.Background(), &DeleteSupplementalTaxRegistrationInput{
+		AuthorityId: ptr.String("__AuthorityId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -282,7 +441,9 @@ func TestCheckResponseSnapshot_DeleteTaxRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTaxRegistration(context.Background(), &DeleteTaxRegistrationInput{})
+	got, err := svc.DeleteTaxRegistration(context.Background(), &DeleteTaxRegistrationInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -508,7 +669,9 @@ func TestCheckResponseSnapshot_GetTaxRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTaxRegistration(context.Background(), &GetTaxRegistrationInput{})
+	got, err := svc.GetTaxRegistration(context.Background(), &GetTaxRegistrationInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -530,7 +693,16 @@ func TestCheckResponseSnapshot_GetTaxRegistrationDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTaxRegistrationDocument(context.Background(), &GetTaxRegistrationDocumentInput{})
+	got, err := svc.GetTaxRegistrationDocument(context.Background(), &GetTaxRegistrationDocumentInput{
+		DestinationS3Location: &types.DestinationS3Location{
+			Bucket: ptr.String("__Bucket__"),
+			Prefix: ptr.String("__Prefix__"),
+		},
+		TaxDocumentMetadata: &types.TaxDocumentMetadata{
+			TaxDocumentAccessToken: ptr.String("__TaxDocumentAccessToken__"),
+			TaxDocumentName:        ptr.String("__TaxDocumentName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -587,7 +759,10 @@ func TestCheckResponseSnapshot_ListSupplementalTaxRegistrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSupplementalTaxRegistrations(context.Background(), &ListSupplementalTaxRegistrationsInput{})
+	got, err := svc.ListSupplementalTaxRegistrations(context.Background(), &ListSupplementalTaxRegistrationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -665,7 +840,10 @@ func TestCheckResponseSnapshot_ListTaxExemptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTaxExemptions(context.Background(), &ListTaxExemptionsInput{})
+	got, err := svc.ListTaxExemptions(context.Background(), &ListTaxExemptionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1180,10 @@ func TestCheckResponseSnapshot_ListTaxRegistrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTaxRegistrations(context.Background(), &ListTaxRegistrationsInput{})
+	got, err := svc.ListTaxRegistrations(context.Background(), &ListTaxRegistrationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1024,7 +1205,23 @@ func TestCheckResponseSnapshot_PutSupplementalTaxRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSupplementalTaxRegistration(context.Background(), &PutSupplementalTaxRegistrationInput{})
+	got, err := svc.PutSupplementalTaxRegistration(context.Background(), &PutSupplementalTaxRegistrationInput{
+		TaxRegistrationEntry: &types.SupplementalTaxRegistrationEntry{
+			RegistrationId:   ptr.String("__RegistrationId__"),
+			RegistrationType: types.SupplementalTaxRegistrationType("VAT"),
+			LegalName:        ptr.String("__LegalName__"),
+			Address: &types.Address{
+				AddressLine1:     ptr.String("__AddressLine1__"),
+				AddressLine2:     ptr.String("__AddressLine2__"),
+				AddressLine3:     ptr.String("__AddressLine3__"),
+				DistrictOrCounty: ptr.String("__DistrictOrCounty__"),
+				City:             ptr.String("__City__"),
+				StateOrRegion:    ptr.String("__StateOrRegion__"),
+				PostalCode:       ptr.String("__PostalCode__"),
+				CountryCode:      ptr.String("__CountryCode__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1045,7 +1242,21 @@ func TestCheckResponseSnapshot_PutTaxExemption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTaxExemption(context.Background(), &PutTaxExemptionInput{})
+	got, err := svc.PutTaxExemption(context.Background(), &PutTaxExemptionInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Authority: &types.Authority{
+			Country: ptr.String("__Country__"),
+			State:   ptr.String("__State__"),
+		},
+		ExemptionType: ptr.String("__ExemptionType__"),
+		ExemptionCertificate: &types.ExemptionCertificate{
+			DocumentName: ptr.String("__DocumentName__"),
+			DocumentFile: []byte("blob"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1064,7 +1275,9 @@ func TestCheckResponseSnapshot_PutTaxInheritance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTaxInheritance(context.Background(), &PutTaxInheritanceInput{})
+	got, err := svc.PutTaxInheritance(context.Background(), &PutTaxInheritanceInput{
+		HeritageStatus: types.HeritageStatus("OptIn"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1085,7 +1298,151 @@ func TestCheckResponseSnapshot_PutTaxRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTaxRegistration(context.Background(), &PutTaxRegistrationInput{})
+	got, err := svc.PutTaxRegistration(context.Background(), &PutTaxRegistrationInput{
+		AccountId: ptr.String("__AccountId__"),
+		TaxRegistrationEntry: &types.TaxRegistrationEntry{
+			RegistrationId:   ptr.String("__RegistrationId__"),
+			RegistrationType: types.TaxRegistrationType("VAT"),
+			LegalName:        ptr.String("__LegalName__"),
+			LegalAddress: &types.Address{
+				AddressLine1:     ptr.String("__AddressLine1__"),
+				AddressLine2:     ptr.String("__AddressLine2__"),
+				AddressLine3:     ptr.String("__AddressLine3__"),
+				DistrictOrCounty: ptr.String("__DistrictOrCounty__"),
+				City:             ptr.String("__City__"),
+				StateOrRegion:    ptr.String("__StateOrRegion__"),
+				PostalCode:       ptr.String("__PostalCode__"),
+				CountryCode:      ptr.String("__CountryCode__"),
+			},
+			Sector: types.Sector("Business"),
+			AdditionalTaxInformation: &types.AdditionalInfoRequest{
+				MalaysiaAdditionalInfo: &types.MalaysiaAdditionalInfo{
+					ServiceTaxCodes: []types.MalaysiaServiceTaxCode{
+						types.MalaysiaServiceTaxCode("Consultancy"),
+						types.MalaysiaServiceTaxCode("Consultancy"),
+					},
+					TaxInformationNumber:       ptr.String("__TaxInformationNumber__"),
+					BusinessRegistrationNumber: ptr.String("__BusinessRegistrationNumber__"),
+				},
+				IsraelAdditionalInfo: &types.IsraelAdditionalInfo{
+					DealerType:   types.IsraelDealerType("Authorized"),
+					CustomerType: types.IsraelCustomerType("Business"),
+				},
+				EstoniaAdditionalInfo: &types.EstoniaAdditionalInfo{
+					RegistryCommercialCode: ptr.String("__RegistryCommercialCode__"),
+				},
+				CanadaAdditionalInfo: &types.CanadaAdditionalInfo{
+					ProvincialSalesTaxId:       ptr.String("__ProvincialSalesTaxId__"),
+					CanadaQuebecSalesTaxNumber: ptr.String("__CanadaQuebecSalesTaxNumber__"),
+					CanadaRetailSalesTaxNumber: ptr.String("__CanadaRetailSalesTaxNumber__"),
+					IsResellerAccount:          ptr.Bool(true),
+				},
+				SpainAdditionalInfo: &types.SpainAdditionalInfo{
+					RegistrationType: types.RegistrationType("Intra-EU"),
+				},
+				KenyaAdditionalInfo: &types.KenyaAdditionalInfo{
+					PersonType: types.PersonType("Legal Person"),
+				},
+				SouthKoreaAdditionalInfo: &types.SouthKoreaAdditionalInfo{
+					BusinessRepresentativeName: ptr.String("__BusinessRepresentativeName__"),
+					LineOfBusiness:             ptr.String("__LineOfBusiness__"),
+					ItemOfBusiness:             ptr.String("__ItemOfBusiness__"),
+				},
+				TurkeyAdditionalInfo: &types.TurkeyAdditionalInfo{
+					TaxOffice:      ptr.String("__TaxOffice__"),
+					KepEmailId:     ptr.String("__KepEmailId__"),
+					SecondaryTaxId: ptr.String("__SecondaryTaxId__"),
+					Industries:     types.Industries("CirculatingOrg"),
+				},
+				GeorgiaAdditionalInfo: &types.GeorgiaAdditionalInfo{
+					PersonType: types.PersonType("Legal Person"),
+				},
+				ItalyAdditionalInfo: &types.ItalyAdditionalInfo{
+					SdiAccountId: ptr.String("__SdiAccountId__"),
+					CigNumber:    ptr.String("__CigNumber__"),
+					CupNumber:    ptr.String("__CupNumber__"),
+					TaxCode:      ptr.String("__TaxCode__"),
+					CustomerType: types.CustomerType("Business"),
+				},
+				RomaniaAdditionalInfo: &types.RomaniaAdditionalInfo{
+					TaxRegistrationNumberType: types.TaxRegistrationNumberType("TaxRegistrationNumber"),
+				},
+				UkraineAdditionalInfo: &types.UkraineAdditionalInfo{
+					UkraineTrnType: types.UkraineTrnType("Business"),
+				},
+				PolandAdditionalInfo: &types.PolandAdditionalInfo{
+					IndividualRegistrationNumber: ptr.String("__IndividualRegistrationNumber__"),
+					IsGroupVatEnabled:            ptr.Bool(true),
+					TaxRegistrationNumberType:    types.PolandTaxRegistrationNumberType("EUTaxRegistrationNumber"),
+				},
+				SaudiArabiaAdditionalInfo: &types.SaudiArabiaAdditionalInfo{
+					TaxRegistrationNumberType: types.SaudiArabiaTaxRegistrationNumberType("TaxRegistrationNumber"),
+				},
+				IndonesiaAdditionalInfo: &types.IndonesiaAdditionalInfo{
+					TaxRegistrationNumberType:   types.IndonesiaTaxRegistrationNumberType("NIK"),
+					PpnExceptionDesignationCode: ptr.String("__PpnExceptionDesignationCode__"),
+					DecisionNumber:              ptr.String("__DecisionNumber__"),
+				},
+				VietnamAdditionalInfo: &types.VietnamAdditionalInfo{
+					EnterpriseIdentificationNumber:  ptr.String("__EnterpriseIdentificationNumber__"),
+					ElectronicTransactionCodeNumber: ptr.String("__ElectronicTransactionCodeNumber__"),
+					PaymentVoucherNumber:            ptr.String("__PaymentVoucherNumber__"),
+					PaymentVoucherNumberDate:        ptr.String("__PaymentVoucherNumberDate__"),
+				},
+				EgyptAdditionalInfo: &types.EgyptAdditionalInfo{
+					UniqueIdentificationNumber:               ptr.String("__UniqueIdentificationNumber__"),
+					UniqueIdentificationNumberExpirationDate: ptr.String("__UniqueIdentificationNumberExpirationDate__"),
+				},
+				GreeceAdditionalInfo: &types.GreeceAdditionalInfo{
+					ContractingAuthorityCode: ptr.String("__ContractingAuthorityCode__"),
+				},
+				UzbekistanAdditionalInfo: &types.UzbekistanAdditionalInfo{
+					TaxRegistrationNumberType: types.UzbekistanTaxRegistrationNumberType("Business"),
+					VatRegistrationNumber:     ptr.String("__VatRegistrationNumber__"),
+				},
+				PhilippinesAdditionalInfo: &types.PhilippinesAdditionalInfo{
+					IsVatRegistered: ptr.Bool(true),
+				},
+				BelgiumAdditionalInfo: &types.BelgiumAdditionalInfo{
+					PeppolId:              ptr.String("__PeppolId__"),
+					IsMercuriusBoxEnabled: ptr.Bool(true),
+				},
+				ChileAdditionalInfo: &types.ChileAdditionalInfo{
+					DocumentType:     types.ChileDocumentType("Invoice"),
+					BusinessActivity: ptr.String("__BusinessActivity__"),
+				},
+				FranceAdditionalInfo: &types.FranceAdditionalInfo{
+					SirenNumber: ptr.String("__SirenNumber__"),
+				},
+			},
+			VerificationDetails: &types.VerificationDetails{
+				DateOfBirth: ptr.String("__DateOfBirth__"),
+				TaxRegistrationDocuments: []types.TaxRegistrationDocument{
+					{
+						S3Location: &types.SourceS3Location{
+							Bucket: ptr.String("__Bucket__"),
+							Key:    ptr.String("__Key__"),
+						},
+						File: &types.TaxRegistrationDocFile{
+							FileName:    ptr.String("__FileName__"),
+							FileContent: []byte("blob"),
+						},
+					},
+					{
+						S3Location: &types.SourceS3Location{
+							Bucket: ptr.String("__Bucket__"),
+							Key:    ptr.String("__Key__"),
+						},
+						File: &types.TaxRegistrationDocFile{
+							FileName:    ptr.String("__FileName__"),
+							FileContent: []byte("blob"),
+						},
+					},
+				},
+			},
+			CertifiedEmailId: ptr.String("__CertifiedEmailId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1106,7 +1463,21 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutTaxExemption(context.Background(), &PutTaxExemptionInput{})
+	_, opErr := svc.PutTaxExemption(context.Background(), &PutTaxExemptionInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Authority: &types.Authority{
+			Country: ptr.String("__Country__"),
+			State:   ptr.String("__State__"),
+		},
+		ExemptionType: ptr.String("__ExemptionType__"),
+		ExemptionCertificate: &types.ExemptionCertificate{
+			DocumentName: ptr.String("__DocumentName__"),
+			DocumentFile: []byte("blob"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1131,7 +1502,21 @@ func TestCheckResponseSnapshot_Error_AttachmentUploadException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutTaxExemption(context.Background(), &PutTaxExemptionInput{})
+	_, opErr := svc.PutTaxExemption(context.Background(), &PutTaxExemptionInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Authority: &types.Authority{
+			Country: ptr.String("__Country__"),
+			State:   ptr.String("__State__"),
+		},
+		ExemptionType: ptr.String("__ExemptionType__"),
+		ExemptionCertificate: &types.ExemptionCertificate{
+			DocumentName: ptr.String("__DocumentName__"),
+			DocumentFile: []byte("blob"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1156,7 +1541,21 @@ func TestCheckResponseSnapshot_Error_CaseCreationLimitExceededException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutTaxExemption(context.Background(), &PutTaxExemptionInput{})
+	_, opErr := svc.PutTaxExemption(context.Background(), &PutTaxExemptionInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Authority: &types.Authority{
+			Country: ptr.String("__Country__"),
+			State:   ptr.String("__State__"),
+		},
+		ExemptionType: ptr.String("__ExemptionType__"),
+		ExemptionCertificate: &types.ExemptionCertificate{
+			DocumentName: ptr.String("__DocumentName__"),
+			DocumentFile: []byte("blob"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1182,7 +1581,12 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteTaxRegistration(context.Background(), &BatchDeleteTaxRegistrationInput{})
+	_, opErr := svc.BatchDeleteTaxRegistration(context.Background(), &BatchDeleteTaxRegistrationInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1208,7 +1612,12 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteTaxRegistration(context.Background(), &BatchDeleteTaxRegistrationInput{})
+	_, opErr := svc.BatchDeleteTaxRegistration(context.Background(), &BatchDeleteTaxRegistrationInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1234,7 +1643,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetTaxExemptions(context.Background(), &BatchGetTaxExemptionsInput{})
+	_, opErr := svc.BatchGetTaxExemptions(context.Background(), &BatchGetTaxExemptionsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1268,7 +1682,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteTaxRegistration(context.Background(), &BatchDeleteTaxRegistrationInput{})
+	_, opErr := svc.BatchDeleteTaxRegistration(context.Background(), &BatchDeleteTaxRegistrationInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"commitmentDuration":"OneMonth","commitmentExpirationTime":"2000-01-01T00:00:00Z","creationTime":"2000-01-01T00:00:00Z","desiredModelArn":"__DesiredModelArn__","desiredModelUnits":1,"failureMessage":"__FailureMessage__","foundationModelArn":"__FoundationModelArn__","lastModifiedTime":"2000-01-01T00:00:00Z","modelArn":"__ModelArn__","modelUnits":1,"provisionedModelArn":"__ProvisionedModelArn__","provisionedModelName":"__ProvisionedModelName__","status":"Creating"}

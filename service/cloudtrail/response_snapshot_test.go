@@ -117,7 +117,19 @@ func TestCheckResponseSnapshot_AddTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTags(context.Background(), &AddTagsInput{})
+	got, err := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +152,11 @@ func TestCheckResponseSnapshot_CancelQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	got, err := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		EventDataStore:               ptr.String("__EventDataStore__"),
+		QueryId:                      ptr.String("__QueryId__"),
+		EventDataStoreOwnerAccountId: ptr.String("__EventDataStoreOwnerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +199,30 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		Name:   ptr.String("__Name__"),
+		Source: ptr.String("__Source__"),
+		Destinations: []types.Destination{
+			{
+				Type:     types.DestinationType("EVENT_DATA_STORE"),
+				Location: ptr.String("__Location__"),
+			},
+			{
+				Type:     types.DestinationType("EVENT_DATA_STORE"),
+				Location: ptr.String("__Location__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -249,7 +288,50 @@ func TestCheckResponseSnapshot_CreateDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDashboard(context.Background(), &CreateDashboardInput{})
+	got, err := svc.CreateDashboard(context.Background(), &CreateDashboardInput{
+		Name: ptr.String("__Name__"),
+		RefreshSchedule: &types.RefreshSchedule{
+			Frequency: &types.RefreshScheduleFrequency{
+				Unit:  types.RefreshScheduleFrequencyUnit("HOURS"),
+				Value: ptr.Int32(1),
+			},
+			Status:    types.RefreshScheduleStatus("ENABLED"),
+			TimeOfDay: ptr.String("__TimeOfDay__"),
+		},
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationProtectionEnabled: ptr.Bool(true),
+		Widgets: []types.RequestWidget{
+			{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				QueryParameters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ViewProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				QueryParameters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ViewProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -410,7 +492,146 @@ func TestCheckResponseSnapshot_CreateEventDataStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{})
+	got, err := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{
+		Name: ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		StartIngestion: ptr.Bool(true),
+		BillingMode:    types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -443,7 +664,29 @@ func TestCheckResponseSnapshot_CreateTrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	got, err := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +705,9 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{})
+	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{
+		Channel: ptr.String("__Channel__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -481,7 +726,9 @@ func TestCheckResponseSnapshot_DeleteDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDashboard(context.Background(), &DeleteDashboardInput{})
+	got, err := svc.DeleteDashboard(context.Background(), &DeleteDashboardInput{
+		DashboardId: ptr.String("__DashboardId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -500,7 +747,9 @@ func TestCheckResponseSnapshot_DeleteEventDataStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventDataStore(context.Background(), &DeleteEventDataStoreInput{})
+	got, err := svc.DeleteEventDataStore(context.Background(), &DeleteEventDataStoreInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -519,7 +768,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -538,7 +789,9 @@ func TestCheckResponseSnapshot_DeleteTrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrail(context.Background(), &DeleteTrailInput{})
+	got, err := svc.DeleteTrail(context.Background(), &DeleteTrailInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -557,7 +810,9 @@ func TestCheckResponseSnapshot_DeregisterOrganizationDelegatedAdmin(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterOrganizationDelegatedAdmin(context.Background(), &DeregisterOrganizationDelegatedAdminInput{})
+	got, err := svc.DeregisterOrganizationDelegatedAdmin(context.Background(), &DeregisterOrganizationDelegatedAdminInput{
+		DelegatedAdminAccountId: ptr.String("__DelegatedAdminAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -592,7 +847,13 @@ func TestCheckResponseSnapshot_DescribeQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeQuery(context.Background(), &DescribeQueryInput{})
+	got, err := svc.DescribeQuery(context.Background(), &DescribeQueryInput{
+		EventDataStore:               ptr.String("__EventDataStore__"),
+		QueryId:                      ptr.String("__QueryId__"),
+		QueryAlias:                   ptr.String("__QueryAlias__"),
+		RefreshId:                    ptr.String("__RefreshId__"),
+		EventDataStoreOwnerAccountId: ptr.String("__EventDataStoreOwnerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -650,7 +911,13 @@ func TestCheckResponseSnapshot_DescribeTrails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTrails(context.Background(), &DescribeTrailsInput{})
+	got, err := svc.DescribeTrails(context.Background(), &DescribeTrailsInput{
+		TrailNameList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IncludeShadowTrails: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -672,7 +939,9 @@ func TestCheckResponseSnapshot_DisableFederation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableFederation(context.Background(), &DisableFederationInput{})
+	got, err := svc.DisableFederation(context.Background(), &DisableFederationInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -695,7 +964,10 @@ func TestCheckResponseSnapshot_EnableFederation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableFederation(context.Background(), &EnableFederationInput{})
+	got, err := svc.EnableFederation(context.Background(), &EnableFederationInput{
+		EventDataStore:    ptr.String("__EventDataStore__"),
+		FederationRoleArn: ptr.String("__FederationRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -718,7 +990,13 @@ func TestCheckResponseSnapshot_GenerateQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateQuery(context.Background(), &GenerateQueryInput{})
+	got, err := svc.GenerateQuery(context.Background(), &GenerateQueryInput{
+		EventDataStores: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Prompt: ptr.String("__Prompt__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -881,7 +1159,9 @@ func TestCheckResponseSnapshot_GetChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannel(context.Background(), &GetChannelInput{})
+	got, err := svc.GetChannel(context.Background(), &GetChannelInput{
+		Channel: ptr.String("__Channel__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -941,7 +1221,9 @@ func TestCheckResponseSnapshot_GetDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDashboard(context.Background(), &GetDashboardInput{})
+	got, err := svc.GetDashboard(context.Background(), &GetDashboardInput{
+		DashboardId: ptr.String("__DashboardId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -996,7 +1278,10 @@ func TestCheckResponseSnapshot_GetEventConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventConfiguration(context.Background(), &GetEventConfigurationInput{})
+	got, err := svc.GetEventConfiguration(context.Background(), &GetEventConfigurationInput{
+		TrailName:      ptr.String("__TrailName__"),
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1159,7 +1444,9 @@ func TestCheckResponseSnapshot_GetEventDataStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventDataStore(context.Background(), &GetEventDataStoreInput{})
+	got, err := svc.GetEventDataStore(context.Background(), &GetEventDataStoreInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1350,7 +1637,9 @@ func TestCheckResponseSnapshot_GetEventSelectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventSelectors(context.Background(), &GetEventSelectorsInput{})
+	got, err := svc.GetEventSelectors(context.Background(), &GetEventSelectorsInput{
+		TrailName: ptr.String("__TrailName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1394,7 +1683,9 @@ func TestCheckResponseSnapshot_GetImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImport(context.Background(), &GetImportInput{})
+	got, err := svc.GetImport(context.Background(), &GetImportInput{
+		ImportId: ptr.String("__ImportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1433,7 +1724,10 @@ func TestCheckResponseSnapshot_GetInsightSelectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInsightSelectors(context.Background(), &GetInsightSelectorsInput{})
+	got, err := svc.GetInsightSelectors(context.Background(), &GetInsightSelectorsInput{
+		TrailName:      ptr.String("__TrailName__"),
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1479,7 +1773,13 @@ func TestCheckResponseSnapshot_GetQueryResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{})
+	got, err := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{
+		EventDataStore:               ptr.String("__EventDataStore__"),
+		QueryId:                      ptr.String("__QueryId__"),
+		NextToken:                    ptr.String("__NextToken__"),
+		MaxQueryResults:              ptr.Int32(1),
+		EventDataStoreOwnerAccountId: ptr.String("__EventDataStoreOwnerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1502,7 +1802,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1540,7 +1842,9 @@ func TestCheckResponseSnapshot_GetTrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrail(context.Background(), &GetTrailInput{})
+	got, err := svc.GetTrail(context.Background(), &GetTrailInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1577,7 +1881,9 @@ func TestCheckResponseSnapshot_GetTrailStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrailStatus(context.Background(), &GetTrailStatusInput{})
+	got, err := svc.GetTrailStatus(context.Background(), &GetTrailStatusInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1608,7 +1914,10 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{})
+	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1639,7 +1948,12 @@ func TestCheckResponseSnapshot_ListDashboards(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDashboards(context.Background(), &ListDashboardsInput{})
+	got, err := svc.ListDashboards(context.Background(), &ListDashboardsInput{
+		NamePrefix: ptr.String("__NamePrefix__"),
+		Type:       types.DashboardType("MANAGED"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1924,7 +2238,10 @@ func TestCheckResponseSnapshot_ListEventDataStores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventDataStores(context.Background(), &ListEventDataStoresInput{})
+	got, err := svc.ListEventDataStores(context.Background(), &ListEventDataStoresInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1961,7 +2278,11 @@ func TestCheckResponseSnapshot_ListImportFailures(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImportFailures(context.Background(), &ListImportFailuresInput{})
+	got, err := svc.ListImportFailures(context.Background(), &ListImportFailuresInput{
+		ImportId:   ptr.String("__ImportId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2004,7 +2325,12 @@ func TestCheckResponseSnapshot_ListImports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImports(context.Background(), &ListImportsInput{})
+	got, err := svc.ListImports(context.Background(), &ListImportsInput{
+		MaxResults:   ptr.Int32(1),
+		Destination:  ptr.String("__Destination__"),
+		ImportStatus: types.ImportStatus("INITIALIZING"),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2067,7 +2393,17 @@ func TestCheckResponseSnapshot_ListInsightsData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInsightsData(context.Background(), &ListInsightsDataInput{})
+	got, err := svc.ListInsightsData(context.Background(), &ListInsightsDataInput{
+		InsightSource: ptr.String("__InsightSource__"),
+		DataType:      types.ListInsightsDataType("InsightsEvents"),
+		Dimensions: map[string]string{
+			"key0": "__Value__",
+		},
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2101,7 +2437,19 @@ func TestCheckResponseSnapshot_ListInsightsMetricData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInsightsMetricData(context.Background(), &ListInsightsMetricDataInput{})
+	got, err := svc.ListInsightsMetricData(context.Background(), &ListInsightsMetricDataInput{
+		TrailName:   ptr.String("__TrailName__"),
+		EventSource: ptr.String("__EventSource__"),
+		EventName:   ptr.String("__EventName__"),
+		InsightType: types.InsightType("ApiCallRateInsight"),
+		ErrorCode:   ptr.String("__ErrorCode__"),
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Period:      ptr.Int32(1),
+		DataType:    types.InsightsMetricDataType("FillWithZeros"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2136,7 +2484,11 @@ func TestCheckResponseSnapshot_ListPublicKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPublicKeys(context.Background(), &ListPublicKeysInput{})
+	got, err := svc.ListPublicKeys(context.Background(), &ListPublicKeysInput{
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2169,7 +2521,14 @@ func TestCheckResponseSnapshot_ListQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueries(context.Background(), &ListQueriesInput{})
+	got, err := svc.ListQueries(context.Background(), &ListQueriesInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		StartTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QueryStatus:    types.QueryStatus("QUEUED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2218,7 +2577,13 @@ func TestCheckResponseSnapshot_ListTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTags(context.Background(), &ListTagsInput{})
+	got, err := svc.ListTags(context.Background(), &ListTagsInput{
+		ResourceIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2251,7 +2616,9 @@ func TestCheckResponseSnapshot_ListTrails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrails(context.Background(), &ListTrailsInput{})
+	got, err := svc.ListTrails(context.Background(), &ListTrailsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2314,7 +2681,23 @@ func TestCheckResponseSnapshot_LookupEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.LookupEvents(context.Background(), &LookupEventsInput{})
+	got, err := svc.LookupEvents(context.Background(), &LookupEventsInput{
+		LookupAttributes: []types.LookupAttribute{
+			{
+				AttributeKey:   types.LookupAttributeKey("EventId"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+			{
+				AttributeKey:   types.LookupAttributeKey("EventId"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+		},
+		StartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EventCategory: types.EventCategory("insight"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2369,7 +2752,43 @@ func TestCheckResponseSnapshot_PutEventConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEventConfiguration(context.Background(), &PutEventConfigurationInput{})
+	got, err := svc.PutEventConfiguration(context.Background(), &PutEventConfigurationInput{
+		TrailName:      ptr.String("__TrailName__"),
+		EventDataStore: ptr.String("__EventDataStore__"),
+		MaxEventSize:   types.MaxEventSize("Standard"),
+		ContextKeySelectors: []types.ContextKeySelector{
+			{
+				Type: types.Type("TagContext"),
+				Equals: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Type: types.Type("TagContext"),
+				Equals: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AggregationConfigurations: []types.AggregationConfiguration{
+			{
+				Templates: []types.Template{
+					types.Template("API_ACTIVITY"),
+					types.Template("API_ACTIVITY"),
+				},
+				EventCategory: types.EventCategoryAggregation("Data"),
+			},
+			{
+				Templates: []types.Template{
+					types.Template("API_ACTIVITY"),
+					types.Template("API_ACTIVITY"),
+				},
+				EventCategory: types.EventCategoryAggregation("Data"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2560,7 +2979,179 @@ func TestCheckResponseSnapshot_PutEventSelectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEventSelectors(context.Background(), &PutEventSelectorsInput{})
+	got, err := svc.PutEventSelectors(context.Background(), &PutEventSelectorsInput{
+		TrailName: ptr.String("__TrailName__"),
+		EventSelectors: []types.EventSelector{
+			{
+				ReadWriteType:           types.ReadWriteType("ReadOnly"),
+				IncludeManagementEvents: ptr.Bool(true),
+				DataResources: []types.DataResource{
+					{
+						Type: ptr.String("__Type__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Type: ptr.String("__Type__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExcludeManagementEventSources: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ReadWriteType:           types.ReadWriteType("ReadOnly"),
+				IncludeManagementEvents: ptr.Bool(true),
+				DataResources: []types.DataResource{
+					{
+						Type: ptr.String("__Type__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Type: ptr.String("__Type__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExcludeManagementEventSources: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2599,7 +3190,27 @@ func TestCheckResponseSnapshot_PutInsightSelectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutInsightSelectors(context.Background(), &PutInsightSelectorsInput{})
+	got, err := svc.PutInsightSelectors(context.Background(), &PutInsightSelectorsInput{
+		TrailName: ptr.String("__TrailName__"),
+		InsightSelectors: []types.InsightSelector{
+			{
+				InsightType: types.InsightType("ApiCallRateInsight"),
+				EventCategories: []types.SourceEventCategory{
+					types.SourceEventCategory("Management"),
+					types.SourceEventCategory("Management"),
+				},
+			},
+			{
+				InsightType: types.InsightType("ApiCallRateInsight"),
+				EventCategories: []types.SourceEventCategory{
+					types.SourceEventCategory("Management"),
+					types.SourceEventCategory("Management"),
+				},
+			},
+		},
+		EventDataStore:      ptr.String("__EventDataStore__"),
+		InsightsDestination: ptr.String("__InsightsDestination__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2622,7 +3233,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn:    ptr.String("__ResourceArn__"),
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2641,7 +3255,9 @@ func TestCheckResponseSnapshot_RegisterOrganizationDelegatedAdmin(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterOrganizationDelegatedAdmin(context.Background(), &RegisterOrganizationDelegatedAdminInput{})
+	got, err := svc.RegisterOrganizationDelegatedAdmin(context.Background(), &RegisterOrganizationDelegatedAdminInput{
+		MemberAccountId: ptr.String("__MemberAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2660,7 +3276,19 @@ func TestCheckResponseSnapshot_RemoveTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{})
+	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2811,7 +3439,9 @@ func TestCheckResponseSnapshot_RestoreEventDataStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreEventDataStore(context.Background(), &RestoreEventDataStoreInput{})
+	got, err := svc.RestoreEventDataStore(context.Background(), &RestoreEventDataStoreInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2846,7 +3476,11 @@ func TestCheckResponseSnapshot_SearchSampleQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchSampleQueries(context.Background(), &SearchSampleQueriesInput{})
+	got, err := svc.SearchSampleQueries(context.Background(), &SearchSampleQueriesInput{
+		SearchPhrase: ptr.String("__SearchPhrase__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2867,7 +3501,12 @@ func TestCheckResponseSnapshot_StartDashboardRefresh(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDashboardRefresh(context.Background(), &StartDashboardRefreshInput{})
+	got, err := svc.StartDashboardRefresh(context.Background(), &StartDashboardRefreshInput{
+		DashboardId: ptr.String("__DashboardId__"),
+		QueryParameterValues: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2886,7 +3525,9 @@ func TestCheckResponseSnapshot_StartEventDataStoreIngestion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartEventDataStoreIngestion(context.Background(), &StartEventDataStoreIngestionInput{})
+	got, err := svc.StartEventDataStoreIngestion(context.Background(), &StartEventDataStoreIngestionInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2923,7 +3564,22 @@ func TestCheckResponseSnapshot_StartImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartImport(context.Background(), &StartImportInput{})
+	got, err := svc.StartImport(context.Background(), &StartImportInput{
+		Destinations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ImportSource: &types.ImportSource{
+			S3: &types.S3ImportSource{
+				S3LocationUri:         ptr.String("__S3LocationUri__"),
+				S3BucketRegion:        ptr.String("__S3BucketRegion__"),
+				S3BucketAccessRoleArn: ptr.String("__S3BucketAccessRoleArn__"),
+			},
+		},
+		StartEventTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndEventTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ImportId:       ptr.String("__ImportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2942,7 +3598,9 @@ func TestCheckResponseSnapshot_StartLogging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartLogging(context.Background(), &StartLoggingInput{})
+	got, err := svc.StartLogging(context.Background(), &StartLoggingInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2964,7 +3622,16 @@ func TestCheckResponseSnapshot_StartQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartQuery(context.Background(), &StartQueryInput{})
+	got, err := svc.StartQuery(context.Background(), &StartQueryInput{
+		QueryStatement: ptr.String("__QueryStatement__"),
+		DeliveryS3Uri:  ptr.String("__DeliveryS3Uri__"),
+		QueryAlias:     ptr.String("__QueryAlias__"),
+		QueryParameters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EventDataStoreOwnerAccountId: ptr.String("__EventDataStoreOwnerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2983,7 +3650,9 @@ func TestCheckResponseSnapshot_StopEventDataStoreIngestion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopEventDataStoreIngestion(context.Background(), &StopEventDataStoreIngestionInput{})
+	got, err := svc.StopEventDataStoreIngestion(context.Background(), &StopEventDataStoreIngestionInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3027,7 +3696,9 @@ func TestCheckResponseSnapshot_StopImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopImport(context.Background(), &StopImportInput{})
+	got, err := svc.StopImport(context.Background(), &StopImportInput{
+		ImportId: ptr.String("__ImportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3046,7 +3717,9 @@ func TestCheckResponseSnapshot_StopLogging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopLogging(context.Background(), &StopLoggingInput{})
+	got, err := svc.StopLogging(context.Background(), &StopLoggingInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3079,7 +3752,20 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{})
+	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{
+		Channel: ptr.String("__Channel__"),
+		Destinations: []types.Destination{
+			{
+				Type:     types.DestinationType("EVENT_DATA_STORE"),
+				Location: ptr.String("__Location__"),
+			},
+			{
+				Type:     types.DestinationType("EVENT_DATA_STORE"),
+				Location: ptr.String("__Location__"),
+			},
+		},
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3137,7 +3823,40 @@ func TestCheckResponseSnapshot_UpdateDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDashboard(context.Background(), &UpdateDashboardInput{})
+	got, err := svc.UpdateDashboard(context.Background(), &UpdateDashboardInput{
+		DashboardId: ptr.String("__DashboardId__"),
+		Widgets: []types.RequestWidget{
+			{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				QueryParameters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ViewProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				QueryParameters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ViewProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		RefreshSchedule: &types.RefreshSchedule{
+			Frequency: &types.RefreshScheduleFrequency{
+				Unit:  types.RefreshScheduleFrequencyUnit("HOURS"),
+				Value: ptr.Int32(1),
+			},
+			Status:    types.RefreshScheduleStatus("ENABLED"),
+			TimeOfDay: ptr.String("__TimeOfDay__"),
+		},
+		TerminationProtectionEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3290,7 +4009,136 @@ func TestCheckResponseSnapshot_UpdateEventDataStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEventDataStore(context.Background(), &UpdateEventDataStoreInput{})
+	got, err := svc.UpdateEventDataStore(context.Background(), &UpdateEventDataStoreInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+		Name:           ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		KmsKeyId:                     ptr.String("__KmsKeyId__"),
+		BillingMode:                  types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3323,7 +4171,19 @@ func TestCheckResponseSnapshot_UpdateTrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTrail(context.Background(), &UpdateTrailInput{})
+	got, err := svc.UpdateTrail(context.Background(), &UpdateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3344,7 +4204,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisableFederation(context.Background(), &DisableFederationInput{})
+	_, opErr := svc.DisableFederation(context.Background(), &DisableFederationInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3369,7 +4231,22 @@ func TestCheckResponseSnapshot_Error_AccountHasOngoingImportException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartImport(context.Background(), &StartImportInput{})
+	_, opErr := svc.StartImport(context.Background(), &StartImportInput{
+		Destinations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ImportSource: &types.ImportSource{
+			S3: &types.S3ImportSource{
+				S3LocationUri:         ptr.String("__S3LocationUri__"),
+				S3BucketRegion:        ptr.String("__S3BucketRegion__"),
+				S3BucketAccessRoleArn: ptr.String("__S3BucketAccessRoleArn__"),
+			},
+		},
+		StartEventTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndEventTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ImportId:       ptr.String("__ImportId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3394,7 +4271,9 @@ func TestCheckResponseSnapshot_Error_AccountNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterOrganizationDelegatedAdmin(context.Background(), &DeregisterOrganizationDelegatedAdminInput{})
+	_, opErr := svc.DeregisterOrganizationDelegatedAdmin(context.Background(), &DeregisterOrganizationDelegatedAdminInput{
+		DelegatedAdminAccountId: ptr.String("__DelegatedAdminAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3419,7 +4298,9 @@ func TestCheckResponseSnapshot_Error_AccountNotRegisteredException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterOrganizationDelegatedAdmin(context.Background(), &DeregisterOrganizationDelegatedAdminInput{})
+	_, opErr := svc.DeregisterOrganizationDelegatedAdmin(context.Background(), &DeregisterOrganizationDelegatedAdminInput{
+		DelegatedAdminAccountId: ptr.String("__DelegatedAdminAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3444,7 +4325,9 @@ func TestCheckResponseSnapshot_Error_AccountRegisteredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterOrganizationDelegatedAdmin(context.Background(), &RegisterOrganizationDelegatedAdminInput{})
+	_, opErr := svc.RegisterOrganizationDelegatedAdmin(context.Background(), &RegisterOrganizationDelegatedAdminInput{
+		MemberAccountId: ptr.String("__MemberAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3469,7 +4352,9 @@ func TestCheckResponseSnapshot_Error_CannotDelegateManagementAccountException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterOrganizationDelegatedAdmin(context.Background(), &RegisterOrganizationDelegatedAdminInput{})
+	_, opErr := svc.RegisterOrganizationDelegatedAdmin(context.Background(), &RegisterOrganizationDelegatedAdminInput{
+		MemberAccountId: ptr.String("__MemberAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3494,7 +4379,19 @@ func TestCheckResponseSnapshot_Error_ChannelARNInvalidException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3519,7 +4416,30 @@ func TestCheckResponseSnapshot_Error_ChannelAlreadyExistsException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		Name:   ptr.String("__Name__"),
+		Source: ptr.String("__Source__"),
+		Destinations: []types.Destination{
+			{
+				Type:     types.DestinationType("EVENT_DATA_STORE"),
+				Location: ptr.String("__Location__"),
+			},
+			{
+				Type:     types.DestinationType("EVENT_DATA_STORE"),
+				Location: ptr.String("__Location__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3544,7 +4464,9 @@ func TestCheckResponseSnapshot_Error_ChannelExistsForEDSException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEventDataStore(context.Background(), &DeleteEventDataStoreInput{})
+	_, opErr := svc.DeleteEventDataStore(context.Background(), &DeleteEventDataStoreInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3569,7 +4491,30 @@ func TestCheckResponseSnapshot_Error_ChannelMaxLimitExceededException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		Name:   ptr.String("__Name__"),
+		Source: ptr.String("__Source__"),
+		Destinations: []types.Destination{
+			{
+				Type:     types.DestinationType("EVENT_DATA_STORE"),
+				Location: ptr.String("__Location__"),
+			},
+			{
+				Type:     types.DestinationType("EVENT_DATA_STORE"),
+				Location: ptr.String("__Location__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3594,7 +4539,19 @@ func TestCheckResponseSnapshot_Error_ChannelNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3619,7 +4576,19 @@ func TestCheckResponseSnapshot_Error_CloudTrailARNInvalidException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3644,7 +4613,146 @@ func TestCheckResponseSnapshot_Error_CloudTrailAccessNotEnabledException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{})
+	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{
+		Name: ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		StartIngestion: ptr.Bool(true),
+		BillingMode:    types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3669,7 +4777,29 @@ func TestCheckResponseSnapshot_Error_CloudTrailInvalidClientTokenIdException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3694,7 +4824,29 @@ func TestCheckResponseSnapshot_Error_CloudWatchLogsDeliveryUnavailableException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3719,7 +4871,9 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisableFederation(context.Background(), &DisableFederationInput{})
+	_, opErr := svc.DisableFederation(context.Background(), &DisableFederationInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3744,7 +4898,19 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3769,7 +4935,9 @@ func TestCheckResponseSnapshot_Error_DelegatedAdminAccountLimitExceededException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterOrganizationDelegatedAdmin(context.Background(), &RegisterOrganizationDelegatedAdminInput{})
+	_, opErr := svc.RegisterOrganizationDelegatedAdmin(context.Background(), &RegisterOrganizationDelegatedAdminInput{
+		MemberAccountId: ptr.String("__MemberAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3794,7 +4962,19 @@ func TestCheckResponseSnapshot_Error_EventDataStoreARNInvalidException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3819,7 +4999,146 @@ func TestCheckResponseSnapshot_Error_EventDataStoreAlreadyExistsException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{})
+	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{
+		Name: ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		StartIngestion: ptr.Bool(true),
+		BillingMode:    types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3844,7 +5163,9 @@ func TestCheckResponseSnapshot_Error_EventDataStoreFederationEnabledException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEventDataStore(context.Background(), &DeleteEventDataStoreInput{})
+	_, opErr := svc.DeleteEventDataStore(context.Background(), &DeleteEventDataStoreInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3869,7 +5190,9 @@ func TestCheckResponseSnapshot_Error_EventDataStoreHasOngoingImportException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEventDataStore(context.Background(), &DeleteEventDataStoreInput{})
+	_, opErr := svc.DeleteEventDataStore(context.Background(), &DeleteEventDataStoreInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3894,7 +5217,146 @@ func TestCheckResponseSnapshot_Error_EventDataStoreMaxLimitExceededException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{})
+	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{
+		Name: ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		StartIngestion: ptr.Bool(true),
+		BillingMode:    types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3919,7 +5381,19 @@ func TestCheckResponseSnapshot_Error_EventDataStoreNotFoundException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3944,7 +5418,9 @@ func TestCheckResponseSnapshot_Error_EventDataStoreTerminationProtectedException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEventDataStore(context.Background(), &DeleteEventDataStoreInput{})
+	_, opErr := svc.DeleteEventDataStore(context.Background(), &DeleteEventDataStoreInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3969,7 +5445,13 @@ func TestCheckResponseSnapshot_Error_GenerateResponseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GenerateQuery(context.Background(), &GenerateQueryInput{})
+	_, opErr := svc.GenerateQuery(context.Background(), &GenerateQueryInput{
+		EventDataStores: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Prompt: ptr.String("__Prompt__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3994,7 +5476,9 @@ func TestCheckResponseSnapshot_Error_ImportNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetImport(context.Background(), &GetImportInput{})
+	_, opErr := svc.GetImport(context.Background(), &GetImportInput{
+		ImportId: ptr.String("__ImportId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4019,7 +5503,19 @@ func TestCheckResponseSnapshot_Error_InactiveEventDataStoreException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4044,7 +5540,11 @@ func TestCheckResponseSnapshot_Error_InactiveQueryException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		EventDataStore:               ptr.String("__EventDataStore__"),
+		QueryId:                      ptr.String("__QueryId__"),
+		EventDataStoreOwnerAccountId: ptr.String("__EventDataStoreOwnerAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4069,7 +5569,10 @@ func TestCheckResponseSnapshot_Error_InsightNotEnabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetInsightSelectors(context.Background(), &GetInsightSelectorsInput{})
+	_, opErr := svc.GetInsightSelectors(context.Background(), &GetInsightSelectorsInput{
+		TrailName:      ptr.String("__TrailName__"),
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4094,7 +5597,146 @@ func TestCheckResponseSnapshot_Error_InsufficientDependencyServiceAccessPermissi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{})
+	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{
+		Name: ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		StartIngestion: ptr.Bool(true),
+		BillingMode:    types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4119,7 +5761,50 @@ func TestCheckResponseSnapshot_Error_InsufficientEncryptionPolicyException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{})
+	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{
+		Name: ptr.String("__Name__"),
+		RefreshSchedule: &types.RefreshSchedule{
+			Frequency: &types.RefreshScheduleFrequency{
+				Unit:  types.RefreshScheduleFrequencyUnit("HOURS"),
+				Value: ptr.Int32(1),
+			},
+			Status:    types.RefreshScheduleStatus("ENABLED"),
+			TimeOfDay: ptr.String("__TimeOfDay__"),
+		},
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationProtectionEnabled: ptr.Bool(true),
+		Widgets: []types.RequestWidget{
+			{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				QueryParameters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ViewProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				QueryParameters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ViewProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4144,7 +5829,43 @@ func TestCheckResponseSnapshot_Error_InsufficientIAMAccessPermissionException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutEventConfiguration(context.Background(), &PutEventConfigurationInput{})
+	_, opErr := svc.PutEventConfiguration(context.Background(), &PutEventConfigurationInput{
+		TrailName:      ptr.String("__TrailName__"),
+		EventDataStore: ptr.String("__EventDataStore__"),
+		MaxEventSize:   types.MaxEventSize("Standard"),
+		ContextKeySelectors: []types.ContextKeySelector{
+			{
+				Type: types.Type("TagContext"),
+				Equals: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Type: types.Type("TagContext"),
+				Equals: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AggregationConfigurations: []types.AggregationConfiguration{
+			{
+				Templates: []types.Template{
+					types.Template("API_ACTIVITY"),
+					types.Template("API_ACTIVITY"),
+				},
+				EventCategory: types.EventCategoryAggregation("Data"),
+			},
+			{
+				Templates: []types.Template{
+					types.Template("API_ACTIVITY"),
+					types.Template("API_ACTIVITY"),
+				},
+				EventCategory: types.EventCategoryAggregation("Data"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4169,7 +5890,29 @@ func TestCheckResponseSnapshot_Error_InsufficientS3BucketPolicyException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4194,7 +5937,29 @@ func TestCheckResponseSnapshot_Error_InsufficientSnsTopicPolicyException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4219,7 +5984,29 @@ func TestCheckResponseSnapshot_Error_InvalidCloudWatchLogsLogGroupArnException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4244,7 +6031,29 @@ func TestCheckResponseSnapshot_Error_InvalidCloudWatchLogsRoleArnException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4269,7 +6078,14 @@ func TestCheckResponseSnapshot_Error_InvalidDateRangeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListQueries(context.Background(), &ListQueriesInput{})
+	_, opErr := svc.ListQueries(context.Background(), &ListQueriesInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		StartTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QueryStatus:    types.QueryStatus("QUEUED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4294,7 +6110,23 @@ func TestCheckResponseSnapshot_Error_InvalidEventCategoryException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.LookupEvents(context.Background(), &LookupEventsInput{})
+	_, opErr := svc.LookupEvents(context.Background(), &LookupEventsInput{
+		LookupAttributes: []types.LookupAttribute{
+			{
+				AttributeKey:   types.LookupAttributeKey("EventId"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+			{
+				AttributeKey:   types.LookupAttributeKey("EventId"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+		},
+		StartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EventCategory: types.EventCategory("insight"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4319,7 +6151,30 @@ func TestCheckResponseSnapshot_Error_InvalidEventDataStoreCategoryException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		Name:   ptr.String("__Name__"),
+		Source: ptr.String("__Source__"),
+		Destinations: []types.Destination{
+			{
+				Type:     types.DestinationType("EVENT_DATA_STORE"),
+				Location: ptr.String("__Location__"),
+			},
+			{
+				Type:     types.DestinationType("EVENT_DATA_STORE"),
+				Location: ptr.String("__Location__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4344,7 +6199,10 @@ func TestCheckResponseSnapshot_Error_InvalidEventDataStoreStatusException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetEventConfiguration(context.Background(), &GetEventConfigurationInput{})
+	_, opErr := svc.GetEventConfiguration(context.Background(), &GetEventConfigurationInput{
+		TrailName:      ptr.String("__TrailName__"),
+		EventDataStore: ptr.String("__EventDataStore__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4369,7 +6227,146 @@ func TestCheckResponseSnapshot_Error_InvalidEventSelectorsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{})
+	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{
+		Name: ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		StartIngestion: ptr.Bool(true),
+		BillingMode:    types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4394,7 +6391,9 @@ func TestCheckResponseSnapshot_Error_InvalidHomeRegionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteTrail(context.Background(), &DeleteTrailInput{})
+	_, opErr := svc.DeleteTrail(context.Background(), &DeleteTrailInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4419,7 +6418,22 @@ func TestCheckResponseSnapshot_Error_InvalidImportSourceException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartImport(context.Background(), &StartImportInput{})
+	_, opErr := svc.StartImport(context.Background(), &StartImportInput{
+		Destinations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ImportSource: &types.ImportSource{
+			S3: &types.S3ImportSource{
+				S3LocationUri:         ptr.String("__S3LocationUri__"),
+				S3BucketRegion:        ptr.String("__S3BucketRegion__"),
+				S3BucketAccessRoleArn: ptr.String("__S3BucketAccessRoleArn__"),
+			},
+		},
+		StartEventTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndEventTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ImportId:       ptr.String("__ImportId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4444,7 +6458,27 @@ func TestCheckResponseSnapshot_Error_InvalidInsightSelectorsException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutInsightSelectors(context.Background(), &PutInsightSelectorsInput{})
+	_, opErr := svc.PutInsightSelectors(context.Background(), &PutInsightSelectorsInput{
+		TrailName: ptr.String("__TrailName__"),
+		InsightSelectors: []types.InsightSelector{
+			{
+				InsightType: types.InsightType("ApiCallRateInsight"),
+				EventCategories: []types.SourceEventCategory{
+					types.SourceEventCategory("Management"),
+					types.SourceEventCategory("Management"),
+				},
+			},
+			{
+				InsightType: types.InsightType("ApiCallRateInsight"),
+				EventCategories: []types.SourceEventCategory{
+					types.SourceEventCategory("Management"),
+					types.SourceEventCategory("Management"),
+				},
+			},
+		},
+		EventDataStore:      ptr.String("__EventDataStore__"),
+		InsightsDestination: ptr.String("__InsightsDestination__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4469,7 +6503,146 @@ func TestCheckResponseSnapshot_Error_InvalidKmsKeyIdException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{})
+	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{
+		Name: ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		StartIngestion: ptr.Bool(true),
+		BillingMode:    types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4494,7 +6667,23 @@ func TestCheckResponseSnapshot_Error_InvalidLookupAttributesException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.LookupEvents(context.Background(), &LookupEventsInput{})
+	_, opErr := svc.LookupEvents(context.Background(), &LookupEventsInput{
+		LookupAttributes: []types.LookupAttribute{
+			{
+				AttributeKey:   types.LookupAttributeKey("EventId"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+			{
+				AttributeKey:   types.LookupAttributeKey("EventId"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+		},
+		StartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EventCategory: types.EventCategory("insight"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4519,7 +6708,13 @@ func TestCheckResponseSnapshot_Error_InvalidMaxResultsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{})
+	_, opErr := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{
+		EventDataStore:               ptr.String("__EventDataStore__"),
+		QueryId:                      ptr.String("__QueryId__"),
+		NextToken:                    ptr.String("__NextToken__"),
+		MaxQueryResults:              ptr.Int32(1),
+		EventDataStoreOwnerAccountId: ptr.String("__EventDataStoreOwnerAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4544,7 +6739,13 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{})
+	_, opErr := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{
+		EventDataStore:               ptr.String("__EventDataStore__"),
+		QueryId:                      ptr.String("__QueryId__"),
+		NextToken:                    ptr.String("__NextToken__"),
+		MaxQueryResults:              ptr.Int32(1),
+		EventDataStoreOwnerAccountId: ptr.String("__EventDataStoreOwnerAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4569,7 +6770,29 @@ func TestCheckResponseSnapshot_Error_InvalidParameterCombinationException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4594,7 +6817,11 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		EventDataStore:               ptr.String("__EventDataStore__"),
+		QueryId:                      ptr.String("__QueryId__"),
+		EventDataStoreOwnerAccountId: ptr.String("__EventDataStoreOwnerAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4619,7 +6846,50 @@ func TestCheckResponseSnapshot_Error_InvalidQueryStatementException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{})
+	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{
+		Name: ptr.String("__Name__"),
+		RefreshSchedule: &types.RefreshSchedule{
+			Frequency: &types.RefreshScheduleFrequency{
+				Unit:  types.RefreshScheduleFrequencyUnit("HOURS"),
+				Value: ptr.Int32(1),
+			},
+			Status:    types.RefreshScheduleStatus("ENABLED"),
+			TimeOfDay: ptr.String("__TimeOfDay__"),
+		},
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationProtectionEnabled: ptr.Bool(true),
+		Widgets: []types.RequestWidget{
+			{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				QueryParameters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ViewProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				QueryParameters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ViewProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4644,7 +6914,14 @@ func TestCheckResponseSnapshot_Error_InvalidQueryStatusException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListQueries(context.Background(), &ListQueriesInput{})
+	_, opErr := svc.ListQueries(context.Background(), &ListQueriesInput{
+		EventDataStore: ptr.String("__EventDataStore__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		StartTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QueryStatus:    types.QueryStatus("QUEUED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4669,7 +6946,29 @@ func TestCheckResponseSnapshot_Error_InvalidS3BucketNameException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4694,7 +6993,29 @@ func TestCheckResponseSnapshot_Error_InvalidS3PrefixException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4719,7 +7040,29 @@ func TestCheckResponseSnapshot_Error_InvalidSnsTopicNameException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4744,7 +7087,30 @@ func TestCheckResponseSnapshot_Error_InvalidSourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		Name:   ptr.String("__Name__"),
+		Source: ptr.String("__Source__"),
+		Destinations: []types.Destination{
+			{
+				Type:     types.DestinationType("EVENT_DATA_STORE"),
+				Location: ptr.String("__Location__"),
+			},
+			{
+				Type:     types.DestinationType("EVENT_DATA_STORE"),
+				Location: ptr.String("__Location__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4769,7 +7135,19 @@ func TestCheckResponseSnapshot_Error_InvalidTagParameterException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4794,7 +7172,11 @@ func TestCheckResponseSnapshot_Error_InvalidTimeRangeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListPublicKeys(context.Background(), &ListPublicKeysInput{})
+	_, opErr := svc.ListPublicKeys(context.Background(), &ListPublicKeysInput{
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4819,7 +7201,11 @@ func TestCheckResponseSnapshot_Error_InvalidTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListPublicKeys(context.Background(), &ListPublicKeysInput{})
+	_, opErr := svc.ListPublicKeys(context.Background(), &ListPublicKeysInput{
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4844,7 +7230,19 @@ func TestCheckResponseSnapshot_Error_InvalidTrailNameException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4869,7 +7267,146 @@ func TestCheckResponseSnapshot_Error_KmsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{})
+	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{
+		Name: ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		StartIngestion: ptr.Bool(true),
+		BillingMode:    types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4894,7 +7431,29 @@ func TestCheckResponseSnapshot_Error_KmsKeyDisabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4919,7 +7478,146 @@ func TestCheckResponseSnapshot_Error_KmsKeyNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{})
+	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{
+		Name: ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		StartIngestion: ptr.Bool(true),
+		BillingMode:    types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4944,7 +7642,16 @@ func TestCheckResponseSnapshot_Error_MaxConcurrentQueriesException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartQuery(context.Background(), &StartQueryInput{})
+	_, opErr := svc.StartQuery(context.Background(), &StartQueryInput{
+		QueryStatement: ptr.String("__QueryStatement__"),
+		DeliveryS3Uri:  ptr.String("__DeliveryS3Uri__"),
+		QueryAlias:     ptr.String("__QueryAlias__"),
+		QueryParameters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EventDataStoreOwnerAccountId: ptr.String("__EventDataStoreOwnerAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4969,7 +7676,29 @@ func TestCheckResponseSnapshot_Error_MaximumNumberOfTrailsExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4994,7 +7723,19 @@ func TestCheckResponseSnapshot_Error_NoManagementAccountSLRExistsException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5019,7 +7760,9 @@ func TestCheckResponseSnapshot_Error_NotOrganizationManagementAccountException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterOrganizationDelegatedAdmin(context.Background(), &DeregisterOrganizationDelegatedAdminInput{})
+	_, opErr := svc.DeregisterOrganizationDelegatedAdmin(context.Background(), &DeregisterOrganizationDelegatedAdminInput{
+		DelegatedAdminAccountId: ptr.String("__DelegatedAdminAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5044,7 +7787,19 @@ func TestCheckResponseSnapshot_Error_NotOrganizationMasterAccountException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5069,7 +7824,19 @@ func TestCheckResponseSnapshot_Error_OperationNotPermittedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5094,7 +7861,146 @@ func TestCheckResponseSnapshot_Error_OrganizationNotInAllFeaturesModeException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{})
+	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{
+		Name: ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		StartIngestion: ptr.Bool(true),
+		BillingMode:    types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5119,7 +8025,146 @@ func TestCheckResponseSnapshot_Error_OrganizationsNotInUseException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{})
+	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{
+		Name: ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		StartIngestion: ptr.Bool(true),
+		BillingMode:    types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5144,7 +8189,11 @@ func TestCheckResponseSnapshot_Error_QueryIdNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		EventDataStore:               ptr.String("__EventDataStore__"),
+		QueryId:                      ptr.String("__QueryId__"),
+		EventDataStoreOwnerAccountId: ptr.String("__EventDataStoreOwnerAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5169,7 +8218,9 @@ func TestCheckResponseSnapshot_Error_ResourceARNNotValidException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5194,7 +8245,19 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5219,7 +8282,9 @@ func TestCheckResponseSnapshot_Error_ResourcePolicyNotFoundException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5244,7 +8309,10 @@ func TestCheckResponseSnapshot_Error_ResourcePolicyNotValidException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn:    ptr.String("__ResourceArn__"),
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5269,7 +8337,19 @@ func TestCheckResponseSnapshot_Error_ResourceTypeNotSupportedException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5294,7 +8374,29 @@ func TestCheckResponseSnapshot_Error_S3BucketDoesNotExistException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5319,7 +8421,50 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{})
+	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{
+		Name: ptr.String("__Name__"),
+		RefreshSchedule: &types.RefreshSchedule{
+			Frequency: &types.RefreshScheduleFrequency{
+				Unit:  types.RefreshScheduleFrequencyUnit("HOURS"),
+				Value: ptr.Int32(1),
+			},
+			Status:    types.RefreshScheduleStatus("ENABLED"),
+			TimeOfDay: ptr.String("__TimeOfDay__"),
+		},
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationProtectionEnabled: ptr.Bool(true),
+		Widgets: []types.RequestWidget{
+			{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				QueryParameters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ViewProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				QueryParameters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ViewProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5344,7 +8489,19 @@ func TestCheckResponseSnapshot_Error_TagsLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5369,7 +8526,146 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{})
+	_, opErr := svc.CreateEventDataStore(context.Background(), &CreateEventDataStoreInput{
+		Name: ptr.String("__Name__"),
+		AdvancedEventSelectors: []types.AdvancedEventSelector{
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				FieldSelectors: []types.AdvancedFieldSelector{
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Field: ptr.String("__Field__"),
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotStartsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEndsWith: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MultiRegionEnabled:           ptr.Bool(true),
+		OrganizationEnabled:          ptr.Bool(true),
+		RetentionPeriod:              ptr.Int32(1),
+		TerminationProtectionEnabled: ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		StartIngestion: ptr.Bool(true),
+		BillingMode:    types.BillingMode("EXTENDABLE_RETENTION_PRICING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5394,7 +8690,29 @@ func TestCheckResponseSnapshot_Error_TrailAlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5419,7 +8737,9 @@ func TestCheckResponseSnapshot_Error_TrailNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteTrail(context.Background(), &DeleteTrailInput{})
+	_, opErr := svc.DeleteTrail(context.Background(), &DeleteTrailInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5444,7 +8764,29 @@ func TestCheckResponseSnapshot_Error_TrailNotProvidedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{})
+	_, opErr := svc.CreateTrail(context.Background(), &CreateTrailInput{
+		Name:                       ptr.String("__Name__"),
+		S3BucketName:               ptr.String("__S3BucketName__"),
+		S3KeyPrefix:                ptr.String("__S3KeyPrefix__"),
+		SnsTopicName:               ptr.String("__SnsTopicName__"),
+		IncludeGlobalServiceEvents: ptr.Bool(true),
+		IsMultiRegionTrail:         ptr.Bool(true),
+		EnableLogFileValidation:    ptr.Bool(true),
+		CloudWatchLogsLogGroupArn:  ptr.String("__CloudWatchLogsLogGroupArn__"),
+		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		IsOrganizationTrail:        ptr.Bool(true),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5469,7 +8811,19 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagsList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

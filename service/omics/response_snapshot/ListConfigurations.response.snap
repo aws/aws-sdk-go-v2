@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","status":"CREATING"},{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","status":"CREATING"}],"nextToken":"__NextToken__"}

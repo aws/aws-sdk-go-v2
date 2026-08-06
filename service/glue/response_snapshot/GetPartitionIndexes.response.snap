@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetPartitionIndexes
+
+{"NextToken":"__NextToken__","PartitionIndexDescriptorList":[{"BackfillErrors":[{"Code":"ENCRYPTED_PARTITION_ERROR","Partitions":[{"Values":["__Member__","__Member__"]},{"Values":["__Member__","__Member__"]}]},{"Code":"ENCRYPTED_PARTITION_ERROR","Partitions":[{"Values":["__Member__","__Member__"]},{"Values":["__Member__","__Member__"]}]}],"IndexName":"__IndexName__","IndexStatus":"CREATING","Keys":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}]},{"BackfillErrors":[{"Code":"ENCRYPTED_PARTITION_ERROR","Partitions":[{"Values":["__Member__","__Member__"]},{"Values":["__Member__","__Member__"]}]},{"Code":"ENCRYPTED_PARTITION_ERROR","Partitions":[{"Values":["__Member__","__Member__"]},{"Values":["__Member__","__Member__"]}]}],"IndexName":"__IndexName__","IndexStatus":"CREATING","Keys":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}]}]}

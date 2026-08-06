@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","permissions":[{"arn":"__Arn__","defaultVersion":true,"featureSet":"CREATED_FROM_POLICY","lastUpdatedTime":946684800,"permissionVersion":"__PermissionVersion__","resourceShareArn":"__ResourceShareArn__","resourceType":"__ResourceType__","status":"__Status__"},{"arn":"__Arn__","defaultVersion":true,"featureSet":"CREATED_FROM_POLICY","lastUpdatedTime":946684800,"permissionVersion":"__PermissionVersion__","resourceShareArn":"__ResourceShareArn__","resourceType":"__ResourceType__","status":"__Status__"}]}

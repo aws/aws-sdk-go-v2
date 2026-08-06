@@ -1,0 +1,5 @@
+500
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSOrganizationsV20161128.AcceptHandshake
+
+{"__type":"ServiceException","Message":"__Message__"}

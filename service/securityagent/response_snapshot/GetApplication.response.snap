@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applicationId":"__ApplicationId__","applicationName":"__ApplicationName__","defaultKmsKeyId":"__DefaultKmsKeyId__","domain":"__Domain__","idcConfiguration":{"idcApplicationArn":"__IdcApplicationArn__","idcInstanceArn":"__IdcInstanceArn__"},"roleArn":"__RoleArn__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelGroupName":"__ChannelGroupName__","ChannelName":"__ChannelName__","Policy":"__Policy__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"participantToken":{"attributes":{"key0":"__Value__"},"capabilities":["PUBLISH","PUBLISH"],"duration":1,"expirationTime":"2000-01-01T00:00:00Z","participantId":"__ParticipantId__","token":"__Token__","userId":"__UserId__"}}

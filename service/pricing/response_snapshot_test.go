@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -135,7 +136,12 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServices(context.Background(), &DescribeServicesInput{})
+	got, err := svc.DescribeServices(context.Background(), &DescribeServicesInput{
+		ServiceCode:   ptr.String("__ServiceCode__"),
+		FormatVersion: ptr.String("__FormatVersion__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +170,12 @@ func TestCheckResponseSnapshot_GetAttributeValues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAttributeValues(context.Background(), &GetAttributeValuesInput{})
+	got, err := svc.GetAttributeValues(context.Background(), &GetAttributeValuesInput{
+		ServiceCode:   ptr.String("__ServiceCode__"),
+		AttributeName: ptr.String("__AttributeName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -185,7 +196,10 @@ func TestCheckResponseSnapshot_GetPriceListFileUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPriceListFileUrl(context.Background(), &GetPriceListFileUrlInput{})
+	got, err := svc.GetPriceListFileUrl(context.Background(), &GetPriceListFileUrlInput{
+		PriceListArn: ptr.String("__PriceListArn__"),
+		FileFormat:   ptr.String("__FileFormat__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +225,24 @@ func TestCheckResponseSnapshot_GetProducts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProducts(context.Background(), &GetProductsInput{})
+	got, err := svc.GetProducts(context.Background(), &GetProductsInput{
+		ServiceCode: ptr.String("__ServiceCode__"),
+		Filters: []types.Filter{
+			{
+				Type:  types.FilterType("TERM_MATCH"),
+				Field: ptr.String("__Field__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Type:  types.FilterType("TERM_MATCH"),
+				Field: ptr.String("__Field__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FormatVersion: ptr.String("__FormatVersion__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +283,14 @@ func TestCheckResponseSnapshot_ListPriceLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPriceLists(context.Background(), &ListPriceListsInput{})
+	got, err := svc.ListPriceLists(context.Background(), &ListPriceListsInput{
+		ServiceCode:   ptr.String("__ServiceCode__"),
+		EffectiveDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RegionCode:    ptr.String("__RegionCode__"),
+		CurrencyCode:  ptr.String("__CurrencyCode__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -273,7 +311,12 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{})
+	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{
+		ServiceCode:   ptr.String("__ServiceCode__"),
+		FormatVersion: ptr.String("__FormatVersion__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -298,7 +341,12 @@ func TestCheckResponseSnapshot_Error_ExpiredNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{})
+	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{
+		ServiceCode:   ptr.String("__ServiceCode__"),
+		FormatVersion: ptr.String("__FormatVersion__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -323,7 +371,12 @@ func TestCheckResponseSnapshot_Error_InternalErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{})
+	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{
+		ServiceCode:   ptr.String("__ServiceCode__"),
+		FormatVersion: ptr.String("__FormatVersion__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -348,7 +401,12 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{})
+	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{
+		ServiceCode:   ptr.String("__ServiceCode__"),
+		FormatVersion: ptr.String("__FormatVersion__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -373,7 +431,12 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{})
+	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{
+		ServiceCode:   ptr.String("__ServiceCode__"),
+		FormatVersion: ptr.String("__FormatVersion__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -398,7 +461,12 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{})
+	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{
+		ServiceCode:   ptr.String("__ServiceCode__"),
+		FormatVersion: ptr.String("__FormatVersion__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -423,7 +491,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetPriceListFileUrl(context.Background(), &GetPriceListFileUrlInput{})
+	_, opErr := svc.GetPriceListFileUrl(context.Background(), &GetPriceListFileUrlInput{
+		PriceListArn: ptr.String("__PriceListArn__"),
+		FileFormat:   ptr.String("__FileFormat__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -448,7 +519,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{})
+	_, opErr := svc.DescribeServices(context.Background(), &DescribeServicesInput{
+		ServiceCode:   ptr.String("__ServiceCode__"),
+		FormatVersion: ptr.String("__FormatVersion__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

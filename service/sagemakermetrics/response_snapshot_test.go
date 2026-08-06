@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -143,7 +144,28 @@ func TestCheckResponseSnapshot_BatchGetMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetMetrics(context.Background(), &BatchGetMetricsInput{})
+	got, err := svc.BatchGetMetrics(context.Background(), &BatchGetMetricsInput{
+		MetricQueries: []types.MetricQuery{
+			{
+				MetricName:  ptr.String("__MetricName__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+				MetricStat:  types.MetricStatistic("Min"),
+				Period:      types.Period("OneMinute"),
+				XAxisType:   types.XAxisType("IterationNumber"),
+				Start:       ptr.Int64(1),
+				End:         ptr.Int64(1),
+			},
+			{
+				MetricName:  ptr.String("__MetricName__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+				MetricStat:  types.MetricStatistic("Min"),
+				Period:      types.Period("OneMinute"),
+				XAxisType:   types.XAxisType("IterationNumber"),
+				Start:       ptr.Int64(1),
+				End:         ptr.Int64(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,7 +195,23 @@ func TestCheckResponseSnapshot_BatchPutMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchPutMetrics(context.Background(), &BatchPutMetricsInput{})
+	got, err := svc.BatchPutMetrics(context.Background(), &BatchPutMetricsInput{
+		TrialComponentName: ptr.String("__TrialComponentName__"),
+		MetricData: []types.RawMetricData{
+			{
+				MetricName: ptr.String("__MetricName__"),
+				Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Step:       ptr.Int32(1),
+				Value:      ptr.Float64(1.0),
+			},
+			{
+				MetricName: ptr.String("__MetricName__"),
+				Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Step:       ptr.Int32(1),
+				Value:      ptr.Float64(1.0),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -1,0 +1,5 @@
+402
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.DetectModerationLabels
+
+{"__type":"HumanLoopQuotaExceededException","Code":"HumanLoopQuotaExceededException","Logref":"__Logref__","Message":"__Message__","QuotaCode":"__QuotaCode__","ResourceType":"__ResourceType__","ServiceCode":"__ServiceCode__"}

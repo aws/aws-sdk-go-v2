@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_ActivateEmailContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{})
+	got, err := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{
+		Arn:  ptr.String("__Arn__"),
+		Code: ptr.String("__Code__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +141,13 @@ func TestCheckResponseSnapshot_CreateEmailContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEmailContact(context.Background(), &CreateEmailContactInput{})
+	got, err := svc.CreateEmailContact(context.Background(), &CreateEmailContactInput{
+		Name:         ptr.String("__Name__"),
+		EmailAddress: ptr.String("__EmailAddress__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,7 +166,9 @@ func TestCheckResponseSnapshot_DeleteEmailContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEmailContact(context.Background(), &DeleteEmailContactInput{})
+	got, err := svc.DeleteEmailContact(context.Background(), &DeleteEmailContactInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -185,7 +196,9 @@ func TestCheckResponseSnapshot_GetEmailContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEmailContact(context.Background(), &GetEmailContactInput{})
+	got, err := svc.GetEmailContact(context.Background(), &GetEmailContactInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +237,10 @@ func TestCheckResponseSnapshot_ListEmailContacts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEmailContacts(context.Background(), &ListEmailContactsInput{})
+	got, err := svc.ListEmailContacts(context.Background(), &ListEmailContactsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -247,7 +263,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -266,7 +284,9 @@ func TestCheckResponseSnapshot_SendActivationCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendActivationCode(context.Background(), &SendActivationCodeInput{})
+	got, err := svc.SendActivationCode(context.Background(), &SendActivationCodeInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -285,7 +305,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -304,7 +329,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -325,7 +356,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{})
+	_, opErr := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{
+		Arn:  ptr.String("__Arn__"),
+		Code: ptr.String("__Code__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -352,7 +386,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{})
+	_, opErr := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{
+		Arn:  ptr.String("__Arn__"),
+		Code: ptr.String("__Code__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -377,7 +414,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{})
+	_, opErr := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{
+		Arn:  ptr.String("__Arn__"),
+		Code: ptr.String("__Code__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -404,7 +444,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{})
+	_, opErr := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{
+		Arn:  ptr.String("__Arn__"),
+		Code: ptr.String("__Code__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -433,7 +476,13 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEmailContact(context.Background(), &CreateEmailContactInput{})
+	_, opErr := svc.CreateEmailContact(context.Background(), &CreateEmailContactInput{
+		Name:         ptr.String("__Name__"),
+		EmailAddress: ptr.String("__EmailAddress__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -461,7 +510,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{})
+	_, opErr := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{
+		Arn:  ptr.String("__Arn__"),
+		Code: ptr.String("__Code__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -497,7 +549,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{})
+	_, opErr := svc.ActivateEmailContact(context.Background(), &ActivateEmailContactInput{
+		Arn:  ptr.String("__Arn__"),
+		Code: ptr.String("__Code__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

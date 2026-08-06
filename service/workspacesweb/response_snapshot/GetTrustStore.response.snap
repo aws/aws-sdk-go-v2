@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"trustStore":{"associatedPortalArns":["__Member__","__Member__"],"trustStoreArn":"__TrustStoreArn__"}}

@@ -119,7 +119,48 @@ func TestCheckResponseSnapshot_CreateExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExport(context.Background(), &CreateExportInput{})
+	got, err := svc.CreateExport(context.Background(), &CreateExportInput{
+		Export: &types.Export{
+			ExportArn:   ptr.String("__ExportArn__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			DataQuery: &types.DataQuery{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				TableConfigurations: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+			},
+			DestinationConfigurations: &types.DestinationConfigurations{
+				S3Destination: &types.S3Destination{
+					S3Bucket:      ptr.String("__S3Bucket__"),
+					S3BucketOwner: ptr.String("__S3BucketOwner__"),
+					S3Prefix:      ptr.String("__S3Prefix__"),
+					S3Region:      ptr.String("__S3Region__"),
+					S3OutputConfigurations: &types.S3OutputConfigurations{
+						OutputType:  types.S3OutputType("CUSTOM"),
+						Format:      types.FormatOption("TEXT_OR_CSV"),
+						Compression: types.CompressionOption("GZIP"),
+						Overwrite:   types.OverwriteOption("CREATE_NEW_REPORT"),
+					},
+				},
+			},
+			RefreshCadence: &types.RefreshCadence{
+				Frequency: types.FrequencyOption("SYNCHRONOUS"),
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +181,9 @@ func TestCheckResponseSnapshot_DeleteExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteExport(context.Background(), &DeleteExportInput{})
+	got, err := svc.DeleteExport(context.Background(), &DeleteExportInput{
+		ExportArn: ptr.String("__ExportArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -198,7 +241,10 @@ func TestCheckResponseSnapshot_GetExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExecution(context.Background(), &GetExecutionInput{})
+	got, err := svc.GetExecution(context.Background(), &GetExecutionInput{
+		ExportArn:   ptr.String("__ExportArn__"),
+		ExecutionId: ptr.String("__ExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -255,7 +301,9 @@ func TestCheckResponseSnapshot_GetExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExport(context.Background(), &GetExportInput{})
+	got, err := svc.GetExport(context.Background(), &GetExportInput{
+		ExportArn: ptr.String("__ExportArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -292,7 +340,12 @@ func TestCheckResponseSnapshot_GetTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTable(context.Background(), &GetTableInput{})
+	got, err := svc.GetTable(context.Background(), &GetTableInput{
+		TableName: ptr.String("__TableName__"),
+		TableProperties: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -335,7 +388,11 @@ func TestCheckResponseSnapshot_ListExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExecutions(context.Background(), &ListExecutionsInput{})
+	got, err := svc.ListExecutions(context.Background(), &ListExecutionsInput{
+		ExportArn:  ptr.String("__ExportArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -380,7 +437,10 @@ func TestCheckResponseSnapshot_ListExports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExports(context.Background(), &ListExportsInput{})
+	got, err := svc.ListExports(context.Background(), &ListExportsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -451,7 +511,10 @@ func TestCheckResponseSnapshot_ListTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTables(context.Background(), &ListTablesInput{})
+	got, err := svc.ListTables(context.Background(), &ListTablesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -482,7 +545,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -501,7 +568,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -520,7 +599,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ResourceTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -541,7 +626,39 @@ func TestCheckResponseSnapshot_UpdateExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateExport(context.Background(), &UpdateExportInput{})
+	got, err := svc.UpdateExport(context.Background(), &UpdateExportInput{
+		ExportArn: ptr.String("__ExportArn__"),
+		Export: &types.Export{
+			ExportArn:   ptr.String("__ExportArn__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			DataQuery: &types.DataQuery{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				TableConfigurations: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+			},
+			DestinationConfigurations: &types.DestinationConfigurations{
+				S3Destination: &types.S3Destination{
+					S3Bucket:      ptr.String("__S3Bucket__"),
+					S3BucketOwner: ptr.String("__S3BucketOwner__"),
+					S3Prefix:      ptr.String("__S3Prefix__"),
+					S3Region:      ptr.String("__S3Region__"),
+					S3OutputConfigurations: &types.S3OutputConfigurations{
+						OutputType:  types.S3OutputType("CUSTOM"),
+						Format:      types.FormatOption("TEXT_OR_CSV"),
+						Compression: types.CompressionOption("GZIP"),
+						Overwrite:   types.OverwriteOption("CREATE_NEW_REPORT"),
+					},
+				},
+			},
+			RefreshCadence: &types.RefreshCadence{
+				Frequency: types.FrequencyOption("SYNCHRONOUS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -562,7 +679,48 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExport(context.Background(), &CreateExportInput{})
+	_, opErr := svc.CreateExport(context.Background(), &CreateExportInput{
+		Export: &types.Export{
+			ExportArn:   ptr.String("__ExportArn__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			DataQuery: &types.DataQuery{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				TableConfigurations: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+			},
+			DestinationConfigurations: &types.DestinationConfigurations{
+				S3Destination: &types.S3Destination{
+					S3Bucket:      ptr.String("__S3Bucket__"),
+					S3BucketOwner: ptr.String("__S3BucketOwner__"),
+					S3Prefix:      ptr.String("__S3Prefix__"),
+					S3Region:      ptr.String("__S3Region__"),
+					S3OutputConfigurations: &types.S3OutputConfigurations{
+						OutputType:  types.S3OutputType("CUSTOM"),
+						Format:      types.FormatOption("TEXT_OR_CSV"),
+						Compression: types.CompressionOption("GZIP"),
+						Overwrite:   types.OverwriteOption("CREATE_NEW_REPORT"),
+					},
+				},
+			},
+			RefreshCadence: &types.RefreshCadence{
+				Frequency: types.FrequencyOption("SYNCHRONOUS"),
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -587,7 +745,48 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExport(context.Background(), &CreateExportInput{})
+	_, opErr := svc.CreateExport(context.Background(), &CreateExportInput{
+		Export: &types.Export{
+			ExportArn:   ptr.String("__ExportArn__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			DataQuery: &types.DataQuery{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				TableConfigurations: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+			},
+			DestinationConfigurations: &types.DestinationConfigurations{
+				S3Destination: &types.S3Destination{
+					S3Bucket:      ptr.String("__S3Bucket__"),
+					S3BucketOwner: ptr.String("__S3BucketOwner__"),
+					S3Prefix:      ptr.String("__S3Prefix__"),
+					S3Region:      ptr.String("__S3Region__"),
+					S3OutputConfigurations: &types.S3OutputConfigurations{
+						OutputType:  types.S3OutputType("CUSTOM"),
+						Format:      types.FormatOption("TEXT_OR_CSV"),
+						Compression: types.CompressionOption("GZIP"),
+						Overwrite:   types.OverwriteOption("CREATE_NEW_REPORT"),
+					},
+				},
+			},
+			RefreshCadence: &types.RefreshCadence{
+				Frequency: types.FrequencyOption("SYNCHRONOUS"),
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -614,7 +813,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteExport(context.Background(), &DeleteExportInput{})
+	_, opErr := svc.DeleteExport(context.Background(), &DeleteExportInput{
+		ExportArn: ptr.String("__ExportArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -643,7 +844,48 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExport(context.Background(), &CreateExportInput{})
+	_, opErr := svc.CreateExport(context.Background(), &CreateExportInput{
+		Export: &types.Export{
+			ExportArn:   ptr.String("__ExportArn__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			DataQuery: &types.DataQuery{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				TableConfigurations: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+			},
+			DestinationConfigurations: &types.DestinationConfigurations{
+				S3Destination: &types.S3Destination{
+					S3Bucket:      ptr.String("__S3Bucket__"),
+					S3BucketOwner: ptr.String("__S3BucketOwner__"),
+					S3Prefix:      ptr.String("__S3Prefix__"),
+					S3Region:      ptr.String("__S3Region__"),
+					S3OutputConfigurations: &types.S3OutputConfigurations{
+						OutputType:  types.S3OutputType("CUSTOM"),
+						Format:      types.FormatOption("TEXT_OR_CSV"),
+						Compression: types.CompressionOption("GZIP"),
+						Overwrite:   types.OverwriteOption("CREATE_NEW_REPORT"),
+					},
+				},
+			},
+			RefreshCadence: &types.RefreshCadence{
+				Frequency: types.FrequencyOption("SYNCHRONOUS"),
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -670,7 +912,48 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExport(context.Background(), &CreateExportInput{})
+	_, opErr := svc.CreateExport(context.Background(), &CreateExportInput{
+		Export: &types.Export{
+			ExportArn:   ptr.String("__ExportArn__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			DataQuery: &types.DataQuery{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				TableConfigurations: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+			},
+			DestinationConfigurations: &types.DestinationConfigurations{
+				S3Destination: &types.S3Destination{
+					S3Bucket:      ptr.String("__S3Bucket__"),
+					S3BucketOwner: ptr.String("__S3BucketOwner__"),
+					S3Prefix:      ptr.String("__S3Prefix__"),
+					S3Region:      ptr.String("__S3Region__"),
+					S3OutputConfigurations: &types.S3OutputConfigurations{
+						OutputType:  types.S3OutputType("CUSTOM"),
+						Format:      types.FormatOption("TEXT_OR_CSV"),
+						Compression: types.CompressionOption("GZIP"),
+						Overwrite:   types.OverwriteOption("CREATE_NEW_REPORT"),
+					},
+				},
+			},
+			RefreshCadence: &types.RefreshCadence{
+				Frequency: types.FrequencyOption("SYNCHRONOUS"),
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -706,7 +989,48 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExport(context.Background(), &CreateExportInput{})
+	_, opErr := svc.CreateExport(context.Background(), &CreateExportInput{
+		Export: &types.Export{
+			ExportArn:   ptr.String("__ExportArn__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			DataQuery: &types.DataQuery{
+				QueryStatement: ptr.String("__QueryStatement__"),
+				TableConfigurations: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+			},
+			DestinationConfigurations: &types.DestinationConfigurations{
+				S3Destination: &types.S3Destination{
+					S3Bucket:      ptr.String("__S3Bucket__"),
+					S3BucketOwner: ptr.String("__S3BucketOwner__"),
+					S3Prefix:      ptr.String("__S3Prefix__"),
+					S3Region:      ptr.String("__S3Region__"),
+					S3OutputConfigurations: &types.S3OutputConfigurations{
+						OutputType:  types.S3OutputType("CUSTOM"),
+						Format:      types.FormatOption("TEXT_OR_CSV"),
+						Compression: types.CompressionOption("GZIP"),
+						Overwrite:   types.OverwriteOption("CREATE_NEW_REPORT"),
+					},
+				},
+			},
+			RefreshCadence: &types.RefreshCadence{
+				Frequency: types.FrequencyOption("SYNCHRONOUS"),
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

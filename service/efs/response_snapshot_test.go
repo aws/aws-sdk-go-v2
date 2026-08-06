@@ -151,7 +151,36 @@ func TestCheckResponseSnapshot_CreateAccessPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{})
+	got, err := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FileSystemId: ptr.String("__FileSystemId__"),
+		PosixUser: &types.PosixUser{
+			Uid: ptr.Int64(1),
+			Gid: ptr.Int64(1),
+			SecondaryGids: []int64{
+				1,
+				1,
+			},
+		},
+		RootDirectory: &types.RootDirectory{
+			Path: ptr.String("__Path__"),
+			CreationInfo: &types.CreationInfo{
+				OwnerUid:    ptr.Int64(1),
+				OwnerGid:    ptr.Int64(1),
+				Permissions: ptr.String("__Permissions__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -206,7 +235,26 @@ func TestCheckResponseSnapshot_CreateFileSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{})
+	got, err := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{
+		CreationToken:                ptr.String("__CreationToken__"),
+		PerformanceMode:              types.PerformanceMode("generalPurpose"),
+		Encrypted:                    ptr.Bool(true),
+		KmsKeyId:                     ptr.String("__KmsKeyId__"),
+		ThroughputMode:               types.ThroughputMode("bursting"),
+		ProvisionedThroughputInMibps: ptr.Float64(1.0),
+		AvailabilityZoneName:         ptr.String("__AvailabilityZoneName__"),
+		Backup:                       ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +285,17 @@ func TestCheckResponseSnapshot_CreateMountTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{})
+	got, err := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{
+		FileSystemId:  ptr.String("__FileSystemId__"),
+		SubnetId:      ptr.String("__SubnetId__"),
+		IpAddress:     ptr.String("__IpAddress__"),
+		Ipv6Address:   ptr.String("__Ipv6Address__"),
+		IpAddressType: types.IpAddressType("IPV4_ONLY"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -283,7 +341,25 @@ func TestCheckResponseSnapshot_CreateReplicationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReplicationConfiguration(context.Background(), &CreateReplicationConfigurationInput{})
+	got, err := svc.CreateReplicationConfiguration(context.Background(), &CreateReplicationConfigurationInput{
+		SourceFileSystemId: ptr.String("__SourceFileSystemId__"),
+		Destinations: []types.DestinationToCreate{
+			{
+				Region:               ptr.String("__Region__"),
+				AvailabilityZoneName: ptr.String("__AvailabilityZoneName__"),
+				KmsKeyId:             ptr.String("__KmsKeyId__"),
+				FileSystemId:         ptr.String("__FileSystemId__"),
+				RoleArn:              ptr.String("__RoleArn__"),
+			},
+			{
+				Region:               ptr.String("__Region__"),
+				AvailabilityZoneName: ptr.String("__AvailabilityZoneName__"),
+				KmsKeyId:             ptr.String("__KmsKeyId__"),
+				FileSystemId:         ptr.String("__FileSystemId__"),
+				RoleArn:              ptr.String("__RoleArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -302,7 +378,19 @@ func TestCheckResponseSnapshot_CreateTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTags(context.Background(), &CreateTagsInput{})
+	got, err := svc.CreateTags(context.Background(), &CreateTagsInput{
+		FileSystemId: ptr.String("__FileSystemId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -321,7 +409,9 @@ func TestCheckResponseSnapshot_DeleteAccessPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessPoint(context.Background(), &DeleteAccessPointInput{})
+	got, err := svc.DeleteAccessPoint(context.Background(), &DeleteAccessPointInput{
+		AccessPointId: ptr.String("__AccessPointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -340,7 +430,9 @@ func TestCheckResponseSnapshot_DeleteFileSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFileSystem(context.Background(), &DeleteFileSystemInput{})
+	got, err := svc.DeleteFileSystem(context.Background(), &DeleteFileSystemInput{
+		FileSystemId: ptr.String("__FileSystemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -359,7 +451,9 @@ func TestCheckResponseSnapshot_DeleteFileSystemPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFileSystemPolicy(context.Background(), &DeleteFileSystemPolicyInput{})
+	got, err := svc.DeleteFileSystemPolicy(context.Background(), &DeleteFileSystemPolicyInput{
+		FileSystemId: ptr.String("__FileSystemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -378,7 +472,9 @@ func TestCheckResponseSnapshot_DeleteMountTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMountTarget(context.Background(), &DeleteMountTargetInput{})
+	got, err := svc.DeleteMountTarget(context.Background(), &DeleteMountTargetInput{
+		MountTargetId: ptr.String("__MountTargetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -397,7 +493,10 @@ func TestCheckResponseSnapshot_DeleteReplicationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReplicationConfiguration(context.Background(), &DeleteReplicationConfigurationInput{})
+	got, err := svc.DeleteReplicationConfiguration(context.Background(), &DeleteReplicationConfigurationInput{
+		SourceFileSystemId: ptr.String("__SourceFileSystemId__"),
+		DeletionMode:       types.DeletionMode("ALL_CONFIGURATIONS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -416,7 +515,13 @@ func TestCheckResponseSnapshot_DeleteTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTags(context.Background(), &DeleteTagsInput{})
+	got, err := svc.DeleteTags(context.Background(), &DeleteTagsInput{
+		FileSystemId: ptr.String("__FileSystemId__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -509,7 +614,12 @@ func TestCheckResponseSnapshot_DescribeAccessPoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccessPoints(context.Background(), &DescribeAccessPointsInput{})
+	got, err := svc.DescribeAccessPoints(context.Background(), &DescribeAccessPointsInput{
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		AccessPointId: ptr.String("__AccessPointId__"),
+		FileSystemId:  ptr.String("__FileSystemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -537,7 +647,10 @@ func TestCheckResponseSnapshot_DescribeAccountPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccountPreferences(context.Background(), &DescribeAccountPreferencesInput{})
+	got, err := svc.DescribeAccountPreferences(context.Background(), &DescribeAccountPreferencesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -560,7 +673,9 @@ func TestCheckResponseSnapshot_DescribeBackupPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBackupPolicy(context.Background(), &DescribeBackupPolicyInput{})
+	got, err := svc.DescribeBackupPolicy(context.Background(), &DescribeBackupPolicyInput{
+		FileSystemId: ptr.String("__FileSystemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -582,7 +697,9 @@ func TestCheckResponseSnapshot_DescribeFileSystemPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFileSystemPolicy(context.Background(), &DescribeFileSystemPolicyInput{})
+	got, err := svc.DescribeFileSystemPolicy(context.Background(), &DescribeFileSystemPolicyInput{
+		FileSystemId: ptr.String("__FileSystemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -680,7 +797,12 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFileSystems(context.Background(), &DescribeFileSystemsInput{})
+	got, err := svc.DescribeFileSystems(context.Background(), &DescribeFileSystemsInput{
+		MaxItems:      ptr.Int32(1),
+		Marker:        ptr.String("__Marker__"),
+		CreationToken: ptr.String("__CreationToken__"),
+		FileSystemId:  ptr.String("__FileSystemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -712,7 +834,9 @@ func TestCheckResponseSnapshot_DescribeLifecycleConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLifecycleConfiguration(context.Background(), &DescribeLifecycleConfigurationInput{})
+	got, err := svc.DescribeLifecycleConfiguration(context.Background(), &DescribeLifecycleConfigurationInput{
+		FileSystemId: ptr.String("__FileSystemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -736,7 +860,9 @@ func TestCheckResponseSnapshot_DescribeMountTargetSecurityGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMountTargetSecurityGroups(context.Background(), &DescribeMountTargetSecurityGroupsInput{})
+	got, err := svc.DescribeMountTargetSecurityGroups(context.Background(), &DescribeMountTargetSecurityGroupsInput{
+		MountTargetId: ptr.String("__MountTargetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -786,7 +912,13 @@ func TestCheckResponseSnapshot_DescribeMountTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMountTargets(context.Background(), &DescribeMountTargetsInput{})
+	got, err := svc.DescribeMountTargets(context.Background(), &DescribeMountTargetsInput{
+		MaxItems:      ptr.Int32(1),
+		Marker:        ptr.String("__Marker__"),
+		FileSystemId:  ptr.String("__FileSystemId__"),
+		MountTargetId: ptr.String("__MountTargetId__"),
+		AccessPointId: ptr.String("__AccessPointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -865,7 +997,11 @@ func TestCheckResponseSnapshot_DescribeReplicationConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplicationConfigurations(context.Background(), &DescribeReplicationConfigurationsInput{})
+	got, err := svc.DescribeReplicationConfigurations(context.Background(), &DescribeReplicationConfigurationsInput{
+		FileSystemId: ptr.String("__FileSystemId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -897,7 +1033,11 @@ func TestCheckResponseSnapshot_DescribeTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{})
+	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{
+		MaxItems:     ptr.Int32(1),
+		Marker:       ptr.String("__Marker__"),
+		FileSystemId: ptr.String("__FileSystemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -928,7 +1068,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -947,7 +1091,13 @@ func TestCheckResponseSnapshot_ModifyMountTargetSecurityGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyMountTargetSecurityGroups(context.Background(), &ModifyMountTargetSecurityGroupsInput{})
+	got, err := svc.ModifyMountTargetSecurityGroups(context.Background(), &ModifyMountTargetSecurityGroupsInput{
+		MountTargetId: ptr.String("__MountTargetId__"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -974,7 +1124,9 @@ func TestCheckResponseSnapshot_PutAccountPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountPreferences(context.Background(), &PutAccountPreferencesInput{})
+	got, err := svc.PutAccountPreferences(context.Background(), &PutAccountPreferencesInput{
+		ResourceIdType: types.ResourceIdType("LONG_ID"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -997,7 +1149,12 @@ func TestCheckResponseSnapshot_PutBackupPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBackupPolicy(context.Background(), &PutBackupPolicyInput{})
+	got, err := svc.PutBackupPolicy(context.Background(), &PutBackupPolicyInput{
+		FileSystemId: ptr.String("__FileSystemId__"),
+		BackupPolicy: &types.BackupPolicy{
+			Status: types.Status("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1019,7 +1176,11 @@ func TestCheckResponseSnapshot_PutFileSystemPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFileSystemPolicy(context.Background(), &PutFileSystemPolicyInput{})
+	got, err := svc.PutFileSystemPolicy(context.Background(), &PutFileSystemPolicyInput{
+		FileSystemId:                   ptr.String("__FileSystemId__"),
+		Policy:                         ptr.String("__Policy__"),
+		BypassPolicyLockoutSafetyCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1051,7 +1212,21 @@ func TestCheckResponseSnapshot_PutLifecycleConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLifecycleConfiguration(context.Background(), &PutLifecycleConfigurationInput{})
+	got, err := svc.PutLifecycleConfiguration(context.Background(), &PutLifecycleConfigurationInput{
+		FileSystemId: ptr.String("__FileSystemId__"),
+		LifecyclePolicies: []types.LifecyclePolicy{
+			{
+				TransitionToIA:                  types.TransitionToIARules("AFTER_7_DAYS"),
+				TransitionToPrimaryStorageClass: types.TransitionToPrimaryStorageClassRules("AFTER_1_ACCESS"),
+				TransitionToArchive:             types.TransitionToArchiveRules("AFTER_1_DAY"),
+			},
+			{
+				TransitionToIA:                  types.TransitionToIARules("AFTER_7_DAYS"),
+				TransitionToPrimaryStorageClass: types.TransitionToPrimaryStorageClassRules("AFTER_1_ACCESS"),
+				TransitionToArchive:             types.TransitionToArchiveRules("AFTER_1_DAY"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1070,7 +1245,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1089,7 +1276,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1144,7 +1337,11 @@ func TestCheckResponseSnapshot_UpdateFileSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFileSystem(context.Background(), &UpdateFileSystemInput{})
+	got, err := svc.UpdateFileSystem(context.Background(), &UpdateFileSystemInput{
+		FileSystemId:                 ptr.String("__FileSystemId__"),
+		ThroughputMode:               types.ThroughputMode("bursting"),
+		ProvisionedThroughputInMibps: ptr.Float64(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1165,7 +1362,10 @@ func TestCheckResponseSnapshot_UpdateFileSystemProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFileSystemProtection(context.Background(), &UpdateFileSystemProtectionInput{})
+	got, err := svc.UpdateFileSystemProtection(context.Background(), &UpdateFileSystemProtectionInput{
+		FileSystemId:                   ptr.String("__FileSystemId__"),
+		ReplicationOverwriteProtection: types.ReplicationOverwriteProtection("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1188,7 +1388,36 @@ func TestCheckResponseSnapshot_Error_AccessPointAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{})
+	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FileSystemId: ptr.String("__FileSystemId__"),
+		PosixUser: &types.PosixUser{
+			Uid: ptr.Int64(1),
+			Gid: ptr.Int64(1),
+			SecondaryGids: []int64{
+				1,
+				1,
+			},
+		},
+		RootDirectory: &types.RootDirectory{
+			Path: ptr.String("__Path__"),
+			CreationInfo: &types.CreationInfo{
+				OwnerUid:    ptr.Int64(1),
+				OwnerGid:    ptr.Int64(1),
+				Permissions: ptr.String("__Permissions__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1214,7 +1443,36 @@ func TestCheckResponseSnapshot_Error_AccessPointLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{})
+	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FileSystemId: ptr.String("__FileSystemId__"),
+		PosixUser: &types.PosixUser{
+			Uid: ptr.Int64(1),
+			Gid: ptr.Int64(1),
+			SecondaryGids: []int64{
+				1,
+				1,
+			},
+		},
+		RootDirectory: &types.RootDirectory{
+			Path: ptr.String("__Path__"),
+			CreationInfo: &types.CreationInfo{
+				OwnerUid:    ptr.Int64(1),
+				OwnerGid:    ptr.Int64(1),
+				Permissions: ptr.String("__Permissions__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1240,7 +1498,9 @@ func TestCheckResponseSnapshot_Error_AccessPointNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAccessPoint(context.Background(), &DeleteAccessPointInput{})
+	_, opErr := svc.DeleteAccessPoint(context.Background(), &DeleteAccessPointInput{
+		AccessPointId: ptr.String("__AccessPointId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1266,7 +1526,17 @@ func TestCheckResponseSnapshot_Error_AvailabilityZonesMismatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{})
+	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{
+		FileSystemId:  ptr.String("__FileSystemId__"),
+		SubnetId:      ptr.String("__SubnetId__"),
+		IpAddress:     ptr.String("__IpAddress__"),
+		Ipv6Address:   ptr.String("__Ipv6Address__"),
+		IpAddressType: types.IpAddressType("IPV4_ONLY"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1292,7 +1562,36 @@ func TestCheckResponseSnapshot_Error_BadRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{})
+	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FileSystemId: ptr.String("__FileSystemId__"),
+		PosixUser: &types.PosixUser{
+			Uid: ptr.Int64(1),
+			Gid: ptr.Int64(1),
+			SecondaryGids: []int64{
+				1,
+				1,
+			},
+		},
+		RootDirectory: &types.RootDirectory{
+			Path: ptr.String("__Path__"),
+			CreationInfo: &types.CreationInfo{
+				OwnerUid:    ptr.Int64(1),
+				OwnerGid:    ptr.Int64(1),
+				Permissions: ptr.String("__Permissions__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1318,7 +1617,25 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationConfiguration(context.Background(), &CreateReplicationConfigurationInput{})
+	_, opErr := svc.CreateReplicationConfiguration(context.Background(), &CreateReplicationConfigurationInput{
+		SourceFileSystemId: ptr.String("__SourceFileSystemId__"),
+		Destinations: []types.DestinationToCreate{
+			{
+				Region:               ptr.String("__Region__"),
+				AvailabilityZoneName: ptr.String("__AvailabilityZoneName__"),
+				KmsKeyId:             ptr.String("__KmsKeyId__"),
+				FileSystemId:         ptr.String("__FileSystemId__"),
+				RoleArn:              ptr.String("__RoleArn__"),
+			},
+			{
+				Region:               ptr.String("__Region__"),
+				AvailabilityZoneName: ptr.String("__AvailabilityZoneName__"),
+				KmsKeyId:             ptr.String("__KmsKeyId__"),
+				FileSystemId:         ptr.String("__FileSystemId__"),
+				RoleArn:              ptr.String("__RoleArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1344,7 +1661,9 @@ func TestCheckResponseSnapshot_Error_DependencyTimeout(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteMountTarget(context.Background(), &DeleteMountTargetInput{})
+	_, opErr := svc.DeleteMountTarget(context.Background(), &DeleteMountTargetInput{
+		MountTargetId: ptr.String("__MountTargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1371,7 +1690,26 @@ func TestCheckResponseSnapshot_Error_FileSystemAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{})
+	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{
+		CreationToken:                ptr.String("__CreationToken__"),
+		PerformanceMode:              types.PerformanceMode("generalPurpose"),
+		Encrypted:                    ptr.Bool(true),
+		KmsKeyId:                     ptr.String("__KmsKeyId__"),
+		ThroughputMode:               types.ThroughputMode("bursting"),
+		ProvisionedThroughputInMibps: ptr.Float64(1.0),
+		AvailabilityZoneName:         ptr.String("__AvailabilityZoneName__"),
+		Backup:                       ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1397,7 +1735,9 @@ func TestCheckResponseSnapshot_Error_FileSystemInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteFileSystem(context.Background(), &DeleteFileSystemInput{})
+	_, opErr := svc.DeleteFileSystem(context.Background(), &DeleteFileSystemInput{
+		FileSystemId: ptr.String("__FileSystemId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1423,7 +1763,26 @@ func TestCheckResponseSnapshot_Error_FileSystemLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{})
+	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{
+		CreationToken:                ptr.String("__CreationToken__"),
+		PerformanceMode:              types.PerformanceMode("generalPurpose"),
+		Encrypted:                    ptr.Bool(true),
+		KmsKeyId:                     ptr.String("__KmsKeyId__"),
+		ThroughputMode:               types.ThroughputMode("bursting"),
+		ProvisionedThroughputInMibps: ptr.Float64(1.0),
+		AvailabilityZoneName:         ptr.String("__AvailabilityZoneName__"),
+		Backup:                       ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1449,7 +1808,36 @@ func TestCheckResponseSnapshot_Error_FileSystemNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{})
+	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FileSystemId: ptr.String("__FileSystemId__"),
+		PosixUser: &types.PosixUser{
+			Uid: ptr.Int64(1),
+			Gid: ptr.Int64(1),
+			SecondaryGids: []int64{
+				1,
+				1,
+			},
+		},
+		RootDirectory: &types.RootDirectory{
+			Path: ptr.String("__Path__"),
+			CreationInfo: &types.CreationInfo{
+				OwnerUid:    ptr.Int64(1),
+				OwnerGid:    ptr.Int64(1),
+				Permissions: ptr.String("__Permissions__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1475,7 +1863,36 @@ func TestCheckResponseSnapshot_Error_IncorrectFileSystemLifeCycleState(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{})
+	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FileSystemId: ptr.String("__FileSystemId__"),
+		PosixUser: &types.PosixUser{
+			Uid: ptr.Int64(1),
+			Gid: ptr.Int64(1),
+			SecondaryGids: []int64{
+				1,
+				1,
+			},
+		},
+		RootDirectory: &types.RootDirectory{
+			Path: ptr.String("__Path__"),
+			CreationInfo: &types.CreationInfo{
+				OwnerUid:    ptr.Int64(1),
+				OwnerGid:    ptr.Int64(1),
+				Permissions: ptr.String("__Permissions__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1501,7 +1918,9 @@ func TestCheckResponseSnapshot_Error_IncorrectMountTargetState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeMountTargetSecurityGroups(context.Background(), &DescribeMountTargetSecurityGroupsInput{})
+	_, opErr := svc.DescribeMountTargetSecurityGroups(context.Background(), &DescribeMountTargetSecurityGroupsInput{
+		MountTargetId: ptr.String("__MountTargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1527,7 +1946,26 @@ func TestCheckResponseSnapshot_Error_InsufficientThroughputCapacity(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{})
+	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{
+		CreationToken:                ptr.String("__CreationToken__"),
+		PerformanceMode:              types.PerformanceMode("generalPurpose"),
+		Encrypted:                    ptr.Bool(true),
+		KmsKeyId:                     ptr.String("__KmsKeyId__"),
+		ThroughputMode:               types.ThroughputMode("bursting"),
+		ProvisionedThroughputInMibps: ptr.Float64(1.0),
+		AvailabilityZoneName:         ptr.String("__AvailabilityZoneName__"),
+		Backup:                       ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1553,7 +1991,36 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{})
+	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FileSystemId: ptr.String("__FileSystemId__"),
+		PosixUser: &types.PosixUser{
+			Uid: ptr.Int64(1),
+			Gid: ptr.Int64(1),
+			SecondaryGids: []int64{
+				1,
+				1,
+			},
+		},
+		RootDirectory: &types.RootDirectory{
+			Path: ptr.String("__Path__"),
+			CreationInfo: &types.CreationInfo{
+				OwnerUid:    ptr.Int64(1),
+				OwnerGid:    ptr.Int64(1),
+				Permissions: ptr.String("__Permissions__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1579,7 +2046,11 @@ func TestCheckResponseSnapshot_Error_InvalidPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutFileSystemPolicy(context.Background(), &PutFileSystemPolicyInput{})
+	_, opErr := svc.PutFileSystemPolicy(context.Background(), &PutFileSystemPolicyInput{
+		FileSystemId:                   ptr.String("__FileSystemId__"),
+		Policy:                         ptr.String("__Policy__"),
+		BypassPolicyLockoutSafetyCheck: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1605,7 +2076,17 @@ func TestCheckResponseSnapshot_Error_IpAddressInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{})
+	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{
+		FileSystemId:  ptr.String("__FileSystemId__"),
+		SubnetId:      ptr.String("__SubnetId__"),
+		IpAddress:     ptr.String("__IpAddress__"),
+		Ipv6Address:   ptr.String("__Ipv6Address__"),
+		IpAddressType: types.IpAddressType("IPV4_ONLY"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1631,7 +2112,17 @@ func TestCheckResponseSnapshot_Error_MountTargetConflict(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{})
+	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{
+		FileSystemId:  ptr.String("__FileSystemId__"),
+		SubnetId:      ptr.String("__SubnetId__"),
+		IpAddress:     ptr.String("__IpAddress__"),
+		Ipv6Address:   ptr.String("__Ipv6Address__"),
+		IpAddressType: types.IpAddressType("IPV4_ONLY"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1657,7 +2148,9 @@ func TestCheckResponseSnapshot_Error_MountTargetNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteMountTarget(context.Background(), &DeleteMountTargetInput{})
+	_, opErr := svc.DeleteMountTarget(context.Background(), &DeleteMountTargetInput{
+		MountTargetId: ptr.String("__MountTargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1683,7 +2176,17 @@ func TestCheckResponseSnapshot_Error_NetworkInterfaceLimitExceeded(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{})
+	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{
+		FileSystemId:  ptr.String("__FileSystemId__"),
+		SubnetId:      ptr.String("__SubnetId__"),
+		IpAddress:     ptr.String("__IpAddress__"),
+		Ipv6Address:   ptr.String("__Ipv6Address__"),
+		IpAddressType: types.IpAddressType("IPV4_ONLY"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1709,7 +2212,17 @@ func TestCheckResponseSnapshot_Error_NoFreeAddressesInSubnet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{})
+	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{
+		FileSystemId:  ptr.String("__FileSystemId__"),
+		SubnetId:      ptr.String("__SubnetId__"),
+		IpAddress:     ptr.String("__IpAddress__"),
+		Ipv6Address:   ptr.String("__Ipv6Address__"),
+		IpAddressType: types.IpAddressType("IPV4_ONLY"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1735,7 +2248,9 @@ func TestCheckResponseSnapshot_Error_PolicyNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeBackupPolicy(context.Background(), &DescribeBackupPolicyInput{})
+	_, opErr := svc.DescribeBackupPolicy(context.Background(), &DescribeBackupPolicyInput{
+		FileSystemId: ptr.String("__FileSystemId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1761,7 +2276,10 @@ func TestCheckResponseSnapshot_Error_ReplicationAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateFileSystemProtection(context.Background(), &UpdateFileSystemProtectionInput{})
+	_, opErr := svc.UpdateFileSystemProtection(context.Background(), &UpdateFileSystemProtectionInput{
+		FileSystemId:                   ptr.String("__FileSystemId__"),
+		ReplicationOverwriteProtection: types.ReplicationOverwriteProtection("ENABLED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1787,7 +2305,25 @@ func TestCheckResponseSnapshot_Error_ReplicationNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationConfiguration(context.Background(), &CreateReplicationConfigurationInput{})
+	_, opErr := svc.CreateReplicationConfiguration(context.Background(), &CreateReplicationConfigurationInput{
+		SourceFileSystemId: ptr.String("__SourceFileSystemId__"),
+		Destinations: []types.DestinationToCreate{
+			{
+				Region:               ptr.String("__Region__"),
+				AvailabilityZoneName: ptr.String("__AvailabilityZoneName__"),
+				KmsKeyId:             ptr.String("__KmsKeyId__"),
+				FileSystemId:         ptr.String("__FileSystemId__"),
+				RoleArn:              ptr.String("__RoleArn__"),
+			},
+			{
+				Region:               ptr.String("__Region__"),
+				AvailabilityZoneName: ptr.String("__AvailabilityZoneName__"),
+				KmsKeyId:             ptr.String("__KmsKeyId__"),
+				FileSystemId:         ptr.String("__FileSystemId__"),
+				RoleArn:              ptr.String("__RoleArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1813,7 +2349,17 @@ func TestCheckResponseSnapshot_Error_SecurityGroupLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{})
+	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{
+		FileSystemId:  ptr.String("__FileSystemId__"),
+		SubnetId:      ptr.String("__SubnetId__"),
+		IpAddress:     ptr.String("__IpAddress__"),
+		Ipv6Address:   ptr.String("__Ipv6Address__"),
+		IpAddressType: types.IpAddressType("IPV4_ONLY"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1839,7 +2385,17 @@ func TestCheckResponseSnapshot_Error_SecurityGroupNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{})
+	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{
+		FileSystemId:  ptr.String("__FileSystemId__"),
+		SubnetId:      ptr.String("__SubnetId__"),
+		IpAddress:     ptr.String("__IpAddress__"),
+		Ipv6Address:   ptr.String("__Ipv6Address__"),
+		IpAddressType: types.IpAddressType("IPV4_ONLY"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1865,7 +2421,17 @@ func TestCheckResponseSnapshot_Error_SubnetNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{})
+	_, opErr := svc.CreateMountTarget(context.Background(), &CreateMountTargetInput{
+		FileSystemId:  ptr.String("__FileSystemId__"),
+		SubnetId:      ptr.String("__SubnetId__"),
+		IpAddress:     ptr.String("__IpAddress__"),
+		Ipv6Address:   ptr.String("__Ipv6Address__"),
+		IpAddressType: types.IpAddressType("IPV4_ONLY"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1891,7 +2457,36 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{})
+	_, opErr := svc.CreateAccessPoint(context.Background(), &CreateAccessPointInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FileSystemId: ptr.String("__FileSystemId__"),
+		PosixUser: &types.PosixUser{
+			Uid: ptr.Int64(1),
+			Gid: ptr.Int64(1),
+			SecondaryGids: []int64{
+				1,
+				1,
+			},
+		},
+		RootDirectory: &types.RootDirectory{
+			Path: ptr.String("__Path__"),
+			CreationInfo: &types.CreationInfo{
+				OwnerUid:    ptr.Int64(1),
+				OwnerGid:    ptr.Int64(1),
+				Permissions: ptr.String("__Permissions__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1917,7 +2512,26 @@ func TestCheckResponseSnapshot_Error_ThroughputLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{})
+	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{
+		CreationToken:                ptr.String("__CreationToken__"),
+		PerformanceMode:              types.PerformanceMode("generalPurpose"),
+		Encrypted:                    ptr.Bool(true),
+		KmsKeyId:                     ptr.String("__KmsKeyId__"),
+		ThroughputMode:               types.ThroughputMode("bursting"),
+		ProvisionedThroughputInMibps: ptr.Float64(1.0),
+		AvailabilityZoneName:         ptr.String("__AvailabilityZoneName__"),
+		Backup:                       ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1943,7 +2557,11 @@ func TestCheckResponseSnapshot_Error_TooManyRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateFileSystem(context.Background(), &UpdateFileSystemInput{})
+	_, opErr := svc.UpdateFileSystem(context.Background(), &UpdateFileSystemInput{
+		FileSystemId:                 ptr.String("__FileSystemId__"),
+		ThroughputMode:               types.ThroughputMode("bursting"),
+		ProvisionedThroughputInMibps: ptr.Float64(1.0),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1969,7 +2587,26 @@ func TestCheckResponseSnapshot_Error_UnsupportedAvailabilityZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{})
+	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{
+		CreationToken:                ptr.String("__CreationToken__"),
+		PerformanceMode:              types.PerformanceMode("generalPurpose"),
+		Encrypted:                    ptr.Bool(true),
+		KmsKeyId:                     ptr.String("__KmsKeyId__"),
+		ThroughputMode:               types.ThroughputMode("bursting"),
+		ProvisionedThroughputInMibps: ptr.Float64(1.0),
+		AvailabilityZoneName:         ptr.String("__AvailabilityZoneName__"),
+		Backup:                       ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1995,7 +2632,25 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationConfiguration(context.Background(), &CreateReplicationConfigurationInput{})
+	_, opErr := svc.CreateReplicationConfiguration(context.Background(), &CreateReplicationConfigurationInput{
+		SourceFileSystemId: ptr.String("__SourceFileSystemId__"),
+		Destinations: []types.DestinationToCreate{
+			{
+				Region:               ptr.String("__Region__"),
+				AvailabilityZoneName: ptr.String("__AvailabilityZoneName__"),
+				KmsKeyId:             ptr.String("__KmsKeyId__"),
+				FileSystemId:         ptr.String("__FileSystemId__"),
+				RoleArn:              ptr.String("__RoleArn__"),
+			},
+			{
+				Region:               ptr.String("__Region__"),
+				AvailabilityZoneName: ptr.String("__AvailabilityZoneName__"),
+				KmsKeyId:             ptr.String("__KmsKeyId__"),
+				FileSystemId:         ptr.String("__FileSystemId__"),
+				RoleArn:              ptr.String("__RoleArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.ListServicePipelineProvisionedResources
+
+{"nextToken":"__NextToken__","provisionedResources":[{"identifier":"__Identifier__","name":"__Name__","provisioningEngine":"CLOUDFORMATION"},{"identifier":"__Identifier__","name":"__Name__","provisioningEngine":"CLOUDFORMATION"}]}

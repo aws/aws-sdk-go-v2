@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"settings":{"key0":"__Value__"}}

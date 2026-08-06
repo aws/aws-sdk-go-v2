@@ -1,0 +1,5 @@
+404
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.AcceptEngagementInvitation
+
+{"__type":"ResourceNotFoundException","Message":"__Message__"}

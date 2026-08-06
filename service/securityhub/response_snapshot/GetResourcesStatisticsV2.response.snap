@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"GroupByResults":[{"GroupByField":"__GroupByField__","GroupByValues":[{"Count":1,"FieldValue":"__FieldValue__"},{"Count":1,"FieldValue":"__FieldValue__"}]},{"GroupByField":"__GroupByField__","GroupByValues":[{"Count":1,"FieldValue":"__FieldValue__"},{"Count":1,"FieldValue":"__FieldValue__"}]}]}

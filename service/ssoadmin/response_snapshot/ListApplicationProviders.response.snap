@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.ListApplicationProviders
+
+{"ApplicationProviders":[{"ApplicationProviderArn":"__ApplicationProviderArn__","DisplayData":{"Description":"__Description__","DisplayName":"__DisplayName__","IconUrl":"__IconUrl__"},"FederationProtocol":"SAML","ResourceServerConfig":{"Scopes":{"key0":{"DetailedTitle":"__DetailedTitle__","LongDescription":"__LongDescription__"}}}},{"ApplicationProviderArn":"__ApplicationProviderArn__","DisplayData":{"Description":"__Description__","DisplayName":"__DisplayName__","IconUrl":"__IconUrl__"},"FederationProtocol":"SAML","ResourceServerConfig":{"Scopes":{"key0":{"DetailedTitle":"__DetailedTitle__","LongDescription":"__LongDescription__"}}}}],"NextToken":"__NextToken__"}

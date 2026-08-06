@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/novaact/document"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -120,7 +121,29 @@ func TestCheckResponseSnapshot_CreateAct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAct(context.Background(), &CreateActInput{})
+	got, err := svc.CreateAct(context.Background(), &CreateActInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		SessionId:              ptr.String("__SessionId__"),
+		Task:                   ptr.String("__Task__"),
+		ToolSpecs: []types.ToolSpec{
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +164,11 @@ func TestCheckResponseSnapshot_CreateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSession(context.Background(), &CreateSessionInput{})
+	got, err := svc.CreateSession(context.Background(), &CreateSessionInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +189,15 @@ func TestCheckResponseSnapshot_CreateWorkflowDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkflowDefinition(context.Background(), &CreateWorkflowDefinitionInput{})
+	got, err := svc.CreateWorkflowDefinition(context.Background(), &CreateWorkflowDefinitionInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ExportConfig: &types.WorkflowExportConfig{
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +219,16 @@ func TestCheckResponseSnapshot_CreateWorkflowRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkflowRun(context.Background(), &CreateWorkflowRunInput{})
+	got, err := svc.CreateWorkflowRun(context.Background(), &CreateWorkflowRunInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		ModelId:                ptr.String("__ModelId__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		LogGroupName:           ptr.String("__LogGroupName__"),
+		ClientInfo: &types.ClientInfo{
+			CompatibilityVersion: ptr.Int32(1),
+			SdkVersion:           ptr.String("__SdkVersion__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -205,7 +249,9 @@ func TestCheckResponseSnapshot_DeleteWorkflowDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkflowDefinition(context.Background(), &DeleteWorkflowDefinitionInput{})
+	got, err := svc.DeleteWorkflowDefinition(context.Background(), &DeleteWorkflowDefinitionInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,7 +272,10 @@ func TestCheckResponseSnapshot_DeleteWorkflowRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkflowRun(context.Background(), &DeleteWorkflowRunInput{})
+	got, err := svc.DeleteWorkflowRun(context.Background(), &DeleteWorkflowRunInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -255,7 +304,9 @@ func TestCheckResponseSnapshot_GetWorkflowDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflowDefinition(context.Background(), &GetWorkflowDefinitionInput{})
+	got, err := svc.GetWorkflowDefinition(context.Background(), &GetWorkflowDefinitionInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -282,7 +333,10 @@ func TestCheckResponseSnapshot_GetWorkflowRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflowRun(context.Background(), &GetWorkflowRunInput{})
+	got, err := svc.GetWorkflowRun(context.Background(), &GetWorkflowRunInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,12 +350,12 @@ func TestCheckResponseSnapshot_InvokeActStep(t *testing.T) {
 		Calls: []types.Call{
 			{
 				CallId: ptr.String("__CallId__"),
-				Input:  nil,
+				Input:  document.NewLazyDocument("__Document__"),
 				Name:   ptr.String("__Name__"),
 			},
 			{
 				CallId: ptr.String("__CallId__"),
-				Input:  nil,
+				Input:  document.NewLazyDocument("__Document__"),
 				Name:   ptr.String("__Name__"),
 			},
 		},
@@ -315,7 +369,37 @@ func TestCheckResponseSnapshot_InvokeActStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeActStep(context.Background(), &InvokeActStepInput{})
+	got, err := svc.InvokeActStep(context.Background(), &InvokeActStepInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		SessionId:              ptr.String("__SessionId__"),
+		ActId:                  ptr.String("__ActId__"),
+		CallResults: []types.CallResult{
+			{
+				CallId: ptr.String("__CallId__"),
+				Content: []types.CallResultContent{
+					&types.CallResultContentMemberText{
+						Value: "__CallResultContentMemberText__",
+					},
+					&types.CallResultContentMemberText{
+						Value: "__CallResultContentMemberText__",
+					},
+				},
+			},
+			{
+				CallId: ptr.String("__CallId__"),
+				Content: []types.CallResultContent{
+					&types.CallResultContentMemberText{
+						Value: "__CallResultContentMemberText__",
+					},
+					&types.CallResultContentMemberText{
+						Value: "__CallResultContentMemberText__",
+					},
+				},
+			},
+		},
+		PreviousStepId: ptr.String("__PreviousStepId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -362,7 +446,14 @@ func TestCheckResponseSnapshot_ListActs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListActs(context.Background(), &ListActsInput{})
+	got, err := svc.ListActs(context.Background(), &ListActsInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		SessionId:              ptr.String("__SessionId__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+		SortOrder:              types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -418,7 +509,9 @@ func TestCheckResponseSnapshot_ListModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListModels(context.Background(), &ListModelsInput{})
+	got, err := svc.ListModels(context.Background(), &ListModelsInput{
+		ClientCompatibilityVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -447,7 +540,13 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{})
+	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+		SortOrder:              types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -482,7 +581,11 @@ func TestCheckResponseSnapshot_ListWorkflowDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflowDefinitions(context.Background(), &ListWorkflowDefinitionsInput{})
+	got, err := svc.ListWorkflowDefinitions(context.Background(), &ListWorkflowDefinitionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SortOrder:  types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -527,7 +630,12 @@ func TestCheckResponseSnapshot_ListWorkflowRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflowRuns(context.Background(), &ListWorkflowRunsInput{})
+	got, err := svc.ListWorkflowRuns(context.Background(), &ListWorkflowRunsInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+		SortOrder:              types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -546,7 +654,17 @@ func TestCheckResponseSnapshot_UpdateAct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAct(context.Background(), &UpdateActInput{})
+	got, err := svc.UpdateAct(context.Background(), &UpdateActInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		SessionId:              ptr.String("__SessionId__"),
+		ActId:                  ptr.String("__ActId__"),
+		Status:                 types.ActStatus("RUNNING"),
+		Error: &types.ActError{
+			Message: ptr.String("__Message__"),
+			Type:    ptr.String("__Type__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -565,7 +683,11 @@ func TestCheckResponseSnapshot_UpdateWorkflowRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkflowRun(context.Background(), &UpdateWorkflowRunInput{})
+	got, err := svc.UpdateWorkflowRun(context.Background(), &UpdateWorkflowRunInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		Status:                 types.WorkflowRunStatus("RUNNING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -586,7 +708,29 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{})
+	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		SessionId:              ptr.String("__SessionId__"),
+		Task:                   ptr.String("__Task__"),
+		ToolSpecs: []types.ToolSpec{
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -613,7 +757,29 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{})
+	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		SessionId:              ptr.String("__SessionId__"),
+		Task:                   ptr.String("__Task__"),
+		ToolSpecs: []types.ToolSpec{
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -640,7 +806,29 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{})
+	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		SessionId:              ptr.String("__SessionId__"),
+		Task:                   ptr.String("__Task__"),
+		ToolSpecs: []types.ToolSpec{
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -667,7 +855,29 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{})
+	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		SessionId:              ptr.String("__SessionId__"),
+		Task:                   ptr.String("__Task__"),
+		ToolSpecs: []types.ToolSpec{
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -696,7 +906,29 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{})
+	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		SessionId:              ptr.String("__SessionId__"),
+		Task:                   ptr.String("__Task__"),
+		ToolSpecs: []types.ToolSpec{
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -724,7 +956,29 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{})
+	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		SessionId:              ptr.String("__SessionId__"),
+		Task:                   ptr.String("__Task__"),
+		ToolSpecs: []types.ToolSpec{
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -760,7 +1014,29 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{})
+	_, opErr := svc.CreateAct(context.Background(), &CreateActInput{
+		WorkflowDefinitionName: ptr.String("__WorkflowDefinitionName__"),
+		WorkflowRunId:          ptr.String("__WorkflowRunId__"),
+		SessionId:              ptr.String("__SessionId__"),
+		Task:                   ptr.String("__Task__"),
+		ToolSpecs: []types.ToolSpec{
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				InputSchema: &types.ToolInputSchemaMemberJson{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

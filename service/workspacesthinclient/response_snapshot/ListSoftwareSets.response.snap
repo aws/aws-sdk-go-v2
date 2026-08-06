@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","softwareSets":[{"arn":"__Arn__","id":"__Id__","releasedAt":946684800,"supportedUntil":946684800,"validationStatus":"VALIDATED","version":"__Version__"},{"arn":"__Arn__","id":"__Id__","releasedAt":946684800,"supportedUntil":946684800,"validationStatus":"VALIDATED","version":"__Version__"}]}

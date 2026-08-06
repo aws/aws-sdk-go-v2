@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","Arn":"__Arn__","EnvironmentId":"__EnvironmentId__","LastUpdatedTime":946684800,"Name":"__Name__","State":"CREATING"}

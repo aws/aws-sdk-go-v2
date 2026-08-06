@@ -1,6 +1,0 @@
-POST /
-
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: JsonProtocol.JsonEnums
-
-{"fooEnum1":"Foo","fooEnum2":"Foo","fooEnum3":"Foo","fooEnumList":["Foo","Foo"],"fooEnumMap":{"key0":"Foo"},"fooEnumSet":["Foo","Foo"]}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.ListNotifyCountries
+
+{"NextToken":"__NextToken__","NotifyCountries":[{"CountryName":"__CountryName__","CustomerOwnedIdentityRequired":true,"IsoCountryCode":"__IsoCountryCode__","SupportedChannels":["SMS","SMS"],"SupportedTiers":["BASIC","BASIC"],"SupportedUseCases":["CODE_VERIFICATION","CODE_VERIFICATION"]},{"CountryName":"__CountryName__","CustomerOwnedIdentityRequired":true,"IsoCountryCode":"__IsoCountryCode__","SupportedChannels":["SMS","SMS"],"SupportedTiers":["BASIC","BASIC"],"SupportedUseCases":["CODE_VERIFICATION","CODE_VERIFICATION"]}]}

@@ -119,7 +119,82 @@ func TestCheckResponseSnapshot_CreateAutoPredictor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAutoPredictor(context.Background(), &CreateAutoPredictorInput{})
+	got, err := svc.CreateAutoPredictor(context.Background(), &CreateAutoPredictorInput{
+		PredictorName:   ptr.String("__PredictorName__"),
+		ForecastHorizon: ptr.Int32(1),
+		ForecastTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForecastDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForecastFrequency: ptr.String("__ForecastFrequency__"),
+		DataConfig: &types.DataConfig{
+			DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+			AttributeConfigs: []types.AttributeConfig{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Transformations: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Transformations: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			AdditionalDatasets: []types.AdditionalDataset{
+				{
+					Name: ptr.String("__Name__"),
+					Configuration: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Configuration: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfig: &types.EncryptionConfig{
+			RoleArn:   ptr.String("__RoleArn__"),
+			KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		},
+		ReferencePredictorArn: ptr.String("__ReferencePredictorArn__"),
+		OptimizationMetric:    types.OptimizationMetric("WAPE"),
+		ExplainPredictor:      ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MonitorConfig: &types.MonitorConfig{
+			MonitorName: ptr.String("__MonitorName__"),
+		},
+		TimeAlignmentBoundary: &types.TimeAlignmentBoundary{
+			Month:      types.Month("JANUARY"),
+			DayOfMonth: ptr.Int32(1),
+			DayOfWeek:  types.DayOfWeek("MONDAY"),
+			Hour:       ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +215,38 @@ func TestCheckResponseSnapshot_CreateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DatasetName:   ptr.String("__DatasetName__"),
+		Domain:        types.Domain("RETAIL"),
+		DatasetType:   types.DatasetType("TARGET_TIME_SERIES"),
+		DataFrequency: ptr.String("__DataFrequency__"),
+		Schema: &types.Schema{
+			Attributes: []types.SchemaAttribute{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					AttributeType: types.AttributeType("string"),
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					AttributeType: types.AttributeType("string"),
+				},
+			},
+		},
+		EncryptionConfig: &types.EncryptionConfig{
+			RoleArn:   ptr.String("__RoleArn__"),
+			KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +267,24 @@ func TestCheckResponseSnapshot_CreateDatasetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDatasetGroup(context.Background(), &CreateDatasetGroupInput{})
+	got, err := svc.CreateDatasetGroup(context.Background(), &CreateDatasetGroupInput{
+		DatasetGroupName: ptr.String("__DatasetGroupName__"),
+		Domain:           types.Domain("RETAIL"),
+		DatasetArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +305,33 @@ func TestCheckResponseSnapshot_CreateDatasetImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDatasetImportJob(context.Background(), &CreateDatasetImportJobInput{})
+	got, err := svc.CreateDatasetImportJob(context.Background(), &CreateDatasetImportJobInput{
+		DatasetImportJobName: ptr.String("__DatasetImportJobName__"),
+		DatasetArn:           ptr.String("__DatasetArn__"),
+		DataSource: &types.DataSource{
+			S3Config: &types.S3Config{
+				Path:      ptr.String("__Path__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+				KMSKeyArn: ptr.String("__KMSKeyArn__"),
+			},
+		},
+		TimestampFormat:           ptr.String("__TimestampFormat__"),
+		TimeZone:                  ptr.String("__TimeZone__"),
+		UseGeolocationForTimeZone: true,
+		GeolocationFormat:         ptr.String("__GeolocationFormat__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Format:     ptr.String("__Format__"),
+		ImportMode: types.ImportMode("FULL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +352,46 @@ func TestCheckResponseSnapshot_CreateExplainability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExplainability(context.Background(), &CreateExplainabilityInput{})
+	got, err := svc.CreateExplainability(context.Background(), &CreateExplainabilityInput{
+		ExplainabilityName: ptr.String("__ExplainabilityName__"),
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		ExplainabilityConfig: &types.ExplainabilityConfig{
+			TimeSeriesGranularity: types.TimeSeriesGranularity("ALL"),
+			TimePointGranularity:  types.TimePointGranularity("ALL"),
+		},
+		DataSource: &types.DataSource{
+			S3Config: &types.S3Config{
+				Path:      ptr.String("__Path__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+				KMSKeyArn: ptr.String("__KMSKeyArn__"),
+			},
+		},
+		Schema: &types.Schema{
+			Attributes: []types.SchemaAttribute{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					AttributeType: types.AttributeType("string"),
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					AttributeType: types.AttributeType("string"),
+				},
+			},
+		},
+		EnableVisualization: ptr.Bool(true),
+		StartDateTime:       ptr.String("__StartDateTime__"),
+		EndDateTime:         ptr.String("__EndDateTime__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +412,28 @@ func TestCheckResponseSnapshot_CreateExplainabilityExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExplainabilityExport(context.Background(), &CreateExplainabilityExportInput{})
+	got, err := svc.CreateExplainabilityExport(context.Background(), &CreateExplainabilityExportInput{
+		ExplainabilityExportName: ptr.String("__ExplainabilityExportName__"),
+		ExplainabilityArn:        ptr.String("__ExplainabilityArn__"),
+		Destination: &types.DataDestination{
+			S3Config: &types.S3Config{
+				Path:      ptr.String("__Path__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+				KMSKeyArn: ptr.String("__KMSKeyArn__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Format: ptr.String("__Format__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -245,7 +454,48 @@ func TestCheckResponseSnapshot_CreateForecast(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateForecast(context.Background(), &CreateForecastInput{})
+	got, err := svc.CreateForecast(context.Background(), &CreateForecastInput{
+		ForecastName: ptr.String("__ForecastName__"),
+		PredictorArn: ptr.String("__PredictorArn__"),
+		ForecastTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TimeSeriesSelector: &types.TimeSeriesSelector{
+			TimeSeriesIdentifiers: &types.TimeSeriesIdentifiers{
+				DataSource: &types.DataSource{
+					S3Config: &types.S3Config{
+						Path:      ptr.String("__Path__"),
+						RoleArn:   ptr.String("__RoleArn__"),
+						KMSKeyArn: ptr.String("__KMSKeyArn__"),
+					},
+				},
+				Schema: &types.Schema{
+					Attributes: []types.SchemaAttribute{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							AttributeType: types.AttributeType("string"),
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							AttributeType: types.AttributeType("string"),
+						},
+					},
+				},
+				Format: ptr.String("__Format__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -266,7 +516,28 @@ func TestCheckResponseSnapshot_CreateForecastExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateForecastExportJob(context.Background(), &CreateForecastExportJobInput{})
+	got, err := svc.CreateForecastExportJob(context.Background(), &CreateForecastExportJobInput{
+		ForecastExportJobName: ptr.String("__ForecastExportJobName__"),
+		ForecastArn:           ptr.String("__ForecastArn__"),
+		Destination: &types.DataDestination{
+			S3Config: &types.S3Config{
+				Path:      ptr.String("__Path__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+				KMSKeyArn: ptr.String("__KMSKeyArn__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Format: ptr.String("__Format__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -287,7 +558,20 @@ func TestCheckResponseSnapshot_CreateMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	got, err := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -308,7 +592,144 @@ func TestCheckResponseSnapshot_CreatePredictor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePredictor(context.Background(), &CreatePredictorInput{})
+	got, err := svc.CreatePredictor(context.Background(), &CreatePredictorInput{
+		PredictorName:   ptr.String("__PredictorName__"),
+		AlgorithmArn:    ptr.String("__AlgorithmArn__"),
+		ForecastHorizon: ptr.Int32(1),
+		ForecastTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PerformAutoML:          ptr.Bool(true),
+		AutoMLOverrideStrategy: types.AutoMLOverrideStrategy("LatencyOptimized"),
+		PerformHPO:             ptr.Bool(true),
+		TrainingParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		EvaluationParameters: &types.EvaluationParameters{
+			NumberOfBacktestWindows: ptr.Int32(1),
+			BackTestWindowOffset:    ptr.Int32(1),
+		},
+		HPOConfig: &types.HyperParameterTuningJobConfig{
+			ParameterRanges: &types.ParameterRanges{
+				CategoricalParameterRanges: []types.CategoricalParameterRange{
+					{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContinuousParameterRanges: []types.ContinuousParameterRange{
+					{
+						Name:        ptr.String("__Name__"),
+						MaxValue:    ptr.Float64(1.0),
+						MinValue:    ptr.Float64(1.0),
+						ScalingType: types.ScalingType("Auto"),
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						MaxValue:    ptr.Float64(1.0),
+						MinValue:    ptr.Float64(1.0),
+						ScalingType: types.ScalingType("Auto"),
+					},
+				},
+				IntegerParameterRanges: []types.IntegerParameterRange{
+					{
+						Name:        ptr.String("__Name__"),
+						MaxValue:    ptr.Int32(1),
+						MinValue:    ptr.Int32(1),
+						ScalingType: types.ScalingType("Auto"),
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						MaxValue:    ptr.Int32(1),
+						MinValue:    ptr.Int32(1),
+						ScalingType: types.ScalingType("Auto"),
+					},
+				},
+			},
+		},
+		InputDataConfig: &types.InputDataConfig{
+			DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+			SupplementaryFeatures: []types.SupplementaryFeature{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		FeaturizationConfig: &types.FeaturizationConfig{
+			ForecastFrequency: ptr.String("__ForecastFrequency__"),
+			ForecastDimensions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Featurizations: []types.Featurization{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					FeaturizationPipeline: []types.FeaturizationMethod{
+						{
+							FeaturizationMethodName: types.FeaturizationMethodName("filling"),
+							FeaturizationMethodParameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						{
+							FeaturizationMethodName: types.FeaturizationMethodName("filling"),
+							FeaturizationMethodParameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					FeaturizationPipeline: []types.FeaturizationMethod{
+						{
+							FeaturizationMethodName: types.FeaturizationMethodName("filling"),
+							FeaturizationMethodParameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						{
+							FeaturizationMethodName: types.FeaturizationMethodName("filling"),
+							FeaturizationMethodParameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfig: &types.EncryptionConfig{
+			RoleArn:   ptr.String("__RoleArn__"),
+			KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		OptimizationMetric: types.OptimizationMetric("WAPE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -329,7 +750,28 @@ func TestCheckResponseSnapshot_CreatePredictorBacktestExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePredictorBacktestExportJob(context.Background(), &CreatePredictorBacktestExportJobInput{})
+	got, err := svc.CreatePredictorBacktestExportJob(context.Background(), &CreatePredictorBacktestExportJobInput{
+		PredictorBacktestExportJobName: ptr.String("__PredictorBacktestExportJobName__"),
+		PredictorArn:                   ptr.String("__PredictorArn__"),
+		Destination: &types.DataDestination{
+			S3Config: &types.S3Config{
+				Path:      ptr.String("__Path__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+				KMSKeyArn: ptr.String("__KMSKeyArn__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Format: ptr.String("__Format__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -350,7 +792,44 @@ func TestCheckResponseSnapshot_CreateWhatIfAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWhatIfAnalysis(context.Background(), &CreateWhatIfAnalysisInput{})
+	got, err := svc.CreateWhatIfAnalysis(context.Background(), &CreateWhatIfAnalysisInput{
+		WhatIfAnalysisName: ptr.String("__WhatIfAnalysisName__"),
+		ForecastArn:        ptr.String("__ForecastArn__"),
+		TimeSeriesSelector: &types.TimeSeriesSelector{
+			TimeSeriesIdentifiers: &types.TimeSeriesIdentifiers{
+				DataSource: &types.DataSource{
+					S3Config: &types.S3Config{
+						Path:      ptr.String("__Path__"),
+						RoleArn:   ptr.String("__RoleArn__"),
+						KMSKeyArn: ptr.String("__KMSKeyArn__"),
+					},
+				},
+				Schema: &types.Schema{
+					Attributes: []types.SchemaAttribute{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							AttributeType: types.AttributeType("string"),
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							AttributeType: types.AttributeType("string"),
+						},
+					},
+				},
+				Format: ptr.String("__Format__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -371,7 +850,81 @@ func TestCheckResponseSnapshot_CreateWhatIfForecast(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWhatIfForecast(context.Background(), &CreateWhatIfForecastInput{})
+	got, err := svc.CreateWhatIfForecast(context.Background(), &CreateWhatIfForecastInput{
+		WhatIfForecastName: ptr.String("__WhatIfForecastName__"),
+		WhatIfAnalysisArn:  ptr.String("__WhatIfAnalysisArn__"),
+		TimeSeriesTransformations: []types.TimeSeriesTransformation{
+			{
+				Action: &types.Action{
+					AttributeName: ptr.String("__AttributeName__"),
+					Operation:     types.Operation("ADD"),
+					Value:         ptr.Float64(1.0),
+				},
+				TimeSeriesConditions: []types.TimeSeriesCondition{
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+						Condition:      types.Condition("EQUALS"),
+					},
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+						Condition:      types.Condition("EQUALS"),
+					},
+				},
+			},
+			{
+				Action: &types.Action{
+					AttributeName: ptr.String("__AttributeName__"),
+					Operation:     types.Operation("ADD"),
+					Value:         ptr.Float64(1.0),
+				},
+				TimeSeriesConditions: []types.TimeSeriesCondition{
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+						Condition:      types.Condition("EQUALS"),
+					},
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+						Condition:      types.Condition("EQUALS"),
+					},
+				},
+			},
+		},
+		TimeSeriesReplacementsDataSource: &types.TimeSeriesReplacementsDataSource{
+			S3Config: &types.S3Config{
+				Path:      ptr.String("__Path__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+				KMSKeyArn: ptr.String("__KMSKeyArn__"),
+			},
+			Schema: &types.Schema{
+				Attributes: []types.SchemaAttribute{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						AttributeType: types.AttributeType("string"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						AttributeType: types.AttributeType("string"),
+					},
+				},
+			},
+			Format:          ptr.String("__Format__"),
+			TimestampFormat: ptr.String("__TimestampFormat__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +945,31 @@ func TestCheckResponseSnapshot_CreateWhatIfForecastExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWhatIfForecastExport(context.Background(), &CreateWhatIfForecastExportInput{})
+	got, err := svc.CreateWhatIfForecastExport(context.Background(), &CreateWhatIfForecastExportInput{
+		WhatIfForecastExportName: ptr.String("__WhatIfForecastExportName__"),
+		WhatIfForecastArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Destination: &types.DataDestination{
+			S3Config: &types.S3Config{
+				Path:      ptr.String("__Path__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+				KMSKeyArn: ptr.String("__KMSKeyArn__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Format: ptr.String("__Format__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -411,7 +988,9 @@ func TestCheckResponseSnapshot_DeleteDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{})
+	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -430,7 +1009,9 @@ func TestCheckResponseSnapshot_DeleteDatasetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDatasetGroup(context.Background(), &DeleteDatasetGroupInput{})
+	got, err := svc.DeleteDatasetGroup(context.Background(), &DeleteDatasetGroupInput{
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -449,7 +1030,9 @@ func TestCheckResponseSnapshot_DeleteDatasetImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDatasetImportJob(context.Background(), &DeleteDatasetImportJobInput{})
+	got, err := svc.DeleteDatasetImportJob(context.Background(), &DeleteDatasetImportJobInput{
+		DatasetImportJobArn: ptr.String("__DatasetImportJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -468,7 +1051,9 @@ func TestCheckResponseSnapshot_DeleteExplainability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteExplainability(context.Background(), &DeleteExplainabilityInput{})
+	got, err := svc.DeleteExplainability(context.Background(), &DeleteExplainabilityInput{
+		ExplainabilityArn: ptr.String("__ExplainabilityArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -487,7 +1072,9 @@ func TestCheckResponseSnapshot_DeleteExplainabilityExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteExplainabilityExport(context.Background(), &DeleteExplainabilityExportInput{})
+	got, err := svc.DeleteExplainabilityExport(context.Background(), &DeleteExplainabilityExportInput{
+		ExplainabilityExportArn: ptr.String("__ExplainabilityExportArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -506,7 +1093,9 @@ func TestCheckResponseSnapshot_DeleteForecast(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteForecast(context.Background(), &DeleteForecastInput{})
+	got, err := svc.DeleteForecast(context.Background(), &DeleteForecastInput{
+		ForecastArn: ptr.String("__ForecastArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -525,7 +1114,9 @@ func TestCheckResponseSnapshot_DeleteForecastExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteForecastExportJob(context.Background(), &DeleteForecastExportJobInput{})
+	got, err := svc.DeleteForecastExportJob(context.Background(), &DeleteForecastExportJobInput{
+		ForecastExportJobArn: ptr.String("__ForecastExportJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -544,7 +1135,9 @@ func TestCheckResponseSnapshot_DeleteMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMonitor(context.Background(), &DeleteMonitorInput{})
+	got, err := svc.DeleteMonitor(context.Background(), &DeleteMonitorInput{
+		MonitorArn: ptr.String("__MonitorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -563,7 +1156,9 @@ func TestCheckResponseSnapshot_DeletePredictor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePredictor(context.Background(), &DeletePredictorInput{})
+	got, err := svc.DeletePredictor(context.Background(), &DeletePredictorInput{
+		PredictorArn: ptr.String("__PredictorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -582,7 +1177,9 @@ func TestCheckResponseSnapshot_DeletePredictorBacktestExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePredictorBacktestExportJob(context.Background(), &DeletePredictorBacktestExportJobInput{})
+	got, err := svc.DeletePredictorBacktestExportJob(context.Background(), &DeletePredictorBacktestExportJobInput{
+		PredictorBacktestExportJobArn: ptr.String("__PredictorBacktestExportJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -601,7 +1198,9 @@ func TestCheckResponseSnapshot_DeleteResourceTree(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourceTree(context.Background(), &DeleteResourceTreeInput{})
+	got, err := svc.DeleteResourceTree(context.Background(), &DeleteResourceTreeInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -620,7 +1219,9 @@ func TestCheckResponseSnapshot_DeleteWhatIfAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWhatIfAnalysis(context.Background(), &DeleteWhatIfAnalysisInput{})
+	got, err := svc.DeleteWhatIfAnalysis(context.Background(), &DeleteWhatIfAnalysisInput{
+		WhatIfAnalysisArn: ptr.String("__WhatIfAnalysisArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -639,7 +1240,9 @@ func TestCheckResponseSnapshot_DeleteWhatIfForecast(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWhatIfForecast(context.Background(), &DeleteWhatIfForecastInput{})
+	got, err := svc.DeleteWhatIfForecast(context.Background(), &DeleteWhatIfForecastInput{
+		WhatIfForecastArn: ptr.String("__WhatIfForecastArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -658,7 +1261,9 @@ func TestCheckResponseSnapshot_DeleteWhatIfForecastExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWhatIfForecastExport(context.Background(), &DeleteWhatIfForecastExportInput{})
+	got, err := svc.DeleteWhatIfForecastExport(context.Background(), &DeleteWhatIfForecastExportInput{
+		WhatIfForecastExportArn: ptr.String("__WhatIfForecastExportArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -759,7 +1364,9 @@ func TestCheckResponseSnapshot_DescribeAutoPredictor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAutoPredictor(context.Background(), &DescribeAutoPredictorInput{})
+	got, err := svc.DescribeAutoPredictor(context.Background(), &DescribeAutoPredictorInput{
+		PredictorArn: ptr.String("__PredictorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -803,7 +1410,9 @@ func TestCheckResponseSnapshot_DescribeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{})
+	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -833,7 +1442,9 @@ func TestCheckResponseSnapshot_DescribeDatasetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDatasetGroup(context.Background(), &DescribeDatasetGroupInput{})
+	got, err := svc.DescribeDatasetGroup(context.Background(), &DescribeDatasetGroupInput{
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -891,7 +1502,9 @@ func TestCheckResponseSnapshot_DescribeDatasetImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDatasetImportJob(context.Background(), &DescribeDatasetImportJobInput{})
+	got, err := svc.DescribeDatasetImportJob(context.Background(), &DescribeDatasetImportJobInput{
+		DatasetImportJobArn: ptr.String("__DatasetImportJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -945,7 +1558,9 @@ func TestCheckResponseSnapshot_DescribeExplainability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeExplainability(context.Background(), &DescribeExplainabilityInput{})
+	got, err := svc.DescribeExplainability(context.Background(), &DescribeExplainabilityInput{
+		ExplainabilityArn: ptr.String("__ExplainabilityArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -980,7 +1595,9 @@ func TestCheckResponseSnapshot_DescribeExplainabilityExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeExplainabilityExport(context.Background(), &DescribeExplainabilityExportInput{})
+	got, err := svc.DescribeExplainabilityExport(context.Background(), &DescribeExplainabilityExportInput{
+		ExplainabilityExportArn: ptr.String("__ExplainabilityExportArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1037,7 +1654,9 @@ func TestCheckResponseSnapshot_DescribeForecast(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeForecast(context.Background(), &DescribeForecastInput{})
+	got, err := svc.DescribeForecast(context.Background(), &DescribeForecastInput{
+		ForecastArn: ptr.String("__ForecastArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1072,7 +1691,9 @@ func TestCheckResponseSnapshot_DescribeForecastExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeForecastExportJob(context.Background(), &DescribeForecastExportJobInput{})
+	got, err := svc.DescribeForecastExportJob(context.Background(), &DescribeForecastExportJobInput{
+		ForecastExportJobArn: ptr.String("__ForecastExportJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1116,7 +1737,9 @@ func TestCheckResponseSnapshot_DescribeMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMonitor(context.Background(), &DescribeMonitorInput{})
+	got, err := svc.DescribeMonitor(context.Background(), &DescribeMonitorInput{
+		MonitorArn: ptr.String("__MonitorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1315,7 +1938,9 @@ func TestCheckResponseSnapshot_DescribePredictor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePredictor(context.Background(), &DescribePredictorInput{})
+	got, err := svc.DescribePredictor(context.Background(), &DescribePredictorInput{
+		PredictorArn: ptr.String("__PredictorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1350,7 +1975,9 @@ func TestCheckResponseSnapshot_DescribePredictorBacktestExportJob(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePredictorBacktestExportJob(context.Background(), &DescribePredictorBacktestExportJobInput{})
+	got, err := svc.DescribePredictorBacktestExportJob(context.Background(), &DescribePredictorBacktestExportJobInput{
+		PredictorBacktestExportJobArn: ptr.String("__PredictorBacktestExportJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1402,7 +2029,9 @@ func TestCheckResponseSnapshot_DescribeWhatIfAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWhatIfAnalysis(context.Background(), &DescribeWhatIfAnalysisInput{})
+	got, err := svc.DescribeWhatIfAnalysis(context.Background(), &DescribeWhatIfAnalysisInput{
+		WhatIfAnalysisArn: ptr.String("__WhatIfAnalysisArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1495,7 +2124,9 @@ func TestCheckResponseSnapshot_DescribeWhatIfForecast(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWhatIfForecast(context.Background(), &DescribeWhatIfForecastInput{})
+	got, err := svc.DescribeWhatIfForecast(context.Background(), &DescribeWhatIfForecastInput{
+		WhatIfForecastArn: ptr.String("__WhatIfForecastArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1534,7 +2165,9 @@ func TestCheckResponseSnapshot_DescribeWhatIfForecastExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWhatIfForecastExport(context.Background(), &DescribeWhatIfForecastExportInput{})
+	got, err := svc.DescribeWhatIfForecastExport(context.Background(), &DescribeWhatIfForecastExportInput{
+		WhatIfForecastExportArn: ptr.String("__WhatIfForecastExportArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1713,7 +2346,9 @@ func TestCheckResponseSnapshot_GetAccuracyMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccuracyMetrics(context.Background(), &GetAccuracyMetricsInput{})
+	got, err := svc.GetAccuracyMetrics(context.Background(), &GetAccuracyMetricsInput{
+		PredictorArn: ptr.String("__PredictorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1748,7 +2383,10 @@ func TestCheckResponseSnapshot_ListDatasetGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasetGroups(context.Background(), &ListDatasetGroupsInput{})
+	got, err := svc.ListDatasetGroups(context.Background(), &ListDatasetGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1803,7 +2441,22 @@ func TestCheckResponseSnapshot_ListDatasetImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasetImportJobs(context.Background(), &ListDatasetImportJobsInput{})
+	got, err := svc.ListDatasetImportJobs(context.Background(), &ListDatasetImportJobsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1842,7 +2495,10 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{})
+	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1891,7 +2547,22 @@ func TestCheckResponseSnapshot_ListExplainabilities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExplainabilities(context.Background(), &ListExplainabilitiesInput{})
+	got, err := svc.ListExplainabilities(context.Background(), &ListExplainabilitiesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1944,7 +2615,22 @@ func TestCheckResponseSnapshot_ListExplainabilityExports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExplainabilityExports(context.Background(), &ListExplainabilityExportsInput{})
+	got, err := svc.ListExplainabilityExports(context.Background(), &ListExplainabilityExportsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1997,7 +2683,22 @@ func TestCheckResponseSnapshot_ListForecastExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListForecastExportJobs(context.Background(), &ListForecastExportJobsInput{})
+	got, err := svc.ListForecastExportJobs(context.Background(), &ListForecastExportJobsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2042,7 +2743,22 @@ func TestCheckResponseSnapshot_ListForecasts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListForecasts(context.Background(), &ListForecastsInput{})
+	got, err := svc.ListForecasts(context.Background(), &ListForecastsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2123,7 +2839,23 @@ func TestCheckResponseSnapshot_ListMonitorEvaluations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMonitorEvaluations(context.Background(), &ListMonitorEvaluationsInput{})
+	got, err := svc.ListMonitorEvaluations(context.Background(), &ListMonitorEvaluationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		MonitorArn: ptr.String("__MonitorArn__"),
+		Filters: []types.Filter{
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2162,7 +2894,22 @@ func TestCheckResponseSnapshot_ListMonitors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMonitors(context.Background(), &ListMonitorsInput{})
+	got, err := svc.ListMonitors(context.Background(), &ListMonitorsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2215,7 +2962,22 @@ func TestCheckResponseSnapshot_ListPredictorBacktestExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPredictorBacktestExportJobs(context.Background(), &ListPredictorBacktestExportJobsInput{})
+	got, err := svc.ListPredictorBacktestExportJobs(context.Background(), &ListPredictorBacktestExportJobsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2266,7 +3028,22 @@ func TestCheckResponseSnapshot_ListPredictors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPredictors(context.Background(), &ListPredictorsInput{})
+	got, err := svc.ListPredictors(context.Background(), &ListPredictorsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2296,7 +3073,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2337,7 +3116,22 @@ func TestCheckResponseSnapshot_ListWhatIfAnalyses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWhatIfAnalyses(context.Background(), &ListWhatIfAnalysesInput{})
+	got, err := svc.ListWhatIfAnalyses(context.Background(), &ListWhatIfAnalysesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2398,7 +3192,22 @@ func TestCheckResponseSnapshot_ListWhatIfForecastExports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWhatIfForecastExports(context.Background(), &ListWhatIfForecastExportsInput{})
+	got, err := svc.ListWhatIfForecastExports(context.Background(), &ListWhatIfForecastExportsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2439,7 +3248,22 @@ func TestCheckResponseSnapshot_ListWhatIfForecasts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWhatIfForecasts(context.Background(), &ListWhatIfForecastsInput{})
+	got, err := svc.ListWhatIfForecasts(context.Background(), &ListWhatIfForecastsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				Value:     ptr.String("__Value__"),
+				Condition: types.FilterConditionString("IS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2458,7 +3282,9 @@ func TestCheckResponseSnapshot_ResumeResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResumeResource(context.Background(), &ResumeResourceInput{})
+	got, err := svc.ResumeResource(context.Background(), &ResumeResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2477,7 +3303,9 @@ func TestCheckResponseSnapshot_StopResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopResource(context.Background(), &StopResourceInput{})
+	got, err := svc.StopResource(context.Background(), &StopResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2496,7 +3324,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2515,7 +3355,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2534,7 +3380,13 @@ func TestCheckResponseSnapshot_UpdateDatasetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDatasetGroup(context.Background(), &UpdateDatasetGroupInput{})
+	got, err := svc.UpdateDatasetGroup(context.Background(), &UpdateDatasetGroupInput{
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		DatasetArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2555,7 +3407,82 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAutoPredictor(context.Background(), &CreateAutoPredictorInput{})
+	_, opErr := svc.CreateAutoPredictor(context.Background(), &CreateAutoPredictorInput{
+		PredictorName:   ptr.String("__PredictorName__"),
+		ForecastHorizon: ptr.Int32(1),
+		ForecastTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForecastDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForecastFrequency: ptr.String("__ForecastFrequency__"),
+		DataConfig: &types.DataConfig{
+			DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+			AttributeConfigs: []types.AttributeConfig{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Transformations: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Transformations: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			AdditionalDatasets: []types.AdditionalDataset{
+				{
+					Name: ptr.String("__Name__"),
+					Configuration: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Configuration: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfig: &types.EncryptionConfig{
+			RoleArn:   ptr.String("__RoleArn__"),
+			KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		},
+		ReferencePredictorArn: ptr.String("__ReferencePredictorArn__"),
+		OptimizationMetric:    types.OptimizationMetric("WAPE"),
+		ExplainPredictor:      ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MonitorConfig: &types.MonitorConfig{
+			MonitorName: ptr.String("__MonitorName__"),
+		},
+		TimeAlignmentBoundary: &types.TimeAlignmentBoundary{
+			Month:      types.Month("JANUARY"),
+			DayOfMonth: ptr.Int32(1),
+			DayOfWeek:  types.DayOfWeek("MONDAY"),
+			Hour:       ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2580,7 +3507,10 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListDatasetGroups(context.Background(), &ListDatasetGroupsInput{})
+	_, opErr := svc.ListDatasetGroups(context.Background(), &ListDatasetGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2605,7 +3535,82 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAutoPredictor(context.Background(), &CreateAutoPredictorInput{})
+	_, opErr := svc.CreateAutoPredictor(context.Background(), &CreateAutoPredictorInput{
+		PredictorName:   ptr.String("__PredictorName__"),
+		ForecastHorizon: ptr.Int32(1),
+		ForecastTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForecastDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForecastFrequency: ptr.String("__ForecastFrequency__"),
+		DataConfig: &types.DataConfig{
+			DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+			AttributeConfigs: []types.AttributeConfig{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Transformations: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Transformations: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			AdditionalDatasets: []types.AdditionalDataset{
+				{
+					Name: ptr.String("__Name__"),
+					Configuration: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Configuration: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfig: &types.EncryptionConfig{
+			RoleArn:   ptr.String("__RoleArn__"),
+			KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		},
+		ReferencePredictorArn: ptr.String("__ReferencePredictorArn__"),
+		OptimizationMetric:    types.OptimizationMetric("WAPE"),
+		ExplainPredictor:      ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MonitorConfig: &types.MonitorConfig{
+			MonitorName: ptr.String("__MonitorName__"),
+		},
+		TimeAlignmentBoundary: &types.TimeAlignmentBoundary{
+			Month:      types.Month("JANUARY"),
+			DayOfMonth: ptr.Int32(1),
+			DayOfWeek:  types.DayOfWeek("MONDAY"),
+			Hour:       ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2630,7 +3635,82 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAutoPredictor(context.Background(), &CreateAutoPredictorInput{})
+	_, opErr := svc.CreateAutoPredictor(context.Background(), &CreateAutoPredictorInput{
+		PredictorName:   ptr.String("__PredictorName__"),
+		ForecastHorizon: ptr.Int32(1),
+		ForecastTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForecastDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForecastFrequency: ptr.String("__ForecastFrequency__"),
+		DataConfig: &types.DataConfig{
+			DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+			AttributeConfigs: []types.AttributeConfig{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Transformations: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Transformations: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			AdditionalDatasets: []types.AdditionalDataset{
+				{
+					Name: ptr.String("__Name__"),
+					Configuration: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Configuration: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfig: &types.EncryptionConfig{
+			RoleArn:   ptr.String("__RoleArn__"),
+			KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		},
+		ReferencePredictorArn: ptr.String("__ReferencePredictorArn__"),
+		OptimizationMetric:    types.OptimizationMetric("WAPE"),
+		ExplainPredictor:      ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MonitorConfig: &types.MonitorConfig{
+			MonitorName: ptr.String("__MonitorName__"),
+		},
+		TimeAlignmentBoundary: &types.TimeAlignmentBoundary{
+			Month:      types.Month("JANUARY"),
+			DayOfMonth: ptr.Int32(1),
+			DayOfWeek:  types.DayOfWeek("MONDAY"),
+			Hour:       ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2655,7 +3735,82 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAutoPredictor(context.Background(), &CreateAutoPredictorInput{})
+	_, opErr := svc.CreateAutoPredictor(context.Background(), &CreateAutoPredictorInput{
+		PredictorName:   ptr.String("__PredictorName__"),
+		ForecastHorizon: ptr.Int32(1),
+		ForecastTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForecastDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForecastFrequency: ptr.String("__ForecastFrequency__"),
+		DataConfig: &types.DataConfig{
+			DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+			AttributeConfigs: []types.AttributeConfig{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Transformations: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Transformations: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			AdditionalDatasets: []types.AdditionalDataset{
+				{
+					Name: ptr.String("__Name__"),
+					Configuration: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Configuration: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfig: &types.EncryptionConfig{
+			RoleArn:   ptr.String("__RoleArn__"),
+			KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		},
+		ReferencePredictorArn: ptr.String("__ReferencePredictorArn__"),
+		OptimizationMetric:    types.OptimizationMetric("WAPE"),
+		ExplainPredictor:      ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MonitorConfig: &types.MonitorConfig{
+			MonitorName: ptr.String("__MonitorName__"),
+		},
+		TimeAlignmentBoundary: &types.TimeAlignmentBoundary{
+			Month:      types.Month("JANUARY"),
+			DayOfMonth: ptr.Int32(1),
+			DayOfWeek:  types.DayOfWeek("MONDAY"),
+			Hour:       ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2680,7 +3835,82 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAutoPredictor(context.Background(), &CreateAutoPredictorInput{})
+	_, opErr := svc.CreateAutoPredictor(context.Background(), &CreateAutoPredictorInput{
+		PredictorName:   ptr.String("__PredictorName__"),
+		ForecastHorizon: ptr.Int32(1),
+		ForecastTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForecastDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForecastFrequency: ptr.String("__ForecastFrequency__"),
+		DataConfig: &types.DataConfig{
+			DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+			AttributeConfigs: []types.AttributeConfig{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Transformations: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Transformations: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			AdditionalDatasets: []types.AdditionalDataset{
+				{
+					Name: ptr.String("__Name__"),
+					Configuration: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Configuration: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfig: &types.EncryptionConfig{
+			RoleArn:   ptr.String("__RoleArn__"),
+			KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		},
+		ReferencePredictorArn: ptr.String("__ReferencePredictorArn__"),
+		OptimizationMetric:    types.OptimizationMetric("WAPE"),
+		ExplainPredictor:      ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MonitorConfig: &types.MonitorConfig{
+			MonitorName: ptr.String("__MonitorName__"),
+		},
+		TimeAlignmentBoundary: &types.TimeAlignmentBoundary{
+			Month:      types.Month("JANUARY"),
+			DayOfMonth: ptr.Int32(1),
+			DayOfWeek:  types.DayOfWeek("MONDAY"),
+			Hour:       ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

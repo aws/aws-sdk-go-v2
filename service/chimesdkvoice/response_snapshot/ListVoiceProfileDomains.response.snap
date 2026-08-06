@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","VoiceProfileDomains":[{"CreatedTimestamp":"2000-01-01T00:00:00Z","Description":"__Description__","Name":"__Name__","UpdatedTimestamp":"2000-01-01T00:00:00Z","VoiceProfileDomainArn":"__VoiceProfileDomainArn__","VoiceProfileDomainId":"__VoiceProfileDomainId__"},{"CreatedTimestamp":"2000-01-01T00:00:00Z","Description":"__Description__","Name":"__Name__","UpdatedTimestamp":"2000-01-01T00:00:00Z","VoiceProfileDomainArn":"__VoiceProfileDomainArn__","VoiceProfileDomainId":"__VoiceProfileDomainId__"}]}

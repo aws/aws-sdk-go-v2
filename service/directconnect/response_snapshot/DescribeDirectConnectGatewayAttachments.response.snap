@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.DescribeDirectConnectGatewayAttachments
+
+{"directConnectGatewayAttachments":[{"attachmentState":"attaching","attachmentType":"TransitVirtualInterface","directConnectGatewayId":"__DirectConnectGatewayId__","stateChangeError":"__StateChangeError__","virtualInterfaceId":"__VirtualInterfaceId__","virtualInterfaceOwnerAccount":"__VirtualInterfaceOwnerAccount__","virtualInterfaceRegion":"__VirtualInterfaceRegion__"},{"attachmentState":"attaching","attachmentType":"TransitVirtualInterface","directConnectGatewayId":"__DirectConnectGatewayId__","stateChangeError":"__StateChangeError__","virtualInterfaceId":"__VirtualInterfaceId__","virtualInterfaceOwnerAccount":"__VirtualInterfaceOwnerAccount__","virtualInterfaceRegion":"__VirtualInterfaceRegion__"}],"nextToken":"__NextToken__"}

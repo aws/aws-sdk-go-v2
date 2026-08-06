@@ -118,7 +118,72 @@ func TestCheckResponseSnapshot_CreateAnomalyMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAnomalyMonitor(context.Background(), &CreateAnomalyMonitorInput{})
+	got, err := svc.CreateAnomalyMonitor(context.Background(), &CreateAnomalyMonitorInput{
+		AnomalyMonitor: &types.AnomalyMonitor{
+			MonitorArn:        ptr.String("__MonitorArn__"),
+			MonitorName:       ptr.String("__MonitorName__"),
+			CreationDate:      ptr.String("__CreationDate__"),
+			LastUpdatedDate:   ptr.String("__LastUpdatedDate__"),
+			LastEvaluatedDate: ptr.String("__LastEvaluatedDate__"),
+			MonitorType:       types.MonitorType("DIMENSIONAL"),
+			MonitorDimension:  types.MonitorDimension("SERVICE"),
+			MonitorSpecification: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.DimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			DimensionalValueCount: 1,
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,7 +204,85 @@ func TestCheckResponseSnapshot_CreateAnomalySubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAnomalySubscription(context.Background(), &CreateAnomalySubscriptionInput{})
+	got, err := svc.CreateAnomalySubscription(context.Background(), &CreateAnomalySubscriptionInput{
+		AnomalySubscription: &types.AnomalySubscription{
+			SubscriptionArn: ptr.String("__SubscriptionArn__"),
+			AccountId:       ptr.String("__AccountId__"),
+			MonitorArnList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subscribers: []types.Subscriber{
+				{
+					Address: ptr.String("__Address__"),
+					Type:    types.SubscriberType("EMAIL"),
+					Status:  types.SubscriberStatus("CONFIRMED"),
+				},
+				{
+					Address: ptr.String("__Address__"),
+					Type:    types.SubscriberType("EMAIL"),
+					Status:  types.SubscriberStatus("CONFIRMED"),
+				},
+			},
+			Threshold:        ptr.Float64(1.0),
+			Frequency:        types.AnomalySubscriptionFrequency("DAILY"),
+			SubscriptionName: ptr.String("__SubscriptionName__"),
+			ThresholdExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.DimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +304,178 @@ func TestCheckResponseSnapshot_CreateCostCategoryDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCostCategoryDefinition(context.Background(), &CreateCostCategoryDefinitionInput{})
+	got, err := svc.CreateCostCategoryDefinition(context.Background(), &CreateCostCategoryDefinitionInput{
+		Name:           ptr.String("__Name__"),
+		EffectiveStart: ptr.String("__EffectiveStart__"),
+		RuleVersion:    types.CostCategoryRuleVersion("CostCategoryExpression.v1"),
+		Rules: []types.CostCategoryRule{
+			{
+				Value: ptr.String("__Value__"),
+				Rule: &types.Expression{
+					Or: []types.Expression{
+						{},
+						{},
+					},
+					And: []types.Expression{
+						{},
+						{},
+					},
+					Not: nil,
+					Dimensions: &types.DimensionValues{
+						Key: types.Dimension("AZ"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					Tags: &types.TagValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+				},
+				InheritedValue: &types.CostCategoryInheritedValueDimension{
+					DimensionName: types.CostCategoryInheritedValueDimensionName("LINKED_ACCOUNT_NAME"),
+					DimensionKey:  ptr.String("__DimensionKey__"),
+				},
+				Type: types.CostCategoryRuleType("REGULAR"),
+			},
+			{
+				Value: ptr.String("__Value__"),
+				Rule: &types.Expression{
+					Or: []types.Expression{
+						{},
+						{},
+					},
+					And: []types.Expression{
+						{},
+						{},
+					},
+					Not: nil,
+					Dimensions: &types.DimensionValues{
+						Key: types.Dimension("AZ"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					Tags: &types.TagValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+				},
+				InheritedValue: &types.CostCategoryInheritedValueDimension{
+					DimensionName: types.CostCategoryInheritedValueDimensionName("LINKED_ACCOUNT_NAME"),
+					DimensionKey:  ptr.String("__DimensionKey__"),
+				},
+				Type: types.CostCategoryRuleType("REGULAR"),
+			},
+		},
+		DefaultValue: ptr.String("__DefaultValue__"),
+		SplitChargeRules: []types.CostCategorySplitChargeRule{
+			{
+				Source: ptr.String("__Source__"),
+				Targets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Method: types.CostCategorySplitChargeMethod("FIXED"),
+				Parameters: []types.CostCategorySplitChargeRuleParameter{
+					{
+						Type: types.CostCategorySplitChargeRuleParameterType("ALLOCATION_PERCENTAGES"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Type: types.CostCategorySplitChargeRuleParameterType("ALLOCATION_PERCENTAGES"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Source: ptr.String("__Source__"),
+				Targets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Method: types.CostCategorySplitChargeMethod("FIXED"),
+				Parameters: []types.CostCategorySplitChargeRuleParameter{
+					{
+						Type: types.CostCategorySplitChargeRuleParameterType("ALLOCATION_PERCENTAGES"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Type: types.CostCategorySplitChargeRuleParameterType("ALLOCATION_PERCENTAGES"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +494,9 @@ func TestCheckResponseSnapshot_DeleteAnomalyMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAnomalyMonitor(context.Background(), &DeleteAnomalyMonitorInput{})
+	got, err := svc.DeleteAnomalyMonitor(context.Background(), &DeleteAnomalyMonitorInput{
+		MonitorArn: ptr.String("__MonitorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -199,7 +515,9 @@ func TestCheckResponseSnapshot_DeleteAnomalySubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAnomalySubscription(context.Background(), &DeleteAnomalySubscriptionInput{})
+	got, err := svc.DeleteAnomalySubscription(context.Background(), &DeleteAnomalySubscriptionInput{
+		SubscriptionArn: ptr.String("__SubscriptionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -221,7 +539,9 @@ func TestCheckResponseSnapshot_DeleteCostCategoryDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCostCategoryDefinition(context.Background(), &DeleteCostCategoryDefinitionInput{})
+	got, err := svc.DeleteCostCategoryDefinition(context.Background(), &DeleteCostCategoryDefinitionInput{
+		CostCategoryArn: ptr.String("__CostCategoryArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -415,7 +735,10 @@ func TestCheckResponseSnapshot_DescribeCostCategoryDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCostCategoryDefinition(context.Background(), &DescribeCostCategoryDefinitionInput{})
+	got, err := svc.DescribeCostCategoryDefinition(context.Background(), &DescribeCostCategoryDefinitionInput{
+		CostCategoryArn: ptr.String("__CostCategoryArn__"),
+		EffectiveOn:     ptr.String("__EffectiveOn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -520,7 +843,21 @@ func TestCheckResponseSnapshot_GetAnomalies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAnomalies(context.Background(), &GetAnomaliesInput{})
+	got, err := svc.GetAnomalies(context.Background(), &GetAnomaliesInput{
+		MonitorArn: ptr.String("__MonitorArn__"),
+		DateInterval: &types.AnomalyDateInterval{
+			StartDate: ptr.String("__StartDate__"),
+			EndDate:   ptr.String("__EndDate__"),
+		},
+		Feedback: types.AnomalyFeedbackType("YES"),
+		TotalImpact: &types.TotalImpactFilter{
+			NumericOperator: types.NumericOperator("EQUAL"),
+			StartValue:      1.0,
+			EndValue:        1.0,
+		},
+		NextPageToken: ptr.String("__NextPageToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -651,7 +988,14 @@ func TestCheckResponseSnapshot_GetAnomalyMonitors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAnomalyMonitors(context.Background(), &GetAnomalyMonitorsInput{})
+	got, err := svc.GetAnomalyMonitors(context.Background(), &GetAnomalyMonitorsInput{
+		MonitorArnList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextPageToken: ptr.String("__NextPageToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -808,7 +1152,15 @@ func TestCheckResponseSnapshot_GetAnomalySubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAnomalySubscriptions(context.Background(), &GetAnomalySubscriptionsInput{})
+	got, err := svc.GetAnomalySubscriptions(context.Background(), &GetAnomalySubscriptionsInput{
+		SubscriptionArnList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MonitorArn:    ptr.String("__MonitorArn__"),
+		NextPageToken: ptr.String("__NextPageToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -836,7 +1188,14 @@ func TestCheckResponseSnapshot_GetApproximateUsageRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApproximateUsageRecords(context.Background(), &GetApproximateUsageRecordsInput{})
+	got, err := svc.GetApproximateUsageRecords(context.Background(), &GetApproximateUsageRecordsInput{
+		Granularity: types.Granularity("DAILY"),
+		Services: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ApproximationDimension: types.ApproximationDimension("SERVICE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -939,7 +1298,9 @@ func TestCheckResponseSnapshot_GetCommitmentPurchaseAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCommitmentPurchaseAnalysis(context.Background(), &GetCommitmentPurchaseAnalysisInput{})
+	got, err := svc.GetCommitmentPurchaseAnalysis(context.Background(), &GetCommitmentPurchaseAnalysisInput{
+		AnalysisId: ptr.String("__AnalysisId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1064,7 +1425,73 @@ func TestCheckResponseSnapshot_GetCostAndUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCostAndUsage(context.Background(), &GetCostAndUsageInput{})
+	got, err := svc.GetCostAndUsage(context.Background(), &GetCostAndUsageInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		Granularity: types.Granularity("DAILY"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		GroupBy: []types.GroupDefinition{
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+		},
+		BillingViewArn: ptr.String("__BillingViewArn__"),
+		NextPageToken:  ptr.String("__NextPageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1203,7 +1630,74 @@ func TestCheckResponseSnapshot_GetCostAndUsageComparisons(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCostAndUsageComparisons(context.Background(), &GetCostAndUsageComparisonsInput{})
+	got, err := svc.GetCostAndUsageComparisons(context.Background(), &GetCostAndUsageComparisonsInput{
+		BillingViewArn: ptr.String("__BillingViewArn__"),
+		BaselineTimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		ComparisonTimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		MetricForComparison: ptr.String("__MetricForComparison__"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		GroupBy: []types.GroupDefinition{
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+		},
+		MaxResults:    ptr.Int32(1),
+		NextPageToken: ptr.String("__NextPageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1328,7 +1822,73 @@ func TestCheckResponseSnapshot_GetCostAndUsageWithResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCostAndUsageWithResources(context.Background(), &GetCostAndUsageWithResourcesInput{})
+	got, err := svc.GetCostAndUsageWithResources(context.Background(), &GetCostAndUsageWithResourcesInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		Granularity: types.Granularity("DAILY"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		GroupBy: []types.GroupDefinition{
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+		},
+		BillingViewArn: ptr.String("__BillingViewArn__"),
+		NextPageToken:  ptr.String("__NextPageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1359,7 +1919,71 @@ func TestCheckResponseSnapshot_GetCostCategories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCostCategories(context.Background(), &GetCostCategoriesInput{})
+	got, err := svc.GetCostCategories(context.Background(), &GetCostCategoriesInput{
+		SearchString: ptr.String("__SearchString__"),
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		CostCategoryName: ptr.String("__CostCategoryName__"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		SortBy: []types.SortDefinition{
+			{
+				Key:       ptr.String("__Key__"),
+				SortOrder: types.SortOrder("ASCENDING"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				SortOrder: types.SortOrder("ASCENDING"),
+			},
+		},
+		BillingViewArn: ptr.String("__BillingViewArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextPageToken:  ptr.String("__NextPageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1542,7 +2166,74 @@ func TestCheckResponseSnapshot_GetCostComparisonDrivers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCostComparisonDrivers(context.Background(), &GetCostComparisonDriversInput{})
+	got, err := svc.GetCostComparisonDrivers(context.Background(), &GetCostComparisonDriversInput{
+		BillingViewArn: ptr.String("__BillingViewArn__"),
+		BaselineTimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		ComparisonTimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		MetricForComparison: ptr.String("__MetricForComparison__"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		GroupBy: []types.GroupDefinition{
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+		},
+		MaxResults:    ptr.Int32(1),
+		NextPageToken: ptr.String("__NextPageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1586,7 +2277,60 @@ func TestCheckResponseSnapshot_GetCostForecast(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCostForecast(context.Background(), &GetCostForecastInput{})
+	got, err := svc.GetCostForecast(context.Background(), &GetCostForecastInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		Metric:      types.Metric("BLENDED_COST"),
+		Granularity: types.Granularity("DAILY"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		BillingViewArn:          ptr.String("__BillingViewArn__"),
+		PredictionIntervalLevel: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1623,7 +2367,72 @@ func TestCheckResponseSnapshot_GetDimensionValues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDimensionValues(context.Background(), &GetDimensionValuesInput{})
+	got, err := svc.GetDimensionValues(context.Background(), &GetDimensionValuesInput{
+		SearchString: ptr.String("__SearchString__"),
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		Dimension: types.Dimension("AZ"),
+		Context:   types.Context("COST_AND_USAGE"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		SortBy: []types.SortDefinition{
+			{
+				Key:       ptr.String("__Key__"),
+				SortOrder: types.SortOrder("ASCENDING"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				SortOrder: types.SortOrder("ASCENDING"),
+			},
+		},
+		BillingViewArn: ptr.String("__BillingViewArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextPageToken:  ptr.String("__NextPageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1801,7 +2610,77 @@ func TestCheckResponseSnapshot_GetReservationCoverage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReservationCoverage(context.Background(), &GetReservationCoverageInput{})
+	got, err := svc.GetReservationCoverage(context.Background(), &GetReservationCoverageInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		GroupBy: []types.GroupDefinition{
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+		},
+		Granularity: types.Granularity("DAILY"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextPageToken: ptr.String("__NextPageToken__"),
+		SortBy: &types.SortDefinition{
+			Key:       ptr.String("__Key__"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2197,7 +3076,65 @@ func TestCheckResponseSnapshot_GetReservationPurchaseRecommendation(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReservationPurchaseRecommendation(context.Background(), &GetReservationPurchaseRecommendationInput{})
+	got, err := svc.GetReservationPurchaseRecommendation(context.Background(), &GetReservationPurchaseRecommendationInput{
+		AccountId: ptr.String("__AccountId__"),
+		Service:   ptr.String("__Service__"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		AccountScope:         types.AccountScope("PAYER"),
+		LookbackPeriodInDays: types.LookbackPeriodInDays("SEVEN_DAYS"),
+		TermInYears:          types.TermInYears("ONE_YEAR"),
+		PaymentOption:        types.PaymentOption("NO_UPFRONT"),
+		ServiceSpecification: &types.ServiceSpecification{
+			EC2Specification: &types.EC2Specification{
+				OfferingClass: types.OfferingClass("STANDARD"),
+			},
+		},
+		PageSize:      1,
+		NextPageToken: ptr.String("__NextPageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2397,7 +3334,73 @@ func TestCheckResponseSnapshot_GetReservationUtilization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReservationUtilization(context.Background(), &GetReservationUtilizationInput{})
+	got, err := svc.GetReservationUtilization(context.Background(), &GetReservationUtilizationInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		GroupBy: []types.GroupDefinition{
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+		},
+		Granularity: types.Granularity("DAILY"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		SortBy: &types.SortDefinition{
+			Key:       ptr.String("__Key__"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		NextPageToken: ptr.String("__NextPageToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2804,7 +3807,59 @@ func TestCheckResponseSnapshot_GetRightsizingRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRightsizingRecommendation(context.Background(), &GetRightsizingRecommendationInput{})
+	got, err := svc.GetRightsizingRecommendation(context.Background(), &GetRightsizingRecommendationInput{
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		Configuration: &types.RightsizingRecommendationConfiguration{
+			RecommendationTarget: types.RecommendationTarget("SAME_INSTANCE_FAMILY"),
+			BenefitsConsidered:   true,
+		},
+		Service:       ptr.String("__Service__"),
+		PageSize:      1,
+		NextPageToken: ptr.String("__NextPageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2871,7 +3926,9 @@ func TestCheckResponseSnapshot_GetSavingsPlanPurchaseRecommendationDetails(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSavingsPlanPurchaseRecommendationDetails(context.Background(), &GetSavingsPlanPurchaseRecommendationDetailsInput{})
+	got, err := svc.GetSavingsPlanPurchaseRecommendationDetails(context.Background(), &GetSavingsPlanPurchaseRecommendationDetailsInput{
+		RecommendationDetailId: ptr.String("__RecommendationDetailId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2924,7 +3981,77 @@ func TestCheckResponseSnapshot_GetSavingsPlansCoverage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSavingsPlansCoverage(context.Background(), &GetSavingsPlansCoverageInput{})
+	got, err := svc.GetSavingsPlansCoverage(context.Background(), &GetSavingsPlansCoverageInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		GroupBy: []types.GroupDefinition{
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+		},
+		Granularity: types.Granularity("DAILY"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SortBy: &types.SortDefinition{
+			Key:       ptr.String("__Key__"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3018,7 +4145,59 @@ func TestCheckResponseSnapshot_GetSavingsPlansPurchaseRecommendation(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSavingsPlansPurchaseRecommendation(context.Background(), &GetSavingsPlansPurchaseRecommendationInput{})
+	got, err := svc.GetSavingsPlansPurchaseRecommendation(context.Background(), &GetSavingsPlansPurchaseRecommendationInput{
+		SavingsPlansType:     types.SupportedSavingsPlansType("COMPUTE_SP"),
+		TermInYears:          types.TermInYears("ONE_YEAR"),
+		PaymentOption:        types.PaymentOption("NO_UPFRONT"),
+		AccountScope:         types.AccountScope("PAYER"),
+		NextPageToken:        ptr.String("__NextPageToken__"),
+		PageSize:             1,
+		LookbackPeriodInDays: types.LookbackPeriodInDays("SEVEN_DAYS"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3099,7 +4278,61 @@ func TestCheckResponseSnapshot_GetSavingsPlansUtilization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSavingsPlansUtilization(context.Background(), &GetSavingsPlansUtilizationInput{})
+	got, err := svc.GetSavingsPlansUtilization(context.Background(), &GetSavingsPlansUtilizationInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		Granularity: types.Granularity("DAILY"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		SortBy: &types.SortDefinition{
+			Key:       ptr.String("__Key__"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3185,7 +4418,66 @@ func TestCheckResponseSnapshot_GetSavingsPlansUtilizationDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSavingsPlansUtilizationDetails(context.Background(), &GetSavingsPlansUtilizationDetailsInput{})
+	got, err := svc.GetSavingsPlansUtilizationDetails(context.Background(), &GetSavingsPlansUtilizationDetailsInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		DataType: []types.SavingsPlansDataType{
+			types.SavingsPlansDataType("ATTRIBUTES"),
+			types.SavingsPlansDataType("ATTRIBUTES"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SortBy: &types.SortDefinition{
+			Key:       ptr.String("__Key__"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3212,7 +4504,71 @@ func TestCheckResponseSnapshot_GetTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTags(context.Background(), &GetTagsInput{})
+	got, err := svc.GetTags(context.Background(), &GetTagsInput{
+		SearchString: ptr.String("__SearchString__"),
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		TagKey: ptr.String("__TagKey__"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		SortBy: []types.SortDefinition{
+			{
+				Key:       ptr.String("__Key__"),
+				SortOrder: types.SortOrder("ASCENDING"),
+			},
+			{
+				Key:       ptr.String("__Key__"),
+				SortOrder: types.SortOrder("ASCENDING"),
+			},
+		},
+		BillingViewArn: ptr.String("__BillingViewArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextPageToken:  ptr.String("__NextPageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3256,7 +4612,60 @@ func TestCheckResponseSnapshot_GetUsageForecast(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUsageForecast(context.Background(), &GetUsageForecastInput{})
+	got, err := svc.GetUsageForecast(context.Background(), &GetUsageForecastInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		Metric:      types.Metric("BLENDED_COST"),
+		Granularity: types.Granularity("DAILY"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		BillingViewArn:          ptr.String("__BillingViewArn__"),
+		PredictionIntervalLevel: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3367,7 +4776,15 @@ func TestCheckResponseSnapshot_ListCommitmentPurchaseAnalyses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCommitmentPurchaseAnalyses(context.Background(), &ListCommitmentPurchaseAnalysesInput{})
+	got, err := svc.ListCommitmentPurchaseAnalyses(context.Background(), &ListCommitmentPurchaseAnalysesInput{
+		AnalysisStatus: types.AnalysisStatus("SUCCEEDED"),
+		NextPageToken:  ptr.String("__NextPageToken__"),
+		PageSize:       1,
+		AnalysisIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3404,7 +4821,10 @@ func TestCheckResponseSnapshot_ListCostAllocationTagBackfillHistory(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCostAllocationTagBackfillHistory(context.Background(), &ListCostAllocationTagBackfillHistoryInput{})
+	got, err := svc.ListCostAllocationTagBackfillHistory(context.Background(), &ListCostAllocationTagBackfillHistoryInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3441,7 +4861,16 @@ func TestCheckResponseSnapshot_ListCostAllocationTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCostAllocationTags(context.Background(), &ListCostAllocationTagsInput{})
+	got, err := svc.ListCostAllocationTags(context.Background(), &ListCostAllocationTagsInput{
+		Status: types.CostAllocationTagStatus("Active"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Type:       types.CostAllocationTagType("AWSGenerated"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3516,7 +4945,15 @@ func TestCheckResponseSnapshot_ListCostCategoryDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCostCategoryDefinitions(context.Background(), &ListCostCategoryDefinitionsInput{})
+	got, err := svc.ListCostCategoryDefinitions(context.Background(), &ListCostCategoryDefinitionsInput{
+		EffectiveOn: ptr.String("__EffectiveOn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		SupportedResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3549,7 +4986,11 @@ func TestCheckResponseSnapshot_ListCostCategoryResourceAssociations(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCostCategoryResourceAssociations(context.Background(), &ListCostCategoryResourceAssociationsInput{})
+	got, err := svc.ListCostCategoryResourceAssociations(context.Background(), &ListCostCategoryResourceAssociationsInput{
+		CostCategoryArn: ptr.String("__CostCategoryArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3586,7 +5027,15 @@ func TestCheckResponseSnapshot_ListSavingsPlansPurchaseRecommendationGeneration(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSavingsPlansPurchaseRecommendationGeneration(context.Background(), &ListSavingsPlansPurchaseRecommendationGenerationInput{})
+	got, err := svc.ListSavingsPlansPurchaseRecommendationGeneration(context.Background(), &ListSavingsPlansPurchaseRecommendationGenerationInput{
+		GenerationStatus: types.GenerationStatus("SUCCEEDED"),
+		RecommendationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PageSize:      1,
+		NextPageToken: ptr.String("__NextPageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3616,7 +5065,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3637,7 +5088,10 @@ func TestCheckResponseSnapshot_ProvideAnomalyFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ProvideAnomalyFeedback(context.Background(), &ProvideAnomalyFeedbackInput{})
+	got, err := svc.ProvideAnomalyFeedback(context.Background(), &ProvideAnomalyFeedbackInput{
+		AnomalyId: ptr.String("__AnomalyId__"),
+		Feedback:  types.AnomalyFeedbackType("YES"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3660,7 +5114,44 @@ func TestCheckResponseSnapshot_StartCommitmentPurchaseAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCommitmentPurchaseAnalysis(context.Background(), &StartCommitmentPurchaseAnalysisInput{})
+	got, err := svc.StartCommitmentPurchaseAnalysis(context.Background(), &StartCommitmentPurchaseAnalysisInput{
+		CommitmentPurchaseAnalysisConfiguration: &types.CommitmentPurchaseAnalysisConfiguration{
+			SavingsPlansPurchaseAnalysisConfiguration: &types.SavingsPlansPurchaseAnalysisConfiguration{
+				AccountScope: types.AccountScope("PAYER"),
+				AccountId:    ptr.String("__AccountId__"),
+				AnalysisType: types.AnalysisType("MAX_SAVINGS"),
+				SavingsPlansToAdd: []types.SavingsPlans{
+					{
+						PaymentOption:          types.PaymentOption("NO_UPFRONT"),
+						SavingsPlansType:       types.SupportedSavingsPlansType("COMPUTE_SP"),
+						Region:                 ptr.String("__Region__"),
+						InstanceFamily:         ptr.String("__InstanceFamily__"),
+						TermInYears:            types.TermInYears("ONE_YEAR"),
+						SavingsPlansCommitment: ptr.Float64(1.0),
+						OfferingId:             ptr.String("__OfferingId__"),
+					},
+					{
+						PaymentOption:          types.PaymentOption("NO_UPFRONT"),
+						SavingsPlansType:       types.SupportedSavingsPlansType("COMPUTE_SP"),
+						Region:                 ptr.String("__Region__"),
+						InstanceFamily:         ptr.String("__InstanceFamily__"),
+						TermInYears:            types.TermInYears("ONE_YEAR"),
+						SavingsPlansCommitment: ptr.Float64(1.0),
+						OfferingId:             ptr.String("__OfferingId__"),
+					},
+				},
+				SavingsPlansToExclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LookBackTimePeriod: &types.DateInterval{
+					Start: ptr.String("__Start__"),
+					End:   ptr.String("__End__"),
+				},
+				SavingsPlansTargetCoverage: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3687,7 +5178,9 @@ func TestCheckResponseSnapshot_StartCostAllocationTagBackfill(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCostAllocationTagBackfill(context.Background(), &StartCostAllocationTagBackfillInput{})
+	got, err := svc.StartCostAllocationTagBackfill(context.Background(), &StartCostAllocationTagBackfillInput{
+		BackfillFrom: ptr.String("__BackfillFrom__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3729,7 +5222,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3748,7 +5253,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ResourceTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3769,7 +5280,10 @@ func TestCheckResponseSnapshot_UpdateAnomalyMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAnomalyMonitor(context.Background(), &UpdateAnomalyMonitorInput{})
+	got, err := svc.UpdateAnomalyMonitor(context.Background(), &UpdateAnomalyMonitorInput{
+		MonitorArn:  ptr.String("__MonitorArn__"),
+		MonitorName: ptr.String("__MonitorName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3790,7 +5304,72 @@ func TestCheckResponseSnapshot_UpdateAnomalySubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAnomalySubscription(context.Background(), &UpdateAnomalySubscriptionInput{})
+	got, err := svc.UpdateAnomalySubscription(context.Background(), &UpdateAnomalySubscriptionInput{
+		SubscriptionArn: ptr.String("__SubscriptionArn__"),
+		Threshold:       ptr.Float64(1.0),
+		Frequency:       types.AnomalySubscriptionFrequency("DAILY"),
+		MonitorArnList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Subscribers: []types.Subscriber{
+			{
+				Address: ptr.String("__Address__"),
+				Type:    types.SubscriberType("EMAIL"),
+				Status:  types.SubscriberStatus("CONFIRMED"),
+			},
+			{
+				Address: ptr.String("__Address__"),
+				Type:    types.SubscriberType("EMAIL"),
+				Status:  types.SubscriberStatus("CONFIRMED"),
+			},
+		},
+		SubscriptionName: ptr.String("__SubscriptionName__"),
+		ThresholdExpression: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3822,7 +5401,18 @@ func TestCheckResponseSnapshot_UpdateCostAllocationTagsStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCostAllocationTagsStatus(context.Background(), &UpdateCostAllocationTagsStatusInput{})
+	got, err := svc.UpdateCostAllocationTagsStatus(context.Background(), &UpdateCostAllocationTagsStatusInput{
+		CostAllocationTagsStatus: []types.CostAllocationTagStatusEntry{
+			{
+				TagKey: ptr.String("__TagKey__"),
+				Status: types.CostAllocationTagStatus("Active"),
+			},
+			{
+				TagKey: ptr.String("__TagKey__"),
+				Status: types.CostAllocationTagStatus("Active"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3844,7 +5434,168 @@ func TestCheckResponseSnapshot_UpdateCostCategoryDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCostCategoryDefinition(context.Background(), &UpdateCostCategoryDefinitionInput{})
+	got, err := svc.UpdateCostCategoryDefinition(context.Background(), &UpdateCostCategoryDefinitionInput{
+		CostCategoryArn: ptr.String("__CostCategoryArn__"),
+		EffectiveStart:  ptr.String("__EffectiveStart__"),
+		RuleVersion:     types.CostCategoryRuleVersion("CostCategoryExpression.v1"),
+		Rules: []types.CostCategoryRule{
+			{
+				Value: ptr.String("__Value__"),
+				Rule: &types.Expression{
+					Or: []types.Expression{
+						{},
+						{},
+					},
+					And: []types.Expression{
+						{},
+						{},
+					},
+					Not: nil,
+					Dimensions: &types.DimensionValues{
+						Key: types.Dimension("AZ"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					Tags: &types.TagValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+				},
+				InheritedValue: &types.CostCategoryInheritedValueDimension{
+					DimensionName: types.CostCategoryInheritedValueDimensionName("LINKED_ACCOUNT_NAME"),
+					DimensionKey:  ptr.String("__DimensionKey__"),
+				},
+				Type: types.CostCategoryRuleType("REGULAR"),
+			},
+			{
+				Value: ptr.String("__Value__"),
+				Rule: &types.Expression{
+					Or: []types.Expression{
+						{},
+						{},
+					},
+					And: []types.Expression{
+						{},
+						{},
+					},
+					Not: nil,
+					Dimensions: &types.DimensionValues{
+						Key: types.Dimension("AZ"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					Tags: &types.TagValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+				},
+				InheritedValue: &types.CostCategoryInheritedValueDimension{
+					DimensionName: types.CostCategoryInheritedValueDimensionName("LINKED_ACCOUNT_NAME"),
+					DimensionKey:  ptr.String("__DimensionKey__"),
+				},
+				Type: types.CostCategoryRuleType("REGULAR"),
+			},
+		},
+		DefaultValue: ptr.String("__DefaultValue__"),
+		SplitChargeRules: []types.CostCategorySplitChargeRule{
+			{
+				Source: ptr.String("__Source__"),
+				Targets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Method: types.CostCategorySplitChargeMethod("FIXED"),
+				Parameters: []types.CostCategorySplitChargeRuleParameter{
+					{
+						Type: types.CostCategorySplitChargeRuleParameterType("ALLOCATION_PERCENTAGES"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Type: types.CostCategorySplitChargeRuleParameterType("ALLOCATION_PERCENTAGES"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Source: ptr.String("__Source__"),
+				Targets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Method: types.CostCategorySplitChargeMethod("FIXED"),
+				Parameters: []types.CostCategorySplitChargeRuleParameter{
+					{
+						Type: types.CostCategorySplitChargeRuleParameterType("ALLOCATION_PERCENTAGES"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Type: types.CostCategorySplitChargeRuleParameterType("ALLOCATION_PERCENTAGES"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3865,7 +5616,9 @@ func TestCheckResponseSnapshot_Error_AnalysisNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetCommitmentPurchaseAnalysis(context.Background(), &GetCommitmentPurchaseAnalysisInput{})
+	_, opErr := svc.GetCommitmentPurchaseAnalysis(context.Background(), &GetCommitmentPurchaseAnalysisInput{
+		AnalysisId: ptr.String("__AnalysisId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3890,7 +5643,9 @@ func TestCheckResponseSnapshot_Error_BackfillLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartCostAllocationTagBackfill(context.Background(), &StartCostAllocationTagBackfillInput{})
+	_, opErr := svc.StartCostAllocationTagBackfill(context.Background(), &StartCostAllocationTagBackfillInput{
+		BackfillFrom: ptr.String("__BackfillFrom__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3915,7 +5670,73 @@ func TestCheckResponseSnapshot_Error_BillExpirationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetCostAndUsage(context.Background(), &GetCostAndUsageInput{})
+	_, opErr := svc.GetCostAndUsage(context.Background(), &GetCostAndUsageInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		Granularity: types.Granularity("DAILY"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		GroupBy: []types.GroupDefinition{
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+		},
+		BillingViewArn: ptr.String("__BillingViewArn__"),
+		NextPageToken:  ptr.String("__NextPageToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3940,7 +5761,73 @@ func TestCheckResponseSnapshot_Error_BillingViewHealthStatusException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetCostAndUsage(context.Background(), &GetCostAndUsageInput{})
+	_, opErr := svc.GetCostAndUsage(context.Background(), &GetCostAndUsageInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		Granularity: types.Granularity("DAILY"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		GroupBy: []types.GroupDefinition{
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+		},
+		BillingViewArn: ptr.String("__BillingViewArn__"),
+		NextPageToken:  ptr.String("__NextPageToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3965,7 +5852,14 @@ func TestCheckResponseSnapshot_Error_DataUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetApproximateUsageRecords(context.Background(), &GetApproximateUsageRecordsInput{})
+	_, opErr := svc.GetApproximateUsageRecords(context.Background(), &GetApproximateUsageRecordsInput{
+		Granularity: types.Granularity("DAILY"),
+		Services: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ApproximationDimension: types.ApproximationDimension("SERVICE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3990,7 +5884,44 @@ func TestCheckResponseSnapshot_Error_GenerationExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartCommitmentPurchaseAnalysis(context.Background(), &StartCommitmentPurchaseAnalysisInput{})
+	_, opErr := svc.StartCommitmentPurchaseAnalysis(context.Background(), &StartCommitmentPurchaseAnalysisInput{
+		CommitmentPurchaseAnalysisConfiguration: &types.CommitmentPurchaseAnalysisConfiguration{
+			SavingsPlansPurchaseAnalysisConfiguration: &types.SavingsPlansPurchaseAnalysisConfiguration{
+				AccountScope: types.AccountScope("PAYER"),
+				AccountId:    ptr.String("__AccountId__"),
+				AnalysisType: types.AnalysisType("MAX_SAVINGS"),
+				SavingsPlansToAdd: []types.SavingsPlans{
+					{
+						PaymentOption:          types.PaymentOption("NO_UPFRONT"),
+						SavingsPlansType:       types.SupportedSavingsPlansType("COMPUTE_SP"),
+						Region:                 ptr.String("__Region__"),
+						InstanceFamily:         ptr.String("__InstanceFamily__"),
+						TermInYears:            types.TermInYears("ONE_YEAR"),
+						SavingsPlansCommitment: ptr.Float64(1.0),
+						OfferingId:             ptr.String("__OfferingId__"),
+					},
+					{
+						PaymentOption:          types.PaymentOption("NO_UPFRONT"),
+						SavingsPlansType:       types.SupportedSavingsPlansType("COMPUTE_SP"),
+						Region:                 ptr.String("__Region__"),
+						InstanceFamily:         ptr.String("__InstanceFamily__"),
+						TermInYears:            types.TermInYears("ONE_YEAR"),
+						SavingsPlansCommitment: ptr.Float64(1.0),
+						OfferingId:             ptr.String("__OfferingId__"),
+					},
+				},
+				SavingsPlansToExclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LookBackTimePeriod: &types.DateInterval{
+					Start: ptr.String("__Start__"),
+					End:   ptr.String("__End__"),
+				},
+				SavingsPlansTargetCoverage: ptr.Int32(1),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4015,7 +5946,21 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetAnomalies(context.Background(), &GetAnomaliesInput{})
+	_, opErr := svc.GetAnomalies(context.Background(), &GetAnomaliesInput{
+		MonitorArn: ptr.String("__MonitorArn__"),
+		DateInterval: &types.AnomalyDateInterval{
+			StartDate: ptr.String("__StartDate__"),
+			EndDate:   ptr.String("__EndDate__"),
+		},
+		Feedback: types.AnomalyFeedbackType("YES"),
+		TotalImpact: &types.TotalImpactFilter{
+			NumericOperator: types.NumericOperator("EQUAL"),
+			StartValue:      1.0,
+			EndValue:        1.0,
+		},
+		NextPageToken: ptr.String("__NextPageToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4040,7 +5985,72 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAnomalyMonitor(context.Background(), &CreateAnomalyMonitorInput{})
+	_, opErr := svc.CreateAnomalyMonitor(context.Background(), &CreateAnomalyMonitorInput{
+		AnomalyMonitor: &types.AnomalyMonitor{
+			MonitorArn:        ptr.String("__MonitorArn__"),
+			MonitorName:       ptr.String("__MonitorName__"),
+			CreationDate:      ptr.String("__CreationDate__"),
+			LastUpdatedDate:   ptr.String("__LastUpdatedDate__"),
+			LastEvaluatedDate: ptr.String("__LastEvaluatedDate__"),
+			MonitorType:       types.MonitorType("DIMENSIONAL"),
+			MonitorDimension:  types.MonitorDimension("SERVICE"),
+			MonitorSpecification: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.DimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+			DimensionalValueCount: 1,
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4065,7 +6075,73 @@ func TestCheckResponseSnapshot_Error_RequestChangedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetCostAndUsage(context.Background(), &GetCostAndUsageInput{})
+	_, opErr := svc.GetCostAndUsage(context.Background(), &GetCostAndUsageInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		Granularity: types.Granularity("DAILY"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		GroupBy: []types.GroupDefinition{
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+			{
+				Type: types.GroupDefinitionType("DIMENSION"),
+				Key:  ptr.String("__Key__"),
+			},
+		},
+		BillingViewArn: ptr.String("__BillingViewArn__"),
+		NextPageToken:  ptr.String("__NextPageToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4091,7 +6167,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCostCategoryDefinition(context.Background(), &DeleteCostCategoryDefinitionInput{})
+	_, opErr := svc.DeleteCostCategoryDefinition(context.Background(), &DeleteCostCategoryDefinitionInput{
+		CostCategoryArn: ptr.String("__CostCategoryArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4116,7 +6194,178 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCostCategoryDefinition(context.Background(), &CreateCostCategoryDefinitionInput{})
+	_, opErr := svc.CreateCostCategoryDefinition(context.Background(), &CreateCostCategoryDefinitionInput{
+		Name:           ptr.String("__Name__"),
+		EffectiveStart: ptr.String("__EffectiveStart__"),
+		RuleVersion:    types.CostCategoryRuleVersion("CostCategoryExpression.v1"),
+		Rules: []types.CostCategoryRule{
+			{
+				Value: ptr.String("__Value__"),
+				Rule: &types.Expression{
+					Or: []types.Expression{
+						{},
+						{},
+					},
+					And: []types.Expression{
+						{},
+						{},
+					},
+					Not: nil,
+					Dimensions: &types.DimensionValues{
+						Key: types.Dimension("AZ"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					Tags: &types.TagValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+				},
+				InheritedValue: &types.CostCategoryInheritedValueDimension{
+					DimensionName: types.CostCategoryInheritedValueDimensionName("LINKED_ACCOUNT_NAME"),
+					DimensionKey:  ptr.String("__DimensionKey__"),
+				},
+				Type: types.CostCategoryRuleType("REGULAR"),
+			},
+			{
+				Value: ptr.String("__Value__"),
+				Rule: &types.Expression{
+					Or: []types.Expression{
+						{},
+						{},
+					},
+					And: []types.Expression{
+						{},
+						{},
+					},
+					Not: nil,
+					Dimensions: &types.DimensionValues{
+						Key: types.Dimension("AZ"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					Tags: &types.TagValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+				},
+				InheritedValue: &types.CostCategoryInheritedValueDimension{
+					DimensionName: types.CostCategoryInheritedValueDimensionName("LINKED_ACCOUNT_NAME"),
+					DimensionKey:  ptr.String("__DimensionKey__"),
+				},
+				Type: types.CostCategoryRuleType("REGULAR"),
+			},
+		},
+		DefaultValue: ptr.String("__DefaultValue__"),
+		SplitChargeRules: []types.CostCategorySplitChargeRule{
+			{
+				Source: ptr.String("__Source__"),
+				Targets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Method: types.CostCategorySplitChargeMethod("FIXED"),
+				Parameters: []types.CostCategorySplitChargeRuleParameter{
+					{
+						Type: types.CostCategorySplitChargeRuleParameterType("ALLOCATION_PERCENTAGES"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Type: types.CostCategorySplitChargeRuleParameterType("ALLOCATION_PERCENTAGES"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Source: ptr.String("__Source__"),
+				Targets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Method: types.CostCategorySplitChargeMethod("FIXED"),
+				Parameters: []types.CostCategorySplitChargeRuleParameter{
+					{
+						Type: types.CostCategorySplitChargeRuleParameterType("ALLOCATION_PERCENTAGES"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Type: types.CostCategorySplitChargeRuleParameterType("ALLOCATION_PERCENTAGES"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4142,7 +6391,19 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4167,7 +6428,85 @@ func TestCheckResponseSnapshot_Error_UnknownMonitorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAnomalySubscription(context.Background(), &CreateAnomalySubscriptionInput{})
+	_, opErr := svc.CreateAnomalySubscription(context.Background(), &CreateAnomalySubscriptionInput{
+		AnomalySubscription: &types.AnomalySubscription{
+			SubscriptionArn: ptr.String("__SubscriptionArn__"),
+			AccountId:       ptr.String("__AccountId__"),
+			MonitorArnList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subscribers: []types.Subscriber{
+				{
+					Address: ptr.String("__Address__"),
+					Type:    types.SubscriberType("EMAIL"),
+					Status:  types.SubscriberStatus("CONFIRMED"),
+				},
+				{
+					Address: ptr.String("__Address__"),
+					Type:    types.SubscriberType("EMAIL"),
+					Status:  types.SubscriberStatus("CONFIRMED"),
+				},
+			},
+			Threshold:        ptr.Float64(1.0),
+			Frequency:        types.AnomalySubscriptionFrequency("DAILY"),
+			SubscriptionName: ptr.String("__SubscriptionName__"),
+			ThresholdExpression: &types.Expression{
+				Or: []types.Expression{
+					{},
+					{},
+				},
+				And: []types.Expression{
+					{},
+					{},
+				},
+				Not: nil,
+				Dimensions: &types.DimensionValues{
+					Key: types.Dimension("AZ"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				Tags: &types.TagValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4192,7 +6531,9 @@ func TestCheckResponseSnapshot_Error_UnknownSubscriptionException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAnomalySubscription(context.Background(), &DeleteAnomalySubscriptionInput{})
+	_, opErr := svc.DeleteAnomalySubscription(context.Background(), &DeleteAnomalySubscriptionInput{
+		SubscriptionArn: ptr.String("__SubscriptionArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4217,7 +6558,60 @@ func TestCheckResponseSnapshot_Error_UnresolvableUsageUnitException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetUsageForecast(context.Background(), &GetUsageForecastInput{})
+	_, opErr := svc.GetUsageForecast(context.Background(), &GetUsageForecastInput{
+		TimePeriod: &types.DateInterval{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		Metric:      types.Metric("BLENDED_COST"),
+		Granularity: types.Granularity("DAILY"),
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("AZ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		BillingViewArn:          ptr.String("__BillingViewArn__"),
+		PredictionIntervalLevel: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

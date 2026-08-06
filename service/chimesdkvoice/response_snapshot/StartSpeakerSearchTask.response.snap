@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"SpeakerSearchTask":{"CallDetails":{"IsCaller":true,"TransactionId":"__TransactionId__","VoiceConnectorId":"__VoiceConnectorId__"},"CreatedTimestamp":"2000-01-01T00:00:00Z","SpeakerSearchDetails":{"Results":[{"ConfidenceScore":1,"VoiceProfileId":"__VoiceProfileId__"},{"ConfidenceScore":1,"VoiceProfileId":"__VoiceProfileId__"}],"VoiceprintGenerationStatus":"__VoiceprintGenerationStatus__"},"SpeakerSearchTaskId":"__SpeakerSearchTaskId__","SpeakerSearchTaskStatus":"__SpeakerSearchTaskStatus__","StartedTimestamp":"2000-01-01T00:00:00Z","StatusMessage":"__StatusMessage__","UpdatedTimestamp":"2000-01-01T00:00:00Z"}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"domainName":"__DomainName__","gatewayId":"__GatewayId__","linkId":"__LinkId__","status":"PENDING_CREATION"}

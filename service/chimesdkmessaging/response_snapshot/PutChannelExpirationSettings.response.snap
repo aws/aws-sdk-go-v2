@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelArn":"__ChannelArn__","ExpirationSettings":{"ExpirationCriterion":"CREATED_TIMESTAMP","ExpirationDays":1}}

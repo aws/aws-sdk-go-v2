@@ -139,7 +139,48 @@ func TestCheckResponseSnapshot_BatchExecuteStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	got, err := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +201,12 @@ func TestCheckResponseSnapshot_BeginTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BeginTransaction(context.Background(), &BeginTransactionInput{})
+	got, err := svc.BeginTransaction(context.Background(), &BeginTransactionInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -181,7 +227,11 @@ func TestCheckResponseSnapshot_CommitTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CommitTransaction(context.Background(), &CommitTransactionInput{})
+	got, err := svc.CommitTransaction(context.Background(), &CommitTransactionInput{
+		ResourceArn:   ptr.String("__ResourceArn__"),
+		SecretArn:     ptr.String("__SecretArn__"),
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -331,7 +381,13 @@ func TestCheckResponseSnapshot_ExecuteSql(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteSql(context.Background(), &ExecuteSqlInput{})
+	got, err := svc.ExecuteSql(context.Background(), &ExecuteSqlInput{
+		DbClusterOrInstanceArn: ptr.String("__DbClusterOrInstanceArn__"),
+		AwsSecretStoreArn:      ptr.String("__AwsSecretStoreArn__"),
+		SqlStatements:          ptr.String("__SqlStatements__"),
+		Database:               ptr.String("__Database__"),
+		Schema:                 ptr.String("__Schema__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -413,7 +469,37 @@ func TestCheckResponseSnapshot_ExecuteStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteStatement(context.Background(), &ExecuteStatementInput{})
+	got, err := svc.ExecuteStatement(context.Background(), &ExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		Parameters: []types.SqlParameter{
+			{
+				Name: ptr.String("__Name__"),
+				Value: &types.FieldMemberIsNull{
+					Value: true,
+				},
+				TypeHint: types.TypeHint("JSON"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Value: &types.FieldMemberIsNull{
+					Value: true,
+				},
+				TypeHint: types.TypeHint("JSON"),
+			},
+		},
+		TransactionId:         ptr.String("__TransactionId__"),
+		IncludeResultMetadata: true,
+		ContinueAfterTimeout:  true,
+		ResultSetOptions: &types.ResultSetOptions{
+			DecimalReturnType: types.DecimalReturnType("STRING"),
+			LongReturnType:    types.LongReturnType("STRING"),
+		},
+		FormatRecordsAs: types.RecordsFormatType("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +520,11 @@ func TestCheckResponseSnapshot_RollbackTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RollbackTransaction(context.Background(), &RollbackTransactionInput{})
+	got, err := svc.RollbackTransaction(context.Background(), &RollbackTransactionInput{
+		ResourceArn:   ptr.String("__ResourceArn__"),
+		SecretArn:     ptr.String("__SecretArn__"),
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -455,7 +545,48 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -480,7 +611,48 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -505,7 +677,48 @@ func TestCheckResponseSnapshot_Error_DatabaseErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -530,7 +743,48 @@ func TestCheckResponseSnapshot_Error_DatabaseNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -555,7 +809,48 @@ func TestCheckResponseSnapshot_Error_DatabaseResumingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -578,7 +873,48 @@ func TestCheckResponseSnapshot_Error_DatabaseUnavailableException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -603,7 +939,48 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -628,7 +1005,48 @@ func TestCheckResponseSnapshot_Error_HttpEndpointNotEnabledException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -651,7 +1069,48 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -676,7 +1135,48 @@ func TestCheckResponseSnapshot_Error_InvalidResourceStateException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -701,7 +1201,48 @@ func TestCheckResponseSnapshot_Error_InvalidSecretException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -726,7 +1267,11 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CommitTransaction(context.Background(), &CommitTransactionInput{})
+	_, opErr := svc.CommitTransaction(context.Background(), &CommitTransactionInput{
+		ResourceArn:   ptr.String("__ResourceArn__"),
+		SecretArn:     ptr.String("__SecretArn__"),
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -751,7 +1296,48 @@ func TestCheckResponseSnapshot_Error_SecretsErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -774,7 +1360,48 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -800,7 +1427,48 @@ func TestCheckResponseSnapshot_Error_StatementTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -825,7 +1493,48 @@ func TestCheckResponseSnapshot_Error_TransactionNotFoundException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		ParameterSets: [][]types.SqlParameter{
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+			{
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Value: &types.FieldMemberIsNull{
+						Value: true,
+					},
+					TypeHint: types.TypeHint("JSON"),
+				},
+			},
+		},
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -850,7 +1559,37 @@ func TestCheckResponseSnapshot_Error_UnsupportedResultException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteStatement(context.Background(), &ExecuteStatementInput{})
+	_, opErr := svc.ExecuteStatement(context.Background(), &ExecuteStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SecretArn:   ptr.String("__SecretArn__"),
+		Sql:         ptr.String("__Sql__"),
+		Database:    ptr.String("__Database__"),
+		Schema:      ptr.String("__Schema__"),
+		Parameters: []types.SqlParameter{
+			{
+				Name: ptr.String("__Name__"),
+				Value: &types.FieldMemberIsNull{
+					Value: true,
+				},
+				TypeHint: types.TypeHint("JSON"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Value: &types.FieldMemberIsNull{
+					Value: true,
+				},
+				TypeHint: types.TypeHint("JSON"),
+			},
+		},
+		TransactionId:         ptr.String("__TransactionId__"),
+		IncludeResultMetadata: true,
+		ContinueAfterTimeout:  true,
+		ResultSetOptions: &types.ResultSetOptions{
+			DecimalReturnType: types.DecimalReturnType("STRING"),
+			LongReturnType:    types.LongReturnType("STRING"),
+		},
+		FormatRecordsAs: types.RecordsFormatType("NONE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

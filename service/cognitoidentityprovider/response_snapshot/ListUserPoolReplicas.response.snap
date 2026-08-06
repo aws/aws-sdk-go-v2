@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.ListUserPoolReplicas
+
+{"NextToken":"__NextToken__","UserPoolReplicas":[{"RegionName":"__RegionName__","Role":"PRIMARY","Status":"CREATING","UserPoolArn":"__UserPoolArn__"},{"RegionName":"__RegionName__","Role":"PRIMARY","Status":"CREATING","UserPoolArn":"__UserPoolArn__"}]}

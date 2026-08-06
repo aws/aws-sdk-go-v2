@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/document"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -117,7 +118,23 @@ func TestCheckResponseSnapshot_AmendBenefitApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{})
+	got, err := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{
+		Catalog:         ptr.String("__Catalog__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Revision:        ptr.String("__Revision__"),
+		Identifier:      ptr.String("__Identifier__"),
+		AmendmentReason: ptr.String("__AmendmentReason__"),
+		Amendments: []types.Amendment{
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +157,11 @@ func TestCheckResponseSnapshot_AssociateBenefitApplicationResource(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateBenefitApplicationResource(context.Background(), &AssociateBenefitApplicationResourceInput{})
+	got, err := svc.AssociateBenefitApplicationResource(context.Background(), &AssociateBenefitApplicationResourceInput{
+		Catalog:                      ptr.String("__Catalog__"),
+		BenefitApplicationIdentifier: ptr.String("__BenefitApplicationIdentifier__"),
+		ResourceArn:                  ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +180,12 @@ func TestCheckResponseSnapshot_CancelBenefitApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelBenefitApplication(context.Background(), &CancelBenefitApplicationInput{})
+	got, err := svc.CancelBenefitApplication(context.Background(), &CancelBenefitApplicationInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Identifier:  ptr.String("__Identifier__"),
+		Reason:      ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +208,58 @@ func TestCheckResponseSnapshot_CreateBenefitApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBenefitApplication(context.Background(), &CreateBenefitApplicationInput{})
+	got, err := svc.CreateBenefitApplication(context.Background(), &CreateBenefitApplicationInput{
+		Catalog:           ptr.String("__Catalog__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		BenefitIdentifier: ptr.String("__BenefitIdentifier__"),
+		FulfillmentTypes: []types.FulfillmentType{
+			types.FulfillmentType("CREDITS"),
+			types.FulfillmentType("CREDITS"),
+		},
+		BenefitApplicationDetails: document.NewLazyDocument("__Document__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AssociatedResources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PartnerContacts: []types.Contact{
+			{
+				Email:         ptr.String("__Email__"),
+				FirstName:     ptr.String("__FirstName__"),
+				LastName:      ptr.String("__LastName__"),
+				BusinessTitle: ptr.String("__BusinessTitle__"),
+				Phone:         ptr.String("__Phone__"),
+			},
+			{
+				Email:         ptr.String("__Email__"),
+				FirstName:     ptr.String("__FirstName__"),
+				LastName:      ptr.String("__LastName__"),
+				BusinessTitle: ptr.String("__BusinessTitle__"),
+				Phone:         ptr.String("__Phone__"),
+			},
+		},
+		FileDetails: []types.FileInput{
+			{
+				FileURI:         ptr.String("__FileURI__"),
+				BusinessUseCase: ptr.String("__BusinessUseCase__"),
+			},
+			{
+				FileURI:         ptr.String("__FileURI__"),
+				BusinessUseCase: ptr.String("__BusinessUseCase__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -205,7 +282,11 @@ func TestCheckResponseSnapshot_DisassociateBenefitApplicationResource(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateBenefitApplicationResource(context.Background(), &DisassociateBenefitApplicationResourceInput{})
+	got, err := svc.DisassociateBenefitApplicationResource(context.Background(), &DisassociateBenefitApplicationResourceInput{
+		Catalog:                      ptr.String("__Catalog__"),
+		BenefitApplicationIdentifier: ptr.String("__BenefitApplicationIdentifier__"),
+		ResourceArn:                  ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -229,7 +310,7 @@ func TestCheckResponseSnapshot_GetBenefit(t *testing.T) {
 			types.FulfillmentType("CREDITS"),
 			types.FulfillmentType("CREDITS"),
 		},
-		BenefitRequestSchema: nil,
+		BenefitRequestSchema: document.NewLazyDocument("__Document__"),
 		Status:               types.BenefitStatus("ACTIVE"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetBenefit.response")
@@ -240,7 +321,10 @@ func TestCheckResponseSnapshot_GetBenefit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBenefit(context.Background(), &GetBenefitInput{})
+	got, err := svc.GetBenefit(context.Background(), &GetBenefitInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -294,7 +378,10 @@ func TestCheckResponseSnapshot_GetBenefitAllocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBenefitAllocation(context.Background(), &GetBenefitAllocationInput{})
+	got, err := svc.GetBenefitAllocation(context.Background(), &GetBenefitAllocationInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -315,7 +402,7 @@ func TestCheckResponseSnapshot_GetBenefitApplication(t *testing.T) {
 			types.FulfillmentType("CREDITS"),
 			types.FulfillmentType("CREDITS"),
 		},
-		BenefitApplicationDetails: nil,
+		BenefitApplicationDetails: document.NewLazyDocument("__Document__"),
 		Programs: []string{
 			"__Member__",
 			"__Member__",
@@ -382,7 +469,10 @@ func TestCheckResponseSnapshot_GetBenefitApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBenefitApplication(context.Background(), &GetBenefitApplicationInput{})
+	got, err := svc.GetBenefitApplication(context.Background(), &GetBenefitApplicationInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -445,7 +535,27 @@ func TestCheckResponseSnapshot_ListBenefitAllocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBenefitAllocations(context.Background(), &ListBenefitAllocationsInput{})
+	got, err := svc.ListBenefitAllocations(context.Background(), &ListBenefitAllocationsInput{
+		Catalog: ptr.String("__Catalog__"),
+		FulfillmentTypes: []types.FulfillmentType{
+			types.FulfillmentType("CREDITS"),
+			types.FulfillmentType("CREDITS"),
+		},
+		BenefitIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BenefitApplicationIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status: []types.BenefitAllocationStatus{
+			types.BenefitAllocationStatus("ACTIVE"),
+			types.BenefitAllocationStatus("ACTIVE"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -520,7 +630,47 @@ func TestCheckResponseSnapshot_ListBenefitApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBenefitApplications(context.Background(), &ListBenefitApplicationsInput{})
+	got, err := svc.ListBenefitApplications(context.Background(), &ListBenefitApplicationsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Programs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FulfillmentTypes: []types.FulfillmentType{
+			types.FulfillmentType("CREDITS"),
+			types.FulfillmentType("CREDITS"),
+		},
+		BenefitIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status: []types.BenefitApplicationStatus{
+			types.BenefitApplicationStatus("PENDING_SUBMISSION"),
+			types.BenefitApplicationStatus("PENDING_SUBMISSION"),
+		},
+		Stages: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AssociatedResources: []types.AssociatedResource{
+			{
+				ResourceType:       types.ResourceType("OPPORTUNITY"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				ResourceArn:        ptr.String("__ResourceArn__"),
+			},
+			{
+				ResourceType:       types.ResourceType("OPPORTUNITY"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				ResourceArn:        ptr.String("__ResourceArn__"),
+			},
+		},
+		AssociatedResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -575,7 +725,23 @@ func TestCheckResponseSnapshot_ListBenefits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBenefits(context.Background(), &ListBenefitsInput{})
+	got, err := svc.ListBenefits(context.Background(), &ListBenefitsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Programs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FulfillmentTypes: []types.FulfillmentType{
+			types.FulfillmentType("CREDITS"),
+			types.FulfillmentType("CREDITS"),
+		},
+		Status: []types.BenefitStatus{
+			types.BenefitStatus("ACTIVE"),
+			types.BenefitStatus("ACTIVE"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -605,7 +771,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -624,7 +792,12 @@ func TestCheckResponseSnapshot_RecallBenefitApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RecallBenefitApplication(context.Background(), &RecallBenefitApplicationInput{})
+	got, err := svc.RecallBenefitApplication(context.Background(), &RecallBenefitApplicationInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Identifier:  ptr.String("__Identifier__"),
+		Reason:      ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -643,7 +816,10 @@ func TestCheckResponseSnapshot_SubmitBenefitApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubmitBenefitApplication(context.Background(), &SubmitBenefitApplicationInput{})
+	got, err := svc.SubmitBenefitApplication(context.Background(), &SubmitBenefitApplicationInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -662,7 +838,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -681,7 +869,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -704,7 +898,41 @@ func TestCheckResponseSnapshot_UpdateBenefitApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBenefitApplication(context.Background(), &UpdateBenefitApplicationInput{})
+	got, err := svc.UpdateBenefitApplication(context.Background(), &UpdateBenefitApplicationInput{
+		Catalog:                   ptr.String("__Catalog__"),
+		ClientToken:               ptr.String("__ClientToken__"),
+		Name:                      ptr.String("__Name__"),
+		Description:               ptr.String("__Description__"),
+		Identifier:                ptr.String("__Identifier__"),
+		Revision:                  ptr.String("__Revision__"),
+		BenefitApplicationDetails: document.NewLazyDocument("__Document__"),
+		PartnerContacts: []types.Contact{
+			{
+				Email:         ptr.String("__Email__"),
+				FirstName:     ptr.String("__FirstName__"),
+				LastName:      ptr.String("__LastName__"),
+				BusinessTitle: ptr.String("__BusinessTitle__"),
+				Phone:         ptr.String("__Phone__"),
+			},
+			{
+				Email:         ptr.String("__Email__"),
+				FirstName:     ptr.String("__FirstName__"),
+				LastName:      ptr.String("__LastName__"),
+				BusinessTitle: ptr.String("__BusinessTitle__"),
+				Phone:         ptr.String("__Phone__"),
+			},
+		},
+		FileDetails: []types.FileInput{
+			{
+				FileURI:         ptr.String("__FileURI__"),
+				BusinessUseCase: ptr.String("__BusinessUseCase__"),
+			},
+			{
+				FileURI:         ptr.String("__FileURI__"),
+				BusinessUseCase: ptr.String("__BusinessUseCase__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -725,7 +953,23 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{})
+	_, opErr := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{
+		Catalog:         ptr.String("__Catalog__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Revision:        ptr.String("__Revision__"),
+		Identifier:      ptr.String("__Identifier__"),
+		AmendmentReason: ptr.String("__AmendmentReason__"),
+		Amendments: []types.Amendment{
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -750,7 +994,23 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{})
+	_, opErr := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{
+		Catalog:         ptr.String("__Catalog__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Revision:        ptr.String("__Revision__"),
+		Identifier:      ptr.String("__Identifier__"),
+		AmendmentReason: ptr.String("__AmendmentReason__"),
+		Amendments: []types.Amendment{
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -775,7 +1035,23 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{})
+	_, opErr := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{
+		Catalog:         ptr.String("__Catalog__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Revision:        ptr.String("__Revision__"),
+		Identifier:      ptr.String("__Identifier__"),
+		AmendmentReason: ptr.String("__AmendmentReason__"),
+		Amendments: []types.Amendment{
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -800,7 +1076,23 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{})
+	_, opErr := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{
+		Catalog:         ptr.String("__Catalog__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Revision:        ptr.String("__Revision__"),
+		Identifier:      ptr.String("__Identifier__"),
+		AmendmentReason: ptr.String("__AmendmentReason__"),
+		Amendments: []types.Amendment{
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -828,7 +1120,19 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -853,7 +1157,23 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{})
+	_, opErr := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{
+		Catalog:         ptr.String("__Catalog__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Revision:        ptr.String("__Revision__"),
+		Identifier:      ptr.String("__Identifier__"),
+		AmendmentReason: ptr.String("__AmendmentReason__"),
+		Amendments: []types.Amendment{
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -891,7 +1211,23 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{})
+	_, opErr := svc.AmendBenefitApplication(context.Background(), &AmendBenefitApplicationInput{
+		Catalog:         ptr.String("__Catalog__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Revision:        ptr.String("__Revision__"),
+		Identifier:      ptr.String("__Identifier__"),
+		AmendmentReason: ptr.String("__AmendmentReason__"),
+		Amendments: []types.Amendment{
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+			{
+				FieldPath: ptr.String("__FieldPath__"),
+				NewValue:  ptr.String("__NewValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

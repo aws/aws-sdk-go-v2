@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_DeleteEarthObservationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{})
+	got, err := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +138,9 @@ func TestCheckResponseSnapshot_DeleteVectorEnrichmentJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVectorEnrichmentJob(context.Background(), &DeleteVectorEnrichmentJobInput{})
+	got, err := svc.DeleteVectorEnrichmentJob(context.Background(), &DeleteVectorEnrichmentJobInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -167,7 +171,18 @@ func TestCheckResponseSnapshot_ExportEarthObservationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportEarthObservationJob(context.Background(), &ExportEarthObservationJobInput{})
+	got, err := svc.ExportEarthObservationJob(context.Background(), &ExportEarthObservationJobInput{
+		Arn:              ptr.String("__Arn__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		OutputConfig: &types.OutputConfigInput{
+			S3Data: &types.ExportS3DataInput{
+				S3Uri:    ptr.String("__S3Uri__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		ExportSourceImages: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -197,7 +212,17 @@ func TestCheckResponseSnapshot_ExportVectorEnrichmentJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportVectorEnrichmentJob(context.Background(), &ExportVectorEnrichmentJobInput{})
+	got, err := svc.ExportVectorEnrichmentJob(context.Background(), &ExportVectorEnrichmentJobInput{
+		Arn:              ptr.String("__Arn__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		OutputConfig: &types.ExportVectorEnrichmentJobOutputConfig{
+			S3Data: &types.VectorEnrichmentJobS3Data{
+				S3Uri:    ptr.String("__S3Uri__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -334,7 +359,9 @@ func TestCheckResponseSnapshot_GetEarthObservationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEarthObservationJob(context.Background(), &GetEarthObservationJobInput{})
+	got, err := svc.GetEarthObservationJob(context.Background(), &GetEarthObservationJobInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -380,7 +407,9 @@ func TestCheckResponseSnapshot_GetRasterDataCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRasterDataCollection(context.Background(), &GetRasterDataCollectionInput{})
+	got, err := svc.GetRasterDataCollection(context.Background(), &GetRasterDataCollectionInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -390,7 +419,9 @@ func TestCheckResponseSnapshot_GetRasterDataCollection(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetTile(t *testing.T) {
-	want := &GetTileOutput{}
+	want := &GetTileOutput{
+		BinaryFile: io.NopCloser(bytes.NewReader([]byte("__BinaryFile__"))),
+	}
 	status, header, body, err := serdeRespReadSnapshot("GetTile.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")
@@ -399,7 +430,23 @@ func TestCheckResponseSnapshot_GetTile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTile(context.Background(), &GetTileInput{})
+	got, err := svc.GetTile(context.Background(), &GetTileInput{
+		X: ptr.Int32(1),
+		Y: ptr.Int32(1),
+		Z: ptr.Int32(1),
+		ImageAssets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Target:           types.TargetOptions("INPUT"),
+		Arn:              ptr.String("__Arn__"),
+		ImageMask:        ptr.Bool(true),
+		OutputFormat:     ptr.String("__OutputFormat__"),
+		TimeRangeFilter:  ptr.String("__TimeRangeFilter__"),
+		PropertyFilters:  ptr.String("__PropertyFilters__"),
+		OutputDataType:   types.OutputType("INT32"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -454,7 +501,9 @@ func TestCheckResponseSnapshot_GetVectorEnrichmentJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVectorEnrichmentJob(context.Background(), &GetVectorEnrichmentJobInput{})
+	got, err := svc.GetVectorEnrichmentJob(context.Background(), &GetVectorEnrichmentJobInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -499,7 +548,13 @@ func TestCheckResponseSnapshot_ListEarthObservationJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEarthObservationJobs(context.Background(), &ListEarthObservationJobsInput{})
+	got, err := svc.ListEarthObservationJobs(context.Background(), &ListEarthObservationJobsInput{
+		StatusEquals: types.EarthObservationJobStatus("INITIALIZING"),
+		SortOrder:    types.SortOrder("ASCENDING"),
+		SortBy:       ptr.String("__SortBy__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -570,7 +625,10 @@ func TestCheckResponseSnapshot_ListRasterDataCollections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRasterDataCollections(context.Background(), &ListRasterDataCollectionsInput{})
+	got, err := svc.ListRasterDataCollections(context.Background(), &ListRasterDataCollectionsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -593,7 +651,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -638,7 +698,13 @@ func TestCheckResponseSnapshot_ListVectorEnrichmentJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVectorEnrichmentJobs(context.Background(), &ListVectorEnrichmentJobsInput{})
+	got, err := svc.ListVectorEnrichmentJobs(context.Background(), &ListVectorEnrichmentJobsInput{
+		StatusEquals: ptr.String("__StatusEquals__"),
+		SortOrder:    types.SortOrder("ASCENDING"),
+		SortBy:       ptr.String("__SortBy__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -746,7 +812,69 @@ func TestCheckResponseSnapshot_SearchRasterDataCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchRasterDataCollection(context.Background(), &SearchRasterDataCollectionInput{})
+	got, err := svc.SearchRasterDataCollection(context.Background(), &SearchRasterDataCollectionInput{
+		Arn: ptr.String("__Arn__"),
+		RasterDataCollectionQuery: &types.RasterDataCollectionQueryWithBandFilterInput{
+			TimeRangeFilter: &types.TimeRangeFilterInput{
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			AreaOfInterest: &types.AreaOfInterestMemberAreaOfInterestGeometry{
+				Value: &types.AreaOfInterestGeometryMemberPolygonGeometry{
+					Value: types.PolygonGeometryInput{
+						Coordinates: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+					},
+				},
+			},
+			PropertyFilters: &types.PropertyFilters{
+				Properties: []types.PropertyFilter{
+					{
+						Property: &types.PropertyMemberEoCloudCover{
+							Value: types.EoCloudCoverInput{
+								LowerBound: ptr.Float32(1.0),
+								UpperBound: ptr.Float32(1.0),
+							},
+						},
+					},
+					{
+						Property: &types.PropertyMemberEoCloudCover{
+							Value: types.EoCloudCoverInput{
+								LowerBound: ptr.Float32(1.0),
+								UpperBound: ptr.Float32(1.0),
+							},
+						},
+					},
+				},
+				LogicalOperator: types.LogicalOperator("AND"),
+			},
+			BandFilter: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -858,7 +986,96 @@ func TestCheckResponseSnapshot_StartEarthObservationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartEarthObservationJob(context.Background(), &StartEarthObservationJobInput{})
+	got, err := svc.StartEarthObservationJob(context.Background(), &StartEarthObservationJobInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		InputConfig: &types.InputConfigInput{
+			PreviousEarthObservationJobArn: ptr.String("__PreviousEarthObservationJobArn__"),
+			RasterDataCollectionQuery: &types.RasterDataCollectionQueryInput{
+				RasterDataCollectionArn: ptr.String("__RasterDataCollectionArn__"),
+				TimeRangeFilter: &types.TimeRangeFilterInput{
+					StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				AreaOfInterest: &types.AreaOfInterestMemberAreaOfInterestGeometry{
+					Value: &types.AreaOfInterestGeometryMemberPolygonGeometry{
+						Value: types.PolygonGeometryInput{
+							Coordinates: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+						},
+					},
+				},
+				PropertyFilters: &types.PropertyFilters{
+					Properties: []types.PropertyFilter{
+						{
+							Property: &types.PropertyMemberEoCloudCover{
+								Value: types.EoCloudCoverInput{
+									LowerBound: ptr.Float32(1.0),
+									UpperBound: ptr.Float32(1.0),
+								},
+							},
+						},
+						{
+							Property: &types.PropertyMemberEoCloudCover{
+								Value: types.EoCloudCoverInput{
+									LowerBound: ptr.Float32(1.0),
+									UpperBound: ptr.Float32(1.0),
+								},
+							},
+						},
+					},
+					LogicalOperator: types.LogicalOperator("AND"),
+				},
+			},
+		},
+		JobConfig: &types.JobConfigInputMemberBandMathConfig{
+			Value: types.BandMathConfigInput{
+				PredefinedIndices: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CustomIndices: &types.CustomIndicesInput{
+					Operations: []types.Operation{
+						{
+							Name:       ptr.String("__Name__"),
+							Equation:   ptr.String("__Equation__"),
+							OutputType: types.OutputType("INT32"),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Equation:   ptr.String("__Equation__"),
+							OutputType: types.OutputType("INT32"),
+						},
+					},
+				},
+			},
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -904,7 +1121,30 @@ func TestCheckResponseSnapshot_StartVectorEnrichmentJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartVectorEnrichmentJob(context.Background(), &StartVectorEnrichmentJobInput{})
+	got, err := svc.StartVectorEnrichmentJob(context.Background(), &StartVectorEnrichmentJobInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		InputConfig: &types.VectorEnrichmentJobInputConfig{
+			DocumentType: types.VectorEnrichmentJobDocumentType("CSV"),
+			DataSourceConfig: &types.VectorEnrichmentJobDataSourceConfigInputMemberS3Data{
+				Value: types.VectorEnrichmentJobS3Data{
+					S3Uri:    ptr.String("__S3Uri__"),
+					KmsKeyId: ptr.String("__KmsKeyId__"),
+				},
+			},
+		},
+		JobConfig: &types.VectorEnrichmentJobConfigMemberReverseGeocodingConfig{
+			Value: types.ReverseGeocodingConfig{
+				YAttributeName: ptr.String("__YAttributeName__"),
+				XAttributeName: ptr.String("__XAttributeName__"),
+			},
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -923,7 +1163,9 @@ func TestCheckResponseSnapshot_StopEarthObservationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopEarthObservationJob(context.Background(), &StopEarthObservationJobInput{})
+	got, err := svc.StopEarthObservationJob(context.Background(), &StopEarthObservationJobInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -942,7 +1184,9 @@ func TestCheckResponseSnapshot_StopVectorEnrichmentJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopVectorEnrichmentJob(context.Background(), &StopVectorEnrichmentJobInput{})
+	got, err := svc.StopVectorEnrichmentJob(context.Background(), &StopVectorEnrichmentJobInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -961,7 +1205,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -980,7 +1229,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1001,7 +1256,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{})
+	_, opErr := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1027,7 +1284,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{})
+	_, opErr := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1053,7 +1312,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{})
+	_, opErr := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1079,7 +1340,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{})
+	_, opErr := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1105,7 +1368,18 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExportEarthObservationJob(context.Background(), &ExportEarthObservationJobInput{})
+	_, opErr := svc.ExportEarthObservationJob(context.Background(), &ExportEarthObservationJobInput{
+		Arn:              ptr.String("__Arn__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		OutputConfig: &types.OutputConfigInput{
+			S3Data: &types.ExportS3DataInput{
+				S3Uri:    ptr.String("__S3Uri__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		ExportSourceImages: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1131,7 +1405,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{})
+	_, opErr := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1157,7 +1433,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{})
+	_, opErr := svc.DeleteEarthObservationJob(context.Background(), &DeleteEarthObservationJobInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

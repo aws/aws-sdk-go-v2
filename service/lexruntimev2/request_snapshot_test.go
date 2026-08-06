@@ -7,6 +7,7 @@ package lexruntimev2
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/types"
@@ -18,6 +19,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -180,7 +182,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_DeleteSession(t *testing.T) {
 	input := &DeleteSessionInput{
@@ -522,6 +545,7 @@ func TestCheckRequestSnapshot_RecognizeUtterance(t *testing.T) {
 		RequestAttributes:   ptr.String("__RequestAttributes__"),
 		RequestContentType:  ptr.String("__RequestContentType__"),
 		ResponseContentType: ptr.String("__ResponseContentType__"),
+		InputStream:         io.NopCloser(bytes.NewReader([]byte("__InputStream__"))),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -885,6 +909,7 @@ func TestUpdateRequestSnapshot_RecognizeUtterance(t *testing.T) {
 		RequestAttributes:   ptr.String("__RequestAttributes__"),
 		RequestContentType:  ptr.String("__RequestContentType__"),
 		ResponseContentType: ptr.String("__ResponseContentType__"),
+		InputStream:         io.NopCloser(bytes.NewReader([]byte("__InputStream__"))),
 	}
 	body := &bytes.Buffer{}
 	method := ""

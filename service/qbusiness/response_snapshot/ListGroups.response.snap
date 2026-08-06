@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"groupName":"__GroupName__"},{"groupName":"__GroupName__"}],"nextToken":"__NextToken__"}

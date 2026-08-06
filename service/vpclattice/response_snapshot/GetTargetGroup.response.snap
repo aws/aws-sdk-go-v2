@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","config":{"healthCheck":{"enabled":true,"healthCheckIntervalSeconds":1,"healthCheckTimeoutSeconds":1,"healthyThresholdCount":1,"matcher":{"httpCode":"__MatcherMemberHttpCode__"},"path":"__Path__","port":1,"protocol":"HTTP","protocolVersion":"HTTP1","unhealthyThresholdCount":1},"ipAddressType":"IPV4","lambdaEventStructureVersion":"V1","port":1,"protocol":"HTTP","protocolVersion":"HTTP1","vpcIdentifier":"__VpcIdentifier__"},"createdAt":"2000-01-01T00:00:00Z","failureCode":"__FailureCode__","failureMessage":"__FailureMessage__","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","serviceArns":["__Member__","__Member__"],"status":"CREATE_IN_PROGRESS","type":"IP"}

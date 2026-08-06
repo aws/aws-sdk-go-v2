@@ -118,7 +118,53 @@ func TestCheckResponseSnapshot_CreateCentralizationRuleForOrganization(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{})
+	got, err := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{
+		RuleName: ptr.String("__RuleName__"),
+		Rule: &types.CentralizationRule{
+			Source: &types.CentralizationRuleSource{
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Scope: ptr.String("__Scope__"),
+				SourceLogsConfiguration: &types.SourceLogsConfiguration{
+					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+				},
+				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
+					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
+				},
+			},
+			Destination: &types.CentralizationRuleDestination{
+				Region:  ptr.String("__Region__"),
+				Account: ptr.String("__Account__"),
+				DestinationLogsConfiguration: &types.DestinationLogsConfiguration{
+					LogsEncryptionConfiguration: &types.LogsEncryptionConfiguration{
+						EncryptionStrategy:                   types.EncryptionStrategy("CUSTOMER_MANAGED"),
+						KmsKeyArn:                            ptr.String("__KmsKeyArn__"),
+						EncryptionConflictResolutionStrategy: types.EncryptionConflictResolutionStrategy("ALLOW"),
+						EncryptionScope:                      types.EncryptionScope("ENCRYPTED_SOURCE_ONLY"),
+					},
+					BackupConfiguration: &types.LogsBackupConfiguration{
+						Region:    ptr.String("__Region__"),
+						KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					},
+					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
+						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+				},
+				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
+					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,7 +185,16 @@ func TestCheckResponseSnapshot_CreateS3TableIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateS3TableIntegration(context.Background(), &CreateS3TableIntegrationInput{})
+	got, err := svc.CreateS3TableIntegration(context.Background(), &CreateS3TableIntegrationInput{
+		Encryption: &types.Encryption{
+			SseAlgorithm: types.SSEAlgorithm("aws:kms"),
+			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +215,15 @@ func TestCheckResponseSnapshot_CreateTelemetryPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTelemetryPipeline(context.Background(), &CreateTelemetryPipelineInput{})
+	got, err := svc.CreateTelemetryPipeline(context.Background(), &CreateTelemetryPipelineInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.TelemetryPipelineConfiguration{
+			Body: ptr.String("__Body__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -181,7 +244,244 @@ func TestCheckResponseSnapshot_CreateTelemetryRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTelemetryRule(context.Background(), &CreateTelemetryRuleInput{})
+	got, err := svc.CreateTelemetryRule(context.Background(), &CreateTelemetryRuleInput{
+		RuleName: ptr.String("__RuleName__"),
+		Rule: &types.TelemetryRule{
+			ResourceType:  types.ResourceType("AWS::EC2::Instance"),
+			TelemetryType: types.TelemetryType("Logs"),
+			TelemetrySourceTypes: []types.TelemetrySourceType{
+				types.TelemetrySourceType("VPC_FLOW_LOGS"),
+				types.TelemetrySourceType("VPC_FLOW_LOGS"),
+			},
+			DestinationConfiguration: &types.TelemetryDestinationConfiguration{
+				DestinationType:    types.DestinationType("cloud-watch-logs"),
+				DestinationPattern: ptr.String("__DestinationPattern__"),
+				RetentionInDays:    ptr.Int32(1),
+				VPCFlowLogParameters: &types.VPCFlowLogParameters{
+					LogFormat:              ptr.String("__LogFormat__"),
+					TrafficType:            ptr.String("__TrafficType__"),
+					MaxAggregationInterval: ptr.Int32(1),
+				},
+				CloudtrailParameters: &types.CloudtrailParameters{
+					AdvancedEventSelectors: []types.AdvancedEventSelector{
+						{
+							Name: ptr.String("__Name__"),
+							FieldSelectors: []types.AdvancedFieldSelector{
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							FieldSelectors: []types.AdvancedFieldSelector{
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+				ELBLoadBalancerLoggingParameters: &types.ELBLoadBalancerLoggingParameters{
+					OutputFormat:   types.OutputFormat("plain"),
+					FieldDelimiter: ptr.String("__FieldDelimiter__"),
+				},
+				WAFLoggingParameters: &types.WAFLoggingParameters{
+					RedactedFields: []types.FieldToMatch{
+						{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							UriPath:     ptr.String("__UriPath__"),
+							QueryString: ptr.String("__QueryString__"),
+							Method:      ptr.String("__Method__"),
+						},
+						{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							UriPath:     ptr.String("__UriPath__"),
+							QueryString: ptr.String("__QueryString__"),
+							Method:      ptr.String("__Method__"),
+						},
+					},
+					LoggingFilter: &types.LoggingFilter{
+						Filters: []types.Filter{
+							{
+								Behavior:    types.FilterBehavior("KEEP"),
+								Requirement: types.FilterRequirement("MEETS_ALL"),
+								Conditions: []types.Condition{
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+								},
+							},
+							{
+								Behavior:    types.FilterBehavior("KEEP"),
+								Requirement: types.FilterRequirement("MEETS_ALL"),
+								Conditions: []types.Condition{
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+								},
+							},
+						},
+						DefaultBehavior: types.FilterBehavior("KEEP"),
+					},
+					LogType: types.WAFLogType("WAF_LOGS"),
+				},
+				LogDeliveryParameters: &types.LogDeliveryParameters{
+					LogTypes: []types.LogType{
+						types.LogType("APPLICATION_LOGS"),
+						types.LogType("APPLICATION_LOGS"),
+					},
+				},
+				MskMonitoringParameters: &types.MskMonitoringParameters{
+					EnhancedMonitoring: types.MskEnhancedMonitoringLevel("DEFAULT"),
+				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+			Scope:             ptr.String("__Scope__"),
+			SelectionCriteria: ptr.String("__SelectionCriteria__"),
+			AllowFieldUpdates: ptr.Bool(true),
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllRegions: ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +502,244 @@ func TestCheckResponseSnapshot_CreateTelemetryRuleForOrganization(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTelemetryRuleForOrganization(context.Background(), &CreateTelemetryRuleForOrganizationInput{})
+	got, err := svc.CreateTelemetryRuleForOrganization(context.Background(), &CreateTelemetryRuleForOrganizationInput{
+		RuleName: ptr.String("__RuleName__"),
+		Rule: &types.TelemetryRule{
+			ResourceType:  types.ResourceType("AWS::EC2::Instance"),
+			TelemetryType: types.TelemetryType("Logs"),
+			TelemetrySourceTypes: []types.TelemetrySourceType{
+				types.TelemetrySourceType("VPC_FLOW_LOGS"),
+				types.TelemetrySourceType("VPC_FLOW_LOGS"),
+			},
+			DestinationConfiguration: &types.TelemetryDestinationConfiguration{
+				DestinationType:    types.DestinationType("cloud-watch-logs"),
+				DestinationPattern: ptr.String("__DestinationPattern__"),
+				RetentionInDays:    ptr.Int32(1),
+				VPCFlowLogParameters: &types.VPCFlowLogParameters{
+					LogFormat:              ptr.String("__LogFormat__"),
+					TrafficType:            ptr.String("__TrafficType__"),
+					MaxAggregationInterval: ptr.Int32(1),
+				},
+				CloudtrailParameters: &types.CloudtrailParameters{
+					AdvancedEventSelectors: []types.AdvancedEventSelector{
+						{
+							Name: ptr.String("__Name__"),
+							FieldSelectors: []types.AdvancedFieldSelector{
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							FieldSelectors: []types.AdvancedFieldSelector{
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+				ELBLoadBalancerLoggingParameters: &types.ELBLoadBalancerLoggingParameters{
+					OutputFormat:   types.OutputFormat("plain"),
+					FieldDelimiter: ptr.String("__FieldDelimiter__"),
+				},
+				WAFLoggingParameters: &types.WAFLoggingParameters{
+					RedactedFields: []types.FieldToMatch{
+						{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							UriPath:     ptr.String("__UriPath__"),
+							QueryString: ptr.String("__QueryString__"),
+							Method:      ptr.String("__Method__"),
+						},
+						{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							UriPath:     ptr.String("__UriPath__"),
+							QueryString: ptr.String("__QueryString__"),
+							Method:      ptr.String("__Method__"),
+						},
+					},
+					LoggingFilter: &types.LoggingFilter{
+						Filters: []types.Filter{
+							{
+								Behavior:    types.FilterBehavior("KEEP"),
+								Requirement: types.FilterRequirement("MEETS_ALL"),
+								Conditions: []types.Condition{
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+								},
+							},
+							{
+								Behavior:    types.FilterBehavior("KEEP"),
+								Requirement: types.FilterRequirement("MEETS_ALL"),
+								Conditions: []types.Condition{
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+								},
+							},
+						},
+						DefaultBehavior: types.FilterBehavior("KEEP"),
+					},
+					LogType: types.WAFLogType("WAF_LOGS"),
+				},
+				LogDeliveryParameters: &types.LogDeliveryParameters{
+					LogTypes: []types.LogType{
+						types.LogType("APPLICATION_LOGS"),
+						types.LogType("APPLICATION_LOGS"),
+					},
+				},
+				MskMonitoringParameters: &types.MskMonitoringParameters{
+					EnhancedMonitoring: types.MskEnhancedMonitoringLevel("DEFAULT"),
+				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+			Scope:             ptr.String("__Scope__"),
+			SelectionCriteria: ptr.String("__SelectionCriteria__"),
+			AllowFieldUpdates: ptr.Bool(true),
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllRegions: ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -221,7 +758,9 @@ func TestCheckResponseSnapshot_DeleteCentralizationRuleForOrganization(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCentralizationRuleForOrganization(context.Background(), &DeleteCentralizationRuleForOrganizationInput{})
+	got, err := svc.DeleteCentralizationRuleForOrganization(context.Background(), &DeleteCentralizationRuleForOrganizationInput{
+		RuleIdentifier: ptr.String("__RuleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -240,7 +779,9 @@ func TestCheckResponseSnapshot_DeleteS3TableIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteS3TableIntegration(context.Background(), &DeleteS3TableIntegrationInput{})
+	got, err := svc.DeleteS3TableIntegration(context.Background(), &DeleteS3TableIntegrationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -259,7 +800,9 @@ func TestCheckResponseSnapshot_DeleteTelemetryPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTelemetryPipeline(context.Background(), &DeleteTelemetryPipelineInput{})
+	got, err := svc.DeleteTelemetryPipeline(context.Background(), &DeleteTelemetryPipelineInput{
+		PipelineIdentifier: ptr.String("__PipelineIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +821,9 @@ func TestCheckResponseSnapshot_DeleteTelemetryRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTelemetryRule(context.Background(), &DeleteTelemetryRuleInput{})
+	got, err := svc.DeleteTelemetryRule(context.Background(), &DeleteTelemetryRuleInput{
+		RuleIdentifier: ptr.String("__RuleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -297,7 +842,9 @@ func TestCheckResponseSnapshot_DeleteTelemetryRuleForOrganization(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTelemetryRuleForOrganization(context.Background(), &DeleteTelemetryRuleForOrganizationInput{})
+	got, err := svc.DeleteTelemetryRuleForOrganization(context.Background(), &DeleteTelemetryRuleForOrganizationInput{
+		RuleIdentifier: ptr.String("__RuleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -366,7 +913,9 @@ func TestCheckResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCentralizationRuleForOrganization(context.Background(), &GetCentralizationRuleForOrganizationInput{})
+	got, err := svc.GetCentralizationRuleForOrganization(context.Background(), &GetCentralizationRuleForOrganizationInput{
+		RuleIdentifier: ptr.String("__RuleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -395,7 +944,9 @@ func TestCheckResponseSnapshot_GetS3TableIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetS3TableIntegration(context.Background(), &GetS3TableIntegrationInput{})
+	got, err := svc.GetS3TableIntegration(context.Background(), &GetS3TableIntegrationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -527,7 +1078,9 @@ func TestCheckResponseSnapshot_GetTelemetryPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTelemetryPipeline(context.Background(), &GetTelemetryPipelineInput{})
+	got, err := svc.GetTelemetryPipeline(context.Background(), &GetTelemetryPipelineInput{
+		PipelineIdentifier: ptr.String("__PipelineIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -799,7 +1352,9 @@ func TestCheckResponseSnapshot_GetTelemetryRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTelemetryRule(context.Background(), &GetTelemetryRuleInput{})
+	got, err := svc.GetTelemetryRule(context.Background(), &GetTelemetryRuleInput{
+		RuleIdentifier: ptr.String("__RuleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1071,7 +1626,9 @@ func TestCheckResponseSnapshot_GetTelemetryRuleForOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTelemetryRuleForOrganization(context.Background(), &GetTelemetryRuleForOrganizationInput{})
+	got, err := svc.GetTelemetryRuleForOrganization(context.Background(), &GetTelemetryRuleForOrganizationInput{
+		RuleIdentifier: ptr.String("__RuleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1118,7 +1675,12 @@ func TestCheckResponseSnapshot_ListCentralizationRulesForOrganization(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCentralizationRulesForOrganization(context.Background(), &ListCentralizationRulesForOrganizationInput{})
+	got, err := svc.ListCentralizationRulesForOrganization(context.Background(), &ListCentralizationRulesForOrganizationInput{
+		RuleNamePrefix: ptr.String("__RuleNamePrefix__"),
+		AllRegions:     ptr.Bool(true),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1167,7 +1729,21 @@ func TestCheckResponseSnapshot_ListResourceTelemetry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceTelemetry(context.Background(), &ListResourceTelemetryInput{})
+	got, err := svc.ListResourceTelemetry(context.Background(), &ListResourceTelemetryInput{
+		ResourceIdentifierPrefix: ptr.String("__ResourceIdentifierPrefix__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::EC2::Instance"),
+			types.ResourceType("AWS::EC2::Instance"),
+		},
+		TelemetryConfigurationState: map[string]types.TelemetryState{
+			"key0": types.TelemetryState("Enabled"),
+		},
+		ResourceTags: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1216,7 +1792,25 @@ func TestCheckResponseSnapshot_ListResourceTelemetryForOrganization(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceTelemetryForOrganization(context.Background(), &ListResourceTelemetryForOrganizationInput{})
+	got, err := svc.ListResourceTelemetryForOrganization(context.Background(), &ListResourceTelemetryForOrganizationInput{
+		AccountIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceIdentifierPrefix: ptr.String("__ResourceIdentifierPrefix__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::EC2::Instance"),
+			types.ResourceType("AWS::EC2::Instance"),
+		},
+		TelemetryConfigurationState: map[string]types.TelemetryState{
+			"key0": types.TelemetryState("Enabled"),
+		},
+		ResourceTags: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1247,7 +1841,10 @@ func TestCheckResponseSnapshot_ListS3TableIntegrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListS3TableIntegrations(context.Background(), &ListS3TableIntegrationsInput{})
+	got, err := svc.ListS3TableIntegrations(context.Background(), &ListS3TableIntegrationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1270,7 +1867,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1371,7 +1970,10 @@ func TestCheckResponseSnapshot_ListTelemetryPipelines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTelemetryPipelines(context.Background(), &ListTelemetryPipelinesInput{})
+	got, err := svc.ListTelemetryPipelines(context.Background(), &ListTelemetryPipelinesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1418,7 +2020,11 @@ func TestCheckResponseSnapshot_ListTelemetryRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTelemetryRules(context.Background(), &ListTelemetryRulesInput{})
+	got, err := svc.ListTelemetryRules(context.Background(), &ListTelemetryRulesInput{
+		RuleNamePrefix: ptr.String("__RuleNamePrefix__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1465,7 +2071,19 @@ func TestCheckResponseSnapshot_ListTelemetryRulesForOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTelemetryRulesForOrganization(context.Background(), &ListTelemetryRulesForOrganizationInput{})
+	got, err := svc.ListTelemetryRulesForOrganization(context.Background(), &ListTelemetryRulesForOrganizationInput{
+		RuleNamePrefix: ptr.String("__RuleNamePrefix__"),
+		SourceAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceOrganizationUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1506,7 +2124,13 @@ func TestCheckResponseSnapshot_StartTelemetryEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTelemetryEvaluation(context.Background(), &StartTelemetryEvaluationInput{})
+	got, err := svc.StartTelemetryEvaluation(context.Background(), &StartTelemetryEvaluationInput{
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllRegions: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1525,7 +2149,13 @@ func TestCheckResponseSnapshot_StartTelemetryEvaluationForOrganization(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTelemetryEvaluationForOrganization(context.Background(), &StartTelemetryEvaluationForOrganizationInput{})
+	got, err := svc.StartTelemetryEvaluationForOrganization(context.Background(), &StartTelemetryEvaluationForOrganizationInput{
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllRegions: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1603,7 +2233,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1643,7 +2278,22 @@ func TestCheckResponseSnapshot_TestTelemetryPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestTelemetryPipeline(context.Background(), &TestTelemetryPipelineInput{})
+	got, err := svc.TestTelemetryPipeline(context.Background(), &TestTelemetryPipelineInput{
+		Records: []types.Record{
+			{
+				Data: ptr.String("__Data__"),
+				Type: types.RecordFormat("STRING"),
+			},
+			{
+				Data: ptr.String("__Data__"),
+				Type: types.RecordFormat("STRING"),
+			},
+		},
+		Configuration: &types.TelemetryPipelineConfiguration{
+			Body: ptr.String("__Body__"),
+		},
+		SignalType: types.SignalType("LOG"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1662,7 +2312,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1683,7 +2339,50 @@ func TestCheckResponseSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCentralizationRuleForOrganization(context.Background(), &UpdateCentralizationRuleForOrganizationInput{})
+	got, err := svc.UpdateCentralizationRuleForOrganization(context.Background(), &UpdateCentralizationRuleForOrganizationInput{
+		RuleIdentifier: ptr.String("__RuleIdentifier__"),
+		Rule: &types.CentralizationRule{
+			Source: &types.CentralizationRuleSource{
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Scope: ptr.String("__Scope__"),
+				SourceLogsConfiguration: &types.SourceLogsConfiguration{
+					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+				},
+				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
+					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
+				},
+			},
+			Destination: &types.CentralizationRuleDestination{
+				Region:  ptr.String("__Region__"),
+				Account: ptr.String("__Account__"),
+				DestinationLogsConfiguration: &types.DestinationLogsConfiguration{
+					LogsEncryptionConfiguration: &types.LogsEncryptionConfiguration{
+						EncryptionStrategy:                   types.EncryptionStrategy("CUSTOMER_MANAGED"),
+						KmsKeyArn:                            ptr.String("__KmsKeyArn__"),
+						EncryptionConflictResolutionStrategy: types.EncryptionConflictResolutionStrategy("ALLOW"),
+						EncryptionScope:                      types.EncryptionScope("ENCRYPTED_SOURCE_ONLY"),
+					},
+					BackupConfiguration: &types.LogsBackupConfiguration{
+						Region:    ptr.String("__Region__"),
+						KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					},
+					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
+						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+				},
+				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
+					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1702,7 +2401,12 @@ func TestCheckResponseSnapshot_UpdateTelemetryPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTelemetryPipeline(context.Background(), &UpdateTelemetryPipelineInput{})
+	got, err := svc.UpdateTelemetryPipeline(context.Background(), &UpdateTelemetryPipelineInput{
+		PipelineIdentifier: ptr.String("__PipelineIdentifier__"),
+		Configuration: &types.TelemetryPipelineConfiguration{
+			Body: ptr.String("__Body__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1723,7 +2427,241 @@ func TestCheckResponseSnapshot_UpdateTelemetryRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTelemetryRule(context.Background(), &UpdateTelemetryRuleInput{})
+	got, err := svc.UpdateTelemetryRule(context.Background(), &UpdateTelemetryRuleInput{
+		RuleIdentifier: ptr.String("__RuleIdentifier__"),
+		Rule: &types.TelemetryRule{
+			ResourceType:  types.ResourceType("AWS::EC2::Instance"),
+			TelemetryType: types.TelemetryType("Logs"),
+			TelemetrySourceTypes: []types.TelemetrySourceType{
+				types.TelemetrySourceType("VPC_FLOW_LOGS"),
+				types.TelemetrySourceType("VPC_FLOW_LOGS"),
+			},
+			DestinationConfiguration: &types.TelemetryDestinationConfiguration{
+				DestinationType:    types.DestinationType("cloud-watch-logs"),
+				DestinationPattern: ptr.String("__DestinationPattern__"),
+				RetentionInDays:    ptr.Int32(1),
+				VPCFlowLogParameters: &types.VPCFlowLogParameters{
+					LogFormat:              ptr.String("__LogFormat__"),
+					TrafficType:            ptr.String("__TrafficType__"),
+					MaxAggregationInterval: ptr.Int32(1),
+				},
+				CloudtrailParameters: &types.CloudtrailParameters{
+					AdvancedEventSelectors: []types.AdvancedEventSelector{
+						{
+							Name: ptr.String("__Name__"),
+							FieldSelectors: []types.AdvancedFieldSelector{
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							FieldSelectors: []types.AdvancedFieldSelector{
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+				ELBLoadBalancerLoggingParameters: &types.ELBLoadBalancerLoggingParameters{
+					OutputFormat:   types.OutputFormat("plain"),
+					FieldDelimiter: ptr.String("__FieldDelimiter__"),
+				},
+				WAFLoggingParameters: &types.WAFLoggingParameters{
+					RedactedFields: []types.FieldToMatch{
+						{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							UriPath:     ptr.String("__UriPath__"),
+							QueryString: ptr.String("__QueryString__"),
+							Method:      ptr.String("__Method__"),
+						},
+						{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							UriPath:     ptr.String("__UriPath__"),
+							QueryString: ptr.String("__QueryString__"),
+							Method:      ptr.String("__Method__"),
+						},
+					},
+					LoggingFilter: &types.LoggingFilter{
+						Filters: []types.Filter{
+							{
+								Behavior:    types.FilterBehavior("KEEP"),
+								Requirement: types.FilterRequirement("MEETS_ALL"),
+								Conditions: []types.Condition{
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+								},
+							},
+							{
+								Behavior:    types.FilterBehavior("KEEP"),
+								Requirement: types.FilterRequirement("MEETS_ALL"),
+								Conditions: []types.Condition{
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+								},
+							},
+						},
+						DefaultBehavior: types.FilterBehavior("KEEP"),
+					},
+					LogType: types.WAFLogType("WAF_LOGS"),
+				},
+				LogDeliveryParameters: &types.LogDeliveryParameters{
+					LogTypes: []types.LogType{
+						types.LogType("APPLICATION_LOGS"),
+						types.LogType("APPLICATION_LOGS"),
+					},
+				},
+				MskMonitoringParameters: &types.MskMonitoringParameters{
+					EnhancedMonitoring: types.MskEnhancedMonitoringLevel("DEFAULT"),
+				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+			Scope:             ptr.String("__Scope__"),
+			SelectionCriteria: ptr.String("__SelectionCriteria__"),
+			AllowFieldUpdates: ptr.Bool(true),
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllRegions: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1744,7 +2682,241 @@ func TestCheckResponseSnapshot_UpdateTelemetryRuleForOrganization(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTelemetryRuleForOrganization(context.Background(), &UpdateTelemetryRuleForOrganizationInput{})
+	got, err := svc.UpdateTelemetryRuleForOrganization(context.Background(), &UpdateTelemetryRuleForOrganizationInput{
+		RuleIdentifier: ptr.String("__RuleIdentifier__"),
+		Rule: &types.TelemetryRule{
+			ResourceType:  types.ResourceType("AWS::EC2::Instance"),
+			TelemetryType: types.TelemetryType("Logs"),
+			TelemetrySourceTypes: []types.TelemetrySourceType{
+				types.TelemetrySourceType("VPC_FLOW_LOGS"),
+				types.TelemetrySourceType("VPC_FLOW_LOGS"),
+			},
+			DestinationConfiguration: &types.TelemetryDestinationConfiguration{
+				DestinationType:    types.DestinationType("cloud-watch-logs"),
+				DestinationPattern: ptr.String("__DestinationPattern__"),
+				RetentionInDays:    ptr.Int32(1),
+				VPCFlowLogParameters: &types.VPCFlowLogParameters{
+					LogFormat:              ptr.String("__LogFormat__"),
+					TrafficType:            ptr.String("__TrafficType__"),
+					MaxAggregationInterval: ptr.Int32(1),
+				},
+				CloudtrailParameters: &types.CloudtrailParameters{
+					AdvancedEventSelectors: []types.AdvancedEventSelector{
+						{
+							Name: ptr.String("__Name__"),
+							FieldSelectors: []types.AdvancedFieldSelector{
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							FieldSelectors: []types.AdvancedFieldSelector{
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Field: ptr.String("__Field__"),
+									Equals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									StartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									EndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEquals: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotStartsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+									NotEndsWith: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+				ELBLoadBalancerLoggingParameters: &types.ELBLoadBalancerLoggingParameters{
+					OutputFormat:   types.OutputFormat("plain"),
+					FieldDelimiter: ptr.String("__FieldDelimiter__"),
+				},
+				WAFLoggingParameters: &types.WAFLoggingParameters{
+					RedactedFields: []types.FieldToMatch{
+						{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							UriPath:     ptr.String("__UriPath__"),
+							QueryString: ptr.String("__QueryString__"),
+							Method:      ptr.String("__Method__"),
+						},
+						{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							UriPath:     ptr.String("__UriPath__"),
+							QueryString: ptr.String("__QueryString__"),
+							Method:      ptr.String("__Method__"),
+						},
+					},
+					LoggingFilter: &types.LoggingFilter{
+						Filters: []types.Filter{
+							{
+								Behavior:    types.FilterBehavior("KEEP"),
+								Requirement: types.FilterRequirement("MEETS_ALL"),
+								Conditions: []types.Condition{
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+								},
+							},
+							{
+								Behavior:    types.FilterBehavior("KEEP"),
+								Requirement: types.FilterRequirement("MEETS_ALL"),
+								Conditions: []types.Condition{
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+									{
+										ActionCondition: &types.ActionCondition{
+											Action: types.Action("ALLOW"),
+										},
+										LabelNameCondition: &types.LabelNameCondition{
+											LabelName: ptr.String("__LabelName__"),
+										},
+									},
+								},
+							},
+						},
+						DefaultBehavior: types.FilterBehavior("KEEP"),
+					},
+					LogType: types.WAFLogType("WAF_LOGS"),
+				},
+				LogDeliveryParameters: &types.LogDeliveryParameters{
+					LogTypes: []types.LogType{
+						types.LogType("APPLICATION_LOGS"),
+						types.LogType("APPLICATION_LOGS"),
+					},
+				},
+				MskMonitoringParameters: &types.MskMonitoringParameters{
+					EnhancedMonitoring: types.MskEnhancedMonitoringLevel("DEFAULT"),
+				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+			Scope:             ptr.String("__Scope__"),
+			SelectionCriteria: ptr.String("__SelectionCriteria__"),
+			AllowFieldUpdates: ptr.Bool(true),
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllRegions: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1780,7 +2952,11 @@ func TestCheckResponseSnapshot_ValidateTelemetryPipelineConfiguration(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidateTelemetryPipelineConfiguration(context.Background(), &ValidateTelemetryPipelineConfigurationInput{})
+	got, err := svc.ValidateTelemetryPipelineConfiguration(context.Background(), &ValidateTelemetryPipelineConfigurationInput{
+		Configuration: &types.TelemetryPipelineConfiguration{
+			Body: ptr.String("__Body__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1792,7 +2968,7 @@ func TestCheckResponseSnapshot_ValidateTelemetryPipelineConfiguration(t *testing
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message:       ptr.String("__Message__"),
-		AmznErrorType: ptr.String("__AmznErrorType__"),
+		AmznErrorType: ptr.String("AccessDeniedException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1802,7 +2978,53 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{})
+	_, opErr := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{
+		RuleName: ptr.String("__RuleName__"),
+		Rule: &types.CentralizationRule{
+			Source: &types.CentralizationRuleSource{
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Scope: ptr.String("__Scope__"),
+				SourceLogsConfiguration: &types.SourceLogsConfiguration{
+					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+				},
+				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
+					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
+				},
+			},
+			Destination: &types.CentralizationRuleDestination{
+				Region:  ptr.String("__Region__"),
+				Account: ptr.String("__Account__"),
+				DestinationLogsConfiguration: &types.DestinationLogsConfiguration{
+					LogsEncryptionConfiguration: &types.LogsEncryptionConfiguration{
+						EncryptionStrategy:                   types.EncryptionStrategy("CUSTOMER_MANAGED"),
+						KmsKeyArn:                            ptr.String("__KmsKeyArn__"),
+						EncryptionConflictResolutionStrategy: types.EncryptionConflictResolutionStrategy("ALLOW"),
+						EncryptionScope:                      types.EncryptionScope("ENCRYPTED_SOURCE_ONLY"),
+					},
+					BackupConfiguration: &types.LogsBackupConfiguration{
+						Region:    ptr.String("__Region__"),
+						KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					},
+					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
+						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+				},
+				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
+					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1829,7 +3051,53 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{})
+	_, opErr := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{
+		RuleName: ptr.String("__RuleName__"),
+		Rule: &types.CentralizationRule{
+			Source: &types.CentralizationRuleSource{
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Scope: ptr.String("__Scope__"),
+				SourceLogsConfiguration: &types.SourceLogsConfiguration{
+					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+				},
+				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
+					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
+				},
+			},
+			Destination: &types.CentralizationRuleDestination{
+				Region:  ptr.String("__Region__"),
+				Account: ptr.String("__Account__"),
+				DestinationLogsConfiguration: &types.DestinationLogsConfiguration{
+					LogsEncryptionConfiguration: &types.LogsEncryptionConfiguration{
+						EncryptionStrategy:                   types.EncryptionStrategy("CUSTOMER_MANAGED"),
+						KmsKeyArn:                            ptr.String("__KmsKeyArn__"),
+						EncryptionConflictResolutionStrategy: types.EncryptionConflictResolutionStrategy("ALLOW"),
+						EncryptionScope:                      types.EncryptionScope("ENCRYPTED_SOURCE_ONLY"),
+					},
+					BackupConfiguration: &types.LogsBackupConfiguration{
+						Region:    ptr.String("__Region__"),
+						KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					},
+					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
+						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+				},
+				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
+					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1845,7 +3113,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 	want := &types.InternalServerException{
 		Message:           ptr.String("__Message__"),
-		AmznErrorType:     ptr.String("__AmznErrorType__"),
+		AmznErrorType:     ptr.String("InternalServerException"),
 		RetryAfterSeconds: ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServerException.error")
@@ -1856,7 +3124,53 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{})
+	_, opErr := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{
+		RuleName: ptr.String("__RuleName__"),
+		Rule: &types.CentralizationRule{
+			Source: &types.CentralizationRuleSource{
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Scope: ptr.String("__Scope__"),
+				SourceLogsConfiguration: &types.SourceLogsConfiguration{
+					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+				},
+				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
+					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
+				},
+			},
+			Destination: &types.CentralizationRuleDestination{
+				Region:  ptr.String("__Region__"),
+				Account: ptr.String("__Account__"),
+				DestinationLogsConfiguration: &types.DestinationLogsConfiguration{
+					LogsEncryptionConfiguration: &types.LogsEncryptionConfiguration{
+						EncryptionStrategy:                   types.EncryptionStrategy("CUSTOMER_MANAGED"),
+						KmsKeyArn:                            ptr.String("__KmsKeyArn__"),
+						EncryptionConflictResolutionStrategy: types.EncryptionConflictResolutionStrategy("ALLOW"),
+						EncryptionScope:                      types.EncryptionScope("ENCRYPTED_SOURCE_ONLY"),
+					},
+					BackupConfiguration: &types.LogsBackupConfiguration{
+						Region:    ptr.String("__Region__"),
+						KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					},
+					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
+						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+				},
+				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
+					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1881,7 +3195,9 @@ func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteS3TableIntegration(context.Background(), &DeleteS3TableIntegrationInput{})
+	_, opErr := svc.DeleteS3TableIntegration(context.Background(), &DeleteS3TableIntegrationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1908,7 +3224,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCentralizationRuleForOrganization(context.Background(), &DeleteCentralizationRuleForOrganizationInput{})
+	_, opErr := svc.DeleteCentralizationRuleForOrganization(context.Background(), &DeleteCentralizationRuleForOrganizationInput{
+		RuleIdentifier: ptr.String("__RuleIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1928,7 +3246,7 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		ResourceType:  ptr.String("__ResourceType__"),
 		ServiceCode:   ptr.String("__ServiceCode__"),
 		QuotaCode:     ptr.String("__QuotaCode__"),
-		AmznErrorType: ptr.String("__AmznErrorType__"),
+		AmznErrorType: ptr.String("ServiceQuotaExceededException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceQuotaExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1938,7 +3256,53 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{})
+	_, opErr := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{
+		RuleName: ptr.String("__RuleName__"),
+		Rule: &types.CentralizationRule{
+			Source: &types.CentralizationRuleSource{
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Scope: ptr.String("__Scope__"),
+				SourceLogsConfiguration: &types.SourceLogsConfiguration{
+					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+				},
+				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
+					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
+				},
+			},
+			Destination: &types.CentralizationRuleDestination{
+				Region:  ptr.String("__Region__"),
+				Account: ptr.String("__Account__"),
+				DestinationLogsConfiguration: &types.DestinationLogsConfiguration{
+					LogsEncryptionConfiguration: &types.LogsEncryptionConfiguration{
+						EncryptionStrategy:                   types.EncryptionStrategy("CUSTOMER_MANAGED"),
+						KmsKeyArn:                            ptr.String("__KmsKeyArn__"),
+						EncryptionConflictResolutionStrategy: types.EncryptionConflictResolutionStrategy("ALLOW"),
+						EncryptionScope:                      types.EncryptionScope("ENCRYPTED_SOURCE_ONLY"),
+					},
+					BackupConfiguration: &types.LogsBackupConfiguration{
+						Region:    ptr.String("__Region__"),
+						KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					},
+					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
+						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+				},
+				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
+					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1963,7 +3327,53 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{})
+	_, opErr := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{
+		RuleName: ptr.String("__RuleName__"),
+		Rule: &types.CentralizationRule{
+			Source: &types.CentralizationRuleSource{
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Scope: ptr.String("__Scope__"),
+				SourceLogsConfiguration: &types.SourceLogsConfiguration{
+					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+				},
+				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
+					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
+				},
+			},
+			Destination: &types.CentralizationRuleDestination{
+				Region:  ptr.String("__Region__"),
+				Account: ptr.String("__Account__"),
+				DestinationLogsConfiguration: &types.DestinationLogsConfiguration{
+					LogsEncryptionConfiguration: &types.LogsEncryptionConfiguration{
+						EncryptionStrategy:                   types.EncryptionStrategy("CUSTOMER_MANAGED"),
+						KmsKeyArn:                            ptr.String("__KmsKeyArn__"),
+						EncryptionConflictResolutionStrategy: types.EncryptionConflictResolutionStrategy("ALLOW"),
+						EncryptionScope:                      types.EncryptionScope("ENCRYPTED_SOURCE_ONLY"),
+					},
+					BackupConfiguration: &types.LogsBackupConfiguration{
+						Region:    ptr.String("__Region__"),
+						KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					},
+					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
+						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+				},
+				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
+					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2004,7 +3414,53 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{})
+	_, opErr := svc.CreateCentralizationRuleForOrganization(context.Background(), &CreateCentralizationRuleForOrganizationInput{
+		RuleName: ptr.String("__RuleName__"),
+		Rule: &types.CentralizationRule{
+			Source: &types.CentralizationRuleSource{
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Scope: ptr.String("__Scope__"),
+				SourceLogsConfiguration: &types.SourceLogsConfiguration{
+					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+				},
+				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
+					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
+				},
+			},
+			Destination: &types.CentralizationRuleDestination{
+				Region:  ptr.String("__Region__"),
+				Account: ptr.String("__Account__"),
+				DestinationLogsConfiguration: &types.DestinationLogsConfiguration{
+					LogsEncryptionConfiguration: &types.LogsEncryptionConfiguration{
+						EncryptionStrategy:                   types.EncryptionStrategy("CUSTOMER_MANAGED"),
+						KmsKeyArn:                            ptr.String("__KmsKeyArn__"),
+						EncryptionConflictResolutionStrategy: types.EncryptionConflictResolutionStrategy("ALLOW"),
+						EncryptionScope:                      types.EncryptionScope("ENCRYPTED_SOURCE_ONLY"),
+					},
+					BackupConfiguration: &types.LogsBackupConfiguration{
+						Region:    ptr.String("__Region__"),
+						KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					},
+					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
+						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+				},
+				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
+					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

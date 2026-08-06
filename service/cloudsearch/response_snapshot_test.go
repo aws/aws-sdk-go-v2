@@ -122,7 +122,9 @@ func TestCheckResponseSnapshot_BuildSuggesters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{})
+	got, err := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +166,9 @@ func TestCheckResponseSnapshot_CreateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -204,7 +208,20 @@ func TestCheckResponseSnapshot_DefineAnalysisScheme(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DefineAnalysisScheme(context.Background(), &DefineAnalysisSchemeInput{})
+	got, err := svc.DefineAnalysisScheme(context.Background(), &DefineAnalysisSchemeInput{
+		DomainName: ptr.String("__DomainName__"),
+		AnalysisScheme: &types.AnalysisScheme{
+			AnalysisSchemeName:     ptr.String("__AnalysisSchemeName__"),
+			AnalysisSchemeLanguage: types.AnalysisSchemeLanguage("ar"),
+			AnalysisOptions: &types.AnalysisOptions{
+				Synonyms:                       ptr.String("__Synonyms__"),
+				Stopwords:                      ptr.String("__Stopwords__"),
+				StemmingDictionary:             ptr.String("__StemmingDictionary__"),
+				JapaneseTokenizationDictionary: ptr.String("__JapaneseTokenizationDictionary__"),
+				AlgorithmicStemming:            types.AlgorithmicStemming("none"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +254,13 @@ func TestCheckResponseSnapshot_DefineExpression(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DefineExpression(context.Background(), &DefineExpressionInput{})
+	got, err := svc.DefineExpression(context.Background(), &DefineExpressionInput{
+		DomainName: ptr.String("__DomainName__"),
+		Expression: &types.Expression{
+			ExpressionName:  ptr.String("__ExpressionName__"),
+			ExpressionValue: ptr.String("__ExpressionValue__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -353,7 +376,96 @@ func TestCheckResponseSnapshot_DefineIndexField(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DefineIndexField(context.Background(), &DefineIndexFieldInput{})
+	got, err := svc.DefineIndexField(context.Background(), &DefineIndexFieldInput{
+		DomainName: ptr.String("__DomainName__"),
+		IndexField: &types.IndexField{
+			IndexFieldName: ptr.String("__IndexFieldName__"),
+			IndexFieldType: types.IndexFieldType("int"),
+			IntOptions: &types.IntOptions{
+				DefaultValue:  ptr.Int64(1),
+				SourceField:   ptr.String("__SourceField__"),
+				FacetEnabled:  ptr.Bool(true),
+				SearchEnabled: ptr.Bool(true),
+				ReturnEnabled: ptr.Bool(true),
+				SortEnabled:   ptr.Bool(true),
+			},
+			DoubleOptions: &types.DoubleOptions{
+				DefaultValue:  ptr.Float64(1.0),
+				SourceField:   ptr.String("__SourceField__"),
+				FacetEnabled:  ptr.Bool(true),
+				SearchEnabled: ptr.Bool(true),
+				ReturnEnabled: ptr.Bool(true),
+				SortEnabled:   ptr.Bool(true),
+			},
+			LiteralOptions: &types.LiteralOptions{
+				DefaultValue:  ptr.String("__DefaultValue__"),
+				SourceField:   ptr.String("__SourceField__"),
+				FacetEnabled:  ptr.Bool(true),
+				SearchEnabled: ptr.Bool(true),
+				ReturnEnabled: ptr.Bool(true),
+				SortEnabled:   ptr.Bool(true),
+			},
+			TextOptions: &types.TextOptions{
+				DefaultValue:     ptr.String("__DefaultValue__"),
+				SourceField:      ptr.String("__SourceField__"),
+				ReturnEnabled:    ptr.Bool(true),
+				SortEnabled:      ptr.Bool(true),
+				HighlightEnabled: ptr.Bool(true),
+				AnalysisScheme:   ptr.String("__AnalysisScheme__"),
+			},
+			DateOptions: &types.DateOptions{
+				DefaultValue:  ptr.String("__DefaultValue__"),
+				SourceField:   ptr.String("__SourceField__"),
+				FacetEnabled:  ptr.Bool(true),
+				SearchEnabled: ptr.Bool(true),
+				ReturnEnabled: ptr.Bool(true),
+				SortEnabled:   ptr.Bool(true),
+			},
+			LatLonOptions: &types.LatLonOptions{
+				DefaultValue:  ptr.String("__DefaultValue__"),
+				SourceField:   ptr.String("__SourceField__"),
+				FacetEnabled:  ptr.Bool(true),
+				SearchEnabled: ptr.Bool(true),
+				ReturnEnabled: ptr.Bool(true),
+				SortEnabled:   ptr.Bool(true),
+			},
+			IntArrayOptions: &types.IntArrayOptions{
+				DefaultValue:  ptr.Int64(1),
+				SourceFields:  ptr.String("__SourceFields__"),
+				FacetEnabled:  ptr.Bool(true),
+				SearchEnabled: ptr.Bool(true),
+				ReturnEnabled: ptr.Bool(true),
+			},
+			DoubleArrayOptions: &types.DoubleArrayOptions{
+				DefaultValue:  ptr.Float64(1.0),
+				SourceFields:  ptr.String("__SourceFields__"),
+				FacetEnabled:  ptr.Bool(true),
+				SearchEnabled: ptr.Bool(true),
+				ReturnEnabled: ptr.Bool(true),
+			},
+			LiteralArrayOptions: &types.LiteralArrayOptions{
+				DefaultValue:  ptr.String("__DefaultValue__"),
+				SourceFields:  ptr.String("__SourceFields__"),
+				FacetEnabled:  ptr.Bool(true),
+				SearchEnabled: ptr.Bool(true),
+				ReturnEnabled: ptr.Bool(true),
+			},
+			TextArrayOptions: &types.TextArrayOptions{
+				DefaultValue:     ptr.String("__DefaultValue__"),
+				SourceFields:     ptr.String("__SourceFields__"),
+				ReturnEnabled:    ptr.Bool(true),
+				HighlightEnabled: ptr.Bool(true),
+				AnalysisScheme:   ptr.String("__AnalysisScheme__"),
+			},
+			DateArrayOptions: &types.DateArrayOptions{
+				DefaultValue:  ptr.String("__DefaultValue__"),
+				SourceFields:  ptr.String("__SourceFields__"),
+				FacetEnabled:  ptr.Bool(true),
+				SearchEnabled: ptr.Bool(true),
+				ReturnEnabled: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -390,7 +502,17 @@ func TestCheckResponseSnapshot_DefineSuggester(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DefineSuggester(context.Background(), &DefineSuggesterInput{})
+	got, err := svc.DefineSuggester(context.Background(), &DefineSuggesterInput{
+		DomainName: ptr.String("__DomainName__"),
+		Suggester: &types.Suggester{
+			SuggesterName: ptr.String("__SuggesterName__"),
+			DocumentSuggesterOptions: &types.DocumentSuggesterOptions{
+				SourceField:    ptr.String("__SourceField__"),
+				FuzzyMatching:  types.SuggesterFuzzyMatching("none"),
+				SortExpression: ptr.String("__SortExpression__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -430,7 +552,10 @@ func TestCheckResponseSnapshot_DeleteAnalysisScheme(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAnalysisScheme(context.Background(), &DeleteAnalysisSchemeInput{})
+	got, err := svc.DeleteAnalysisScheme(context.Background(), &DeleteAnalysisSchemeInput{
+		DomainName:         ptr.String("__DomainName__"),
+		AnalysisSchemeName: ptr.String("__AnalysisSchemeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -472,7 +597,9 @@ func TestCheckResponseSnapshot_DeleteDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{})
+	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -505,7 +632,10 @@ func TestCheckResponseSnapshot_DeleteExpression(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteExpression(context.Background(), &DeleteExpressionInput{})
+	got, err := svc.DeleteExpression(context.Background(), &DeleteExpressionInput{
+		DomainName:     ptr.String("__DomainName__"),
+		ExpressionName: ptr.String("__ExpressionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -621,7 +751,10 @@ func TestCheckResponseSnapshot_DeleteIndexField(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIndexField(context.Background(), &DeleteIndexFieldInput{})
+	got, err := svc.DeleteIndexField(context.Background(), &DeleteIndexFieldInput{
+		DomainName:     ptr.String("__DomainName__"),
+		IndexFieldName: ptr.String("__IndexFieldName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -658,7 +791,10 @@ func TestCheckResponseSnapshot_DeleteSuggester(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSuggester(context.Background(), &DeleteSuggesterInput{})
+	got, err := svc.DeleteSuggester(context.Background(), &DeleteSuggesterInput{
+		DomainName:    ptr.String("__DomainName__"),
+		SuggesterName: ptr.String("__SuggesterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -720,7 +856,14 @@ func TestCheckResponseSnapshot_DescribeAnalysisSchemes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAnalysisSchemes(context.Background(), &DescribeAnalysisSchemesInput{})
+	got, err := svc.DescribeAnalysisSchemes(context.Background(), &DescribeAnalysisSchemesInput{
+		DomainName: ptr.String("__DomainName__"),
+		AnalysisSchemeNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Deployed: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -750,7 +893,10 @@ func TestCheckResponseSnapshot_DescribeAvailabilityOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAvailabilityOptions(context.Background(), &DescribeAvailabilityOptionsInput{})
+	got, err := svc.DescribeAvailabilityOptions(context.Background(), &DescribeAvailabilityOptionsInput{
+		DomainName: ptr.String("__DomainName__"),
+		Deployed:   ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -783,7 +929,10 @@ func TestCheckResponseSnapshot_DescribeDomainEndpointOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomainEndpointOptions(context.Background(), &DescribeDomainEndpointOptionsInput{})
+	got, err := svc.DescribeDomainEndpointOptions(context.Background(), &DescribeDomainEndpointOptionsInput{
+		DomainName: ptr.String("__DomainName__"),
+		Deployed:   ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -849,7 +998,12 @@ func TestCheckResponseSnapshot_DescribeDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomains(context.Background(), &DescribeDomainsInput{})
+	got, err := svc.DescribeDomains(context.Background(), &DescribeDomainsInput{
+		DomainNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -897,7 +1051,14 @@ func TestCheckResponseSnapshot_DescribeExpressions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeExpressions(context.Background(), &DescribeExpressionsInput{})
+	got, err := svc.DescribeExpressions(context.Background(), &DescribeExpressionsInput{
+		DomainName: ptr.String("__DomainName__"),
+		ExpressionNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Deployed: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1111,7 +1272,14 @@ func TestCheckResponseSnapshot_DescribeIndexFields(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeIndexFields(context.Background(), &DescribeIndexFieldsInput{})
+	got, err := svc.DescribeIndexFields(context.Background(), &DescribeIndexFieldsInput{
+		DomainName: ptr.String("__DomainName__"),
+		FieldNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Deployed: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1145,7 +1313,9 @@ func TestCheckResponseSnapshot_DescribeScalingParameters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScalingParameters(context.Background(), &DescribeScalingParametersInput{})
+	got, err := svc.DescribeScalingParameters(context.Background(), &DescribeScalingParametersInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1175,7 +1345,10 @@ func TestCheckResponseSnapshot_DescribeServiceAccessPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServiceAccessPolicies(context.Background(), &DescribeServiceAccessPoliciesInput{})
+	got, err := svc.DescribeServiceAccessPolicies(context.Background(), &DescribeServiceAccessPoliciesInput{
+		DomainName: ptr.String("__DomainName__"),
+		Deployed:   ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1231,7 +1404,14 @@ func TestCheckResponseSnapshot_DescribeSuggesters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSuggesters(context.Background(), &DescribeSuggestersInput{})
+	got, err := svc.DescribeSuggesters(context.Background(), &DescribeSuggestersInput{
+		DomainName: ptr.String("__DomainName__"),
+		SuggesterNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Deployed: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1255,7 +1435,9 @@ func TestCheckResponseSnapshot_IndexDocuments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.IndexDocuments(context.Background(), &IndexDocumentsInput{})
+	got, err := svc.IndexDocuments(context.Background(), &IndexDocumentsInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1308,7 +1490,10 @@ func TestCheckResponseSnapshot_UpdateAvailabilityOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAvailabilityOptions(context.Background(), &UpdateAvailabilityOptionsInput{})
+	got, err := svc.UpdateAvailabilityOptions(context.Background(), &UpdateAvailabilityOptionsInput{
+		DomainName: ptr.String("__DomainName__"),
+		MultiAZ:    ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1341,7 +1526,13 @@ func TestCheckResponseSnapshot_UpdateDomainEndpointOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomainEndpointOptions(context.Background(), &UpdateDomainEndpointOptionsInput{})
+	got, err := svc.UpdateDomainEndpointOptions(context.Background(), &UpdateDomainEndpointOptionsInput{
+		DomainName: ptr.String("__DomainName__"),
+		DomainEndpointOptions: &types.DomainEndpointOptions{
+			EnforceHTTPS:      ptr.Bool(true),
+			TLSSecurityPolicy: types.TLSSecurityPolicy("Policy-Min-TLS-1-0-2019-07"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1375,7 +1566,14 @@ func TestCheckResponseSnapshot_UpdateScalingParameters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateScalingParameters(context.Background(), &UpdateScalingParametersInput{})
+	got, err := svc.UpdateScalingParameters(context.Background(), &UpdateScalingParametersInput{
+		DomainName: ptr.String("__DomainName__"),
+		ScalingParameters: &types.ScalingParameters{
+			DesiredInstanceType:     types.PartitionInstanceType("search.m1.small"),
+			DesiredReplicationCount: 1,
+			DesiredPartitionCount:   1,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1405,7 +1603,10 @@ func TestCheckResponseSnapshot_UpdateServiceAccessPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceAccessPolicies(context.Background(), &UpdateServiceAccessPoliciesInput{})
+	got, err := svc.UpdateServiceAccessPolicies(context.Background(), &UpdateServiceAccessPoliciesInput{
+		DomainName:     ptr.String("__DomainName__"),
+		AccessPolicies: ptr.String("__AccessPolicies__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1427,7 +1628,9 @@ func TestCheckResponseSnapshot_Error_BaseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{})
+	_, opErr := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1453,7 +1656,10 @@ func TestCheckResponseSnapshot_Error_DisabledOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAvailabilityOptions(context.Background(), &DescribeAvailabilityOptionsInput{})
+	_, opErr := svc.DescribeAvailabilityOptions(context.Background(), &DescribeAvailabilityOptionsInput{
+		DomainName: ptr.String("__DomainName__"),
+		Deployed:   ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1479,7 +1685,9 @@ func TestCheckResponseSnapshot_Error_InternalException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{})
+	_, opErr := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1505,7 +1713,20 @@ func TestCheckResponseSnapshot_Error_InvalidTypeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DefineAnalysisScheme(context.Background(), &DefineAnalysisSchemeInput{})
+	_, opErr := svc.DefineAnalysisScheme(context.Background(), &DefineAnalysisSchemeInput{
+		DomainName: ptr.String("__DomainName__"),
+		AnalysisScheme: &types.AnalysisScheme{
+			AnalysisSchemeName:     ptr.String("__AnalysisSchemeName__"),
+			AnalysisSchemeLanguage: types.AnalysisSchemeLanguage("ar"),
+			AnalysisOptions: &types.AnalysisOptions{
+				Synonyms:                       ptr.String("__Synonyms__"),
+				Stopwords:                      ptr.String("__Stopwords__"),
+				StemmingDictionary:             ptr.String("__StemmingDictionary__"),
+				JapaneseTokenizationDictionary: ptr.String("__JapaneseTokenizationDictionary__"),
+				AlgorithmicStemming:            types.AlgorithmicStemming("none"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1531,7 +1752,9 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1557,7 +1780,9 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1583,7 +1808,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{})
+	_, opErr := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1609,7 +1836,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{})
+	_, opErr := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

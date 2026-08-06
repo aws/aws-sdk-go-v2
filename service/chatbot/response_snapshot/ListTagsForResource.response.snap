@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Tags":[{"TagKey":"__TagKey__","TagValue":"__TagValue__"},{"TagKey":"__TagKey__","TagValue":"__TagValue__"}]}

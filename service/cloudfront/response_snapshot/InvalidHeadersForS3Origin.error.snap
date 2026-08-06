@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>InvalidHeadersForS3Origin</Code><Message>__Message__</Message></Error></ErrorResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"category":"FINANCIAL_INFORMATION","id":"__Id__"},{"category":"FINANCIAL_INFORMATION","id":"__Id__"}],"nextToken":"__NextToken__"}

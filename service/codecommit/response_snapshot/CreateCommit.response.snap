@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.CreateCommit
+
+{"commitId":"__CommitId__","filesAdded":[{"absolutePath":"__AbsolutePath__","blobId":"__BlobId__","fileMode":"EXECUTABLE"},{"absolutePath":"__AbsolutePath__","blobId":"__BlobId__","fileMode":"EXECUTABLE"}],"filesDeleted":[{"absolutePath":"__AbsolutePath__","blobId":"__BlobId__","fileMode":"EXECUTABLE"},{"absolutePath":"__AbsolutePath__","blobId":"__BlobId__","fileMode":"EXECUTABLE"}],"filesUpdated":[{"absolutePath":"__AbsolutePath__","blobId":"__BlobId__","fileMode":"EXECUTABLE"},{"absolutePath":"__AbsolutePath__","blobId":"__BlobId__","fileMode":"EXECUTABLE"}],"treeId":"__TreeId__"}

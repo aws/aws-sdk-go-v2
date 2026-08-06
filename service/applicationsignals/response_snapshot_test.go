@@ -143,7 +143,15 @@ func TestCheckResponseSnapshot_BatchDeleteInstrumentationConfigurations(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteInstrumentationConfigurations(context.Background(), &BatchDeleteInstrumentationConfigurationsInput{})
+	got, err := svc.BatchDeleteInstrumentationConfigurations(context.Background(), &BatchDeleteInstrumentationConfigurationsInput{
+		DeletionTarget: &types.BatchDeleteDeletionTargetMemberScope{
+			Value: types.BatchDeleteScope{
+				Service:             ptr.String("__Service__"),
+				Environment:         ptr.String("__Environment__"),
+				InstrumentationType: types.InstrumentationType("BREAKPOINT"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -718,7 +726,13 @@ func TestCheckResponseSnapshot_BatchGetServiceLevelObjectiveBudgetReport(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetServiceLevelObjectiveBudgetReport(context.Background(), &BatchGetServiceLevelObjectiveBudgetReportInput{})
+	got, err := svc.BatchGetServiceLevelObjectiveBudgetReport(context.Background(), &BatchGetServiceLevelObjectiveBudgetReportInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SloIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -754,7 +768,60 @@ func TestCheckResponseSnapshot_BatchUpdateExclusionWindows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateExclusionWindows(context.Background(), &BatchUpdateExclusionWindowsInput{})
+	got, err := svc.BatchUpdateExclusionWindows(context.Background(), &BatchUpdateExclusionWindowsInput{
+		SloIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AddExclusionWindows: []types.ExclusionWindow{
+			{
+				Window: &types.Window{
+					DurationUnit: types.DurationUnit("MINUTE"),
+					Duration:     ptr.Int32(1),
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecurrenceRule: &types.RecurrenceRule{
+					Expression: ptr.String("__Expression__"),
+				},
+				Reason: ptr.String("__Reason__"),
+			},
+			{
+				Window: &types.Window{
+					DurationUnit: types.DurationUnit("MINUTE"),
+					Duration:     ptr.Int32(1),
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecurrenceRule: &types.RecurrenceRule{
+					Expression: ptr.String("__Expression__"),
+				},
+				Reason: ptr.String("__Reason__"),
+			},
+		},
+		RemoveExclusionWindows: []types.ExclusionWindow{
+			{
+				Window: &types.Window{
+					DurationUnit: types.DurationUnit("MINUTE"),
+					Duration:     ptr.Int32(1),
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecurrenceRule: &types.RecurrenceRule{
+					Expression: ptr.String("__Expression__"),
+				},
+				Reason: ptr.String("__Reason__"),
+			},
+			{
+				Window: &types.Window{
+					DurationUnit: types.DurationUnit("MINUTE"),
+					Duration:     ptr.Int32(1),
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecurrenceRule: &types.RecurrenceRule{
+					Expression: ptr.String("__Expression__"),
+				},
+				Reason: ptr.String("__Reason__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -825,7 +892,66 @@ func TestCheckResponseSnapshot_CreateInstrumentationConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInstrumentationConfiguration(context.Background(), &CreateInstrumentationConfigurationInput{})
+	got, err := svc.CreateInstrumentationConfiguration(context.Background(), &CreateInstrumentationConfigurationInput{
+		InstrumentationType: types.InstrumentationType("BREAKPOINT"),
+		Service:             ptr.String("__Service__"),
+		Environment:         ptr.String("__Environment__"),
+		SignalType:          types.DynamicInstrumentationSignalType("SNAPSHOT"),
+		Location: &types.LocationMemberCodeLocation{
+			Value: types.CodeLocation{
+				Language:   types.ProgrammingLanguage("Java"),
+				CodeUnit:   ptr.String("__CodeUnit__"),
+				ClassName:  ptr.String("__ClassName__"),
+				MethodName: ptr.String("__MethodName__"),
+				FilePath:   ptr.String("__FilePath__"),
+				LineNumber: ptr.Int32(1),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AttributeFilters: []map[string]string{
+			{
+				"key0": "__Value__",
+			},
+			{
+				"key0": "__Value__",
+			},
+		},
+		CaptureConfiguration: &types.CaptureConfigurationMemberCodeCapture{
+			Value: types.CodeCaptureConfiguration{
+				CaptureArguments: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CaptureReturn:     ptr.Bool(true),
+				CaptureStackTrace: ptr.Bool(true),
+				CaptureLocals: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CaptureLimits: &types.CaptureLimitsConfig{
+					MaxHits:            ptr.Int32(1),
+					MaxStringLength:    ptr.Int32(1),
+					MaxCollectionWidth: ptr.Int32(1),
+					MaxCollectionDepth: ptr.Int32(1),
+					MaxStackFrames:     ptr.Int32(1),
+					MaxStackTraceSize:  ptr.Int32(1),
+					MaxObjectDepth:     ptr.Int32(1),
+					MaxFieldsPerObject: ptr.Int32(1),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1121,7 +1247,292 @@ func TestCheckResponseSnapshot_CreateServiceLevelObjective(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceLevelObjective(context.Background(), &CreateServiceLevelObjectiveInput{})
+	got, err := svc.CreateServiceLevelObjective(context.Background(), &CreateServiceLevelObjectiveInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SliConfig: &types.ServiceLevelIndicatorConfig{
+			SliMetricConfig: &types.ServiceLevelIndicatorMetricConfig{
+				KeyAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+				OperationName: ptr.String("__OperationName__"),
+				MetricType:    types.ServiceLevelIndicatorMetricType("LATENCY"),
+				MetricName:    ptr.String("__MetricName__"),
+				Statistic:     ptr.String("__Statistic__"),
+				PeriodSeconds: ptr.Int32(1),
+				MetricSource: &types.MetricSource{
+					MetricSourceKeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					MetricSourceAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				MetricDataQueries: []types.MetricDataQuery{
+					{
+						Id: ptr.String("__Id__"),
+						MetricStat: &types.MetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.Dimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Period: ptr.Int32(1),
+							Stat:   ptr.String("__Stat__"),
+							Unit:   types.StandardUnit("Microseconds"),
+						},
+						Expression: ptr.String("__Expression__"),
+						Label:      ptr.String("__Label__"),
+						ReturnData: ptr.Bool(true),
+						Period:     ptr.Int32(1),
+						AccountId:  ptr.String("__AccountId__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+						MetricStat: &types.MetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.Dimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Period: ptr.Int32(1),
+							Stat:   ptr.String("__Stat__"),
+							Unit:   types.StandardUnit("Microseconds"),
+						},
+						Expression: ptr.String("__Expression__"),
+						Label:      ptr.String("__Label__"),
+						ReturnData: ptr.Bool(true),
+						Period:     ptr.Int32(1),
+						AccountId:  ptr.String("__AccountId__"),
+					},
+				},
+				DependencyConfig: &types.DependencyConfig{
+					DependencyKeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					DependencyOperationName: ptr.String("__DependencyOperationName__"),
+				},
+				CompositeSliConfig: &types.CompositeSliConfig{
+					SelectionConfig: &types.SelectionConfig{
+						Type:    types.SelectionType("EXPLICIT"),
+						Pattern: ptr.String("__Pattern__"),
+					},
+					Components: []types.CompositeSliComponent{
+						&types.CompositeSliComponentMemberOperationName{
+							Value: "__CompositeSliComponentMemberOperationName__",
+						},
+						&types.CompositeSliComponentMemberOperationName{
+							Value: "__CompositeSliComponentMemberOperationName__",
+						},
+					},
+				},
+			},
+			MetricThreshold:    ptr.Float64(1.0),
+			ComparisonOperator: types.ServiceLevelIndicatorComparisonOperator("GreaterThanOrEqualTo"),
+		},
+		RequestBasedSliConfig: &types.RequestBasedServiceLevelIndicatorConfig{
+			RequestBasedSliMetricConfig: &types.RequestBasedServiceLevelIndicatorMetricConfig{
+				KeyAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+				OperationName: ptr.String("__OperationName__"),
+				MetricType:    types.ServiceLevelIndicatorMetricType("LATENCY"),
+				TotalRequestCountMetric: []types.MetricDataQuery{
+					{
+						Id: ptr.String("__Id__"),
+						MetricStat: &types.MetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.Dimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Period: ptr.Int32(1),
+							Stat:   ptr.String("__Stat__"),
+							Unit:   types.StandardUnit("Microseconds"),
+						},
+						Expression: ptr.String("__Expression__"),
+						Label:      ptr.String("__Label__"),
+						ReturnData: ptr.Bool(true),
+						Period:     ptr.Int32(1),
+						AccountId:  ptr.String("__AccountId__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+						MetricStat: &types.MetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.Dimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Period: ptr.Int32(1),
+							Stat:   ptr.String("__Stat__"),
+							Unit:   types.StandardUnit("Microseconds"),
+						},
+						Expression: ptr.String("__Expression__"),
+						Label:      ptr.String("__Label__"),
+						ReturnData: ptr.Bool(true),
+						Period:     ptr.Int32(1),
+						AccountId:  ptr.String("__AccountId__"),
+					},
+				},
+				MonitoredRequestCountMetric: &types.MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric{
+					Value: []types.MetricDataQuery{
+						{
+							Id: ptr.String("__Id__"),
+							MetricStat: &types.MetricStat{
+								Metric: &types.Metric{
+									Namespace:  ptr.String("__Namespace__"),
+									MetricName: ptr.String("__MetricName__"),
+									Dimensions: []types.Dimension{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+								Period: ptr.Int32(1),
+								Stat:   ptr.String("__Stat__"),
+								Unit:   types.StandardUnit("Microseconds"),
+							},
+							Expression: ptr.String("__Expression__"),
+							Label:      ptr.String("__Label__"),
+							ReturnData: ptr.Bool(true),
+							Period:     ptr.Int32(1),
+							AccountId:  ptr.String("__AccountId__"),
+						},
+						{
+							Id: ptr.String("__Id__"),
+							MetricStat: &types.MetricStat{
+								Metric: &types.Metric{
+									Namespace:  ptr.String("__Namespace__"),
+									MetricName: ptr.String("__MetricName__"),
+									Dimensions: []types.Dimension{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+								Period: ptr.Int32(1),
+								Stat:   ptr.String("__Stat__"),
+								Unit:   types.StandardUnit("Microseconds"),
+							},
+							Expression: ptr.String("__Expression__"),
+							Label:      ptr.String("__Label__"),
+							ReturnData: ptr.Bool(true),
+							Period:     ptr.Int32(1),
+							AccountId:  ptr.String("__AccountId__"),
+						},
+					},
+				},
+				DependencyConfig: &types.DependencyConfig{
+					DependencyKeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					DependencyOperationName: ptr.String("__DependencyOperationName__"),
+				},
+				MetricSource: &types.MetricSource{
+					MetricSourceKeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					MetricSourceAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				MetricName: ptr.String("__MetricName__"),
+				CompositeSliConfig: &types.CompositeSliConfig{
+					SelectionConfig: &types.SelectionConfig{
+						Type:    types.SelectionType("EXPLICIT"),
+						Pattern: ptr.String("__Pattern__"),
+					},
+					Components: []types.CompositeSliComponent{
+						&types.CompositeSliComponentMemberOperationName{
+							Value: "__CompositeSliComponentMemberOperationName__",
+						},
+						&types.CompositeSliComponentMemberOperationName{
+							Value: "__CompositeSliComponentMemberOperationName__",
+						},
+					},
+				},
+			},
+			MetricThreshold:    ptr.Float64(1.0),
+			ComparisonOperator: types.ServiceLevelIndicatorComparisonOperator("GreaterThanOrEqualTo"),
+		},
+		Goal: &types.Goal{
+			Interval: &types.IntervalMemberRollingInterval{
+				Value: types.RollingInterval{
+					DurationUnit: types.DurationUnit("MINUTE"),
+					Duration:     ptr.Int32(1),
+				},
+			},
+			AttainmentGoal:   ptr.Float64(1.0),
+			WarningThreshold: ptr.Float64(1.0),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		BurnRateConfigurations: []types.BurnRateConfiguration{
+			{
+				LookBackWindowMinutes: ptr.Int32(1),
+			},
+			{
+				LookBackWindowMinutes: ptr.Int32(1),
+			},
+		},
+		CreateRecommendedSlo:     true,
+		AutoInvestigationEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1161,7 +1572,22 @@ func TestCheckResponseSnapshot_DeleteInstrumentationConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInstrumentationConfiguration(context.Background(), &DeleteInstrumentationConfigurationInput{})
+	got, err := svc.DeleteInstrumentationConfiguration(context.Background(), &DeleteInstrumentationConfigurationInput{
+		InstrumentationType: types.InstrumentationType("BREAKPOINT"),
+		Service:             ptr.String("__Service__"),
+		Environment:         ptr.String("__Environment__"),
+		SignalType:          types.DynamicInstrumentationSignalType("SNAPSHOT"),
+		LocationIdentifier: &types.LocationIdentifierMemberCodeLocation{
+			Value: types.CodeLocation{
+				Language:   types.ProgrammingLanguage("Java"),
+				CodeUnit:   ptr.String("__CodeUnit__"),
+				ClassName:  ptr.String("__ClassName__"),
+				MethodName: ptr.String("__MethodName__"),
+				FilePath:   ptr.String("__FilePath__"),
+				LineNumber: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1180,7 +1606,9 @@ func TestCheckResponseSnapshot_DeleteServiceLevelObjective(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceLevelObjective(context.Background(), &DeleteServiceLevelObjectiveInput{})
+	got, err := svc.DeleteServiceLevelObjective(context.Background(), &DeleteServiceLevelObjectiveInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1253,7 +1681,22 @@ func TestCheckResponseSnapshot_GetInstrumentationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInstrumentationConfiguration(context.Background(), &GetInstrumentationConfigurationInput{})
+	got, err := svc.GetInstrumentationConfiguration(context.Background(), &GetInstrumentationConfigurationInput{
+		InstrumentationType: types.InstrumentationType("BREAKPOINT"),
+		Service:             ptr.String("__Service__"),
+		Environment:         ptr.String("__Environment__"),
+		SignalType:          types.DynamicInstrumentationSignalType("SNAPSHOT"),
+		LocationIdentifier: &types.LocationIdentifierMemberCodeLocation{
+			Value: types.CodeLocation{
+				Language:   types.ProgrammingLanguage("Java"),
+				CodeUnit:   ptr.String("__CodeUnit__"),
+				ClassName:  ptr.String("__ClassName__"),
+				MethodName: ptr.String("__MethodName__"),
+				FilePath:   ptr.String("__FilePath__"),
+				LineNumber: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1298,7 +1741,27 @@ func TestCheckResponseSnapshot_GetInstrumentationConfigurationStatus(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInstrumentationConfigurationStatus(context.Background(), &GetInstrumentationConfigurationStatusInput{})
+	got, err := svc.GetInstrumentationConfigurationStatus(context.Background(), &GetInstrumentationConfigurationStatusInput{
+		InstrumentationType: types.InstrumentationType("BREAKPOINT"),
+		Service:             ptr.String("__Service__"),
+		Environment:         ptr.String("__Environment__"),
+		SignalType:          types.DynamicInstrumentationSignalType("SNAPSHOT"),
+		LocationIdentifier: &types.LocationIdentifierMemberCodeLocation{
+			Value: types.CodeLocation{
+				Language:   types.ProgrammingLanguage("Java"),
+				CodeUnit:   ptr.String("__CodeUnit__"),
+				ClassName:  ptr.String("__ClassName__"),
+				MethodName: ptr.String("__MethodName__"),
+				FilePath:   ptr.String("__FilePath__"),
+				LineNumber: ptr.Int32(1),
+			},
+		},
+		Status:     types.InstrumentationConfigurationStatus("READY"),
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1397,7 +1860,13 @@ func TestCheckResponseSnapshot_GetService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetService(context.Background(), &GetServiceInput{})
+	got, err := svc.GetService(context.Background(), &GetServiceInput{
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KeyAttributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1693,7 +2162,9 @@ func TestCheckResponseSnapshot_GetServiceLevelObjective(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceLevelObjective(context.Background(), &GetServiceLevelObjectiveInput{})
+	got, err := svc.GetServiceLevelObjective(context.Background(), &GetServiceLevelObjectiveInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1968,7 +2439,41 @@ func TestCheckResponseSnapshot_ListAuditFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAuditFindings(context.Background(), &ListAuditFindingsInput{})
+	got, err := svc.ListAuditFindings(context.Background(), &ListAuditFindingsInput{
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Auditors: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AuditTargets: []types.AuditTarget{
+			{
+				Type: ptr.String("__Type__"),
+				Data: &types.AuditTargetEntityMemberService{
+					Value: types.ServiceEntity{
+						Type:         ptr.String("__Type__"),
+						Name:         ptr.String("__Name__"),
+						Environment:  ptr.String("__Environment__"),
+						AwsAccountId: ptr.String("__AwsAccountId__"),
+					},
+				},
+			},
+			{
+				Type: ptr.String("__Type__"),
+				Data: &types.AuditTargetEntityMemberService{
+					Value: types.ServiceEntity{
+						Type:         ptr.String("__Type__"),
+						Name:         ptr.String("__Name__"),
+						Environment:  ptr.String("__Environment__"),
+						AwsAccountId: ptr.String("__AwsAccountId__"),
+					},
+				},
+			},
+		},
+		DetailLevel: types.DetailLevel("BRIEF"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2017,7 +2522,15 @@ func TestCheckResponseSnapshot_ListEntityEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEntityEvents(context.Background(), &ListEntityEventsInput{})
+	got, err := svc.ListEntityEvents(context.Background(), &ListEntityEventsInput{
+		Entity: map[string]string{
+			"key0": "__Value__",
+		},
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2057,7 +2570,11 @@ func TestCheckResponseSnapshot_ListGroupingAttributeDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupingAttributeDefinitions(context.Background(), &ListGroupingAttributeDefinitionsInput{})
+	got, err := svc.ListGroupingAttributeDefinitions(context.Background(), &ListGroupingAttributeDefinitionsInput{
+		NextToken:             ptr.String("__NextToken__"),
+		AwsAccountId:          ptr.String("__AwsAccountId__"),
+		IncludeLinkedAccounts: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2187,7 +2704,14 @@ func TestCheckResponseSnapshot_ListInstrumentationConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstrumentationConfigurations(context.Background(), &ListInstrumentationConfigurationsInput{})
+	got, err := svc.ListInstrumentationConfigurations(context.Background(), &ListInstrumentationConfigurationsInput{
+		Service:             ptr.String("__Service__"),
+		Environment:         ptr.String("__Environment__"),
+		InstrumentationType: types.InstrumentationType("BREAKPOINT"),
+		SyncedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2294,7 +2818,15 @@ func TestCheckResponseSnapshot_ListServiceDependencies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceDependencies(context.Background(), &ListServiceDependenciesInput{})
+	got, err := svc.ListServiceDependencies(context.Background(), &ListServiceDependenciesInput{
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KeyAttributes: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2401,7 +2933,15 @@ func TestCheckResponseSnapshot_ListServiceDependents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceDependents(context.Background(), &ListServiceDependentsInput{})
+	got, err := svc.ListServiceDependents(context.Background(), &ListServiceDependentsInput{
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KeyAttributes: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2446,7 +2986,11 @@ func TestCheckResponseSnapshot_ListServiceLevelObjectiveExclusionWindows(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceLevelObjectiveExclusionWindows(context.Background(), &ListServiceLevelObjectiveExclusionWindowsInput{})
+	got, err := svc.ListServiceLevelObjectiveExclusionWindows(context.Background(), &ListServiceLevelObjectiveExclusionWindowsInput{
+		Id:         ptr.String("__Id__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2547,7 +3091,34 @@ func TestCheckResponseSnapshot_ListServiceLevelObjectives(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceLevelObjectives(context.Background(), &ListServiceLevelObjectivesInput{})
+	got, err := svc.ListServiceLevelObjectives(context.Background(), &ListServiceLevelObjectivesInput{
+		KeyAttributes: map[string]string{
+			"key0": "__Value__",
+		},
+		OperationName: ptr.String("__OperationName__"),
+		DependencyConfig: &types.DependencyConfig{
+			DependencyKeyAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			DependencyOperationName: ptr.String("__DependencyOperationName__"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		MetricSourceTypes: []types.MetricSourceType{
+			types.MetricSourceType("ServiceOperation"),
+			types.MetricSourceType("ServiceOperation"),
+		},
+		IncludeLinkedAccounts: true,
+		SloOwnerAwsAccountId:  ptr.String("__SloOwnerAwsAccountId__"),
+		MetricSource: &types.MetricSource{
+			MetricSourceKeyAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			MetricSourceAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2646,7 +3217,15 @@ func TestCheckResponseSnapshot_ListServiceOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceOperations(context.Background(), &ListServiceOperationsInput{})
+	got, err := svc.ListServiceOperations(context.Background(), &ListServiceOperationsInput{
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KeyAttributes: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2765,7 +3344,30 @@ func TestCheckResponseSnapshot_ListServiceStates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceStates(context.Background(), &ListServiceStatesInput{})
+	got, err := svc.ListServiceStates(context.Background(), &ListServiceStatesInput{
+		StartTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+		IncludeLinkedAccounts: true,
+		AwsAccountId:          ptr.String("__AwsAccountId__"),
+		AttributeFilters: []types.AttributeFilter{
+			{
+				AttributeFilterName: ptr.String("__AttributeFilterName__"),
+				AttributeFilterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				AttributeFilterName: ptr.String("__AttributeFilterName__"),
+				AttributeFilterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2912,7 +3514,14 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServices(context.Background(), &ListServicesInput{})
+	got, err := svc.ListServices(context.Background(), &ListServicesInput{
+		StartTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+		IncludeLinkedAccounts: true,
+		AwsAccountId:          ptr.String("__AwsAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2942,7 +3551,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2983,7 +3594,26 @@ func TestCheckResponseSnapshot_PutGroupingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutGroupingConfiguration(context.Background(), &PutGroupingConfigurationInput{})
+	got, err := svc.PutGroupingConfiguration(context.Background(), &PutGroupingConfigurationInput{
+		GroupingAttributeDefinitions: []types.GroupingAttributeDefinition{
+			{
+				GroupingName: ptr.String("__GroupingName__"),
+				GroupingSourceKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DefaultGroupingValue: ptr.String("__DefaultGroupingValue__"),
+			},
+			{
+				GroupingName: ptr.String("__GroupingName__"),
+				GroupingSourceKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DefaultGroupingValue: ptr.String("__DefaultGroupingValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3023,7 +3653,28 @@ func TestCheckResponseSnapshot_ReportInstrumentationConfigurationStatus(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReportInstrumentationConfigurationStatus(context.Background(), &ReportInstrumentationConfigurationStatusInput{})
+	got, err := svc.ReportInstrumentationConfigurationStatus(context.Background(), &ReportInstrumentationConfigurationStatusInput{
+		Service:     ptr.String("__Service__"),
+		Environment: ptr.String("__Environment__"),
+		Configurations: []types.InstrumentationConfigurationStatusReport{
+			{
+				InstrumentationType: types.InstrumentationType("BREAKPOINT"),
+				SignalType:          types.DynamicInstrumentationSignalType("SNAPSHOT"),
+				LocationHash:        ptr.String("__LocationHash__"),
+				Status:              types.InstrumentationConfigurationStatus("READY"),
+				Time:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ErrorCause:          types.InstrumentationErrorCause("FILE_NOT_FOUND"),
+			},
+			{
+				InstrumentationType: types.InstrumentationType("BREAKPOINT"),
+				SignalType:          types.DynamicInstrumentationSignalType("SNAPSHOT"),
+				LocationHash:        ptr.String("__LocationHash__"),
+				Status:              types.InstrumentationConfigurationStatus("READY"),
+				Time:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ErrorCause:          types.InstrumentationErrorCause("FILE_NOT_FOUND"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3061,7 +3712,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3080,7 +3743,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3376,7 +4045,281 @@ func TestCheckResponseSnapshot_UpdateServiceLevelObjective(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceLevelObjective(context.Background(), &UpdateServiceLevelObjectiveInput{})
+	got, err := svc.UpdateServiceLevelObjective(context.Background(), &UpdateServiceLevelObjectiveInput{
+		Id:          ptr.String("__Id__"),
+		Description: ptr.String("__Description__"),
+		SliConfig: &types.ServiceLevelIndicatorConfig{
+			SliMetricConfig: &types.ServiceLevelIndicatorMetricConfig{
+				KeyAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+				OperationName: ptr.String("__OperationName__"),
+				MetricType:    types.ServiceLevelIndicatorMetricType("LATENCY"),
+				MetricName:    ptr.String("__MetricName__"),
+				Statistic:     ptr.String("__Statistic__"),
+				PeriodSeconds: ptr.Int32(1),
+				MetricSource: &types.MetricSource{
+					MetricSourceKeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					MetricSourceAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				MetricDataQueries: []types.MetricDataQuery{
+					{
+						Id: ptr.String("__Id__"),
+						MetricStat: &types.MetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.Dimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Period: ptr.Int32(1),
+							Stat:   ptr.String("__Stat__"),
+							Unit:   types.StandardUnit("Microseconds"),
+						},
+						Expression: ptr.String("__Expression__"),
+						Label:      ptr.String("__Label__"),
+						ReturnData: ptr.Bool(true),
+						Period:     ptr.Int32(1),
+						AccountId:  ptr.String("__AccountId__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+						MetricStat: &types.MetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.Dimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Period: ptr.Int32(1),
+							Stat:   ptr.String("__Stat__"),
+							Unit:   types.StandardUnit("Microseconds"),
+						},
+						Expression: ptr.String("__Expression__"),
+						Label:      ptr.String("__Label__"),
+						ReturnData: ptr.Bool(true),
+						Period:     ptr.Int32(1),
+						AccountId:  ptr.String("__AccountId__"),
+					},
+				},
+				DependencyConfig: &types.DependencyConfig{
+					DependencyKeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					DependencyOperationName: ptr.String("__DependencyOperationName__"),
+				},
+				CompositeSliConfig: &types.CompositeSliConfig{
+					SelectionConfig: &types.SelectionConfig{
+						Type:    types.SelectionType("EXPLICIT"),
+						Pattern: ptr.String("__Pattern__"),
+					},
+					Components: []types.CompositeSliComponent{
+						&types.CompositeSliComponentMemberOperationName{
+							Value: "__CompositeSliComponentMemberOperationName__",
+						},
+						&types.CompositeSliComponentMemberOperationName{
+							Value: "__CompositeSliComponentMemberOperationName__",
+						},
+					},
+				},
+			},
+			MetricThreshold:    ptr.Float64(1.0),
+			ComparisonOperator: types.ServiceLevelIndicatorComparisonOperator("GreaterThanOrEqualTo"),
+		},
+		RequestBasedSliConfig: &types.RequestBasedServiceLevelIndicatorConfig{
+			RequestBasedSliMetricConfig: &types.RequestBasedServiceLevelIndicatorMetricConfig{
+				KeyAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+				OperationName: ptr.String("__OperationName__"),
+				MetricType:    types.ServiceLevelIndicatorMetricType("LATENCY"),
+				TotalRequestCountMetric: []types.MetricDataQuery{
+					{
+						Id: ptr.String("__Id__"),
+						MetricStat: &types.MetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.Dimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Period: ptr.Int32(1),
+							Stat:   ptr.String("__Stat__"),
+							Unit:   types.StandardUnit("Microseconds"),
+						},
+						Expression: ptr.String("__Expression__"),
+						Label:      ptr.String("__Label__"),
+						ReturnData: ptr.Bool(true),
+						Period:     ptr.Int32(1),
+						AccountId:  ptr.String("__AccountId__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+						MetricStat: &types.MetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.Dimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Period: ptr.Int32(1),
+							Stat:   ptr.String("__Stat__"),
+							Unit:   types.StandardUnit("Microseconds"),
+						},
+						Expression: ptr.String("__Expression__"),
+						Label:      ptr.String("__Label__"),
+						ReturnData: ptr.Bool(true),
+						Period:     ptr.Int32(1),
+						AccountId:  ptr.String("__AccountId__"),
+					},
+				},
+				MonitoredRequestCountMetric: &types.MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric{
+					Value: []types.MetricDataQuery{
+						{
+							Id: ptr.String("__Id__"),
+							MetricStat: &types.MetricStat{
+								Metric: &types.Metric{
+									Namespace:  ptr.String("__Namespace__"),
+									MetricName: ptr.String("__MetricName__"),
+									Dimensions: []types.Dimension{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+								Period: ptr.Int32(1),
+								Stat:   ptr.String("__Stat__"),
+								Unit:   types.StandardUnit("Microseconds"),
+							},
+							Expression: ptr.String("__Expression__"),
+							Label:      ptr.String("__Label__"),
+							ReturnData: ptr.Bool(true),
+							Period:     ptr.Int32(1),
+							AccountId:  ptr.String("__AccountId__"),
+						},
+						{
+							Id: ptr.String("__Id__"),
+							MetricStat: &types.MetricStat{
+								Metric: &types.Metric{
+									Namespace:  ptr.String("__Namespace__"),
+									MetricName: ptr.String("__MetricName__"),
+									Dimensions: []types.Dimension{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+								Period: ptr.Int32(1),
+								Stat:   ptr.String("__Stat__"),
+								Unit:   types.StandardUnit("Microseconds"),
+							},
+							Expression: ptr.String("__Expression__"),
+							Label:      ptr.String("__Label__"),
+							ReturnData: ptr.Bool(true),
+							Period:     ptr.Int32(1),
+							AccountId:  ptr.String("__AccountId__"),
+						},
+					},
+				},
+				DependencyConfig: &types.DependencyConfig{
+					DependencyKeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					DependencyOperationName: ptr.String("__DependencyOperationName__"),
+				},
+				MetricSource: &types.MetricSource{
+					MetricSourceKeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					MetricSourceAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				MetricName: ptr.String("__MetricName__"),
+				CompositeSliConfig: &types.CompositeSliConfig{
+					SelectionConfig: &types.SelectionConfig{
+						Type:    types.SelectionType("EXPLICIT"),
+						Pattern: ptr.String("__Pattern__"),
+					},
+					Components: []types.CompositeSliComponent{
+						&types.CompositeSliComponentMemberOperationName{
+							Value: "__CompositeSliComponentMemberOperationName__",
+						},
+						&types.CompositeSliComponentMemberOperationName{
+							Value: "__CompositeSliComponentMemberOperationName__",
+						},
+					},
+				},
+			},
+			MetricThreshold:    ptr.Float64(1.0),
+			ComparisonOperator: types.ServiceLevelIndicatorComparisonOperator("GreaterThanOrEqualTo"),
+		},
+		Goal: &types.Goal{
+			Interval: &types.IntervalMemberRollingInterval{
+				Value: types.RollingInterval{
+					DurationUnit: types.DurationUnit("MINUTE"),
+					Duration:     ptr.Int32(1),
+				},
+			},
+			AttainmentGoal:   ptr.Float64(1.0),
+			WarningThreshold: ptr.Float64(1.0),
+		},
+		BurnRateConfigurations: []types.BurnRateConfiguration{
+			{
+				LookBackWindowMinutes: ptr.Int32(1),
+			},
+			{
+				LookBackWindowMinutes: ptr.Int32(1),
+			},
+		},
+		AutoInvestigationEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3397,7 +4340,292 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateServiceLevelObjective(context.Background(), &CreateServiceLevelObjectiveInput{})
+	_, opErr := svc.CreateServiceLevelObjective(context.Background(), &CreateServiceLevelObjectiveInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SliConfig: &types.ServiceLevelIndicatorConfig{
+			SliMetricConfig: &types.ServiceLevelIndicatorMetricConfig{
+				KeyAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+				OperationName: ptr.String("__OperationName__"),
+				MetricType:    types.ServiceLevelIndicatorMetricType("LATENCY"),
+				MetricName:    ptr.String("__MetricName__"),
+				Statistic:     ptr.String("__Statistic__"),
+				PeriodSeconds: ptr.Int32(1),
+				MetricSource: &types.MetricSource{
+					MetricSourceKeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					MetricSourceAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				MetricDataQueries: []types.MetricDataQuery{
+					{
+						Id: ptr.String("__Id__"),
+						MetricStat: &types.MetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.Dimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Period: ptr.Int32(1),
+							Stat:   ptr.String("__Stat__"),
+							Unit:   types.StandardUnit("Microseconds"),
+						},
+						Expression: ptr.String("__Expression__"),
+						Label:      ptr.String("__Label__"),
+						ReturnData: ptr.Bool(true),
+						Period:     ptr.Int32(1),
+						AccountId:  ptr.String("__AccountId__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+						MetricStat: &types.MetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.Dimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Period: ptr.Int32(1),
+							Stat:   ptr.String("__Stat__"),
+							Unit:   types.StandardUnit("Microseconds"),
+						},
+						Expression: ptr.String("__Expression__"),
+						Label:      ptr.String("__Label__"),
+						ReturnData: ptr.Bool(true),
+						Period:     ptr.Int32(1),
+						AccountId:  ptr.String("__AccountId__"),
+					},
+				},
+				DependencyConfig: &types.DependencyConfig{
+					DependencyKeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					DependencyOperationName: ptr.String("__DependencyOperationName__"),
+				},
+				CompositeSliConfig: &types.CompositeSliConfig{
+					SelectionConfig: &types.SelectionConfig{
+						Type:    types.SelectionType("EXPLICIT"),
+						Pattern: ptr.String("__Pattern__"),
+					},
+					Components: []types.CompositeSliComponent{
+						&types.CompositeSliComponentMemberOperationName{
+							Value: "__CompositeSliComponentMemberOperationName__",
+						},
+						&types.CompositeSliComponentMemberOperationName{
+							Value: "__CompositeSliComponentMemberOperationName__",
+						},
+					},
+				},
+			},
+			MetricThreshold:    ptr.Float64(1.0),
+			ComparisonOperator: types.ServiceLevelIndicatorComparisonOperator("GreaterThanOrEqualTo"),
+		},
+		RequestBasedSliConfig: &types.RequestBasedServiceLevelIndicatorConfig{
+			RequestBasedSliMetricConfig: &types.RequestBasedServiceLevelIndicatorMetricConfig{
+				KeyAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+				OperationName: ptr.String("__OperationName__"),
+				MetricType:    types.ServiceLevelIndicatorMetricType("LATENCY"),
+				TotalRequestCountMetric: []types.MetricDataQuery{
+					{
+						Id: ptr.String("__Id__"),
+						MetricStat: &types.MetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.Dimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Period: ptr.Int32(1),
+							Stat:   ptr.String("__Stat__"),
+							Unit:   types.StandardUnit("Microseconds"),
+						},
+						Expression: ptr.String("__Expression__"),
+						Label:      ptr.String("__Label__"),
+						ReturnData: ptr.Bool(true),
+						Period:     ptr.Int32(1),
+						AccountId:  ptr.String("__AccountId__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+						MetricStat: &types.MetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.Dimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Period: ptr.Int32(1),
+							Stat:   ptr.String("__Stat__"),
+							Unit:   types.StandardUnit("Microseconds"),
+						},
+						Expression: ptr.String("__Expression__"),
+						Label:      ptr.String("__Label__"),
+						ReturnData: ptr.Bool(true),
+						Period:     ptr.Int32(1),
+						AccountId:  ptr.String("__AccountId__"),
+					},
+				},
+				MonitoredRequestCountMetric: &types.MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric{
+					Value: []types.MetricDataQuery{
+						{
+							Id: ptr.String("__Id__"),
+							MetricStat: &types.MetricStat{
+								Metric: &types.Metric{
+									Namespace:  ptr.String("__Namespace__"),
+									MetricName: ptr.String("__MetricName__"),
+									Dimensions: []types.Dimension{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+								Period: ptr.Int32(1),
+								Stat:   ptr.String("__Stat__"),
+								Unit:   types.StandardUnit("Microseconds"),
+							},
+							Expression: ptr.String("__Expression__"),
+							Label:      ptr.String("__Label__"),
+							ReturnData: ptr.Bool(true),
+							Period:     ptr.Int32(1),
+							AccountId:  ptr.String("__AccountId__"),
+						},
+						{
+							Id: ptr.String("__Id__"),
+							MetricStat: &types.MetricStat{
+								Metric: &types.Metric{
+									Namespace:  ptr.String("__Namespace__"),
+									MetricName: ptr.String("__MetricName__"),
+									Dimensions: []types.Dimension{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+								Period: ptr.Int32(1),
+								Stat:   ptr.String("__Stat__"),
+								Unit:   types.StandardUnit("Microseconds"),
+							},
+							Expression: ptr.String("__Expression__"),
+							Label:      ptr.String("__Label__"),
+							ReturnData: ptr.Bool(true),
+							Period:     ptr.Int32(1),
+							AccountId:  ptr.String("__AccountId__"),
+						},
+					},
+				},
+				DependencyConfig: &types.DependencyConfig{
+					DependencyKeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					DependencyOperationName: ptr.String("__DependencyOperationName__"),
+				},
+				MetricSource: &types.MetricSource{
+					MetricSourceKeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					MetricSourceAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				MetricName: ptr.String("__MetricName__"),
+				CompositeSliConfig: &types.CompositeSliConfig{
+					SelectionConfig: &types.SelectionConfig{
+						Type:    types.SelectionType("EXPLICIT"),
+						Pattern: ptr.String("__Pattern__"),
+					},
+					Components: []types.CompositeSliComponent{
+						&types.CompositeSliComponentMemberOperationName{
+							Value: "__CompositeSliComponentMemberOperationName__",
+						},
+						&types.CompositeSliComponentMemberOperationName{
+							Value: "__CompositeSliComponentMemberOperationName__",
+						},
+					},
+				},
+			},
+			MetricThreshold:    ptr.Float64(1.0),
+			ComparisonOperator: types.ServiceLevelIndicatorComparisonOperator("GreaterThanOrEqualTo"),
+		},
+		Goal: &types.Goal{
+			Interval: &types.IntervalMemberRollingInterval{
+				Value: types.RollingInterval{
+					DurationUnit: types.DurationUnit("MINUTE"),
+					Duration:     ptr.Int32(1),
+				},
+			},
+			AttainmentGoal:   ptr.Float64(1.0),
+			WarningThreshold: ptr.Float64(1.0),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		BurnRateConfigurations: []types.BurnRateConfiguration{
+			{
+				LookBackWindowMinutes: ptr.Int32(1),
+			},
+			{
+				LookBackWindowMinutes: ptr.Int32(1),
+			},
+		},
+		CreateRecommendedSlo:     true,
+		AutoInvestigationEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3422,7 +4650,66 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInstrumentationConfiguration(context.Background(), &CreateInstrumentationConfigurationInput{})
+	_, opErr := svc.CreateInstrumentationConfiguration(context.Background(), &CreateInstrumentationConfigurationInput{
+		InstrumentationType: types.InstrumentationType("BREAKPOINT"),
+		Service:             ptr.String("__Service__"),
+		Environment:         ptr.String("__Environment__"),
+		SignalType:          types.DynamicInstrumentationSignalType("SNAPSHOT"),
+		Location: &types.LocationMemberCodeLocation{
+			Value: types.CodeLocation{
+				Language:   types.ProgrammingLanguage("Java"),
+				CodeUnit:   ptr.String("__CodeUnit__"),
+				ClassName:  ptr.String("__ClassName__"),
+				MethodName: ptr.String("__MethodName__"),
+				FilePath:   ptr.String("__FilePath__"),
+				LineNumber: ptr.Int32(1),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AttributeFilters: []map[string]string{
+			{
+				"key0": "__Value__",
+			},
+			{
+				"key0": "__Value__",
+			},
+		},
+		CaptureConfiguration: &types.CaptureConfigurationMemberCodeCapture{
+			Value: types.CodeCaptureConfiguration{
+				CaptureArguments: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CaptureReturn:     ptr.Bool(true),
+				CaptureStackTrace: ptr.Bool(true),
+				CaptureLocals: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CaptureLimits: &types.CaptureLimitsConfig{
+					MaxHits:            ptr.Int32(1),
+					MaxStringLength:    ptr.Int32(1),
+					MaxCollectionWidth: ptr.Int32(1),
+					MaxCollectionDepth: ptr.Int32(1),
+					MaxStackFrames:     ptr.Int32(1),
+					MaxStackTraceSize:  ptr.Int32(1),
+					MaxObjectDepth:     ptr.Int32(1),
+					MaxFieldsPerObject: ptr.Int32(1),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3449,7 +4736,60 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateExclusionWindows(context.Background(), &BatchUpdateExclusionWindowsInput{})
+	_, opErr := svc.BatchUpdateExclusionWindows(context.Background(), &BatchUpdateExclusionWindowsInput{
+		SloIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AddExclusionWindows: []types.ExclusionWindow{
+			{
+				Window: &types.Window{
+					DurationUnit: types.DurationUnit("MINUTE"),
+					Duration:     ptr.Int32(1),
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecurrenceRule: &types.RecurrenceRule{
+					Expression: ptr.String("__Expression__"),
+				},
+				Reason: ptr.String("__Reason__"),
+			},
+			{
+				Window: &types.Window{
+					DurationUnit: types.DurationUnit("MINUTE"),
+					Duration:     ptr.Int32(1),
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecurrenceRule: &types.RecurrenceRule{
+					Expression: ptr.String("__Expression__"),
+				},
+				Reason: ptr.String("__Reason__"),
+			},
+		},
+		RemoveExclusionWindows: []types.ExclusionWindow{
+			{
+				Window: &types.Window{
+					DurationUnit: types.DurationUnit("MINUTE"),
+					Duration:     ptr.Int32(1),
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecurrenceRule: &types.RecurrenceRule{
+					Expression: ptr.String("__Expression__"),
+				},
+				Reason: ptr.String("__Reason__"),
+			},
+			{
+				Window: &types.Window{
+					DurationUnit: types.DurationUnit("MINUTE"),
+					Duration:     ptr.Int32(1),
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecurrenceRule: &types.RecurrenceRule{
+					Expression: ptr.String("__Expression__"),
+				},
+				Reason: ptr.String("__Reason__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3474,7 +4814,66 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInstrumentationConfiguration(context.Background(), &CreateInstrumentationConfigurationInput{})
+	_, opErr := svc.CreateInstrumentationConfiguration(context.Background(), &CreateInstrumentationConfigurationInput{
+		InstrumentationType: types.InstrumentationType("BREAKPOINT"),
+		Service:             ptr.String("__Service__"),
+		Environment:         ptr.String("__Environment__"),
+		SignalType:          types.DynamicInstrumentationSignalType("SNAPSHOT"),
+		Location: &types.LocationMemberCodeLocation{
+			Value: types.CodeLocation{
+				Language:   types.ProgrammingLanguage("Java"),
+				CodeUnit:   ptr.String("__CodeUnit__"),
+				ClassName:  ptr.String("__ClassName__"),
+				MethodName: ptr.String("__MethodName__"),
+				FilePath:   ptr.String("__FilePath__"),
+				LineNumber: ptr.Int32(1),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AttributeFilters: []map[string]string{
+			{
+				"key0": "__Value__",
+			},
+			{
+				"key0": "__Value__",
+			},
+		},
+		CaptureConfiguration: &types.CaptureConfigurationMemberCodeCapture{
+			Value: types.CodeCaptureConfiguration{
+				CaptureArguments: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CaptureReturn:     ptr.Bool(true),
+				CaptureStackTrace: ptr.Bool(true),
+				CaptureLocals: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CaptureLimits: &types.CaptureLimitsConfig{
+					MaxHits:            ptr.Int32(1),
+					MaxStringLength:    ptr.Int32(1),
+					MaxCollectionWidth: ptr.Int32(1),
+					MaxCollectionDepth: ptr.Int32(1),
+					MaxStackFrames:     ptr.Int32(1),
+					MaxStackTraceSize:  ptr.Int32(1),
+					MaxObjectDepth:     ptr.Int32(1),
+					MaxFieldsPerObject: ptr.Int32(1),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3499,7 +4898,15 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteInstrumentationConfigurations(context.Background(), &BatchDeleteInstrumentationConfigurationsInput{})
+	_, opErr := svc.BatchDeleteInstrumentationConfigurations(context.Background(), &BatchDeleteInstrumentationConfigurationsInput{
+		DeletionTarget: &types.BatchDeleteDeletionTargetMemberScope{
+			Value: types.BatchDeleteScope{
+				Service:             ptr.String("__Service__"),
+				Environment:         ptr.String("__Environment__"),
+				InstrumentationType: types.InstrumentationType("BREAKPOINT"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3524,7 +4931,15 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteInstrumentationConfigurations(context.Background(), &BatchDeleteInstrumentationConfigurationsInput{})
+	_, opErr := svc.BatchDeleteInstrumentationConfigurations(context.Background(), &BatchDeleteInstrumentationConfigurationsInput{
+		DeletionTarget: &types.BatchDeleteDeletionTargetMemberScope{
+			Value: types.BatchDeleteScope{
+				Service:             ptr.String("__Service__"),
+				Environment:         ptr.String("__Environment__"),
+				InstrumentationType: types.InstrumentationType("BREAKPOINT"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

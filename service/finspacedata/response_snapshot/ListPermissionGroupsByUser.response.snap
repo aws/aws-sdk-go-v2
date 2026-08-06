@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","permissionGroups":[{"membershipStatus":"ADDITION_IN_PROGRESS","name":"__Name__","permissionGroupId":"__PermissionGroupId__"},{"membershipStatus":"ADDITION_IN_PROGRESS","name":"__Name__","permissionGroupId":"__PermissionGroupId__"}]}

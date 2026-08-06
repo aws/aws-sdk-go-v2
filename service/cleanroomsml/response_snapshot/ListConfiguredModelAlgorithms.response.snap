@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configuredModelAlgorithms":[{"configuredModelAlgorithmArn":"__ConfiguredModelAlgorithmArn__","createTime":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","updateTime":"2000-01-01T00:00:00Z"},{"configuredModelAlgorithmArn":"__ConfiguredModelAlgorithmArn__","createTime":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","updateTime":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.ListSessions
+
+{"NextToken":"__NextToken__","Sessions":[{"Description":"__Description__","EngineVersion":{"EffectiveEngineVersion":"__EffectiveEngineVersion__","SelectedEngineVersion":"__SelectedEngineVersion__"},"NotebookVersion":"__NotebookVersion__","SessionId":"__SessionId__","Status":{"EndDateTime":946684800,"IdleSinceDateTime":946684800,"LastModifiedDateTime":946684800,"StartDateTime":946684800,"State":"CREATING","StateChangeReason":"__StateChangeReason__"}},{"Description":"__Description__","EngineVersion":{"EffectiveEngineVersion":"__EffectiveEngineVersion__","SelectedEngineVersion":"__SelectedEngineVersion__"},"NotebookVersion":"__NotebookVersion__","SessionId":"__SessionId__","Status":{"EndDateTime":946684800,"IdleSinceDateTime":946684800,"LastModifiedDateTime":946684800,"StartDateTime":946684800,"State":"CREATING","StateChangeReason":"__StateChangeReason__"}}]}

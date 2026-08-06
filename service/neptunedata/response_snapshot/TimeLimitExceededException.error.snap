@@ -1,0 +1,4 @@
+500
+Content-Type: application/json
+
+{"__type":"TimeLimitExceededException","code":"TimeLimitExceededException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

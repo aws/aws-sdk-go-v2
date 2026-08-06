@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_CancelCapacityTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelCapacityTask(context.Background(), &CancelCapacityTaskInput{})
+	got, err := svc.CancelCapacityTask(context.Background(), &CancelCapacityTaskInput{
+		CapacityTaskId:    ptr.String("__CapacityTaskId__"),
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +139,9 @@ func TestCheckResponseSnapshot_CancelOrder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelOrder(context.Background(), &CancelOrderInput{})
+	got, err := svc.CancelOrder(context.Background(), &CancelOrderInput{
+		OrderId: ptr.String("__OrderId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,7 +231,23 @@ func TestCheckResponseSnapshot_CreateOrder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOrder(context.Background(), &CreateOrderInput{})
+	got, err := svc.CreateOrder(context.Background(), &CreateOrderInput{
+		OutpostIdentifier:     ptr.String("__OutpostIdentifier__"),
+		QuoteIdentifier:       ptr.String("__QuoteIdentifier__"),
+		QuoteOptionIdentifier: ptr.String("__QuoteOptionIdentifier__"),
+		LineItems: []types.LineItemRequest{
+			{
+				CatalogItemId: ptr.String("__CatalogItemId__"),
+				Quantity:      ptr.Int32(1),
+			},
+			{
+				CatalogItemId: ptr.String("__CatalogItemId__"),
+				Quantity:      ptr.Int32(1),
+			},
+		},
+		PaymentOption: types.PaymentOption("ALL_UPFRONT"),
+		PaymentTerm:   types.PaymentTerm("THREE_YEARS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -262,7 +283,17 @@ func TestCheckResponseSnapshot_CreateOutpost(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOutpost(context.Background(), &CreateOutpostInput{})
+	got, err := svc.CreateOutpost(context.Background(), &CreateOutpostInput{
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		SiteId:             ptr.String("__SiteId__"),
+		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		SupportedHardwareType: types.SupportedHardwareType("RACK"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -760,7 +791,41 @@ func TestCheckResponseSnapshot_CreateQuote(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQuote(context.Background(), &CreateQuoteInput{})
+	got, err := svc.CreateQuote(context.Background(), &CreateQuoteInput{
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+		CountryCode:       ptr.String("__CountryCode__"),
+		RequestedCapacities: []types.QuoteCapacity{
+			{
+				QuoteCapacityType: types.QuoteCapacityType("EC2"),
+				Unit:              ptr.String("__Unit__"),
+				Quantity:          ptr.Float32(1.0),
+			},
+			{
+				QuoteCapacityType: types.QuoteCapacityType("EC2"),
+				Unit:              ptr.String("__Unit__"),
+				Quantity:          ptr.Float32(1.0),
+			},
+		},
+		RequestedConstraints: []types.QuoteConstraint{
+			{
+				QuoteConstraintType: types.QuoteConstraintType("RACK_MAXIMUM"),
+				Value:               ptr.String("__Value__"),
+			},
+			{
+				QuoteConstraintType: types.QuoteConstraintType("RACK_MAXIMUM"),
+				Value:               ptr.String("__Value__"),
+			},
+		},
+		RequestedPaymentOptions: []types.PaymentOption{
+			types.PaymentOption("ALL_UPFRONT"),
+			types.PaymentOption("ALL_UPFRONT"),
+		},
+		RequestedPaymentTerms: []types.PaymentTerm{
+			types.PaymentTerm("THREE_YEARS"),
+			types.PaymentTerm("THREE_YEARS"),
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -786,7 +851,12 @@ func TestCheckResponseSnapshot_CreateRenewal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRenewal(context.Background(), &CreateRenewalInput{})
+	got, err := svc.CreateRenewal(context.Background(), &CreateRenewalInput{
+		PaymentOption:     types.PaymentOption("ALL_UPFRONT"),
+		PaymentTerm:       types.PaymentTerm("THREE_YEARS"),
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -831,7 +901,51 @@ func TestCheckResponseSnapshot_CreateSite(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSite(context.Background(), &CreateSiteInput{})
+	got, err := svc.CreateSite(context.Background(), &CreateSiteInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Notes:       ptr.String("__Notes__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		OperatingAddress: &types.Address{
+			ContactName:        ptr.String("__ContactName__"),
+			ContactPhoneNumber: ptr.String("__ContactPhoneNumber__"),
+			AddressLine1:       ptr.String("__AddressLine1__"),
+			AddressLine2:       ptr.String("__AddressLine2__"),
+			AddressLine3:       ptr.String("__AddressLine3__"),
+			City:               ptr.String("__City__"),
+			StateOrRegion:      ptr.String("__StateOrRegion__"),
+			DistrictOrCounty:   ptr.String("__DistrictOrCounty__"),
+			PostalCode:         ptr.String("__PostalCode__"),
+			CountryCode:        ptr.String("__CountryCode__"),
+			Municipality:       ptr.String("__Municipality__"),
+		},
+		ShippingAddress: &types.Address{
+			ContactName:        ptr.String("__ContactName__"),
+			ContactPhoneNumber: ptr.String("__ContactPhoneNumber__"),
+			AddressLine1:       ptr.String("__AddressLine1__"),
+			AddressLine2:       ptr.String("__AddressLine2__"),
+			AddressLine3:       ptr.String("__AddressLine3__"),
+			City:               ptr.String("__City__"),
+			StateOrRegion:      ptr.String("__StateOrRegion__"),
+			DistrictOrCounty:   ptr.String("__DistrictOrCounty__"),
+			PostalCode:         ptr.String("__PostalCode__"),
+			CountryCode:        ptr.String("__CountryCode__"),
+			Municipality:       ptr.String("__Municipality__"),
+		},
+		RackPhysicalProperties: &types.RackPhysicalProperties{
+			PowerDrawKva:              types.PowerDrawKva("POWER_5_KVA"),
+			PowerPhase:                types.PowerPhase("SINGLE_PHASE"),
+			PowerConnector:            types.PowerConnector("L6_30P"),
+			PowerFeedDrop:             types.PowerFeedDrop("ABOVE_RACK"),
+			UplinkGbps:                types.UplinkGbps("UPLINK_1G"),
+			UplinkCount:               types.UplinkCount("UPLINK_COUNT_1"),
+			FiberOpticCableType:       types.FiberOpticCableType("SINGLE_MODE"),
+			OpticalStandard:           types.OpticalStandard("OPTIC_10GBASE_SR"),
+			MaximumSupportedWeightLbs: types.MaximumSupportedWeightLbs("NO_LIMIT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -850,7 +964,9 @@ func TestCheckResponseSnapshot_DeleteOutpost(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOutpost(context.Background(), &DeleteOutpostInput{})
+	got, err := svc.DeleteOutpost(context.Background(), &DeleteOutpostInput{
+		OutpostId: ptr.String("__OutpostId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -869,7 +985,9 @@ func TestCheckResponseSnapshot_DeleteQuote(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQuote(context.Background(), &DeleteQuoteInput{})
+	got, err := svc.DeleteQuote(context.Background(), &DeleteQuoteInput{
+		QuoteIdentifier: ptr.String("__QuoteIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -888,7 +1006,9 @@ func TestCheckResponseSnapshot_DeleteSite(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSite(context.Background(), &DeleteSiteInput{})
+	got, err := svc.DeleteSite(context.Background(), &DeleteSiteInput{
+		SiteId: ptr.String("__SiteId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -946,7 +1066,10 @@ func TestCheckResponseSnapshot_GetCapacityTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCapacityTask(context.Background(), &GetCapacityTaskInput{})
+	got, err := svc.GetCapacityTask(context.Background(), &GetCapacityTaskInput{
+		CapacityTaskId:    ptr.String("__CapacityTaskId__"),
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -992,7 +1115,9 @@ func TestCheckResponseSnapshot_GetCatalogItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCatalogItem(context.Background(), &GetCatalogItemInput{})
+	got, err := svc.GetCatalogItem(context.Background(), &GetCatalogItemInput{
+		CatalogItemId: ptr.String("__CatalogItemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1024,7 +1149,9 @@ func TestCheckResponseSnapshot_GetConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{})
+	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1114,7 +1241,9 @@ func TestCheckResponseSnapshot_GetOrder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOrder(context.Background(), &GetOrderInput{})
+	got, err := svc.GetOrder(context.Background(), &GetOrderInput{
+		OrderId: ptr.String("__OrderId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1150,7 +1279,9 @@ func TestCheckResponseSnapshot_GetOutpost(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOutpost(context.Background(), &GetOutpostInput{})
+	got, err := svc.GetOutpost(context.Background(), &GetOutpostInput{
+		OutpostId: ptr.String("__OutpostId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1204,7 +1335,11 @@ func TestCheckResponseSnapshot_GetOutpostBillingInformation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOutpostBillingInformation(context.Background(), &GetOutpostBillingInformationInput{})
+	got, err := svc.GetOutpostBillingInformation(context.Background(), &GetOutpostBillingInformationInput{
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1237,7 +1372,11 @@ func TestCheckResponseSnapshot_GetOutpostInstanceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOutpostInstanceTypes(context.Background(), &GetOutpostInstanceTypesInput{})
+	got, err := svc.GetOutpostInstanceTypes(context.Background(), &GetOutpostInstanceTypesInput{
+		OutpostId:  ptr.String("__OutpostId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1268,7 +1407,13 @@ func TestCheckResponseSnapshot_GetOutpostSupportedInstanceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOutpostSupportedInstanceTypes(context.Background(), &GetOutpostSupportedInstanceTypesInput{})
+	got, err := svc.GetOutpostSupportedInstanceTypes(context.Background(), &GetOutpostSupportedInstanceTypesInput{
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+		OrderId:           ptr.String("__OrderId__"),
+		AssetId:           ptr.String("__AssetId__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1766,7 +1911,9 @@ func TestCheckResponseSnapshot_GetQuote(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQuote(context.Background(), &GetQuoteInput{})
+	got, err := svc.GetQuote(context.Background(), &GetQuoteInput{
+		QuoteIdentifier: ptr.String("__QuoteIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1809,7 +1956,9 @@ func TestCheckResponseSnapshot_GetRenewalPricing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRenewalPricing(context.Background(), &GetRenewalPricingInput{})
+	got, err := svc.GetRenewalPricing(context.Background(), &GetRenewalPricingInput{
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1854,7 +2003,9 @@ func TestCheckResponseSnapshot_GetSite(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSite(context.Background(), &GetSiteInput{})
+	got, err := svc.GetSite(context.Background(), &GetSiteInput{
+		SiteId: ptr.String("__SiteId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1889,7 +2040,10 @@ func TestCheckResponseSnapshot_GetSiteAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSiteAddress(context.Background(), &GetSiteAddressInput{})
+	got, err := svc.GetSiteAddress(context.Background(), &GetSiteAddressInput{
+		SiteId:      ptr.String("__SiteId__"),
+		AddressType: types.AddressType("SHIPPING_ADDRESS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1926,7 +2080,27 @@ func TestCheckResponseSnapshot_ListAssetInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetInstances(context.Background(), &ListAssetInstancesInput{})
+	got, err := svc.ListAssetInstances(context.Background(), &ListAssetInstancesInput{
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+		AssetIdFilter: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceTypeFilter: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AccountIdFilter: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AwsServiceFilter: []types.AWSServiceName{
+			types.AWSServiceName("AWS"),
+			types.AWSServiceName("AWS"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2003,7 +2177,23 @@ func TestCheckResponseSnapshot_ListAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssets(context.Background(), &ListAssetsInput{})
+	got, err := svc.ListAssets(context.Background(), &ListAssetsInput{
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+		HostIdFilter: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		StatusFilter: []types.AssetState{
+			types.AssetState("ACTIVE"),
+			types.AssetState("ACTIVE"),
+		},
+		AssetTypeFilter: []types.AssetType{
+			types.AssetType("COMPUTE"),
+			types.AssetType("COMPUTE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2036,7 +2226,12 @@ func TestCheckResponseSnapshot_ListBlockingInstancesForCapacityTask(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBlockingInstancesForCapacityTask(context.Background(), &ListBlockingInstancesForCapacityTaskInput{})
+	got, err := svc.ListBlockingInstancesForCapacityTask(context.Background(), &ListBlockingInstancesForCapacityTaskInput{
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+		CapacityTaskId:    ptr.String("__CapacityTaskId__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2079,7 +2274,15 @@ func TestCheckResponseSnapshot_ListCapacityTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCapacityTasks(context.Background(), &ListCapacityTasksInput{})
+	got, err := svc.ListCapacityTasks(context.Background(), &ListCapacityTasksInput{
+		OutpostIdentifierFilter: ptr.String("__OutpostIdentifierFilter__"),
+		MaxResults:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+		CapacityTaskStatusFilter: []types.CapacityTaskStatus{
+			types.CapacityTaskStatus("REQUESTED"),
+			types.CapacityTaskStatus("REQUESTED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2154,7 +2357,22 @@ func TestCheckResponseSnapshot_ListCatalogItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCatalogItems(context.Background(), &ListCatalogItemsInput{})
+	got, err := svc.ListCatalogItems(context.Background(), &ListCatalogItemsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		ItemClassFilter: []types.CatalogItemClass{
+			types.CatalogItemClass("RACK"),
+			types.CatalogItemClass("RACK"),
+		},
+		SupportedStorageFilter: []types.SupportedStorageEnum{
+			types.SupportedStorageEnum("EBS"),
+			types.SupportedStorageEnum("EBS"),
+		},
+		EC2FamilyFilter: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2209,7 +2427,11 @@ func TestCheckResponseSnapshot_ListOrderableInstanceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrderableInstanceTypes(context.Background(), &ListOrderableInstanceTypesInput{})
+	got, err := svc.ListOrderableInstanceTypes(context.Background(), &ListOrderableInstanceTypesInput{
+		OutpostGenerationFilter: types.OutpostGeneration("GENERATION_2"),
+		MaxResults:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2254,7 +2476,11 @@ func TestCheckResponseSnapshot_ListOrders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrders(context.Background(), &ListOrdersInput{})
+	got, err := svc.ListOrders(context.Background(), &ListOrdersInput{
+		OutpostIdentifierFilter: ptr.String("__OutpostIdentifierFilter__"),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2309,7 +2535,22 @@ func TestCheckResponseSnapshot_ListOutposts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOutposts(context.Background(), &ListOutpostsInput{})
+	got, err := svc.ListOutposts(context.Background(), &ListOutpostsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		LifeCycleStatusFilter: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneFilter: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneIdFilter: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3264,7 +3505,10 @@ func TestCheckResponseSnapshot_ListQuotes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQuotes(context.Background(), &ListQuotesInput{})
+	got, err := svc.ListQuotes(context.Background(), &ListQuotesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3337,7 +3581,22 @@ func TestCheckResponseSnapshot_ListSites(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSites(context.Background(), &ListSitesInput{})
+	got, err := svc.ListSites(context.Background(), &ListSitesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		OperatingAddressCountryCodeFilter: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OperatingAddressStateOrRegionFilter: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OperatingAddressCityFilter: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3360,7 +3619,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3418,7 +3679,37 @@ func TestCheckResponseSnapshot_StartCapacityTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCapacityTask(context.Background(), &StartCapacityTaskInput{})
+	got, err := svc.StartCapacityTask(context.Background(), &StartCapacityTaskInput{
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+		OrderId:           ptr.String("__OrderId__"),
+		AssetId:           ptr.String("__AssetId__"),
+		InstancePools: []types.InstanceTypeCapacity{
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+				Count:        1,
+			},
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+				Count:        1,
+			},
+		},
+		InstancesToExclude: &types.InstancesToExclude{
+			Instances: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Services: []types.AWSServiceName{
+				types.AWSServiceName("AWS"),
+				types.AWSServiceName("AWS"),
+			},
+		},
+		DryRun:                        true,
+		TaskActionOnBlockingInstances: types.TaskActionOnBlockingInstances("WAIT_FOR_EVACUATION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3440,7 +3731,12 @@ func TestCheckResponseSnapshot_StartConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartConnection(context.Background(), &StartConnectionInput{})
+	got, err := svc.StartConnection(context.Background(), &StartConnectionInput{
+		DeviceSerialNumber:          ptr.String("__DeviceSerialNumber__"),
+		AssetId:                     ptr.String("__AssetId__"),
+		ClientPublicKey:             ptr.String("__ClientPublicKey__"),
+		NetworkInterfaceDeviceIndex: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3465,7 +3761,10 @@ func TestCheckResponseSnapshot_StartOutpostDecommission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartOutpostDecommission(context.Background(), &StartOutpostDecommissionInput{})
+	got, err := svc.StartOutpostDecommission(context.Background(), &StartOutpostDecommissionInput{
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+		ValidateOnly:      true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3484,7 +3783,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3503,7 +3807,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3539,7 +3849,12 @@ func TestCheckResponseSnapshot_UpdateOutpost(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOutpost(context.Background(), &UpdateOutpostInput{})
+	got, err := svc.UpdateOutpost(context.Background(), &UpdateOutpostInput{
+		OutpostId:             ptr.String("__OutpostId__"),
+		Name:                  ptr.String("__Name__"),
+		Description:           ptr.String("__Description__"),
+		SupportedHardwareType: types.SupportedHardwareType("RACK"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4037,7 +4352,42 @@ func TestCheckResponseSnapshot_UpdateQuote(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQuote(context.Background(), &UpdateQuoteInput{})
+	got, err := svc.UpdateQuote(context.Background(), &UpdateQuoteInput{
+		QuoteIdentifier:   ptr.String("__QuoteIdentifier__"),
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+		CountryCode:       ptr.String("__CountryCode__"),
+		RequestedCapacities: []types.QuoteCapacity{
+			{
+				QuoteCapacityType: types.QuoteCapacityType("EC2"),
+				Unit:              ptr.String("__Unit__"),
+				Quantity:          ptr.Float32(1.0),
+			},
+			{
+				QuoteCapacityType: types.QuoteCapacityType("EC2"),
+				Unit:              ptr.String("__Unit__"),
+				Quantity:          ptr.Float32(1.0),
+			},
+		},
+		RequestedConstraints: []types.QuoteConstraint{
+			{
+				QuoteConstraintType: types.QuoteConstraintType("RACK_MAXIMUM"),
+				Value:               ptr.String("__Value__"),
+			},
+			{
+				QuoteConstraintType: types.QuoteConstraintType("RACK_MAXIMUM"),
+				Value:               ptr.String("__Value__"),
+			},
+		},
+		RequestedPaymentOptions: []types.PaymentOption{
+			types.PaymentOption("ALL_UPFRONT"),
+			types.PaymentOption("ALL_UPFRONT"),
+		},
+		RequestedPaymentTerms: []types.PaymentTerm{
+			types.PaymentTerm("THREE_YEARS"),
+			types.PaymentTerm("THREE_YEARS"),
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4082,7 +4432,12 @@ func TestCheckResponseSnapshot_UpdateSite(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSite(context.Background(), &UpdateSiteInput{})
+	got, err := svc.UpdateSite(context.Background(), &UpdateSiteInput{
+		SiteId:      ptr.String("__SiteId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Notes:       ptr.String("__Notes__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4116,7 +4471,23 @@ func TestCheckResponseSnapshot_UpdateSiteAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSiteAddress(context.Background(), &UpdateSiteAddressInput{})
+	got, err := svc.UpdateSiteAddress(context.Background(), &UpdateSiteAddressInput{
+		SiteId:      ptr.String("__SiteId__"),
+		AddressType: types.AddressType("SHIPPING_ADDRESS"),
+		Address: &types.Address{
+			ContactName:        ptr.String("__ContactName__"),
+			ContactPhoneNumber: ptr.String("__ContactPhoneNumber__"),
+			AddressLine1:       ptr.String("__AddressLine1__"),
+			AddressLine2:       ptr.String("__AddressLine2__"),
+			AddressLine3:       ptr.String("__AddressLine3__"),
+			City:               ptr.String("__City__"),
+			StateOrRegion:      ptr.String("__StateOrRegion__"),
+			DistrictOrCounty:   ptr.String("__DistrictOrCounty__"),
+			PostalCode:         ptr.String("__PostalCode__"),
+			CountryCode:        ptr.String("__CountryCode__"),
+			Municipality:       ptr.String("__Municipality__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4161,7 +4532,18 @@ func TestCheckResponseSnapshot_UpdateSiteRackPhysicalProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSiteRackPhysicalProperties(context.Background(), &UpdateSiteRackPhysicalPropertiesInput{})
+	got, err := svc.UpdateSiteRackPhysicalProperties(context.Background(), &UpdateSiteRackPhysicalPropertiesInput{
+		SiteId:                    ptr.String("__SiteId__"),
+		PowerDrawKva:              types.PowerDrawKva("POWER_5_KVA"),
+		PowerPhase:                types.PowerPhase("SINGLE_PHASE"),
+		PowerConnector:            types.PowerConnector("L6_30P"),
+		PowerFeedDrop:             types.PowerFeedDrop("ABOVE_RACK"),
+		UplinkGbps:                types.UplinkGbps("UPLINK_1G"),
+		UplinkCount:               types.UplinkCount("UPLINK_COUNT_1"),
+		FiberOpticCableType:       types.FiberOpticCableType("SINGLE_MODE"),
+		OpticalStandard:           types.OpticalStandard("OPTIC_10GBASE_SR"),
+		MaximumSupportedWeightLbs: types.MaximumSupportedWeightLbs("NO_LIMIT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4182,7 +4564,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelCapacityTask(context.Background(), &CancelCapacityTaskInput{})
+	_, opErr := svc.CancelCapacityTask(context.Background(), &CancelCapacityTaskInput{
+		CapacityTaskId:    ptr.String("__CapacityTaskId__"),
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4209,7 +4594,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelCapacityTask(context.Background(), &CancelCapacityTaskInput{})
+	_, opErr := svc.CancelCapacityTask(context.Background(), &CancelCapacityTaskInput{
+		CapacityTaskId:    ptr.String("__CapacityTaskId__"),
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4234,7 +4622,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelCapacityTask(context.Background(), &CancelCapacityTaskInput{})
+	_, opErr := svc.CancelCapacityTask(context.Background(), &CancelCapacityTaskInput{
+		CapacityTaskId:    ptr.String("__CapacityTaskId__"),
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4259,7 +4650,10 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelCapacityTask(context.Background(), &CancelCapacityTaskInput{})
+	_, opErr := svc.CancelCapacityTask(context.Background(), &CancelCapacityTaskInput{
+		CapacityTaskId:    ptr.String("__CapacityTaskId__"),
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4284,7 +4678,23 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOrder(context.Background(), &CreateOrderInput{})
+	_, opErr := svc.CreateOrder(context.Background(), &CreateOrderInput{
+		OutpostIdentifier:     ptr.String("__OutpostIdentifier__"),
+		QuoteIdentifier:       ptr.String("__QuoteIdentifier__"),
+		QuoteOptionIdentifier: ptr.String("__QuoteOptionIdentifier__"),
+		LineItems: []types.LineItemRequest{
+			{
+				CatalogItemId: ptr.String("__CatalogItemId__"),
+				Quantity:      ptr.Int32(1),
+			},
+			{
+				CatalogItemId: ptr.String("__CatalogItemId__"),
+				Quantity:      ptr.Int32(1),
+			},
+		},
+		PaymentOption: types.PaymentOption("ALL_UPFRONT"),
+		PaymentTerm:   types.PaymentTerm("THREE_YEARS"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4309,7 +4719,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelCapacityTask(context.Background(), &CancelCapacityTaskInput{})
+	_, opErr := svc.CancelCapacityTask(context.Background(), &CancelCapacityTaskInput{
+		CapacityTaskId:    ptr.String("__CapacityTaskId__"),
+		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

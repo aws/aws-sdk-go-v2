@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.DescribeDaemon
+
+{"daemon":{"clusterArn":"__ClusterArn__","createdAt":946684800,"currentRevisions":[{"arn":"__Arn__","capacityProviders":[{"arn":"__Arn__","runningCount":1},{"arn":"__Arn__","runningCount":1}],"totalRunningCount":1},{"arn":"__Arn__","capacityProviders":[{"arn":"__Arn__","runningCount":1},{"arn":"__Arn__","runningCount":1}],"totalRunningCount":1}],"daemonArn":"__DaemonArn__","deploymentArn":"__DeploymentArn__","status":"ACTIVE","updatedAt":946684800}}

@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -118,7 +119,16 @@ func TestCheckResponseSnapshot_CreateSavingsPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSavingsPlan(context.Background(), &CreateSavingsPlanInput{})
+	got, err := svc.CreateSavingsPlan(context.Background(), &CreateSavingsPlanInput{
+		SavingsPlanOfferingId: ptr.String("__SavingsPlanOfferingId__"),
+		Commitment:            ptr.String("__Commitment__"),
+		UpfrontPaymentAmount:  ptr.String("__UpfrontPaymentAmount__"),
+		PurchaseTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -137,7 +147,9 @@ func TestCheckResponseSnapshot_DeleteQueuedSavingsPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQueuedSavingsPlan(context.Background(), &DeleteQueuedSavingsPlanInput{})
+	got, err := svc.DeleteQueuedSavingsPlan(context.Background(), &DeleteQueuedSavingsPlanInput{
+		SavingsPlanId: ptr.String("__SavingsPlanId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -199,7 +211,27 @@ func TestCheckResponseSnapshot_DescribeSavingsPlanRates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSavingsPlanRates(context.Background(), &DescribeSavingsPlanRatesInput{})
+	got, err := svc.DescribeSavingsPlanRates(context.Background(), &DescribeSavingsPlanRatesInput{
+		SavingsPlanId: ptr.String("__SavingsPlanId__"),
+		Filters: []types.SavingsPlanRateFilter{
+			{
+				Name: types.SavingsPlanRateFilterName("region"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SavingsPlanRateFilterName("region"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +306,38 @@ func TestCheckResponseSnapshot_DescribeSavingsPlans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSavingsPlans(context.Background(), &DescribeSavingsPlansInput{})
+	got, err := svc.DescribeSavingsPlans(context.Background(), &DescribeSavingsPlansInput{
+		SavingsPlanArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SavingsPlanIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		States: []types.SavingsPlanState{
+			types.SavingsPlanState("payment-pending"),
+			types.SavingsPlanState("payment-pending"),
+		},
+		Filters: []types.SavingsPlanFilter{
+			{
+				Name: types.SavingsPlansFilterName("region"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SavingsPlansFilterName("region"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -349,7 +412,54 @@ func TestCheckResponseSnapshot_DescribeSavingsPlansOfferingRates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSavingsPlansOfferingRates(context.Background(), &DescribeSavingsPlansOfferingRatesInput{})
+	got, err := svc.DescribeSavingsPlansOfferingRates(context.Background(), &DescribeSavingsPlansOfferingRatesInput{
+		SavingsPlanOfferingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SavingsPlanPaymentOptions: []types.SavingsPlanPaymentOption{
+			types.SavingsPlanPaymentOption("All Upfront"),
+			types.SavingsPlanPaymentOption("All Upfront"),
+		},
+		SavingsPlanTypes: []types.SavingsPlanType{
+			types.SavingsPlanType("Compute"),
+			types.SavingsPlanType("Compute"),
+		},
+		Products: []types.SavingsPlanProductType{
+			types.SavingsPlanProductType("EC2"),
+			types.SavingsPlanProductType("EC2"),
+		},
+		ServiceCodes: []types.SavingsPlanRateServiceCode{
+			types.SavingsPlanRateServiceCode("AmazonEC2"),
+			types.SavingsPlanRateServiceCode("AmazonEC2"),
+		},
+		UsageTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Operations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.SavingsPlanOfferingRateFilterElement{
+			{
+				Name: types.SavingsPlanRateFilterAttribute("region"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SavingsPlanRateFilterAttribute("region"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -422,7 +532,63 @@ func TestCheckResponseSnapshot_DescribeSavingsPlansOfferings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSavingsPlansOfferings(context.Background(), &DescribeSavingsPlansOfferingsInput{})
+	got, err := svc.DescribeSavingsPlansOfferings(context.Background(), &DescribeSavingsPlansOfferingsInput{
+		OfferingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PaymentOptions: []types.SavingsPlanPaymentOption{
+			types.SavingsPlanPaymentOption("All Upfront"),
+			types.SavingsPlanPaymentOption("All Upfront"),
+		},
+		ProductType: types.SavingsPlanProductType("EC2"),
+		PlanTypes: []types.SavingsPlanType{
+			types.SavingsPlanType("Compute"),
+			types.SavingsPlanType("Compute"),
+		},
+		Durations: []int64{
+			1,
+			1,
+		},
+		Currencies: []types.CurrencyCode{
+			types.CurrencyCode("CNY"),
+			types.CurrencyCode("CNY"),
+		},
+		Descriptions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceCodes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UsageTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Operations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.SavingsPlanOfferingFilterElement{
+			{
+				Name: types.SavingsPlanOfferingFilterAttribute("region"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SavingsPlanOfferingFilterAttribute("region"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -445,7 +611,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -466,7 +634,10 @@ func TestCheckResponseSnapshot_ReturnSavingsPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReturnSavingsPlan(context.Background(), &ReturnSavingsPlanInput{})
+	got, err := svc.ReturnSavingsPlan(context.Background(), &ReturnSavingsPlanInput{
+		SavingsPlanId: ptr.String("__SavingsPlanId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -485,7 +656,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -504,7 +680,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -525,7 +707,16 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSavingsPlan(context.Background(), &CreateSavingsPlanInput{})
+	_, opErr := svc.CreateSavingsPlan(context.Background(), &CreateSavingsPlanInput{
+		SavingsPlanOfferingId: ptr.String("__SavingsPlanOfferingId__"),
+		Commitment:            ptr.String("__Commitment__"),
+		UpfrontPaymentAmount:  ptr.String("__UpfrontPaymentAmount__"),
+		PurchaseTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -550,7 +741,16 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSavingsPlan(context.Background(), &CreateSavingsPlanInput{})
+	_, opErr := svc.CreateSavingsPlan(context.Background(), &CreateSavingsPlanInput{
+		SavingsPlanOfferingId: ptr.String("__SavingsPlanOfferingId__"),
+		Commitment:            ptr.String("__Commitment__"),
+		UpfrontPaymentAmount:  ptr.String("__UpfrontPaymentAmount__"),
+		PurchaseTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -575,7 +775,16 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSavingsPlan(context.Background(), &CreateSavingsPlanInput{})
+	_, opErr := svc.CreateSavingsPlan(context.Background(), &CreateSavingsPlanInput{
+		SavingsPlanOfferingId: ptr.String("__SavingsPlanOfferingId__"),
+		Commitment:            ptr.String("__Commitment__"),
+		UpfrontPaymentAmount:  ptr.String("__UpfrontPaymentAmount__"),
+		PurchaseTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -600,7 +809,16 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSavingsPlan(context.Background(), &CreateSavingsPlanInput{})
+	_, opErr := svc.CreateSavingsPlan(context.Background(), &CreateSavingsPlanInput{
+		SavingsPlanOfferingId: ptr.String("__SavingsPlanOfferingId__"),
+		Commitment:            ptr.String("__Commitment__"),
+		UpfrontPaymentAmount:  ptr.String("__UpfrontPaymentAmount__"),
+		PurchaseTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

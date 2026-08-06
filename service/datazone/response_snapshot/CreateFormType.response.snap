@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"description":"__Description__","domainId":"__DomainId__","name":"__Name__","originDomainId":"__OriginDomainId__","originProjectId":"__OriginProjectId__","owningProjectId":"__OwningProjectId__","revision":"__Revision__"}

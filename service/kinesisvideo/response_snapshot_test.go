@@ -119,7 +119,23 @@ func TestCheckResponseSnapshot_CreateSignalingChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{})
+	got, err := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ChannelType: types.ChannelType("SINGLE_MASTER"),
+		SingleMasterConfiguration: &types.SingleMasterConfiguration{
+			MessageTtlSeconds: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +156,19 @@ func TestCheckResponseSnapshot_CreateStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStream(context.Background(), &CreateStreamInput{})
+	got, err := svc.CreateStream(context.Background(), &CreateStreamInput{
+		DeviceName:           ptr.String("__DeviceName__"),
+		StreamName:           ptr.String("__StreamName__"),
+		MediaType:            ptr.String("__MediaType__"),
+		KmsKeyId:             ptr.String("__KmsKeyId__"),
+		DataRetentionInHours: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		StreamStorageConfiguration: &types.StreamStorageConfiguration{
+			DefaultStorageTier: types.DefaultStorageTier("HOT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +187,10 @@ func TestCheckResponseSnapshot_DeleteEdgeConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEdgeConfiguration(context.Background(), &DeleteEdgeConfigurationInput{})
+	got, err := svc.DeleteEdgeConfiguration(context.Background(), &DeleteEdgeConfigurationInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +209,10 @@ func TestCheckResponseSnapshot_DeleteSignalingChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSignalingChannel(context.Background(), &DeleteSignalingChannelInput{})
+	got, err := svc.DeleteSignalingChannel(context.Background(), &DeleteSignalingChannelInput{
+		ChannelARN:     ptr.String("__ChannelARN__"),
+		CurrentVersion: ptr.String("__CurrentVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -197,7 +231,10 @@ func TestCheckResponseSnapshot_DeleteStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStream(context.Background(), &DeleteStreamInput{})
+	got, err := svc.DeleteStream(context.Background(), &DeleteStreamInput{
+		StreamARN:      ptr.String("__StreamARN__"),
+		CurrentVersion: ptr.String("__CurrentVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +301,10 @@ func TestCheckResponseSnapshot_DescribeEdgeConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEdgeConfiguration(context.Background(), &DescribeEdgeConfigurationInput{})
+	got, err := svc.DescribeEdgeConfiguration(context.Background(), &DescribeEdgeConfigurationInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +339,10 @@ func TestCheckResponseSnapshot_DescribeImageGenerationConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeImageGenerationConfiguration(context.Background(), &DescribeImageGenerationConfigurationInput{})
+	got, err := svc.DescribeImageGenerationConfiguration(context.Background(), &DescribeImageGenerationConfigurationInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -330,7 +373,12 @@ func TestCheckResponseSnapshot_DescribeMappedResourceConfiguration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMappedResourceConfiguration(context.Background(), &DescribeMappedResourceConfigurationInput{})
+	got, err := svc.DescribeMappedResourceConfiguration(context.Background(), &DescribeMappedResourceConfigurationInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -354,7 +402,10 @@ func TestCheckResponseSnapshot_DescribeMediaStorageConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMediaStorageConfiguration(context.Background(), &DescribeMediaStorageConfigurationInput{})
+	got, err := svc.DescribeMediaStorageConfiguration(context.Background(), &DescribeMediaStorageConfigurationInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ChannelARN:  ptr.String("__ChannelARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -380,7 +431,10 @@ func TestCheckResponseSnapshot_DescribeNotificationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeNotificationConfiguration(context.Background(), &DescribeNotificationConfigurationInput{})
+	got, err := svc.DescribeNotificationConfiguration(context.Background(), &DescribeNotificationConfigurationInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -411,7 +465,10 @@ func TestCheckResponseSnapshot_DescribeSignalingChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSignalingChannel(context.Background(), &DescribeSignalingChannelInput{})
+	got, err := svc.DescribeSignalingChannel(context.Background(), &DescribeSignalingChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ChannelARN:  ptr.String("__ChannelARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -442,7 +499,10 @@ func TestCheckResponseSnapshot_DescribeStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStream(context.Background(), &DescribeStreamInput{})
+	got, err := svc.DescribeStream(context.Background(), &DescribeStreamInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -467,7 +527,10 @@ func TestCheckResponseSnapshot_DescribeStreamStorageConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStreamStorageConfiguration(context.Background(), &DescribeStreamStorageConfigurationInput{})
+	got, err := svc.DescribeStreamStorageConfiguration(context.Background(), &DescribeStreamStorageConfigurationInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -488,7 +551,11 @@ func TestCheckResponseSnapshot_GetDataEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataEndpoint(context.Background(), &GetDataEndpointInput{})
+	got, err := svc.GetDataEndpoint(context.Background(), &GetDataEndpointInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		APIName:    types.APIName("PUT_MEDIA"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -518,7 +585,16 @@ func TestCheckResponseSnapshot_GetSignalingChannelEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSignalingChannelEndpoint(context.Background(), &GetSignalingChannelEndpointInput{})
+	got, err := svc.GetSignalingChannelEndpoint(context.Background(), &GetSignalingChannelEndpointInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+		SingleMasterChannelEndpointConfiguration: &types.SingleMasterChannelEndpointConfiguration{
+			Protocols: []types.ChannelProtocol{
+				types.ChannelProtocol("WSS"),
+				types.ChannelProtocol("WSS"),
+			},
+			Role: types.ChannelRole("MASTER"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -611,7 +687,11 @@ func TestCheckResponseSnapshot_ListEdgeAgentConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEdgeAgentConfigurations(context.Background(), &ListEdgeAgentConfigurationsInput{})
+	got, err := svc.ListEdgeAgentConfigurations(context.Background(), &ListEdgeAgentConfigurationsInput{
+		HubDeviceArn: ptr.String("__HubDeviceArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -656,7 +736,14 @@ func TestCheckResponseSnapshot_ListSignalingChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSignalingChannels(context.Background(), &ListSignalingChannelsInput{})
+	got, err := svc.ListSignalingChannels(context.Background(), &ListSignalingChannelsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		ChannelNameCondition: &types.ChannelNameCondition{
+			ComparisonOperator: types.ComparisonOperator("BEGINS_WITH"),
+			ComparisonValue:    ptr.String("__ComparisonValue__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -701,7 +788,14 @@ func TestCheckResponseSnapshot_ListStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreams(context.Background(), &ListStreamsInput{})
+	got, err := svc.ListStreams(context.Background(), &ListStreamsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		StreamNameCondition: &types.StreamNameCondition{
+			ComparisonOperator: types.ComparisonOperator("BEGINS_WITH"),
+			ComparisonValue:    ptr.String("__ComparisonValue__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -725,7 +819,10 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		NextToken:   ptr.String("__NextToken__"),
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -749,7 +846,11 @@ func TestCheckResponseSnapshot_ListTagsForStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForStream(context.Background(), &ListTagsForStreamInput{})
+	got, err := svc.ListTagsForStream(context.Background(), &ListTagsForStreamInput{
+		NextToken:  ptr.String("__NextToken__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		StreamName: ptr.String("__StreamName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -802,7 +903,37 @@ func TestCheckResponseSnapshot_StartEdgeConfigurationUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartEdgeConfigurationUpdate(context.Background(), &StartEdgeConfigurationUpdateInput{})
+	got, err := svc.StartEdgeConfigurationUpdate(context.Background(), &StartEdgeConfigurationUpdateInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		EdgeConfig: &types.EdgeConfig{
+			HubDeviceArn: ptr.String("__HubDeviceArn__"),
+			RecorderConfig: &types.RecorderConfig{
+				MediaSourceConfig: &types.MediaSourceConfig{
+					MediaUriSecretArn: ptr.String("__MediaUriSecretArn__"),
+					MediaUriType:      types.MediaUriType("RTSP_URI"),
+				},
+				ScheduleConfig: &types.ScheduleConfig{
+					ScheduleExpression: ptr.String("__ScheduleExpression__"),
+					DurationInSeconds:  ptr.Int32(1),
+				},
+			},
+			UploaderConfig: &types.UploaderConfig{
+				ScheduleConfig: &types.ScheduleConfig{
+					ScheduleExpression: ptr.String("__ScheduleExpression__"),
+					DurationInSeconds:  ptr.Int32(1),
+				},
+			},
+			DeletionConfig: &types.DeletionConfig{
+				EdgeRetentionInHours: ptr.Int32(1),
+				LocalSizeConfig: &types.LocalSizeConfig{
+					MaxLocalMediaSizeInMB: ptr.Int32(1),
+					StrategyOnFullSize:    types.StrategyOnFullSize("DELETE_OLDEST_MEDIA"),
+				},
+				DeleteAfterUpload: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -821,7 +952,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -840,7 +983,13 @@ func TestCheckResponseSnapshot_TagStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagStream(context.Background(), &TagStreamInput{})
+	got, err := svc.TagStream(context.Background(), &TagStreamInput{
+		StreamARN:  ptr.String("__StreamARN__"),
+		StreamName: ptr.String("__StreamName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -859,7 +1008,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeyList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -878,7 +1033,14 @@ func TestCheckResponseSnapshot_UntagStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagStream(context.Background(), &UntagStreamInput{})
+	got, err := svc.UntagStream(context.Background(), &UntagStreamInput{
+		StreamARN:  ptr.String("__StreamARN__"),
+		StreamName: ptr.String("__StreamName__"),
+		TagKeyList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -897,7 +1059,13 @@ func TestCheckResponseSnapshot_UpdateDataRetention(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataRetention(context.Background(), &UpdateDataRetentionInput{})
+	got, err := svc.UpdateDataRetention(context.Background(), &UpdateDataRetentionInput{
+		StreamName:                 ptr.String("__StreamName__"),
+		StreamARN:                  ptr.String("__StreamARN__"),
+		CurrentVersion:             ptr.String("__CurrentVersion__"),
+		Operation:                  types.UpdateDataRetentionOperation("INCREASE_DATA_RETENTION"),
+		DataRetentionChangeInHours: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -916,7 +1084,25 @@ func TestCheckResponseSnapshot_UpdateImageGenerationConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateImageGenerationConfiguration(context.Background(), &UpdateImageGenerationConfigurationInput{})
+	got, err := svc.UpdateImageGenerationConfiguration(context.Background(), &UpdateImageGenerationConfigurationInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		ImageGenerationConfiguration: &types.ImageGenerationConfiguration{
+			Status:            types.ConfigurationStatus("ENABLED"),
+			ImageSelectorType: types.ImageSelectorType("SERVER_TIMESTAMP"),
+			DestinationConfig: &types.ImageGenerationDestinationConfig{
+				Uri:               ptr.String("__Uri__"),
+				DestinationRegion: ptr.String("__DestinationRegion__"),
+			},
+			SamplingInterval: ptr.Int32(1),
+			Format:           types.Format("JPEG"),
+			FormatConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			WidthPixels:  ptr.Int32(1),
+			HeightPixels: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -935,7 +1121,13 @@ func TestCheckResponseSnapshot_UpdateMediaStorageConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMediaStorageConfiguration(context.Background(), &UpdateMediaStorageConfigurationInput{})
+	got, err := svc.UpdateMediaStorageConfiguration(context.Background(), &UpdateMediaStorageConfigurationInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+		MediaStorageConfiguration: &types.MediaStorageConfiguration{
+			StreamARN: ptr.String("__StreamARN__"),
+			Status:    types.MediaStorageConfigurationStatus("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -954,7 +1146,16 @@ func TestCheckResponseSnapshot_UpdateNotificationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNotificationConfiguration(context.Background(), &UpdateNotificationConfigurationInput{})
+	got, err := svc.UpdateNotificationConfiguration(context.Background(), &UpdateNotificationConfigurationInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		NotificationConfiguration: &types.NotificationConfiguration{
+			Status: types.ConfigurationStatus("ENABLED"),
+			DestinationConfig: &types.NotificationDestinationConfig{
+				Uri: ptr.String("__Uri__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -973,7 +1174,13 @@ func TestCheckResponseSnapshot_UpdateSignalingChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSignalingChannel(context.Background(), &UpdateSignalingChannelInput{})
+	got, err := svc.UpdateSignalingChannel(context.Background(), &UpdateSignalingChannelInput{
+		ChannelARN:     ptr.String("__ChannelARN__"),
+		CurrentVersion: ptr.String("__CurrentVersion__"),
+		SingleMasterConfiguration: &types.SingleMasterConfiguration{
+			MessageTtlSeconds: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -992,7 +1199,13 @@ func TestCheckResponseSnapshot_UpdateStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStream(context.Background(), &UpdateStreamInput{})
+	got, err := svc.UpdateStream(context.Background(), &UpdateStreamInput{
+		StreamName:     ptr.String("__StreamName__"),
+		StreamARN:      ptr.String("__StreamARN__"),
+		CurrentVersion: ptr.String("__CurrentVersion__"),
+		DeviceName:     ptr.String("__DeviceName__"),
+		MediaType:      ptr.String("__MediaType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1011,7 +1224,14 @@ func TestCheckResponseSnapshot_UpdateStreamStorageConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStreamStorageConfiguration(context.Background(), &UpdateStreamStorageConfigurationInput{})
+	got, err := svc.UpdateStreamStorageConfiguration(context.Background(), &UpdateStreamStorageConfigurationInput{
+		StreamName:     ptr.String("__StreamName__"),
+		StreamARN:      ptr.String("__StreamARN__"),
+		CurrentVersion: ptr.String("__CurrentVersion__"),
+		StreamStorageConfiguration: &types.StreamStorageConfiguration{
+			DefaultStorageTier: types.DefaultStorageTier("HOT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1032,7 +1252,23 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{})
+	_, opErr := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ChannelType: types.ChannelType("SINGLE_MASTER"),
+		SingleMasterConfiguration: &types.SingleMasterConfiguration{
+			MessageTtlSeconds: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1057,7 +1293,23 @@ func TestCheckResponseSnapshot_Error_AccountChannelLimitExceededException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{})
+	_, opErr := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ChannelType: types.ChannelType("SINGLE_MASTER"),
+		SingleMasterConfiguration: &types.SingleMasterConfiguration{
+			MessageTtlSeconds: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1082,7 +1334,19 @@ func TestCheckResponseSnapshot_Error_AccountStreamLimitExceededException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStream(context.Background(), &CreateStreamInput{})
+	_, opErr := svc.CreateStream(context.Background(), &CreateStreamInput{
+		DeviceName:           ptr.String("__DeviceName__"),
+		StreamName:           ptr.String("__StreamName__"),
+		MediaType:            ptr.String("__MediaType__"),
+		KmsKeyId:             ptr.String("__KmsKeyId__"),
+		DataRetentionInHours: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		StreamStorageConfiguration: &types.StreamStorageConfiguration{
+			DefaultStorageTier: types.DefaultStorageTier("HOT"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1107,7 +1371,23 @@ func TestCheckResponseSnapshot_Error_ClientLimitExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{})
+	_, opErr := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ChannelType: types.ChannelType("SINGLE_MASTER"),
+		SingleMasterConfiguration: &types.SingleMasterConfiguration{
+			MessageTtlSeconds: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1132,7 +1412,19 @@ func TestCheckResponseSnapshot_Error_DeviceStreamLimitExceededException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStream(context.Background(), &CreateStreamInput{})
+	_, opErr := svc.CreateStream(context.Background(), &CreateStreamInput{
+		DeviceName:           ptr.String("__DeviceName__"),
+		StreamName:           ptr.String("__StreamName__"),
+		MediaType:            ptr.String("__MediaType__"),
+		KmsKeyId:             ptr.String("__KmsKeyId__"),
+		DataRetentionInHours: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		StreamStorageConfiguration: &types.StreamStorageConfiguration{
+			DefaultStorageTier: types.DefaultStorageTier("HOT"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1157,7 +1449,23 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{})
+	_, opErr := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ChannelType: types.ChannelType("SINGLE_MASTER"),
+		SingleMasterConfiguration: &types.SingleMasterConfiguration{
+			MessageTtlSeconds: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1182,7 +1490,19 @@ func TestCheckResponseSnapshot_Error_InvalidDeviceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStream(context.Background(), &CreateStreamInput{})
+	_, opErr := svc.CreateStream(context.Background(), &CreateStreamInput{
+		DeviceName:           ptr.String("__DeviceName__"),
+		StreamName:           ptr.String("__StreamName__"),
+		MediaType:            ptr.String("__MediaType__"),
+		KmsKeyId:             ptr.String("__KmsKeyId__"),
+		DataRetentionInHours: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		StreamStorageConfiguration: &types.StreamStorageConfiguration{
+			DefaultStorageTier: types.DefaultStorageTier("HOT"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1207,7 +1527,11 @@ func TestCheckResponseSnapshot_Error_InvalidResourceFormatException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForStream(context.Background(), &ListTagsForStreamInput{})
+	_, opErr := svc.ListTagsForStream(context.Background(), &ListTagsForStreamInput{
+		NextToken:  ptr.String("__NextToken__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		StreamName: ptr.String("__StreamName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1232,7 +1556,37 @@ func TestCheckResponseSnapshot_Error_NoDataRetentionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartEdgeConfigurationUpdate(context.Background(), &StartEdgeConfigurationUpdateInput{})
+	_, opErr := svc.StartEdgeConfigurationUpdate(context.Background(), &StartEdgeConfigurationUpdateInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		EdgeConfig: &types.EdgeConfig{
+			HubDeviceArn: ptr.String("__HubDeviceArn__"),
+			RecorderConfig: &types.RecorderConfig{
+				MediaSourceConfig: &types.MediaSourceConfig{
+					MediaUriSecretArn: ptr.String("__MediaUriSecretArn__"),
+					MediaUriType:      types.MediaUriType("RTSP_URI"),
+				},
+				ScheduleConfig: &types.ScheduleConfig{
+					ScheduleExpression: ptr.String("__ScheduleExpression__"),
+					DurationInSeconds:  ptr.Int32(1),
+				},
+			},
+			UploaderConfig: &types.UploaderConfig{
+				ScheduleConfig: &types.ScheduleConfig{
+					ScheduleExpression: ptr.String("__ScheduleExpression__"),
+					DurationInSeconds:  ptr.Int32(1),
+				},
+			},
+			DeletionConfig: &types.DeletionConfig{
+				EdgeRetentionInHours: ptr.Int32(1),
+				LocalSizeConfig: &types.LocalSizeConfig{
+					MaxLocalMediaSizeInMB: ptr.Int32(1),
+					StrategyOnFullSize:    types.StrategyOnFullSize("DELETE_OLDEST_MEDIA"),
+				},
+				DeleteAfterUpload: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1257,7 +1611,10 @@ func TestCheckResponseSnapshot_Error_NotAuthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteStream(context.Background(), &DeleteStreamInput{})
+	_, opErr := svc.DeleteStream(context.Background(), &DeleteStreamInput{
+		StreamARN:      ptr.String("__StreamARN__"),
+		CurrentVersion: ptr.String("__CurrentVersion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1282,7 +1639,23 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{})
+	_, opErr := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ChannelType: types.ChannelType("SINGLE_MASTER"),
+		SingleMasterConfiguration: &types.SingleMasterConfiguration{
+			MessageTtlSeconds: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1307,7 +1680,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEdgeConfiguration(context.Background(), &DeleteEdgeConfigurationInput{})
+	_, opErr := svc.DeleteEdgeConfiguration(context.Background(), &DeleteEdgeConfigurationInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1332,7 +1708,10 @@ func TestCheckResponseSnapshot_Error_StreamEdgeConfigurationNotFoundException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEdgeConfiguration(context.Background(), &DeleteEdgeConfigurationInput{})
+	_, opErr := svc.DeleteEdgeConfiguration(context.Background(), &DeleteEdgeConfigurationInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1357,7 +1736,23 @@ func TestCheckResponseSnapshot_Error_TagsPerResourceExceededLimitException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{})
+	_, opErr := svc.CreateSignalingChannel(context.Background(), &CreateSignalingChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ChannelType: types.ChannelType("SINGLE_MASTER"),
+		SingleMasterConfiguration: &types.SingleMasterConfiguration{
+			MessageTtlSeconds: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1382,7 +1777,10 @@ func TestCheckResponseSnapshot_Error_VersionMismatchException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSignalingChannel(context.Background(), &DeleteSignalingChannelInput{})
+	_, opErr := svc.DeleteSignalingChannel(context.Background(), &DeleteSignalingChannelInput{
+		ChannelARN:     ptr.String("__ChannelARN__"),
+		CurrentVersion: ptr.String("__CurrentVersion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

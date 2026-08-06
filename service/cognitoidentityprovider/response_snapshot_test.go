@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/document"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -117,7 +118,41 @@ func TestCheckResponseSnapshot_AddCustomAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{})
+	got, err := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		CustomAttributes: []types.SchemaAttributeType{
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -142,7 +177,11 @@ func TestCheckResponseSnapshot_AddUserPoolClientSecret(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddUserPoolClientSecret(context.Background(), &AddUserPoolClientSecretInput{})
+	got, err := svc.AddUserPoolClientSecret(context.Background(), &AddUserPoolClientSecretInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +200,11 @@ func TestCheckResponseSnapshot_AdminAddUserToGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminAddUserToGroup(context.Background(), &AdminAddUserToGroupInput{})
+	got, err := svc.AdminAddUserToGroup(context.Background(), &AdminAddUserToGroupInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		GroupName:  ptr.String("__GroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +223,13 @@ func TestCheckResponseSnapshot_AdminConfirmSignUp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminConfirmSignUp(context.Background(), &AdminConfirmSignUpInput{})
+	got, err := svc.AdminConfirmSignUp(context.Background(), &AdminConfirmSignUpInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +276,40 @@ func TestCheckResponseSnapshot_AdminCreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{})
+	got, err := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		UserAttributes: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ValidationData: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TemporaryPassword:  ptr.String("__TemporaryPassword__"),
+		ForceAliasCreation: true,
+		MessageAction:      types.MessageActionType("RESEND"),
+		DesiredDeliveryMediums: []types.DeliveryMediumType{
+			types.DeliveryMediumType("SMS"),
+			types.DeliveryMediumType("SMS"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +328,10 @@ func TestCheckResponseSnapshot_AdminDeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminDeleteUser(context.Background(), &AdminDeleteUserInput{})
+	got, err := svc.AdminDeleteUser(context.Background(), &AdminDeleteUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -265,7 +350,14 @@ func TestCheckResponseSnapshot_AdminDeleteUserAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminDeleteUserAttributes(context.Background(), &AdminDeleteUserAttributesInput{})
+	got, err := svc.AdminDeleteUserAttributes(context.Background(), &AdminDeleteUserAttributesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		UserAttributeNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -284,7 +376,14 @@ func TestCheckResponseSnapshot_AdminDisableProviderForUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminDisableProviderForUser(context.Background(), &AdminDisableProviderForUserInput{})
+	got, err := svc.AdminDisableProviderForUser(context.Background(), &AdminDisableProviderForUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		User: &types.ProviderUserIdentifierType{
+			ProviderName:           ptr.String("__ProviderName__"),
+			ProviderAttributeName:  ptr.String("__ProviderAttributeName__"),
+			ProviderAttributeValue: ptr.String("__ProviderAttributeValue__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -303,7 +402,10 @@ func TestCheckResponseSnapshot_AdminDisableUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminDisableUser(context.Background(), &AdminDisableUserInput{})
+	got, err := svc.AdminDisableUser(context.Background(), &AdminDisableUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +424,10 @@ func TestCheckResponseSnapshot_AdminEnableUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminEnableUser(context.Background(), &AdminEnableUserInput{})
+	got, err := svc.AdminEnableUser(context.Background(), &AdminEnableUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +446,11 @@ func TestCheckResponseSnapshot_AdminForgetDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminForgetDevice(context.Background(), &AdminForgetDeviceInput{})
+	got, err := svc.AdminForgetDevice(context.Background(), &AdminForgetDeviceInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		DeviceKey:  ptr.String("__DeviceKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +486,11 @@ func TestCheckResponseSnapshot_AdminGetDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminGetDevice(context.Background(), &AdminGetDeviceInput{})
+	got, err := svc.AdminGetDevice(context.Background(), &AdminGetDeviceInput{
+		DeviceKey:  ptr.String("__DeviceKey__"),
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -427,7 +540,10 @@ func TestCheckResponseSnapshot_AdminGetUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminGetUser(context.Background(), &AdminGetUserInput{})
+	got, err := svc.AdminGetUser(context.Background(), &AdminGetUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -457,7 +573,10 @@ func TestCheckResponseSnapshot_AdminGetUserAuthFactors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminGetUserAuthFactors(context.Background(), &AdminGetUserAuthFactorsInput{})
+	got, err := svc.AdminGetUserAuthFactors(context.Background(), &AdminGetUserAuthFactorsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -497,7 +616,37 @@ func TestCheckResponseSnapshot_AdminInitiateAuth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{})
+	got, err := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		AuthFlow:   types.AuthFlowType("USER_SRP_AUTH"),
+		AuthParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ContextData: &types.ContextDataType{
+			IpAddress:  ptr.String("__IpAddress__"),
+			ServerName: ptr.String("__ServerName__"),
+			ServerPath: ptr.String("__ServerPath__"),
+			HttpHeaders: []types.HttpHeader{
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+			},
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		Session: ptr.String("__Session__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -516,7 +665,19 @@ func TestCheckResponseSnapshot_AdminLinkProviderForUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminLinkProviderForUser(context.Background(), &AdminLinkProviderForUserInput{})
+	got, err := svc.AdminLinkProviderForUser(context.Background(), &AdminLinkProviderForUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		DestinationUser: &types.ProviderUserIdentifierType{
+			ProviderName:           ptr.String("__ProviderName__"),
+			ProviderAttributeName:  ptr.String("__ProviderAttributeName__"),
+			ProviderAttributeValue: ptr.String("__ProviderAttributeValue__"),
+		},
+		SourceUser: &types.ProviderUserIdentifierType{
+			ProviderName:           ptr.String("__ProviderName__"),
+			ProviderAttributeName:  ptr.String("__ProviderAttributeName__"),
+			ProviderAttributeValue: ptr.String("__ProviderAttributeValue__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -571,7 +732,12 @@ func TestCheckResponseSnapshot_AdminListDevices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminListDevices(context.Background(), &AdminListDevicesInput{})
+	got, err := svc.AdminListDevices(context.Background(), &AdminListDevicesInput{
+		UserPoolId:      ptr.String("__UserPoolId__"),
+		Username:        ptr.String("__Username__"),
+		Limit:           ptr.Int32(1),
+		PaginationToken: ptr.String("__PaginationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -612,7 +778,12 @@ func TestCheckResponseSnapshot_AdminListGroupsForUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminListGroupsForUser(context.Background(), &AdminListGroupsForUserInput{})
+	got, err := svc.AdminListGroupsForUser(context.Background(), &AdminListGroupsForUserInput{
+		Username:   ptr.String("__Username__"),
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Limit:      ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -701,7 +872,12 @@ func TestCheckResponseSnapshot_AdminListUserAuthEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminListUserAuthEvents(context.Background(), &AdminListUserAuthEventsInput{})
+	got, err := svc.AdminListUserAuthEvents(context.Background(), &AdminListUserAuthEventsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -720,7 +896,11 @@ func TestCheckResponseSnapshot_AdminRemoveUserFromGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminRemoveUserFromGroup(context.Background(), &AdminRemoveUserFromGroupInput{})
+	got, err := svc.AdminRemoveUserFromGroup(context.Background(), &AdminRemoveUserFromGroupInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		GroupName:  ptr.String("__GroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -739,7 +919,13 @@ func TestCheckResponseSnapshot_AdminResetUserPassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminResetUserPassword(context.Background(), &AdminResetUserPasswordInput{})
+	got, err := svc.AdminResetUserPassword(context.Background(), &AdminResetUserPasswordInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -775,7 +961,37 @@ func TestCheckResponseSnapshot_AdminRespondToAuthChallenge(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminRespondToAuthChallenge(context.Background(), &AdminRespondToAuthChallengeInput{})
+	got, err := svc.AdminRespondToAuthChallenge(context.Background(), &AdminRespondToAuthChallengeInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		ClientId:      ptr.String("__ClientId__"),
+		ChallengeName: types.ChallengeNameType("SMS_MFA"),
+		ChallengeResponses: map[string]string{
+			"key0": "__Value__",
+		},
+		Session: ptr.String("__Session__"),
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ContextData: &types.ContextDataType{
+			IpAddress:  ptr.String("__IpAddress__"),
+			ServerName: ptr.String("__ServerName__"),
+			ServerPath: ptr.String("__ServerPath__"),
+			HttpHeaders: []types.HttpHeader{
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+			},
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -794,7 +1010,25 @@ func TestCheckResponseSnapshot_AdminSetUserMFAPreference(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminSetUserMFAPreference(context.Background(), &AdminSetUserMFAPreferenceInput{})
+	got, err := svc.AdminSetUserMFAPreference(context.Background(), &AdminSetUserMFAPreferenceInput{
+		SMSMfaSettings: &types.SMSMfaSettingsType{
+			Enabled:      true,
+			PreferredMfa: true,
+		},
+		SoftwareTokenMfaSettings: &types.SoftwareTokenMfaSettingsType{
+			Enabled:      true,
+			PreferredMfa: true,
+		},
+		EmailMfaSettings: &types.EmailMfaSettingsType{
+			Enabled:      true,
+			PreferredMfa: true,
+		},
+		WebAuthnMfaSettings: &types.WebAuthnMfaSettingsType{
+			Enabled: true,
+		},
+		Username:   ptr.String("__Username__"),
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -813,7 +1047,12 @@ func TestCheckResponseSnapshot_AdminSetUserPassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminSetUserPassword(context.Background(), &AdminSetUserPasswordInput{})
+	got, err := svc.AdminSetUserPassword(context.Background(), &AdminSetUserPasswordInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		Password:   ptr.String("__Password__"),
+		Permanent:  true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -832,7 +1071,20 @@ func TestCheckResponseSnapshot_AdminSetUserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminSetUserSettings(context.Background(), &AdminSetUserSettingsInput{})
+	got, err := svc.AdminSetUserSettings(context.Background(), &AdminSetUserSettingsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		MFAOptions: []types.MFAOptionType{
+			{
+				DeliveryMedium: types.DeliveryMediumType("SMS"),
+				AttributeName:  ptr.String("__AttributeName__"),
+			},
+			{
+				DeliveryMedium: types.DeliveryMediumType("SMS"),
+				AttributeName:  ptr.String("__AttributeName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -851,7 +1103,12 @@ func TestCheckResponseSnapshot_AdminUpdateAuthEventFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminUpdateAuthEventFeedback(context.Background(), &AdminUpdateAuthEventFeedbackInput{})
+	got, err := svc.AdminUpdateAuthEventFeedback(context.Background(), &AdminUpdateAuthEventFeedbackInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		Username:      ptr.String("__Username__"),
+		EventId:       ptr.String("__EventId__"),
+		FeedbackValue: types.FeedbackValueType("Valid"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -870,7 +1127,12 @@ func TestCheckResponseSnapshot_AdminUpdateDeviceStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminUpdateDeviceStatus(context.Background(), &AdminUpdateDeviceStatusInput{})
+	got, err := svc.AdminUpdateDeviceStatus(context.Background(), &AdminUpdateDeviceStatusInput{
+		UserPoolId:             ptr.String("__UserPoolId__"),
+		Username:               ptr.String("__Username__"),
+		DeviceKey:              ptr.String("__DeviceKey__"),
+		DeviceRememberedStatus: types.DeviceRememberedStatusType("remembered"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -889,7 +1151,23 @@ func TestCheckResponseSnapshot_AdminUpdateUserAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminUpdateUserAttributes(context.Background(), &AdminUpdateUserAttributesInput{})
+	got, err := svc.AdminUpdateUserAttributes(context.Background(), &AdminUpdateUserAttributesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		UserAttributes: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -908,7 +1186,10 @@ func TestCheckResponseSnapshot_AdminUserGlobalSignOut(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdminUserGlobalSignOut(context.Background(), &AdminUserGlobalSignOutInput{})
+	got, err := svc.AdminUserGlobalSignOut(context.Background(), &AdminUserGlobalSignOutInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -930,7 +1211,10 @@ func TestCheckResponseSnapshot_AssociateSoftwareToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateSoftwareToken(context.Background(), &AssociateSoftwareTokenInput{})
+	got, err := svc.AssociateSoftwareToken(context.Background(), &AssociateSoftwareTokenInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		Session:     ptr.String("__Session__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -949,7 +1233,11 @@ func TestCheckResponseSnapshot_ChangePassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ChangePassword(context.Background(), &ChangePasswordInput{})
+	got, err := svc.ChangePassword(context.Background(), &ChangePasswordInput{
+		PreviousPassword: ptr.String("__PreviousPassword__"),
+		ProposedPassword: ptr.String("__ProposedPassword__"),
+		AccessToken:      ptr.String("__AccessToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -968,7 +1256,10 @@ func TestCheckResponseSnapshot_CompleteWebAuthnRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{})
+	got, err := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		Credential:  document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -989,7 +1280,15 @@ func TestCheckResponseSnapshot_ConfirmDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfirmDevice(context.Background(), &ConfirmDeviceInput{})
+	got, err := svc.ConfirmDevice(context.Background(), &ConfirmDeviceInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		DeviceKey:   ptr.String("__DeviceKey__"),
+		DeviceSecretVerifierConfig: &types.DeviceSecretVerifierConfigType{
+			PasswordVerifier: ptr.String("__PasswordVerifier__"),
+			Salt:             ptr.String("__Salt__"),
+		},
+		DeviceName: ptr.String("__DeviceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1008,7 +1307,23 @@ func TestCheckResponseSnapshot_ConfirmForgotPassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfirmForgotPassword(context.Background(), &ConfirmForgotPasswordInput{})
+	got, err := svc.ConfirmForgotPassword(context.Background(), &ConfirmForgotPasswordInput{
+		ClientId:         ptr.String("__ClientId__"),
+		SecretHash:       ptr.String("__SecretHash__"),
+		Username:         ptr.String("__Username__"),
+		ConfirmationCode: ptr.String("__ConfirmationCode__"),
+		Password:         ptr.String("__Password__"),
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		UserContextData: &types.UserContextDataType{
+			IpAddress:   ptr.String("__IpAddress__"),
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1029,7 +1344,24 @@ func TestCheckResponseSnapshot_ConfirmSignUp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfirmSignUp(context.Background(), &ConfirmSignUpInput{})
+	got, err := svc.ConfirmSignUp(context.Background(), &ConfirmSignUpInput{
+		ClientId:           ptr.String("__ClientId__"),
+		SecretHash:         ptr.String("__SecretHash__"),
+		Username:           ptr.String("__Username__"),
+		ConfirmationCode:   ptr.String("__ConfirmationCode__"),
+		ForceAliasCreation: true,
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		UserContextData: &types.UserContextDataType{
+			IpAddress:   ptr.String("__IpAddress__"),
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		Session: ptr.String("__Session__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1058,7 +1390,13 @@ func TestCheckResponseSnapshot_CreateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		GroupName:   ptr.String("__GroupName__"),
+		UserPoolId:  ptr.String("__UserPoolId__"),
+		Description: ptr.String("__Description__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		Precedence:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1095,7 +1433,21 @@ func TestCheckResponseSnapshot_CreateIdentityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIdentityProvider(context.Background(), &CreateIdentityProviderInput{})
+	got, err := svc.CreateIdentityProvider(context.Background(), &CreateIdentityProviderInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		ProviderName: ptr.String("__ProviderName__"),
+		ProviderType: types.IdentityProviderTypeType("SAML"),
+		ProviderDetails: map[string]string{
+			"key0": "__Value__",
+		},
+		AttributeMapping: map[string]string{
+			"key0": "__Value__",
+		},
+		IdpIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1110,7 +1462,7 @@ func TestCheckResponseSnapshot_CreateManagedLoginBranding(t *testing.T) {
 			ManagedLoginBrandingId:   ptr.String("__ManagedLoginBrandingId__"),
 			UserPoolId:               ptr.String("__UserPoolId__"),
 			UseCognitoProvidedValues: true,
-			Settings:                 nil,
+			Settings:                 document.NewLazyDocument("__Document__"),
 			Assets: []types.AssetType{
 				{
 					Category:   types.AssetCategoryType("FAVICON_ICO"),
@@ -1139,7 +1491,28 @@ func TestCheckResponseSnapshot_CreateManagedLoginBranding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateManagedLoginBranding(context.Background(), &CreateManagedLoginBrandingInput{})
+	got, err := svc.CreateManagedLoginBranding(context.Background(), &CreateManagedLoginBrandingInput{
+		UserPoolId:               ptr.String("__UserPoolId__"),
+		ClientId:                 ptr.String("__ClientId__"),
+		UseCognitoProvidedValues: true,
+		Settings:                 document.NewLazyDocument("__Document__"),
+		Assets: []types.AssetType{
+			{
+				Category:   types.AssetCategoryType("FAVICON_ICO"),
+				ColorMode:  types.ColorSchemeModeType("LIGHT"),
+				Extension:  types.AssetExtensionType("ICO"),
+				Bytes:      []byte("blob"),
+				ResourceId: ptr.String("__ResourceId__"),
+			},
+			{
+				Category:   types.AssetCategoryType("FAVICON_ICO"),
+				ColorMode:  types.ColorSchemeModeType("LIGHT"),
+				Extension:  types.AssetExtensionType("ICO"),
+				Bytes:      []byte("blob"),
+				ResourceId: ptr.String("__ResourceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1174,7 +1547,21 @@ func TestCheckResponseSnapshot_CreateResourceServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResourceServer(context.Background(), &CreateResourceServerInput{})
+	got, err := svc.CreateResourceServer(context.Background(), &CreateResourceServerInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Identifier: ptr.String("__Identifier__"),
+		Name:       ptr.String("__Name__"),
+		Scopes: []types.ResourceServerScopeType{
+			{
+				ScopeName:        ptr.String("__ScopeName__"),
+				ScopeDescription: ptr.String("__ScopeDescription__"),
+			},
+			{
+				ScopeName:        ptr.String("__ScopeName__"),
+				ScopeDescription: ptr.String("__ScopeDescription__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1207,7 +1594,16 @@ func TestCheckResponseSnapshot_CreateTerms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTerms(context.Background(), &CreateTermsInput{})
+	got, err := svc.CreateTerms(context.Background(), &CreateTermsInput{
+		UserPoolId:  ptr.String("__UserPoolId__"),
+		ClientId:    ptr.String("__ClientId__"),
+		TermsName:   ptr.String("__TermsName__"),
+		TermsSource: types.TermsSourceType("LINK"),
+		Enforcement: types.TermsEnforcementType("NONE"),
+		Links: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1243,7 +1639,12 @@ func TestCheckResponseSnapshot_CreateUserImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUserImportJob(context.Background(), &CreateUserImportJobInput{})
+	got, err := svc.CreateUserImportJob(context.Background(), &CreateUserImportJobInput{
+		JobName:                  ptr.String("__JobName__"),
+		UserPoolId:               ptr.String("__UserPoolId__"),
+		CloudWatchLogsRoleArn:    ptr.String("__CloudWatchLogsRoleArn__"),
+		PasswordHashingAlgorithm: types.PasswordHashingAlgorithmType("BCRYPT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1452,7 +1853,185 @@ func TestCheckResponseSnapshot_CreateUserPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUserPool(context.Background(), &CreateUserPoolInput{})
+	got, err := svc.CreateUserPool(context.Background(), &CreateUserPoolInput{
+		PoolName: ptr.String("__PoolName__"),
+		Policies: &types.UserPoolPolicyType{
+			PasswordPolicy: &types.PasswordPolicyType{
+				MinimumLength:                 ptr.Int32(1),
+				RequireUppercase:              true,
+				RequireLowercase:              true,
+				RequireNumbers:                true,
+				RequireSymbols:                true,
+				PasswordHistorySize:           ptr.Int32(1),
+				TemporaryPasswordValidityDays: 1,
+			},
+			SignInPolicy: &types.SignInPolicyType{
+				AllowedFirstAuthFactors: []types.AuthFactorType{
+					types.AuthFactorType("PASSWORD"),
+					types.AuthFactorType("PASSWORD"),
+				},
+			},
+		},
+		DeletionProtection: types.DeletionProtectionType("ACTIVE"),
+		LambdaConfig: &types.LambdaConfigType{
+			PreSignUp:                   ptr.String("__PreSignUp__"),
+			CustomMessage:               ptr.String("__CustomMessage__"),
+			PostConfirmation:            ptr.String("__PostConfirmation__"),
+			PreAuthentication:           ptr.String("__PreAuthentication__"),
+			PostAuthentication:          ptr.String("__PostAuthentication__"),
+			DefineAuthChallenge:         ptr.String("__DefineAuthChallenge__"),
+			CreateAuthChallenge:         ptr.String("__CreateAuthChallenge__"),
+			VerifyAuthChallengeResponse: ptr.String("__VerifyAuthChallengeResponse__"),
+			PreTokenGeneration:          ptr.String("__PreTokenGeneration__"),
+			UserMigration:               ptr.String("__UserMigration__"),
+			PreTokenGenerationConfig: &types.PreTokenGenerationVersionConfigType{
+				LambdaVersion: types.PreTokenGenerationLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			CustomSMSSender: &types.CustomSMSLambdaVersionConfigType{
+				LambdaVersion: types.CustomSMSSenderLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			CustomEmailSender: &types.CustomEmailLambdaVersionConfigType{
+				LambdaVersion: types.CustomEmailSenderLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			KMSKeyID: ptr.String("__KMSKeyID__"),
+			InboundFederation: &types.InboundFederationLambdaType{
+				LambdaVersion: types.InboundFederationLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+		},
+		AutoVerifiedAttributes: []types.VerifiedAttributeType{
+			types.VerifiedAttributeType("phone_number"),
+			types.VerifiedAttributeType("phone_number"),
+		},
+		AliasAttributes: []types.AliasAttributeType{
+			types.AliasAttributeType("phone_number"),
+			types.AliasAttributeType("phone_number"),
+		},
+		UsernameAttributes: []types.UsernameAttributeType{
+			types.UsernameAttributeType("phone_number"),
+			types.UsernameAttributeType("phone_number"),
+		},
+		SmsVerificationMessage:   ptr.String("__SmsVerificationMessage__"),
+		EmailVerificationMessage: ptr.String("__EmailVerificationMessage__"),
+		EmailVerificationSubject: ptr.String("__EmailVerificationSubject__"),
+		VerificationMessageTemplate: &types.VerificationMessageTemplateType{
+			SmsMessage:         ptr.String("__SmsMessage__"),
+			EmailMessage:       ptr.String("__EmailMessage__"),
+			EmailSubject:       ptr.String("__EmailSubject__"),
+			EmailMessageByLink: ptr.String("__EmailMessageByLink__"),
+			EmailSubjectByLink: ptr.String("__EmailSubjectByLink__"),
+			DefaultEmailOption: types.DefaultEmailOptionType("CONFIRM_WITH_LINK"),
+		},
+		SmsAuthenticationMessage: ptr.String("__SmsAuthenticationMessage__"),
+		MfaConfiguration:         types.UserPoolMfaType("OFF"),
+		UserAttributeUpdateSettings: &types.UserAttributeUpdateSettingsType{
+			AttributesRequireVerificationBeforeUpdate: []types.VerifiedAttributeType{
+				types.VerifiedAttributeType("phone_number"),
+				types.VerifiedAttributeType("phone_number"),
+			},
+		},
+		DeviceConfiguration: &types.DeviceConfigurationType{
+			ChallengeRequiredOnNewDevice:     true,
+			DeviceOnlyRememberedOnUserPrompt: true,
+		},
+		EmailConfiguration: &types.EmailConfigurationType{
+			SourceArn:           ptr.String("__SourceArn__"),
+			ReplyToEmailAddress: ptr.String("__ReplyToEmailAddress__"),
+			EmailSendingAccount: types.EmailSendingAccountType("COGNITO_DEFAULT"),
+			From:                ptr.String("__From__"),
+			ConfigurationSet:    ptr.String("__ConfigurationSet__"),
+		},
+		SmsConfiguration: &types.SmsConfigurationType{
+			SnsCallerArn: ptr.String("__SnsCallerArn__"),
+			ExternalId:   ptr.String("__ExternalId__"),
+			SnsRegion:    ptr.String("__SnsRegion__"),
+			EumsSms: &types.EumsSmsConfigurationType{
+				CallerArn:            ptr.String("__CallerArn__"),
+				ExternalId:           ptr.String("__ExternalId__"),
+				OriginationIdentity:  ptr.String("__OriginationIdentity__"),
+				ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+				InEntityId:           ptr.String("__InEntityId__"),
+				InTemplateId:         ptr.String("__InTemplateId__"),
+				Region:               ptr.String("__Region__"),
+			},
+		},
+		UserPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+		AdminCreateUserConfig: &types.AdminCreateUserConfigType{
+			AllowAdminCreateUserOnly:  true,
+			UnusedAccountValidityDays: 1,
+			InviteMessageTemplate: &types.MessageTemplateType{
+				SMSMessage:   ptr.String("__SMSMessage__"),
+				EmailMessage: ptr.String("__EmailMessage__"),
+				EmailSubject: ptr.String("__EmailSubject__"),
+			},
+		},
+		Schema: []types.SchemaAttributeType{
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+		},
+		UserPoolAddOns: &types.UserPoolAddOnsType{
+			AdvancedSecurityMode: types.AdvancedSecurityModeType("OFF"),
+			AdvancedSecurityAdditionalFlows: &types.AdvancedSecurityAdditionalFlowsType{
+				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
+			},
+		},
+		UsernameConfiguration: &types.UsernameConfigurationType{
+			CaseSensitive: ptr.Bool(true),
+		},
+		AccountRecoverySetting: &types.AccountRecoverySettingType{
+			RecoveryMechanisms: []types.RecoveryOptionType{
+				{
+					Priority: ptr.Int32(1),
+					Name:     types.RecoveryOptionNameType("verified_email"),
+				},
+				{
+					Priority: ptr.Int32(1),
+					Name:     types.RecoveryOptionNameType("verified_email"),
+				},
+			},
+		},
+		UserPoolTier: types.UserPoolTierType("LITE"),
+		KeyConfiguration: &types.KeyConfigurationType{
+			KeyType:   types.EncryptionKeyType("AWS_OWNED_KEY"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		IssuerConfiguration: &types.IssuerConfigurationType{
+			Type: types.IssuerType("ORIGINAL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1537,7 +2116,69 @@ func TestCheckResponseSnapshot_CreateUserPoolClient(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUserPoolClient(context.Background(), &CreateUserPoolClientInput{})
+	got, err := svc.CreateUserPoolClient(context.Background(), &CreateUserPoolClientInput{
+		UserPoolId:           ptr.String("__UserPoolId__"),
+		ClientName:           ptr.String("__ClientName__"),
+		GenerateSecret:       true,
+		ClientSecret:         ptr.String("__ClientSecret__"),
+		RefreshTokenValidity: 1,
+		AccessTokenValidity:  ptr.Int32(1),
+		IdTokenValidity:      ptr.Int32(1),
+		TokenValidityUnits: &types.TokenValidityUnitsType{
+			AccessToken:  types.TimeUnitsType("seconds"),
+			IdToken:      types.TimeUnitsType("seconds"),
+			RefreshToken: types.TimeUnitsType("seconds"),
+		},
+		ReadAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WriteAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExplicitAuthFlows: []types.ExplicitAuthFlowsType{
+			types.ExplicitAuthFlowsType("ADMIN_NO_SRP_AUTH"),
+			types.ExplicitAuthFlowsType("ADMIN_NO_SRP_AUTH"),
+		},
+		SupportedIdentityProviders: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CallbackURLs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogoutURLs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DefaultRedirectURI: ptr.String("__DefaultRedirectURI__"),
+		AllowedOAuthFlows: []types.OAuthFlowType{
+			types.OAuthFlowType("code"),
+			types.OAuthFlowType("code"),
+		},
+		AllowedOAuthScopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowedOAuthFlowsUserPoolClient: true,
+		AnalyticsConfiguration: &types.AnalyticsConfigurationType{
+			ApplicationId:  ptr.String("__ApplicationId__"),
+			ApplicationArn: ptr.String("__ApplicationArn__"),
+			RoleArn:        ptr.String("__RoleArn__"),
+			ExternalId:     ptr.String("__ExternalId__"),
+			UserDataShared: true,
+		},
+		PreventUserExistenceErrors:               types.PreventUserExistenceErrorTypes("LEGACY"),
+		EnableTokenRevocation:                    ptr.Bool(true),
+		EnablePropagateAdditionalUserContextData: ptr.Bool(true),
+		AuthSessionValidity:                      ptr.Int32(1),
+		RefreshTokenRotation: &types.RefreshTokenRotationType{
+			Feature:                 types.FeatureType("ENABLED"),
+			RetryGracePeriodSeconds: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1565,7 +2206,21 @@ func TestCheckResponseSnapshot_CreateUserPoolDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUserPoolDomain(context.Background(), &CreateUserPoolDomainInput{})
+	got, err := svc.CreateUserPoolDomain(context.Background(), &CreateUserPoolDomainInput{
+		Domain:              ptr.String("__Domain__"),
+		UserPoolId:          ptr.String("__UserPoolId__"),
+		ManagedLoginVersion: ptr.Int32(1),
+		CustomDomainConfig: &types.CustomDomainConfigType{
+			CertificateArn: ptr.String("__CertificateArn__"),
+			SecurityPolicy: types.SecurityPolicyType("TLS_V1"),
+		},
+		Routing: &types.RoutingType{
+			Failover: &types.FailoverType{
+				SecondaryRegion:             ptr.String("__SecondaryRegion__"),
+				PrimaryRoute53HealthCheckId: ptr.String("__PrimaryRoute53HealthCheckId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1591,7 +2246,13 @@ func TestCheckResponseSnapshot_CreateUserPoolReplica(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUserPoolReplica(context.Background(), &CreateUserPoolReplicaInput{})
+	got, err := svc.CreateUserPoolReplica(context.Background(), &CreateUserPoolReplicaInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RegionName: ptr.String("__RegionName__"),
+		UserPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1610,7 +2271,10 @@ func TestCheckResponseSnapshot_DeleteGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{})
+	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{
+		GroupName:  ptr.String("__GroupName__"),
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1629,7 +2293,10 @@ func TestCheckResponseSnapshot_DeleteIdentityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdentityProvider(context.Background(), &DeleteIdentityProviderInput{})
+	got, err := svc.DeleteIdentityProvider(context.Background(), &DeleteIdentityProviderInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		ProviderName: ptr.String("__ProviderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1648,7 +2315,10 @@ func TestCheckResponseSnapshot_DeleteManagedLoginBranding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteManagedLoginBranding(context.Background(), &DeleteManagedLoginBrandingInput{})
+	got, err := svc.DeleteManagedLoginBranding(context.Background(), &DeleteManagedLoginBrandingInput{
+		ManagedLoginBrandingId: ptr.String("__ManagedLoginBrandingId__"),
+		UserPoolId:             ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1667,7 +2337,10 @@ func TestCheckResponseSnapshot_DeleteResourceServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourceServer(context.Background(), &DeleteResourceServerInput{})
+	got, err := svc.DeleteResourceServer(context.Background(), &DeleteResourceServerInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1686,7 +2359,10 @@ func TestCheckResponseSnapshot_DeleteTerms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTerms(context.Background(), &DeleteTermsInput{})
+	got, err := svc.DeleteTerms(context.Background(), &DeleteTermsInput{
+		TermsId:    ptr.String("__TermsId__"),
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1705,7 +2381,9 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1724,7 +2402,13 @@ func TestCheckResponseSnapshot_DeleteUserAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUserAttributes(context.Background(), &DeleteUserAttributesInput{})
+	got, err := svc.DeleteUserAttributes(context.Background(), &DeleteUserAttributesInput{
+		UserAttributeNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1743,7 +2427,9 @@ func TestCheckResponseSnapshot_DeleteUserPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUserPool(context.Background(), &DeleteUserPoolInput{})
+	got, err := svc.DeleteUserPool(context.Background(), &DeleteUserPoolInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1762,7 +2448,10 @@ func TestCheckResponseSnapshot_DeleteUserPoolClient(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUserPoolClient(context.Background(), &DeleteUserPoolClientInput{})
+	got, err := svc.DeleteUserPoolClient(context.Background(), &DeleteUserPoolClientInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1781,7 +2470,11 @@ func TestCheckResponseSnapshot_DeleteUserPoolClientSecret(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUserPoolClientSecret(context.Background(), &DeleteUserPoolClientSecretInput{})
+	got, err := svc.DeleteUserPoolClientSecret(context.Background(), &DeleteUserPoolClientSecretInput{
+		UserPoolId:     ptr.String("__UserPoolId__"),
+		ClientId:       ptr.String("__ClientId__"),
+		ClientSecretId: ptr.String("__ClientSecretId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1800,7 +2493,10 @@ func TestCheckResponseSnapshot_DeleteUserPoolDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUserPoolDomain(context.Background(), &DeleteUserPoolDomainInput{})
+	got, err := svc.DeleteUserPoolDomain(context.Background(), &DeleteUserPoolDomainInput{
+		Domain:     ptr.String("__Domain__"),
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1826,7 +2522,10 @@ func TestCheckResponseSnapshot_DeleteUserPoolReplica(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUserPoolReplica(context.Background(), &DeleteUserPoolReplicaInput{})
+	got, err := svc.DeleteUserPoolReplica(context.Background(), &DeleteUserPoolReplicaInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RegionName: ptr.String("__RegionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1845,7 +2544,10 @@ func TestCheckResponseSnapshot_DeleteWebAuthnCredential(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWebAuthnCredential(context.Background(), &DeleteWebAuthnCredentialInput{})
+	got, err := svc.DeleteWebAuthnCredential(context.Background(), &DeleteWebAuthnCredentialInput{
+		AccessToken:  ptr.String("__AccessToken__"),
+		CredentialId: ptr.String("__CredentialId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1882,7 +2584,10 @@ func TestCheckResponseSnapshot_DescribeIdentityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeIdentityProvider(context.Background(), &DescribeIdentityProviderInput{})
+	got, err := svc.DescribeIdentityProvider(context.Background(), &DescribeIdentityProviderInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		ProviderName: ptr.String("__ProviderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1897,7 +2602,7 @@ func TestCheckResponseSnapshot_DescribeManagedLoginBranding(t *testing.T) {
 			ManagedLoginBrandingId:   ptr.String("__ManagedLoginBrandingId__"),
 			UserPoolId:               ptr.String("__UserPoolId__"),
 			UseCognitoProvidedValues: true,
-			Settings:                 nil,
+			Settings:                 document.NewLazyDocument("__Document__"),
 			Assets: []types.AssetType{
 				{
 					Category:   types.AssetCategoryType("FAVICON_ICO"),
@@ -1926,7 +2631,11 @@ func TestCheckResponseSnapshot_DescribeManagedLoginBranding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeManagedLoginBranding(context.Background(), &DescribeManagedLoginBrandingInput{})
+	got, err := svc.DescribeManagedLoginBranding(context.Background(), &DescribeManagedLoginBrandingInput{
+		UserPoolId:             ptr.String("__UserPoolId__"),
+		ManagedLoginBrandingId: ptr.String("__ManagedLoginBrandingId__"),
+		ReturnMergedResources:  true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1941,7 +2650,7 @@ func TestCheckResponseSnapshot_DescribeManagedLoginBrandingByClient(t *testing.T
 			ManagedLoginBrandingId:   ptr.String("__ManagedLoginBrandingId__"),
 			UserPoolId:               ptr.String("__UserPoolId__"),
 			UseCognitoProvidedValues: true,
-			Settings:                 nil,
+			Settings:                 document.NewLazyDocument("__Document__"),
 			Assets: []types.AssetType{
 				{
 					Category:   types.AssetCategoryType("FAVICON_ICO"),
@@ -1970,7 +2679,11 @@ func TestCheckResponseSnapshot_DescribeManagedLoginBrandingByClient(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeManagedLoginBrandingByClient(context.Background(), &DescribeManagedLoginBrandingByClientInput{})
+	got, err := svc.DescribeManagedLoginBrandingByClient(context.Background(), &DescribeManagedLoginBrandingByClientInput{
+		UserPoolId:            ptr.String("__UserPoolId__"),
+		ClientId:              ptr.String("__ClientId__"),
+		ReturnMergedResources: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2005,7 +2718,10 @@ func TestCheckResponseSnapshot_DescribeResourceServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResourceServer(context.Background(), &DescribeResourceServerInput{})
+	got, err := svc.DescribeResourceServer(context.Background(), &DescribeResourceServerInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2085,7 +2801,10 @@ func TestCheckResponseSnapshot_DescribeRiskConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRiskConfiguration(context.Background(), &DescribeRiskConfigurationInput{})
+	got, err := svc.DescribeRiskConfiguration(context.Background(), &DescribeRiskConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2118,7 +2837,10 @@ func TestCheckResponseSnapshot_DescribeTerms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTerms(context.Background(), &DescribeTermsInput{})
+	got, err := svc.DescribeTerms(context.Background(), &DescribeTermsInput{
+		TermsId:    ptr.String("__TermsId__"),
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2154,7 +2876,10 @@ func TestCheckResponseSnapshot_DescribeUserImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUserImportJob(context.Background(), &DescribeUserImportJobInput{})
+	got, err := svc.DescribeUserImportJob(context.Background(), &DescribeUserImportJobInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		JobId:      ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2363,7 +3088,9 @@ func TestCheckResponseSnapshot_DescribeUserPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUserPool(context.Background(), &DescribeUserPoolInput{})
+	got, err := svc.DescribeUserPool(context.Background(), &DescribeUserPoolInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2448,7 +3175,10 @@ func TestCheckResponseSnapshot_DescribeUserPoolClient(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUserPoolClient(context.Background(), &DescribeUserPoolClientInput{})
+	got, err := svc.DescribeUserPoolClient(context.Background(), &DescribeUserPoolClientInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2488,7 +3218,9 @@ func TestCheckResponseSnapshot_DescribeUserPoolDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUserPoolDomain(context.Background(), &DescribeUserPoolDomainInput{})
+	got, err := svc.DescribeUserPoolDomain(context.Background(), &DescribeUserPoolDomainInput{
+		Domain: ptr.String("__Domain__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2507,7 +3239,10 @@ func TestCheckResponseSnapshot_ForgetDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ForgetDevice(context.Background(), &ForgetDeviceInput{})
+	got, err := svc.ForgetDevice(context.Background(), &ForgetDeviceInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		DeviceKey:   ptr.String("__DeviceKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2532,7 +3267,21 @@ func TestCheckResponseSnapshot_ForgotPassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ForgotPassword(context.Background(), &ForgotPasswordInput{})
+	got, err := svc.ForgotPassword(context.Background(), &ForgotPasswordInput{
+		ClientId:   ptr.String("__ClientId__"),
+		SecretHash: ptr.String("__SecretHash__"),
+		UserContextData: &types.UserContextDataType{
+			IpAddress:   ptr.String("__IpAddress__"),
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		Username: ptr.String("__Username__"),
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2557,7 +3306,9 @@ func TestCheckResponseSnapshot_GetCSVHeader(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCSVHeader(context.Background(), &GetCSVHeaderInput{})
+	got, err := svc.GetCSVHeader(context.Background(), &GetCSVHeaderInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2593,7 +3344,10 @@ func TestCheckResponseSnapshot_GetDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDevice(context.Background(), &GetDeviceInput{})
+	got, err := svc.GetDevice(context.Background(), &GetDeviceInput{
+		DeviceKey:   ptr.String("__DeviceKey__"),
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2622,7 +3376,10 @@ func TestCheckResponseSnapshot_GetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroup(context.Background(), &GetGroupInput{})
+	got, err := svc.GetGroup(context.Background(), &GetGroupInput{
+		GroupName:  ptr.String("__GroupName__"),
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2659,7 +3416,10 @@ func TestCheckResponseSnapshot_GetIdentityProviderByIdentifier(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdentityProviderByIdentifier(context.Background(), &GetIdentityProviderByIdentifierInput{})
+	got, err := svc.GetIdentityProviderByIdentifier(context.Background(), &GetIdentityProviderByIdentifierInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		IdpIdentifier: ptr.String("__IdpIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2710,7 +3470,9 @@ func TestCheckResponseSnapshot_GetLogDeliveryConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLogDeliveryConfiguration(context.Background(), &GetLogDeliveryConfigurationInput{})
+	got, err := svc.GetLogDeliveryConfiguration(context.Background(), &GetLogDeliveryConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2740,7 +3502,14 @@ func TestCheckResponseSnapshot_GetProvisionedLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProvisionedLimit(context.Background(), &GetProvisionedLimitInput{})
+	got, err := svc.GetProvisionedLimit(context.Background(), &GetProvisionedLimitInput{
+		LimitDefinition: &types.LimitDefinitionType{
+			LimitClass: types.LimitClass("API_CATEGORY"),
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2761,7 +3530,9 @@ func TestCheckResponseSnapshot_GetSigningCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSigningCertificate(context.Background(), &GetSigningCertificateInput{})
+	got, err := svc.GetSigningCertificate(context.Background(), &GetSigningCertificateInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2792,7 +3563,15 @@ func TestCheckResponseSnapshot_GetTokensFromRefreshToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTokensFromRefreshToken(context.Background(), &GetTokensFromRefreshTokenInput{})
+	got, err := svc.GetTokensFromRefreshToken(context.Background(), &GetTokensFromRefreshTokenInput{
+		RefreshToken: ptr.String("__RefreshToken__"),
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		DeviceKey:    ptr.String("__DeviceKey__"),
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2821,7 +3600,10 @@ func TestCheckResponseSnapshot_GetUICustomization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUICustomization(context.Background(), &GetUICustomizationInput{})
+	got, err := svc.GetUICustomization(context.Background(), &GetUICustomizationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2867,7 +3649,9 @@ func TestCheckResponseSnapshot_GetUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUser(context.Background(), &GetUserInput{})
+	got, err := svc.GetUser(context.Background(), &GetUserInput{
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2892,7 +3676,13 @@ func TestCheckResponseSnapshot_GetUserAttributeVerificationCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUserAttributeVerificationCode(context.Background(), &GetUserAttributeVerificationCodeInput{})
+	got, err := svc.GetUserAttributeVerificationCode(context.Background(), &GetUserAttributeVerificationCodeInput{
+		AccessToken:   ptr.String("__AccessToken__"),
+		AttributeName: ptr.String("__AttributeName__"),
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2922,7 +3712,9 @@ func TestCheckResponseSnapshot_GetUserAuthFactors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUserAuthFactors(context.Background(), &GetUserAuthFactorsInput{})
+	got, err := svc.GetUserAuthFactors(context.Background(), &GetUserAuthFactorsInput{
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2972,7 +3764,9 @@ func TestCheckResponseSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUserPoolMfaConfig(context.Background(), &GetUserPoolMfaConfigInput{})
+	got, err := svc.GetUserPoolMfaConfig(context.Background(), &GetUserPoolMfaConfigInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2991,7 +3785,9 @@ func TestCheckResponseSnapshot_GlobalSignOut(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GlobalSignOut(context.Background(), &GlobalSignOutInput{})
+	got, err := svc.GlobalSignOut(context.Background(), &GlobalSignOutInput{
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3031,7 +3827,24 @@ func TestCheckResponseSnapshot_InitiateAuth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InitiateAuth(context.Background(), &InitiateAuthInput{})
+	got, err := svc.InitiateAuth(context.Background(), &InitiateAuthInput{
+		AuthFlow: types.AuthFlowType("USER_SRP_AUTH"),
+		AuthParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientId: ptr.String("__ClientId__"),
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		UserContextData: &types.UserContextDataType{
+			IpAddress:   ptr.String("__IpAddress__"),
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		Session: ptr.String("__Session__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3086,7 +3899,11 @@ func TestCheckResponseSnapshot_ListDevices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDevices(context.Background(), &ListDevicesInput{})
+	got, err := svc.ListDevices(context.Background(), &ListDevicesInput{
+		AccessToken:     ptr.String("__AccessToken__"),
+		Limit:           ptr.Int32(1),
+		PaginationToken: ptr.String("__PaginationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3127,7 +3944,11 @@ func TestCheckResponseSnapshot_ListGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{})
+	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Limit:      ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3162,7 +3983,11 @@ func TestCheckResponseSnapshot_ListIdentityProviders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdentityProviders(context.Background(), &ListIdentityProvidersInput{})
+	got, err := svc.ListIdentityProviders(context.Background(), &ListIdentityProvidersInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3215,7 +4040,11 @@ func TestCheckResponseSnapshot_ListResourceServers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceServers(context.Background(), &ListResourceServersInput{})
+	got, err := svc.ListResourceServers(context.Background(), &ListResourceServersInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3238,7 +4067,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3275,7 +4106,11 @@ func TestCheckResponseSnapshot_ListTerms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTerms(context.Background(), &ListTermsInput{})
+	got, err := svc.ListTerms(context.Background(), &ListTermsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3330,7 +4165,11 @@ func TestCheckResponseSnapshot_ListUserImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUserImportJobs(context.Background(), &ListUserImportJobsInput{})
+	got, err := svc.ListUserImportJobs(context.Background(), &ListUserImportJobsInput{
+		UserPoolId:      ptr.String("__UserPoolId__"),
+		MaxResults:      ptr.Int32(1),
+		PaginationToken: ptr.String("__PaginationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3363,7 +4202,11 @@ func TestCheckResponseSnapshot_ListUserPoolClientSecrets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUserPoolClientSecrets(context.Background(), &ListUserPoolClientSecretsInput{})
+	got, err := svc.ListUserPoolClientSecrets(context.Background(), &ListUserPoolClientSecretsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3396,7 +4239,11 @@ func TestCheckResponseSnapshot_ListUserPoolClients(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUserPoolClients(context.Background(), &ListUserPoolClientsInput{})
+	got, err := svc.ListUserPoolClients(context.Background(), &ListUserPoolClientsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3431,7 +4278,10 @@ func TestCheckResponseSnapshot_ListUserPoolReplicas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUserPoolReplicas(context.Background(), &ListUserPoolReplicasInput{})
+	got, err := svc.ListUserPoolReplicas(context.Background(), &ListUserPoolReplicasInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3534,7 +4384,10 @@ func TestCheckResponseSnapshot_ListUserPools(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUserPools(context.Background(), &ListUserPoolsInput{})
+	got, err := svc.ListUserPools(context.Background(), &ListUserPoolsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3611,7 +4464,16 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsers(context.Background(), &ListUsersInput{})
+	got, err := svc.ListUsers(context.Background(), &ListUsersInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		AttributesToGet: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:           ptr.Int32(1),
+		PaginationToken: ptr.String("__PaginationToken__"),
+		Filter:          ptr.String("__Filter__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3688,7 +4550,12 @@ func TestCheckResponseSnapshot_ListUsersInGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsersInGroup(context.Background(), &ListUsersInGroupInput{})
+	got, err := svc.ListUsersInGroup(context.Background(), &ListUsersInGroupInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		GroupName:  ptr.String("__GroupName__"),
+		Limit:      ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3733,7 +4600,11 @@ func TestCheckResponseSnapshot_ListWebAuthnCredentials(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWebAuthnCredentials(context.Background(), &ListWebAuthnCredentialsInput{})
+	got, err := svc.ListWebAuthnCredentials(context.Background(), &ListWebAuthnCredentialsInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3758,7 +4629,21 @@ func TestCheckResponseSnapshot_ResendConfirmationCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResendConfirmationCode(context.Background(), &ResendConfirmationCodeInput{})
+	got, err := svc.ResendConfirmationCode(context.Background(), &ResendConfirmationCodeInput{
+		ClientId:   ptr.String("__ClientId__"),
+		SecretHash: ptr.String("__SecretHash__"),
+		UserContextData: &types.UserContextDataType{
+			IpAddress:   ptr.String("__IpAddress__"),
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		Username: ptr.String("__Username__"),
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3794,7 +4679,24 @@ func TestCheckResponseSnapshot_RespondToAuthChallenge(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RespondToAuthChallenge(context.Background(), &RespondToAuthChallengeInput{})
+	got, err := svc.RespondToAuthChallenge(context.Background(), &RespondToAuthChallengeInput{
+		ClientId:      ptr.String("__ClientId__"),
+		ChallengeName: types.ChallengeNameType("SMS_MFA"),
+		Session:       ptr.String("__Session__"),
+		ChallengeResponses: map[string]string{
+			"key0": "__Value__",
+		},
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		UserContextData: &types.UserContextDataType{
+			IpAddress:   ptr.String("__IpAddress__"),
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3813,7 +4715,11 @@ func TestCheckResponseSnapshot_RevokeToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeToken(context.Background(), &RevokeTokenInput{})
+	got, err := svc.RevokeToken(context.Background(), &RevokeTokenInput{
+		Token:        ptr.String("__Token__"),
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3864,7 +4770,37 @@ func TestCheckResponseSnapshot_SetLogDeliveryConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetLogDeliveryConfiguration(context.Background(), &SetLogDeliveryConfigurationInput{})
+	got, err := svc.SetLogDeliveryConfiguration(context.Background(), &SetLogDeliveryConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		LogConfigurations: []types.LogConfigurationType{
+			{
+				LogLevel:    types.LogLevel("ERROR"),
+				EventSource: types.EventSourceName("userNotification"),
+				CloudWatchLogsConfiguration: &types.CloudWatchLogsConfigurationType{
+					LogGroupArn: ptr.String("__LogGroupArn__"),
+				},
+				S3Configuration: &types.S3ConfigurationType{
+					BucketArn: ptr.String("__BucketArn__"),
+				},
+				FirehoseConfiguration: &types.FirehoseConfigurationType{
+					StreamArn: ptr.String("__StreamArn__"),
+				},
+			},
+			{
+				LogLevel:    types.LogLevel("ERROR"),
+				EventSource: types.EventSourceName("userNotification"),
+				CloudWatchLogsConfiguration: &types.CloudWatchLogsConfigurationType{
+					LogGroupArn: ptr.String("__LogGroupArn__"),
+				},
+				S3Configuration: &types.S3ConfigurationType{
+					BucketArn: ptr.String("__BucketArn__"),
+				},
+				FirehoseConfiguration: &types.FirehoseConfigurationType{
+					StreamArn: ptr.String("__StreamArn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3944,7 +4880,65 @@ func TestCheckResponseSnapshot_SetRiskConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetRiskConfiguration(context.Background(), &SetRiskConfigurationInput{})
+	got, err := svc.SetRiskConfiguration(context.Background(), &SetRiskConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		CompromisedCredentialsRiskConfiguration: &types.CompromisedCredentialsRiskConfigurationType{
+			EventFilter: []types.EventFilterType{
+				types.EventFilterType("SIGN_IN"),
+				types.EventFilterType("SIGN_IN"),
+			},
+			Actions: &types.CompromisedCredentialsActionsType{
+				EventAction: types.CompromisedCredentialsEventActionType("BLOCK"),
+			},
+		},
+		AccountTakeoverRiskConfiguration: &types.AccountTakeoverRiskConfigurationType{
+			NotifyConfiguration: &types.NotifyConfigurationType{
+				From:      ptr.String("__From__"),
+				ReplyTo:   ptr.String("__ReplyTo__"),
+				SourceArn: ptr.String("__SourceArn__"),
+				BlockEmail: &types.NotifyEmailType{
+					Subject:  ptr.String("__Subject__"),
+					HtmlBody: ptr.String("__HtmlBody__"),
+					TextBody: ptr.String("__TextBody__"),
+				},
+				NoActionEmail: &types.NotifyEmailType{
+					Subject:  ptr.String("__Subject__"),
+					HtmlBody: ptr.String("__HtmlBody__"),
+					TextBody: ptr.String("__TextBody__"),
+				},
+				MfaEmail: &types.NotifyEmailType{
+					Subject:  ptr.String("__Subject__"),
+					HtmlBody: ptr.String("__HtmlBody__"),
+					TextBody: ptr.String("__TextBody__"),
+				},
+			},
+			Actions: &types.AccountTakeoverActionsType{
+				LowAction: &types.AccountTakeoverActionType{
+					Notify:      true,
+					EventAction: types.AccountTakeoverEventActionType("BLOCK"),
+				},
+				MediumAction: &types.AccountTakeoverActionType{
+					Notify:      true,
+					EventAction: types.AccountTakeoverEventActionType("BLOCK"),
+				},
+				HighAction: &types.AccountTakeoverActionType{
+					Notify:      true,
+					EventAction: types.AccountTakeoverEventActionType("BLOCK"),
+				},
+			},
+		},
+		RiskExceptionConfiguration: &types.RiskExceptionConfigurationType{
+			BlockedIPRangeList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SkippedIPRangeList: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3973,7 +4967,12 @@ func TestCheckResponseSnapshot_SetUICustomization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetUICustomization(context.Background(), &SetUICustomizationInput{})
+	got, err := svc.SetUICustomization(context.Background(), &SetUICustomizationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		CSS:        ptr.String("__CSS__"),
+		ImageFile:  []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3992,7 +4991,24 @@ func TestCheckResponseSnapshot_SetUserMFAPreference(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetUserMFAPreference(context.Background(), &SetUserMFAPreferenceInput{})
+	got, err := svc.SetUserMFAPreference(context.Background(), &SetUserMFAPreferenceInput{
+		SMSMfaSettings: &types.SMSMfaSettingsType{
+			Enabled:      true,
+			PreferredMfa: true,
+		},
+		SoftwareTokenMfaSettings: &types.SoftwareTokenMfaSettingsType{
+			Enabled:      true,
+			PreferredMfa: true,
+		},
+		EmailMfaSettings: &types.EmailMfaSettingsType{
+			Enabled:      true,
+			PreferredMfa: true,
+		},
+		WebAuthnMfaSettings: &types.WebAuthnMfaSettingsType{
+			Enabled: true,
+		},
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4042,7 +5058,39 @@ func TestCheckResponseSnapshot_SetUserPoolMfaConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetUserPoolMfaConfig(context.Background(), &SetUserPoolMfaConfigInput{})
+	got, err := svc.SetUserPoolMfaConfig(context.Background(), &SetUserPoolMfaConfigInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		SmsMfaConfiguration: &types.SmsMfaConfigType{
+			SmsAuthenticationMessage: ptr.String("__SmsAuthenticationMessage__"),
+			SmsConfiguration: &types.SmsConfigurationType{
+				SnsCallerArn: ptr.String("__SnsCallerArn__"),
+				ExternalId:   ptr.String("__ExternalId__"),
+				SnsRegion:    ptr.String("__SnsRegion__"),
+				EumsSms: &types.EumsSmsConfigurationType{
+					CallerArn:            ptr.String("__CallerArn__"),
+					ExternalId:           ptr.String("__ExternalId__"),
+					OriginationIdentity:  ptr.String("__OriginationIdentity__"),
+					ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+					InEntityId:           ptr.String("__InEntityId__"),
+					InTemplateId:         ptr.String("__InTemplateId__"),
+					Region:               ptr.String("__Region__"),
+				},
+			},
+		},
+		SoftwareTokenMfaConfiguration: &types.SoftwareTokenMfaConfigType{
+			Enabled: true,
+		},
+		EmailMfaConfiguration: &types.EmailMfaConfigType{
+			Message: ptr.String("__Message__"),
+			Subject: ptr.String("__Subject__"),
+		},
+		MfaConfiguration: types.UserPoolMfaType("OFF"),
+		WebAuthnConfiguration: &types.WebAuthnConfigurationType{
+			RelyingPartyId:      ptr.String("__RelyingPartyId__"),
+			UserVerification:    types.UserVerificationType("required"),
+			FactorConfiguration: types.WebAuthnFactorConfigurationType("SINGLE_FACTOR"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4061,7 +5109,19 @@ func TestCheckResponseSnapshot_SetUserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetUserSettings(context.Background(), &SetUserSettingsInput{})
+	got, err := svc.SetUserSettings(context.Background(), &SetUserSettingsInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		MFAOptions: []types.MFAOptionType{
+			{
+				DeliveryMedium: types.DeliveryMediumType("SMS"),
+				AttributeName:  ptr.String("__AttributeName__"),
+			},
+			{
+				DeliveryMedium: types.DeliveryMediumType("SMS"),
+				AttributeName:  ptr.String("__AttributeName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4089,7 +5149,42 @@ func TestCheckResponseSnapshot_SignUp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SignUp(context.Background(), &SignUpInput{})
+	got, err := svc.SignUp(context.Background(), &SignUpInput{
+		ClientId:   ptr.String("__ClientId__"),
+		SecretHash: ptr.String("__SecretHash__"),
+		Username:   ptr.String("__Username__"),
+		Password:   ptr.String("__Password__"),
+		UserAttributes: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ValidationData: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		UserContextData: &types.UserContextDataType{
+			IpAddress:   ptr.String("__IpAddress__"),
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4125,7 +5220,10 @@ func TestCheckResponseSnapshot_StartUserImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartUserImportJob(context.Background(), &StartUserImportJobInput{})
+	got, err := svc.StartUserImportJob(context.Background(), &StartUserImportJobInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		JobId:      ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4136,7 +5234,7 @@ func TestCheckResponseSnapshot_StartUserImportJob(t *testing.T) {
 
 func TestCheckResponseSnapshot_StartWebAuthnRegistration(t *testing.T) {
 	want := &StartWebAuthnRegistrationOutput{
-		CredentialCreationOptions: nil,
+		CredentialCreationOptions: document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartWebAuthnRegistration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4146,7 +5244,9 @@ func TestCheckResponseSnapshot_StartWebAuthnRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartWebAuthnRegistration(context.Background(), &StartWebAuthnRegistrationInput{})
+	got, err := svc.StartWebAuthnRegistration(context.Background(), &StartWebAuthnRegistrationInput{
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4182,7 +5282,10 @@ func TestCheckResponseSnapshot_StopUserImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopUserImportJob(context.Background(), &StopUserImportJobInput{})
+	got, err := svc.StopUserImportJob(context.Background(), &StopUserImportJobInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		JobId:      ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4201,7 +5304,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4220,7 +5328,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4239,7 +5353,13 @@ func TestCheckResponseSnapshot_UpdateAuthEventFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAuthEventFeedback(context.Background(), &UpdateAuthEventFeedbackInput{})
+	got, err := svc.UpdateAuthEventFeedback(context.Background(), &UpdateAuthEventFeedbackInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		Username:      ptr.String("__Username__"),
+		EventId:       ptr.String("__EventId__"),
+		FeedbackToken: ptr.String("__FeedbackToken__"),
+		FeedbackValue: types.FeedbackValueType("Valid"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4258,7 +5378,11 @@ func TestCheckResponseSnapshot_UpdateDeviceStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDeviceStatus(context.Background(), &UpdateDeviceStatusInput{})
+	got, err := svc.UpdateDeviceStatus(context.Background(), &UpdateDeviceStatusInput{
+		AccessToken:            ptr.String("__AccessToken__"),
+		DeviceKey:              ptr.String("__DeviceKey__"),
+		DeviceRememberedStatus: types.DeviceRememberedStatusType("remembered"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4287,7 +5411,13 @@ func TestCheckResponseSnapshot_UpdateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{})
+	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{
+		GroupName:   ptr.String("__GroupName__"),
+		UserPoolId:  ptr.String("__UserPoolId__"),
+		Description: ptr.String("__Description__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		Precedence:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4324,7 +5454,20 @@ func TestCheckResponseSnapshot_UpdateIdentityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIdentityProvider(context.Background(), &UpdateIdentityProviderInput{})
+	got, err := svc.UpdateIdentityProvider(context.Background(), &UpdateIdentityProviderInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		ProviderName: ptr.String("__ProviderName__"),
+		ProviderDetails: map[string]string{
+			"key0": "__Value__",
+		},
+		AttributeMapping: map[string]string{
+			"key0": "__Value__",
+		},
+		IdpIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4339,7 +5482,7 @@ func TestCheckResponseSnapshot_UpdateManagedLoginBranding(t *testing.T) {
 			ManagedLoginBrandingId:   ptr.String("__ManagedLoginBrandingId__"),
 			UserPoolId:               ptr.String("__UserPoolId__"),
 			UseCognitoProvidedValues: true,
-			Settings:                 nil,
+			Settings:                 document.NewLazyDocument("__Document__"),
 			Assets: []types.AssetType{
 				{
 					Category:   types.AssetCategoryType("FAVICON_ICO"),
@@ -4368,7 +5511,28 @@ func TestCheckResponseSnapshot_UpdateManagedLoginBranding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateManagedLoginBranding(context.Background(), &UpdateManagedLoginBrandingInput{})
+	got, err := svc.UpdateManagedLoginBranding(context.Background(), &UpdateManagedLoginBrandingInput{
+		UserPoolId:               ptr.String("__UserPoolId__"),
+		ManagedLoginBrandingId:   ptr.String("__ManagedLoginBrandingId__"),
+		UseCognitoProvidedValues: true,
+		Settings:                 document.NewLazyDocument("__Document__"),
+		Assets: []types.AssetType{
+			{
+				Category:   types.AssetCategoryType("FAVICON_ICO"),
+				ColorMode:  types.ColorSchemeModeType("LIGHT"),
+				Extension:  types.AssetExtensionType("ICO"),
+				Bytes:      []byte("blob"),
+				ResourceId: ptr.String("__ResourceId__"),
+			},
+			{
+				Category:   types.AssetCategoryType("FAVICON_ICO"),
+				ColorMode:  types.ColorSchemeModeType("LIGHT"),
+				Extension:  types.AssetExtensionType("ICO"),
+				Bytes:      []byte("blob"),
+				ResourceId: ptr.String("__ResourceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4398,7 +5562,15 @@ func TestCheckResponseSnapshot_UpdateProvisionedLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProvisionedLimit(context.Background(), &UpdateProvisionedLimitInput{})
+	got, err := svc.UpdateProvisionedLimit(context.Background(), &UpdateProvisionedLimitInput{
+		LimitDefinition: &types.LimitDefinitionType{
+			LimitClass: types.LimitClass("API_CATEGORY"),
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		RequestedLimitValue: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4433,7 +5605,21 @@ func TestCheckResponseSnapshot_UpdateResourceServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResourceServer(context.Background(), &UpdateResourceServerInput{})
+	got, err := svc.UpdateResourceServer(context.Background(), &UpdateResourceServerInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Identifier: ptr.String("__Identifier__"),
+		Name:       ptr.String("__Name__"),
+		Scopes: []types.ResourceServerScopeType{
+			{
+				ScopeName:        ptr.String("__ScopeName__"),
+				ScopeDescription: ptr.String("__ScopeDescription__"),
+			},
+			{
+				ScopeName:        ptr.String("__ScopeName__"),
+				ScopeDescription: ptr.String("__ScopeDescription__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4466,7 +5652,16 @@ func TestCheckResponseSnapshot_UpdateTerms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTerms(context.Background(), &UpdateTermsInput{})
+	got, err := svc.UpdateTerms(context.Background(), &UpdateTermsInput{
+		TermsId:     ptr.String("__TermsId__"),
+		UserPoolId:  ptr.String("__UserPoolId__"),
+		TermsName:   ptr.String("__TermsName__"),
+		TermsSource: types.TermsSourceType("LINK"),
+		Enforcement: types.TermsEnforcementType("NONE"),
+		Links: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4498,7 +5693,22 @@ func TestCheckResponseSnapshot_UpdateUserAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserAttributes(context.Background(), &UpdateUserAttributesInput{})
+	got, err := svc.UpdateUserAttributes(context.Background(), &UpdateUserAttributesInput{
+		UserAttributes: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AccessToken: ptr.String("__AccessToken__"),
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4517,7 +5727,143 @@ func TestCheckResponseSnapshot_UpdateUserPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserPool(context.Background(), &UpdateUserPoolInput{})
+	got, err := svc.UpdateUserPool(context.Background(), &UpdateUserPoolInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Policies: &types.UserPoolPolicyType{
+			PasswordPolicy: &types.PasswordPolicyType{
+				MinimumLength:                 ptr.Int32(1),
+				RequireUppercase:              true,
+				RequireLowercase:              true,
+				RequireNumbers:                true,
+				RequireSymbols:                true,
+				PasswordHistorySize:           ptr.Int32(1),
+				TemporaryPasswordValidityDays: 1,
+			},
+			SignInPolicy: &types.SignInPolicyType{
+				AllowedFirstAuthFactors: []types.AuthFactorType{
+					types.AuthFactorType("PASSWORD"),
+					types.AuthFactorType("PASSWORD"),
+				},
+			},
+		},
+		DeletionProtection: types.DeletionProtectionType("ACTIVE"),
+		LambdaConfig: &types.LambdaConfigType{
+			PreSignUp:                   ptr.String("__PreSignUp__"),
+			CustomMessage:               ptr.String("__CustomMessage__"),
+			PostConfirmation:            ptr.String("__PostConfirmation__"),
+			PreAuthentication:           ptr.String("__PreAuthentication__"),
+			PostAuthentication:          ptr.String("__PostAuthentication__"),
+			DefineAuthChallenge:         ptr.String("__DefineAuthChallenge__"),
+			CreateAuthChallenge:         ptr.String("__CreateAuthChallenge__"),
+			VerifyAuthChallengeResponse: ptr.String("__VerifyAuthChallengeResponse__"),
+			PreTokenGeneration:          ptr.String("__PreTokenGeneration__"),
+			UserMigration:               ptr.String("__UserMigration__"),
+			PreTokenGenerationConfig: &types.PreTokenGenerationVersionConfigType{
+				LambdaVersion: types.PreTokenGenerationLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			CustomSMSSender: &types.CustomSMSLambdaVersionConfigType{
+				LambdaVersion: types.CustomSMSSenderLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			CustomEmailSender: &types.CustomEmailLambdaVersionConfigType{
+				LambdaVersion: types.CustomEmailSenderLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			KMSKeyID: ptr.String("__KMSKeyID__"),
+			InboundFederation: &types.InboundFederationLambdaType{
+				LambdaVersion: types.InboundFederationLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+		},
+		AutoVerifiedAttributes: []types.VerifiedAttributeType{
+			types.VerifiedAttributeType("phone_number"),
+			types.VerifiedAttributeType("phone_number"),
+		},
+		SmsVerificationMessage:   ptr.String("__SmsVerificationMessage__"),
+		EmailVerificationMessage: ptr.String("__EmailVerificationMessage__"),
+		EmailVerificationSubject: ptr.String("__EmailVerificationSubject__"),
+		VerificationMessageTemplate: &types.VerificationMessageTemplateType{
+			SmsMessage:         ptr.String("__SmsMessage__"),
+			EmailMessage:       ptr.String("__EmailMessage__"),
+			EmailSubject:       ptr.String("__EmailSubject__"),
+			EmailMessageByLink: ptr.String("__EmailMessageByLink__"),
+			EmailSubjectByLink: ptr.String("__EmailSubjectByLink__"),
+			DefaultEmailOption: types.DefaultEmailOptionType("CONFIRM_WITH_LINK"),
+		},
+		SmsAuthenticationMessage: ptr.String("__SmsAuthenticationMessage__"),
+		UserAttributeUpdateSettings: &types.UserAttributeUpdateSettingsType{
+			AttributesRequireVerificationBeforeUpdate: []types.VerifiedAttributeType{
+				types.VerifiedAttributeType("phone_number"),
+				types.VerifiedAttributeType("phone_number"),
+			},
+		},
+		MfaConfiguration: types.UserPoolMfaType("OFF"),
+		DeviceConfiguration: &types.DeviceConfigurationType{
+			ChallengeRequiredOnNewDevice:     true,
+			DeviceOnlyRememberedOnUserPrompt: true,
+		},
+		EmailConfiguration: &types.EmailConfigurationType{
+			SourceArn:           ptr.String("__SourceArn__"),
+			ReplyToEmailAddress: ptr.String("__ReplyToEmailAddress__"),
+			EmailSendingAccount: types.EmailSendingAccountType("COGNITO_DEFAULT"),
+			From:                ptr.String("__From__"),
+			ConfigurationSet:    ptr.String("__ConfigurationSet__"),
+		},
+		SmsConfiguration: &types.SmsConfigurationType{
+			SnsCallerArn: ptr.String("__SnsCallerArn__"),
+			ExternalId:   ptr.String("__ExternalId__"),
+			SnsRegion:    ptr.String("__SnsRegion__"),
+			EumsSms: &types.EumsSmsConfigurationType{
+				CallerArn:            ptr.String("__CallerArn__"),
+				ExternalId:           ptr.String("__ExternalId__"),
+				OriginationIdentity:  ptr.String("__OriginationIdentity__"),
+				ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+				InEntityId:           ptr.String("__InEntityId__"),
+				InTemplateId:         ptr.String("__InTemplateId__"),
+				Region:               ptr.String("__Region__"),
+			},
+		},
+		UserPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+		AdminCreateUserConfig: &types.AdminCreateUserConfigType{
+			AllowAdminCreateUserOnly:  true,
+			UnusedAccountValidityDays: 1,
+			InviteMessageTemplate: &types.MessageTemplateType{
+				SMSMessage:   ptr.String("__SMSMessage__"),
+				EmailMessage: ptr.String("__EmailMessage__"),
+				EmailSubject: ptr.String("__EmailSubject__"),
+			},
+		},
+		UserPoolAddOns: &types.UserPoolAddOnsType{
+			AdvancedSecurityMode: types.AdvancedSecurityModeType("OFF"),
+			AdvancedSecurityAdditionalFlows: &types.AdvancedSecurityAdditionalFlowsType{
+				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
+			},
+		},
+		AccountRecoverySetting: &types.AccountRecoverySettingType{
+			RecoveryMechanisms: []types.RecoveryOptionType{
+				{
+					Priority: ptr.Int32(1),
+					Name:     types.RecoveryOptionNameType("verified_email"),
+				},
+				{
+					Priority: ptr.Int32(1),
+					Name:     types.RecoveryOptionNameType("verified_email"),
+				},
+			},
+		},
+		PoolName:     ptr.String("__PoolName__"),
+		UserPoolTier: types.UserPoolTierType("LITE"),
+		KeyConfiguration: &types.KeyConfigurationType{
+			KeyType:   types.EncryptionKeyType("AWS_OWNED_KEY"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		IssuerConfiguration: &types.IssuerConfigurationType{
+			Type: types.IssuerType("ORIGINAL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4602,7 +5948,68 @@ func TestCheckResponseSnapshot_UpdateUserPoolClient(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserPoolClient(context.Background(), &UpdateUserPoolClientInput{})
+	got, err := svc.UpdateUserPoolClient(context.Background(), &UpdateUserPoolClientInput{
+		UserPoolId:           ptr.String("__UserPoolId__"),
+		ClientId:             ptr.String("__ClientId__"),
+		ClientName:           ptr.String("__ClientName__"),
+		RefreshTokenValidity: 1,
+		AccessTokenValidity:  ptr.Int32(1),
+		IdTokenValidity:      ptr.Int32(1),
+		TokenValidityUnits: &types.TokenValidityUnitsType{
+			AccessToken:  types.TimeUnitsType("seconds"),
+			IdToken:      types.TimeUnitsType("seconds"),
+			RefreshToken: types.TimeUnitsType("seconds"),
+		},
+		ReadAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WriteAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExplicitAuthFlows: []types.ExplicitAuthFlowsType{
+			types.ExplicitAuthFlowsType("ADMIN_NO_SRP_AUTH"),
+			types.ExplicitAuthFlowsType("ADMIN_NO_SRP_AUTH"),
+		},
+		SupportedIdentityProviders: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CallbackURLs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogoutURLs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DefaultRedirectURI: ptr.String("__DefaultRedirectURI__"),
+		AllowedOAuthFlows: []types.OAuthFlowType{
+			types.OAuthFlowType("code"),
+			types.OAuthFlowType("code"),
+		},
+		AllowedOAuthScopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowedOAuthFlowsUserPoolClient: true,
+		AnalyticsConfiguration: &types.AnalyticsConfigurationType{
+			ApplicationId:  ptr.String("__ApplicationId__"),
+			ApplicationArn: ptr.String("__ApplicationArn__"),
+			RoleArn:        ptr.String("__RoleArn__"),
+			ExternalId:     ptr.String("__ExternalId__"),
+			UserDataShared: true,
+		},
+		PreventUserExistenceErrors:               types.PreventUserExistenceErrorTypes("LEGACY"),
+		EnableTokenRevocation:                    ptr.Bool(true),
+		EnablePropagateAdditionalUserContextData: ptr.Bool(true),
+		AuthSessionValidity:                      ptr.Int32(1),
+		RefreshTokenRotation: &types.RefreshTokenRotationType{
+			Feature:                 types.FeatureType("ENABLED"),
+			RetryGracePeriodSeconds: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4630,7 +6037,21 @@ func TestCheckResponseSnapshot_UpdateUserPoolDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserPoolDomain(context.Background(), &UpdateUserPoolDomainInput{})
+	got, err := svc.UpdateUserPoolDomain(context.Background(), &UpdateUserPoolDomainInput{
+		Domain:              ptr.String("__Domain__"),
+		UserPoolId:          ptr.String("__UserPoolId__"),
+		ManagedLoginVersion: ptr.Int32(1),
+		CustomDomainConfig: &types.CustomDomainConfigType{
+			CertificateArn: ptr.String("__CertificateArn__"),
+			SecurityPolicy: types.SecurityPolicyType("TLS_V1"),
+		},
+		Routing: &types.RoutingType{
+			Failover: &types.FailoverType{
+				SecondaryRegion:             ptr.String("__SecondaryRegion__"),
+				PrimaryRoute53HealthCheckId: ptr.String("__PrimaryRoute53HealthCheckId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4656,7 +6077,11 @@ func TestCheckResponseSnapshot_UpdateUserPoolReplica(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserPoolReplica(context.Background(), &UpdateUserPoolReplicaInput{})
+	got, err := svc.UpdateUserPoolReplica(context.Background(), &UpdateUserPoolReplicaInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RegionName: ptr.String("__RegionName__"),
+		Status:     types.UpdateReplicaStatusType("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4678,7 +6103,12 @@ func TestCheckResponseSnapshot_VerifySoftwareToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifySoftwareToken(context.Background(), &VerifySoftwareTokenInput{})
+	got, err := svc.VerifySoftwareToken(context.Background(), &VerifySoftwareTokenInput{
+		AccessToken:        ptr.String("__AccessToken__"),
+		Session:            ptr.String("__Session__"),
+		UserCode:           ptr.String("__UserCode__"),
+		FriendlyDeviceName: ptr.String("__FriendlyDeviceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4697,7 +6127,11 @@ func TestCheckResponseSnapshot_VerifyUserAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyUserAttribute(context.Background(), &VerifyUserAttributeInput{})
+	got, err := svc.VerifyUserAttribute(context.Background(), &VerifyUserAttributeInput{
+		AccessToken:   ptr.String("__AccessToken__"),
+		AttributeName: ptr.String("__AttributeName__"),
+		Code:          ptr.String("__Code__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4718,7 +6152,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddUserPoolClientSecret(context.Background(), &AddUserPoolClientSecretInput{})
+	_, opErr := svc.AddUserPoolClientSecret(context.Background(), &AddUserPoolClientSecretInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4743,7 +6181,14 @@ func TestCheckResponseSnapshot_Error_AliasExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminDisableProviderForUser(context.Background(), &AdminDisableProviderForUserInput{})
+	_, opErr := svc.AdminDisableProviderForUser(context.Background(), &AdminDisableProviderForUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		User: &types.ProviderUserIdentifierType{
+			ProviderName:           ptr.String("__ProviderName__"),
+			ProviderAttributeName:  ptr.String("__ProviderAttributeName__"),
+			ProviderAttributeValue: ptr.String("__ProviderAttributeValue__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4768,7 +6213,40 @@ func TestCheckResponseSnapshot_Error_CodeDeliveryFailureException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{})
+	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		UserAttributes: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ValidationData: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TemporaryPassword:  ptr.String("__TemporaryPassword__"),
+		ForceAliasCreation: true,
+		MessageAction:      types.MessageActionType("RESEND"),
+		DesiredDeliveryMediums: []types.DeliveryMediumType{
+			types.DeliveryMediumType("SMS"),
+			types.DeliveryMediumType("SMS"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4793,7 +6271,37 @@ func TestCheckResponseSnapshot_Error_CodeMismatchException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminRespondToAuthChallenge(context.Background(), &AdminRespondToAuthChallengeInput{})
+	_, opErr := svc.AdminRespondToAuthChallenge(context.Background(), &AdminRespondToAuthChallengeInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		ClientId:      ptr.String("__ClientId__"),
+		ChallengeName: types.ChallengeNameType("SMS_MFA"),
+		ChallengeResponses: map[string]string{
+			"key0": "__Value__",
+		},
+		Session: ptr.String("__Session__"),
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ContextData: &types.ContextDataType{
+			IpAddress:  ptr.String("__IpAddress__"),
+			ServerName: ptr.String("__ServerName__"),
+			ServerPath: ptr.String("__ServerPath__"),
+			HttpHeaders: []types.HttpHeader{
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+			},
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4818,7 +6326,10 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSoftwareToken(context.Background(), &AssociateSoftwareTokenInput{})
+	_, opErr := svc.AssociateSoftwareToken(context.Background(), &AssociateSoftwareTokenInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		Session:     ptr.String("__Session__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4843,7 +6354,15 @@ func TestCheckResponseSnapshot_Error_DeviceKeyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConfirmDevice(context.Background(), &ConfirmDeviceInput{})
+	_, opErr := svc.ConfirmDevice(context.Background(), &ConfirmDeviceInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		DeviceKey:   ptr.String("__DeviceKey__"),
+		DeviceSecretVerifierConfig: &types.DeviceSecretVerifierConfigType{
+			PasswordVerifier: ptr.String("__PasswordVerifier__"),
+			Salt:             ptr.String("__Salt__"),
+		},
+		DeviceName: ptr.String("__DeviceName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4868,7 +6387,21 @@ func TestCheckResponseSnapshot_Error_DuplicateProviderException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIdentityProvider(context.Background(), &CreateIdentityProviderInput{})
+	_, opErr := svc.CreateIdentityProvider(context.Background(), &CreateIdentityProviderInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		ProviderName: ptr.String("__ProviderName__"),
+		ProviderType: types.IdentityProviderTypeType("SAML"),
+		ProviderDetails: map[string]string{
+			"key0": "__Value__",
+		},
+		AttributeMapping: map[string]string{
+			"key0": "__Value__",
+		},
+		IdpIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4893,7 +6426,12 @@ func TestCheckResponseSnapshot_Error_EnableSoftwareTokenMFAException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.VerifySoftwareToken(context.Background(), &VerifySoftwareTokenInput{})
+	_, opErr := svc.VerifySoftwareToken(context.Background(), &VerifySoftwareTokenInput{
+		AccessToken:        ptr.String("__AccessToken__"),
+		Session:            ptr.String("__Session__"),
+		UserCode:           ptr.String("__UserCode__"),
+		FriendlyDeviceName: ptr.String("__FriendlyDeviceName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4918,7 +6456,37 @@ func TestCheckResponseSnapshot_Error_ExpiredCodeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminRespondToAuthChallenge(context.Background(), &AdminRespondToAuthChallengeInput{})
+	_, opErr := svc.AdminRespondToAuthChallenge(context.Background(), &AdminRespondToAuthChallengeInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		ClientId:      ptr.String("__ClientId__"),
+		ChallengeName: types.ChallengeNameType("SMS_MFA"),
+		ChallengeResponses: map[string]string{
+			"key0": "__Value__",
+		},
+		Session: ptr.String("__Session__"),
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ContextData: &types.ContextDataType{
+			IpAddress:  ptr.String("__IpAddress__"),
+			ServerName: ptr.String("__ServerName__"),
+			ServerPath: ptr.String("__ServerPath__"),
+			HttpHeaders: []types.HttpHeader{
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+			},
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4943,7 +6511,185 @@ func TestCheckResponseSnapshot_Error_FeatureUnavailableInTierException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUserPool(context.Background(), &CreateUserPoolInput{})
+	_, opErr := svc.CreateUserPool(context.Background(), &CreateUserPoolInput{
+		PoolName: ptr.String("__PoolName__"),
+		Policies: &types.UserPoolPolicyType{
+			PasswordPolicy: &types.PasswordPolicyType{
+				MinimumLength:                 ptr.Int32(1),
+				RequireUppercase:              true,
+				RequireLowercase:              true,
+				RequireNumbers:                true,
+				RequireSymbols:                true,
+				PasswordHistorySize:           ptr.Int32(1),
+				TemporaryPasswordValidityDays: 1,
+			},
+			SignInPolicy: &types.SignInPolicyType{
+				AllowedFirstAuthFactors: []types.AuthFactorType{
+					types.AuthFactorType("PASSWORD"),
+					types.AuthFactorType("PASSWORD"),
+				},
+			},
+		},
+		DeletionProtection: types.DeletionProtectionType("ACTIVE"),
+		LambdaConfig: &types.LambdaConfigType{
+			PreSignUp:                   ptr.String("__PreSignUp__"),
+			CustomMessage:               ptr.String("__CustomMessage__"),
+			PostConfirmation:            ptr.String("__PostConfirmation__"),
+			PreAuthentication:           ptr.String("__PreAuthentication__"),
+			PostAuthentication:          ptr.String("__PostAuthentication__"),
+			DefineAuthChallenge:         ptr.String("__DefineAuthChallenge__"),
+			CreateAuthChallenge:         ptr.String("__CreateAuthChallenge__"),
+			VerifyAuthChallengeResponse: ptr.String("__VerifyAuthChallengeResponse__"),
+			PreTokenGeneration:          ptr.String("__PreTokenGeneration__"),
+			UserMigration:               ptr.String("__UserMigration__"),
+			PreTokenGenerationConfig: &types.PreTokenGenerationVersionConfigType{
+				LambdaVersion: types.PreTokenGenerationLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			CustomSMSSender: &types.CustomSMSLambdaVersionConfigType{
+				LambdaVersion: types.CustomSMSSenderLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			CustomEmailSender: &types.CustomEmailLambdaVersionConfigType{
+				LambdaVersion: types.CustomEmailSenderLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			KMSKeyID: ptr.String("__KMSKeyID__"),
+			InboundFederation: &types.InboundFederationLambdaType{
+				LambdaVersion: types.InboundFederationLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+		},
+		AutoVerifiedAttributes: []types.VerifiedAttributeType{
+			types.VerifiedAttributeType("phone_number"),
+			types.VerifiedAttributeType("phone_number"),
+		},
+		AliasAttributes: []types.AliasAttributeType{
+			types.AliasAttributeType("phone_number"),
+			types.AliasAttributeType("phone_number"),
+		},
+		UsernameAttributes: []types.UsernameAttributeType{
+			types.UsernameAttributeType("phone_number"),
+			types.UsernameAttributeType("phone_number"),
+		},
+		SmsVerificationMessage:   ptr.String("__SmsVerificationMessage__"),
+		EmailVerificationMessage: ptr.String("__EmailVerificationMessage__"),
+		EmailVerificationSubject: ptr.String("__EmailVerificationSubject__"),
+		VerificationMessageTemplate: &types.VerificationMessageTemplateType{
+			SmsMessage:         ptr.String("__SmsMessage__"),
+			EmailMessage:       ptr.String("__EmailMessage__"),
+			EmailSubject:       ptr.String("__EmailSubject__"),
+			EmailMessageByLink: ptr.String("__EmailMessageByLink__"),
+			EmailSubjectByLink: ptr.String("__EmailSubjectByLink__"),
+			DefaultEmailOption: types.DefaultEmailOptionType("CONFIRM_WITH_LINK"),
+		},
+		SmsAuthenticationMessage: ptr.String("__SmsAuthenticationMessage__"),
+		MfaConfiguration:         types.UserPoolMfaType("OFF"),
+		UserAttributeUpdateSettings: &types.UserAttributeUpdateSettingsType{
+			AttributesRequireVerificationBeforeUpdate: []types.VerifiedAttributeType{
+				types.VerifiedAttributeType("phone_number"),
+				types.VerifiedAttributeType("phone_number"),
+			},
+		},
+		DeviceConfiguration: &types.DeviceConfigurationType{
+			ChallengeRequiredOnNewDevice:     true,
+			DeviceOnlyRememberedOnUserPrompt: true,
+		},
+		EmailConfiguration: &types.EmailConfigurationType{
+			SourceArn:           ptr.String("__SourceArn__"),
+			ReplyToEmailAddress: ptr.String("__ReplyToEmailAddress__"),
+			EmailSendingAccount: types.EmailSendingAccountType("COGNITO_DEFAULT"),
+			From:                ptr.String("__From__"),
+			ConfigurationSet:    ptr.String("__ConfigurationSet__"),
+		},
+		SmsConfiguration: &types.SmsConfigurationType{
+			SnsCallerArn: ptr.String("__SnsCallerArn__"),
+			ExternalId:   ptr.String("__ExternalId__"),
+			SnsRegion:    ptr.String("__SnsRegion__"),
+			EumsSms: &types.EumsSmsConfigurationType{
+				CallerArn:            ptr.String("__CallerArn__"),
+				ExternalId:           ptr.String("__ExternalId__"),
+				OriginationIdentity:  ptr.String("__OriginationIdentity__"),
+				ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+				InEntityId:           ptr.String("__InEntityId__"),
+				InTemplateId:         ptr.String("__InTemplateId__"),
+				Region:               ptr.String("__Region__"),
+			},
+		},
+		UserPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+		AdminCreateUserConfig: &types.AdminCreateUserConfigType{
+			AllowAdminCreateUserOnly:  true,
+			UnusedAccountValidityDays: 1,
+			InviteMessageTemplate: &types.MessageTemplateType{
+				SMSMessage:   ptr.String("__SMSMessage__"),
+				EmailMessage: ptr.String("__EmailMessage__"),
+				EmailSubject: ptr.String("__EmailSubject__"),
+			},
+		},
+		Schema: []types.SchemaAttributeType{
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+		},
+		UserPoolAddOns: &types.UserPoolAddOnsType{
+			AdvancedSecurityMode: types.AdvancedSecurityModeType("OFF"),
+			AdvancedSecurityAdditionalFlows: &types.AdvancedSecurityAdditionalFlowsType{
+				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
+			},
+		},
+		UsernameConfiguration: &types.UsernameConfigurationType{
+			CaseSensitive: ptr.Bool(true),
+		},
+		AccountRecoverySetting: &types.AccountRecoverySettingType{
+			RecoveryMechanisms: []types.RecoveryOptionType{
+				{
+					Priority: ptr.Int32(1),
+					Name:     types.RecoveryOptionNameType("verified_email"),
+				},
+				{
+					Priority: ptr.Int32(1),
+					Name:     types.RecoveryOptionNameType("verified_email"),
+				},
+			},
+		},
+		UserPoolTier: types.UserPoolTierType("LITE"),
+		KeyConfiguration: &types.KeyConfigurationType{
+			KeyType:   types.EncryptionKeyType("AWS_OWNED_KEY"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		IssuerConfiguration: &types.IssuerConfigurationType{
+			Type: types.IssuerType("ORIGINAL"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4968,7 +6714,10 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSoftwareToken(context.Background(), &AssociateSoftwareTokenInput{})
+	_, opErr := svc.AssociateSoftwareToken(context.Background(), &AssociateSoftwareTokenInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		Session:     ptr.String("__Session__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4993,7 +6742,13 @@ func TestCheckResponseSnapshot_Error_GroupExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		GroupName:   ptr.String("__GroupName__"),
+		UserPoolId:  ptr.String("__UserPoolId__"),
+		Description: ptr.String("__Description__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		Precedence:  ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5018,7 +6773,41 @@ func TestCheckResponseSnapshot_Error_InternalErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{})
+	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		CustomAttributes: []types.SchemaAttributeType{
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5043,7 +6832,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddUserPoolClientSecret(context.Background(), &AddUserPoolClientSecretInput{})
+	_, opErr := svc.AddUserPoolClientSecret(context.Background(), &AddUserPoolClientSecretInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5068,7 +6861,37 @@ func TestCheckResponseSnapshot_Error_InvalidEmailRoleAccessPolicyException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{})
+	_, opErr := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		AuthFlow:   types.AuthFlowType("USER_SRP_AUTH"),
+		AuthParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ContextData: &types.ContextDataType{
+			IpAddress:  ptr.String("__IpAddress__"),
+			ServerName: ptr.String("__ServerName__"),
+			ServerPath: ptr.String("__ServerPath__"),
+			HttpHeaders: []types.HttpHeader{
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+			},
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		Session: ptr.String("__Session__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5093,7 +6916,13 @@ func TestCheckResponseSnapshot_Error_InvalidLambdaResponseException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminConfirmSignUp(context.Background(), &AdminConfirmSignUpInput{})
+	_, opErr := svc.AdminConfirmSignUp(context.Background(), &AdminConfirmSignUpInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5118,7 +6947,69 @@ func TestCheckResponseSnapshot_Error_InvalidOAuthFlowException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUserPoolClient(context.Background(), &CreateUserPoolClientInput{})
+	_, opErr := svc.CreateUserPoolClient(context.Background(), &CreateUserPoolClientInput{
+		UserPoolId:           ptr.String("__UserPoolId__"),
+		ClientName:           ptr.String("__ClientName__"),
+		GenerateSecret:       true,
+		ClientSecret:         ptr.String("__ClientSecret__"),
+		RefreshTokenValidity: 1,
+		AccessTokenValidity:  ptr.Int32(1),
+		IdTokenValidity:      ptr.Int32(1),
+		TokenValidityUnits: &types.TokenValidityUnitsType{
+			AccessToken:  types.TimeUnitsType("seconds"),
+			IdToken:      types.TimeUnitsType("seconds"),
+			RefreshToken: types.TimeUnitsType("seconds"),
+		},
+		ReadAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WriteAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExplicitAuthFlows: []types.ExplicitAuthFlowsType{
+			types.ExplicitAuthFlowsType("ADMIN_NO_SRP_AUTH"),
+			types.ExplicitAuthFlowsType("ADMIN_NO_SRP_AUTH"),
+		},
+		SupportedIdentityProviders: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CallbackURLs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogoutURLs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DefaultRedirectURI: ptr.String("__DefaultRedirectURI__"),
+		AllowedOAuthFlows: []types.OAuthFlowType{
+			types.OAuthFlowType("code"),
+			types.OAuthFlowType("code"),
+		},
+		AllowedOAuthScopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowedOAuthFlowsUserPoolClient: true,
+		AnalyticsConfiguration: &types.AnalyticsConfigurationType{
+			ApplicationId:  ptr.String("__ApplicationId__"),
+			ApplicationArn: ptr.String("__ApplicationArn__"),
+			RoleArn:        ptr.String("__RoleArn__"),
+			ExternalId:     ptr.String("__ExternalId__"),
+			UserDataShared: true,
+		},
+		PreventUserExistenceErrors:               types.PreventUserExistenceErrorTypes("LEGACY"),
+		EnableTokenRevocation:                    ptr.Bool(true),
+		EnablePropagateAdditionalUserContextData: ptr.Bool(true),
+		AuthSessionValidity:                      ptr.Int32(1),
+		RefreshTokenRotation: &types.RefreshTokenRotationType{
+			Feature:                 types.FeatureType("ENABLED"),
+			RetryGracePeriodSeconds: ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5144,7 +7035,41 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{})
+	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		CustomAttributes: []types.SchemaAttributeType{
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5169,7 +7094,40 @@ func TestCheckResponseSnapshot_Error_InvalidPasswordException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{})
+	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		UserAttributes: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ValidationData: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TemporaryPassword:  ptr.String("__TemporaryPassword__"),
+		ForceAliasCreation: true,
+		MessageAction:      types.MessageActionType("RESEND"),
+		DesiredDeliveryMediums: []types.DeliveryMediumType{
+			types.DeliveryMediumType("SMS"),
+			types.DeliveryMediumType("SMS"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5194,7 +7152,40 @@ func TestCheckResponseSnapshot_Error_InvalidSmsRoleAccessPolicyException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{})
+	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		UserAttributes: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ValidationData: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TemporaryPassword:  ptr.String("__TemporaryPassword__"),
+		ForceAliasCreation: true,
+		MessageAction:      types.MessageActionType("RESEND"),
+		DesiredDeliveryMediums: []types.DeliveryMediumType{
+			types.DeliveryMediumType("SMS"),
+			types.DeliveryMediumType("SMS"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5219,7 +7210,40 @@ func TestCheckResponseSnapshot_Error_InvalidSmsRoleTrustRelationshipException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{})
+	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		UserAttributes: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ValidationData: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TemporaryPassword:  ptr.String("__TemporaryPassword__"),
+		ForceAliasCreation: true,
+		MessageAction:      types.MessageActionType("RESEND"),
+		DesiredDeliveryMediums: []types.DeliveryMediumType{
+			types.DeliveryMediumType("SMS"),
+			types.DeliveryMediumType("SMS"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5244,7 +7268,11 @@ func TestCheckResponseSnapshot_Error_InvalidUserPoolConfigurationException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminForgetDevice(context.Background(), &AdminForgetDeviceInput{})
+	_, opErr := svc.AdminForgetDevice(context.Background(), &AdminForgetDeviceInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		DeviceKey:  ptr.String("__DeviceKey__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5269,7 +7297,11 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddUserPoolClientSecret(context.Background(), &AddUserPoolClientSecretInput{})
+	_, opErr := svc.AddUserPoolClientSecret(context.Background(), &AddUserPoolClientSecretInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5294,7 +7326,37 @@ func TestCheckResponseSnapshot_Error_MFAMethodNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{})
+	_, opErr := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		AuthFlow:   types.AuthFlowType("USER_SRP_AUTH"),
+		AuthParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ContextData: &types.ContextDataType{
+			IpAddress:  ptr.String("__IpAddress__"),
+			ServerName: ptr.String("__ServerName__"),
+			ServerPath: ptr.String("__ServerPath__"),
+			HttpHeaders: []types.HttpHeader{
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+			},
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		Session: ptr.String("__Session__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5319,7 +7381,28 @@ func TestCheckResponseSnapshot_Error_ManagedLoginBrandingExistsException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateManagedLoginBranding(context.Background(), &CreateManagedLoginBrandingInput{})
+	_, opErr := svc.CreateManagedLoginBranding(context.Background(), &CreateManagedLoginBrandingInput{
+		UserPoolId:               ptr.String("__UserPoolId__"),
+		ClientId:                 ptr.String("__ClientId__"),
+		UseCognitoProvidedValues: true,
+		Settings:                 document.NewLazyDocument("__Document__"),
+		Assets: []types.AssetType{
+			{
+				Category:   types.AssetCategoryType("FAVICON_ICO"),
+				ColorMode:  types.ColorSchemeModeType("LIGHT"),
+				Extension:  types.AssetExtensionType("ICO"),
+				Bytes:      []byte("blob"),
+				ResourceId: ptr.String("__ResourceId__"),
+			},
+			{
+				Category:   types.AssetCategoryType("FAVICON_ICO"),
+				ColorMode:  types.ColorSchemeModeType("LIGHT"),
+				Extension:  types.AssetExtensionType("ICO"),
+				Bytes:      []byte("blob"),
+				ResourceId: ptr.String("__ResourceId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5344,7 +7427,41 @@ func TestCheckResponseSnapshot_Error_NotAuthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{})
+	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		CustomAttributes: []types.SchemaAttributeType{
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5369,7 +7486,41 @@ func TestCheckResponseSnapshot_Error_OperationNotEnabledException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{})
+	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		CustomAttributes: []types.SchemaAttributeType{
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5394,7 +7545,37 @@ func TestCheckResponseSnapshot_Error_PasswordHistoryPolicyViolationException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminRespondToAuthChallenge(context.Background(), &AdminRespondToAuthChallengeInput{})
+	_, opErr := svc.AdminRespondToAuthChallenge(context.Background(), &AdminRespondToAuthChallengeInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		ClientId:      ptr.String("__ClientId__"),
+		ChallengeName: types.ChallengeNameType("SMS_MFA"),
+		ChallengeResponses: map[string]string{
+			"key0": "__Value__",
+		},
+		Session: ptr.String("__Session__"),
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ContextData: &types.ContextDataType{
+			IpAddress:  ptr.String("__IpAddress__"),
+			ServerName: ptr.String("__ServerName__"),
+			ServerPath: ptr.String("__ServerPath__"),
+			HttpHeaders: []types.HttpHeader{
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+			},
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5419,7 +7600,37 @@ func TestCheckResponseSnapshot_Error_PasswordResetRequiredException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{})
+	_, opErr := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		AuthFlow:   types.AuthFlowType("USER_SRP_AUTH"),
+		AuthParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ContextData: &types.ContextDataType{
+			IpAddress:  ptr.String("__IpAddress__"),
+			ServerName: ptr.String("__ServerName__"),
+			ServerPath: ptr.String("__ServerPath__"),
+			HttpHeaders: []types.HttpHeader{
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+			},
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		Session: ptr.String("__Session__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5444,7 +7655,40 @@ func TestCheckResponseSnapshot_Error_PreconditionNotMetException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{})
+	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		UserAttributes: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ValidationData: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TemporaryPassword:  ptr.String("__TemporaryPassword__"),
+		ForceAliasCreation: true,
+		MessageAction:      types.MessageActionType("RESEND"),
+		DesiredDeliveryMediums: []types.DeliveryMediumType{
+			types.DeliveryMediumType("SMS"),
+			types.DeliveryMediumType("SMS"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5469,7 +7713,15 @@ func TestCheckResponseSnapshot_Error_RefreshTokenReuseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetTokensFromRefreshToken(context.Background(), &GetTokensFromRefreshTokenInput{})
+	_, opErr := svc.GetTokensFromRefreshToken(context.Background(), &GetTokensFromRefreshTokenInput{
+		RefreshToken: ptr.String("__RefreshToken__"),
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		DeviceKey:    ptr.String("__DeviceKey__"),
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5494,7 +7746,41 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{})
+	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		CustomAttributes: []types.SchemaAttributeType{
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5519,7 +7805,69 @@ func TestCheckResponseSnapshot_Error_ScopeDoesNotExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUserPoolClient(context.Background(), &CreateUserPoolClientInput{})
+	_, opErr := svc.CreateUserPoolClient(context.Background(), &CreateUserPoolClientInput{
+		UserPoolId:           ptr.String("__UserPoolId__"),
+		ClientName:           ptr.String("__ClientName__"),
+		GenerateSecret:       true,
+		ClientSecret:         ptr.String("__ClientSecret__"),
+		RefreshTokenValidity: 1,
+		AccessTokenValidity:  ptr.Int32(1),
+		IdTokenValidity:      ptr.Int32(1),
+		TokenValidityUnits: &types.TokenValidityUnitsType{
+			AccessToken:  types.TimeUnitsType("seconds"),
+			IdToken:      types.TimeUnitsType("seconds"),
+			RefreshToken: types.TimeUnitsType("seconds"),
+		},
+		ReadAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WriteAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExplicitAuthFlows: []types.ExplicitAuthFlowsType{
+			types.ExplicitAuthFlowsType("ADMIN_NO_SRP_AUTH"),
+			types.ExplicitAuthFlowsType("ADMIN_NO_SRP_AUTH"),
+		},
+		SupportedIdentityProviders: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CallbackURLs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogoutURLs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DefaultRedirectURI: ptr.String("__DefaultRedirectURI__"),
+		AllowedOAuthFlows: []types.OAuthFlowType{
+			types.OAuthFlowType("code"),
+			types.OAuthFlowType("code"),
+		},
+		AllowedOAuthScopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowedOAuthFlowsUserPoolClient: true,
+		AnalyticsConfiguration: &types.AnalyticsConfigurationType{
+			ApplicationId:  ptr.String("__ApplicationId__"),
+			ApplicationArn: ptr.String("__ApplicationArn__"),
+			RoleArn:        ptr.String("__RoleArn__"),
+			ExternalId:     ptr.String("__ExternalId__"),
+			UserDataShared: true,
+		},
+		PreventUserExistenceErrors:               types.PreventUserExistenceErrorTypes("LEGACY"),
+		EnableTokenRevocation:                    ptr.Bool(true),
+		EnablePropagateAdditionalUserContextData: ptr.Bool(true),
+		AuthSessionValidity:                      ptr.Int32(1),
+		RefreshTokenRotation: &types.RefreshTokenRotationType{
+			Feature:                 types.FeatureType("ENABLED"),
+			RetryGracePeriodSeconds: ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5544,7 +7892,15 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateProvisionedLimit(context.Background(), &UpdateProvisionedLimitInput{})
+	_, opErr := svc.UpdateProvisionedLimit(context.Background(), &UpdateProvisionedLimitInput{
+		LimitDefinition: &types.LimitDefinitionType{
+			LimitClass: types.LimitClass("API_CATEGORY"),
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		RequestedLimitValue: 1,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5569,7 +7925,37 @@ func TestCheckResponseSnapshot_Error_SoftwareTokenMFANotFoundException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminRespondToAuthChallenge(context.Background(), &AdminRespondToAuthChallengeInput{})
+	_, opErr := svc.AdminRespondToAuthChallenge(context.Background(), &AdminRespondToAuthChallengeInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		ClientId:      ptr.String("__ClientId__"),
+		ChallengeName: types.ChallengeNameType("SMS_MFA"),
+		ChallengeResponses: map[string]string{
+			"key0": "__Value__",
+		},
+		Session: ptr.String("__Session__"),
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ContextData: &types.ContextDataType{
+			IpAddress:  ptr.String("__IpAddress__"),
+			ServerName: ptr.String("__ServerName__"),
+			ServerPath: ptr.String("__ServerPath__"),
+			HttpHeaders: []types.HttpHeader{
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+			},
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5594,7 +7980,16 @@ func TestCheckResponseSnapshot_Error_TermsExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTerms(context.Background(), &CreateTermsInput{})
+	_, opErr := svc.CreateTerms(context.Background(), &CreateTermsInput{
+		UserPoolId:  ptr.String("__UserPoolId__"),
+		ClientId:    ptr.String("__ClientId__"),
+		TermsName:   ptr.String("__TermsName__"),
+		TermsSource: types.TermsSourceType("LINK"),
+		Enforcement: types.TermsEnforcementType("NONE"),
+		Links: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5619,7 +8014,185 @@ func TestCheckResponseSnapshot_Error_TierChangeNotAllowedException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUserPool(context.Background(), &CreateUserPoolInput{})
+	_, opErr := svc.CreateUserPool(context.Background(), &CreateUserPoolInput{
+		PoolName: ptr.String("__PoolName__"),
+		Policies: &types.UserPoolPolicyType{
+			PasswordPolicy: &types.PasswordPolicyType{
+				MinimumLength:                 ptr.Int32(1),
+				RequireUppercase:              true,
+				RequireLowercase:              true,
+				RequireNumbers:                true,
+				RequireSymbols:                true,
+				PasswordHistorySize:           ptr.Int32(1),
+				TemporaryPasswordValidityDays: 1,
+			},
+			SignInPolicy: &types.SignInPolicyType{
+				AllowedFirstAuthFactors: []types.AuthFactorType{
+					types.AuthFactorType("PASSWORD"),
+					types.AuthFactorType("PASSWORD"),
+				},
+			},
+		},
+		DeletionProtection: types.DeletionProtectionType("ACTIVE"),
+		LambdaConfig: &types.LambdaConfigType{
+			PreSignUp:                   ptr.String("__PreSignUp__"),
+			CustomMessage:               ptr.String("__CustomMessage__"),
+			PostConfirmation:            ptr.String("__PostConfirmation__"),
+			PreAuthentication:           ptr.String("__PreAuthentication__"),
+			PostAuthentication:          ptr.String("__PostAuthentication__"),
+			DefineAuthChallenge:         ptr.String("__DefineAuthChallenge__"),
+			CreateAuthChallenge:         ptr.String("__CreateAuthChallenge__"),
+			VerifyAuthChallengeResponse: ptr.String("__VerifyAuthChallengeResponse__"),
+			PreTokenGeneration:          ptr.String("__PreTokenGeneration__"),
+			UserMigration:               ptr.String("__UserMigration__"),
+			PreTokenGenerationConfig: &types.PreTokenGenerationVersionConfigType{
+				LambdaVersion: types.PreTokenGenerationLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			CustomSMSSender: &types.CustomSMSLambdaVersionConfigType{
+				LambdaVersion: types.CustomSMSSenderLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			CustomEmailSender: &types.CustomEmailLambdaVersionConfigType{
+				LambdaVersion: types.CustomEmailSenderLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			KMSKeyID: ptr.String("__KMSKeyID__"),
+			InboundFederation: &types.InboundFederationLambdaType{
+				LambdaVersion: types.InboundFederationLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+		},
+		AutoVerifiedAttributes: []types.VerifiedAttributeType{
+			types.VerifiedAttributeType("phone_number"),
+			types.VerifiedAttributeType("phone_number"),
+		},
+		AliasAttributes: []types.AliasAttributeType{
+			types.AliasAttributeType("phone_number"),
+			types.AliasAttributeType("phone_number"),
+		},
+		UsernameAttributes: []types.UsernameAttributeType{
+			types.UsernameAttributeType("phone_number"),
+			types.UsernameAttributeType("phone_number"),
+		},
+		SmsVerificationMessage:   ptr.String("__SmsVerificationMessage__"),
+		EmailVerificationMessage: ptr.String("__EmailVerificationMessage__"),
+		EmailVerificationSubject: ptr.String("__EmailVerificationSubject__"),
+		VerificationMessageTemplate: &types.VerificationMessageTemplateType{
+			SmsMessage:         ptr.String("__SmsMessage__"),
+			EmailMessage:       ptr.String("__EmailMessage__"),
+			EmailSubject:       ptr.String("__EmailSubject__"),
+			EmailMessageByLink: ptr.String("__EmailMessageByLink__"),
+			EmailSubjectByLink: ptr.String("__EmailSubjectByLink__"),
+			DefaultEmailOption: types.DefaultEmailOptionType("CONFIRM_WITH_LINK"),
+		},
+		SmsAuthenticationMessage: ptr.String("__SmsAuthenticationMessage__"),
+		MfaConfiguration:         types.UserPoolMfaType("OFF"),
+		UserAttributeUpdateSettings: &types.UserAttributeUpdateSettingsType{
+			AttributesRequireVerificationBeforeUpdate: []types.VerifiedAttributeType{
+				types.VerifiedAttributeType("phone_number"),
+				types.VerifiedAttributeType("phone_number"),
+			},
+		},
+		DeviceConfiguration: &types.DeviceConfigurationType{
+			ChallengeRequiredOnNewDevice:     true,
+			DeviceOnlyRememberedOnUserPrompt: true,
+		},
+		EmailConfiguration: &types.EmailConfigurationType{
+			SourceArn:           ptr.String("__SourceArn__"),
+			ReplyToEmailAddress: ptr.String("__ReplyToEmailAddress__"),
+			EmailSendingAccount: types.EmailSendingAccountType("COGNITO_DEFAULT"),
+			From:                ptr.String("__From__"),
+			ConfigurationSet:    ptr.String("__ConfigurationSet__"),
+		},
+		SmsConfiguration: &types.SmsConfigurationType{
+			SnsCallerArn: ptr.String("__SnsCallerArn__"),
+			ExternalId:   ptr.String("__ExternalId__"),
+			SnsRegion:    ptr.String("__SnsRegion__"),
+			EumsSms: &types.EumsSmsConfigurationType{
+				CallerArn:            ptr.String("__CallerArn__"),
+				ExternalId:           ptr.String("__ExternalId__"),
+				OriginationIdentity:  ptr.String("__OriginationIdentity__"),
+				ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+				InEntityId:           ptr.String("__InEntityId__"),
+				InTemplateId:         ptr.String("__InTemplateId__"),
+				Region:               ptr.String("__Region__"),
+			},
+		},
+		UserPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+		AdminCreateUserConfig: &types.AdminCreateUserConfigType{
+			AllowAdminCreateUserOnly:  true,
+			UnusedAccountValidityDays: 1,
+			InviteMessageTemplate: &types.MessageTemplateType{
+				SMSMessage:   ptr.String("__SMSMessage__"),
+				EmailMessage: ptr.String("__EmailMessage__"),
+				EmailSubject: ptr.String("__EmailSubject__"),
+			},
+		},
+		Schema: []types.SchemaAttributeType{
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+		},
+		UserPoolAddOns: &types.UserPoolAddOnsType{
+			AdvancedSecurityMode: types.AdvancedSecurityModeType("OFF"),
+			AdvancedSecurityAdditionalFlows: &types.AdvancedSecurityAdditionalFlowsType{
+				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
+			},
+		},
+		UsernameConfiguration: &types.UsernameConfigurationType{
+			CaseSensitive: ptr.Bool(true),
+		},
+		AccountRecoverySetting: &types.AccountRecoverySettingType{
+			RecoveryMechanisms: []types.RecoveryOptionType{
+				{
+					Priority: ptr.Int32(1),
+					Name:     types.RecoveryOptionNameType("verified_email"),
+				},
+				{
+					Priority: ptr.Int32(1),
+					Name:     types.RecoveryOptionNameType("verified_email"),
+				},
+			},
+		},
+		UserPoolTier: types.UserPoolTierType("LITE"),
+		KeyConfiguration: &types.KeyConfigurationType{
+			KeyType:   types.EncryptionKeyType("AWS_OWNED_KEY"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		IssuerConfiguration: &types.IssuerConfigurationType{
+			Type: types.IssuerType("ORIGINAL"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5644,7 +8217,13 @@ func TestCheckResponseSnapshot_Error_TooManyFailedAttemptsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminConfirmSignUp(context.Background(), &AdminConfirmSignUpInput{})
+	_, opErr := svc.AdminConfirmSignUp(context.Background(), &AdminConfirmSignUpInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5669,7 +8248,41 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{})
+	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		CustomAttributes: []types.SchemaAttributeType{
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5694,7 +8307,11 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RevokeToken(context.Background(), &RevokeTokenInput{})
+	_, opErr := svc.RevokeToken(context.Background(), &RevokeTokenInput{
+		Token:        ptr.String("__Token__"),
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5719,7 +8336,13 @@ func TestCheckResponseSnapshot_Error_UnexpectedLambdaException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminConfirmSignUp(context.Background(), &AdminConfirmSignUpInput{})
+	_, opErr := svc.AdminConfirmSignUp(context.Background(), &AdminConfirmSignUpInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5744,7 +8367,10 @@ func TestCheckResponseSnapshot_Error_UnsupportedIdentityProviderException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteIdentityProvider(context.Background(), &DeleteIdentityProviderInput{})
+	_, opErr := svc.DeleteIdentityProvider(context.Background(), &DeleteIdentityProviderInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		ProviderName: ptr.String("__ProviderName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5769,7 +8395,37 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{})
+	_, opErr := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		AuthFlow:   types.AuthFlowType("USER_SRP_AUTH"),
+		AuthParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ContextData: &types.ContextDataType{
+			IpAddress:  ptr.String("__IpAddress__"),
+			ServerName: ptr.String("__ServerName__"),
+			ServerPath: ptr.String("__ServerPath__"),
+			HttpHeaders: []types.HttpHeader{
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+			},
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		Session: ptr.String("__Session__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5794,7 +8450,11 @@ func TestCheckResponseSnapshot_Error_UnsupportedTokenTypeException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RevokeToken(context.Background(), &RevokeTokenInput{})
+	_, opErr := svc.RevokeToken(context.Background(), &RevokeTokenInput{
+		Token:        ptr.String("__Token__"),
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5819,7 +8479,40 @@ func TestCheckResponseSnapshot_Error_UnsupportedUserStateException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{})
+	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		UserAttributes: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ValidationData: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TemporaryPassword:  ptr.String("__TemporaryPassword__"),
+		ForceAliasCreation: true,
+		MessageAction:      types.MessageActionType("RESEND"),
+		DesiredDeliveryMediums: []types.DeliveryMediumType{
+			types.DeliveryMediumType("SMS"),
+			types.DeliveryMediumType("SMS"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5844,7 +8537,41 @@ func TestCheckResponseSnapshot_Error_UserImportInProgressException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{})
+	_, opErr := svc.AddCustomAttributes(context.Background(), &AddCustomAttributesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		CustomAttributes: []types.SchemaAttributeType{
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5869,7 +8596,13 @@ func TestCheckResponseSnapshot_Error_UserLambdaValidationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminConfirmSignUp(context.Background(), &AdminConfirmSignUpInput{})
+	_, opErr := svc.AdminConfirmSignUp(context.Background(), &AdminConfirmSignUpInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5894,7 +8627,37 @@ func TestCheckResponseSnapshot_Error_UserNotConfirmedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{})
+	_, opErr := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		AuthFlow:   types.AuthFlowType("USER_SRP_AUTH"),
+		AuthParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
+		},
+		ContextData: &types.ContextDataType{
+			IpAddress:  ptr.String("__IpAddress__"),
+			ServerName: ptr.String("__ServerName__"),
+			ServerPath: ptr.String("__ServerPath__"),
+			HttpHeaders: []types.HttpHeader{
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+				{
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
+				},
+			},
+			EncodedData: ptr.String("__EncodedData__"),
+		},
+		Session: ptr.String("__Session__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5919,7 +8682,11 @@ func TestCheckResponseSnapshot_Error_UserNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminAddUserToGroup(context.Background(), &AdminAddUserToGroupInput{})
+	_, opErr := svc.AdminAddUserToGroup(context.Background(), &AdminAddUserToGroupInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		GroupName:  ptr.String("__GroupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5944,7 +8711,12 @@ func TestCheckResponseSnapshot_Error_UserPoolAddOnNotEnabledException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminListUserAuthEvents(context.Background(), &AdminListUserAuthEventsInput{})
+	_, opErr := svc.AdminListUserAuthEvents(context.Background(), &AdminListUserAuthEventsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5969,7 +8741,185 @@ func TestCheckResponseSnapshot_Error_UserPoolTaggingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUserPool(context.Background(), &CreateUserPoolInput{})
+	_, opErr := svc.CreateUserPool(context.Background(), &CreateUserPoolInput{
+		PoolName: ptr.String("__PoolName__"),
+		Policies: &types.UserPoolPolicyType{
+			PasswordPolicy: &types.PasswordPolicyType{
+				MinimumLength:                 ptr.Int32(1),
+				RequireUppercase:              true,
+				RequireLowercase:              true,
+				RequireNumbers:                true,
+				RequireSymbols:                true,
+				PasswordHistorySize:           ptr.Int32(1),
+				TemporaryPasswordValidityDays: 1,
+			},
+			SignInPolicy: &types.SignInPolicyType{
+				AllowedFirstAuthFactors: []types.AuthFactorType{
+					types.AuthFactorType("PASSWORD"),
+					types.AuthFactorType("PASSWORD"),
+				},
+			},
+		},
+		DeletionProtection: types.DeletionProtectionType("ACTIVE"),
+		LambdaConfig: &types.LambdaConfigType{
+			PreSignUp:                   ptr.String("__PreSignUp__"),
+			CustomMessage:               ptr.String("__CustomMessage__"),
+			PostConfirmation:            ptr.String("__PostConfirmation__"),
+			PreAuthentication:           ptr.String("__PreAuthentication__"),
+			PostAuthentication:          ptr.String("__PostAuthentication__"),
+			DefineAuthChallenge:         ptr.String("__DefineAuthChallenge__"),
+			CreateAuthChallenge:         ptr.String("__CreateAuthChallenge__"),
+			VerifyAuthChallengeResponse: ptr.String("__VerifyAuthChallengeResponse__"),
+			PreTokenGeneration:          ptr.String("__PreTokenGeneration__"),
+			UserMigration:               ptr.String("__UserMigration__"),
+			PreTokenGenerationConfig: &types.PreTokenGenerationVersionConfigType{
+				LambdaVersion: types.PreTokenGenerationLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			CustomSMSSender: &types.CustomSMSLambdaVersionConfigType{
+				LambdaVersion: types.CustomSMSSenderLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			CustomEmailSender: &types.CustomEmailLambdaVersionConfigType{
+				LambdaVersion: types.CustomEmailSenderLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+			KMSKeyID: ptr.String("__KMSKeyID__"),
+			InboundFederation: &types.InboundFederationLambdaType{
+				LambdaVersion: types.InboundFederationLambdaVersionType("V1_0"),
+				LambdaArn:     ptr.String("__LambdaArn__"),
+			},
+		},
+		AutoVerifiedAttributes: []types.VerifiedAttributeType{
+			types.VerifiedAttributeType("phone_number"),
+			types.VerifiedAttributeType("phone_number"),
+		},
+		AliasAttributes: []types.AliasAttributeType{
+			types.AliasAttributeType("phone_number"),
+			types.AliasAttributeType("phone_number"),
+		},
+		UsernameAttributes: []types.UsernameAttributeType{
+			types.UsernameAttributeType("phone_number"),
+			types.UsernameAttributeType("phone_number"),
+		},
+		SmsVerificationMessage:   ptr.String("__SmsVerificationMessage__"),
+		EmailVerificationMessage: ptr.String("__EmailVerificationMessage__"),
+		EmailVerificationSubject: ptr.String("__EmailVerificationSubject__"),
+		VerificationMessageTemplate: &types.VerificationMessageTemplateType{
+			SmsMessage:         ptr.String("__SmsMessage__"),
+			EmailMessage:       ptr.String("__EmailMessage__"),
+			EmailSubject:       ptr.String("__EmailSubject__"),
+			EmailMessageByLink: ptr.String("__EmailMessageByLink__"),
+			EmailSubjectByLink: ptr.String("__EmailSubjectByLink__"),
+			DefaultEmailOption: types.DefaultEmailOptionType("CONFIRM_WITH_LINK"),
+		},
+		SmsAuthenticationMessage: ptr.String("__SmsAuthenticationMessage__"),
+		MfaConfiguration:         types.UserPoolMfaType("OFF"),
+		UserAttributeUpdateSettings: &types.UserAttributeUpdateSettingsType{
+			AttributesRequireVerificationBeforeUpdate: []types.VerifiedAttributeType{
+				types.VerifiedAttributeType("phone_number"),
+				types.VerifiedAttributeType("phone_number"),
+			},
+		},
+		DeviceConfiguration: &types.DeviceConfigurationType{
+			ChallengeRequiredOnNewDevice:     true,
+			DeviceOnlyRememberedOnUserPrompt: true,
+		},
+		EmailConfiguration: &types.EmailConfigurationType{
+			SourceArn:           ptr.String("__SourceArn__"),
+			ReplyToEmailAddress: ptr.String("__ReplyToEmailAddress__"),
+			EmailSendingAccount: types.EmailSendingAccountType("COGNITO_DEFAULT"),
+			From:                ptr.String("__From__"),
+			ConfigurationSet:    ptr.String("__ConfigurationSet__"),
+		},
+		SmsConfiguration: &types.SmsConfigurationType{
+			SnsCallerArn: ptr.String("__SnsCallerArn__"),
+			ExternalId:   ptr.String("__ExternalId__"),
+			SnsRegion:    ptr.String("__SnsRegion__"),
+			EumsSms: &types.EumsSmsConfigurationType{
+				CallerArn:            ptr.String("__CallerArn__"),
+				ExternalId:           ptr.String("__ExternalId__"),
+				OriginationIdentity:  ptr.String("__OriginationIdentity__"),
+				ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+				InEntityId:           ptr.String("__InEntityId__"),
+				InTemplateId:         ptr.String("__InTemplateId__"),
+				Region:               ptr.String("__Region__"),
+			},
+		},
+		UserPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+		AdminCreateUserConfig: &types.AdminCreateUserConfigType{
+			AllowAdminCreateUserOnly:  true,
+			UnusedAccountValidityDays: 1,
+			InviteMessageTemplate: &types.MessageTemplateType{
+				SMSMessage:   ptr.String("__SMSMessage__"),
+				EmailMessage: ptr.String("__EmailMessage__"),
+				EmailSubject: ptr.String("__EmailSubject__"),
+			},
+		},
+		Schema: []types.SchemaAttributeType{
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				AttributeDataType:      types.AttributeDataType("String"),
+				DeveloperOnlyAttribute: ptr.Bool(true),
+				Mutable:                ptr.Bool(true),
+				Required:               ptr.Bool(true),
+				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
+					MinValue: ptr.String("__MinValue__"),
+					MaxValue: ptr.String("__MaxValue__"),
+				},
+				StringAttributeConstraints: &types.StringAttributeConstraintsType{
+					MinLength: ptr.String("__MinLength__"),
+					MaxLength: ptr.String("__MaxLength__"),
+				},
+			},
+		},
+		UserPoolAddOns: &types.UserPoolAddOnsType{
+			AdvancedSecurityMode: types.AdvancedSecurityModeType("OFF"),
+			AdvancedSecurityAdditionalFlows: &types.AdvancedSecurityAdditionalFlowsType{
+				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
+			},
+		},
+		UsernameConfiguration: &types.UsernameConfigurationType{
+			CaseSensitive: ptr.Bool(true),
+		},
+		AccountRecoverySetting: &types.AccountRecoverySettingType{
+			RecoveryMechanisms: []types.RecoveryOptionType{
+				{
+					Priority: ptr.Int32(1),
+					Name:     types.RecoveryOptionNameType("verified_email"),
+				},
+				{
+					Priority: ptr.Int32(1),
+					Name:     types.RecoveryOptionNameType("verified_email"),
+				},
+			},
+		},
+		UserPoolTier: types.UserPoolTierType("LITE"),
+		KeyConfiguration: &types.KeyConfigurationType{
+			KeyType:   types.EncryptionKeyType("AWS_OWNED_KEY"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		IssuerConfiguration: &types.IssuerConfigurationType{
+			Type: types.IssuerType("ORIGINAL"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5994,7 +8944,40 @@ func TestCheckResponseSnapshot_Error_UsernameExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{})
+	_, opErr := svc.AdminCreateUser(context.Background(), &AdminCreateUserInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		UserAttributes: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ValidationData: []types.AttributeType{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TemporaryPassword:  ptr.String("__TemporaryPassword__"),
+		ForceAliasCreation: true,
+		MessageAction:      types.MessageActionType("RESEND"),
+		DesiredDeliveryMediums: []types.DeliveryMediumType{
+			types.DeliveryMediumType("SMS"),
+			types.DeliveryMediumType("SMS"),
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6019,7 +9002,10 @@ func TestCheckResponseSnapshot_Error_WebAuthnChallengeNotFoundException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{})
+	_, opErr := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		Credential:  document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6044,7 +9030,10 @@ func TestCheckResponseSnapshot_Error_WebAuthnClientMismatchException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{})
+	_, opErr := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		Credential:  document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6069,7 +9058,9 @@ func TestCheckResponseSnapshot_Error_WebAuthnConfigurationMissingException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartWebAuthnRegistration(context.Background(), &StartWebAuthnRegistrationInput{})
+	_, opErr := svc.StartWebAuthnRegistration(context.Background(), &StartWebAuthnRegistrationInput{
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6094,7 +9085,10 @@ func TestCheckResponseSnapshot_Error_WebAuthnCredentialNotSupportedException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{})
+	_, opErr := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		Credential:  document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6119,7 +9113,10 @@ func TestCheckResponseSnapshot_Error_WebAuthnNotEnabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{})
+	_, opErr := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		Credential:  document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6144,7 +9141,10 @@ func TestCheckResponseSnapshot_Error_WebAuthnOriginNotAllowedException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{})
+	_, opErr := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		Credential:  document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6169,7 +9169,10 @@ func TestCheckResponseSnapshot_Error_WebAuthnRelyingPartyMismatchException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{})
+	_, opErr := svc.CompleteWebAuthnRegistration(context.Background(), &CompleteWebAuthnRegistrationInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		Credential:  document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

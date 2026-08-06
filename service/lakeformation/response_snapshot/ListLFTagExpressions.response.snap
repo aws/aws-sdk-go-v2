@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LFTagExpressions":[{"CatalogId":"__CatalogId__","Description":"__Description__","Expression":[{"TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]},{"TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}],"Name":"__Name__"},{"CatalogId":"__CatalogId__","Description":"__Description__","Expression":[{"TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]},{"TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}],"Name":"__Name__"}],"NextToken":"__NextToken__"}

@@ -1,0 +1,6 @@
+200
+Content-Type: application/xml
+Etag: __ETag__
+Location: __Location__
+
+<PublicKey xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><CreatedTime>2000-01-01T00:00:00Z</CreatedTime><Id>__Id__</Id><PublicKeyConfig><CallerReference>__CallerReference__</CallerReference><Comment>__Comment__</Comment><EncodedKey>__EncodedKey__</EncodedKey><Name>__Name__</Name></PublicKeyConfig></PublicKey>

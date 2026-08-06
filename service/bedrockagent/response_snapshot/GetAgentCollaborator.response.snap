@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentCollaborator":{"agentDescriptor":{"aliasArn":"__AliasArn__"},"agentId":"__AgentId__","agentVersion":"__AgentVersion__","clientToken":"__ClientToken__","collaborationInstruction":"__CollaborationInstruction__","collaboratorId":"__CollaboratorId__","collaboratorName":"__CollaboratorName__","createdAt":"2000-01-01T00:00:00Z","lastUpdatedAt":"2000-01-01T00:00:00Z","relayConversationHistory":"TO_COLLABORATOR"}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"functionPackages":[{"arn":"__Arn__","id":"__Id__","metadata":{"createdAt":"2000-01-01T00:00:00Z","lastModified":"2000-01-01T00:00:00Z"},"onboardingState":"CREATED","operationalState":"ENABLED","usageState":"IN_USE","vnfProductName":"__VnfProductName__","vnfProvider":"__VnfProvider__","vnfdId":"__VnfdId__","vnfdVersion":"__VnfdVersion__"},{"arn":"__Arn__","id":"__Id__","metadata":{"createdAt":"2000-01-01T00:00:00Z","lastModified":"2000-01-01T00:00:00Z"},"onboardingState":"CREATED","operationalState":"ENABLED","usageState":"IN_USE","vnfProductName":"__VnfProductName__","vnfProvider":"__VnfProvider__","vnfdId":"__VnfdId__","vnfdVersion":"__VnfdVersion__"}],"nextToken":"__NextToken__"}

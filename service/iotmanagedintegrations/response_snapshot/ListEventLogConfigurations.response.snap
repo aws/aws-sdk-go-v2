@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EventLogConfigurationList":[{"EventLogLevel":"DEBUG","Id":"__Id__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"},{"EventLogLevel":"DEBUG","Id":"__Id__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}],"NextToken":"__NextToken__"}

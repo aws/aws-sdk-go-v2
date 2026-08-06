@@ -118,7 +118,61 @@ func TestCheckResponseSnapshot_AllQueryStringTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AllQueryStringTypes(context.Background(), &AllQueryStringTypesInput{})
+	got, err := svc.AllQueryStringTypes(context.Background(), &AllQueryStringTypesInput{
+		QueryString: ptr.String("__QueryString__"),
+		QueryStringList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		QueryStringSet: []string{
+			"__Member__",
+			"__Member__",
+		},
+		QueryByte:    ptr.Int8(1),
+		QueryShort:   ptr.Int16(1),
+		QueryInteger: ptr.Int32(1),
+		QueryIntegerList: []int32{
+			1,
+			1,
+		},
+		QueryIntegerSet: []int32{
+			1,
+			1,
+		},
+		QueryLong:   ptr.Int64(1),
+		QueryFloat:  ptr.Float32(1.0),
+		QueryDouble: ptr.Float64(1.0),
+		QueryDoubleList: []float64{
+			1.0,
+			1.0,
+		},
+		QueryBoolean: ptr.Bool(true),
+		QueryBooleanList: []bool{
+			true,
+			true,
+		},
+		QueryTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QueryTimestampList: []time.Time{
+			time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+			time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+		},
+		QueryEnum: types.FooEnum("Foo"),
+		QueryEnumList: []types.FooEnum{
+			types.FooEnum("Foo"),
+			types.FooEnum("Foo"),
+		},
+		QueryIntegerEnum: types.IntegerEnum(1),
+		QueryIntegerEnumList: []types.IntegerEnum{
+			types.IntegerEnum(1),
+			types.IntegerEnum(1),
+		},
+		QueryParamsMapOfStringList: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -137,7 +191,10 @@ func TestCheckResponseSnapshot_ConstantAndVariableQueryString(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConstantAndVariableQueryString(context.Background(), &ConstantAndVariableQueryStringInput{})
+	got, err := svc.ConstantAndVariableQueryString(context.Background(), &ConstantAndVariableQueryStringInput{
+		Baz:      ptr.String("__Baz__"),
+		MaybeSet: ptr.String("__MaybeSet__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -156,7 +213,9 @@ func TestCheckResponseSnapshot_ConstantQueryString(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConstantQueryString(context.Background(), &ConstantQueryStringInput{})
+	got, err := svc.ConstantQueryString(context.Background(), &ConstantQueryStringInput{
+		Hello: ptr.String("__Hello__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -175,7 +234,9 @@ func TestCheckResponseSnapshot_ContentTypeParameters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ContentTypeParameters(context.Background(), &ContentTypeParametersInput{})
+	got, err := svc.ContentTypeParameters(context.Background(), &ContentTypeParametersInput{
+		Value: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -208,7 +269,7 @@ func TestCheckResponseSnapshot_DatetimeOffsets(t *testing.T) {
 func TestCheckResponseSnapshot_DocumentType(t *testing.T) {
 	want := &DocumentTypeOutput{
 		StringValue:   ptr.String("__StringValue__"),
-		DocumentValue: nil,
+		DocumentValue: document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DocumentType.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -218,7 +279,10 @@ func TestCheckResponseSnapshot_DocumentType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DocumentType(context.Background(), &DocumentTypeInput{})
+	got, err := svc.DocumentType(context.Background(), &DocumentTypeInput{
+		StringValue:   ptr.String("__StringValue__"),
+		DocumentValue: document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -230,7 +294,7 @@ func TestCheckResponseSnapshot_DocumentType(t *testing.T) {
 func TestCheckResponseSnapshot_DocumentTypeAsMapValue(t *testing.T) {
 	want := &DocumentTypeAsMapValueOutput{
 		DocValuedMap: map[string]document.Interface{
-			"key0": nil,
+			"key0": document.NewLazyDocument("__Document__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DocumentTypeAsMapValue.response")
@@ -241,7 +305,11 @@ func TestCheckResponseSnapshot_DocumentTypeAsMapValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DocumentTypeAsMapValue(context.Background(), &DocumentTypeAsMapValueInput{})
+	got, err := svc.DocumentTypeAsMapValue(context.Background(), &DocumentTypeAsMapValueInput{
+		DocValuedMap: map[string]document.Interface{
+			"key0": document.NewLazyDocument("__Document__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +320,7 @@ func TestCheckResponseSnapshot_DocumentTypeAsMapValue(t *testing.T) {
 
 func TestCheckResponseSnapshot_DocumentTypeAsPayload(t *testing.T) {
 	want := &DocumentTypeAsPayloadOutput{
-		DocumentValue: nil,
+		DocumentValue: document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DocumentTypeAsPayload.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -262,13 +330,27 @@ func TestCheckResponseSnapshot_DocumentTypeAsPayload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DocumentTypeAsPayload(context.Background(), &DocumentTypeAsPayloadInput{})
+	got, err := svc.DocumentTypeAsPayload(context.Background(), &DocumentTypeAsPayloadInput{
+		DocumentValue: document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DocumentTypeAsPayload.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_DuplexStream(t *testing.T) {
+	t.Skip("event stream operation")
+}
+
+func TestCheckResponseSnapshot_DuplexStreamWithDistinctStreams(t *testing.T) {
+	t.Skip("event stream operation")
+}
+
+func TestCheckResponseSnapshot_DuplexStreamWithInitialMessages(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_EmptyInputAndEmptyOutput(t *testing.T) {
@@ -319,7 +401,9 @@ func TestCheckResponseSnapshot_EndpointWithHostLabelOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EndpointWithHostLabelOperation(context.Background(), &EndpointWithHostLabelOperationInput{})
+	got, err := svc.EndpointWithHostLabelOperation(context.Background(), &EndpointWithHostLabelOperationInput{
+		Label: ptr.String("Label-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -401,7 +485,9 @@ func TestCheckResponseSnapshot_HttpChecksumRequired(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpChecksumRequired(context.Background(), &HttpChecksumRequiredInput{})
+	got, err := svc.HttpChecksumRequired(context.Background(), &HttpChecksumRequiredInput{
+		Foo: ptr.String("__Foo__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -411,27 +497,7 @@ func TestCheckResponseSnapshot_HttpChecksumRequired(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_HttpEmptyPrefixHeaders(t *testing.T) {
-	want := &HttpEmptyPrefixHeadersOutput{
-		PrefixHeaders: map[string]string{
-			"key0": "__Value__",
-		},
-		SpecificHeader: ptr.String("__SpecificHeader__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("HttpEmptyPrefixHeaders.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpEmptyPrefixHeaders(context.Background(), &HttpEmptyPrefixHeadersInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "HttpEmptyPrefixHeaders.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_HttpEnumPayload(t *testing.T) {
@@ -446,7 +512,9 @@ func TestCheckResponseSnapshot_HttpEnumPayload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpEnumPayload(context.Background(), &HttpEnumPayloadInput{})
+	got, err := svc.HttpEnumPayload(context.Background(), &HttpEnumPayloadInput{
+		Payload: types.StringEnum("enumvalue"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -468,7 +536,10 @@ func TestCheckResponseSnapshot_HttpPayloadTraits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpPayloadTraits(context.Background(), &HttpPayloadTraitsInput{})
+	got, err := svc.HttpPayloadTraits(context.Background(), &HttpPayloadTraitsInput{
+		Foo:  ptr.String("__Foo__"),
+		Blob: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -490,7 +561,10 @@ func TestCheckResponseSnapshot_HttpPayloadTraitsWithMediaType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpPayloadTraitsWithMediaType(context.Background(), &HttpPayloadTraitsWithMediaTypeInput{})
+	got, err := svc.HttpPayloadTraitsWithMediaType(context.Background(), &HttpPayloadTraitsWithMediaTypeInput{
+		Foo:  ptr.String("__Foo__"),
+		Blob: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -514,7 +588,12 @@ func TestCheckResponseSnapshot_HttpPayloadWithStructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpPayloadWithStructure(context.Background(), &HttpPayloadWithStructureInput{})
+	got, err := svc.HttpPayloadWithStructure(context.Background(), &HttpPayloadWithStructureInput{
+		Nested: &types.NestedPayload{
+			Greeting: ptr.String("__Greeting__"),
+			Name:     ptr.String("__Name__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -537,7 +616,11 @@ func TestCheckResponseSnapshot_HttpPayloadWithUnion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpPayloadWithUnion(context.Background(), &HttpPayloadWithUnionInput{})
+	got, err := svc.HttpPayloadWithUnion(context.Background(), &HttpPayloadWithUnionInput{
+		Nested: &types.UnionPayloadMemberGreeting{
+			Value: "__UnionPayloadMemberGreeting__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -561,7 +644,12 @@ func TestCheckResponseSnapshot_HttpPrefixHeaders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpPrefixHeaders(context.Background(), &HttpPrefixHeadersInput{})
+	got, err := svc.HttpPrefixHeaders(context.Background(), &HttpPrefixHeadersInput{
+		Foo: ptr.String("__Foo__"),
+		FooMap: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -571,26 +659,7 @@ func TestCheckResponseSnapshot_HttpPrefixHeaders(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_HttpPrefixHeadersInResponse(t *testing.T) {
-	want := &HttpPrefixHeadersInResponseOutput{
-		PrefixHeaders: map[string]string{
-			"key0": "__Value__",
-		},
-	}
-	status, header, body, err := serdeRespReadSnapshot("HttpPrefixHeadersInResponse.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpPrefixHeadersInResponse(context.Background(), &HttpPrefixHeadersInResponseInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "HttpPrefixHeadersInResponse.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_HttpQueryParamsOnlyOperation(t *testing.T) {
@@ -603,7 +672,11 @@ func TestCheckResponseSnapshot_HttpQueryParamsOnlyOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpQueryParamsOnlyOperation(context.Background(), &HttpQueryParamsOnlyOperationInput{})
+	got, err := svc.HttpQueryParamsOnlyOperation(context.Background(), &HttpQueryParamsOnlyOperationInput{
+		QueryMap: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -622,7 +695,10 @@ func TestCheckResponseSnapshot_HttpRequestWithFloatLabels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpRequestWithFloatLabels(context.Background(), &HttpRequestWithFloatLabelsInput{})
+	got, err := svc.HttpRequestWithFloatLabels(context.Background(), &HttpRequestWithFloatLabelsInput{
+		Float:  ptr.Float32(1.0),
+		Double: ptr.Float64(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -641,7 +717,10 @@ func TestCheckResponseSnapshot_HttpRequestWithGreedyLabelInPath(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpRequestWithGreedyLabelInPath(context.Background(), &HttpRequestWithGreedyLabelInPathInput{})
+	got, err := svc.HttpRequestWithGreedyLabelInPath(context.Background(), &HttpRequestWithGreedyLabelInPathInput{
+		Foo: ptr.String("__Foo__"),
+		Baz: ptr.String("__Baz__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -660,7 +739,16 @@ func TestCheckResponseSnapshot_HttpRequestWithLabels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpRequestWithLabels(context.Background(), &HttpRequestWithLabelsInput{})
+	got, err := svc.HttpRequestWithLabels(context.Background(), &HttpRequestWithLabelsInput{
+		String_:   ptr.String("__String___"),
+		Short:     ptr.Int16(1),
+		Integer:   ptr.Int32(1),
+		Long:      ptr.Int64(1),
+		Float:     ptr.Float32(1.0),
+		Double:    ptr.Float64(1.0),
+		Boolean:   ptr.Bool(true),
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -679,7 +767,15 @@ func TestCheckResponseSnapshot_HttpRequestWithLabelsAndTimestampFormat(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpRequestWithLabelsAndTimestampFormat(context.Background(), &HttpRequestWithLabelsAndTimestampFormatInput{})
+	got, err := svc.HttpRequestWithLabelsAndTimestampFormat(context.Background(), &HttpRequestWithLabelsAndTimestampFormatInput{
+		MemberEpochSeconds: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MemberHttpDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MemberDateTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DefaultFormat:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TargetEpochSeconds: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TargetHttpDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TargetDateTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -698,7 +794,9 @@ func TestCheckResponseSnapshot_HttpRequestWithRegexLiteral(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpRequestWithRegexLiteral(context.Background(), &HttpRequestWithRegexLiteralInput{})
+	got, err := svc.HttpRequestWithRegexLiteral(context.Background(), &HttpRequestWithRegexLiteralInput{
+		Str: ptr.String("__Str__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -709,7 +807,7 @@ func TestCheckResponseSnapshot_HttpRequestWithRegexLiteral(t *testing.T) {
 
 func TestCheckResponseSnapshot_HttpResponseCode(t *testing.T) {
 	want := &HttpResponseCodeOutput{
-		Status: ptr.Int32(1),
+		Status: ptr.Int32(200),
 	}
 	status, header, body, err := serdeRespReadSnapshot("HttpResponseCode.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -740,7 +838,9 @@ func TestCheckResponseSnapshot_HttpStringPayload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HttpStringPayload(context.Background(), &HttpStringPayloadInput{})
+	got, err := svc.HttpStringPayload(context.Background(), &HttpStringPayloadInput{
+		Payload: ptr.String("__Payload__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -750,24 +850,7 @@ func TestCheckResponseSnapshot_HttpStringPayload(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_IgnoreQueryParamsInResponse(t *testing.T) {
-	want := &IgnoreQueryParamsInResponseOutput{
-		Baz: ptr.String("__Baz__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("IgnoreQueryParamsInResponse.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.IgnoreQueryParamsInResponse(context.Background(), &IgnoreQueryParamsInResponseInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "IgnoreQueryParamsInResponse.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_InputAndOutputWithHeaders(t *testing.T) {
@@ -820,13 +903,61 @@ func TestCheckResponseSnapshot_InputAndOutputWithHeaders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InputAndOutputWithHeaders(context.Background(), &InputAndOutputWithHeadersInput{})
+	got, err := svc.InputAndOutputWithHeaders(context.Background(), &InputAndOutputWithHeadersInput{
+		HeaderString:    ptr.String("__HeaderString__"),
+		HeaderByte:      ptr.Int8(1),
+		HeaderShort:     ptr.Int16(1),
+		HeaderInteger:   ptr.Int32(1),
+		HeaderLong:      ptr.Int64(1),
+		HeaderFloat:     ptr.Float32(1.0),
+		HeaderDouble:    ptr.Float64(1.0),
+		HeaderTrueBool:  ptr.Bool(true),
+		HeaderFalseBool: ptr.Bool(true),
+		HeaderStringList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		HeaderStringSet: []string{
+			"__Member__",
+			"__Member__",
+		},
+		HeaderIntegerList: []int32{
+			1,
+			1,
+		},
+		HeaderBooleanList: []bool{
+			true,
+			true,
+		},
+		HeaderTimestampList: []time.Time{
+			time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+			time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+		},
+		HeaderEnum: types.FooEnum("Foo"),
+		HeaderEnumList: []types.FooEnum{
+			types.FooEnum("Foo"),
+			types.FooEnum("Foo"),
+		},
+		HeaderIntegerEnum: types.IntegerEnum(1),
+		HeaderIntegerEnumList: []types.IntegerEnum{
+			types.IntegerEnum(1),
+			types.IntegerEnum(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "InputAndOutputWithHeaders.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_InputStream(t *testing.T) {
+	t.Skip("event stream operation")
+}
+
+func TestCheckResponseSnapshot_InputStreamWithInitialRequest(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_JsonBlobs(t *testing.T) {
@@ -841,7 +972,9 @@ func TestCheckResponseSnapshot_JsonBlobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JsonBlobs(context.Background(), &JsonBlobsInput{})
+	got, err := svc.JsonBlobs(context.Background(), &JsonBlobsInput{
+		Data: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -875,7 +1008,22 @@ func TestCheckResponseSnapshot_JsonEnums(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JsonEnums(context.Background(), &JsonEnumsInput{})
+	got, err := svc.JsonEnums(context.Background(), &JsonEnumsInput{
+		FooEnum1: types.FooEnum("Foo"),
+		FooEnum2: types.FooEnum("Foo"),
+		FooEnum3: types.FooEnum("Foo"),
+		FooEnumList: []types.FooEnum{
+			types.FooEnum("Foo"),
+			types.FooEnum("Foo"),
+		},
+		FooEnumSet: []types.FooEnum{
+			types.FooEnum("Foo"),
+			types.FooEnum("Foo"),
+		},
+		FooEnumMap: map[string]types.FooEnum{
+			"key0": types.FooEnum("Foo"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -909,7 +1057,22 @@ func TestCheckResponseSnapshot_JsonIntEnums(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JsonIntEnums(context.Background(), &JsonIntEnumsInput{})
+	got, err := svc.JsonIntEnums(context.Background(), &JsonIntEnumsInput{
+		IntegerEnum1: types.IntegerEnum(1),
+		IntegerEnum2: types.IntegerEnum(1),
+		IntegerEnum3: types.IntegerEnum(1),
+		IntegerEnumList: []types.IntegerEnum{
+			types.IntegerEnum(1),
+			types.IntegerEnum(1),
+		},
+		IntegerEnumSet: []types.IntegerEnum{
+			types.IntegerEnum(1),
+			types.IntegerEnum(1),
+		},
+		IntegerEnumMap: map[string]types.IntegerEnum{
+			"key0": types.IntegerEnum(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -977,7 +1140,56 @@ func TestCheckResponseSnapshot_JsonLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JsonLists(context.Background(), &JsonListsInput{})
+	got, err := svc.JsonLists(context.Background(), &JsonListsInput{
+		StringList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StringSet: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IntegerList: []int32{
+			1,
+			1,
+		},
+		BooleanList: []bool{
+			true,
+			true,
+		},
+		TimestampList: []time.Time{
+			time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+			time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+		},
+		EnumList: []types.FooEnum{
+			types.FooEnum("Foo"),
+			types.FooEnum("Foo"),
+		},
+		IntEnumList: []types.IntegerEnum{
+			types.IntegerEnum(1),
+			types.IntegerEnum(1),
+		},
+		NestedStringList: [][]string{
+			{
+				"__Member__",
+				"__Member__",
+			},
+			{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		StructureList: []types.StructureListMember{
+			{
+				A: ptr.String("__A__"),
+				B: ptr.String("__B__"),
+			},
+			{
+				A: ptr.String("__A__"),
+				B: ptr.String("__B__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1017,7 +1229,28 @@ func TestCheckResponseSnapshot_JsonMaps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JsonMaps(context.Background(), &JsonMapsInput{})
+	got, err := svc.JsonMaps(context.Background(), &JsonMapsInput{
+		DenseStructMap: map[string]types.GreetingStruct{
+			"key0": {
+				Hi: ptr.String("__Hi__"),
+			},
+		},
+		DenseNumberMap: map[string]int32{
+			"key0": 1,
+		},
+		DenseBooleanMap: map[string]bool{
+			"key0": true,
+		},
+		DenseStringMap: map[string]string{
+			"key0": "__Value__",
+		},
+		DenseSetMap: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1044,7 +1277,15 @@ func TestCheckResponseSnapshot_JsonTimestamps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JsonTimestamps(context.Background(), &JsonTimestampsInput{})
+	got, err := svc.JsonTimestamps(context.Background(), &JsonTimestampsInput{
+		Normal:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DateTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DateTimeOnTarget:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EpochSeconds:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EpochSecondsOnTarget: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		HttpDate:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		HttpDateOnTarget:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1067,7 +1308,11 @@ func TestCheckResponseSnapshot_JsonUnions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JsonUnions(context.Background(), &JsonUnionsInput{})
+	got, err := svc.JsonUnions(context.Background(), &JsonUnionsInput{
+		Contents: &types.MyUnionMemberStringValue{
+			Value: "__MyUnionMemberStringValue__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1149,7 +1394,9 @@ func TestCheckResponseSnapshot_MalformedBlob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedBlob(context.Background(), &MalformedBlobInput{})
+	got, err := svc.MalformedBlob(context.Background(), &MalformedBlobInput{
+		Blob: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1168,7 +1415,12 @@ func TestCheckResponseSnapshot_MalformedBoolean(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedBoolean(context.Background(), &MalformedBooleanInput{})
+	got, err := svc.MalformedBoolean(context.Background(), &MalformedBooleanInput{
+		BooleanInBody:   ptr.Bool(true),
+		BooleanInPath:   ptr.Bool(true),
+		BooleanInQuery:  ptr.Bool(true),
+		BooleanInHeader: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1187,7 +1439,12 @@ func TestCheckResponseSnapshot_MalformedByte(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedByte(context.Background(), &MalformedByteInput{})
+	got, err := svc.MalformedByte(context.Background(), &MalformedByteInput{
+		ByteInBody:   ptr.Int8(1),
+		ByteInPath:   ptr.Int8(1),
+		ByteInQuery:  ptr.Int8(1),
+		ByteInHeader: ptr.Int8(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1206,7 +1463,9 @@ func TestCheckResponseSnapshot_MalformedContentTypeWithBody(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedContentTypeWithBody(context.Background(), &MalformedContentTypeWithBodyInput{})
+	got, err := svc.MalformedContentTypeWithBody(context.Background(), &MalformedContentTypeWithBodyInput{
+		Hi: ptr.String("__Hi__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1225,7 +1484,9 @@ func TestCheckResponseSnapshot_MalformedContentTypeWithGenericString(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedContentTypeWithGenericString(context.Background(), &MalformedContentTypeWithGenericStringInput{})
+	got, err := svc.MalformedContentTypeWithGenericString(context.Background(), &MalformedContentTypeWithGenericStringInput{
+		Payload: ptr.String("__Payload__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1244,7 +1505,9 @@ func TestCheckResponseSnapshot_MalformedContentTypeWithPayload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedContentTypeWithPayload(context.Background(), &MalformedContentTypeWithPayloadInput{})
+	got, err := svc.MalformedContentTypeWithPayload(context.Background(), &MalformedContentTypeWithPayloadInput{
+		Payload: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1282,7 +1545,9 @@ func TestCheckResponseSnapshot_MalformedContentTypeWithoutBodyEmptyInput(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedContentTypeWithoutBodyEmptyInput(context.Background(), &MalformedContentTypeWithoutBodyEmptyInputInput{})
+	got, err := svc.MalformedContentTypeWithoutBodyEmptyInput(context.Background(), &MalformedContentTypeWithoutBodyEmptyInputInput{
+		Header: ptr.String("__Header__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1301,7 +1566,12 @@ func TestCheckResponseSnapshot_MalformedDouble(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedDouble(context.Background(), &MalformedDoubleInput{})
+	got, err := svc.MalformedDouble(context.Background(), &MalformedDoubleInput{
+		DoubleInBody:   ptr.Float64(1.0),
+		DoubleInPath:   ptr.Float64(1.0),
+		DoubleInQuery:  ptr.Float64(1.0),
+		DoubleInHeader: ptr.Float64(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1320,7 +1590,12 @@ func TestCheckResponseSnapshot_MalformedFloat(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedFloat(context.Background(), &MalformedFloatInput{})
+	got, err := svc.MalformedFloat(context.Background(), &MalformedFloatInput{
+		FloatInBody:   ptr.Float32(1.0),
+		FloatInPath:   ptr.Float32(1.0),
+		FloatInQuery:  ptr.Float32(1.0),
+		FloatInHeader: ptr.Float32(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1339,7 +1614,12 @@ func TestCheckResponseSnapshot_MalformedInteger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedInteger(context.Background(), &MalformedIntegerInput{})
+	got, err := svc.MalformedInteger(context.Background(), &MalformedIntegerInput{
+		IntegerInBody:   ptr.Int32(1),
+		IntegerInPath:   ptr.Int32(1),
+		IntegerInQuery:  ptr.Int32(1),
+		IntegerInHeader: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1358,7 +1638,12 @@ func TestCheckResponseSnapshot_MalformedList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedList(context.Background(), &MalformedListInput{})
+	got, err := svc.MalformedList(context.Background(), &MalformedListInput{
+		BodyList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1377,7 +1662,12 @@ func TestCheckResponseSnapshot_MalformedLong(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedLong(context.Background(), &MalformedLongInput{})
+	got, err := svc.MalformedLong(context.Background(), &MalformedLongInput{
+		LongInBody:   ptr.Int64(1),
+		LongInPath:   ptr.Int64(1),
+		LongInQuery:  ptr.Int64(1),
+		LongInHeader: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1396,7 +1686,11 @@ func TestCheckResponseSnapshot_MalformedMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedMap(context.Background(), &MalformedMapInput{})
+	got, err := svc.MalformedMap(context.Background(), &MalformedMapInput{
+		BodyMap: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1415,7 +1709,10 @@ func TestCheckResponseSnapshot_MalformedRequestBody(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedRequestBody(context.Background(), &MalformedRequestBodyInput{})
+	got, err := svc.MalformedRequestBody(context.Background(), &MalformedRequestBodyInput{
+		Int:   ptr.Int32(1),
+		Float: ptr.Float32(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1434,7 +1731,12 @@ func TestCheckResponseSnapshot_MalformedShort(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedShort(context.Background(), &MalformedShortInput{})
+	got, err := svc.MalformedShort(context.Background(), &MalformedShortInput{
+		ShortInBody:   ptr.Int16(1),
+		ShortInPath:   ptr.Int16(1),
+		ShortInQuery:  ptr.Int16(1),
+		ShortInHeader: ptr.Int16(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1453,7 +1755,9 @@ func TestCheckResponseSnapshot_MalformedString(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedString(context.Background(), &MalformedStringInput{})
+	got, err := svc.MalformedString(context.Background(), &MalformedStringInput{
+		Blob: ptr.String("__Blob__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1472,7 +1776,9 @@ func TestCheckResponseSnapshot_MalformedTimestampBodyDateTime(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedTimestampBodyDateTime(context.Background(), &MalformedTimestampBodyDateTimeInput{})
+	got, err := svc.MalformedTimestampBodyDateTime(context.Background(), &MalformedTimestampBodyDateTimeInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1491,7 +1797,9 @@ func TestCheckResponseSnapshot_MalformedTimestampBodyDefault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedTimestampBodyDefault(context.Background(), &MalformedTimestampBodyDefaultInput{})
+	got, err := svc.MalformedTimestampBodyDefault(context.Background(), &MalformedTimestampBodyDefaultInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1510,7 +1818,9 @@ func TestCheckResponseSnapshot_MalformedTimestampBodyHttpDate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedTimestampBodyHttpDate(context.Background(), &MalformedTimestampBodyHttpDateInput{})
+	got, err := svc.MalformedTimestampBodyHttpDate(context.Background(), &MalformedTimestampBodyHttpDateInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1529,7 +1839,9 @@ func TestCheckResponseSnapshot_MalformedTimestampHeaderDateTime(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedTimestampHeaderDateTime(context.Background(), &MalformedTimestampHeaderDateTimeInput{})
+	got, err := svc.MalformedTimestampHeaderDateTime(context.Background(), &MalformedTimestampHeaderDateTimeInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1548,7 +1860,9 @@ func TestCheckResponseSnapshot_MalformedTimestampHeaderDefault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedTimestampHeaderDefault(context.Background(), &MalformedTimestampHeaderDefaultInput{})
+	got, err := svc.MalformedTimestampHeaderDefault(context.Background(), &MalformedTimestampHeaderDefaultInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1567,7 +1881,9 @@ func TestCheckResponseSnapshot_MalformedTimestampHeaderEpoch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedTimestampHeaderEpoch(context.Background(), &MalformedTimestampHeaderEpochInput{})
+	got, err := svc.MalformedTimestampHeaderEpoch(context.Background(), &MalformedTimestampHeaderEpochInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1586,7 +1902,9 @@ func TestCheckResponseSnapshot_MalformedTimestampPathDefault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedTimestampPathDefault(context.Background(), &MalformedTimestampPathDefaultInput{})
+	got, err := svc.MalformedTimestampPathDefault(context.Background(), &MalformedTimestampPathDefaultInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1605,7 +1923,9 @@ func TestCheckResponseSnapshot_MalformedTimestampPathEpoch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedTimestampPathEpoch(context.Background(), &MalformedTimestampPathEpochInput{})
+	got, err := svc.MalformedTimestampPathEpoch(context.Background(), &MalformedTimestampPathEpochInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1624,7 +1944,9 @@ func TestCheckResponseSnapshot_MalformedTimestampPathHttpDate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedTimestampPathHttpDate(context.Background(), &MalformedTimestampPathHttpDateInput{})
+	got, err := svc.MalformedTimestampPathHttpDate(context.Background(), &MalformedTimestampPathHttpDateInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1643,7 +1965,9 @@ func TestCheckResponseSnapshot_MalformedTimestampQueryDefault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedTimestampQueryDefault(context.Background(), &MalformedTimestampQueryDefaultInput{})
+	got, err := svc.MalformedTimestampQueryDefault(context.Background(), &MalformedTimestampQueryDefaultInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1662,7 +1986,9 @@ func TestCheckResponseSnapshot_MalformedTimestampQueryEpoch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedTimestampQueryEpoch(context.Background(), &MalformedTimestampQueryEpochInput{})
+	got, err := svc.MalformedTimestampQueryEpoch(context.Background(), &MalformedTimestampQueryEpochInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1681,7 +2007,9 @@ func TestCheckResponseSnapshot_MalformedTimestampQueryHttpDate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedTimestampQueryHttpDate(context.Background(), &MalformedTimestampQueryHttpDateInput{})
+	got, err := svc.MalformedTimestampQueryHttpDate(context.Background(), &MalformedTimestampQueryHttpDateInput{
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1700,7 +2028,11 @@ func TestCheckResponseSnapshot_MalformedUnion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MalformedUnion(context.Background(), &MalformedUnionInput{})
+	got, err := svc.MalformedUnion(context.Background(), &MalformedUnionInput{
+		Union: &types.SimpleUnionMemberInt{
+			Value: 1,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1721,7 +2053,9 @@ func TestCheckResponseSnapshot_MediaTypeHeader(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MediaTypeHeader(context.Background(), &MediaTypeHeaderInput{})
+	got, err := svc.MediaTypeHeader(context.Background(), &MediaTypeHeaderInput{
+		Json: ptr.String("__Json__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1785,7 +2119,14 @@ func TestCheckResponseSnapshot_NullAndEmptyHeadersClient(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NullAndEmptyHeadersClient(context.Background(), &NullAndEmptyHeadersClientInput{})
+	got, err := svc.NullAndEmptyHeadersClient(context.Background(), &NullAndEmptyHeadersClientInput{
+		A: ptr.String("__A__"),
+		B: ptr.String("__B__"),
+		C: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1811,7 +2152,14 @@ func TestCheckResponseSnapshot_NullAndEmptyHeadersServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NullAndEmptyHeadersServer(context.Background(), &NullAndEmptyHeadersServerInput{})
+	got, err := svc.NullAndEmptyHeadersServer(context.Background(), &NullAndEmptyHeadersServerInput{
+		A: ptr.String("__A__"),
+		B: ptr.String("__B__"),
+		C: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1830,7 +2178,10 @@ func TestCheckResponseSnapshot_OmitsNullSerializesEmptyString(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OmitsNullSerializesEmptyString(context.Background(), &OmitsNullSerializesEmptyStringInput{})
+	got, err := svc.OmitsNullSerializesEmptyString(context.Background(), &OmitsNullSerializesEmptyStringInput{
+		NullValue:   ptr.String("__NullValue__"),
+		EmptyString: ptr.String("__EmptyString__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1849,7 +2200,36 @@ func TestCheckResponseSnapshot_OmitsSerializingEmptyLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OmitsSerializingEmptyLists(context.Background(), &OmitsSerializingEmptyListsInput{})
+	got, err := svc.OmitsSerializingEmptyLists(context.Background(), &OmitsSerializingEmptyListsInput{
+		QueryStringList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		QueryIntegerList: []int32{
+			1,
+			1,
+		},
+		QueryDoubleList: []float64{
+			1.0,
+			1.0,
+		},
+		QueryBooleanList: []bool{
+			true,
+			true,
+		},
+		QueryTimestampList: []time.Time{
+			time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+			time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+		},
+		QueryEnumList: []types.FooEnum{
+			types.FooEnum("Foo"),
+			types.FooEnum("Foo"),
+		},
+		QueryIntegerEnumList: []types.IntegerEnum{
+			types.IntegerEnum(1),
+			types.IntegerEnum(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1866,11 +2246,11 @@ func TestCheckResponseSnapshot_OperationWithDefaults(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		DefaultDocumentMap:     nil,
-		DefaultDocumentString:  nil,
-		DefaultDocumentBoolean: nil,
-		DefaultDocumentList:    nil,
-		DefaultNullDocument:    nil,
+		DefaultDocumentMap:     document.NewLazyDocument("__Document__"),
+		DefaultDocumentString:  document.NewLazyDocument("__Document__"),
+		DefaultDocumentBoolean: document.NewLazyDocument("__Document__"),
+		DefaultDocumentList:    document.NewLazyDocument("__Document__"),
+		DefaultNullDocument:    document.NewLazyDocument("__Document__"),
 		DefaultTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		DefaultBlob:            []byte("blob"),
 		DefaultByte:            ptr.Int8(1),
@@ -1902,7 +2282,48 @@ func TestCheckResponseSnapshot_OperationWithDefaults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OperationWithDefaults(context.Background(), &OperationWithDefaultsInput{})
+	got, err := svc.OperationWithDefaults(context.Background(), &OperationWithDefaultsInput{
+		Defaults: &types.Defaults{
+			DefaultString:  ptr.String("__DefaultString__"),
+			DefaultBoolean: ptr.Bool(true),
+			DefaultList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			DefaultDocumentMap:     document.NewLazyDocument("__Document__"),
+			DefaultDocumentString:  document.NewLazyDocument("__Document__"),
+			DefaultDocumentBoolean: document.NewLazyDocument("__Document__"),
+			DefaultDocumentList:    document.NewLazyDocument("__Document__"),
+			DefaultNullDocument:    document.NewLazyDocument("__Document__"),
+			DefaultTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DefaultBlob:            []byte("blob"),
+			DefaultByte:            ptr.Int8(1),
+			DefaultShort:           ptr.Int16(1),
+			DefaultInteger:         ptr.Int32(1),
+			DefaultLong:            ptr.Int64(1),
+			DefaultFloat:           ptr.Float32(1.0),
+			DefaultDouble:          ptr.Float64(1.0),
+			DefaultMap: map[string]string{
+				"key0": "__Value__",
+			},
+			DefaultEnum:    types.TestEnum("FOO"),
+			DefaultIntEnum: types.TestIntEnum(1),
+			EmptyString:    ptr.String("__EmptyString__"),
+			FalseBoolean:   true,
+			EmptyBlob:      []byte("blob"),
+			ZeroByte:       1,
+			ZeroShort:      1,
+			ZeroInteger:    1,
+			ZeroLong:       1,
+			ZeroFloat:      1.0,
+			ZeroDouble:     1.0,
+		},
+		ClientOptionalDefaults: &types.ClientOptionalDefaults{
+			Member: ptr.Int32(1),
+		},
+		TopLevelDefault:      ptr.String("__TopLevelDefault__"),
+		OtherTopLevelDefault: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1954,13 +2375,56 @@ func TestCheckResponseSnapshot_OperationWithNestedStructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OperationWithNestedStructure(context.Background(), &OperationWithNestedStructureInput{})
+	got, err := svc.OperationWithNestedStructure(context.Background(), &OperationWithNestedStructureInput{
+		TopLevel: &types.TopLevel{
+			Dialog: &types.Dialog{
+				Language: ptr.String("__Language__"),
+				Greeting: ptr.String("__Greeting__"),
+				Farewell: &types.Farewell{
+					Phrase: ptr.String("__Phrase__"),
+				},
+			},
+			DialogList: []types.Dialog{
+				{
+					Language: ptr.String("__Language__"),
+					Greeting: ptr.String("__Greeting__"),
+					Farewell: &types.Farewell{
+						Phrase: ptr.String("__Phrase__"),
+					},
+				},
+				{
+					Language: ptr.String("__Language__"),
+					Greeting: ptr.String("__Greeting__"),
+					Farewell: &types.Farewell{
+						Phrase: ptr.String("__Phrase__"),
+					},
+				},
+			},
+			DialogMap: map[string]types.Dialog{
+				"key0": {
+					Language: ptr.String("__Language__"),
+					Greeting: ptr.String("__Greeting__"),
+					Farewell: &types.Farewell{
+						Phrase: ptr.String("__Phrase__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "OperationWithNestedStructure.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_OutputStream(t *testing.T) {
+	t.Skip("event stream operation")
+}
+
+func TestCheckResponseSnapshot_OutputStreamWithInitialResponse(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_PostPlayerAction(t *testing.T) {
@@ -1977,7 +2441,11 @@ func TestCheckResponseSnapshot_PostPlayerAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PostPlayerAction(context.Background(), &PostPlayerActionInput{})
+	got, err := svc.PostPlayerAction(context.Background(), &PostPlayerActionInput{
+		Action: &types.PlayerActionMemberQuit{
+			Value: types.Unit{},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2000,7 +2468,11 @@ func TestCheckResponseSnapshot_PostUnionWithJsonName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PostUnionWithJsonName(context.Background(), &PostUnionWithJsonNameInput{})
+	got, err := svc.PostUnionWithJsonName(context.Background(), &PostUnionWithJsonNameInput{
+		Value: &types.UnionWithJsonNameMemberFoo{
+			Value: "__UnionWithJsonNameMemberFoo__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2019,7 +2491,10 @@ func TestCheckResponseSnapshot_PutWithContentEncoding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutWithContentEncoding(context.Background(), &PutWithContentEncodingInput{})
+	got, err := svc.PutWithContentEncoding(context.Background(), &PutWithContentEncodingInput{
+		Encoding: ptr.String("__Encoding__"),
+		Data:     ptr.String("__Data__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2038,7 +2513,9 @@ func TestCheckResponseSnapshot_QueryIdempotencyTokenAutoFill(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryIdempotencyTokenAutoFill(context.Background(), &QueryIdempotencyTokenAutoFillInput{})
+	got, err := svc.QueryIdempotencyTokenAutoFill(context.Background(), &QueryIdempotencyTokenAutoFillInput{
+		Token: ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2057,7 +2534,15 @@ func TestCheckResponseSnapshot_QueryParamsAsStringListMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryParamsAsStringListMap(context.Background(), &QueryParamsAsStringListMapInput{})
+	got, err := svc.QueryParamsAsStringListMap(context.Background(), &QueryParamsAsStringListMapInput{
+		Qux: ptr.String("__Qux__"),
+		Foo: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2076,7 +2561,12 @@ func TestCheckResponseSnapshot_QueryPrecedence(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryPrecedence(context.Background(), &QueryPrecedenceInput{})
+	got, err := svc.QueryPrecedence(context.Background(), &QueryPrecedenceInput{
+		Foo: ptr.String("__Foo__"),
+		Baz: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2103,7 +2593,15 @@ func TestCheckResponseSnapshot_RecursiveShapes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RecursiveShapes(context.Background(), &RecursiveShapesInput{})
+	got, err := svc.RecursiveShapes(context.Background(), &RecursiveShapesInput{
+		Nested: &types.RecursiveShapesInputOutputNested1{
+			Foo: ptr.String("__Foo__"),
+			Nested: &types.RecursiveShapesInputOutputNested2{
+				Bar:             ptr.String("__Bar__"),
+				RecursiveMember: nil,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2133,7 +2631,7 @@ func TestCheckResponseSnapshot_ResponseCodeHttpFallback(t *testing.T) {
 
 func TestCheckResponseSnapshot_ResponseCodeRequired(t *testing.T) {
 	want := &ResponseCodeRequiredOutput{
-		ResponseCode: ptr.Int32(1),
+		ResponseCode: ptr.Int32(200),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResponseCodeRequired.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2173,7 +2671,18 @@ func TestCheckResponseSnapshot_SimpleScalarProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SimpleScalarProperties(context.Background(), &SimpleScalarPropertiesInput{})
+	got, err := svc.SimpleScalarProperties(context.Background(), &SimpleScalarPropertiesInput{
+		Foo:               ptr.String("__Foo__"),
+		StringValue:       ptr.String("__StringValue__"),
+		TrueBooleanValue:  ptr.Bool(true),
+		FalseBooleanValue: ptr.Bool(true),
+		ByteValue:         ptr.Int8(1),
+		ShortValue:        ptr.Int16(1),
+		IntegerValue:      ptr.Int32(1),
+		LongValue:         ptr.Int64(1),
+		FloatValue:        ptr.Float32(1.0),
+		DoubleValue:       ptr.Float64(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2201,7 +2710,16 @@ func TestCheckResponseSnapshot_SparseJsonLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SparseJsonLists(context.Background(), &SparseJsonListsInput{})
+	got, err := svc.SparseJsonLists(context.Background(), &SparseJsonListsInput{
+		SparseStringList: []*string{
+			ptr.String("__Member__"),
+			ptr.String("__Member__"),
+		},
+		SparseShortList: []*int16{
+			ptr.Int16(1),
+			ptr.Int16(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2241,7 +2759,28 @@ func TestCheckResponseSnapshot_SparseJsonMaps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SparseJsonMaps(context.Background(), &SparseJsonMapsInput{})
+	got, err := svc.SparseJsonMaps(context.Background(), &SparseJsonMapsInput{
+		SparseStructMap: map[string]*types.GreetingStruct{
+			"key0": {
+				Hi: ptr.String("__Hi__"),
+			},
+		},
+		SparseNumberMap: map[string]*int32{
+			"key0": ptr.Int32(1),
+		},
+		SparseBooleanMap: map[string]*bool{
+			"key0": ptr.Bool(true),
+		},
+		SparseStringMap: map[string]*string{
+			"key0": ptr.String("__Value__"),
+		},
+		SparseSetMap: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2252,7 +2791,8 @@ func TestCheckResponseSnapshot_SparseJsonMaps(t *testing.T) {
 
 func TestCheckResponseSnapshot_StreamingTraits(t *testing.T) {
 	want := &StreamingTraitsOutput{
-		Foo: ptr.String("__Foo__"),
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
 	}
 	status, header, body, err := serdeRespReadSnapshot("StreamingTraits.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2262,7 +2802,10 @@ func TestCheckResponseSnapshot_StreamingTraits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StreamingTraits(context.Background(), &StreamingTraitsInput{})
+	got, err := svc.StreamingTraits(context.Background(), &StreamingTraitsInput{
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2281,7 +2824,10 @@ func TestCheckResponseSnapshot_StreamingTraitsRequireLength(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StreamingTraitsRequireLength(context.Background(), &StreamingTraitsRequireLengthInput{})
+	got, err := svc.StreamingTraitsRequireLength(context.Background(), &StreamingTraitsRequireLengthInput{
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2292,7 +2838,8 @@ func TestCheckResponseSnapshot_StreamingTraitsRequireLength(t *testing.T) {
 
 func TestCheckResponseSnapshot_StreamingTraitsWithMediaType(t *testing.T) {
 	want := &StreamingTraitsWithMediaTypeOutput{
-		Foo: ptr.String("__Foo__"),
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
 	}
 	status, header, body, err := serdeRespReadSnapshot("StreamingTraitsWithMediaType.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2302,7 +2849,10 @@ func TestCheckResponseSnapshot_StreamingTraitsWithMediaType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StreamingTraitsWithMediaType(context.Background(), &StreamingTraitsWithMediaTypeInput{})
+	got, err := svc.StreamingTraitsWithMediaType(context.Background(), &StreamingTraitsWithMediaTypeInput{
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2326,7 +2876,12 @@ func TestCheckResponseSnapshot_TestBodyStructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestBodyStructure(context.Background(), &TestBodyStructureInput{})
+	got, err := svc.TestBodyStructure(context.Background(), &TestBodyStructureInput{
+		TestId: ptr.String("__TestId__"),
+		TestConfig: &types.TestConfig{
+			Timeout: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2368,7 +2923,9 @@ func TestCheckResponseSnapshot_TestGetNoPayload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestGetNoPayload(context.Background(), &TestGetNoPayloadInput{})
+	got, err := svc.TestGetNoPayload(context.Background(), &TestGetNoPayloadInput{
+		TestId: ptr.String("__TestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2390,7 +2947,10 @@ func TestCheckResponseSnapshot_TestPayloadBlob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestPayloadBlob(context.Background(), &TestPayloadBlobInput{})
+	got, err := svc.TestPayloadBlob(context.Background(), &TestPayloadBlobInput{
+		ContentType: ptr.String("__ContentType__"),
+		Data:        []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2414,7 +2974,12 @@ func TestCheckResponseSnapshot_TestPayloadStructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestPayloadStructure(context.Background(), &TestPayloadStructureInput{})
+	got, err := svc.TestPayloadStructure(context.Background(), &TestPayloadStructureInput{
+		TestId: ptr.String("__TestId__"),
+		PayloadConfig: &types.PayloadConfig{
+			Data: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2456,7 +3021,9 @@ func TestCheckResponseSnapshot_TestPostNoPayload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestPostNoPayload(context.Background(), &TestPostNoPayloadInput{})
+	got, err := svc.TestPostNoPayload(context.Background(), &TestPostNoPayloadInput{
+		TestId: ptr.String("__TestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2483,7 +3050,15 @@ func TestCheckResponseSnapshot_TimestampFormatHeaders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TimestampFormatHeaders(context.Background(), &TimestampFormatHeadersInput{})
+	got, err := svc.TimestampFormatHeaders(context.Background(), &TimestampFormatHeadersInput{
+		MemberEpochSeconds: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MemberHttpDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MemberDateTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DefaultFormat:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TargetEpochSeconds: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TargetHttpDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TargetDateTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}

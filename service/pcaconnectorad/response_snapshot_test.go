@@ -119,7 +119,21 @@ func TestCheckResponseSnapshot_CreateConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	got, err := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		DirectoryId:             ptr.String("__DirectoryId__"),
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		VpcInformation: &types.VpcInformation{
+			IpAddressType: types.IpAddressType("IPV4"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +154,13 @@ func TestCheckResponseSnapshot_CreateDirectoryRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDirectoryRegistration(context.Background(), &CreateDirectoryRegistrationInput{})
+	got, err := svc.CreateDirectoryRegistration(context.Background(), &CreateDirectoryRegistrationInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +179,11 @@ func TestCheckResponseSnapshot_CreateServicePrincipalName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServicePrincipalName(context.Background(), &CreateServicePrincipalNameInput{})
+	got, err := svc.CreateServicePrincipalName(context.Background(), &CreateServicePrincipalNameInput{
+		DirectoryRegistrationArn: ptr.String("__DirectoryRegistrationArn__"),
+		ConnectorArn:             ptr.String("__ConnectorArn__"),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +204,91 @@ func TestCheckResponseSnapshot_CreateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTemplate(context.Background(), &CreateTemplateInput{})
+	got, err := svc.CreateTemplate(context.Background(), &CreateTemplateInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		Name:         ptr.String("__Name__"),
+		Definition: &types.TemplateDefinitionMemberTemplateV2{
+			Value: types.TemplateV2{
+				CertificateValidity: &types.CertificateValidity{
+					ValidityPeriod: &types.ValidityPeriod{
+						PeriodType: types.ValidityPeriodType("HOURS"),
+						Period:     ptr.Int64(1),
+					},
+					RenewalPeriod: &types.ValidityPeriod{
+						PeriodType: types.ValidityPeriodType("HOURS"),
+						Period:     ptr.Int64(1),
+					},
+				},
+				SupersededTemplates: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateKeyAttributes: &types.PrivateKeyAttributesV2{
+					MinimalKeyLength: ptr.Int32(1),
+					KeySpec:          types.KeySpec("KEY_EXCHANGE"),
+					CryptoProviders: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PrivateKeyFlags: &types.PrivateKeyFlagsV2{
+					ExportableKey:               ptr.Bool(true),
+					StrongKeyProtectionRequired: ptr.Bool(true),
+					ClientVersion:               types.ClientCompatibilityV2("WINDOWS_SERVER_2003"),
+				},
+				EnrollmentFlags: &types.EnrollmentFlagsV2{
+					IncludeSymmetricAlgorithms:                ptr.Bool(true),
+					UserInteractionRequired:                   ptr.Bool(true),
+					RemoveInvalidCertificateFromPersonalStore: ptr.Bool(true),
+					NoSecurityExtension:                       ptr.Bool(true),
+					EnableKeyReuseOnNtTokenKeysetStorageFull:  ptr.Bool(true),
+				},
+				SubjectNameFlags: &types.SubjectNameFlagsV2{
+					SanRequireDomainDns:     ptr.Bool(true),
+					SanRequireSpn:           ptr.Bool(true),
+					SanRequireDirectoryGuid: ptr.Bool(true),
+					SanRequireUpn:           ptr.Bool(true),
+					SanRequireEmail:         ptr.Bool(true),
+					SanRequireDns:           ptr.Bool(true),
+					RequireDnsAsCn:          ptr.Bool(true),
+					RequireEmail:            ptr.Bool(true),
+					RequireCommonName:       ptr.Bool(true),
+					RequireDirectoryPath:    ptr.Bool(true),
+				},
+				GeneralFlags: &types.GeneralFlagsV2{
+					AutoEnrollment: ptr.Bool(true),
+					MachineType:    ptr.Bool(true),
+				},
+				Extensions: &types.ExtensionsV2{
+					KeyUsage: &types.KeyUsage{
+						Critical: ptr.Bool(true),
+						UsageFlags: &types.KeyUsageFlags{
+							DigitalSignature: ptr.Bool(true),
+							NonRepudiation:   ptr.Bool(true),
+							KeyEncipherment:  ptr.Bool(true),
+							DataEncipherment: ptr.Bool(true),
+							KeyAgreement:     ptr.Bool(true),
+						},
+					},
+					ApplicationPolicies: &types.ApplicationPolicies{
+						Critical: ptr.Bool(true),
+						Policies: []types.ApplicationPolicy{
+							&types.ApplicationPolicyMemberPolicyType{
+								Value: types.ApplicationPolicyType("ALL_APPLICATION_POLICIES"),
+							},
+							&types.ApplicationPolicyMemberPolicyType{
+								Value: types.ApplicationPolicyType("ALL_APPLICATION_POLICIES"),
+							},
+						},
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -199,7 +307,16 @@ func TestCheckResponseSnapshot_CreateTemplateGroupAccessControlEntry(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTemplateGroupAccessControlEntry(context.Background(), &CreateTemplateGroupAccessControlEntryInput{})
+	got, err := svc.CreateTemplateGroupAccessControlEntry(context.Background(), &CreateTemplateGroupAccessControlEntryInput{
+		TemplateArn:             ptr.String("__TemplateArn__"),
+		GroupSecurityIdentifier: ptr.String("__GroupSecurityIdentifier__"),
+		GroupDisplayName:        ptr.String("__GroupDisplayName__"),
+		AccessRights: &types.AccessRights{
+			Enroll:     types.AccessRight("ALLOW"),
+			AutoEnroll: types.AccessRight("ALLOW"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -218,7 +335,9 @@ func TestCheckResponseSnapshot_DeleteConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{})
+	got, err := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +356,9 @@ func TestCheckResponseSnapshot_DeleteDirectoryRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDirectoryRegistration(context.Background(), &DeleteDirectoryRegistrationInput{})
+	got, err := svc.DeleteDirectoryRegistration(context.Background(), &DeleteDirectoryRegistrationInput{
+		DirectoryRegistrationArn: ptr.String("__DirectoryRegistrationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -256,7 +377,10 @@ func TestCheckResponseSnapshot_DeleteServicePrincipalName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServicePrincipalName(context.Background(), &DeleteServicePrincipalNameInput{})
+	got, err := svc.DeleteServicePrincipalName(context.Background(), &DeleteServicePrincipalNameInput{
+		DirectoryRegistrationArn: ptr.String("__DirectoryRegistrationArn__"),
+		ConnectorArn:             ptr.String("__ConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -275,7 +399,9 @@ func TestCheckResponseSnapshot_DeleteTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTemplate(context.Background(), &DeleteTemplateInput{})
+	got, err := svc.DeleteTemplate(context.Background(), &DeleteTemplateInput{
+		TemplateArn: ptr.String("__TemplateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -294,7 +420,10 @@ func TestCheckResponseSnapshot_DeleteTemplateGroupAccessControlEntry(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTemplateGroupAccessControlEntry(context.Background(), &DeleteTemplateGroupAccessControlEntryInput{})
+	got, err := svc.DeleteTemplateGroupAccessControlEntry(context.Background(), &DeleteTemplateGroupAccessControlEntryInput{
+		TemplateArn:             ptr.String("__TemplateArn__"),
+		GroupSecurityIdentifier: ptr.String("__GroupSecurityIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -331,7 +460,9 @@ func TestCheckResponseSnapshot_GetConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnector(context.Background(), &GetConnectorInput{})
+	got, err := svc.GetConnector(context.Background(), &GetConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -359,7 +490,9 @@ func TestCheckResponseSnapshot_GetDirectoryRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDirectoryRegistration(context.Background(), &GetDirectoryRegistrationInput{})
+	got, err := svc.GetDirectoryRegistration(context.Background(), &GetDirectoryRegistrationInput{
+		DirectoryRegistrationArn: ptr.String("__DirectoryRegistrationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -387,7 +520,10 @@ func TestCheckResponseSnapshot_GetServicePrincipalName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServicePrincipalName(context.Background(), &GetServicePrincipalNameInput{})
+	got, err := svc.GetServicePrincipalName(context.Background(), &GetServicePrincipalNameInput{
+		DirectoryRegistrationArn: ptr.String("__DirectoryRegistrationArn__"),
+		ConnectorArn:             ptr.String("__ConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -498,7 +634,9 @@ func TestCheckResponseSnapshot_GetTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemplate(context.Background(), &GetTemplateInput{})
+	got, err := svc.GetTemplate(context.Background(), &GetTemplateInput{
+		TemplateArn: ptr.String("__TemplateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -529,7 +667,10 @@ func TestCheckResponseSnapshot_GetTemplateGroupAccessControlEntry(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemplateGroupAccessControlEntry(context.Background(), &GetTemplateGroupAccessControlEntryInput{})
+	got, err := svc.GetTemplateGroupAccessControlEntry(context.Background(), &GetTemplateGroupAccessControlEntryInput{
+		TemplateArn:             ptr.String("__TemplateArn__"),
+		GroupSecurityIdentifier: ptr.String("__GroupSecurityIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -586,7 +727,10 @@ func TestCheckResponseSnapshot_ListConnectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{})
+	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -625,7 +769,10 @@ func TestCheckResponseSnapshot_ListDirectoryRegistrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDirectoryRegistrations(context.Background(), &ListDirectoryRegistrationsInput{})
+	got, err := svc.ListDirectoryRegistrations(context.Background(), &ListDirectoryRegistrationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -664,7 +811,11 @@ func TestCheckResponseSnapshot_ListServicePrincipalNames(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServicePrincipalNames(context.Background(), &ListServicePrincipalNamesInput{})
+	got, err := svc.ListServicePrincipalNames(context.Background(), &ListServicePrincipalNamesInput{
+		MaxResults:               ptr.Int32(1),
+		NextToken:                ptr.String("__NextToken__"),
+		DirectoryRegistrationArn: ptr.String("__DirectoryRegistrationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +838,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -732,7 +885,11 @@ func TestCheckResponseSnapshot_ListTemplateGroupAccessControlEntries(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTemplateGroupAccessControlEntries(context.Background(), &ListTemplateGroupAccessControlEntriesInput{})
+	got, err := svc.ListTemplateGroupAccessControlEntries(context.Background(), &ListTemplateGroupAccessControlEntriesInput{
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		TemplateArn: ptr.String("__TemplateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -937,7 +1094,11 @@ func TestCheckResponseSnapshot_ListTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTemplates(context.Background(), &ListTemplatesInput{})
+	got, err := svc.ListTemplates(context.Background(), &ListTemplatesInput{
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -956,7 +1117,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -975,7 +1141,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -994,7 +1166,87 @@ func TestCheckResponseSnapshot_UpdateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTemplate(context.Background(), &UpdateTemplateInput{})
+	got, err := svc.UpdateTemplate(context.Background(), &UpdateTemplateInput{
+		TemplateArn: ptr.String("__TemplateArn__"),
+		Definition: &types.TemplateDefinitionMemberTemplateV2{
+			Value: types.TemplateV2{
+				CertificateValidity: &types.CertificateValidity{
+					ValidityPeriod: &types.ValidityPeriod{
+						PeriodType: types.ValidityPeriodType("HOURS"),
+						Period:     ptr.Int64(1),
+					},
+					RenewalPeriod: &types.ValidityPeriod{
+						PeriodType: types.ValidityPeriodType("HOURS"),
+						Period:     ptr.Int64(1),
+					},
+				},
+				SupersededTemplates: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateKeyAttributes: &types.PrivateKeyAttributesV2{
+					MinimalKeyLength: ptr.Int32(1),
+					KeySpec:          types.KeySpec("KEY_EXCHANGE"),
+					CryptoProviders: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PrivateKeyFlags: &types.PrivateKeyFlagsV2{
+					ExportableKey:               ptr.Bool(true),
+					StrongKeyProtectionRequired: ptr.Bool(true),
+					ClientVersion:               types.ClientCompatibilityV2("WINDOWS_SERVER_2003"),
+				},
+				EnrollmentFlags: &types.EnrollmentFlagsV2{
+					IncludeSymmetricAlgorithms:                ptr.Bool(true),
+					UserInteractionRequired:                   ptr.Bool(true),
+					RemoveInvalidCertificateFromPersonalStore: ptr.Bool(true),
+					NoSecurityExtension:                       ptr.Bool(true),
+					EnableKeyReuseOnNtTokenKeysetStorageFull:  ptr.Bool(true),
+				},
+				SubjectNameFlags: &types.SubjectNameFlagsV2{
+					SanRequireDomainDns:     ptr.Bool(true),
+					SanRequireSpn:           ptr.Bool(true),
+					SanRequireDirectoryGuid: ptr.Bool(true),
+					SanRequireUpn:           ptr.Bool(true),
+					SanRequireEmail:         ptr.Bool(true),
+					SanRequireDns:           ptr.Bool(true),
+					RequireDnsAsCn:          ptr.Bool(true),
+					RequireEmail:            ptr.Bool(true),
+					RequireCommonName:       ptr.Bool(true),
+					RequireDirectoryPath:    ptr.Bool(true),
+				},
+				GeneralFlags: &types.GeneralFlagsV2{
+					AutoEnrollment: ptr.Bool(true),
+					MachineType:    ptr.Bool(true),
+				},
+				Extensions: &types.ExtensionsV2{
+					KeyUsage: &types.KeyUsage{
+						Critical: ptr.Bool(true),
+						UsageFlags: &types.KeyUsageFlags{
+							DigitalSignature: ptr.Bool(true),
+							NonRepudiation:   ptr.Bool(true),
+							KeyEncipherment:  ptr.Bool(true),
+							DataEncipherment: ptr.Bool(true),
+							KeyAgreement:     ptr.Bool(true),
+						},
+					},
+					ApplicationPolicies: &types.ApplicationPolicies{
+						Critical: ptr.Bool(true),
+						Policies: []types.ApplicationPolicy{
+							&types.ApplicationPolicyMemberPolicyType{
+								Value: types.ApplicationPolicyType("ALL_APPLICATION_POLICIES"),
+							},
+							&types.ApplicationPolicyMemberPolicyType{
+								Value: types.ApplicationPolicyType("ALL_APPLICATION_POLICIES"),
+							},
+						},
+					},
+				},
+			},
+		},
+		ReenrollAllCertificateHolders: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1013,7 +1265,15 @@ func TestCheckResponseSnapshot_UpdateTemplateGroupAccessControlEntry(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTemplateGroupAccessControlEntry(context.Background(), &UpdateTemplateGroupAccessControlEntryInput{})
+	got, err := svc.UpdateTemplateGroupAccessControlEntry(context.Background(), &UpdateTemplateGroupAccessControlEntryInput{
+		TemplateArn:             ptr.String("__TemplateArn__"),
+		GroupSecurityIdentifier: ptr.String("__GroupSecurityIdentifier__"),
+		GroupDisplayName:        ptr.String("__GroupDisplayName__"),
+		AccessRights: &types.AccessRights{
+			Enroll:     types.AccessRight("ALLOW"),
+			AutoEnroll: types.AccessRight("ALLOW"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1034,7 +1294,21 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		DirectoryId:             ptr.String("__DirectoryId__"),
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		VpcInformation: &types.VpcInformation{
+			IpAddressType: types.IpAddressType("IPV4"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1061,7 +1335,21 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		DirectoryId:             ptr.String("__DirectoryId__"),
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		VpcInformation: &types.VpcInformation{
+			IpAddressType: types.IpAddressType("IPV4"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1086,7 +1374,21 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		DirectoryId:             ptr.String("__DirectoryId__"),
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		VpcInformation: &types.VpcInformation{
+			IpAddressType: types.IpAddressType("IPV4"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1113,7 +1415,21 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		DirectoryId:             ptr.String("__DirectoryId__"),
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		VpcInformation: &types.VpcInformation{
+			IpAddressType: types.IpAddressType("IPV4"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1142,7 +1458,21 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		DirectoryId:             ptr.String("__DirectoryId__"),
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		VpcInformation: &types.VpcInformation{
+			IpAddressType: types.IpAddressType("IPV4"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1169,7 +1499,21 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		DirectoryId:             ptr.String("__DirectoryId__"),
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		VpcInformation: &types.VpcInformation{
+			IpAddressType: types.IpAddressType("IPV4"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1195,7 +1539,21 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		DirectoryId:             ptr.String("__DirectoryId__"),
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		VpcInformation: &types.VpcInformation{
+			IpAddressType: types.IpAddressType("IPV4"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

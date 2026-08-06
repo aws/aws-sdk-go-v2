@@ -135,7 +135,18 @@ func TestCheckResponseSnapshot_CreateAssistant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAssistant(context.Background(), &CreateAssistantInput{})
+	got, err := svc.CreateAssistant(context.Background(), &CreateAssistantInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.AssistantType("AGENT"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -171,7 +182,17 @@ func TestCheckResponseSnapshot_CreateAssistantAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAssistantAssociation(context.Background(), &CreateAssistantAssociationInput{})
+	got, err := svc.CreateAssistantAssociation(context.Background(), &CreateAssistantAssociationInput{
+		AssistantId:     ptr.String("__AssistantId__"),
+		AssociationType: types.AssociationType("KNOWLEDGE_BASE"),
+		Association: &types.AssistantAssociationInputDataMemberKnowledgeBaseId{
+			Value: "__AssistantAssociationInputDataMemberKnowledgeBaseId__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +232,20 @@ func TestCheckResponseSnapshot_CreateContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContent(context.Background(), &CreateContentInput{})
+	got, err := svc.CreateContent(context.Background(), &CreateContentInput{
+		KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+		Name:               ptr.String("__Name__"),
+		Title:              ptr.String("__Title__"),
+		OverrideLinkOutUri: ptr.String("__OverrideLinkOutUri__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		UploadId:    ptr.String("__UploadId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -258,7 +292,30 @@ func TestCheckResponseSnapshot_CreateKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKnowledgeBase(context.Background(), &CreateKnowledgeBaseInput{})
+	got, err := svc.CreateKnowledgeBase(context.Background(), &CreateKnowledgeBaseInput{
+		ClientToken:       ptr.String("__ClientToken__"),
+		Name:              ptr.String("__Name__"),
+		KnowledgeBaseType: types.KnowledgeBaseType("EXTERNAL"),
+		SourceConfiguration: &types.SourceConfigurationMemberAppIntegrations{
+			Value: types.AppIntegrationsConfiguration{
+				AppIntegrationArn: ptr.String("__AppIntegrationArn__"),
+				ObjectFields: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RenderingConfiguration: &types.RenderingConfiguration{
+			TemplateUri: ptr.String("__TemplateUri__"),
+		},
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -316,7 +373,33 @@ func TestCheckResponseSnapshot_CreateQuickResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQuickResponse(context.Background(), &CreateQuickResponseInput{})
+	got, err := svc.CreateQuickResponse(context.Background(), &CreateQuickResponseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		Name:            ptr.String("__Name__"),
+		Content: &types.QuickResponseDataProviderMemberContent{
+			Value: "__QuickResponseDataProviderMemberContent__",
+		},
+		ContentType: ptr.String("__ContentType__"),
+		GroupingConfiguration: &types.GroupingConfiguration{
+			Criteria: ptr.String("__Criteria__"),
+			Values: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ShortcutKey: ptr.String("__ShortcutKey__"),
+		IsActive:    ptr.Bool(true),
+		Channels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Language:    ptr.String("__Language__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -348,7 +431,15 @@ func TestCheckResponseSnapshot_CreateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSession(context.Background(), &CreateSessionInput{})
+	got, err := svc.CreateSession(context.Background(), &CreateSessionInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AssistantId: ptr.String("__AssistantId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -367,7 +458,9 @@ func TestCheckResponseSnapshot_DeleteAssistant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAssistant(context.Background(), &DeleteAssistantInput{})
+	got, err := svc.DeleteAssistant(context.Background(), &DeleteAssistantInput{
+		AssistantId: ptr.String("__AssistantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -386,7 +479,10 @@ func TestCheckResponseSnapshot_DeleteAssistantAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAssistantAssociation(context.Background(), &DeleteAssistantAssociationInput{})
+	got, err := svc.DeleteAssistantAssociation(context.Background(), &DeleteAssistantAssociationInput{
+		AssistantAssociationId: ptr.String("__AssistantAssociationId__"),
+		AssistantId:            ptr.String("__AssistantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -405,7 +501,10 @@ func TestCheckResponseSnapshot_DeleteContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContent(context.Background(), &DeleteContentInput{})
+	got, err := svc.DeleteContent(context.Background(), &DeleteContentInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ContentId:       ptr.String("__ContentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -424,7 +523,10 @@ func TestCheckResponseSnapshot_DeleteImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImportJob(context.Background(), &DeleteImportJobInput{})
+	got, err := svc.DeleteImportJob(context.Background(), &DeleteImportJobInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ImportJobId:     ptr.String("__ImportJobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -443,7 +545,9 @@ func TestCheckResponseSnapshot_DeleteKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKnowledgeBase(context.Background(), &DeleteKnowledgeBaseInput{})
+	got, err := svc.DeleteKnowledgeBase(context.Background(), &DeleteKnowledgeBaseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +566,10 @@ func TestCheckResponseSnapshot_DeleteQuickResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQuickResponse(context.Background(), &DeleteQuickResponseInput{})
+	got, err := svc.DeleteQuickResponse(context.Background(), &DeleteQuickResponseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		QuickResponseId: ptr.String("__QuickResponseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -499,7 +606,9 @@ func TestCheckResponseSnapshot_GetAssistant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssistant(context.Background(), &GetAssistantInput{})
+	got, err := svc.GetAssistant(context.Background(), &GetAssistantInput{
+		AssistantId: ptr.String("__AssistantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -535,7 +644,10 @@ func TestCheckResponseSnapshot_GetAssistantAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssistantAssociation(context.Background(), &GetAssistantAssociationInput{})
+	got, err := svc.GetAssistantAssociation(context.Background(), &GetAssistantAssociationInput{
+		AssistantAssociationId: ptr.String("__AssistantAssociationId__"),
+		AssistantId:            ptr.String("__AssistantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -575,7 +687,10 @@ func TestCheckResponseSnapshot_GetContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContent(context.Background(), &GetContentInput{})
+	got, err := svc.GetContent(context.Background(), &GetContentInput{
+		ContentId:       ptr.String("__ContentId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -612,7 +727,10 @@ func TestCheckResponseSnapshot_GetContentSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContentSummary(context.Background(), &GetContentSummaryInput{})
+	got, err := svc.GetContentSummary(context.Background(), &GetContentSummaryInput{
+		ContentId:       ptr.String("__ContentId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -656,7 +774,10 @@ func TestCheckResponseSnapshot_GetImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImportJob(context.Background(), &GetImportJobInput{})
+	got, err := svc.GetImportJob(context.Background(), &GetImportJobInput{
+		ImportJobId:     ptr.String("__ImportJobId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -703,7 +824,9 @@ func TestCheckResponseSnapshot_GetKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKnowledgeBase(context.Background(), &GetKnowledgeBaseInput{})
+	got, err := svc.GetKnowledgeBase(context.Background(), &GetKnowledgeBaseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -761,7 +884,10 @@ func TestCheckResponseSnapshot_GetQuickResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQuickResponse(context.Background(), &GetQuickResponseInput{})
+	got, err := svc.GetQuickResponse(context.Background(), &GetQuickResponseInput{
+		QuickResponseId: ptr.String("__QuickResponseId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -893,7 +1019,12 @@ func TestCheckResponseSnapshot_GetRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommendations(context.Background(), &GetRecommendationsInput{})
+	got, err := svc.GetRecommendations(context.Background(), &GetRecommendationsInput{
+		AssistantId:     ptr.String("__AssistantId__"),
+		SessionId:       ptr.String("__SessionId__"),
+		MaxResults:      ptr.Int32(1),
+		WaitTimeSeconds: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -925,7 +1056,10 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSession(context.Background(), &GetSessionInput{})
+	got, err := svc.GetSession(context.Background(), &GetSessionInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		SessionId:   ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -980,7 +1114,11 @@ func TestCheckResponseSnapshot_ListAssistantAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssistantAssociations(context.Background(), &ListAssistantAssociationsInput{})
+	got, err := svc.ListAssistantAssociations(context.Background(), &ListAssistantAssociationsInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		AssistantId: ptr.String("__AssistantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1037,7 +1175,10 @@ func TestCheckResponseSnapshot_ListAssistants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssistants(context.Background(), &ListAssistantsInput{})
+	got, err := svc.ListAssistants(context.Background(), &ListAssistantsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1094,7 +1235,11 @@ func TestCheckResponseSnapshot_ListContents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContents(context.Background(), &ListContentsInput{})
+	got, err := svc.ListContents(context.Background(), &ListContentsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1159,7 +1304,11 @@ func TestCheckResponseSnapshot_ListImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImportJobs(context.Background(), &ListImportJobsInput{})
+	got, err := svc.ListImportJobs(context.Background(), &ListImportJobsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1234,7 +1383,10 @@ func TestCheckResponseSnapshot_ListKnowledgeBases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKnowledgeBases(context.Background(), &ListKnowledgeBasesInput{})
+	got, err := svc.ListKnowledgeBases(context.Background(), &ListKnowledgeBasesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1299,7 +1451,11 @@ func TestCheckResponseSnapshot_ListQuickResponses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQuickResponses(context.Background(), &ListQuickResponsesInput{})
+	got, err := svc.ListQuickResponses(context.Background(), &ListQuickResponsesInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1322,7 +1478,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1356,7 +1514,14 @@ func TestCheckResponseSnapshot_NotifyRecommendationsReceived(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NotifyRecommendationsReceived(context.Background(), &NotifyRecommendationsReceivedInput{})
+	got, err := svc.NotifyRecommendationsReceived(context.Background(), &NotifyRecommendationsReceivedInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		SessionId:   ptr.String("__SessionId__"),
+		RecommendationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1455,7 +1620,12 @@ func TestCheckResponseSnapshot_QueryAssistant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryAssistant(context.Background(), &QueryAssistantInput{})
+	got, err := svc.QueryAssistant(context.Background(), &QueryAssistantInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		QueryText:   ptr.String("__QueryText__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1474,7 +1644,9 @@ func TestCheckResponseSnapshot_RemoveKnowledgeBaseTemplateUri(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveKnowledgeBaseTemplateUri(context.Background(), &RemoveKnowledgeBaseTemplateUriInput{})
+	got, err := svc.RemoveKnowledgeBaseTemplateUri(context.Background(), &RemoveKnowledgeBaseTemplateUriInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1531,7 +1703,25 @@ func TestCheckResponseSnapshot_SearchContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchContent(context.Background(), &SearchContentInput{})
+	got, err := svc.SearchContent(context.Background(), &SearchContentInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		SearchExpression: &types.SearchExpression{
+			Filters: []types.Filter{
+				{
+					Field:    types.FilterField("NAME"),
+					Operator: types.FilterOperator("EQUALS"),
+					Value:    ptr.String("__Value__"),
+				},
+				{
+					Field:    types.FilterField("NAME"),
+					Operator: types.FilterOperator("EQUALS"),
+					Value:    ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1646,7 +1836,62 @@ func TestCheckResponseSnapshot_SearchQuickResponses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchQuickResponses(context.Background(), &SearchQuickResponsesInput{})
+	got, err := svc.SearchQuickResponses(context.Background(), &SearchQuickResponsesInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		SearchExpression: &types.QuickResponseSearchExpression{
+			Queries: []types.QuickResponseQueryField{
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Operator:       types.QuickResponseQueryOperator("CONTAINS"),
+					AllowFuzziness: ptr.Bool(true),
+					Priority:       types.Priority("HIGH"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Operator:       types.QuickResponseQueryOperator("CONTAINS"),
+					AllowFuzziness: ptr.Bool(true),
+					Priority:       types.Priority("HIGH"),
+				},
+			},
+			Filters: []types.QuickResponseFilterField{
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Operator:           types.QuickResponseFilterOperator("EQUALS"),
+					IncludeNoExistence: ptr.Bool(true),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Operator:           types.QuickResponseFilterOperator("EQUALS"),
+					IncludeNoExistence: ptr.Bool(true),
+				},
+			},
+			OrderOnField: &types.QuickResponseOrderField{
+				Name:  ptr.String("__Name__"),
+				Order: types.Order("ASC"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1681,7 +1926,25 @@ func TestCheckResponseSnapshot_SearchSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchSessions(context.Background(), &SearchSessionsInput{})
+	got, err := svc.SearchSessions(context.Background(), &SearchSessionsInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		AssistantId: ptr.String("__AssistantId__"),
+		SearchExpression: &types.SearchExpression{
+			Filters: []types.Filter{
+				{
+					Field:    types.FilterField("NAME"),
+					Operator: types.FilterOperator("EQUALS"),
+					Value:    ptr.String("__Value__"),
+				},
+				{
+					Field:    types.FilterField("NAME"),
+					Operator: types.FilterOperator("EQUALS"),
+					Value:    ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1707,7 +1970,11 @@ func TestCheckResponseSnapshot_StartContentUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartContentUpload(context.Background(), &StartContentUploadInput{})
+	got, err := svc.StartContentUpload(context.Background(), &StartContentUploadInput{
+		KnowledgeBaseId:        ptr.String("__KnowledgeBaseId__"),
+		ContentType:            ptr.String("__ContentType__"),
+		PresignedUrlTimeToLive: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1751,7 +2018,23 @@ func TestCheckResponseSnapshot_StartImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartImportJob(context.Background(), &StartImportJobInput{})
+	got, err := svc.StartImportJob(context.Background(), &StartImportJobInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ImportJobType:   types.ImportJobType("QUICK_RESPONSES"),
+		UploadId:        ptr.String("__UploadId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ExternalSourceConfiguration: &types.ExternalSourceConfiguration{
+			Source: types.ExternalSource("AMAZON_CONNECT"),
+			Configuration: &types.ConfigurationMemberConnectConfiguration{
+				Value: types.ConnectConfiguration{
+					InstanceId: ptr.String("__InstanceId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1770,7 +2053,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1789,7 +2077,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1829,7 +2123,18 @@ func TestCheckResponseSnapshot_UpdateContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContent(context.Background(), &UpdateContentInput{})
+	got, err := svc.UpdateContent(context.Background(), &UpdateContentInput{
+		KnowledgeBaseId:          ptr.String("__KnowledgeBaseId__"),
+		ContentId:                ptr.String("__ContentId__"),
+		RevisionId:               ptr.String("__RevisionId__"),
+		Title:                    ptr.String("__Title__"),
+		OverrideLinkOutUri:       ptr.String("__OverrideLinkOutUri__"),
+		RemoveOverrideLinkOutUri: ptr.Bool(true),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		UploadId: ptr.String("__UploadId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1876,7 +2181,10 @@ func TestCheckResponseSnapshot_UpdateKnowledgeBaseTemplateUri(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKnowledgeBaseTemplateUri(context.Background(), &UpdateKnowledgeBaseTemplateUriInput{})
+	got, err := svc.UpdateKnowledgeBaseTemplateUri(context.Background(), &UpdateKnowledgeBaseTemplateUriInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		TemplateUri:     ptr.String("__TemplateUri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1934,7 +2242,33 @@ func TestCheckResponseSnapshot_UpdateQuickResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQuickResponse(context.Background(), &UpdateQuickResponseInput{})
+	got, err := svc.UpdateQuickResponse(context.Background(), &UpdateQuickResponseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		QuickResponseId: ptr.String("__QuickResponseId__"),
+		Name:            ptr.String("__Name__"),
+		Content: &types.QuickResponseDataProviderMemberContent{
+			Value: "__QuickResponseDataProviderMemberContent__",
+		},
+		ContentType: ptr.String("__ContentType__"),
+		GroupingConfiguration: &types.GroupingConfiguration{
+			Criteria: ptr.String("__Criteria__"),
+			Values: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		RemoveGroupingConfiguration: ptr.Bool(true),
+		Description:                 ptr.String("__Description__"),
+		RemoveDescription:           ptr.Bool(true),
+		ShortcutKey:                 ptr.String("__ShortcutKey__"),
+		RemoveShortcutKey:           ptr.Bool(true),
+		IsActive:                    ptr.Bool(true),
+		Channels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Language: ptr.String("__Language__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1955,7 +2289,18 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAssistant(context.Background(), &CreateAssistantInput{})
+	_, opErr := svc.CreateAssistant(context.Background(), &CreateAssistantInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.AssistantType("AGENT"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1980,7 +2325,18 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAssistant(context.Background(), &CreateAssistantInput{})
+	_, opErr := svc.CreateAssistant(context.Background(), &CreateAssistantInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.AssistantType("AGENT"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2005,7 +2361,18 @@ func TestCheckResponseSnapshot_Error_PreconditionFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateContent(context.Background(), &UpdateContentInput{})
+	_, opErr := svc.UpdateContent(context.Background(), &UpdateContentInput{
+		KnowledgeBaseId:          ptr.String("__KnowledgeBaseId__"),
+		ContentId:                ptr.String("__ContentId__"),
+		RevisionId:               ptr.String("__RevisionId__"),
+		Title:                    ptr.String("__Title__"),
+		OverrideLinkOutUri:       ptr.String("__OverrideLinkOutUri__"),
+		RemoveOverrideLinkOutUri: ptr.Bool(true),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		UploadId: ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2030,7 +2397,12 @@ func TestCheckResponseSnapshot_Error_RequestTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.QueryAssistant(context.Background(), &QueryAssistantInput{})
+	_, opErr := svc.QueryAssistant(context.Background(), &QueryAssistantInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		QueryText:   ptr.String("__QueryText__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2056,7 +2428,17 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAssistantAssociation(context.Background(), &CreateAssistantAssociationInput{})
+	_, opErr := svc.CreateAssistantAssociation(context.Background(), &CreateAssistantAssociationInput{
+		AssistantId:     ptr.String("__AssistantId__"),
+		AssociationType: types.AssociationType("KNOWLEDGE_BASE"),
+		Association: &types.AssistantAssociationInputDataMemberKnowledgeBaseId{
+			Value: "__AssistantAssociationInputDataMemberKnowledgeBaseId__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2081,7 +2463,18 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAssistant(context.Background(), &CreateAssistantInput{})
+	_, opErr := svc.CreateAssistant(context.Background(), &CreateAssistantInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.AssistantType("AGENT"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2107,7 +2500,12 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2132,7 +2530,18 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAssistant(context.Background(), &CreateAssistantInput{})
+	_, opErr := svc.CreateAssistant(context.Background(), &CreateAssistantInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.AssistantType("AGENT"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

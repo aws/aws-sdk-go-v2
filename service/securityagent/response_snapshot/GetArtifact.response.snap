@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","artifact":{"contents":"__Contents__","type":"TXT"},"artifactId":"__ArtifactId__","fileName":"__FileName__","updatedAt":"2000-01-01T00:00:00Z"}

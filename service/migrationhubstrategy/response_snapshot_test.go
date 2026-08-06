@@ -258,7 +258,9 @@ func TestCheckResponseSnapshot_GetApplicationComponentDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplicationComponentDetails(context.Background(), &GetApplicationComponentDetailsInput{})
+	got, err := svc.GetApplicationComponentDetails(context.Background(), &GetApplicationComponentDetailsInput{
+		ApplicationComponentId: ptr.String("__ApplicationComponentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -306,7 +308,9 @@ func TestCheckResponseSnapshot_GetApplicationComponentStrategies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplicationComponentStrategies(context.Background(), &GetApplicationComponentStrategiesInput{})
+	got, err := svc.GetApplicationComponentStrategies(context.Background(), &GetApplicationComponentStrategiesInput{
+		ApplicationComponentId: ptr.String("__ApplicationComponentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -355,7 +359,9 @@ func TestCheckResponseSnapshot_GetAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssessment(context.Background(), &GetAssessmentInput{})
+	got, err := svc.GetAssessment(context.Background(), &GetAssessmentInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -386,7 +392,9 @@ func TestCheckResponseSnapshot_GetImportFileTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImportFileTask(context.Background(), &GetImportFileTaskInput{})
+	got, err := svc.GetImportFileTask(context.Background(), &GetImportFileTaskInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -588,7 +596,9 @@ func TestCheckResponseSnapshot_GetRecommendationReportDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommendationReportDetails(context.Background(), &GetRecommendationReportDetailsInput{})
+	got, err := svc.GetRecommendationReportDetails(context.Background(), &GetRecommendationReportDetailsInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +697,11 @@ func TestCheckResponseSnapshot_GetServerDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServerDetails(context.Background(), &GetServerDetailsInput{})
+	got, err := svc.GetServerDetails(context.Background(), &GetServerDetailsInput{
+		ServerId:   ptr.String("__ServerId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -737,7 +751,9 @@ func TestCheckResponseSnapshot_GetServerStrategies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServerStrategies(context.Background(), &GetServerStrategiesInput{})
+	got, err := svc.GetServerStrategies(context.Background(), &GetServerStrategiesInput{
+		ServerId: ptr.String("__ServerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -772,7 +788,11 @@ func TestCheckResponseSnapshot_ListAnalyzableServers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnalyzableServers(context.Background(), &ListAnalyzableServersInput{})
+	got, err := svc.ListAnalyzableServers(context.Background(), &ListAnalyzableServersInput{
+		Sort:       types.SortOrder("ASC"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1045,7 +1065,23 @@ func TestCheckResponseSnapshot_ListApplicationComponents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationComponents(context.Background(), &ListApplicationComponentsInput{})
+	got, err := svc.ListApplicationComponents(context.Background(), &ListApplicationComponentsInput{
+		ApplicationComponentCriteria: types.ApplicationComponentCriteria("NOT_DEFINED"),
+		FilterValue:                  ptr.String("__FilterValue__"),
+		Sort:                         types.SortOrder("ASC"),
+		GroupIdFilter: []types.Group{
+			{
+				Name:  types.GroupName("ExternalId"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.GroupName("ExternalId"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1180,7 +1216,10 @@ func TestCheckResponseSnapshot_ListCollectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollectors(context.Background(), &ListCollectorsInput{})
+	got, err := svc.ListCollectors(context.Background(), &ListCollectorsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1229,7 +1268,10 @@ func TestCheckResponseSnapshot_ListImportFileTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImportFileTask(context.Background(), &ListImportFileTaskInput{})
+	got, err := svc.ListImportFileTask(context.Background(), &ListImportFileTaskInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1388,7 +1430,23 @@ func TestCheckResponseSnapshot_ListServers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServers(context.Background(), &ListServersInput{})
+	got, err := svc.ListServers(context.Background(), &ListServersInput{
+		ServerCriteria: types.ServerCriteria("NOT_DEFINED"),
+		FilterValue:    ptr.String("__FilterValue__"),
+		Sort:           types.SortOrder("ASC"),
+		GroupIdFilter: []types.Group{
+			{
+				Name:  types.GroupName("ExternalId"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.GroupName("ExternalId"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1407,7 +1465,38 @@ func TestCheckResponseSnapshot_PutPortfolioPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPortfolioPreferences(context.Background(), &PutPortfolioPreferencesInput{})
+	got, err := svc.PutPortfolioPreferences(context.Background(), &PutPortfolioPreferencesInput{
+		PrioritizeBusinessGoals: &types.PrioritizeBusinessGoals{
+			BusinessGoals: &types.BusinessGoals{
+				SpeedOfMigration: ptr.Int32(1),
+				ReduceOperationalOverheadWithManagedServices:       ptr.Int32(1),
+				ModernizeInfrastructureWithCloudNativeTechnologies: ptr.Int32(1),
+				LicenseCostReduction:                               ptr.Int32(1),
+			},
+		},
+		ApplicationPreferences: &types.ApplicationPreferences{
+			ManagementPreference: &types.ManagementPreferenceMemberAwsManagedResources{
+				Value: types.AwsManagedResources{
+					TargetDestination: []types.AwsManagedTargetDestination{
+						types.AwsManagedTargetDestination("None specified"),
+						types.AwsManagedTargetDestination("None specified"),
+					},
+				},
+			},
+		},
+		DatabasePreferences: &types.DatabasePreferences{
+			DatabaseManagementPreference: types.DatabaseManagementPreference("AWS-managed"),
+			DatabaseMigrationPreference: &types.DatabaseMigrationPreferenceMemberHeterogeneous{
+				Value: types.Heterogeneous{
+					TargetDatabaseEngine: []types.HeterogeneousTargetDatabaseEngine{
+						types.HeterogeneousTargetDatabaseEngine("None specified"),
+						types.HeterogeneousTargetDatabaseEngine("None specified"),
+					},
+				},
+			},
+		},
+		ApplicationMode: types.ApplicationMode("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1428,7 +1517,29 @@ func TestCheckResponseSnapshot_StartAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAssessment(context.Background(), &StartAssessmentInput{})
+	got, err := svc.StartAssessment(context.Background(), &StartAssessmentInput{
+		S3bucketForAnalysisData: ptr.String("__S3bucketForAnalysisData__"),
+		S3bucketForReportData:   ptr.String("__S3bucketForReportData__"),
+		AssessmentTargets: []types.AssessmentTarget{
+			{
+				Condition: types.Condition("EQUALS"),
+				Name:      ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Condition: types.Condition("EQUALS"),
+				Name:      ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AssessmentDataSourceType: types.AssessmentDataSourceType("StrategyRecommendationsApplicationDataCollector"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1449,7 +1560,23 @@ func TestCheckResponseSnapshot_StartImportFileTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartImportFileTask(context.Background(), &StartImportFileTaskInput{})
+	got, err := svc.StartImportFileTask(context.Background(), &StartImportFileTaskInput{
+		Name:           ptr.String("__Name__"),
+		S3Bucket:       ptr.String("__S3Bucket__"),
+		S3key:          ptr.String("__S3key__"),
+		DataSourceType: types.DataSourceType("ApplicationDiscoveryService"),
+		GroupId: []types.Group{
+			{
+				Name:  types.GroupName("ExternalId"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.GroupName("ExternalId"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		S3bucketForReportData: ptr.String("__S3bucketForReportData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1470,7 +1597,19 @@ func TestCheckResponseSnapshot_StartRecommendationReportGeneration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRecommendationReportGeneration(context.Background(), &StartRecommendationReportGenerationInput{})
+	got, err := svc.StartRecommendationReportGeneration(context.Background(), &StartRecommendationReportGenerationInput{
+		OutputFormat: types.OutputFormat("Excel"),
+		GroupIdFilter: []types.Group{
+			{
+				Name:  types.GroupName("ExternalId"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.GroupName("ExternalId"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1489,7 +1628,9 @@ func TestCheckResponseSnapshot_StopAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopAssessment(context.Background(), &StopAssessmentInput{})
+	got, err := svc.StopAssessment(context.Background(), &StopAssessmentInput{
+		AssessmentId: ptr.String("__AssessmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1508,7 +1649,33 @@ func TestCheckResponseSnapshot_UpdateApplicationComponentConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplicationComponentConfig(context.Background(), &UpdateApplicationComponentConfigInput{})
+	got, err := svc.UpdateApplicationComponentConfig(context.Background(), &UpdateApplicationComponentConfigInput{
+		ApplicationComponentId: ptr.String("__ApplicationComponentId__"),
+		InclusionStatus:        types.InclusionStatus("excludeFromAssessment"),
+		StrategyOption: &types.StrategyOption{
+			Strategy:          types.Strategy("Rehost"),
+			ToolName:          types.TransformationToolName("App2Container"),
+			TargetDestination: types.TargetDestination("None specified"),
+			IsPreferred:       ptr.Bool(true),
+		},
+		SourceCodeList: []types.SourceCode{
+			{
+				VersionControl: types.VersionControl("GITHUB"),
+				SourceVersion:  ptr.String("__SourceVersion__"),
+				Location:       ptr.String("__Location__"),
+				ProjectName:    ptr.String("__ProjectName__"),
+			},
+			{
+				VersionControl: types.VersionControl("GITHUB"),
+				SourceVersion:  ptr.String("__SourceVersion__"),
+				Location:       ptr.String("__Location__"),
+				ProjectName:    ptr.String("__ProjectName__"),
+			},
+		},
+		SecretsManagerKey: ptr.String("__SecretsManagerKey__"),
+		ConfigureOnly:     ptr.Bool(true),
+		AppType:           types.AppType("DotNetFramework"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1527,7 +1694,15 @@ func TestCheckResponseSnapshot_UpdateServerConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServerConfig(context.Background(), &UpdateServerConfigInput{})
+	got, err := svc.UpdateServerConfig(context.Background(), &UpdateServerConfigInput{
+		ServerId: ptr.String("__ServerId__"),
+		StrategyOption: &types.StrategyOption{
+			Strategy:          types.Strategy("Rehost"),
+			ToolName:          types.TransformationToolName("App2Container"),
+			TargetDestination: types.TargetDestination("None specified"),
+			IsPreferred:       ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1548,7 +1723,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetAssessment(context.Background(), &GetAssessmentInput{})
+	_, opErr := svc.GetAssessment(context.Background(), &GetAssessmentInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1573,7 +1750,38 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutPortfolioPreferences(context.Background(), &PutPortfolioPreferencesInput{})
+	_, opErr := svc.PutPortfolioPreferences(context.Background(), &PutPortfolioPreferencesInput{
+		PrioritizeBusinessGoals: &types.PrioritizeBusinessGoals{
+			BusinessGoals: &types.BusinessGoals{
+				SpeedOfMigration: ptr.Int32(1),
+				ReduceOperationalOverheadWithManagedServices:       ptr.Int32(1),
+				ModernizeInfrastructureWithCloudNativeTechnologies: ptr.Int32(1),
+				LicenseCostReduction:                               ptr.Int32(1),
+			},
+		},
+		ApplicationPreferences: &types.ApplicationPreferences{
+			ManagementPreference: &types.ManagementPreferenceMemberAwsManagedResources{
+				Value: types.AwsManagedResources{
+					TargetDestination: []types.AwsManagedTargetDestination{
+						types.AwsManagedTargetDestination("None specified"),
+						types.AwsManagedTargetDestination("None specified"),
+					},
+				},
+			},
+		},
+		DatabasePreferences: &types.DatabasePreferences{
+			DatabaseManagementPreference: types.DatabaseManagementPreference("AWS-managed"),
+			DatabaseMigrationPreference: &types.DatabaseMigrationPreferenceMemberHeterogeneous{
+				Value: types.Heterogeneous{
+					TargetDatabaseEngine: []types.HeterogeneousTargetDatabaseEngine{
+						types.HeterogeneousTargetDatabaseEngine("None specified"),
+						types.HeterogeneousTargetDatabaseEngine("None specified"),
+					},
+				},
+			},
+		},
+		ApplicationMode: types.ApplicationMode("ALL"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1623,7 +1831,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetApplicationComponentDetails(context.Background(), &GetApplicationComponentDetailsInput{})
+	_, opErr := svc.GetApplicationComponentDetails(context.Background(), &GetApplicationComponentDetailsInput{
+		ApplicationComponentId: ptr.String("__ApplicationComponentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1648,7 +1858,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetApplicationComponentDetails(context.Background(), &GetApplicationComponentDetailsInput{})
+	_, opErr := svc.GetApplicationComponentDetails(context.Background(), &GetApplicationComponentDetailsInput{
+		ApplicationComponentId: ptr.String("__ApplicationComponentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1673,7 +1885,23 @@ func TestCheckResponseSnapshot_Error_ServiceLinkedRoleLockClientException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListApplicationComponents(context.Background(), &ListApplicationComponentsInput{})
+	_, opErr := svc.ListApplicationComponents(context.Background(), &ListApplicationComponentsInput{
+		ApplicationComponentCriteria: types.ApplicationComponentCriteria("NOT_DEFINED"),
+		FilterValue:                  ptr.String("__FilterValue__"),
+		Sort:                         types.SortOrder("ASC"),
+		GroupIdFilter: []types.Group{
+			{
+				Name:  types.GroupName("ExternalId"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.GroupName("ExternalId"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1698,7 +1926,29 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartAssessment(context.Background(), &StartAssessmentInput{})
+	_, opErr := svc.StartAssessment(context.Background(), &StartAssessmentInput{
+		S3bucketForAnalysisData: ptr.String("__S3bucketForAnalysisData__"),
+		S3bucketForReportData:   ptr.String("__S3bucketForReportData__"),
+		AssessmentTargets: []types.AssessmentTarget{
+			{
+				Condition: types.Condition("EQUALS"),
+				Name:      ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Condition: types.Condition("EQUALS"),
+				Name:      ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AssessmentDataSourceType: types.AssessmentDataSourceType("StrategyRecommendationsApplicationDataCollector"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1723,7 +1973,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetApplicationComponentDetails(context.Background(), &GetApplicationComponentDetailsInput{})
+	_, opErr := svc.GetApplicationComponentDetails(context.Background(), &GetApplicationComponentDetailsInput{
+		ApplicationComponentId: ptr.String("__ApplicationComponentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1748,7 +2000,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetImportFileTask(context.Background(), &GetImportFileTaskInput{})
+	_, opErr := svc.GetImportFileTask(context.Background(), &GetImportFileTaskInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

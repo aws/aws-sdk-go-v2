@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DistributionIdList xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><IsTruncated>true</IsTruncated><Items><DistributionId>__Member__</DistributionId><DistributionId>__Member__</DistributionId></Items><Marker>__Marker__</Marker><MaxItems>1</MaxItems><NextMarker>__NextMarker__</NextMarker><Quantity>1</Quantity></DistributionIdList>

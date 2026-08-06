@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSParallelComputingService.CreateCluster
+
+{"__type":"ValidationException","fieldList":[{"message":"__Message__","name":"__Name__"},{"message":"__Message__","name":"__Name__"}],"message":"__Message__","reason":"unknownOperation"}

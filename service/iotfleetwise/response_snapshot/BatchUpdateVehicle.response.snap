@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.BatchUpdateVehicle
+
+{"errors":[{"code":1,"message":"__Message__","vehicleName":"__VehicleName__"},{"code":1,"message":"__Message__","vehicleName":"__VehicleName__"}],"vehicles":[{"arn":"__Arn__","vehicleName":"__VehicleName__"},{"arn":"__Arn__","vehicleName":"__VehicleName__"}]}

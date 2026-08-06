@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"thingTypeArn":"__ThingTypeArn__","thingTypeId":"__ThingTypeId__","thingTypeName":"__ThingTypeName__"}

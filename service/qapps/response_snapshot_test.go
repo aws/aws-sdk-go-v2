@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/document"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -117,7 +118,10 @@ func TestCheckResponseSnapshot_AssociateLibraryItemReview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{})
+	got, err := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +140,10 @@ func TestCheckResponseSnapshot_AssociateQAppWithUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateQAppWithUser(context.Background(), &AssociateQAppWithUserInput{})
+	got, err := svc.AssociateQAppWithUser(context.Background(), &AssociateQAppWithUserInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		AppId:      ptr.String("__AppId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +162,21 @@ func TestCheckResponseSnapshot_BatchCreateCategory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateCategory(context.Background(), &BatchCreateCategoryInput{})
+	got, err := svc.BatchCreateCategory(context.Background(), &BatchCreateCategoryInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Categories: []types.BatchCreateCategoryInputCategory{
+			{
+				Id:    ptr.String("__Id__"),
+				Title: ptr.String("__Title__"),
+				Color: ptr.String("__Color__"),
+			},
+			{
+				Id:    ptr.String("__Id__"),
+				Title: ptr.String("__Title__"),
+				Color: ptr.String("__Color__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +195,13 @@ func TestCheckResponseSnapshot_BatchDeleteCategory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteCategory(context.Background(), &BatchDeleteCategoryInput{})
+	got, err := svc.BatchDeleteCategory(context.Background(), &BatchDeleteCategoryInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -193,7 +220,21 @@ func TestCheckResponseSnapshot_BatchUpdateCategory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateCategory(context.Background(), &BatchUpdateCategoryInput{})
+	got, err := svc.BatchUpdateCategory(context.Background(), &BatchUpdateCategoryInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Categories: []types.CategoryInput{
+			{
+				Id:    ptr.String("__Id__"),
+				Title: ptr.String("__Title__"),
+				Color: ptr.String("__Color__"),
+			},
+			{
+				Id:    ptr.String("__Id__"),
+				Title: ptr.String("__Title__"),
+				Color: ptr.String("__Color__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -221,7 +262,15 @@ func TestCheckResponseSnapshot_CreateLibraryItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLibraryItem(context.Background(), &CreateLibraryItemInput{})
+	got, err := svc.CreateLibraryItem(context.Background(), &CreateLibraryItemInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		AppId:      ptr.String("__AppId__"),
+		AppVersion: ptr.Int32(1),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -247,7 +296,15 @@ func TestCheckResponseSnapshot_CreatePresignedUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePresignedUrl(context.Background(), &CreatePresignedUrlInput{})
+	got, err := svc.CreatePresignedUrl(context.Background(), &CreatePresignedUrlInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		CardId:             ptr.String("__CardId__"),
+		AppId:              ptr.String("__AppId__"),
+		FileContentsSha256: ptr.String("__FileContentsSha256__"),
+		FileName:           ptr.String("__FileName__"),
+		Scope:              types.DocumentScope("APPLICATION"),
+		SessionId:          ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -282,7 +339,37 @@ func TestCheckResponseSnapshot_CreateQApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQApp(context.Background(), &CreateQAppInput{})
+	got, err := svc.CreateQApp(context.Background(), &CreateQAppInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		AppDefinition: &types.AppDefinitionInput{
+			Cards: []types.CardInput{
+				&types.CardInputMemberTextInput{
+					Value: types.TextInputCardInput{
+						Title:        ptr.String("__Title__"),
+						Id:           ptr.String("__Id__"),
+						Type:         types.CardType("text-input"),
+						Placeholder:  ptr.String("__Placeholder__"),
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+				},
+				&types.CardInputMemberTextInput{
+					Value: types.TextInputCardInput{
+						Title:        ptr.String("__Title__"),
+						Id:           ptr.String("__Id__"),
+						Type:         types.CardType("text-input"),
+						Placeholder:  ptr.String("__Placeholder__"),
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+				},
+			},
+			InitialPrompt: ptr.String("__InitialPrompt__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -301,7 +388,10 @@ func TestCheckResponseSnapshot_DeleteLibraryItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLibraryItem(context.Background(), &DeleteLibraryItemInput{})
+	got, err := svc.DeleteLibraryItem(context.Background(), &DeleteLibraryItemInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -320,7 +410,10 @@ func TestCheckResponseSnapshot_DeleteQApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQApp(context.Background(), &DeleteQAppInput{})
+	got, err := svc.DeleteQApp(context.Background(), &DeleteQAppInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		AppId:      ptr.String("__AppId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -360,7 +453,10 @@ func TestCheckResponseSnapshot_DescribeQAppPermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeQAppPermissions(context.Background(), &DescribeQAppPermissionsInput{})
+	got, err := svc.DescribeQAppPermissions(context.Background(), &DescribeQAppPermissionsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		AppId:      ptr.String("__AppId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -379,7 +475,10 @@ func TestCheckResponseSnapshot_DisassociateLibraryItemReview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateLibraryItemReview(context.Background(), &DisassociateLibraryItemReviewInput{})
+	got, err := svc.DisassociateLibraryItemReview(context.Background(), &DisassociateLibraryItemReviewInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -398,7 +497,10 @@ func TestCheckResponseSnapshot_DisassociateQAppFromUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateQAppFromUser(context.Background(), &DisassociateQAppFromUserInput{})
+	got, err := svc.DisassociateQAppFromUser(context.Background(), &DisassociateQAppFromUserInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		AppId:      ptr.String("__AppId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +523,10 @@ func TestCheckResponseSnapshot_ExportQAppSessionData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportQAppSessionData(context.Background(), &ExportQAppSessionDataInput{})
+	got, err := svc.ExportQAppSessionData(context.Background(), &ExportQAppSessionDataInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -467,7 +572,11 @@ func TestCheckResponseSnapshot_GetLibraryItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLibraryItem(context.Background(), &GetLibraryItemInput{})
+	got, err := svc.GetLibraryItem(context.Background(), &GetLibraryItemInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+		AppId:         ptr.String("__AppId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -534,7 +643,11 @@ func TestCheckResponseSnapshot_GetQApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQApp(context.Background(), &GetQAppInput{})
+	got, err := svc.GetQApp(context.Background(), &GetQAppInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		AppId:      ptr.String("__AppId__"),
+		AppVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -557,12 +670,12 @@ func TestCheckResponseSnapshot_GetQAppSession(t *testing.T) {
 				CurrentValue: ptr.String("__CurrentValue__"),
 				Submissions: []types.Submission{
 					{
-						Value:        nil,
+						Value:        document.NewLazyDocument("__Document__"),
 						SubmissionId: ptr.String("__SubmissionId__"),
 						Timestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 					{
-						Value:        nil,
+						Value:        document.NewLazyDocument("__Document__"),
 						SubmissionId: ptr.String("__SubmissionId__"),
 						Timestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
@@ -579,7 +692,10 @@ func TestCheckResponseSnapshot_GetQAppSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQAppSession(context.Background(), &GetQAppSessionInput{})
+	got, err := svc.GetQAppSession(context.Background(), &GetQAppSessionInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -608,7 +724,10 @@ func TestCheckResponseSnapshot_GetQAppSessionMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQAppSessionMetadata(context.Background(), &GetQAppSessionMetadataInput{})
+	got, err := svc.GetQAppSessionMetadata(context.Background(), &GetQAppSessionMetadataInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -629,7 +748,15 @@ func TestCheckResponseSnapshot_ImportDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportDocument(context.Background(), &ImportDocumentInput{})
+	got, err := svc.ImportDocument(context.Background(), &ImportDocumentInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		CardId:             ptr.String("__CardId__"),
+		AppId:              ptr.String("__AppId__"),
+		FileContentsBase64: ptr.String("__FileContentsBase64__"),
+		FileName:           ptr.String("__FileName__"),
+		Scope:              types.DocumentScope("APPLICATION"),
+		SessionId:          ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -663,7 +790,9 @@ func TestCheckResponseSnapshot_ListCategories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCategories(context.Background(), &ListCategoriesInput{})
+	got, err := svc.ListCategories(context.Background(), &ListCategoriesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -742,7 +871,12 @@ func TestCheckResponseSnapshot_ListLibraryItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLibraryItems(context.Background(), &ListLibraryItemsInput{})
+	got, err := svc.ListLibraryItems(context.Background(), &ListLibraryItemsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Limit:      ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		CategoryId: ptr.String("__CategoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -758,7 +892,7 @@ func TestCheckResponseSnapshot_ListQAppSessionData(t *testing.T) {
 		SessionData: []types.QAppSessionData{
 			{
 				CardId: ptr.String("__CardId__"),
-				Value:  nil,
+				Value:  document.NewLazyDocument("__Document__"),
 				User: &types.User{
 					UserId: ptr.String("__UserId__"),
 				},
@@ -767,7 +901,7 @@ func TestCheckResponseSnapshot_ListQAppSessionData(t *testing.T) {
 			},
 			{
 				CardId: ptr.String("__CardId__"),
-				Value:  nil,
+				Value:  document.NewLazyDocument("__Document__"),
 				User: &types.User{
 					UserId: ptr.String("__UserId__"),
 				},
@@ -785,7 +919,10 @@ func TestCheckResponseSnapshot_ListQAppSessionData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQAppSessionData(context.Background(), &ListQAppSessionDataInput{})
+	got, err := svc.ListQAppSessionData(context.Background(), &ListQAppSessionDataInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -828,7 +965,11 @@ func TestCheckResponseSnapshot_ListQApps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQApps(context.Background(), &ListQAppsInput{})
+	got, err := svc.ListQApps(context.Background(), &ListQAppsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Limit:      ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -851,7 +992,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -899,7 +1042,21 @@ func TestCheckResponseSnapshot_PredictQApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PredictQApp(context.Background(), &PredictQAppInput{})
+	got, err := svc.PredictQApp(context.Background(), &PredictQAppInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Options: &types.PredictQAppInputOptionsMemberConversation{
+			Value: []types.ConversationMessage{
+				{
+					Body: ptr.String("__Body__"),
+					Type: types.Sender("USER"),
+				},
+				{
+					Body: ptr.String("__Body__"),
+					Type: types.Sender("USER"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1078,33 @@ func TestCheckResponseSnapshot_StartQAppSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartQAppSession(context.Background(), &StartQAppSessionInput{})
+	got, err := svc.StartQAppSession(context.Background(), &StartQAppSessionInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		AppId:      ptr.String("__AppId__"),
+		AppVersion: ptr.Int32(1),
+		InitialValues: []types.CardValue{
+			{
+				CardId: ptr.String("__CardId__"),
+				Value:  ptr.String("__Value__"),
+				SubmissionMutation: &types.SubmissionMutation{
+					SubmissionId: ptr.String("__SubmissionId__"),
+					MutationType: types.SubmissionMutationKind("edit"),
+				},
+			},
+			{
+				CardId: ptr.String("__CardId__"),
+				Value:  ptr.String("__Value__"),
+				SubmissionMutation: &types.SubmissionMutation{
+					SubmissionId: ptr.String("__SubmissionId__"),
+					MutationType: types.SubmissionMutationKind("edit"),
+				},
+			},
+		},
+		SessionId: ptr.String("__SessionId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -940,7 +1123,10 @@ func TestCheckResponseSnapshot_StopQAppSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopQAppSession(context.Background(), &StopQAppSessionInput{})
+	got, err := svc.StopQAppSession(context.Background(), &StopQAppSessionInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -959,7 +1145,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -978,7 +1169,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1024,7 +1221,15 @@ func TestCheckResponseSnapshot_UpdateLibraryItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLibraryItem(context.Background(), &UpdateLibraryItemInput{})
+	got, err := svc.UpdateLibraryItem(context.Background(), &UpdateLibraryItemInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+		Status:        types.LibraryItemStatus("PUBLISHED"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1043,7 +1248,11 @@ func TestCheckResponseSnapshot_UpdateLibraryItemMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLibraryItemMetadata(context.Background(), &UpdateLibraryItemMetadataInput{})
+	got, err := svc.UpdateLibraryItemMetadata(context.Background(), &UpdateLibraryItemMetadataInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+		IsVerified:    ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1078,7 +1287,35 @@ func TestCheckResponseSnapshot_UpdateQApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQApp(context.Background(), &UpdateQAppInput{})
+	got, err := svc.UpdateQApp(context.Background(), &UpdateQAppInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		AppId:       ptr.String("__AppId__"),
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		AppDefinition: &types.AppDefinitionInput{
+			Cards: []types.CardInput{
+				&types.CardInputMemberTextInput{
+					Value: types.TextInputCardInput{
+						Title:        ptr.String("__Title__"),
+						Id:           ptr.String("__Id__"),
+						Type:         types.CardType("text-input"),
+						Placeholder:  ptr.String("__Placeholder__"),
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+				},
+				&types.CardInputMemberTextInput{
+					Value: types.TextInputCardInput{
+						Title:        ptr.String("__Title__"),
+						Id:           ptr.String("__Id__"),
+						Type:         types.CardType("text-input"),
+						Placeholder:  ptr.String("__Placeholder__"),
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+				},
+			},
+			InitialPrompt: ptr.String("__InitialPrompt__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1118,7 +1355,30 @@ func TestCheckResponseSnapshot_UpdateQAppPermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQAppPermissions(context.Background(), &UpdateQAppPermissionsInput{})
+	got, err := svc.UpdateQAppPermissions(context.Background(), &UpdateQAppPermissionsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		AppId:      ptr.String("__AppId__"),
+		GrantPermissions: []types.PermissionInput{
+			{
+				Action:    types.Action("read"),
+				Principal: ptr.String("__Principal__"),
+			},
+			{
+				Action:    types.Action("read"),
+				Principal: ptr.String("__Principal__"),
+			},
+		},
+		RevokePermissions: []types.PermissionInput{
+			{
+				Action:    types.Action("read"),
+				Principal: ptr.String("__Principal__"),
+			},
+			{
+				Action:    types.Action("read"),
+				Principal: ptr.String("__Principal__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1140,7 +1400,28 @@ func TestCheckResponseSnapshot_UpdateQAppSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQAppSession(context.Background(), &UpdateQAppSessionInput{})
+	got, err := svc.UpdateQAppSession(context.Background(), &UpdateQAppSessionInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		SessionId:  ptr.String("__SessionId__"),
+		Values: []types.CardValue{
+			{
+				CardId: ptr.String("__CardId__"),
+				Value:  ptr.String("__Value__"),
+				SubmissionMutation: &types.SubmissionMutation{
+					SubmissionId: ptr.String("__SubmissionId__"),
+					MutationType: types.SubmissionMutationKind("edit"),
+				},
+			},
+			{
+				CardId: ptr.String("__CardId__"),
+				Value:  ptr.String("__Value__"),
+				SubmissionMutation: &types.SubmissionMutation{
+					SubmissionId: ptr.String("__SubmissionId__"),
+					MutationType: types.SubmissionMutationKind("edit"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1168,7 +1449,16 @@ func TestCheckResponseSnapshot_UpdateQAppSessionMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQAppSessionMetadata(context.Background(), &UpdateQAppSessionMetadataInput{})
+	got, err := svc.UpdateQAppSessionMetadata(context.Background(), &UpdateQAppSessionMetadataInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		SessionId:   ptr.String("__SessionId__"),
+		SessionName: ptr.String("__SessionName__"),
+		SharingConfiguration: &types.SessionSharingConfiguration{
+			Enabled:         ptr.Bool(true),
+			AcceptResponses: ptr.Bool(true),
+			RevealCards:     ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1189,7 +1479,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{})
+	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1216,7 +1509,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{})
+	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1243,7 +1539,37 @@ func TestCheckResponseSnapshot_Error_ContentTooLargeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateQApp(context.Background(), &CreateQAppInput{})
+	_, opErr := svc.CreateQApp(context.Background(), &CreateQAppInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		AppDefinition: &types.AppDefinitionInput{
+			Cards: []types.CardInput{
+				&types.CardInputMemberTextInput{
+					Value: types.TextInputCardInput{
+						Title:        ptr.String("__Title__"),
+						Id:           ptr.String("__Id__"),
+						Type:         types.CardType("text-input"),
+						Placeholder:  ptr.String("__Placeholder__"),
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+				},
+				&types.CardInputMemberTextInput{
+					Value: types.TextInputCardInput{
+						Title:        ptr.String("__Title__"),
+						Id:           ptr.String("__Id__"),
+						Type:         types.CardType("text-input"),
+						Placeholder:  ptr.String("__Placeholder__"),
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+				},
+			},
+			InitialPrompt: ptr.String("__InitialPrompt__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1269,7 +1595,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{})
+	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1296,7 +1625,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{})
+	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1325,7 +1657,10 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{})
+	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1353,7 +1688,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{})
+	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1378,7 +1716,10 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{})
+	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1403,7 +1744,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{})
+	_, opErr := svc.AssociateLibraryItemReview(context.Background(), &AssociateLibraryItemReviewInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		LibraryItemId: ptr.String("__LibraryItemId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

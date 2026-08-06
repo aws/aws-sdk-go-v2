@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Channels":[{"Config":{"Filters":{"MessageTypes":["NEW_INSIGHT","NEW_INSIGHT"],"Severities":["LOW","LOW"]},"Sns":{"TopicArn":"__TopicArn__"}},"Id":"__Id__"},{"Config":{"Filters":{"MessageTypes":["NEW_INSIGHT","NEW_INSIGHT"],"Severities":["LOW","LOW"]},"Sns":{"TopicArn":"__TopicArn__"}},"Id":"__Id__"}],"NextToken":"__NextToken__"}

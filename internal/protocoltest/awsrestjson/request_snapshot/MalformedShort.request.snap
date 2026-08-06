@@ -1,6 +1,0 @@
-POST /MalformedShort/1?shortInQuery=1
-
-Content-Type: application/json
-Shortinheader: 1
-
-{"shortInBody":1}

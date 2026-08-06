@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ProfileResourceAssociation":{"CreationTime":946684800,"Id":"__Id__","ModificationTime":946684800,"Name":"__Name__","OwnerId":"__OwnerId__","ProfileId":"__ProfileId__","ResourceArn":"__ResourceArn__","ResourceProperties":"__ResourceProperties__","ResourceType":"__ResourceType__","Status":"COMPLETE","StatusMessage":"__StatusMessage__"}}

@@ -119,7 +119,20 @@ func TestCheckResponseSnapshot_CreateAddonInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAddonInstance(context.Background(), &CreateAddonInstanceInput{})
+	got, err := svc.CreateAddonInstance(context.Background(), &CreateAddonInstanceInput{
+		ClientToken:         ptr.String("__ClientToken__"),
+		AddonSubscriptionId: ptr.String("__AddonSubscriptionId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +153,20 @@ func TestCheckResponseSnapshot_CreateAddonSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAddonSubscription(context.Background(), &CreateAddonSubscriptionInput{})
+	got, err := svc.CreateAddonSubscription(context.Background(), &CreateAddonSubscriptionInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AddonName:   ptr.String("__AddonName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +187,20 @@ func TestCheckResponseSnapshot_CreateAddressList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAddressList(context.Background(), &CreateAddressListInput{})
+	got, err := svc.CreateAddressList(context.Background(), &CreateAddressListInput{
+		ClientToken:     ptr.String("__ClientToken__"),
+		AddressListName: ptr.String("__AddressListName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +222,14 @@ func TestCheckResponseSnapshot_CreateAddressListImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAddressListImportJob(context.Background(), &CreateAddressListImportJobInput{})
+	got, err := svc.CreateAddressListImportJob(context.Background(), &CreateAddressListImportJobInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		AddressListId: ptr.String("__AddressListId__"),
+		Name:          ptr.String("__Name__"),
+		ImportDataFormat: &types.ImportDataFormat{
+			ImportDataType: types.ImportDataType("CSV"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -204,7 +250,24 @@ func TestCheckResponseSnapshot_CreateArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateArchive(context.Background(), &CreateArchiveInput{})
+	got, err := svc.CreateArchive(context.Background(), &CreateArchiveInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ArchiveName: ptr.String("__ArchiveName__"),
+		Retention: &types.ArchiveRetentionMemberRetentionPeriod{
+			Value: types.RetentionPeriod("THREE_MONTHS"),
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,7 +288,32 @@ func TestCheckResponseSnapshot_CreateIngressPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIngressPoint(context.Background(), &CreateIngressPointInput{})
+	got, err := svc.CreateIngressPoint(context.Background(), &CreateIngressPointInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		IngressPointName: ptr.String("__IngressPointName__"),
+		Type:             types.IngressPointType("OPEN"),
+		RuleSetId:        ptr.String("__RuleSetId__"),
+		TrafficPolicyId:  ptr.String("__TrafficPolicyId__"),
+		IngressPointConfiguration: &types.IngressPointConfigurationMemberSmtpPassword{
+			Value: "__IngressPointConfigurationMemberSmtpPassword__",
+		},
+		NetworkConfiguration: &types.NetworkConfigurationMemberPublicNetworkConfiguration{
+			Value: types.PublicNetworkConfiguration{
+				IpType: types.IpType("IPV4"),
+			},
+		},
+		TlsPolicy: types.TlsPolicy("REQUIRED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +334,25 @@ func TestCheckResponseSnapshot_CreateRelay(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRelay(context.Background(), &CreateRelayInput{})
+	got, err := svc.CreateRelay(context.Background(), &CreateRelayInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		RelayName:   ptr.String("__RelayName__"),
+		ServerName:  ptr.String("__ServerName__"),
+		ServerPort:  ptr.Int32(1),
+		Authentication: &types.RelayAuthenticationMemberSecretArn{
+			Value: "__RelayAuthenticationMemberSecretArn__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +373,116 @@ func TestCheckResponseSnapshot_CreateRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRuleSet(context.Background(), &CreateRuleSetInput{})
+	got, err := svc.CreateRuleSet(context.Background(), &CreateRuleSetInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		RuleSetName: ptr.String("__RuleSetName__"),
+		Rules: []types.Rule{
+			{
+				Name: ptr.String("__Name__"),
+				Conditions: []types.RuleCondition{
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+				},
+				Unless: []types.RuleCondition{
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+				},
+				Actions: []types.RuleAction{
+					&types.RuleActionMemberDrop{
+						Value: types.DropAction{},
+					},
+					&types.RuleActionMemberDrop{
+						Value: types.DropAction{},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Conditions: []types.RuleCondition{
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+				},
+				Unless: []types.RuleCondition{
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+				},
+				Actions: []types.RuleAction{
+					&types.RuleActionMemberDrop{
+						Value: types.DropAction{},
+					},
+					&types.RuleActionMemberDrop{
+						Value: types.DropAction{},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -288,7 +503,82 @@ func TestCheckResponseSnapshot_CreateTrafficPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrafficPolicy(context.Background(), &CreateTrafficPolicyInput{})
+	got, err := svc.CreateTrafficPolicy(context.Background(), &CreateTrafficPolicyInput{
+		ClientToken:       ptr.String("__ClientToken__"),
+		TrafficPolicyName: ptr.String("__TrafficPolicyName__"),
+		PolicyStatements: []types.PolicyStatement{
+			{
+				Conditions: []types.PolicyCondition{
+					&types.PolicyConditionMemberStringExpression{
+						Value: types.IngressStringExpression{
+							Evaluate: &types.IngressStringToEvaluateMemberAttribute{
+								Value: types.IngressStringEmailAttribute("RECIPIENT"),
+							},
+							Operator: types.IngressStringOperator("EQUALS"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					&types.PolicyConditionMemberStringExpression{
+						Value: types.IngressStringExpression{
+							Evaluate: &types.IngressStringToEvaluateMemberAttribute{
+								Value: types.IngressStringEmailAttribute("RECIPIENT"),
+							},
+							Operator: types.IngressStringOperator("EQUALS"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				Action: types.AcceptAction("ALLOW"),
+			},
+			{
+				Conditions: []types.PolicyCondition{
+					&types.PolicyConditionMemberStringExpression{
+						Value: types.IngressStringExpression{
+							Evaluate: &types.IngressStringToEvaluateMemberAttribute{
+								Value: types.IngressStringEmailAttribute("RECIPIENT"),
+							},
+							Operator: types.IngressStringOperator("EQUALS"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					&types.PolicyConditionMemberStringExpression{
+						Value: types.IngressStringExpression{
+							Evaluate: &types.IngressStringToEvaluateMemberAttribute{
+								Value: types.IngressStringEmailAttribute("RECIPIENT"),
+							},
+							Operator: types.IngressStringOperator("EQUALS"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				Action: types.AcceptAction("ALLOW"),
+			},
+		},
+		DefaultAction:       types.AcceptAction("ALLOW"),
+		MaxMessageSizeBytes: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -307,7 +597,9 @@ func TestCheckResponseSnapshot_DeleteAddonInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAddonInstance(context.Background(), &DeleteAddonInstanceInput{})
+	got, err := svc.DeleteAddonInstance(context.Background(), &DeleteAddonInstanceInput{
+		AddonInstanceId: ptr.String("__AddonInstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +618,9 @@ func TestCheckResponseSnapshot_DeleteAddonSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAddonSubscription(context.Background(), &DeleteAddonSubscriptionInput{})
+	got, err := svc.DeleteAddonSubscription(context.Background(), &DeleteAddonSubscriptionInput{
+		AddonSubscriptionId: ptr.String("__AddonSubscriptionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -345,7 +639,9 @@ func TestCheckResponseSnapshot_DeleteAddressList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAddressList(context.Background(), &DeleteAddressListInput{})
+	got, err := svc.DeleteAddressList(context.Background(), &DeleteAddressListInput{
+		AddressListId: ptr.String("__AddressListId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +660,9 @@ func TestCheckResponseSnapshot_DeleteArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteArchive(context.Background(), &DeleteArchiveInput{})
+	got, err := svc.DeleteArchive(context.Background(), &DeleteArchiveInput{
+		ArchiveId: ptr.String("__ArchiveId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -383,7 +681,9 @@ func TestCheckResponseSnapshot_DeleteIngressPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIngressPoint(context.Background(), &DeleteIngressPointInput{})
+	got, err := svc.DeleteIngressPoint(context.Background(), &DeleteIngressPointInput{
+		IngressPointId: ptr.String("__IngressPointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +702,9 @@ func TestCheckResponseSnapshot_DeleteRelay(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRelay(context.Background(), &DeleteRelayInput{})
+	got, err := svc.DeleteRelay(context.Background(), &DeleteRelayInput{
+		RelayId: ptr.String("__RelayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +723,9 @@ func TestCheckResponseSnapshot_DeleteRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRuleSet(context.Background(), &DeleteRuleSetInput{})
+	got, err := svc.DeleteRuleSet(context.Background(), &DeleteRuleSetInput{
+		RuleSetId: ptr.String("__RuleSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -440,7 +744,9 @@ func TestCheckResponseSnapshot_DeleteTrafficPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrafficPolicy(context.Background(), &DeleteTrafficPolicyInput{})
+	got, err := svc.DeleteTrafficPolicy(context.Background(), &DeleteTrafficPolicyInput{
+		TrafficPolicyId: ptr.String("__TrafficPolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -459,7 +765,10 @@ func TestCheckResponseSnapshot_DeregisterMemberFromAddressList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterMemberFromAddressList(context.Background(), &DeregisterMemberFromAddressListInput{})
+	got, err := svc.DeregisterMemberFromAddressList(context.Background(), &DeregisterMemberFromAddressListInput{
+		AddressListId: ptr.String("__AddressListId__"),
+		Address:       ptr.String("__Address__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -483,7 +792,9 @@ func TestCheckResponseSnapshot_GetAddonInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAddonInstance(context.Background(), &GetAddonInstanceInput{})
+	got, err := svc.GetAddonInstance(context.Background(), &GetAddonInstanceInput{
+		AddonInstanceId: ptr.String("__AddonInstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -506,7 +817,9 @@ func TestCheckResponseSnapshot_GetAddonSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAddonSubscription(context.Background(), &GetAddonSubscriptionInput{})
+	got, err := svc.GetAddonSubscription(context.Background(), &GetAddonSubscriptionInput{
+		AddonSubscriptionId: ptr.String("__AddonSubscriptionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -531,7 +844,9 @@ func TestCheckResponseSnapshot_GetAddressList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAddressList(context.Background(), &GetAddressListInput{})
+	got, err := svc.GetAddressList(context.Background(), &GetAddressListInput{
+		AddressListId: ptr.String("__AddressListId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -565,7 +880,9 @@ func TestCheckResponseSnapshot_GetAddressListImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAddressListImportJob(context.Background(), &GetAddressListImportJobInput{})
+	got, err := svc.GetAddressListImportJob(context.Background(), &GetAddressListImportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -595,7 +912,9 @@ func TestCheckResponseSnapshot_GetArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetArchive(context.Background(), &GetArchiveInput{})
+	got, err := svc.GetArchive(context.Background(), &GetArchiveInput{
+		ArchiveId: ptr.String("__ArchiveId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -684,7 +1003,9 @@ func TestCheckResponseSnapshot_GetArchiveExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetArchiveExport(context.Background(), &GetArchiveExportInput{})
+	got, err := svc.GetArchiveExport(context.Background(), &GetArchiveExportInput{
+		ExportId: ptr.String("__ExportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -728,7 +1049,9 @@ func TestCheckResponseSnapshot_GetArchiveMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetArchiveMessage(context.Background(), &GetArchiveMessageInput{})
+	got, err := svc.GetArchiveMessage(context.Background(), &GetArchiveMessageInput{
+		ArchivedMessageId: ptr.String("__ArchivedMessageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -753,7 +1076,9 @@ func TestCheckResponseSnapshot_GetArchiveMessageContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetArchiveMessageContent(context.Background(), &GetArchiveMessageContentInput{})
+	got, err := svc.GetArchiveMessageContent(context.Background(), &GetArchiveMessageContentInput{
+		ArchivedMessageId: ptr.String("__ArchivedMessageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -837,7 +1162,9 @@ func TestCheckResponseSnapshot_GetArchiveSearch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetArchiveSearch(context.Background(), &GetArchiveSearchInput{})
+	got, err := svc.GetArchiveSearch(context.Background(), &GetArchiveSearchInput{
+		SearchId: ptr.String("__SearchId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1248,9 @@ func TestCheckResponseSnapshot_GetArchiveSearchResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetArchiveSearchResults(context.Background(), &GetArchiveSearchResultsInput{})
+	got, err := svc.GetArchiveSearchResults(context.Background(), &GetArchiveSearchResultsInput{
+		SearchId: ptr.String("__SearchId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -972,7 +1301,10 @@ func TestCheckResponseSnapshot_GetIngressPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIngressPoint(context.Background(), &GetIngressPointInput{})
+	got, err := svc.GetIngressPoint(context.Background(), &GetIngressPointInput{
+		IngressPointId:            ptr.String("__IngressPointId__"),
+		IncludeTrustStoreContents: types.TrustStoreResponseOption("EXCLUDE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -994,7 +1326,10 @@ func TestCheckResponseSnapshot_GetMemberOfAddressList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMemberOfAddressList(context.Background(), &GetMemberOfAddressListInput{})
+	got, err := svc.GetMemberOfAddressList(context.Background(), &GetMemberOfAddressListInput{
+		AddressListId: ptr.String("__AddressListId__"),
+		Address:       ptr.String("__Address__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1024,7 +1359,9 @@ func TestCheckResponseSnapshot_GetRelay(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRelay(context.Background(), &GetRelayInput{})
+	got, err := svc.GetRelay(context.Background(), &GetRelayInput{
+		RelayId: ptr.String("__RelayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1145,7 +1482,9 @@ func TestCheckResponseSnapshot_GetRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRuleSet(context.Background(), &GetRuleSetInput{})
+	got, err := svc.GetRuleSet(context.Background(), &GetRuleSetInput{
+		RuleSetId: ptr.String("__RuleSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1232,7 +1571,9 @@ func TestCheckResponseSnapshot_GetTrafficPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrafficPolicy(context.Background(), &GetTrafficPolicyInput{})
+	got, err := svc.GetTrafficPolicy(context.Background(), &GetTrafficPolicyInput{
+		TrafficPolicyId: ptr.String("__TrafficPolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1269,7 +1610,10 @@ func TestCheckResponseSnapshot_ListAddonInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAddonInstances(context.Background(), &ListAddonInstancesInput{})
+	got, err := svc.ListAddonInstances(context.Background(), &ListAddonInstancesInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1304,7 +1648,10 @@ func TestCheckResponseSnapshot_ListAddonSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAddonSubscriptions(context.Background(), &ListAddonSubscriptionsInput{})
+	got, err := svc.ListAddonSubscriptions(context.Background(), &ListAddonSubscriptionsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1359,7 +1706,11 @@ func TestCheckResponseSnapshot_ListAddressListImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAddressListImportJobs(context.Background(), &ListAddressListImportJobsInput{})
+	got, err := svc.ListAddressListImportJobs(context.Background(), &ListAddressListImportJobsInput{
+		AddressListId: ptr.String("__AddressListId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		PageSize:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1396,7 +1747,10 @@ func TestCheckResponseSnapshot_ListAddressLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAddressLists(context.Background(), &ListAddressListsInput{})
+	got, err := svc.ListAddressLists(context.Background(), &ListAddressListsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1437,7 +1791,11 @@ func TestCheckResponseSnapshot_ListArchiveExports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListArchiveExports(context.Background(), &ListArchiveExportsInput{})
+	got, err := svc.ListArchiveExports(context.Background(), &ListArchiveExportsInput{
+		ArchiveId: ptr.String("__ArchiveId__"),
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1478,7 +1836,11 @@ func TestCheckResponseSnapshot_ListArchiveSearches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListArchiveSearches(context.Background(), &ListArchiveSearchesInput{})
+	got, err := svc.ListArchiveSearches(context.Background(), &ListArchiveSearchesInput{
+		ArchiveId: ptr.String("__ArchiveId__"),
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1513,7 +1875,10 @@ func TestCheckResponseSnapshot_ListArchives(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListArchives(context.Background(), &ListArchivesInput{})
+	got, err := svc.ListArchives(context.Background(), &ListArchivesInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1550,7 +1915,10 @@ func TestCheckResponseSnapshot_ListIngressPoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIngressPoints(context.Background(), &ListIngressPointsInput{})
+	got, err := svc.ListIngressPoints(context.Background(), &ListIngressPointsInput{
+		PageSize:  ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1581,7 +1949,14 @@ func TestCheckResponseSnapshot_ListMembersOfAddressList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMembersOfAddressList(context.Background(), &ListMembersOfAddressListInput{})
+	got, err := svc.ListMembersOfAddressList(context.Background(), &ListMembersOfAddressListInput{
+		AddressListId: ptr.String("__AddressListId__"),
+		Filter: &types.AddressFilter{
+			AddressPrefix: ptr.String("__AddressPrefix__"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1614,7 +1989,10 @@ func TestCheckResponseSnapshot_ListRelays(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRelays(context.Background(), &ListRelaysInput{})
+	got, err := svc.ListRelays(context.Background(), &ListRelaysInput{
+		PageSize:  ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1647,7 +2025,10 @@ func TestCheckResponseSnapshot_ListRuleSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRuleSets(context.Background(), &ListRuleSetsInput{})
+	got, err := svc.ListRuleSets(context.Background(), &ListRuleSetsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1677,7 +2058,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1710,7 +2093,10 @@ func TestCheckResponseSnapshot_ListTrafficPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrafficPolicies(context.Background(), &ListTrafficPoliciesInput{})
+	got, err := svc.ListTrafficPolicies(context.Background(), &ListTrafficPoliciesInput{
+		PageSize:  ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1729,7 +2115,10 @@ func TestCheckResponseSnapshot_RegisterMemberToAddressList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterMemberToAddressList(context.Background(), &RegisterMemberToAddressListInput{})
+	got, err := svc.RegisterMemberToAddressList(context.Background(), &RegisterMemberToAddressListInput{
+		AddressListId: ptr.String("__AddressListId__"),
+		Address:       ptr.String("__Address__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1748,7 +2137,9 @@ func TestCheckResponseSnapshot_StartAddressListImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAddressListImportJob(context.Background(), &StartAddressListImportJobInput{})
+	got, err := svc.StartAddressListImportJob(context.Background(), &StartAddressListImportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1769,7 +2160,72 @@ func TestCheckResponseSnapshot_StartArchiveExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartArchiveExport(context.Background(), &StartArchiveExportInput{})
+	got, err := svc.StartArchiveExport(context.Background(), &StartArchiveExportInput{
+		ArchiveId: ptr.String("__ArchiveId__"),
+		Filters: &types.ArchiveFilters{
+			Include: []types.ArchiveFilterCondition{
+				&types.ArchiveFilterConditionMemberStringExpression{
+					Value: types.ArchiveStringExpression{
+						Evaluate: &types.ArchiveStringToEvaluateMemberAttribute{
+							Value: types.ArchiveStringEmailAttribute("TO"),
+						},
+						Operator: types.ArchiveStringOperator("CONTAINS"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				&types.ArchiveFilterConditionMemberStringExpression{
+					Value: types.ArchiveStringExpression{
+						Evaluate: &types.ArchiveStringToEvaluateMemberAttribute{
+							Value: types.ArchiveStringEmailAttribute("TO"),
+						},
+						Operator: types.ArchiveStringOperator("CONTAINS"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			Unless: []types.ArchiveFilterCondition{
+				&types.ArchiveFilterConditionMemberStringExpression{
+					Value: types.ArchiveStringExpression{
+						Evaluate: &types.ArchiveStringToEvaluateMemberAttribute{
+							Value: types.ArchiveStringEmailAttribute("TO"),
+						},
+						Operator: types.ArchiveStringOperator("CONTAINS"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				&types.ArchiveFilterConditionMemberStringExpression{
+					Value: types.ArchiveStringExpression{
+						Evaluate: &types.ArchiveStringToEvaluateMemberAttribute{
+							Value: types.ArchiveStringEmailAttribute("TO"),
+						},
+						Operator: types.ArchiveStringOperator("CONTAINS"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		FromTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ToTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:    ptr.Int32(1),
+		ExportDestinationConfiguration: &types.ExportDestinationConfigurationMemberS3{
+			Value: types.S3ExportDestinationConfiguration{
+				S3Location: ptr.String("__S3Location__"),
+			},
+		},
+		IncludeMetadata: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1790,7 +2246,66 @@ func TestCheckResponseSnapshot_StartArchiveSearch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartArchiveSearch(context.Background(), &StartArchiveSearchInput{})
+	got, err := svc.StartArchiveSearch(context.Background(), &StartArchiveSearchInput{
+		ArchiveId: ptr.String("__ArchiveId__"),
+		Filters: &types.ArchiveFilters{
+			Include: []types.ArchiveFilterCondition{
+				&types.ArchiveFilterConditionMemberStringExpression{
+					Value: types.ArchiveStringExpression{
+						Evaluate: &types.ArchiveStringToEvaluateMemberAttribute{
+							Value: types.ArchiveStringEmailAttribute("TO"),
+						},
+						Operator: types.ArchiveStringOperator("CONTAINS"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				&types.ArchiveFilterConditionMemberStringExpression{
+					Value: types.ArchiveStringExpression{
+						Evaluate: &types.ArchiveStringToEvaluateMemberAttribute{
+							Value: types.ArchiveStringEmailAttribute("TO"),
+						},
+						Operator: types.ArchiveStringOperator("CONTAINS"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			Unless: []types.ArchiveFilterCondition{
+				&types.ArchiveFilterConditionMemberStringExpression{
+					Value: types.ArchiveStringExpression{
+						Evaluate: &types.ArchiveStringToEvaluateMemberAttribute{
+							Value: types.ArchiveStringEmailAttribute("TO"),
+						},
+						Operator: types.ArchiveStringOperator("CONTAINS"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				&types.ArchiveFilterConditionMemberStringExpression{
+					Value: types.ArchiveStringExpression{
+						Evaluate: &types.ArchiveStringToEvaluateMemberAttribute{
+							Value: types.ArchiveStringEmailAttribute("TO"),
+						},
+						Operator: types.ArchiveStringOperator("CONTAINS"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		FromTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ToTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1809,7 +2324,9 @@ func TestCheckResponseSnapshot_StopAddressListImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopAddressListImportJob(context.Background(), &StopAddressListImportJobInput{})
+	got, err := svc.StopAddressListImportJob(context.Background(), &StopAddressListImportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1828,7 +2345,9 @@ func TestCheckResponseSnapshot_StopArchiveExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopArchiveExport(context.Background(), &StopArchiveExportInput{})
+	got, err := svc.StopArchiveExport(context.Background(), &StopArchiveExportInput{
+		ExportId: ptr.String("__ExportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1847,7 +2366,9 @@ func TestCheckResponseSnapshot_StopArchiveSearch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopArchiveSearch(context.Background(), &StopArchiveSearchInput{})
+	got, err := svc.StopArchiveSearch(context.Background(), &StopArchiveSearchInput{
+		SearchId: ptr.String("__SearchId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1866,7 +2387,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1885,7 +2418,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1904,7 +2443,13 @@ func TestCheckResponseSnapshot_UpdateArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateArchive(context.Background(), &UpdateArchiveInput{})
+	got, err := svc.UpdateArchive(context.Background(), &UpdateArchiveInput{
+		ArchiveId:   ptr.String("__ArchiveId__"),
+		ArchiveName: ptr.String("__ArchiveName__"),
+		Retention: &types.ArchiveRetentionMemberRetentionPeriod{
+			Value: types.RetentionPeriod("THREE_MONTHS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1923,7 +2468,17 @@ func TestCheckResponseSnapshot_UpdateIngressPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIngressPoint(context.Background(), &UpdateIngressPointInput{})
+	got, err := svc.UpdateIngressPoint(context.Background(), &UpdateIngressPointInput{
+		IngressPointId:   ptr.String("__IngressPointId__"),
+		IngressPointName: ptr.String("__IngressPointName__"),
+		StatusToUpdate:   types.IngressPointStatusToUpdate("ACTIVE"),
+		RuleSetId:        ptr.String("__RuleSetId__"),
+		TrafficPolicyId:  ptr.String("__TrafficPolicyId__"),
+		IngressPointConfiguration: &types.IngressPointConfigurationMemberSmtpPassword{
+			Value: "__IngressPointConfigurationMemberSmtpPassword__",
+		},
+		TlsPolicy: types.TlsPolicy("REQUIRED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1942,7 +2497,15 @@ func TestCheckResponseSnapshot_UpdateRelay(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRelay(context.Background(), &UpdateRelayInput{})
+	got, err := svc.UpdateRelay(context.Background(), &UpdateRelayInput{
+		RelayId:    ptr.String("__RelayId__"),
+		RelayName:  ptr.String("__RelayName__"),
+		ServerName: ptr.String("__ServerName__"),
+		ServerPort: ptr.Int32(1),
+		Authentication: &types.RelayAuthenticationMemberSecretArn{
+			Value: "__RelayAuthenticationMemberSecretArn__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1961,7 +2524,106 @@ func TestCheckResponseSnapshot_UpdateRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRuleSet(context.Background(), &UpdateRuleSetInput{})
+	got, err := svc.UpdateRuleSet(context.Background(), &UpdateRuleSetInput{
+		RuleSetId:   ptr.String("__RuleSetId__"),
+		RuleSetName: ptr.String("__RuleSetName__"),
+		Rules: []types.Rule{
+			{
+				Name: ptr.String("__Name__"),
+				Conditions: []types.RuleCondition{
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+				},
+				Unless: []types.RuleCondition{
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+				},
+				Actions: []types.RuleAction{
+					&types.RuleActionMemberDrop{
+						Value: types.DropAction{},
+					},
+					&types.RuleActionMemberDrop{
+						Value: types.DropAction{},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Conditions: []types.RuleCondition{
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+				},
+				Unless: []types.RuleCondition{
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+					&types.RuleConditionMemberBooleanExpression{
+						Value: types.RuleBooleanExpression{
+							Evaluate: &types.RuleBooleanToEvaluateMemberAttribute{
+								Value: types.RuleBooleanEmailAttribute("READ_RECEIPT_REQUESTED"),
+							},
+							Operator: types.RuleBooleanOperator("IS_TRUE"),
+						},
+					},
+				},
+				Actions: []types.RuleAction{
+					&types.RuleActionMemberDrop{
+						Value: types.DropAction{},
+					},
+					&types.RuleActionMemberDrop{
+						Value: types.DropAction{},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1980,7 +2642,72 @@ func TestCheckResponseSnapshot_UpdateTrafficPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTrafficPolicy(context.Background(), &UpdateTrafficPolicyInput{})
+	got, err := svc.UpdateTrafficPolicy(context.Background(), &UpdateTrafficPolicyInput{
+		TrafficPolicyId:   ptr.String("__TrafficPolicyId__"),
+		TrafficPolicyName: ptr.String("__TrafficPolicyName__"),
+		PolicyStatements: []types.PolicyStatement{
+			{
+				Conditions: []types.PolicyCondition{
+					&types.PolicyConditionMemberStringExpression{
+						Value: types.IngressStringExpression{
+							Evaluate: &types.IngressStringToEvaluateMemberAttribute{
+								Value: types.IngressStringEmailAttribute("RECIPIENT"),
+							},
+							Operator: types.IngressStringOperator("EQUALS"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					&types.PolicyConditionMemberStringExpression{
+						Value: types.IngressStringExpression{
+							Evaluate: &types.IngressStringToEvaluateMemberAttribute{
+								Value: types.IngressStringEmailAttribute("RECIPIENT"),
+							},
+							Operator: types.IngressStringOperator("EQUALS"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				Action: types.AcceptAction("ALLOW"),
+			},
+			{
+				Conditions: []types.PolicyCondition{
+					&types.PolicyConditionMemberStringExpression{
+						Value: types.IngressStringExpression{
+							Evaluate: &types.IngressStringToEvaluateMemberAttribute{
+								Value: types.IngressStringEmailAttribute("RECIPIENT"),
+							},
+							Operator: types.IngressStringOperator("EQUALS"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					&types.PolicyConditionMemberStringExpression{
+						Value: types.IngressStringExpression{
+							Evaluate: &types.IngressStringToEvaluateMemberAttribute{
+								Value: types.IngressStringEmailAttribute("RECIPIENT"),
+							},
+							Operator: types.IngressStringOperator("EQUALS"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				Action: types.AcceptAction("ALLOW"),
+			},
+		},
+		DefaultAction:       types.AcceptAction("ALLOW"),
+		MaxMessageSizeBytes: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2001,7 +2728,20 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAddressList(context.Background(), &CreateAddressListInput{})
+	_, opErr := svc.CreateAddressList(context.Background(), &CreateAddressListInput{
+		ClientToken:     ptr.String("__ClientToken__"),
+		AddressListName: ptr.String("__AddressListName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2026,7 +2766,20 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAddonInstance(context.Background(), &CreateAddonInstanceInput{})
+	_, opErr := svc.CreateAddonInstance(context.Background(), &CreateAddonInstanceInput{
+		ClientToken:         ptr.String("__ClientToken__"),
+		AddonSubscriptionId: ptr.String("__AddonSubscriptionId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2051,7 +2804,20 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAddonInstance(context.Background(), &CreateAddonInstanceInput{})
+	_, opErr := svc.CreateAddonInstance(context.Background(), &CreateAddonInstanceInput{
+		ClientToken:         ptr.String("__ClientToken__"),
+		AddonSubscriptionId: ptr.String("__AddonSubscriptionId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2076,7 +2842,20 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAddonInstance(context.Background(), &CreateAddonInstanceInput{})
+	_, opErr := svc.CreateAddonInstance(context.Background(), &CreateAddonInstanceInput{
+		ClientToken:         ptr.String("__ClientToken__"),
+		AddonSubscriptionId: ptr.String("__AddonSubscriptionId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2101,7 +2880,20 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAddonSubscription(context.Background(), &CreateAddonSubscriptionInput{})
+	_, opErr := svc.CreateAddonSubscription(context.Background(), &CreateAddonSubscriptionInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AddonName:   ptr.String("__AddonName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2126,7 +2918,20 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAddonInstance(context.Background(), &CreateAddonInstanceInput{})
+	_, opErr := svc.CreateAddonInstance(context.Background(), &CreateAddonInstanceInput{
+		ClientToken:         ptr.String("__ClientToken__"),
+		AddonSubscriptionId: ptr.String("__AddonSubscriptionId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

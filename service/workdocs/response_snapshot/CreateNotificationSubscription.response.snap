@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Subscription":{"EndPoint":"__EndPoint__","Protocol":"HTTPS","SubscriptionId":"__SubscriptionId__"}}

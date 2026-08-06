@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"availableQuantity":1,"consumableResourceArn":"__ConsumableResourceArn__","consumableResourceName":"__ConsumableResourceName__","createdAt":1,"inUseQuantity":1,"resourceType":"__ResourceType__","tags":{"key0":"__Value__"},"totalQuantity":1}

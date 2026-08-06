@@ -153,7 +153,10 @@ func TestCheckResponseSnapshot_AcceptResourceShareInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{})
+	got, err := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -198,7 +201,22 @@ func TestCheckResponseSnapshot_AssociateResourceShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateResourceShare(context.Background(), &AssociateResourceShareInput{})
+	got, err := svc.AssociateResourceShare(context.Background(), &AssociateResourceShareInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Sources: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -220,7 +238,13 @@ func TestCheckResponseSnapshot_AssociateResourceSharePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateResourceSharePermission(context.Background(), &AssociateResourceSharePermissionInput{})
+	got, err := svc.AssociateResourceSharePermission(context.Background(), &AssociateResourceSharePermissionInput{
+		ResourceShareArn:  ptr.String("__ResourceShareArn__"),
+		PermissionArn:     ptr.String("__PermissionArn__"),
+		Replace:           ptr.Bool(true),
+		ClientToken:       ptr.String("__ClientToken__"),
+		PermissionVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +288,22 @@ func TestCheckResponseSnapshot_CreatePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePermission(context.Background(), &CreatePermissionInput{})
+	got, err := svc.CreatePermission(context.Background(), &CreatePermissionInput{
+		Name:           ptr.String("__Name__"),
+		ResourceType:   ptr.String("__ResourceType__"),
+		PolicyTemplate: ptr.String("__PolicyTemplate__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -309,7 +348,11 @@ func TestCheckResponseSnapshot_CreatePermissionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePermissionVersion(context.Background(), &CreatePermissionVersionInput{})
+	got, err := svc.CreatePermissionVersion(context.Background(), &CreatePermissionVersionInput{
+		PermissionArn:  ptr.String("__PermissionArn__"),
+		PolicyTemplate: ptr.String("__PolicyTemplate__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -354,7 +397,40 @@ func TestCheckResponseSnapshot_CreateResourceShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResourceShare(context.Background(), &CreateResourceShareInput{})
+	got, err := svc.CreateResourceShare(context.Background(), &CreateResourceShareInput{
+		Name: ptr.String("__Name__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AllowExternalPrincipals: ptr.Bool(true),
+		ClientToken:             ptr.String("__ClientToken__"),
+		PermissionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Sources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceShareConfiguration: &types.ResourceShareConfiguration{
+			RetainSharingOnAccountLeaveOrganization: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +453,10 @@ func TestCheckResponseSnapshot_DeletePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePermission(context.Background(), &DeletePermissionInput{})
+	got, err := svc.DeletePermission(context.Background(), &DeletePermissionInput{
+		PermissionArn: ptr.String("__PermissionArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -400,7 +479,11 @@ func TestCheckResponseSnapshot_DeletePermissionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePermissionVersion(context.Background(), &DeletePermissionVersionInput{})
+	got, err := svc.DeletePermissionVersion(context.Background(), &DeletePermissionVersionInput{
+		PermissionArn:     ptr.String("__PermissionArn__"),
+		PermissionVersion: ptr.Int32(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -422,7 +505,10 @@ func TestCheckResponseSnapshot_DeleteResourceShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourceShare(context.Background(), &DeleteResourceShareInput{})
+	got, err := svc.DeleteResourceShare(context.Background(), &DeleteResourceShareInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -467,7 +553,22 @@ func TestCheckResponseSnapshot_DisassociateResourceShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateResourceShare(context.Background(), &DisassociateResourceShareInput{})
+	got, err := svc.DisassociateResourceShare(context.Background(), &DisassociateResourceShareInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Sources: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -489,7 +590,11 @@ func TestCheckResponseSnapshot_DisassociateResourceSharePermission(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateResourceSharePermission(context.Background(), &DisassociateResourceSharePermissionInput{})
+	got, err := svc.DisassociateResourceSharePermission(context.Background(), &DisassociateResourceSharePermissionInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+		PermissionArn:    ptr.String("__PermissionArn__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +659,10 @@ func TestCheckResponseSnapshot_GetPermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPermission(context.Background(), &GetPermissionInput{})
+	got, err := svc.GetPermission(context.Background(), &GetPermissionInput{
+		PermissionArn:     ptr.String("__PermissionArn__"),
+		PermissionVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -579,7 +687,15 @@ func TestCheckResponseSnapshot_GetResourcePolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicies(context.Background(), &GetResourcePoliciesInput{})
+	got, err := svc.GetResourcePolicies(context.Background(), &GetResourcePoliciesInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principal:  ptr.String("__Principal__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -624,7 +740,18 @@ func TestCheckResponseSnapshot_GetResourceShareAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceShareAssociations(context.Background(), &GetResourceShareAssociationsInput{})
+	got, err := svc.GetResourceShareAssociations(context.Background(), &GetResourceShareAssociationsInput{
+		AssociationType: types.ResourceShareAssociationType("PRINCIPAL"),
+		ResourceShareArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceArn:       ptr.String("__ResourceArn__"),
+		Principal:         ptr.String("__Principal__"),
+		AssociationStatus: types.ResourceShareAssociationStatus("ASSOCIATING"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -715,7 +842,18 @@ func TestCheckResponseSnapshot_GetResourceShareInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceShareInvitations(context.Background(), &GetResourceShareInvitationsInput{})
+	got, err := svc.GetResourceShareInvitations(context.Background(), &GetResourceShareInvitationsInput{
+		ResourceShareInvitationArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceShareArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -786,7 +924,35 @@ func TestCheckResponseSnapshot_GetResourceShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceShares(context.Background(), &GetResourceSharesInput{})
+	got, err := svc.GetResourceShares(context.Background(), &GetResourceSharesInput{
+		ResourceShareArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceShareStatus: types.ResourceShareStatus("PENDING"),
+		ResourceOwner:       types.ResourceOwner("SELF"),
+		Name:                ptr.String("__Name__"),
+		TagFilters: []types.TagFilter{
+			{
+				TagKey: ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				TagKey: ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		PermissionArn:     ptr.String("__PermissionArn__"),
+		PermissionVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -831,7 +997,12 @@ func TestCheckResponseSnapshot_ListPendingInvitationResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPendingInvitationResources(context.Background(), &ListPendingInvitationResourcesInput{})
+	got, err := svc.ListPendingInvitationResources(context.Background(), &ListPendingInvitationResourcesInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		NextToken:                  ptr.String("__NextToken__"),
+		MaxResults:                 ptr.Int32(1),
+		ResourceRegionScope:        types.ResourceRegionScopeFilter("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -874,7 +1045,16 @@ func TestCheckResponseSnapshot_ListPermissionAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPermissionAssociations(context.Background(), &ListPermissionAssociationsInput{})
+	got, err := svc.ListPermissionAssociations(context.Background(), &ListPermissionAssociationsInput{
+		PermissionArn:     ptr.String("__PermissionArn__"),
+		PermissionVersion: ptr.Int32(1),
+		AssociationStatus: types.ResourceShareAssociationStatus("ASSOCIATING"),
+		ResourceType:      ptr.String("__ResourceType__"),
+		FeatureSet:        types.PermissionFeatureSet("CREATED_FROM_POLICY"),
+		DefaultVersion:    ptr.Bool(true),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -943,7 +1123,11 @@ func TestCheckResponseSnapshot_ListPermissionVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPermissionVersions(context.Background(), &ListPermissionVersionsInput{})
+	got, err := svc.ListPermissionVersions(context.Background(), &ListPermissionVersionsInput{
+		PermissionArn: ptr.String("__PermissionArn__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1012,7 +1196,12 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPermissions(context.Background(), &ListPermissionsInput{})
+	got, err := svc.ListPermissions(context.Background(), &ListPermissionsInput{
+		ResourceType:   ptr.String("__ResourceType__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		PermissionType: types.PermissionTypeFilter("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1049,7 +1238,21 @@ func TestCheckResponseSnapshot_ListPrincipals(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPrincipals(context.Background(), &ListPrincipalsInput{})
+	got, err := svc.ListPrincipals(context.Background(), &ListPrincipalsInput{
+		ResourceOwner: types.ResourceOwner("SELF"),
+		ResourceArn:   ptr.String("__ResourceArn__"),
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceType: ptr.String("__ResourceType__"),
+		ResourceShareArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1094,7 +1297,15 @@ func TestCheckResponseSnapshot_ListReplacePermissionAssociationsWork(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReplacePermissionAssociationsWork(context.Background(), &ListReplacePermissionAssociationsWorkInput{})
+	got, err := svc.ListReplacePermissionAssociationsWork(context.Background(), &ListReplacePermissionAssociationsWorkInput{
+		WorkIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status:     types.ReplacePermissionAssociationsWorkStatus("IN_PROGRESS"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1163,7 +1374,11 @@ func TestCheckResponseSnapshot_ListResourceSharePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceSharePermissions(context.Background(), &ListResourceSharePermissionsInput{})
+	got, err := svc.ListResourceSharePermissions(context.Background(), &ListResourceSharePermissionsInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1196,7 +1411,11 @@ func TestCheckResponseSnapshot_ListResourceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceTypes(context.Background(), &ListResourceTypesInput{})
+	got, err := svc.ListResourceTypes(context.Background(), &ListResourceTypesInput{
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+		ResourceRegionScope: types.ResourceRegionScopeFilter("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1241,7 +1460,22 @@ func TestCheckResponseSnapshot_ListResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResources(context.Background(), &ListResourcesInput{})
+	got, err := svc.ListResources(context.Background(), &ListResourcesInput{
+		ResourceOwner: types.ResourceOwner("SELF"),
+		Principal:     ptr.String("__Principal__"),
+		ResourceType:  ptr.String("__ResourceType__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceShareArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+		ResourceRegionScope: types.ResourceRegionScopeFilter("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1282,7 +1516,17 @@ func TestCheckResponseSnapshot_ListSourceAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSourceAssociations(context.Background(), &ListSourceAssociationsInput{})
+	got, err := svc.ListSourceAssociations(context.Background(), &ListSourceAssociationsInput{
+		ResourceShareArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceId:          ptr.String("__SourceId__"),
+		SourceType:        ptr.String("__SourceType__"),
+		AssociationStatus: types.ResourceShareAssociationStatus("ASSOCIATING"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1326,7 +1570,11 @@ func TestCheckResponseSnapshot_PromotePermissionCreatedFromPolicy(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PromotePermissionCreatedFromPolicy(context.Background(), &PromotePermissionCreatedFromPolicyInput{})
+	got, err := svc.PromotePermissionCreatedFromPolicy(context.Background(), &PromotePermissionCreatedFromPolicyInput{
+		PermissionArn: ptr.String("__PermissionArn__"),
+		Name:          ptr.String("__Name__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1347,7 +1595,9 @@ func TestCheckResponseSnapshot_PromoteResourceShareCreatedFromPolicy(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PromoteResourceShareCreatedFromPolicy(context.Background(), &PromoteResourceShareCreatedFromPolicyInput{})
+	got, err := svc.PromoteResourceShareCreatedFromPolicy(context.Background(), &PromoteResourceShareCreatedFromPolicyInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1402,7 +1652,10 @@ func TestCheckResponseSnapshot_RejectResourceShareInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectResourceShareInvitation(context.Background(), &RejectResourceShareInvitationInput{})
+	got, err := svc.RejectResourceShareInvitation(context.Background(), &RejectResourceShareInvitationInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1434,7 +1687,12 @@ func TestCheckResponseSnapshot_ReplacePermissionAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReplacePermissionAssociations(context.Background(), &ReplacePermissionAssociationsInput{})
+	got, err := svc.ReplacePermissionAssociations(context.Background(), &ReplacePermissionAssociationsInput{
+		FromPermissionArn:     ptr.String("__FromPermissionArn__"),
+		FromPermissionVersion: ptr.Int32(1),
+		ToPermissionArn:       ptr.String("__ToPermissionArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1456,7 +1714,11 @@ func TestCheckResponseSnapshot_SetDefaultPermissionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetDefaultPermissionVersion(context.Background(), &SetDefaultPermissionVersionInput{})
+	got, err := svc.SetDefaultPermissionVersion(context.Background(), &SetDefaultPermissionVersionInput{
+		PermissionArn:     ptr.String("__PermissionArn__"),
+		PermissionVersion: ptr.Int32(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1475,7 +1737,20 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1494,7 +1769,14 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1539,7 +1821,12 @@ func TestCheckResponseSnapshot_UpdateResourceShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResourceShare(context.Background(), &UpdateResourceShareInput{})
+	got, err := svc.UpdateResourceShare(context.Background(), &UpdateResourceShareInput{
+		ResourceShareArn:        ptr.String("__ResourceShareArn__"),
+		Name:                    ptr.String("__Name__"),
+		AllowExternalPrincipals: ptr.Bool(true),
+		ClientToken:             ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1560,7 +1847,10 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{})
+	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1585,7 +1875,10 @@ func TestCheckResponseSnapshot_Error_InvalidClientTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{})
+	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1610,7 +1903,18 @@ func TestCheckResponseSnapshot_Error_InvalidMaxResultsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetResourceShareInvitations(context.Background(), &GetResourceShareInvitationsInput{})
+	_, opErr := svc.GetResourceShareInvitations(context.Background(), &GetResourceShareInvitationsInput{
+		ResourceShareInvitationArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceShareArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1635,7 +1939,15 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetResourcePolicies(context.Background(), &GetResourcePoliciesInput{})
+	_, opErr := svc.GetResourcePolicies(context.Background(), &GetResourcePoliciesInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principal:  ptr.String("__Principal__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1660,7 +1972,22 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResourceShare(context.Background(), &AssociateResourceShareInput{})
+	_, opErr := svc.AssociateResourceShare(context.Background(), &AssociateResourceShareInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Sources: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1685,7 +2012,22 @@ func TestCheckResponseSnapshot_Error_InvalidPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePermission(context.Background(), &CreatePermissionInput{})
+	_, opErr := svc.CreatePermission(context.Background(), &CreatePermissionInput{
+		Name:           ptr.String("__Name__"),
+		ResourceType:   ptr.String("__ResourceType__"),
+		PolicyTemplate: ptr.String("__PolicyTemplate__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1710,7 +2052,22 @@ func TestCheckResponseSnapshot_Error_InvalidResourceTypeException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListResources(context.Background(), &ListResourcesInput{})
+	_, opErr := svc.ListResources(context.Background(), &ListResourcesInput{
+		ResourceOwner: types.ResourceOwner("SELF"),
+		Principal:     ptr.String("__Principal__"),
+		ResourceType:  ptr.String("__ResourceType__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceShareArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+		ResourceRegionScope: types.ResourceRegionScopeFilter("ALL"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1735,7 +2092,22 @@ func TestCheckResponseSnapshot_Error_InvalidStateTransitionException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResourceShare(context.Background(), &AssociateResourceShareInput{})
+	_, opErr := svc.AssociateResourceShare(context.Background(), &AssociateResourceShareInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Sources: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1760,7 +2132,10 @@ func TestCheckResponseSnapshot_Error_MalformedArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{})
+	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1785,7 +2160,22 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyTemplateException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePermission(context.Background(), &CreatePermissionInput{})
+	_, opErr := svc.CreatePermission(context.Background(), &CreatePermissionInput{
+		Name:           ptr.String("__Name__"),
+		ResourceType:   ptr.String("__ResourceType__"),
+		PolicyTemplate: ptr.String("__PolicyTemplate__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1810,7 +2200,12 @@ func TestCheckResponseSnapshot_Error_MissingRequiredParameterException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListPendingInvitationResources(context.Background(), &ListPendingInvitationResourcesInput{})
+	_, opErr := svc.ListPendingInvitationResources(context.Background(), &ListPendingInvitationResourcesInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		NextToken:                  ptr.String("__NextToken__"),
+		MaxResults:                 ptr.Int32(1),
+		ResourceRegionScope:        types.ResourceRegionScopeFilter("ALL"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1835,7 +2230,10 @@ func TestCheckResponseSnapshot_Error_OperationNotPermittedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{})
+	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1860,7 +2258,22 @@ func TestCheckResponseSnapshot_Error_PermissionAlreadyExistsException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePermission(context.Background(), &CreatePermissionInput{})
+	_, opErr := svc.CreatePermission(context.Background(), &CreatePermissionInput{
+		Name:           ptr.String("__Name__"),
+		ResourceType:   ptr.String("__ResourceType__"),
+		PolicyTemplate: ptr.String("__PolicyTemplate__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1885,7 +2298,22 @@ func TestCheckResponseSnapshot_Error_PermissionLimitExceededException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePermission(context.Background(), &CreatePermissionInput{})
+	_, opErr := svc.CreatePermission(context.Background(), &CreatePermissionInput{
+		Name:           ptr.String("__Name__"),
+		ResourceType:   ptr.String("__ResourceType__"),
+		PolicyTemplate: ptr.String("__PolicyTemplate__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1910,7 +2338,11 @@ func TestCheckResponseSnapshot_Error_PermissionVersionsLimitExceededException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePermissionVersion(context.Background(), &CreatePermissionVersionInput{})
+	_, opErr := svc.CreatePermissionVersion(context.Background(), &CreatePermissionVersionInput{
+		PermissionArn:  ptr.String("__PermissionArn__"),
+		PolicyTemplate: ptr.String("__PolicyTemplate__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1935,7 +2367,15 @@ func TestCheckResponseSnapshot_Error_ResourceArnNotFoundException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetResourcePolicies(context.Background(), &GetResourcePoliciesInput{})
+	_, opErr := svc.GetResourcePolicies(context.Background(), &GetResourcePoliciesInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principal:  ptr.String("__Principal__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1960,7 +2400,10 @@ func TestCheckResponseSnapshot_Error_ResourceShareInvitationAlreadyAcceptedExcep
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{})
+	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1985,7 +2428,10 @@ func TestCheckResponseSnapshot_Error_ResourceShareInvitationAlreadyRejectedExcep
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{})
+	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2010,7 +2456,10 @@ func TestCheckResponseSnapshot_Error_ResourceShareInvitationArnNotFoundException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{})
+	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2035,7 +2484,10 @@ func TestCheckResponseSnapshot_Error_ResourceShareInvitationExpiredException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{})
+	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2060,7 +2512,22 @@ func TestCheckResponseSnapshot_Error_ResourceShareLimitExceededException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResourceShare(context.Background(), &AssociateResourceShareInput{})
+	_, opErr := svc.AssociateResourceShare(context.Background(), &AssociateResourceShareInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Sources: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2085,7 +2552,10 @@ func TestCheckResponseSnapshot_Error_ServerInternalException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{})
+	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2110,7 +2580,10 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{})
+	_, opErr := svc.AcceptResourceShareInvitation(context.Background(), &AcceptResourceShareInvitationInput{
+		ResourceShareInvitationArn: ptr.String("__ResourceShareInvitationArn__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2135,7 +2608,40 @@ func TestCheckResponseSnapshot_Error_TagLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResourceShare(context.Background(), &CreateResourceShareInput{})
+	_, opErr := svc.CreateResourceShare(context.Background(), &CreateResourceShareInput{
+		Name: ptr.String("__Name__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AllowExternalPrincipals: ptr.Bool(true),
+		ClientToken:             ptr.String("__ClientToken__"),
+		PermissionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Sources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceShareConfiguration: &types.ResourceShareConfiguration{
+			RetainSharingOnAccountLeaveOrganization: ptr.Bool(true),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2160,7 +2666,40 @@ func TestCheckResponseSnapshot_Error_TagPolicyViolationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResourceShare(context.Background(), &CreateResourceShareInput{})
+	_, opErr := svc.CreateResourceShare(context.Background(), &CreateResourceShareInput{
+		Name: ptr.String("__Name__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AllowExternalPrincipals: ptr.Bool(true),
+		ClientToken:             ptr.String("__ClientToken__"),
+		PermissionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Sources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceShareConfiguration: &types.ResourceShareConfiguration{
+			RetainSharingOnAccountLeaveOrganization: ptr.Bool(true),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2185,7 +2724,22 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResourceShare(context.Background(), &AssociateResourceShareInput{})
+	_, opErr := svc.AssociateResourceShare(context.Background(), &AssociateResourceShareInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Sources: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2210,7 +2764,22 @@ func TestCheckResponseSnapshot_Error_UnknownResourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResourceShare(context.Background(), &AssociateResourceShareInput{})
+	_, opErr := svc.AssociateResourceShare(context.Background(), &AssociateResourceShareInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Sources: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2235,7 +2804,9 @@ func TestCheckResponseSnapshot_Error_UnmatchedPolicyPermissionException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PromoteResourceShareCreatedFromPolicy(context.Background(), &PromoteResourceShareCreatedFromPolicyInput{})
+	_, opErr := svc.PromoteResourceShareCreatedFromPolicy(context.Background(), &PromoteResourceShareCreatedFromPolicyInput{
+		ResourceShareArn: ptr.String("__ResourceShareArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

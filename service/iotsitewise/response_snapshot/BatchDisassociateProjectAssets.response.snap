@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"assetId":"__AssetId__","code":"INTERNAL_FAILURE","message":"__Message__"},{"assetId":"__AssetId__","code":"INTERNAL_FAILURE","message":"__Message__"}]}

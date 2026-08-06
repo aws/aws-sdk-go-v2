@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.ListMailboxExportJobs
+
+{"Jobs":[{"Description":"__Description__","EndTime":946684800,"EntityId":"__EntityId__","EstimatedProgress":1,"JobId":"__JobId__","S3BucketName":"__S3BucketName__","S3Path":"__S3Path__","StartTime":946684800,"State":"RUNNING"},{"Description":"__Description__","EndTime":946684800,"EntityId":"__EntityId__","EstimatedProgress":1,"JobId":"__JobId__","S3BucketName":"__S3BucketName__","S3Path":"__S3Path__","StartTime":946684800,"State":"RUNNING"}],"NextToken":"__NextToken__"}

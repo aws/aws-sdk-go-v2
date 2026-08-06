@@ -127,7 +127,11 @@ func TestCheckResponseSnapshot_AssociateFraudster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{})
+	got, err := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+		FraudsterId: ptr.String("__FraudsterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -167,7 +171,24 @@ func TestCheckResponseSnapshot_CreateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +217,12 @@ func TestCheckResponseSnapshot_CreateWatchlist(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWatchlist(context.Background(), &CreateWatchlistInput{})
+	got, err := svc.CreateWatchlist(context.Background(), &CreateWatchlistInput{
+		DomainId:    ptr.String("__DomainId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -215,7 +241,9 @@ func TestCheckResponseSnapshot_DeleteDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{})
+	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{
+		DomainId: ptr.String("__DomainId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -234,7 +262,10 @@ func TestCheckResponseSnapshot_DeleteFraudster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFraudster(context.Background(), &DeleteFraudsterInput{})
+	got, err := svc.DeleteFraudster(context.Background(), &DeleteFraudsterInput{
+		DomainId:    ptr.String("__DomainId__"),
+		FraudsterId: ptr.String("__FraudsterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -253,7 +284,10 @@ func TestCheckResponseSnapshot_DeleteSpeaker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSpeaker(context.Background(), &DeleteSpeakerInput{})
+	got, err := svc.DeleteSpeaker(context.Background(), &DeleteSpeakerInput{
+		DomainId:  ptr.String("__DomainId__"),
+		SpeakerId: ptr.String("__SpeakerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -272,7 +306,10 @@ func TestCheckResponseSnapshot_DeleteWatchlist(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWatchlist(context.Background(), &DeleteWatchlistInput{})
+	got, err := svc.DeleteWatchlist(context.Background(), &DeleteWatchlistInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -312,7 +349,9 @@ func TestCheckResponseSnapshot_DescribeDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomain(context.Background(), &DescribeDomainInput{})
+	got, err := svc.DescribeDomain(context.Background(), &DescribeDomainInput{
+		DomainId: ptr.String("__DomainId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +380,10 @@ func TestCheckResponseSnapshot_DescribeFraudster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFraudster(context.Background(), &DescribeFraudsterInput{})
+	got, err := svc.DescribeFraudster(context.Background(), &DescribeFraudsterInput{
+		DomainId:    ptr.String("__DomainId__"),
+		FraudsterId: ptr.String("__FraudsterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +434,10 @@ func TestCheckResponseSnapshot_DescribeFraudsterRegistrationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFraudsterRegistrationJob(context.Background(), &DescribeFraudsterRegistrationJobInput{})
+	got, err := svc.DescribeFraudsterRegistrationJob(context.Background(), &DescribeFraudsterRegistrationJobInput{
+		DomainId: ptr.String("__DomainId__"),
+		JobId:    ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +466,10 @@ func TestCheckResponseSnapshot_DescribeSpeaker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSpeaker(context.Background(), &DescribeSpeakerInput{})
+	got, err := svc.DescribeSpeaker(context.Background(), &DescribeSpeakerInput{
+		DomainId:  ptr.String("__DomainId__"),
+		SpeakerId: ptr.String("__SpeakerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -475,7 +523,10 @@ func TestCheckResponseSnapshot_DescribeSpeakerEnrollmentJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSpeakerEnrollmentJob(context.Background(), &DescribeSpeakerEnrollmentJobInput{})
+	got, err := svc.DescribeSpeakerEnrollmentJob(context.Background(), &DescribeSpeakerEnrollmentJobInput{
+		DomainId: ptr.String("__DomainId__"),
+		JobId:    ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -504,7 +555,10 @@ func TestCheckResponseSnapshot_DescribeWatchlist(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWatchlist(context.Background(), &DescribeWatchlistInput{})
+	got, err := svc.DescribeWatchlist(context.Background(), &DescribeWatchlistInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -533,7 +587,11 @@ func TestCheckResponseSnapshot_DisassociateFraudster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateFraudster(context.Background(), &DisassociateFraudsterInput{})
+	got, err := svc.DisassociateFraudster(context.Background(), &DisassociateFraudsterInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+		FraudsterId: ptr.String("__FraudsterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -592,7 +650,10 @@ func TestCheckResponseSnapshot_EvaluateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EvaluateSession(context.Background(), &EvaluateSessionInput{})
+	got, err := svc.EvaluateSession(context.Background(), &EvaluateSessionInput{
+		DomainId:        ptr.String("__DomainId__"),
+		SessionNameOrId: ptr.String("__SessionNameOrId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -655,7 +716,10 @@ func TestCheckResponseSnapshot_ListDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{})
+	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -708,7 +772,12 @@ func TestCheckResponseSnapshot_ListFraudsterRegistrationJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFraudsterRegistrationJobs(context.Background(), &ListFraudsterRegistrationJobsInput{})
+	got, err := svc.ListFraudsterRegistrationJobs(context.Background(), &ListFraudsterRegistrationJobsInput{
+		DomainId:   ptr.String("__DomainId__"),
+		JobStatus:  types.FraudsterRegistrationJobStatus("SUBMITTED"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -749,7 +818,12 @@ func TestCheckResponseSnapshot_ListFraudsters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFraudsters(context.Background(), &ListFraudstersInput{})
+	got, err := svc.ListFraudsters(context.Background(), &ListFraudstersInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -802,7 +876,12 @@ func TestCheckResponseSnapshot_ListSpeakerEnrollmentJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSpeakerEnrollmentJobs(context.Background(), &ListSpeakerEnrollmentJobsInput{})
+	got, err := svc.ListSpeakerEnrollmentJobs(context.Background(), &ListSpeakerEnrollmentJobsInput{
+		DomainId:   ptr.String("__DomainId__"),
+		JobStatus:  types.SpeakerEnrollmentJobStatus("SUBMITTED"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -843,7 +922,11 @@ func TestCheckResponseSnapshot_ListSpeakers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSpeakers(context.Background(), &ListSpeakersInput{})
+	got, err := svc.ListSpeakers(context.Background(), &ListSpeakersInput{
+		DomainId:   ptr.String("__DomainId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -873,7 +956,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -914,7 +999,11 @@ func TestCheckResponseSnapshot_ListWatchlists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWatchlists(context.Background(), &ListWatchlistsInput{})
+	got, err := svc.ListWatchlists(context.Background(), &ListWatchlistsInput{
+		DomainId:   ptr.String("__DomainId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -943,7 +1032,10 @@ func TestCheckResponseSnapshot_OptOutSpeaker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OptOutSpeaker(context.Background(), &OptOutSpeakerInput{})
+	got, err := svc.OptOutSpeaker(context.Background(), &OptOutSpeakerInput{
+		DomainId:  ptr.String("__DomainId__"),
+		SpeakerId: ptr.String("__SpeakerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -994,7 +1086,27 @@ func TestCheckResponseSnapshot_StartFraudsterRegistrationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFraudsterRegistrationJob(context.Background(), &StartFraudsterRegistrationJobInput{})
+	got, err := svc.StartFraudsterRegistrationJob(context.Background(), &StartFraudsterRegistrationJobInput{
+		ClientToken:       ptr.String("__ClientToken__"),
+		JobName:           ptr.String("__JobName__"),
+		DomainId:          ptr.String("__DomainId__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		RegistrationConfig: &types.RegistrationConfig{
+			DuplicateRegistrationAction:  types.DuplicateRegistrationAction("SKIP"),
+			FraudsterSimilarityThreshold: ptr.Int32(1),
+			WatchlistIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri:    ptr.String("__S3Uri__"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1048,7 +1160,30 @@ func TestCheckResponseSnapshot_StartSpeakerEnrollmentJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSpeakerEnrollmentJob(context.Background(), &StartSpeakerEnrollmentJobInput{})
+	got, err := svc.StartSpeakerEnrollmentJob(context.Background(), &StartSpeakerEnrollmentJobInput{
+		ClientToken:       ptr.String("__ClientToken__"),
+		JobName:           ptr.String("__JobName__"),
+		DomainId:          ptr.String("__DomainId__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EnrollmentConfig: &types.EnrollmentConfig{
+			ExistingEnrollmentAction: types.ExistingEnrollmentAction("SKIP"),
+			FraudDetectionConfig: &types.EnrollmentJobFraudDetectionConfig{
+				FraudDetectionAction: types.FraudDetectionAction("IGNORE"),
+				RiskThreshold:        ptr.Int32(1),
+				WatchlistIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri:    ptr.String("__S3Uri__"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1067,7 +1202,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1086,7 +1233,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1126,7 +1279,14 @@ func TestCheckResponseSnapshot_UpdateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomain(context.Background(), &UpdateDomainInput{})
+	got, err := svc.UpdateDomain(context.Background(), &UpdateDomainInput{
+		DomainId:    ptr.String("__DomainId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1155,7 +1315,12 @@ func TestCheckResponseSnapshot_UpdateWatchlist(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWatchlist(context.Background(), &UpdateWatchlistInput{})
+	got, err := svc.UpdateWatchlist(context.Background(), &UpdateWatchlistInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1176,7 +1341,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{})
+	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+		FraudsterId: ptr.String("__FraudsterId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1202,7 +1371,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{})
+	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+		FraudsterId: ptr.String("__FraudsterId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1227,7 +1400,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{})
+	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+		FraudsterId: ptr.String("__FraudsterId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1253,7 +1430,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{})
+	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+		FraudsterId: ptr.String("__FraudsterId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1278,7 +1459,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{})
+	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+		FraudsterId: ptr.String("__FraudsterId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1303,7 +1488,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{})
+	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+		FraudsterId: ptr.String("__FraudsterId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1328,7 +1517,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{})
+	_, opErr := svc.AssociateFraudster(context.Background(), &AssociateFraudsterInput{
+		DomainId:    ptr.String("__DomainId__"),
+		WatchlistId: ptr.String("__WatchlistId__"),
+		FraudsterId: ptr.String("__FraudsterId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

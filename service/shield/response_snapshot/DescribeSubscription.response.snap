@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSShield_20160616.DescribeSubscription
+
+{"Subscription":{"AutoRenew":"ENABLED","EndTime":946684800,"Limits":[{"Max":1,"Type":"__Type__"},{"Max":1,"Type":"__Type__"}],"ProactiveEngagementStatus":"ENABLED","StartTime":946684800,"SubscriptionArn":"__SubscriptionArn__","SubscriptionLimits":{"ProtectionGroupLimits":{"MaxProtectionGroups":1,"PatternTypeLimits":{"ArbitraryPatternLimits":{"MaxMembers":1}}},"ProtectionLimits":{"ProtectedResourceTypeLimits":[{"Max":1,"Type":"__Type__"},{"Max":1,"Type":"__Type__"}]}},"TimeCommitmentInSeconds":1}}

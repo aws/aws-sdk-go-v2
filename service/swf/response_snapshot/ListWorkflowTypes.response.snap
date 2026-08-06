@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.ListWorkflowTypes
+
+{"nextPageToken":"__NextPageToken__","typeInfos":[{"creationDate":946684800,"deprecationDate":946684800,"description":"__Description__","status":"REGISTERED","workflowType":{"name":"__Name__","version":"__Version__"}},{"creationDate":946684800,"deprecationDate":946684800,"description":"__Description__","status":"REGISTERED","workflowType":{"name":"__Name__","version":"__Version__"}}]}

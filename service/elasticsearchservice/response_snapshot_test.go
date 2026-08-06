@@ -135,7 +135,9 @@ func TestCheckResponseSnapshot_AcceptInboundCrossClusterSearchConnection(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptInboundCrossClusterSearchConnection(context.Background(), &AcceptInboundCrossClusterSearchConnectionInput{})
+	got, err := svc.AcceptInboundCrossClusterSearchConnection(context.Background(), &AcceptInboundCrossClusterSearchConnectionInput{
+		CrossClusterSearchConnectionId: ptr.String("__CrossClusterSearchConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -154,7 +156,19 @@ func TestCheckResponseSnapshot_AddTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTags(context.Background(), &AddTagsInput{})
+	got, err := svc.AddTags(context.Background(), &AddTagsInput{
+		ARN: ptr.String("__ARN__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +202,10 @@ func TestCheckResponseSnapshot_AssociatePackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociatePackage(context.Background(), &AssociatePackageInput{})
+	got, err := svc.AssociatePackage(context.Background(), &AssociatePackageInput{
+		PackageID:  ptr.String("__PackageID__"),
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -212,7 +229,10 @@ func TestCheckResponseSnapshot_AuthorizeVpcEndpointAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AuthorizeVpcEndpointAccess(context.Background(), &AuthorizeVpcEndpointAccessInput{})
+	got, err := svc.AuthorizeVpcEndpointAccess(context.Background(), &AuthorizeVpcEndpointAccessInput{
+		DomainName: ptr.String("__DomainName__"),
+		Account:    ptr.String("__Account__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -249,7 +269,10 @@ func TestCheckResponseSnapshot_CancelDomainConfigChange(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelDomainConfigChange(context.Background(), &CancelDomainConfigChangeInput{})
+	got, err := svc.CancelDomainConfigChange(context.Background(), &CancelDomainConfigChangeInput{
+		DomainName: ptr.String("__DomainName__"),
+		DryRun:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -279,7 +302,9 @@ func TestCheckResponseSnapshot_CancelElasticsearchServiceSoftwareUpdate(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelElasticsearchServiceSoftwareUpdate(context.Background(), &CancelElasticsearchServiceSoftwareUpdateInput{})
+	got, err := svc.CancelElasticsearchServiceSoftwareUpdate(context.Background(), &CancelElasticsearchServiceSoftwareUpdateInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -449,7 +474,140 @@ func TestCheckResponseSnapshot_CreateElasticsearchDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateElasticsearchDomain(context.Background(), &CreateElasticsearchDomainInput{})
+	got, err := svc.CreateElasticsearchDomain(context.Background(), &CreateElasticsearchDomainInput{
+		DomainName:           ptr.String("__DomainName__"),
+		ElasticsearchVersion: ptr.String("__ElasticsearchVersion__"),
+		ElasticsearchClusterConfig: &types.ElasticsearchClusterConfig{
+			InstanceType:           types.ESPartitionInstanceType("m3.medium.elasticsearch"),
+			InstanceCount:          ptr.Int32(1),
+			DedicatedMasterEnabled: ptr.Bool(true),
+			ZoneAwarenessEnabled:   ptr.Bool(true),
+			ZoneAwarenessConfig: &types.ZoneAwarenessConfig{
+				AvailabilityZoneCount: ptr.Int32(1),
+			},
+			DedicatedMasterType:  types.ESPartitionInstanceType("m3.medium.elasticsearch"),
+			DedicatedMasterCount: ptr.Int32(1),
+			WarmEnabled:          ptr.Bool(true),
+			WarmType:             types.ESWarmPartitionInstanceType("ultrawarm1.medium.elasticsearch"),
+			WarmCount:            ptr.Int32(1),
+			ColdStorageOptions: &types.ColdStorageOptions{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		EBSOptions: &types.EBSOptions{
+			EBSEnabled: ptr.Bool(true),
+			VolumeType: types.VolumeType("standard"),
+			VolumeSize: ptr.Int32(1),
+			Iops:       ptr.Int32(1),
+			Throughput: ptr.Int32(1),
+		},
+		AccessPolicies: ptr.String("__AccessPolicies__"),
+		SnapshotOptions: &types.SnapshotOptions{
+			AutomatedSnapshotStartHour: ptr.Int32(1),
+		},
+		VPCOptions: &types.VPCOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CognitoOptions: &types.CognitoOptions{
+			Enabled:        ptr.Bool(true),
+			UserPoolId:     ptr.String("__UserPoolId__"),
+			IdentityPoolId: ptr.String("__IdentityPoolId__"),
+			RoleArn:        ptr.String("__RoleArn__"),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			Enabled:  ptr.Bool(true),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
+			Enabled: ptr.Bool(true),
+		},
+		AdvancedOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		LogPublishingOptions: map[string]types.LogPublishingOption{
+			"key0": {
+				CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
+				Enabled:                   ptr.Bool(true),
+			},
+		},
+		DomainEndpointOptions: &types.DomainEndpointOptions{
+			EnforceHTTPS:                 ptr.Bool(true),
+			TLSSecurityPolicy:            types.TLSSecurityPolicy("Policy-Min-TLS-1-0-2019-07"),
+			CustomEndpointEnabled:        ptr.Bool(true),
+			CustomEndpoint:               ptr.String("__CustomEndpoint__"),
+			CustomEndpointCertificateArn: ptr.String("__CustomEndpointCertificateArn__"),
+		},
+		AdvancedSecurityOptions: &types.AdvancedSecurityOptionsInput{
+			Enabled:                     ptr.Bool(true),
+			InternalUserDatabaseEnabled: ptr.Bool(true),
+			MasterUserOptions: &types.MasterUserOptions{
+				MasterUserARN:      ptr.String("__MasterUserARN__"),
+				MasterUserName:     ptr.String("__MasterUserName__"),
+				MasterUserPassword: ptr.String("__MasterUserPassword__"),
+			},
+			SAMLOptions: &types.SAMLOptionsInput{
+				Enabled: ptr.Bool(true),
+				Idp: &types.SAMLIdp{
+					MetadataContent: ptr.String("__MetadataContent__"),
+					EntityId:        ptr.String("__EntityId__"),
+				},
+				MasterUserName:        ptr.String("__MasterUserName__"),
+				MasterBackendRole:     ptr.String("__MasterBackendRole__"),
+				SubjectKey:            ptr.String("__SubjectKey__"),
+				RolesKey:              ptr.String("__RolesKey__"),
+				SessionTimeoutMinutes: ptr.Int32(1),
+			},
+			AnonymousAuthEnabled: ptr.Bool(true),
+		},
+		AutoTuneOptions: &types.AutoTuneOptionsInput{
+			DesiredState: types.AutoTuneDesiredState("ENABLED"),
+			MaintenanceSchedules: []types.AutoTuneMaintenanceSchedule{
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+			},
+		},
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DeploymentStrategyOptions: &types.DeploymentStrategyOptions{
+			DeploymentStrategy: types.DeploymentStrategy("Default"),
+		},
+		AutomatedSnapshotPauseOptions: &types.AutomatedSnapshotPauseRequestOptions{
+			Enabled:   ptr.Bool(true),
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		UseCase:    types.DomainUseCase("SEARCH"),
+		EngineMode: types.DomainEngineMode("GENERAL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -485,7 +643,19 @@ func TestCheckResponseSnapshot_CreateOutboundCrossClusterSearchConnection(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOutboundCrossClusterSearchConnection(context.Background(), &CreateOutboundCrossClusterSearchConnectionInput{})
+	got, err := svc.CreateOutboundCrossClusterSearchConnection(context.Background(), &CreateOutboundCrossClusterSearchConnectionInput{
+		SourceDomainInfo: &types.DomainInformation{
+			OwnerId:    ptr.String("__OwnerId__"),
+			DomainName: ptr.String("__DomainName__"),
+			Region:     ptr.String("__Region__"),
+		},
+		DestinationDomainInfo: &types.DomainInformation{
+			OwnerId:    ptr.String("__OwnerId__"),
+			DomainName: ptr.String("__DomainName__"),
+			Region:     ptr.String("__Region__"),
+		},
+		ConnectionAlias: ptr.String("__ConnectionAlias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -519,7 +689,15 @@ func TestCheckResponseSnapshot_CreatePackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePackage(context.Background(), &CreatePackageInput{})
+	got, err := svc.CreatePackage(context.Background(), &CreatePackageInput{
+		PackageName:        ptr.String("__PackageName__"),
+		PackageType:        types.PackageType("TXT-DICTIONARY"),
+		PackageDescription: ptr.String("__PackageDescription__"),
+		PackageSource: &types.PackageSource{
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3Key:        ptr.String("__S3Key__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -561,7 +739,20 @@ func TestCheckResponseSnapshot_CreateVpcEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVpcEndpoint(context.Background(), &CreateVpcEndpointInput{})
+	got, err := svc.CreateVpcEndpoint(context.Background(), &CreateVpcEndpointInput{
+		DomainArn: ptr.String("__DomainArn__"),
+		VpcOptions: &types.VPCOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -731,7 +922,9 @@ func TestCheckResponseSnapshot_DeleteElasticsearchDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteElasticsearchDomain(context.Background(), &DeleteElasticsearchDomainInput{})
+	got, err := svc.DeleteElasticsearchDomain(context.Background(), &DeleteElasticsearchDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -787,7 +980,9 @@ func TestCheckResponseSnapshot_DeleteInboundCrossClusterSearchConnection(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInboundCrossClusterSearchConnection(context.Background(), &DeleteInboundCrossClusterSearchConnectionInput{})
+	got, err := svc.DeleteInboundCrossClusterSearchConnection(context.Background(), &DeleteInboundCrossClusterSearchConnectionInput{
+		CrossClusterSearchConnectionId: ptr.String("__CrossClusterSearchConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -825,7 +1020,9 @@ func TestCheckResponseSnapshot_DeleteOutboundCrossClusterSearchConnection(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOutboundCrossClusterSearchConnection(context.Background(), &DeleteOutboundCrossClusterSearchConnectionInput{})
+	got, err := svc.DeleteOutboundCrossClusterSearchConnection(context.Background(), &DeleteOutboundCrossClusterSearchConnectionInput{
+		CrossClusterSearchConnectionId: ptr.String("__CrossClusterSearchConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -859,7 +1056,9 @@ func TestCheckResponseSnapshot_DeletePackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePackage(context.Background(), &DeletePackageInput{})
+	got, err := svc.DeletePackage(context.Background(), &DeletePackageInput{
+		PackageID: ptr.String("__PackageID__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -885,7 +1084,9 @@ func TestCheckResponseSnapshot_DeleteVpcEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVpcEndpoint(context.Background(), &DeleteVpcEndpointInput{})
+	got, err := svc.DeleteVpcEndpoint(context.Background(), &DeleteVpcEndpointInput{
+		VpcEndpointId: ptr.String("__VpcEndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -930,7 +1131,11 @@ func TestCheckResponseSnapshot_DescribeDomainAutoTunes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomainAutoTunes(context.Background(), &DescribeDomainAutoTunesInput{})
+	got, err := svc.DescribeDomainAutoTunes(context.Background(), &DescribeDomainAutoTunesInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -981,7 +1186,10 @@ func TestCheckResponseSnapshot_DescribeDomainChangeProgress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomainChangeProgress(context.Background(), &DescribeDomainChangeProgressInput{})
+	got, err := svc.DescribeDomainChangeProgress(context.Background(), &DescribeDomainChangeProgressInput{
+		DomainName: ptr.String("__DomainName__"),
+		ChangeId:   ptr.String("__ChangeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1151,7 +1359,9 @@ func TestCheckResponseSnapshot_DescribeElasticsearchDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeElasticsearchDomain(context.Background(), &DescribeElasticsearchDomainInput{})
+	got, err := svc.DescribeElasticsearchDomain(context.Background(), &DescribeElasticsearchDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1480,7 +1690,9 @@ func TestCheckResponseSnapshot_DescribeElasticsearchDomainConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeElasticsearchDomainConfig(context.Background(), &DescribeElasticsearchDomainConfigInput{})
+	got, err := svc.DescribeElasticsearchDomainConfig(context.Background(), &DescribeElasticsearchDomainConfigInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1802,7 +2014,12 @@ func TestCheckResponseSnapshot_DescribeElasticsearchDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeElasticsearchDomains(context.Background(), &DescribeElasticsearchDomainsInput{})
+	got, err := svc.DescribeElasticsearchDomains(context.Background(), &DescribeElasticsearchDomainsInput{
+		DomainNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1890,7 +2107,11 @@ func TestCheckResponseSnapshot_DescribeElasticsearchInstanceTypeLimits(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeElasticsearchInstanceTypeLimits(context.Background(), &DescribeElasticsearchInstanceTypeLimitsInput{})
+	got, err := svc.DescribeElasticsearchInstanceTypeLimits(context.Background(), &DescribeElasticsearchInstanceTypeLimitsInput{
+		DomainName:           ptr.String("__DomainName__"),
+		InstanceType:         types.ESPartitionInstanceType("m3.medium.elasticsearch"),
+		ElasticsearchVersion: ptr.String("__ElasticsearchVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1947,7 +2168,26 @@ func TestCheckResponseSnapshot_DescribeInboundCrossClusterSearchConnections(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInboundCrossClusterSearchConnections(context.Background(), &DescribeInboundCrossClusterSearchConnectionsInput{})
+	got, err := svc.DescribeInboundCrossClusterSearchConnections(context.Background(), &DescribeInboundCrossClusterSearchConnectionsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2006,7 +2246,26 @@ func TestCheckResponseSnapshot_DescribeOutboundCrossClusterSearchConnections(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOutboundCrossClusterSearchConnections(context.Background(), &DescribeOutboundCrossClusterSearchConnectionsInput{})
+	got, err := svc.DescribeOutboundCrossClusterSearchConnections(context.Background(), &DescribeOutboundCrossClusterSearchConnectionsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2057,7 +2316,26 @@ func TestCheckResponseSnapshot_DescribePackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePackages(context.Background(), &DescribePackagesInput{})
+	got, err := svc.DescribePackages(context.Background(), &DescribePackagesInput{
+		Filters: []types.DescribePackagesFilter{
+			{
+				Name: types.DescribePackagesFilterName("PackageID"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.DescribePackagesFilterName("PackageID"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2118,7 +2396,11 @@ func TestCheckResponseSnapshot_DescribeReservedElasticsearchInstanceOfferings(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReservedElasticsearchInstanceOfferings(context.Background(), &DescribeReservedElasticsearchInstanceOfferingsInput{})
+	got, err := svc.DescribeReservedElasticsearchInstanceOfferings(context.Background(), &DescribeReservedElasticsearchInstanceOfferingsInput{
+		ReservedElasticsearchInstanceOfferingId: ptr.String("__ReservedElasticsearchInstanceOfferingId__"),
+		MaxResults:                              1,
+		NextToken:                               ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2189,7 +2471,11 @@ func TestCheckResponseSnapshot_DescribeReservedElasticsearchInstances(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReservedElasticsearchInstances(context.Background(), &DescribeReservedElasticsearchInstancesInput{})
+	got, err := svc.DescribeReservedElasticsearchInstances(context.Background(), &DescribeReservedElasticsearchInstancesInput{
+		ReservedElasticsearchInstanceId: ptr.String("__ReservedElasticsearchInstanceId__"),
+		MaxResults:                      1,
+		NextToken:                       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2267,7 +2553,12 @@ func TestCheckResponseSnapshot_DescribeVpcEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVpcEndpoints(context.Background(), &DescribeVpcEndpointsInput{})
+	got, err := svc.DescribeVpcEndpoints(context.Background(), &DescribeVpcEndpointsInput{
+		VpcEndpointIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2301,7 +2592,10 @@ func TestCheckResponseSnapshot_DissociatePackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DissociatePackage(context.Background(), &DissociatePackageInput{})
+	got, err := svc.DissociatePackage(context.Background(), &DissociatePackageInput{
+		PackageID:  ptr.String("__PackageID__"),
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2337,7 +2631,9 @@ func TestCheckResponseSnapshot_GetCompatibleElasticsearchVersions(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCompatibleElasticsearchVersions(context.Background(), &GetCompatibleElasticsearchVersionsInput{})
+	got, err := svc.GetCompatibleElasticsearchVersions(context.Background(), &GetCompatibleElasticsearchVersionsInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2371,7 +2667,11 @@ func TestCheckResponseSnapshot_GetPackageVersionHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPackageVersionHistory(context.Background(), &GetPackageVersionHistoryInput{})
+	got, err := svc.GetPackageVersionHistory(context.Background(), &GetPackageVersionHistoryInput{
+		PackageID:  ptr.String("__PackageID__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2444,7 +2744,11 @@ func TestCheckResponseSnapshot_GetUpgradeHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUpgradeHistory(context.Background(), &GetUpgradeHistoryInput{})
+	got, err := svc.GetUpgradeHistory(context.Background(), &GetUpgradeHistoryInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2467,7 +2771,9 @@ func TestCheckResponseSnapshot_GetUpgradeStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUpgradeStatus(context.Background(), &GetUpgradeStatusInput{})
+	got, err := svc.GetUpgradeStatus(context.Background(), &GetUpgradeStatusInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2497,7 +2803,9 @@ func TestCheckResponseSnapshot_ListDomainNames(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainNames(context.Background(), &ListDomainNamesInput{})
+	got, err := svc.ListDomainNames(context.Background(), &ListDomainNamesInput{
+		EngineType: types.EngineType("OpenSearch"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2548,7 +2856,11 @@ func TestCheckResponseSnapshot_ListDomainsForPackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainsForPackage(context.Background(), &ListDomainsForPackageInput{})
+	got, err := svc.ListDomainsForPackage(context.Background(), &ListDomainsForPackageInput{
+		PackageID:  ptr.String("__PackageID__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2573,7 +2885,12 @@ func TestCheckResponseSnapshot_ListElasticsearchInstanceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListElasticsearchInstanceTypes(context.Background(), &ListElasticsearchInstanceTypesInput{})
+	got, err := svc.ListElasticsearchInstanceTypes(context.Background(), &ListElasticsearchInstanceTypesInput{
+		ElasticsearchVersion: ptr.String("__ElasticsearchVersion__"),
+		DomainName:           ptr.String("__DomainName__"),
+		MaxResults:           1,
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2598,7 +2915,10 @@ func TestCheckResponseSnapshot_ListElasticsearchVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListElasticsearchVersions(context.Background(), &ListElasticsearchVersionsInput{})
+	got, err := svc.ListElasticsearchVersions(context.Background(), &ListElasticsearchVersionsInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2649,7 +2969,11 @@ func TestCheckResponseSnapshot_ListPackagesForDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPackagesForDomain(context.Background(), &ListPackagesForDomainInput{})
+	got, err := svc.ListPackagesForDomain(context.Background(), &ListPackagesForDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2679,7 +3003,9 @@ func TestCheckResponseSnapshot_ListTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTags(context.Background(), &ListTagsInput{})
+	got, err := svc.ListTags(context.Background(), &ListTagsInput{
+		ARN: ptr.String("__ARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2710,7 +3036,10 @@ func TestCheckResponseSnapshot_ListVpcEndpointAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVpcEndpointAccess(context.Background(), &ListVpcEndpointAccessInput{})
+	got, err := svc.ListVpcEndpointAccess(context.Background(), &ListVpcEndpointAccessInput{
+		DomainName: ptr.String("__DomainName__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2745,7 +3074,9 @@ func TestCheckResponseSnapshot_ListVpcEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVpcEndpoints(context.Background(), &ListVpcEndpointsInput{})
+	got, err := svc.ListVpcEndpoints(context.Background(), &ListVpcEndpointsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2780,7 +3111,10 @@ func TestCheckResponseSnapshot_ListVpcEndpointsForDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVpcEndpointsForDomain(context.Background(), &ListVpcEndpointsForDomainInput{})
+	got, err := svc.ListVpcEndpointsForDomain(context.Background(), &ListVpcEndpointsForDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2802,7 +3136,11 @@ func TestCheckResponseSnapshot_PurchaseReservedElasticsearchInstanceOffering(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PurchaseReservedElasticsearchInstanceOffering(context.Background(), &PurchaseReservedElasticsearchInstanceOfferingInput{})
+	got, err := svc.PurchaseReservedElasticsearchInstanceOffering(context.Background(), &PurchaseReservedElasticsearchInstanceOfferingInput{
+		ReservedElasticsearchInstanceOfferingId: ptr.String("__ReservedElasticsearchInstanceOfferingId__"),
+		ReservationName:                         ptr.String("__ReservationName__"),
+		InstanceCount:                           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2839,7 +3177,9 @@ func TestCheckResponseSnapshot_RejectInboundCrossClusterSearchConnection(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectInboundCrossClusterSearchConnection(context.Background(), &RejectInboundCrossClusterSearchConnectionInput{})
+	got, err := svc.RejectInboundCrossClusterSearchConnection(context.Background(), &RejectInboundCrossClusterSearchConnectionInput{
+		CrossClusterSearchConnectionId: ptr.String("__CrossClusterSearchConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2858,7 +3198,13 @@ func TestCheckResponseSnapshot_RemoveTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{})
+	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{
+		ARN: ptr.String("__ARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2877,7 +3223,10 @@ func TestCheckResponseSnapshot_RevokeVpcEndpointAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeVpcEndpointAccess(context.Background(), &RevokeVpcEndpointAccessInput{})
+	got, err := svc.RevokeVpcEndpointAccess(context.Background(), &RevokeVpcEndpointAccessInput{
+		DomainName: ptr.String("__DomainName__"),
+		Account:    ptr.String("__Account__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2907,7 +3256,9 @@ func TestCheckResponseSnapshot_StartElasticsearchServiceSoftwareUpdate(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartElasticsearchServiceSoftwareUpdate(context.Background(), &StartElasticsearchServiceSoftwareUpdateInput{})
+	got, err := svc.StartElasticsearchServiceSoftwareUpdate(context.Background(), &StartElasticsearchServiceSoftwareUpdateInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3240,7 +3591,131 @@ func TestCheckResponseSnapshot_UpdateElasticsearchDomainConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateElasticsearchDomainConfig(context.Background(), &UpdateElasticsearchDomainConfigInput{})
+	got, err := svc.UpdateElasticsearchDomainConfig(context.Background(), &UpdateElasticsearchDomainConfigInput{
+		DomainName: ptr.String("__DomainName__"),
+		ElasticsearchClusterConfig: &types.ElasticsearchClusterConfig{
+			InstanceType:           types.ESPartitionInstanceType("m3.medium.elasticsearch"),
+			InstanceCount:          ptr.Int32(1),
+			DedicatedMasterEnabled: ptr.Bool(true),
+			ZoneAwarenessEnabled:   ptr.Bool(true),
+			ZoneAwarenessConfig: &types.ZoneAwarenessConfig{
+				AvailabilityZoneCount: ptr.Int32(1),
+			},
+			DedicatedMasterType:  types.ESPartitionInstanceType("m3.medium.elasticsearch"),
+			DedicatedMasterCount: ptr.Int32(1),
+			WarmEnabled:          ptr.Bool(true),
+			WarmType:             types.ESWarmPartitionInstanceType("ultrawarm1.medium.elasticsearch"),
+			WarmCount:            ptr.Int32(1),
+			ColdStorageOptions: &types.ColdStorageOptions{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		EBSOptions: &types.EBSOptions{
+			EBSEnabled: ptr.Bool(true),
+			VolumeType: types.VolumeType("standard"),
+			VolumeSize: ptr.Int32(1),
+			Iops:       ptr.Int32(1),
+			Throughput: ptr.Int32(1),
+		},
+		SnapshotOptions: &types.SnapshotOptions{
+			AutomatedSnapshotStartHour: ptr.Int32(1),
+		},
+		VPCOptions: &types.VPCOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CognitoOptions: &types.CognitoOptions{
+			Enabled:        ptr.Bool(true),
+			UserPoolId:     ptr.String("__UserPoolId__"),
+			IdentityPoolId: ptr.String("__IdentityPoolId__"),
+			RoleArn:        ptr.String("__RoleArn__"),
+		},
+		AdvancedOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		AccessPolicies: ptr.String("__AccessPolicies__"),
+		LogPublishingOptions: map[string]types.LogPublishingOption{
+			"key0": {
+				CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
+				Enabled:                   ptr.Bool(true),
+			},
+		},
+		DomainEndpointOptions: &types.DomainEndpointOptions{
+			EnforceHTTPS:                 ptr.Bool(true),
+			TLSSecurityPolicy:            types.TLSSecurityPolicy("Policy-Min-TLS-1-0-2019-07"),
+			CustomEndpointEnabled:        ptr.Bool(true),
+			CustomEndpoint:               ptr.String("__CustomEndpoint__"),
+			CustomEndpointCertificateArn: ptr.String("__CustomEndpointCertificateArn__"),
+		},
+		AdvancedSecurityOptions: &types.AdvancedSecurityOptionsInput{
+			Enabled:                     ptr.Bool(true),
+			InternalUserDatabaseEnabled: ptr.Bool(true),
+			MasterUserOptions: &types.MasterUserOptions{
+				MasterUserARN:      ptr.String("__MasterUserARN__"),
+				MasterUserName:     ptr.String("__MasterUserName__"),
+				MasterUserPassword: ptr.String("__MasterUserPassword__"),
+			},
+			SAMLOptions: &types.SAMLOptionsInput{
+				Enabled: ptr.Bool(true),
+				Idp: &types.SAMLIdp{
+					MetadataContent: ptr.String("__MetadataContent__"),
+					EntityId:        ptr.String("__EntityId__"),
+				},
+				MasterUserName:        ptr.String("__MasterUserName__"),
+				MasterBackendRole:     ptr.String("__MasterBackendRole__"),
+				SubjectKey:            ptr.String("__SubjectKey__"),
+				RolesKey:              ptr.String("__RolesKey__"),
+				SessionTimeoutMinutes: ptr.Int32(1),
+			},
+			AnonymousAuthEnabled: ptr.Bool(true),
+		},
+		NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
+			Enabled: ptr.Bool(true),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			Enabled:  ptr.Bool(true),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		AutoTuneOptions: &types.AutoTuneOptions{
+			DesiredState:      types.AutoTuneDesiredState("ENABLED"),
+			RollbackOnDisable: types.RollbackOnDisable("NO_ROLLBACK"),
+			MaintenanceSchedules: []types.AutoTuneMaintenanceSchedule{
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+			},
+		},
+		DryRun: ptr.Bool(true),
+		DeploymentStrategyOptions: &types.DeploymentStrategyOptions{
+			DeploymentStrategy: types.DeploymentStrategy("Default"),
+		},
+		AutomatedSnapshotPauseOptions: &types.AutomatedSnapshotPauseRequestOptions{
+			Enabled:   ptr.Bool(true),
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		UseCase:    types.DomainUseCase("SEARCH"),
+		EngineMode: types.DomainEngineMode("GENERAL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3274,7 +3749,15 @@ func TestCheckResponseSnapshot_UpdatePackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePackage(context.Background(), &UpdatePackageInput{})
+	got, err := svc.UpdatePackage(context.Background(), &UpdatePackageInput{
+		PackageID: ptr.String("__PackageID__"),
+		PackageSource: &types.PackageSource{
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3Key:        ptr.String("__S3Key__"),
+		},
+		PackageDescription: ptr.String("__PackageDescription__"),
+		CommitMessage:      ptr.String("__CommitMessage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3316,7 +3799,19 @@ func TestCheckResponseSnapshot_UpdateVpcEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVpcEndpoint(context.Background(), &UpdateVpcEndpointInput{})
+	got, err := svc.UpdateVpcEndpoint(context.Background(), &UpdateVpcEndpointInput{
+		VpcEndpointId: ptr.String("__VpcEndpointId__"),
+		VpcOptions: &types.VPCOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3347,7 +3842,11 @@ func TestCheckResponseSnapshot_UpgradeElasticsearchDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpgradeElasticsearchDomain(context.Background(), &UpgradeElasticsearchDomainInput{})
+	got, err := svc.UpgradeElasticsearchDomain(context.Background(), &UpgradeElasticsearchDomainInput{
+		DomainName:       ptr.String("__DomainName__"),
+		TargetVersion:    ptr.String("__TargetVersion__"),
+		PerformCheckOnly: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3368,7 +3867,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePackage(context.Background(), &AssociatePackageInput{})
+	_, opErr := svc.AssociatePackage(context.Background(), &AssociatePackageInput{
+		PackageID:  ptr.String("__PackageID__"),
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3393,7 +3895,19 @@ func TestCheckResponseSnapshot_Error_BaseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ARN: ptr.String("__ARN__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3418,7 +3932,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePackage(context.Background(), &AssociatePackageInput{})
+	_, opErr := svc.AssociatePackage(context.Background(), &AssociatePackageInput{
+		PackageID:  ptr.String("__PackageID__"),
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3443,7 +3960,9 @@ func TestCheckResponseSnapshot_Error_DisabledOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInboundCrossClusterSearchConnection(context.Background(), &AcceptInboundCrossClusterSearchConnectionInput{})
+	_, opErr := svc.AcceptInboundCrossClusterSearchConnection(context.Background(), &AcceptInboundCrossClusterSearchConnectionInput{
+		CrossClusterSearchConnectionId: ptr.String("__CrossClusterSearchConnectionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3468,7 +3987,19 @@ func TestCheckResponseSnapshot_Error_InternalException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ARN: ptr.String("__ARN__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3493,7 +4024,26 @@ func TestCheckResponseSnapshot_Error_InvalidPaginationTokenException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeInboundCrossClusterSearchConnections(context.Background(), &DescribeInboundCrossClusterSearchConnectionsInput{})
+	_, opErr := svc.DescribeInboundCrossClusterSearchConnections(context.Background(), &DescribeInboundCrossClusterSearchConnectionsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3518,7 +4068,140 @@ func TestCheckResponseSnapshot_Error_InvalidTypeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateElasticsearchDomain(context.Background(), &CreateElasticsearchDomainInput{})
+	_, opErr := svc.CreateElasticsearchDomain(context.Background(), &CreateElasticsearchDomainInput{
+		DomainName:           ptr.String("__DomainName__"),
+		ElasticsearchVersion: ptr.String("__ElasticsearchVersion__"),
+		ElasticsearchClusterConfig: &types.ElasticsearchClusterConfig{
+			InstanceType:           types.ESPartitionInstanceType("m3.medium.elasticsearch"),
+			InstanceCount:          ptr.Int32(1),
+			DedicatedMasterEnabled: ptr.Bool(true),
+			ZoneAwarenessEnabled:   ptr.Bool(true),
+			ZoneAwarenessConfig: &types.ZoneAwarenessConfig{
+				AvailabilityZoneCount: ptr.Int32(1),
+			},
+			DedicatedMasterType:  types.ESPartitionInstanceType("m3.medium.elasticsearch"),
+			DedicatedMasterCount: ptr.Int32(1),
+			WarmEnabled:          ptr.Bool(true),
+			WarmType:             types.ESWarmPartitionInstanceType("ultrawarm1.medium.elasticsearch"),
+			WarmCount:            ptr.Int32(1),
+			ColdStorageOptions: &types.ColdStorageOptions{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		EBSOptions: &types.EBSOptions{
+			EBSEnabled: ptr.Bool(true),
+			VolumeType: types.VolumeType("standard"),
+			VolumeSize: ptr.Int32(1),
+			Iops:       ptr.Int32(1),
+			Throughput: ptr.Int32(1),
+		},
+		AccessPolicies: ptr.String("__AccessPolicies__"),
+		SnapshotOptions: &types.SnapshotOptions{
+			AutomatedSnapshotStartHour: ptr.Int32(1),
+		},
+		VPCOptions: &types.VPCOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CognitoOptions: &types.CognitoOptions{
+			Enabled:        ptr.Bool(true),
+			UserPoolId:     ptr.String("__UserPoolId__"),
+			IdentityPoolId: ptr.String("__IdentityPoolId__"),
+			RoleArn:        ptr.String("__RoleArn__"),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			Enabled:  ptr.Bool(true),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
+			Enabled: ptr.Bool(true),
+		},
+		AdvancedOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		LogPublishingOptions: map[string]types.LogPublishingOption{
+			"key0": {
+				CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
+				Enabled:                   ptr.Bool(true),
+			},
+		},
+		DomainEndpointOptions: &types.DomainEndpointOptions{
+			EnforceHTTPS:                 ptr.Bool(true),
+			TLSSecurityPolicy:            types.TLSSecurityPolicy("Policy-Min-TLS-1-0-2019-07"),
+			CustomEndpointEnabled:        ptr.Bool(true),
+			CustomEndpoint:               ptr.String("__CustomEndpoint__"),
+			CustomEndpointCertificateArn: ptr.String("__CustomEndpointCertificateArn__"),
+		},
+		AdvancedSecurityOptions: &types.AdvancedSecurityOptionsInput{
+			Enabled:                     ptr.Bool(true),
+			InternalUserDatabaseEnabled: ptr.Bool(true),
+			MasterUserOptions: &types.MasterUserOptions{
+				MasterUserARN:      ptr.String("__MasterUserARN__"),
+				MasterUserName:     ptr.String("__MasterUserName__"),
+				MasterUserPassword: ptr.String("__MasterUserPassword__"),
+			},
+			SAMLOptions: &types.SAMLOptionsInput{
+				Enabled: ptr.Bool(true),
+				Idp: &types.SAMLIdp{
+					MetadataContent: ptr.String("__MetadataContent__"),
+					EntityId:        ptr.String("__EntityId__"),
+				},
+				MasterUserName:        ptr.String("__MasterUserName__"),
+				MasterBackendRole:     ptr.String("__MasterBackendRole__"),
+				SubjectKey:            ptr.String("__SubjectKey__"),
+				RolesKey:              ptr.String("__RolesKey__"),
+				SessionTimeoutMinutes: ptr.Int32(1),
+			},
+			AnonymousAuthEnabled: ptr.Bool(true),
+		},
+		AutoTuneOptions: &types.AutoTuneOptionsInput{
+			DesiredState: types.AutoTuneDesiredState("ENABLED"),
+			MaintenanceSchedules: []types.AutoTuneMaintenanceSchedule{
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+			},
+		},
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DeploymentStrategyOptions: &types.DeploymentStrategyOptions{
+			DeploymentStrategy: types.DeploymentStrategy("Default"),
+		},
+		AutomatedSnapshotPauseOptions: &types.AutomatedSnapshotPauseRequestOptions{
+			Enabled:   ptr.Bool(true),
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		UseCase:    types.DomainUseCase("SEARCH"),
+		EngineMode: types.DomainEngineMode("GENERAL"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3543,7 +4226,9 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInboundCrossClusterSearchConnection(context.Background(), &AcceptInboundCrossClusterSearchConnectionInput{})
+	_, opErr := svc.AcceptInboundCrossClusterSearchConnection(context.Background(), &AcceptInboundCrossClusterSearchConnectionInput{
+		CrossClusterSearchConnectionId: ptr.String("__CrossClusterSearchConnectionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3568,7 +4253,140 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateElasticsearchDomain(context.Background(), &CreateElasticsearchDomainInput{})
+	_, opErr := svc.CreateElasticsearchDomain(context.Background(), &CreateElasticsearchDomainInput{
+		DomainName:           ptr.String("__DomainName__"),
+		ElasticsearchVersion: ptr.String("__ElasticsearchVersion__"),
+		ElasticsearchClusterConfig: &types.ElasticsearchClusterConfig{
+			InstanceType:           types.ESPartitionInstanceType("m3.medium.elasticsearch"),
+			InstanceCount:          ptr.Int32(1),
+			DedicatedMasterEnabled: ptr.Bool(true),
+			ZoneAwarenessEnabled:   ptr.Bool(true),
+			ZoneAwarenessConfig: &types.ZoneAwarenessConfig{
+				AvailabilityZoneCount: ptr.Int32(1),
+			},
+			DedicatedMasterType:  types.ESPartitionInstanceType("m3.medium.elasticsearch"),
+			DedicatedMasterCount: ptr.Int32(1),
+			WarmEnabled:          ptr.Bool(true),
+			WarmType:             types.ESWarmPartitionInstanceType("ultrawarm1.medium.elasticsearch"),
+			WarmCount:            ptr.Int32(1),
+			ColdStorageOptions: &types.ColdStorageOptions{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		EBSOptions: &types.EBSOptions{
+			EBSEnabled: ptr.Bool(true),
+			VolumeType: types.VolumeType("standard"),
+			VolumeSize: ptr.Int32(1),
+			Iops:       ptr.Int32(1),
+			Throughput: ptr.Int32(1),
+		},
+		AccessPolicies: ptr.String("__AccessPolicies__"),
+		SnapshotOptions: &types.SnapshotOptions{
+			AutomatedSnapshotStartHour: ptr.Int32(1),
+		},
+		VPCOptions: &types.VPCOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CognitoOptions: &types.CognitoOptions{
+			Enabled:        ptr.Bool(true),
+			UserPoolId:     ptr.String("__UserPoolId__"),
+			IdentityPoolId: ptr.String("__IdentityPoolId__"),
+			RoleArn:        ptr.String("__RoleArn__"),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			Enabled:  ptr.Bool(true),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
+			Enabled: ptr.Bool(true),
+		},
+		AdvancedOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		LogPublishingOptions: map[string]types.LogPublishingOption{
+			"key0": {
+				CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
+				Enabled:                   ptr.Bool(true),
+			},
+		},
+		DomainEndpointOptions: &types.DomainEndpointOptions{
+			EnforceHTTPS:                 ptr.Bool(true),
+			TLSSecurityPolicy:            types.TLSSecurityPolicy("Policy-Min-TLS-1-0-2019-07"),
+			CustomEndpointEnabled:        ptr.Bool(true),
+			CustomEndpoint:               ptr.String("__CustomEndpoint__"),
+			CustomEndpointCertificateArn: ptr.String("__CustomEndpointCertificateArn__"),
+		},
+		AdvancedSecurityOptions: &types.AdvancedSecurityOptionsInput{
+			Enabled:                     ptr.Bool(true),
+			InternalUserDatabaseEnabled: ptr.Bool(true),
+			MasterUserOptions: &types.MasterUserOptions{
+				MasterUserARN:      ptr.String("__MasterUserARN__"),
+				MasterUserName:     ptr.String("__MasterUserName__"),
+				MasterUserPassword: ptr.String("__MasterUserPassword__"),
+			},
+			SAMLOptions: &types.SAMLOptionsInput{
+				Enabled: ptr.Bool(true),
+				Idp: &types.SAMLIdp{
+					MetadataContent: ptr.String("__MetadataContent__"),
+					EntityId:        ptr.String("__EntityId__"),
+				},
+				MasterUserName:        ptr.String("__MasterUserName__"),
+				MasterBackendRole:     ptr.String("__MasterBackendRole__"),
+				SubjectKey:            ptr.String("__SubjectKey__"),
+				RolesKey:              ptr.String("__RolesKey__"),
+				SessionTimeoutMinutes: ptr.Int32(1),
+			},
+			AnonymousAuthEnabled: ptr.Bool(true),
+		},
+		AutoTuneOptions: &types.AutoTuneOptionsInput{
+			DesiredState: types.AutoTuneDesiredState("ENABLED"),
+			MaintenanceSchedules: []types.AutoTuneMaintenanceSchedule{
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+			},
+		},
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DeploymentStrategyOptions: &types.DeploymentStrategyOptions{
+			DeploymentStrategy: types.DeploymentStrategy("Default"),
+		},
+		AutomatedSnapshotPauseOptions: &types.AutomatedSnapshotPauseRequestOptions{
+			Enabled:   ptr.Bool(true),
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		UseCase:    types.DomainUseCase("SEARCH"),
+		EngineMode: types.DomainEngineMode("GENERAL"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3593,7 +4411,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInboundCrossClusterSearchConnection(context.Background(), &AcceptInboundCrossClusterSearchConnectionInput{})
+	_, opErr := svc.AcceptInboundCrossClusterSearchConnection(context.Background(), &AcceptInboundCrossClusterSearchConnectionInput{
+		CrossClusterSearchConnectionId: ptr.String("__CrossClusterSearchConnectionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3618,7 +4438,19 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ARN: ptr.String("__ARN__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

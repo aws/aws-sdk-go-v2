@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"eventSummaries":[{"eventId":"__EventId__","eventReferences":[{"resource":"__EventReferenceMemberResource__"},{"resource":"__EventReferenceMemberResource__"}],"eventTime":946684800,"eventType":"__EventType__","eventUpdatedTime":946684800,"incidentRecordArn":"__IncidentRecordArn__"},{"eventId":"__EventId__","eventReferences":[{"resource":"__EventReferenceMemberResource__"},{"resource":"__EventReferenceMemberResource__"}],"eventTime":946684800,"eventType":"__EventType__","eventUpdatedTime":946684800,"incidentRecordArn":"__IncidentRecordArn__"}],"nextToken":"__NextToken__"}

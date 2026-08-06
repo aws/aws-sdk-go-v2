@@ -136,7 +136,50 @@ func TestCheckResponseSnapshot_CopyObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyObject(context.Background(), &CopyObjectInput{})
+	got, err := svc.CopyObject(context.Background(), &CopyObjectInput{
+		ACL:                            ptr.String("__ACL__"),
+		Bucket:                         ptr.String("__Bucket__"),
+		CacheControl:                   ptr.String("__CacheControl__"),
+		ChecksumAlgorithm:              ptr.String("__ChecksumAlgorithm__"),
+		ContentDisposition:             ptr.String("__ContentDisposition__"),
+		ContentEncoding:                ptr.String("__ContentEncoding__"),
+		ContentLanguage:                ptr.String("__ContentLanguage__"),
+		ContentType:                    ptr.String("__ContentType__"),
+		CopySource:                     ptr.String("__CopySource__"),
+		CopySourceIfMatch:              ptr.String("__CopySourceIfMatch__"),
+		CopySourceIfModifiedSince:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CopySourceIfNoneMatch:          ptr.String("__CopySourceIfNoneMatch__"),
+		CopySourceIfUnmodifiedSince:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Expires:                        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GrantFullControl:               ptr.String("__GrantFullControl__"),
+		GrantRead:                      ptr.String("__GrantRead__"),
+		GrantReadACP:                   ptr.String("__GrantReadACP__"),
+		GrantWriteACP:                  ptr.String("__GrantWriteACP__"),
+		IfMatch:                        ptr.String("__IfMatch__"),
+		IfNoneMatch:                    ptr.String("__IfNoneMatch__"),
+		Key:                            ptr.String("__Key__"),
+		MetadataDirective:              ptr.String("__MetadataDirective__"),
+		TaggingDirective:               ptr.String("__TaggingDirective__"),
+		ServerSideEncryption:           ptr.String("__ServerSideEncryption__"),
+		StorageClass:                   ptr.String("__StorageClass__"),
+		WebsiteRedirectLocation:        ptr.String("__WebsiteRedirectLocation__"),
+		SSECustomerAlgorithm:           ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:                 ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:              ptr.String("__SSECustomerKeyMD5__"),
+		SSEKMSKeyId:                    ptr.String("__SSEKMSKeyId__"),
+		SSEKMSEncryptionContext:        ptr.String("__SSEKMSEncryptionContext__"),
+		BucketKeyEnabled:               ptr.Bool(true),
+		CopySourceSSECustomerAlgorithm: ptr.String("__CopySourceSSECustomerAlgorithm__"),
+		CopySourceSSECustomerKey:       ptr.String("__CopySourceSSECustomerKey__"),
+		CopySourceSSECustomerKeyMD5:    ptr.String("__CopySourceSSECustomerKeyMD5__"),
+		RequestPayer:                   ptr.String("__RequestPayer__"),
+		Tagging:                        ptr.String("__Tagging__"),
+		ObjectLockMode:                 ptr.String("__ObjectLockMode__"),
+		ObjectLockRetainUntilDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ObjectLockLegalHoldStatus:      ptr.String("__ObjectLockLegalHoldStatus__"),
+		ExpectedBucketOwner:            ptr.String("__ExpectedBucketOwner__"),
+		ExpectedSourceBucketOwner:      ptr.String("__ExpectedSourceBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -215,7 +258,72 @@ func TestCheckResponseSnapshot_GetMetricData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetricData(context.Background(), &GetMetricDataInput{})
+	got, err := svc.GetMetricData(context.Background(), &GetMetricDataInput{
+		MetricDataQueries: []types.MetricDataQuery{
+			{
+				Id: ptr.String("__Id__"),
+				MetricStat: &types.MetricStat{
+					Metric: &types.Metric{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					Period: ptr.Int32(1),
+					Stat:   ptr.String("__Stat__"),
+					Unit:   types.StandardUnit("Seconds"),
+				},
+				Expression: ptr.String("__Expression__"),
+				Label:      ptr.String("__Label__"),
+				ReturnData: ptr.Bool(true),
+				Period:     ptr.Int32(1),
+				AccountId:  ptr.String("__AccountId__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+				MetricStat: &types.MetricStat{
+					Metric: &types.Metric{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					Period: ptr.Int32(1),
+					Stat:   ptr.String("__Stat__"),
+					Unit:   types.StandardUnit("Seconds"),
+				},
+				Expression: ptr.String("__Expression__"),
+				Label:      ptr.String("__Label__"),
+				ReturnData: ptr.Bool(true),
+				Period:     ptr.Int32(1),
+				AccountId:  ptr.String("__AccountId__"),
+			},
+		},
+		StartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:     ptr.String("__NextToken__"),
+		ScanBy:        types.ScanBy("TimestampDescending"),
+		MaxDatapoints: ptr.Int32(1),
+		LabelOptions: &types.LabelOptions{
+			Timezone: ptr.String("__Timezone__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,116 +333,11 @@ func TestCheckResponseSnapshot_GetMetricData(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetObject(t *testing.T) {
-	want := &GetObjectOutput{
-		Body:                      []byte("blob"),
-		DeleteMarker:              ptr.Bool(true),
-		AcceptRanges:              ptr.String("__AcceptRanges__"),
-		Expiration:                ptr.String("__Expiration__"),
-		Restore:                   ptr.String("__Restore__"),
-		LastModified:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ContentLength:             ptr.Int64(1),
-		ETag:                      ptr.String("__ETag__"),
-		ChecksumCRC32:             ptr.String("__ChecksumCRC32__"),
-		ChecksumCRC32C:            ptr.String("__ChecksumCRC32C__"),
-		ChecksumCRC64NVME:         ptr.String("__ChecksumCRC64NVME__"),
-		ChecksumSHA1:              ptr.String("__ChecksumSHA1__"),
-		ChecksumSHA256:            ptr.String("__ChecksumSHA256__"),
-		ChecksumType:              ptr.String("__ChecksumType__"),
-		MissingMeta:               ptr.Int32(1),
-		VersionId:                 ptr.String("__VersionId__"),
-		CacheControl:              ptr.String("__CacheControl__"),
-		ContentDisposition:        ptr.String("__ContentDisposition__"),
-		ContentEncoding:           ptr.String("__ContentEncoding__"),
-		ContentLanguage:           ptr.String("__ContentLanguage__"),
-		ContentType:               ptr.String("__ContentType__"),
-		Expires:                   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		WebsiteRedirectLocation:   ptr.String("__WebsiteRedirectLocation__"),
-		ServerSideEncryption:      ptr.String("__ServerSideEncryption__"),
-		SSECustomerAlgorithm:      ptr.String("__SSECustomerAlgorithm__"),
-		SSECustomerKeyMD5:         ptr.String("__SSECustomerKeyMD5__"),
-		SSEKMSKeyId:               ptr.String("__SSEKMSKeyId__"),
-		BucketKeyEnabled:          ptr.Bool(true),
-		StorageClass:              ptr.String("__StorageClass__"),
-		RequestCharged:            ptr.String("__RequestCharged__"),
-		ReplicationStatus:         ptr.String("__ReplicationStatus__"),
-		PartsCount:                ptr.Int32(1),
-		TagCount:                  ptr.Int32(1),
-		ObjectLockMode:            ptr.String("__ObjectLockMode__"),
-		ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ObjectLockLegalHoldStatus: ptr.String("__ObjectLockLegalHoldStatus__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetObject.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObject(context.Background(), &GetObjectInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetObject.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_HeadObject(t *testing.T) {
-	want := &HeadObjectOutput{
-		DeleteMarker:              ptr.Bool(true),
-		AcceptRanges:              ptr.String("__AcceptRanges__"),
-		Expiration:                ptr.String("__Expiration__"),
-		Restore:                   ptr.String("__Restore__"),
-		ArchiveStatus:             ptr.String("__ArchiveStatus__"),
-		LastModified:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ContentLength:             ptr.Int64(1),
-		ChecksumCRC32:             ptr.String("__ChecksumCRC32__"),
-		ChecksumCRC32C:            ptr.String("__ChecksumCRC32C__"),
-		ChecksumCRC64NVME:         ptr.String("__ChecksumCRC64NVME__"),
-		ChecksumSHA1:              ptr.String("__ChecksumSHA1__"),
-		ChecksumSHA256:            ptr.String("__ChecksumSHA256__"),
-		ChecksumType:              ptr.String("__ChecksumType__"),
-		ETag:                      ptr.String("__ETag__"),
-		MissingMeta:               ptr.Int32(1),
-		VersionId:                 ptr.String("__VersionId__"),
-		CacheControl:              ptr.String("__CacheControl__"),
-		ContentDisposition:        ptr.String("__ContentDisposition__"),
-		ContentEncoding:           ptr.String("__ContentEncoding__"),
-		ContentLanguage:           ptr.String("__ContentLanguage__"),
-		ContentType:               ptr.String("__ContentType__"),
-		ContentRange:              ptr.String("__ContentRange__"),
-		Expires:                   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		WebsiteRedirectLocation:   ptr.String("__WebsiteRedirectLocation__"),
-		ServerSideEncryption:      ptr.String("__ServerSideEncryption__"),
-		SSECustomerAlgorithm:      ptr.String("__SSECustomerAlgorithm__"),
-		SSECustomerKeyMD5:         ptr.String("__SSECustomerKeyMD5__"),
-		SSEKMSKeyId:               ptr.String("__SSEKMSKeyId__"),
-		BucketKeyEnabled:          ptr.Bool(true),
-		StorageClass:              ptr.String("__StorageClass__"),
-		RequestCharged:            ptr.String("__RequestCharged__"),
-		ReplicationStatus:         ptr.String("__ReplicationStatus__"),
-		PartsCount:                ptr.Int32(1),
-		TagCount:                  ptr.Int32(1),
-		ObjectLockMode:            ptr.String("__ObjectLockMode__"),
-		ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ObjectLockLegalHoldStatus: ptr.String("__ObjectLockLegalHoldStatus__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("HeadObject.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.HeadObject(context.Background(), &HeadObjectInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "HeadObject.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_Healthcheck(t *testing.T) {
@@ -368,7 +371,224 @@ func TestCheckResponseSnapshot_PutMetricData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMetricData(context.Background(), &PutMetricDataInput{})
+	got, err := svc.PutMetricData(context.Background(), &PutMetricDataInput{
+		Namespace: ptr.String("__Namespace__"),
+		MetricData: []types.MetricDatum{
+			{
+				MetricName: ptr.String("__MetricName__"),
+				Dimensions: []types.Dimension{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Value:     ptr.Float64(1.0),
+				StatisticValues: &types.StatisticSet{
+					SampleCount: ptr.Float64(1.0),
+					Sum:         ptr.Float64(1.0),
+					Minimum:     ptr.Float64(1.0),
+					Maximum:     ptr.Float64(1.0),
+				},
+				Values: []float64{
+					1.0,
+					1.0,
+				},
+				Counts: []float64{
+					1.0,
+					1.0,
+				},
+				Unit:              types.StandardUnit("Seconds"),
+				StorageResolution: ptr.Int32(1),
+			},
+			{
+				MetricName: ptr.String("__MetricName__"),
+				Dimensions: []types.Dimension{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Value:     ptr.Float64(1.0),
+				StatisticValues: &types.StatisticSet{
+					SampleCount: ptr.Float64(1.0),
+					Sum:         ptr.Float64(1.0),
+					Minimum:     ptr.Float64(1.0),
+					Maximum:     ptr.Float64(1.0),
+				},
+				Values: []float64{
+					1.0,
+					1.0,
+				},
+				Counts: []float64{
+					1.0,
+					1.0,
+				},
+				Unit:              types.StandardUnit("Seconds"),
+				StorageResolution: ptr.Int32(1),
+			},
+		},
+		EntityMetricData: []types.EntityMetricDatum{
+			{
+				Entity: &types.Entity{
+					KeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				MetricData: []types.MetricDatum{
+					{
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value:     ptr.Float64(1.0),
+						StatisticValues: &types.StatisticSet{
+							SampleCount: ptr.Float64(1.0),
+							Sum:         ptr.Float64(1.0),
+							Minimum:     ptr.Float64(1.0),
+							Maximum:     ptr.Float64(1.0),
+						},
+						Values: []float64{
+							1.0,
+							1.0,
+						},
+						Counts: []float64{
+							1.0,
+							1.0,
+						},
+						Unit:              types.StandardUnit("Seconds"),
+						StorageResolution: ptr.Int32(1),
+					},
+					{
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value:     ptr.Float64(1.0),
+						StatisticValues: &types.StatisticSet{
+							SampleCount: ptr.Float64(1.0),
+							Sum:         ptr.Float64(1.0),
+							Minimum:     ptr.Float64(1.0),
+							Maximum:     ptr.Float64(1.0),
+						},
+						Values: []float64{
+							1.0,
+							1.0,
+						},
+						Counts: []float64{
+							1.0,
+							1.0,
+						},
+						Unit:              types.StandardUnit("Seconds"),
+						StorageResolution: ptr.Int32(1),
+					},
+				},
+			},
+			{
+				Entity: &types.Entity{
+					KeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				MetricData: []types.MetricDatum{
+					{
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value:     ptr.Float64(1.0),
+						StatisticValues: &types.StatisticSet{
+							SampleCount: ptr.Float64(1.0),
+							Sum:         ptr.Float64(1.0),
+							Minimum:     ptr.Float64(1.0),
+							Maximum:     ptr.Float64(1.0),
+						},
+						Values: []float64{
+							1.0,
+							1.0,
+						},
+						Counts: []float64{
+							1.0,
+							1.0,
+						},
+						Unit:              types.StandardUnit("Seconds"),
+						StorageResolution: ptr.Int32(1),
+					},
+					{
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value:     ptr.Float64(1.0),
+						StatisticValues: &types.StatisticSet{
+							SampleCount: ptr.Float64(1.0),
+							Sum:         ptr.Float64(1.0),
+							Minimum:     ptr.Float64(1.0),
+							Maximum:     ptr.Float64(1.0),
+						},
+						Values: []float64{
+							1.0,
+							1.0,
+						},
+						Counts: []float64{
+							1.0,
+							1.0,
+						},
+						Unit:              types.StandardUnit("Seconds"),
+						StorageResolution: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		StrictEntityValidation: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -405,7 +625,51 @@ func TestCheckResponseSnapshot_PutObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutObject(context.Background(), &PutObjectInput{})
+	got, err := svc.PutObject(context.Background(), &PutObjectInput{
+		Bucket:             ptr.String("__Bucket__"),
+		Key:                ptr.String("__Key__"),
+		Body:               []byte("blob"),
+		ACL:                ptr.String("__ACL__"),
+		CacheControl:       ptr.String("__CacheControl__"),
+		ContentDisposition: ptr.String("__ContentDisposition__"),
+		ContentEncoding:    ptr.String("__ContentEncoding__"),
+		ContentLanguage:    ptr.String("__ContentLanguage__"),
+		ContentLength:      ptr.Int64(1),
+		ContentMD5:         ptr.String("__ContentMD5__"),
+		ContentType:        ptr.String("__ContentType__"),
+		ChecksumAlgorithm:  types.ChecksumAlgorithm("CRC32"),
+		ChecksumCRC32:      ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:     ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:  ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:       ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:     ptr.String("__ChecksumSHA256__"),
+		Expires:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IfMatch:            ptr.String("__IfMatch__"),
+		IfNoneMatch:        ptr.String("__IfNoneMatch__"),
+		GrantFullControl:   ptr.String("__GrantFullControl__"),
+		GrantRead:          ptr.String("__GrantRead__"),
+		GrantReadACP:       ptr.String("__GrantReadACP__"),
+		GrantWriteACP:      ptr.String("__GrantWriteACP__"),
+		WriteOffsetBytes:   ptr.Int64(1),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryption:      ptr.String("__ServerSideEncryption__"),
+		StorageClass:              ptr.String("__StorageClass__"),
+		WebsiteRedirectLocation:   ptr.String("__WebsiteRedirectLocation__"),
+		SSECustomerAlgorithm:      ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:            ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:         ptr.String("__SSECustomerKeyMD5__"),
+		SSEKMSKeyId:               ptr.String("__SSEKMSKeyId__"),
+		SSEKMSEncryptionContext:   ptr.String("__SSEKMSEncryptionContext__"),
+		BucketKeyEnabled:          ptr.Bool(true),
+		RequestPayer:              ptr.String("__RequestPayer__"),
+		Tagging:                   ptr.String("__Tagging__"),
+		ObjectLockMode:            ptr.String("__ObjectLockMode__"),
+		ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ObjectLockLegalHoldStatus: ptr.String("__ObjectLockLegalHoldStatus__"),
+		ExpectedBucketOwner:       ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}

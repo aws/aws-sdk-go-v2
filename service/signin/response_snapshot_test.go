@@ -128,7 +128,16 @@ func TestCheckResponseSnapshot_CreateOAuth2Token(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{})
+	got, err := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{
+		TokenInput: &types.CreateOAuth2TokenRequestBody{
+			ClientId:     ptr.String("__ClientId__"),
+			GrantType:    ptr.String("__GrantType__"),
+			Code:         ptr.String("__Code__"),
+			RedirectUri:  ptr.String("__RedirectUri__"),
+			CodeVerifier: ptr.String("__CodeVerifier__"),
+			RefreshToken: ptr.String("__RefreshToken__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -151,7 +160,10 @@ func TestCheckResponseSnapshot_CreateOAuth2TokenWithIAM(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOAuth2TokenWithIAM(context.Background(), &CreateOAuth2TokenWithIAMInput{})
+	got, err := svc.CreateOAuth2TokenWithIAM(context.Background(), &CreateOAuth2TokenWithIAMInput{
+		GrantType: ptr.String("__GrantType__"),
+		Resource:  ptr.String("__Resource__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +186,9 @@ func TestCheckResponseSnapshot_DeleteConsoleAuthorizationConfiguration(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConsoleAuthorizationConfiguration(context.Background(), &DeleteConsoleAuthorizationConfigurationInput{})
+	got, err := svc.DeleteConsoleAuthorizationConfiguration(context.Background(), &DeleteConsoleAuthorizationConfigurationInput{
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -193,7 +207,10 @@ func TestCheckResponseSnapshot_DeleteResourcePermissionStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePermissionStatement(context.Background(), &DeleteResourcePermissionStatementInput{})
+	got, err := svc.DeleteResourcePermissionStatement(context.Background(), &DeleteResourcePermissionStatementInput{
+		StatementId: ptr.String("__StatementId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -216,7 +233,9 @@ func TestCheckResponseSnapshot_GetConsoleAuthorizationConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConsoleAuthorizationConfiguration(context.Background(), &GetConsoleAuthorizationConfigurationInput{})
+	got, err := svc.GetConsoleAuthorizationConfiguration(context.Background(), &GetConsoleAuthorizationConfigurationInput{
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +332,10 @@ func TestCheckResponseSnapshot_IntrospectOAuth2TokenWithIAM(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.IntrospectOAuth2TokenWithIAM(context.Background(), &IntrospectOAuth2TokenWithIAMInput{})
+	got, err := svc.IntrospectOAuth2TokenWithIAM(context.Background(), &IntrospectOAuth2TokenWithIAMInput{
+		Token:         ptr.String("__Token__"),
+		TokenTypeHint: ptr.String("__TokenTypeHint__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -358,7 +380,10 @@ func TestCheckResponseSnapshot_ListResourcePermissionStatements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourcePermissionStatements(context.Background(), &ListResourcePermissionStatementsInput{})
+	got, err := svc.ListResourcePermissionStatements(context.Background(), &ListResourcePermissionStatementsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -381,7 +406,9 @@ func TestCheckResponseSnapshot_PutConsoleAuthorizationConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConsoleAuthorizationConfiguration(context.Background(), &PutConsoleAuthorizationConfigurationInput{})
+	got, err := svc.PutConsoleAuthorizationConfiguration(context.Background(), &PutConsoleAuthorizationConfigurationInput{
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +429,16 @@ func TestCheckResponseSnapshot_PutResourcePermissionStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePermissionStatement(context.Background(), &PutResourcePermissionStatementInput{})
+	got, err := svc.PutResourcePermissionStatement(context.Background(), &PutResourcePermissionStatementInput{
+		SourceVpc:         ptr.String("__SourceVpc__"),
+		SigninSourceVpce:  ptr.String("__SigninSourceVpce__"),
+		ConsoleSourceVpce: ptr.String("__ConsoleSourceVpce__"),
+		VpcSourceIp:       ptr.String("__VpcSourceIp__"),
+		SourceIp:          ptr.String("__SourceIp__"),
+		RequestedRegion:   ptr.String("__RequestedRegion__"),
+		ExcludedPrincipal: ptr.String("__ExcludedPrincipal__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +457,9 @@ func TestCheckResponseSnapshot_RevokeOAuth2TokenWithIAM(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeOAuth2TokenWithIAM(context.Background(), &RevokeOAuth2TokenWithIAMInput{})
+	got, err := svc.RevokeOAuth2TokenWithIAM(context.Background(), &RevokeOAuth2TokenWithIAMInput{
+		Token: ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -443,7 +481,16 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{})
+	_, opErr := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{
+		TokenInput: &types.CreateOAuth2TokenRequestBody{
+			ClientId:     ptr.String("__ClientId__"),
+			GrantType:    ptr.String("__GrantType__"),
+			Code:         ptr.String("__Code__"),
+			RedirectUri:  ptr.String("__RedirectUri__"),
+			CodeVerifier: ptr.String("__CodeVerifier__"),
+			RefreshToken: ptr.String("__RefreshToken__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -469,7 +516,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConsoleAuthorizationConfiguration(context.Background(), &PutConsoleAuthorizationConfigurationInput{})
+	_, opErr := svc.PutConsoleAuthorizationConfiguration(context.Background(), &PutConsoleAuthorizationConfigurationInput{
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -495,7 +544,16 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{})
+	_, opErr := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{
+		TokenInput: &types.CreateOAuth2TokenRequestBody{
+			ClientId:     ptr.String("__ClientId__"),
+			GrantType:    ptr.String("__GrantType__"),
+			Code:         ptr.String("__Code__"),
+			RedirectUri:  ptr.String("__RedirectUri__"),
+			CodeVerifier: ptr.String("__CodeVerifier__"),
+			RefreshToken: ptr.String("__RefreshToken__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -521,7 +579,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConsoleAuthorizationConfiguration(context.Background(), &DeleteConsoleAuthorizationConfigurationInput{})
+	_, opErr := svc.DeleteConsoleAuthorizationConfiguration(context.Background(), &DeleteConsoleAuthorizationConfigurationInput{
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -547,7 +607,16 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourcePermissionStatement(context.Background(), &PutResourcePermissionStatementInput{})
+	_, opErr := svc.PutResourcePermissionStatement(context.Background(), &PutResourcePermissionStatementInput{
+		SourceVpc:         ptr.String("__SourceVpc__"),
+		SigninSourceVpce:  ptr.String("__SigninSourceVpce__"),
+		ConsoleSourceVpce: ptr.String("__ConsoleSourceVpce__"),
+		VpcSourceIp:       ptr.String("__VpcSourceIp__"),
+		SourceIp:          ptr.String("__SourceIp__"),
+		RequestedRegion:   ptr.String("__RequestedRegion__"),
+		ExcludedPrincipal: ptr.String("__ExcludedPrincipal__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -573,7 +642,16 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{})
+	_, opErr := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{
+		TokenInput: &types.CreateOAuth2TokenRequestBody{
+			ClientId:     ptr.String("__ClientId__"),
+			GrantType:    ptr.String("__GrantType__"),
+			Code:         ptr.String("__Code__"),
+			RedirectUri:  ptr.String("__RedirectUri__"),
+			CodeVerifier: ptr.String("__CodeVerifier__"),
+			RefreshToken: ptr.String("__RefreshToken__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -599,7 +677,16 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{})
+	_, opErr := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{
+		TokenInput: &types.CreateOAuth2TokenRequestBody{
+			ClientId:     ptr.String("__ClientId__"),
+			GrantType:    ptr.String("__GrantType__"),
+			Code:         ptr.String("__Code__"),
+			RedirectUri:  ptr.String("__RedirectUri__"),
+			CodeVerifier: ptr.String("__CodeVerifier__"),
+			RefreshToken: ptr.String("__RefreshToken__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

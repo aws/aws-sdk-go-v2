@@ -117,7 +117,22 @@ func TestCheckResponseSnapshot_AddTagsToOnPremisesInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{})
+	got, err := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -209,7 +224,55 @@ func TestCheckResponseSnapshot_BatchGetApplicationRevisions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{})
+	got, err := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Revisions: []types.RevisionLocation{
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -247,7 +310,12 @@ func TestCheckResponseSnapshot_BatchGetApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetApplications(context.Background(), &BatchGetApplicationsInput{})
+	got, err := svc.BatchGetApplications(context.Background(), &BatchGetApplicationsInput{
+		ApplicationNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -798,7 +866,13 @@ func TestCheckResponseSnapshot_BatchGetDeploymentGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetDeploymentGroups(context.Background(), &BatchGetDeploymentGroupsInput{})
+	got, err := svc.BatchGetDeploymentGroups(context.Background(), &BatchGetDeploymentGroupsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		DeploymentGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -887,7 +961,13 @@ func TestCheckResponseSnapshot_BatchGetDeploymentInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetDeploymentInstances(context.Background(), &BatchGetDeploymentInstancesInput{})
+	got, err := svc.BatchGetDeploymentInstances(context.Background(), &BatchGetDeploymentInstancesInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1249,7 +1329,13 @@ func TestCheckResponseSnapshot_BatchGetDeploymentTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{})
+	got, err := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		TargetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1745,7 +1831,12 @@ func TestCheckResponseSnapshot_BatchGetDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetDeployments(context.Background(), &BatchGetDeploymentsInput{})
+	got, err := svc.BatchGetDeployments(context.Background(), &BatchGetDeploymentsInput{
+		DeploymentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1803,7 +1894,12 @@ func TestCheckResponseSnapshot_BatchGetOnPremisesInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetOnPremisesInstances(context.Background(), &BatchGetOnPremisesInstancesInput{})
+	got, err := svc.BatchGetOnPremisesInstances(context.Background(), &BatchGetOnPremisesInstancesInput{
+		InstanceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1822,7 +1918,10 @@ func TestCheckResponseSnapshot_ContinueDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ContinueDeployment(context.Background(), &ContinueDeploymentInput{})
+	got, err := svc.ContinueDeployment(context.Background(), &ContinueDeploymentInput{
+		DeploymentId:       ptr.String("__DeploymentId__"),
+		DeploymentWaitType: types.DeploymentWaitType("READY_WAIT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1843,7 +1942,20 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		ComputePlatform: types.ComputePlatform("Server"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1864,7 +1976,102 @@ func TestCheckResponseSnapshot_CreateDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1885,7 +2092,33 @@ func TestCheckResponseSnapshot_CreateDeploymentConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeploymentConfig(context.Background(), &CreateDeploymentConfigInput{})
+	got, err := svc.CreateDeploymentConfig(context.Background(), &CreateDeploymentConfigInput{
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		MinimumHealthyHosts: &types.MinimumHealthyHosts{
+			Type:  types.MinimumHealthyHostsType("HOST_COUNT"),
+			Value: 1,
+		},
+		TrafficRoutingConfig: &types.TrafficRoutingConfig{
+			Type: types.TrafficRoutingType("TimeBasedCanary"),
+			TimeBasedCanary: &types.TimeBasedCanary{
+				CanaryPercentage: 1,
+				CanaryInterval:   1,
+			},
+			TimeBasedLinear: &types.TimeBasedLinear{
+				LinearPercentage: 1,
+				LinearInterval:   1,
+			},
+		},
+		ComputePlatform: types.ComputePlatform("Server"),
+		ZonalConfig: &types.ZonalConfig{
+			FirstZoneMonitorDurationInSeconds: ptr.Int64(1),
+			MonitorDurationInSeconds:          ptr.Int64(1),
+			MinimumHealthyHostsPerZone: &types.MinimumHealthyHostsPerZone{
+				Type:  types.MinimumHealthyHostsPerZoneType("HOST_COUNT"),
+				Value: 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1906,7 +2139,236 @@ func TestCheckResponseSnapshot_CreateDeploymentGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	got, err := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1925,7 +2387,9 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1944,7 +2408,9 @@ func TestCheckResponseSnapshot_DeleteDeploymentConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeploymentConfig(context.Background(), &DeleteDeploymentConfigInput{})
+	got, err := svc.DeleteDeploymentConfig(context.Background(), &DeleteDeploymentConfigInput{
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1976,7 +2442,10 @@ func TestCheckResponseSnapshot_DeleteDeploymentGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeploymentGroup(context.Background(), &DeleteDeploymentGroupInput{})
+	got, err := svc.DeleteDeploymentGroup(context.Background(), &DeleteDeploymentGroupInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1997,7 +2466,9 @@ func TestCheckResponseSnapshot_DeleteGitHubAccountToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGitHubAccountToken(context.Background(), &DeleteGitHubAccountTokenInput{})
+	got, err := svc.DeleteGitHubAccountToken(context.Background(), &DeleteGitHubAccountTokenInput{
+		TokenName: ptr.String("__TokenName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2016,7 +2487,9 @@ func TestCheckResponseSnapshot_DeleteResourcesByExternalId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcesByExternalId(context.Background(), &DeleteResourcesByExternalIdInput{})
+	got, err := svc.DeleteResourcesByExternalId(context.Background(), &DeleteResourcesByExternalIdInput{
+		ExternalId: ptr.String("__ExternalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2035,7 +2508,9 @@ func TestCheckResponseSnapshot_DeregisterOnPremisesInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterOnPremisesInstance(context.Background(), &DeregisterOnPremisesInstanceInput{})
+	got, err := svc.DeregisterOnPremisesInstance(context.Background(), &DeregisterOnPremisesInstanceInput{
+		InstanceName: ptr.String("__InstanceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2063,7 +2538,9 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{})
+	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2116,7 +2593,31 @@ func TestCheckResponseSnapshot_GetApplicationRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplicationRevision(context.Background(), &GetApplicationRevisionInput{})
+	got, err := svc.GetApplicationRevision(context.Background(), &GetApplicationRevisionInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2373,7 +2874,9 @@ func TestCheckResponseSnapshot_GetDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{})
+	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2422,7 +2925,9 @@ func TestCheckResponseSnapshot_GetDeploymentConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeploymentConfig(context.Background(), &GetDeploymentConfigInput{})
+	got, err := svc.GetDeploymentConfig(context.Background(), &GetDeploymentConfigInput{
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2706,7 +3211,10 @@ func TestCheckResponseSnapshot_GetDeploymentGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeploymentGroup(context.Background(), &GetDeploymentGroupInput{})
+	got, err := svc.GetDeploymentGroup(context.Background(), &GetDeploymentGroupInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2759,7 +3267,10 @@ func TestCheckResponseSnapshot_GetDeploymentInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeploymentInstance(context.Background(), &GetDeploymentInstanceInput{})
+	got, err := svc.GetDeploymentInstance(context.Background(), &GetDeploymentInstanceInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		InstanceId:   ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2949,7 +3460,10 @@ func TestCheckResponseSnapshot_GetDeploymentTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeploymentTarget(context.Background(), &GetDeploymentTargetInput{})
+	got, err := svc.GetDeploymentTarget(context.Background(), &GetDeploymentTargetInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		TargetId:     ptr.String("__TargetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2987,7 +3501,9 @@ func TestCheckResponseSnapshot_GetOnPremisesInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOnPremisesInstance(context.Background(), &GetOnPremisesInstanceInput{})
+	got, err := svc.GetOnPremisesInstance(context.Background(), &GetOnPremisesInstanceInput{
+		InstanceName: ptr.String("__InstanceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3054,7 +3570,15 @@ func TestCheckResponseSnapshot_ListApplicationRevisions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{})
+	got, err := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		SortBy:          types.ApplicationRevisionSortBy("registerTime"),
+		SortOrder:       types.SortOrder("ascending"),
+		S3Bucket:        ptr.String("__S3Bucket__"),
+		S3KeyPrefix:     ptr.String("__S3KeyPrefix__"),
+		Deployed:        types.ListStateFilterAction("include"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3079,7 +3603,9 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3104,7 +3630,9 @@ func TestCheckResponseSnapshot_ListDeploymentConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeploymentConfigs(context.Background(), &ListDeploymentConfigsInput{})
+	got, err := svc.ListDeploymentConfigs(context.Background(), &ListDeploymentConfigsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3130,7 +3658,10 @@ func TestCheckResponseSnapshot_ListDeploymentGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeploymentGroups(context.Background(), &ListDeploymentGroupsInput{})
+	got, err := svc.ListDeploymentGroups(context.Background(), &ListDeploymentGroupsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3155,7 +3686,18 @@ func TestCheckResponseSnapshot_ListDeploymentInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeploymentInstances(context.Background(), &ListDeploymentInstancesInput{})
+	got, err := svc.ListDeploymentInstances(context.Background(), &ListDeploymentInstancesInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		InstanceStatusFilter: []types.InstanceStatus{
+			types.InstanceStatus("Pending"),
+			types.InstanceStatus("Pending"),
+		},
+		InstanceTypeFilter: []types.InstanceType{
+			types.InstanceType("Blue"),
+			types.InstanceType("Blue"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3180,7 +3722,16 @@ func TestCheckResponseSnapshot_ListDeploymentTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeploymentTargets(context.Background(), &ListDeploymentTargetsInput{})
+	got, err := svc.ListDeploymentTargets(context.Background(), &ListDeploymentTargetsInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		TargetFilters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3205,7 +3756,20 @@ func TestCheckResponseSnapshot_ListDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeployments(context.Background(), &ListDeploymentsInput{})
+	got, err := svc.ListDeployments(context.Background(), &ListDeploymentsInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		ExternalId:          ptr.String("__ExternalId__"),
+		IncludeOnlyStatuses: []types.DeploymentStatus{
+			types.DeploymentStatus("Created"),
+			types.DeploymentStatus("Created"),
+		},
+		CreateTimeRange: &types.TimeRange{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3230,7 +3794,9 @@ func TestCheckResponseSnapshot_ListGitHubAccountTokenNames(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGitHubAccountTokenNames(context.Background(), &ListGitHubAccountTokenNamesInput{})
+	got, err := svc.ListGitHubAccountTokenNames(context.Background(), &ListGitHubAccountTokenNamesInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3255,7 +3821,22 @@ func TestCheckResponseSnapshot_ListOnPremisesInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOnPremisesInstances(context.Background(), &ListOnPremisesInstancesInput{})
+	got, err := svc.ListOnPremisesInstances(context.Background(), &ListOnPremisesInstancesInput{
+		RegistrationStatus: types.RegistrationStatus("Registered"),
+		TagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3286,7 +3867,10 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3307,7 +3891,11 @@ func TestCheckResponseSnapshot_PutLifecycleEventHookExecutionStatus(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLifecycleEventHookExecutionStatus(context.Background(), &PutLifecycleEventHookExecutionStatusInput{})
+	got, err := svc.PutLifecycleEventHookExecutionStatus(context.Background(), &PutLifecycleEventHookExecutionStatusInput{
+		DeploymentId:                  ptr.String("__DeploymentId__"),
+		LifecycleEventHookExecutionId: ptr.String("__LifecycleEventHookExecutionId__"),
+		Status:                        types.LifecycleEventStatus("Pending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3326,7 +3914,32 @@ func TestCheckResponseSnapshot_RegisterApplicationRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterApplicationRevision(context.Background(), &RegisterApplicationRevisionInput{})
+	got, err := svc.RegisterApplicationRevision(context.Background(), &RegisterApplicationRevisionInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Description:     ptr.String("__Description__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3345,7 +3958,11 @@ func TestCheckResponseSnapshot_RegisterOnPremisesInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{})
+	got, err := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{
+		InstanceName:  ptr.String("__InstanceName__"),
+		IamSessionArn: ptr.String("__IamSessionArn__"),
+		IamUserArn:    ptr.String("__IamUserArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3364,7 +3981,22 @@ func TestCheckResponseSnapshot_RemoveTagsFromOnPremisesInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTagsFromOnPremisesInstances(context.Background(), &RemoveTagsFromOnPremisesInstancesInput{})
+	got, err := svc.RemoveTagsFromOnPremisesInstances(context.Background(), &RemoveTagsFromOnPremisesInstancesInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3383,7 +4015,9 @@ func TestCheckResponseSnapshot_SkipWaitTimeForInstanceTermination(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SkipWaitTimeForInstanceTermination(context.Background(), &SkipWaitTimeForInstanceTerminationInput{})
+	got, err := svc.SkipWaitTimeForInstanceTermination(context.Background(), &SkipWaitTimeForInstanceTerminationInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3405,7 +4039,10 @@ func TestCheckResponseSnapshot_StopDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopDeployment(context.Background(), &StopDeploymentInput{})
+	got, err := svc.StopDeployment(context.Background(), &StopDeploymentInput{
+		DeploymentId:        ptr.String("__DeploymentId__"),
+		AutoRollbackEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3424,7 +4061,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3443,7 +4092,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3462,7 +4117,10 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		ApplicationName:    ptr.String("__ApplicationName__"),
+		NewApplicationName: ptr.String("__NewApplicationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3494,7 +4152,227 @@ func TestCheckResponseSnapshot_UpdateDeploymentGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDeploymentGroup(context.Background(), &UpdateDeploymentGroupInput{})
+	got, err := svc.UpdateDeploymentGroup(context.Background(), &UpdateDeploymentGroupInput{
+		ApplicationName:            ptr.String("__ApplicationName__"),
+		CurrentDeploymentGroupName: ptr.String("__CurrentDeploymentGroupName__"),
+		NewDeploymentGroupName:     ptr.String("__NewDeploymentGroupName__"),
+		DeploymentConfigName:       ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3515,7 +4393,102 @@ func TestCheckResponseSnapshot_Error_AlarmsLimitExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3540,7 +4513,20 @@ func TestCheckResponseSnapshot_Error_ApplicationAlreadyExistsException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		ComputePlatform: types.ComputePlatform("Server"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3565,7 +4551,55 @@ func TestCheckResponseSnapshot_Error_ApplicationDoesNotExistException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{})
+	_, opErr := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Revisions: []types.RevisionLocation{
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3590,7 +4624,20 @@ func TestCheckResponseSnapshot_Error_ApplicationLimitExceededException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		ComputePlatform: types.ComputePlatform("Server"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3615,7 +4662,55 @@ func TestCheckResponseSnapshot_Error_ApplicationNameRequiredException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{})
+	_, opErr := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Revisions: []types.RevisionLocation{
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3640,7 +4735,10 @@ func TestCheckResponseSnapshot_Error_ArnNotSupportedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3665,7 +4763,55 @@ func TestCheckResponseSnapshot_Error_BatchLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{})
+	_, opErr := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Revisions: []types.RevisionLocation{
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3690,7 +4836,15 @@ func TestCheckResponseSnapshot_Error_BucketNameFilterRequiredException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{})
+	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		SortBy:          types.ApplicationRevisionSortBy("registerTime"),
+		SortOrder:       types.SortOrder("ascending"),
+		S3Bucket:        ptr.String("__S3Bucket__"),
+		S3KeyPrefix:     ptr.String("__S3KeyPrefix__"),
+		Deployed:        types.ListStateFilterAction("include"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3715,7 +4869,10 @@ func TestCheckResponseSnapshot_Error_DeploymentAlreadyCompletedException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueDeployment(context.Background(), &ContinueDeploymentInput{})
+	_, opErr := svc.ContinueDeployment(context.Background(), &ContinueDeploymentInput{
+		DeploymentId:       ptr.String("__DeploymentId__"),
+		DeploymentWaitType: types.DeploymentWaitType("READY_WAIT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3740,7 +4897,33 @@ func TestCheckResponseSnapshot_Error_DeploymentConfigAlreadyExistsException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentConfig(context.Background(), &CreateDeploymentConfigInput{})
+	_, opErr := svc.CreateDeploymentConfig(context.Background(), &CreateDeploymentConfigInput{
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		MinimumHealthyHosts: &types.MinimumHealthyHosts{
+			Type:  types.MinimumHealthyHostsType("HOST_COUNT"),
+			Value: 1,
+		},
+		TrafficRoutingConfig: &types.TrafficRoutingConfig{
+			Type: types.TrafficRoutingType("TimeBasedCanary"),
+			TimeBasedCanary: &types.TimeBasedCanary{
+				CanaryPercentage: 1,
+				CanaryInterval:   1,
+			},
+			TimeBasedLinear: &types.TimeBasedLinear{
+				LinearPercentage: 1,
+				LinearInterval:   1,
+			},
+		},
+		ComputePlatform: types.ComputePlatform("Server"),
+		ZonalConfig: &types.ZonalConfig{
+			FirstZoneMonitorDurationInSeconds: ptr.Int64(1),
+			MonitorDurationInSeconds:          ptr.Int64(1),
+			MinimumHealthyHostsPerZone: &types.MinimumHealthyHostsPerZone{
+				Type:  types.MinimumHealthyHostsPerZoneType("HOST_COUNT"),
+				Value: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3765,7 +4948,13 @@ func TestCheckResponseSnapshot_Error_DeploymentConfigDoesNotExistException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentGroups(context.Background(), &BatchGetDeploymentGroupsInput{})
+	_, opErr := svc.BatchGetDeploymentGroups(context.Background(), &BatchGetDeploymentGroupsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		DeploymentGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3790,7 +4979,9 @@ func TestCheckResponseSnapshot_Error_DeploymentConfigInUseException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDeploymentConfig(context.Background(), &DeleteDeploymentConfigInput{})
+	_, opErr := svc.DeleteDeploymentConfig(context.Background(), &DeleteDeploymentConfigInput{
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3815,7 +5006,33 @@ func TestCheckResponseSnapshot_Error_DeploymentConfigLimitExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentConfig(context.Background(), &CreateDeploymentConfigInput{})
+	_, opErr := svc.CreateDeploymentConfig(context.Background(), &CreateDeploymentConfigInput{
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		MinimumHealthyHosts: &types.MinimumHealthyHosts{
+			Type:  types.MinimumHealthyHostsType("HOST_COUNT"),
+			Value: 1,
+		},
+		TrafficRoutingConfig: &types.TrafficRoutingConfig{
+			Type: types.TrafficRoutingType("TimeBasedCanary"),
+			TimeBasedCanary: &types.TimeBasedCanary{
+				CanaryPercentage: 1,
+				CanaryInterval:   1,
+			},
+			TimeBasedLinear: &types.TimeBasedLinear{
+				LinearPercentage: 1,
+				LinearInterval:   1,
+			},
+		},
+		ComputePlatform: types.ComputePlatform("Server"),
+		ZonalConfig: &types.ZonalConfig{
+			FirstZoneMonitorDurationInSeconds: ptr.Int64(1),
+			MonitorDurationInSeconds:          ptr.Int64(1),
+			MinimumHealthyHostsPerZone: &types.MinimumHealthyHostsPerZone{
+				Type:  types.MinimumHealthyHostsPerZoneType("HOST_COUNT"),
+				Value: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3840,7 +5057,33 @@ func TestCheckResponseSnapshot_Error_DeploymentConfigNameRequiredException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentConfig(context.Background(), &CreateDeploymentConfigInput{})
+	_, opErr := svc.CreateDeploymentConfig(context.Background(), &CreateDeploymentConfigInput{
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		MinimumHealthyHosts: &types.MinimumHealthyHosts{
+			Type:  types.MinimumHealthyHostsType("HOST_COUNT"),
+			Value: 1,
+		},
+		TrafficRoutingConfig: &types.TrafficRoutingConfig{
+			Type: types.TrafficRoutingType("TimeBasedCanary"),
+			TimeBasedCanary: &types.TimeBasedCanary{
+				CanaryPercentage: 1,
+				CanaryInterval:   1,
+			},
+			TimeBasedLinear: &types.TimeBasedLinear{
+				LinearPercentage: 1,
+				LinearInterval:   1,
+			},
+		},
+		ComputePlatform: types.ComputePlatform("Server"),
+		ZonalConfig: &types.ZonalConfig{
+			FirstZoneMonitorDurationInSeconds: ptr.Int64(1),
+			MonitorDurationInSeconds:          ptr.Int64(1),
+			MinimumHealthyHostsPerZone: &types.MinimumHealthyHostsPerZone{
+				Type:  types.MinimumHealthyHostsPerZoneType("HOST_COUNT"),
+				Value: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3865,7 +5108,13 @@ func TestCheckResponseSnapshot_Error_DeploymentDoesNotExistException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentInstances(context.Background(), &BatchGetDeploymentInstancesInput{})
+	_, opErr := svc.BatchGetDeploymentInstances(context.Background(), &BatchGetDeploymentInstancesInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3890,7 +5139,236 @@ func TestCheckResponseSnapshot_Error_DeploymentGroupAlreadyExistsException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3915,7 +5393,102 @@ func TestCheckResponseSnapshot_Error_DeploymentGroupDoesNotExistException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3940,7 +5513,236 @@ func TestCheckResponseSnapshot_Error_DeploymentGroupLimitExceededException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3965,7 +5767,13 @@ func TestCheckResponseSnapshot_Error_DeploymentGroupNameRequiredException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentGroups(context.Background(), &BatchGetDeploymentGroupsInput{})
+	_, opErr := svc.BatchGetDeploymentGroups(context.Background(), &BatchGetDeploymentGroupsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		DeploymentGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3990,7 +5798,13 @@ func TestCheckResponseSnapshot_Error_DeploymentIdRequiredException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentInstances(context.Background(), &BatchGetDeploymentInstancesInput{})
+	_, opErr := svc.BatchGetDeploymentInstances(context.Background(), &BatchGetDeploymentInstancesInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4015,7 +5829,10 @@ func TestCheckResponseSnapshot_Error_DeploymentIsNotInReadyStateException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueDeployment(context.Background(), &ContinueDeploymentInput{})
+	_, opErr := svc.ContinueDeployment(context.Background(), &ContinueDeploymentInput{
+		DeploymentId:       ptr.String("__DeploymentId__"),
+		DeploymentWaitType: types.DeploymentWaitType("READY_WAIT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4040,7 +5857,102 @@ func TestCheckResponseSnapshot_Error_DeploymentLimitExceededException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4065,7 +5977,13 @@ func TestCheckResponseSnapshot_Error_DeploymentNotStartedException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{})
+	_, opErr := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		TargetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4090,7 +6008,13 @@ func TestCheckResponseSnapshot_Error_DeploymentTargetDoesNotExistException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{})
+	_, opErr := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		TargetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4115,7 +6039,13 @@ func TestCheckResponseSnapshot_Error_DeploymentTargetIdRequiredException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{})
+	_, opErr := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		TargetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4140,7 +6070,13 @@ func TestCheckResponseSnapshot_Error_DeploymentTargetListSizeExceededException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{})
+	_, opErr := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		TargetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4165,7 +6101,102 @@ func TestCheckResponseSnapshot_Error_DescriptionTooLongException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4190,7 +6221,236 @@ func TestCheckResponseSnapshot_Error_ECSServiceMappingLimitExceededException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4215,7 +6475,9 @@ func TestCheckResponseSnapshot_Error_GitHubAccountTokenDoesNotExistException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteGitHubAccountToken(context.Background(), &DeleteGitHubAccountTokenInput{})
+	_, opErr := svc.DeleteGitHubAccountToken(context.Background(), &DeleteGitHubAccountTokenInput{
+		TokenName: ptr.String("__TokenName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4240,7 +6502,9 @@ func TestCheckResponseSnapshot_Error_GitHubAccountTokenNameRequiredException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteGitHubAccountToken(context.Background(), &DeleteGitHubAccountTokenInput{})
+	_, opErr := svc.DeleteGitHubAccountToken(context.Background(), &DeleteGitHubAccountTokenInput{
+		TokenName: ptr.String("__TokenName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4265,7 +6529,11 @@ func TestCheckResponseSnapshot_Error_IamArnRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{})
+	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{
+		InstanceName:  ptr.String("__InstanceName__"),
+		IamSessionArn: ptr.String("__IamSessionArn__"),
+		IamUserArn:    ptr.String("__IamUserArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4290,7 +6558,11 @@ func TestCheckResponseSnapshot_Error_IamSessionArnAlreadyRegisteredException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{})
+	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{
+		InstanceName:  ptr.String("__InstanceName__"),
+		IamSessionArn: ptr.String("__IamSessionArn__"),
+		IamUserArn:    ptr.String("__IamUserArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4315,7 +6587,11 @@ func TestCheckResponseSnapshot_Error_IamUserArnAlreadyRegisteredException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{})
+	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{
+		InstanceName:  ptr.String("__InstanceName__"),
+		IamSessionArn: ptr.String("__IamSessionArn__"),
+		IamUserArn:    ptr.String("__IamUserArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4340,7 +6616,11 @@ func TestCheckResponseSnapshot_Error_IamUserArnRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{})
+	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{
+		InstanceName:  ptr.String("__InstanceName__"),
+		IamSessionArn: ptr.String("__IamSessionArn__"),
+		IamUserArn:    ptr.String("__IamUserArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4365,7 +6645,13 @@ func TestCheckResponseSnapshot_Error_InstanceDoesNotExistException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{})
+	_, opErr := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		TargetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4390,7 +6676,13 @@ func TestCheckResponseSnapshot_Error_InstanceIdRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentInstances(context.Background(), &BatchGetDeploymentInstancesInput{})
+	_, opErr := svc.BatchGetDeploymentInstances(context.Background(), &BatchGetDeploymentInstancesInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4415,7 +6707,22 @@ func TestCheckResponseSnapshot_Error_InstanceLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{})
+	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4440,7 +6747,11 @@ func TestCheckResponseSnapshot_Error_InstanceNameAlreadyRegisteredException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{})
+	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{
+		InstanceName:  ptr.String("__InstanceName__"),
+		IamSessionArn: ptr.String("__IamSessionArn__"),
+		IamUserArn:    ptr.String("__IamUserArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4465,7 +6776,22 @@ func TestCheckResponseSnapshot_Error_InstanceNameRequiredException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{})
+	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4490,7 +6816,22 @@ func TestCheckResponseSnapshot_Error_InstanceNotRegisteredException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{})
+	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4515,7 +6856,102 @@ func TestCheckResponseSnapshot_Error_InvalidAlarmConfigException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4540,7 +6976,55 @@ func TestCheckResponseSnapshot_Error_InvalidApplicationNameException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{})
+	_, opErr := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Revisions: []types.RevisionLocation{
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4565,7 +7049,10 @@ func TestCheckResponseSnapshot_Error_InvalidArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4590,7 +7077,102 @@ func TestCheckResponseSnapshot_Error_InvalidAutoRollbackConfigException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4615,7 +7197,102 @@ func TestCheckResponseSnapshot_Error_InvalidAutoScalingGroupException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4640,7 +7317,236 @@ func TestCheckResponseSnapshot_Error_InvalidBlueGreenDeploymentConfigurationExce
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4665,7 +7571,15 @@ func TestCheckResponseSnapshot_Error_InvalidBucketNameFilterException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{})
+	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		SortBy:          types.ApplicationRevisionSortBy("registerTime"),
+		SortOrder:       types.SortOrder("ascending"),
+		S3Bucket:        ptr.String("__S3Bucket__"),
+		S3KeyPrefix:     ptr.String("__S3KeyPrefix__"),
+		Deployed:        types.ListStateFilterAction("include"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4690,7 +7604,13 @@ func TestCheckResponseSnapshot_Error_InvalidComputePlatformException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentInstances(context.Background(), &BatchGetDeploymentInstancesInput{})
+	_, opErr := svc.BatchGetDeploymentInstances(context.Background(), &BatchGetDeploymentInstancesInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4715,7 +7635,15 @@ func TestCheckResponseSnapshot_Error_InvalidDeployedStateFilterException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{})
+	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		SortBy:          types.ApplicationRevisionSortBy("registerTime"),
+		SortOrder:       types.SortOrder("ascending"),
+		S3Bucket:        ptr.String("__S3Bucket__"),
+		S3KeyPrefix:     ptr.String("__S3KeyPrefix__"),
+		Deployed:        types.ListStateFilterAction("include"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4740,7 +7668,102 @@ func TestCheckResponseSnapshot_Error_InvalidDeploymentConfigNameException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4765,7 +7788,13 @@ func TestCheckResponseSnapshot_Error_InvalidDeploymentGroupNameException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentGroups(context.Background(), &BatchGetDeploymentGroupsInput{})
+	_, opErr := svc.BatchGetDeploymentGroups(context.Background(), &BatchGetDeploymentGroupsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		DeploymentGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4790,7 +7819,13 @@ func TestCheckResponseSnapshot_Error_InvalidDeploymentIdException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentInstances(context.Background(), &BatchGetDeploymentInstancesInput{})
+	_, opErr := svc.BatchGetDeploymentInstances(context.Background(), &BatchGetDeploymentInstancesInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4815,7 +7850,18 @@ func TestCheckResponseSnapshot_Error_InvalidDeploymentInstanceTypeException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListDeploymentInstances(context.Background(), &ListDeploymentInstancesInput{})
+	_, opErr := svc.ListDeploymentInstances(context.Background(), &ListDeploymentInstancesInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		InstanceStatusFilter: []types.InstanceStatus{
+			types.InstanceStatus("Pending"),
+			types.InstanceStatus("Pending"),
+		},
+		InstanceTypeFilter: []types.InstanceType{
+			types.InstanceType("Blue"),
+			types.InstanceType("Blue"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4840,7 +7886,10 @@ func TestCheckResponseSnapshot_Error_InvalidDeploymentStatusException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueDeployment(context.Background(), &ContinueDeploymentInput{})
+	_, opErr := svc.ContinueDeployment(context.Background(), &ContinueDeploymentInput{
+		DeploymentId:       ptr.String("__DeploymentId__"),
+		DeploymentWaitType: types.DeploymentWaitType("READY_WAIT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4865,7 +7914,236 @@ func TestCheckResponseSnapshot_Error_InvalidDeploymentStyleException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4890,7 +8168,13 @@ func TestCheckResponseSnapshot_Error_InvalidDeploymentTargetIdException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{})
+	_, opErr := svc.BatchGetDeploymentTargets(context.Background(), &BatchGetDeploymentTargetsInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		TargetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4915,7 +8199,10 @@ func TestCheckResponseSnapshot_Error_InvalidDeploymentWaitTypeException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueDeployment(context.Background(), &ContinueDeploymentInput{})
+	_, opErr := svc.ContinueDeployment(context.Background(), &ContinueDeploymentInput{
+		DeploymentId:       ptr.String("__DeploymentId__"),
+		DeploymentWaitType: types.DeploymentWaitType("READY_WAIT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4940,7 +8227,236 @@ func TestCheckResponseSnapshot_Error_InvalidEC2TagCombinationException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4965,7 +8481,236 @@ func TestCheckResponseSnapshot_Error_InvalidEC2TagException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4990,7 +8735,236 @@ func TestCheckResponseSnapshot_Error_InvalidECSServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5015,7 +8989,20 @@ func TestCheckResponseSnapshot_Error_InvalidExternalIdException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListDeployments(context.Background(), &ListDeploymentsInput{})
+	_, opErr := svc.ListDeployments(context.Background(), &ListDeploymentsInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		ExternalId:          ptr.String("__ExternalId__"),
+		IncludeOnlyStatuses: []types.DeploymentStatus{
+			types.DeploymentStatus("Created"),
+			types.DeploymentStatus("Created"),
+		},
+		CreateTimeRange: &types.TimeRange{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5040,7 +9027,102 @@ func TestCheckResponseSnapshot_Error_InvalidFileExistsBehaviorException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5065,7 +9147,102 @@ func TestCheckResponseSnapshot_Error_InvalidGitHubAccountTokenException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5090,7 +9267,9 @@ func TestCheckResponseSnapshot_Error_InvalidGitHubAccountTokenNameException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteGitHubAccountToken(context.Background(), &DeleteGitHubAccountTokenInput{})
+	_, opErr := svc.DeleteGitHubAccountToken(context.Background(), &DeleteGitHubAccountTokenInput{
+		TokenName: ptr.String("__TokenName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5115,7 +9294,11 @@ func TestCheckResponseSnapshot_Error_InvalidIamSessionArnException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{})
+	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{
+		InstanceName:  ptr.String("__InstanceName__"),
+		IamSessionArn: ptr.String("__IamSessionArn__"),
+		IamUserArn:    ptr.String("__IamUserArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5140,7 +9323,11 @@ func TestCheckResponseSnapshot_Error_InvalidIamUserArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{})
+	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{
+		InstanceName:  ptr.String("__InstanceName__"),
+		IamSessionArn: ptr.String("__IamSessionArn__"),
+		IamUserArn:    ptr.String("__IamUserArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5165,7 +9352,102 @@ func TestCheckResponseSnapshot_Error_InvalidIgnoreApplicationStopFailuresValueEx
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5190,7 +9472,236 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5215,7 +9726,22 @@ func TestCheckResponseSnapshot_Error_InvalidInstanceNameException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{})
+	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5240,7 +9766,18 @@ func TestCheckResponseSnapshot_Error_InvalidInstanceStatusException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListDeploymentInstances(context.Background(), &ListDeploymentInstancesInput{})
+	_, opErr := svc.ListDeploymentInstances(context.Background(), &ListDeploymentInstancesInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		InstanceStatusFilter: []types.InstanceStatus{
+			types.InstanceStatus("Pending"),
+			types.InstanceStatus("Pending"),
+		},
+		InstanceTypeFilter: []types.InstanceType{
+			types.InstanceType("Blue"),
+			types.InstanceType("Blue"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5265,7 +9802,18 @@ func TestCheckResponseSnapshot_Error_InvalidInstanceTypeException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListDeploymentInstances(context.Background(), &ListDeploymentInstancesInput{})
+	_, opErr := svc.ListDeploymentInstances(context.Background(), &ListDeploymentInstancesInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		InstanceStatusFilter: []types.InstanceStatus{
+			types.InstanceStatus("Pending"),
+			types.InstanceStatus("Pending"),
+		},
+		InstanceTypeFilter: []types.InstanceType{
+			types.InstanceType("Blue"),
+			types.InstanceType("Blue"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5290,7 +9838,15 @@ func TestCheckResponseSnapshot_Error_InvalidKeyPrefixFilterException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{})
+	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		SortBy:          types.ApplicationRevisionSortBy("registerTime"),
+		SortOrder:       types.SortOrder("ascending"),
+		S3Bucket:        ptr.String("__S3Bucket__"),
+		S3KeyPrefix:     ptr.String("__S3KeyPrefix__"),
+		Deployed:        types.ListStateFilterAction("include"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5315,7 +9871,11 @@ func TestCheckResponseSnapshot_Error_InvalidLifecycleEventHookExecutionIdExcepti
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLifecycleEventHookExecutionStatus(context.Background(), &PutLifecycleEventHookExecutionStatusInput{})
+	_, opErr := svc.PutLifecycleEventHookExecutionStatus(context.Background(), &PutLifecycleEventHookExecutionStatusInput{
+		DeploymentId:                  ptr.String("__DeploymentId__"),
+		LifecycleEventHookExecutionId: ptr.String("__LifecycleEventHookExecutionId__"),
+		Status:                        types.LifecycleEventStatus("Pending"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5340,7 +9900,11 @@ func TestCheckResponseSnapshot_Error_InvalidLifecycleEventHookExecutionStatusExc
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLifecycleEventHookExecutionStatus(context.Background(), &PutLifecycleEventHookExecutionStatusInput{})
+	_, opErr := svc.PutLifecycleEventHookExecutionStatus(context.Background(), &PutLifecycleEventHookExecutionStatusInput{
+		DeploymentId:                  ptr.String("__DeploymentId__"),
+		LifecycleEventHookExecutionId: ptr.String("__LifecycleEventHookExecutionId__"),
+		Status:                        types.LifecycleEventStatus("Pending"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5365,7 +9929,102 @@ func TestCheckResponseSnapshot_Error_InvalidLoadBalancerInfoException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5390,7 +10049,33 @@ func TestCheckResponseSnapshot_Error_InvalidMinimumHealthyHostValueException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentConfig(context.Background(), &CreateDeploymentConfigInput{})
+	_, opErr := svc.CreateDeploymentConfig(context.Background(), &CreateDeploymentConfigInput{
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		MinimumHealthyHosts: &types.MinimumHealthyHosts{
+			Type:  types.MinimumHealthyHostsType("HOST_COUNT"),
+			Value: 1,
+		},
+		TrafficRoutingConfig: &types.TrafficRoutingConfig{
+			Type: types.TrafficRoutingType("TimeBasedCanary"),
+			TimeBasedCanary: &types.TimeBasedCanary{
+				CanaryPercentage: 1,
+				CanaryInterval:   1,
+			},
+			TimeBasedLinear: &types.TimeBasedLinear{
+				LinearPercentage: 1,
+				LinearInterval:   1,
+			},
+		},
+		ComputePlatform: types.ComputePlatform("Server"),
+		ZonalConfig: &types.ZonalConfig{
+			FirstZoneMonitorDurationInSeconds: ptr.Int64(1),
+			MonitorDurationInSeconds:          ptr.Int64(1),
+			MinimumHealthyHostsPerZone: &types.MinimumHealthyHostsPerZone{
+				Type:  types.MinimumHealthyHostsPerZoneType("HOST_COUNT"),
+				Value: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5415,7 +10100,15 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{})
+	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		SortBy:          types.ApplicationRevisionSortBy("registerTime"),
+		SortOrder:       types.SortOrder("ascending"),
+		S3Bucket:        ptr.String("__S3Bucket__"),
+		S3KeyPrefix:     ptr.String("__S3KeyPrefix__"),
+		Deployed:        types.ListStateFilterAction("include"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5440,7 +10133,236 @@ func TestCheckResponseSnapshot_Error_InvalidOnPremisesTagCombinationException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5465,7 +10387,9 @@ func TestCheckResponseSnapshot_Error_InvalidOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDeploymentConfig(context.Background(), &DeleteDeploymentConfigInput{})
+	_, opErr := svc.DeleteDeploymentConfig(context.Background(), &DeleteDeploymentConfigInput{
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5490,7 +10414,22 @@ func TestCheckResponseSnapshot_Error_InvalidRegistrationStatusException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListOnPremisesInstances(context.Background(), &ListOnPremisesInstancesInput{})
+	_, opErr := svc.ListOnPremisesInstances(context.Background(), &ListOnPremisesInstancesInput{
+		RegistrationStatus: types.RegistrationStatus("Registered"),
+		TagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5515,7 +10454,55 @@ func TestCheckResponseSnapshot_Error_InvalidRevisionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{})
+	_, opErr := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Revisions: []types.RevisionLocation{
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5540,7 +10527,102 @@ func TestCheckResponseSnapshot_Error_InvalidRoleException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5565,7 +10647,15 @@ func TestCheckResponseSnapshot_Error_InvalidSortByException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{})
+	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		SortBy:          types.ApplicationRevisionSortBy("registerTime"),
+		SortOrder:       types.SortOrder("ascending"),
+		S3Bucket:        ptr.String("__S3Bucket__"),
+		S3KeyPrefix:     ptr.String("__S3KeyPrefix__"),
+		Deployed:        types.ListStateFilterAction("include"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5590,7 +10680,15 @@ func TestCheckResponseSnapshot_Error_InvalidSortOrderException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{})
+	_, opErr := svc.ListApplicationRevisions(context.Background(), &ListApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		SortBy:          types.ApplicationRevisionSortBy("registerTime"),
+		SortOrder:       types.SortOrder("ascending"),
+		S3Bucket:        ptr.String("__S3Bucket__"),
+		S3KeyPrefix:     ptr.String("__S3KeyPrefix__"),
+		Deployed:        types.ListStateFilterAction("include"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5615,7 +10713,22 @@ func TestCheckResponseSnapshot_Error_InvalidTagException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{})
+	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5640,7 +10753,22 @@ func TestCheckResponseSnapshot_Error_InvalidTagFilterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListOnPremisesInstances(context.Background(), &ListOnPremisesInstancesInput{})
+	_, opErr := svc.ListOnPremisesInstances(context.Background(), &ListOnPremisesInstancesInput{
+		RegistrationStatus: types.RegistrationStatus("Registered"),
+		TagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5665,7 +10793,20 @@ func TestCheckResponseSnapshot_Error_InvalidTagsToAddException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		ComputePlatform: types.ComputePlatform("Server"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5690,7 +10831,18 @@ func TestCheckResponseSnapshot_Error_InvalidTargetFilterNameException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListDeploymentInstances(context.Background(), &ListDeploymentInstancesInput{})
+	_, opErr := svc.ListDeploymentInstances(context.Background(), &ListDeploymentInstancesInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		InstanceStatusFilter: []types.InstanceStatus{
+			types.InstanceStatus("Pending"),
+			types.InstanceStatus("Pending"),
+		},
+		InstanceTypeFilter: []types.InstanceType{
+			types.InstanceType("Blue"),
+			types.InstanceType("Blue"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5715,7 +10867,236 @@ func TestCheckResponseSnapshot_Error_InvalidTargetGroupPairException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5740,7 +11121,102 @@ func TestCheckResponseSnapshot_Error_InvalidTargetInstancesException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5765,7 +11241,20 @@ func TestCheckResponseSnapshot_Error_InvalidTimeRangeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListDeployments(context.Background(), &ListDeploymentsInput{})
+	_, opErr := svc.ListDeployments(context.Background(), &ListDeploymentsInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		ExternalId:          ptr.String("__ExternalId__"),
+		IncludeOnlyStatuses: []types.DeploymentStatus{
+			types.DeploymentStatus("Created"),
+			types.DeploymentStatus("Created"),
+		},
+		CreateTimeRange: &types.TimeRange{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5790,7 +11279,102 @@ func TestCheckResponseSnapshot_Error_InvalidTrafficRoutingConfigurationException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5815,7 +11399,236 @@ func TestCheckResponseSnapshot_Error_InvalidTriggerConfigException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5840,7 +11653,102 @@ func TestCheckResponseSnapshot_Error_InvalidUpdateOutdatedInstancesOnlyValueExce
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5865,7 +11773,33 @@ func TestCheckResponseSnapshot_Error_InvalidZonalDeploymentConfigurationExceptio
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentConfig(context.Background(), &CreateDeploymentConfigInput{})
+	_, opErr := svc.CreateDeploymentConfig(context.Background(), &CreateDeploymentConfigInput{
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		MinimumHealthyHosts: &types.MinimumHealthyHosts{
+			Type:  types.MinimumHealthyHostsType("HOST_COUNT"),
+			Value: 1,
+		},
+		TrafficRoutingConfig: &types.TrafficRoutingConfig{
+			Type: types.TrafficRoutingType("TimeBasedCanary"),
+			TimeBasedCanary: &types.TimeBasedCanary{
+				CanaryPercentage: 1,
+				CanaryInterval:   1,
+			},
+			TimeBasedLinear: &types.TimeBasedLinear{
+				LinearPercentage: 1,
+				LinearInterval:   1,
+			},
+		},
+		ComputePlatform: types.ComputePlatform("Server"),
+		ZonalConfig: &types.ZonalConfig{
+			FirstZoneMonitorDurationInSeconds: ptr.Int64(1),
+			MonitorDurationInSeconds:          ptr.Int64(1),
+			MinimumHealthyHostsPerZone: &types.MinimumHealthyHostsPerZone{
+				Type:  types.MinimumHealthyHostsPerZoneType("HOST_COUNT"),
+				Value: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5890,7 +11824,11 @@ func TestCheckResponseSnapshot_Error_LifecycleEventAlreadyCompletedException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLifecycleEventHookExecutionStatus(context.Background(), &PutLifecycleEventHookExecutionStatusInput{})
+	_, opErr := svc.PutLifecycleEventHookExecutionStatus(context.Background(), &PutLifecycleEventHookExecutionStatusInput{
+		DeploymentId:                  ptr.String("__DeploymentId__"),
+		LifecycleEventHookExecutionId: ptr.String("__LifecycleEventHookExecutionId__"),
+		Status:                        types.LifecycleEventStatus("Pending"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5915,7 +11853,236 @@ func TestCheckResponseSnapshot_Error_LifecycleHookLimitExceededException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5940,7 +12107,11 @@ func TestCheckResponseSnapshot_Error_MultipleIamArnsProvidedException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{})
+	_, opErr := svc.RegisterOnPremisesInstance(context.Background(), &RegisterOnPremisesInstanceInput{
+		InstanceName:  ptr.String("__InstanceName__"),
+		IamSessionArn: ptr.String("__IamSessionArn__"),
+		IamUserArn:    ptr.String("__IamUserArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5965,7 +12136,9 @@ func TestCheckResponseSnapshot_Error_OperationNotSupportedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteGitHubAccountToken(context.Background(), &DeleteGitHubAccountTokenInput{})
+	_, opErr := svc.DeleteGitHubAccountToken(context.Background(), &DeleteGitHubAccountTokenInput{
+		TokenName: ptr.String("__TokenName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5990,7 +12163,10 @@ func TestCheckResponseSnapshot_Error_ResourceArnRequiredException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6015,7 +12191,9 @@ func TestCheckResponseSnapshot_Error_ResourceValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteGitHubAccountToken(context.Background(), &DeleteGitHubAccountTokenInput{})
+	_, opErr := svc.DeleteGitHubAccountToken(context.Background(), &DeleteGitHubAccountTokenInput{
+		TokenName: ptr.String("__TokenName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6040,7 +12218,102 @@ func TestCheckResponseSnapshot_Error_RevisionDoesNotExistException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6065,7 +12338,55 @@ func TestCheckResponseSnapshot_Error_RevisionRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{})
+	_, opErr := svc.BatchGetApplicationRevisions(context.Background(), &BatchGetApplicationRevisionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Revisions: []types.RevisionLocation{
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+			{
+				RevisionType: types.RevisionLocationType("S3"),
+				S3Location: &types.S3Location{
+					Bucket:     ptr.String("__Bucket__"),
+					Key:        ptr.String("__Key__"),
+					BundleType: types.BundleType("tar"),
+					Version:    ptr.String("__Version__"),
+					ETag:       ptr.String("__ETag__"),
+				},
+				GitHubLocation: &types.GitHubLocation{
+					Repository: ptr.String("__Repository__"),
+					CommitId:   ptr.String("__CommitId__"),
+				},
+				String_: &types.RawString{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+				AppSpecContent: &types.AppSpecContent{
+					Content: ptr.String("__Content__"),
+					Sha256:  ptr.String("__Sha256__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6090,7 +12411,236 @@ func TestCheckResponseSnapshot_Error_RoleRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6115,7 +12665,22 @@ func TestCheckResponseSnapshot_Error_TagLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{})
+	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6140,7 +12705,22 @@ func TestCheckResponseSnapshot_Error_TagRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{})
+	_, opErr := svc.AddTagsToOnPremisesInstances(context.Background(), &AddTagsToOnPremisesInstancesInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6165,7 +12745,236 @@ func TestCheckResponseSnapshot_Error_TagSetListLimitExceededException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6190,7 +12999,102 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6215,7 +13119,236 @@ func TestCheckResponseSnapshot_Error_TriggerTargetsLimitExceededException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{})
+	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
+		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
+		Ec2TagFilters: []types.EC2TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			},
+		},
+		OnPremisesInstanceTagFilters: []types.TagFilter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.TagFilterType("KEY_ONLY"),
+			},
+		},
+		AutoScalingGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		TriggerConfigurations: []types.TriggerConfig{
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+			{
+				TriggerName:      ptr.String("__TriggerName__"),
+				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
+				TriggerEvents: []types.TriggerEventType{
+					types.TriggerEventType("DeploymentStart"),
+					types.TriggerEventType("DeploymentStart"),
+				},
+			},
+		},
+		AlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
+		DeploymentStyle: &types.DeploymentStyle{
+			DeploymentType:   types.DeploymentType("IN_PLACE"),
+			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
+		},
+		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
+			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
+				Action:                       types.InstanceAction("TERMINATE"),
+				TerminationWaitTimeInMinutes: 1,
+			},
+			DeploymentReadyOption: &types.DeploymentReadyOption{
+				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
+				WaitTimeInMinutes: 1,
+			},
+			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
+				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
+			},
+		},
+		LoadBalancerInfo: &types.LoadBalancerInfo{
+			ElbInfoList: []types.ELBInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupInfoList: []types.TargetGroupInfo{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TargetGroups: []types.TargetGroupInfo{
+						{
+							Name: ptr.String("__Name__"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					ProdTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TestTrafficRoute: &types.TrafficRoute{
+						ListenerArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Ec2TagSet: &types.EC2TagSet{
+			Ec2TagSetList: [][]types.EC2TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.EC2TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		EcsServices: []types.ECSService{
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+			{
+				ServiceName: ptr.String("__ServiceName__"),
+				ClusterName: ptr.String("__ClusterName__"),
+			},
+		},
+		OnPremisesTagSet: &types.OnPremisesTagSet{
+			OnPremisesTagSetList: [][]types.TagFilter{
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+				{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.TagFilterType("KEY_ONLY"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TerminationHookEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6240,7 +13373,10 @@ func TestCheckResponseSnapshot_Error_UnsupportedActionForDeploymentTypeException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueDeployment(context.Background(), &ContinueDeploymentInput{})
+	_, opErr := svc.ContinueDeployment(context.Background(), &ContinueDeploymentInput{
+		DeploymentId:       ptr.String("__DeploymentId__"),
+		DeploymentWaitType: types.DeploymentWaitType("READY_WAIT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

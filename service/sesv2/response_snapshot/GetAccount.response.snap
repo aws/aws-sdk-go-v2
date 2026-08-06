@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DedicatedIpAutoWarmupEnabled":true,"Details":{"AdditionalContactEmailAddresses":["__Member__","__Member__"],"ContactLanguage":"EN","MailType":"MARKETING","ReviewDetails":{"CaseId":"__CaseId__","Status":"PENDING"},"UseCaseDescription":"__UseCaseDescription__","WebsiteURL":"__WebsiteURL__"},"EnforcementStatus":"__EnforcementStatus__","PricingAttributes":{"CurrentPlan":"NONE","NextPlan":"NONE"},"ProductionAccessEnabled":true,"SendQuota":{"Max24HourSend":1,"MaxSendRate":1,"SentLast24Hours":1},"SendingEnabled":true,"SuppressionAttributes":{"SuppressedReasons":["BOUNCE","BOUNCE"],"ValidationAttributes":{"ConditionThreshold":{"ConditionThresholdEnabled":"ENABLED","OverallConfidenceThreshold":{"ConfidenceVerdictThreshold":"MEDIUM"}}}},"VdmAttributes":{"DashboardAttributes":{"EngagementMetrics":"ENABLED"},"GuardianAttributes":{"OptimizedSharedDelivery":"ENABLED"},"VdmEnabled":"ENABLED"}}

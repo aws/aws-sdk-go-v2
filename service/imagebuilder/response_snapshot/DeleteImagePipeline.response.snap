@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"imagePipelineArn":"__ImagePipelineArn__","requestId":"__RequestId__"}

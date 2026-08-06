@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"VoiceProfile":{"CreatedTimestamp":"2000-01-01T00:00:00Z","ExpirationTimestamp":"2000-01-01T00:00:00Z","UpdatedTimestamp":"2000-01-01T00:00:00Z","VoiceProfileArn":"__VoiceProfileArn__","VoiceProfileDomainId":"__VoiceProfileDomainId__","VoiceProfileId":"__VoiceProfileId__"}}

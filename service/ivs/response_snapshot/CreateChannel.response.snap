@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"channel":{"adConfigurationArn":"__AdConfigurationArn__","arn":"__Arn__","authorized":true,"containerFormat":"TS","ingestEndpoint":"__IngestEndpoint__","insecureIngest":true,"latencyMode":"NORMAL","multitrackInputConfiguration":{"enabled":true,"maximumResolution":"SD","policy":"ALLOW"},"name":"__Name__","playbackRestrictionPolicyArn":"__PlaybackRestrictionPolicyArn__","playbackUrl":"__PlaybackUrl__","preset":"HIGHER_BANDWIDTH_DELIVERY","recordingConfigurationArn":"__RecordingConfigurationArn__","srt":{"endpoint":"__Endpoint__","passphrase":"__Passphrase__"},"tags":{"key0":"__Value__"},"type":"BASIC"},"streamKey":{"arn":"__Arn__","channelArn":"__ChannelArn__","tags":{"key0":"__Value__"},"value":"__Value__"}}

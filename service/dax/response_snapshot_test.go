@@ -192,7 +192,40 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -216,7 +249,10 @@ func TestCheckResponseSnapshot_CreateParameterGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateParameterGroup(context.Background(), &CreateParameterGroupInput{})
+	got, err := svc.CreateParameterGroup(context.Background(), &CreateParameterGroupInput{
+		ParameterGroupName: ptr.String("__ParameterGroupName__"),
+		Description:        ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -263,7 +299,14 @@ func TestCheckResponseSnapshot_CreateSubnetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSubnetGroup(context.Background(), &CreateSubnetGroupInput{})
+	got, err := svc.CreateSubnetGroup(context.Background(), &CreateSubnetGroupInput{
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		Description:     ptr.String("__Description__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -357,7 +400,18 @@ func TestCheckResponseSnapshot_DecreaseReplicationFactor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DecreaseReplicationFactor(context.Background(), &DecreaseReplicationFactorInput{})
+	got, err := svc.DecreaseReplicationFactor(context.Background(), &DecreaseReplicationFactorInput{
+		ClusterName:          ptr.String("__ClusterName__"),
+		NewReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NodeIdsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -451,7 +505,9 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		ClusterName: ptr.String("__ClusterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -472,7 +528,9 @@ func TestCheckResponseSnapshot_DeleteParameterGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteParameterGroup(context.Background(), &DeleteParameterGroupInput{})
+	got, err := svc.DeleteParameterGroup(context.Background(), &DeleteParameterGroupInput{
+		ParameterGroupName: ptr.String("__ParameterGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -493,7 +551,9 @@ func TestCheckResponseSnapshot_DeleteSubnetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSubnetGroup(context.Background(), &DeleteSubnetGroupInput{})
+	got, err := svc.DeleteSubnetGroup(context.Background(), &DeleteSubnetGroupInput{
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -664,7 +724,14 @@ func TestCheckResponseSnapshot_DescribeClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeClusters(context.Background(), &DescribeClustersInput{})
+	got, err := svc.DescribeClusters(context.Background(), &DescribeClustersInput{
+		ClusterNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -729,7 +796,10 @@ func TestCheckResponseSnapshot_DescribeDefaultParameters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDefaultParameters(context.Background(), &DescribeDefaultParametersInput{})
+	got, err := svc.DescribeDefaultParameters(context.Background(), &DescribeDefaultParametersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -764,7 +834,15 @@ func TestCheckResponseSnapshot_DescribeEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEvents(context.Background(), &DescribeEventsInput{})
+	got, err := svc.DescribeEvents(context.Background(), &DescribeEventsInput{
+		SourceName: ptr.String("__SourceName__"),
+		SourceType: types.SourceType("CLUSTER"),
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Duration:   ptr.Int32(1),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -795,7 +873,14 @@ func TestCheckResponseSnapshot_DescribeParameterGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeParameterGroups(context.Background(), &DescribeParameterGroupsInput{})
+	got, err := svc.DescribeParameterGroups(context.Background(), &DescribeParameterGroupsInput{
+		ParameterGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -860,7 +945,12 @@ func TestCheckResponseSnapshot_DescribeParameters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeParameters(context.Background(), &DescribeParametersInput{})
+	got, err := svc.DescribeParameters(context.Background(), &DescribeParametersInput{
+		ParameterGroupName: ptr.String("__ParameterGroupName__"),
+		Source:             ptr.String("__Source__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -937,7 +1027,14 @@ func TestCheckResponseSnapshot_DescribeSubnetGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSubnetGroups(context.Background(), &DescribeSubnetGroupsInput{})
+	got, err := svc.DescribeSubnetGroups(context.Background(), &DescribeSubnetGroupsInput{
+		SubnetGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1031,7 +1128,14 @@ func TestCheckResponseSnapshot_IncreaseReplicationFactor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.IncreaseReplicationFactor(context.Background(), &IncreaseReplicationFactorInput{})
+	got, err := svc.IncreaseReplicationFactor(context.Background(), &IncreaseReplicationFactorInput{
+		ClusterName:          ptr.String("__ClusterName__"),
+		NewReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1062,7 +1166,10 @@ func TestCheckResponseSnapshot_ListTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTags(context.Background(), &ListTagsInput{})
+	got, err := svc.ListTags(context.Background(), &ListTagsInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1156,7 +1263,10 @@ func TestCheckResponseSnapshot_RebootNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RebootNode(context.Background(), &RebootNodeInput{})
+	got, err := svc.RebootNode(context.Background(), &RebootNodeInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		NodeId:      ptr.String("__NodeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1186,7 +1296,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1216,7 +1338,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1310,7 +1438,18 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{})
+	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{
+		ClusterName:                ptr.String("__ClusterName__"),
+		Description:                ptr.String("__Description__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		NotificationTopicStatus:    ptr.String("__NotificationTopicStatus__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1334,7 +1473,19 @@ func TestCheckResponseSnapshot_UpdateParameterGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateParameterGroup(context.Background(), &UpdateParameterGroupInput{})
+	got, err := svc.UpdateParameterGroup(context.Background(), &UpdateParameterGroupInput{
+		ParameterGroupName: ptr.String("__ParameterGroupName__"),
+		ParameterNameValues: []types.ParameterNameValue{
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1381,7 +1532,14 @@ func TestCheckResponseSnapshot_UpdateSubnetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubnetGroup(context.Background(), &UpdateSubnetGroupInput{})
+	got, err := svc.UpdateSubnetGroup(context.Background(), &UpdateSubnetGroupInput{
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		Description:     ptr.String("__Description__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1402,7 +1560,40 @@ func TestCheckResponseSnapshot_Error_ClusterAlreadyExistsFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1427,7 +1618,18 @@ func TestCheckResponseSnapshot_Error_ClusterNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DecreaseReplicationFactor(context.Background(), &DecreaseReplicationFactorInput{})
+	_, opErr := svc.DecreaseReplicationFactor(context.Background(), &DecreaseReplicationFactorInput{
+		ClusterName:          ptr.String("__ClusterName__"),
+		NewReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NodeIdsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1452,7 +1654,40 @@ func TestCheckResponseSnapshot_Error_ClusterQuotaForCustomerExceededFault(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1477,7 +1712,40 @@ func TestCheckResponseSnapshot_Error_InsufficientClusterCapacityFault(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1502,7 +1770,10 @@ func TestCheckResponseSnapshot_Error_InvalidARNFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTags(context.Background(), &ListTagsInput{})
+	_, opErr := svc.ListTags(context.Background(), &ListTagsInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1527,7 +1798,40 @@ func TestCheckResponseSnapshot_Error_InvalidClusterStateFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1552,7 +1856,40 @@ func TestCheckResponseSnapshot_Error_InvalidParameterCombinationException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1577,7 +1914,40 @@ func TestCheckResponseSnapshot_Error_InvalidParameterGroupStateFault(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1602,7 +1972,40 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1627,7 +2030,14 @@ func TestCheckResponseSnapshot_Error_InvalidSubnet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSubnetGroup(context.Background(), &CreateSubnetGroupInput{})
+	_, opErr := svc.CreateSubnetGroup(context.Background(), &CreateSubnetGroupInput{
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		Description:     ptr.String("__Description__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1652,7 +2062,40 @@ func TestCheckResponseSnapshot_Error_InvalidVPCNetworkStateFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1677,7 +2120,18 @@ func TestCheckResponseSnapshot_Error_NodeNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DecreaseReplicationFactor(context.Background(), &DecreaseReplicationFactorInput{})
+	_, opErr := svc.DecreaseReplicationFactor(context.Background(), &DecreaseReplicationFactorInput{
+		ClusterName:          ptr.String("__ClusterName__"),
+		NewReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NodeIdsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1702,7 +2156,40 @@ func TestCheckResponseSnapshot_Error_NodeQuotaForClusterExceededFault(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1727,7 +2214,40 @@ func TestCheckResponseSnapshot_Error_NodeQuotaForCustomerExceededFault(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1752,7 +2272,10 @@ func TestCheckResponseSnapshot_Error_ParameterGroupAlreadyExistsFault(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateParameterGroup(context.Background(), &CreateParameterGroupInput{})
+	_, opErr := svc.CreateParameterGroup(context.Background(), &CreateParameterGroupInput{
+		ParameterGroupName: ptr.String("__ParameterGroupName__"),
+		Description:        ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1777,7 +2300,40 @@ func TestCheckResponseSnapshot_Error_ParameterGroupNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1802,7 +2358,10 @@ func TestCheckResponseSnapshot_Error_ParameterGroupQuotaExceededFault(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateParameterGroup(context.Background(), &CreateParameterGroupInput{})
+	_, opErr := svc.CreateParameterGroup(context.Background(), &CreateParameterGroupInput{
+		ParameterGroupName: ptr.String("__ParameterGroupName__"),
+		Description:        ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1827,7 +2386,40 @@ func TestCheckResponseSnapshot_Error_ServiceLinkedRoleNotFoundFault(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1850,7 +2442,40 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1875,7 +2500,14 @@ func TestCheckResponseSnapshot_Error_SubnetGroupAlreadyExistsFault(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSubnetGroup(context.Background(), &CreateSubnetGroupInput{})
+	_, opErr := svc.CreateSubnetGroup(context.Background(), &CreateSubnetGroupInput{
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		Description:     ptr.String("__Description__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1900,7 +2532,9 @@ func TestCheckResponseSnapshot_Error_SubnetGroupInUseFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSubnetGroup(context.Background(), &DeleteSubnetGroupInput{})
+	_, opErr := svc.DeleteSubnetGroup(context.Background(), &DeleteSubnetGroupInput{
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1925,7 +2559,40 @@ func TestCheckResponseSnapshot_Error_SubnetGroupNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1950,7 +2617,14 @@ func TestCheckResponseSnapshot_Error_SubnetGroupQuotaExceededFault(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSubnetGroup(context.Background(), &CreateSubnetGroupInput{})
+	_, opErr := svc.CreateSubnetGroup(context.Background(), &CreateSubnetGroupInput{
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		Description:     ptr.String("__Description__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1975,7 +2649,14 @@ func TestCheckResponseSnapshot_Error_SubnetInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateSubnetGroup(context.Background(), &UpdateSubnetGroupInput{})
+	_, opErr := svc.UpdateSubnetGroup(context.Background(), &UpdateSubnetGroupInput{
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		Description:     ptr.String("__Description__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2000,7 +2681,14 @@ func TestCheckResponseSnapshot_Error_SubnetNotAllowedFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSubnetGroup(context.Background(), &CreateSubnetGroupInput{})
+	_, opErr := svc.CreateSubnetGroup(context.Background(), &CreateSubnetGroupInput{
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		Description:     ptr.String("__Description__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2025,7 +2713,14 @@ func TestCheckResponseSnapshot_Error_SubnetQuotaExceededFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSubnetGroup(context.Background(), &CreateSubnetGroupInput{})
+	_, opErr := svc.CreateSubnetGroup(context.Background(), &CreateSubnetGroupInput{
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		Description:     ptr.String("__Description__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2050,7 +2745,13 @@ func TestCheckResponseSnapshot_Error_TagNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	_, opErr := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2075,7 +2776,40 @@ func TestCheckResponseSnapshot_Error_TagQuotaPerResourceExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		NodeType:          ptr.String("__NodeType__"),
+		Description:       ptr.String("__Description__"),
+		ReplicationFactor: 1,
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetGroupName: ptr.String("__SubnetGroupName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		IamRoleArn:                 ptr.String("__IamRoleArn__"),
+		ParameterGroupName:         ptr.String("__ParameterGroupName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled: ptr.Bool(true),
+		},
+		ClusterEndpointEncryptionType: types.ClusterEndpointEncryptionType("NONE"),
+		NetworkType:                   types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

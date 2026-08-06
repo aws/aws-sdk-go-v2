@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"subscriberEndpoint":"__SubscriberEndpoint__"}

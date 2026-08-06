@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeSpendLimits
+
+{"NextToken":"__NextToken__","SpendLimits":[{"EnforcedLimit":1,"MaxLimit":1,"Name":"TEXT_MESSAGE_MONTHLY_SPEND_LIMIT","Overridden":true},{"EnforcedLimit":1,"MaxLimit":1,"Name":"TEXT_MESSAGE_MONTHLY_SPEND_LIMIT","Overridden":true}]}

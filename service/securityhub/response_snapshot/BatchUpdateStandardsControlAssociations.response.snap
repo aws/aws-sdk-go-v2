@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"UnprocessedAssociationUpdates":[{"ErrorCode":"INVALID_INPUT","ErrorReason":"__ErrorReason__","StandardsControlAssociationUpdate":{"AssociationStatus":"ENABLED","SecurityControlId":"__SecurityControlId__","StandardsArn":"__StandardsArn__","UpdatedReason":"__UpdatedReason__"}},{"ErrorCode":"INVALID_INPUT","ErrorReason":"__ErrorReason__","StandardsControlAssociationUpdate":{"AssociationStatus":"ENABLED","SecurityControlId":"__SecurityControlId__","StandardsArn":"__StandardsArn__","UpdatedReason":"__UpdatedReason__"}}]}

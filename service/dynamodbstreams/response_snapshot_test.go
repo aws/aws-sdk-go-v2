@@ -155,7 +155,15 @@ func TestCheckResponseSnapshot_DescribeStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStream(context.Background(), &DescribeStreamInput{})
+	got, err := svc.DescribeStream(context.Background(), &DescribeStreamInput{
+		StreamArn:             ptr.String("__StreamArn__"),
+		Limit:                 ptr.Int32(1),
+		ExclusiveStartShardId: ptr.String("__ExclusiveStartShardId__"),
+		ShardFilter: &types.ShardFilter{
+			Type:    types.ShardFilterType("CHILD_SHARDS"),
+			ShardId: ptr.String("__ShardId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -242,7 +250,10 @@ func TestCheckResponseSnapshot_GetRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	got, err := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -263,7 +274,12 @@ func TestCheckResponseSnapshot_GetShardIterator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetShardIterator(context.Background(), &GetShardIteratorInput{})
+	got, err := svc.GetShardIterator(context.Background(), &GetShardIteratorInput{
+		StreamArn:         ptr.String("__StreamArn__"),
+		ShardId:           ptr.String("__ShardId__"),
+		ShardIteratorType: types.ShardIteratorType("TRIM_HORIZON"),
+		SequenceNumber:    ptr.String("__SequenceNumber__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +312,11 @@ func TestCheckResponseSnapshot_ListStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreams(context.Background(), &ListStreamsInput{})
+	got, err := svc.ListStreams(context.Background(), &ListStreamsInput{
+		TableName:               ptr.String("__TableName__"),
+		Limit:                   ptr.Int32(1),
+		ExclusiveStartStreamArn: ptr.String("__ExclusiveStartStreamArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -317,7 +337,10 @@ func TestCheckResponseSnapshot_Error_ExpiredIteratorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -342,7 +365,15 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeStream(context.Background(), &DescribeStreamInput{})
+	_, opErr := svc.DescribeStream(context.Background(), &DescribeStreamInput{
+		StreamArn:             ptr.String("__StreamArn__"),
+		Limit:                 ptr.Int32(1),
+		ExclusiveStartShardId: ptr.String("__ExclusiveStartShardId__"),
+		ShardFilter: &types.ShardFilter{
+			Type:    types.ShardFilterType("CHILD_SHARDS"),
+			ShardId: ptr.String("__ShardId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -367,7 +398,10 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -392,7 +426,15 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeStream(context.Background(), &DescribeStreamInput{})
+	_, opErr := svc.DescribeStream(context.Background(), &DescribeStreamInput{
+		StreamArn:             ptr.String("__StreamArn__"),
+		Limit:                 ptr.Int32(1),
+		ExclusiveStartShardId: ptr.String("__ExclusiveStartShardId__"),
+		ShardFilter: &types.ShardFilter{
+			Type:    types.ShardFilterType("CHILD_SHARDS"),
+			ShardId: ptr.String("__ShardId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -417,7 +459,10 @@ func TestCheckResponseSnapshot_Error_TrimmedDataAccessException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

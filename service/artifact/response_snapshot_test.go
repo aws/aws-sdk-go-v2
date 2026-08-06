@@ -130,7 +130,17 @@ func TestCheckResponseSnapshot_CreateComplianceInquiry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateComplianceInquiry(context.Background(), &CreateComplianceInquiryInput{})
+	got, err := svc.CreateComplianceInquiry(context.Background(), &CreateComplianceInquiryInput{
+		Name: ptr.String("__Name__"),
+		InquiryContent: &types.InquiryContentMemberQuery{
+			Value: "__InquiryContentMemberQuery__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		SupportMode: types.InquirySupportMode("AI_ONLY"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -154,7 +164,14 @@ func TestCheckResponseSnapshot_ExportComplianceInquiry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportComplianceInquiry(context.Background(), &ExportComplianceInquiryInput{})
+	got, err := svc.ExportComplianceInquiry(context.Background(), &ExportComplianceInquiryInput{
+		ComplianceInquiryId: ptr.String("__ComplianceInquiryId__"),
+		QueryIdentifiers: []int32{
+			1,
+			1,
+		},
+		IncludeCitations: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +228,9 @@ func TestCheckResponseSnapshot_GetComplianceInquiryMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComplianceInquiryMetadata(context.Background(), &GetComplianceInquiryMetadataInput{})
+	got, err := svc.GetComplianceInquiryMetadata(context.Background(), &GetComplianceInquiryMetadataInput{
+		ComplianceInquiryId: ptr.String("__ComplianceInquiryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -232,7 +251,11 @@ func TestCheckResponseSnapshot_GetReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReport(context.Background(), &GetReportInput{})
+	got, err := svc.GetReport(context.Background(), &GetReportInput{
+		ReportId:      ptr.String("__ReportId__"),
+		ReportVersion: ptr.Int64(1),
+		TermToken:     ptr.String("__TermToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +297,10 @@ func TestCheckResponseSnapshot_GetReportMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReportMetadata(context.Background(), &GetReportMetadataInput{})
+	got, err := svc.GetReportMetadata(context.Background(), &GetReportMetadataInput{
+		ReportId:      ptr.String("__ReportId__"),
+		ReportVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +322,10 @@ func TestCheckResponseSnapshot_GetTermForReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTermForReport(context.Background(), &GetTermForReportInput{})
+	got, err := svc.GetTermForReport(context.Background(), &GetTermForReportInput{
+		ReportId:      ptr.String("__ReportId__"),
+		ReportVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +366,10 @@ func TestCheckResponseSnapshot_ListComplianceInquiries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComplianceInquiries(context.Background(), &ListComplianceInquiriesInput{})
+	got, err := svc.ListComplianceInquiries(context.Background(), &ListComplianceInquiriesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -422,7 +454,11 @@ func TestCheckResponseSnapshot_ListComplianceInquiryQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComplianceInquiryQueries(context.Background(), &ListComplianceInquiryQueriesInput{})
+	got, err := svc.ListComplianceInquiryQueries(context.Background(), &ListComplianceInquiryQueriesInput{
+		ComplianceInquiryId: ptr.String("__ComplianceInquiryId__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -487,7 +523,10 @@ func TestCheckResponseSnapshot_ListCustomerAgreements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomerAgreements(context.Background(), &ListCustomerAgreementsInput{})
+	got, err := svc.ListCustomerAgreements(context.Background(), &ListCustomerAgreementsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -544,7 +583,11 @@ func TestCheckResponseSnapshot_ListReportVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReportVersions(context.Background(), &ListReportVersionsInput{})
+	got, err := svc.ListReportVersions(context.Background(), &ListReportVersionsInput{
+		ReportId:   ptr.String("__ReportId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -601,7 +644,10 @@ func TestCheckResponseSnapshot_ListReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReports(context.Background(), &ListReportsInput{})
+	got, err := svc.ListReports(context.Background(), &ListReportsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -624,7 +670,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -647,7 +695,9 @@ func TestCheckResponseSnapshot_PutAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountSettings(context.Background(), &PutAccountSettingsInput{})
+	got, err := svc.PutAccountSettings(context.Background(), &PutAccountSettingsInput{
+		NotificationSubscriptionStatus: types.NotificationSubscriptionStatus("SUBSCRIBED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -668,7 +718,18 @@ func TestCheckResponseSnapshot_PutComplianceInquiryFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutComplianceInquiryFeedback(context.Background(), &PutComplianceInquiryFeedbackInput{})
+	got, err := svc.PutComplianceInquiryFeedback(context.Background(), &PutComplianceInquiryFeedbackInput{
+		ComplianceInquiryId: ptr.String("__ComplianceInquiryId__"),
+		QueryIdentifier:     ptr.Int32(1),
+		Rating:              types.FeedbackRating("THUMBS_UP"),
+		ResponseRevisionId:  ptr.Int32(1),
+		ReasonCodes: []types.FeedbackReasonCode{
+			types.FeedbackReasonCode("OTHER"),
+			types.FeedbackReasonCode("OTHER"),
+		},
+		Comment:     ptr.String("__Comment__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +748,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -706,7 +772,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -727,7 +799,17 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComplianceInquiry(context.Background(), &CreateComplianceInquiryInput{})
+	_, opErr := svc.CreateComplianceInquiry(context.Background(), &CreateComplianceInquiryInput{
+		Name: ptr.String("__Name__"),
+		InquiryContent: &types.InquiryContentMemberQuery{
+			Value: "__InquiryContentMemberQuery__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		SupportMode: types.InquirySupportMode("AI_ONLY"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -754,7 +836,17 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComplianceInquiry(context.Background(), &CreateComplianceInquiryInput{})
+	_, opErr := svc.CreateComplianceInquiry(context.Background(), &CreateComplianceInquiryInput{
+		Name: ptr.String("__Name__"),
+		InquiryContent: &types.InquiryContentMemberQuery{
+			Value: "__InquiryContentMemberQuery__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		SupportMode: types.InquirySupportMode("AI_ONLY"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -780,7 +872,17 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComplianceInquiry(context.Background(), &CreateComplianceInquiryInput{})
+	_, opErr := svc.CreateComplianceInquiry(context.Background(), &CreateComplianceInquiryInput{
+		Name: ptr.String("__Name__"),
+		InquiryContent: &types.InquiryContentMemberQuery{
+			Value: "__InquiryContentMemberQuery__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		SupportMode: types.InquirySupportMode("AI_ONLY"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -807,7 +909,14 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExportComplianceInquiry(context.Background(), &ExportComplianceInquiryInput{})
+	_, opErr := svc.ExportComplianceInquiry(context.Background(), &ExportComplianceInquiryInput{
+		ComplianceInquiryId: ptr.String("__ComplianceInquiryId__"),
+		QueryIdentifiers: []int32{
+			1,
+			1,
+		},
+		IncludeCitations: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -864,7 +973,17 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComplianceInquiry(context.Background(), &CreateComplianceInquiryInput{})
+	_, opErr := svc.CreateComplianceInquiry(context.Background(), &CreateComplianceInquiryInput{
+		Name: ptr.String("__Name__"),
+		InquiryContent: &types.InquiryContentMemberQuery{
+			Value: "__InquiryContentMemberQuery__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		SupportMode: types.InquirySupportMode("AI_ONLY"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -900,7 +1019,17 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComplianceInquiry(context.Background(), &CreateComplianceInquiryInput{})
+	_, opErr := svc.CreateComplianceInquiry(context.Background(), &CreateComplianceInquiryInput{
+		Name: ptr.String("__Name__"),
+		InquiryContent: &types.InquiryContentMemberQuery{
+			Value: "__InquiryContentMemberQuery__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		SupportMode: types.InquirySupportMode("AI_ONLY"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

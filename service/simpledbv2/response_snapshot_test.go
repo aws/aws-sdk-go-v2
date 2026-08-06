@@ -133,7 +133,9 @@ func TestCheckResponseSnapshot_GetExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExport(context.Background(), &GetExportInput{})
+	got, err := svc.GetExport(context.Background(), &GetExportInput{
+		ExportArn: ptr.String("__ExportArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -168,7 +170,11 @@ func TestCheckResponseSnapshot_ListExports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExports(context.Background(), &ListExportsInput{})
+	got, err := svc.ListExports(context.Background(), &ListExportsInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -191,7 +197,15 @@ func TestCheckResponseSnapshot_StartDomainExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDomainExport(context.Background(), &StartDomainExportInput{})
+	got, err := svc.StartDomainExport(context.Background(), &StartDomainExportInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		DomainName:     ptr.String("__DomainName__"),
+		S3Bucket:       ptr.String("__S3Bucket__"),
+		S3KeyPrefix:    ptr.String("__S3KeyPrefix__"),
+		S3SseAlgorithm: types.S3SseAlgorithm("AES256"),
+		S3SseKmsKeyId:  ptr.String("__S3SseKmsKeyId__"),
+		S3BucketOwner:  ptr.String("__S3BucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -212,7 +226,15 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartDomainExport(context.Background(), &StartDomainExportInput{})
+	_, opErr := svc.StartDomainExport(context.Background(), &StartDomainExportInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		DomainName:     ptr.String("__DomainName__"),
+		S3Bucket:       ptr.String("__S3Bucket__"),
+		S3KeyPrefix:    ptr.String("__S3KeyPrefix__"),
+		S3SseAlgorithm: types.S3SseAlgorithm("AES256"),
+		S3SseKmsKeyId:  ptr.String("__S3SseKmsKeyId__"),
+		S3BucketOwner:  ptr.String("__S3BucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -237,7 +259,11 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListExports(context.Background(), &ListExportsInput{})
+	_, opErr := svc.ListExports(context.Background(), &ListExportsInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -262,7 +288,15 @@ func TestCheckResponseSnapshot_Error_InvalidParameterCombinationException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartDomainExport(context.Background(), &StartDomainExportInput{})
+	_, opErr := svc.StartDomainExport(context.Background(), &StartDomainExportInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		DomainName:     ptr.String("__DomainName__"),
+		S3Bucket:       ptr.String("__S3Bucket__"),
+		S3KeyPrefix:    ptr.String("__S3KeyPrefix__"),
+		S3SseAlgorithm: types.S3SseAlgorithm("AES256"),
+		S3SseKmsKeyId:  ptr.String("__S3SseKmsKeyId__"),
+		S3BucketOwner:  ptr.String("__S3BucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -287,7 +321,9 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetExport(context.Background(), &GetExportInput{})
+	_, opErr := svc.GetExport(context.Background(), &GetExportInput{
+		ExportArn: ptr.String("__ExportArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -312,7 +348,11 @@ func TestCheckResponseSnapshot_Error_NoSuchDomainException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListExports(context.Background(), &ListExportsInput{})
+	_, opErr := svc.ListExports(context.Background(), &ListExportsInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -337,7 +377,9 @@ func TestCheckResponseSnapshot_Error_NoSuchExportException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetExport(context.Background(), &GetExportInput{})
+	_, opErr := svc.GetExport(context.Background(), &GetExportInput{
+		ExportArn: ptr.String("__ExportArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -362,7 +404,15 @@ func TestCheckResponseSnapshot_Error_NumberExportsLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartDomainExport(context.Background(), &StartDomainExportInput{})
+	_, opErr := svc.StartDomainExport(context.Background(), &StartDomainExportInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		DomainName:     ptr.String("__DomainName__"),
+		S3Bucket:       ptr.String("__S3Bucket__"),
+		S3KeyPrefix:    ptr.String("__S3KeyPrefix__"),
+		S3SseAlgorithm: types.S3SseAlgorithm("AES256"),
+		S3SseKmsKeyId:  ptr.String("__S3SseKmsKeyId__"),
+		S3BucketOwner:  ptr.String("__S3BucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

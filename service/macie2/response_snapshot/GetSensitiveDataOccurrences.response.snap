@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"error":"__Error__","sensitiveDataOccurrences":{"key0":[{"value":"__Value__"},{"value":"__Value__"}]},"status":"SUCCESS"}

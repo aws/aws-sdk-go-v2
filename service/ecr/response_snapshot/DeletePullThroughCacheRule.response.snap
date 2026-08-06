@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.DeletePullThroughCacheRule
+
+{"createdAt":946684800,"credentialArn":"__CredentialArn__","customRoleArn":"__CustomRoleArn__","ecrRepositoryPrefix":"__EcrRepositoryPrefix__","registryId":"__RegistryId__","upstreamRegistryUrl":"__UpstreamRegistryUrl__","upstreamRepositoryPrefix":"__UpstreamRepositoryPrefix__"}

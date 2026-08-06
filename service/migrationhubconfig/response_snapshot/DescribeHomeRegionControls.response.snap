@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHubMultiAccountService.DescribeHomeRegionControls
+
+{"HomeRegionControls":[{"ControlId":"__ControlId__","HomeRegion":"__HomeRegion__","RequestedTime":946684800,"Target":{"Id":"__Id__","Type":"ACCOUNT"}},{"ControlId":"__ControlId__","HomeRegion":"__HomeRegion__","RequestedTime":946684800,"Target":{"Id":"__Id__","Type":"ACCOUNT"}}],"NextToken":"__NextToken__"}

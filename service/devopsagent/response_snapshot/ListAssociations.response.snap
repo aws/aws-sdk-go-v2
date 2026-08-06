@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"associations":[{"agentSpaceId":"__AgentSpaceId__","associationId":"__AssociationId__","capabilities":{"key0":{"enabled":true}},"configuration":{"sourceAws":{"accountId":"__AccountId__","accountType":"source","assumableRoleArn":"__AssumableRoleArn__","externalId":"__ExternalId__"}},"createdAt":"2000-01-01T00:00:00Z","serviceId":"__ServiceId__","status":"valid","updatedAt":"2000-01-01T00:00:00Z"},{"agentSpaceId":"__AgentSpaceId__","associationId":"__AssociationId__","capabilities":{"key0":{"enabled":true}},"configuration":{"sourceAws":{"accountId":"__AccountId__","accountType":"source","assumableRoleArn":"__AssumableRoleArn__","externalId":"__ExternalId__"}},"createdAt":"2000-01-01T00:00:00Z","serviceId":"__ServiceId__","status":"valid","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

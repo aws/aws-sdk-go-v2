@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Count":1,"DatasetDeletedAfterRequestedSyncCount":true,"DatasetExists":true,"DatasetSyncCount":1,"LastModifiedBy":"__LastModifiedBy__","MergedDatasetNames":["__Member__","__Member__"],"NextToken":"__NextToken__","Records":[{"DeviceLastModifiedDate":946684800,"Key":"__Key__","LastModifiedBy":"__LastModifiedBy__","LastModifiedDate":946684800,"SyncCount":1,"Value":"__Value__"},{"DeviceLastModifiedDate":946684800,"Key":"__Key__","LastModifiedBy":"__LastModifiedBy__","LastModifiedDate":946684800,"SyncCount":1,"Value":"__Value__"}],"SyncSessionToken":"__SyncSessionToken__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.ListAgreementInvoiceLineItems
+
+{"agreementInvoiceLineItemGroupSummaries":[{"agreementId":"__AgreementId__","invoiceBillingPeriod":{"month":1,"year":1},"invoiceId":"__InvoiceId__","invoiceType":"INVOICE","invoicingEntity":{"branchName":"__BranchName__","legalName":"__LegalName__"},"issuedTime":946684800,"pricingCurrencyAmount":{"amount":"__Amount__","currencyCode":"__CurrencyCode__","maxAdjustmentAmount":"__MaxAdjustmentAmount__"}},{"agreementId":"__AgreementId__","invoiceBillingPeriod":{"month":1,"year":1},"invoiceId":"__InvoiceId__","invoiceType":"INVOICE","invoicingEntity":{"branchName":"__BranchName__","legalName":"__LegalName__"},"issuedTime":946684800,"pricingCurrencyAmount":{"amount":"__Amount__","currencyCode":"__CurrencyCode__","maxAdjustmentAmount":"__MaxAdjustmentAmount__"}}],"nextToken":"__NextToken__"}

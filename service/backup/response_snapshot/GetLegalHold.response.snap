@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CancelDescription":"__CancelDescription__","CancellationDate":946684800,"CreationDate":946684800,"Description":"__Description__","LegalHoldArn":"__LegalHoldArn__","LegalHoldId":"__LegalHoldId__","RecoveryPointSelection":{"DateRange":{"FromDate":946684800,"ToDate":946684800},"ResourceIdentifiers":["__Member__","__Member__"],"VaultNames":["__Member__","__Member__"]},"RetainRecordUntil":946684800,"Status":"CREATING","Title":"__Title__"}

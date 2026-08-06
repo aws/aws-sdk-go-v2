@@ -203,7 +203,33 @@ func TestCheckResponseSnapshot_BatchGetRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetRecord(context.Background(), &BatchGetRecordInput{})
+	got, err := svc.BatchGetRecord(context.Background(), &BatchGetRecordInput{
+		Identifiers: []types.BatchGetRecordIdentifier{
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				RecordIdentifiersValueAsString: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FeatureNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				RecordIdentifiersValueAsString: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FeatureNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExpirationTimeResponse: types.ExpirationTimeResponse("Enabled"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -351,7 +377,72 @@ func TestCheckResponseSnapshot_BatchWriteRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchWriteRecord(context.Background(), &BatchWriteRecordInput{})
+	got, err := svc.BatchWriteRecord(context.Background(), &BatchWriteRecordInput{
+		Entries: []types.BatchWriteRecordEntry{
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				Record: []types.FeatureValue{
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				TargetStores: []types.TargetStore{
+					types.TargetStore("OnlineStore"),
+					types.TargetStore("OnlineStore"),
+				},
+				TtlDuration: &types.TtlDuration{
+					Unit:  types.TtlDurationUnit("Seconds"),
+					Value: ptr.Int32(1),
+				},
+			},
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				Record: []types.FeatureValue{
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				TargetStores: []types.TargetStore{
+					types.TargetStore("OnlineStore"),
+					types.TargetStore("OnlineStore"),
+				},
+				TtlDuration: &types.TtlDuration{
+					Unit:  types.TtlDurationUnit("Seconds"),
+					Value: ptr.Int32(1),
+				},
+			},
+		},
+		TtlDuration: &types.TtlDuration{
+			Unit:  types.TtlDurationUnit("Seconds"),
+			Value: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -370,7 +461,16 @@ func TestCheckResponseSnapshot_DeleteRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRecord(context.Background(), &DeleteRecordInput{})
+	got, err := svc.DeleteRecord(context.Background(), &DeleteRecordInput{
+		FeatureGroupName:              ptr.String("__FeatureGroupName__"),
+		RecordIdentifierValueAsString: ptr.String("__RecordIdentifierValueAsString__"),
+		EventTime:                     ptr.String("__EventTime__"),
+		TargetStores: []types.TargetStore{
+			types.TargetStore("OnlineStore"),
+			types.TargetStore("OnlineStore"),
+		},
+		DeletionMode: types.DeletionMode("SoftDelete"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -409,7 +509,15 @@ func TestCheckResponseSnapshot_GetRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecord(context.Background(), &GetRecordInput{})
+	got, err := svc.GetRecord(context.Background(), &GetRecordInput{
+		FeatureGroupName:              ptr.String("__FeatureGroupName__"),
+		RecordIdentifierValueAsString: ptr.String("__RecordIdentifierValueAsString__"),
+		FeatureNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExpirationTimeResponse: types.ExpirationTimeResponse("Enabled"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +542,12 @@ func TestCheckResponseSnapshot_ListRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecords(context.Background(), &ListRecordsInput{})
+	got, err := svc.ListRecords(context.Background(), &ListRecordsInput{
+		FeatureGroupName:          ptr.String("__FeatureGroupName__"),
+		MaxResults:                ptr.Int32(1),
+		NextToken:                 ptr.String("__NextToken__"),
+		IncludeSoftDeletedRecords: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +566,35 @@ func TestCheckResponseSnapshot_PutRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRecord(context.Background(), &PutRecordInput{})
+	got, err := svc.PutRecord(context.Background(), &PutRecordInput{
+		FeatureGroupName: ptr.String("__FeatureGroupName__"),
+		Record: []types.FeatureValue{
+			{
+				FeatureName:   ptr.String("__FeatureName__"),
+				ValueAsString: ptr.String("__ValueAsString__"),
+				ValueAsStringList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FeatureName:   ptr.String("__FeatureName__"),
+				ValueAsString: ptr.String("__ValueAsString__"),
+				ValueAsStringList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		TargetStores: []types.TargetStore{
+			types.TargetStore("OnlineStore"),
+			types.TargetStore("OnlineStore"),
+		},
+		TtlDuration: &types.TtlDuration{
+			Unit:  types.TtlDurationUnit("Seconds"),
+			Value: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -474,7 +615,33 @@ func TestCheckResponseSnapshot_Error_AccessForbidden(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetRecord(context.Background(), &BatchGetRecordInput{})
+	_, opErr := svc.BatchGetRecord(context.Background(), &BatchGetRecordInput{
+		Identifiers: []types.BatchGetRecordIdentifier{
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				RecordIdentifiersValueAsString: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FeatureNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				RecordIdentifiersValueAsString: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FeatureNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExpirationTimeResponse: types.ExpirationTimeResponse("Enabled"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -499,7 +666,33 @@ func TestCheckResponseSnapshot_Error_InternalFailure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetRecord(context.Background(), &BatchGetRecordInput{})
+	_, opErr := svc.BatchGetRecord(context.Background(), &BatchGetRecordInput{
+		Identifiers: []types.BatchGetRecordIdentifier{
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				RecordIdentifiersValueAsString: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FeatureNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				RecordIdentifiersValueAsString: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FeatureNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExpirationTimeResponse: types.ExpirationTimeResponse("Enabled"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -524,7 +717,72 @@ func TestCheckResponseSnapshot_Error_ResourceNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchWriteRecord(context.Background(), &BatchWriteRecordInput{})
+	_, opErr := svc.BatchWriteRecord(context.Background(), &BatchWriteRecordInput{
+		Entries: []types.BatchWriteRecordEntry{
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				Record: []types.FeatureValue{
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				TargetStores: []types.TargetStore{
+					types.TargetStore("OnlineStore"),
+					types.TargetStore("OnlineStore"),
+				},
+				TtlDuration: &types.TtlDuration{
+					Unit:  types.TtlDurationUnit("Seconds"),
+					Value: ptr.Int32(1),
+				},
+			},
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				Record: []types.FeatureValue{
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				TargetStores: []types.TargetStore{
+					types.TargetStore("OnlineStore"),
+					types.TargetStore("OnlineStore"),
+				},
+				TtlDuration: &types.TtlDuration{
+					Unit:  types.TtlDurationUnit("Seconds"),
+					Value: ptr.Int32(1),
+				},
+			},
+		},
+		TtlDuration: &types.TtlDuration{
+			Unit:  types.TtlDurationUnit("Seconds"),
+			Value: ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -549,7 +807,33 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetRecord(context.Background(), &BatchGetRecordInput{})
+	_, opErr := svc.BatchGetRecord(context.Background(), &BatchGetRecordInput{
+		Identifiers: []types.BatchGetRecordIdentifier{
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				RecordIdentifiersValueAsString: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FeatureNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				RecordIdentifiersValueAsString: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FeatureNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExpirationTimeResponse: types.ExpirationTimeResponse("Enabled"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -574,7 +858,33 @@ func TestCheckResponseSnapshot_Error_ValidationError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetRecord(context.Background(), &BatchGetRecordInput{})
+	_, opErr := svc.BatchGetRecord(context.Background(), &BatchGetRecordInput{
+		Identifiers: []types.BatchGetRecordIdentifier{
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				RecordIdentifiersValueAsString: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FeatureNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				RecordIdentifiersValueAsString: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FeatureNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExpirationTimeResponse: types.ExpirationTimeResponse("Enabled"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

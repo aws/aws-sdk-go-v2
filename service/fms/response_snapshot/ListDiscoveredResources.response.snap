@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSFMS_20180101.ListDiscoveredResources
+
+{"Items":[{"AccountId":"__AccountId__","Name":"__Name__","Type":"__Type__","URI":"__URI__"},{"AccountId":"__AccountId__","Name":"__Name__","Type":"__Type__","URI":"__URI__"}],"NextToken":"__NextToken__"}

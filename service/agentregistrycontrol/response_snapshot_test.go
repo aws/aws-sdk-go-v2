@@ -119,7 +119,85 @@ func TestCheckResponseSnapshot_CreateRegistry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRegistry(context.Background(), &CreateRegistryInput{})
+	got, err := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DiscoveryConfiguration: &types.DiscoveryConfiguration{
+			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
+				Value: types.CustomJWTAuthorizerConfiguration{
+					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
+					AllowedAudience: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedClients: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedScopes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CustomClaims: []types.CustomClaimValidationType{
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+					},
+					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+						},
+					},
+					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+					},
+				},
+			},
+			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ApprovalConfiguration: &types.ApprovalConfiguration{
+			AutoApprovalRules: []types.AutoApprovalRule{
+				types.AutoApprovalRule("APPROVE_ALL"),
+				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +219,164 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRegistryRecord(context.Background(), &CreateRegistryRecordInput{})
+	got, err := svc.CreateRegistryRecord(context.Background(), &CreateRegistryRecordInput{
+		RegistryId:  ptr.String("__RegistryId__"),
+		Name:        ptr.String("__Name__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+		RecordType:  types.RecordType("MCP"),
+		Descriptors: &types.Descriptors{
+			McpServer: &types.McpServerDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				AdditionalData: &types.McpServerAdditionalData{
+					Tools: &types.McpToolsDescriptor{
+						Data:              ptr.String("__Data__"),
+						DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+					},
+				},
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			A2aAgentCard: &types.A2aAgentCardDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			AgentSkillsDefinition: &types.AgentSkillsDefinitionDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				AdditionalData: &types.AgentSkillsAdditionalData{
+					SkillMd: &types.AgentSkillsMdDescriptor{
+						Data:              ptr.String("__Data__"),
+						DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+								CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+											},
+										},
+									},
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Custom: &types.CustomDescriptor{
+				Data: ptr.String("__Data__"),
+			},
+		},
+		RecordVersion: ptr.String("__RecordVersion__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +397,9 @@ func TestCheckResponseSnapshot_DeleteRegistry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRegistry(context.Background(), &DeleteRegistryInput{})
+	got, err := svc.DeleteRegistry(context.Background(), &DeleteRegistryInput{
+		RegistryId: ptr.String("__RegistryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -181,7 +418,10 @@ func TestCheckResponseSnapshot_DeleteRegistryRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRegistryRecord(context.Background(), &DeleteRegistryRecordInput{})
+	got, err := svc.DeleteRegistryRecord(context.Background(), &DeleteRegistryRecordInput{
+		RegistryId: ptr.String("__RegistryId__"),
+		RecordId:   ptr.String("__RecordId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -280,7 +520,9 @@ func TestCheckResponseSnapshot_GetRegistry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRegistry(context.Background(), &GetRegistryInput{})
+	got, err := svc.GetRegistry(context.Background(), &GetRegistryInput{
+		RegistryId: ptr.String("__RegistryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -458,7 +700,10 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRegistryRecord(context.Background(), &GetRegistryRecordInput{})
+	got, err := svc.GetRegistryRecord(context.Background(), &GetRegistryRecordInput{
+		RegistryId: ptr.String("__RegistryId__"),
+		RecordId:   ptr.String("__RecordId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -631,7 +876,26 @@ func TestCheckResponseSnapshot_ListRegistries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRegistries(context.Background(), &ListRegistriesInput{})
+	got, err := svc.ListRegistries(context.Background(), &ListRegistriesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.RegistryFilter{
+			{
+				Name: types.RegistryFilterName("status"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.RegistryFilterName("status"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -680,7 +944,27 @@ func TestCheckResponseSnapshot_ListRegistryRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRegistryRecords(context.Background(), &ListRegistryRecordsInput{})
+	got, err := svc.ListRegistryRecords(context.Background(), &ListRegistryRecordsInput{
+		RegistryId: ptr.String("__RegistryId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.RegistryRecordFilter{
+			{
+				Name: types.RegistryRecordFilterName("name"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.RegistryRecordFilterName("name"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -703,7 +987,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -728,7 +1014,10 @@ func TestCheckResponseSnapshot_SubmitRegistryRecordForApproval(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubmitRegistryRecordForApproval(context.Background(), &SubmitRegistryRecordForApprovalInput{})
+	got, err := svc.SubmitRegistryRecordForApproval(context.Background(), &SubmitRegistryRecordForApprovalInput{
+		RegistryId: ptr.String("__RegistryId__"),
+		RecordId:   ptr.String("__RecordId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -747,7 +1036,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -766,7 +1060,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -865,7 +1165,87 @@ func TestCheckResponseSnapshot_UpdateRegistry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRegistry(context.Background(), &UpdateRegistryInput{})
+	got, err := svc.UpdateRegistry(context.Background(), &UpdateRegistryInput{
+		RegistryId: ptr.String("__RegistryId__"),
+		Name:       ptr.String("__Name__"),
+		Description: &types.UpdatedDescription{
+			OptionalValue: ptr.String("__OptionalValue__"),
+		},
+		DiscoveryConfiguration: &types.UpdatedDiscoveryConfiguration{
+			AuthorizerConfiguration: &types.UpdatedAuthorizerConfiguration{
+				OptionalValue: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
+					Value: types.CustomJWTAuthorizerConfiguration{
+						DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
+						AllowedAudience: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AllowedClients: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AllowedScopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CustomClaims: []types.CustomClaimValidationType{
+							{
+								InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+								InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+								AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+									ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+										Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+									},
+									ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+								},
+							},
+							{
+								InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+								InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+								AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+									ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+										Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+									},
+									ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+								},
+							},
+						},
+						PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+							Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+								Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+							},
+						},
+						PrivateEndpointOverrides: []types.PrivateEndpointOverride{
+							{
+								Domain: ptr.String("__Domain__"),
+								PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+									Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+										Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+									},
+								},
+							},
+							{
+								Domain: ptr.String("__Domain__"),
+								PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+									Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+										Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		ApprovalConfiguration: &types.UpdatedApprovalConfiguration{
+			OptionalValue: &types.ApprovalConfiguration{
+				AutoApprovalRules: []types.AutoApprovalRule{
+					types.AutoApprovalRule("APPROVE_ALL"),
+					types.AutoApprovalRule("APPROVE_ALL"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1043,7 +1423,90 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRegistryRecord(context.Background(), &UpdateRegistryRecordInput{})
+	got, err := svc.UpdateRegistryRecord(context.Background(), &UpdateRegistryRecordInput{
+		RegistryId: ptr.String("__RegistryId__"),
+		RecordId:   ptr.String("__RecordId__"),
+		Name:       ptr.String("__Name__"),
+		DisplayName: &types.UpdatedDisplayName{
+			OptionalValue: ptr.String("__OptionalValue__"),
+		},
+		Description: &types.UpdatedDescription{
+			OptionalValue: ptr.String("__OptionalValue__"),
+		},
+		RecordType: types.RecordType("MCP"),
+		Descriptors: &types.UpdatedDescriptors{
+			OptionalValue: &types.UpdatedDescriptorsFields{
+				McpServer: &types.UpdatedMcpServerDescriptor{
+					OptionalValue: &types.UpdatedMcpServerDescriptorFields{
+						Data: &types.UpdatedDescriptorData{
+							OptionalValue: ptr.String("__OptionalValue__"),
+						},
+						DataSchemaVersion: &types.UpdatedDataSchemaVersion{
+							OptionalValue: ptr.String("__OptionalValue__"),
+						},
+						Source: &types.UpdatedDescriptorSource{
+							OptionalValue: &types.DescriptorSource{
+								FromUrl: &types.DescriptorSourceFromUrl{
+									Url: ptr.String("__Url__"),
+									CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+										{
+											CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+											CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+												Value: types.RegistryRecordOAuthCredentialProvider{},
+											},
+										},
+										{
+											CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+											CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+												Value: types.RegistryRecordOAuthCredentialProvider{},
+											},
+										},
+									},
+								},
+							},
+						},
+						AdditionalData: &types.UpdatedMcpServerAdditionalData{
+							OptionalValue: &types.UpdatedMcpServerAdditionalDataFields{
+								Tools: &types.UpdatedMcpToolsDescriptor{
+									OptionalValue: &types.UpdatedMcpToolsDescriptorFields{
+										Data:              nil,
+										DataSchemaVersion: nil,
+									},
+								},
+							},
+						},
+					},
+				},
+				A2aAgentCard: &types.UpdatedA2aAgentCardDescriptor{
+					OptionalValue: &types.UpdatedA2aAgentCardDescriptorFields{
+						Data:              nil,
+						DataSchemaVersion: nil,
+						Source: &types.UpdatedDescriptorSource{
+							OptionalValue: &types.DescriptorSource{
+								FromUrl: nil,
+							},
+						},
+					},
+				},
+				AgentSkillsDefinition: &types.UpdatedAgentSkillsDefinitionDescriptor{
+					OptionalValue: &types.UpdatedAgentSkillsDefinitionDescriptorFields{
+						Data:              nil,
+						DataSchemaVersion: nil,
+						AdditionalData: &types.UpdatedAgentSkillsAdditionalData{
+							OptionalValue: nil,
+						},
+					},
+				},
+				Custom: &types.UpdatedCustomDescriptor{
+					OptionalValue: &types.UpdatedCustomDescriptorFields{
+						Data: nil,
+					},
+				},
+			},
+		},
+		RecordVersion:          ptr.String("__RecordVersion__"),
+		TriggerSynchronization: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1069,7 +1532,12 @@ func TestCheckResponseSnapshot_UpdateRegistryRecordStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRegistryRecordStatus(context.Background(), &UpdateRegistryRecordStatusInput{})
+	got, err := svc.UpdateRegistryRecordStatus(context.Background(), &UpdateRegistryRecordStatusInput{
+		RegistryId:   ptr.String("__RegistryId__"),
+		RecordId:     ptr.String("__RecordId__"),
+		Status:       types.RegistryRecordStatus("DRAFT"),
+		StatusReason: ptr.String("__StatusReason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1090,7 +1558,85 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{})
+	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DiscoveryConfiguration: &types.DiscoveryConfiguration{
+			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
+				Value: types.CustomJWTAuthorizerConfiguration{
+					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
+					AllowedAudience: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedClients: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedScopes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CustomClaims: []types.CustomClaimValidationType{
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+					},
+					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+						},
+					},
+					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+					},
+				},
+			},
+			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ApprovalConfiguration: &types.ApprovalConfiguration{
+			AutoApprovalRules: []types.AutoApprovalRule{
+				types.AutoApprovalRule("APPROVE_ALL"),
+				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1115,7 +1661,85 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{})
+	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DiscoveryConfiguration: &types.DiscoveryConfiguration{
+			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
+				Value: types.CustomJWTAuthorizerConfiguration{
+					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
+					AllowedAudience: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedClients: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedScopes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CustomClaims: []types.CustomClaimValidationType{
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+					},
+					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+						},
+					},
+					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+					},
+				},
+			},
+			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ApprovalConfiguration: &types.ApprovalConfiguration{
+			AutoApprovalRules: []types.AutoApprovalRule{
+				types.AutoApprovalRule("APPROVE_ALL"),
+				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1140,7 +1764,85 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{})
+	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DiscoveryConfiguration: &types.DiscoveryConfiguration{
+			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
+				Value: types.CustomJWTAuthorizerConfiguration{
+					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
+					AllowedAudience: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedClients: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedScopes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CustomClaims: []types.CustomClaimValidationType{
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+					},
+					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+						},
+					},
+					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+					},
+				},
+			},
+			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ApprovalConfiguration: &types.ApprovalConfiguration{
+			AutoApprovalRules: []types.AutoApprovalRule{
+				types.AutoApprovalRule("APPROVE_ALL"),
+				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1165,7 +1867,164 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistryRecord(context.Background(), &CreateRegistryRecordInput{})
+	_, opErr := svc.CreateRegistryRecord(context.Background(), &CreateRegistryRecordInput{
+		RegistryId:  ptr.String("__RegistryId__"),
+		Name:        ptr.String("__Name__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+		RecordType:  types.RecordType("MCP"),
+		Descriptors: &types.Descriptors{
+			McpServer: &types.McpServerDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				AdditionalData: &types.McpServerAdditionalData{
+					Tools: &types.McpToolsDescriptor{
+						Data:              ptr.String("__Data__"),
+						DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+					},
+				},
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			A2aAgentCard: &types.A2aAgentCardDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			AgentSkillsDefinition: &types.AgentSkillsDefinitionDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				AdditionalData: &types.AgentSkillsAdditionalData{
+					SkillMd: &types.AgentSkillsMdDescriptor{
+						Data:              ptr.String("__Data__"),
+						DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+								CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+											},
+										},
+									},
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Custom: &types.CustomDescriptor{
+				Data: ptr.String("__Data__"),
+			},
+		},
+		RecordVersion: ptr.String("__RecordVersion__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1190,7 +2049,85 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{})
+	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DiscoveryConfiguration: &types.DiscoveryConfiguration{
+			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
+				Value: types.CustomJWTAuthorizerConfiguration{
+					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
+					AllowedAudience: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedClients: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedScopes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CustomClaims: []types.CustomClaimValidationType{
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+					},
+					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+						},
+					},
+					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+					},
+				},
+			},
+			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ApprovalConfiguration: &types.ApprovalConfiguration{
+			AutoApprovalRules: []types.AutoApprovalRule{
+				types.AutoApprovalRule("APPROVE_ALL"),
+				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1215,7 +2152,85 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{})
+	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DiscoveryConfiguration: &types.DiscoveryConfiguration{
+			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
+				Value: types.CustomJWTAuthorizerConfiguration{
+					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
+					AllowedAudience: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedClients: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedScopes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CustomClaims: []types.CustomClaimValidationType{
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+					},
+					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+						},
+					},
+					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+					},
+				},
+			},
+			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ApprovalConfiguration: &types.ApprovalConfiguration{
+			AutoApprovalRules: []types.AutoApprovalRule{
+				types.AutoApprovalRule("APPROVE_ALL"),
+				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1251,7 +2266,85 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{})
+	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DiscoveryConfiguration: &types.DiscoveryConfiguration{
+			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
+				Value: types.CustomJWTAuthorizerConfiguration{
+					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
+					AllowedAudience: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedClients: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedScopes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CustomClaims: []types.CustomClaimValidationType{
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+						{
+							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+								},
+								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+							},
+						},
+					},
+					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+						},
+					},
+					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+						{
+							Domain: ptr.String("__Domain__"),
+							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+								},
+							},
+						},
+					},
+				},
+			},
+			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ApprovalConfiguration: &types.ApprovalConfiguration{
+			AutoApprovalRules: []types.AutoApprovalRule{
+				types.AutoApprovalRule("APPROVE_ALL"),
+				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

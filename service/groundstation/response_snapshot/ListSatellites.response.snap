@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","satellites":[{"currentEphemeris":{"ephemerisId":"__EphemerisId__","epoch":946684800,"name":"__Name__","source":"CUSTOMER_PROVIDED"},"groundStations":["__Member__","__Member__"],"noradSatelliteID":1,"satelliteArn":"__SatelliteArn__","satelliteId":"__SatelliteId__"},{"currentEphemeris":{"ephemerisId":"__EphemerisId__","epoch":946684800,"name":"__Name__","source":"CUSTOMER_PROVIDED"},"groundStations":["__Member__","__Member__"],"noradSatelliteID":1,"satelliteArn":"__SatelliteArn__","satelliteId":"__SatelliteId__"}]}

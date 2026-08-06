@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeRcsAgentCountryLaunchStatus
+
+{"CountryLaunchStatus":[{"CarrierStatus":[{"CarrierName":"__CarrierName__","Status":"PENDING"},{"CarrierName":"__CarrierName__","Status":"PENDING"}],"IsoCountryCode":"__IsoCountryCode__","RcsPlatformId":"__RcsPlatformId__","RegistrationId":"__RegistrationId__","Status":"CREATED"},{"CarrierStatus":[{"CarrierName":"__CarrierName__","Status":"PENDING"},{"CarrierName":"__CarrierName__","Status":"PENDING"}],"IsoCountryCode":"__IsoCountryCode__","RcsPlatformId":"__RcsPlatformId__","RegistrationId":"__RegistrationId__","Status":"CREATED"}],"NextToken":"__NextToken__","RcsAgentArn":"__RcsAgentArn__","RcsAgentId":"__RcsAgentId__"}

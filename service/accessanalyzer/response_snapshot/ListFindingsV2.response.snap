@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"findings":[{"analyzedAt":"2000-01-01T00:00:00Z","createdAt":"2000-01-01T00:00:00Z","error":"__Error__","findingType":"ExternalAccess","id":"__Id__","resource":"__Resource__","resourceOwnerAccount":"__ResourceOwnerAccount__","resourceType":"AWS::S3::Bucket","status":"ACTIVE","updatedAt":"2000-01-01T00:00:00Z"},{"analyzedAt":"2000-01-01T00:00:00Z","createdAt":"2000-01-01T00:00:00Z","error":"__Error__","findingType":"ExternalAccess","id":"__Id__","resource":"__Resource__","resourceOwnerAccount":"__ResourceOwnerAccount__","resourceType":"AWS::S3::Bucket","status":"ACTIVE","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","Description":"__Description__","Id":"__Id__","LoRaWAN":{"Beaconing":{"DataRate":1,"Frequencies":[1,1]},"GatewayEui":"__GatewayEui__","JoinEuiFilters":[["__Member__","__Member__"],["__Member__","__Member__"]],"MaxEirp":1,"NetIdFilters":["__Member__","__Member__"],"RfRegion":"__RfRegion__","SubBands":[1,1]},"Name":"__Name__","ThingArn":"__ThingArn__","ThingName":"__ThingName__"}

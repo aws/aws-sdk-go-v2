@@ -141,7 +141,12 @@ func TestCheckResponseSnapshot_BatchDeleteAdvancedPromptOptimizationJob(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{})
+	got, err := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{
+		JobIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +188,12 @@ func TestCheckResponseSnapshot_BatchDeleteEvaluationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteEvaluationJob(context.Background(), &BatchDeleteEvaluationJobInput{})
+	got, err := svc.BatchDeleteEvaluationJob(context.Background(), &BatchDeleteEvaluationJobInput{
+		JobIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +212,10 @@ func TestCheckResponseSnapshot_CancelAutomatedReasoningPolicyBuildWorkflow(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelAutomatedReasoningPolicyBuildWorkflow(context.Background(), &CancelAutomatedReasoningPolicyBuildWorkflowInput{})
+	got, err := svc.CancelAutomatedReasoningPolicyBuildWorkflow(context.Background(), &CancelAutomatedReasoningPolicyBuildWorkflowInput{
+		PolicyArn:       ptr.String("__PolicyArn__"),
+		BuildWorkflowId: ptr.String("__BuildWorkflowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +236,60 @@ func TestCheckResponseSnapshot_CreateAdvancedPromptOptimizationJob(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAdvancedPromptOptimizationJob(context.Background(), &CreateAdvancedPromptOptimizationJobInput{})
+	got, err := svc.CreateAdvancedPromptOptimizationJob(context.Background(), &CreateAdvancedPromptOptimizationJobInput{
+		JobName:        ptr.String("__JobName__"),
+		JobDescription: ptr.String("__JobDescription__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		InputConfig: &types.AdvancedPromptOptimizationInputConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		OutputConfig: &types.AdvancedPromptOptimizationOutputConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ModelConfigurations: []types.ModelConfiguration{
+			{
+				ModelId: ptr.String("__ModelId__"),
+				InferenceConfig: &types.InferenceConfiguration{
+					MaxTokens:   ptr.Int32(1),
+					Temperature: ptr.Float32(1.0),
+					TopP:        ptr.Float32(1.0),
+					StopSequences: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AdditionalModelRequestFields: map[string]document.Interface{
+					"key0": document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				ModelId: ptr.String("__ModelId__"),
+				InferenceConfig: &types.InferenceConfiguration{
+					MaxTokens:   ptr.Int32(1),
+					Temperature: ptr.Float32(1.0),
+					TopP:        ptr.Float32(1.0),
+					StopSequences: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AdditionalModelRequestFields: map[string]document.Interface{
+					"key0": document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +316,79 @@ func TestCheckResponseSnapshot_CreateAutomatedReasoningPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAutomatedReasoningPolicy(context.Background(), &CreateAutomatedReasoningPolicyInput{})
+	got, err := svc.CreateAutomatedReasoningPolicy(context.Background(), &CreateAutomatedReasoningPolicyInput{
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		PolicyDefinition: &types.AutomatedReasoningPolicyDefinition{
+			Version: ptr.String("__Version__"),
+			Types: []types.AutomatedReasoningPolicyDefinitionType{
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Values: []types.AutomatedReasoningPolicyDefinitionTypeValue{
+						{
+							Value:       ptr.String("__Value__"),
+							Description: ptr.String("__Description__"),
+						},
+						{
+							Value:       ptr.String("__Value__"),
+							Description: ptr.String("__Description__"),
+						},
+					},
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Values: []types.AutomatedReasoningPolicyDefinitionTypeValue{
+						{
+							Value:       ptr.String("__Value__"),
+							Description: ptr.String("__Description__"),
+						},
+						{
+							Value:       ptr.String("__Value__"),
+							Description: ptr.String("__Description__"),
+						},
+					},
+				},
+			},
+			Rules: []types.AutomatedReasoningPolicyDefinitionRule{
+				{
+					Id:                  ptr.String("__Id__"),
+					Expression:          ptr.String("__Expression__"),
+					AlternateExpression: ptr.String("__AlternateExpression__"),
+				},
+				{
+					Id:                  ptr.String("__Id__"),
+					Expression:          ptr.String("__Expression__"),
+					AlternateExpression: ptr.String("__AlternateExpression__"),
+				},
+			},
+			Variables: []types.AutomatedReasoningPolicyDefinitionVariable{
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        ptr.String("__Type__"),
+					Description: ptr.String("__Description__"),
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        ptr.String("__Type__"),
+					Description: ptr.String("__Description__"),
+				},
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -272,7 +410,14 @@ func TestCheckResponseSnapshot_CreateAutomatedReasoningPolicyTestCase(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAutomatedReasoningPolicyTestCase(context.Background(), &CreateAutomatedReasoningPolicyTestCaseInput{})
+	got, err := svc.CreateAutomatedReasoningPolicyTestCase(context.Background(), &CreateAutomatedReasoningPolicyTestCaseInput{
+		PolicyArn:                        ptr.String("__PolicyArn__"),
+		GuardContent:                     ptr.String("__GuardContent__"),
+		QueryContent:                     ptr.String("__QueryContent__"),
+		ExpectedAggregatedFindingsResult: types.AutomatedReasoningCheckResult("VALID"),
+		ClientRequestToken:               ptr.String("__ClientRequestToken__"),
+		ConfidenceThreshold:              ptr.Float64(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +443,21 @@ func TestCheckResponseSnapshot_CreateAutomatedReasoningPolicyVersion(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAutomatedReasoningPolicyVersion(context.Background(), &CreateAutomatedReasoningPolicyVersionInput{})
+	got, err := svc.CreateAutomatedReasoningPolicyVersion(context.Background(), &CreateAutomatedReasoningPolicyVersionInput{
+		PolicyArn:                 ptr.String("__PolicyArn__"),
+		ClientRequestToken:        ptr.String("__ClientRequestToken__"),
+		LastUpdatedDefinitionHash: ptr.String("__LastUpdatedDefinitionHash__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -319,7 +478,32 @@ func TestCheckResponseSnapshot_CreateCustomModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomModel(context.Background(), &CreateCustomModelInput{})
+	got, err := svc.CreateCustomModel(context.Background(), &CreateCustomModelInput{
+		ModelName: ptr.String("__ModelName__"),
+		ModelSourceConfig: &types.ModelDataSourceMemberS3DataSource{
+			Value: types.S3DataSource{
+				S3Uri: ptr.String("__S3Uri__"),
+			},
+		},
+		CustomModelDataSource: &types.CustomModelDataSourceMemberModelPackageArnDataSource{
+			Value: types.ModelPackageArnDataSource{
+				ModelPackageArn: ptr.String("__ModelPackageArn__"),
+			},
+		},
+		ModelKmsKeyArn: ptr.String("__ModelKmsKeyArn__"),
+		RoleArn:        ptr.String("__RoleArn__"),
+		ModelTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -340,7 +524,22 @@ func TestCheckResponseSnapshot_CreateCustomModelDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomModelDeployment(context.Background(), &CreateCustomModelDeploymentInput{})
+	got, err := svc.CreateCustomModelDeployment(context.Background(), &CreateCustomModelDeploymentInput{
+		ModelDeploymentName: ptr.String("__ModelDeploymentName__"),
+		ModelArn:            ptr.String("__ModelArn__"),
+		Description:         ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -361,7 +560,145 @@ func TestCheckResponseSnapshot_CreateEvaluationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEvaluationJob(context.Background(), &CreateEvaluationJobInput{})
+	got, err := svc.CreateEvaluationJob(context.Background(), &CreateEvaluationJobInput{
+		JobName:                 ptr.String("__JobName__"),
+		JobDescription:          ptr.String("__JobDescription__"),
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		RoleArn:                 ptr.String("__RoleArn__"),
+		CustomerEncryptionKeyId: ptr.String("__CustomerEncryptionKeyId__"),
+		JobTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ApplicationType: types.ApplicationType("ModelEvaluation"),
+		EvaluationConfig: &types.EvaluationConfigMemberAutomated{
+			Value: types.AutomatedEvaluationConfig{
+				DatasetMetricConfigs: []types.EvaluationDatasetMetricConfig{
+					{
+						TaskType: types.EvaluationTaskType("Summarization"),
+						Dataset: &types.EvaluationDataset{
+							Name: ptr.String("__Name__"),
+							DatasetLocation: &types.EvaluationDatasetLocationMemberS3Uri{
+								Value: "__EvaluationDatasetLocationMemberS3Uri__",
+							},
+						},
+						MetricNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TaskType: types.EvaluationTaskType("Summarization"),
+						Dataset: &types.EvaluationDataset{
+							Name: ptr.String("__Name__"),
+							DatasetLocation: &types.EvaluationDatasetLocationMemberS3Uri{
+								Value: "__EvaluationDatasetLocationMemberS3Uri__",
+							},
+						},
+						MetricNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				EvaluatorModelConfig: &types.EvaluatorModelConfigMemberBedrockEvaluatorModels{
+					Value: []types.BedrockEvaluatorModel{
+						{
+							ModelIdentifier: ptr.String("__ModelIdentifier__"),
+						},
+						{
+							ModelIdentifier: ptr.String("__ModelIdentifier__"),
+						},
+					},
+				},
+				CustomMetricConfig: &types.AutomatedEvaluationCustomMetricConfig{
+					CustomMetrics: []types.AutomatedEvaluationCustomMetricSource{
+						&types.AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition{
+							Value: types.CustomMetricDefinition{
+								Name:         ptr.String("__Name__"),
+								Instructions: ptr.String("__Instructions__"),
+								RatingScale: []types.RatingScaleItem{
+									{
+										Definition: ptr.String("__Definition__"),
+										Value: &types.RatingScaleItemValueMemberStringValue{
+											Value: "__RatingScaleItemValueMemberStringValue__",
+										},
+									},
+									{
+										Definition: ptr.String("__Definition__"),
+										Value: &types.RatingScaleItemValueMemberStringValue{
+											Value: "__RatingScaleItemValueMemberStringValue__",
+										},
+									},
+								},
+							},
+						},
+						&types.AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition{
+							Value: types.CustomMetricDefinition{
+								Name:         ptr.String("__Name__"),
+								Instructions: ptr.String("__Instructions__"),
+								RatingScale: []types.RatingScaleItem{
+									{
+										Definition: ptr.String("__Definition__"),
+										Value: &types.RatingScaleItemValueMemberStringValue{
+											Value: "__RatingScaleItemValueMemberStringValue__",
+										},
+									},
+									{
+										Definition: ptr.String("__Definition__"),
+										Value: &types.RatingScaleItemValueMemberStringValue{
+											Value: "__RatingScaleItemValueMemberStringValue__",
+										},
+									},
+								},
+							},
+						},
+					},
+					EvaluatorModelConfig: &types.CustomMetricEvaluatorModelConfig{
+						BedrockEvaluatorModels: []types.CustomMetricBedrockEvaluatorModel{
+							{
+								ModelIdentifier: ptr.String("__ModelIdentifier__"),
+							},
+							{
+								ModelIdentifier: ptr.String("__ModelIdentifier__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		InferenceConfig: &types.EvaluationInferenceConfigMemberModels{
+			Value: []types.EvaluationModelConfig{
+				&types.EvaluationModelConfigMemberBedrockModel{
+					Value: types.EvaluationBedrockModel{
+						ModelIdentifier: ptr.String("__ModelIdentifier__"),
+						InferenceParams: ptr.String("__InferenceParams__"),
+						PerformanceConfig: &types.PerformanceConfiguration{
+							Latency: types.PerformanceConfigLatency("standard"),
+						},
+					},
+				},
+				&types.EvaluationModelConfigMemberBedrockModel{
+					Value: types.EvaluationBedrockModel{
+						ModelIdentifier: ptr.String("__ModelIdentifier__"),
+						InferenceParams: ptr.String("__InferenceParams__"),
+						PerformanceConfig: &types.PerformanceConfiguration{
+							Latency: types.PerformanceConfigLatency("standard"),
+						},
+					},
+				},
+			},
+		},
+		OutputDataConfig: &types.EvaluationOutputDataConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -382,7 +719,10 @@ func TestCheckResponseSnapshot_CreateFoundationModelAgreement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFoundationModelAgreement(context.Background(), &CreateFoundationModelAgreementInput{})
+	got, err := svc.CreateFoundationModelAgreement(context.Background(), &CreateFoundationModelAgreementInput{
+		OfferToken: ptr.String("__OfferToken__"),
+		ModelId:    ptr.String("__ModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -406,7 +746,200 @@ func TestCheckResponseSnapshot_CreateGuardrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGuardrail(context.Background(), &CreateGuardrailInput{})
+	got, err := svc.CreateGuardrail(context.Background(), &CreateGuardrailInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		TopicPolicyConfig: &types.GuardrailTopicPolicyConfig{
+			TopicsConfig: []types.GuardrailTopicConfig{
+				{
+					Name:       ptr.String("__Name__"),
+					Definition: ptr.String("__Definition__"),
+					Examples: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Type:          types.GuardrailTopicType("DENY"),
+					InputAction:   types.GuardrailTopicAction("BLOCK"),
+					OutputAction:  types.GuardrailTopicAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+				{
+					Name:       ptr.String("__Name__"),
+					Definition: ptr.String("__Definition__"),
+					Examples: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Type:          types.GuardrailTopicType("DENY"),
+					InputAction:   types.GuardrailTopicAction("BLOCK"),
+					OutputAction:  types.GuardrailTopicAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+			},
+			TierConfig: &types.GuardrailTopicsTierConfig{
+				TierName: types.GuardrailTopicsTierName("CLASSIC"),
+			},
+		},
+		ContentPolicyConfig: &types.GuardrailContentPolicyConfig{
+			FiltersConfig: []types.GuardrailContentFilterConfig{
+				{
+					Type:           types.GuardrailContentFilterType("SEXUAL"),
+					InputStrength:  types.GuardrailFilterStrength("NONE"),
+					OutputStrength: types.GuardrailFilterStrength("NONE"),
+					InputModalities: []types.GuardrailModality{
+						types.GuardrailModality("TEXT"),
+						types.GuardrailModality("TEXT"),
+					},
+					OutputModalities: []types.GuardrailModality{
+						types.GuardrailModality("TEXT"),
+						types.GuardrailModality("TEXT"),
+					},
+					InputAction:   types.GuardrailContentFilterAction("BLOCK"),
+					OutputAction:  types.GuardrailContentFilterAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+				{
+					Type:           types.GuardrailContentFilterType("SEXUAL"),
+					InputStrength:  types.GuardrailFilterStrength("NONE"),
+					OutputStrength: types.GuardrailFilterStrength("NONE"),
+					InputModalities: []types.GuardrailModality{
+						types.GuardrailModality("TEXT"),
+						types.GuardrailModality("TEXT"),
+					},
+					OutputModalities: []types.GuardrailModality{
+						types.GuardrailModality("TEXT"),
+						types.GuardrailModality("TEXT"),
+					},
+					InputAction:   types.GuardrailContentFilterAction("BLOCK"),
+					OutputAction:  types.GuardrailContentFilterAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+			},
+			TierConfig: &types.GuardrailContentFiltersTierConfig{
+				TierName: types.GuardrailContentFiltersTierName("CLASSIC"),
+			},
+		},
+		WordPolicyConfig: &types.GuardrailWordPolicyConfig{
+			WordsConfig: []types.GuardrailWordConfig{
+				{
+					Text:          ptr.String("__Text__"),
+					InputAction:   types.GuardrailWordAction("BLOCK"),
+					OutputAction:  types.GuardrailWordAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+				{
+					Text:          ptr.String("__Text__"),
+					InputAction:   types.GuardrailWordAction("BLOCK"),
+					OutputAction:  types.GuardrailWordAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+			},
+			ManagedWordListsConfig: []types.GuardrailManagedWordsConfig{
+				{
+					Type:          types.GuardrailManagedWordsType("PROFANITY"),
+					InputAction:   types.GuardrailWordAction("BLOCK"),
+					OutputAction:  types.GuardrailWordAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+				{
+					Type:          types.GuardrailManagedWordsType("PROFANITY"),
+					InputAction:   types.GuardrailWordAction("BLOCK"),
+					OutputAction:  types.GuardrailWordAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+			},
+		},
+		SensitiveInformationPolicyConfig: &types.GuardrailSensitiveInformationPolicyConfig{
+			PiiEntitiesConfig: []types.GuardrailPiiEntityConfig{
+				{
+					Type:          types.GuardrailPiiEntityType("ADDRESS"),
+					Action:        types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputAction:   types.GuardrailSensitiveInformationAction("BLOCK"),
+					OutputAction:  types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+				{
+					Type:          types.GuardrailPiiEntityType("ADDRESS"),
+					Action:        types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputAction:   types.GuardrailSensitiveInformationAction("BLOCK"),
+					OutputAction:  types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+			},
+			RegexesConfig: []types.GuardrailRegexConfig{
+				{
+					Name:          ptr.String("__Name__"),
+					Description:   ptr.String("__Description__"),
+					Pattern:       ptr.String("__Pattern__"),
+					Action:        types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputAction:   types.GuardrailSensitiveInformationAction("BLOCK"),
+					OutputAction:  types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+				{
+					Name:          ptr.String("__Name__"),
+					Description:   ptr.String("__Description__"),
+					Pattern:       ptr.String("__Pattern__"),
+					Action:        types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputAction:   types.GuardrailSensitiveInformationAction("BLOCK"),
+					OutputAction:  types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+			},
+		},
+		ContextualGroundingPolicyConfig: &types.GuardrailContextualGroundingPolicyConfig{
+			FiltersConfig: []types.GuardrailContextualGroundingFilterConfig{
+				{
+					Type:      types.GuardrailContextualGroundingFilterType("GROUNDING"),
+					Threshold: ptr.Float64(1.0),
+					Action:    types.GuardrailContextualGroundingAction("BLOCK"),
+					Enabled:   ptr.Bool(true),
+				},
+				{
+					Type:      types.GuardrailContextualGroundingFilterType("GROUNDING"),
+					Threshold: ptr.Float64(1.0),
+					Action:    types.GuardrailContextualGroundingAction("BLOCK"),
+					Enabled:   ptr.Bool(true),
+				},
+			},
+		},
+		AutomatedReasoningPolicyConfig: &types.GuardrailAutomatedReasoningPolicyConfig{
+			Policies: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ConfidenceThreshold: ptr.Float64(1.0),
+		},
+		CrossRegionConfig: &types.GuardrailCrossRegionConfig{
+			GuardrailProfileIdentifier: ptr.String("__GuardrailProfileIdentifier__"),
+		},
+		BlockedInputMessaging:   ptr.String("__BlockedInputMessaging__"),
+		BlockedOutputsMessaging: ptr.String("__BlockedOutputsMessaging__"),
+		KmsKeyId:                ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -428,7 +961,11 @@ func TestCheckResponseSnapshot_CreateGuardrailVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGuardrailVersion(context.Background(), &CreateGuardrailVersionInput{})
+	got, err := svc.CreateGuardrailVersion(context.Background(), &CreateGuardrailVersionInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		Description:         ptr.String("__Description__"),
+		ClientRequestToken:  ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -450,7 +987,24 @@ func TestCheckResponseSnapshot_CreateInferenceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInferenceProfile(context.Background(), &CreateInferenceProfileInput{})
+	got, err := svc.CreateInferenceProfile(context.Background(), &CreateInferenceProfileInput{
+		InferenceProfileName: ptr.String("__InferenceProfileName__"),
+		Description:          ptr.String("__Description__"),
+		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
+		ModelSource: &types.InferenceProfileModelSourceMemberCopyFrom{
+			Value: "__InferenceProfileModelSourceMemberCopyFrom__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -498,7 +1052,40 @@ func TestCheckResponseSnapshot_CreateMarketplaceModelEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMarketplaceModelEndpoint(context.Background(), &CreateMarketplaceModelEndpointInput{})
+	got, err := svc.CreateMarketplaceModelEndpoint(context.Background(), &CreateMarketplaceModelEndpointInput{
+		ModelSourceIdentifier: ptr.String("__ModelSourceIdentifier__"),
+		EndpointConfig: &types.EndpointConfigMemberSageMaker{
+			Value: types.SageMakerEndpoint{
+				InitialInstanceCount: ptr.Int32(1),
+				InstanceType:         ptr.String("__InstanceType__"),
+				ExecutionRole:        ptr.String("__ExecutionRole__"),
+				KmsEncryptionKey:     ptr.String("__KmsEncryptionKey__"),
+				Vpc: &types.VpcConfig{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AcceptEula:         true,
+		EndpointName:       ptr.String("__EndpointName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -519,7 +1106,22 @@ func TestCheckResponseSnapshot_CreateModelCopyJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateModelCopyJob(context.Background(), &CreateModelCopyJobInput{})
+	got, err := svc.CreateModelCopyJob(context.Background(), &CreateModelCopyJobInput{
+		SourceModelArn:  ptr.String("__SourceModelArn__"),
+		TargetModelName: ptr.String("__TargetModelName__"),
+		ModelKmsKeyId:   ptr.String("__ModelKmsKeyId__"),
+		TargetModelTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -540,7 +1142,83 @@ func TestCheckResponseSnapshot_CreateModelCustomizationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateModelCustomizationJob(context.Background(), &CreateModelCustomizationJobInput{})
+	got, err := svc.CreateModelCustomizationJob(context.Background(), &CreateModelCustomizationJobInput{
+		JobName:             ptr.String("__JobName__"),
+		CustomModelName:     ptr.String("__CustomModelName__"),
+		RoleArn:             ptr.String("__RoleArn__"),
+		ClientRequestToken:  ptr.String("__ClientRequestToken__"),
+		BaseModelIdentifier: ptr.String("__BaseModelIdentifier__"),
+		CustomizationType:   types.CustomizationType("FINE_TUNING"),
+		CustomModelKmsKeyId: ptr.String("__CustomModelKmsKeyId__"),
+		JobTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CustomModelTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TrainingDataConfig: &types.TrainingDataConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+			InvocationLogsConfig: &types.InvocationLogsConfig{
+				UsePromptResponse: true,
+				InvocationLogSource: &types.InvocationLogSourceMemberS3Uri{
+					Value: "__InvocationLogSourceMemberS3Uri__",
+				},
+				RequestMetadataFilters: &types.RequestMetadataFiltersMemberEquals{
+					Value: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		ValidationDataConfig: &types.ValidationDataConfig{
+			Validators: []types.Validator{
+				{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+				{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+			},
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		HyperParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CustomizationConfig: &types.CustomizationConfigMemberDistillationConfig{
+			Value: types.DistillationConfig{
+				TeacherModelConfig: &types.TeacherModelConfig{
+					TeacherModelIdentifier:        ptr.String("__TeacherModelIdentifier__"),
+					MaxResponseLengthForInference: ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -561,7 +1239,48 @@ func TestCheckResponseSnapshot_CreateModelImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateModelImportJob(context.Background(), &CreateModelImportJobInput{})
+	got, err := svc.CreateModelImportJob(context.Background(), &CreateModelImportJobInput{
+		JobName:           ptr.String("__JobName__"),
+		ImportedModelName: ptr.String("__ImportedModelName__"),
+		RoleArn:           ptr.String("__RoleArn__"),
+		ModelDataSource: &types.ModelDataSourceMemberS3DataSource{
+			Value: types.S3DataSource{
+				S3Uri: ptr.String("__S3Uri__"),
+			},
+		},
+		JobTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ImportedModelTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ImportedModelKmsKeyId: ptr.String("__ImportedModelKmsKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -582,7 +1301,48 @@ func TestCheckResponseSnapshot_CreateModelInvocationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateModelInvocationJob(context.Background(), &CreateModelInvocationJobInput{})
+	got, err := svc.CreateModelInvocationJob(context.Background(), &CreateModelInvocationJobInput{
+		JobName:            ptr.String("__JobName__"),
+		RoleArn:            ptr.String("__RoleArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ModelId:            ptr.String("__ModelId__"),
+		InputDataConfig: &types.ModelInvocationJobInputDataConfigMemberS3InputDataConfig{
+			Value: types.ModelInvocationJobS3InputDataConfig{
+				S3InputFormat: types.S3InputFormat("JSONL"),
+				S3Uri:         ptr.String("__S3Uri__"),
+				S3BucketOwner: ptr.String("__S3BucketOwner__"),
+			},
+		},
+		OutputDataConfig: &types.ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig{
+			Value: types.ModelInvocationJobS3OutputDataConfig{
+				S3Uri:             ptr.String("__S3Uri__"),
+				S3EncryptionKeyId: ptr.String("__S3EncryptionKeyId__"),
+				S3BucketOwner:     ptr.String("__S3BucketOwner__"),
+			},
+		},
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		TimeoutDurationInHours: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ModelInvocationType: types.ModelInvocationType("InvokeModel"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -603,7 +1363,35 @@ func TestCheckResponseSnapshot_CreatePromptRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePromptRouter(context.Background(), &CreatePromptRouterInput{})
+	got, err := svc.CreatePromptRouter(context.Background(), &CreatePromptRouterInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		PromptRouterName:   ptr.String("__PromptRouterName__"),
+		Models: []types.PromptRouterTargetModel{
+			{
+				ModelArn: ptr.String("__ModelArn__"),
+			},
+			{
+				ModelArn: ptr.String("__ModelArn__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		RoutingCriteria: &types.RoutingCriteria{
+			ResponseQualityDifference: ptr.Float64(1.0),
+		},
+		FallbackModel: &types.PromptRouterTargetModel{
+			ModelArn: ptr.String("__ModelArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -624,7 +1412,23 @@ func TestCheckResponseSnapshot_CreateProvisionedModelThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProvisionedModelThroughput(context.Background(), &CreateProvisionedModelThroughputInput{})
+	got, err := svc.CreateProvisionedModelThroughput(context.Background(), &CreateProvisionedModelThroughputInput{
+		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
+		ModelUnits:           ptr.Int32(1),
+		ProvisionedModelName: ptr.String("__ProvisionedModelName__"),
+		ModelId:              ptr.String("__ModelId__"),
+		CommitmentDuration:   types.CommitmentDuration("OneMonth"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -643,7 +1447,10 @@ func TestCheckResponseSnapshot_DeleteAutomatedReasoningPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAutomatedReasoningPolicy(context.Background(), &DeleteAutomatedReasoningPolicyInput{})
+	got, err := svc.DeleteAutomatedReasoningPolicy(context.Background(), &DeleteAutomatedReasoningPolicyInput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+		Force:     true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -662,7 +1469,11 @@ func TestCheckResponseSnapshot_DeleteAutomatedReasoningPolicyBuildWorkflow(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAutomatedReasoningPolicyBuildWorkflow(context.Background(), &DeleteAutomatedReasoningPolicyBuildWorkflowInput{})
+	got, err := svc.DeleteAutomatedReasoningPolicyBuildWorkflow(context.Background(), &DeleteAutomatedReasoningPolicyBuildWorkflowInput{
+		PolicyArn:       ptr.String("__PolicyArn__"),
+		BuildWorkflowId: ptr.String("__BuildWorkflowId__"),
+		LastUpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -681,7 +1492,11 @@ func TestCheckResponseSnapshot_DeleteAutomatedReasoningPolicyTestCase(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAutomatedReasoningPolicyTestCase(context.Background(), &DeleteAutomatedReasoningPolicyTestCaseInput{})
+	got, err := svc.DeleteAutomatedReasoningPolicyTestCase(context.Background(), &DeleteAutomatedReasoningPolicyTestCaseInput{
+		PolicyArn:     ptr.String("__PolicyArn__"),
+		TestCaseId:    ptr.String("__TestCaseId__"),
+		LastUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -700,7 +1515,9 @@ func TestCheckResponseSnapshot_DeleteCustomModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomModel(context.Background(), &DeleteCustomModelInput{})
+	got, err := svc.DeleteCustomModel(context.Background(), &DeleteCustomModelInput{
+		ModelIdentifier: ptr.String("__ModelIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -719,7 +1536,9 @@ func TestCheckResponseSnapshot_DeleteCustomModelDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomModelDeployment(context.Background(), &DeleteCustomModelDeploymentInput{})
+	got, err := svc.DeleteCustomModelDeployment(context.Background(), &DeleteCustomModelDeploymentInput{
+		CustomModelDeploymentIdentifier: ptr.String("__CustomModelDeploymentIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -738,7 +1557,9 @@ func TestCheckResponseSnapshot_DeleteEnforcedGuardrailConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnforcedGuardrailConfiguration(context.Background(), &DeleteEnforcedGuardrailConfigurationInput{})
+	got, err := svc.DeleteEnforcedGuardrailConfiguration(context.Background(), &DeleteEnforcedGuardrailConfigurationInput{
+		ConfigId: ptr.String("__ConfigId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -757,7 +1578,9 @@ func TestCheckResponseSnapshot_DeleteFoundationModelAgreement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFoundationModelAgreement(context.Background(), &DeleteFoundationModelAgreementInput{})
+	got, err := svc.DeleteFoundationModelAgreement(context.Background(), &DeleteFoundationModelAgreementInput{
+		ModelId: ptr.String("__ModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -776,7 +1599,10 @@ func TestCheckResponseSnapshot_DeleteGuardrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGuardrail(context.Background(), &DeleteGuardrailInput{})
+	got, err := svc.DeleteGuardrail(context.Background(), &DeleteGuardrailInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -795,7 +1621,9 @@ func TestCheckResponseSnapshot_DeleteImportedModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImportedModel(context.Background(), &DeleteImportedModelInput{})
+	got, err := svc.DeleteImportedModel(context.Background(), &DeleteImportedModelInput{
+		ModelIdentifier: ptr.String("__ModelIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -814,7 +1642,9 @@ func TestCheckResponseSnapshot_DeleteInferenceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInferenceProfile(context.Background(), &DeleteInferenceProfileInput{})
+	got, err := svc.DeleteInferenceProfile(context.Background(), &DeleteInferenceProfileInput{
+		InferenceProfileIdentifier: ptr.String("__InferenceProfileIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -833,7 +1663,9 @@ func TestCheckResponseSnapshot_DeleteMarketplaceModelEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMarketplaceModelEndpoint(context.Background(), &DeleteMarketplaceModelEndpointInput{})
+	got, err := svc.DeleteMarketplaceModelEndpoint(context.Background(), &DeleteMarketplaceModelEndpointInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -871,7 +1703,9 @@ func TestCheckResponseSnapshot_DeletePromptRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePromptRouter(context.Background(), &DeletePromptRouterInput{})
+	got, err := svc.DeletePromptRouter(context.Background(), &DeletePromptRouterInput{
+		PromptRouterArn: ptr.String("__PromptRouterArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -890,7 +1724,9 @@ func TestCheckResponseSnapshot_DeleteProvisionedModelThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProvisionedModelThroughput(context.Background(), &DeleteProvisionedModelThroughputInput{})
+	got, err := svc.DeleteProvisionedModelThroughput(context.Background(), &DeleteProvisionedModelThroughputInput{
+		ProvisionedModelId: ptr.String("__ProvisionedModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -909,7 +1745,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -928,7 +1766,9 @@ func TestCheckResponseSnapshot_DeregisterMarketplaceModelEndpoint(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterMarketplaceModelEndpoint(context.Background(), &DeregisterMarketplaceModelEndpointInput{})
+	got, err := svc.DeregisterMarketplaceModelEndpoint(context.Background(), &DeregisterMarketplaceModelEndpointInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1005,7 +1845,9 @@ func TestCheckResponseSnapshot_ExportAutomatedReasoningPolicyVersion(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportAutomatedReasoningPolicyVersion(context.Background(), &ExportAutomatedReasoningPolicyVersionInput{})
+	got, err := svc.ExportAutomatedReasoningPolicyVersion(context.Background(), &ExportAutomatedReasoningPolicyVersionInput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1065,7 +1907,7 @@ func TestCheckResponseSnapshot_GetAdvancedPromptOptimizationJob(t *testing.T) {
 					},
 				},
 				AdditionalModelRequestFields: map[string]document.Interface{
-					"key0": nil,
+					"key0": document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -1080,7 +1922,7 @@ func TestCheckResponseSnapshot_GetAdvancedPromptOptimizationJob(t *testing.T) {
 					},
 				},
 				AdditionalModelRequestFields: map[string]document.Interface{
-					"key0": nil,
+					"key0": document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -1093,7 +1935,9 @@ func TestCheckResponseSnapshot_GetAdvancedPromptOptimizationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAdvancedPromptOptimizationJob(context.Background(), &GetAdvancedPromptOptimizationJobInput{})
+	got, err := svc.GetAdvancedPromptOptimizationJob(context.Background(), &GetAdvancedPromptOptimizationJobInput{
+		JobIdentifier: ptr.String("__JobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1122,7 +1966,9 @@ func TestCheckResponseSnapshot_GetAutomatedReasoningPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutomatedReasoningPolicy(context.Background(), &GetAutomatedReasoningPolicyInput{})
+	got, err := svc.GetAutomatedReasoningPolicy(context.Background(), &GetAutomatedReasoningPolicyInput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1181,7 +2027,10 @@ func TestCheckResponseSnapshot_GetAutomatedReasoningPolicyAnnotations(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutomatedReasoningPolicyAnnotations(context.Background(), &GetAutomatedReasoningPolicyAnnotationsInput{})
+	got, err := svc.GetAutomatedReasoningPolicyAnnotations(context.Background(), &GetAutomatedReasoningPolicyAnnotationsInput{
+		PolicyArn:       ptr.String("__PolicyArn__"),
+		BuildWorkflowId: ptr.String("__BuildWorkflowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1210,7 +2059,10 @@ func TestCheckResponseSnapshot_GetAutomatedReasoningPolicyBuildWorkflow(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutomatedReasoningPolicyBuildWorkflow(context.Background(), &GetAutomatedReasoningPolicyBuildWorkflowInput{})
+	got, err := svc.GetAutomatedReasoningPolicyBuildWorkflow(context.Background(), &GetAutomatedReasoningPolicyBuildWorkflowInput{
+		PolicyArn:       ptr.String("__PolicyArn__"),
+		BuildWorkflowId: ptr.String("__BuildWorkflowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1291,7 +2143,12 @@ func TestCheckResponseSnapshot_GetAutomatedReasoningPolicyBuildWorkflowResultAss
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutomatedReasoningPolicyBuildWorkflowResultAssets(context.Background(), &GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput{})
+	got, err := svc.GetAutomatedReasoningPolicyBuildWorkflowResultAssets(context.Background(), &GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput{
+		PolicyArn:       ptr.String("__PolicyArn__"),
+		BuildWorkflowId: ptr.String("__BuildWorkflowId__"),
+		AssetType:       types.AutomatedReasoningPolicyBuildResultAssetType("BUILD_LOG"),
+		AssetId:         ptr.String("__AssetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1321,7 +2178,10 @@ func TestCheckResponseSnapshot_GetAutomatedReasoningPolicyNextScenario(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutomatedReasoningPolicyNextScenario(context.Background(), &GetAutomatedReasoningPolicyNextScenarioInput{})
+	got, err := svc.GetAutomatedReasoningPolicyNextScenario(context.Background(), &GetAutomatedReasoningPolicyNextScenarioInput{
+		PolicyArn:       ptr.String("__PolicyArn__"),
+		BuildWorkflowId: ptr.String("__BuildWorkflowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1351,7 +2211,10 @@ func TestCheckResponseSnapshot_GetAutomatedReasoningPolicyTestCase(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutomatedReasoningPolicyTestCase(context.Background(), &GetAutomatedReasoningPolicyTestCaseInput{})
+	got, err := svc.GetAutomatedReasoningPolicyTestCase(context.Background(), &GetAutomatedReasoningPolicyTestCaseInput{
+		PolicyArn:  ptr.String("__PolicyArn__"),
+		TestCaseId: ptr.String("__TestCaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1565,7 +2428,11 @@ func TestCheckResponseSnapshot_GetAutomatedReasoningPolicyTestResult(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutomatedReasoningPolicyTestResult(context.Background(), &GetAutomatedReasoningPolicyTestResultInput{})
+	got, err := svc.GetAutomatedReasoningPolicyTestResult(context.Background(), &GetAutomatedReasoningPolicyTestResultInput{
+		PolicyArn:       ptr.String("__PolicyArn__"),
+		BuildWorkflowId: ptr.String("__BuildWorkflowId__"),
+		TestCaseId:      ptr.String("__TestCaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1644,7 +2511,9 @@ func TestCheckResponseSnapshot_GetCustomModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCustomModel(context.Background(), &GetCustomModelInput{})
+	got, err := svc.GetCustomModel(context.Background(), &GetCustomModelInput{
+		ModelIdentifier: ptr.String("__ModelIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1676,7 +2545,9 @@ func TestCheckResponseSnapshot_GetCustomModelDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCustomModelDeployment(context.Background(), &GetCustomModelDeploymentInput{})
+	got, err := svc.GetCustomModelDeployment(context.Background(), &GetCustomModelDeploymentInput{
+		CustomModelDeploymentIdentifier: ptr.String("__CustomModelDeploymentIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1831,7 +2702,9 @@ func TestCheckResponseSnapshot_GetEvaluationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEvaluationJob(context.Background(), &GetEvaluationJobInput{})
+	got, err := svc.GetEvaluationJob(context.Background(), &GetEvaluationJobInput{
+		JobIdentifier: ptr.String("__JobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1881,7 +2754,9 @@ func TestCheckResponseSnapshot_GetFoundationModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFoundationModel(context.Background(), &GetFoundationModelInput{})
+	got, err := svc.GetFoundationModel(context.Background(), &GetFoundationModelInput{
+		ModelIdentifier: ptr.String("__ModelIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1909,7 +2784,9 @@ func TestCheckResponseSnapshot_GetFoundationModelAvailability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFoundationModelAvailability(context.Background(), &GetFoundationModelAvailabilityInput{})
+	got, err := svc.GetFoundationModelAvailability(context.Background(), &GetFoundationModelAvailabilityInput{
+		ModelId: ptr.String("__ModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2125,7 +3002,10 @@ func TestCheckResponseSnapshot_GetGuardrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGuardrail(context.Background(), &GetGuardrailInput{})
+	got, err := svc.GetGuardrail(context.Background(), &GetGuardrailInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2162,7 +3042,9 @@ func TestCheckResponseSnapshot_GetImportedModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImportedModel(context.Background(), &GetImportedModelInput{})
+	got, err := svc.GetImportedModel(context.Background(), &GetImportedModelInput{
+		ModelIdentifier: ptr.String("__ModelIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2198,7 +3080,9 @@ func TestCheckResponseSnapshot_GetInferenceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInferenceProfile(context.Background(), &GetInferenceProfileInput{})
+	got, err := svc.GetInferenceProfile(context.Background(), &GetInferenceProfileInput{
+		InferenceProfileIdentifier: ptr.String("__InferenceProfileIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2246,7 +3130,9 @@ func TestCheckResponseSnapshot_GetMarketplaceModelEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMarketplaceModelEndpoint(context.Background(), &GetMarketplaceModelEndpointInput{})
+	got, err := svc.GetMarketplaceModelEndpoint(context.Background(), &GetMarketplaceModelEndpointInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2286,7 +3172,9 @@ func TestCheckResponseSnapshot_GetModelCopyJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModelCopyJob(context.Background(), &GetModelCopyJobInput{})
+	got, err := svc.GetModelCopyJob(context.Background(), &GetModelCopyJobInput{
+		JobArn: ptr.String("__JobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2396,7 +3284,9 @@ func TestCheckResponseSnapshot_GetModelCustomizationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModelCustomizationJob(context.Background(), &GetModelCustomizationJobInput{})
+	got, err := svc.GetModelCustomizationJob(context.Background(), &GetModelCustomizationJobInput{
+		JobIdentifier: ptr.String("__JobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2442,7 +3332,9 @@ func TestCheckResponseSnapshot_GetModelImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModelImportJob(context.Background(), &GetModelImportJobInput{})
+	got, err := svc.GetModelImportJob(context.Background(), &GetModelImportJobInput{
+		JobIdentifier: ptr.String("__JobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2503,7 +3395,9 @@ func TestCheckResponseSnapshot_GetModelInvocationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModelInvocationJob(context.Background(), &GetModelInvocationJobInput{})
+	got, err := svc.GetModelInvocationJob(context.Background(), &GetModelInvocationJobInput{
+		JobIdentifier: ptr.String("__JobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2583,7 +3477,9 @@ func TestCheckResponseSnapshot_GetPromptRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPromptRouter(context.Background(), &GetPromptRouterInput{})
+	got, err := svc.GetPromptRouter(context.Background(), &GetPromptRouterInput{
+		PromptRouterArn: ptr.String("__PromptRouterArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2616,7 +3512,9 @@ func TestCheckResponseSnapshot_GetProvisionedModelThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProvisionedModelThroughput(context.Background(), &GetProvisionedModelThroughputInput{})
+	got, err := svc.GetProvisionedModelThroughput(context.Background(), &GetProvisionedModelThroughputInput{
+		ProvisionedModelId: ptr.String("__ProvisionedModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2637,7 +3535,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2695,7 +3595,12 @@ func TestCheckResponseSnapshot_ListAdvancedPromptOptimizationJobs(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAdvancedPromptOptimizationJobs(context.Background(), &ListAdvancedPromptOptimizationJobsInput{})
+	got, err := svc.ListAdvancedPromptOptimizationJobs(context.Background(), &ListAdvancedPromptOptimizationJobsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SortBy:     types.SortJobsBy("CreationTime"),
+		SortOrder:  types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2736,7 +3641,11 @@ func TestCheckResponseSnapshot_ListAutomatedReasoningPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutomatedReasoningPolicies(context.Background(), &ListAutomatedReasoningPoliciesInput{})
+	got, err := svc.ListAutomatedReasoningPolicies(context.Background(), &ListAutomatedReasoningPoliciesInput{
+		PolicyArn:  ptr.String("__PolicyArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2775,7 +3684,11 @@ func TestCheckResponseSnapshot_ListAutomatedReasoningPolicyBuildWorkflows(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutomatedReasoningPolicyBuildWorkflows(context.Background(), &ListAutomatedReasoningPolicyBuildWorkflowsInput{})
+	got, err := svc.ListAutomatedReasoningPolicyBuildWorkflows(context.Background(), &ListAutomatedReasoningPolicyBuildWorkflowsInput{
+		PolicyArn:  ptr.String("__PolicyArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2816,7 +3729,11 @@ func TestCheckResponseSnapshot_ListAutomatedReasoningPolicyTestCases(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutomatedReasoningPolicyTestCases(context.Background(), &ListAutomatedReasoningPolicyTestCasesInput{})
+	got, err := svc.ListAutomatedReasoningPolicyTestCases(context.Background(), &ListAutomatedReasoningPolicyTestCasesInput{
+		PolicyArn:  ptr.String("__PolicyArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3227,7 +4144,12 @@ func TestCheckResponseSnapshot_ListAutomatedReasoningPolicyTestResults(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutomatedReasoningPolicyTestResults(context.Background(), &ListAutomatedReasoningPolicyTestResultsInput{})
+	got, err := svc.ListAutomatedReasoningPolicyTestResults(context.Background(), &ListAutomatedReasoningPolicyTestResultsInput{
+		PolicyArn:       ptr.String("__PolicyArn__"),
+		BuildWorkflowId: ptr.String("__BuildWorkflowId__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3268,7 +4190,17 @@ func TestCheckResponseSnapshot_ListCustomModelDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomModelDeployments(context.Background(), &ListCustomModelDeploymentsInput{})
+	got, err := svc.ListCustomModelDeployments(context.Background(), &ListCustomModelDeploymentsInput{
+		CreatedBefore:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAfter:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NameContains:   ptr.String("__NameContains__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+		SortBy:         types.SortModelsBy("CreationTime"),
+		SortOrder:      types.SortOrder("Ascending"),
+		StatusEquals:   types.CustomModelDeploymentStatus("Creating"),
+		ModelArnEquals: ptr.String("__ModelArnEquals__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3311,7 +4243,19 @@ func TestCheckResponseSnapshot_ListCustomModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomModels(context.Background(), &ListCustomModelsInput{})
+	got, err := svc.ListCustomModels(context.Background(), &ListCustomModelsInput{
+		CreationTimeBefore:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeAfter:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NameContains:             ptr.String("__NameContains__"),
+		BaseModelArnEquals:       ptr.String("__BaseModelArnEquals__"),
+		FoundationModelArnEquals: ptr.String("__FoundationModelArnEquals__"),
+		MaxResults:               ptr.Int32(1),
+		NextToken:                ptr.String("__NextToken__"),
+		SortBy:                   types.SortModelsBy("CreationTime"),
+		SortOrder:                types.SortOrder("Ascending"),
+		IsOwned:                  ptr.Bool(true),
+		ModelStatus:              types.ModelStatus("Active"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3386,7 +4330,9 @@ func TestCheckResponseSnapshot_ListEnforcedGuardrailsConfiguration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnforcedGuardrailsConfiguration(context.Background(), &ListEnforcedGuardrailsConfigurationInput{})
+	got, err := svc.ListEnforcedGuardrailsConfiguration(context.Background(), &ListEnforcedGuardrailsConfigurationInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3509,7 +4455,17 @@ func TestCheckResponseSnapshot_ListEvaluationJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEvaluationJobs(context.Background(), &ListEvaluationJobsInput{})
+	got, err := svc.ListEvaluationJobs(context.Background(), &ListEvaluationJobsInput{
+		CreationTimeAfter:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StatusEquals:          types.EvaluationJobStatus("InProgress"),
+		ApplicationTypeEquals: types.ApplicationType("ModelEvaluation"),
+		NameContains:          ptr.String("__NameContains__"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+		SortBy:                types.SortJobsBy("CreationTime"),
+		SortOrder:             types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3594,7 +4550,10 @@ func TestCheckResponseSnapshot_ListFoundationModelAgreementOffers(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFoundationModelAgreementOffers(context.Background(), &ListFoundationModelAgreementOffersInput{})
+	got, err := svc.ListFoundationModelAgreementOffers(context.Background(), &ListFoundationModelAgreementOffersInput{
+		ModelId:   ptr.String("__ModelId__"),
+		OfferType: types.OfferType("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3676,7 +4635,12 @@ func TestCheckResponseSnapshot_ListFoundationModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFoundationModels(context.Background(), &ListFoundationModelsInput{})
+	got, err := svc.ListFoundationModels(context.Background(), &ListFoundationModelsInput{
+		ByProvider:          ptr.String("__ByProvider__"),
+		ByCustomizationType: types.ModelCustomization("FINE_TUNING"),
+		ByOutputModality:    types.ModelModality("TEXT"),
+		ByInferenceType:     types.InferenceType("ON_DEMAND"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3727,7 +4691,11 @@ func TestCheckResponseSnapshot_ListGuardrails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGuardrails(context.Background(), &ListGuardrailsInput{})
+	got, err := svc.ListGuardrails(context.Background(), &ListGuardrailsInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3764,7 +4732,15 @@ func TestCheckResponseSnapshot_ListImportedModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImportedModels(context.Background(), &ListImportedModelsInput{})
+	got, err := svc.ListImportedModels(context.Background(), &ListImportedModelsInput{
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NameContains:       ptr.String("__NameContains__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		SortBy:             types.SortModelsBy("CreationTime"),
+		SortOrder:          types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3823,7 +4799,11 @@ func TestCheckResponseSnapshot_ListInferenceProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInferenceProfiles(context.Background(), &ListInferenceProfilesInput{})
+	got, err := svc.ListInferenceProfiles(context.Background(), &ListInferenceProfilesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		TypeEquals: types.InferenceProfileType("SYSTEM_DEFINED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3862,7 +4842,11 @@ func TestCheckResponseSnapshot_ListMarketplaceModelEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMarketplaceModelEndpoints(context.Background(), &ListMarketplaceModelEndpointsInput{})
+	got, err := svc.ListMarketplaceModelEndpoints(context.Background(), &ListMarketplaceModelEndpointsInput{
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		ModelSourceEquals: ptr.String("__ModelSourceEquals__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3929,7 +4913,18 @@ func TestCheckResponseSnapshot_ListModelCopyJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListModelCopyJobs(context.Background(), &ListModelCopyJobsInput{})
+	got, err := svc.ListModelCopyJobs(context.Background(), &ListModelCopyJobsInput{
+		CreationTimeAfter:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StatusEquals:            types.ModelCopyJobStatus("InProgress"),
+		SourceAccountEquals:     ptr.String("__SourceAccountEquals__"),
+		SourceModelArnEquals:    ptr.String("__SourceModelArnEquals__"),
+		TargetModelNameContains: ptr.String("__TargetModelNameContains__"),
+		MaxResults:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+		SortBy:                  types.SortJobsBy("CreationTime"),
+		SortOrder:               types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4010,7 +5005,16 @@ func TestCheckResponseSnapshot_ListModelCustomizationJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListModelCustomizationJobs(context.Background(), &ListModelCustomizationJobsInput{})
+	got, err := svc.ListModelCustomizationJobs(context.Background(), &ListModelCustomizationJobsInput{
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StatusEquals:       types.FineTuningJobStatus("InProgress"),
+		NameContains:       ptr.String("__NameContains__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		SortBy:             types.SortJobsBy("CreationTime"),
+		SortOrder:          types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4053,7 +5057,16 @@ func TestCheckResponseSnapshot_ListModelImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListModelImportJobs(context.Background(), &ListModelImportJobsInput{})
+	got, err := svc.ListModelImportJobs(context.Background(), &ListModelImportJobsInput{
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StatusEquals:       types.ModelImportJobStatus("InProgress"),
+		NameContains:       ptr.String("__NameContains__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		SortBy:             types.SortJobsBy("CreationTime"),
+		SortOrder:          types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4162,7 +5175,16 @@ func TestCheckResponseSnapshot_ListModelInvocationJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListModelInvocationJobs(context.Background(), &ListModelInvocationJobsInput{})
+	got, err := svc.ListModelInvocationJobs(context.Background(), &ListModelInvocationJobsInput{
+		SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StatusEquals:     types.ModelInvocationJobStatus("Submitted"),
+		NameContains:     ptr.String("__NameContains__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		SortBy:           types.SortJobsBy("CreationTime"),
+		SortOrder:        types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4231,7 +5253,11 @@ func TestCheckResponseSnapshot_ListPromptRouters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPromptRouters(context.Background(), &ListPromptRoutersInput{})
+	got, err := svc.ListPromptRouters(context.Background(), &ListPromptRoutersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Type:       types.PromptRouterType("custom"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4282,7 +5308,17 @@ func TestCheckResponseSnapshot_ListProvisionedModelThroughputs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProvisionedModelThroughputs(context.Background(), &ListProvisionedModelThroughputsInput{})
+	got, err := svc.ListProvisionedModelThroughputs(context.Background(), &ListProvisionedModelThroughputsInput{
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StatusEquals:       types.ProvisionedModelStatus("Creating"),
+		ModelArnEquals:     ptr.String("__ModelArnEquals__"),
+		NameContains:       ptr.String("__NameContains__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		SortBy:             types.SortByProvisionedModels("CreationTime"),
+		SortOrder:          types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4312,7 +5348,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4334,7 +5372,9 @@ func TestCheckResponseSnapshot_PutAccountDataRetention(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountDataRetention(context.Background(), &PutAccountDataRetentionInput{})
+	got, err := svc.PutAccountDataRetention(context.Background(), &PutAccountDataRetentionInput{
+		Mode: types.DataRetentionMode("default"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4357,7 +5397,27 @@ func TestCheckResponseSnapshot_PutEnforcedGuardrailConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEnforcedGuardrailConfiguration(context.Background(), &PutEnforcedGuardrailConfigurationInput{})
+	got, err := svc.PutEnforcedGuardrailConfiguration(context.Background(), &PutEnforcedGuardrailConfigurationInput{
+		ConfigId: ptr.String("__ConfigId__"),
+		GuardrailInferenceConfig: &types.AccountEnforcedGuardrailInferenceInputConfiguration{
+			GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+			SelectiveContentGuarding: &types.SelectiveContentGuarding{
+				System:   types.SelectiveGuardingMode("SELECTIVE"),
+				Messages: types.SelectiveGuardingMode("SELECTIVE"),
+			},
+			ModelEnforcement: &types.ModelEnforcement{
+				IncludedModels: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedModels: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4376,7 +5436,27 @@ func TestCheckResponseSnapshot_PutModelInvocationLoggingConfiguration(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutModelInvocationLoggingConfiguration(context.Background(), &PutModelInvocationLoggingConfigurationInput{})
+	got, err := svc.PutModelInvocationLoggingConfiguration(context.Background(), &PutModelInvocationLoggingConfigurationInput{
+		LoggingConfig: &types.LoggingConfig{
+			CloudWatchConfig: &types.CloudWatchConfig{
+				LogGroupName: ptr.String("__LogGroupName__"),
+				RoleArn:      ptr.String("__RoleArn__"),
+				LargeDataDeliveryS3Config: &types.S3Config{
+					BucketName: ptr.String("__BucketName__"),
+					KeyPrefix:  ptr.String("__KeyPrefix__"),
+				},
+			},
+			S3Config: &types.S3Config{
+				BucketName: ptr.String("__BucketName__"),
+				KeyPrefix:  ptr.String("__KeyPrefix__"),
+			},
+			TextDataDeliveryEnabled:      ptr.Bool(true),
+			ImageDataDeliveryEnabled:     ptr.Bool(true),
+			EmbeddingDataDeliveryEnabled: ptr.Bool(true),
+			VideoDataDeliveryEnabled:     ptr.Bool(true),
+			AudioDataDeliveryEnabled:     ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4397,7 +5477,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn:    ptr.String("__ResourceArn__"),
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4416,7 +5499,9 @@ func TestCheckResponseSnapshot_PutUseCaseForModelAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutUseCaseForModelAccess(context.Background(), &PutUseCaseForModelAccessInput{})
+	got, err := svc.PutUseCaseForModelAccess(context.Background(), &PutUseCaseForModelAccessInput{
+		FormData: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4464,7 +5549,10 @@ func TestCheckResponseSnapshot_RegisterMarketplaceModelEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterMarketplaceModelEndpoint(context.Background(), &RegisterMarketplaceModelEndpointInput{})
+	got, err := svc.RegisterMarketplaceModelEndpoint(context.Background(), &RegisterMarketplaceModelEndpointInput{
+		EndpointIdentifier:    ptr.String("__EndpointIdentifier__"),
+		ModelSourceIdentifier: ptr.String("__ModelSourceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4486,7 +5574,86 @@ func TestCheckResponseSnapshot_StartAutomatedReasoningPolicyBuildWorkflow(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAutomatedReasoningPolicyBuildWorkflow(context.Background(), &StartAutomatedReasoningPolicyBuildWorkflowInput{})
+	got, err := svc.StartAutomatedReasoningPolicyBuildWorkflow(context.Background(), &StartAutomatedReasoningPolicyBuildWorkflowInput{
+		PolicyArn:          ptr.String("__PolicyArn__"),
+		BuildWorkflowType:  types.AutomatedReasoningPolicyBuildWorkflowType("INGEST_CONTENT"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SourceContent: &types.AutomatedReasoningPolicyBuildWorkflowSource{
+			PolicyDefinition: &types.AutomatedReasoningPolicyDefinition{
+				Version: ptr.String("__Version__"),
+				Types: []types.AutomatedReasoningPolicyDefinitionType{
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						Values: []types.AutomatedReasoningPolicyDefinitionTypeValue{
+							{
+								Value:       ptr.String("__Value__"),
+								Description: ptr.String("__Description__"),
+							},
+							{
+								Value:       ptr.String("__Value__"),
+								Description: ptr.String("__Description__"),
+							},
+						},
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						Values: []types.AutomatedReasoningPolicyDefinitionTypeValue{
+							{
+								Value:       ptr.String("__Value__"),
+								Description: ptr.String("__Description__"),
+							},
+							{
+								Value:       ptr.String("__Value__"),
+								Description: ptr.String("__Description__"),
+							},
+						},
+					},
+				},
+				Rules: []types.AutomatedReasoningPolicyDefinitionRule{
+					{
+						Id:                  ptr.String("__Id__"),
+						Expression:          ptr.String("__Expression__"),
+						AlternateExpression: ptr.String("__AlternateExpression__"),
+					},
+					{
+						Id:                  ptr.String("__Id__"),
+						Expression:          ptr.String("__Expression__"),
+						AlternateExpression: ptr.String("__AlternateExpression__"),
+					},
+				},
+				Variables: []types.AutomatedReasoningPolicyDefinitionVariable{
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        ptr.String("__Type__"),
+						Description: ptr.String("__Description__"),
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        ptr.String("__Type__"),
+						Description: ptr.String("__Description__"),
+					},
+				},
+			},
+			WorkflowContent: &types.AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments{
+				Value: []types.AutomatedReasoningPolicyBuildWorkflowDocument{
+					{
+						Document:            []byte("blob"),
+						DocumentContentType: types.AutomatedReasoningPolicyBuildDocumentContentType("pdf"),
+						DocumentName:        ptr.String("__DocumentName__"),
+						DocumentDescription: ptr.String("__DocumentDescription__"),
+					},
+					{
+						Document:            []byte("blob"),
+						DocumentContentType: types.AutomatedReasoningPolicyBuildDocumentContentType("pdf"),
+						DocumentName:        ptr.String("__DocumentName__"),
+						DocumentDescription: ptr.String("__DocumentDescription__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4507,7 +5674,15 @@ func TestCheckResponseSnapshot_StartAutomatedReasoningPolicyTestWorkflow(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAutomatedReasoningPolicyTestWorkflow(context.Background(), &StartAutomatedReasoningPolicyTestWorkflowInput{})
+	got, err := svc.StartAutomatedReasoningPolicyTestWorkflow(context.Background(), &StartAutomatedReasoningPolicyTestWorkflowInput{
+		PolicyArn:       ptr.String("__PolicyArn__"),
+		BuildWorkflowId: ptr.String("__BuildWorkflowId__"),
+		TestCaseIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4526,7 +5701,9 @@ func TestCheckResponseSnapshot_StopAdvancedPromptOptimizationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopAdvancedPromptOptimizationJob(context.Background(), &StopAdvancedPromptOptimizationJobInput{})
+	got, err := svc.StopAdvancedPromptOptimizationJob(context.Background(), &StopAdvancedPromptOptimizationJobInput{
+		JobIdentifier: ptr.String("__JobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4545,7 +5722,9 @@ func TestCheckResponseSnapshot_StopEvaluationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopEvaluationJob(context.Background(), &StopEvaluationJobInput{})
+	got, err := svc.StopEvaluationJob(context.Background(), &StopEvaluationJobInput{
+		JobIdentifier: ptr.String("__JobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4564,7 +5743,9 @@ func TestCheckResponseSnapshot_StopModelCustomizationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopModelCustomizationJob(context.Background(), &StopModelCustomizationJobInput{})
+	got, err := svc.StopModelCustomizationJob(context.Background(), &StopModelCustomizationJobInput{
+		JobIdentifier: ptr.String("__JobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4583,7 +5764,9 @@ func TestCheckResponseSnapshot_StopModelInvocationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopModelInvocationJob(context.Background(), &StopModelInvocationJobInput{})
+	got, err := svc.StopModelInvocationJob(context.Background(), &StopModelInvocationJobInput{
+		JobIdentifier: ptr.String("__JobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4602,7 +5785,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4621,7 +5816,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4645,7 +5846,68 @@ func TestCheckResponseSnapshot_UpdateAutomatedReasoningPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAutomatedReasoningPolicy(context.Background(), &UpdateAutomatedReasoningPolicyInput{})
+	got, err := svc.UpdateAutomatedReasoningPolicy(context.Background(), &UpdateAutomatedReasoningPolicyInput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+		PolicyDefinition: &types.AutomatedReasoningPolicyDefinition{
+			Version: ptr.String("__Version__"),
+			Types: []types.AutomatedReasoningPolicyDefinitionType{
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Values: []types.AutomatedReasoningPolicyDefinitionTypeValue{
+						{
+							Value:       ptr.String("__Value__"),
+							Description: ptr.String("__Description__"),
+						},
+						{
+							Value:       ptr.String("__Value__"),
+							Description: ptr.String("__Description__"),
+						},
+					},
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Values: []types.AutomatedReasoningPolicyDefinitionTypeValue{
+						{
+							Value:       ptr.String("__Value__"),
+							Description: ptr.String("__Description__"),
+						},
+						{
+							Value:       ptr.String("__Value__"),
+							Description: ptr.String("__Description__"),
+						},
+					},
+				},
+			},
+			Rules: []types.AutomatedReasoningPolicyDefinitionRule{
+				{
+					Id:                  ptr.String("__Id__"),
+					Expression:          ptr.String("__Expression__"),
+					AlternateExpression: ptr.String("__AlternateExpression__"),
+				},
+				{
+					Id:                  ptr.String("__Id__"),
+					Expression:          ptr.String("__Expression__"),
+					AlternateExpression: ptr.String("__AlternateExpression__"),
+				},
+			},
+			Variables: []types.AutomatedReasoningPolicyDefinitionVariable{
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        ptr.String("__Type__"),
+					Description: ptr.String("__Description__"),
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        ptr.String("__Type__"),
+					Description: ptr.String("__Description__"),
+				},
+			},
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4669,7 +5931,45 @@ func TestCheckResponseSnapshot_UpdateAutomatedReasoningPolicyAnnotations(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAutomatedReasoningPolicyAnnotations(context.Background(), &UpdateAutomatedReasoningPolicyAnnotationsInput{})
+	got, err := svc.UpdateAutomatedReasoningPolicyAnnotations(context.Background(), &UpdateAutomatedReasoningPolicyAnnotationsInput{
+		PolicyArn:       ptr.String("__PolicyArn__"),
+		BuildWorkflowId: ptr.String("__BuildWorkflowId__"),
+		Annotations: []types.AutomatedReasoningPolicyAnnotation{
+			&types.AutomatedReasoningPolicyAnnotationMemberAddType{
+				Value: types.AutomatedReasoningPolicyAddTypeAnnotation{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Values: []types.AutomatedReasoningPolicyDefinitionTypeValue{
+						{
+							Value:       ptr.String("__Value__"),
+							Description: ptr.String("__Description__"),
+						},
+						{
+							Value:       ptr.String("__Value__"),
+							Description: ptr.String("__Description__"),
+						},
+					},
+				},
+			},
+			&types.AutomatedReasoningPolicyAnnotationMemberAddType{
+				Value: types.AutomatedReasoningPolicyAddTypeAnnotation{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Values: []types.AutomatedReasoningPolicyDefinitionTypeValue{
+						{
+							Value:       ptr.String("__Value__"),
+							Description: ptr.String("__Description__"),
+						},
+						{
+							Value:       ptr.String("__Value__"),
+							Description: ptr.String("__Description__"),
+						},
+					},
+				},
+			},
+		},
+		LastUpdatedAnnotationSetHash: ptr.String("__LastUpdatedAnnotationSetHash__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4691,7 +5991,16 @@ func TestCheckResponseSnapshot_UpdateAutomatedReasoningPolicyTestCase(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAutomatedReasoningPolicyTestCase(context.Background(), &UpdateAutomatedReasoningPolicyTestCaseInput{})
+	got, err := svc.UpdateAutomatedReasoningPolicyTestCase(context.Background(), &UpdateAutomatedReasoningPolicyTestCaseInput{
+		PolicyArn:                        ptr.String("__PolicyArn__"),
+		TestCaseId:                       ptr.String("__TestCaseId__"),
+		GuardContent:                     ptr.String("__GuardContent__"),
+		QueryContent:                     ptr.String("__QueryContent__"),
+		LastUpdatedAt:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpectedAggregatedFindingsResult: types.AutomatedReasoningCheckResult("VALID"),
+		ConfidenceThreshold:              ptr.Float64(1.0),
+		ClientRequestToken:               ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4712,7 +6021,10 @@ func TestCheckResponseSnapshot_UpdateCustomModelDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCustomModelDeployment(context.Background(), &UpdateCustomModelDeploymentInput{})
+	got, err := svc.UpdateCustomModelDeployment(context.Background(), &UpdateCustomModelDeploymentInput{
+		ModelArn:                        ptr.String("__ModelArn__"),
+		CustomModelDeploymentIdentifier: ptr.String("__CustomModelDeploymentIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4736,7 +6048,190 @@ func TestCheckResponseSnapshot_UpdateGuardrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGuardrail(context.Background(), &UpdateGuardrailInput{})
+	got, err := svc.UpdateGuardrail(context.Background(), &UpdateGuardrailInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		Name:                ptr.String("__Name__"),
+		Description:         ptr.String("__Description__"),
+		TopicPolicyConfig: &types.GuardrailTopicPolicyConfig{
+			TopicsConfig: []types.GuardrailTopicConfig{
+				{
+					Name:       ptr.String("__Name__"),
+					Definition: ptr.String("__Definition__"),
+					Examples: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Type:          types.GuardrailTopicType("DENY"),
+					InputAction:   types.GuardrailTopicAction("BLOCK"),
+					OutputAction:  types.GuardrailTopicAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+				{
+					Name:       ptr.String("__Name__"),
+					Definition: ptr.String("__Definition__"),
+					Examples: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Type:          types.GuardrailTopicType("DENY"),
+					InputAction:   types.GuardrailTopicAction("BLOCK"),
+					OutputAction:  types.GuardrailTopicAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+			},
+			TierConfig: &types.GuardrailTopicsTierConfig{
+				TierName: types.GuardrailTopicsTierName("CLASSIC"),
+			},
+		},
+		ContentPolicyConfig: &types.GuardrailContentPolicyConfig{
+			FiltersConfig: []types.GuardrailContentFilterConfig{
+				{
+					Type:           types.GuardrailContentFilterType("SEXUAL"),
+					InputStrength:  types.GuardrailFilterStrength("NONE"),
+					OutputStrength: types.GuardrailFilterStrength("NONE"),
+					InputModalities: []types.GuardrailModality{
+						types.GuardrailModality("TEXT"),
+						types.GuardrailModality("TEXT"),
+					},
+					OutputModalities: []types.GuardrailModality{
+						types.GuardrailModality("TEXT"),
+						types.GuardrailModality("TEXT"),
+					},
+					InputAction:   types.GuardrailContentFilterAction("BLOCK"),
+					OutputAction:  types.GuardrailContentFilterAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+				{
+					Type:           types.GuardrailContentFilterType("SEXUAL"),
+					InputStrength:  types.GuardrailFilterStrength("NONE"),
+					OutputStrength: types.GuardrailFilterStrength("NONE"),
+					InputModalities: []types.GuardrailModality{
+						types.GuardrailModality("TEXT"),
+						types.GuardrailModality("TEXT"),
+					},
+					OutputModalities: []types.GuardrailModality{
+						types.GuardrailModality("TEXT"),
+						types.GuardrailModality("TEXT"),
+					},
+					InputAction:   types.GuardrailContentFilterAction("BLOCK"),
+					OutputAction:  types.GuardrailContentFilterAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+			},
+			TierConfig: &types.GuardrailContentFiltersTierConfig{
+				TierName: types.GuardrailContentFiltersTierName("CLASSIC"),
+			},
+		},
+		WordPolicyConfig: &types.GuardrailWordPolicyConfig{
+			WordsConfig: []types.GuardrailWordConfig{
+				{
+					Text:          ptr.String("__Text__"),
+					InputAction:   types.GuardrailWordAction("BLOCK"),
+					OutputAction:  types.GuardrailWordAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+				{
+					Text:          ptr.String("__Text__"),
+					InputAction:   types.GuardrailWordAction("BLOCK"),
+					OutputAction:  types.GuardrailWordAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+			},
+			ManagedWordListsConfig: []types.GuardrailManagedWordsConfig{
+				{
+					Type:          types.GuardrailManagedWordsType("PROFANITY"),
+					InputAction:   types.GuardrailWordAction("BLOCK"),
+					OutputAction:  types.GuardrailWordAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+				{
+					Type:          types.GuardrailManagedWordsType("PROFANITY"),
+					InputAction:   types.GuardrailWordAction("BLOCK"),
+					OutputAction:  types.GuardrailWordAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+			},
+		},
+		SensitiveInformationPolicyConfig: &types.GuardrailSensitiveInformationPolicyConfig{
+			PiiEntitiesConfig: []types.GuardrailPiiEntityConfig{
+				{
+					Type:          types.GuardrailPiiEntityType("ADDRESS"),
+					Action:        types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputAction:   types.GuardrailSensitiveInformationAction("BLOCK"),
+					OutputAction:  types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+				{
+					Type:          types.GuardrailPiiEntityType("ADDRESS"),
+					Action:        types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputAction:   types.GuardrailSensitiveInformationAction("BLOCK"),
+					OutputAction:  types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+			},
+			RegexesConfig: []types.GuardrailRegexConfig{
+				{
+					Name:          ptr.String("__Name__"),
+					Description:   ptr.String("__Description__"),
+					Pattern:       ptr.String("__Pattern__"),
+					Action:        types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputAction:   types.GuardrailSensitiveInformationAction("BLOCK"),
+					OutputAction:  types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+				{
+					Name:          ptr.String("__Name__"),
+					Description:   ptr.String("__Description__"),
+					Pattern:       ptr.String("__Pattern__"),
+					Action:        types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputAction:   types.GuardrailSensitiveInformationAction("BLOCK"),
+					OutputAction:  types.GuardrailSensitiveInformationAction("BLOCK"),
+					InputEnabled:  ptr.Bool(true),
+					OutputEnabled: ptr.Bool(true),
+				},
+			},
+		},
+		ContextualGroundingPolicyConfig: &types.GuardrailContextualGroundingPolicyConfig{
+			FiltersConfig: []types.GuardrailContextualGroundingFilterConfig{
+				{
+					Type:      types.GuardrailContextualGroundingFilterType("GROUNDING"),
+					Threshold: ptr.Float64(1.0),
+					Action:    types.GuardrailContextualGroundingAction("BLOCK"),
+					Enabled:   ptr.Bool(true),
+				},
+				{
+					Type:      types.GuardrailContextualGroundingFilterType("GROUNDING"),
+					Threshold: ptr.Float64(1.0),
+					Action:    types.GuardrailContextualGroundingAction("BLOCK"),
+					Enabled:   ptr.Bool(true),
+				},
+			},
+		},
+		AutomatedReasoningPolicyConfig: &types.GuardrailAutomatedReasoningPolicyConfig{
+			Policies: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ConfidenceThreshold: ptr.Float64(1.0),
+		},
+		CrossRegionConfig: &types.GuardrailCrossRegionConfig{
+			GuardrailProfileIdentifier: ptr.String("__GuardrailProfileIdentifier__"),
+		},
+		BlockedInputMessaging:   ptr.String("__BlockedInputMessaging__"),
+		BlockedOutputsMessaging: ptr.String("__BlockedOutputsMessaging__"),
+		KmsKeyId:                ptr.String("__KmsKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4784,7 +6279,28 @@ func TestCheckResponseSnapshot_UpdateMarketplaceModelEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMarketplaceModelEndpoint(context.Background(), &UpdateMarketplaceModelEndpointInput{})
+	got, err := svc.UpdateMarketplaceModelEndpoint(context.Background(), &UpdateMarketplaceModelEndpointInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+		EndpointConfig: &types.EndpointConfigMemberSageMaker{
+			Value: types.SageMakerEndpoint{
+				InitialInstanceCount: ptr.Int32(1),
+				InstanceType:         ptr.String("__InstanceType__"),
+				ExecutionRole:        ptr.String("__ExecutionRole__"),
+				KmsEncryptionKey:     ptr.String("__KmsEncryptionKey__"),
+				Vpc: &types.VpcConfig{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4803,7 +6319,11 @@ func TestCheckResponseSnapshot_UpdateProvisionedModelThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProvisionedModelThroughput(context.Background(), &UpdateProvisionedModelThroughputInput{})
+	got, err := svc.UpdateProvisionedModelThroughput(context.Background(), &UpdateProvisionedModelThroughputInput{
+		ProvisionedModelId:          ptr.String("__ProvisionedModelId__"),
+		DesiredProvisionedModelName: ptr.String("__DesiredProvisionedModelName__"),
+		DesiredModelId:              ptr.String("__DesiredModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4824,7 +6344,12 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{})
+	_, opErr := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{
+		JobIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4849,7 +6374,12 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteEvaluationJob(context.Background(), &BatchDeleteEvaluationJobInput{})
+	_, opErr := svc.BatchDeleteEvaluationJob(context.Background(), &BatchDeleteEvaluationJobInput{
+		JobIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4874,7 +6404,12 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{})
+	_, opErr := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{
+		JobIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4899,7 +6434,10 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAutomatedReasoningPolicy(context.Background(), &DeleteAutomatedReasoningPolicyInput{})
+	_, opErr := svc.DeleteAutomatedReasoningPolicy(context.Background(), &DeleteAutomatedReasoningPolicyInput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+		Force:     true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4924,7 +6462,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteEvaluationJob(context.Background(), &BatchDeleteEvaluationJobInput{})
+	_, opErr := svc.BatchDeleteEvaluationJob(context.Background(), &BatchDeleteEvaluationJobInput{
+		JobIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4949,7 +6492,60 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdvancedPromptOptimizationJob(context.Background(), &CreateAdvancedPromptOptimizationJobInput{})
+	_, opErr := svc.CreateAdvancedPromptOptimizationJob(context.Background(), &CreateAdvancedPromptOptimizationJobInput{
+		JobName:        ptr.String("__JobName__"),
+		JobDescription: ptr.String("__JobDescription__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		InputConfig: &types.AdvancedPromptOptimizationInputConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		OutputConfig: &types.AdvancedPromptOptimizationOutputConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ModelConfigurations: []types.ModelConfiguration{
+			{
+				ModelId: ptr.String("__ModelId__"),
+				InferenceConfig: &types.InferenceConfiguration{
+					MaxTokens:   ptr.Int32(1),
+					Temperature: ptr.Float32(1.0),
+					TopP:        ptr.Float32(1.0),
+					StopSequences: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AdditionalModelRequestFields: map[string]document.Interface{
+					"key0": document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				ModelId: ptr.String("__ModelId__"),
+				InferenceConfig: &types.InferenceConfiguration{
+					MaxTokens:   ptr.Int32(1),
+					Temperature: ptr.Float32(1.0),
+					TopP:        ptr.Float32(1.0),
+					StopSequences: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AdditionalModelRequestFields: map[string]document.Interface{
+					"key0": document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4974,7 +6570,9 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterMarketplaceModelEndpoint(context.Background(), &DeregisterMarketplaceModelEndpointInput{})
+	_, opErr := svc.DeregisterMarketplaceModelEndpoint(context.Background(), &DeregisterMarketplaceModelEndpointInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4999,7 +6597,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{})
+	_, opErr := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{
+		JobIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5025,7 +6628,60 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdvancedPromptOptimizationJob(context.Background(), &CreateAdvancedPromptOptimizationJobInput{})
+	_, opErr := svc.CreateAdvancedPromptOptimizationJob(context.Background(), &CreateAdvancedPromptOptimizationJobInput{
+		JobName:        ptr.String("__JobName__"),
+		JobDescription: ptr.String("__JobDescription__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		InputConfig: &types.AdvancedPromptOptimizationInputConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		OutputConfig: &types.AdvancedPromptOptimizationOutputConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ModelConfigurations: []types.ModelConfiguration{
+			{
+				ModelId: ptr.String("__ModelId__"),
+				InferenceConfig: &types.InferenceConfiguration{
+					MaxTokens:   ptr.Int32(1),
+					Temperature: ptr.Float32(1.0),
+					TopP:        ptr.Float32(1.0),
+					StopSequences: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AdditionalModelRequestFields: map[string]document.Interface{
+					"key0": document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				ModelId: ptr.String("__ModelId__"),
+				InferenceConfig: &types.InferenceConfiguration{
+					MaxTokens:   ptr.Int32(1),
+					Temperature: ptr.Float32(1.0),
+					TopP:        ptr.Float32(1.0),
+					StopSequences: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AdditionalModelRequestFields: map[string]document.Interface{
+					"key0": document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5050,7 +6706,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{})
+	_, opErr := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{
+		JobIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"VoiceConnector":{"CdrBucket":"__CdrBucket__"}}

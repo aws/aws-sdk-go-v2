@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"OAuthClientApplication":{"Arn":"__Arn__","CreatedTime":946684800,"DataSourceType":"ADOBE_ANALYTICS","IdentityProviderVpcConnectionProperties":{"VpcConnectionArn":"__VpcConnectionArn__"},"LastUpdatedTime":946684800,"Name":"__Name__","OAuthAuthorizationEndpointUrl":"__OAuthAuthorizationEndpointUrl__","OAuthClientApplicationId":"__OAuthClientApplicationId__","OAuthClientAuthenticationType":"TOKEN","OAuthScopes":"__OAuthScopes__","OAuthTokenEndpointUrl":"__OAuthTokenEndpointUrl__"},"RequestId":"__RequestId__","Status":200}

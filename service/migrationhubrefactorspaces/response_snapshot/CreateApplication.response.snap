@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApiGatewayProxy":{"EndpointType":"REGIONAL","StageName":"__StageName__"},"ApplicationId":"__ApplicationId__","Arn":"__Arn__","CreatedByAccountId":"__CreatedByAccountId__","CreatedTime":946684800,"EnvironmentId":"__EnvironmentId__","LastUpdatedTime":946684800,"Name":"__Name__","OwnerAccountId":"__OwnerAccountId__","ProxyType":"API_GATEWAY","State":"CREATING","Tags":{"key0":"__Value__"},"VpcId":"__VpcId__"}

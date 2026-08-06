@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_AssociateDRTLogBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{})
+	got, err := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{
+		LogBucket: ptr.String("__LogBucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +138,9 @@ func TestCheckResponseSnapshot_AssociateDRTRole(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateDRTRole(context.Background(), &AssociateDRTRoleInput{})
+	got, err := svc.AssociateDRTRole(context.Background(), &AssociateDRTRoleInput{
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +159,10 @@ func TestCheckResponseSnapshot_AssociateHealthCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateHealthCheck(context.Background(), &AssociateHealthCheckInput{})
+	got, err := svc.AssociateHealthCheck(context.Background(), &AssociateHealthCheckInput{
+		ProtectionId:   ptr.String("__ProtectionId__"),
+		HealthCheckArn: ptr.String("__HealthCheckArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +181,20 @@ func TestCheckResponseSnapshot_AssociateProactiveEngagementDetails(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateProactiveEngagementDetails(context.Background(), &AssociateProactiveEngagementDetailsInput{})
+	got, err := svc.AssociateProactiveEngagementDetails(context.Background(), &AssociateProactiveEngagementDetailsInput{
+		EmergencyContactList: []types.EmergencyContact{
+			{
+				EmailAddress: ptr.String("__EmailAddress__"),
+				PhoneNumber:  ptr.String("__PhoneNumber__"),
+				ContactNotes: ptr.String("__ContactNotes__"),
+			},
+			{
+				EmailAddress: ptr.String("__EmailAddress__"),
+				PhoneNumber:  ptr.String("__PhoneNumber__"),
+				ContactNotes: ptr.String("__ContactNotes__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -195,7 +215,20 @@ func TestCheckResponseSnapshot_CreateProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProtection(context.Background(), &CreateProtectionInput{})
+	got, err := svc.CreateProtection(context.Background(), &CreateProtectionInput{
+		Name:        ptr.String("__Name__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -214,7 +247,26 @@ func TestCheckResponseSnapshot_CreateProtectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProtectionGroup(context.Background(), &CreateProtectionGroupInput{})
+	got, err := svc.CreateProtectionGroup(context.Background(), &CreateProtectionGroupInput{
+		ProtectionGroupId: ptr.String("__ProtectionGroupId__"),
+		Aggregation:       types.ProtectionGroupAggregation("SUM"),
+		Pattern:           types.ProtectionGroupPattern("ALL"),
+		ResourceType:      types.ProtectedResourceType("CLOUDFRONT_DISTRIBUTION"),
+		Members: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +304,9 @@ func TestCheckResponseSnapshot_DeleteProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProtection(context.Background(), &DeleteProtectionInput{})
+	got, err := svc.DeleteProtection(context.Background(), &DeleteProtectionInput{
+		ProtectionId: ptr.String("__ProtectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -271,7 +325,9 @@ func TestCheckResponseSnapshot_DeleteProtectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProtectionGroup(context.Background(), &DeleteProtectionGroupInput{})
+	got, err := svc.DeleteProtectionGroup(context.Background(), &DeleteProtectionGroupInput{
+		ProtectionGroupId: ptr.String("__ProtectionGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -510,7 +566,9 @@ func TestCheckResponseSnapshot_DescribeAttack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAttack(context.Background(), &DescribeAttackInput{})
+	got, err := svc.DescribeAttack(context.Background(), &DescribeAttackInput{
+		AttackId: ptr.String("__AttackId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -658,7 +716,10 @@ func TestCheckResponseSnapshot_DescribeProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProtection(context.Background(), &DescribeProtectionInput{})
+	got, err := svc.DescribeProtection(context.Background(), &DescribeProtectionInput{
+		ProtectionId: ptr.String("__ProtectionId__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -689,7 +750,9 @@ func TestCheckResponseSnapshot_DescribeProtectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProtectionGroup(context.Background(), &DescribeProtectionGroupInput{})
+	got, err := svc.DescribeProtectionGroup(context.Background(), &DescribeProtectionGroupInput{
+		ProtectionGroupId: ptr.String("__ProtectionGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -768,7 +831,9 @@ func TestCheckResponseSnapshot_DisableApplicationLayerAutomaticResponse(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableApplicationLayerAutomaticResponse(context.Background(), &DisableApplicationLayerAutomaticResponseInput{})
+	got, err := svc.DisableApplicationLayerAutomaticResponse(context.Background(), &DisableApplicationLayerAutomaticResponseInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -806,7 +871,9 @@ func TestCheckResponseSnapshot_DisassociateDRTLogBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateDRTLogBucket(context.Background(), &DisassociateDRTLogBucketInput{})
+	got, err := svc.DisassociateDRTLogBucket(context.Background(), &DisassociateDRTLogBucketInput{
+		LogBucket: ptr.String("__LogBucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -844,7 +911,10 @@ func TestCheckResponseSnapshot_DisassociateHealthCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateHealthCheck(context.Background(), &DisassociateHealthCheckInput{})
+	got, err := svc.DisassociateHealthCheck(context.Background(), &DisassociateHealthCheckInput{
+		ProtectionId:   ptr.String("__ProtectionId__"),
+		HealthCheckArn: ptr.String("__HealthCheckArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -863,7 +933,13 @@ func TestCheckResponseSnapshot_EnableApplicationLayerAutomaticResponse(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableApplicationLayerAutomaticResponse(context.Background(), &EnableApplicationLayerAutomaticResponseInput{})
+	got, err := svc.EnableApplicationLayerAutomaticResponse(context.Background(), &EnableApplicationLayerAutomaticResponseInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Action: &types.ResponseAction{
+			Block: &types.BlockAction{},
+			Count: &types.CountAction{},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -954,7 +1030,22 @@ func TestCheckResponseSnapshot_ListAttacks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAttacks(context.Background(), &ListAttacksInput{})
+	got, err := svc.ListAttacks(context.Background(), &ListAttacksInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StartTime: &types.TimeRange{
+			FromInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ToExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		EndTime: &types.TimeRange{
+			FromInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ToExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -999,7 +1090,28 @@ func TestCheckResponseSnapshot_ListProtectionGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProtectionGroups(context.Background(), &ListProtectionGroupsInput{})
+	got, err := svc.ListProtectionGroups(context.Background(), &ListProtectionGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		InclusionFilters: &types.InclusionProtectionGroupFilters{
+			ProtectionGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Patterns: []types.ProtectionGroupPattern{
+				types.ProtectionGroupPattern("ALL"),
+				types.ProtectionGroupPattern("ALL"),
+			},
+			ResourceTypes: []types.ProtectedResourceType{
+				types.ProtectedResourceType("CLOUDFRONT_DISTRIBUTION"),
+				types.ProtectedResourceType("CLOUDFRONT_DISTRIBUTION"),
+			},
+			Aggregations: []types.ProtectionGroupAggregation{
+				types.ProtectionGroupAggregation("SUM"),
+				types.ProtectionGroupAggregation("SUM"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1056,7 +1168,24 @@ func TestCheckResponseSnapshot_ListProtections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProtections(context.Background(), &ListProtectionsInput{})
+	got, err := svc.ListProtections(context.Background(), &ListProtectionsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		InclusionFilters: &types.InclusionProtectionFilters{
+			ResourceArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ProtectionNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTypes: []types.ProtectedResourceType{
+				types.ProtectedResourceType("CLOUDFRONT_DISTRIBUTION"),
+				types.ProtectedResourceType("CLOUDFRONT_DISTRIBUTION"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1081,7 +1210,11 @@ func TestCheckResponseSnapshot_ListResourcesInProtectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourcesInProtectionGroup(context.Background(), &ListResourcesInProtectionGroupInput{})
+	got, err := svc.ListResourcesInProtectionGroup(context.Background(), &ListResourcesInProtectionGroupInput{
+		ProtectionGroupId: ptr.String("__ProtectionGroupId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1111,7 +1244,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1130,7 +1265,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1149,7 +1296,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1168,7 +1321,13 @@ func TestCheckResponseSnapshot_UpdateApplicationLayerAutomaticResponse(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplicationLayerAutomaticResponse(context.Background(), &UpdateApplicationLayerAutomaticResponseInput{})
+	got, err := svc.UpdateApplicationLayerAutomaticResponse(context.Background(), &UpdateApplicationLayerAutomaticResponseInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Action: &types.ResponseAction{
+			Block: &types.BlockAction{},
+			Count: &types.CountAction{},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1187,7 +1346,20 @@ func TestCheckResponseSnapshot_UpdateEmergencyContactSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEmergencyContactSettings(context.Background(), &UpdateEmergencyContactSettingsInput{})
+	got, err := svc.UpdateEmergencyContactSettings(context.Background(), &UpdateEmergencyContactSettingsInput{
+		EmergencyContactList: []types.EmergencyContact{
+			{
+				EmailAddress: ptr.String("__EmailAddress__"),
+				PhoneNumber:  ptr.String("__PhoneNumber__"),
+				ContactNotes: ptr.String("__ContactNotes__"),
+			},
+			{
+				EmailAddress: ptr.String("__EmailAddress__"),
+				PhoneNumber:  ptr.String("__PhoneNumber__"),
+				ContactNotes: ptr.String("__ContactNotes__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1206,7 +1378,16 @@ func TestCheckResponseSnapshot_UpdateProtectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProtectionGroup(context.Background(), &UpdateProtectionGroupInput{})
+	got, err := svc.UpdateProtectionGroup(context.Background(), &UpdateProtectionGroupInput{
+		ProtectionGroupId: ptr.String("__ProtectionGroupId__"),
+		Aggregation:       types.ProtectionGroupAggregation("SUM"),
+		Pattern:           types.ProtectionGroupPattern("ALL"),
+		ResourceType:      types.ProtectedResourceType("CLOUDFRONT_DISTRIBUTION"),
+		Members: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1225,7 +1406,9 @@ func TestCheckResponseSnapshot_UpdateSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubscription(context.Background(), &UpdateSubscriptionInput{})
+	got, err := svc.UpdateSubscription(context.Background(), &UpdateSubscriptionInput{
+		AutoRenew: types.AutoRenew("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1246,7 +1429,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAttack(context.Background(), &DescribeAttackInput{})
+	_, opErr := svc.DescribeAttack(context.Background(), &DescribeAttackInput{
+		AttackId: ptr.String("__AttackId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1271,7 +1456,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedForDependencyException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{})
+	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{
+		LogBucket: ptr.String("__LogBucket__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1296,7 +1483,9 @@ func TestCheckResponseSnapshot_Error_InternalErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{})
+	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{
+		LogBucket: ptr.String("__LogBucket__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1321,7 +1510,9 @@ func TestCheckResponseSnapshot_Error_InvalidOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{})
+	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{
+		LogBucket: ptr.String("__LogBucket__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1346,7 +1537,28 @@ func TestCheckResponseSnapshot_Error_InvalidPaginationTokenException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListProtectionGroups(context.Background(), &ListProtectionGroupsInput{})
+	_, opErr := svc.ListProtectionGroups(context.Background(), &ListProtectionGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		InclusionFilters: &types.InclusionProtectionGroupFilters{
+			ProtectionGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Patterns: []types.ProtectionGroupPattern{
+				types.ProtectionGroupPattern("ALL"),
+				types.ProtectionGroupPattern("ALL"),
+			},
+			ResourceTypes: []types.ProtectedResourceType{
+				types.ProtectedResourceType("CLOUDFRONT_DISTRIBUTION"),
+				types.ProtectedResourceType("CLOUDFRONT_DISTRIBUTION"),
+			},
+			Aggregations: []types.ProtectionGroupAggregation{
+				types.ProtectionGroupAggregation("SUM"),
+				types.ProtectionGroupAggregation("SUM"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1382,7 +1594,9 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{})
+	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{
+		LogBucket: ptr.String("__LogBucket__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1407,7 +1621,10 @@ func TestCheckResponseSnapshot_Error_InvalidResourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateHealthCheck(context.Background(), &AssociateHealthCheckInput{})
+	_, opErr := svc.AssociateHealthCheck(context.Background(), &AssociateHealthCheckInput{
+		ProtectionId:   ptr.String("__ProtectionId__"),
+		HealthCheckArn: ptr.String("__HealthCheckArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1434,7 +1651,9 @@ func TestCheckResponseSnapshot_Error_LimitsExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{})
+	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{
+		LogBucket: ptr.String("__LogBucket__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1484,7 +1703,9 @@ func TestCheckResponseSnapshot_Error_NoAssociatedRoleException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{})
+	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{
+		LogBucket: ptr.String("__LogBucket__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1509,7 +1730,9 @@ func TestCheckResponseSnapshot_Error_OptimisticLockException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{})
+	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{
+		LogBucket: ptr.String("__LogBucket__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1535,7 +1758,20 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateProtection(context.Background(), &CreateProtectionInput{})
+	_, opErr := svc.CreateProtection(context.Background(), &CreateProtectionInput{
+		Name:        ptr.String("__Name__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1561,7 +1797,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{})
+	_, opErr := svc.AssociateDRTLogBucket(context.Background(), &AssociateDRTLogBucketInput{
+		LogBucket: ptr.String("__LogBucket__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

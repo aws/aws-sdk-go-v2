@@ -118,7 +118,9 @@ func TestCheckResponseSnapshot_DeleteReportDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{})
+	got, err := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{
+		ReportName: ptr.String("__ReportName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -189,7 +191,10 @@ func TestCheckResponseSnapshot_DescribeReportDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReportDefinitions(context.Background(), &DescribeReportDefinitionsInput{})
+	got, err := svc.DescribeReportDefinitions(context.Background(), &DescribeReportDefinitionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -219,7 +224,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ReportName: ptr.String("__ReportName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -238,7 +245,33 @@ func TestCheckResponseSnapshot_ModifyReportDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyReportDefinition(context.Background(), &ModifyReportDefinitionInput{})
+	got, err := svc.ModifyReportDefinition(context.Background(), &ModifyReportDefinitionInput{
+		ReportName: ptr.String("__ReportName__"),
+		ReportDefinition: &types.ReportDefinition{
+			ReportName:  ptr.String("__ReportName__"),
+			TimeUnit:    types.TimeUnit("HOURLY"),
+			Format:      types.ReportFormat("textORcsv"),
+			Compression: types.CompressionFormat("ZIP"),
+			AdditionalSchemaElements: []types.SchemaElement{
+				types.SchemaElement("RESOURCES"),
+				types.SchemaElement("RESOURCES"),
+			},
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Prefix: ptr.String("__S3Prefix__"),
+			S3Region: types.AWSRegion("af-south-1"),
+			AdditionalArtifacts: []types.AdditionalArtifact{
+				types.AdditionalArtifact("REDSHIFT"),
+				types.AdditionalArtifact("REDSHIFT"),
+			},
+			RefreshClosedReports: ptr.Bool(true),
+			ReportVersioning:     types.ReportVersioning("CREATE_NEW_REPORT"),
+			BillingViewArn:       ptr.String("__BillingViewArn__"),
+			ReportStatus: &types.ReportStatus{
+				LastDelivery: ptr.String("__LastDelivery__"),
+				LastStatus:   types.LastStatus("SUCCESS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -257,7 +290,42 @@ func TestCheckResponseSnapshot_PutReportDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutReportDefinition(context.Background(), &PutReportDefinitionInput{})
+	got, err := svc.PutReportDefinition(context.Background(), &PutReportDefinitionInput{
+		ReportDefinition: &types.ReportDefinition{
+			ReportName:  ptr.String("__ReportName__"),
+			TimeUnit:    types.TimeUnit("HOURLY"),
+			Format:      types.ReportFormat("textORcsv"),
+			Compression: types.CompressionFormat("ZIP"),
+			AdditionalSchemaElements: []types.SchemaElement{
+				types.SchemaElement("RESOURCES"),
+				types.SchemaElement("RESOURCES"),
+			},
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Prefix: ptr.String("__S3Prefix__"),
+			S3Region: types.AWSRegion("af-south-1"),
+			AdditionalArtifacts: []types.AdditionalArtifact{
+				types.AdditionalArtifact("REDSHIFT"),
+				types.AdditionalArtifact("REDSHIFT"),
+			},
+			RefreshClosedReports: ptr.Bool(true),
+			ReportVersioning:     types.ReportVersioning("CREATE_NEW_REPORT"),
+			BillingViewArn:       ptr.String("__BillingViewArn__"),
+			ReportStatus: &types.ReportStatus{
+				LastDelivery: ptr.String("__LastDelivery__"),
+				LastStatus:   types.LastStatus("SUCCESS"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -276,7 +344,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ReportName: ptr.String("__ReportName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +375,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ReportName: ptr.String("__ReportName__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -316,7 +402,42 @@ func TestCheckResponseSnapshot_Error_DuplicateReportNameException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutReportDefinition(context.Background(), &PutReportDefinitionInput{})
+	_, opErr := svc.PutReportDefinition(context.Background(), &PutReportDefinitionInput{
+		ReportDefinition: &types.ReportDefinition{
+			ReportName:  ptr.String("__ReportName__"),
+			TimeUnit:    types.TimeUnit("HOURLY"),
+			Format:      types.ReportFormat("textORcsv"),
+			Compression: types.CompressionFormat("ZIP"),
+			AdditionalSchemaElements: []types.SchemaElement{
+				types.SchemaElement("RESOURCES"),
+				types.SchemaElement("RESOURCES"),
+			},
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Prefix: ptr.String("__S3Prefix__"),
+			S3Region: types.AWSRegion("af-south-1"),
+			AdditionalArtifacts: []types.AdditionalArtifact{
+				types.AdditionalArtifact("REDSHIFT"),
+				types.AdditionalArtifact("REDSHIFT"),
+			},
+			RefreshClosedReports: ptr.Bool(true),
+			ReportVersioning:     types.ReportVersioning("CREATE_NEW_REPORT"),
+			BillingViewArn:       ptr.String("__BillingViewArn__"),
+			ReportStatus: &types.ReportStatus{
+				LastDelivery: ptr.String("__LastDelivery__"),
+				LastStatus:   types.LastStatus("SUCCESS"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -341,7 +462,9 @@ func TestCheckResponseSnapshot_Error_InternalErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{})
+	_, opErr := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{
+		ReportName: ptr.String("__ReportName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -366,7 +489,42 @@ func TestCheckResponseSnapshot_Error_ReportLimitReachedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutReportDefinition(context.Background(), &PutReportDefinitionInput{})
+	_, opErr := svc.PutReportDefinition(context.Background(), &PutReportDefinitionInput{
+		ReportDefinition: &types.ReportDefinition{
+			ReportName:  ptr.String("__ReportName__"),
+			TimeUnit:    types.TimeUnit("HOURLY"),
+			Format:      types.ReportFormat("textORcsv"),
+			Compression: types.CompressionFormat("ZIP"),
+			AdditionalSchemaElements: []types.SchemaElement{
+				types.SchemaElement("RESOURCES"),
+				types.SchemaElement("RESOURCES"),
+			},
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Prefix: ptr.String("__S3Prefix__"),
+			S3Region: types.AWSRegion("af-south-1"),
+			AdditionalArtifacts: []types.AdditionalArtifact{
+				types.AdditionalArtifact("REDSHIFT"),
+				types.AdditionalArtifact("REDSHIFT"),
+			},
+			RefreshClosedReports: ptr.Bool(true),
+			ReportVersioning:     types.ReportVersioning("CREATE_NEW_REPORT"),
+			BillingViewArn:       ptr.String("__BillingViewArn__"),
+			ReportStatus: &types.ReportStatus{
+				LastDelivery: ptr.String("__LastDelivery__"),
+				LastStatus:   types.LastStatus("SUCCESS"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -391,7 +549,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ReportName: ptr.String("__ReportName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -416,7 +576,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{})
+	_, opErr := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{
+		ReportName: ptr.String("__ReportName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

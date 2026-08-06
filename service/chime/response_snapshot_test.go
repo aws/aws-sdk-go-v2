@@ -117,7 +117,11 @@ func TestCheckResponseSnapshot_AssociatePhoneNumberWithUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{})
+	got, err := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{
+		AccountId:       ptr.String("__AccountId__"),
+		UserId:          ptr.String("__UserId__"),
+		E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +140,17 @@ func TestCheckResponseSnapshot_AssociateSigninDelegateGroupsWithAccount(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateSigninDelegateGroupsWithAccount(context.Background(), &AssociateSigninDelegateGroupsWithAccountInput{})
+	got, err := svc.AssociateSigninDelegateGroupsWithAccount(context.Background(), &AssociateSigninDelegateGroupsWithAccountInput{
+		AccountId: ptr.String("__AccountId__"),
+		SigninDelegateGroups: []types.SigninDelegateGroup{
+			{
+				GroupName: ptr.String("__GroupName__"),
+			},
+			{
+				GroupName: ptr.String("__GroupName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -168,7 +182,20 @@ func TestCheckResponseSnapshot_BatchCreateRoomMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateRoomMembership(context.Background(), &BatchCreateRoomMembershipInput{})
+	got, err := svc.BatchCreateRoomMembership(context.Background(), &BatchCreateRoomMembershipInput{
+		AccountId: ptr.String("__AccountId__"),
+		RoomId:    ptr.String("__RoomId__"),
+		MembershipItemList: []types.MembershipItem{
+			{
+				MemberId: ptr.String("__MemberId__"),
+				Role:     types.RoomMembershipRole("Administrator"),
+			},
+			{
+				MemberId: ptr.String("__MemberId__"),
+				Role:     types.RoomMembershipRole("Administrator"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -200,7 +227,12 @@ func TestCheckResponseSnapshot_BatchDeletePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeletePhoneNumber(context.Background(), &BatchDeletePhoneNumberInput{})
+	got, err := svc.BatchDeletePhoneNumber(context.Background(), &BatchDeletePhoneNumberInput{
+		PhoneNumberIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -232,7 +264,13 @@ func TestCheckResponseSnapshot_BatchSuspendUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchSuspendUser(context.Background(), &BatchSuspendUserInput{})
+	got, err := svc.BatchSuspendUser(context.Background(), &BatchSuspendUserInput{
+		AccountId: ptr.String("__AccountId__"),
+		UserIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +302,13 @@ func TestCheckResponseSnapshot_BatchUnsuspendUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUnsuspendUser(context.Background(), &BatchUnsuspendUserInput{})
+	got, err := svc.BatchUnsuspendUser(context.Background(), &BatchUnsuspendUserInput{
+		AccountId: ptr.String("__AccountId__"),
+		UserIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +340,20 @@ func TestCheckResponseSnapshot_BatchUpdatePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdatePhoneNumber(context.Background(), &BatchUpdatePhoneNumberInput{})
+	got, err := svc.BatchUpdatePhoneNumber(context.Background(), &BatchUpdatePhoneNumberInput{
+		UpdatePhoneNumberRequestItems: []types.UpdatePhoneNumberRequestItem{
+			{
+				PhoneNumberId: ptr.String("__PhoneNumberId__"),
+				ProductType:   types.PhoneNumberProductType("BusinessCalling"),
+				CallingName:   ptr.String("__CallingName__"),
+			},
+			{
+				PhoneNumberId: ptr.String("__PhoneNumberId__"),
+				ProductType:   types.PhoneNumberProductType("BusinessCalling"),
+				CallingName:   ptr.String("__CallingName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -328,7 +385,29 @@ func TestCheckResponseSnapshot_BatchUpdateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateUser(context.Background(), &BatchUpdateUserInput{})
+	got, err := svc.BatchUpdateUser(context.Background(), &BatchUpdateUserInput{
+		AccountId: ptr.String("__AccountId__"),
+		UpdateUserRequestItems: []types.UpdateUserRequestItem{
+			{
+				UserId:      ptr.String("__UserId__"),
+				LicenseType: types.License("Basic"),
+				UserType:    types.UserType("PrivateUser"),
+				AlexaForBusinessMetadata: &types.AlexaForBusinessMetadata{
+					IsAlexaForBusinessEnabled: ptr.Bool(true),
+					AlexaForBusinessRoomArn:   ptr.String("__AlexaForBusinessRoomArn__"),
+				},
+			},
+			{
+				UserId:      ptr.String("__UserId__"),
+				LicenseType: types.License("Basic"),
+				UserType:    types.UserType("PrivateUser"),
+				AlexaForBusinessMetadata: &types.AlexaForBusinessMetadata{
+					IsAlexaForBusinessEnabled: ptr.Bool(true),
+					AlexaForBusinessRoomArn:   ptr.String("__AlexaForBusinessRoomArn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +448,9 @@ func TestCheckResponseSnapshot_CreateAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccount(context.Background(), &CreateAccountInput{})
+	got, err := svc.CreateAccount(context.Background(), &CreateAccountInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -400,7 +481,11 @@ func TestCheckResponseSnapshot_CreateBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBot(context.Background(), &CreateBotInput{})
+	got, err := svc.CreateBot(context.Background(), &CreateBotInput{
+		AccountId:   ptr.String("__AccountId__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Domain:      ptr.String("__Domain__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +506,12 @@ func TestCheckResponseSnapshot_CreateMeetingDialOut(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMeetingDialOut(context.Background(), &CreateMeetingDialOutInput{})
+	got, err := svc.CreateMeetingDialOut(context.Background(), &CreateMeetingDialOutInput{
+		MeetingId:       ptr.String("__MeetingId__"),
+		FromPhoneNumber: ptr.String("__FromPhoneNumber__"),
+		ToPhoneNumber:   ptr.String("__ToPhoneNumber__"),
+		JoinToken:       ptr.String("__JoinToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -458,7 +548,13 @@ func TestCheckResponseSnapshot_CreatePhoneNumberOrder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePhoneNumberOrder(context.Background(), &CreatePhoneNumberOrderInput{})
+	got, err := svc.CreatePhoneNumberOrder(context.Background(), &CreatePhoneNumberOrderInput{
+		ProductType: types.PhoneNumberProductType("BusinessCalling"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -486,7 +582,11 @@ func TestCheckResponseSnapshot_CreateRoom(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRoom(context.Background(), &CreateRoomInput{})
+	got, err := svc.CreateRoom(context.Background(), &CreateRoomInput{
+		AccountId:          ptr.String("__AccountId__"),
+		Name:               ptr.String("__Name__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -519,7 +619,12 @@ func TestCheckResponseSnapshot_CreateRoomMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRoomMembership(context.Background(), &CreateRoomMembershipInput{})
+	got, err := svc.CreateRoomMembership(context.Background(), &CreateRoomMembershipInput{
+		AccountId: ptr.String("__AccountId__"),
+		RoomId:    ptr.String("__RoomId__"),
+		MemberId:  ptr.String("__MemberId__"),
+		Role:      types.RoomMembershipRole("Administrator"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -557,7 +662,12 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUser(context.Background(), &CreateUserInput{})
+	got, err := svc.CreateUser(context.Background(), &CreateUserInput{
+		AccountId: ptr.String("__AccountId__"),
+		Username:  ptr.String("__Username__"),
+		Email:     ptr.String("__Email__"),
+		UserType:  types.UserType("PrivateUser"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -576,7 +686,9 @@ func TestCheckResponseSnapshot_DeleteAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccount(context.Background(), &DeleteAccountInput{})
+	got, err := svc.DeleteAccount(context.Background(), &DeleteAccountInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -595,7 +707,10 @@ func TestCheckResponseSnapshot_DeleteEventsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventsConfiguration(context.Background(), &DeleteEventsConfigurationInput{})
+	got, err := svc.DeleteEventsConfiguration(context.Background(), &DeleteEventsConfigurationInput{
+		AccountId: ptr.String("__AccountId__"),
+		BotId:     ptr.String("__BotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -614,7 +729,9 @@ func TestCheckResponseSnapshot_DeletePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePhoneNumber(context.Background(), &DeletePhoneNumberInput{})
+	got, err := svc.DeletePhoneNumber(context.Background(), &DeletePhoneNumberInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -633,7 +750,10 @@ func TestCheckResponseSnapshot_DeleteRoom(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRoom(context.Background(), &DeleteRoomInput{})
+	got, err := svc.DeleteRoom(context.Background(), &DeleteRoomInput{
+		AccountId: ptr.String("__AccountId__"),
+		RoomId:    ptr.String("__RoomId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,7 +772,11 @@ func TestCheckResponseSnapshot_DeleteRoomMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRoomMembership(context.Background(), &DeleteRoomMembershipInput{})
+	got, err := svc.DeleteRoomMembership(context.Background(), &DeleteRoomMembershipInput{
+		AccountId: ptr.String("__AccountId__"),
+		RoomId:    ptr.String("__RoomId__"),
+		MemberId:  ptr.String("__MemberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -671,7 +795,10 @@ func TestCheckResponseSnapshot_DisassociatePhoneNumberFromUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociatePhoneNumberFromUser(context.Background(), &DisassociatePhoneNumberFromUserInput{})
+	got, err := svc.DisassociatePhoneNumberFromUser(context.Background(), &DisassociatePhoneNumberFromUserInput{
+		AccountId: ptr.String("__AccountId__"),
+		UserId:    ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -690,7 +817,13 @@ func TestCheckResponseSnapshot_DisassociateSigninDelegateGroupsFromAccount(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateSigninDelegateGroupsFromAccount(context.Background(), &DisassociateSigninDelegateGroupsFromAccountInput{})
+	got, err := svc.DisassociateSigninDelegateGroupsFromAccount(context.Background(), &DisassociateSigninDelegateGroupsFromAccountInput{
+		AccountId: ptr.String("__AccountId__"),
+		GroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -731,7 +864,9 @@ func TestCheckResponseSnapshot_GetAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccount(context.Background(), &GetAccountInput{})
+	got, err := svc.GetAccount(context.Background(), &GetAccountInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -755,7 +890,9 @@ func TestCheckResponseSnapshot_GetAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccountSettings(context.Background(), &GetAccountSettingsInput{})
+	got, err := svc.GetAccountSettings(context.Background(), &GetAccountSettingsInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -786,7 +923,10 @@ func TestCheckResponseSnapshot_GetBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBot(context.Background(), &GetBotInput{})
+	got, err := svc.GetBot(context.Background(), &GetBotInput{
+		AccountId: ptr.String("__AccountId__"),
+		BotId:     ptr.String("__BotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -811,7 +951,10 @@ func TestCheckResponseSnapshot_GetEventsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventsConfiguration(context.Background(), &GetEventsConfigurationInput{})
+	got, err := svc.GetEventsConfiguration(context.Background(), &GetEventsConfigurationInput{
+		AccountId: ptr.String("__AccountId__"),
+		BotId:     ptr.String("__BotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -890,7 +1033,9 @@ func TestCheckResponseSnapshot_GetPhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPhoneNumber(context.Background(), &GetPhoneNumberInput{})
+	got, err := svc.GetPhoneNumber(context.Background(), &GetPhoneNumberInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -927,7 +1072,9 @@ func TestCheckResponseSnapshot_GetPhoneNumberOrder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPhoneNumberOrder(context.Background(), &GetPhoneNumberOrderInput{})
+	got, err := svc.GetPhoneNumberOrder(context.Background(), &GetPhoneNumberOrderInput{
+		PhoneNumberOrderId: ptr.String("__PhoneNumberOrderId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -978,7 +1125,9 @@ func TestCheckResponseSnapshot_GetRetentionSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRetentionSettings(context.Background(), &GetRetentionSettingsInput{})
+	got, err := svc.GetRetentionSettings(context.Background(), &GetRetentionSettingsInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1006,7 +1155,10 @@ func TestCheckResponseSnapshot_GetRoom(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRoom(context.Background(), &GetRoomInput{})
+	got, err := svc.GetRoom(context.Background(), &GetRoomInput{
+		AccountId: ptr.String("__AccountId__"),
+		RoomId:    ptr.String("__RoomId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1044,7 +1196,10 @@ func TestCheckResponseSnapshot_GetUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUser(context.Background(), &GetUserInput{})
+	got, err := svc.GetUser(context.Background(), &GetUserInput{
+		AccountId: ptr.String("__AccountId__"),
+		UserId:    ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1071,7 +1226,10 @@ func TestCheckResponseSnapshot_GetUserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUserSettings(context.Background(), &GetUserSettingsInput{})
+	got, err := svc.GetUserSettings(context.Background(), &GetUserSettingsInput{
+		AccountId: ptr.String("__AccountId__"),
+		UserId:    ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1105,7 +1263,14 @@ func TestCheckResponseSnapshot_InviteUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InviteUsers(context.Background(), &InviteUsersInput{})
+	got, err := svc.InviteUsers(context.Background(), &InviteUsersInput{
+		AccountId: ptr.String("__AccountId__"),
+		UserEmailList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserType: types.UserType("PrivateUser"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1170,7 +1335,12 @@ func TestCheckResponseSnapshot_ListAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccounts(context.Background(), &ListAccountsInput{})
+	got, err := svc.ListAccounts(context.Background(), &ListAccountsInput{
+		Name:       ptr.String("__Name__"),
+		UserEmail:  ptr.String("__UserEmail__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1215,7 +1385,11 @@ func TestCheckResponseSnapshot_ListBots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBots(context.Background(), &ListBotsInput{})
+	got, err := svc.ListBots(context.Background(), &ListBotsInput{
+		AccountId:  ptr.String("__AccountId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1272,7 +1446,10 @@ func TestCheckResponseSnapshot_ListPhoneNumberOrders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPhoneNumberOrders(context.Background(), &ListPhoneNumberOrdersInput{})
+	got, err := svc.ListPhoneNumberOrders(context.Background(), &ListPhoneNumberOrdersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1361,7 +1538,14 @@ func TestCheckResponseSnapshot_ListPhoneNumbers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPhoneNumbers(context.Background(), &ListPhoneNumbersInput{})
+	got, err := svc.ListPhoneNumbers(context.Background(), &ListPhoneNumbersInput{
+		Status:      types.PhoneNumberStatus("AcquireInProgress"),
+		ProductType: types.PhoneNumberProductType("BusinessCalling"),
+		FilterName:  types.PhoneNumberAssociationName("AccountId"),
+		FilterValue: ptr.String("__FilterValue__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1410,7 +1594,12 @@ func TestCheckResponseSnapshot_ListRoomMemberships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRoomMemberships(context.Background(), &ListRoomMembershipsInput{})
+	got, err := svc.ListRoomMemberships(context.Background(), &ListRoomMembershipsInput{
+		AccountId:  ptr.String("__AccountId__"),
+		RoomId:     ptr.String("__RoomId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1449,7 +1638,12 @@ func TestCheckResponseSnapshot_ListRooms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRooms(context.Background(), &ListRoomsInput{})
+	got, err := svc.ListRooms(context.Background(), &ListRoomsInput{
+		AccountId:  ptr.String("__AccountId__"),
+		MemberId:   ptr.String("__MemberId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1485,7 +1679,9 @@ func TestCheckResponseSnapshot_ListSupportedPhoneNumberCountries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSupportedPhoneNumberCountries(context.Background(), &ListSupportedPhoneNumberCountriesInput{})
+	got, err := svc.ListSupportedPhoneNumberCountries(context.Background(), &ListSupportedPhoneNumberCountriesInput{
+		ProductType: types.PhoneNumberProductType("BusinessCalling"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1544,7 +1740,13 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsers(context.Background(), &ListUsersInput{})
+	got, err := svc.ListUsers(context.Background(), &ListUsersInput{
+		AccountId:  ptr.String("__AccountId__"),
+		UserEmail:  ptr.String("__UserEmail__"),
+		UserType:   types.UserType("PrivateUser"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1563,7 +1765,10 @@ func TestCheckResponseSnapshot_LogoutUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.LogoutUser(context.Background(), &LogoutUserInput{})
+	got, err := svc.LogoutUser(context.Background(), &LogoutUserInput{
+		AccountId: ptr.String("__AccountId__"),
+		UserId:    ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1588,7 +1793,12 @@ func TestCheckResponseSnapshot_PutEventsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEventsConfiguration(context.Background(), &PutEventsConfigurationInput{})
+	got, err := svc.PutEventsConfiguration(context.Background(), &PutEventsConfigurationInput{
+		AccountId:                   ptr.String("__AccountId__"),
+		BotId:                       ptr.String("__BotId__"),
+		OutboundEventsHTTPSEndpoint: ptr.String("__OutboundEventsHTTPSEndpoint__"),
+		LambdaFunctionArn:           ptr.String("__LambdaFunctionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1617,7 +1827,17 @@ func TestCheckResponseSnapshot_PutRetentionSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRetentionSettings(context.Background(), &PutRetentionSettingsInput{})
+	got, err := svc.PutRetentionSettings(context.Background(), &PutRetentionSettingsInput{
+		AccountId: ptr.String("__AccountId__"),
+		RetentionSettings: &types.RetentionSettings{
+			RoomRetentionSettings: &types.RoomRetentionSettings{
+				RetentionDays: ptr.Int32(1),
+			},
+			ConversationRetentionSettings: &types.ConversationRetentionSettings{
+				RetentionDays: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1636,7 +1856,11 @@ func TestCheckResponseSnapshot_RedactConversationMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RedactConversationMessage(context.Background(), &RedactConversationMessageInput{})
+	got, err := svc.RedactConversationMessage(context.Background(), &RedactConversationMessageInput{
+		AccountId:      ptr.String("__AccountId__"),
+		ConversationId: ptr.String("__ConversationId__"),
+		MessageId:      ptr.String("__MessageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1655,7 +1879,11 @@ func TestCheckResponseSnapshot_RedactRoomMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RedactRoomMessage(context.Background(), &RedactRoomMessageInput{})
+	got, err := svc.RedactRoomMessage(context.Background(), &RedactRoomMessageInput{
+		AccountId: ptr.String("__AccountId__"),
+		RoomId:    ptr.String("__RoomId__"),
+		MessageId: ptr.String("__MessageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1686,7 +1914,10 @@ func TestCheckResponseSnapshot_RegenerateSecurityToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegenerateSecurityToken(context.Background(), &RegenerateSecurityTokenInput{})
+	got, err := svc.RegenerateSecurityToken(context.Background(), &RegenerateSecurityTokenInput{
+		AccountId: ptr.String("__AccountId__"),
+		BotId:     ptr.String("__BotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1724,7 +1955,10 @@ func TestCheckResponseSnapshot_ResetPersonalPIN(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetPersonalPIN(context.Background(), &ResetPersonalPINInput{})
+	got, err := svc.ResetPersonalPIN(context.Background(), &ResetPersonalPINInput{
+		AccountId: ptr.String("__AccountId__"),
+		UserId:    ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1777,7 +2011,9 @@ func TestCheckResponseSnapshot_RestorePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestorePhoneNumber(context.Background(), &RestorePhoneNumberInput{})
+	got, err := svc.RestorePhoneNumber(context.Background(), &RestorePhoneNumberInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1802,7 +2038,16 @@ func TestCheckResponseSnapshot_SearchAvailablePhoneNumbers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchAvailablePhoneNumbers(context.Background(), &SearchAvailablePhoneNumbersInput{})
+	got, err := svc.SearchAvailablePhoneNumbers(context.Background(), &SearchAvailablePhoneNumbersInput{
+		AreaCode:        ptr.String("__AreaCode__"),
+		City:            ptr.String("__City__"),
+		Country:         ptr.String("__Country__"),
+		State:           ptr.String("__State__"),
+		TollFreePrefix:  ptr.String("__TollFreePrefix__"),
+		PhoneNumberType: types.PhoneNumberType("Local"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1843,7 +2088,11 @@ func TestCheckResponseSnapshot_UpdateAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccount(context.Background(), &UpdateAccountInput{})
+	got, err := svc.UpdateAccount(context.Background(), &UpdateAccountInput{
+		AccountId:      ptr.String("__AccountId__"),
+		Name:           ptr.String("__Name__"),
+		DefaultLicense: types.License("Basic"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1862,7 +2111,13 @@ func TestCheckResponseSnapshot_UpdateAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{})
+	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{
+		AccountId: ptr.String("__AccountId__"),
+		AccountSettings: &types.AccountSettings{
+			DisableRemoteControl: ptr.Bool(true),
+			EnableDialOut:        ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1893,7 +2148,11 @@ func TestCheckResponseSnapshot_UpdateBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBot(context.Background(), &UpdateBotInput{})
+	got, err := svc.UpdateBot(context.Background(), &UpdateBotInput{
+		AccountId: ptr.String("__AccountId__"),
+		BotId:     ptr.String("__BotId__"),
+		Disabled:  ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1912,7 +2171,14 @@ func TestCheckResponseSnapshot_UpdateGlobalSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGlobalSettings(context.Background(), &UpdateGlobalSettingsInput{})
+	got, err := svc.UpdateGlobalSettings(context.Background(), &UpdateGlobalSettingsInput{
+		BusinessCalling: &types.BusinessCallingSettings{
+			CdrBucket: ptr.String("__CdrBucket__"),
+		},
+		VoiceConnector: &types.VoiceConnectorSettings{
+			CdrBucket: ptr.String("__CdrBucket__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1965,7 +2231,11 @@ func TestCheckResponseSnapshot_UpdatePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePhoneNumber(context.Background(), &UpdatePhoneNumberInput{})
+	got, err := svc.UpdatePhoneNumber(context.Background(), &UpdatePhoneNumberInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+		ProductType:   types.PhoneNumberProductType("BusinessCalling"),
+		CallingName:   ptr.String("__CallingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1984,7 +2254,9 @@ func TestCheckResponseSnapshot_UpdatePhoneNumberSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePhoneNumberSettings(context.Background(), &UpdatePhoneNumberSettingsInput{})
+	got, err := svc.UpdatePhoneNumberSettings(context.Background(), &UpdatePhoneNumberSettingsInput{
+		CallingName: ptr.String("__CallingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2012,7 +2284,11 @@ func TestCheckResponseSnapshot_UpdateRoom(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoom(context.Background(), &UpdateRoomInput{})
+	got, err := svc.UpdateRoom(context.Background(), &UpdateRoomInput{
+		AccountId: ptr.String("__AccountId__"),
+		RoomId:    ptr.String("__RoomId__"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2045,7 +2321,12 @@ func TestCheckResponseSnapshot_UpdateRoomMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoomMembership(context.Background(), &UpdateRoomMembershipInput{})
+	got, err := svc.UpdateRoomMembership(context.Background(), &UpdateRoomMembershipInput{
+		AccountId: ptr.String("__AccountId__"),
+		RoomId:    ptr.String("__RoomId__"),
+		MemberId:  ptr.String("__MemberId__"),
+		Role:      types.RoomMembershipRole("Administrator"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2083,7 +2364,16 @@ func TestCheckResponseSnapshot_UpdateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{})
+	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{
+		AccountId:   ptr.String("__AccountId__"),
+		UserId:      ptr.String("__UserId__"),
+		LicenseType: types.License("Basic"),
+		UserType:    types.UserType("PrivateUser"),
+		AlexaForBusinessMetadata: &types.AlexaForBusinessMetadata{
+			IsAlexaForBusinessEnabled: ptr.Bool(true),
+			AlexaForBusinessRoomArn:   ptr.String("__AlexaForBusinessRoomArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2102,7 +2392,17 @@ func TestCheckResponseSnapshot_UpdateUserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserSettings(context.Background(), &UpdateUserSettingsInput{})
+	got, err := svc.UpdateUserSettings(context.Background(), &UpdateUserSettingsInput{
+		AccountId: ptr.String("__AccountId__"),
+		UserId:    ptr.String("__UserId__"),
+		UserSettings: &types.UserSettings{
+			Telephony: &types.TelephonySettings{
+				InboundCalling:  ptr.Bool(true),
+				OutboundCalling: ptr.Bool(true),
+				SMS:             ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2113,7 +2413,7 @@ func TestCheckResponseSnapshot_UpdateUserSettings(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("AccessDeniedException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
@@ -2124,7 +2424,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{})
+	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{
+		AccountId:       ptr.String("__AccountId__"),
+		UserId:          ptr.String("__UserId__"),
+		E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2139,7 +2443,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 	want := &types.BadRequestException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("BadRequestException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("BadRequestException.error")
@@ -2150,7 +2454,11 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{})
+	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{
+		AccountId:       ptr.String("__AccountId__"),
+		UserId:          ptr.String("__UserId__"),
+		E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2165,7 +2473,7 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ConflictException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
@@ -2176,7 +2484,12 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRoomMembership(context.Background(), &CreateRoomMembershipInput{})
+	_, opErr := svc.CreateRoomMembership(context.Background(), &CreateRoomMembershipInput{
+		AccountId: ptr.String("__AccountId__"),
+		RoomId:    ptr.String("__RoomId__"),
+		MemberId:  ptr.String("__MemberId__"),
+		Role:      types.RoomMembershipRole("Administrator"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2191,7 +2504,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 	want := &types.ForbiddenException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ForbiddenException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ForbiddenException.error")
@@ -2202,7 +2515,11 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{})
+	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{
+		AccountId:       ptr.String("__AccountId__"),
+		UserId:          ptr.String("__UserId__"),
+		E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2217,7 +2534,7 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 	want := &types.NotFoundException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("NotFoundException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("NotFoundException.error")
@@ -2228,7 +2545,11 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{})
+	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{
+		AccountId:       ptr.String("__AccountId__"),
+		UserId:          ptr.String("__UserId__"),
+		E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2243,7 +2564,7 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T) {
 	want := &types.ResourceLimitExceededException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ResourceLimitExceededException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceLimitExceededException.error")
@@ -2254,7 +2575,11 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBot(context.Background(), &CreateBotInput{})
+	_, opErr := svc.CreateBot(context.Background(), &CreateBotInput{
+		AccountId:   ptr.String("__AccountId__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Domain:      ptr.String("__Domain__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2269,7 +2594,7 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 
 func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 	want := &types.ServiceFailureException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ServiceFailureException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceFailureException.error")
@@ -2280,7 +2605,11 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{})
+	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{
+		AccountId:       ptr.String("__AccountId__"),
+		UserId:          ptr.String("__UserId__"),
+		E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2295,7 +2624,7 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 	want := &types.ServiceUnavailableException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ServiceUnavailableException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceUnavailableException.error")
@@ -2306,7 +2635,11 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{})
+	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{
+		AccountId:       ptr.String("__AccountId__"),
+		UserId:          ptr.String("__UserId__"),
+		E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2321,7 +2654,7 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 	want := &types.ThrottledClientException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ThrottledClientException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ThrottledClientException.error")
@@ -2332,7 +2665,11 @@ func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{})
+	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{
+		AccountId:       ptr.String("__AccountId__"),
+		UserId:          ptr.String("__UserId__"),
+		E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2347,7 +2684,7 @@ func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 	want := &types.UnauthorizedClientException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("UnauthorizedClientException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UnauthorizedClientException.error")
@@ -2358,7 +2695,11 @@ func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{})
+	_, opErr := svc.AssociatePhoneNumberWithUser(context.Background(), &AssociatePhoneNumberWithUserInput{
+		AccountId:       ptr.String("__AccountId__"),
+		UserId:          ptr.String("__UserId__"),
+		E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2373,7 +2714,7 @@ func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_UnprocessableEntityException(t *testing.T) {
 	want := &types.UnprocessableEntityException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("UnprocessableEntityException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UnprocessableEntityException.error")
@@ -2384,7 +2725,9 @@ func TestCheckResponseSnapshot_Error_UnprocessableEntityException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAccount(context.Background(), &DeleteAccountInput{})
+	_, opErr := svc.DeleteAccount(context.Background(), &DeleteAccountInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

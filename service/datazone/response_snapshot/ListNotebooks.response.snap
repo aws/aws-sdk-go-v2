@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","id":"__Id__","name":"__Name__","owningProjectId":"__OwningProjectId__","status":"ACTIVE","updatedAt":946684800,"updatedBy":"__UpdatedBy__"},{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","id":"__Id__","name":"__Name__","owningProjectId":"__OwningProjectId__","status":"ACTIVE","updatedAt":946684800,"updatedBy":"__UpdatedBy__"}],"nextToken":"__NextToken__"}

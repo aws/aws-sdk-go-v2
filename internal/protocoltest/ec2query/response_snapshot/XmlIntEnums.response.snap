@@ -1,4 +1,0 @@
-200
-Content-Type: application/x-www-form-urlencoded
-
-Action=XmlIntEnums&IntEnum1=1&IntEnum2=1&IntEnum3=1&IntEnumList.1=1&IntEnumList.2=1&IntEnumMap.entry.1.key=key0&IntEnumMap.entry.1.value=1&IntEnumSet.1=1&IntEnumSet.2=1&Version=2020-01-08

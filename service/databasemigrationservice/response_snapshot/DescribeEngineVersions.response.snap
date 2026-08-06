@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.DescribeEngineVersions
+
+{"EngineVersions":[{"AutoUpgradeDate":946684800,"AvailableUpgrades":["__Member__","__Member__"],"DeprecationDate":946684800,"ForceUpgradeDate":946684800,"LaunchDate":946684800,"Lifecycle":"__Lifecycle__","ReleaseStatus":"beta","Version":"__Version__"},{"AutoUpgradeDate":946684800,"AvailableUpgrades":["__Member__","__Member__"],"DeprecationDate":946684800,"ForceUpgradeDate":946684800,"LaunchDate":946684800,"Lifecycle":"__Lifecycle__","ReleaseStatus":"beta","Version":"__Version__"}],"Marker":"__Marker__"}

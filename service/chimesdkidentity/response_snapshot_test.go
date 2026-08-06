@@ -119,7 +119,21 @@ func TestCheckResponseSnapshot_CreateAppInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{})
+	got, err := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{
+		Name:               ptr.String("__Name__"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -144,7 +158,10 @@ func TestCheckResponseSnapshot_CreateAppInstanceAdmin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppInstanceAdmin(context.Background(), &CreateAppInstanceAdminInput{})
+	got, err := svc.CreateAppInstanceAdmin(context.Background(), &CreateAppInstanceAdminInput{
+		AppInstanceAdminArn: ptr.String("__AppInstanceAdminArn__"),
+		AppInstanceArn:      ptr.String("__AppInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,7 +182,34 @@ func TestCheckResponseSnapshot_CreateAppInstanceBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppInstanceBot(context.Background(), &CreateAppInstanceBotInput{})
+	got, err := svc.CreateAppInstanceBot(context.Background(), &CreateAppInstanceBotInput{
+		AppInstanceArn:     ptr.String("__AppInstanceArn__"),
+		Name:               ptr.String("__Name__"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Configuration: &types.Configuration{
+			Lex: &types.LexConfiguration{
+				RespondsTo: types.RespondsTo("STANDARD_MESSAGES"),
+				InvokedBy: &types.InvokedBy{
+					StandardMessages: types.StandardMessages("AUTO"),
+					TargetedMessages: types.TargetedMessages("ALL"),
+				},
+				LexBotAliasArn: ptr.String("__LexBotAliasArn__"),
+				LocaleId:       ptr.String("__LocaleId__"),
+				WelcomeIntent:  ptr.String("__WelcomeIntent__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -186,7 +230,27 @@ func TestCheckResponseSnapshot_CreateAppInstanceUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppInstanceUser(context.Background(), &CreateAppInstanceUserInput{})
+	got, err := svc.CreateAppInstanceUser(context.Background(), &CreateAppInstanceUserInput{
+		AppInstanceArn:     ptr.String("__AppInstanceArn__"),
+		AppInstanceUserId:  ptr.String("__AppInstanceUserId__"),
+		Name:               ptr.String("__Name__"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ExpirationSettings: &types.ExpirationSettings{
+			ExpirationDays:      ptr.Int32(1),
+			ExpirationCriterion: types.ExpirationCriterion("CREATED_TIMESTAMP"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -205,7 +269,9 @@ func TestCheckResponseSnapshot_DeleteAppInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppInstance(context.Background(), &DeleteAppInstanceInput{})
+	got, err := svc.DeleteAppInstance(context.Background(), &DeleteAppInstanceInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +290,10 @@ func TestCheckResponseSnapshot_DeleteAppInstanceAdmin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppInstanceAdmin(context.Background(), &DeleteAppInstanceAdminInput{})
+	got, err := svc.DeleteAppInstanceAdmin(context.Background(), &DeleteAppInstanceAdminInput{
+		AppInstanceAdminArn: ptr.String("__AppInstanceAdminArn__"),
+		AppInstanceArn:      ptr.String("__AppInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -243,7 +312,9 @@ func TestCheckResponseSnapshot_DeleteAppInstanceBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppInstanceBot(context.Background(), &DeleteAppInstanceBotInput{})
+	got, err := svc.DeleteAppInstanceBot(context.Background(), &DeleteAppInstanceBotInput{
+		AppInstanceBotArn: ptr.String("__AppInstanceBotArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -262,7 +333,9 @@ func TestCheckResponseSnapshot_DeleteAppInstanceUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppInstanceUser(context.Background(), &DeleteAppInstanceUserInput{})
+	got, err := svc.DeleteAppInstanceUser(context.Background(), &DeleteAppInstanceUserInput{
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -281,7 +354,10 @@ func TestCheckResponseSnapshot_DeregisterAppInstanceUserEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterAppInstanceUserEndpoint(context.Background(), &DeregisterAppInstanceUserEndpointInput{})
+	got, err := svc.DeregisterAppInstanceUserEndpoint(context.Background(), &DeregisterAppInstanceUserEndpointInput{
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+		EndpointId:         ptr.String("__EndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -308,7 +384,9 @@ func TestCheckResponseSnapshot_DescribeAppInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppInstance(context.Background(), &DescribeAppInstanceInput{})
+	got, err := svc.DescribeAppInstance(context.Background(), &DescribeAppInstanceInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -336,7 +414,10 @@ func TestCheckResponseSnapshot_DescribeAppInstanceAdmin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppInstanceAdmin(context.Background(), &DescribeAppInstanceAdminInput{})
+	got, err := svc.DescribeAppInstanceAdmin(context.Background(), &DescribeAppInstanceAdminInput{
+		AppInstanceAdminArn: ptr.String("__AppInstanceAdminArn__"),
+		AppInstanceArn:      ptr.String("__AppInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -375,7 +456,9 @@ func TestCheckResponseSnapshot_DescribeAppInstanceBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppInstanceBot(context.Background(), &DescribeAppInstanceBotInput{})
+	got, err := svc.DescribeAppInstanceBot(context.Background(), &DescribeAppInstanceBotInput{
+		AppInstanceBotArn: ptr.String("__AppInstanceBotArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -406,7 +489,9 @@ func TestCheckResponseSnapshot_DescribeAppInstanceUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppInstanceUser(context.Background(), &DescribeAppInstanceUserInput{})
+	got, err := svc.DescribeAppInstanceUser(context.Background(), &DescribeAppInstanceUserInput{
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -444,7 +529,10 @@ func TestCheckResponseSnapshot_DescribeAppInstanceUserEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppInstanceUserEndpoint(context.Background(), &DescribeAppInstanceUserEndpointInput{})
+	got, err := svc.DescribeAppInstanceUserEndpoint(context.Background(), &DescribeAppInstanceUserEndpointInput{
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+		EndpointId:         ptr.String("__EndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +558,9 @@ func TestCheckResponseSnapshot_GetAppInstanceRetentionSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAppInstanceRetentionSettings(context.Background(), &GetAppInstanceRetentionSettingsInput{})
+	got, err := svc.GetAppInstanceRetentionSettings(context.Background(), &GetAppInstanceRetentionSettingsInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -506,7 +596,11 @@ func TestCheckResponseSnapshot_ListAppInstanceAdmins(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppInstanceAdmins(context.Background(), &ListAppInstanceAdminsInput{})
+	got, err := svc.ListAppInstanceAdmins(context.Background(), &ListAppInstanceAdminsInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -540,7 +634,11 @@ func TestCheckResponseSnapshot_ListAppInstanceBots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppInstanceBots(context.Background(), &ListAppInstanceBotsInput{})
+	got, err := svc.ListAppInstanceBots(context.Background(), &ListAppInstanceBotsInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -585,7 +683,11 @@ func TestCheckResponseSnapshot_ListAppInstanceUserEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppInstanceUserEndpoints(context.Background(), &ListAppInstanceUserEndpointsInput{})
+	got, err := svc.ListAppInstanceUserEndpoints(context.Background(), &ListAppInstanceUserEndpointsInput{
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -619,7 +721,11 @@ func TestCheckResponseSnapshot_ListAppInstanceUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppInstanceUsers(context.Background(), &ListAppInstanceUsersInput{})
+	got, err := svc.ListAppInstanceUsers(context.Background(), &ListAppInstanceUsersInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,7 +758,10 @@ func TestCheckResponseSnapshot_ListAppInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppInstances(context.Background(), &ListAppInstancesInput{})
+	got, err := svc.ListAppInstances(context.Background(), &ListAppInstancesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -682,7 +791,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -708,7 +819,14 @@ func TestCheckResponseSnapshot_PutAppInstanceRetentionSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAppInstanceRetentionSettings(context.Background(), &PutAppInstanceRetentionSettingsInput{})
+	got, err := svc.PutAppInstanceRetentionSettings(context.Background(), &PutAppInstanceRetentionSettingsInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+		AppInstanceRetentionSettings: &types.AppInstanceRetentionSettings{
+			ChannelRetentionSettings: &types.ChannelRetentionSettings{
+				RetentionDays: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -733,7 +851,13 @@ func TestCheckResponseSnapshot_PutAppInstanceUserExpirationSettings(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAppInstanceUserExpirationSettings(context.Background(), &PutAppInstanceUserExpirationSettingsInput{})
+	got, err := svc.PutAppInstanceUserExpirationSettings(context.Background(), &PutAppInstanceUserExpirationSettingsInput{
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+		ExpirationSettings: &types.ExpirationSettings{
+			ExpirationDays:      ptr.Int32(1),
+			ExpirationCriterion: types.ExpirationCriterion("CREATED_TIMESTAMP"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -755,7 +879,18 @@ func TestCheckResponseSnapshot_RegisterAppInstanceUserEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterAppInstanceUserEndpoint(context.Background(), &RegisterAppInstanceUserEndpointInput{})
+	got, err := svc.RegisterAppInstanceUserEndpoint(context.Background(), &RegisterAppInstanceUserEndpointInput{
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+		Name:               ptr.String("__Name__"),
+		Type:               types.AppInstanceUserEndpointType("APNS"),
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		EndpointAttributes: &types.EndpointAttributes{
+			DeviceToken:     ptr.String("__DeviceToken__"),
+			VoipDeviceToken: ptr.String("__VoipDeviceToken__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		AllowMessages:      types.AllowMessages("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -774,7 +909,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -793,7 +940,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -814,7 +967,11 @@ func TestCheckResponseSnapshot_UpdateAppInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAppInstance(context.Background(), &UpdateAppInstanceInput{})
+	got, err := svc.UpdateAppInstance(context.Background(), &UpdateAppInstanceInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+		Name:           ptr.String("__Name__"),
+		Metadata:       ptr.String("__Metadata__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -835,7 +992,23 @@ func TestCheckResponseSnapshot_UpdateAppInstanceBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAppInstanceBot(context.Background(), &UpdateAppInstanceBotInput{})
+	got, err := svc.UpdateAppInstanceBot(context.Background(), &UpdateAppInstanceBotInput{
+		AppInstanceBotArn: ptr.String("__AppInstanceBotArn__"),
+		Name:              ptr.String("__Name__"),
+		Metadata:          ptr.String("__Metadata__"),
+		Configuration: &types.Configuration{
+			Lex: &types.LexConfiguration{
+				RespondsTo: types.RespondsTo("STANDARD_MESSAGES"),
+				InvokedBy: &types.InvokedBy{
+					StandardMessages: types.StandardMessages("AUTO"),
+					TargetedMessages: types.TargetedMessages("ALL"),
+				},
+				LexBotAliasArn: ptr.String("__LexBotAliasArn__"),
+				LocaleId:       ptr.String("__LocaleId__"),
+				WelcomeIntent:  ptr.String("__WelcomeIntent__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -856,7 +1029,11 @@ func TestCheckResponseSnapshot_UpdateAppInstanceUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAppInstanceUser(context.Background(), &UpdateAppInstanceUserInput{})
+	got, err := svc.UpdateAppInstanceUser(context.Background(), &UpdateAppInstanceUserInput{
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+		Name:               ptr.String("__Name__"),
+		Metadata:           ptr.String("__Metadata__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -878,7 +1055,12 @@ func TestCheckResponseSnapshot_UpdateAppInstanceUserEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAppInstanceUserEndpoint(context.Background(), &UpdateAppInstanceUserEndpointInput{})
+	got, err := svc.UpdateAppInstanceUserEndpoint(context.Background(), &UpdateAppInstanceUserEndpointInput{
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+		EndpointId:         ptr.String("__EndpointId__"),
+		Name:               ptr.String("__Name__"),
+		AllowMessages:      types.AllowMessages("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -889,7 +1071,7 @@ func TestCheckResponseSnapshot_UpdateAppInstanceUserEndpoint(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 	want := &types.BadRequestException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("BadRequestException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("BadRequestException.error")
@@ -900,7 +1082,21 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{})
+	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{
+		Name:               ptr.String("__Name__"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -915,7 +1111,7 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ConflictException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
@@ -926,7 +1122,21 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{})
+	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{
+		Name:               ptr.String("__Name__"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -941,7 +1151,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 	want := &types.ForbiddenException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ForbiddenException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ForbiddenException.error")
@@ -952,7 +1162,21 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{})
+	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{
+		Name:               ptr.String("__Name__"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -967,7 +1191,7 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 	want := &types.NotFoundException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("NotFoundException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("NotFoundException.error")
@@ -978,7 +1202,9 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAppInstanceBot(context.Background(), &DescribeAppInstanceBotInput{})
+	_, opErr := svc.DescribeAppInstanceBot(context.Background(), &DescribeAppInstanceBotInput{
+		AppInstanceBotArn: ptr.String("__AppInstanceBotArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -993,7 +1219,7 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T) {
 	want := &types.ResourceLimitExceededException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ResourceLimitExceededException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceLimitExceededException.error")
@@ -1004,7 +1230,21 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{})
+	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{
+		Name:               ptr.String("__Name__"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1019,7 +1259,7 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 
 func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 	want := &types.ServiceFailureException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ServiceFailureException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceFailureException.error")
@@ -1030,7 +1270,21 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{})
+	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{
+		Name:               ptr.String("__Name__"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1045,7 +1299,7 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 	want := &types.ServiceUnavailableException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ServiceUnavailableException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceUnavailableException.error")
@@ -1056,7 +1310,21 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{})
+	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{
+		Name:               ptr.String("__Name__"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1071,7 +1339,7 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 	want := &types.ThrottledClientException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ThrottledClientException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ThrottledClientException.error")
@@ -1082,7 +1350,21 @@ func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{})
+	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{
+		Name:               ptr.String("__Name__"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1097,7 +1379,7 @@ func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 	want := &types.UnauthorizedClientException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("UnauthorizedClientException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UnauthorizedClientException.error")
@@ -1108,7 +1390,21 @@ func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{})
+	_, opErr := svc.CreateAppInstance(context.Background(), &CreateAppInstanceInput{
+		Name:               ptr.String("__Name__"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

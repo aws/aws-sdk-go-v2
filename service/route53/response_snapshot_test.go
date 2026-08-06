@@ -124,7 +124,10 @@ func TestCheckResponseSnapshot_ActivateKeySigningKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{})
+	got, err := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -150,7 +153,14 @@ func TestCheckResponseSnapshot_AssociateVPCWithHostedZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{})
+	got, err := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		Comment: ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -171,7 +181,28 @@ func TestCheckResponseSnapshot_ChangeCidrCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ChangeCidrCollection(context.Background(), &ChangeCidrCollectionInput{})
+	got, err := svc.ChangeCidrCollection(context.Background(), &ChangeCidrCollectionInput{
+		Id:                ptr.String("__Id__"),
+		CollectionVersion: ptr.Int64(1),
+		Changes: []types.CidrCollectionChange{
+			{
+				LocationName: ptr.String("__LocationName__"),
+				Action:       types.CidrCollectionChangeAction("PUT"),
+				CidrList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				LocationName: ptr.String("__LocationName__"),
+				Action:       types.CidrCollectionChangeAction("PUT"),
+				CidrList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -197,7 +228,106 @@ func TestCheckResponseSnapshot_ChangeResourceRecordSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ChangeResourceRecordSets(context.Background(), &ChangeResourceRecordSetsInput{})
+	got, err := svc.ChangeResourceRecordSets(context.Background(), &ChangeResourceRecordSetsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ChangeBatch: &types.ChangeBatch{
+			Comment: ptr.String("__Comment__"),
+			Changes: []types.Change{
+				{
+					Action: types.ChangeAction("CREATE"),
+					ResourceRecordSet: &types.ResourceRecordSet{
+						Name:          ptr.String("__Name__"),
+						Type:          types.RRType("SOA"),
+						SetIdentifier: ptr.String("__SetIdentifier__"),
+						Weight:        ptr.Int64(1),
+						Region:        types.ResourceRecordSetRegion("us-east-1"),
+						GeoLocation: &types.GeoLocation{
+							ContinentCode:   ptr.String("__ContinentCode__"),
+							CountryCode:     ptr.String("__CountryCode__"),
+							SubdivisionCode: ptr.String("__SubdivisionCode__"),
+						},
+						Failover:         types.ResourceRecordSetFailover("PRIMARY"),
+						MultiValueAnswer: ptr.Bool(true),
+						TTL:              ptr.Int64(1),
+						ResourceRecords: []types.ResourceRecord{
+							{
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						AliasTarget: &types.AliasTarget{
+							HostedZoneId:         ptr.String("__HostedZoneId__"),
+							DNSName:              ptr.String("__DNSName__"),
+							EvaluateTargetHealth: true,
+						},
+						HealthCheckId:           ptr.String("__HealthCheckId__"),
+						TrafficPolicyInstanceId: ptr.String("__TrafficPolicyInstanceId__"),
+						CidrRoutingConfig: &types.CidrRoutingConfig{
+							CollectionId: ptr.String("__CollectionId__"),
+							LocationName: ptr.String("__LocationName__"),
+						},
+						GeoProximityLocation: &types.GeoProximityLocation{
+							AWSRegion:      ptr.String("__AWSRegion__"),
+							LocalZoneGroup: ptr.String("__LocalZoneGroup__"),
+							Coordinates: &types.Coordinates{
+								Latitude:  ptr.String("__Latitude__"),
+								Longitude: ptr.String("__Longitude__"),
+							},
+							Bias: ptr.Int32(1),
+						},
+					},
+				},
+				{
+					Action: types.ChangeAction("CREATE"),
+					ResourceRecordSet: &types.ResourceRecordSet{
+						Name:          ptr.String("__Name__"),
+						Type:          types.RRType("SOA"),
+						SetIdentifier: ptr.String("__SetIdentifier__"),
+						Weight:        ptr.Int64(1),
+						Region:        types.ResourceRecordSetRegion("us-east-1"),
+						GeoLocation: &types.GeoLocation{
+							ContinentCode:   ptr.String("__ContinentCode__"),
+							CountryCode:     ptr.String("__CountryCode__"),
+							SubdivisionCode: ptr.String("__SubdivisionCode__"),
+						},
+						Failover:         types.ResourceRecordSetFailover("PRIMARY"),
+						MultiValueAnswer: ptr.Bool(true),
+						TTL:              ptr.Int64(1),
+						ResourceRecords: []types.ResourceRecord{
+							{
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						AliasTarget: &types.AliasTarget{
+							HostedZoneId:         ptr.String("__HostedZoneId__"),
+							DNSName:              ptr.String("__DNSName__"),
+							EvaluateTargetHealth: true,
+						},
+						HealthCheckId:           ptr.String("__HealthCheckId__"),
+						TrafficPolicyInstanceId: ptr.String("__TrafficPolicyInstanceId__"),
+						CidrRoutingConfig: &types.CidrRoutingConfig{
+							CollectionId: ptr.String("__CollectionId__"),
+							LocationName: ptr.String("__LocationName__"),
+						},
+						GeoProximityLocation: &types.GeoProximityLocation{
+							AWSRegion:      ptr.String("__AWSRegion__"),
+							LocalZoneGroup: ptr.String("__LocalZoneGroup__"),
+							Coordinates: &types.Coordinates{
+								Latitude:  ptr.String("__Latitude__"),
+								Longitude: ptr.String("__Longitude__"),
+							},
+							Bias: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -216,7 +346,24 @@ func TestCheckResponseSnapshot_ChangeTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ChangeTagsForResource(context.Background(), &ChangeTagsForResourceInput{})
+	got, err := svc.ChangeTagsForResource(context.Background(), &ChangeTagsForResourceInput{
+		ResourceType: types.TagResourceType("healthcheck"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		AddTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		RemoveTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -243,7 +390,10 @@ func TestCheckResponseSnapshot_CreateCidrCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCidrCollection(context.Background(), &CreateCidrCollectionInput{})
+	got, err := svc.CreateCidrCollection(context.Background(), &CreateCidrCollectionInput{
+		Name:            ptr.String("__Name__"),
+		CallerReference: ptr.String("__CallerReference__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -321,7 +471,38 @@ func TestCheckResponseSnapshot_CreateHealthCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHealthCheck(context.Background(), &CreateHealthCheckInput{})
+	got, err := svc.CreateHealthCheck(context.Background(), &CreateHealthCheckInput{
+		CallerReference: ptr.String("__CallerReference__"),
+		HealthCheckConfig: &types.HealthCheckConfig{
+			IPAddress:                ptr.String("__IPAddress__"),
+			Port:                     ptr.Int32(1),
+			Type:                     types.HealthCheckType("HTTP"),
+			ResourcePath:             ptr.String("__ResourcePath__"),
+			FullyQualifiedDomainName: ptr.String("__FullyQualifiedDomainName__"),
+			SearchString:             ptr.String("__SearchString__"),
+			RequestInterval:          ptr.Int32(1),
+			FailureThreshold:         ptr.Int32(1),
+			MeasureLatency:           ptr.Bool(true),
+			Inverted:                 ptr.Bool(true),
+			Disabled:                 ptr.Bool(true),
+			HealthThreshold:          ptr.Int32(1),
+			ChildHealthChecks: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EnableSNI: ptr.Bool(true),
+			Regions: []types.HealthCheckRegion{
+				types.HealthCheckRegion("us-east-1"),
+				types.HealthCheckRegion("us-east-1"),
+			},
+			AlarmIdentifier: &types.AlarmIdentifier{
+				Region: types.CloudWatchRegion("us-east-1"),
+				Name:   ptr.String("__Name__"),
+			},
+			InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
+			RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -380,7 +561,19 @@ func TestCheckResponseSnapshot_CreateHostedZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{})
+	got, err := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{
+		Name: ptr.String("__Name__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		CallerReference: ptr.String("__CallerReference__"),
+		HostedZoneConfig: &types.HostedZoneConfig{
+			Comment:     ptr.String("__Comment__"),
+			PrivateZone: true,
+		},
+		DelegationSetId: ptr.String("__DelegationSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -425,7 +618,13 @@ func TestCheckResponseSnapshot_CreateKeySigningKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKeySigningKey(context.Background(), &CreateKeySigningKeyInput{})
+	got, err := svc.CreateKeySigningKey(context.Background(), &CreateKeySigningKeyInput{
+		CallerReference:         ptr.String("__CallerReference__"),
+		HostedZoneId:            ptr.String("__HostedZoneId__"),
+		KeyManagementServiceArn: ptr.String("__KeyManagementServiceArn__"),
+		Name:                    ptr.String("__Name__"),
+		Status:                  ptr.String("__Status__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -451,7 +650,10 @@ func TestCheckResponseSnapshot_CreateQueryLoggingConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQueryLoggingConfig(context.Background(), &CreateQueryLoggingConfigInput{})
+	got, err := svc.CreateQueryLoggingConfig(context.Background(), &CreateQueryLoggingConfigInput{
+		HostedZoneId:              ptr.String("__HostedZoneId__"),
+		CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -480,7 +682,10 @@ func TestCheckResponseSnapshot_CreateReusableDelegationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReusableDelegationSet(context.Background(), &CreateReusableDelegationSetInput{})
+	got, err := svc.CreateReusableDelegationSet(context.Background(), &CreateReusableDelegationSetInput{
+		CallerReference: ptr.String("__CallerReference__"),
+		HostedZoneId:    ptr.String("__HostedZoneId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -509,7 +714,11 @@ func TestCheckResponseSnapshot_CreateTrafficPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrafficPolicy(context.Background(), &CreateTrafficPolicyInput{})
+	got, err := svc.CreateTrafficPolicy(context.Background(), &CreateTrafficPolicyInput{
+		Name:     ptr.String("__Name__"),
+		Document: ptr.String("__Document__"),
+		Comment:  ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -541,7 +750,13 @@ func TestCheckResponseSnapshot_CreateTrafficPolicyInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrafficPolicyInstance(context.Background(), &CreateTrafficPolicyInstanceInput{})
+	got, err := svc.CreateTrafficPolicyInstance(context.Background(), &CreateTrafficPolicyInstanceInput{
+		HostedZoneId:         ptr.String("__HostedZoneId__"),
+		Name:                 ptr.String("__Name__"),
+		TTL:                  ptr.Int64(1),
+		TrafficPolicyId:      ptr.String("__TrafficPolicyId__"),
+		TrafficPolicyVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -570,7 +785,11 @@ func TestCheckResponseSnapshot_CreateTrafficPolicyVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrafficPolicyVersion(context.Background(), &CreateTrafficPolicyVersionInput{})
+	got, err := svc.CreateTrafficPolicyVersion(context.Background(), &CreateTrafficPolicyVersionInput{
+		Id:       ptr.String("__Id__"),
+		Document: ptr.String("__Document__"),
+		Comment:  ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -595,7 +814,13 @@ func TestCheckResponseSnapshot_CreateVPCAssociationAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVPCAssociationAuthorization(context.Background(), &CreateVPCAssociationAuthorizationInput{})
+	got, err := svc.CreateVPCAssociationAuthorization(context.Background(), &CreateVPCAssociationAuthorizationInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -621,7 +846,10 @@ func TestCheckResponseSnapshot_DeactivateKeySigningKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeactivateKeySigningKey(context.Background(), &DeactivateKeySigningKeyInput{})
+	got, err := svc.DeactivateKeySigningKey(context.Background(), &DeactivateKeySigningKeyInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -640,7 +868,9 @@ func TestCheckResponseSnapshot_DeleteCidrCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCidrCollection(context.Background(), &DeleteCidrCollectionInput{})
+	got, err := svc.DeleteCidrCollection(context.Background(), &DeleteCidrCollectionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -659,7 +889,9 @@ func TestCheckResponseSnapshot_DeleteHealthCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHealthCheck(context.Background(), &DeleteHealthCheckInput{})
+	got, err := svc.DeleteHealthCheck(context.Background(), &DeleteHealthCheckInput{
+		HealthCheckId: ptr.String("__HealthCheckId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -685,7 +917,9 @@ func TestCheckResponseSnapshot_DeleteHostedZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHostedZone(context.Background(), &DeleteHostedZoneInput{})
+	got, err := svc.DeleteHostedZone(context.Background(), &DeleteHostedZoneInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -711,7 +945,10 @@ func TestCheckResponseSnapshot_DeleteKeySigningKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKeySigningKey(context.Background(), &DeleteKeySigningKeyInput{})
+	got, err := svc.DeleteKeySigningKey(context.Background(), &DeleteKeySigningKeyInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -730,7 +967,9 @@ func TestCheckResponseSnapshot_DeleteQueryLoggingConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQueryLoggingConfig(context.Background(), &DeleteQueryLoggingConfigInput{})
+	got, err := svc.DeleteQueryLoggingConfig(context.Background(), &DeleteQueryLoggingConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -749,7 +988,9 @@ func TestCheckResponseSnapshot_DeleteReusableDelegationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReusableDelegationSet(context.Background(), &DeleteReusableDelegationSetInput{})
+	got, err := svc.DeleteReusableDelegationSet(context.Background(), &DeleteReusableDelegationSetInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -768,7 +1009,10 @@ func TestCheckResponseSnapshot_DeleteTrafficPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrafficPolicy(context.Background(), &DeleteTrafficPolicyInput{})
+	got, err := svc.DeleteTrafficPolicy(context.Background(), &DeleteTrafficPolicyInput{
+		Id:      ptr.String("__Id__"),
+		Version: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -787,7 +1031,9 @@ func TestCheckResponseSnapshot_DeleteTrafficPolicyInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrafficPolicyInstance(context.Background(), &DeleteTrafficPolicyInstanceInput{})
+	got, err := svc.DeleteTrafficPolicyInstance(context.Background(), &DeleteTrafficPolicyInstanceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -806,7 +1052,13 @@ func TestCheckResponseSnapshot_DeleteVPCAssociationAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVPCAssociationAuthorization(context.Background(), &DeleteVPCAssociationAuthorizationInput{})
+	got, err := svc.DeleteVPCAssociationAuthorization(context.Background(), &DeleteVPCAssociationAuthorizationInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -832,7 +1084,9 @@ func TestCheckResponseSnapshot_DisableHostedZoneDNSSEC(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableHostedZoneDNSSEC(context.Background(), &DisableHostedZoneDNSSECInput{})
+	got, err := svc.DisableHostedZoneDNSSEC(context.Background(), &DisableHostedZoneDNSSECInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -858,7 +1112,14 @@ func TestCheckResponseSnapshot_DisassociateVPCFromHostedZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateVPCFromHostedZone(context.Background(), &DisassociateVPCFromHostedZoneInput{})
+	got, err := svc.DisassociateVPCFromHostedZone(context.Background(), &DisassociateVPCFromHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		Comment: ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -884,7 +1145,9 @@ func TestCheckResponseSnapshot_EnableHostedZoneDNSSEC(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableHostedZoneDNSSEC(context.Background(), &EnableHostedZoneDNSSECInput{})
+	got, err := svc.EnableHostedZoneDNSSEC(context.Background(), &EnableHostedZoneDNSSECInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -909,7 +1172,9 @@ func TestCheckResponseSnapshot_GetAccountLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccountLimit(context.Background(), &GetAccountLimitInput{})
+	got, err := svc.GetAccountLimit(context.Background(), &GetAccountLimitInput{
+		Type: types.AccountLimitType("MAX_HEALTH_CHECKS_BY_OWNER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -935,7 +1200,9 @@ func TestCheckResponseSnapshot_GetChange(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChange(context.Background(), &GetChangeInput{})
+	got, err := svc.GetChange(context.Background(), &GetChangeInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1021,7 +1288,9 @@ func TestCheckResponseSnapshot_GetDNSSEC(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDNSSEC(context.Background(), &GetDNSSECInput{})
+	got, err := svc.GetDNSSEC(context.Background(), &GetDNSSECInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1049,7 +1318,11 @@ func TestCheckResponseSnapshot_GetGeoLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGeoLocation(context.Background(), &GetGeoLocationInput{})
+	got, err := svc.GetGeoLocation(context.Background(), &GetGeoLocationInput{
+		ContinentCode:   ptr.String("__ContinentCode__"),
+		CountryCode:     ptr.String("__CountryCode__"),
+		SubdivisionCode: ptr.String("__SubdivisionCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1126,7 +1399,9 @@ func TestCheckResponseSnapshot_GetHealthCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHealthCheck(context.Background(), &GetHealthCheckInput{})
+	got, err := svc.GetHealthCheck(context.Background(), &GetHealthCheckInput{
+		HealthCheckId: ptr.String("__HealthCheckId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1185,7 +1460,9 @@ func TestCheckResponseSnapshot_GetHealthCheckLastFailureReason(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHealthCheckLastFailureReason(context.Background(), &GetHealthCheckLastFailureReasonInput{})
+	got, err := svc.GetHealthCheckLastFailureReason(context.Background(), &GetHealthCheckLastFailureReasonInput{
+		HealthCheckId: ptr.String("__HealthCheckId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1223,7 +1500,9 @@ func TestCheckResponseSnapshot_GetHealthCheckStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHealthCheckStatus(context.Background(), &GetHealthCheckStatusInput{})
+	got, err := svc.GetHealthCheckStatus(context.Background(), &GetHealthCheckStatusInput{
+		HealthCheckId: ptr.String("__HealthCheckId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1281,7 +1560,9 @@ func TestCheckResponseSnapshot_GetHostedZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHostedZone(context.Background(), &GetHostedZoneInput{})
+	got, err := svc.GetHostedZone(context.Background(), &GetHostedZoneInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1327,7 +1608,10 @@ func TestCheckResponseSnapshot_GetHostedZoneLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHostedZoneLimit(context.Background(), &GetHostedZoneLimitInput{})
+	got, err := svc.GetHostedZoneLimit(context.Background(), &GetHostedZoneLimitInput{
+		Type:         types.HostedZoneLimitType("MAX_RRSETS_BY_ZONE"),
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1352,7 +1636,9 @@ func TestCheckResponseSnapshot_GetQueryLoggingConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryLoggingConfig(context.Background(), &GetQueryLoggingConfigInput{})
+	got, err := svc.GetQueryLoggingConfig(context.Background(), &GetQueryLoggingConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1380,7 +1666,9 @@ func TestCheckResponseSnapshot_GetReusableDelegationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReusableDelegationSet(context.Background(), &GetReusableDelegationSetInput{})
+	got, err := svc.GetReusableDelegationSet(context.Background(), &GetReusableDelegationSetInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1405,7 +1693,10 @@ func TestCheckResponseSnapshot_GetReusableDelegationSetLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReusableDelegationSetLimit(context.Background(), &GetReusableDelegationSetLimitInput{})
+	got, err := svc.GetReusableDelegationSetLimit(context.Background(), &GetReusableDelegationSetLimitInput{
+		Type:            types.ReusableDelegationSetLimitType("MAX_ZONES_BY_REUSABLE_DELEGATION_SET"),
+		DelegationSetId: ptr.String("__DelegationSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1433,7 +1724,10 @@ func TestCheckResponseSnapshot_GetTrafficPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrafficPolicy(context.Background(), &GetTrafficPolicyInput{})
+	got, err := svc.GetTrafficPolicy(context.Background(), &GetTrafficPolicyInput{
+		Id:      ptr.String("__Id__"),
+		Version: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1464,7 +1758,9 @@ func TestCheckResponseSnapshot_GetTrafficPolicyInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrafficPolicyInstance(context.Background(), &GetTrafficPolicyInstanceInput{})
+	got, err := svc.GetTrafficPolicyInstance(context.Background(), &GetTrafficPolicyInstanceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1516,7 +1812,12 @@ func TestCheckResponseSnapshot_ListCidrBlocks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCidrBlocks(context.Background(), &ListCidrBlocksInput{})
+	got, err := svc.ListCidrBlocks(context.Background(), &ListCidrBlocksInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		LocationName: ptr.String("__LocationName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1551,7 +1852,10 @@ func TestCheckResponseSnapshot_ListCidrCollections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCidrCollections(context.Background(), &ListCidrCollectionsInput{})
+	got, err := svc.ListCidrCollections(context.Background(), &ListCidrCollectionsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1580,7 +1884,11 @@ func TestCheckResponseSnapshot_ListCidrLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCidrLocations(context.Background(), &ListCidrLocationsInput{})
+	got, err := svc.ListCidrLocations(context.Background(), &ListCidrLocationsInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1623,7 +1931,12 @@ func TestCheckResponseSnapshot_ListGeoLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGeoLocations(context.Background(), &ListGeoLocationsInput{})
+	got, err := svc.ListGeoLocations(context.Background(), &ListGeoLocationsInput{
+		StartContinentCode:   ptr.String("__StartContinentCode__"),
+		StartCountryCode:     ptr.String("__StartCountryCode__"),
+		StartSubdivisionCode: ptr.String("__StartSubdivisionCode__"),
+		MaxItems:             ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1763,7 +2076,10 @@ func TestCheckResponseSnapshot_ListHealthChecks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHealthChecks(context.Background(), &ListHealthChecksInput{})
+	got, err := svc.ListHealthChecks(context.Background(), &ListHealthChecksInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1829,7 +2145,12 @@ func TestCheckResponseSnapshot_ListHostedZones(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHostedZones(context.Background(), &ListHostedZonesInput{})
+	got, err := svc.ListHostedZones(context.Background(), &ListHostedZonesInput{
+		Marker:          ptr.String("__Marker__"),
+		MaxItems:        ptr.Int32(1),
+		DelegationSetId: ptr.String("__DelegationSetId__"),
+		HostedZoneType:  types.HostedZoneType("PrivateHostedZone"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1897,7 +2218,11 @@ func TestCheckResponseSnapshot_ListHostedZonesByName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHostedZonesByName(context.Background(), &ListHostedZonesByNameInput{})
+	got, err := svc.ListHostedZonesByName(context.Background(), &ListHostedZonesByNameInput{
+		DNSName:      ptr.String("__DNSName__"),
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		MaxItems:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1937,7 +2262,12 @@ func TestCheckResponseSnapshot_ListHostedZonesByVPC(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHostedZonesByVPC(context.Background(), &ListHostedZonesByVPCInput{})
+	got, err := svc.ListHostedZonesByVPC(context.Background(), &ListHostedZonesByVPCInput{
+		VPCId:     ptr.String("__VPCId__"),
+		VPCRegion: types.VPCRegion("us-east-1"),
+		MaxItems:  ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1970,7 +2300,11 @@ func TestCheckResponseSnapshot_ListQueryLoggingConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueryLoggingConfigs(context.Background(), &ListQueryLoggingConfigsInput{})
+	got, err := svc.ListQueryLoggingConfigs(context.Background(), &ListQueryLoggingConfigsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2083,7 +2417,13 @@ func TestCheckResponseSnapshot_ListResourceRecordSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceRecordSets(context.Background(), &ListResourceRecordSetsInput{})
+	got, err := svc.ListResourceRecordSets(context.Background(), &ListResourceRecordSetsInput{
+		HostedZoneId:          ptr.String("__HostedZoneId__"),
+		StartRecordName:       ptr.String("__StartRecordName__"),
+		StartRecordType:       types.RRType("SOA"),
+		StartRecordIdentifier: ptr.String("__StartRecordIdentifier__"),
+		MaxItems:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2125,7 +2465,10 @@ func TestCheckResponseSnapshot_ListReusableDelegationSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReusableDelegationSets(context.Background(), &ListReusableDelegationSetsInput{})
+	got, err := svc.ListReusableDelegationSets(context.Background(), &ListReusableDelegationSetsInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2159,7 +2502,10 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceType: types.TagResourceType("healthcheck"),
+		ResourceId:   ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2209,7 +2555,13 @@ func TestCheckResponseSnapshot_ListTagsForResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResources(context.Background(), &ListTagsForResourcesInput{})
+	got, err := svc.ListTagsForResources(context.Background(), &ListTagsForResourcesInput{
+		ResourceType: types.TagResourceType("healthcheck"),
+		ResourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2248,7 +2600,10 @@ func TestCheckResponseSnapshot_ListTrafficPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrafficPolicies(context.Background(), &ListTrafficPoliciesInput{})
+	got, err := svc.ListTrafficPolicies(context.Background(), &ListTrafficPoliciesInput{
+		TrafficPolicyIdMarker: ptr.String("__TrafficPolicyIdMarker__"),
+		MaxItems:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2297,7 +2652,12 @@ func TestCheckResponseSnapshot_ListTrafficPolicyInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrafficPolicyInstances(context.Background(), &ListTrafficPolicyInstancesInput{})
+	got, err := svc.ListTrafficPolicyInstances(context.Background(), &ListTrafficPolicyInstancesInput{
+		HostedZoneIdMarker:              ptr.String("__HostedZoneIdMarker__"),
+		TrafficPolicyInstanceNameMarker: ptr.String("__TrafficPolicyInstanceNameMarker__"),
+		TrafficPolicyInstanceTypeMarker: types.RRType("SOA"),
+		MaxItems:                        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2345,7 +2705,12 @@ func TestCheckResponseSnapshot_ListTrafficPolicyInstancesByHostedZone(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrafficPolicyInstancesByHostedZone(context.Background(), &ListTrafficPolicyInstancesByHostedZoneInput{})
+	got, err := svc.ListTrafficPolicyInstancesByHostedZone(context.Background(), &ListTrafficPolicyInstancesByHostedZoneInput{
+		HostedZoneId:                    ptr.String("__HostedZoneId__"),
+		TrafficPolicyInstanceNameMarker: ptr.String("__TrafficPolicyInstanceNameMarker__"),
+		TrafficPolicyInstanceTypeMarker: types.RRType("SOA"),
+		MaxItems:                        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2394,7 +2759,14 @@ func TestCheckResponseSnapshot_ListTrafficPolicyInstancesByPolicy(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrafficPolicyInstancesByPolicy(context.Background(), &ListTrafficPolicyInstancesByPolicyInput{})
+	got, err := svc.ListTrafficPolicyInstancesByPolicy(context.Background(), &ListTrafficPolicyInstancesByPolicyInput{
+		TrafficPolicyId:                 ptr.String("__TrafficPolicyId__"),
+		TrafficPolicyVersion:            ptr.Int32(1),
+		HostedZoneIdMarker:              ptr.String("__HostedZoneIdMarker__"),
+		TrafficPolicyInstanceNameMarker: ptr.String("__TrafficPolicyInstanceNameMarker__"),
+		TrafficPolicyInstanceTypeMarker: types.RRType("SOA"),
+		MaxItems:                        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2435,7 +2807,11 @@ func TestCheckResponseSnapshot_ListTrafficPolicyVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrafficPolicyVersions(context.Background(), &ListTrafficPolicyVersionsInput{})
+	got, err := svc.ListTrafficPolicyVersions(context.Background(), &ListTrafficPolicyVersionsInput{
+		Id:                         ptr.String("__Id__"),
+		TrafficPolicyVersionMarker: ptr.String("__TrafficPolicyVersionMarker__"),
+		MaxItems:                   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2467,7 +2843,11 @@ func TestCheckResponseSnapshot_ListVPCAssociationAuthorizations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVPCAssociationAuthorizations(context.Background(), &ListVPCAssociationAuthorizationsInput{})
+	got, err := svc.ListVPCAssociationAuthorizations(context.Background(), &ListVPCAssociationAuthorizationsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2496,7 +2876,14 @@ func TestCheckResponseSnapshot_TestDNSAnswer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestDNSAnswer(context.Background(), &TestDNSAnswerInput{})
+	got, err := svc.TestDNSAnswer(context.Background(), &TestDNSAnswerInput{
+		HostedZoneId:          ptr.String("__HostedZoneId__"),
+		RecordName:            ptr.String("__RecordName__"),
+		RecordType:            types.RRType("SOA"),
+		ResolverIP:            ptr.String("__ResolverIP__"),
+		EDNS0ClientSubnetIP:   ptr.String("__EDNS0ClientSubnetIP__"),
+		EDNS0ClientSubnetMask: ptr.String("__EDNS0ClientSubnetMask__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2573,7 +2960,37 @@ func TestCheckResponseSnapshot_UpdateHealthCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateHealthCheck(context.Background(), &UpdateHealthCheckInput{})
+	got, err := svc.UpdateHealthCheck(context.Background(), &UpdateHealthCheckInput{
+		HealthCheckId:            ptr.String("__HealthCheckId__"),
+		HealthCheckVersion:       ptr.Int64(1),
+		IPAddress:                ptr.String("__IPAddress__"),
+		Port:                     ptr.Int32(1),
+		ResourcePath:             ptr.String("__ResourcePath__"),
+		FullyQualifiedDomainName: ptr.String("__FullyQualifiedDomainName__"),
+		SearchString:             ptr.String("__SearchString__"),
+		FailureThreshold:         ptr.Int32(1),
+		Inverted:                 ptr.Bool(true),
+		Disabled:                 ptr.Bool(true),
+		HealthThreshold:          ptr.Int32(1),
+		ChildHealthChecks: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EnableSNI: ptr.Bool(true),
+		Regions: []types.HealthCheckRegion{
+			types.HealthCheckRegion("us-east-1"),
+			types.HealthCheckRegion("us-east-1"),
+		},
+		AlarmIdentifier: &types.AlarmIdentifier{
+			Region: types.CloudWatchRegion("us-east-1"),
+			Name:   ptr.String("__Name__"),
+		},
+		InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
+		ResetElements: []types.ResettableElementName{
+			types.ResettableElementName("FullyQualifiedDomainName"),
+			types.ResettableElementName("FullyQualifiedDomainName"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2613,7 +3030,10 @@ func TestCheckResponseSnapshot_UpdateHostedZoneComment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateHostedZoneComment(context.Background(), &UpdateHostedZoneCommentInput{})
+	got, err := svc.UpdateHostedZoneComment(context.Background(), &UpdateHostedZoneCommentInput{
+		Id:      ptr.String("__Id__"),
+		Comment: ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2632,7 +3052,10 @@ func TestCheckResponseSnapshot_UpdateHostedZoneFeatures(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateHostedZoneFeatures(context.Background(), &UpdateHostedZoneFeaturesInput{})
+	got, err := svc.UpdateHostedZoneFeatures(context.Background(), &UpdateHostedZoneFeaturesInput{
+		HostedZoneId:              ptr.String("__HostedZoneId__"),
+		EnableAcceleratedRecovery: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2660,7 +3083,11 @@ func TestCheckResponseSnapshot_UpdateTrafficPolicyComment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTrafficPolicyComment(context.Background(), &UpdateTrafficPolicyCommentInput{})
+	got, err := svc.UpdateTrafficPolicyComment(context.Background(), &UpdateTrafficPolicyCommentInput{
+		Id:      ptr.String("__Id__"),
+		Version: ptr.Int32(1),
+		Comment: ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2691,7 +3118,12 @@ func TestCheckResponseSnapshot_UpdateTrafficPolicyInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTrafficPolicyInstance(context.Background(), &UpdateTrafficPolicyInstanceInput{})
+	got, err := svc.UpdateTrafficPolicyInstance(context.Background(), &UpdateTrafficPolicyInstanceInput{
+		Id:                   ptr.String("__Id__"),
+		TTL:                  ptr.Int64(1),
+		TrafficPolicyId:      ptr.String("__TrafficPolicyId__"),
+		TrafficPolicyVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2712,7 +3144,28 @@ func TestCheckResponseSnapshot_Error_CidrBlockInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChangeCidrCollection(context.Background(), &ChangeCidrCollectionInput{})
+	_, opErr := svc.ChangeCidrCollection(context.Background(), &ChangeCidrCollectionInput{
+		Id:                ptr.String("__Id__"),
+		CollectionVersion: ptr.Int64(1),
+		Changes: []types.CidrCollectionChange{
+			{
+				LocationName: ptr.String("__LocationName__"),
+				Action:       types.CidrCollectionChangeAction("PUT"),
+				CidrList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				LocationName: ptr.String("__LocationName__"),
+				Action:       types.CidrCollectionChangeAction("PUT"),
+				CidrList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2737,7 +3190,10 @@ func TestCheckResponseSnapshot_Error_CidrCollectionAlreadyExistsException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCidrCollection(context.Background(), &CreateCidrCollectionInput{})
+	_, opErr := svc.CreateCidrCollection(context.Background(), &CreateCidrCollectionInput{
+		Name:            ptr.String("__Name__"),
+		CallerReference: ptr.String("__CallerReference__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2762,7 +3218,9 @@ func TestCheckResponseSnapshot_Error_CidrCollectionInUseException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCidrCollection(context.Background(), &DeleteCidrCollectionInput{})
+	_, opErr := svc.DeleteCidrCollection(context.Background(), &DeleteCidrCollectionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2787,7 +3245,28 @@ func TestCheckResponseSnapshot_Error_CidrCollectionVersionMismatchException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChangeCidrCollection(context.Background(), &ChangeCidrCollectionInput{})
+	_, opErr := svc.ChangeCidrCollection(context.Background(), &ChangeCidrCollectionInput{
+		Id:                ptr.String("__Id__"),
+		CollectionVersion: ptr.Int64(1),
+		Changes: []types.CidrCollectionChange{
+			{
+				LocationName: ptr.String("__LocationName__"),
+				Action:       types.CidrCollectionChangeAction("PUT"),
+				CidrList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				LocationName: ptr.String("__LocationName__"),
+				Action:       types.CidrCollectionChangeAction("PUT"),
+				CidrList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2812,7 +3291,10 @@ func TestCheckResponseSnapshot_Error_ConcurrentModification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{})
+	_, opErr := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2837,7 +3319,14 @@ func TestCheckResponseSnapshot_Error_ConflictingDomainExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{})
+	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		Comment: ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2862,7 +3351,12 @@ func TestCheckResponseSnapshot_Error_ConflictingTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateTrafficPolicyInstance(context.Background(), &UpdateTrafficPolicyInstanceInput{})
+	_, opErr := svc.UpdateTrafficPolicyInstance(context.Background(), &UpdateTrafficPolicyInstanceInput{
+		Id:                   ptr.String("__Id__"),
+		TTL:                  ptr.Int64(1),
+		TrafficPolicyId:      ptr.String("__TrafficPolicyId__"),
+		TrafficPolicyVersion: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2887,7 +3381,9 @@ func TestCheckResponseSnapshot_Error_DNSSECNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisableHostedZoneDNSSEC(context.Background(), &DisableHostedZoneDNSSECInput{})
+	_, opErr := svc.DisableHostedZoneDNSSEC(context.Background(), &DisableHostedZoneDNSSECInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2912,7 +3408,10 @@ func TestCheckResponseSnapshot_Error_DelegationSetAlreadyCreated(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReusableDelegationSet(context.Background(), &CreateReusableDelegationSetInput{})
+	_, opErr := svc.CreateReusableDelegationSet(context.Background(), &CreateReusableDelegationSetInput{
+		CallerReference: ptr.String("__CallerReference__"),
+		HostedZoneId:    ptr.String("__HostedZoneId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2937,7 +3436,10 @@ func TestCheckResponseSnapshot_Error_DelegationSetAlreadyReusable(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReusableDelegationSet(context.Background(), &CreateReusableDelegationSetInput{})
+	_, opErr := svc.CreateReusableDelegationSet(context.Background(), &CreateReusableDelegationSetInput{
+		CallerReference: ptr.String("__CallerReference__"),
+		HostedZoneId:    ptr.String("__HostedZoneId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2962,7 +3464,9 @@ func TestCheckResponseSnapshot_Error_DelegationSetInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteReusableDelegationSet(context.Background(), &DeleteReusableDelegationSetInput{})
+	_, opErr := svc.DeleteReusableDelegationSet(context.Background(), &DeleteReusableDelegationSetInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2987,7 +3491,19 @@ func TestCheckResponseSnapshot_Error_DelegationSetNotAvailable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{})
+	_, opErr := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{
+		Name: ptr.String("__Name__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		CallerReference: ptr.String("__CallerReference__"),
+		HostedZoneConfig: &types.HostedZoneConfig{
+			Comment:     ptr.String("__Comment__"),
+			PrivateZone: true,
+		},
+		DelegationSetId: ptr.String("__DelegationSetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3012,7 +3528,19 @@ func TestCheckResponseSnapshot_Error_DelegationSetNotReusable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{})
+	_, opErr := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{
+		Name: ptr.String("__Name__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		CallerReference: ptr.String("__CallerReference__"),
+		HostedZoneConfig: &types.HostedZoneConfig{
+			Comment:     ptr.String("__Comment__"),
+			PrivateZone: true,
+		},
+		DelegationSetId: ptr.String("__DelegationSetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3037,7 +3565,38 @@ func TestCheckResponseSnapshot_Error_HealthCheckAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHealthCheck(context.Background(), &CreateHealthCheckInput{})
+	_, opErr := svc.CreateHealthCheck(context.Background(), &CreateHealthCheckInput{
+		CallerReference: ptr.String("__CallerReference__"),
+		HealthCheckConfig: &types.HealthCheckConfig{
+			IPAddress:                ptr.String("__IPAddress__"),
+			Port:                     ptr.Int32(1),
+			Type:                     types.HealthCheckType("HTTP"),
+			ResourcePath:             ptr.String("__ResourcePath__"),
+			FullyQualifiedDomainName: ptr.String("__FullyQualifiedDomainName__"),
+			SearchString:             ptr.String("__SearchString__"),
+			RequestInterval:          ptr.Int32(1),
+			FailureThreshold:         ptr.Int32(1),
+			MeasureLatency:           ptr.Bool(true),
+			Inverted:                 ptr.Bool(true),
+			Disabled:                 ptr.Bool(true),
+			HealthThreshold:          ptr.Int32(1),
+			ChildHealthChecks: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EnableSNI: ptr.Bool(true),
+			Regions: []types.HealthCheckRegion{
+				types.HealthCheckRegion("us-east-1"),
+				types.HealthCheckRegion("us-east-1"),
+			},
+			AlarmIdentifier: &types.AlarmIdentifier{
+				Region: types.CloudWatchRegion("us-east-1"),
+				Name:   ptr.String("__Name__"),
+			},
+			InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
+			RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3062,7 +3621,9 @@ func TestCheckResponseSnapshot_Error_HealthCheckInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteHealthCheck(context.Background(), &DeleteHealthCheckInput{})
+	_, opErr := svc.DeleteHealthCheck(context.Background(), &DeleteHealthCheckInput{
+		HealthCheckId: ptr.String("__HealthCheckId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3087,7 +3648,37 @@ func TestCheckResponseSnapshot_Error_HealthCheckVersionMismatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateHealthCheck(context.Background(), &UpdateHealthCheckInput{})
+	_, opErr := svc.UpdateHealthCheck(context.Background(), &UpdateHealthCheckInput{
+		HealthCheckId:            ptr.String("__HealthCheckId__"),
+		HealthCheckVersion:       ptr.Int64(1),
+		IPAddress:                ptr.String("__IPAddress__"),
+		Port:                     ptr.Int32(1),
+		ResourcePath:             ptr.String("__ResourcePath__"),
+		FullyQualifiedDomainName: ptr.String("__FullyQualifiedDomainName__"),
+		SearchString:             ptr.String("__SearchString__"),
+		FailureThreshold:         ptr.Int32(1),
+		Inverted:                 ptr.Bool(true),
+		Disabled:                 ptr.Bool(true),
+		HealthThreshold:          ptr.Int32(1),
+		ChildHealthChecks: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EnableSNI: ptr.Bool(true),
+		Regions: []types.HealthCheckRegion{
+			types.HealthCheckRegion("us-east-1"),
+			types.HealthCheckRegion("us-east-1"),
+		},
+		AlarmIdentifier: &types.AlarmIdentifier{
+			Region: types.CloudWatchRegion("us-east-1"),
+			Name:   ptr.String("__Name__"),
+		},
+		InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
+		ResetElements: []types.ResettableElementName{
+			types.ResettableElementName("FullyQualifiedDomainName"),
+			types.ResettableElementName("FullyQualifiedDomainName"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3112,7 +3703,19 @@ func TestCheckResponseSnapshot_Error_HostedZoneAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{})
+	_, opErr := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{
+		Name: ptr.String("__Name__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		CallerReference: ptr.String("__CallerReference__"),
+		HostedZoneConfig: &types.HostedZoneConfig{
+			Comment:     ptr.String("__Comment__"),
+			PrivateZone: true,
+		},
+		DelegationSetId: ptr.String("__DelegationSetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3137,7 +3740,9 @@ func TestCheckResponseSnapshot_Error_HostedZoneNotEmpty(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteHostedZone(context.Background(), &DeleteHostedZoneInput{})
+	_, opErr := svc.DeleteHostedZone(context.Background(), &DeleteHostedZoneInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3162,7 +3767,10 @@ func TestCheckResponseSnapshot_Error_HostedZoneNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReusableDelegationSet(context.Background(), &CreateReusableDelegationSetInput{})
+	_, opErr := svc.CreateReusableDelegationSet(context.Background(), &CreateReusableDelegationSetInput{
+		CallerReference: ptr.String("__CallerReference__"),
+		HostedZoneId:    ptr.String("__HostedZoneId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3187,7 +3795,10 @@ func TestCheckResponseSnapshot_Error_HostedZoneNotPrivate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetHostedZoneLimit(context.Background(), &GetHostedZoneLimitInput{})
+	_, opErr := svc.GetHostedZoneLimit(context.Background(), &GetHostedZoneLimitInput{
+		Type:         types.HostedZoneLimitType("MAX_RRSETS_BY_ZONE"),
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3212,7 +3823,9 @@ func TestCheckResponseSnapshot_Error_HostedZonePartiallyDelegated(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.EnableHostedZoneDNSSEC(context.Background(), &EnableHostedZoneDNSSECInput{})
+	_, opErr := svc.EnableHostedZoneDNSSEC(context.Background(), &EnableHostedZoneDNSSECInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3237,7 +3850,9 @@ func TestCheckResponseSnapshot_Error_IncompatibleVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetHealthCheck(context.Background(), &GetHealthCheckInput{})
+	_, opErr := svc.GetHealthCheck(context.Background(), &GetHealthCheckInput{
+		HealthCheckId: ptr.String("__HealthCheckId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3262,7 +3877,10 @@ func TestCheckResponseSnapshot_Error_InsufficientCloudWatchLogsResourcePolicy(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateQueryLoggingConfig(context.Background(), &CreateQueryLoggingConfigInput{})
+	_, opErr := svc.CreateQueryLoggingConfig(context.Background(), &CreateQueryLoggingConfigInput{
+		HostedZoneId:              ptr.String("__HostedZoneId__"),
+		CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3287,7 +3905,13 @@ func TestCheckResponseSnapshot_Error_InvalidArgument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKeySigningKey(context.Background(), &CreateKeySigningKeyInput{})
+	_, opErr := svc.CreateKeySigningKey(context.Background(), &CreateKeySigningKeyInput{
+		CallerReference:         ptr.String("__CallerReference__"),
+		HostedZoneId:            ptr.String("__HostedZoneId__"),
+		KeyManagementServiceArn: ptr.String("__KeyManagementServiceArn__"),
+		Name:                    ptr.String("__Name__"),
+		Status:                  ptr.String("__Status__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3316,7 +3940,106 @@ func TestCheckResponseSnapshot_Error_InvalidChangeBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChangeResourceRecordSets(context.Background(), &ChangeResourceRecordSetsInput{})
+	_, opErr := svc.ChangeResourceRecordSets(context.Background(), &ChangeResourceRecordSetsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ChangeBatch: &types.ChangeBatch{
+			Comment: ptr.String("__Comment__"),
+			Changes: []types.Change{
+				{
+					Action: types.ChangeAction("CREATE"),
+					ResourceRecordSet: &types.ResourceRecordSet{
+						Name:          ptr.String("__Name__"),
+						Type:          types.RRType("SOA"),
+						SetIdentifier: ptr.String("__SetIdentifier__"),
+						Weight:        ptr.Int64(1),
+						Region:        types.ResourceRecordSetRegion("us-east-1"),
+						GeoLocation: &types.GeoLocation{
+							ContinentCode:   ptr.String("__ContinentCode__"),
+							CountryCode:     ptr.String("__CountryCode__"),
+							SubdivisionCode: ptr.String("__SubdivisionCode__"),
+						},
+						Failover:         types.ResourceRecordSetFailover("PRIMARY"),
+						MultiValueAnswer: ptr.Bool(true),
+						TTL:              ptr.Int64(1),
+						ResourceRecords: []types.ResourceRecord{
+							{
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						AliasTarget: &types.AliasTarget{
+							HostedZoneId:         ptr.String("__HostedZoneId__"),
+							DNSName:              ptr.String("__DNSName__"),
+							EvaluateTargetHealth: true,
+						},
+						HealthCheckId:           ptr.String("__HealthCheckId__"),
+						TrafficPolicyInstanceId: ptr.String("__TrafficPolicyInstanceId__"),
+						CidrRoutingConfig: &types.CidrRoutingConfig{
+							CollectionId: ptr.String("__CollectionId__"),
+							LocationName: ptr.String("__LocationName__"),
+						},
+						GeoProximityLocation: &types.GeoProximityLocation{
+							AWSRegion:      ptr.String("__AWSRegion__"),
+							LocalZoneGroup: ptr.String("__LocalZoneGroup__"),
+							Coordinates: &types.Coordinates{
+								Latitude:  ptr.String("__Latitude__"),
+								Longitude: ptr.String("__Longitude__"),
+							},
+							Bias: ptr.Int32(1),
+						},
+					},
+				},
+				{
+					Action: types.ChangeAction("CREATE"),
+					ResourceRecordSet: &types.ResourceRecordSet{
+						Name:          ptr.String("__Name__"),
+						Type:          types.RRType("SOA"),
+						SetIdentifier: ptr.String("__SetIdentifier__"),
+						Weight:        ptr.Int64(1),
+						Region:        types.ResourceRecordSetRegion("us-east-1"),
+						GeoLocation: &types.GeoLocation{
+							ContinentCode:   ptr.String("__ContinentCode__"),
+							CountryCode:     ptr.String("__CountryCode__"),
+							SubdivisionCode: ptr.String("__SubdivisionCode__"),
+						},
+						Failover:         types.ResourceRecordSetFailover("PRIMARY"),
+						MultiValueAnswer: ptr.Bool(true),
+						TTL:              ptr.Int64(1),
+						ResourceRecords: []types.ResourceRecord{
+							{
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						AliasTarget: &types.AliasTarget{
+							HostedZoneId:         ptr.String("__HostedZoneId__"),
+							DNSName:              ptr.String("__DNSName__"),
+							EvaluateTargetHealth: true,
+						},
+						HealthCheckId:           ptr.String("__HealthCheckId__"),
+						TrafficPolicyInstanceId: ptr.String("__TrafficPolicyInstanceId__"),
+						CidrRoutingConfig: &types.CidrRoutingConfig{
+							CollectionId: ptr.String("__CollectionId__"),
+							LocationName: ptr.String("__LocationName__"),
+						},
+						GeoProximityLocation: &types.GeoProximityLocation{
+							AWSRegion:      ptr.String("__AWSRegion__"),
+							LocalZoneGroup: ptr.String("__LocalZoneGroup__"),
+							Coordinates: &types.Coordinates{
+								Latitude:  ptr.String("__Latitude__"),
+								Longitude: ptr.String("__Longitude__"),
+							},
+							Bias: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3341,7 +4064,19 @@ func TestCheckResponseSnapshot_Error_InvalidDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{})
+	_, opErr := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{
+		Name: ptr.String("__Name__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		CallerReference: ptr.String("__CallerReference__"),
+		HostedZoneConfig: &types.HostedZoneConfig{
+			Comment:     ptr.String("__Comment__"),
+			PrivateZone: true,
+		},
+		DelegationSetId: ptr.String("__DelegationSetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3366,7 +4101,10 @@ func TestCheckResponseSnapshot_Error_InvalidInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{})
+	_, opErr := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3391,7 +4129,10 @@ func TestCheckResponseSnapshot_Error_InvalidKMSArn(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{})
+	_, opErr := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3416,7 +4157,13 @@ func TestCheckResponseSnapshot_Error_InvalidKeySigningKeyName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKeySigningKey(context.Background(), &CreateKeySigningKeyInput{})
+	_, opErr := svc.CreateKeySigningKey(context.Background(), &CreateKeySigningKeyInput{
+		CallerReference:         ptr.String("__CallerReference__"),
+		HostedZoneId:            ptr.String("__HostedZoneId__"),
+		KeyManagementServiceArn: ptr.String("__KeyManagementServiceArn__"),
+		Name:                    ptr.String("__Name__"),
+		Status:                  ptr.String("__Status__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3441,7 +4188,10 @@ func TestCheckResponseSnapshot_Error_InvalidKeySigningKeyStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{})
+	_, opErr := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3466,7 +4216,12 @@ func TestCheckResponseSnapshot_Error_InvalidPaginationToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListHostedZonesByVPC(context.Background(), &ListHostedZonesByVPCInput{})
+	_, opErr := svc.ListHostedZonesByVPC(context.Background(), &ListHostedZonesByVPCInput{
+		VPCId:     ptr.String("__VPCId__"),
+		VPCRegion: types.VPCRegion("us-east-1"),
+		MaxItems:  ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3491,7 +4246,10 @@ func TestCheckResponseSnapshot_Error_InvalidSigningStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{})
+	_, opErr := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3516,7 +4274,11 @@ func TestCheckResponseSnapshot_Error_InvalidTrafficPolicyDocument(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrafficPolicy(context.Background(), &CreateTrafficPolicyInput{})
+	_, opErr := svc.CreateTrafficPolicy(context.Background(), &CreateTrafficPolicyInput{
+		Name:     ptr.String("__Name__"),
+		Document: ptr.String("__Document__"),
+		Comment:  ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3541,7 +4303,14 @@ func TestCheckResponseSnapshot_Error_InvalidVPCId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{})
+	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		Comment: ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3566,7 +4335,13 @@ func TestCheckResponseSnapshot_Error_KeySigningKeyAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKeySigningKey(context.Background(), &CreateKeySigningKeyInput{})
+	_, opErr := svc.CreateKeySigningKey(context.Background(), &CreateKeySigningKeyInput{
+		CallerReference:         ptr.String("__CallerReference__"),
+		HostedZoneId:            ptr.String("__HostedZoneId__"),
+		KeyManagementServiceArn: ptr.String("__KeyManagementServiceArn__"),
+		Name:                    ptr.String("__Name__"),
+		Status:                  ptr.String("__Status__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3591,7 +4366,10 @@ func TestCheckResponseSnapshot_Error_KeySigningKeyInParentDSRecord(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeactivateKeySigningKey(context.Background(), &DeactivateKeySigningKeyInput{})
+	_, opErr := svc.DeactivateKeySigningKey(context.Background(), &DeactivateKeySigningKeyInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3616,7 +4394,10 @@ func TestCheckResponseSnapshot_Error_KeySigningKeyInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeactivateKeySigningKey(context.Background(), &DeactivateKeySigningKeyInput{})
+	_, opErr := svc.DeactivateKeySigningKey(context.Background(), &DeactivateKeySigningKeyInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3641,7 +4422,9 @@ func TestCheckResponseSnapshot_Error_KeySigningKeyWithActiveStatusNotFound(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.EnableHostedZoneDNSSEC(context.Background(), &EnableHostedZoneDNSSECInput{})
+	_, opErr := svc.EnableHostedZoneDNSSEC(context.Background(), &EnableHostedZoneDNSSECInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3666,7 +4449,14 @@ func TestCheckResponseSnapshot_Error_LastVPCAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisassociateVPCFromHostedZone(context.Background(), &DisassociateVPCFromHostedZoneInput{})
+	_, opErr := svc.DisassociateVPCFromHostedZone(context.Background(), &DisassociateVPCFromHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		Comment: ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3691,7 +4481,14 @@ func TestCheckResponseSnapshot_Error_LimitsExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{})
+	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		Comment: ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3716,7 +4513,9 @@ func TestCheckResponseSnapshot_Error_NoSuchChange(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetChange(context.Background(), &GetChangeInput{})
+	_, opErr := svc.GetChange(context.Background(), &GetChangeInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3741,7 +4540,28 @@ func TestCheckResponseSnapshot_Error_NoSuchCidrCollectionException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChangeCidrCollection(context.Background(), &ChangeCidrCollectionInput{})
+	_, opErr := svc.ChangeCidrCollection(context.Background(), &ChangeCidrCollectionInput{
+		Id:                ptr.String("__Id__"),
+		CollectionVersion: ptr.Int64(1),
+		Changes: []types.CidrCollectionChange{
+			{
+				LocationName: ptr.String("__LocationName__"),
+				Action:       types.CidrCollectionChangeAction("PUT"),
+				CidrList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				LocationName: ptr.String("__LocationName__"),
+				Action:       types.CidrCollectionChangeAction("PUT"),
+				CidrList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3766,7 +4586,12 @@ func TestCheckResponseSnapshot_Error_NoSuchCidrLocationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListCidrBlocks(context.Background(), &ListCidrBlocksInput{})
+	_, opErr := svc.ListCidrBlocks(context.Background(), &ListCidrBlocksInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		LocationName: ptr.String("__LocationName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3791,7 +4616,10 @@ func TestCheckResponseSnapshot_Error_NoSuchCloudWatchLogsLogGroup(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateQueryLoggingConfig(context.Background(), &CreateQueryLoggingConfigInput{})
+	_, opErr := svc.CreateQueryLoggingConfig(context.Background(), &CreateQueryLoggingConfigInput{
+		HostedZoneId:              ptr.String("__HostedZoneId__"),
+		CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3816,7 +4644,19 @@ func TestCheckResponseSnapshot_Error_NoSuchDelegationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{})
+	_, opErr := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{
+		Name: ptr.String("__Name__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		CallerReference: ptr.String("__CallerReference__"),
+		HostedZoneConfig: &types.HostedZoneConfig{
+			Comment:     ptr.String("__Comment__"),
+			PrivateZone: true,
+		},
+		DelegationSetId: ptr.String("__DelegationSetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3841,7 +4681,11 @@ func TestCheckResponseSnapshot_Error_NoSuchGeoLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetGeoLocation(context.Background(), &GetGeoLocationInput{})
+	_, opErr := svc.GetGeoLocation(context.Background(), &GetGeoLocationInput{
+		ContinentCode:   ptr.String("__ContinentCode__"),
+		CountryCode:     ptr.String("__CountryCode__"),
+		SubdivisionCode: ptr.String("__SubdivisionCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3866,7 +4710,106 @@ func TestCheckResponseSnapshot_Error_NoSuchHealthCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChangeResourceRecordSets(context.Background(), &ChangeResourceRecordSetsInput{})
+	_, opErr := svc.ChangeResourceRecordSets(context.Background(), &ChangeResourceRecordSetsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ChangeBatch: &types.ChangeBatch{
+			Comment: ptr.String("__Comment__"),
+			Changes: []types.Change{
+				{
+					Action: types.ChangeAction("CREATE"),
+					ResourceRecordSet: &types.ResourceRecordSet{
+						Name:          ptr.String("__Name__"),
+						Type:          types.RRType("SOA"),
+						SetIdentifier: ptr.String("__SetIdentifier__"),
+						Weight:        ptr.Int64(1),
+						Region:        types.ResourceRecordSetRegion("us-east-1"),
+						GeoLocation: &types.GeoLocation{
+							ContinentCode:   ptr.String("__ContinentCode__"),
+							CountryCode:     ptr.String("__CountryCode__"),
+							SubdivisionCode: ptr.String("__SubdivisionCode__"),
+						},
+						Failover:         types.ResourceRecordSetFailover("PRIMARY"),
+						MultiValueAnswer: ptr.Bool(true),
+						TTL:              ptr.Int64(1),
+						ResourceRecords: []types.ResourceRecord{
+							{
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						AliasTarget: &types.AliasTarget{
+							HostedZoneId:         ptr.String("__HostedZoneId__"),
+							DNSName:              ptr.String("__DNSName__"),
+							EvaluateTargetHealth: true,
+						},
+						HealthCheckId:           ptr.String("__HealthCheckId__"),
+						TrafficPolicyInstanceId: ptr.String("__TrafficPolicyInstanceId__"),
+						CidrRoutingConfig: &types.CidrRoutingConfig{
+							CollectionId: ptr.String("__CollectionId__"),
+							LocationName: ptr.String("__LocationName__"),
+						},
+						GeoProximityLocation: &types.GeoProximityLocation{
+							AWSRegion:      ptr.String("__AWSRegion__"),
+							LocalZoneGroup: ptr.String("__LocalZoneGroup__"),
+							Coordinates: &types.Coordinates{
+								Latitude:  ptr.String("__Latitude__"),
+								Longitude: ptr.String("__Longitude__"),
+							},
+							Bias: ptr.Int32(1),
+						},
+					},
+				},
+				{
+					Action: types.ChangeAction("CREATE"),
+					ResourceRecordSet: &types.ResourceRecordSet{
+						Name:          ptr.String("__Name__"),
+						Type:          types.RRType("SOA"),
+						SetIdentifier: ptr.String("__SetIdentifier__"),
+						Weight:        ptr.Int64(1),
+						Region:        types.ResourceRecordSetRegion("us-east-1"),
+						GeoLocation: &types.GeoLocation{
+							ContinentCode:   ptr.String("__ContinentCode__"),
+							CountryCode:     ptr.String("__CountryCode__"),
+							SubdivisionCode: ptr.String("__SubdivisionCode__"),
+						},
+						Failover:         types.ResourceRecordSetFailover("PRIMARY"),
+						MultiValueAnswer: ptr.Bool(true),
+						TTL:              ptr.Int64(1),
+						ResourceRecords: []types.ResourceRecord{
+							{
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						AliasTarget: &types.AliasTarget{
+							HostedZoneId:         ptr.String("__HostedZoneId__"),
+							DNSName:              ptr.String("__DNSName__"),
+							EvaluateTargetHealth: true,
+						},
+						HealthCheckId:           ptr.String("__HealthCheckId__"),
+						TrafficPolicyInstanceId: ptr.String("__TrafficPolicyInstanceId__"),
+						CidrRoutingConfig: &types.CidrRoutingConfig{
+							CollectionId: ptr.String("__CollectionId__"),
+							LocationName: ptr.String("__LocationName__"),
+						},
+						GeoProximityLocation: &types.GeoProximityLocation{
+							AWSRegion:      ptr.String("__AWSRegion__"),
+							LocalZoneGroup: ptr.String("__LocalZoneGroup__"),
+							Coordinates: &types.Coordinates{
+								Latitude:  ptr.String("__Latitude__"),
+								Longitude: ptr.String("__Longitude__"),
+							},
+							Bias: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3891,7 +4834,14 @@ func TestCheckResponseSnapshot_Error_NoSuchHostedZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{})
+	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		Comment: ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3916,7 +4866,10 @@ func TestCheckResponseSnapshot_Error_NoSuchKeySigningKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{})
+	_, opErr := svc.ActivateKeySigningKey(context.Background(), &ActivateKeySigningKeyInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3941,7 +4894,9 @@ func TestCheckResponseSnapshot_Error_NoSuchQueryLoggingConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteQueryLoggingConfig(context.Background(), &DeleteQueryLoggingConfigInput{})
+	_, opErr := svc.DeleteQueryLoggingConfig(context.Background(), &DeleteQueryLoggingConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3966,7 +4921,13 @@ func TestCheckResponseSnapshot_Error_NoSuchTrafficPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrafficPolicyInstance(context.Background(), &CreateTrafficPolicyInstanceInput{})
+	_, opErr := svc.CreateTrafficPolicyInstance(context.Background(), &CreateTrafficPolicyInstanceInput{
+		HostedZoneId:         ptr.String("__HostedZoneId__"),
+		Name:                 ptr.String("__Name__"),
+		TTL:                  ptr.Int64(1),
+		TrafficPolicyId:      ptr.String("__TrafficPolicyId__"),
+		TrafficPolicyVersion: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3991,7 +4952,9 @@ func TestCheckResponseSnapshot_Error_NoSuchTrafficPolicyInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteTrafficPolicyInstance(context.Background(), &DeleteTrafficPolicyInstanceInput{})
+	_, opErr := svc.DeleteTrafficPolicyInstance(context.Background(), &DeleteTrafficPolicyInstanceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4016,7 +4979,14 @@ func TestCheckResponseSnapshot_Error_NotAuthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{})
+	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		Comment: ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4041,7 +5011,14 @@ func TestCheckResponseSnapshot_Error_PriorRequestNotComplete(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{})
+	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		Comment: ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4066,7 +5043,14 @@ func TestCheckResponseSnapshot_Error_PublicZoneVPCAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{})
+	_, opErr := svc.AssociateVPCWithHostedZone(context.Background(), &AssociateVPCWithHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		Comment: ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4091,7 +5075,10 @@ func TestCheckResponseSnapshot_Error_QueryLoggingConfigAlreadyExists(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateQueryLoggingConfig(context.Background(), &CreateQueryLoggingConfigInput{})
+	_, opErr := svc.CreateQueryLoggingConfig(context.Background(), &CreateQueryLoggingConfigInput{
+		HostedZoneId:              ptr.String("__HostedZoneId__"),
+		CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4116,7 +5103,24 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChangeTagsForResource(context.Background(), &ChangeTagsForResourceInput{})
+	_, opErr := svc.ChangeTagsForResource(context.Background(), &ChangeTagsForResourceInput{
+		ResourceType: types.TagResourceType("healthcheck"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		AddTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		RemoveTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4141,7 +5145,38 @@ func TestCheckResponseSnapshot_Error_TooManyHealthChecks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHealthCheck(context.Background(), &CreateHealthCheckInput{})
+	_, opErr := svc.CreateHealthCheck(context.Background(), &CreateHealthCheckInput{
+		CallerReference: ptr.String("__CallerReference__"),
+		HealthCheckConfig: &types.HealthCheckConfig{
+			IPAddress:                ptr.String("__IPAddress__"),
+			Port:                     ptr.Int32(1),
+			Type:                     types.HealthCheckType("HTTP"),
+			ResourcePath:             ptr.String("__ResourcePath__"),
+			FullyQualifiedDomainName: ptr.String("__FullyQualifiedDomainName__"),
+			SearchString:             ptr.String("__SearchString__"),
+			RequestInterval:          ptr.Int32(1),
+			FailureThreshold:         ptr.Int32(1),
+			MeasureLatency:           ptr.Bool(true),
+			Inverted:                 ptr.Bool(true),
+			Disabled:                 ptr.Bool(true),
+			HealthThreshold:          ptr.Int32(1),
+			ChildHealthChecks: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EnableSNI: ptr.Bool(true),
+			Regions: []types.HealthCheckRegion{
+				types.HealthCheckRegion("us-east-1"),
+				types.HealthCheckRegion("us-east-1"),
+			},
+			AlarmIdentifier: &types.AlarmIdentifier{
+				Region: types.CloudWatchRegion("us-east-1"),
+				Name:   ptr.String("__Name__"),
+			},
+			InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
+			RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4166,7 +5201,19 @@ func TestCheckResponseSnapshot_Error_TooManyHostedZones(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{})
+	_, opErr := svc.CreateHostedZone(context.Background(), &CreateHostedZoneInput{
+		Name: ptr.String("__Name__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		CallerReference: ptr.String("__CallerReference__"),
+		HostedZoneConfig: &types.HostedZoneConfig{
+			Comment:     ptr.String("__Comment__"),
+			PrivateZone: true,
+		},
+		DelegationSetId: ptr.String("__DelegationSetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4191,7 +5238,13 @@ func TestCheckResponseSnapshot_Error_TooManyKeySigningKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKeySigningKey(context.Background(), &CreateKeySigningKeyInput{})
+	_, opErr := svc.CreateKeySigningKey(context.Background(), &CreateKeySigningKeyInput{
+		CallerReference:         ptr.String("__CallerReference__"),
+		HostedZoneId:            ptr.String("__HostedZoneId__"),
+		KeyManagementServiceArn: ptr.String("__KeyManagementServiceArn__"),
+		Name:                    ptr.String("__Name__"),
+		Status:                  ptr.String("__Status__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4216,7 +5269,11 @@ func TestCheckResponseSnapshot_Error_TooManyTrafficPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrafficPolicy(context.Background(), &CreateTrafficPolicyInput{})
+	_, opErr := svc.CreateTrafficPolicy(context.Background(), &CreateTrafficPolicyInput{
+		Name:     ptr.String("__Name__"),
+		Document: ptr.String("__Document__"),
+		Comment:  ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4241,7 +5298,13 @@ func TestCheckResponseSnapshot_Error_TooManyTrafficPolicyInstances(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrafficPolicyInstance(context.Background(), &CreateTrafficPolicyInstanceInput{})
+	_, opErr := svc.CreateTrafficPolicyInstance(context.Background(), &CreateTrafficPolicyInstanceInput{
+		HostedZoneId:         ptr.String("__HostedZoneId__"),
+		Name:                 ptr.String("__Name__"),
+		TTL:                  ptr.Int64(1),
+		TrafficPolicyId:      ptr.String("__TrafficPolicyId__"),
+		TrafficPolicyVersion: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4266,7 +5329,11 @@ func TestCheckResponseSnapshot_Error_TooManyTrafficPolicyVersionsForCurrentPolic
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrafficPolicyVersion(context.Background(), &CreateTrafficPolicyVersionInput{})
+	_, opErr := svc.CreateTrafficPolicyVersion(context.Background(), &CreateTrafficPolicyVersionInput{
+		Id:       ptr.String("__Id__"),
+		Document: ptr.String("__Document__"),
+		Comment:  ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4291,7 +5358,13 @@ func TestCheckResponseSnapshot_Error_TooManyVPCAssociationAuthorizations(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateVPCAssociationAuthorization(context.Background(), &CreateVPCAssociationAuthorizationInput{})
+	_, opErr := svc.CreateVPCAssociationAuthorization(context.Background(), &CreateVPCAssociationAuthorizationInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4316,7 +5389,11 @@ func TestCheckResponseSnapshot_Error_TrafficPolicyAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrafficPolicy(context.Background(), &CreateTrafficPolicyInput{})
+	_, opErr := svc.CreateTrafficPolicy(context.Background(), &CreateTrafficPolicyInput{
+		Name:     ptr.String("__Name__"),
+		Document: ptr.String("__Document__"),
+		Comment:  ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4341,7 +5418,10 @@ func TestCheckResponseSnapshot_Error_TrafficPolicyInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteTrafficPolicy(context.Background(), &DeleteTrafficPolicyInput{})
+	_, opErr := svc.DeleteTrafficPolicy(context.Background(), &DeleteTrafficPolicyInput{
+		Id:      ptr.String("__Id__"),
+		Version: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4366,7 +5446,13 @@ func TestCheckResponseSnapshot_Error_TrafficPolicyInstanceAlreadyExists(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrafficPolicyInstance(context.Background(), &CreateTrafficPolicyInstanceInput{})
+	_, opErr := svc.CreateTrafficPolicyInstance(context.Background(), &CreateTrafficPolicyInstanceInput{
+		HostedZoneId:         ptr.String("__HostedZoneId__"),
+		Name:                 ptr.String("__Name__"),
+		TTL:                  ptr.Int64(1),
+		TrafficPolicyId:      ptr.String("__TrafficPolicyId__"),
+		TrafficPolicyVersion: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4391,7 +5477,13 @@ func TestCheckResponseSnapshot_Error_VPCAssociationAuthorizationNotFound(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteVPCAssociationAuthorization(context.Background(), &DeleteVPCAssociationAuthorizationInput{})
+	_, opErr := svc.DeleteVPCAssociationAuthorization(context.Background(), &DeleteVPCAssociationAuthorizationInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4416,7 +5508,14 @@ func TestCheckResponseSnapshot_Error_VPCAssociationNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisassociateVPCFromHostedZone(context.Background(), &DisassociateVPCFromHostedZoneInput{})
+	_, opErr := svc.DisassociateVPCFromHostedZone(context.Background(), &DisassociateVPCFromHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		VPC: &types.VPC{
+			VPCRegion: types.VPCRegion("us-east-1"),
+			VPCId:     ptr.String("__VPCId__"),
+		},
+		Comment: ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

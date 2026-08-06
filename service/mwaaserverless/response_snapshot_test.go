@@ -129,7 +129,39 @@ func TestCheckResponseSnapshot_CreateWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{})
+	got, err := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		DefinitionS3Location: &types.DefinitionS3Location{
+			Bucket:    ptr.String("__Bucket__"),
+			ObjectKey: ptr.String("__ObjectKey__"),
+			VersionId: ptr.String("__VersionId__"),
+		},
+		RoleArn:     ptr.String("__RoleArn__"),
+		Description: ptr.String("__Description__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		LoggingConfiguration: &types.LoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		EngineVersion: types.EngineVersion(1),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TriggerMode: ptr.String("__TriggerMode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -151,7 +183,10 @@ func TestCheckResponseSnapshot_DeleteWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkflow(context.Background(), &DeleteWorkflowInput{})
+	got, err := svc.DeleteWorkflow(context.Background(), &DeleteWorkflowInput{
+		WorkflowArn:     ptr.String("__WorkflowArn__"),
+		WorkflowVersion: ptr.String("__WorkflowVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +223,11 @@ func TestCheckResponseSnapshot_GetTaskInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTaskInstance(context.Background(), &GetTaskInstanceInput{})
+	got, err := svc.GetTaskInstance(context.Background(), &GetTaskInstanceInput{
+		WorkflowArn:    ptr.String("__WorkflowArn__"),
+		TaskInstanceId: ptr.String("__TaskInstanceId__"),
+		RunId:          ptr.String("__RunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -244,7 +283,10 @@ func TestCheckResponseSnapshot_GetWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflow(context.Background(), &GetWorkflowInput{})
+	got, err := svc.GetWorkflow(context.Background(), &GetWorkflowInput{
+		WorkflowArn:     ptr.String("__WorkflowArn__"),
+		WorkflowVersion: ptr.String("__WorkflowVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -260,7 +302,7 @@ func TestCheckResponseSnapshot_GetWorkflowRun(t *testing.T) {
 		RunId:           ptr.String("__RunId__"),
 		RunType:         types.RunType("ON_DEMAND"),
 		OverrideParameters: map[string]document.Interface{
-			"key0": nil,
+			"key0": document.NewLazyDocument("__Document__"),
 		},
 		RunDetail: &types.WorkflowRunDetail{
 			WorkflowArn:     ptr.String("__WorkflowArn__"),
@@ -288,7 +330,10 @@ func TestCheckResponseSnapshot_GetWorkflowRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflowRun(context.Background(), &GetWorkflowRunInput{})
+	got, err := svc.GetWorkflowRun(context.Background(), &GetWorkflowRunInput{
+		WorkflowArn: ptr.String("__WorkflowArn__"),
+		RunId:       ptr.String("__RunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -311,7 +356,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -352,7 +399,12 @@ func TestCheckResponseSnapshot_ListTaskInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTaskInstances(context.Background(), &ListTaskInstancesInput{})
+	got, err := svc.ListTaskInstances(context.Background(), &ListTaskInstancesInput{
+		WorkflowArn: ptr.String("__WorkflowArn__"),
+		RunId:       ptr.String("__RunId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -399,7 +451,12 @@ func TestCheckResponseSnapshot_ListWorkflowRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflowRuns(context.Background(), &ListWorkflowRunsInput{})
+	got, err := svc.ListWorkflowRuns(context.Background(), &ListWorkflowRunsInput{
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		WorkflowArn:     ptr.String("__WorkflowArn__"),
+		WorkflowVersion: ptr.String("__WorkflowVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -454,7 +511,11 @@ func TestCheckResponseSnapshot_ListWorkflowVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflowVersions(context.Background(), &ListWorkflowVersionsInput{})
+	got, err := svc.ListWorkflowVersions(context.Background(), &ListWorkflowVersionsInput{
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		WorkflowArn: ptr.String("__WorkflowArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -497,7 +558,10 @@ func TestCheckResponseSnapshot_ListWorkflows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflows(context.Background(), &ListWorkflowsInput{})
+	got, err := svc.ListWorkflows(context.Background(), &ListWorkflowsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -520,7 +584,14 @@ func TestCheckResponseSnapshot_StartWorkflowRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartWorkflowRun(context.Background(), &StartWorkflowRunInput{})
+	got, err := svc.StartWorkflowRun(context.Background(), &StartWorkflowRunInput{
+		WorkflowArn: ptr.String("__WorkflowArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		OverrideParameters: map[string]document.Interface{
+			"key0": document.NewLazyDocument("__Document__"),
+		},
+		WorkflowVersion: ptr.String("__WorkflowVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -544,7 +615,10 @@ func TestCheckResponseSnapshot_StopWorkflowRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopWorkflowRun(context.Background(), &StopWorkflowRunInput{})
+	got, err := svc.StopWorkflowRun(context.Background(), &StopWorkflowRunInput{
+		WorkflowArn: ptr.String("__WorkflowArn__"),
+		RunId:       ptr.String("__RunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -563,7 +637,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -582,7 +661,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -609,7 +694,31 @@ func TestCheckResponseSnapshot_UpdateWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkflow(context.Background(), &UpdateWorkflowInput{})
+	got, err := svc.UpdateWorkflow(context.Background(), &UpdateWorkflowInput{
+		WorkflowArn: ptr.String("__WorkflowArn__"),
+		DefinitionS3Location: &types.DefinitionS3Location{
+			Bucket:    ptr.String("__Bucket__"),
+			ObjectKey: ptr.String("__ObjectKey__"),
+			VersionId: ptr.String("__VersionId__"),
+		},
+		RoleArn:     ptr.String("__RoleArn__"),
+		Description: ptr.String("__Description__"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		EngineVersion: types.EngineVersion(1),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		TriggerMode: ptr.String("__TriggerMode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -630,7 +739,39 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{})
+	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		DefinitionS3Location: &types.DefinitionS3Location{
+			Bucket:    ptr.String("__Bucket__"),
+			ObjectKey: ptr.String("__ObjectKey__"),
+			VersionId: ptr.String("__VersionId__"),
+		},
+		RoleArn:     ptr.String("__RoleArn__"),
+		Description: ptr.String("__Description__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		LoggingConfiguration: &types.LoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		EngineVersion: types.EngineVersion(1),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TriggerMode: ptr.String("__TriggerMode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -657,7 +798,39 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{})
+	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		DefinitionS3Location: &types.DefinitionS3Location{
+			Bucket:    ptr.String("__Bucket__"),
+			ObjectKey: ptr.String("__ObjectKey__"),
+			VersionId: ptr.String("__VersionId__"),
+		},
+		RoleArn:     ptr.String("__RoleArn__"),
+		Description: ptr.String("__Description__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		LoggingConfiguration: &types.LoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		EngineVersion: types.EngineVersion(1),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TriggerMode: ptr.String("__TriggerMode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -683,7 +856,39 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{})
+	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		DefinitionS3Location: &types.DefinitionS3Location{
+			Bucket:    ptr.String("__Bucket__"),
+			ObjectKey: ptr.String("__ObjectKey__"),
+			VersionId: ptr.String("__VersionId__"),
+		},
+		RoleArn:     ptr.String("__RoleArn__"),
+		Description: ptr.String("__Description__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		LoggingConfiguration: &types.LoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		EngineVersion: types.EngineVersion(1),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TriggerMode: ptr.String("__TriggerMode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -708,7 +913,39 @@ func TestCheckResponseSnapshot_Error_OperationTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{})
+	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		DefinitionS3Location: &types.DefinitionS3Location{
+			Bucket:    ptr.String("__Bucket__"),
+			ObjectKey: ptr.String("__ObjectKey__"),
+			VersionId: ptr.String("__VersionId__"),
+		},
+		RoleArn:     ptr.String("__RoleArn__"),
+		Description: ptr.String("__Description__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		LoggingConfiguration: &types.LoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		EngineVersion: types.EngineVersion(1),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TriggerMode: ptr.String("__TriggerMode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -735,7 +972,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteWorkflow(context.Background(), &DeleteWorkflowInput{})
+	_, opErr := svc.DeleteWorkflow(context.Background(), &DeleteWorkflowInput{
+		WorkflowArn:     ptr.String("__WorkflowArn__"),
+		WorkflowVersion: ptr.String("__WorkflowVersion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -764,7 +1004,39 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{})
+	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		DefinitionS3Location: &types.DefinitionS3Location{
+			Bucket:    ptr.String("__Bucket__"),
+			ObjectKey: ptr.String("__ObjectKey__"),
+			VersionId: ptr.String("__VersionId__"),
+		},
+		RoleArn:     ptr.String("__RoleArn__"),
+		Description: ptr.String("__Description__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		LoggingConfiguration: &types.LoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		EngineVersion: types.EngineVersion(1),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TriggerMode: ptr.String("__TriggerMode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -792,7 +1064,39 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{})
+	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		DefinitionS3Location: &types.DefinitionS3Location{
+			Bucket:    ptr.String("__Bucket__"),
+			ObjectKey: ptr.String("__ObjectKey__"),
+			VersionId: ptr.String("__VersionId__"),
+		},
+		RoleArn:     ptr.String("__RoleArn__"),
+		Description: ptr.String("__Description__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		LoggingConfiguration: &types.LoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		EngineVersion: types.EngineVersion(1),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TriggerMode: ptr.String("__TriggerMode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -828,7 +1132,39 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{})
+	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		DefinitionS3Location: &types.DefinitionS3Location{
+			Bucket:    ptr.String("__Bucket__"),
+			ObjectKey: ptr.String("__ObjectKey__"),
+			VersionId: ptr.String("__VersionId__"),
+		},
+		RoleArn:     ptr.String("__RoleArn__"),
+		Description: ptr.String("__Description__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		LoggingConfiguration: &types.LoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		EngineVersion: types.EngineVersion(1),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TriggerMode: ptr.String("__TriggerMode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

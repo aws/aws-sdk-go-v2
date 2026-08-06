@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_AssociateApprovalRuleTemplateWithRepository(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	got, err := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -153,7 +156,13 @@ func TestCheckResponseSnapshot_BatchAssociateApprovalRuleTemplateWithRepositorie
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchAssociateApprovalRuleTemplateWithRepositories(context.Background(), &BatchAssociateApprovalRuleTemplateWithRepositoriesInput{})
+	got, err := svc.BatchAssociateApprovalRuleTemplateWithRepositories(context.Background(), &BatchAssociateApprovalRuleTemplateWithRepositoriesInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -333,7 +342,21 @@ func TestCheckResponseSnapshot_BatchDescribeMergeConflicts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	got, err := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +392,13 @@ func TestCheckResponseSnapshot_BatchDisassociateApprovalRuleTemplateFromReposito
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDisassociateApprovalRuleTemplateFromRepositories(context.Background(), &BatchDisassociateApprovalRuleTemplateFromRepositoriesInput{})
+	got, err := svc.BatchDisassociateApprovalRuleTemplateFromRepositories(context.Background(), &BatchDisassociateApprovalRuleTemplateFromRepositoriesInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -443,7 +472,13 @@ func TestCheckResponseSnapshot_BatchGetCommits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetCommits(context.Background(), &BatchGetCommitsInput{})
+	got, err := svc.BatchGetCommits(context.Background(), &BatchGetCommitsInput{
+		CommitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RepositoryName: ptr.String("__RepositoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -509,7 +544,12 @@ func TestCheckResponseSnapshot_BatchGetRepositories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetRepositories(context.Background(), &BatchGetRepositoriesInput{})
+	got, err := svc.BatchGetRepositories(context.Background(), &BatchGetRepositoriesInput{
+		RepositoryNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -539,7 +579,11 @@ func TestCheckResponseSnapshot_CreateApprovalRuleTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApprovalRuleTemplate(context.Background(), &CreateApprovalRuleTemplateInput{})
+	got, err := svc.CreateApprovalRuleTemplate(context.Background(), &CreateApprovalRuleTemplateInput{
+		ApprovalRuleTemplateName:        ptr.String("__ApprovalRuleTemplateName__"),
+		ApprovalRuleTemplateContent:     ptr.String("__ApprovalRuleTemplateContent__"),
+		ApprovalRuleTemplateDescription: ptr.String("__ApprovalRuleTemplateDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -558,7 +602,11 @@ func TestCheckResponseSnapshot_CreateBranch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBranch(context.Background(), &CreateBranchInput{})
+	got, err := svc.CreateBranch(context.Background(), &CreateBranchInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BranchName:     ptr.String("__BranchName__"),
+		CommitId:       ptr.String("__CommitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -616,7 +664,53 @@ func TestCheckResponseSnapshot_CreateCommit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	got, err := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -705,7 +799,23 @@ func TestCheckResponseSnapshot_CreatePullRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	got, err := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -738,7 +848,11 @@ func TestCheckResponseSnapshot_CreatePullRequestApprovalRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{})
+	got, err := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{
+		PullRequestId:       ptr.String("__PullRequestId__"),
+		ApprovalRuleName:    ptr.String("__ApprovalRuleName__"),
+		ApprovalRuleContent: ptr.String("__ApprovalRuleContent__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -771,7 +885,14 @@ func TestCheckResponseSnapshot_CreateRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	got, err := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		RepositoryDescription: ptr.String("__RepositoryDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -793,7 +914,52 @@ func TestCheckResponseSnapshot_CreateUnreferencedMergeCommit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{})
+	got, err := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -814,7 +980,9 @@ func TestCheckResponseSnapshot_DeleteApprovalRuleTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApprovalRuleTemplate(context.Background(), &DeleteApprovalRuleTemplateInput{})
+	got, err := svc.DeleteApprovalRuleTemplate(context.Background(), &DeleteApprovalRuleTemplateInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -838,7 +1006,10 @@ func TestCheckResponseSnapshot_DeleteBranch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBranch(context.Background(), &DeleteBranchInput{})
+	got, err := svc.DeleteBranch(context.Background(), &DeleteBranchInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BranchName:     ptr.String("__BranchName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -875,7 +1046,9 @@ func TestCheckResponseSnapshot_DeleteCommentContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCommentContent(context.Background(), &DeleteCommentContentInput{})
+	got, err := svc.DeleteCommentContent(context.Background(), &DeleteCommentContentInput{
+		CommentId: ptr.String("__CommentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -899,7 +1072,16 @@ func TestCheckResponseSnapshot_DeleteFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFile(context.Background(), &DeleteFileInput{})
+	got, err := svc.DeleteFile(context.Background(), &DeleteFileInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		FilePath:         ptr.String("__FilePath__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		KeepEmptyFolders: true,
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		Name:             ptr.String("__Name__"),
+		Email:            ptr.String("__Email__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -920,7 +1102,10 @@ func TestCheckResponseSnapshot_DeletePullRequestApprovalRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePullRequestApprovalRule(context.Background(), &DeletePullRequestApprovalRuleInput{})
+	got, err := svc.DeletePullRequestApprovalRule(context.Background(), &DeletePullRequestApprovalRuleInput{
+		PullRequestId:    ptr.String("__PullRequestId__"),
+		ApprovalRuleName: ptr.String("__ApprovalRuleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -941,7 +1126,9 @@ func TestCheckResponseSnapshot_DeleteRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRepository(context.Background(), &DeleteRepositoryInput{})
+	got, err := svc.DeleteRepository(context.Background(), &DeleteRepositoryInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1034,7 +1221,17 @@ func TestCheckResponseSnapshot_DescribeMergeConflicts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMergeConflicts(context.Background(), &DescribeMergeConflictsInput{})
+	got, err := svc.DescribeMergeConflicts(context.Background(), &DescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		FilePath:                   ptr.String("__FilePath__"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1145,7 +1342,13 @@ func TestCheckResponseSnapshot_DescribePullRequestEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePullRequestEvents(context.Background(), &DescribePullRequestEventsInput{})
+	got, err := svc.DescribePullRequestEvents(context.Background(), &DescribePullRequestEventsInput{
+		PullRequestId:        ptr.String("__PullRequestId__"),
+		PullRequestEventType: types.PullRequestEventType("PULL_REQUEST_CREATED"),
+		ActorArn:             ptr.String("__ActorArn__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1164,7 +1367,10 @@ func TestCheckResponseSnapshot_DisassociateApprovalRuleTemplateFromRepository(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateApprovalRuleTemplateFromRepository(context.Background(), &DisassociateApprovalRuleTemplateFromRepositoryInput{})
+	got, err := svc.DisassociateApprovalRuleTemplateFromRepository(context.Background(), &DisassociateApprovalRuleTemplateFromRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1196,7 +1402,10 @@ func TestCheckResponseSnapshot_EvaluatePullRequestApprovalRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EvaluatePullRequestApprovalRules(context.Background(), &EvaluatePullRequestApprovalRulesInput{})
+	got, err := svc.EvaluatePullRequestApprovalRules(context.Background(), &EvaluatePullRequestApprovalRulesInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		RevisionId:    ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1226,7 +1435,9 @@ func TestCheckResponseSnapshot_GetApprovalRuleTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApprovalRuleTemplate(context.Background(), &GetApprovalRuleTemplateInput{})
+	got, err := svc.GetApprovalRuleTemplate(context.Background(), &GetApprovalRuleTemplateInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1247,7 +1458,10 @@ func TestCheckResponseSnapshot_GetBlob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBlob(context.Background(), &GetBlobInput{})
+	got, err := svc.GetBlob(context.Background(), &GetBlobInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BlobId:         ptr.String("__BlobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1271,7 +1485,10 @@ func TestCheckResponseSnapshot_GetBranch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBranch(context.Background(), &GetBranchInput{})
+	got, err := svc.GetBranch(context.Background(), &GetBranchInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BranchName:     ptr.String("__BranchName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1308,7 +1525,9 @@ func TestCheckResponseSnapshot_GetComment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComment(context.Background(), &GetCommentInput{})
+	got, err := svc.GetComment(context.Background(), &GetCommentInput{
+		CommentId: ptr.String("__CommentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1355,7 +1574,12 @@ func TestCheckResponseSnapshot_GetCommentReactions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCommentReactions(context.Background(), &GetCommentReactionsInput{})
+	got, err := svc.GetCommentReactions(context.Background(), &GetCommentReactionsInput{
+		CommentId:       ptr.String("__CommentId__"),
+		ReactionUserArn: ptr.String("__ReactionUserArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1474,7 +1698,13 @@ func TestCheckResponseSnapshot_GetCommentsForComparedCommit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCommentsForComparedCommit(context.Background(), &GetCommentsForComparedCommitInput{})
+	got, err := svc.GetCommentsForComparedCommit(context.Background(), &GetCommentsForComparedCommitInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BeforeCommitId: ptr.String("__BeforeCommitId__"),
+		AfterCommitId:  ptr.String("__AfterCommitId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1595,7 +1825,14 @@ func TestCheckResponseSnapshot_GetCommentsForPullRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCommentsForPullRequest(context.Background(), &GetCommentsForPullRequestInput{})
+	got, err := svc.GetCommentsForPullRequest(context.Background(), &GetCommentsForPullRequestInput{
+		PullRequestId:  ptr.String("__PullRequestId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BeforeCommitId: ptr.String("__BeforeCommitId__"),
+		AfterCommitId:  ptr.String("__AfterCommitId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1635,7 +1872,10 @@ func TestCheckResponseSnapshot_GetCommit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCommit(context.Background(), &GetCommitInput{})
+	got, err := svc.GetCommit(context.Background(), &GetCommitInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		CommitId:       ptr.String("__CommitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1684,7 +1924,15 @@ func TestCheckResponseSnapshot_GetDifferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDifferences(context.Background(), &GetDifferencesInput{})
+	got, err := svc.GetDifferences(context.Background(), &GetDifferencesInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		BeforeCommitSpecifier: ptr.String("__BeforeCommitSpecifier__"),
+		AfterCommitSpecifier:  ptr.String("__AfterCommitSpecifier__"),
+		BeforePath:            ptr.String("__BeforePath__"),
+		AfterPath:             ptr.String("__AfterPath__"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1710,7 +1958,11 @@ func TestCheckResponseSnapshot_GetFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFile(context.Background(), &GetFileInput{})
+	got, err := svc.GetFile(context.Background(), &GetFileInput{
+		RepositoryName:  ptr.String("__RepositoryName__"),
+		CommitSpecifier: ptr.String("__CommitSpecifier__"),
+		FilePath:        ptr.String("__FilePath__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1785,7 +2037,11 @@ func TestCheckResponseSnapshot_GetFolder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFolder(context.Background(), &GetFolderInput{})
+	got, err := svc.GetFolder(context.Background(), &GetFolderInput{
+		RepositoryName:  ptr.String("__RepositoryName__"),
+		CommitSpecifier: ptr.String("__CommitSpecifier__"),
+		FolderPath:      ptr.String("__FolderPath__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1809,7 +2065,13 @@ func TestCheckResponseSnapshot_GetMergeCommit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMergeCommit(context.Background(), &GetMergeCommitInput{})
+	got, err := svc.GetMergeCommit(context.Background(), &GetMergeCommitInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1898,7 +2160,16 @@ func TestCheckResponseSnapshot_GetMergeConflicts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMergeConflicts(context.Background(), &GetMergeConflictsInput{})
+	got, err := svc.GetMergeConflicts(context.Background(), &GetMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		MaxConflictFiles:           ptr.Int32(1),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1925,7 +2196,13 @@ func TestCheckResponseSnapshot_GetMergeOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMergeOptions(context.Background(), &GetMergeOptionsInput{})
+	got, err := svc.GetMergeOptions(context.Background(), &GetMergeOptionsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2014,7 +2291,9 @@ func TestCheckResponseSnapshot_GetPullRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPullRequest(context.Background(), &GetPullRequestInput{})
+	got, err := svc.GetPullRequest(context.Background(), &GetPullRequestInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2044,7 +2323,10 @@ func TestCheckResponseSnapshot_GetPullRequestApprovalStates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPullRequestApprovalStates(context.Background(), &GetPullRequestApprovalStatesInput{})
+	got, err := svc.GetPullRequestApprovalStates(context.Background(), &GetPullRequestApprovalStatesInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		RevisionId:    ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2066,7 +2348,10 @@ func TestCheckResponseSnapshot_GetPullRequestOverrideState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPullRequestOverrideState(context.Background(), &GetPullRequestOverrideStateInput{})
+	got, err := svc.GetPullRequestOverrideState(context.Background(), &GetPullRequestOverrideStateInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		RevisionId:    ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2099,7 +2384,9 @@ func TestCheckResponseSnapshot_GetRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRepository(context.Background(), &GetRepositoryInput{})
+	got, err := svc.GetRepository(context.Background(), &GetRepositoryInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2148,7 +2435,9 @@ func TestCheckResponseSnapshot_GetRepositoryTriggers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRepositoryTriggers(context.Background(), &GetRepositoryTriggersInput{})
+	got, err := svc.GetRepositoryTriggers(context.Background(), &GetRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2173,7 +2462,10 @@ func TestCheckResponseSnapshot_ListApprovalRuleTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApprovalRuleTemplates(context.Background(), &ListApprovalRuleTemplatesInput{})
+	got, err := svc.ListApprovalRuleTemplates(context.Background(), &ListApprovalRuleTemplatesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2198,7 +2490,11 @@ func TestCheckResponseSnapshot_ListAssociatedApprovalRuleTemplatesForRepository(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociatedApprovalRuleTemplatesForRepository(context.Background(), &ListAssociatedApprovalRuleTemplatesForRepositoryInput{})
+	got, err := svc.ListAssociatedApprovalRuleTemplatesForRepository(context.Background(), &ListAssociatedApprovalRuleTemplatesForRepositoryInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2223,7 +2519,10 @@ func TestCheckResponseSnapshot_ListBranches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBranches(context.Background(), &ListBranchesInput{})
+	got, err := svc.ListBranches(context.Background(), &ListBranchesInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2302,7 +2601,13 @@ func TestCheckResponseSnapshot_ListFileCommitHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFileCommitHistory(context.Background(), &ListFileCommitHistoryInput{})
+	got, err := svc.ListFileCommitHistory(context.Background(), &ListFileCommitHistoryInput{
+		RepositoryName:  ptr.String("__RepositoryName__"),
+		CommitSpecifier: ptr.String("__CommitSpecifier__"),
+		FilePath:        ptr.String("__FilePath__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2327,7 +2632,13 @@ func TestCheckResponseSnapshot_ListPullRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPullRequests(context.Background(), &ListPullRequestsInput{})
+	got, err := svc.ListPullRequests(context.Background(), &ListPullRequestsInput{
+		RepositoryName:    ptr.String("__RepositoryName__"),
+		AuthorArn:         ptr.String("__AuthorArn__"),
+		PullRequestStatus: types.PullRequestStatusEnum("OPEN"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2358,7 +2669,11 @@ func TestCheckResponseSnapshot_ListRepositories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRepositories(context.Background(), &ListRepositoriesInput{})
+	got, err := svc.ListRepositories(context.Background(), &ListRepositoriesInput{
+		NextToken: ptr.String("__NextToken__"),
+		SortBy:    types.SortByEnum("repositoryName"),
+		Order:     types.OrderEnum("ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2383,7 +2698,11 @@ func TestCheckResponseSnapshot_ListRepositoriesForApprovalRuleTemplate(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRepositoriesForApprovalRuleTemplate(context.Background(), &ListRepositoriesForApprovalRuleTemplateInput{})
+	got, err := svc.ListRepositoriesForApprovalRuleTemplate(context.Background(), &ListRepositoriesForApprovalRuleTemplateInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		NextToken:                ptr.String("__NextToken__"),
+		MaxResults:               ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2407,7 +2726,10 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2429,7 +2751,12 @@ func TestCheckResponseSnapshot_MergeBranchesByFastForward(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MergeBranchesByFastForward(context.Background(), &MergeBranchesByFastForwardInput{})
+	got, err := svc.MergeBranchesByFastForward(context.Background(), &MergeBranchesByFastForwardInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		TargetBranch:               ptr.String("__TargetBranch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2451,7 +2778,52 @@ func TestCheckResponseSnapshot_MergeBranchesBySquash(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MergeBranchesBySquash(context.Background(), &MergeBranchesBySquashInput{})
+	got, err := svc.MergeBranchesBySquash(context.Background(), &MergeBranchesBySquashInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		TargetBranch:               ptr.String("__TargetBranch__"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2473,7 +2845,52 @@ func TestCheckResponseSnapshot_MergeBranchesByThreeWay(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MergeBranchesByThreeWay(context.Background(), &MergeBranchesByThreeWayInput{})
+	got, err := svc.MergeBranchesByThreeWay(context.Background(), &MergeBranchesByThreeWayInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		TargetBranch:               ptr.String("__TargetBranch__"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2562,7 +2979,11 @@ func TestCheckResponseSnapshot_MergePullRequestByFastForward(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MergePullRequestByFastForward(context.Background(), &MergePullRequestByFastForwardInput{})
+	got, err := svc.MergePullRequestByFastForward(context.Background(), &MergePullRequestByFastForwardInput{
+		PullRequestId:  ptr.String("__PullRequestId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		SourceCommitId: ptr.String("__SourceCommitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2651,7 +3072,51 @@ func TestCheckResponseSnapshot_MergePullRequestBySquash(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MergePullRequestBySquash(context.Background(), &MergePullRequestBySquashInput{})
+	got, err := svc.MergePullRequestBySquash(context.Background(), &MergePullRequestBySquashInput{
+		PullRequestId:              ptr.String("__PullRequestId__"),
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitId:             ptr.String("__SourceCommitId__"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2740,7 +3205,51 @@ func TestCheckResponseSnapshot_MergePullRequestByThreeWay(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MergePullRequestByThreeWay(context.Background(), &MergePullRequestByThreeWayInput{})
+	got, err := svc.MergePullRequestByThreeWay(context.Background(), &MergePullRequestByThreeWayInput{
+		PullRequestId:              ptr.String("__PullRequestId__"),
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitId:             ptr.String("__SourceCommitId__"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2759,7 +3268,11 @@ func TestCheckResponseSnapshot_OverridePullRequestApprovalRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OverridePullRequestApprovalRules(context.Background(), &OverridePullRequestApprovalRulesInput{})
+	got, err := svc.OverridePullRequestApprovalRules(context.Background(), &OverridePullRequestApprovalRulesInput{
+		PullRequestId:  ptr.String("__PullRequestId__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+		OverrideStatus: types.OverrideStatus("OVERRIDE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2806,7 +3319,18 @@ func TestCheckResponseSnapshot_PostCommentForComparedCommit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{})
+	got, err := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BeforeCommitId: ptr.String("__BeforeCommitId__"),
+		AfterCommitId:  ptr.String("__AfterCommitId__"),
+		Location: &types.Location{
+			FilePath:            ptr.String("__FilePath__"),
+			FilePosition:        ptr.Int64(1),
+			RelativeFileVersion: types.RelativeFileVersionEnum("BEFORE"),
+		},
+		Content:            ptr.String("__Content__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2854,7 +3378,19 @@ func TestCheckResponseSnapshot_PostCommentForPullRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PostCommentForPullRequest(context.Background(), &PostCommentForPullRequestInput{})
+	got, err := svc.PostCommentForPullRequest(context.Background(), &PostCommentForPullRequestInput{
+		PullRequestId:  ptr.String("__PullRequestId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BeforeCommitId: ptr.String("__BeforeCommitId__"),
+		AfterCommitId:  ptr.String("__AfterCommitId__"),
+		Location: &types.Location{
+			FilePath:            ptr.String("__FilePath__"),
+			FilePosition:        ptr.Int64(1),
+			RelativeFileVersion: types.RelativeFileVersionEnum("BEFORE"),
+		},
+		Content:            ptr.String("__Content__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2891,7 +3427,11 @@ func TestCheckResponseSnapshot_PostCommentReply(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PostCommentReply(context.Background(), &PostCommentReplyInput{})
+	got, err := svc.PostCommentReply(context.Background(), &PostCommentReplyInput{
+		InReplyTo:          ptr.String("__InReplyTo__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Content:            ptr.String("__Content__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2910,7 +3450,10 @@ func TestCheckResponseSnapshot_PutCommentReaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutCommentReaction(context.Background(), &PutCommentReactionInput{})
+	got, err := svc.PutCommentReaction(context.Background(), &PutCommentReactionInput{
+		CommentId:     ptr.String("__CommentId__"),
+		ReactionValue: ptr.String("__ReactionValue__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2933,7 +3476,17 @@ func TestCheckResponseSnapshot_PutFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFile(context.Background(), &PutFileInput{})
+	got, err := svc.PutFile(context.Background(), &PutFileInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BranchName:     ptr.String("__BranchName__"),
+		FileContent:    []byte("blob"),
+		FilePath:       ptr.String("__FilePath__"),
+		FileMode:       types.FileModeTypeEnum("EXECUTABLE"),
+		ParentCommitId: ptr.String("__ParentCommitId__"),
+		CommitMessage:  ptr.String("__CommitMessage__"),
+		Name:           ptr.String("__Name__"),
+		Email:          ptr.String("__Email__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2954,7 +3507,37 @@ func TestCheckResponseSnapshot_PutRepositoryTriggers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	got, err := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2973,7 +3556,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3007,7 +3595,37 @@ func TestCheckResponseSnapshot_TestRepositoryTriggers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestRepositoryTriggers(context.Background(), &TestRepositoryTriggersInput{})
+	got, err := svc.TestRepositoryTriggers(context.Background(), &TestRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3026,7 +3644,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3056,7 +3680,11 @@ func TestCheckResponseSnapshot_UpdateApprovalRuleTemplateContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApprovalRuleTemplateContent(context.Background(), &UpdateApprovalRuleTemplateContentInput{})
+	got, err := svc.UpdateApprovalRuleTemplateContent(context.Background(), &UpdateApprovalRuleTemplateContentInput{
+		ApprovalRuleTemplateName:  ptr.String("__ApprovalRuleTemplateName__"),
+		NewRuleContent:            ptr.String("__NewRuleContent__"),
+		ExistingRuleContentSha256: ptr.String("__ExistingRuleContentSha256__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3086,7 +3714,10 @@ func TestCheckResponseSnapshot_UpdateApprovalRuleTemplateDescription(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApprovalRuleTemplateDescription(context.Background(), &UpdateApprovalRuleTemplateDescriptionInput{})
+	got, err := svc.UpdateApprovalRuleTemplateDescription(context.Background(), &UpdateApprovalRuleTemplateDescriptionInput{
+		ApprovalRuleTemplateName:        ptr.String("__ApprovalRuleTemplateName__"),
+		ApprovalRuleTemplateDescription: ptr.String("__ApprovalRuleTemplateDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3116,7 +3747,10 @@ func TestCheckResponseSnapshot_UpdateApprovalRuleTemplateName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApprovalRuleTemplateName(context.Background(), &UpdateApprovalRuleTemplateNameInput{})
+	got, err := svc.UpdateApprovalRuleTemplateName(context.Background(), &UpdateApprovalRuleTemplateNameInput{
+		OldApprovalRuleTemplateName: ptr.String("__OldApprovalRuleTemplateName__"),
+		NewApprovalRuleTemplateName: ptr.String("__NewApprovalRuleTemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3153,7 +3787,10 @@ func TestCheckResponseSnapshot_UpdateComment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateComment(context.Background(), &UpdateCommentInput{})
+	got, err := svc.UpdateComment(context.Background(), &UpdateCommentInput{
+		CommentId: ptr.String("__CommentId__"),
+		Content:   ptr.String("__Content__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3172,7 +3809,10 @@ func TestCheckResponseSnapshot_UpdateDefaultBranch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDefaultBranch(context.Background(), &UpdateDefaultBranchInput{})
+	got, err := svc.UpdateDefaultBranch(context.Background(), &UpdateDefaultBranchInput{
+		RepositoryName:    ptr.String("__RepositoryName__"),
+		DefaultBranchName: ptr.String("__DefaultBranchName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3205,7 +3845,12 @@ func TestCheckResponseSnapshot_UpdatePullRequestApprovalRuleContent(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePullRequestApprovalRuleContent(context.Background(), &UpdatePullRequestApprovalRuleContentInput{})
+	got, err := svc.UpdatePullRequestApprovalRuleContent(context.Background(), &UpdatePullRequestApprovalRuleContentInput{
+		PullRequestId:             ptr.String("__PullRequestId__"),
+		ApprovalRuleName:          ptr.String("__ApprovalRuleName__"),
+		ExistingRuleContentSha256: ptr.String("__ExistingRuleContentSha256__"),
+		NewRuleContent:            ptr.String("__NewRuleContent__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3224,7 +3869,11 @@ func TestCheckResponseSnapshot_UpdatePullRequestApprovalState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePullRequestApprovalState(context.Background(), &UpdatePullRequestApprovalStateInput{})
+	got, err := svc.UpdatePullRequestApprovalState(context.Background(), &UpdatePullRequestApprovalStateInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		RevisionId:    ptr.String("__RevisionId__"),
+		ApprovalState: types.ApprovalState("APPROVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3313,7 +3962,10 @@ func TestCheckResponseSnapshot_UpdatePullRequestDescription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePullRequestDescription(context.Background(), &UpdatePullRequestDescriptionInput{})
+	got, err := svc.UpdatePullRequestDescription(context.Background(), &UpdatePullRequestDescriptionInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		Description:   ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3402,7 +4054,10 @@ func TestCheckResponseSnapshot_UpdatePullRequestStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePullRequestStatus(context.Background(), &UpdatePullRequestStatusInput{})
+	got, err := svc.UpdatePullRequestStatus(context.Background(), &UpdatePullRequestStatusInput{
+		PullRequestId:     ptr.String("__PullRequestId__"),
+		PullRequestStatus: types.PullRequestStatusEnum("OPEN"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3491,7 +4146,10 @@ func TestCheckResponseSnapshot_UpdatePullRequestTitle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePullRequestTitle(context.Background(), &UpdatePullRequestTitleInput{})
+	got, err := svc.UpdatePullRequestTitle(context.Background(), &UpdatePullRequestTitleInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		Title:         ptr.String("__Title__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3510,7 +4168,10 @@ func TestCheckResponseSnapshot_UpdateRepositoryDescription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRepositoryDescription(context.Background(), &UpdateRepositoryDescriptionInput{})
+	got, err := svc.UpdateRepositoryDescription(context.Background(), &UpdateRepositoryDescriptionInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		RepositoryDescription: ptr.String("__RepositoryDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3533,7 +4194,10 @@ func TestCheckResponseSnapshot_UpdateRepositoryEncryptionKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRepositoryEncryptionKey(context.Background(), &UpdateRepositoryEncryptionKeyInput{})
+	got, err := svc.UpdateRepositoryEncryptionKey(context.Background(), &UpdateRepositoryEncryptionKeyInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3552,7 +4216,10 @@ func TestCheckResponseSnapshot_UpdateRepositoryName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRepositoryName(context.Background(), &UpdateRepositoryNameInput{})
+	got, err := svc.UpdateRepositoryName(context.Background(), &UpdateRepositoryNameInput{
+		OldName: ptr.String("__OldName__"),
+		NewName: ptr.String("__NewName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3573,7 +4240,13 @@ func TestCheckResponseSnapshot_Error_ActorDoesNotExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribePullRequestEvents(context.Background(), &DescribePullRequestEventsInput{})
+	_, opErr := svc.DescribePullRequestEvents(context.Background(), &DescribePullRequestEventsInput{
+		PullRequestId:        ptr.String("__PullRequestId__"),
+		PullRequestEventType: types.PullRequestEventType("PULL_REQUEST_CREATED"),
+		ActorArn:             ptr.String("__ActorArn__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3598,7 +4271,11 @@ func TestCheckResponseSnapshot_Error_ApprovalRuleContentRequiredException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{})
+	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{
+		PullRequestId:       ptr.String("__PullRequestId__"),
+		ApprovalRuleName:    ptr.String("__ApprovalRuleName__"),
+		ApprovalRuleContent: ptr.String("__ApprovalRuleContent__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3623,7 +4300,12 @@ func TestCheckResponseSnapshot_Error_ApprovalRuleDoesNotExistException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdatePullRequestApprovalRuleContent(context.Background(), &UpdatePullRequestApprovalRuleContentInput{})
+	_, opErr := svc.UpdatePullRequestApprovalRuleContent(context.Background(), &UpdatePullRequestApprovalRuleContentInput{
+		PullRequestId:             ptr.String("__PullRequestId__"),
+		ApprovalRuleName:          ptr.String("__ApprovalRuleName__"),
+		ExistingRuleContentSha256: ptr.String("__ExistingRuleContentSha256__"),
+		NewRuleContent:            ptr.String("__NewRuleContent__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3648,7 +4330,11 @@ func TestCheckResponseSnapshot_Error_ApprovalRuleNameAlreadyExistsException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{})
+	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{
+		PullRequestId:       ptr.String("__PullRequestId__"),
+		ApprovalRuleName:    ptr.String("__ApprovalRuleName__"),
+		ApprovalRuleContent: ptr.String("__ApprovalRuleContent__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3673,7 +4359,11 @@ func TestCheckResponseSnapshot_Error_ApprovalRuleNameRequiredException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{})
+	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{
+		PullRequestId:       ptr.String("__PullRequestId__"),
+		ApprovalRuleName:    ptr.String("__ApprovalRuleName__"),
+		ApprovalRuleContent: ptr.String("__ApprovalRuleContent__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3698,7 +4388,11 @@ func TestCheckResponseSnapshot_Error_ApprovalRuleTemplateContentRequiredExceptio
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApprovalRuleTemplate(context.Background(), &CreateApprovalRuleTemplateInput{})
+	_, opErr := svc.CreateApprovalRuleTemplate(context.Background(), &CreateApprovalRuleTemplateInput{
+		ApprovalRuleTemplateName:        ptr.String("__ApprovalRuleTemplateName__"),
+		ApprovalRuleTemplateContent:     ptr.String("__ApprovalRuleTemplateContent__"),
+		ApprovalRuleTemplateDescription: ptr.String("__ApprovalRuleTemplateDescription__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3723,7 +4417,10 @@ func TestCheckResponseSnapshot_Error_ApprovalRuleTemplateDoesNotExistException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3748,7 +4445,9 @@ func TestCheckResponseSnapshot_Error_ApprovalRuleTemplateInUseException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteApprovalRuleTemplate(context.Background(), &DeleteApprovalRuleTemplateInput{})
+	_, opErr := svc.DeleteApprovalRuleTemplate(context.Background(), &DeleteApprovalRuleTemplateInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3773,7 +4472,11 @@ func TestCheckResponseSnapshot_Error_ApprovalRuleTemplateNameAlreadyExistsExcept
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApprovalRuleTemplate(context.Background(), &CreateApprovalRuleTemplateInput{})
+	_, opErr := svc.CreateApprovalRuleTemplate(context.Background(), &CreateApprovalRuleTemplateInput{
+		ApprovalRuleTemplateName:        ptr.String("__ApprovalRuleTemplateName__"),
+		ApprovalRuleTemplateContent:     ptr.String("__ApprovalRuleTemplateContent__"),
+		ApprovalRuleTemplateDescription: ptr.String("__ApprovalRuleTemplateDescription__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3798,7 +4501,10 @@ func TestCheckResponseSnapshot_Error_ApprovalRuleTemplateNameRequiredException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3823,7 +4529,11 @@ func TestCheckResponseSnapshot_Error_ApprovalStateRequiredException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdatePullRequestApprovalState(context.Background(), &UpdatePullRequestApprovalStateInput{})
+	_, opErr := svc.UpdatePullRequestApprovalState(context.Background(), &UpdatePullRequestApprovalStateInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		RevisionId:    ptr.String("__RevisionId__"),
+		ApprovalState: types.ApprovalState("APPROVE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3848,7 +4558,13 @@ func TestCheckResponseSnapshot_Error_AuthorDoesNotExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListPullRequests(context.Background(), &ListPullRequestsInput{})
+	_, opErr := svc.ListPullRequests(context.Background(), &ListPullRequestsInput{
+		RepositoryName:    ptr.String("__RepositoryName__"),
+		AuthorArn:         ptr.String("__AuthorArn__"),
+		PullRequestStatus: types.PullRequestStatusEnum("OPEN"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3873,7 +4589,18 @@ func TestCheckResponseSnapshot_Error_BeforeCommitIdAndAfterCommitIdAreSameExcept
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{})
+	_, opErr := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BeforeCommitId: ptr.String("__BeforeCommitId__"),
+		AfterCommitId:  ptr.String("__AfterCommitId__"),
+		Location: &types.Location{
+			FilePath:            ptr.String("__FilePath__"),
+			FilePosition:        ptr.Int64(1),
+			RelativeFileVersion: types.RelativeFileVersionEnum("BEFORE"),
+		},
+		Content:            ptr.String("__Content__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3898,7 +4625,10 @@ func TestCheckResponseSnapshot_Error_BlobIdDoesNotExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetBlob(context.Background(), &GetBlobInput{})
+	_, opErr := svc.GetBlob(context.Background(), &GetBlobInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BlobId:         ptr.String("__BlobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3923,7 +4653,10 @@ func TestCheckResponseSnapshot_Error_BlobIdRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetBlob(context.Background(), &GetBlobInput{})
+	_, opErr := svc.GetBlob(context.Background(), &GetBlobInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BlobId:         ptr.String("__BlobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3948,7 +4681,53 @@ func TestCheckResponseSnapshot_Error_BranchDoesNotExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3973,7 +4752,11 @@ func TestCheckResponseSnapshot_Error_BranchNameExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBranch(context.Background(), &CreateBranchInput{})
+	_, opErr := svc.CreateBranch(context.Background(), &CreateBranchInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BranchName:     ptr.String("__BranchName__"),
+		CommitId:       ptr.String("__CommitId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3998,7 +4781,53 @@ func TestCheckResponseSnapshot_Error_BranchNameIsTagNameException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4023,7 +4852,11 @@ func TestCheckResponseSnapshot_Error_BranchNameRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBranch(context.Background(), &CreateBranchInput{})
+	_, opErr := svc.CreateBranch(context.Background(), &CreateBranchInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BranchName:     ptr.String("__BranchName__"),
+		CommitId:       ptr.String("__CommitId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4048,7 +4881,10 @@ func TestCheckResponseSnapshot_Error_CannotDeleteApprovalRuleFromTemplateExcepti
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeletePullRequestApprovalRule(context.Background(), &DeletePullRequestApprovalRuleInput{})
+	_, opErr := svc.DeletePullRequestApprovalRule(context.Background(), &DeletePullRequestApprovalRuleInput{
+		PullRequestId:    ptr.String("__PullRequestId__"),
+		ApprovalRuleName: ptr.String("__ApprovalRuleName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4073,7 +4909,12 @@ func TestCheckResponseSnapshot_Error_CannotModifyApprovalRuleFromTemplateExcepti
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdatePullRequestApprovalRuleContent(context.Background(), &UpdatePullRequestApprovalRuleContentInput{})
+	_, opErr := svc.UpdatePullRequestApprovalRuleContent(context.Background(), &UpdatePullRequestApprovalRuleContentInput{
+		PullRequestId:             ptr.String("__PullRequestId__"),
+		ApprovalRuleName:          ptr.String("__ApprovalRuleName__"),
+		ExistingRuleContentSha256: ptr.String("__ExistingRuleContentSha256__"),
+		NewRuleContent:            ptr.String("__NewRuleContent__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4098,7 +4939,23 @@ func TestCheckResponseSnapshot_Error_ClientRequestTokenRequiredException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4123,7 +4980,18 @@ func TestCheckResponseSnapshot_Error_CommentContentRequiredException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{})
+	_, opErr := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BeforeCommitId: ptr.String("__BeforeCommitId__"),
+		AfterCommitId:  ptr.String("__AfterCommitId__"),
+		Location: &types.Location{
+			FilePath:            ptr.String("__FilePath__"),
+			FilePosition:        ptr.Int64(1),
+			RelativeFileVersion: types.RelativeFileVersionEnum("BEFORE"),
+		},
+		Content:            ptr.String("__Content__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4148,7 +5016,18 @@ func TestCheckResponseSnapshot_Error_CommentContentSizeLimitExceededException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{})
+	_, opErr := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BeforeCommitId: ptr.String("__BeforeCommitId__"),
+		AfterCommitId:  ptr.String("__AfterCommitId__"),
+		Location: &types.Location{
+			FilePath:            ptr.String("__FilePath__"),
+			FilePosition:        ptr.Int64(1),
+			RelativeFileVersion: types.RelativeFileVersionEnum("BEFORE"),
+		},
+		Content:            ptr.String("__Content__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4173,7 +5052,9 @@ func TestCheckResponseSnapshot_Error_CommentDeletedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCommentContent(context.Background(), &DeleteCommentContentInput{})
+	_, opErr := svc.DeleteCommentContent(context.Background(), &DeleteCommentContentInput{
+		CommentId: ptr.String("__CommentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4198,7 +5079,9 @@ func TestCheckResponseSnapshot_Error_CommentDoesNotExistException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCommentContent(context.Background(), &DeleteCommentContentInput{})
+	_, opErr := svc.DeleteCommentContent(context.Background(), &DeleteCommentContentInput{
+		CommentId: ptr.String("__CommentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4223,7 +5106,9 @@ func TestCheckResponseSnapshot_Error_CommentIdRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCommentContent(context.Background(), &DeleteCommentContentInput{})
+	_, opErr := svc.DeleteCommentContent(context.Background(), &DeleteCommentContentInput{
+		CommentId: ptr.String("__CommentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4248,7 +5133,10 @@ func TestCheckResponseSnapshot_Error_CommentNotCreatedByCallerException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateComment(context.Background(), &UpdateCommentInput{})
+	_, opErr := svc.UpdateComment(context.Background(), &UpdateCommentInput{
+		CommentId: ptr.String("__CommentId__"),
+		Content:   ptr.String("__Content__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4273,7 +5161,21 @@ func TestCheckResponseSnapshot_Error_CommitDoesNotExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4298,7 +5200,10 @@ func TestCheckResponseSnapshot_Error_CommitIdDoesNotExistException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetCommit(context.Background(), &GetCommitInput{})
+	_, opErr := svc.GetCommit(context.Background(), &GetCommitInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		CommitId:       ptr.String("__CommitId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4323,7 +5228,11 @@ func TestCheckResponseSnapshot_Error_CommitIdRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBranch(context.Background(), &CreateBranchInput{})
+	_, opErr := svc.CreateBranch(context.Background(), &CreateBranchInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BranchName:     ptr.String("__BranchName__"),
+		CommitId:       ptr.String("__CommitId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4348,7 +5257,13 @@ func TestCheckResponseSnapshot_Error_CommitIdsLimitExceededException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCommits(context.Background(), &BatchGetCommitsInput{})
+	_, opErr := svc.BatchGetCommits(context.Background(), &BatchGetCommitsInput{
+		CommitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RepositoryName: ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4373,7 +5288,13 @@ func TestCheckResponseSnapshot_Error_CommitIdsListRequiredException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCommits(context.Background(), &BatchGetCommitsInput{})
+	_, opErr := svc.BatchGetCommits(context.Background(), &BatchGetCommitsInput{
+		CommitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RepositoryName: ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4398,7 +5319,53 @@ func TestCheckResponseSnapshot_Error_CommitMessageLengthExceededException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4423,7 +5390,21 @@ func TestCheckResponseSnapshot_Error_CommitRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4448,7 +5429,52 @@ func TestCheckResponseSnapshot_Error_ConcurrentReferenceUpdateException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{})
+	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4473,7 +5499,10 @@ func TestCheckResponseSnapshot_Error_DefaultBranchCannotBeDeletedException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteBranch(context.Background(), &DeleteBranchInput{})
+	_, opErr := svc.DeleteBranch(context.Background(), &DeleteBranchInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BranchName:     ptr.String("__BranchName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4498,7 +5527,53 @@ func TestCheckResponseSnapshot_Error_DirectoryNameConflictsWithFileNameException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4523,7 +5598,10 @@ func TestCheckResponseSnapshot_Error_EncryptionIntegrityChecksFailedException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4548,7 +5626,10 @@ func TestCheckResponseSnapshot_Error_EncryptionKeyAccessDeniedException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4573,7 +5654,10 @@ func TestCheckResponseSnapshot_Error_EncryptionKeyDisabledException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4598,7 +5682,14 @@ func TestCheckResponseSnapshot_Error_EncryptionKeyInvalidIdException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		RepositoryDescription: ptr.String("__RepositoryDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4623,7 +5714,14 @@ func TestCheckResponseSnapshot_Error_EncryptionKeyInvalidUsageException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		RepositoryDescription: ptr.String("__RepositoryDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4648,7 +5746,10 @@ func TestCheckResponseSnapshot_Error_EncryptionKeyNotFoundException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4673,7 +5774,10 @@ func TestCheckResponseSnapshot_Error_EncryptionKeyRequiredException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateRepositoryEncryptionKey(context.Background(), &UpdateRepositoryEncryptionKeyInput{})
+	_, opErr := svc.UpdateRepositoryEncryptionKey(context.Background(), &UpdateRepositoryEncryptionKeyInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4698,7 +5802,10 @@ func TestCheckResponseSnapshot_Error_EncryptionKeyUnavailableException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4723,7 +5830,53 @@ func TestCheckResponseSnapshot_Error_FileContentAndSourceFileSpecifiedException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4748,7 +5901,17 @@ func TestCheckResponseSnapshot_Error_FileContentRequiredException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutFile(context.Background(), &PutFileInput{})
+	_, opErr := svc.PutFile(context.Background(), &PutFileInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BranchName:     ptr.String("__BranchName__"),
+		FileContent:    []byte("blob"),
+		FilePath:       ptr.String("__FilePath__"),
+		FileMode:       types.FileModeTypeEnum("EXECUTABLE"),
+		ParentCommitId: ptr.String("__ParentCommitId__"),
+		CommitMessage:  ptr.String("__CommitMessage__"),
+		Name:           ptr.String("__Name__"),
+		Email:          ptr.String("__Email__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4773,7 +5936,53 @@ func TestCheckResponseSnapshot_Error_FileContentSizeLimitExceededException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4798,7 +6007,53 @@ func TestCheckResponseSnapshot_Error_FileDoesNotExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4823,7 +6078,53 @@ func TestCheckResponseSnapshot_Error_FileEntryRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4848,7 +6149,53 @@ func TestCheckResponseSnapshot_Error_FileModeRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4873,7 +6220,53 @@ func TestCheckResponseSnapshot_Error_FileNameConflictsWithDirectoryNameException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4898,7 +6291,53 @@ func TestCheckResponseSnapshot_Error_FilePathConflictsWithSubmodulePathException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4923,7 +6362,10 @@ func TestCheckResponseSnapshot_Error_FileTooLargeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetBlob(context.Background(), &GetBlobInput{})
+	_, opErr := svc.GetBlob(context.Background(), &GetBlobInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BlobId:         ptr.String("__BlobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4948,7 +6390,53 @@ func TestCheckResponseSnapshot_Error_FolderContentSizeLimitExceededException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4973,7 +6461,11 @@ func TestCheckResponseSnapshot_Error_FolderDoesNotExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetFolder(context.Background(), &GetFolderInput{})
+	_, opErr := svc.GetFolder(context.Background(), &GetFolderInput{
+		RepositoryName:  ptr.String("__RepositoryName__"),
+		CommitSpecifier: ptr.String("__CommitSpecifier__"),
+		FolderPath:      ptr.String("__FolderPath__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4998,7 +6490,23 @@ func TestCheckResponseSnapshot_Error_IdempotencyParameterMismatchException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5023,7 +6531,13 @@ func TestCheckResponseSnapshot_Error_InvalidActorArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribePullRequestEvents(context.Background(), &DescribePullRequestEventsInput{})
+	_, opErr := svc.DescribePullRequestEvents(context.Background(), &DescribePullRequestEventsInput{
+		PullRequestId:        ptr.String("__PullRequestId__"),
+		PullRequestEventType: types.PullRequestEventType("PULL_REQUEST_CREATED"),
+		ActorArn:             ptr.String("__ActorArn__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5048,7 +6562,11 @@ func TestCheckResponseSnapshot_Error_InvalidApprovalRuleContentException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{})
+	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{
+		PullRequestId:       ptr.String("__PullRequestId__"),
+		ApprovalRuleName:    ptr.String("__ApprovalRuleName__"),
+		ApprovalRuleContent: ptr.String("__ApprovalRuleContent__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5073,7 +6591,11 @@ func TestCheckResponseSnapshot_Error_InvalidApprovalRuleNameException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{})
+	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{
+		PullRequestId:       ptr.String("__PullRequestId__"),
+		ApprovalRuleName:    ptr.String("__ApprovalRuleName__"),
+		ApprovalRuleContent: ptr.String("__ApprovalRuleContent__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5098,7 +6620,11 @@ func TestCheckResponseSnapshot_Error_InvalidApprovalRuleTemplateContentException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApprovalRuleTemplate(context.Background(), &CreateApprovalRuleTemplateInput{})
+	_, opErr := svc.CreateApprovalRuleTemplate(context.Background(), &CreateApprovalRuleTemplateInput{
+		ApprovalRuleTemplateName:        ptr.String("__ApprovalRuleTemplateName__"),
+		ApprovalRuleTemplateContent:     ptr.String("__ApprovalRuleTemplateContent__"),
+		ApprovalRuleTemplateDescription: ptr.String("__ApprovalRuleTemplateDescription__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5123,7 +6649,11 @@ func TestCheckResponseSnapshot_Error_InvalidApprovalRuleTemplateDescriptionExcep
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApprovalRuleTemplate(context.Background(), &CreateApprovalRuleTemplateInput{})
+	_, opErr := svc.CreateApprovalRuleTemplate(context.Background(), &CreateApprovalRuleTemplateInput{
+		ApprovalRuleTemplateName:        ptr.String("__ApprovalRuleTemplateName__"),
+		ApprovalRuleTemplateContent:     ptr.String("__ApprovalRuleTemplateContent__"),
+		ApprovalRuleTemplateDescription: ptr.String("__ApprovalRuleTemplateDescription__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5148,7 +6678,10 @@ func TestCheckResponseSnapshot_Error_InvalidApprovalRuleTemplateNameException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5173,7 +6706,11 @@ func TestCheckResponseSnapshot_Error_InvalidApprovalStateException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdatePullRequestApprovalState(context.Background(), &UpdatePullRequestApprovalStateInput{})
+	_, opErr := svc.UpdatePullRequestApprovalState(context.Background(), &UpdatePullRequestApprovalStateInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		RevisionId:    ptr.String("__RevisionId__"),
+		ApprovalState: types.ApprovalState("APPROVE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5198,7 +6735,13 @@ func TestCheckResponseSnapshot_Error_InvalidAuthorArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListPullRequests(context.Background(), &ListPullRequestsInput{})
+	_, opErr := svc.ListPullRequests(context.Background(), &ListPullRequestsInput{
+		RepositoryName:    ptr.String("__RepositoryName__"),
+		AuthorArn:         ptr.String("__AuthorArn__"),
+		PullRequestStatus: types.PullRequestStatusEnum("OPEN"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5223,7 +6766,10 @@ func TestCheckResponseSnapshot_Error_InvalidBlobIdException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetBlob(context.Background(), &GetBlobInput{})
+	_, opErr := svc.GetBlob(context.Background(), &GetBlobInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BlobId:         ptr.String("__BlobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5248,7 +6794,11 @@ func TestCheckResponseSnapshot_Error_InvalidBranchNameException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBranch(context.Background(), &CreateBranchInput{})
+	_, opErr := svc.CreateBranch(context.Background(), &CreateBranchInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BranchName:     ptr.String("__BranchName__"),
+		CommitId:       ptr.String("__CommitId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5273,7 +6823,23 @@ func TestCheckResponseSnapshot_Error_InvalidClientRequestTokenException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5298,7 +6864,9 @@ func TestCheckResponseSnapshot_Error_InvalidCommentIdException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCommentContent(context.Background(), &DeleteCommentContentInput{})
+	_, opErr := svc.DeleteCommentContent(context.Background(), &DeleteCommentContentInput{
+		CommentId: ptr.String("__CommentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5323,7 +6891,21 @@ func TestCheckResponseSnapshot_Error_InvalidCommitException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5348,7 +6930,11 @@ func TestCheckResponseSnapshot_Error_InvalidCommitIdException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBranch(context.Background(), &CreateBranchInput{})
+	_, opErr := svc.CreateBranch(context.Background(), &CreateBranchInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BranchName:     ptr.String("__BranchName__"),
+		CommitId:       ptr.String("__CommitId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5373,7 +6959,21 @@ func TestCheckResponseSnapshot_Error_InvalidConflictDetailLevelException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5398,7 +6998,52 @@ func TestCheckResponseSnapshot_Error_InvalidConflictResolutionException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{})
+	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5423,7 +7068,21 @@ func TestCheckResponseSnapshot_Error_InvalidConflictResolutionStrategyException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5448,7 +7107,21 @@ func TestCheckResponseSnapshot_Error_InvalidContinuationTokenException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5473,7 +7146,53 @@ func TestCheckResponseSnapshot_Error_InvalidDeletionParameterException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5498,7 +7217,23 @@ func TestCheckResponseSnapshot_Error_InvalidDescriptionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5523,7 +7258,16 @@ func TestCheckResponseSnapshot_Error_InvalidDestinationCommitSpecifierException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMergeConflicts(context.Background(), &GetMergeConflictsInput{})
+	_, opErr := svc.GetMergeConflicts(context.Background(), &GetMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		MaxConflictFiles:           ptr.Int32(1),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5548,7 +7292,53 @@ func TestCheckResponseSnapshot_Error_InvalidEmailException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5573,7 +7363,18 @@ func TestCheckResponseSnapshot_Error_InvalidFileLocationException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{})
+	_, opErr := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BeforeCommitId: ptr.String("__BeforeCommitId__"),
+		AfterCommitId:  ptr.String("__AfterCommitId__"),
+		Location: &types.Location{
+			FilePath:            ptr.String("__FilePath__"),
+			FilePosition:        ptr.Int64(1),
+			RelativeFileVersion: types.RelativeFileVersionEnum("BEFORE"),
+		},
+		Content:            ptr.String("__Content__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5598,7 +7399,53 @@ func TestCheckResponseSnapshot_Error_InvalidFileModeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5623,7 +7470,18 @@ func TestCheckResponseSnapshot_Error_InvalidFilePositionException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{})
+	_, opErr := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BeforeCommitId: ptr.String("__BeforeCommitId__"),
+		AfterCommitId:  ptr.String("__AfterCommitId__"),
+		Location: &types.Location{
+			FilePath:            ptr.String("__FilePath__"),
+			FilePosition:        ptr.Int64(1),
+			RelativeFileVersion: types.RelativeFileVersionEnum("BEFORE"),
+		},
+		Content:            ptr.String("__Content__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5648,7 +7506,21 @@ func TestCheckResponseSnapshot_Error_InvalidMaxConflictFilesException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5673,7 +7545,21 @@ func TestCheckResponseSnapshot_Error_InvalidMaxMergeHunksException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5698,7 +7584,13 @@ func TestCheckResponseSnapshot_Error_InvalidMaxResultsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribePullRequestEvents(context.Background(), &DescribePullRequestEventsInput{})
+	_, opErr := svc.DescribePullRequestEvents(context.Background(), &DescribePullRequestEventsInput{
+		PullRequestId:        ptr.String("__PullRequestId__"),
+		PullRequestEventType: types.PullRequestEventType("PULL_REQUEST_CREATED"),
+		ActorArn:             ptr.String("__ActorArn__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5723,7 +7615,21 @@ func TestCheckResponseSnapshot_Error_InvalidMergeOptionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5748,7 +7654,11 @@ func TestCheckResponseSnapshot_Error_InvalidOrderException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRepositories(context.Background(), &ListRepositoriesInput{})
+	_, opErr := svc.ListRepositories(context.Background(), &ListRepositoriesInput{
+		NextToken: ptr.String("__NextToken__"),
+		SortBy:    types.SortByEnum("repositoryName"),
+		Order:     types.OrderEnum("ascending"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5773,7 +7683,11 @@ func TestCheckResponseSnapshot_Error_InvalidOverrideStatusException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.OverridePullRequestApprovalRules(context.Background(), &OverridePullRequestApprovalRulesInput{})
+	_, opErr := svc.OverridePullRequestApprovalRules(context.Background(), &OverridePullRequestApprovalRulesInput{
+		PullRequestId:  ptr.String("__PullRequestId__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+		OverrideStatus: types.OverrideStatus("OVERRIDE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5798,7 +7712,53 @@ func TestCheckResponseSnapshot_Error_InvalidParentCommitIdException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5823,7 +7783,53 @@ func TestCheckResponseSnapshot_Error_InvalidPathException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5848,7 +7854,13 @@ func TestCheckResponseSnapshot_Error_InvalidPullRequestEventTypeException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribePullRequestEvents(context.Background(), &DescribePullRequestEventsInput{})
+	_, opErr := svc.DescribePullRequestEvents(context.Background(), &DescribePullRequestEventsInput{
+		PullRequestId:        ptr.String("__PullRequestId__"),
+		PullRequestEventType: types.PullRequestEventType("PULL_REQUEST_CREATED"),
+		ActorArn:             ptr.String("__ActorArn__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5873,7 +7885,11 @@ func TestCheckResponseSnapshot_Error_InvalidPullRequestIdException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{})
+	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{
+		PullRequestId:       ptr.String("__PullRequestId__"),
+		ApprovalRuleName:    ptr.String("__ApprovalRuleName__"),
+		ApprovalRuleContent: ptr.String("__ApprovalRuleContent__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5898,7 +7914,13 @@ func TestCheckResponseSnapshot_Error_InvalidPullRequestStatusException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListPullRequests(context.Background(), &ListPullRequestsInput{})
+	_, opErr := svc.ListPullRequests(context.Background(), &ListPullRequestsInput{
+		RepositoryName:    ptr.String("__RepositoryName__"),
+		AuthorArn:         ptr.String("__AuthorArn__"),
+		PullRequestStatus: types.PullRequestStatusEnum("OPEN"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5923,7 +7945,10 @@ func TestCheckResponseSnapshot_Error_InvalidPullRequestStatusUpdateException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdatePullRequestStatus(context.Background(), &UpdatePullRequestStatusInput{})
+	_, opErr := svc.UpdatePullRequestStatus(context.Background(), &UpdatePullRequestStatusInput{
+		PullRequestId:     ptr.String("__PullRequestId__"),
+		PullRequestStatus: types.PullRequestStatusEnum("OPEN"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5948,7 +7973,12 @@ func TestCheckResponseSnapshot_Error_InvalidReactionUserArnException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetCommentReactions(context.Background(), &GetCommentReactionsInput{})
+	_, opErr := svc.GetCommentReactions(context.Background(), &GetCommentReactionsInput{
+		CommentId:       ptr.String("__CommentId__"),
+		ReactionUserArn: ptr.String("__ReactionUserArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5973,7 +8003,10 @@ func TestCheckResponseSnapshot_Error_InvalidReactionValueException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutCommentReaction(context.Background(), &PutCommentReactionInput{})
+	_, opErr := svc.PutCommentReaction(context.Background(), &PutCommentReactionInput{
+		CommentId:     ptr.String("__CommentId__"),
+		ReactionValue: ptr.String("__ReactionValue__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5998,7 +8031,23 @@ func TestCheckResponseSnapshot_Error_InvalidReferenceNameException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6023,7 +8072,18 @@ func TestCheckResponseSnapshot_Error_InvalidRelativeFileVersionEnumException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{})
+	_, opErr := svc.PostCommentForComparedCommit(context.Background(), &PostCommentForComparedCommitInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BeforeCommitId: ptr.String("__BeforeCommitId__"),
+		AfterCommitId:  ptr.String("__AfterCommitId__"),
+		Location: &types.Location{
+			FilePath:            ptr.String("__FilePath__"),
+			FilePosition:        ptr.Int64(1),
+			RelativeFileVersion: types.RelativeFileVersionEnum("BEFORE"),
+		},
+		Content:            ptr.String("__Content__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6048,7 +8108,52 @@ func TestCheckResponseSnapshot_Error_InvalidReplacementContentException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{})
+	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6073,7 +8178,52 @@ func TestCheckResponseSnapshot_Error_InvalidReplacementTypeException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{})
+	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6098,7 +8248,14 @@ func TestCheckResponseSnapshot_Error_InvalidRepositoryDescriptionException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		RepositoryDescription: ptr.String("__RepositoryDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6123,7 +8280,10 @@ func TestCheckResponseSnapshot_Error_InvalidRepositoryNameException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6148,7 +8308,37 @@ func TestCheckResponseSnapshot_Error_InvalidRepositoryTriggerBranchNameException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6173,7 +8363,37 @@ func TestCheckResponseSnapshot_Error_InvalidRepositoryTriggerCustomDataException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6198,7 +8418,37 @@ func TestCheckResponseSnapshot_Error_InvalidRepositoryTriggerDestinationArnExcep
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6223,7 +8473,37 @@ func TestCheckResponseSnapshot_Error_InvalidRepositoryTriggerEventsException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6248,7 +8528,37 @@ func TestCheckResponseSnapshot_Error_InvalidRepositoryTriggerNameException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6273,7 +8583,37 @@ func TestCheckResponseSnapshot_Error_InvalidRepositoryTriggerRegionException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6298,7 +8638,10 @@ func TestCheckResponseSnapshot_Error_InvalidResourceArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6323,7 +8666,10 @@ func TestCheckResponseSnapshot_Error_InvalidRevisionIdException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.EvaluatePullRequestApprovalRules(context.Background(), &EvaluatePullRequestApprovalRulesInput{})
+	_, opErr := svc.EvaluatePullRequestApprovalRules(context.Background(), &EvaluatePullRequestApprovalRulesInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		RevisionId:    ptr.String("__RevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6348,7 +8694,11 @@ func TestCheckResponseSnapshot_Error_InvalidRuleContentSha256Exception(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateApprovalRuleTemplateContent(context.Background(), &UpdateApprovalRuleTemplateContentInput{})
+	_, opErr := svc.UpdateApprovalRuleTemplateContent(context.Background(), &UpdateApprovalRuleTemplateContentInput{
+		ApprovalRuleTemplateName:  ptr.String("__ApprovalRuleTemplateName__"),
+		NewRuleContent:            ptr.String("__NewRuleContent__"),
+		ExistingRuleContentSha256: ptr.String("__ExistingRuleContentSha256__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6373,7 +8723,11 @@ func TestCheckResponseSnapshot_Error_InvalidSortByException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRepositories(context.Background(), &ListRepositoriesInput{})
+	_, opErr := svc.ListRepositories(context.Background(), &ListRepositoriesInput{
+		NextToken: ptr.String("__NextToken__"),
+		SortBy:    types.SortByEnum("repositoryName"),
+		Order:     types.OrderEnum("ascending"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6398,7 +8752,16 @@ func TestCheckResponseSnapshot_Error_InvalidSourceCommitSpecifierException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMergeConflicts(context.Background(), &GetMergeConflictsInput{})
+	_, opErr := svc.GetMergeConflicts(context.Background(), &GetMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		MaxConflictFiles:           ptr.Int32(1),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6423,7 +8786,14 @@ func TestCheckResponseSnapshot_Error_InvalidSystemTagUsageException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		RepositoryDescription: ptr.String("__RepositoryDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6448,7 +8818,13 @@ func TestCheckResponseSnapshot_Error_InvalidTagKeysListException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	_, opErr := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6473,7 +8849,14 @@ func TestCheckResponseSnapshot_Error_InvalidTagsMapException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		RepositoryDescription: ptr.String("__RepositoryDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6498,7 +8881,12 @@ func TestCheckResponseSnapshot_Error_InvalidTargetBranchException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.MergeBranchesByFastForward(context.Background(), &MergeBranchesByFastForwardInput{})
+	_, opErr := svc.MergeBranchesByFastForward(context.Background(), &MergeBranchesByFastForwardInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		TargetBranch:               ptr.String("__TargetBranch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6523,7 +8911,23 @@ func TestCheckResponseSnapshot_Error_InvalidTargetException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6548,7 +8952,23 @@ func TestCheckResponseSnapshot_Error_InvalidTargetsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6573,7 +8993,23 @@ func TestCheckResponseSnapshot_Error_InvalidTitleException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6598,7 +9034,52 @@ func TestCheckResponseSnapshot_Error_ManualMergeRequiredException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{})
+	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6623,7 +9104,37 @@ func TestCheckResponseSnapshot_Error_MaximumBranchesExceededException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6648,7 +9159,52 @@ func TestCheckResponseSnapshot_Error_MaximumConflictResolutionEntriesExceededExc
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{})
+	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6673,7 +9229,21 @@ func TestCheckResponseSnapshot_Error_MaximumFileContentToLoadExceededException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6698,7 +9268,53 @@ func TestCheckResponseSnapshot_Error_MaximumFileEntriesExceededException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6723,7 +9339,21 @@ func TestCheckResponseSnapshot_Error_MaximumItemsToCompareExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6748,7 +9378,11 @@ func TestCheckResponseSnapshot_Error_MaximumNumberOfApprovalsExceededException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdatePullRequestApprovalState(context.Background(), &UpdatePullRequestApprovalStateInput{})
+	_, opErr := svc.UpdatePullRequestApprovalState(context.Background(), &UpdatePullRequestApprovalStateInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		RevisionId:    ptr.String("__RevisionId__"),
+		ApprovalState: types.ApprovalState("APPROVE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6773,7 +9407,23 @@ func TestCheckResponseSnapshot_Error_MaximumOpenPullRequestsExceededException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6798,7 +9448,13 @@ func TestCheckResponseSnapshot_Error_MaximumRepositoryNamesExceededException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchAssociateApprovalRuleTemplateWithRepositories(context.Background(), &BatchAssociateApprovalRuleTemplateWithRepositoriesInput{})
+	_, opErr := svc.BatchAssociateApprovalRuleTemplateWithRepositories(context.Background(), &BatchAssociateApprovalRuleTemplateWithRepositoriesInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6823,7 +9479,37 @@ func TestCheckResponseSnapshot_Error_MaximumRepositoryTriggersExceededException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6848,7 +9534,10 @@ func TestCheckResponseSnapshot_Error_MaximumRuleTemplatesAssociatedWithRepositor
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6873,7 +9562,21 @@ func TestCheckResponseSnapshot_Error_MergeOptionRequiredException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6898,7 +9601,52 @@ func TestCheckResponseSnapshot_Error_MultipleConflictResolutionEntriesException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{})
+	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6923,7 +9671,23 @@ func TestCheckResponseSnapshot_Error_MultipleRepositoriesInPullRequestException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6948,7 +9712,53 @@ func TestCheckResponseSnapshot_Error_NameLengthExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6973,7 +9783,53 @@ func TestCheckResponseSnapshot_Error_NoChangeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6998,7 +9854,11 @@ func TestCheckResponseSnapshot_Error_NumberOfRuleTemplatesExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApprovalRuleTemplate(context.Background(), &CreateApprovalRuleTemplateInput{})
+	_, opErr := svc.CreateApprovalRuleTemplate(context.Background(), &CreateApprovalRuleTemplateInput{
+		ApprovalRuleTemplateName:        ptr.String("__ApprovalRuleTemplateName__"),
+		ApprovalRuleTemplateContent:     ptr.String("__ApprovalRuleTemplateContent__"),
+		ApprovalRuleTemplateDescription: ptr.String("__ApprovalRuleTemplateDescription__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7023,7 +9883,11 @@ func TestCheckResponseSnapshot_Error_NumberOfRulesExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{})
+	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{
+		PullRequestId:       ptr.String("__PullRequestId__"),
+		ApprovalRuleName:    ptr.String("__ApprovalRuleName__"),
+		ApprovalRuleContent: ptr.String("__ApprovalRuleContent__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7048,7 +9912,14 @@ func TestCheckResponseSnapshot_Error_OperationNotAllowedException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		RepositoryDescription: ptr.String("__RepositoryDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7073,7 +9944,11 @@ func TestCheckResponseSnapshot_Error_OverrideAlreadySetException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.OverridePullRequestApprovalRules(context.Background(), &OverridePullRequestApprovalRulesInput{})
+	_, opErr := svc.OverridePullRequestApprovalRules(context.Background(), &OverridePullRequestApprovalRulesInput{
+		PullRequestId:  ptr.String("__PullRequestId__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+		OverrideStatus: types.OverrideStatus("OVERRIDE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7098,7 +9973,11 @@ func TestCheckResponseSnapshot_Error_OverrideStatusRequiredException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.OverridePullRequestApprovalRules(context.Background(), &OverridePullRequestApprovalRulesInput{})
+	_, opErr := svc.OverridePullRequestApprovalRules(context.Background(), &OverridePullRequestApprovalRulesInput{
+		PullRequestId:  ptr.String("__PullRequestId__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+		OverrideStatus: types.OverrideStatus("OVERRIDE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7123,7 +10002,53 @@ func TestCheckResponseSnapshot_Error_ParentCommitDoesNotExistException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7148,7 +10073,53 @@ func TestCheckResponseSnapshot_Error_ParentCommitIdOutdatedException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7173,7 +10144,53 @@ func TestCheckResponseSnapshot_Error_ParentCommitIdRequiredException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7198,7 +10215,15 @@ func TestCheckResponseSnapshot_Error_PathDoesNotExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetDifferences(context.Background(), &GetDifferencesInput{})
+	_, opErr := svc.GetDifferences(context.Background(), &GetDifferencesInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		BeforeCommitSpecifier: ptr.String("__BeforeCommitSpecifier__"),
+		AfterCommitSpecifier:  ptr.String("__AfterCommitSpecifier__"),
+		BeforePath:            ptr.String("__BeforePath__"),
+		AfterPath:             ptr.String("__AfterPath__"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7223,7 +10248,53 @@ func TestCheckResponseSnapshot_Error_PathRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7248,7 +10319,11 @@ func TestCheckResponseSnapshot_Error_PullRequestAlreadyClosedException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{})
+	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{
+		PullRequestId:       ptr.String("__PullRequestId__"),
+		ApprovalRuleName:    ptr.String("__ApprovalRuleName__"),
+		ApprovalRuleContent: ptr.String("__ApprovalRuleContent__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7273,7 +10348,11 @@ func TestCheckResponseSnapshot_Error_PullRequestApprovalRulesNotSatisfiedExcepti
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.MergePullRequestByFastForward(context.Background(), &MergePullRequestByFastForwardInput{})
+	_, opErr := svc.MergePullRequestByFastForward(context.Background(), &MergePullRequestByFastForwardInput{
+		PullRequestId:  ptr.String("__PullRequestId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		SourceCommitId: ptr.String("__SourceCommitId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7298,7 +10377,11 @@ func TestCheckResponseSnapshot_Error_PullRequestCannotBeApprovedByAuthorExceptio
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdatePullRequestApprovalState(context.Background(), &UpdatePullRequestApprovalStateInput{})
+	_, opErr := svc.UpdatePullRequestApprovalState(context.Background(), &UpdatePullRequestApprovalStateInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		RevisionId:    ptr.String("__RevisionId__"),
+		ApprovalState: types.ApprovalState("APPROVE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7323,7 +10406,11 @@ func TestCheckResponseSnapshot_Error_PullRequestDoesNotExistException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{})
+	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{
+		PullRequestId:       ptr.String("__PullRequestId__"),
+		ApprovalRuleName:    ptr.String("__ApprovalRuleName__"),
+		ApprovalRuleContent: ptr.String("__ApprovalRuleContent__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7348,7 +10435,11 @@ func TestCheckResponseSnapshot_Error_PullRequestIdRequiredException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{})
+	_, opErr := svc.CreatePullRequestApprovalRule(context.Background(), &CreatePullRequestApprovalRuleInput{
+		PullRequestId:       ptr.String("__PullRequestId__"),
+		ApprovalRuleName:    ptr.String("__ApprovalRuleName__"),
+		ApprovalRuleContent: ptr.String("__ApprovalRuleContent__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7373,7 +10464,10 @@ func TestCheckResponseSnapshot_Error_PullRequestStatusRequiredException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdatePullRequestStatus(context.Background(), &UpdatePullRequestStatusInput{})
+	_, opErr := svc.UpdatePullRequestStatus(context.Background(), &UpdatePullRequestStatusInput{
+		PullRequestId:     ptr.String("__PullRequestId__"),
+		PullRequestStatus: types.PullRequestStatusEnum("OPEN"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7398,7 +10492,53 @@ func TestCheckResponseSnapshot_Error_PutFileEntryConflictException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7423,7 +10563,10 @@ func TestCheckResponseSnapshot_Error_ReactionLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutCommentReaction(context.Background(), &PutCommentReactionInput{})
+	_, opErr := svc.PutCommentReaction(context.Background(), &PutCommentReactionInput{
+		CommentId:     ptr.String("__CommentId__"),
+		ReactionValue: ptr.String("__ReactionValue__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7448,7 +10591,10 @@ func TestCheckResponseSnapshot_Error_ReactionValueRequiredException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutCommentReaction(context.Background(), &PutCommentReactionInput{})
+	_, opErr := svc.PutCommentReaction(context.Background(), &PutCommentReactionInput{
+		CommentId:     ptr.String("__CommentId__"),
+		ReactionValue: ptr.String("__ReactionValue__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7473,7 +10619,23 @@ func TestCheckResponseSnapshot_Error_ReferenceDoesNotExistException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7498,7 +10660,23 @@ func TestCheckResponseSnapshot_Error_ReferenceNameRequiredException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7523,7 +10701,23 @@ func TestCheckResponseSnapshot_Error_ReferenceTypeNotSupportedException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7548,7 +10742,52 @@ func TestCheckResponseSnapshot_Error_ReplacementContentRequiredException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{})
+	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7573,7 +10812,52 @@ func TestCheckResponseSnapshot_Error_ReplacementTypeRequiredException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{})
+	_, opErr := svc.CreateUnreferencedMergeCommit(context.Background(), &CreateUnreferencedMergeCommitInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		AuthorName:                 ptr.String("__AuthorName__"),
+		Email:                      ptr.String("__Email__"),
+		CommitMessage:              ptr.String("__CommitMessage__"),
+		KeepEmptyFolders:           true,
+		ConflictResolution: &types.ConflictResolution{
+			ReplaceContents: []types.ReplaceContentEntry{
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath:        ptr.String("__FilePath__"),
+					ReplacementType: types.ReplacementTypeEnum("KEEP_BASE"),
+					Content:         []byte("blob"),
+					FileMode:        types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+			DeleteFiles: []types.DeleteFileEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+				},
+			},
+			SetFileModes: []types.SetFileModeEntry{
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+				{
+					FilePath: ptr.String("__FilePath__"),
+					FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7598,7 +10882,10 @@ func TestCheckResponseSnapshot_Error_RepositoryDoesNotExistException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7623,7 +10910,14 @@ func TestCheckResponseSnapshot_Error_RepositoryLimitExceededException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		RepositoryDescription: ptr.String("__RepositoryDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7648,7 +10942,14 @@ func TestCheckResponseSnapshot_Error_RepositoryNameExistsException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		RepositoryDescription: ptr.String("__RepositoryDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7673,7 +10974,10 @@ func TestCheckResponseSnapshot_Error_RepositoryNameRequiredException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{})
+	_, opErr := svc.AssociateApprovalRuleTemplateWithRepository(context.Background(), &AssociateApprovalRuleTemplateWithRepositoryInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryName:           ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7698,7 +11002,13 @@ func TestCheckResponseSnapshot_Error_RepositoryNamesRequiredException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchAssociateApprovalRuleTemplateWithRepositories(context.Background(), &BatchAssociateApprovalRuleTemplateWithRepositoriesInput{})
+	_, opErr := svc.BatchAssociateApprovalRuleTemplateWithRepositories(context.Background(), &BatchAssociateApprovalRuleTemplateWithRepositoriesInput{
+		ApprovalRuleTemplateName: ptr.String("__ApprovalRuleTemplateName__"),
+		RepositoryNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7723,7 +11033,14 @@ func TestCheckResponseSnapshot_Error_RepositoryNotAssociatedWithPullRequestExcep
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetCommentsForPullRequest(context.Background(), &GetCommentsForPullRequestInput{})
+	_, opErr := svc.GetCommentsForPullRequest(context.Background(), &GetCommentsForPullRequestInput{
+		PullRequestId:  ptr.String("__PullRequestId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BeforeCommitId: ptr.String("__BeforeCommitId__"),
+		AfterCommitId:  ptr.String("__AfterCommitId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7748,7 +11065,37 @@ func TestCheckResponseSnapshot_Error_RepositoryTriggerBranchNameListRequiredExce
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7773,7 +11120,37 @@ func TestCheckResponseSnapshot_Error_RepositoryTriggerDestinationArnRequiredExce
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7798,7 +11175,37 @@ func TestCheckResponseSnapshot_Error_RepositoryTriggerEventsListRequiredExceptio
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7823,7 +11230,37 @@ func TestCheckResponseSnapshot_Error_RepositoryTriggerNameRequiredException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7848,7 +11285,37 @@ func TestCheckResponseSnapshot_Error_RepositoryTriggersListRequiredException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{})
+	_, opErr := svc.PutRepositoryTriggers(context.Background(), &PutRepositoryTriggersInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Triggers: []types.RepositoryTrigger{
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+			{
+				Name:           ptr.String("__Name__"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+				CustomData:     ptr.String("__CustomData__"),
+				Branches: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Events: []types.RepositoryTriggerEventEnum{
+					types.RepositoryTriggerEventEnum("all"),
+					types.RepositoryTriggerEventEnum("all"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7873,7 +11340,10 @@ func TestCheckResponseSnapshot_Error_ResourceArnRequiredException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7898,7 +11368,53 @@ func TestCheckResponseSnapshot_Error_RestrictedSourceFileException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7923,7 +11439,10 @@ func TestCheckResponseSnapshot_Error_RevisionIdRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.EvaluatePullRequestApprovalRules(context.Background(), &EvaluatePullRequestApprovalRulesInput{})
+	_, opErr := svc.EvaluatePullRequestApprovalRules(context.Background(), &EvaluatePullRequestApprovalRulesInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		RevisionId:    ptr.String("__RevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7948,7 +11467,10 @@ func TestCheckResponseSnapshot_Error_RevisionNotCurrentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.EvaluatePullRequestApprovalRules(context.Background(), &EvaluatePullRequestApprovalRulesInput{})
+	_, opErr := svc.EvaluatePullRequestApprovalRules(context.Background(), &EvaluatePullRequestApprovalRulesInput{
+		PullRequestId: ptr.String("__PullRequestId__"),
+		RevisionId:    ptr.String("__RevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7973,7 +11495,17 @@ func TestCheckResponseSnapshot_Error_SameFileContentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutFile(context.Background(), &PutFileInput{})
+	_, opErr := svc.PutFile(context.Background(), &PutFileInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		BranchName:     ptr.String("__BranchName__"),
+		FileContent:    []byte("blob"),
+		FilePath:       ptr.String("__FilePath__"),
+		FileMode:       types.FileModeTypeEnum("EXECUTABLE"),
+		ParentCommitId: ptr.String("__ParentCommitId__"),
+		CommitMessage:  ptr.String("__CommitMessage__"),
+		Name:           ptr.String("__Name__"),
+		Email:          ptr.String("__Email__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7998,7 +11530,53 @@ func TestCheckResponseSnapshot_Error_SamePathRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8023,7 +11601,23 @@ func TestCheckResponseSnapshot_Error_SourceAndDestinationAreSameException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8048,7 +11642,53 @@ func TestCheckResponseSnapshot_Error_SourceFileOrContentRequiredException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{})
+	_, opErr := svc.CreateCommit(context.Background(), &CreateCommitInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		BranchName:       ptr.String("__BranchName__"),
+		ParentCommitId:   ptr.String("__ParentCommitId__"),
+		AuthorName:       ptr.String("__AuthorName__"),
+		Email:            ptr.String("__Email__"),
+		CommitMessage:    ptr.String("__CommitMessage__"),
+		KeepEmptyFolders: true,
+		PutFiles: []types.PutFileEntry{
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+			{
+				FilePath:    ptr.String("__FilePath__"),
+				FileMode:    types.FileModeTypeEnum("EXECUTABLE"),
+				FileContent: []byte("blob"),
+				SourceFile: &types.SourceFileSpecifier{
+					FilePath: ptr.String("__FilePath__"),
+					IsMove:   true,
+				},
+			},
+		},
+		DeleteFiles: []types.DeleteFileEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+			},
+		},
+		SetFileModes: []types.SetFileModeEntry{
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+			{
+				FilePath: ptr.String("__FilePath__"),
+				FileMode: types.FileModeTypeEnum("EXECUTABLE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8073,7 +11713,13 @@ func TestCheckResponseSnapshot_Error_TagKeysListRequiredException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	_, opErr := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8098,7 +11744,14 @@ func TestCheckResponseSnapshot_Error_TagPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		RepositoryDescription: ptr.String("__RepositoryDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8123,7 +11776,12 @@ func TestCheckResponseSnapshot_Error_TagsMapRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8148,7 +11806,23 @@ func TestCheckResponseSnapshot_Error_TargetRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8173,7 +11847,23 @@ func TestCheckResponseSnapshot_Error_TargetsRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8198,7 +11888,11 @@ func TestCheckResponseSnapshot_Error_TipOfSourceReferenceIsDifferentException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.MergePullRequestByFastForward(context.Background(), &MergePullRequestByFastForwardInput{})
+	_, opErr := svc.MergePullRequestByFastForward(context.Background(), &MergePullRequestByFastForwardInput{
+		PullRequestId:  ptr.String("__PullRequestId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		SourceCommitId: ptr.String("__SourceCommitId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8223,7 +11917,21 @@ func TestCheckResponseSnapshot_Error_TipsDivergenceExceededException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{})
+	_, opErr := svc.BatchDescribeMergeConflicts(context.Background(), &BatchDescribeMergeConflictsInput{
+		RepositoryName:             ptr.String("__RepositoryName__"),
+		DestinationCommitSpecifier: ptr.String("__DestinationCommitSpecifier__"),
+		SourceCommitSpecifier:      ptr.String("__SourceCommitSpecifier__"),
+		MergeOption:                types.MergeOptionTypeEnum("FAST_FORWARD_MERGE"),
+		MaxMergeHunks:              ptr.Int32(1),
+		MaxConflictFiles:           ptr.Int32(1),
+		FilePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConflictDetailLevel:        types.ConflictDetailLevelTypeEnum("FILE_LEVEL"),
+		ConflictResolutionStrategy: types.ConflictResolutionStrategyTypeEnum("NONE"),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8248,7 +11956,23 @@ func TestCheckResponseSnapshot_Error_TitleRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{})
+	_, opErr := svc.CreatePullRequest(context.Background(), &CreatePullRequestInput{
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Targets: []types.Target{
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+			{
+				RepositoryName:       ptr.String("__RepositoryName__"),
+				SourceReference:      ptr.String("__SourceReference__"),
+				DestinationReference: ptr.String("__DestinationReference__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8273,7 +11997,14 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName:        ptr.String("__RepositoryName__"),
+		RepositoryDescription: ptr.String("__RepositoryDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

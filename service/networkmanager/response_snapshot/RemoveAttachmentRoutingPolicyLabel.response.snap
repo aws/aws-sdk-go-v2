@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AttachmentId":"__AttachmentId__","CoreNetworkId":"__CoreNetworkId__","RoutingPolicyLabel":"__RoutingPolicyLabel__"}

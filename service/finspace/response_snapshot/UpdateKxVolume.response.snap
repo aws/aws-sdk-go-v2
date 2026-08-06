@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"attachedClusters":[{"clusterName":"__ClusterName__","clusterStatus":"PENDING","clusterType":"HDB"},{"clusterName":"__ClusterName__","clusterStatus":"PENDING","clusterType":"HDB"}],"availabilityZoneIds":["__Member__","__Member__"],"azMode":"SINGLE","createdTimestamp":946684800,"description":"__Description__","environmentId":"__EnvironmentId__","lastModifiedTimestamp":946684800,"nas1Configuration":{"size":1,"type":"SSD_1000"},"status":"CREATING","statusReason":"__StatusReason__","volumeArn":"__VolumeArn__","volumeName":"__VolumeName__","volumeType":"NAS_1"}

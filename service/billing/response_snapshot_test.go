@@ -119,7 +119,13 @@ func TestCheckResponseSnapshot_AssociateSourceViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{})
+	got, err := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
+		Arn: ptr.String("__Arn__"),
+		SourceViews: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +147,52 @@ func TestCheckResponseSnapshot_CreateBillingView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBillingView(context.Background(), &CreateBillingViewInput{})
+	got, err := svc.CreateBillingView(context.Background(), &CreateBillingViewInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SourceViews: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DataFilterExpression: &types.Expression{
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("LINKED_ACCOUNT"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			TimeRange: &types.TimeRange{
+				BeginDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDateInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +213,10 @@ func TestCheckResponseSnapshot_DeleteBillingView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBillingView(context.Background(), &DeleteBillingViewInput{})
+	got, err := svc.DeleteBillingView(context.Background(), &DeleteBillingViewInput{
+		Arn:   ptr.String("__Arn__"),
+		Force: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +237,13 @@ func TestCheckResponseSnapshot_DisassociateSourceViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateSourceViews(context.Background(), &DisassociateSourceViewsInput{})
+	got, err := svc.DisassociateSourceViews(context.Background(), &DisassociateSourceViewsInput{
+		Arn: ptr.String("__Arn__"),
+		SourceViews: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -228,7 +288,30 @@ func TestCheckResponseSnapshot_GetBillingPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBillingPreferences(context.Background(), &GetBillingPreferencesInput{})
+	got, err := svc.GetBillingPreferences(context.Background(), &GetBillingPreferencesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Features: []types.BillingFeature{
+			types.BillingFeature("RI_SHARING"),
+			types.BillingFeature("RI_SHARING"),
+		},
+		Filters: []types.BillingFeatureFilter{
+			{
+				Name: types.BillingFeatureFilterName("PREFERENCE_KEY"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.BillingFeatureFilterName("PREFERENCE_KEY"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +378,9 @@ func TestCheckResponseSnapshot_GetBillingView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBillingView(context.Background(), &GetBillingViewInput{})
+	got, err := svc.GetBillingView(context.Background(), &GetBillingViewInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -347,7 +432,14 @@ func TestCheckResponseSnapshot_GetCreditAllocationHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCreditAllocationHistory(context.Background(), &GetCreditAllocationHistoryInput{})
+	got, err := svc.GetCreditAllocationHistory(context.Background(), &GetCreditAllocationHistoryInput{
+		AccountId:  ptr.String("__AccountId__"),
+		CreditId:   ptr.Int64(1),
+		StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -449,7 +541,12 @@ func TestCheckResponseSnapshot_GetCredits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCredits(context.Background(), &GetCreditsInput{})
+	got, err := svc.GetCredits(context.Background(), &GetCreditsInput{
+		AccountId:        ptr.String("__AccountId__"),
+		StartDate:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PayerAccountFlag: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -516,7 +613,9 @@ func TestCheckResponseSnapshot_GetEnterpriseSupportChargeSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnterpriseSupportChargeSummary(context.Background(), &GetEnterpriseSupportChargeSummaryInput{})
+	got, err := svc.GetEnterpriseSupportChargeSummary(context.Background(), &GetEnterpriseSupportChargeSummaryInput{
+		BillingMonth: ptr.String("__BillingMonth__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -655,7 +754,9 @@ func TestCheckResponseSnapshot_GetEnterpriseSupportContractDetails(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnterpriseSupportContractDetails(context.Background(), &GetEnterpriseSupportContractDetailsInput{})
+	got, err := svc.GetEnterpriseSupportContractDetails(context.Background(), &GetEnterpriseSupportContractDetailsInput{
+		BillingMonth: ptr.String("__BillingMonth__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -677,7 +778,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -730,7 +833,34 @@ func TestCheckResponseSnapshot_ListBillingViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBillingViews(context.Background(), &ListBillingViewsInput{})
+	got, err := svc.ListBillingViews(context.Background(), &ListBillingViewsInput{
+		ActiveTimeRange: &types.ActiveTimeRange{
+			ActiveAfterInclusive:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ActiveBeforeInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BillingViewTypes: []types.BillingViewType{
+			types.BillingViewType("PRIMARY"),
+			types.BillingViewType("PRIMARY"),
+		},
+		Names: []types.StringSearch{
+			{
+				SearchOption: types.SearchOption("STARTS_WITH"),
+				SearchValue:  ptr.String("__SearchValue__"),
+			},
+			{
+				SearchOption: types.SearchOption("STARTS_WITH"),
+				SearchValue:  ptr.String("__SearchValue__"),
+			},
+		},
+		OwnerAccountId:  ptr.String("__OwnerAccountId__"),
+		SourceAccountId: ptr.String("__SourceAccountId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -835,7 +965,12 @@ func TestCheckResponseSnapshot_ListEnterpriseSupportLinkedAccountCharges(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnterpriseSupportLinkedAccountCharges(context.Background(), &ListEnterpriseSupportLinkedAccountChargesInput{})
+	got, err := svc.ListEnterpriseSupportLinkedAccountCharges(context.Background(), &ListEnterpriseSupportLinkedAccountChargesInput{
+		BillingMonth: ptr.String("__BillingMonth__"),
+		AccountId:    ptr.String("__AccountId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -860,7 +995,11 @@ func TestCheckResponseSnapshot_ListSourceViewsForBillingView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSourceViewsForBillingView(context.Background(), &ListSourceViewsForBillingViewInput{})
+	got, err := svc.ListSourceViewsForBillingView(context.Background(), &ListSourceViewsForBillingViewInput{
+		Arn:        ptr.String("__Arn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -890,7 +1029,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -909,7 +1050,9 @@ func TestCheckResponseSnapshot_RedeemCredits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RedeemCredits(context.Background(), &RedeemCreditsInput{})
+	got, err := svc.RedeemCredits(context.Background(), &RedeemCreditsInput{
+		PromoCode: ptr.String("__PromoCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -928,7 +1071,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -947,7 +1102,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ResourceTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -966,7 +1127,19 @@ func TestCheckResponseSnapshot_UpdateBillingPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBillingPreferences(context.Background(), &UpdateBillingPreferencesInput{})
+	got, err := svc.UpdateBillingPreferences(context.Background(), &UpdateBillingPreferencesInput{
+		Feature: types.BillingFeature("RI_SHARING"),
+		BillingPreferencesPerKey: []types.BillingPreferenceForKey{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: types.PreferenceValue("ENABLED"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: types.PreferenceValue("ENABLED"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -988,7 +1161,38 @@ func TestCheckResponseSnapshot_UpdateBillingView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBillingView(context.Background(), &UpdateBillingViewInput{})
+	got, err := svc.UpdateBillingView(context.Background(), &UpdateBillingViewInput{
+		Arn:         ptr.String("__Arn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DataFilterExpression: &types.Expression{
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("LINKED_ACCOUNT"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Tags: &types.TagValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			TimeRange: &types.TimeRange{
+				BeginDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDateInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1009,7 +1213,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{})
+	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
+		Arn: ptr.String("__Arn__"),
+		SourceViews: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1034,7 +1244,13 @@ func TestCheckResponseSnapshot_Error_BillingViewHealthStatusException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{})
+	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
+		Arn: ptr.String("__Arn__"),
+		SourceViews: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1061,7 +1277,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{})
+	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
+		Arn: ptr.String("__Arn__"),
+		SourceViews: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1086,7 +1308,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{})
+	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
+		Arn: ptr.String("__Arn__"),
+		SourceViews: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1113,7 +1341,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{})
+	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
+		Arn: ptr.String("__Arn__"),
+		SourceViews: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1142,7 +1376,13 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{})
+	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
+		Arn: ptr.String("__Arn__"),
+		SourceViews: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1167,7 +1407,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{})
+	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
+		Arn: ptr.String("__Arn__"),
+		SourceViews: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1203,7 +1449,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{})
+	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
+		Arn: ptr.String("__Arn__"),
+		SourceViews: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

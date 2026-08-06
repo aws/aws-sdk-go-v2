@@ -120,7 +120,10 @@ func TestCheckResponseSnapshot_AssociateAttributeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAttributeGroup(context.Background(), &AssociateAttributeGroupInput{})
+	got, err := svc.AssociateAttributeGroup(context.Background(), &AssociateAttributeGroupInput{
+		Application:    ptr.String("__Application__"),
+		AttributeGroup: ptr.String("__AttributeGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -146,7 +149,15 @@ func TestCheckResponseSnapshot_AssociateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateResource(context.Background(), &AssociateResourceInput{})
+	got, err := svc.AssociateResource(context.Background(), &AssociateResourceInput{
+		Application:  ptr.String("__Application__"),
+		ResourceType: types.ResourceType("CFN_STACK"),
+		Resource:     ptr.String("__Resource__"),
+		Options: []types.AssociationOption{
+			types.AssociationOption("APPLY_APPLICATION_TAG"),
+			types.AssociationOption("APPLY_APPLICATION_TAG"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +191,14 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +229,15 @@ func TestCheckResponseSnapshot_CreateAttributeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAttributeGroup(context.Background(), &CreateAttributeGroupInput{})
+	got, err := svc.CreateAttributeGroup(context.Background(), &CreateAttributeGroupInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Attributes:  ptr.String("__Attributes__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -239,7 +265,9 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		Application: ptr.String("__Application__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -268,7 +296,9 @@ func TestCheckResponseSnapshot_DeleteAttributeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAttributeGroup(context.Background(), &DeleteAttributeGroupInput{})
+	got, err := svc.DeleteAttributeGroup(context.Background(), &DeleteAttributeGroupInput{
+		AttributeGroup: ptr.String("__AttributeGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -290,7 +320,10 @@ func TestCheckResponseSnapshot_DisassociateAttributeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateAttributeGroup(context.Background(), &DisassociateAttributeGroupInput{})
+	got, err := svc.DisassociateAttributeGroup(context.Background(), &DisassociateAttributeGroupInput{
+		Application:    ptr.String("__Application__"),
+		AttributeGroup: ptr.String("__AttributeGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -312,7 +345,11 @@ func TestCheckResponseSnapshot_DisassociateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateResource(context.Background(), &DisassociateResourceInput{})
+	got, err := svc.DisassociateResource(context.Background(), &DisassociateResourceInput{
+		Application:  ptr.String("__Application__"),
+		ResourceType: types.ResourceType("CFN_STACK"),
+		Resource:     ptr.String("__Resource__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -357,7 +394,9 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{})
+	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{
+		Application: ptr.String("__Application__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -412,7 +451,17 @@ func TestCheckResponseSnapshot_GetAssociatedResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssociatedResource(context.Background(), &GetAssociatedResourceInput{})
+	got, err := svc.GetAssociatedResource(context.Background(), &GetAssociatedResourceInput{
+		Application:  ptr.String("__Application__"),
+		ResourceType: types.ResourceType("CFN_STACK"),
+		Resource:     ptr.String("__Resource__"),
+		NextToken:    ptr.String("__NextToken__"),
+		ResourceTagStatus: []types.ResourceItemStatus{
+			types.ResourceItemStatus("SUCCESS"),
+			types.ResourceItemStatus("SUCCESS"),
+		},
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -443,7 +492,9 @@ func TestCheckResponseSnapshot_GetAttributeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAttributeGroup(context.Background(), &GetAttributeGroupInput{})
+	got, err := svc.GetAttributeGroup(context.Background(), &GetAttributeGroupInput{
+		AttributeGroup: ptr.String("__AttributeGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -507,7 +558,10 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -532,7 +586,11 @@ func TestCheckResponseSnapshot_ListAssociatedAttributeGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociatedAttributeGroups(context.Background(), &ListAssociatedAttributeGroupsInput{})
+	got, err := svc.ListAssociatedAttributeGroups(context.Background(), &ListAssociatedAttributeGroupsInput{
+		Application: ptr.String("__Application__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -579,7 +637,11 @@ func TestCheckResponseSnapshot_ListAssociatedResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociatedResources(context.Background(), &ListAssociatedResourcesInput{})
+	got, err := svc.ListAssociatedResources(context.Background(), &ListAssociatedResourcesInput{
+		Application: ptr.String("__Application__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -620,7 +682,10 @@ func TestCheckResponseSnapshot_ListAttributeGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAttributeGroups(context.Background(), &ListAttributeGroupsInput{})
+	got, err := svc.ListAttributeGroups(context.Background(), &ListAttributeGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -655,7 +720,11 @@ func TestCheckResponseSnapshot_ListAttributeGroupsForApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAttributeGroupsForApplication(context.Background(), &ListAttributeGroupsForApplicationInput{})
+	got, err := svc.ListAttributeGroupsForApplication(context.Background(), &ListAttributeGroupsForApplicationInput{
+		Application: ptr.String("__Application__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -678,7 +747,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -697,7 +768,13 @@ func TestCheckResponseSnapshot_PutConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfiguration(context.Background(), &PutConfigurationInput{})
+	got, err := svc.PutConfiguration(context.Background(), &PutConfigurationInput{
+		Configuration: &types.AppRegistryConfiguration{
+			TagQueryConfiguration: &types.TagQueryConfiguration{
+				TagKey: ptr.String("__TagKey__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -720,7 +797,10 @@ func TestCheckResponseSnapshot_SyncResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SyncResource(context.Background(), &SyncResourceInput{})
+	got, err := svc.SyncResource(context.Background(), &SyncResourceInput{
+		ResourceType: types.ResourceType("CFN_STACK"),
+		Resource:     ptr.String("__Resource__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -739,7 +819,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -758,7 +843,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -792,7 +883,11 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		Application: ptr.String("__Application__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -823,7 +918,12 @@ func TestCheckResponseSnapshot_UpdateAttributeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAttributeGroup(context.Background(), &UpdateAttributeGroupInput{})
+	got, err := svc.UpdateAttributeGroup(context.Background(), &UpdateAttributeGroupInput{
+		AttributeGroup: ptr.String("__AttributeGroup__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		Attributes:     ptr.String("__Attributes__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -844,7 +944,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAttributeGroup(context.Background(), &AssociateAttributeGroupInput{})
+	_, opErr := svc.AssociateAttributeGroup(context.Background(), &AssociateAttributeGroupInput{
+		Application:    ptr.String("__Application__"),
+		AttributeGroup: ptr.String("__AttributeGroup__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -869,7 +972,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAttributeGroup(context.Background(), &AssociateAttributeGroupInput{})
+	_, opErr := svc.AssociateAttributeGroup(context.Background(), &AssociateAttributeGroupInput{
+		Application:    ptr.String("__Application__"),
+		AttributeGroup: ptr.String("__AttributeGroup__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -894,7 +1000,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAttributeGroup(context.Background(), &AssociateAttributeGroupInput{})
+	_, opErr := svc.AssociateAttributeGroup(context.Background(), &AssociateAttributeGroupInput{
+		Application:    ptr.String("__Application__"),
+		AttributeGroup: ptr.String("__AttributeGroup__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -919,7 +1028,10 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAttributeGroup(context.Background(), &AssociateAttributeGroupInput{})
+	_, opErr := svc.AssociateAttributeGroup(context.Background(), &AssociateAttributeGroupInput{
+		Application:    ptr.String("__Application__"),
+		AttributeGroup: ptr.String("__AttributeGroup__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -945,7 +1057,15 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResource(context.Background(), &AssociateResourceInput{})
+	_, opErr := svc.AssociateResource(context.Background(), &AssociateResourceInput{
+		Application:  ptr.String("__Application__"),
+		ResourceType: types.ResourceType("CFN_STACK"),
+		Resource:     ptr.String("__Resource__"),
+		Options: []types.AssociationOption{
+			types.AssociationOption("APPLY_APPLICATION_TAG"),
+			types.AssociationOption("APPLY_APPLICATION_TAG"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -970,7 +1090,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAttributeGroup(context.Background(), &AssociateAttributeGroupInput{})
+	_, opErr := svc.AssociateAttributeGroup(context.Background(), &AssociateAttributeGroupInput{
+		Application:    ptr.String("__Application__"),
+		AttributeGroup: ptr.String("__AttributeGroup__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

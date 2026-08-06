@@ -117,7 +117,22 @@ func TestCheckResponseSnapshot_AddTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTags(context.Background(), &AddTagsInput{})
+	got, err := svc.AddTags(context.Background(), &AddTagsInput{
+		LoadBalancerNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +156,13 @@ func TestCheckResponseSnapshot_ApplySecurityGroupsToLoadBalancer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ApplySecurityGroupsToLoadBalancer(context.Background(), &ApplySecurityGroupsToLoadBalancerInput{})
+	got, err := svc.ApplySecurityGroupsToLoadBalancer(context.Background(), &ApplySecurityGroupsToLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,7 +186,13 @@ func TestCheckResponseSnapshot_AttachLoadBalancerToSubnets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachLoadBalancerToSubnets(context.Background(), &AttachLoadBalancerToSubnetsInput{})
+	got, err := svc.AttachLoadBalancerToSubnets(context.Background(), &AttachLoadBalancerToSubnetsInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -192,7 +219,16 @@ func TestCheckResponseSnapshot_ConfigureHealthCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfigureHealthCheck(context.Background(), &ConfigureHealthCheckInput{})
+	got, err := svc.ConfigureHealthCheck(context.Background(), &ConfigureHealthCheckInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		HealthCheck: &types.HealthCheck{
+			Target:             ptr.String("__Target__"),
+			Interval:           ptr.Int32(1),
+			Timeout:            ptr.Int32(1),
+			UnhealthyThreshold: ptr.Int32(1),
+			HealthyThreshold:   ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +247,11 @@ func TestCheckResponseSnapshot_CreateAppCookieStickinessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppCookieStickinessPolicy(context.Background(), &CreateAppCookieStickinessPolicyInput{})
+	got, err := svc.CreateAppCookieStickinessPolicy(context.Background(), &CreateAppCookieStickinessPolicyInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		PolicyName:       ptr.String("__PolicyName__"),
+		CookieName:       ptr.String("__CookieName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -230,7 +270,11 @@ func TestCheckResponseSnapshot_CreateLBCookieStickinessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLBCookieStickinessPolicy(context.Background(), &CreateLBCookieStickinessPolicyInput{})
+	got, err := svc.CreateLBCookieStickinessPolicy(context.Background(), &CreateLBCookieStickinessPolicyInput{
+		LoadBalancerName:       ptr.String("__LoadBalancerName__"),
+		PolicyName:             ptr.String("__PolicyName__"),
+		CookieExpirationPeriod: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -251,7 +295,48 @@ func TestCheckResponseSnapshot_CreateLoadBalancer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	got, err := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Listeners: []types.Listener{
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+		},
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: ptr.String("__Scheme__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +355,25 @@ func TestCheckResponseSnapshot_CreateLoadBalancerListeners(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLoadBalancerListeners(context.Background(), &CreateLoadBalancerListenersInput{})
+	got, err := svc.CreateLoadBalancerListeners(context.Background(), &CreateLoadBalancerListenersInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Listeners: []types.Listener{
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -289,7 +392,21 @@ func TestCheckResponseSnapshot_CreateLoadBalancerPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLoadBalancerPolicy(context.Background(), &CreateLoadBalancerPolicyInput{})
+	got, err := svc.CreateLoadBalancerPolicy(context.Background(), &CreateLoadBalancerPolicyInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		PolicyName:       ptr.String("__PolicyName__"),
+		PolicyTypeName:   ptr.String("__PolicyTypeName__"),
+		PolicyAttributes: []types.PolicyAttribute{
+			{
+				AttributeName:  ptr.String("__AttributeName__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+			{
+				AttributeName:  ptr.String("__AttributeName__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -308,7 +425,9 @@ func TestCheckResponseSnapshot_DeleteLoadBalancer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLoadBalancer(context.Background(), &DeleteLoadBalancerInput{})
+	got, err := svc.DeleteLoadBalancer(context.Background(), &DeleteLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -327,7 +446,13 @@ func TestCheckResponseSnapshot_DeleteLoadBalancerListeners(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLoadBalancerListeners(context.Background(), &DeleteLoadBalancerListenersInput{})
+	got, err := svc.DeleteLoadBalancerListeners(context.Background(), &DeleteLoadBalancerListenersInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		LoadBalancerPorts: []int32{
+			1,
+			1,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +471,10 @@ func TestCheckResponseSnapshot_DeleteLoadBalancerPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLoadBalancerPolicy(context.Background(), &DeleteLoadBalancerPolicyInput{})
+	got, err := svc.DeleteLoadBalancerPolicy(context.Background(), &DeleteLoadBalancerPolicyInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		PolicyName:       ptr.String("__PolicyName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -374,7 +502,17 @@ func TestCheckResponseSnapshot_DeregisterInstancesFromLoadBalancer(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterInstancesFromLoadBalancer(context.Background(), &DeregisterInstancesFromLoadBalancerInput{})
+	got, err := svc.DeregisterInstancesFromLoadBalancer(context.Background(), &DeregisterInstancesFromLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Instances: []types.Instance{
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+			},
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -405,7 +543,10 @@ func TestCheckResponseSnapshot_DescribeAccountLimits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccountLimits(context.Background(), &DescribeAccountLimitsInput{})
+	got, err := svc.DescribeAccountLimits(context.Background(), &DescribeAccountLimitsInput{
+		Marker:   ptr.String("__Marker__"),
+		PageSize: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -439,7 +580,17 @@ func TestCheckResponseSnapshot_DescribeInstanceHealth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInstanceHealth(context.Background(), &DescribeInstanceHealthInput{})
+	got, err := svc.DescribeInstanceHealth(context.Background(), &DescribeInstanceHealthInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Instances: []types.Instance{
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+			},
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -487,7 +638,9 @@ func TestCheckResponseSnapshot_DescribeLoadBalancerAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLoadBalancerAttributes(context.Background(), &DescribeLoadBalancerAttributesInput{})
+	got, err := svc.DescribeLoadBalancerAttributes(context.Background(), &DescribeLoadBalancerAttributesInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -537,7 +690,13 @@ func TestCheckResponseSnapshot_DescribeLoadBalancerPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLoadBalancerPolicies(context.Background(), &DescribeLoadBalancerPoliciesInput{})
+	got, err := svc.DescribeLoadBalancerPolicies(context.Background(), &DescribeLoadBalancerPoliciesInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		PolicyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -599,7 +758,12 @@ func TestCheckResponseSnapshot_DescribeLoadBalancerPolicyTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLoadBalancerPolicyTypes(context.Background(), &DescribeLoadBalancerPolicyTypesInput{})
+	got, err := svc.DescribeLoadBalancerPolicyTypes(context.Background(), &DescribeLoadBalancerPolicyTypesInput{
+		PolicyTypeNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -842,7 +1006,14 @@ func TestCheckResponseSnapshot_DescribeLoadBalancers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLoadBalancers(context.Background(), &DescribeLoadBalancersInput{})
+	got, err := svc.DescribeLoadBalancers(context.Background(), &DescribeLoadBalancersInput{
+		LoadBalancerNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker:   ptr.String("__Marker__"),
+		PageSize: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -890,7 +1061,12 @@ func TestCheckResponseSnapshot_DescribeTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{})
+	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{
+		LoadBalancerNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -914,7 +1090,13 @@ func TestCheckResponseSnapshot_DetachLoadBalancerFromSubnets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachLoadBalancerFromSubnets(context.Background(), &DetachLoadBalancerFromSubnetsInput{})
+	got, err := svc.DetachLoadBalancerFromSubnets(context.Background(), &DetachLoadBalancerFromSubnetsInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -938,7 +1120,13 @@ func TestCheckResponseSnapshot_DisableAvailabilityZonesForLoadBalancer(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableAvailabilityZonesForLoadBalancer(context.Background(), &DisableAvailabilityZonesForLoadBalancerInput{})
+	got, err := svc.DisableAvailabilityZonesForLoadBalancer(context.Background(), &DisableAvailabilityZonesForLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -962,7 +1150,13 @@ func TestCheckResponseSnapshot_EnableAvailabilityZonesForLoadBalancer(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableAvailabilityZonesForLoadBalancer(context.Background(), &EnableAvailabilityZonesForLoadBalancerInput{})
+	got, err := svc.EnableAvailabilityZonesForLoadBalancer(context.Background(), &EnableAvailabilityZonesForLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1011,7 +1205,37 @@ func TestCheckResponseSnapshot_ModifyLoadBalancerAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyLoadBalancerAttributes(context.Background(), &ModifyLoadBalancerAttributesInput{})
+	got, err := svc.ModifyLoadBalancerAttributes(context.Background(), &ModifyLoadBalancerAttributesInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		LoadBalancerAttributes: &types.LoadBalancerAttributes{
+			CrossZoneLoadBalancing: &types.CrossZoneLoadBalancing{
+				Enabled: true,
+			},
+			AccessLog: &types.AccessLog{
+				Enabled:        true,
+				S3BucketName:   ptr.String("__S3BucketName__"),
+				EmitInterval:   ptr.Int32(1),
+				S3BucketPrefix: ptr.String("__S3BucketPrefix__"),
+			},
+			ConnectionDraining: &types.ConnectionDraining{
+				Enabled: true,
+				Timeout: ptr.Int32(1),
+			},
+			ConnectionSettings: &types.ConnectionSettings{
+				IdleTimeout: ptr.Int32(1),
+			},
+			AdditionalAttributes: []types.AdditionalAttribute{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1039,7 +1263,17 @@ func TestCheckResponseSnapshot_RegisterInstancesWithLoadBalancer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterInstancesWithLoadBalancer(context.Background(), &RegisterInstancesWithLoadBalancerInput{})
+	got, err := svc.RegisterInstancesWithLoadBalancer(context.Background(), &RegisterInstancesWithLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Instances: []types.Instance{
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+			},
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1058,7 +1292,20 @@ func TestCheckResponseSnapshot_RemoveTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{})
+	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{
+		LoadBalancerNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.TagKeyOnly{
+			{
+				Key: ptr.String("__Key__"),
+			},
+			{
+				Key: ptr.String("__Key__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1077,7 +1324,11 @@ func TestCheckResponseSnapshot_SetLoadBalancerListenerSSLCertificate(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetLoadBalancerListenerSSLCertificate(context.Background(), &SetLoadBalancerListenerSSLCertificateInput{})
+	got, err := svc.SetLoadBalancerListenerSSLCertificate(context.Background(), &SetLoadBalancerListenerSSLCertificateInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		LoadBalancerPort: 1,
+		SSLCertificateId: ptr.String("__SSLCertificateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1096,7 +1347,14 @@ func TestCheckResponseSnapshot_SetLoadBalancerPoliciesForBackendServer(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetLoadBalancerPoliciesForBackendServer(context.Background(), &SetLoadBalancerPoliciesForBackendServerInput{})
+	got, err := svc.SetLoadBalancerPoliciesForBackendServer(context.Background(), &SetLoadBalancerPoliciesForBackendServerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		InstancePort:     ptr.Int32(1),
+		PolicyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1115,7 +1373,14 @@ func TestCheckResponseSnapshot_SetLoadBalancerPoliciesOfListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetLoadBalancerPoliciesOfListener(context.Background(), &SetLoadBalancerPoliciesOfListenerInput{})
+	got, err := svc.SetLoadBalancerPoliciesOfListener(context.Background(), &SetLoadBalancerPoliciesOfListenerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		LoadBalancerPort: 1,
+		PolicyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1136,7 +1401,22 @@ func TestCheckResponseSnapshot_Error_AccessPointNotFoundException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		LoadBalancerNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1161,7 +1441,48 @@ func TestCheckResponseSnapshot_Error_CertificateNotFoundException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Listeners: []types.Listener{
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+		},
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: ptr.String("__Scheme__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1186,7 +1507,14 @@ func TestCheckResponseSnapshot_Error_DependencyThrottleException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeLoadBalancers(context.Background(), &DescribeLoadBalancersInput{})
+	_, opErr := svc.DescribeLoadBalancers(context.Background(), &DescribeLoadBalancersInput{
+		LoadBalancerNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker:   ptr.String("__Marker__"),
+		PageSize: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1211,7 +1539,48 @@ func TestCheckResponseSnapshot_Error_DuplicateAccessPointNameException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Listeners: []types.Listener{
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+		},
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: ptr.String("__Scheme__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1236,7 +1605,25 @@ func TestCheckResponseSnapshot_Error_DuplicateListenerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancerListeners(context.Background(), &CreateLoadBalancerListenersInput{})
+	_, opErr := svc.CreateLoadBalancerListeners(context.Background(), &CreateLoadBalancerListenersInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Listeners: []types.Listener{
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1261,7 +1648,11 @@ func TestCheckResponseSnapshot_Error_DuplicatePolicyNameException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppCookieStickinessPolicy(context.Background(), &CreateAppCookieStickinessPolicyInput{})
+	_, opErr := svc.CreateAppCookieStickinessPolicy(context.Background(), &CreateAppCookieStickinessPolicyInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		PolicyName:       ptr.String("__PolicyName__"),
+		CookieName:       ptr.String("__CookieName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1286,7 +1677,22 @@ func TestCheckResponseSnapshot_Error_DuplicateTagKeysException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		LoadBalancerNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1311,7 +1717,13 @@ func TestCheckResponseSnapshot_Error_InvalidConfigurationRequestException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplySecurityGroupsToLoadBalancer(context.Background(), &ApplySecurityGroupsToLoadBalancerInput{})
+	_, opErr := svc.ApplySecurityGroupsToLoadBalancer(context.Background(), &ApplySecurityGroupsToLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1336,7 +1748,17 @@ func TestCheckResponseSnapshot_Error_InvalidEndPointException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterInstancesFromLoadBalancer(context.Background(), &DeregisterInstancesFromLoadBalancerInput{})
+	_, opErr := svc.DeregisterInstancesFromLoadBalancer(context.Background(), &DeregisterInstancesFromLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Instances: []types.Instance{
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+			},
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1361,7 +1783,48 @@ func TestCheckResponseSnapshot_Error_InvalidSchemeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Listeners: []types.Listener{
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+		},
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: ptr.String("__Scheme__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1386,7 +1849,13 @@ func TestCheckResponseSnapshot_Error_InvalidSecurityGroupException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplySecurityGroupsToLoadBalancer(context.Background(), &ApplySecurityGroupsToLoadBalancerInput{})
+	_, opErr := svc.ApplySecurityGroupsToLoadBalancer(context.Background(), &ApplySecurityGroupsToLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1411,7 +1880,13 @@ func TestCheckResponseSnapshot_Error_InvalidSubnetException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachLoadBalancerToSubnets(context.Background(), &AttachLoadBalancerToSubnetsInput{})
+	_, opErr := svc.AttachLoadBalancerToSubnets(context.Background(), &AttachLoadBalancerToSubnetsInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1436,7 +1911,11 @@ func TestCheckResponseSnapshot_Error_ListenerNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SetLoadBalancerListenerSSLCertificate(context.Background(), &SetLoadBalancerListenerSSLCertificateInput{})
+	_, opErr := svc.SetLoadBalancerListenerSSLCertificate(context.Background(), &SetLoadBalancerListenerSSLCertificateInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		LoadBalancerPort: 1,
+		SSLCertificateId: ptr.String("__SSLCertificateId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1461,7 +1940,9 @@ func TestCheckResponseSnapshot_Error_LoadBalancerAttributeNotFoundException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeLoadBalancerAttributes(context.Background(), &DescribeLoadBalancerAttributesInput{})
+	_, opErr := svc.DescribeLoadBalancerAttributes(context.Background(), &DescribeLoadBalancerAttributesInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1486,7 +1967,48 @@ func TestCheckResponseSnapshot_Error_OperationNotPermittedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Listeners: []types.Listener{
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+		},
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: ptr.String("__Scheme__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1511,7 +2033,13 @@ func TestCheckResponseSnapshot_Error_PolicyNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeLoadBalancerPolicies(context.Background(), &DescribeLoadBalancerPoliciesInput{})
+	_, opErr := svc.DescribeLoadBalancerPolicies(context.Background(), &DescribeLoadBalancerPoliciesInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		PolicyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1536,7 +2064,21 @@ func TestCheckResponseSnapshot_Error_PolicyTypeNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancerPolicy(context.Background(), &CreateLoadBalancerPolicyInput{})
+	_, opErr := svc.CreateLoadBalancerPolicy(context.Background(), &CreateLoadBalancerPolicyInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		PolicyName:       ptr.String("__PolicyName__"),
+		PolicyTypeName:   ptr.String("__PolicyTypeName__"),
+		PolicyAttributes: []types.PolicyAttribute{
+			{
+				AttributeName:  ptr.String("__AttributeName__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+			{
+				AttributeName:  ptr.String("__AttributeName__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1561,7 +2103,13 @@ func TestCheckResponseSnapshot_Error_SubnetNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachLoadBalancerToSubnets(context.Background(), &AttachLoadBalancerToSubnetsInput{})
+	_, opErr := svc.AttachLoadBalancerToSubnets(context.Background(), &AttachLoadBalancerToSubnetsInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1586,7 +2134,48 @@ func TestCheckResponseSnapshot_Error_TooManyAccessPointsException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Listeners: []types.Listener{
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+		},
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: ptr.String("__Scheme__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1611,7 +2200,11 @@ func TestCheckResponseSnapshot_Error_TooManyPoliciesException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppCookieStickinessPolicy(context.Background(), &CreateAppCookieStickinessPolicyInput{})
+	_, opErr := svc.CreateAppCookieStickinessPolicy(context.Background(), &CreateAppCookieStickinessPolicyInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		PolicyName:       ptr.String("__PolicyName__"),
+		CookieName:       ptr.String("__CookieName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1636,7 +2229,22 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		LoadBalancerNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1661,7 +2269,48 @@ func TestCheckResponseSnapshot_Error_UnsupportedProtocolException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		LoadBalancerName: ptr.String("__LoadBalancerName__"),
+		Listeners: []types.Listener{
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+			{
+				Protocol:         ptr.String("__Protocol__"),
+				LoadBalancerPort: 1,
+				InstanceProtocol: ptr.String("__InstanceProtocol__"),
+				InstancePort:     ptr.Int32(1),
+				SSLCertificateId: ptr.String("__SSLCertificateId__"),
+			},
+		},
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: ptr.String("__Scheme__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

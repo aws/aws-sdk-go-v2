@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EmailIdentities":[{"IdentityName":"__IdentityName__","IdentityType":"EMAIL_ADDRESS","SendingEnabled":true,"VerificationStatus":"PENDING"},{"IdentityName":"__IdentityName__","IdentityType":"EMAIL_ADDRESS","SendingEnabled":true,"VerificationStatus":"PENDING"}],"NextToken":"__NextToken__"}

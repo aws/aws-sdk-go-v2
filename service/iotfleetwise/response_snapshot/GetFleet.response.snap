@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.GetFleet
+
+{"arn":"__Arn__","creationTime":946684800,"description":"__Description__","id":"__Id__","lastModificationTime":946684800,"signalCatalogArn":"__SignalCatalogArn__"}

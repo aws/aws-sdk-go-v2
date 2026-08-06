@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Action":{"ExportRevisionToS3":{"Encryption":{"KmsKeyArn":"__KmsKeyArn__","Type":"aws:kms"},"RevisionDestination":{"Bucket":"__Bucket__","KeyPattern":"__KeyPattern__"}}},"Arn":"__Arn__","CreatedAt":"2000-01-01T00:00:00Z","Event":{"RevisionPublished":{"DataSetId":"__DataSetId__"}},"Id":"__Id__","UpdatedAt":"2000-01-01T00:00:00Z"}

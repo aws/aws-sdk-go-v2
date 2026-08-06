@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListMonitoringAlertHistory
+
+{"MonitoringAlertHistory":[{"AlertStatus":"InAlert","CreationTime":946684800,"MonitoringAlertName":"__MonitoringAlertName__","MonitoringScheduleName":"__MonitoringScheduleName__"},{"AlertStatus":"InAlert","CreationTime":946684800,"MonitoringAlertName":"__MonitoringAlertName__","MonitoringScheduleName":"__MonitoringScheduleName__"}],"NextToken":"__NextToken__"}

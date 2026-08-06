@@ -163,7 +163,32 @@ func TestCheckResponseSnapshot_CreateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProfile(context.Background(), &CreateProfileInput{})
+	got, err := svc.CreateProfile(context.Background(), &CreateProfileInput{
+		Name:                      ptr.String("__Name__"),
+		RequireInstanceProperties: ptr.Bool(true),
+		SessionPolicy:             ptr.String("__SessionPolicy__"),
+		RoleArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ManagedPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DurationSeconds: ptr.Int32(1),
+		Enabled:         ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AcceptRoleSessionName: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -213,7 +238,40 @@ func TestCheckResponseSnapshot_CreateTrustAnchor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrustAnchor(context.Background(), &CreateTrustAnchorInput{})
+	got, err := svc.CreateTrustAnchor(context.Background(), &CreateTrustAnchorInput{
+		Name: ptr.String("__Name__"),
+		Source: &types.Source{
+			SourceType: types.TrustAnchorType("AWS_ACM_PCA"),
+			SourceData: &types.SourceDataMemberX509CertificateData{
+				Value: "__SourceDataMemberX509CertificateData__",
+			},
+		},
+		Enabled: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NotificationSettings: []types.NotificationSetting{
+			{
+				Enabled:   ptr.Bool(true),
+				Event:     types.NotificationEvent("CA_CERTIFICATE_EXPIRY"),
+				Threshold: ptr.Int32(1),
+				Channel:   types.NotificationChannel("ALL"),
+			},
+			{
+				Enabled:   ptr.Bool(true),
+				Event:     types.NotificationEvent("CA_CERTIFICATE_EXPIRY"),
+				Threshold: ptr.Int32(1),
+				Channel:   types.NotificationChannel("ALL"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +336,14 @@ func TestCheckResponseSnapshot_DeleteAttributeMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAttributeMapping(context.Background(), &DeleteAttributeMappingInput{})
+	got, err := svc.DeleteAttributeMapping(context.Background(), &DeleteAttributeMappingInput{
+		ProfileId:        ptr.String("__ProfileId__"),
+		CertificateField: types.CertificateField("x509Subject"),
+		Specifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -308,7 +373,9 @@ func TestCheckResponseSnapshot_DeleteCrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCrl(context.Background(), &DeleteCrlInput{})
+	got, err := svc.DeleteCrl(context.Background(), &DeleteCrlInput{
+		CrlId: ptr.String("__CrlId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -373,7 +440,9 @@ func TestCheckResponseSnapshot_DeleteProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProfile(context.Background(), &DeleteProfileInput{})
+	got, err := svc.DeleteProfile(context.Background(), &DeleteProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -423,7 +492,9 @@ func TestCheckResponseSnapshot_DeleteTrustAnchor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrustAnchor(context.Background(), &DeleteTrustAnchorInput{})
+	got, err := svc.DeleteTrustAnchor(context.Background(), &DeleteTrustAnchorInput{
+		TrustAnchorId: ptr.String("__TrustAnchorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +524,9 @@ func TestCheckResponseSnapshot_DisableCrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableCrl(context.Background(), &DisableCrlInput{})
+	got, err := svc.DisableCrl(context.Background(), &DisableCrlInput{
+		CrlId: ptr.String("__CrlId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -518,7 +591,9 @@ func TestCheckResponseSnapshot_DisableProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableProfile(context.Background(), &DisableProfileInput{})
+	got, err := svc.DisableProfile(context.Background(), &DisableProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -568,7 +643,9 @@ func TestCheckResponseSnapshot_DisableTrustAnchor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableTrustAnchor(context.Background(), &DisableTrustAnchorInput{})
+	got, err := svc.DisableTrustAnchor(context.Background(), &DisableTrustAnchorInput{
+		TrustAnchorId: ptr.String("__TrustAnchorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -598,7 +675,9 @@ func TestCheckResponseSnapshot_EnableCrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableCrl(context.Background(), &EnableCrlInput{})
+	got, err := svc.EnableCrl(context.Background(), &EnableCrlInput{
+		CrlId: ptr.String("__CrlId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -663,7 +742,9 @@ func TestCheckResponseSnapshot_EnableProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableProfile(context.Background(), &EnableProfileInput{})
+	got, err := svc.EnableProfile(context.Background(), &EnableProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -713,7 +794,9 @@ func TestCheckResponseSnapshot_EnableTrustAnchor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableTrustAnchor(context.Background(), &EnableTrustAnchorInput{})
+	got, err := svc.EnableTrustAnchor(context.Background(), &EnableTrustAnchorInput{
+		TrustAnchorId: ptr.String("__TrustAnchorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -743,7 +826,9 @@ func TestCheckResponseSnapshot_GetCrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCrl(context.Background(), &GetCrlInput{})
+	got, err := svc.GetCrl(context.Background(), &GetCrlInput{
+		CrlId: ptr.String("__CrlId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -808,7 +893,9 @@ func TestCheckResponseSnapshot_GetProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfile(context.Background(), &GetProfileInput{})
+	got, err := svc.GetProfile(context.Background(), &GetProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -871,7 +958,9 @@ func TestCheckResponseSnapshot_GetSubject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSubject(context.Background(), &GetSubjectInput{})
+	got, err := svc.GetSubject(context.Background(), &GetSubjectInput{
+		SubjectId: ptr.String("__SubjectId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1010,9 @@ func TestCheckResponseSnapshot_GetTrustAnchor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrustAnchor(context.Background(), &GetTrustAnchorInput{})
+	got, err := svc.GetTrustAnchor(context.Background(), &GetTrustAnchorInput{
+		TrustAnchorId: ptr.String("__TrustAnchorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -951,7 +1042,22 @@ func TestCheckResponseSnapshot_ImportCrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportCrl(context.Background(), &ImportCrlInput{})
+	got, err := svc.ImportCrl(context.Background(), &ImportCrlInput{
+		Name:    ptr.String("__Name__"),
+		CrlData: []byte("blob"),
+		Enabled: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -994,7 +1100,10 @@ func TestCheckResponseSnapshot_ListCrls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCrls(context.Background(), &ListCrlsInput{})
+	got, err := svc.ListCrls(context.Background(), &ListCrlsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1107,7 +1216,10 @@ func TestCheckResponseSnapshot_ListProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfiles(context.Background(), &ListProfilesInput{})
+	got, err := svc.ListProfiles(context.Background(), &ListProfilesInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1148,7 +1260,10 @@ func TestCheckResponseSnapshot_ListSubjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubjects(context.Background(), &ListSubjectsInput{})
+	got, err := svc.ListSubjects(context.Background(), &ListSubjectsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1178,7 +1293,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1261,7 +1378,10 @@ func TestCheckResponseSnapshot_ListTrustAnchors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrustAnchors(context.Background(), &ListTrustAnchorsInput{})
+	got, err := svc.ListTrustAnchors(context.Background(), &ListTrustAnchorsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1326,7 +1446,18 @@ func TestCheckResponseSnapshot_PutAttributeMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAttributeMapping(context.Background(), &PutAttributeMappingInput{})
+	got, err := svc.PutAttributeMapping(context.Background(), &PutAttributeMappingInput{
+		ProfileId:        ptr.String("__ProfileId__"),
+		CertificateField: types.CertificateField("x509Subject"),
+		MappingRules: []types.MappingRule{
+			{
+				Specifier: ptr.String("__Specifier__"),
+			},
+			{
+				Specifier: ptr.String("__Specifier__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1376,7 +1507,23 @@ func TestCheckResponseSnapshot_PutNotificationSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutNotificationSettings(context.Background(), &PutNotificationSettingsInput{})
+	got, err := svc.PutNotificationSettings(context.Background(), &PutNotificationSettingsInput{
+		TrustAnchorId: ptr.String("__TrustAnchorId__"),
+		NotificationSettings: []types.NotificationSetting{
+			{
+				Enabled:   ptr.Bool(true),
+				Event:     types.NotificationEvent("CA_CERTIFICATE_EXPIRY"),
+				Threshold: ptr.Int32(1),
+				Channel:   types.NotificationChannel("ALL"),
+			},
+			{
+				Enabled:   ptr.Bool(true),
+				Event:     types.NotificationEvent("CA_CERTIFICATE_EXPIRY"),
+				Threshold: ptr.Int32(1),
+				Channel:   types.NotificationChannel("ALL"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1426,7 +1573,19 @@ func TestCheckResponseSnapshot_ResetNotificationSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetNotificationSettings(context.Background(), &ResetNotificationSettingsInput{})
+	got, err := svc.ResetNotificationSettings(context.Background(), &ResetNotificationSettingsInput{
+		TrustAnchorId: ptr.String("__TrustAnchorId__"),
+		NotificationSettingKeys: []types.NotificationSettingKey{
+			{
+				Event:   types.NotificationEvent("CA_CERTIFICATE_EXPIRY"),
+				Channel: types.NotificationChannel("ALL"),
+			},
+			{
+				Event:   types.NotificationEvent("CA_CERTIFICATE_EXPIRY"),
+				Channel: types.NotificationChannel("ALL"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1445,7 +1604,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1464,7 +1635,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1494,7 +1671,11 @@ func TestCheckResponseSnapshot_UpdateCrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCrl(context.Background(), &UpdateCrlInput{})
+	got, err := svc.UpdateCrl(context.Background(), &UpdateCrlInput{
+		CrlId:   ptr.String("__CrlId__"),
+		Name:    ptr.String("__Name__"),
+		CrlData: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1559,7 +1740,21 @@ func TestCheckResponseSnapshot_UpdateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProfile(context.Background(), &UpdateProfileInput{})
+	got, err := svc.UpdateProfile(context.Background(), &UpdateProfileInput{
+		ProfileId:     ptr.String("__ProfileId__"),
+		Name:          ptr.String("__Name__"),
+		SessionPolicy: ptr.String("__SessionPolicy__"),
+		RoleArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ManagedPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DurationSeconds:       ptr.Int32(1),
+		AcceptRoleSessionName: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1609,7 +1804,16 @@ func TestCheckResponseSnapshot_UpdateTrustAnchor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTrustAnchor(context.Background(), &UpdateTrustAnchorInput{})
+	got, err := svc.UpdateTrustAnchor(context.Background(), &UpdateTrustAnchorInput{
+		TrustAnchorId: ptr.String("__TrustAnchorId__"),
+		Name:          ptr.String("__Name__"),
+		Source: &types.Source{
+			SourceType: types.TrustAnchorType("AWS_ACM_PCA"),
+			SourceData: &types.SourceDataMemberX509CertificateData{
+				Value: "__SourceDataMemberX509CertificateData__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1630,7 +1834,32 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateProfile(context.Background(), &CreateProfileInput{})
+	_, opErr := svc.CreateProfile(context.Background(), &CreateProfileInput{
+		Name:                      ptr.String("__Name__"),
+		RequireInstanceProperties: ptr.Bool(true),
+		SessionPolicy:             ptr.String("__SessionPolicy__"),
+		RoleArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ManagedPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DurationSeconds: ptr.Int32(1),
+		Enabled:         ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AcceptRoleSessionName: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1655,7 +1884,14 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAttributeMapping(context.Background(), &DeleteAttributeMappingInput{})
+	_, opErr := svc.DeleteAttributeMapping(context.Background(), &DeleteAttributeMappingInput{
+		ProfileId:        ptr.String("__ProfileId__"),
+		CertificateField: types.CertificateField("x509Subject"),
+		Specifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1680,7 +1916,19 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1705,7 +1953,32 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateProfile(context.Background(), &CreateProfileInput{})
+	_, opErr := svc.CreateProfile(context.Background(), &CreateProfileInput{
+		Name:                      ptr.String("__Name__"),
+		RequireInstanceProperties: ptr.Bool(true),
+		SessionPolicy:             ptr.String("__SessionPolicy__"),
+		RoleArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ManagedPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DurationSeconds: ptr.Int32(1),
+		Enabled:         ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AcceptRoleSessionName: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appArn":"__AppArn__","appDefinition":{"appDefinitionVersion":"__AppDefinitionVersion__","canEdit":true,"cards":[{"textInput":{"defaultValue":"__DefaultValue__","dependencies":["__Member__","__Member__"],"id":"__Id__","placeholder":"__Placeholder__","title":"__Title__","type":"text-input"}},{"textInput":{"defaultValue":"__DefaultValue__","dependencies":["__Member__","__Member__"],"id":"__Id__","placeholder":"__Placeholder__","title":"__Title__","type":"text-input"}}]},"appId":"__AppId__","appVersion":1,"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","description":"__Description__","initialPrompt":"__InitialPrompt__","requiredCapabilities":["FileUpload","FileUpload"],"status":"PUBLISHED","title":"__Title__","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__"}

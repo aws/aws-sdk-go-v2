@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"missionProfileList":[{"missionProfileArn":"__MissionProfileArn__","missionProfileId":"__MissionProfileId__","name":"__Name__","region":"__Region__"},{"missionProfileArn":"__MissionProfileArn__","missionProfileId":"__MissionProfileId__","name":"__Name__","region":"__Region__"}],"nextToken":"__NextToken__"}

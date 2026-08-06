@@ -129,7 +129,9 @@ func TestCheckResponseSnapshot_AcceptSharedDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptSharedDirectory(context.Background(), &AcceptSharedDirectoryInput{})
+	got, err := svc.AcceptSharedDirectory(context.Background(), &AcceptSharedDirectoryInput{
+		SharedDirectoryId: ptr.String("__SharedDirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -148,7 +150,22 @@ func TestCheckResponseSnapshot_AddIpRoutes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddIpRoutes(context.Background(), &AddIpRoutesInput{})
+	got, err := svc.AddIpRoutes(context.Background(), &AddIpRoutesInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		IpRoutes: []types.IpRoute{
+			{
+				CidrIp:      ptr.String("__CidrIp__"),
+				CidrIpv6:    ptr.String("__CidrIpv6__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				CidrIp:      ptr.String("__CidrIp__"),
+				CidrIpv6:    ptr.String("__CidrIpv6__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		UpdateSecurityGroupForDirectoryControllers: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -167,7 +184,17 @@ func TestCheckResponseSnapshot_AddRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddRegion(context.Background(), &AddRegionInput{})
+	got, err := svc.AddRegion(context.Background(), &AddRegionInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		RegionName:  ptr.String("__RegionName__"),
+		VPCSettings: &types.DirectoryVpcSettings{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -186,7 +213,19 @@ func TestCheckResponseSnapshot_AddTagsToResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	got, err := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -205,7 +244,10 @@ func TestCheckResponseSnapshot_CancelSchemaExtension(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelSchemaExtension(context.Background(), &CancelSchemaExtensionInput{})
+	got, err := svc.CancelSchemaExtension(context.Background(), &CancelSchemaExtensionInput{
+		DirectoryId:       ptr.String("__DirectoryId__"),
+		SchemaExtensionId: ptr.String("__SchemaExtensionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,7 +268,40 @@ func TestCheckResponseSnapshot_ConnectDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConnectDirectory(context.Background(), &ConnectDirectoryInput{})
+	got, err := svc.ConnectDirectory(context.Background(), &ConnectDirectoryInput{
+		Name:        ptr.String("__Name__"),
+		ShortName:   ptr.String("__ShortName__"),
+		Password:    ptr.String("__Password__"),
+		Description: ptr.String("__Description__"),
+		Size:        types.DirectorySize("Small"),
+		ConnectSettings: &types.DirectoryConnectSettings{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CustomerDnsIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CustomerDnsIpsV6: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CustomerUserName: ptr.String("__CustomerUserName__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NetworkType: types.NetworkType("Dual-stack"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -248,7 +323,10 @@ func TestCheckResponseSnapshot_CreateAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	got, err := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Alias:       ptr.String("__Alias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -282,7 +360,22 @@ func TestCheckResponseSnapshot_CreateComputer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateComputer(context.Background(), &CreateComputerInput{})
+	got, err := svc.CreateComputer(context.Background(), &CreateComputerInput{
+		DirectoryId:                         ptr.String("__DirectoryId__"),
+		ComputerName:                        ptr.String("__ComputerName__"),
+		Password:                            ptr.String("__Password__"),
+		OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+		ComputerAttributes: []types.Attribute{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -301,7 +394,18 @@ func TestCheckResponseSnapshot_CreateConditionalForwarder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConditionalForwarder(context.Background(), &CreateConditionalForwarderInput{})
+	got, err := svc.CreateConditionalForwarder(context.Background(), &CreateConditionalForwarderInput{
+		DirectoryId:      ptr.String("__DirectoryId__"),
+		RemoteDomainName: ptr.String("__RemoteDomainName__"),
+		DnsIpAddrs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DnsIpv6Addrs: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +426,31 @@ func TestCheckResponseSnapshot_CreateDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDirectory(context.Background(), &CreateDirectoryInput{})
+	got, err := svc.CreateDirectory(context.Background(), &CreateDirectoryInput{
+		Name:        ptr.String("__Name__"),
+		ShortName:   ptr.String("__ShortName__"),
+		Password:    ptr.String("__Password__"),
+		Description: ptr.String("__Description__"),
+		Size:        types.DirectorySize("Small"),
+		VpcSettings: &types.DirectoryVpcSettings{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NetworkType: types.NetworkType("Dual-stack"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -343,7 +471,20 @@ func TestCheckResponseSnapshot_CreateHybridAD(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHybridAD(context.Background(), &CreateHybridADInput{})
+	got, err := svc.CreateHybridAD(context.Background(), &CreateHybridADInput{
+		SecretArn:    ptr.String("__SecretArn__"),
+		AssessmentId: ptr.String("__AssessmentId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -362,7 +503,10 @@ func TestCheckResponseSnapshot_CreateLogSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLogSubscription(context.Background(), &CreateLogSubscriptionInput{})
+	got, err := svc.CreateLogSubscription(context.Background(), &CreateLogSubscriptionInput{
+		DirectoryId:  ptr.String("__DirectoryId__"),
+		LogGroupName: ptr.String("__LogGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -383,7 +527,31 @@ func TestCheckResponseSnapshot_CreateMicrosoftAD(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMicrosoftAD(context.Background(), &CreateMicrosoftADInput{})
+	got, err := svc.CreateMicrosoftAD(context.Background(), &CreateMicrosoftADInput{
+		Name:        ptr.String("__Name__"),
+		ShortName:   ptr.String("__ShortName__"),
+		Password:    ptr.String("__Password__"),
+		Description: ptr.String("__Description__"),
+		VpcSettings: &types.DirectoryVpcSettings{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Edition: types.DirectoryEdition("Enterprise"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NetworkType: types.NetworkType("Dual-stack"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -404,7 +572,10 @@ func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{})
+	got, err := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Name:        ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -425,7 +596,22 @@ func TestCheckResponseSnapshot_CreateTrust(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrust(context.Background(), &CreateTrustInput{})
+	got, err := svc.CreateTrust(context.Background(), &CreateTrustInput{
+		DirectoryId:      ptr.String("__DirectoryId__"),
+		RemoteDomainName: ptr.String("__RemoteDomainName__"),
+		TrustPassword:    ptr.String("__TrustPassword__"),
+		TrustDirection:   types.TrustDirection("One-Way: Outgoing"),
+		TrustType:        types.TrustType("Forest"),
+		ConditionalForwarderIpAddrs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConditionalForwarderIpv6Addrs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SelectiveAuth: types.SelectiveAuth("Enabled"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -446,7 +632,9 @@ func TestCheckResponseSnapshot_DeleteADAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteADAssessment(context.Background(), &DeleteADAssessmentInput{})
+	got, err := svc.DeleteADAssessment(context.Background(), &DeleteADAssessmentInput{
+		AssessmentId: ptr.String("__AssessmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,7 +653,10 @@ func TestCheckResponseSnapshot_DeleteConditionalForwarder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConditionalForwarder(context.Background(), &DeleteConditionalForwarderInput{})
+	got, err := svc.DeleteConditionalForwarder(context.Background(), &DeleteConditionalForwarderInput{
+		DirectoryId:      ptr.String("__DirectoryId__"),
+		RemoteDomainName: ptr.String("__RemoteDomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -486,7 +677,9 @@ func TestCheckResponseSnapshot_DeleteDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDirectory(context.Background(), &DeleteDirectoryInput{})
+	got, err := svc.DeleteDirectory(context.Background(), &DeleteDirectoryInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -505,7 +698,9 @@ func TestCheckResponseSnapshot_DeleteLogSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLogSubscription(context.Background(), &DeleteLogSubscriptionInput{})
+	got, err := svc.DeleteLogSubscription(context.Background(), &DeleteLogSubscriptionInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -526,7 +721,9 @@ func TestCheckResponseSnapshot_DeleteSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSnapshot(context.Background(), &DeleteSnapshotInput{})
+	got, err := svc.DeleteSnapshot(context.Background(), &DeleteSnapshotInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -547,7 +744,10 @@ func TestCheckResponseSnapshot_DeleteTrust(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrust(context.Background(), &DeleteTrustInput{})
+	got, err := svc.DeleteTrust(context.Background(), &DeleteTrustInput{
+		TrustId:                              ptr.String("__TrustId__"),
+		DeleteAssociatedConditionalForwarder: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -566,7 +766,10 @@ func TestCheckResponseSnapshot_DeregisterCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterCertificate(context.Background(), &DeregisterCertificateInput{})
+	got, err := svc.DeregisterCertificate(context.Background(), &DeregisterCertificateInput{
+		DirectoryId:   ptr.String("__DirectoryId__"),
+		CertificateId: ptr.String("__CertificateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -585,7 +788,10 @@ func TestCheckResponseSnapshot_DeregisterEventTopic(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterEventTopic(context.Background(), &DeregisterEventTopicInput{})
+	got, err := svc.DeregisterEventTopic(context.Background(), &DeregisterEventTopicInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		TopicName:   ptr.String("__TopicName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -682,7 +888,9 @@ func TestCheckResponseSnapshot_DescribeADAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeADAssessment(context.Background(), &DescribeADAssessmentInput{})
+	got, err := svc.DescribeADAssessment(context.Background(), &DescribeADAssessmentInput{
+		AssessmentId: ptr.String("__AssessmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -707,7 +915,9 @@ func TestCheckResponseSnapshot_DescribeCAEnrollmentPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCAEnrollmentPolicy(context.Background(), &DescribeCAEnrollmentPolicyInput{})
+	got, err := svc.DescribeCAEnrollmentPolicy(context.Background(), &DescribeCAEnrollmentPolicyInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -739,7 +949,10 @@ func TestCheckResponseSnapshot_DescribeCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCertificate(context.Background(), &DescribeCertificateInput{})
+	got, err := svc.DescribeCertificate(context.Background(), &DescribeCertificateInput{
+		DirectoryId:   ptr.String("__DirectoryId__"),
+		CertificateId: ptr.String("__CertificateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -772,7 +985,12 @@ func TestCheckResponseSnapshot_DescribeClientAuthenticationSettings(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeClientAuthenticationSettings(context.Background(), &DescribeClientAuthenticationSettingsInput{})
+	got, err := svc.DescribeClientAuthenticationSettings(context.Background(), &DescribeClientAuthenticationSettingsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Type:        types.ClientAuthenticationType("SmartCard"),
+		NextToken:   ptr.String("__NextToken__"),
+		Limit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -818,7 +1036,13 @@ func TestCheckResponseSnapshot_DescribeConditionalForwarders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConditionalForwarders(context.Background(), &DescribeConditionalForwardersInput{})
+	got, err := svc.DescribeConditionalForwarders(context.Background(), &DescribeConditionalForwardersInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		RemoteDomainNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1123,7 +1347,14 @@ func TestCheckResponseSnapshot_DescribeDirectories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDirectories(context.Background(), &DescribeDirectoriesInput{})
+	got, err := svc.DescribeDirectories(context.Background(), &DescribeDirectoriesInput{
+		DirectoryIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1144,7 +1375,9 @@ func TestCheckResponseSnapshot_DescribeDirectoryDataAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDirectoryDataAccess(context.Background(), &DescribeDirectoryDataAccessInput{})
+	got, err := svc.DescribeDirectoryDataAccess(context.Background(), &DescribeDirectoryDataAccessInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1193,7 +1426,15 @@ func TestCheckResponseSnapshot_DescribeDomainControllers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomainControllers(context.Background(), &DescribeDomainControllersInput{})
+	got, err := svc.DescribeDomainControllers(context.Background(), &DescribeDomainControllersInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		DomainControllerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1229,7 +1470,13 @@ func TestCheckResponseSnapshot_DescribeEventTopics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEventTopics(context.Background(), &DescribeEventTopicsInput{})
+	got, err := svc.DescribeEventTopics(context.Background(), &DescribeEventTopicsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		TopicNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1368,7 +1615,11 @@ func TestCheckResponseSnapshot_DescribeHybridADUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeHybridADUpdate(context.Background(), &DescribeHybridADUpdateInput{})
+	got, err := svc.DescribeHybridADUpdate(context.Background(), &DescribeHybridADUpdateInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		UpdateType:  types.HybridUpdateType("SelfManagedInstances"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1401,7 +1652,12 @@ func TestCheckResponseSnapshot_DescribeLDAPSSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLDAPSSettings(context.Background(), &DescribeLDAPSSettingsInput{})
+	got, err := svc.DescribeLDAPSSettings(context.Background(), &DescribeLDAPSSettingsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Type:        types.LDAPSType("Client"),
+		NextToken:   ptr.String("__NextToken__"),
+		Limit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1458,7 +1714,11 @@ func TestCheckResponseSnapshot_DescribeRegions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRegions(context.Background(), &DescribeRegionsInput{})
+	got, err := svc.DescribeRegions(context.Background(), &DescribeRegionsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		RegionName:  ptr.String("__RegionName__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1512,7 +1772,11 @@ func TestCheckResponseSnapshot_DescribeSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSettings(context.Background(), &DescribeSettingsInput{})
+	got, err := svc.DescribeSettings(context.Background(), &DescribeSettingsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Status:      types.DirectoryConfigurationStatus("Requested"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1557,7 +1821,15 @@ func TestCheckResponseSnapshot_DescribeSharedDirectories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSharedDirectories(context.Background(), &DescribeSharedDirectoriesInput{})
+	got, err := svc.DescribeSharedDirectories(context.Background(), &DescribeSharedDirectoriesInput{
+		OwnerDirectoryId: ptr.String("__OwnerDirectoryId__"),
+		SharedDirectoryIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1596,7 +1868,15 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSnapshots(context.Background(), &DescribeSnapshotsInput{})
+	got, err := svc.DescribeSnapshots(context.Background(), &DescribeSnapshotsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		SnapshotIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1645,7 +1925,15 @@ func TestCheckResponseSnapshot_DescribeTrusts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTrusts(context.Background(), &DescribeTrustsInput{})
+	got, err := svc.DescribeTrusts(context.Background(), &DescribeTrustsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		TrustIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1704,7 +1992,12 @@ func TestCheckResponseSnapshot_DescribeUpdateDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUpdateDirectory(context.Background(), &DescribeUpdateDirectoryInput{})
+	got, err := svc.DescribeUpdateDirectory(context.Background(), &DescribeUpdateDirectoryInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		UpdateType:  types.UpdateType("OS"),
+		RegionName:  ptr.String("__RegionName__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1723,7 +2016,9 @@ func TestCheckResponseSnapshot_DisableCAEnrollmentPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableCAEnrollmentPolicy(context.Background(), &DisableCAEnrollmentPolicyInput{})
+	got, err := svc.DisableCAEnrollmentPolicy(context.Background(), &DisableCAEnrollmentPolicyInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1742,7 +2037,10 @@ func TestCheckResponseSnapshot_DisableClientAuthentication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableClientAuthentication(context.Background(), &DisableClientAuthenticationInput{})
+	got, err := svc.DisableClientAuthentication(context.Background(), &DisableClientAuthenticationInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Type:        types.ClientAuthenticationType("SmartCard"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1761,7 +2059,9 @@ func TestCheckResponseSnapshot_DisableDirectoryDataAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableDirectoryDataAccess(context.Background(), &DisableDirectoryDataAccessInput{})
+	got, err := svc.DisableDirectoryDataAccess(context.Background(), &DisableDirectoryDataAccessInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1780,7 +2080,10 @@ func TestCheckResponseSnapshot_DisableLDAPS(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableLDAPS(context.Background(), &DisableLDAPSInput{})
+	got, err := svc.DisableLDAPS(context.Background(), &DisableLDAPSInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Type:        types.LDAPSType("Client"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1799,7 +2102,9 @@ func TestCheckResponseSnapshot_DisableRadius(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableRadius(context.Background(), &DisableRadiusInput{})
+	got, err := svc.DisableRadius(context.Background(), &DisableRadiusInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1818,7 +2123,11 @@ func TestCheckResponseSnapshot_DisableSso(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableSso(context.Background(), &DisableSsoInput{})
+	got, err := svc.DisableSso(context.Background(), &DisableSsoInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		UserName:    ptr.String("__UserName__"),
+		Password:    ptr.String("__Password__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1837,7 +2146,10 @@ func TestCheckResponseSnapshot_EnableCAEnrollmentPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableCAEnrollmentPolicy(context.Background(), &EnableCAEnrollmentPolicyInput{})
+	got, err := svc.EnableCAEnrollmentPolicy(context.Background(), &EnableCAEnrollmentPolicyInput{
+		DirectoryId:     ptr.String("__DirectoryId__"),
+		PcaConnectorArn: ptr.String("__PcaConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1856,7 +2168,10 @@ func TestCheckResponseSnapshot_EnableClientAuthentication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableClientAuthentication(context.Background(), &EnableClientAuthenticationInput{})
+	got, err := svc.EnableClientAuthentication(context.Background(), &EnableClientAuthenticationInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Type:        types.ClientAuthenticationType("SmartCard"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1875,7 +2190,9 @@ func TestCheckResponseSnapshot_EnableDirectoryDataAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableDirectoryDataAccess(context.Background(), &EnableDirectoryDataAccessInput{})
+	got, err := svc.EnableDirectoryDataAccess(context.Background(), &EnableDirectoryDataAccessInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1894,7 +2211,10 @@ func TestCheckResponseSnapshot_EnableLDAPS(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableLDAPS(context.Background(), &EnableLDAPSInput{})
+	got, err := svc.EnableLDAPS(context.Background(), &EnableLDAPSInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Type:        types.LDAPSType("Client"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1913,7 +2233,26 @@ func TestCheckResponseSnapshot_EnableRadius(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableRadius(context.Background(), &EnableRadiusInput{})
+	got, err := svc.EnableRadius(context.Background(), &EnableRadiusInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		RadiusSettings: &types.RadiusSettings{
+			RadiusServers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RadiusServersIpv6: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RadiusPort:             ptr.Int32(1),
+			RadiusTimeout:          ptr.Int32(1),
+			RadiusRetries:          1,
+			SharedSecret:           ptr.String("__SharedSecret__"),
+			AuthenticationProtocol: types.RadiusAuthenticationProtocol("PAP"),
+			DisplayLabel:           ptr.String("__DisplayLabel__"),
+			UseSameUsername:        true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1932,7 +2271,11 @@ func TestCheckResponseSnapshot_EnableSso(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableSso(context.Background(), &EnableSsoInput{})
+	got, err := svc.EnableSso(context.Background(), &EnableSsoInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		UserName:    ptr.String("__UserName__"),
+		Password:    ptr.String("__Password__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1988,7 +2331,9 @@ func TestCheckResponseSnapshot_GetSnapshotLimits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSnapshotLimits(context.Background(), &GetSnapshotLimitsInput{})
+	got, err := svc.GetSnapshotLimits(context.Background(), &GetSnapshotLimitsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2037,7 +2382,11 @@ func TestCheckResponseSnapshot_ListADAssessments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListADAssessments(context.Background(), &ListADAssessmentsInput{})
+	got, err := svc.ListADAssessments(context.Background(), &ListADAssessmentsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		Limit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2074,7 +2423,11 @@ func TestCheckResponseSnapshot_ListCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCertificates(context.Background(), &ListCertificatesInput{})
+	got, err := svc.ListCertificates(context.Background(), &ListCertificatesInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		Limit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2115,7 +2468,11 @@ func TestCheckResponseSnapshot_ListIpRoutes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIpRoutes(context.Background(), &ListIpRoutesInput{})
+	got, err := svc.ListIpRoutes(context.Background(), &ListIpRoutesInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		Limit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2148,7 +2505,11 @@ func TestCheckResponseSnapshot_ListLogSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLogSubscriptions(context.Background(), &ListLogSubscriptionsInput{})
+	got, err := svc.ListLogSubscriptions(context.Background(), &ListLogSubscriptionsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		Limit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2189,7 +2550,11 @@ func TestCheckResponseSnapshot_ListSchemaExtensions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSchemaExtensions(context.Background(), &ListSchemaExtensionsInput{})
+	got, err := svc.ListSchemaExtensions(context.Background(), &ListSchemaExtensionsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		Limit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2220,7 +2585,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2241,7 +2610,14 @@ func TestCheckResponseSnapshot_RegisterCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterCertificate(context.Background(), &RegisterCertificateInput{})
+	got, err := svc.RegisterCertificate(context.Background(), &RegisterCertificateInput{
+		DirectoryId:     ptr.String("__DirectoryId__"),
+		CertificateData: ptr.String("__CertificateData__"),
+		Type:            types.CertificateType("ClientCertAuth"),
+		ClientCertAuthSettings: &types.ClientCertAuthSettings{
+			OCSPUrl: ptr.String("__OCSPUrl__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2260,7 +2636,10 @@ func TestCheckResponseSnapshot_RegisterEventTopic(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterEventTopic(context.Background(), &RegisterEventTopicInput{})
+	got, err := svc.RegisterEventTopic(context.Background(), &RegisterEventTopicInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		TopicName:   ptr.String("__TopicName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2281,7 +2660,9 @@ func TestCheckResponseSnapshot_RejectSharedDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectSharedDirectory(context.Background(), &RejectSharedDirectoryInput{})
+	got, err := svc.RejectSharedDirectory(context.Background(), &RejectSharedDirectoryInput{
+		SharedDirectoryId: ptr.String("__SharedDirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2300,7 +2681,17 @@ func TestCheckResponseSnapshot_RemoveIpRoutes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveIpRoutes(context.Background(), &RemoveIpRoutesInput{})
+	got, err := svc.RemoveIpRoutes(context.Background(), &RemoveIpRoutesInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		CidrIps: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CidrIpv6s: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2319,7 +2710,9 @@ func TestCheckResponseSnapshot_RemoveRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveRegion(context.Background(), &RemoveRegionInput{})
+	got, err := svc.RemoveRegion(context.Background(), &RemoveRegionInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2338,7 +2731,13 @@ func TestCheckResponseSnapshot_RemoveTagsFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTagsFromResource(context.Background(), &RemoveTagsFromResourceInput{})
+	got, err := svc.RemoveTagsFromResource(context.Background(), &RemoveTagsFromResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2357,7 +2756,11 @@ func TestCheckResponseSnapshot_ResetUserPassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetUserPassword(context.Background(), &ResetUserPasswordInput{})
+	got, err := svc.ResetUserPassword(context.Background(), &ResetUserPasswordInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		UserName:    ptr.String("__UserName__"),
+		NewPassword: ptr.String("__NewPassword__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2376,7 +2779,9 @@ func TestCheckResponseSnapshot_RestoreFromSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreFromSnapshot(context.Background(), &RestoreFromSnapshotInput{})
+	got, err := svc.RestoreFromSnapshot(context.Background(), &RestoreFromSnapshotInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2397,7 +2802,15 @@ func TestCheckResponseSnapshot_ShareDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ShareDirectory(context.Background(), &ShareDirectoryInput{})
+	got, err := svc.ShareDirectory(context.Background(), &ShareDirectoryInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		ShareNotes:  ptr.String("__ShareNotes__"),
+		ShareTarget: &types.ShareTarget{
+			Id:   ptr.String("__Id__"),
+			Type: types.TargetType("ACCOUNT"),
+		},
+		ShareMethod: types.ShareMethod("ORGANIZATIONS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2418,7 +2831,31 @@ func TestCheckResponseSnapshot_StartADAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartADAssessment(context.Background(), &StartADAssessmentInput{})
+	got, err := svc.StartADAssessment(context.Background(), &StartADAssessmentInput{
+		AssessmentConfiguration: &types.AssessmentConfiguration{
+			CustomerDnsIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			DnsName: ptr.String("__DnsName__"),
+			VpcSettings: &types.DirectoryVpcSettings{
+				VpcId: ptr.String("__VpcId__"),
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			InstanceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2439,7 +2876,12 @@ func TestCheckResponseSnapshot_StartSchemaExtension(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSchemaExtension(context.Background(), &StartSchemaExtensionInput{})
+	got, err := svc.StartSchemaExtension(context.Background(), &StartSchemaExtensionInput{
+		DirectoryId:                         ptr.String("__DirectoryId__"),
+		CreateSnapshotBeforeSchemaExtension: true,
+		LdifContent:                         ptr.String("__LdifContent__"),
+		Description:                         ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2460,7 +2902,13 @@ func TestCheckResponseSnapshot_UnshareDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UnshareDirectory(context.Background(), &UnshareDirectoryInput{})
+	got, err := svc.UnshareDirectory(context.Background(), &UnshareDirectoryInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		UnshareTarget: &types.UnshareTarget{
+			Id:   ptr.String("__Id__"),
+			Type: types.TargetType("ACCOUNT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2479,7 +2927,18 @@ func TestCheckResponseSnapshot_UpdateConditionalForwarder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConditionalForwarder(context.Background(), &UpdateConditionalForwarderInput{})
+	got, err := svc.UpdateConditionalForwarder(context.Background(), &UpdateConditionalForwarderInput{
+		DirectoryId:      ptr.String("__DirectoryId__"),
+		RemoteDomainName: ptr.String("__RemoteDomainName__"),
+		DnsIpAddrs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DnsIpv6Addrs: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2498,7 +2957,24 @@ func TestCheckResponseSnapshot_UpdateDirectorySetup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDirectorySetup(context.Background(), &UpdateDirectorySetupInput{})
+	got, err := svc.UpdateDirectorySetup(context.Background(), &UpdateDirectorySetupInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		UpdateType:  types.UpdateType("OS"),
+		OSUpdateSettings: &types.OSUpdateSettings{
+			OSVersion: types.OSVersion("SERVER_2012"),
+		},
+		DirectorySizeUpdateSettings: &types.DirectorySizeUpdateSettings{
+			DirectorySize: types.DirectorySize("Small"),
+		},
+		NetworkUpdateSettings: &types.NetworkUpdateSettings{
+			NetworkType: types.NetworkType("Dual-stack"),
+			CustomerDnsIpsV6: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CreateSnapshotBeforeUpdate: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2520,7 +2996,22 @@ func TestCheckResponseSnapshot_UpdateHybridAD(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateHybridAD(context.Background(), &UpdateHybridADInput{})
+	got, err := svc.UpdateHybridAD(context.Background(), &UpdateHybridADInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		HybridAdministratorAccountUpdate: &types.HybridAdministratorAccountUpdate{
+			SecretArn: ptr.String("__SecretArn__"),
+		},
+		SelfManagedInstancesSettings: &types.HybridCustomerInstancesSettings{
+			CustomerDnsIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			InstanceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2539,7 +3030,10 @@ func TestCheckResponseSnapshot_UpdateNumberOfDomainControllers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNumberOfDomainControllers(context.Background(), &UpdateNumberOfDomainControllersInput{})
+	got, err := svc.UpdateNumberOfDomainControllers(context.Background(), &UpdateNumberOfDomainControllersInput{
+		DirectoryId:   ptr.String("__DirectoryId__"),
+		DesiredNumber: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2558,7 +3052,26 @@ func TestCheckResponseSnapshot_UpdateRadius(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRadius(context.Background(), &UpdateRadiusInput{})
+	got, err := svc.UpdateRadius(context.Background(), &UpdateRadiusInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		RadiusSettings: &types.RadiusSettings{
+			RadiusServers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RadiusServersIpv6: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RadiusPort:             ptr.Int32(1),
+			RadiusTimeout:          ptr.Int32(1),
+			RadiusRetries:          1,
+			SharedSecret:           ptr.String("__SharedSecret__"),
+			AuthenticationProtocol: types.RadiusAuthenticationProtocol("PAP"),
+			DisplayLabel:           ptr.String("__DisplayLabel__"),
+			UseSameUsername:        true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2579,7 +3092,19 @@ func TestCheckResponseSnapshot_UpdateSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSettings(context.Background(), &UpdateSettingsInput{})
+	got, err := svc.UpdateSettings(context.Background(), &UpdateSettingsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Settings: []types.Setting{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2601,7 +3126,10 @@ func TestCheckResponseSnapshot_UpdateTrust(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTrust(context.Background(), &UpdateTrustInput{})
+	got, err := svc.UpdateTrust(context.Background(), &UpdateTrustInput{
+		TrustId:       ptr.String("__TrustId__"),
+		SelectiveAuth: types.SelectiveAuth("Enabled"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2622,7 +3150,9 @@ func TestCheckResponseSnapshot_VerifyTrust(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyTrust(context.Background(), &VerifyTrustInput{})
+	got, err := svc.VerifyTrust(context.Background(), &VerifyTrustInput{
+		TrustId: ptr.String("__TrustId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2644,7 +3174,20 @@ func TestCheckResponseSnapshot_Error_ADAssessmentLimitExceededException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHybridAD(context.Background(), &CreateHybridADInput{})
+	_, opErr := svc.CreateHybridAD(context.Background(), &CreateHybridADInput{
+		SecretArn:    ptr.String("__SecretArn__"),
+		AssessmentId: ptr.String("__AssessmentId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2670,7 +3213,17 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{})
+	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		RegionName:  ptr.String("__RegionName__"),
+		VPCSettings: &types.DirectoryVpcSettings{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2696,7 +3249,22 @@ func TestCheckResponseSnapshot_Error_AuthenticationFailedException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComputer(context.Background(), &CreateComputerInput{})
+	_, opErr := svc.CreateComputer(context.Background(), &CreateComputerInput{
+		DirectoryId:                         ptr.String("__DirectoryId__"),
+		ComputerName:                        ptr.String("__ComputerName__"),
+		Password:                            ptr.String("__Password__"),
+		OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+		ComputerAttributes: []types.Attribute{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2722,7 +3290,14 @@ func TestCheckResponseSnapshot_Error_CertificateAlreadyExistsException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterCertificate(context.Background(), &RegisterCertificateInput{})
+	_, opErr := svc.RegisterCertificate(context.Background(), &RegisterCertificateInput{
+		DirectoryId:     ptr.String("__DirectoryId__"),
+		CertificateData: ptr.String("__CertificateData__"),
+		Type:            types.CertificateType("ClientCertAuth"),
+		ClientCertAuthSettings: &types.ClientCertAuthSettings{
+			OCSPUrl: ptr.String("__OCSPUrl__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2748,7 +3323,10 @@ func TestCheckResponseSnapshot_Error_CertificateDoesNotExistException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterCertificate(context.Background(), &DeregisterCertificateInput{})
+	_, opErr := svc.DeregisterCertificate(context.Background(), &DeregisterCertificateInput{
+		DirectoryId:   ptr.String("__DirectoryId__"),
+		CertificateId: ptr.String("__CertificateId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2774,7 +3352,10 @@ func TestCheckResponseSnapshot_Error_CertificateInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterCertificate(context.Background(), &DeregisterCertificateInput{})
+	_, opErr := svc.DeregisterCertificate(context.Background(), &DeregisterCertificateInput{
+		DirectoryId:   ptr.String("__DirectoryId__"),
+		CertificateId: ptr.String("__CertificateId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2800,7 +3381,14 @@ func TestCheckResponseSnapshot_Error_CertificateLimitExceededException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterCertificate(context.Background(), &RegisterCertificateInput{})
+	_, opErr := svc.RegisterCertificate(context.Background(), &RegisterCertificateInput{
+		DirectoryId:     ptr.String("__DirectoryId__"),
+		CertificateData: ptr.String("__CertificateData__"),
+		Type:            types.CertificateType("ClientCertAuth"),
+		ClientCertAuthSettings: &types.ClientCertAuthSettings{
+			OCSPUrl: ptr.String("__OCSPUrl__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2826,7 +3414,9 @@ func TestCheckResponseSnapshot_Error_ClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptSharedDirectory(context.Background(), &AcceptSharedDirectoryInput{})
+	_, opErr := svc.AcceptSharedDirectory(context.Background(), &AcceptSharedDirectoryInput{
+		SharedDirectoryId: ptr.String("__SharedDirectoryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2852,7 +3442,17 @@ func TestCheckResponseSnapshot_Error_DirectoryAlreadyInRegionException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{})
+	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		RegionName:  ptr.String("__RegionName__"),
+		VPCSettings: &types.DirectoryVpcSettings{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2878,7 +3478,9 @@ func TestCheckResponseSnapshot_Error_DirectoryAlreadySharedException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptSharedDirectory(context.Background(), &AcceptSharedDirectoryInput{})
+	_, opErr := svc.AcceptSharedDirectory(context.Background(), &AcceptSharedDirectoryInput{
+		SharedDirectoryId: ptr.String("__SharedDirectoryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2904,7 +3506,17 @@ func TestCheckResponseSnapshot_Error_DirectoryDoesNotExistException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{})
+	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		RegionName:  ptr.String("__RegionName__"),
+		VPCSettings: &types.DirectoryVpcSettings{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2930,7 +3542,9 @@ func TestCheckResponseSnapshot_Error_DirectoryInDesiredStateException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisableDirectoryDataAccess(context.Background(), &DisableDirectoryDataAccessInput{})
+	_, opErr := svc.DisableDirectoryDataAccess(context.Background(), &DisableDirectoryDataAccessInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2956,7 +3570,40 @@ func TestCheckResponseSnapshot_Error_DirectoryLimitExceededException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConnectDirectory(context.Background(), &ConnectDirectoryInput{})
+	_, opErr := svc.ConnectDirectory(context.Background(), &ConnectDirectoryInput{
+		Name:        ptr.String("__Name__"),
+		ShortName:   ptr.String("__ShortName__"),
+		Password:    ptr.String("__Password__"),
+		Description: ptr.String("__Description__"),
+		Size:        types.DirectorySize("Small"),
+		ConnectSettings: &types.DirectoryConnectSettings{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CustomerDnsIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CustomerDnsIpsV6: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CustomerUserName: ptr.String("__CustomerUserName__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NetworkType: types.NetworkType("Dual-stack"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2982,7 +3629,13 @@ func TestCheckResponseSnapshot_Error_DirectoryNotSharedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UnshareDirectory(context.Background(), &UnshareDirectoryInput{})
+	_, opErr := svc.UnshareDirectory(context.Background(), &UnshareDirectoryInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		UnshareTarget: &types.UnshareTarget{
+			Id:   ptr.String("__Id__"),
+			Type: types.TargetType("ACCOUNT"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3008,7 +3661,22 @@ func TestCheckResponseSnapshot_Error_DirectoryUnavailableException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddIpRoutes(context.Background(), &AddIpRoutesInput{})
+	_, opErr := svc.AddIpRoutes(context.Background(), &AddIpRoutesInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		IpRoutes: []types.IpRoute{
+			{
+				CidrIp:      ptr.String("__CidrIp__"),
+				CidrIpv6:    ptr.String("__CidrIpv6__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				CidrIp:      ptr.String("__CidrIp__"),
+				CidrIpv6:    ptr.String("__CidrIpv6__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		UpdateSecurityGroupForDirectoryControllers: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3034,7 +3702,9 @@ func TestCheckResponseSnapshot_Error_DisableAlreadyInProgressException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisableCAEnrollmentPolicy(context.Background(), &DisableCAEnrollmentPolicyInput{})
+	_, opErr := svc.DisableCAEnrollmentPolicy(context.Background(), &DisableCAEnrollmentPolicyInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3060,7 +3730,10 @@ func TestCheckResponseSnapshot_Error_DomainControllerLimitExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateNumberOfDomainControllers(context.Background(), &UpdateNumberOfDomainControllersInput{})
+	_, opErr := svc.UpdateNumberOfDomainControllers(context.Background(), &UpdateNumberOfDomainControllersInput{
+		DirectoryId:   ptr.String("__DirectoryId__"),
+		DesiredNumber: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3086,7 +3759,10 @@ func TestCheckResponseSnapshot_Error_EnableAlreadyInProgressException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.EnableCAEnrollmentPolicy(context.Background(), &EnableCAEnrollmentPolicyInput{})
+	_, opErr := svc.EnableCAEnrollmentPolicy(context.Background(), &EnableCAEnrollmentPolicyInput{
+		DirectoryId:     ptr.String("__DirectoryId__"),
+		PcaConnectorArn: ptr.String("__PcaConnectorArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3112,7 +3788,22 @@ func TestCheckResponseSnapshot_Error_EntityAlreadyExistsException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddIpRoutes(context.Background(), &AddIpRoutesInput{})
+	_, opErr := svc.AddIpRoutes(context.Background(), &AddIpRoutesInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		IpRoutes: []types.IpRoute{
+			{
+				CidrIp:      ptr.String("__CidrIp__"),
+				CidrIpv6:    ptr.String("__CidrIpv6__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				CidrIp:      ptr.String("__CidrIp__"),
+				CidrIpv6:    ptr.String("__CidrIpv6__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		UpdateSecurityGroupForDirectoryControllers: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3138,7 +3829,9 @@ func TestCheckResponseSnapshot_Error_EntityDoesNotExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptSharedDirectory(context.Background(), &AcceptSharedDirectoryInput{})
+	_, opErr := svc.AcceptSharedDirectory(context.Background(), &AcceptSharedDirectoryInput{
+		SharedDirectoryId: ptr.String("__SharedDirectoryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3164,7 +3857,19 @@ func TestCheckResponseSnapshot_Error_IncompatibleSettingsException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateSettings(context.Background(), &UpdateSettingsInput{})
+	_, opErr := svc.UpdateSettings(context.Background(), &UpdateSettingsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Settings: []types.Setting{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3190,7 +3895,10 @@ func TestCheckResponseSnapshot_Error_InsufficientPermissionsException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLogSubscription(context.Background(), &CreateLogSubscriptionInput{})
+	_, opErr := svc.CreateLogSubscription(context.Background(), &CreateLogSubscriptionInput{
+		DirectoryId:  ptr.String("__DirectoryId__"),
+		LogGroupName: ptr.String("__LogGroupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3216,7 +3924,14 @@ func TestCheckResponseSnapshot_Error_InvalidCertificateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterCertificate(context.Background(), &RegisterCertificateInput{})
+	_, opErr := svc.RegisterCertificate(context.Background(), &RegisterCertificateInput{
+		DirectoryId:     ptr.String("__DirectoryId__"),
+		CertificateData: ptr.String("__CertificateData__"),
+		Type:            types.CertificateType("ClientCertAuth"),
+		ClientCertAuthSettings: &types.ClientCertAuthSettings{
+			OCSPUrl: ptr.String("__OCSPUrl__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3242,7 +3957,10 @@ func TestCheckResponseSnapshot_Error_InvalidClientAuthStatusException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisableClientAuthentication(context.Background(), &DisableClientAuthenticationInput{})
+	_, opErr := svc.DisableClientAuthentication(context.Background(), &DisableClientAuthenticationInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Type:        types.ClientAuthenticationType("SmartCard"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3268,7 +3986,10 @@ func TestCheckResponseSnapshot_Error_InvalidLDAPSStatusException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisableLDAPS(context.Background(), &DisableLDAPSInput{})
+	_, opErr := svc.DisableLDAPS(context.Background(), &DisableLDAPSInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Type:        types.LDAPSType("Client"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3294,7 +4015,14 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeDirectories(context.Background(), &DescribeDirectoriesInput{})
+	_, opErr := svc.DescribeDirectories(context.Background(), &DescribeDirectoriesInput{
+		DirectoryIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3320,7 +4048,9 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptSharedDirectory(context.Background(), &AcceptSharedDirectoryInput{})
+	_, opErr := svc.AcceptSharedDirectory(context.Background(), &AcceptSharedDirectoryInput{
+		SharedDirectoryId: ptr.String("__SharedDirectoryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3346,7 +4076,11 @@ func TestCheckResponseSnapshot_Error_InvalidPasswordException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ResetUserPassword(context.Background(), &ResetUserPasswordInput{})
+	_, opErr := svc.ResetUserPassword(context.Background(), &ResetUserPasswordInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		UserName:    ptr.String("__UserName__"),
+		NewPassword: ptr.String("__NewPassword__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3372,7 +4106,15 @@ func TestCheckResponseSnapshot_Error_InvalidTargetException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ShareDirectory(context.Background(), &ShareDirectoryInput{})
+	_, opErr := svc.ShareDirectory(context.Background(), &ShareDirectoryInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		ShareNotes:  ptr.String("__ShareNotes__"),
+		ShareTarget: &types.ShareTarget{
+			Id:   ptr.String("__Id__"),
+			Type: types.TargetType("ACCOUNT"),
+		},
+		ShareMethod: types.ShareMethod("ORGANIZATIONS"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3398,7 +4140,22 @@ func TestCheckResponseSnapshot_Error_IpRouteLimitExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddIpRoutes(context.Background(), &AddIpRoutesInput{})
+	_, opErr := svc.AddIpRoutes(context.Background(), &AddIpRoutesInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		IpRoutes: []types.IpRoute{
+			{
+				CidrIp:      ptr.String("__CidrIp__"),
+				CidrIpv6:    ptr.String("__CidrIpv6__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				CidrIp:      ptr.String("__CidrIp__"),
+				CidrIpv6:    ptr.String("__CidrIpv6__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		UpdateSecurityGroupForDirectoryControllers: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3424,7 +4181,10 @@ func TestCheckResponseSnapshot_Error_NoAvailableCertificateException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.EnableClientAuthentication(context.Background(), &EnableClientAuthenticationInput{})
+	_, opErr := svc.EnableClientAuthentication(context.Background(), &EnableClientAuthenticationInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Type:        types.ClientAuthenticationType("SmartCard"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3450,7 +4210,15 @@ func TestCheckResponseSnapshot_Error_OrganizationsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ShareDirectory(context.Background(), &ShareDirectoryInput{})
+	_, opErr := svc.ShareDirectory(context.Background(), &ShareDirectoryInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		ShareNotes:  ptr.String("__ShareNotes__"),
+		ShareTarget: &types.ShareTarget{
+			Id:   ptr.String("__Id__"),
+			Type: types.TargetType("ACCOUNT"),
+		},
+		ShareMethod: types.ShareMethod("ORGANIZATIONS"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3476,7 +4244,17 @@ func TestCheckResponseSnapshot_Error_RegionLimitExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{})
+	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		RegionName:  ptr.String("__RegionName__"),
+		VPCSettings: &types.DirectoryVpcSettings{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3502,7 +4280,9 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptSharedDirectory(context.Background(), &AcceptSharedDirectoryInput{})
+	_, opErr := svc.AcceptSharedDirectory(context.Background(), &AcceptSharedDirectoryInput{
+		SharedDirectoryId: ptr.String("__SharedDirectoryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3528,7 +4308,15 @@ func TestCheckResponseSnapshot_Error_ShareLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ShareDirectory(context.Background(), &ShareDirectoryInput{})
+	_, opErr := svc.ShareDirectory(context.Background(), &ShareDirectoryInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		ShareNotes:  ptr.String("__ShareNotes__"),
+		ShareTarget: &types.ShareTarget{
+			Id:   ptr.String("__Id__"),
+			Type: types.TargetType("ACCOUNT"),
+		},
+		ShareMethod: types.ShareMethod("ORGANIZATIONS"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3554,7 +4342,10 @@ func TestCheckResponseSnapshot_Error_SnapshotLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{})
+	_, opErr := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Name:        ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3580,7 +4371,19 @@ func TestCheckResponseSnapshot_Error_TagLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3606,7 +4409,17 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{})
+	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		RegionName:  ptr.String("__RegionName__"),
+		VPCSettings: &types.DirectoryVpcSettings{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3632,7 +4445,19 @@ func TestCheckResponseSnapshot_Error_UnsupportedSettingsException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateSettings(context.Background(), &UpdateSettingsInput{})
+	_, opErr := svc.UpdateSettings(context.Background(), &UpdateSettingsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Settings: []types.Setting{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3658,7 +4483,11 @@ func TestCheckResponseSnapshot_Error_UserDoesNotExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ResetUserPassword(context.Background(), &ResetUserPasswordInput{})
+	_, opErr := svc.ResetUserPassword(context.Background(), &ResetUserPasswordInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		UserName:    ptr.String("__UserName__"),
+		NewPassword: ptr.String("__NewPassword__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

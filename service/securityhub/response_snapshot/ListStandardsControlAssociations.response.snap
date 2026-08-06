@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","StandardsControlAssociationSummaries":[{"AssociationStatus":"ENABLED","RelatedRequirements":["__Member__","__Member__"],"SecurityControlArn":"__SecurityControlArn__","SecurityControlId":"__SecurityControlId__","StandardsArn":"__StandardsArn__","StandardsControlDescription":"__StandardsControlDescription__","StandardsControlTitle":"__StandardsControlTitle__","UpdatedAt":"2000-01-01T00:00:00Z","UpdatedReason":"__UpdatedReason__"},{"AssociationStatus":"ENABLED","RelatedRequirements":["__Member__","__Member__"],"SecurityControlArn":"__SecurityControlArn__","SecurityControlId":"__SecurityControlId__","StandardsArn":"__StandardsArn__","StandardsControlDescription":"__StandardsControlDescription__","StandardsControlTitle":"__StandardsControlTitle__","UpdatedAt":"2000-01-01T00:00:00Z","UpdatedReason":"__UpdatedReason__"}]}

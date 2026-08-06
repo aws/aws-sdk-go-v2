@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","replacePermissionAssociationsWorks":[{"creationTime":946684800,"fromPermissionArn":"__FromPermissionArn__","fromPermissionVersion":"__FromPermissionVersion__","id":"__Id__","lastUpdatedTime":946684800,"status":"IN_PROGRESS","statusMessage":"__StatusMessage__","toPermissionArn":"__ToPermissionArn__","toPermissionVersion":"__ToPermissionVersion__"},{"creationTime":946684800,"fromPermissionArn":"__FromPermissionArn__","fromPermissionVersion":"__FromPermissionVersion__","id":"__Id__","lastUpdatedTime":946684800,"status":"IN_PROGRESS","statusMessage":"__StatusMessage__","toPermissionArn":"__ToPermissionArn__","toPermissionVersion":"__ToPermissionVersion__"}]}

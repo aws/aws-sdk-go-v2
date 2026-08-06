@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","displayName":"__DisplayName__","fileSystemLocations":[{"name":"__Name__","path":"__Path__","type":"SHARED"},{"name":"__Name__","path":"__Path__","type":"SHARED"}],"osFamily":"WINDOWS","storageProfileId":"__StorageProfileId__","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__"}

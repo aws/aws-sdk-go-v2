@@ -162,7 +162,43 @@ func TestCheckResponseSnapshot_CreateApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApi(context.Background(), &CreateApiInput{})
+	got, err := svc.CreateApi(context.Background(), &CreateApiInput{
+		ApiKeySelectionExpression: ptr.String("__ApiKeySelectionExpression__"),
+		CorsConfiguration: &types.Cors{
+			AllowCredentials: ptr.Bool(true),
+			AllowHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowMethods: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowOrigins: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExposeHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MaxAge: ptr.Int32(1),
+		},
+		CredentialsArn:            ptr.String("__CredentialsArn__"),
+		Description:               ptr.String("__Description__"),
+		DisableSchemaValidation:   ptr.Bool(true),
+		DisableExecuteApiEndpoint: ptr.Bool(true),
+		IpAddressType:             types.IpAddressType("ipv4"),
+		Name:                      ptr.String("__Name__"),
+		ProtocolType:              types.ProtocolType("WEBSOCKET"),
+		RouteKey:                  ptr.String("__RouteKey__"),
+		RouteSelectionExpression:  ptr.String("__RouteSelectionExpression__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Target:  ptr.String("__Target__"),
+		Version: ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -186,7 +222,12 @@ func TestCheckResponseSnapshot_CreateApiMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApiMapping(context.Background(), &CreateApiMappingInput{})
+	got, err := svc.CreateApiMapping(context.Background(), &CreateApiMappingInput{
+		ApiId:         ptr.String("__ApiId__"),
+		ApiMappingKey: ptr.String("__ApiMappingKey__"),
+		DomainName:    ptr.String("__DomainName__"),
+		Stage:         ptr.String("__Stage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,7 +267,28 @@ func TestCheckResponseSnapshot_CreateAuthorizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAuthorizer(context.Background(), &CreateAuthorizerInput{})
+	got, err := svc.CreateAuthorizer(context.Background(), &CreateAuthorizerInput{
+		ApiId:                          ptr.String("__ApiId__"),
+		AuthorizerCredentialsArn:       ptr.String("__AuthorizerCredentialsArn__"),
+		AuthorizerPayloadFormatVersion: ptr.String("__AuthorizerPayloadFormatVersion__"),
+		AuthorizerResultTtlInSeconds:   ptr.Int32(1),
+		AuthorizerType:                 types.AuthorizerType("REQUEST"),
+		AuthorizerUri:                  ptr.String("__AuthorizerUri__"),
+		EnableSimpleResponses:          ptr.Bool(true),
+		IdentitySource: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+		JwtConfiguration: &types.JWTConfiguration{
+			Audience: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Issuer: ptr.String("__Issuer__"),
+		},
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +314,11 @@ func TestCheckResponseSnapshot_CreateDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApiId:       ptr.String("__ApiId__"),
+		Description: ptr.String("__Description__"),
+		StageName:   ptr.String("__StageName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -315,7 +381,45 @@ func TestCheckResponseSnapshot_CreateDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomainName(context.Background(), &CreateDomainNameInput{})
+	got, err := svc.CreateDomainName(context.Background(), &CreateDomainNameInput{
+		DomainName: ptr.String("__DomainName__"),
+		DomainNameConfigurations: []types.DomainNameConfiguration{
+			{
+				ApiGatewayDomainName:                ptr.String("__ApiGatewayDomainName__"),
+				CertificateArn:                      ptr.String("__CertificateArn__"),
+				CertificateName:                     ptr.String("__CertificateName__"),
+				CertificateUploadDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DomainNameStatus:                    types.DomainNameStatus("AVAILABLE"),
+				DomainNameStatusMessage:             ptr.String("__DomainNameStatusMessage__"),
+				EndpointType:                        types.EndpointType("REGIONAL"),
+				HostedZoneId:                        ptr.String("__HostedZoneId__"),
+				IpAddressType:                       types.IpAddressType("ipv4"),
+				SecurityPolicy:                      types.SecurityPolicy("TLS_1_0"),
+				OwnershipVerificationCertificateArn: ptr.String("__OwnershipVerificationCertificateArn__"),
+			},
+			{
+				ApiGatewayDomainName:                ptr.String("__ApiGatewayDomainName__"),
+				CertificateArn:                      ptr.String("__CertificateArn__"),
+				CertificateName:                     ptr.String("__CertificateName__"),
+				CertificateUploadDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DomainNameStatus:                    types.DomainNameStatus("AVAILABLE"),
+				DomainNameStatusMessage:             ptr.String("__DomainNameStatusMessage__"),
+				EndpointType:                        types.EndpointType("REGIONAL"),
+				HostedZoneId:                        ptr.String("__HostedZoneId__"),
+				IpAddressType:                       types.IpAddressType("ipv4"),
+				SecurityPolicy:                      types.SecurityPolicy("TLS_1_0"),
+				OwnershipVerificationCertificateArn: ptr.String("__OwnershipVerificationCertificateArn__"),
+			},
+		},
+		MutualTlsAuthentication: &types.MutualTlsAuthenticationInput{
+			TruststoreUri:     ptr.String("__TruststoreUri__"),
+			TruststoreVersion: ptr.String("__TruststoreVersion__"),
+		},
+		RoutingMode: types.RoutingMode("API_MAPPING_ONLY"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -365,7 +469,36 @@ func TestCheckResponseSnapshot_CreateIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIntegration(context.Background(), &CreateIntegrationInput{})
+	got, err := svc.CreateIntegration(context.Background(), &CreateIntegrationInput{
+		ApiId:                   ptr.String("__ApiId__"),
+		ConnectionId:            ptr.String("__ConnectionId__"),
+		ConnectionType:          types.ConnectionType("INTERNET"),
+		ContentHandlingStrategy: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
+		CredentialsArn:          ptr.String("__CredentialsArn__"),
+		Description:             ptr.String("__Description__"),
+		IntegrationMethod:       ptr.String("__IntegrationMethod__"),
+		IntegrationSubtype:      ptr.String("__IntegrationSubtype__"),
+		IntegrationType:         types.IntegrationType("AWS"),
+		IntegrationUri:          ptr.String("__IntegrationUri__"),
+		PassthroughBehavior:     types.PassthroughBehavior("WHEN_NO_MATCH"),
+		PayloadFormatVersion:    ptr.String("__PayloadFormatVersion__"),
+		RequestParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestTemplates: map[string]string{
+			"key0": "__Value__",
+		},
+		ResponseParameters: map[string]map[string]string{
+			"key0": {
+				"key0": "__Value__",
+			},
+		},
+		TemplateSelectionExpression: ptr.String("__TemplateSelectionExpression__"),
+		TimeoutInMillis:             ptr.Int32(1),
+		TlsConfig: &types.TlsConfigInput{
+			ServerNameToVerify: ptr.String("__ServerNameToVerify__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -395,7 +528,19 @@ func TestCheckResponseSnapshot_CreateIntegrationResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIntegrationResponse(context.Background(), &CreateIntegrationResponseInput{})
+	got, err := svc.CreateIntegrationResponse(context.Background(), &CreateIntegrationResponseInput{
+		ApiId:                   ptr.String("__ApiId__"),
+		ContentHandlingStrategy: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
+		IntegrationId:           ptr.String("__IntegrationId__"),
+		IntegrationResponseKey:  ptr.String("__IntegrationResponseKey__"),
+		ResponseParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ResponseTemplates: map[string]string{
+			"key0": "__Value__",
+		},
+		TemplateSelectionExpression: ptr.String("__TemplateSelectionExpression__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -420,7 +565,13 @@ func TestCheckResponseSnapshot_CreateModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateModel(context.Background(), &CreateModelInput{})
+	got, err := svc.CreateModel(context.Background(), &CreateModelInput{
+		ApiId:       ptr.String("__ApiId__"),
+		ContentType: ptr.String("__ContentType__"),
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Schema:      ptr.String("__Schema__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -487,7 +638,47 @@ func TestCheckResponseSnapshot_CreatePortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePortal(context.Background(), &CreatePortalInput{})
+	got, err := svc.CreatePortal(context.Background(), &CreatePortalInput{
+		Authorization: &types.Authorization{
+			CognitoConfig: &types.CognitoConfig{
+				AppClientId:    ptr.String("__AppClientId__"),
+				UserPoolArn:    ptr.String("__UserPoolArn__"),
+				UserPoolDomain: ptr.String("__UserPoolDomain__"),
+			},
+			None: &types.None{},
+		},
+		EndpointConfiguration: &types.EndpointConfigurationRequest{
+			AcmManaged: &types.ACMManaged{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				DomainName:     ptr.String("__DomainName__"),
+			},
+			None: &types.None{},
+		},
+		IncludedPortalProductArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogoUri: ptr.String("__LogoUri__"),
+		PortalContent: &types.PortalContent{
+			Description: ptr.String("__Description__"),
+			DisplayName: ptr.String("__DisplayName__"),
+			Theme: &types.PortalTheme{
+				CustomColors: &types.CustomColors{
+					AccentColor:          ptr.String("__AccentColor__"),
+					BackgroundColor:      ptr.String("__BackgroundColor__"),
+					ErrorValidationColor: ptr.String("__ErrorValidationColor__"),
+					HeaderColor:          ptr.String("__HeaderColor__"),
+					NavigationColor:      ptr.String("__NavigationColor__"),
+					TextColor:            ptr.String("__TextColor__"),
+				},
+				LogoLastUploaded: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		RumAppMonitorName: ptr.String("__RumAppMonitorName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -538,7 +729,13 @@ func TestCheckResponseSnapshot_CreatePortalProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePortalProduct(context.Background(), &CreatePortalProductInput{})
+	got, err := svc.CreatePortalProduct(context.Background(), &CreatePortalProductInput{
+		Description: ptr.String("__Description__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -565,7 +762,13 @@ func TestCheckResponseSnapshot_CreateProductPage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProductPage(context.Background(), &CreateProductPageInput{})
+	got, err := svc.CreateProductPage(context.Background(), &CreateProductPageInput{
+		DisplayContent: &types.DisplayContent{
+			Body:  ptr.String("__Body__"),
+			Title: ptr.String("__Title__"),
+		},
+		PortalProductId: ptr.String("__PortalProductId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -607,7 +810,26 @@ func TestCheckResponseSnapshot_CreateProductRestEndpointPage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProductRestEndpointPage(context.Background(), &CreateProductRestEndpointPageInput{})
+	got, err := svc.CreateProductRestEndpointPage(context.Background(), &CreateProductRestEndpointPageInput{
+		DisplayContent: &types.EndpointDisplayContent{
+			None: &types.None{},
+			Overrides: &types.DisplayContentOverrides{
+				Body:          ptr.String("__Body__"),
+				Endpoint:      ptr.String("__Endpoint__"),
+				OperationName: ptr.String("__OperationName__"),
+			},
+		},
+		PortalProductId: ptr.String("__PortalProductId__"),
+		RestEndpointIdentifier: &types.RestEndpointIdentifier{
+			IdentifierParts: &types.IdentifierParts{
+				Method:    ptr.String("__Method__"),
+				Path:      ptr.String("__Path__"),
+				RestApiId: ptr.String("__RestApiId__"),
+				Stage:     ptr.String("__Stage__"),
+			},
+		},
+		TryItState: types.TryItState("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -649,7 +871,29 @@ func TestCheckResponseSnapshot_CreateRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRoute(context.Background(), &CreateRouteInput{})
+	got, err := svc.CreateRoute(context.Background(), &CreateRouteInput{
+		ApiId:          ptr.String("__ApiId__"),
+		ApiKeyRequired: ptr.Bool(true),
+		AuthorizationScopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AuthorizationType:        types.AuthorizationType("NONE"),
+		AuthorizerId:             ptr.String("__AuthorizerId__"),
+		ModelSelectionExpression: ptr.String("__ModelSelectionExpression__"),
+		OperationName:            ptr.String("__OperationName__"),
+		RequestModels: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestParameters: map[string]types.ParameterConstraints{
+			"key0": {
+				Required: ptr.Bool(true),
+			},
+		},
+		RouteKey:                         ptr.String("__RouteKey__"),
+		RouteResponseSelectionExpression: ptr.String("__RouteResponseSelectionExpression__"),
+		Target:                           ptr.String("__Target__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -680,7 +924,20 @@ func TestCheckResponseSnapshot_CreateRouteResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRouteResponse(context.Background(), &CreateRouteResponseInput{})
+	got, err := svc.CreateRouteResponse(context.Background(), &CreateRouteResponseInput{
+		ApiId:                    ptr.String("__ApiId__"),
+		ModelSelectionExpression: ptr.String("__ModelSelectionExpression__"),
+		ResponseModels: map[string]string{
+			"key0": "__Value__",
+		},
+		ResponseParameters: map[string]types.ParameterConstraints{
+			"key0": {
+				Required: ptr.Bool(true),
+			},
+		},
+		RouteId:          ptr.String("__RouteId__"),
+		RouteResponseKey: ptr.String("__RouteResponseKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -761,7 +1018,69 @@ func TestCheckResponseSnapshot_CreateRoutingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRoutingRule(context.Background(), &CreateRoutingRuleInput{})
+	got, err := svc.CreateRoutingRule(context.Background(), &CreateRoutingRuleInput{
+		Actions: []types.RoutingRuleAction{
+			{
+				InvokeApi: &types.RoutingRuleActionInvokeApi{
+					ApiId:         ptr.String("__ApiId__"),
+					Stage:         ptr.String("__Stage__"),
+					StripBasePath: ptr.Bool(true),
+				},
+			},
+			{
+				InvokeApi: &types.RoutingRuleActionInvokeApi{
+					ApiId:         ptr.String("__ApiId__"),
+					Stage:         ptr.String("__Stage__"),
+					StripBasePath: ptr.Bool(true),
+				},
+			},
+		},
+		Conditions: []types.RoutingRuleCondition{
+			{
+				MatchBasePaths: &types.RoutingRuleMatchBasePaths{
+					AnyOf: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MatchHeaders: &types.RoutingRuleMatchHeaders{
+					AnyOf: []types.RoutingRuleMatchHeaderValue{
+						{
+							Header:    ptr.String("__Header__"),
+							ValueGlob: ptr.String("__ValueGlob__"),
+						},
+						{
+							Header:    ptr.String("__Header__"),
+							ValueGlob: ptr.String("__ValueGlob__"),
+						},
+					},
+				},
+			},
+			{
+				MatchBasePaths: &types.RoutingRuleMatchBasePaths{
+					AnyOf: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MatchHeaders: &types.RoutingRuleMatchHeaders{
+					AnyOf: []types.RoutingRuleMatchHeaderValue{
+						{
+							Header:    ptr.String("__Header__"),
+							ValueGlob: ptr.String("__ValueGlob__"),
+						},
+						{
+							Header:    ptr.String("__Header__"),
+							ValueGlob: ptr.String("__ValueGlob__"),
+						},
+					},
+				},
+			},
+		},
+		DomainName:   ptr.String("__DomainName__"),
+		DomainNameId: ptr.String("__DomainNameId__"),
+		Priority:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -816,7 +1135,40 @@ func TestCheckResponseSnapshot_CreateStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStage(context.Background(), &CreateStageInput{})
+	got, err := svc.CreateStage(context.Background(), &CreateStageInput{
+		AccessLogSettings: &types.AccessLogSettings{
+			DestinationArn: ptr.String("__DestinationArn__"),
+			Format:         ptr.String("__Format__"),
+		},
+		ApiId:               ptr.String("__ApiId__"),
+		AutoDeploy:          ptr.Bool(true),
+		ClientCertificateId: ptr.String("__ClientCertificateId__"),
+		DefaultRouteSettings: &types.RouteSettings{
+			DataTraceEnabled:       ptr.Bool(true),
+			DetailedMetricsEnabled: ptr.Bool(true),
+			LoggingLevel:           types.LoggingLevel("ERROR"),
+			ThrottlingBurstLimit:   ptr.Int32(1),
+			ThrottlingRateLimit:    ptr.Float64(1.0),
+		},
+		DeploymentId: ptr.String("__DeploymentId__"),
+		Description:  ptr.String("__Description__"),
+		RouteSettings: map[string]types.RouteSettings{
+			"key0": {
+				DataTraceEnabled:       ptr.Bool(true),
+				DetailedMetricsEnabled: ptr.Bool(true),
+				LoggingLevel:           types.LoggingLevel("ERROR"),
+				ThrottlingBurstLimit:   ptr.Int32(1),
+				ThrottlingRateLimit:    ptr.Float64(1.0),
+			},
+		},
+		StageName: ptr.String("__StageName__"),
+		StageVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -853,7 +1205,20 @@ func TestCheckResponseSnapshot_CreateVpcLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVpcLink(context.Background(), &CreateVpcLinkInput{})
+	got, err := svc.CreateVpcLink(context.Background(), &CreateVpcLinkInput{
+		Name: ptr.String("__Name__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -872,7 +1237,10 @@ func TestCheckResponseSnapshot_DeleteAccessLogSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessLogSettings(context.Background(), &DeleteAccessLogSettingsInput{})
+	got, err := svc.DeleteAccessLogSettings(context.Background(), &DeleteAccessLogSettingsInput{
+		ApiId:     ptr.String("__ApiId__"),
+		StageName: ptr.String("__StageName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -891,7 +1259,9 @@ func TestCheckResponseSnapshot_DeleteApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApi(context.Background(), &DeleteApiInput{})
+	got, err := svc.DeleteApi(context.Background(), &DeleteApiInput{
+		ApiId: ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -910,7 +1280,10 @@ func TestCheckResponseSnapshot_DeleteApiMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApiMapping(context.Background(), &DeleteApiMappingInput{})
+	got, err := svc.DeleteApiMapping(context.Background(), &DeleteApiMappingInput{
+		ApiMappingId: ptr.String("__ApiMappingId__"),
+		DomainName:   ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -929,7 +1302,10 @@ func TestCheckResponseSnapshot_DeleteAuthorizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAuthorizer(context.Background(), &DeleteAuthorizerInput{})
+	got, err := svc.DeleteAuthorizer(context.Background(), &DeleteAuthorizerInput{
+		ApiId:        ptr.String("__ApiId__"),
+		AuthorizerId: ptr.String("__AuthorizerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -948,7 +1324,9 @@ func TestCheckResponseSnapshot_DeleteCorsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCorsConfiguration(context.Background(), &DeleteCorsConfigurationInput{})
+	got, err := svc.DeleteCorsConfiguration(context.Background(), &DeleteCorsConfigurationInput{
+		ApiId: ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -967,7 +1345,10 @@ func TestCheckResponseSnapshot_DeleteDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeployment(context.Background(), &DeleteDeploymentInput{})
+	got, err := svc.DeleteDeployment(context.Background(), &DeleteDeploymentInput{
+		ApiId:        ptr.String("__ApiId__"),
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -986,7 +1367,9 @@ func TestCheckResponseSnapshot_DeleteDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomainName(context.Background(), &DeleteDomainNameInput{})
+	got, err := svc.DeleteDomainName(context.Background(), &DeleteDomainNameInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1005,7 +1388,10 @@ func TestCheckResponseSnapshot_DeleteIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIntegration(context.Background(), &DeleteIntegrationInput{})
+	got, err := svc.DeleteIntegration(context.Background(), &DeleteIntegrationInput{
+		ApiId:         ptr.String("__ApiId__"),
+		IntegrationId: ptr.String("__IntegrationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1024,7 +1410,11 @@ func TestCheckResponseSnapshot_DeleteIntegrationResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIntegrationResponse(context.Background(), &DeleteIntegrationResponseInput{})
+	got, err := svc.DeleteIntegrationResponse(context.Background(), &DeleteIntegrationResponseInput{
+		ApiId:                 ptr.String("__ApiId__"),
+		IntegrationId:         ptr.String("__IntegrationId__"),
+		IntegrationResponseId: ptr.String("__IntegrationResponseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1043,7 +1433,10 @@ func TestCheckResponseSnapshot_DeleteModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteModel(context.Background(), &DeleteModelInput{})
+	got, err := svc.DeleteModel(context.Background(), &DeleteModelInput{
+		ApiId:   ptr.String("__ApiId__"),
+		ModelId: ptr.String("__ModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1062,7 +1455,9 @@ func TestCheckResponseSnapshot_DeletePortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePortal(context.Background(), &DeletePortalInput{})
+	got, err := svc.DeletePortal(context.Background(), &DeletePortalInput{
+		PortalId: ptr.String("__PortalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1081,7 +1476,9 @@ func TestCheckResponseSnapshot_DeletePortalProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePortalProduct(context.Background(), &DeletePortalProductInput{})
+	got, err := svc.DeletePortalProduct(context.Background(), &DeletePortalProductInput{
+		PortalProductId: ptr.String("__PortalProductId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1100,7 +1497,9 @@ func TestCheckResponseSnapshot_DeletePortalProductSharingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePortalProductSharingPolicy(context.Background(), &DeletePortalProductSharingPolicyInput{})
+	got, err := svc.DeletePortalProductSharingPolicy(context.Background(), &DeletePortalProductSharingPolicyInput{
+		PortalProductId: ptr.String("__PortalProductId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1119,7 +1518,10 @@ func TestCheckResponseSnapshot_DeleteProductPage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProductPage(context.Background(), &DeleteProductPageInput{})
+	got, err := svc.DeleteProductPage(context.Background(), &DeleteProductPageInput{
+		PortalProductId: ptr.String("__PortalProductId__"),
+		ProductPageId:   ptr.String("__ProductPageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1138,7 +1540,10 @@ func TestCheckResponseSnapshot_DeleteProductRestEndpointPage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProductRestEndpointPage(context.Background(), &DeleteProductRestEndpointPageInput{})
+	got, err := svc.DeleteProductRestEndpointPage(context.Background(), &DeleteProductRestEndpointPageInput{
+		PortalProductId:           ptr.String("__PortalProductId__"),
+		ProductRestEndpointPageId: ptr.String("__ProductRestEndpointPageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1157,7 +1562,10 @@ func TestCheckResponseSnapshot_DeleteRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRoute(context.Background(), &DeleteRouteInput{})
+	got, err := svc.DeleteRoute(context.Background(), &DeleteRouteInput{
+		ApiId:   ptr.String("__ApiId__"),
+		RouteId: ptr.String("__RouteId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1176,7 +1584,11 @@ func TestCheckResponseSnapshot_DeleteRouteRequestParameter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRouteRequestParameter(context.Background(), &DeleteRouteRequestParameterInput{})
+	got, err := svc.DeleteRouteRequestParameter(context.Background(), &DeleteRouteRequestParameterInput{
+		ApiId:               ptr.String("__ApiId__"),
+		RequestParameterKey: ptr.String("__RequestParameterKey__"),
+		RouteId:             ptr.String("__RouteId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1195,7 +1607,11 @@ func TestCheckResponseSnapshot_DeleteRouteResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRouteResponse(context.Background(), &DeleteRouteResponseInput{})
+	got, err := svc.DeleteRouteResponse(context.Background(), &DeleteRouteResponseInput{
+		ApiId:           ptr.String("__ApiId__"),
+		RouteId:         ptr.String("__RouteId__"),
+		RouteResponseId: ptr.String("__RouteResponseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1214,7 +1630,11 @@ func TestCheckResponseSnapshot_DeleteRouteSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRouteSettings(context.Background(), &DeleteRouteSettingsInput{})
+	got, err := svc.DeleteRouteSettings(context.Background(), &DeleteRouteSettingsInput{
+		ApiId:     ptr.String("__ApiId__"),
+		RouteKey:  ptr.String("__RouteKey__"),
+		StageName: ptr.String("__StageName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1233,7 +1653,11 @@ func TestCheckResponseSnapshot_DeleteRoutingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRoutingRule(context.Background(), &DeleteRoutingRuleInput{})
+	got, err := svc.DeleteRoutingRule(context.Background(), &DeleteRoutingRuleInput{
+		DomainName:    ptr.String("__DomainName__"),
+		DomainNameId:  ptr.String("__DomainNameId__"),
+		RoutingRuleId: ptr.String("__RoutingRuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1252,7 +1676,10 @@ func TestCheckResponseSnapshot_DeleteStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStage(context.Background(), &DeleteStageInput{})
+	got, err := svc.DeleteStage(context.Background(), &DeleteStageInput{
+		ApiId:     ptr.String("__ApiId__"),
+		StageName: ptr.String("__StageName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1271,7 +1698,9 @@ func TestCheckResponseSnapshot_DeleteVpcLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVpcLink(context.Background(), &DeleteVpcLinkInput{})
+	got, err := svc.DeleteVpcLink(context.Background(), &DeleteVpcLinkInput{
+		VpcLinkId: ptr.String("__VpcLinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1290,7 +1719,9 @@ func TestCheckResponseSnapshot_DisablePortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisablePortal(context.Background(), &DisablePortalInput{})
+	got, err := svc.DisablePortal(context.Background(), &DisablePortalInput{
+		PortalId: ptr.String("__PortalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1311,7 +1742,14 @@ func TestCheckResponseSnapshot_ExportApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportApi(context.Background(), &ExportApiInput{})
+	got, err := svc.ExportApi(context.Background(), &ExportApiInput{
+		ApiId:             ptr.String("__ApiId__"),
+		ExportVersion:     ptr.String("__ExportVersion__"),
+		IncludeExtensions: ptr.Bool(true),
+		OutputType:        ptr.String("__OutputType__"),
+		Specification:     ptr.String("__Specification__"),
+		StageName:         ptr.String("__StageName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1375,7 +1813,9 @@ func TestCheckResponseSnapshot_GetApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApi(context.Background(), &GetApiInput{})
+	got, err := svc.GetApi(context.Background(), &GetApiInput{
+		ApiId: ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1399,7 +1839,10 @@ func TestCheckResponseSnapshot_GetApiMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApiMapping(context.Background(), &GetApiMappingInput{})
+	got, err := svc.GetApiMapping(context.Background(), &GetApiMappingInput{
+		ApiMappingId: ptr.String("__ApiMappingId__"),
+		DomainName:   ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1434,7 +1877,11 @@ func TestCheckResponseSnapshot_GetApiMappings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApiMappings(context.Background(), &GetApiMappingsInput{})
+	got, err := svc.GetApiMappings(context.Background(), &GetApiMappingsInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1549,7 +1996,10 @@ func TestCheckResponseSnapshot_GetApis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApis(context.Background(), &GetApisInput{})
+	got, err := svc.GetApis(context.Background(), &GetApisInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1589,7 +2039,10 @@ func TestCheckResponseSnapshot_GetAuthorizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAuthorizer(context.Background(), &GetAuthorizerInput{})
+	got, err := svc.GetAuthorizer(context.Background(), &GetAuthorizerInput{
+		ApiId:        ptr.String("__ApiId__"),
+		AuthorizerId: ptr.String("__AuthorizerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1656,7 +2109,11 @@ func TestCheckResponseSnapshot_GetAuthorizers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAuthorizers(context.Background(), &GetAuthorizersInput{})
+	got, err := svc.GetAuthorizers(context.Background(), &GetAuthorizersInput{
+		ApiId:      ptr.String("__ApiId__"),
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1682,7 +2139,10 @@ func TestCheckResponseSnapshot_GetDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{})
+	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{
+		ApiId:        ptr.String("__ApiId__"),
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1721,7 +2181,11 @@ func TestCheckResponseSnapshot_GetDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeployments(context.Background(), &GetDeploymentsInput{})
+	got, err := svc.GetDeployments(context.Background(), &GetDeploymentsInput{
+		ApiId:      ptr.String("__ApiId__"),
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1784,7 +2248,9 @@ func TestCheckResponseSnapshot_GetDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainName(context.Background(), &GetDomainNameInput{})
+	got, err := svc.GetDomainName(context.Background(), &GetDomainNameInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1897,7 +2363,10 @@ func TestCheckResponseSnapshot_GetDomainNames(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainNames(context.Background(), &GetDomainNamesInput{})
+	got, err := svc.GetDomainNames(context.Background(), &GetDomainNamesInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1947,7 +2416,10 @@ func TestCheckResponseSnapshot_GetIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntegration(context.Background(), &GetIntegrationInput{})
+	got, err := svc.GetIntegration(context.Background(), &GetIntegrationInput{
+		ApiId:         ptr.String("__ApiId__"),
+		IntegrationId: ptr.String("__IntegrationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1977,7 +2449,11 @@ func TestCheckResponseSnapshot_GetIntegrationResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntegrationResponse(context.Background(), &GetIntegrationResponseInput{})
+	got, err := svc.GetIntegrationResponse(context.Background(), &GetIntegrationResponseInput{
+		ApiId:                 ptr.String("__ApiId__"),
+		IntegrationId:         ptr.String("__IntegrationId__"),
+		IntegrationResponseId: ptr.String("__IntegrationResponseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2024,7 +2500,12 @@ func TestCheckResponseSnapshot_GetIntegrationResponses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntegrationResponses(context.Background(), &GetIntegrationResponsesInput{})
+	got, err := svc.GetIntegrationResponses(context.Background(), &GetIntegrationResponsesInput{
+		ApiId:         ptr.String("__ApiId__"),
+		IntegrationId: ptr.String("__IntegrationId__"),
+		MaxResults:    ptr.String("__MaxResults__"),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2111,7 +2592,11 @@ func TestCheckResponseSnapshot_GetIntegrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntegrations(context.Background(), &GetIntegrationsInput{})
+	got, err := svc.GetIntegrations(context.Background(), &GetIntegrationsInput{
+		ApiId:      ptr.String("__ApiId__"),
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2136,7 +2621,10 @@ func TestCheckResponseSnapshot_GetModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModel(context.Background(), &GetModelInput{})
+	got, err := svc.GetModel(context.Background(), &GetModelInput{
+		ApiId:   ptr.String("__ApiId__"),
+		ModelId: ptr.String("__ModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2157,7 +2645,10 @@ func TestCheckResponseSnapshot_GetModelTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModelTemplate(context.Background(), &GetModelTemplateInput{})
+	got, err := svc.GetModelTemplate(context.Background(), &GetModelTemplateInput{
+		ApiId:   ptr.String("__ApiId__"),
+		ModelId: ptr.String("__ModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2194,7 +2685,11 @@ func TestCheckResponseSnapshot_GetModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModels(context.Background(), &GetModelsInput{})
+	got, err := svc.GetModels(context.Background(), &GetModelsInput{
+		ApiId:      ptr.String("__ApiId__"),
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2269,7 +2764,9 @@ func TestCheckResponseSnapshot_GetPortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPortal(context.Background(), &GetPortalInput{})
+	got, err := svc.GetPortal(context.Background(), &GetPortalInput{
+		PortalId: ptr.String("__PortalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2320,7 +2817,10 @@ func TestCheckResponseSnapshot_GetPortalProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPortalProduct(context.Background(), &GetPortalProductInput{})
+	got, err := svc.GetPortalProduct(context.Background(), &GetPortalProductInput{
+		PortalProductId:        ptr.String("__PortalProductId__"),
+		ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2342,7 +2842,9 @@ func TestCheckResponseSnapshot_GetPortalProductSharingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPortalProductSharingPolicy(context.Background(), &GetPortalProductSharingPolicyInput{})
+	got, err := svc.GetPortalProductSharingPolicy(context.Background(), &GetPortalProductSharingPolicyInput{
+		PortalProductId: ptr.String("__PortalProductId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2369,7 +2871,11 @@ func TestCheckResponseSnapshot_GetProductPage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProductPage(context.Background(), &GetProductPageInput{})
+	got, err := svc.GetProductPage(context.Background(), &GetProductPageInput{
+		PortalProductId:        ptr.String("__PortalProductId__"),
+		ProductPageId:          ptr.String("__ProductPageId__"),
+		ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2412,7 +2918,12 @@ func TestCheckResponseSnapshot_GetProductRestEndpointPage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProductRestEndpointPage(context.Background(), &GetProductRestEndpointPageInput{})
+	got, err := svc.GetProductRestEndpointPage(context.Background(), &GetProductRestEndpointPageInput{
+		IncludeRawDisplayContent:  ptr.String("__IncludeRawDisplayContent__"),
+		PortalProductId:           ptr.String("__PortalProductId__"),
+		ProductRestEndpointPageId: ptr.String("__ProductRestEndpointPageId__"),
+		ResourceOwnerAccountId:    ptr.String("__ResourceOwnerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2454,7 +2965,10 @@ func TestCheckResponseSnapshot_GetRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRoute(context.Background(), &GetRouteInput{})
+	got, err := svc.GetRoute(context.Background(), &GetRouteInput{
+		ApiId:   ptr.String("__ApiId__"),
+		RouteId: ptr.String("__RouteId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2485,7 +2999,11 @@ func TestCheckResponseSnapshot_GetRouteResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRouteResponse(context.Background(), &GetRouteResponseInput{})
+	got, err := svc.GetRouteResponse(context.Background(), &GetRouteResponseInput{
+		ApiId:           ptr.String("__ApiId__"),
+		RouteId:         ptr.String("__RouteId__"),
+		RouteResponseId: ptr.String("__RouteResponseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2534,7 +3052,12 @@ func TestCheckResponseSnapshot_GetRouteResponses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRouteResponses(context.Background(), &GetRouteResponsesInput{})
+	got, err := svc.GetRouteResponses(context.Background(), &GetRouteResponsesInput{
+		ApiId:      ptr.String("__ApiId__"),
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+		RouteId:    ptr.String("__RouteId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2605,7 +3128,11 @@ func TestCheckResponseSnapshot_GetRoutes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRoutes(context.Background(), &GetRoutesInput{})
+	got, err := svc.GetRoutes(context.Background(), &GetRoutesInput{
+		ApiId:      ptr.String("__ApiId__"),
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2686,7 +3213,11 @@ func TestCheckResponseSnapshot_GetRoutingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRoutingRule(context.Background(), &GetRoutingRuleInput{})
+	got, err := svc.GetRoutingRule(context.Background(), &GetRoutingRuleInput{
+		DomainName:    ptr.String("__DomainName__"),
+		DomainNameId:  ptr.String("__DomainNameId__"),
+		RoutingRuleId: ptr.String("__RoutingRuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2741,7 +3272,10 @@ func TestCheckResponseSnapshot_GetStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStage(context.Background(), &GetStageInput{})
+	got, err := svc.GetStage(context.Background(), &GetStageInput{
+		ApiId:     ptr.String("__ApiId__"),
+		StageName: ptr.String("__StageName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2838,7 +3372,11 @@ func TestCheckResponseSnapshot_GetStages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStages(context.Background(), &GetStagesInput{})
+	got, err := svc.GetStages(context.Background(), &GetStagesInput{
+		ApiId:      ptr.String("__ApiId__"),
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2861,7 +3399,9 @@ func TestCheckResponseSnapshot_GetTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTags(context.Background(), &GetTagsInput{})
+	got, err := svc.GetTags(context.Background(), &GetTagsInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2898,7 +3438,9 @@ func TestCheckResponseSnapshot_GetVpcLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVpcLink(context.Background(), &GetVpcLinkInput{})
+	got, err := svc.GetVpcLink(context.Background(), &GetVpcLinkInput{
+		VpcLinkId: ptr.String("__VpcLinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2959,7 +3501,10 @@ func TestCheckResponseSnapshot_GetVpcLinks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVpcLinks(context.Background(), &GetVpcLinksInput{})
+	got, err := svc.GetVpcLinks(context.Background(), &GetVpcLinksInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3023,7 +3568,11 @@ func TestCheckResponseSnapshot_ImportApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportApi(context.Background(), &ImportApiInput{})
+	got, err := svc.ImportApi(context.Background(), &ImportApiInput{
+		Basepath:       ptr.String("__Basepath__"),
+		Body:           ptr.String("__Body__"),
+		FailOnWarnings: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3066,7 +3615,11 @@ func TestCheckResponseSnapshot_ListPortalProducts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPortalProducts(context.Background(), &ListPortalProductsInput{})
+	got, err := svc.ListPortalProducts(context.Background(), &ListPortalProductsInput{
+		MaxResults:    ptr.String("__MaxResults__"),
+		NextToken:     ptr.String("__NextToken__"),
+		ResourceOwner: ptr.String("__ResourceOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3203,7 +3756,10 @@ func TestCheckResponseSnapshot_ListPortals(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPortals(context.Background(), &ListPortalsInput{})
+	got, err := svc.ListPortals(context.Background(), &ListPortalsInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3238,7 +3794,12 @@ func TestCheckResponseSnapshot_ListProductPages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProductPages(context.Background(), &ListProductPagesInput{})
+	got, err := svc.ListProductPages(context.Background(), &ListProductPagesInput{
+		MaxResults:             ptr.String("__MaxResults__"),
+		NextToken:              ptr.String("__NextToken__"),
+		PortalProductId:        ptr.String("__PortalProductId__"),
+		ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3303,7 +3864,12 @@ func TestCheckResponseSnapshot_ListProductRestEndpointPages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProductRestEndpointPages(context.Background(), &ListProductRestEndpointPagesInput{})
+	got, err := svc.ListProductRestEndpointPages(context.Background(), &ListProductRestEndpointPagesInput{
+		MaxResults:             ptr.String("__MaxResults__"),
+		NextToken:              ptr.String("__NextToken__"),
+		PortalProductId:        ptr.String("__PortalProductId__"),
+		ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3452,7 +4018,12 @@ func TestCheckResponseSnapshot_ListRoutingRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRoutingRules(context.Background(), &ListRoutingRulesInput{})
+	got, err := svc.ListRoutingRules(context.Background(), &ListRoutingRulesInput{
+		DomainName:   ptr.String("__DomainName__"),
+		DomainNameId: ptr.String("__DomainNameId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3471,7 +4042,9 @@ func TestCheckResponseSnapshot_PreviewPortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PreviewPortal(context.Background(), &PreviewPortalInput{})
+	got, err := svc.PreviewPortal(context.Background(), &PreviewPortalInput{
+		PortalId: ptr.String("__PortalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3490,7 +4063,10 @@ func TestCheckResponseSnapshot_PublishPortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishPortal(context.Background(), &PublishPortalInput{})
+	got, err := svc.PublishPortal(context.Background(), &PublishPortalInput{
+		Description: ptr.String("__Description__"),
+		PortalId:    ptr.String("__PortalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3509,7 +4085,10 @@ func TestCheckResponseSnapshot_PutPortalProductSharingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPortalProductSharingPolicy(context.Background(), &PutPortalProductSharingPolicyInput{})
+	got, err := svc.PutPortalProductSharingPolicy(context.Background(), &PutPortalProductSharingPolicyInput{
+		PolicyDocument:  ptr.String("__PolicyDocument__"),
+		PortalProductId: ptr.String("__PortalProductId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3590,7 +4169,70 @@ func TestCheckResponseSnapshot_PutRoutingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRoutingRule(context.Background(), &PutRoutingRuleInput{})
+	got, err := svc.PutRoutingRule(context.Background(), &PutRoutingRuleInput{
+		Actions: []types.RoutingRuleAction{
+			{
+				InvokeApi: &types.RoutingRuleActionInvokeApi{
+					ApiId:         ptr.String("__ApiId__"),
+					Stage:         ptr.String("__Stage__"),
+					StripBasePath: ptr.Bool(true),
+				},
+			},
+			{
+				InvokeApi: &types.RoutingRuleActionInvokeApi{
+					ApiId:         ptr.String("__ApiId__"),
+					Stage:         ptr.String("__Stage__"),
+					StripBasePath: ptr.Bool(true),
+				},
+			},
+		},
+		Conditions: []types.RoutingRuleCondition{
+			{
+				MatchBasePaths: &types.RoutingRuleMatchBasePaths{
+					AnyOf: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MatchHeaders: &types.RoutingRuleMatchHeaders{
+					AnyOf: []types.RoutingRuleMatchHeaderValue{
+						{
+							Header:    ptr.String("__Header__"),
+							ValueGlob: ptr.String("__ValueGlob__"),
+						},
+						{
+							Header:    ptr.String("__Header__"),
+							ValueGlob: ptr.String("__ValueGlob__"),
+						},
+					},
+				},
+			},
+			{
+				MatchBasePaths: &types.RoutingRuleMatchBasePaths{
+					AnyOf: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MatchHeaders: &types.RoutingRuleMatchHeaders{
+					AnyOf: []types.RoutingRuleMatchHeaderValue{
+						{
+							Header:    ptr.String("__Header__"),
+							ValueGlob: ptr.String("__ValueGlob__"),
+						},
+						{
+							Header:    ptr.String("__Header__"),
+							ValueGlob: ptr.String("__ValueGlob__"),
+						},
+					},
+				},
+			},
+		},
+		DomainName:    ptr.String("__DomainName__"),
+		DomainNameId:  ptr.String("__DomainNameId__"),
+		Priority:      ptr.Int32(1),
+		RoutingRuleId: ptr.String("__RoutingRuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3654,7 +4296,12 @@ func TestCheckResponseSnapshot_ReimportApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReimportApi(context.Background(), &ReimportApiInput{})
+	got, err := svc.ReimportApi(context.Background(), &ReimportApiInput{
+		ApiId:          ptr.String("__ApiId__"),
+		Basepath:       ptr.String("__Basepath__"),
+		Body:           ptr.String("__Body__"),
+		FailOnWarnings: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3673,7 +4320,10 @@ func TestCheckResponseSnapshot_ResetAuthorizersCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetAuthorizersCache(context.Background(), &ResetAuthorizersCacheInput{})
+	got, err := svc.ResetAuthorizersCache(context.Background(), &ResetAuthorizersCacheInput{
+		ApiId:     ptr.String("__ApiId__"),
+		StageName: ptr.String("__StageName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3692,7 +4342,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3711,7 +4366,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3775,7 +4436,40 @@ func TestCheckResponseSnapshot_UpdateApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApi(context.Background(), &UpdateApiInput{})
+	got, err := svc.UpdateApi(context.Background(), &UpdateApiInput{
+		ApiId:                     ptr.String("__ApiId__"),
+		ApiKeySelectionExpression: ptr.String("__ApiKeySelectionExpression__"),
+		CorsConfiguration: &types.Cors{
+			AllowCredentials: ptr.Bool(true),
+			AllowHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowMethods: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowOrigins: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExposeHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MaxAge: ptr.Int32(1),
+		},
+		CredentialsArn:            ptr.String("__CredentialsArn__"),
+		Description:               ptr.String("__Description__"),
+		DisableSchemaValidation:   ptr.Bool(true),
+		DisableExecuteApiEndpoint: ptr.Bool(true),
+		IpAddressType:             types.IpAddressType("ipv4"),
+		Name:                      ptr.String("__Name__"),
+		RouteKey:                  ptr.String("__RouteKey__"),
+		RouteSelectionExpression:  ptr.String("__RouteSelectionExpression__"),
+		Target:                    ptr.String("__Target__"),
+		Version:                   ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3799,7 +4493,13 @@ func TestCheckResponseSnapshot_UpdateApiMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApiMapping(context.Background(), &UpdateApiMappingInput{})
+	got, err := svc.UpdateApiMapping(context.Background(), &UpdateApiMappingInput{
+		ApiId:         ptr.String("__ApiId__"),
+		ApiMappingId:  ptr.String("__ApiMappingId__"),
+		ApiMappingKey: ptr.String("__ApiMappingKey__"),
+		DomainName:    ptr.String("__DomainName__"),
+		Stage:         ptr.String("__Stage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3839,7 +4539,29 @@ func TestCheckResponseSnapshot_UpdateAuthorizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAuthorizer(context.Background(), &UpdateAuthorizerInput{})
+	got, err := svc.UpdateAuthorizer(context.Background(), &UpdateAuthorizerInput{
+		ApiId:                          ptr.String("__ApiId__"),
+		AuthorizerCredentialsArn:       ptr.String("__AuthorizerCredentialsArn__"),
+		AuthorizerId:                   ptr.String("__AuthorizerId__"),
+		AuthorizerPayloadFormatVersion: ptr.String("__AuthorizerPayloadFormatVersion__"),
+		AuthorizerResultTtlInSeconds:   ptr.Int32(1),
+		AuthorizerType:                 types.AuthorizerType("REQUEST"),
+		AuthorizerUri:                  ptr.String("__AuthorizerUri__"),
+		EnableSimpleResponses:          ptr.Bool(true),
+		IdentitySource: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+		JwtConfiguration: &types.JWTConfiguration{
+			Audience: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Issuer: ptr.String("__Issuer__"),
+		},
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3865,7 +4587,11 @@ func TestCheckResponseSnapshot_UpdateDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDeployment(context.Background(), &UpdateDeploymentInput{})
+	got, err := svc.UpdateDeployment(context.Background(), &UpdateDeploymentInput{
+		ApiId:        ptr.String("__ApiId__"),
+		DeploymentId: ptr.String("__DeploymentId__"),
+		Description:  ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3928,7 +4654,42 @@ func TestCheckResponseSnapshot_UpdateDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomainName(context.Background(), &UpdateDomainNameInput{})
+	got, err := svc.UpdateDomainName(context.Background(), &UpdateDomainNameInput{
+		DomainName: ptr.String("__DomainName__"),
+		DomainNameConfigurations: []types.DomainNameConfiguration{
+			{
+				ApiGatewayDomainName:                ptr.String("__ApiGatewayDomainName__"),
+				CertificateArn:                      ptr.String("__CertificateArn__"),
+				CertificateName:                     ptr.String("__CertificateName__"),
+				CertificateUploadDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DomainNameStatus:                    types.DomainNameStatus("AVAILABLE"),
+				DomainNameStatusMessage:             ptr.String("__DomainNameStatusMessage__"),
+				EndpointType:                        types.EndpointType("REGIONAL"),
+				HostedZoneId:                        ptr.String("__HostedZoneId__"),
+				IpAddressType:                       types.IpAddressType("ipv4"),
+				SecurityPolicy:                      types.SecurityPolicy("TLS_1_0"),
+				OwnershipVerificationCertificateArn: ptr.String("__OwnershipVerificationCertificateArn__"),
+			},
+			{
+				ApiGatewayDomainName:                ptr.String("__ApiGatewayDomainName__"),
+				CertificateArn:                      ptr.String("__CertificateArn__"),
+				CertificateName:                     ptr.String("__CertificateName__"),
+				CertificateUploadDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DomainNameStatus:                    types.DomainNameStatus("AVAILABLE"),
+				DomainNameStatusMessage:             ptr.String("__DomainNameStatusMessage__"),
+				EndpointType:                        types.EndpointType("REGIONAL"),
+				HostedZoneId:                        ptr.String("__HostedZoneId__"),
+				IpAddressType:                       types.IpAddressType("ipv4"),
+				SecurityPolicy:                      types.SecurityPolicy("TLS_1_0"),
+				OwnershipVerificationCertificateArn: ptr.String("__OwnershipVerificationCertificateArn__"),
+			},
+		},
+		MutualTlsAuthentication: &types.MutualTlsAuthenticationInput{
+			TruststoreUri:     ptr.String("__TruststoreUri__"),
+			TruststoreVersion: ptr.String("__TruststoreVersion__"),
+		},
+		RoutingMode: types.RoutingMode("API_MAPPING_ONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3978,7 +4739,37 @@ func TestCheckResponseSnapshot_UpdateIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIntegration(context.Background(), &UpdateIntegrationInput{})
+	got, err := svc.UpdateIntegration(context.Background(), &UpdateIntegrationInput{
+		ApiId:                   ptr.String("__ApiId__"),
+		ConnectionId:            ptr.String("__ConnectionId__"),
+		ConnectionType:          types.ConnectionType("INTERNET"),
+		ContentHandlingStrategy: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
+		CredentialsArn:          ptr.String("__CredentialsArn__"),
+		Description:             ptr.String("__Description__"),
+		IntegrationId:           ptr.String("__IntegrationId__"),
+		IntegrationMethod:       ptr.String("__IntegrationMethod__"),
+		IntegrationSubtype:      ptr.String("__IntegrationSubtype__"),
+		IntegrationType:         types.IntegrationType("AWS"),
+		IntegrationUri:          ptr.String("__IntegrationUri__"),
+		PassthroughBehavior:     types.PassthroughBehavior("WHEN_NO_MATCH"),
+		PayloadFormatVersion:    ptr.String("__PayloadFormatVersion__"),
+		RequestParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestTemplates: map[string]string{
+			"key0": "__Value__",
+		},
+		ResponseParameters: map[string]map[string]string{
+			"key0": {
+				"key0": "__Value__",
+			},
+		},
+		TemplateSelectionExpression: ptr.String("__TemplateSelectionExpression__"),
+		TimeoutInMillis:             ptr.Int32(1),
+		TlsConfig: &types.TlsConfigInput{
+			ServerNameToVerify: ptr.String("__ServerNameToVerify__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4008,7 +4799,20 @@ func TestCheckResponseSnapshot_UpdateIntegrationResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIntegrationResponse(context.Background(), &UpdateIntegrationResponseInput{})
+	got, err := svc.UpdateIntegrationResponse(context.Background(), &UpdateIntegrationResponseInput{
+		ApiId:                   ptr.String("__ApiId__"),
+		ContentHandlingStrategy: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
+		IntegrationId:           ptr.String("__IntegrationId__"),
+		IntegrationResponseId:   ptr.String("__IntegrationResponseId__"),
+		IntegrationResponseKey:  ptr.String("__IntegrationResponseKey__"),
+		ResponseParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ResponseTemplates: map[string]string{
+			"key0": "__Value__",
+		},
+		TemplateSelectionExpression: ptr.String("__TemplateSelectionExpression__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4033,7 +4837,14 @@ func TestCheckResponseSnapshot_UpdateModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateModel(context.Background(), &UpdateModelInput{})
+	got, err := svc.UpdateModel(context.Background(), &UpdateModelInput{
+		ApiId:       ptr.String("__ApiId__"),
+		ContentType: ptr.String("__ContentType__"),
+		Description: ptr.String("__Description__"),
+		ModelId:     ptr.String("__ModelId__"),
+		Name:        ptr.String("__Name__"),
+		Schema:      ptr.String("__Schema__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4108,7 +4919,45 @@ func TestCheckResponseSnapshot_UpdatePortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePortal(context.Background(), &UpdatePortalInput{})
+	got, err := svc.UpdatePortal(context.Background(), &UpdatePortalInput{
+		Authorization: &types.Authorization{
+			CognitoConfig: &types.CognitoConfig{
+				AppClientId:    ptr.String("__AppClientId__"),
+				UserPoolArn:    ptr.String("__UserPoolArn__"),
+				UserPoolDomain: ptr.String("__UserPoolDomain__"),
+			},
+			None: &types.None{},
+		},
+		EndpointConfiguration: &types.EndpointConfigurationRequest{
+			AcmManaged: &types.ACMManaged{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				DomainName:     ptr.String("__DomainName__"),
+			},
+			None: &types.None{},
+		},
+		IncludedPortalProductArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogoUri: ptr.String("__LogoUri__"),
+		PortalContent: &types.PortalContent{
+			Description: ptr.String("__Description__"),
+			DisplayName: ptr.String("__DisplayName__"),
+			Theme: &types.PortalTheme{
+				CustomColors: &types.CustomColors{
+					AccentColor:          ptr.String("__AccentColor__"),
+					BackgroundColor:      ptr.String("__BackgroundColor__"),
+					ErrorValidationColor: ptr.String("__ErrorValidationColor__"),
+					HeaderColor:          ptr.String("__HeaderColor__"),
+					NavigationColor:      ptr.String("__NavigationColor__"),
+					TextColor:            ptr.String("__TextColor__"),
+				},
+				LogoLastUploaded: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		PortalId:          ptr.String("__PortalId__"),
+		RumAppMonitorName: ptr.String("__RumAppMonitorName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4159,7 +5008,34 @@ func TestCheckResponseSnapshot_UpdatePortalProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePortalProduct(context.Background(), &UpdatePortalProductInput{})
+	got, err := svc.UpdatePortalProduct(context.Background(), &UpdatePortalProductInput{
+		Description: ptr.String("__Description__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		DisplayOrder: &types.DisplayOrder{
+			Contents: []types.Section{
+				{
+					ProductRestEndpointPageArns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SectionName: ptr.String("__SectionName__"),
+				},
+				{
+					ProductRestEndpointPageArns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SectionName: ptr.String("__SectionName__"),
+				},
+			},
+			OverviewPageArn: ptr.String("__OverviewPageArn__"),
+			ProductPageArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PortalProductId: ptr.String("__PortalProductId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4186,7 +5062,14 @@ func TestCheckResponseSnapshot_UpdateProductPage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProductPage(context.Background(), &UpdateProductPageInput{})
+	got, err := svc.UpdateProductPage(context.Background(), &UpdateProductPageInput{
+		DisplayContent: &types.DisplayContent{
+			Body:  ptr.String("__Body__"),
+			Title: ptr.String("__Title__"),
+		},
+		PortalProductId: ptr.String("__PortalProductId__"),
+		ProductPageId:   ptr.String("__ProductPageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4228,7 +5111,19 @@ func TestCheckResponseSnapshot_UpdateProductRestEndpointPage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProductRestEndpointPage(context.Background(), &UpdateProductRestEndpointPageInput{})
+	got, err := svc.UpdateProductRestEndpointPage(context.Background(), &UpdateProductRestEndpointPageInput{
+		DisplayContent: &types.EndpointDisplayContent{
+			None: &types.None{},
+			Overrides: &types.DisplayContentOverrides{
+				Body:          ptr.String("__Body__"),
+				Endpoint:      ptr.String("__Endpoint__"),
+				OperationName: ptr.String("__OperationName__"),
+			},
+		},
+		PortalProductId:           ptr.String("__PortalProductId__"),
+		ProductRestEndpointPageId: ptr.String("__ProductRestEndpointPageId__"),
+		TryItState:                types.TryItState("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4270,7 +5165,30 @@ func TestCheckResponseSnapshot_UpdateRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoute(context.Background(), &UpdateRouteInput{})
+	got, err := svc.UpdateRoute(context.Background(), &UpdateRouteInput{
+		ApiId:          ptr.String("__ApiId__"),
+		ApiKeyRequired: ptr.Bool(true),
+		AuthorizationScopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AuthorizationType:        types.AuthorizationType("NONE"),
+		AuthorizerId:             ptr.String("__AuthorizerId__"),
+		ModelSelectionExpression: ptr.String("__ModelSelectionExpression__"),
+		OperationName:            ptr.String("__OperationName__"),
+		RequestModels: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestParameters: map[string]types.ParameterConstraints{
+			"key0": {
+				Required: ptr.Bool(true),
+			},
+		},
+		RouteId:                          ptr.String("__RouteId__"),
+		RouteKey:                         ptr.String("__RouteKey__"),
+		RouteResponseSelectionExpression: ptr.String("__RouteResponseSelectionExpression__"),
+		Target:                           ptr.String("__Target__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4301,7 +5219,21 @@ func TestCheckResponseSnapshot_UpdateRouteResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRouteResponse(context.Background(), &UpdateRouteResponseInput{})
+	got, err := svc.UpdateRouteResponse(context.Background(), &UpdateRouteResponseInput{
+		ApiId:                    ptr.String("__ApiId__"),
+		ModelSelectionExpression: ptr.String("__ModelSelectionExpression__"),
+		ResponseModels: map[string]string{
+			"key0": "__Value__",
+		},
+		ResponseParameters: map[string]types.ParameterConstraints{
+			"key0": {
+				Required: ptr.Bool(true),
+			},
+		},
+		RouteId:          ptr.String("__RouteId__"),
+		RouteResponseId:  ptr.String("__RouteResponseId__"),
+		RouteResponseKey: ptr.String("__RouteResponseKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4356,7 +5288,37 @@ func TestCheckResponseSnapshot_UpdateStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStage(context.Background(), &UpdateStageInput{})
+	got, err := svc.UpdateStage(context.Background(), &UpdateStageInput{
+		AccessLogSettings: &types.AccessLogSettings{
+			DestinationArn: ptr.String("__DestinationArn__"),
+			Format:         ptr.String("__Format__"),
+		},
+		ApiId:               ptr.String("__ApiId__"),
+		AutoDeploy:          ptr.Bool(true),
+		ClientCertificateId: ptr.String("__ClientCertificateId__"),
+		DefaultRouteSettings: &types.RouteSettings{
+			DataTraceEnabled:       ptr.Bool(true),
+			DetailedMetricsEnabled: ptr.Bool(true),
+			LoggingLevel:           types.LoggingLevel("ERROR"),
+			ThrottlingBurstLimit:   ptr.Int32(1),
+			ThrottlingRateLimit:    ptr.Float64(1.0),
+		},
+		DeploymentId: ptr.String("__DeploymentId__"),
+		Description:  ptr.String("__Description__"),
+		RouteSettings: map[string]types.RouteSettings{
+			"key0": {
+				DataTraceEnabled:       ptr.Bool(true),
+				DetailedMetricsEnabled: ptr.Bool(true),
+				LoggingLevel:           types.LoggingLevel("ERROR"),
+				ThrottlingBurstLimit:   ptr.Int32(1),
+				ThrottlingRateLimit:    ptr.Float64(1.0),
+			},
+		},
+		StageName: ptr.String("__StageName__"),
+		StageVariables: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4393,7 +5355,10 @@ func TestCheckResponseSnapshot_UpdateVpcLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVpcLink(context.Background(), &UpdateVpcLinkInput{})
+	got, err := svc.UpdateVpcLink(context.Background(), &UpdateVpcLinkInput{
+		Name:      ptr.String("__Name__"),
+		VpcLinkId: ptr.String("__VpcLinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4414,7 +5379,45 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDomainName(context.Background(), &CreateDomainNameInput{})
+	_, opErr := svc.CreateDomainName(context.Background(), &CreateDomainNameInput{
+		DomainName: ptr.String("__DomainName__"),
+		DomainNameConfigurations: []types.DomainNameConfiguration{
+			{
+				ApiGatewayDomainName:                ptr.String("__ApiGatewayDomainName__"),
+				CertificateArn:                      ptr.String("__CertificateArn__"),
+				CertificateName:                     ptr.String("__CertificateName__"),
+				CertificateUploadDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DomainNameStatus:                    types.DomainNameStatus("AVAILABLE"),
+				DomainNameStatusMessage:             ptr.String("__DomainNameStatusMessage__"),
+				EndpointType:                        types.EndpointType("REGIONAL"),
+				HostedZoneId:                        ptr.String("__HostedZoneId__"),
+				IpAddressType:                       types.IpAddressType("ipv4"),
+				SecurityPolicy:                      types.SecurityPolicy("TLS_1_0"),
+				OwnershipVerificationCertificateArn: ptr.String("__OwnershipVerificationCertificateArn__"),
+			},
+			{
+				ApiGatewayDomainName:                ptr.String("__ApiGatewayDomainName__"),
+				CertificateArn:                      ptr.String("__CertificateArn__"),
+				CertificateName:                     ptr.String("__CertificateName__"),
+				CertificateUploadDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DomainNameStatus:                    types.DomainNameStatus("AVAILABLE"),
+				DomainNameStatusMessage:             ptr.String("__DomainNameStatusMessage__"),
+				EndpointType:                        types.EndpointType("REGIONAL"),
+				HostedZoneId:                        ptr.String("__HostedZoneId__"),
+				IpAddressType:                       types.IpAddressType("ipv4"),
+				SecurityPolicy:                      types.SecurityPolicy("TLS_1_0"),
+				OwnershipVerificationCertificateArn: ptr.String("__OwnershipVerificationCertificateArn__"),
+			},
+		},
+		MutualTlsAuthentication: &types.MutualTlsAuthenticationInput{
+			TruststoreUri:     ptr.String("__TruststoreUri__"),
+			TruststoreVersion: ptr.String("__TruststoreVersion__"),
+		},
+		RoutingMode: types.RoutingMode("API_MAPPING_ONLY"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4439,7 +5442,43 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApi(context.Background(), &CreateApiInput{})
+	_, opErr := svc.CreateApi(context.Background(), &CreateApiInput{
+		ApiKeySelectionExpression: ptr.String("__ApiKeySelectionExpression__"),
+		CorsConfiguration: &types.Cors{
+			AllowCredentials: ptr.Bool(true),
+			AllowHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowMethods: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowOrigins: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExposeHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MaxAge: ptr.Int32(1),
+		},
+		CredentialsArn:            ptr.String("__CredentialsArn__"),
+		Description:               ptr.String("__Description__"),
+		DisableSchemaValidation:   ptr.Bool(true),
+		DisableExecuteApiEndpoint: ptr.Bool(true),
+		IpAddressType:             types.IpAddressType("ipv4"),
+		Name:                      ptr.String("__Name__"),
+		ProtocolType:              types.ProtocolType("WEBSOCKET"),
+		RouteKey:                  ptr.String("__RouteKey__"),
+		RouteSelectionExpression:  ptr.String("__RouteSelectionExpression__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Target:  ptr.String("__Target__"),
+		Version: ptr.String("__Version__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4464,7 +5503,43 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApi(context.Background(), &CreateApiInput{})
+	_, opErr := svc.CreateApi(context.Background(), &CreateApiInput{
+		ApiKeySelectionExpression: ptr.String("__ApiKeySelectionExpression__"),
+		CorsConfiguration: &types.Cors{
+			AllowCredentials: ptr.Bool(true),
+			AllowHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowMethods: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowOrigins: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExposeHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MaxAge: ptr.Int32(1),
+		},
+		CredentialsArn:            ptr.String("__CredentialsArn__"),
+		Description:               ptr.String("__Description__"),
+		DisableSchemaValidation:   ptr.Bool(true),
+		DisableExecuteApiEndpoint: ptr.Bool(true),
+		IpAddressType:             types.IpAddressType("ipv4"),
+		Name:                      ptr.String("__Name__"),
+		ProtocolType:              types.ProtocolType("WEBSOCKET"),
+		RouteKey:                  ptr.String("__RouteKey__"),
+		RouteSelectionExpression:  ptr.String("__RouteSelectionExpression__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Target:  ptr.String("__Target__"),
+		Version: ptr.String("__Version__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4490,7 +5565,43 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApi(context.Background(), &CreateApiInput{})
+	_, opErr := svc.CreateApi(context.Background(), &CreateApiInput{
+		ApiKeySelectionExpression: ptr.String("__ApiKeySelectionExpression__"),
+		CorsConfiguration: &types.Cors{
+			AllowCredentials: ptr.Bool(true),
+			AllowHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowMethods: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowOrigins: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExposeHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MaxAge: ptr.Int32(1),
+		},
+		CredentialsArn:            ptr.String("__CredentialsArn__"),
+		Description:               ptr.String("__Description__"),
+		DisableSchemaValidation:   ptr.Bool(true),
+		DisableExecuteApiEndpoint: ptr.Bool(true),
+		IpAddressType:             types.IpAddressType("ipv4"),
+		Name:                      ptr.String("__Name__"),
+		ProtocolType:              types.ProtocolType("WEBSOCKET"),
+		RouteKey:                  ptr.String("__RouteKey__"),
+		RouteSelectionExpression:  ptr.String("__RouteSelectionExpression__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Target:  ptr.String("__Target__"),
+		Version: ptr.String("__Version__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4516,7 +5627,43 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApi(context.Background(), &CreateApiInput{})
+	_, opErr := svc.CreateApi(context.Background(), &CreateApiInput{
+		ApiKeySelectionExpression: ptr.String("__ApiKeySelectionExpression__"),
+		CorsConfiguration: &types.Cors{
+			AllowCredentials: ptr.Bool(true),
+			AllowHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowMethods: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowOrigins: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExposeHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MaxAge: ptr.Int32(1),
+		},
+		CredentialsArn:            ptr.String("__CredentialsArn__"),
+		Description:               ptr.String("__Description__"),
+		DisableSchemaValidation:   ptr.Bool(true),
+		DisableExecuteApiEndpoint: ptr.Bool(true),
+		IpAddressType:             types.IpAddressType("ipv4"),
+		Name:                      ptr.String("__Name__"),
+		ProtocolType:              types.ProtocolType("WEBSOCKET"),
+		RouteKey:                  ptr.String("__RouteKey__"),
+		RouteSelectionExpression:  ptr.String("__RouteSelectionExpression__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Target:  ptr.String("__Target__"),
+		Version: ptr.String("__Version__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

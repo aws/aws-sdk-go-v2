@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.DescribeQuerySuggestionsConfig
+
+{"AttributeSuggestionsConfig":{"AttributeSuggestionsMode":"ACTIVE","SuggestableConfigList":[{"AttributeName":"__AttributeName__","Suggestable":true},{"AttributeName":"__AttributeName__","Suggestable":true}]},"IncludeQueriesWithoutUserInformation":true,"LastClearTime":946684800,"LastSuggestionsBuildTime":946684800,"MinimumNumberOfQueryingUsers":1,"MinimumQueryCount":1,"Mode":"ENABLED","QueryLogLookBackWindowInDays":1,"Status":"ACTIVE","TotalSuggestionsCount":1}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clusterVersions":[{"clusterType":"__ClusterType__","clusterVersion":"__ClusterVersion__","defaultPlatformVersion":"__DefaultPlatformVersion__","defaultVersion":true,"endOfExtendedSupportDate":946684800,"endOfStandardSupportDate":946684800,"kubernetesPatchVersion":"__KubernetesPatchVersion__","releaseDate":946684800,"status":"unsupported","versionStatus":"UNSUPPORTED"},{"clusterType":"__ClusterType__","clusterVersion":"__ClusterVersion__","defaultPlatformVersion":"__DefaultPlatformVersion__","defaultVersion":true,"endOfExtendedSupportDate":946684800,"endOfStandardSupportDate":946684800,"kubernetesPatchVersion":"__KubernetesPatchVersion__","releaseDate":946684800,"status":"unsupported","versionStatus":"UNSUPPORTED"}],"nextToken":"__NextToken__"}

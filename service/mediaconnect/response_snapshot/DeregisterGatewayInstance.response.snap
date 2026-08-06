@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"gatewayInstanceArn":"__GatewayInstanceArn__","instanceState":"REGISTERING"}

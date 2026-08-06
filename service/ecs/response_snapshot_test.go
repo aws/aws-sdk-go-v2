@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/document"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -119,7 +120,11 @@ func TestCheckResponseSnapshot_ContinueServiceDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{})
+	got, err := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{
+		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
+		HookId:               ptr.String("__HookId__"),
+		Action:               types.DeploymentLifecycleHookAction("ROLLBACK"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -284,7 +289,146 @@ func TestCheckResponseSnapshot_CreateCapacityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{})
+	got, err := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{
+		Name:    ptr.String("__Name__"),
+		Cluster: ptr.String("__Cluster__"),
+		AutoScalingGroupProvider: &types.AutoScalingGroupProvider{
+			AutoScalingGroupArn: ptr.String("__AutoScalingGroupArn__"),
+			ManagedScaling: &types.ManagedScaling{
+				Status:                 types.ManagedScalingStatus("ENABLED"),
+				TargetCapacity:         ptr.Int32(1),
+				MinimumScalingStepSize: ptr.Int32(1),
+				MaximumScalingStepSize: ptr.Int32(1),
+				InstanceWarmupPeriod:   ptr.Int32(1),
+			},
+			ManagedTerminationProtection: types.ManagedTerminationProtection("ENABLED"),
+			ManagedDraining:              types.ManagedDraining("ENABLED"),
+		},
+		ManagedInstancesProvider: &types.CreateManagedInstancesProviderConfiguration{
+			InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+			InstanceLaunchTemplate: &types.InstanceLaunchTemplate{
+				Ec2InstanceProfileArn: ptr.String("__Ec2InstanceProfileArn__"),
+				NetworkConfiguration: &types.ManagedInstancesNetworkConfiguration{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StorageConfiguration: &types.ManagedInstancesStorageConfiguration{
+					StorageSizeGiB: ptr.Int32(1),
+				},
+				LocalStorageConfiguration: &types.ManagedInstancesLocalStorageConfiguration{
+					UseLocalStorage: true,
+				},
+				Monitoring:                      types.ManagedInstancesMonitoringOptions("BASIC"),
+				CapacityOptionType:              types.CapacityOptionType("ON_DEMAND"),
+				InstanceMetadataTagsPropagation: ptr.Bool(true),
+				InstanceRequirements: &types.InstanceRequirementsRequest{
+					VCpuCount: &types.VCpuCountRangeRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					MemoryMiB: &types.MemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					CpuManufacturers: []types.CpuManufacturer{
+						types.CpuManufacturer("intel"),
+						types.CpuManufacturer("intel"),
+					},
+					MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					ExcludedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					InstanceGenerations: []types.InstanceGeneration{
+						types.InstanceGeneration("current"),
+						types.InstanceGeneration("current"),
+					},
+					SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+					OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+					BareMetal:               types.BareMetal("included"),
+					BurstablePerformance:    types.BurstablePerformance("included"),
+					RequireHibernateSupport: ptr.Bool(true),
+					NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					LocalStorage: types.LocalStorage("included"),
+					LocalStorageTypes: []types.LocalStorageType{
+						types.LocalStorageType("hdd"),
+						types.LocalStorageType("hdd"),
+					},
+					TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorTypes: []types.AcceleratorType{
+						types.AcceleratorType("gpu"),
+						types.AcceleratorType("gpu"),
+					},
+					AcceleratorCount: &types.AcceleratorCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorManufacturers: []types.AcceleratorManufacturer{
+						types.AcceleratorManufacturer("amazon-web-services"),
+						types.AcceleratorManufacturer("amazon-web-services"),
+					},
+					AcceleratorNames: []types.AcceleratorName{
+						types.AcceleratorName("a100"),
+						types.AcceleratorName("a100"),
+					},
+					AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					AllowedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+				},
+				FipsEnabled: ptr.Bool(true),
+				CapacityReservations: &types.CapacityReservationRequest{
+					ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
+					ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
+				},
+			},
+			PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
+			InfrastructureOptimization: &types.InfrastructureOptimization{
+				ScaleInAfter: ptr.Int32(1),
+			},
+			AutoRepairConfiguration: &types.AutoRepairConfiguration{
+				ActionsStatus: types.AutoRepairActionsStatus("ENABLED"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -412,7 +556,65 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Settings: []types.ClusterSetting{
+			{
+				Name:  types.ClusterSettingName("containerInsights"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.ClusterSettingName("containerInsights"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Configuration: &types.ClusterConfiguration{
+			ExecuteCommandConfiguration: &types.ExecuteCommandConfiguration{
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+				Logging:  types.ExecuteCommandLogging("NONE"),
+				LogConfiguration: &types.ExecuteCommandLogConfiguration{
+					CloudWatchLogGroupName:      ptr.String("__CloudWatchLogGroupName__"),
+					CloudWatchEncryptionEnabled: true,
+					S3BucketName:                ptr.String("__S3BucketName__"),
+					S3EncryptionEnabled:         true,
+					S3KeyPrefix:                 ptr.String("__S3KeyPrefix__"),
+				},
+			},
+			ManagedStorageConfiguration: &types.ManagedStorageConfiguration{
+				KmsKeyId:                        ptr.String("__KmsKeyId__"),
+				FargateEphemeralStorageKmsKeyId: ptr.String("__FargateEphemeralStorageKmsKeyId__"),
+			},
+		},
+		CapacityProviders: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DefaultCapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+		},
+		ServiceConnectDefaults: &types.ClusterServiceConnectDefaultsRequest{
+			Namespace: ptr.String("__Namespace__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -436,7 +638,40 @@ func TestCheckResponseSnapshot_CreateDaemon(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDaemon(context.Background(), &CreateDaemonInput{})
+	got, err := svc.CreateDaemon(context.Background(), &CreateDaemonInput{
+		DaemonName:              ptr.String("__DaemonName__"),
+		ClusterArn:              ptr.String("__ClusterArn__"),
+		DaemonTaskDefinitionArn: ptr.String("__DaemonTaskDefinitionArn__"),
+		CapacityProviderArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeploymentConfiguration: &types.DaemonDeploymentConfiguration{
+			DrainPercent: ptr.Float64(1.0),
+			Alarms: &types.DaemonAlarmConfiguration{
+				AlarmNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Enable: true,
+			},
+			BakeTimeInMinutes: 1,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PropagateTags:        types.DaemonPropagateTags("DAEMON"),
+		EnableECSManagedTags: true,
+		EnableExecuteCommand: true,
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -623,7 +858,78 @@ func TestCheckResponseSnapshot_CreateExpressGatewayService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExpressGatewayService(context.Background(), &CreateExpressGatewayServiceInput{})
+	got, err := svc.CreateExpressGatewayService(context.Background(), &CreateExpressGatewayServiceInput{
+		ExecutionRoleArn:      ptr.String("__ExecutionRoleArn__"),
+		InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+		ServiceName:           ptr.String("__ServiceName__"),
+		Cluster:               ptr.String("__Cluster__"),
+		HealthCheckPath:       ptr.String("__HealthCheckPath__"),
+		PrimaryContainer: &types.ExpressGatewayContainer{
+			Image:         ptr.String("__Image__"),
+			ContainerPort: ptr.Int32(1),
+			AwsLogsConfiguration: &types.ExpressGatewayServiceAwsLogsConfiguration{
+				LogGroup:        ptr.String("__LogGroup__"),
+				LogStreamPrefix: ptr.String("__LogStreamPrefix__"),
+			},
+			RepositoryCredentials: &types.ExpressGatewayRepositoryCredentials{
+				CredentialsParameter: ptr.String("__CredentialsParameter__"),
+			},
+			Command: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Environment: []types.KeyValuePair{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Secrets: []types.Secret{
+				{
+					Name:      ptr.String("__Name__"),
+					ValueFrom: ptr.String("__ValueFrom__"),
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					ValueFrom: ptr.String("__ValueFrom__"),
+				},
+			},
+		},
+		TaskRoleArn: ptr.String("__TaskRoleArn__"),
+		NetworkConfiguration: &types.ExpressGatewayServiceNetworkConfiguration{
+			SecurityGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Cpu:    ptr.String("__Cpu__"),
+		Memory: ptr.String("__Memory__"),
+		ScalingTarget: &types.ExpressGatewayScalingTarget{
+			MinTaskCount:           ptr.Int32(1),
+			MaxTaskCount:           ptr.Int32(1),
+			AutoScalingMetric:      types.ExpressGatewayServiceScalingMetric("AVERAGE_CPU"),
+			AutoScalingTargetValue: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -729,7 +1035,7 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 							types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 						},
-						HookDetails: nil,
+						HookDetails: document.NewLazyDocument("__Document__"),
 						TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 							TimeoutInMinutes: ptr.Int32(1),
 							Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -743,7 +1049,7 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 							types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 						},
-						HookDetails: nil,
+						HookDetails: document.NewLazyDocument("__Document__"),
 						TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 							TimeoutInMinutes: ptr.Int32(1),
 							Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -1596,7 +1902,413 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateService(context.Background(), &CreateServiceInput{})
+	got, err := svc.CreateService(context.Background(), &CreateServiceInput{
+		Cluster:                     ptr.String("__Cluster__"),
+		ServiceName:                 ptr.String("__ServiceName__"),
+		TaskDefinition:              ptr.String("__TaskDefinition__"),
+		AvailabilityZoneRebalancing: types.AvailabilityZoneRebalancing("ENABLED"),
+		LoadBalancers: []types.LoadBalancer{
+			{
+				TargetGroupArn:   ptr.String("__TargetGroupArn__"),
+				LoadBalancerName: ptr.String("__LoadBalancerName__"),
+				ContainerName:    ptr.String("__ContainerName__"),
+				ContainerPort:    ptr.Int32(1),
+				AdvancedConfiguration: &types.AdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+					RoleArn:                 ptr.String("__RoleArn__"),
+				},
+			},
+			{
+				TargetGroupArn:   ptr.String("__TargetGroupArn__"),
+				LoadBalancerName: ptr.String("__LoadBalancerName__"),
+				ContainerName:    ptr.String("__ContainerName__"),
+				ContainerPort:    ptr.Int32(1),
+				AdvancedConfiguration: &types.AdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+					RoleArn:                 ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		ServiceRegistries: []types.ServiceRegistry{
+			{
+				RegistryArn:   ptr.String("__RegistryArn__"),
+				Port:          ptr.Int32(1),
+				ContainerName: ptr.String("__ContainerName__"),
+				ContainerPort: ptr.Int32(1),
+			},
+			{
+				RegistryArn:   ptr.String("__RegistryArn__"),
+				Port:          ptr.Int32(1),
+				ContainerName: ptr.String("__ContainerName__"),
+				ContainerPort: ptr.Int32(1),
+			},
+		},
+		DesiredCount: ptr.Int32(1),
+		ClientToken:  ptr.String("__ClientToken__"),
+		LaunchType:   types.LaunchType("EC2"),
+		CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		Role:            ptr.String("__Role__"),
+		DeploymentConfiguration: &types.DeploymentConfiguration{
+			DeploymentCircuitBreaker: &types.DeploymentCircuitBreaker{
+				Enable:             true,
+				Rollback:           true,
+				ResetOnHealthyTask: ptr.Bool(true),
+				ThresholdConfiguration: &types.ThresholdConfiguration{
+					Type:  types.ThresholdType("COUNT"),
+					Value: 1,
+				},
+			},
+			MaximumPercent:        ptr.Int32(1),
+			MinimumHealthyPercent: ptr.Int32(1),
+			Alarms: &types.DeploymentAlarms{
+				AlarmNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Rollback: true,
+				Enable:   true,
+			},
+			Strategy:          types.DeploymentStrategy("ROLLING"),
+			BakeTimeInMinutes: ptr.Int32(1),
+			LifecycleHooks: []types.DeploymentLifecycleHook{
+				{
+					TargetType:    types.DeploymentLifecycleHookTargetType("AWS_LAMBDA"),
+					HookTargetArn: ptr.String("__HookTargetArn__"),
+					RoleArn:       ptr.String("__RoleArn__"),
+					LifecycleStages: []types.DeploymentLifecycleHookStage{
+						types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
+						types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
+					},
+					HookDetails: document.NewLazyDocument("__Document__"),
+					TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
+						TimeoutInMinutes: ptr.Int32(1),
+						Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
+					},
+				},
+				{
+					TargetType:    types.DeploymentLifecycleHookTargetType("AWS_LAMBDA"),
+					HookTargetArn: ptr.String("__HookTargetArn__"),
+					RoleArn:       ptr.String("__RoleArn__"),
+					LifecycleStages: []types.DeploymentLifecycleHookStage{
+						types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
+						types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
+					},
+					HookDetails: document.NewLazyDocument("__Document__"),
+					TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
+						TimeoutInMinutes: ptr.Int32(1),
+						Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
+					},
+				},
+			},
+			LinearConfiguration: &types.LinearConfiguration{
+				StepPercent:           ptr.Float64(1.0),
+				StepBakeTimeInMinutes: ptr.Int32(1),
+			},
+			CanaryConfiguration: &types.CanaryConfiguration{
+				CanaryPercent:           ptr.Float64(1.0),
+				CanaryBakeTimeInMinutes: ptr.Int32(1),
+			},
+		},
+		PlacementConstraints: []types.PlacementConstraint{
+			{
+				Type:       types.PlacementConstraintType("distinctInstance"),
+				Expression: ptr.String("__Expression__"),
+			},
+			{
+				Type:       types.PlacementConstraintType("distinctInstance"),
+				Expression: ptr.String("__Expression__"),
+			},
+		},
+		PlacementStrategy: []types.PlacementStrategy{
+			{
+				Type:  types.PlacementStrategyType("random"),
+				Field: ptr.String("__Field__"),
+			},
+			{
+				Type:  types.PlacementStrategyType("random"),
+				Field: ptr.String("__Field__"),
+			},
+		},
+		NetworkConfiguration: &types.NetworkConfiguration{
+			AwsvpcConfiguration: &types.AwsVpcConfiguration{
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AssignPublicIp: types.AssignPublicIp("ENABLED"),
+			},
+		},
+		HealthCheckGracePeriodSeconds: ptr.Int32(1),
+		SchedulingStrategy:            types.SchedulingStrategy("REPLICA"),
+		DeploymentController: &types.DeploymentController{
+			Type: types.DeploymentControllerType("ECS"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EnableECSManagedTags: true,
+		PropagateTags:        types.PropagateTags("TASK_DEFINITION"),
+		EnableExecuteCommand: true,
+		ServiceConnectConfiguration: &types.ServiceConnectConfiguration{
+			Enabled:   true,
+			Namespace: ptr.String("__Namespace__"),
+			Services: []types.ServiceConnectService{
+				{
+					PortName:      ptr.String("__PortName__"),
+					DiscoveryName: ptr.String("__DiscoveryName__"),
+					ClientAliases: []types.ServiceConnectClientAlias{
+						{
+							Port:    ptr.Int32(1),
+							DnsName: ptr.String("__DnsName__"),
+							TestTrafficRules: &types.ServiceConnectTestTrafficRules{
+								Header: &types.ServiceConnectTestTrafficHeaderRules{
+									Name: ptr.String("__Name__"),
+									Value: &types.ServiceConnectTestTrafficHeaderMatchRules{
+										Exact: ptr.String("__Exact__"),
+									},
+								},
+							},
+						},
+						{
+							Port:    ptr.Int32(1),
+							DnsName: ptr.String("__DnsName__"),
+							TestTrafficRules: &types.ServiceConnectTestTrafficRules{
+								Header: &types.ServiceConnectTestTrafficHeaderRules{
+									Name: ptr.String("__Name__"),
+									Value: &types.ServiceConnectTestTrafficHeaderMatchRules{
+										Exact: ptr.String("__Exact__"),
+									},
+								},
+							},
+						},
+					},
+					IngressPortOverride: ptr.Int32(1),
+					Timeout: &types.TimeoutConfiguration{
+						IdleTimeoutSeconds:       ptr.Int32(1),
+						PerRequestTimeoutSeconds: ptr.Int32(1),
+					},
+					Tls: &types.ServiceConnectTlsConfiguration{
+						IssuerCertificateAuthority: &types.ServiceConnectTlsCertificateAuthority{
+							AwsPcaAuthorityArn: ptr.String("__AwsPcaAuthorityArn__"),
+						},
+						KmsKey:  ptr.String("__KmsKey__"),
+						RoleArn: ptr.String("__RoleArn__"),
+					},
+				},
+				{
+					PortName:      ptr.String("__PortName__"),
+					DiscoveryName: ptr.String("__DiscoveryName__"),
+					ClientAliases: []types.ServiceConnectClientAlias{
+						{
+							Port:    ptr.Int32(1),
+							DnsName: ptr.String("__DnsName__"),
+							TestTrafficRules: &types.ServiceConnectTestTrafficRules{
+								Header: &types.ServiceConnectTestTrafficHeaderRules{
+									Name: ptr.String("__Name__"),
+									Value: &types.ServiceConnectTestTrafficHeaderMatchRules{
+										Exact: ptr.String("__Exact__"),
+									},
+								},
+							},
+						},
+						{
+							Port:    ptr.Int32(1),
+							DnsName: ptr.String("__DnsName__"),
+							TestTrafficRules: &types.ServiceConnectTestTrafficRules{
+								Header: &types.ServiceConnectTestTrafficHeaderRules{
+									Name: ptr.String("__Name__"),
+									Value: &types.ServiceConnectTestTrafficHeaderMatchRules{
+										Exact: ptr.String("__Exact__"),
+									},
+								},
+							},
+						},
+					},
+					IngressPortOverride: ptr.Int32(1),
+					Timeout: &types.TimeoutConfiguration{
+						IdleTimeoutSeconds:       ptr.Int32(1),
+						PerRequestTimeoutSeconds: ptr.Int32(1),
+					},
+					Tls: &types.ServiceConnectTlsConfiguration{
+						IssuerCertificateAuthority: &types.ServiceConnectTlsCertificateAuthority{
+							AwsPcaAuthorityArn: ptr.String("__AwsPcaAuthorityArn__"),
+						},
+						KmsKey:  ptr.String("__KmsKey__"),
+						RoleArn: ptr.String("__RoleArn__"),
+					},
+				},
+			},
+			LogConfiguration: &types.LogConfiguration{
+				LogDriver: types.LogDriver("json-file"),
+				Options: map[string]string{
+					"key0": "__Value__",
+				},
+				SecretOptions: []types.Secret{
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+				},
+			},
+			AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
+				Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
+				IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+			},
+		},
+		VolumeConfigurations: []types.ServiceVolumeConfiguration{
+			{
+				Name: ptr.String("__Name__"),
+				ManagedEBSVolume: &types.ServiceManagedEBSVolumeConfiguration{
+					Encrypted:                ptr.Bool(true),
+					KmsKeyId:                 ptr.String("__KmsKeyId__"),
+					VolumeType:               ptr.String("__VolumeType__"),
+					SizeInGiB:                ptr.Int32(1),
+					SnapshotId:               ptr.String("__SnapshotId__"),
+					VolumeInitializationRate: ptr.Int32(1),
+					Iops:                     ptr.Int32(1),
+					Throughput:               ptr.Int32(1),
+					TagSpecifications: []types.EBSTagSpecification{
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+					},
+					RoleArn:        ptr.String("__RoleArn__"),
+					FilesystemType: types.TaskFilesystemType("ext3"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				ManagedEBSVolume: &types.ServiceManagedEBSVolumeConfiguration{
+					Encrypted:                ptr.Bool(true),
+					KmsKeyId:                 ptr.String("__KmsKeyId__"),
+					VolumeType:               ptr.String("__VolumeType__"),
+					SizeInGiB:                ptr.Int32(1),
+					SnapshotId:               ptr.String("__SnapshotId__"),
+					VolumeInitializationRate: ptr.Int32(1),
+					Iops:                     ptr.Int32(1),
+					Throughput:               ptr.Int32(1),
+					TagSpecifications: []types.EBSTagSpecification{
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+					},
+					RoleArn:        ptr.String("__RoleArn__"),
+					FilesystemType: types.TaskFilesystemType("ext3"),
+				},
+			},
+		},
+		VpcLatticeConfigurations: []types.VpcLatticeConfiguration{
+			{
+				RoleArn:        ptr.String("__RoleArn__"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				PortName:       ptr.String("__PortName__"),
+			},
+			{
+				RoleArn:        ptr.String("__RoleArn__"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				PortName:       ptr.String("__PortName__"),
+			},
+		},
+		Monitoring: &types.MonitoringConfiguration{
+			MetricConfigurations: []types.MetricConfiguration{
+				{
+					MetricNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ResolutionSeconds: ptr.Int32(1),
+				},
+				{
+					MetricNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ResolutionSeconds: ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1718,7 +2430,94 @@ func TestCheckResponseSnapshot_CreateTaskSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTaskSet(context.Background(), &CreateTaskSetInput{})
+	got, err := svc.CreateTaskSet(context.Background(), &CreateTaskSetInput{
+		Service:        ptr.String("__Service__"),
+		Cluster:        ptr.String("__Cluster__"),
+		ExternalId:     ptr.String("__ExternalId__"),
+		TaskDefinition: ptr.String("__TaskDefinition__"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			AwsvpcConfiguration: &types.AwsVpcConfiguration{
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AssignPublicIp: types.AssignPublicIp("ENABLED"),
+			},
+		},
+		LoadBalancers: []types.LoadBalancer{
+			{
+				TargetGroupArn:   ptr.String("__TargetGroupArn__"),
+				LoadBalancerName: ptr.String("__LoadBalancerName__"),
+				ContainerName:    ptr.String("__ContainerName__"),
+				ContainerPort:    ptr.Int32(1),
+				AdvancedConfiguration: &types.AdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+					RoleArn:                 ptr.String("__RoleArn__"),
+				},
+			},
+			{
+				TargetGroupArn:   ptr.String("__TargetGroupArn__"),
+				LoadBalancerName: ptr.String("__LoadBalancerName__"),
+				ContainerName:    ptr.String("__ContainerName__"),
+				ContainerPort:    ptr.Int32(1),
+				AdvancedConfiguration: &types.AdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+					RoleArn:                 ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		ServiceRegistries: []types.ServiceRegistry{
+			{
+				RegistryArn:   ptr.String("__RegistryArn__"),
+				Port:          ptr.Int32(1),
+				ContainerName: ptr.String("__ContainerName__"),
+				ContainerPort: ptr.Int32(1),
+			},
+			{
+				RegistryArn:   ptr.String("__RegistryArn__"),
+				Port:          ptr.Int32(1),
+				ContainerName: ptr.String("__ContainerName__"),
+				ContainerPort: ptr.Int32(1),
+			},
+		},
+		LaunchType: types.LaunchType("EC2"),
+		CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		Scale: &types.Scale{
+			Value: 1.0,
+			Unit:  types.ScaleUnit("PERCENT"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1744,7 +2543,10 @@ func TestCheckResponseSnapshot_DeleteAccountSetting(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccountSetting(context.Background(), &DeleteAccountSettingInput{})
+	got, err := svc.DeleteAccountSetting(context.Background(), &DeleteAccountSettingInput{
+		Name:         types.SettingName("serviceLongArnFormat"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1778,7 +2580,23 @@ func TestCheckResponseSnapshot_DeleteAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAttributes(context.Background(), &DeleteAttributesInput{})
+	got, err := svc.DeleteAttributes(context.Background(), &DeleteAttributesInput{
+		Cluster: ptr.String("__Cluster__"),
+		Attributes: []types.Attribute{
+			{
+				Name:       ptr.String("__Name__"),
+				Value:      ptr.String("__Value__"),
+				TargetType: types.TargetType("container-instance"),
+				TargetId:   ptr.String("__TargetId__"),
+			},
+			{
+				Name:       ptr.String("__Name__"),
+				Value:      ptr.String("__Value__"),
+				TargetType: types.TargetType("container-instance"),
+				TargetId:   ptr.String("__TargetId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1943,7 +2761,10 @@ func TestCheckResponseSnapshot_DeleteCapacityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCapacityProvider(context.Background(), &DeleteCapacityProviderInput{})
+	got, err := svc.DeleteCapacityProvider(context.Background(), &DeleteCapacityProviderInput{
+		CapacityProvider: ptr.String("__CapacityProvider__"),
+		Cluster:          ptr.String("__Cluster__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2071,7 +2892,9 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		Cluster: ptr.String("__Cluster__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2096,7 +2919,9 @@ func TestCheckResponseSnapshot_DeleteDaemon(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDaemon(context.Background(), &DeleteDaemonInput{})
+	got, err := svc.DeleteDaemon(context.Background(), &DeleteDaemonInput{
+		DaemonArn: ptr.String("__DaemonArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2117,7 +2942,9 @@ func TestCheckResponseSnapshot_DeleteDaemonTaskDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDaemonTaskDefinition(context.Background(), &DeleteDaemonTaskDefinitionInput{})
+	got, err := svc.DeleteDaemonTaskDefinition(context.Background(), &DeleteDaemonTaskDefinitionInput{
+		DaemonTaskDefinition: ptr.String("__DaemonTaskDefinition__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2304,7 +3131,9 @@ func TestCheckResponseSnapshot_DeleteExpressGatewayService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteExpressGatewayService(context.Background(), &DeleteExpressGatewayServiceInput{})
+	got, err := svc.DeleteExpressGatewayService(context.Background(), &DeleteExpressGatewayServiceInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2410,7 +3239,7 @@ func TestCheckResponseSnapshot_DeleteService(t *testing.T) {
 							types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 						},
-						HookDetails: nil,
+						HookDetails: document.NewLazyDocument("__Document__"),
 						TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 							TimeoutInMinutes: ptr.Int32(1),
 							Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -2424,7 +3253,7 @@ func TestCheckResponseSnapshot_DeleteService(t *testing.T) {
 							types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 						},
-						HookDetails: nil,
+						HookDetails: document.NewLazyDocument("__Document__"),
 						TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 							TimeoutInMinutes: ptr.Int32(1),
 							Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -3277,7 +4106,11 @@ func TestCheckResponseSnapshot_DeleteService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{})
+	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{
+		Cluster: ptr.String("__Cluster__"),
+		Service: ptr.String("__Service__"),
+		Force:   ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4717,7 +5550,12 @@ func TestCheckResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTaskDefinitions(context.Background(), &DeleteTaskDefinitionsInput{})
+	got, err := svc.DeleteTaskDefinitions(context.Background(), &DeleteTaskDefinitionsInput{
+		TaskDefinitions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4839,7 +5677,12 @@ func TestCheckResponseSnapshot_DeleteTaskSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTaskSet(context.Background(), &DeleteTaskSetInput{})
+	got, err := svc.DeleteTaskSet(context.Background(), &DeleteTaskSetInput{
+		Cluster: ptr.String("__Cluster__"),
+		Service: ptr.String("__Service__"),
+		TaskSet: ptr.String("__TaskSet__"),
+		Force:   ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5000,7 +5843,11 @@ func TestCheckResponseSnapshot_DeregisterContainerInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterContainerInstance(context.Background(), &DeregisterContainerInstanceInput{})
+	got, err := svc.DeregisterContainerInstance(context.Background(), &DeregisterContainerInstanceInput{
+		Cluster:           ptr.String("__Cluster__"),
+		ContainerInstance: ptr.String("__ContainerInstance__"),
+		Force:             ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5723,7 +6570,9 @@ func TestCheckResponseSnapshot_DeregisterTaskDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterTaskDefinition(context.Background(), &DeregisterTaskDefinitionInput{})
+	got, err := svc.DeregisterTaskDefinition(context.Background(), &DeregisterTaskDefinitionInput{
+		TaskDefinition: ptr.String("__TaskDefinition__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6048,7 +6897,19 @@ func TestCheckResponseSnapshot_DescribeCapacityProviders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCapacityProviders(context.Background(), &DescribeCapacityProvidersInput{})
+	got, err := svc.DescribeCapacityProviders(context.Background(), &DescribeCapacityProvidersInput{
+		CapacityProviders: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Cluster: ptr.String("__Cluster__"),
+		Include: []types.CapacityProviderField{
+			types.CapacityProviderField("TAGS"),
+			types.CapacityProviderField("TAGS"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6298,7 +7159,16 @@ func TestCheckResponseSnapshot_DescribeClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeClusters(context.Background(), &DescribeClustersInput{})
+	got, err := svc.DescribeClusters(context.Background(), &DescribeClustersInput{
+		Clusters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Include: []types.ClusterField{
+			types.ClusterField("ATTACHMENTS"),
+			types.ClusterField("ATTACHMENTS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6614,7 +7484,17 @@ func TestCheckResponseSnapshot_DescribeContainerInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContainerInstances(context.Background(), &DescribeContainerInstancesInput{})
+	got, err := svc.DescribeContainerInstances(context.Background(), &DescribeContainerInstancesInput{
+		Cluster: ptr.String("__Cluster__"),
+		ContainerInstances: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Include: []types.ContainerInstanceField{
+			types.ContainerInstanceField("TAGS"),
+			types.ContainerInstanceField("TAGS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6672,7 +7552,9 @@ func TestCheckResponseSnapshot_DescribeDaemon(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDaemon(context.Background(), &DescribeDaemonInput{})
+	got, err := svc.DescribeDaemon(context.Background(), &DescribeDaemonInput{
+		DaemonArn: ptr.String("__DaemonArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6904,7 +7786,12 @@ func TestCheckResponseSnapshot_DescribeDaemonDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDaemonDeployments(context.Background(), &DescribeDaemonDeploymentsInput{})
+	got, err := svc.DescribeDaemonDeployments(context.Background(), &DescribeDaemonDeploymentsInput{
+		DaemonDeploymentArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6982,7 +7869,12 @@ func TestCheckResponseSnapshot_DescribeDaemonRevisions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDaemonRevisions(context.Background(), &DescribeDaemonRevisionsInput{})
+	got, err := svc.DescribeDaemonRevisions(context.Background(), &DescribeDaemonRevisionsInput{
+		DaemonRevisionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7413,7 +8305,9 @@ func TestCheckResponseSnapshot_DescribeDaemonTaskDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDaemonTaskDefinition(context.Background(), &DescribeDaemonTaskDefinitionInput{})
+	got, err := svc.DescribeDaemonTaskDefinition(context.Background(), &DescribeDaemonTaskDefinitionInput{
+		DaemonTaskDefinition: ptr.String("__DaemonTaskDefinition__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7600,7 +8494,13 @@ func TestCheckResponseSnapshot_DescribeExpressGatewayService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeExpressGatewayService(context.Background(), &DescribeExpressGatewayServiceInput{})
+	got, err := svc.DescribeExpressGatewayService(context.Background(), &DescribeExpressGatewayServiceInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		Include: []types.ExpressGatewayServiceInclude{
+			types.ExpressGatewayServiceInclude("TAGS"),
+			types.ExpressGatewayServiceInclude("TAGS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7699,7 +8599,7 @@ func TestCheckResponseSnapshot_DescribeServiceDeployments(t *testing.T) {
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							},
-							HookDetails: nil,
+							HookDetails: document.NewLazyDocument("__Document__"),
 							TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 								TimeoutInMinutes: ptr.Int32(1),
 								Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -7713,7 +8613,7 @@ func TestCheckResponseSnapshot_DescribeServiceDeployments(t *testing.T) {
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							},
-							HookDetails: nil,
+							HookDetails: document.NewLazyDocument("__Document__"),
 							TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 								TimeoutInMinutes: ptr.Int32(1),
 								Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -7838,7 +8738,7 @@ func TestCheckResponseSnapshot_DescribeServiceDeployments(t *testing.T) {
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							},
-							HookDetails: nil,
+							HookDetails: document.NewLazyDocument("__Document__"),
 							TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 								TimeoutInMinutes: ptr.Int32(1),
 								Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -7852,7 +8752,7 @@ func TestCheckResponseSnapshot_DescribeServiceDeployments(t *testing.T) {
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							},
-							HookDetails: nil,
+							HookDetails: document.NewLazyDocument("__Document__"),
 							TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 								TimeoutInMinutes: ptr.Int32(1),
 								Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -7912,7 +8812,12 @@ func TestCheckResponseSnapshot_DescribeServiceDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServiceDeployments(context.Background(), &DescribeServiceDeploymentsInput{})
+	got, err := svc.DescribeServiceDeployments(context.Background(), &DescribeServiceDeploymentsInput{
+		ServiceDeploymentArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9070,7 +9975,12 @@ func TestCheckResponseSnapshot_DescribeServiceRevisions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServiceRevisions(context.Background(), &DescribeServiceRevisionsInput{})
+	got, err := svc.DescribeServiceRevisions(context.Background(), &DescribeServiceRevisionsInput{
+		ServiceRevisionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9177,7 +10087,7 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							},
-							HookDetails: nil,
+							HookDetails: document.NewLazyDocument("__Document__"),
 							TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 								TimeoutInMinutes: ptr.Int32(1),
 								Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -9191,7 +10101,7 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							},
-							HookDetails: nil,
+							HookDetails: document.NewLazyDocument("__Document__"),
 							TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 								TimeoutInMinutes: ptr.Int32(1),
 								Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -10130,7 +11040,7 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							},
-							HookDetails: nil,
+							HookDetails: document.NewLazyDocument("__Document__"),
 							TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 								TimeoutInMinutes: ptr.Int32(1),
 								Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -10144,7 +11054,7 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 								types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							},
-							HookDetails: nil,
+							HookDetails: document.NewLazyDocument("__Document__"),
 							TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 								TimeoutInMinutes: ptr.Int32(1),
 								Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -11010,7 +11920,17 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServices(context.Background(), &DescribeServicesInput{})
+	got, err := svc.DescribeServices(context.Background(), &DescribeServicesInput{
+		Cluster: ptr.String("__Cluster__"),
+		Services: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Include: []types.ServiceField{
+			types.ServiceField("TAGS"),
+			types.ServiceField("TAGS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11743,7 +12663,13 @@ func TestCheckResponseSnapshot_DescribeTaskDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTaskDefinition(context.Background(), &DescribeTaskDefinitionInput{})
+	got, err := svc.DescribeTaskDefinition(context.Background(), &DescribeTaskDefinitionInput{
+		TaskDefinition: ptr.String("__TaskDefinition__"),
+		Include: []types.TaskDefinitionField{
+			types.TaskDefinitionField("TAGS"),
+			types.TaskDefinitionField("TAGS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11981,7 +12907,18 @@ func TestCheckResponseSnapshot_DescribeTaskSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTaskSets(context.Background(), &DescribeTaskSetsInput{})
+	got, err := svc.DescribeTaskSets(context.Background(), &DescribeTaskSetsInput{
+		Cluster: ptr.String("__Cluster__"),
+		Service: ptr.String("__Service__"),
+		TaskSets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Include: []types.TaskSetField{
+			types.TaskSetField("TAGS"),
+			types.TaskSetField("TAGS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12697,7 +13634,17 @@ func TestCheckResponseSnapshot_DescribeTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTasks(context.Background(), &DescribeTasksInput{})
+	got, err := svc.DescribeTasks(context.Background(), &DescribeTasksInput{
+		Cluster: ptr.String("__Cluster__"),
+		Tasks: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Include: []types.TaskField{
+			types.TaskField("TAGS"),
+			types.TaskField("TAGS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12720,7 +13667,10 @@ func TestCheckResponseSnapshot_DiscoverPollEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DiscoverPollEndpoint(context.Background(), &DiscoverPollEndpointInput{})
+	got, err := svc.DiscoverPollEndpoint(context.Background(), &DiscoverPollEndpointInput{
+		ContainerInstance: ptr.String("__ContainerInstance__"),
+		Cluster:           ptr.String("__Cluster__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12750,7 +13700,13 @@ func TestCheckResponseSnapshot_ExecuteCommand(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteCommand(context.Background(), &ExecuteCommandInput{})
+	got, err := svc.ExecuteCommand(context.Background(), &ExecuteCommandInput{
+		Cluster:     ptr.String("__Cluster__"),
+		Container:   ptr.String("__Container__"),
+		Command:     ptr.String("__Command__"),
+		Interactive: true,
+		Task:        ptr.String("__Task__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12794,7 +13750,13 @@ func TestCheckResponseSnapshot_GetTaskProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTaskProtection(context.Background(), &GetTaskProtectionInput{})
+	got, err := svc.GetTaskProtection(context.Background(), &GetTaskProtectionInput{
+		Cluster: ptr.String("__Cluster__"),
+		Tasks: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12829,7 +13791,14 @@ func TestCheckResponseSnapshot_ListAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountSettings(context.Background(), &ListAccountSettingsInput{})
+	got, err := svc.ListAccountSettings(context.Background(), &ListAccountSettingsInput{
+		Name:              types.SettingName("serviceLongArnFormat"),
+		Value:             ptr.String("__Value__"),
+		PrincipalArn:      ptr.String("__PrincipalArn__"),
+		EffectiveSettings: true,
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12864,7 +13833,14 @@ func TestCheckResponseSnapshot_ListAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAttributes(context.Background(), &ListAttributesInput{})
+	got, err := svc.ListAttributes(context.Background(), &ListAttributesInput{
+		Cluster:        ptr.String("__Cluster__"),
+		TargetType:     types.TargetType("container-instance"),
+		AttributeName:  ptr.String("__AttributeName__"),
+		AttributeValue: ptr.String("__AttributeValue__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12889,7 +13865,10 @@ func TestCheckResponseSnapshot_ListClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClusters(context.Background(), &ListClustersInput{})
+	got, err := svc.ListClusters(context.Background(), &ListClustersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12914,7 +13893,13 @@ func TestCheckResponseSnapshot_ListContainerInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContainerInstances(context.Background(), &ListContainerInstancesInput{})
+	got, err := svc.ListContainerInstances(context.Background(), &ListContainerInstancesInput{
+		Cluster:    ptr.String("__Cluster__"),
+		Filter:     ptr.String("__Filter__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Status:     types.ContainerInstanceStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12961,7 +13946,19 @@ func TestCheckResponseSnapshot_ListDaemonDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDaemonDeployments(context.Background(), &ListDaemonDeploymentsInput{})
+	got, err := svc.ListDaemonDeployments(context.Background(), &ListDaemonDeploymentsInput{
+		DaemonArn: ptr.String("__DaemonArn__"),
+		Status: []types.DaemonDeploymentStatus{
+			types.DaemonDeploymentStatus("PENDING"),
+			types.DaemonDeploymentStatus("PENDING"),
+		},
+		CreatedAt: &types.CreatedAt{
+			Before: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			After:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12998,7 +13995,15 @@ func TestCheckResponseSnapshot_ListDaemonTaskDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDaemonTaskDefinitions(context.Background(), &ListDaemonTaskDefinitionsInput{})
+	got, err := svc.ListDaemonTaskDefinitions(context.Background(), &ListDaemonTaskDefinitionsInput{
+		FamilyPrefix: ptr.String("__FamilyPrefix__"),
+		Family:       ptr.String("__Family__"),
+		Revision:     types.DaemonTaskDefinitionRevisionFilter("LAST_REGISTERED"),
+		Status:       types.DaemonTaskDefinitionStatusFilter("ACTIVE"),
+		Sort:         types.SortOrder("ASC"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13033,7 +14038,15 @@ func TestCheckResponseSnapshot_ListDaemons(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDaemons(context.Background(), &ListDaemonsInput{})
+	got, err := svc.ListDaemons(context.Background(), &ListDaemonsInput{
+		ClusterArn: ptr.String("__ClusterArn__"),
+		CapacityProviderArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13078,7 +14091,20 @@ func TestCheckResponseSnapshot_ListServiceDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceDeployments(context.Background(), &ListServiceDeploymentsInput{})
+	got, err := svc.ListServiceDeployments(context.Background(), &ListServiceDeploymentsInput{
+		Service: ptr.String("__Service__"),
+		Cluster: ptr.String("__Cluster__"),
+		Status: []types.ServiceDeploymentStatus{
+			types.ServiceDeploymentStatus("PENDING"),
+			types.ServiceDeploymentStatus("PENDING"),
+		},
+		CreatedAt: &types.CreatedAt{
+			Before: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			After:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13103,7 +14129,14 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServices(context.Background(), &ListServicesInput{})
+	got, err := svc.ListServices(context.Background(), &ListServicesInput{
+		Cluster:                ptr.String("__Cluster__"),
+		NextToken:              ptr.String("__NextToken__"),
+		MaxResults:             ptr.Int32(1),
+		LaunchType:             types.LaunchType("EC2"),
+		SchedulingStrategy:     types.SchedulingStrategy("REPLICA"),
+		ResourceManagementType: types.ResourceManagementType("CUSTOMER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13128,7 +14161,11 @@ func TestCheckResponseSnapshot_ListServicesByNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServicesByNamespace(context.Background(), &ListServicesByNamespaceInput{})
+	got, err := svc.ListServicesByNamespace(context.Background(), &ListServicesByNamespaceInput{
+		Namespace:  ptr.String("__Namespace__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13158,7 +14195,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13183,7 +14222,12 @@ func TestCheckResponseSnapshot_ListTaskDefinitionFamilies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTaskDefinitionFamilies(context.Background(), &ListTaskDefinitionFamiliesInput{})
+	got, err := svc.ListTaskDefinitionFamilies(context.Background(), &ListTaskDefinitionFamiliesInput{
+		FamilyPrefix: ptr.String("__FamilyPrefix__"),
+		Status:       types.TaskDefinitionFamilyStatus("ACTIVE"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13208,7 +14252,13 @@ func TestCheckResponseSnapshot_ListTaskDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTaskDefinitions(context.Background(), &ListTaskDefinitionsInput{})
+	got, err := svc.ListTaskDefinitions(context.Background(), &ListTaskDefinitionsInput{
+		FamilyPrefix: ptr.String("__FamilyPrefix__"),
+		Status:       types.TaskDefinitionStatus("ACTIVE"),
+		Sort:         types.SortOrder("ASC"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13233,7 +14283,18 @@ func TestCheckResponseSnapshot_ListTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTasks(context.Background(), &ListTasksInput{})
+	got, err := svc.ListTasks(context.Background(), &ListTasksInput{
+		Cluster:           ptr.String("__Cluster__"),
+		ContainerInstance: ptr.String("__ContainerInstance__"),
+		Family:            ptr.String("__Family__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		StartedBy:         ptr.String("__StartedBy__"),
+		ServiceName:       ptr.String("__ServiceName__"),
+		DesiredStatus:     types.DesiredStatus("RUNNING"),
+		LaunchType:        types.LaunchType("EC2"),
+		DaemonName:        ptr.String("__DaemonName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13259,7 +14320,11 @@ func TestCheckResponseSnapshot_PutAccountSetting(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountSetting(context.Background(), &PutAccountSettingInput{})
+	got, err := svc.PutAccountSetting(context.Background(), &PutAccountSettingInput{
+		Name:         types.SettingName("serviceLongArnFormat"),
+		Value:        ptr.String("__Value__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13285,7 +14350,10 @@ func TestCheckResponseSnapshot_PutAccountSettingDefault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountSettingDefault(context.Background(), &PutAccountSettingDefaultInput{})
+	got, err := svc.PutAccountSettingDefault(context.Background(), &PutAccountSettingDefaultInput{
+		Name:  types.SettingName("serviceLongArnFormat"),
+		Value: ptr.String("__Value__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13319,7 +14387,23 @@ func TestCheckResponseSnapshot_PutAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAttributes(context.Background(), &PutAttributesInput{})
+	got, err := svc.PutAttributes(context.Background(), &PutAttributesInput{
+		Cluster: ptr.String("__Cluster__"),
+		Attributes: []types.Attribute{
+			{
+				Name:       ptr.String("__Name__"),
+				Value:      ptr.String("__Value__"),
+				TargetType: types.TargetType("container-instance"),
+				TargetId:   ptr.String("__TargetId__"),
+			},
+			{
+				Name:       ptr.String("__Name__"),
+				Value:      ptr.String("__Value__"),
+				TargetType: types.TargetType("container-instance"),
+				TargetId:   ptr.String("__TargetId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13447,7 +14531,25 @@ func TestCheckResponseSnapshot_PutClusterCapacityProviders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutClusterCapacityProviders(context.Background(), &PutClusterCapacityProvidersInput{})
+	got, err := svc.PutClusterCapacityProviders(context.Background(), &PutClusterCapacityProvidersInput{
+		Cluster: ptr.String("__Cluster__"),
+		CapacityProviders: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DefaultCapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13608,7 +14710,75 @@ func TestCheckResponseSnapshot_RegisterContainerInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterContainerInstance(context.Background(), &RegisterContainerInstanceInput{})
+	got, err := svc.RegisterContainerInstance(context.Background(), &RegisterContainerInstanceInput{
+		Cluster:                           ptr.String("__Cluster__"),
+		InstanceIdentityDocument:          ptr.String("__InstanceIdentityDocument__"),
+		InstanceIdentityDocumentSignature: ptr.String("__InstanceIdentityDocumentSignature__"),
+		TotalResources: []types.Resource{
+			{
+				Name:         ptr.String("__Name__"),
+				Type:         ptr.String("__Type__"),
+				DoubleValue:  1.0,
+				LongValue:    1,
+				IntegerValue: 1,
+				StringSetValue: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				Type:         ptr.String("__Type__"),
+				DoubleValue:  1.0,
+				LongValue:    1,
+				IntegerValue: 1,
+				StringSetValue: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		VersionInfo: &types.VersionInfo{
+			AgentVersion:  ptr.String("__AgentVersion__"),
+			AgentHash:     ptr.String("__AgentHash__"),
+			DockerVersion: ptr.String("__DockerVersion__"),
+		},
+		ContainerInstanceArn: ptr.String("__ContainerInstanceArn__"),
+		Attributes: []types.Attribute{
+			{
+				Name:       ptr.String("__Name__"),
+				Value:      ptr.String("__Value__"),
+				TargetType: types.TargetType("container-instance"),
+				TargetId:   ptr.String("__TargetId__"),
+			},
+			{
+				Name:       ptr.String("__Name__"),
+				Value:      ptr.String("__Value__"),
+				TargetType: types.TargetType("container-instance"),
+				TargetId:   ptr.String("__TargetId__"),
+			},
+		},
+		PlatformDevices: []types.PlatformDevice{
+			{
+				Id:   ptr.String("__Id__"),
+				Type: types.PlatformDeviceType("GPU"),
+			},
+			{
+				Id:   ptr.String("__Id__"),
+				Type: types.PlatformDeviceType("GPU"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13629,7 +14799,421 @@ func TestCheckResponseSnapshot_RegisterDaemonTaskDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterDaemonTaskDefinition(context.Background(), &RegisterDaemonTaskDefinitionInput{})
+	got, err := svc.RegisterDaemonTaskDefinition(context.Background(), &RegisterDaemonTaskDefinitionInput{
+		Family:           ptr.String("__Family__"),
+		TaskRoleArn:      ptr.String("__TaskRoleArn__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		ContainerDefinitions: []types.DaemonContainerDefinition{
+			{
+				Name:              ptr.String("__Name__"),
+				Image:             ptr.String("__Image__"),
+				Memory:            ptr.Int32(1),
+				MemoryReservation: ptr.Int32(1),
+				RepositoryCredentials: &types.RepositoryCredentials{
+					CredentialsParameter: ptr.String("__CredentialsParameter__"),
+				},
+				HealthCheck: &types.HealthCheck{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Interval:    ptr.Int32(1),
+					Timeout:     ptr.Int32(1),
+					Retries:     ptr.Int32(1),
+					StartPeriod: ptr.Int32(1),
+				},
+				Cpu:       1,
+				Essential: ptr.Bool(true),
+				EntryPoint: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Command: []string{
+					"__Member__",
+					"__Member__",
+				},
+				WorkingDirectory: ptr.String("__WorkingDirectory__"),
+				EnvironmentFiles: []types.EnvironmentFile{
+					{
+						Value: ptr.String("__Value__"),
+						Type:  types.EnvironmentFileType("s3"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+						Type:  types.EnvironmentFileType("s3"),
+					},
+				},
+				Environment: []types.KeyValuePair{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Secrets: []types.Secret{
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+				},
+				ReadonlyRootFilesystem: ptr.Bool(true),
+				MountPoints: []types.MountPoint{
+					{
+						SourceVolume:  ptr.String("__SourceVolume__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						ReadOnly:      ptr.Bool(true),
+					},
+					{
+						SourceVolume:  ptr.String("__SourceVolume__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						ReadOnly:      ptr.Bool(true),
+					},
+				},
+				LogConfiguration: &types.LogConfiguration{
+					LogDriver: types.LogDriver("json-file"),
+					Options: map[string]string{
+						"key0": "__Value__",
+					},
+					SecretOptions: []types.Secret{
+						{
+							Name:      ptr.String("__Name__"),
+							ValueFrom: ptr.String("__ValueFrom__"),
+						},
+						{
+							Name:      ptr.String("__Name__"),
+							ValueFrom: ptr.String("__ValueFrom__"),
+						},
+					},
+				},
+				FirelensConfiguration: &types.FirelensConfiguration{
+					Type: types.FirelensConfigurationType("fluentd"),
+					Options: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				Privileged: ptr.Bool(true),
+				User:       ptr.String("__User__"),
+				Ulimits: []types.Ulimit{
+					{
+						Name:      types.UlimitName("core"),
+						SoftLimit: 1,
+						HardLimit: 1,
+					},
+					{
+						Name:      types.UlimitName("core"),
+						SoftLimit: 1,
+						HardLimit: 1,
+					},
+				},
+				LinuxParameters: &types.DaemonLinuxParameters{
+					Capabilities: &types.KernelCapabilities{
+						Add: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Drop: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Devices: []types.Device{
+						{
+							HostPath:      ptr.String("__HostPath__"),
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Permissions: []types.DeviceCgroupPermission{
+								types.DeviceCgroupPermission("read"),
+								types.DeviceCgroupPermission("read"),
+							},
+						},
+						{
+							HostPath:      ptr.String("__HostPath__"),
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Permissions: []types.DeviceCgroupPermission{
+								types.DeviceCgroupPermission("read"),
+								types.DeviceCgroupPermission("read"),
+							},
+						},
+					},
+					InitProcessEnabled: ptr.Bool(true),
+					Tmpfs: []types.Tmpfs{
+						{
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Size:          1,
+							MountOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Size:          1,
+							MountOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				DependsOn: []types.ContainerDependency{
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerCondition("START"),
+					},
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerCondition("START"),
+					},
+				},
+				StartTimeout: ptr.Int32(1),
+				StopTimeout:  ptr.Int32(1),
+				SystemControls: []types.SystemControl{
+					{
+						Namespace: ptr.String("__Namespace__"),
+						Value:     ptr.String("__Value__"),
+					},
+					{
+						Namespace: ptr.String("__Namespace__"),
+						Value:     ptr.String("__Value__"),
+					},
+				},
+				Interactive:    ptr.Bool(true),
+				PseudoTerminal: ptr.Bool(true),
+				RestartPolicy: &types.ContainerRestartPolicy{
+					Enabled: ptr.Bool(true),
+					IgnoredExitCodes: []int32{
+						1,
+						1,
+					},
+					RestartAttemptPeriod: ptr.Int32(1),
+				},
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Image:             ptr.String("__Image__"),
+				Memory:            ptr.Int32(1),
+				MemoryReservation: ptr.Int32(1),
+				RepositoryCredentials: &types.RepositoryCredentials{
+					CredentialsParameter: ptr.String("__CredentialsParameter__"),
+				},
+				HealthCheck: &types.HealthCheck{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Interval:    ptr.Int32(1),
+					Timeout:     ptr.Int32(1),
+					Retries:     ptr.Int32(1),
+					StartPeriod: ptr.Int32(1),
+				},
+				Cpu:       1,
+				Essential: ptr.Bool(true),
+				EntryPoint: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Command: []string{
+					"__Member__",
+					"__Member__",
+				},
+				WorkingDirectory: ptr.String("__WorkingDirectory__"),
+				EnvironmentFiles: []types.EnvironmentFile{
+					{
+						Value: ptr.String("__Value__"),
+						Type:  types.EnvironmentFileType("s3"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+						Type:  types.EnvironmentFileType("s3"),
+					},
+				},
+				Environment: []types.KeyValuePair{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Secrets: []types.Secret{
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+				},
+				ReadonlyRootFilesystem: ptr.Bool(true),
+				MountPoints: []types.MountPoint{
+					{
+						SourceVolume:  ptr.String("__SourceVolume__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						ReadOnly:      ptr.Bool(true),
+					},
+					{
+						SourceVolume:  ptr.String("__SourceVolume__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						ReadOnly:      ptr.Bool(true),
+					},
+				},
+				LogConfiguration: &types.LogConfiguration{
+					LogDriver: types.LogDriver("json-file"),
+					Options: map[string]string{
+						"key0": "__Value__",
+					},
+					SecretOptions: []types.Secret{
+						{
+							Name:      ptr.String("__Name__"),
+							ValueFrom: ptr.String("__ValueFrom__"),
+						},
+						{
+							Name:      ptr.String("__Name__"),
+							ValueFrom: ptr.String("__ValueFrom__"),
+						},
+					},
+				},
+				FirelensConfiguration: &types.FirelensConfiguration{
+					Type: types.FirelensConfigurationType("fluentd"),
+					Options: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				Privileged: ptr.Bool(true),
+				User:       ptr.String("__User__"),
+				Ulimits: []types.Ulimit{
+					{
+						Name:      types.UlimitName("core"),
+						SoftLimit: 1,
+						HardLimit: 1,
+					},
+					{
+						Name:      types.UlimitName("core"),
+						SoftLimit: 1,
+						HardLimit: 1,
+					},
+				},
+				LinuxParameters: &types.DaemonLinuxParameters{
+					Capabilities: &types.KernelCapabilities{
+						Add: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Drop: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Devices: []types.Device{
+						{
+							HostPath:      ptr.String("__HostPath__"),
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Permissions: []types.DeviceCgroupPermission{
+								types.DeviceCgroupPermission("read"),
+								types.DeviceCgroupPermission("read"),
+							},
+						},
+						{
+							HostPath:      ptr.String("__HostPath__"),
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Permissions: []types.DeviceCgroupPermission{
+								types.DeviceCgroupPermission("read"),
+								types.DeviceCgroupPermission("read"),
+							},
+						},
+					},
+					InitProcessEnabled: ptr.Bool(true),
+					Tmpfs: []types.Tmpfs{
+						{
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Size:          1,
+							MountOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Size:          1,
+							MountOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				DependsOn: []types.ContainerDependency{
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerCondition("START"),
+					},
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerCondition("START"),
+					},
+				},
+				StartTimeout: ptr.Int32(1),
+				StopTimeout:  ptr.Int32(1),
+				SystemControls: []types.SystemControl{
+					{
+						Namespace: ptr.String("__Namespace__"),
+						Value:     ptr.String("__Value__"),
+					},
+					{
+						Namespace: ptr.String("__Namespace__"),
+						Value:     ptr.String("__Value__"),
+					},
+				},
+				Interactive:    ptr.Bool(true),
+				PseudoTerminal: ptr.Bool(true),
+				RestartPolicy: &types.ContainerRestartPolicy{
+					Enabled: ptr.Bool(true),
+					IgnoredExitCodes: []int32{
+						1,
+						1,
+					},
+					RestartAttemptPeriod: ptr.Int32(1),
+				},
+			},
+		},
+		Cpu:    ptr.String("__Cpu__"),
+		Memory: ptr.String("__Memory__"),
+		Volumes: []types.DaemonVolume{
+			{
+				Name: ptr.String("__Name__"),
+				Host: &types.HostVolumeProperties{
+					SourcePath: ptr.String("__SourcePath__"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Host: &types.HostVolumeProperties{
+					SourcePath: ptr.String("__SourcePath__"),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PidMode: types.DaemonPidMode("none"),
+		IpcMode: types.DaemonIpcMode("none"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14362,7 +15946,694 @@ func TestCheckResponseSnapshot_RegisterTaskDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterTaskDefinition(context.Background(), &RegisterTaskDefinitionInput{})
+	got, err := svc.RegisterTaskDefinition(context.Background(), &RegisterTaskDefinitionInput{
+		Family:           ptr.String("__Family__"),
+		TaskRoleArn:      ptr.String("__TaskRoleArn__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		NetworkMode:      types.NetworkMode("bridge"),
+		ContainerDefinitions: []types.ContainerDefinition{
+			{
+				Name:  ptr.String("__Name__"),
+				Image: ptr.String("__Image__"),
+				RepositoryCredentials: &types.RepositoryCredentials{
+					CredentialsParameter: ptr.String("__CredentialsParameter__"),
+				},
+				Cpu:               1,
+				Memory:            ptr.Int32(1),
+				MemoryReservation: ptr.Int32(1),
+				Links: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PortMappings: []types.PortMapping{
+					{
+						ContainerPort:      ptr.Int32(1),
+						HostPort:           ptr.Int32(1),
+						Protocol:           types.TransportProtocol("tcp"),
+						Name:               ptr.String("__Name__"),
+						AppProtocol:        types.ApplicationProtocol("http"),
+						ContainerPortRange: ptr.String("__ContainerPortRange__"),
+					},
+					{
+						ContainerPort:      ptr.Int32(1),
+						HostPort:           ptr.Int32(1),
+						Protocol:           types.TransportProtocol("tcp"),
+						Name:               ptr.String("__Name__"),
+						AppProtocol:        types.ApplicationProtocol("http"),
+						ContainerPortRange: ptr.String("__ContainerPortRange__"),
+					},
+				},
+				Essential: ptr.Bool(true),
+				RestartPolicy: &types.ContainerRestartPolicy{
+					Enabled: ptr.Bool(true),
+					IgnoredExitCodes: []int32{
+						1,
+						1,
+					},
+					RestartAttemptPeriod: ptr.Int32(1),
+				},
+				EntryPoint: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Command: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Environment: []types.KeyValuePair{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				EnvironmentFiles: []types.EnvironmentFile{
+					{
+						Value: ptr.String("__Value__"),
+						Type:  types.EnvironmentFileType("s3"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+						Type:  types.EnvironmentFileType("s3"),
+					},
+				},
+				MountPoints: []types.MountPoint{
+					{
+						SourceVolume:  ptr.String("__SourceVolume__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						ReadOnly:      ptr.Bool(true),
+					},
+					{
+						SourceVolume:  ptr.String("__SourceVolume__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						ReadOnly:      ptr.Bool(true),
+					},
+				},
+				VolumesFrom: []types.VolumeFrom{
+					{
+						SourceContainer: ptr.String("__SourceContainer__"),
+						ReadOnly:        ptr.Bool(true),
+					},
+					{
+						SourceContainer: ptr.String("__SourceContainer__"),
+						ReadOnly:        ptr.Bool(true),
+					},
+				},
+				LinuxParameters: &types.LinuxParameters{
+					Capabilities: &types.KernelCapabilities{
+						Add: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Drop: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Devices: []types.Device{
+						{
+							HostPath:      ptr.String("__HostPath__"),
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Permissions: []types.DeviceCgroupPermission{
+								types.DeviceCgroupPermission("read"),
+								types.DeviceCgroupPermission("read"),
+							},
+						},
+						{
+							HostPath:      ptr.String("__HostPath__"),
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Permissions: []types.DeviceCgroupPermission{
+								types.DeviceCgroupPermission("read"),
+								types.DeviceCgroupPermission("read"),
+							},
+						},
+					},
+					InitProcessEnabled: ptr.Bool(true),
+					SharedMemorySize:   ptr.Int32(1),
+					Tmpfs: []types.Tmpfs{
+						{
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Size:          1,
+							MountOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Size:          1,
+							MountOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					MaxSwap:    ptr.Int32(1),
+					Swappiness: ptr.Int32(1),
+				},
+				Secrets: []types.Secret{
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+				},
+				DependsOn: []types.ContainerDependency{
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerCondition("START"),
+					},
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerCondition("START"),
+					},
+				},
+				StartTimeout:           ptr.Int32(1),
+				StopTimeout:            ptr.Int32(1),
+				VersionConsistency:     types.VersionConsistency("enabled"),
+				Hostname:               ptr.String("__Hostname__"),
+				User:                   ptr.String("__User__"),
+				WorkingDirectory:       ptr.String("__WorkingDirectory__"),
+				DisableNetworking:      ptr.Bool(true),
+				Privileged:             ptr.Bool(true),
+				ReadonlyRootFilesystem: ptr.Bool(true),
+				DnsServers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DnsSearchDomains: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExtraHosts: []types.HostEntry{
+					{
+						Hostname:  ptr.String("__Hostname__"),
+						IpAddress: ptr.String("__IpAddress__"),
+					},
+					{
+						Hostname:  ptr.String("__Hostname__"),
+						IpAddress: ptr.String("__IpAddress__"),
+					},
+				},
+				DockerSecurityOptions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Interactive:    ptr.Bool(true),
+				PseudoTerminal: ptr.Bool(true),
+				DockerLabels: map[string]string{
+					"key0": "__Value__",
+				},
+				Ulimits: []types.Ulimit{
+					{
+						Name:      types.UlimitName("core"),
+						SoftLimit: 1,
+						HardLimit: 1,
+					},
+					{
+						Name:      types.UlimitName("core"),
+						SoftLimit: 1,
+						HardLimit: 1,
+					},
+				},
+				LogConfiguration: &types.LogConfiguration{
+					LogDriver: types.LogDriver("json-file"),
+					Options: map[string]string{
+						"key0": "__Value__",
+					},
+					SecretOptions: []types.Secret{
+						{
+							Name:      ptr.String("__Name__"),
+							ValueFrom: ptr.String("__ValueFrom__"),
+						},
+						{
+							Name:      ptr.String("__Name__"),
+							ValueFrom: ptr.String("__ValueFrom__"),
+						},
+					},
+				},
+				HealthCheck: &types.HealthCheck{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Interval:    ptr.Int32(1),
+					Timeout:     ptr.Int32(1),
+					Retries:     ptr.Int32(1),
+					StartPeriod: ptr.Int32(1),
+				},
+				SystemControls: []types.SystemControl{
+					{
+						Namespace: ptr.String("__Namespace__"),
+						Value:     ptr.String("__Value__"),
+					},
+					{
+						Namespace: ptr.String("__Namespace__"),
+						Value:     ptr.String("__Value__"),
+					},
+				},
+				ResourceRequirements: []types.ResourceRequirement{
+					{
+						Value: ptr.String("__Value__"),
+						Type:  types.ResourceType("GPU"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+						Type:  types.ResourceType("GPU"),
+					},
+				},
+				FirelensConfiguration: &types.FirelensConfiguration{
+					Type: types.FirelensConfigurationType("fluentd"),
+					Options: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				CredentialSpecs: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Image: ptr.String("__Image__"),
+				RepositoryCredentials: &types.RepositoryCredentials{
+					CredentialsParameter: ptr.String("__CredentialsParameter__"),
+				},
+				Cpu:               1,
+				Memory:            ptr.Int32(1),
+				MemoryReservation: ptr.Int32(1),
+				Links: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PortMappings: []types.PortMapping{
+					{
+						ContainerPort:      ptr.Int32(1),
+						HostPort:           ptr.Int32(1),
+						Protocol:           types.TransportProtocol("tcp"),
+						Name:               ptr.String("__Name__"),
+						AppProtocol:        types.ApplicationProtocol("http"),
+						ContainerPortRange: ptr.String("__ContainerPortRange__"),
+					},
+					{
+						ContainerPort:      ptr.Int32(1),
+						HostPort:           ptr.Int32(1),
+						Protocol:           types.TransportProtocol("tcp"),
+						Name:               ptr.String("__Name__"),
+						AppProtocol:        types.ApplicationProtocol("http"),
+						ContainerPortRange: ptr.String("__ContainerPortRange__"),
+					},
+				},
+				Essential: ptr.Bool(true),
+				RestartPolicy: &types.ContainerRestartPolicy{
+					Enabled: ptr.Bool(true),
+					IgnoredExitCodes: []int32{
+						1,
+						1,
+					},
+					RestartAttemptPeriod: ptr.Int32(1),
+				},
+				EntryPoint: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Command: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Environment: []types.KeyValuePair{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				EnvironmentFiles: []types.EnvironmentFile{
+					{
+						Value: ptr.String("__Value__"),
+						Type:  types.EnvironmentFileType("s3"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+						Type:  types.EnvironmentFileType("s3"),
+					},
+				},
+				MountPoints: []types.MountPoint{
+					{
+						SourceVolume:  ptr.String("__SourceVolume__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						ReadOnly:      ptr.Bool(true),
+					},
+					{
+						SourceVolume:  ptr.String("__SourceVolume__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						ReadOnly:      ptr.Bool(true),
+					},
+				},
+				VolumesFrom: []types.VolumeFrom{
+					{
+						SourceContainer: ptr.String("__SourceContainer__"),
+						ReadOnly:        ptr.Bool(true),
+					},
+					{
+						SourceContainer: ptr.String("__SourceContainer__"),
+						ReadOnly:        ptr.Bool(true),
+					},
+				},
+				LinuxParameters: &types.LinuxParameters{
+					Capabilities: &types.KernelCapabilities{
+						Add: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Drop: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Devices: []types.Device{
+						{
+							HostPath:      ptr.String("__HostPath__"),
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Permissions: []types.DeviceCgroupPermission{
+								types.DeviceCgroupPermission("read"),
+								types.DeviceCgroupPermission("read"),
+							},
+						},
+						{
+							HostPath:      ptr.String("__HostPath__"),
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Permissions: []types.DeviceCgroupPermission{
+								types.DeviceCgroupPermission("read"),
+								types.DeviceCgroupPermission("read"),
+							},
+						},
+					},
+					InitProcessEnabled: ptr.Bool(true),
+					SharedMemorySize:   ptr.Int32(1),
+					Tmpfs: []types.Tmpfs{
+						{
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Size:          1,
+							MountOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ContainerPath: ptr.String("__ContainerPath__"),
+							Size:          1,
+							MountOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					MaxSwap:    ptr.Int32(1),
+					Swappiness: ptr.Int32(1),
+				},
+				Secrets: []types.Secret{
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+				},
+				DependsOn: []types.ContainerDependency{
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerCondition("START"),
+					},
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerCondition("START"),
+					},
+				},
+				StartTimeout:           ptr.Int32(1),
+				StopTimeout:            ptr.Int32(1),
+				VersionConsistency:     types.VersionConsistency("enabled"),
+				Hostname:               ptr.String("__Hostname__"),
+				User:                   ptr.String("__User__"),
+				WorkingDirectory:       ptr.String("__WorkingDirectory__"),
+				DisableNetworking:      ptr.Bool(true),
+				Privileged:             ptr.Bool(true),
+				ReadonlyRootFilesystem: ptr.Bool(true),
+				DnsServers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DnsSearchDomains: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExtraHosts: []types.HostEntry{
+					{
+						Hostname:  ptr.String("__Hostname__"),
+						IpAddress: ptr.String("__IpAddress__"),
+					},
+					{
+						Hostname:  ptr.String("__Hostname__"),
+						IpAddress: ptr.String("__IpAddress__"),
+					},
+				},
+				DockerSecurityOptions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Interactive:    ptr.Bool(true),
+				PseudoTerminal: ptr.Bool(true),
+				DockerLabels: map[string]string{
+					"key0": "__Value__",
+				},
+				Ulimits: []types.Ulimit{
+					{
+						Name:      types.UlimitName("core"),
+						SoftLimit: 1,
+						HardLimit: 1,
+					},
+					{
+						Name:      types.UlimitName("core"),
+						SoftLimit: 1,
+						HardLimit: 1,
+					},
+				},
+				LogConfiguration: &types.LogConfiguration{
+					LogDriver: types.LogDriver("json-file"),
+					Options: map[string]string{
+						"key0": "__Value__",
+					},
+					SecretOptions: []types.Secret{
+						{
+							Name:      ptr.String("__Name__"),
+							ValueFrom: ptr.String("__ValueFrom__"),
+						},
+						{
+							Name:      ptr.String("__Name__"),
+							ValueFrom: ptr.String("__ValueFrom__"),
+						},
+					},
+				},
+				HealthCheck: &types.HealthCheck{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Interval:    ptr.Int32(1),
+					Timeout:     ptr.Int32(1),
+					Retries:     ptr.Int32(1),
+					StartPeriod: ptr.Int32(1),
+				},
+				SystemControls: []types.SystemControl{
+					{
+						Namespace: ptr.String("__Namespace__"),
+						Value:     ptr.String("__Value__"),
+					},
+					{
+						Namespace: ptr.String("__Namespace__"),
+						Value:     ptr.String("__Value__"),
+					},
+				},
+				ResourceRequirements: []types.ResourceRequirement{
+					{
+						Value: ptr.String("__Value__"),
+						Type:  types.ResourceType("GPU"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+						Type:  types.ResourceType("GPU"),
+					},
+				},
+				FirelensConfiguration: &types.FirelensConfiguration{
+					Type: types.FirelensConfigurationType("fluentd"),
+					Options: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				CredentialSpecs: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Volumes: []types.Volume{
+			{
+				Name: ptr.String("__Name__"),
+				Host: &types.HostVolumeProperties{
+					SourcePath: ptr.String("__SourcePath__"),
+				},
+				DockerVolumeConfiguration: &types.DockerVolumeConfiguration{
+					Scope:         types.Scope("task"),
+					Autoprovision: ptr.Bool(true),
+					Driver:        ptr.String("__Driver__"),
+					DriverOpts: map[string]string{
+						"key0": "__Value__",
+					},
+					Labels: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+					FileSystemId:          ptr.String("__FileSystemId__"),
+					RootDirectory:         ptr.String("__RootDirectory__"),
+					TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+					TransitEncryptionPort: ptr.Int32(1),
+					AuthorizationConfig: &types.EFSAuthorizationConfig{
+						AccessPointId: ptr.String("__AccessPointId__"),
+						Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+					},
+				},
+				S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+					FileSystemArn:         ptr.String("__FileSystemArn__"),
+					RootDirectory:         ptr.String("__RootDirectory__"),
+					TransitEncryptionPort: ptr.Int32(1),
+					AccessPointArn:        ptr.String("__AccessPointArn__"),
+				},
+				FsxWindowsFileServerVolumeConfiguration: &types.FSxWindowsFileServerVolumeConfiguration{
+					FileSystemId:  ptr.String("__FileSystemId__"),
+					RootDirectory: ptr.String("__RootDirectory__"),
+					AuthorizationConfig: &types.FSxWindowsFileServerAuthorizationConfig{
+						CredentialsParameter: ptr.String("__CredentialsParameter__"),
+						Domain:               ptr.String("__Domain__"),
+					},
+				},
+				ConfiguredAtLaunch: ptr.Bool(true),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Host: &types.HostVolumeProperties{
+					SourcePath: ptr.String("__SourcePath__"),
+				},
+				DockerVolumeConfiguration: &types.DockerVolumeConfiguration{
+					Scope:         types.Scope("task"),
+					Autoprovision: ptr.Bool(true),
+					Driver:        ptr.String("__Driver__"),
+					DriverOpts: map[string]string{
+						"key0": "__Value__",
+					},
+					Labels: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+					FileSystemId:          ptr.String("__FileSystemId__"),
+					RootDirectory:         ptr.String("__RootDirectory__"),
+					TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+					TransitEncryptionPort: ptr.Int32(1),
+					AuthorizationConfig: &types.EFSAuthorizationConfig{
+						AccessPointId: ptr.String("__AccessPointId__"),
+						Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+					},
+				},
+				S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+					FileSystemArn:         ptr.String("__FileSystemArn__"),
+					RootDirectory:         ptr.String("__RootDirectory__"),
+					TransitEncryptionPort: ptr.Int32(1),
+					AccessPointArn:        ptr.String("__AccessPointArn__"),
+				},
+				FsxWindowsFileServerVolumeConfiguration: &types.FSxWindowsFileServerVolumeConfiguration{
+					FileSystemId:  ptr.String("__FileSystemId__"),
+					RootDirectory: ptr.String("__RootDirectory__"),
+					AuthorizationConfig: &types.FSxWindowsFileServerAuthorizationConfig{
+						CredentialsParameter: ptr.String("__CredentialsParameter__"),
+						Domain:               ptr.String("__Domain__"),
+					},
+				},
+				ConfiguredAtLaunch: ptr.Bool(true),
+			},
+		},
+		PlacementConstraints: []types.TaskDefinitionPlacementConstraint{
+			{
+				Type:       types.TaskDefinitionPlacementConstraintType("memberOf"),
+				Expression: ptr.String("__Expression__"),
+			},
+			{
+				Type:       types.TaskDefinitionPlacementConstraintType("memberOf"),
+				Expression: ptr.String("__Expression__"),
+			},
+		},
+		RequiresCompatibilities: []types.Compatibility{
+			types.Compatibility("EC2"),
+			types.Compatibility("EC2"),
+		},
+		Cpu:    ptr.String("__Cpu__"),
+		Memory: ptr.String("__Memory__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PidMode: types.PidMode("host"),
+		IpcMode: types.IpcMode("host"),
+		ProxyConfiguration: &types.ProxyConfiguration{
+			Type:          types.ProxyConfigurationType("APPMESH"),
+			ContainerName: ptr.String("__ContainerName__"),
+			Properties: []types.KeyValuePair{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		InferenceAccelerators: []types.InferenceAccelerator{
+			{
+				DeviceName: ptr.String("__DeviceName__"),
+				DeviceType: ptr.String("__DeviceType__"),
+			},
+			{
+				DeviceName: ptr.String("__DeviceName__"),
+				DeviceType: ptr.String("__DeviceType__"),
+			},
+		},
+		EphemeralStorage: &types.EphemeralStorage{
+			SizeInGiB: 1,
+		},
+		RuntimePlatform: &types.RuntimePlatform{
+			CpuArchitecture:       types.CPUArchitecture("X86_64"),
+			OperatingSystemFamily: types.OSFamily("WINDOWS_SERVER_2019_FULL"),
+		},
+		EnableFaultInjection: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15078,7 +17349,274 @@ func TestCheckResponseSnapshot_RunTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RunTask(context.Background(), &RunTaskInput{})
+	got, err := svc.RunTask(context.Background(), &RunTaskInput{
+		CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+		},
+		Cluster:              ptr.String("__Cluster__"),
+		Count:                ptr.Int32(1),
+		EnableECSManagedTags: true,
+		EnableExecuteCommand: true,
+		Group:                ptr.String("__Group__"),
+		LaunchType:           types.LaunchType("EC2"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			AwsvpcConfiguration: &types.AwsVpcConfiguration{
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AssignPublicIp: types.AssignPublicIp("ENABLED"),
+			},
+		},
+		Overrides: &types.TaskOverride{
+			ContainerOverrides: []types.ContainerOverride{
+				{
+					Name: ptr.String("__Name__"),
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.KeyValuePair{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					EnvironmentFiles: []types.EnvironmentFile{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+					},
+					Cpu:               ptr.Int32(1),
+					Memory:            ptr.Int32(1),
+					MemoryReservation: ptr.Int32(1),
+					ResourceRequirements: []types.ResourceRequirement{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.KeyValuePair{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					EnvironmentFiles: []types.EnvironmentFile{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+					},
+					Cpu:               ptr.Int32(1),
+					Memory:            ptr.Int32(1),
+					MemoryReservation: ptr.Int32(1),
+					ResourceRequirements: []types.ResourceRequirement{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+					},
+				},
+			},
+			Cpu: ptr.String("__Cpu__"),
+			InferenceAcceleratorOverrides: []types.InferenceAcceleratorOverride{
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					DeviceType: ptr.String("__DeviceType__"),
+				},
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					DeviceType: ptr.String("__DeviceType__"),
+				},
+			},
+			ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+			Memory:           ptr.String("__Memory__"),
+			TaskRoleArn:      ptr.String("__TaskRoleArn__"),
+			EphemeralStorage: &types.EphemeralStorage{
+				SizeInGiB: 1,
+			},
+		},
+		PlacementConstraints: []types.PlacementConstraint{
+			{
+				Type:       types.PlacementConstraintType("distinctInstance"),
+				Expression: ptr.String("__Expression__"),
+			},
+			{
+				Type:       types.PlacementConstraintType("distinctInstance"),
+				Expression: ptr.String("__Expression__"),
+			},
+		},
+		PlacementStrategy: []types.PlacementStrategy{
+			{
+				Type:  types.PlacementStrategyType("random"),
+				Field: ptr.String("__Field__"),
+			},
+			{
+				Type:  types.PlacementStrategyType("random"),
+				Field: ptr.String("__Field__"),
+			},
+		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		PropagateTags:   types.PropagateTags("TASK_DEFINITION"),
+		ReferenceId:     ptr.String("__ReferenceId__"),
+		StartedBy:       ptr.String("__StartedBy__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TaskDefinition: ptr.String("__TaskDefinition__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		VolumeConfigurations: []types.TaskVolumeConfiguration{
+			{
+				Name: ptr.String("__Name__"),
+				ManagedEBSVolume: &types.TaskManagedEBSVolumeConfiguration{
+					Encrypted:                ptr.Bool(true),
+					KmsKeyId:                 ptr.String("__KmsKeyId__"),
+					VolumeType:               ptr.String("__VolumeType__"),
+					SizeInGiB:                ptr.Int32(1),
+					SnapshotId:               ptr.String("__SnapshotId__"),
+					VolumeInitializationRate: ptr.Int32(1),
+					Iops:                     ptr.Int32(1),
+					Throughput:               ptr.Int32(1),
+					TagSpecifications: []types.EBSTagSpecification{
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+					TerminationPolicy: &types.TaskManagedEBSVolumeTerminationPolicy{
+						DeleteOnTermination: ptr.Bool(true),
+					},
+					FilesystemType: types.TaskFilesystemType("ext3"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				ManagedEBSVolume: &types.TaskManagedEBSVolumeConfiguration{
+					Encrypted:                ptr.Bool(true),
+					KmsKeyId:                 ptr.String("__KmsKeyId__"),
+					VolumeType:               ptr.String("__VolumeType__"),
+					SizeInGiB:                ptr.Int32(1),
+					SnapshotId:               ptr.String("__SnapshotId__"),
+					VolumeInitializationRate: ptr.Int32(1),
+					Iops:                     ptr.Int32(1),
+					Throughput:               ptr.Int32(1),
+					TagSpecifications: []types.EBSTagSpecification{
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+					TerminationPolicy: &types.TaskManagedEBSVolumeTerminationPolicy{
+						DeleteOnTermination: ptr.Bool(true),
+					},
+					FilesystemType: types.TaskFilesystemType("ext3"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15794,7 +18332,242 @@ func TestCheckResponseSnapshot_StartTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTask(context.Background(), &StartTaskInput{})
+	got, err := svc.StartTask(context.Background(), &StartTaskInput{
+		Cluster: ptr.String("__Cluster__"),
+		ContainerInstances: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EnableECSManagedTags: true,
+		EnableExecuteCommand: true,
+		Group:                ptr.String("__Group__"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			AwsvpcConfiguration: &types.AwsVpcConfiguration{
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AssignPublicIp: types.AssignPublicIp("ENABLED"),
+			},
+		},
+		Overrides: &types.TaskOverride{
+			ContainerOverrides: []types.ContainerOverride{
+				{
+					Name: ptr.String("__Name__"),
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.KeyValuePair{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					EnvironmentFiles: []types.EnvironmentFile{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+					},
+					Cpu:               ptr.Int32(1),
+					Memory:            ptr.Int32(1),
+					MemoryReservation: ptr.Int32(1),
+					ResourceRequirements: []types.ResourceRequirement{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.KeyValuePair{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					EnvironmentFiles: []types.EnvironmentFile{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+					},
+					Cpu:               ptr.Int32(1),
+					Memory:            ptr.Int32(1),
+					MemoryReservation: ptr.Int32(1),
+					ResourceRequirements: []types.ResourceRequirement{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+					},
+				},
+			},
+			Cpu: ptr.String("__Cpu__"),
+			InferenceAcceleratorOverrides: []types.InferenceAcceleratorOverride{
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					DeviceType: ptr.String("__DeviceType__"),
+				},
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					DeviceType: ptr.String("__DeviceType__"),
+				},
+			},
+			ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+			Memory:           ptr.String("__Memory__"),
+			TaskRoleArn:      ptr.String("__TaskRoleArn__"),
+			EphemeralStorage: &types.EphemeralStorage{
+				SizeInGiB: 1,
+			},
+		},
+		PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+		ReferenceId:   ptr.String("__ReferenceId__"),
+		StartedBy:     ptr.String("__StartedBy__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TaskDefinition: ptr.String("__TaskDefinition__"),
+		VolumeConfigurations: []types.TaskVolumeConfiguration{
+			{
+				Name: ptr.String("__Name__"),
+				ManagedEBSVolume: &types.TaskManagedEBSVolumeConfiguration{
+					Encrypted:                ptr.Bool(true),
+					KmsKeyId:                 ptr.String("__KmsKeyId__"),
+					VolumeType:               ptr.String("__VolumeType__"),
+					SizeInGiB:                ptr.Int32(1),
+					SnapshotId:               ptr.String("__SnapshotId__"),
+					VolumeInitializationRate: ptr.Int32(1),
+					Iops:                     ptr.Int32(1),
+					Throughput:               ptr.Int32(1),
+					TagSpecifications: []types.EBSTagSpecification{
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+					TerminationPolicy: &types.TaskManagedEBSVolumeTerminationPolicy{
+						DeleteOnTermination: ptr.Bool(true),
+					},
+					FilesystemType: types.TaskFilesystemType("ext3"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				ManagedEBSVolume: &types.TaskManagedEBSVolumeConfiguration{
+					Encrypted:                ptr.Bool(true),
+					KmsKeyId:                 ptr.String("__KmsKeyId__"),
+					VolumeType:               ptr.String("__VolumeType__"),
+					SizeInGiB:                ptr.Int32(1),
+					SnapshotId:               ptr.String("__SnapshotId__"),
+					VolumeInitializationRate: ptr.Int32(1),
+					Iops:                     ptr.Int32(1),
+					Throughput:               ptr.Int32(1),
+					TagSpecifications: []types.EBSTagSpecification{
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+					TerminationPolicy: &types.TaskManagedEBSVolumeTerminationPolicy{
+						DeleteOnTermination: ptr.Bool(true),
+					},
+					FilesystemType: types.TaskFilesystemType("ext3"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15815,7 +18588,10 @@ func TestCheckResponseSnapshot_StopServiceDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopServiceDeployment(context.Background(), &StopServiceDeploymentInput{})
+	got, err := svc.StopServiceDeployment(context.Background(), &StopServiceDeploymentInput{
+		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
+		StopType:             types.StopServiceDeploymentStopType("ABORT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16176,7 +18952,11 @@ func TestCheckResponseSnapshot_StopTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopTask(context.Background(), &StopTaskInput{})
+	got, err := svc.StopTask(context.Background(), &StopTaskInput{
+		Cluster: ptr.String("__Cluster__"),
+		Task:    ptr.String("__Task__"),
+		Reason:  ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16197,7 +18977,19 @@ func TestCheckResponseSnapshot_SubmitAttachmentStateChanges(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubmitAttachmentStateChanges(context.Background(), &SubmitAttachmentStateChangesInput{})
+	got, err := svc.SubmitAttachmentStateChanges(context.Background(), &SubmitAttachmentStateChangesInput{
+		Cluster: ptr.String("__Cluster__"),
+		Attachments: []types.AttachmentStateChange{
+			{
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+				Status:        ptr.String("__Status__"),
+			},
+			{
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+				Status:        ptr.String("__Status__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16218,7 +19010,33 @@ func TestCheckResponseSnapshot_SubmitContainerStateChange(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubmitContainerStateChange(context.Background(), &SubmitContainerStateChangeInput{})
+	got, err := svc.SubmitContainerStateChange(context.Background(), &SubmitContainerStateChangeInput{
+		Cluster:       ptr.String("__Cluster__"),
+		Task:          ptr.String("__Task__"),
+		ContainerName: ptr.String("__ContainerName__"),
+		RuntimeId:     ptr.String("__RuntimeId__"),
+		Status:        ptr.String("__Status__"),
+		ExitCode:      ptr.Int32(1),
+		Reason:        ptr.String("__Reason__"),
+		NetworkBindings: []types.NetworkBinding{
+			{
+				BindIP:             ptr.String("__BindIP__"),
+				ContainerPort:      ptr.Int32(1),
+				HostPort:           ptr.Int32(1),
+				Protocol:           types.TransportProtocol("tcp"),
+				ContainerPortRange: ptr.String("__ContainerPortRange__"),
+				HostPortRange:      ptr.String("__HostPortRange__"),
+			},
+			{
+				BindIP:             ptr.String("__BindIP__"),
+				ContainerPort:      ptr.Int32(1),
+				HostPort:           ptr.Int32(1),
+				Protocol:           types.TransportProtocol("tcp"),
+				ContainerPortRange: ptr.String("__ContainerPortRange__"),
+				HostPortRange:      ptr.String("__HostPortRange__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16239,7 +19057,93 @@ func TestCheckResponseSnapshot_SubmitTaskStateChange(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubmitTaskStateChange(context.Background(), &SubmitTaskStateChangeInput{})
+	got, err := svc.SubmitTaskStateChange(context.Background(), &SubmitTaskStateChangeInput{
+		Cluster: ptr.String("__Cluster__"),
+		Task:    ptr.String("__Task__"),
+		Status:  ptr.String("__Status__"),
+		Reason:  ptr.String("__Reason__"),
+		Containers: []types.ContainerStateChange{
+			{
+				ContainerName: ptr.String("__ContainerName__"),
+				ImageDigest:   ptr.String("__ImageDigest__"),
+				RuntimeId:     ptr.String("__RuntimeId__"),
+				ExitCode:      ptr.Int32(1),
+				NetworkBindings: []types.NetworkBinding{
+					{
+						BindIP:             ptr.String("__BindIP__"),
+						ContainerPort:      ptr.Int32(1),
+						HostPort:           ptr.Int32(1),
+						Protocol:           types.TransportProtocol("tcp"),
+						ContainerPortRange: ptr.String("__ContainerPortRange__"),
+						HostPortRange:      ptr.String("__HostPortRange__"),
+					},
+					{
+						BindIP:             ptr.String("__BindIP__"),
+						ContainerPort:      ptr.Int32(1),
+						HostPort:           ptr.Int32(1),
+						Protocol:           types.TransportProtocol("tcp"),
+						ContainerPortRange: ptr.String("__ContainerPortRange__"),
+						HostPortRange:      ptr.String("__HostPortRange__"),
+					},
+				},
+				Reason: ptr.String("__Reason__"),
+				Status: ptr.String("__Status__"),
+			},
+			{
+				ContainerName: ptr.String("__ContainerName__"),
+				ImageDigest:   ptr.String("__ImageDigest__"),
+				RuntimeId:     ptr.String("__RuntimeId__"),
+				ExitCode:      ptr.Int32(1),
+				NetworkBindings: []types.NetworkBinding{
+					{
+						BindIP:             ptr.String("__BindIP__"),
+						ContainerPort:      ptr.Int32(1),
+						HostPort:           ptr.Int32(1),
+						Protocol:           types.TransportProtocol("tcp"),
+						ContainerPortRange: ptr.String("__ContainerPortRange__"),
+						HostPortRange:      ptr.String("__HostPortRange__"),
+					},
+					{
+						BindIP:             ptr.String("__BindIP__"),
+						ContainerPort:      ptr.Int32(1),
+						HostPort:           ptr.Int32(1),
+						Protocol:           types.TransportProtocol("tcp"),
+						ContainerPortRange: ptr.String("__ContainerPortRange__"),
+						HostPortRange:      ptr.String("__HostPortRange__"),
+					},
+				},
+				Reason: ptr.String("__Reason__"),
+				Status: ptr.String("__Status__"),
+			},
+		},
+		Attachments: []types.AttachmentStateChange{
+			{
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+				Status:        ptr.String("__Status__"),
+			},
+			{
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+				Status:        ptr.String("__Status__"),
+			},
+		},
+		ManagedAgents: []types.ManagedAgentStateChange{
+			{
+				ContainerName:    ptr.String("__ContainerName__"),
+				ManagedAgentName: types.ManagedAgentName("ExecuteCommandAgent"),
+				Status:           ptr.String("__Status__"),
+				Reason:           ptr.String("__Reason__"),
+			},
+			{
+				ContainerName:    ptr.String("__ContainerName__"),
+				ManagedAgentName: types.ManagedAgentName("ExecuteCommandAgent"),
+				Status:           ptr.String("__Status__"),
+				Reason:           ptr.String("__Reason__"),
+			},
+		},
+		PullStartedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PullStoppedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExecutionStoppedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16258,7 +19162,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16277,7 +19193,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16442,7 +19364,133 @@ func TestCheckResponseSnapshot_UpdateCapacityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCapacityProvider(context.Background(), &UpdateCapacityProviderInput{})
+	got, err := svc.UpdateCapacityProvider(context.Background(), &UpdateCapacityProviderInput{
+		Name:    ptr.String("__Name__"),
+		Cluster: ptr.String("__Cluster__"),
+		AutoScalingGroupProvider: &types.AutoScalingGroupProviderUpdate{
+			ManagedScaling: &types.ManagedScaling{
+				Status:                 types.ManagedScalingStatus("ENABLED"),
+				TargetCapacity:         ptr.Int32(1),
+				MinimumScalingStepSize: ptr.Int32(1),
+				MaximumScalingStepSize: ptr.Int32(1),
+				InstanceWarmupPeriod:   ptr.Int32(1),
+			},
+			ManagedTerminationProtection: types.ManagedTerminationProtection("ENABLED"),
+			ManagedDraining:              types.ManagedDraining("ENABLED"),
+		},
+		ManagedInstancesProvider: &types.UpdateManagedInstancesProviderConfiguration{
+			InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+			InstanceLaunchTemplate: &types.InstanceLaunchTemplateUpdate{
+				Ec2InstanceProfileArn: ptr.String("__Ec2InstanceProfileArn__"),
+				NetworkConfiguration: &types.ManagedInstancesNetworkConfiguration{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StorageConfiguration: &types.ManagedInstancesStorageConfiguration{
+					StorageSizeGiB: ptr.Int32(1),
+				},
+				InstanceMetadataTagsPropagation: ptr.Bool(true),
+				LocalStorageConfiguration: &types.ManagedInstancesLocalStorageConfiguration{
+					UseLocalStorage: true,
+				},
+				Monitoring: types.ManagedInstancesMonitoringOptions("BASIC"),
+				InstanceRequirements: &types.InstanceRequirementsRequest{
+					VCpuCount: &types.VCpuCountRangeRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					MemoryMiB: &types.MemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					CpuManufacturers: []types.CpuManufacturer{
+						types.CpuManufacturer("intel"),
+						types.CpuManufacturer("intel"),
+					},
+					MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					ExcludedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					InstanceGenerations: []types.InstanceGeneration{
+						types.InstanceGeneration("current"),
+						types.InstanceGeneration("current"),
+					},
+					SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+					OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+					BareMetal:               types.BareMetal("included"),
+					BurstablePerformance:    types.BurstablePerformance("included"),
+					RequireHibernateSupport: ptr.Bool(true),
+					NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					LocalStorage: types.LocalStorage("included"),
+					LocalStorageTypes: []types.LocalStorageType{
+						types.LocalStorageType("hdd"),
+						types.LocalStorageType("hdd"),
+					},
+					TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorTypes: []types.AcceleratorType{
+						types.AcceleratorType("gpu"),
+						types.AcceleratorType("gpu"),
+					},
+					AcceleratorCount: &types.AcceleratorCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorManufacturers: []types.AcceleratorManufacturer{
+						types.AcceleratorManufacturer("amazon-web-services"),
+						types.AcceleratorManufacturer("amazon-web-services"),
+					},
+					AcceleratorNames: []types.AcceleratorName{
+						types.AcceleratorName("a100"),
+						types.AcceleratorName("a100"),
+					},
+					AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					AllowedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+				},
+				CapacityReservations: &types.CapacityReservationRequest{
+					ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
+					ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
+				},
+			},
+			PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
+			InfrastructureOptimization: &types.InfrastructureOptimization{
+				ScaleInAfter: ptr.Int32(1),
+			},
+			AutoRepairConfiguration: &types.AutoRepairConfiguration{
+				ActionsStatus: types.AutoRepairActionsStatus("ENABLED"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16570,7 +19618,39 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{})
+	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{
+		Cluster: ptr.String("__Cluster__"),
+		Settings: []types.ClusterSetting{
+			{
+				Name:  types.ClusterSettingName("containerInsights"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.ClusterSettingName("containerInsights"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Configuration: &types.ClusterConfiguration{
+			ExecuteCommandConfiguration: &types.ExecuteCommandConfiguration{
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+				Logging:  types.ExecuteCommandLogging("NONE"),
+				LogConfiguration: &types.ExecuteCommandLogConfiguration{
+					CloudWatchLogGroupName:      ptr.String("__CloudWatchLogGroupName__"),
+					CloudWatchEncryptionEnabled: true,
+					S3BucketName:                ptr.String("__S3BucketName__"),
+					S3EncryptionEnabled:         true,
+					S3KeyPrefix:                 ptr.String("__S3KeyPrefix__"),
+				},
+			},
+			ManagedStorageConfiguration: &types.ManagedStorageConfiguration{
+				KmsKeyId:                        ptr.String("__KmsKeyId__"),
+				FargateEphemeralStorageKmsKeyId: ptr.String("__FargateEphemeralStorageKmsKeyId__"),
+			},
+		},
+		ServiceConnectDefaults: &types.ClusterServiceConnectDefaultsRequest{
+			Namespace: ptr.String("__Namespace__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16698,7 +19778,19 @@ func TestCheckResponseSnapshot_UpdateClusterSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateClusterSettings(context.Background(), &UpdateClusterSettingsInput{})
+	got, err := svc.UpdateClusterSettings(context.Background(), &UpdateClusterSettingsInput{
+		Cluster: ptr.String("__Cluster__"),
+		Settings: []types.ClusterSetting{
+			{
+				Name:  types.ClusterSettingName("containerInsights"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.ClusterSettingName("containerInsights"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16859,7 +19951,10 @@ func TestCheckResponseSnapshot_UpdateContainerAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContainerAgent(context.Background(), &UpdateContainerAgentInput{})
+	got, err := svc.UpdateContainerAgent(context.Background(), &UpdateContainerAgentInput{
+		Cluster:           ptr.String("__Cluster__"),
+		ContainerInstance: ptr.String("__ContainerInstance__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17175,7 +20270,14 @@ func TestCheckResponseSnapshot_UpdateContainerInstancesState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContainerInstancesState(context.Background(), &UpdateContainerInstancesStateInput{})
+	got, err := svc.UpdateContainerInstancesState(context.Background(), &UpdateContainerInstancesStateInput{
+		Cluster: ptr.String("__Cluster__"),
+		ContainerInstances: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status: types.ContainerInstanceStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17200,7 +20302,28 @@ func TestCheckResponseSnapshot_UpdateDaemon(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDaemon(context.Background(), &UpdateDaemonInput{})
+	got, err := svc.UpdateDaemon(context.Background(), &UpdateDaemonInput{
+		DaemonArn:               ptr.String("__DaemonArn__"),
+		DaemonTaskDefinitionArn: ptr.String("__DaemonTaskDefinitionArn__"),
+		CapacityProviderArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeploymentConfiguration: &types.DaemonDeploymentConfiguration{
+			DrainPercent: ptr.Float64(1.0),
+			Alarms: &types.DaemonAlarmConfiguration{
+				AlarmNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Enable: true,
+			},
+			BakeTimeInMinutes: 1,
+		},
+		PropagateTags:        types.DaemonPropagateTags("DAEMON"),
+		EnableECSManagedTags: true,
+		EnableExecuteCommand: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17302,7 +20425,66 @@ func TestCheckResponseSnapshot_UpdateExpressGatewayService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateExpressGatewayService(context.Background(), &UpdateExpressGatewayServiceInput{})
+	got, err := svc.UpdateExpressGatewayService(context.Background(), &UpdateExpressGatewayServiceInput{
+		ServiceArn:       ptr.String("__ServiceArn__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		HealthCheckPath:  ptr.String("__HealthCheckPath__"),
+		PrimaryContainer: &types.ExpressGatewayContainer{
+			Image:         ptr.String("__Image__"),
+			ContainerPort: ptr.Int32(1),
+			AwsLogsConfiguration: &types.ExpressGatewayServiceAwsLogsConfiguration{
+				LogGroup:        ptr.String("__LogGroup__"),
+				LogStreamPrefix: ptr.String("__LogStreamPrefix__"),
+			},
+			RepositoryCredentials: &types.ExpressGatewayRepositoryCredentials{
+				CredentialsParameter: ptr.String("__CredentialsParameter__"),
+			},
+			Command: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Environment: []types.KeyValuePair{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Secrets: []types.Secret{
+				{
+					Name:      ptr.String("__Name__"),
+					ValueFrom: ptr.String("__ValueFrom__"),
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					ValueFrom: ptr.String("__ValueFrom__"),
+				},
+			},
+		},
+		TaskRoleArn: ptr.String("__TaskRoleArn__"),
+		NetworkConfiguration: &types.ExpressGatewayServiceNetworkConfiguration{
+			SecurityGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Cpu:    ptr.String("__Cpu__"),
+		Memory: ptr.String("__Memory__"),
+		ScalingTarget: &types.ExpressGatewayScalingTarget{
+			MinTaskCount:           ptr.Int32(1),
+			MaxTaskCount:           ptr.Int32(1),
+			AutoScalingMetric:      types.ExpressGatewayServiceScalingMetric("AVERAGE_CPU"),
+			AutoScalingTargetValue: ptr.Int32(1),
+		},
+		TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17408,7 +20590,7 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 							types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 						},
-						HookDetails: nil,
+						HookDetails: document.NewLazyDocument("__Document__"),
 						TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 							TimeoutInMinutes: ptr.Int32(1),
 							Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -17422,7 +20604,7 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 							types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 							types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
 						},
-						HookDetails: nil,
+						HookDetails: document.NewLazyDocument("__Document__"),
 						TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
 							TimeoutInMinutes: ptr.Int32(1),
 							Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
@@ -18275,7 +21457,400 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateService(context.Background(), &UpdateServiceInput{})
+	got, err := svc.UpdateService(context.Background(), &UpdateServiceInput{
+		Cluster:        ptr.String("__Cluster__"),
+		Service:        ptr.String("__Service__"),
+		DesiredCount:   ptr.Int32(1),
+		TaskDefinition: ptr.String("__TaskDefinition__"),
+		CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+		},
+		DeploymentConfiguration: &types.DeploymentConfiguration{
+			DeploymentCircuitBreaker: &types.DeploymentCircuitBreaker{
+				Enable:             true,
+				Rollback:           true,
+				ResetOnHealthyTask: ptr.Bool(true),
+				ThresholdConfiguration: &types.ThresholdConfiguration{
+					Type:  types.ThresholdType("COUNT"),
+					Value: 1,
+				},
+			},
+			MaximumPercent:        ptr.Int32(1),
+			MinimumHealthyPercent: ptr.Int32(1),
+			Alarms: &types.DeploymentAlarms{
+				AlarmNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Rollback: true,
+				Enable:   true,
+			},
+			Strategy:          types.DeploymentStrategy("ROLLING"),
+			BakeTimeInMinutes: ptr.Int32(1),
+			LifecycleHooks: []types.DeploymentLifecycleHook{
+				{
+					TargetType:    types.DeploymentLifecycleHookTargetType("AWS_LAMBDA"),
+					HookTargetArn: ptr.String("__HookTargetArn__"),
+					RoleArn:       ptr.String("__RoleArn__"),
+					LifecycleStages: []types.DeploymentLifecycleHookStage{
+						types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
+						types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
+					},
+					HookDetails: document.NewLazyDocument("__Document__"),
+					TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
+						TimeoutInMinutes: ptr.Int32(1),
+						Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
+					},
+				},
+				{
+					TargetType:    types.DeploymentLifecycleHookTargetType("AWS_LAMBDA"),
+					HookTargetArn: ptr.String("__HookTargetArn__"),
+					RoleArn:       ptr.String("__RoleArn__"),
+					LifecycleStages: []types.DeploymentLifecycleHookStage{
+						types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
+						types.DeploymentLifecycleHookStage("RECONCILE_SERVICE"),
+					},
+					HookDetails: document.NewLazyDocument("__Document__"),
+					TimeoutConfiguration: &types.DeploymentLifecycleHookTimeoutConfiguration{
+						TimeoutInMinutes: ptr.Int32(1),
+						Action:           types.DeploymentLifecycleHookAction("ROLLBACK"),
+					},
+				},
+			},
+			LinearConfiguration: &types.LinearConfiguration{
+				StepPercent:           ptr.Float64(1.0),
+				StepBakeTimeInMinutes: ptr.Int32(1),
+			},
+			CanaryConfiguration: &types.CanaryConfiguration{
+				CanaryPercent:           ptr.Float64(1.0),
+				CanaryBakeTimeInMinutes: ptr.Int32(1),
+			},
+		},
+		AvailabilityZoneRebalancing: types.AvailabilityZoneRebalancing("ENABLED"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			AwsvpcConfiguration: &types.AwsVpcConfiguration{
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AssignPublicIp: types.AssignPublicIp("ENABLED"),
+			},
+		},
+		PlacementConstraints: []types.PlacementConstraint{
+			{
+				Type:       types.PlacementConstraintType("distinctInstance"),
+				Expression: ptr.String("__Expression__"),
+			},
+			{
+				Type:       types.PlacementConstraintType("distinctInstance"),
+				Expression: ptr.String("__Expression__"),
+			},
+		},
+		PlacementStrategy: []types.PlacementStrategy{
+			{
+				Type:  types.PlacementStrategyType("random"),
+				Field: ptr.String("__Field__"),
+			},
+			{
+				Type:  types.PlacementStrategyType("random"),
+				Field: ptr.String("__Field__"),
+			},
+		},
+		PlatformVersion:               ptr.String("__PlatformVersion__"),
+		ForceNewDeployment:            true,
+		HealthCheckGracePeriodSeconds: ptr.Int32(1),
+		DeploymentController: &types.DeploymentController{
+			Type: types.DeploymentControllerType("ECS"),
+		},
+		EnableExecuteCommand: ptr.Bool(true),
+		EnableECSManagedTags: ptr.Bool(true),
+		LoadBalancers: []types.LoadBalancer{
+			{
+				TargetGroupArn:   ptr.String("__TargetGroupArn__"),
+				LoadBalancerName: ptr.String("__LoadBalancerName__"),
+				ContainerName:    ptr.String("__ContainerName__"),
+				ContainerPort:    ptr.Int32(1),
+				AdvancedConfiguration: &types.AdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+					RoleArn:                 ptr.String("__RoleArn__"),
+				},
+			},
+			{
+				TargetGroupArn:   ptr.String("__TargetGroupArn__"),
+				LoadBalancerName: ptr.String("__LoadBalancerName__"),
+				ContainerName:    ptr.String("__ContainerName__"),
+				ContainerPort:    ptr.Int32(1),
+				AdvancedConfiguration: &types.AdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+					RoleArn:                 ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+		ServiceRegistries: []types.ServiceRegistry{
+			{
+				RegistryArn:   ptr.String("__RegistryArn__"),
+				Port:          ptr.Int32(1),
+				ContainerName: ptr.String("__ContainerName__"),
+				ContainerPort: ptr.Int32(1),
+			},
+			{
+				RegistryArn:   ptr.String("__RegistryArn__"),
+				Port:          ptr.Int32(1),
+				ContainerName: ptr.String("__ContainerName__"),
+				ContainerPort: ptr.Int32(1),
+			},
+		},
+		ServiceConnectConfiguration: &types.ServiceConnectConfiguration{
+			Enabled:   true,
+			Namespace: ptr.String("__Namespace__"),
+			Services: []types.ServiceConnectService{
+				{
+					PortName:      ptr.String("__PortName__"),
+					DiscoveryName: ptr.String("__DiscoveryName__"),
+					ClientAliases: []types.ServiceConnectClientAlias{
+						{
+							Port:    ptr.Int32(1),
+							DnsName: ptr.String("__DnsName__"),
+							TestTrafficRules: &types.ServiceConnectTestTrafficRules{
+								Header: &types.ServiceConnectTestTrafficHeaderRules{
+									Name: ptr.String("__Name__"),
+									Value: &types.ServiceConnectTestTrafficHeaderMatchRules{
+										Exact: ptr.String("__Exact__"),
+									},
+								},
+							},
+						},
+						{
+							Port:    ptr.Int32(1),
+							DnsName: ptr.String("__DnsName__"),
+							TestTrafficRules: &types.ServiceConnectTestTrafficRules{
+								Header: &types.ServiceConnectTestTrafficHeaderRules{
+									Name: ptr.String("__Name__"),
+									Value: &types.ServiceConnectTestTrafficHeaderMatchRules{
+										Exact: ptr.String("__Exact__"),
+									},
+								},
+							},
+						},
+					},
+					IngressPortOverride: ptr.Int32(1),
+					Timeout: &types.TimeoutConfiguration{
+						IdleTimeoutSeconds:       ptr.Int32(1),
+						PerRequestTimeoutSeconds: ptr.Int32(1),
+					},
+					Tls: &types.ServiceConnectTlsConfiguration{
+						IssuerCertificateAuthority: &types.ServiceConnectTlsCertificateAuthority{
+							AwsPcaAuthorityArn: ptr.String("__AwsPcaAuthorityArn__"),
+						},
+						KmsKey:  ptr.String("__KmsKey__"),
+						RoleArn: ptr.String("__RoleArn__"),
+					},
+				},
+				{
+					PortName:      ptr.String("__PortName__"),
+					DiscoveryName: ptr.String("__DiscoveryName__"),
+					ClientAliases: []types.ServiceConnectClientAlias{
+						{
+							Port:    ptr.Int32(1),
+							DnsName: ptr.String("__DnsName__"),
+							TestTrafficRules: &types.ServiceConnectTestTrafficRules{
+								Header: &types.ServiceConnectTestTrafficHeaderRules{
+									Name: ptr.String("__Name__"),
+									Value: &types.ServiceConnectTestTrafficHeaderMatchRules{
+										Exact: ptr.String("__Exact__"),
+									},
+								},
+							},
+						},
+						{
+							Port:    ptr.Int32(1),
+							DnsName: ptr.String("__DnsName__"),
+							TestTrafficRules: &types.ServiceConnectTestTrafficRules{
+								Header: &types.ServiceConnectTestTrafficHeaderRules{
+									Name: ptr.String("__Name__"),
+									Value: &types.ServiceConnectTestTrafficHeaderMatchRules{
+										Exact: ptr.String("__Exact__"),
+									},
+								},
+							},
+						},
+					},
+					IngressPortOverride: ptr.Int32(1),
+					Timeout: &types.TimeoutConfiguration{
+						IdleTimeoutSeconds:       ptr.Int32(1),
+						PerRequestTimeoutSeconds: ptr.Int32(1),
+					},
+					Tls: &types.ServiceConnectTlsConfiguration{
+						IssuerCertificateAuthority: &types.ServiceConnectTlsCertificateAuthority{
+							AwsPcaAuthorityArn: ptr.String("__AwsPcaAuthorityArn__"),
+						},
+						KmsKey:  ptr.String("__KmsKey__"),
+						RoleArn: ptr.String("__RoleArn__"),
+					},
+				},
+			},
+			LogConfiguration: &types.LogConfiguration{
+				LogDriver: types.LogDriver("json-file"),
+				Options: map[string]string{
+					"key0": "__Value__",
+				},
+				SecretOptions: []types.Secret{
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+				},
+			},
+			AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
+				Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
+				IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+			},
+		},
+		VolumeConfigurations: []types.ServiceVolumeConfiguration{
+			{
+				Name: ptr.String("__Name__"),
+				ManagedEBSVolume: &types.ServiceManagedEBSVolumeConfiguration{
+					Encrypted:                ptr.Bool(true),
+					KmsKeyId:                 ptr.String("__KmsKeyId__"),
+					VolumeType:               ptr.String("__VolumeType__"),
+					SizeInGiB:                ptr.Int32(1),
+					SnapshotId:               ptr.String("__SnapshotId__"),
+					VolumeInitializationRate: ptr.Int32(1),
+					Iops:                     ptr.Int32(1),
+					Throughput:               ptr.Int32(1),
+					TagSpecifications: []types.EBSTagSpecification{
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+					},
+					RoleArn:        ptr.String("__RoleArn__"),
+					FilesystemType: types.TaskFilesystemType("ext3"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				ManagedEBSVolume: &types.ServiceManagedEBSVolumeConfiguration{
+					Encrypted:                ptr.Bool(true),
+					KmsKeyId:                 ptr.String("__KmsKeyId__"),
+					VolumeType:               ptr.String("__VolumeType__"),
+					SizeInGiB:                ptr.Int32(1),
+					SnapshotId:               ptr.String("__SnapshotId__"),
+					VolumeInitializationRate: ptr.Int32(1),
+					Iops:                     ptr.Int32(1),
+					Throughput:               ptr.Int32(1),
+					TagSpecifications: []types.EBSTagSpecification{
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+					},
+					RoleArn:        ptr.String("__RoleArn__"),
+					FilesystemType: types.TaskFilesystemType("ext3"),
+				},
+			},
+		},
+		VpcLatticeConfigurations: []types.VpcLatticeConfiguration{
+			{
+				RoleArn:        ptr.String("__RoleArn__"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				PortName:       ptr.String("__PortName__"),
+			},
+			{
+				RoleArn:        ptr.String("__RoleArn__"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				PortName:       ptr.String("__PortName__"),
+			},
+		},
+		Monitoring: &types.MonitoringConfiguration{
+			MetricConfigurations: []types.MetricConfiguration{
+				{
+					MetricNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ResolutionSeconds: ptr.Int32(1),
+				},
+				{
+					MetricNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ResolutionSeconds: ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18397,7 +21972,11 @@ func TestCheckResponseSnapshot_UpdateServicePrimaryTaskSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServicePrimaryTaskSet(context.Background(), &UpdateServicePrimaryTaskSetInput{})
+	got, err := svc.UpdateServicePrimaryTaskSet(context.Background(), &UpdateServicePrimaryTaskSetInput{
+		Cluster:        ptr.String("__Cluster__"),
+		Service:        ptr.String("__Service__"),
+		PrimaryTaskSet: ptr.String("__PrimaryTaskSet__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18441,7 +22020,15 @@ func TestCheckResponseSnapshot_UpdateTaskProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTaskProtection(context.Background(), &UpdateTaskProtectionInput{})
+	got, err := svc.UpdateTaskProtection(context.Background(), &UpdateTaskProtectionInput{
+		Cluster: ptr.String("__Cluster__"),
+		Tasks: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ProtectionEnabled: true,
+		ExpiresInMinutes:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18563,7 +22150,15 @@ func TestCheckResponseSnapshot_UpdateTaskSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTaskSet(context.Background(), &UpdateTaskSetInput{})
+	got, err := svc.UpdateTaskSet(context.Background(), &UpdateTaskSetInput{
+		Cluster: ptr.String("__Cluster__"),
+		Service: ptr.String("__Service__"),
+		TaskSet: ptr.String("__TaskSet__"),
+		Scale: &types.Scale{
+			Value: 1.0,
+			Unit:  types.ScaleUnit("PERCENT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18584,7 +22179,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{})
+	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{
+		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
+		HookId:               ptr.String("__HookId__"),
+		Action:               types.DeploymentLifecycleHookAction("ROLLBACK"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18609,7 +22208,23 @@ func TestCheckResponseSnapshot_Error_AttributeLimitExceededException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutAttributes(context.Background(), &PutAttributesInput{})
+	_, opErr := svc.PutAttributes(context.Background(), &PutAttributesInput{
+		Cluster: ptr.String("__Cluster__"),
+		Attributes: []types.Attribute{
+			{
+				Name:       ptr.String("__Name__"),
+				Value:      ptr.String("__Value__"),
+				TargetType: types.TargetType("container-instance"),
+				TargetId:   ptr.String("__TargetId__"),
+			},
+			{
+				Name:       ptr.String("__Name__"),
+				Value:      ptr.String("__Value__"),
+				TargetType: types.TargetType("container-instance"),
+				TargetId:   ptr.String("__TargetId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18634,7 +22249,274 @@ func TestCheckResponseSnapshot_Error_BlockedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RunTask(context.Background(), &RunTaskInput{})
+	_, opErr := svc.RunTask(context.Background(), &RunTaskInput{
+		CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+		},
+		Cluster:              ptr.String("__Cluster__"),
+		Count:                ptr.Int32(1),
+		EnableECSManagedTags: true,
+		EnableExecuteCommand: true,
+		Group:                ptr.String("__Group__"),
+		LaunchType:           types.LaunchType("EC2"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			AwsvpcConfiguration: &types.AwsVpcConfiguration{
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AssignPublicIp: types.AssignPublicIp("ENABLED"),
+			},
+		},
+		Overrides: &types.TaskOverride{
+			ContainerOverrides: []types.ContainerOverride{
+				{
+					Name: ptr.String("__Name__"),
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.KeyValuePair{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					EnvironmentFiles: []types.EnvironmentFile{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+					},
+					Cpu:               ptr.Int32(1),
+					Memory:            ptr.Int32(1),
+					MemoryReservation: ptr.Int32(1),
+					ResourceRequirements: []types.ResourceRequirement{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.KeyValuePair{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					EnvironmentFiles: []types.EnvironmentFile{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+					},
+					Cpu:               ptr.Int32(1),
+					Memory:            ptr.Int32(1),
+					MemoryReservation: ptr.Int32(1),
+					ResourceRequirements: []types.ResourceRequirement{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+					},
+				},
+			},
+			Cpu: ptr.String("__Cpu__"),
+			InferenceAcceleratorOverrides: []types.InferenceAcceleratorOverride{
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					DeviceType: ptr.String("__DeviceType__"),
+				},
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					DeviceType: ptr.String("__DeviceType__"),
+				},
+			},
+			ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+			Memory:           ptr.String("__Memory__"),
+			TaskRoleArn:      ptr.String("__TaskRoleArn__"),
+			EphemeralStorage: &types.EphemeralStorage{
+				SizeInGiB: 1,
+			},
+		},
+		PlacementConstraints: []types.PlacementConstraint{
+			{
+				Type:       types.PlacementConstraintType("distinctInstance"),
+				Expression: ptr.String("__Expression__"),
+			},
+			{
+				Type:       types.PlacementConstraintType("distinctInstance"),
+				Expression: ptr.String("__Expression__"),
+			},
+		},
+		PlacementStrategy: []types.PlacementStrategy{
+			{
+				Type:  types.PlacementStrategyType("random"),
+				Field: ptr.String("__Field__"),
+			},
+			{
+				Type:  types.PlacementStrategyType("random"),
+				Field: ptr.String("__Field__"),
+			},
+		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		PropagateTags:   types.PropagateTags("TASK_DEFINITION"),
+		ReferenceId:     ptr.String("__ReferenceId__"),
+		StartedBy:       ptr.String("__StartedBy__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TaskDefinition: ptr.String("__TaskDefinition__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		VolumeConfigurations: []types.TaskVolumeConfiguration{
+			{
+				Name: ptr.String("__Name__"),
+				ManagedEBSVolume: &types.TaskManagedEBSVolumeConfiguration{
+					Encrypted:                ptr.Bool(true),
+					KmsKeyId:                 ptr.String("__KmsKeyId__"),
+					VolumeType:               ptr.String("__VolumeType__"),
+					SizeInGiB:                ptr.Int32(1),
+					SnapshotId:               ptr.String("__SnapshotId__"),
+					VolumeInitializationRate: ptr.Int32(1),
+					Iops:                     ptr.Int32(1),
+					Throughput:               ptr.Int32(1),
+					TagSpecifications: []types.EBSTagSpecification{
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+					TerminationPolicy: &types.TaskManagedEBSVolumeTerminationPolicy{
+						DeleteOnTermination: ptr.Bool(true),
+					},
+					FilesystemType: types.TaskFilesystemType("ext3"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				ManagedEBSVolume: &types.TaskManagedEBSVolumeConfiguration{
+					Encrypted:                ptr.Bool(true),
+					KmsKeyId:                 ptr.String("__KmsKeyId__"),
+					VolumeType:               ptr.String("__VolumeType__"),
+					SizeInGiB:                ptr.Int32(1),
+					SnapshotId:               ptr.String("__SnapshotId__"),
+					VolumeInitializationRate: ptr.Int32(1),
+					Iops:                     ptr.Int32(1),
+					Throughput:               ptr.Int32(1),
+					TagSpecifications: []types.EBSTagSpecification{
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+					TerminationPolicy: &types.TaskManagedEBSVolumeTerminationPolicy{
+						DeleteOnTermination: ptr.Bool(true),
+					},
+					FilesystemType: types.TaskFilesystemType("ext3"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18659,7 +22541,11 @@ func TestCheckResponseSnapshot_Error_ClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{})
+	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{
+		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
+		HookId:               ptr.String("__HookId__"),
+		Action:               types.DeploymentLifecycleHookAction("ROLLBACK"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18684,7 +22570,9 @@ func TestCheckResponseSnapshot_Error_ClusterContainsCapacityProviderException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	_, opErr := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		Cluster: ptr.String("__Cluster__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18709,7 +22597,9 @@ func TestCheckResponseSnapshot_Error_ClusterContainsContainerInstancesException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	_, opErr := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		Cluster: ptr.String("__Cluster__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18734,7 +22624,9 @@ func TestCheckResponseSnapshot_Error_ClusterContainsServicesException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	_, opErr := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		Cluster: ptr.String("__Cluster__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18759,7 +22651,9 @@ func TestCheckResponseSnapshot_Error_ClusterContainsTasksException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	_, opErr := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		Cluster: ptr.String("__Cluster__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18784,7 +22678,146 @@ func TestCheckResponseSnapshot_Error_ClusterNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{})
+	_, opErr := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{
+		Name:    ptr.String("__Name__"),
+		Cluster: ptr.String("__Cluster__"),
+		AutoScalingGroupProvider: &types.AutoScalingGroupProvider{
+			AutoScalingGroupArn: ptr.String("__AutoScalingGroupArn__"),
+			ManagedScaling: &types.ManagedScaling{
+				Status:                 types.ManagedScalingStatus("ENABLED"),
+				TargetCapacity:         ptr.Int32(1),
+				MinimumScalingStepSize: ptr.Int32(1),
+				MaximumScalingStepSize: ptr.Int32(1),
+				InstanceWarmupPeriod:   ptr.Int32(1),
+			},
+			ManagedTerminationProtection: types.ManagedTerminationProtection("ENABLED"),
+			ManagedDraining:              types.ManagedDraining("ENABLED"),
+		},
+		ManagedInstancesProvider: &types.CreateManagedInstancesProviderConfiguration{
+			InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+			InstanceLaunchTemplate: &types.InstanceLaunchTemplate{
+				Ec2InstanceProfileArn: ptr.String("__Ec2InstanceProfileArn__"),
+				NetworkConfiguration: &types.ManagedInstancesNetworkConfiguration{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StorageConfiguration: &types.ManagedInstancesStorageConfiguration{
+					StorageSizeGiB: ptr.Int32(1),
+				},
+				LocalStorageConfiguration: &types.ManagedInstancesLocalStorageConfiguration{
+					UseLocalStorage: true,
+				},
+				Monitoring:                      types.ManagedInstancesMonitoringOptions("BASIC"),
+				CapacityOptionType:              types.CapacityOptionType("ON_DEMAND"),
+				InstanceMetadataTagsPropagation: ptr.Bool(true),
+				InstanceRequirements: &types.InstanceRequirementsRequest{
+					VCpuCount: &types.VCpuCountRangeRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					MemoryMiB: &types.MemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					CpuManufacturers: []types.CpuManufacturer{
+						types.CpuManufacturer("intel"),
+						types.CpuManufacturer("intel"),
+					},
+					MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					ExcludedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					InstanceGenerations: []types.InstanceGeneration{
+						types.InstanceGeneration("current"),
+						types.InstanceGeneration("current"),
+					},
+					SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+					OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+					BareMetal:               types.BareMetal("included"),
+					BurstablePerformance:    types.BurstablePerformance("included"),
+					RequireHibernateSupport: ptr.Bool(true),
+					NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					LocalStorage: types.LocalStorage("included"),
+					LocalStorageTypes: []types.LocalStorageType{
+						types.LocalStorageType("hdd"),
+						types.LocalStorageType("hdd"),
+					},
+					TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorTypes: []types.AcceleratorType{
+						types.AcceleratorType("gpu"),
+						types.AcceleratorType("gpu"),
+					},
+					AcceleratorCount: &types.AcceleratorCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorManufacturers: []types.AcceleratorManufacturer{
+						types.AcceleratorManufacturer("amazon-web-services"),
+						types.AcceleratorManufacturer("amazon-web-services"),
+					},
+					AcceleratorNames: []types.AcceleratorName{
+						types.AcceleratorName("a100"),
+						types.AcceleratorName("a100"),
+					},
+					AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					AllowedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+				},
+				FipsEnabled: ptr.Bool(true),
+				CapacityReservations: &types.CapacityReservationRequest{
+					ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
+					ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
+				},
+			},
+			PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
+			InfrastructureOptimization: &types.InfrastructureOptimization{
+				ScaleInAfter: ptr.Int32(1),
+			},
+			AutoRepairConfiguration: &types.AutoRepairConfiguration{
+				ActionsStatus: types.AutoRepairActionsStatus("ENABLED"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18813,7 +22846,274 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RunTask(context.Background(), &RunTaskInput{})
+	_, opErr := svc.RunTask(context.Background(), &RunTaskInput{
+		CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+		},
+		Cluster:              ptr.String("__Cluster__"),
+		Count:                ptr.Int32(1),
+		EnableECSManagedTags: true,
+		EnableExecuteCommand: true,
+		Group:                ptr.String("__Group__"),
+		LaunchType:           types.LaunchType("EC2"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			AwsvpcConfiguration: &types.AwsVpcConfiguration{
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AssignPublicIp: types.AssignPublicIp("ENABLED"),
+			},
+		},
+		Overrides: &types.TaskOverride{
+			ContainerOverrides: []types.ContainerOverride{
+				{
+					Name: ptr.String("__Name__"),
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.KeyValuePair{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					EnvironmentFiles: []types.EnvironmentFile{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+					},
+					Cpu:               ptr.Int32(1),
+					Memory:            ptr.Int32(1),
+					MemoryReservation: ptr.Int32(1),
+					ResourceRequirements: []types.ResourceRequirement{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.KeyValuePair{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					EnvironmentFiles: []types.EnvironmentFile{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.EnvironmentFileType("s3"),
+						},
+					},
+					Cpu:               ptr.Int32(1),
+					Memory:            ptr.Int32(1),
+					MemoryReservation: ptr.Int32(1),
+					ResourceRequirements: []types.ResourceRequirement{
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+							Type:  types.ResourceType("GPU"),
+						},
+					},
+				},
+			},
+			Cpu: ptr.String("__Cpu__"),
+			InferenceAcceleratorOverrides: []types.InferenceAcceleratorOverride{
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					DeviceType: ptr.String("__DeviceType__"),
+				},
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					DeviceType: ptr.String("__DeviceType__"),
+				},
+			},
+			ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+			Memory:           ptr.String("__Memory__"),
+			TaskRoleArn:      ptr.String("__TaskRoleArn__"),
+			EphemeralStorage: &types.EphemeralStorage{
+				SizeInGiB: 1,
+			},
+		},
+		PlacementConstraints: []types.PlacementConstraint{
+			{
+				Type:       types.PlacementConstraintType("distinctInstance"),
+				Expression: ptr.String("__Expression__"),
+			},
+			{
+				Type:       types.PlacementConstraintType("distinctInstance"),
+				Expression: ptr.String("__Expression__"),
+			},
+		},
+		PlacementStrategy: []types.PlacementStrategy{
+			{
+				Type:  types.PlacementStrategyType("random"),
+				Field: ptr.String("__Field__"),
+			},
+			{
+				Type:  types.PlacementStrategyType("random"),
+				Field: ptr.String("__Field__"),
+			},
+		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		PropagateTags:   types.PropagateTags("TASK_DEFINITION"),
+		ReferenceId:     ptr.String("__ReferenceId__"),
+		StartedBy:       ptr.String("__StartedBy__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TaskDefinition: ptr.String("__TaskDefinition__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		VolumeConfigurations: []types.TaskVolumeConfiguration{
+			{
+				Name: ptr.String("__Name__"),
+				ManagedEBSVolume: &types.TaskManagedEBSVolumeConfiguration{
+					Encrypted:                ptr.Bool(true),
+					KmsKeyId:                 ptr.String("__KmsKeyId__"),
+					VolumeType:               ptr.String("__VolumeType__"),
+					SizeInGiB:                ptr.Int32(1),
+					SnapshotId:               ptr.String("__SnapshotId__"),
+					VolumeInitializationRate: ptr.Int32(1),
+					Iops:                     ptr.Int32(1),
+					Throughput:               ptr.Int32(1),
+					TagSpecifications: []types.EBSTagSpecification{
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+					TerminationPolicy: &types.TaskManagedEBSVolumeTerminationPolicy{
+						DeleteOnTermination: ptr.Bool(true),
+					},
+					FilesystemType: types.TaskFilesystemType("ext3"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				ManagedEBSVolume: &types.TaskManagedEBSVolumeConfiguration{
+					Encrypted:                ptr.Bool(true),
+					KmsKeyId:                 ptr.String("__KmsKeyId__"),
+					VolumeType:               ptr.String("__VolumeType__"),
+					SizeInGiB:                ptr.Int32(1),
+					SnapshotId:               ptr.String("__SnapshotId__"),
+					VolumeInitializationRate: ptr.Int32(1),
+					Iops:                     ptr.Int32(1),
+					Throughput:               ptr.Int32(1),
+					TagSpecifications: []types.EBSTagSpecification{
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+						{
+							ResourceType: types.EBSResourceType("volume"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+						},
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+					TerminationPolicy: &types.TaskManagedEBSVolumeTerminationPolicy{
+						DeleteOnTermination: ptr.Bool(true),
+					},
+					FilesystemType: types.TaskFilesystemType("ext3"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18838,7 +23138,9 @@ func TestCheckResponseSnapshot_Error_DaemonNotActiveException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDaemon(context.Background(), &DeleteDaemonInput{})
+	_, opErr := svc.DeleteDaemon(context.Background(), &DeleteDaemonInput{
+		DaemonArn: ptr.String("__DaemonArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18863,7 +23165,9 @@ func TestCheckResponseSnapshot_Error_DaemonNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDaemon(context.Background(), &DeleteDaemonInput{})
+	_, opErr := svc.DeleteDaemon(context.Background(), &DeleteDaemonInput{
+		DaemonArn: ptr.String("__DaemonArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18888,7 +23192,11 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{})
+	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{
+		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
+		HookId:               ptr.String("__HookId__"),
+		Action:               types.DeploymentLifecycleHookAction("ROLLBACK"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18913,7 +23221,146 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{})
+	_, opErr := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{
+		Name:    ptr.String("__Name__"),
+		Cluster: ptr.String("__Cluster__"),
+		AutoScalingGroupProvider: &types.AutoScalingGroupProvider{
+			AutoScalingGroupArn: ptr.String("__AutoScalingGroupArn__"),
+			ManagedScaling: &types.ManagedScaling{
+				Status:                 types.ManagedScalingStatus("ENABLED"),
+				TargetCapacity:         ptr.Int32(1),
+				MinimumScalingStepSize: ptr.Int32(1),
+				MaximumScalingStepSize: ptr.Int32(1),
+				InstanceWarmupPeriod:   ptr.Int32(1),
+			},
+			ManagedTerminationProtection: types.ManagedTerminationProtection("ENABLED"),
+			ManagedDraining:              types.ManagedDraining("ENABLED"),
+		},
+		ManagedInstancesProvider: &types.CreateManagedInstancesProviderConfiguration{
+			InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+			InstanceLaunchTemplate: &types.InstanceLaunchTemplate{
+				Ec2InstanceProfileArn: ptr.String("__Ec2InstanceProfileArn__"),
+				NetworkConfiguration: &types.ManagedInstancesNetworkConfiguration{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StorageConfiguration: &types.ManagedInstancesStorageConfiguration{
+					StorageSizeGiB: ptr.Int32(1),
+				},
+				LocalStorageConfiguration: &types.ManagedInstancesLocalStorageConfiguration{
+					UseLocalStorage: true,
+				},
+				Monitoring:                      types.ManagedInstancesMonitoringOptions("BASIC"),
+				CapacityOptionType:              types.CapacityOptionType("ON_DEMAND"),
+				InstanceMetadataTagsPropagation: ptr.Bool(true),
+				InstanceRequirements: &types.InstanceRequirementsRequest{
+					VCpuCount: &types.VCpuCountRangeRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					MemoryMiB: &types.MemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					CpuManufacturers: []types.CpuManufacturer{
+						types.CpuManufacturer("intel"),
+						types.CpuManufacturer("intel"),
+					},
+					MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					ExcludedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					InstanceGenerations: []types.InstanceGeneration{
+						types.InstanceGeneration("current"),
+						types.InstanceGeneration("current"),
+					},
+					SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+					OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+					BareMetal:               types.BareMetal("included"),
+					BurstablePerformance:    types.BurstablePerformance("included"),
+					RequireHibernateSupport: ptr.Bool(true),
+					NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					LocalStorage: types.LocalStorage("included"),
+					LocalStorageTypes: []types.LocalStorageType{
+						types.LocalStorageType("hdd"),
+						types.LocalStorageType("hdd"),
+					},
+					TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorTypes: []types.AcceleratorType{
+						types.AcceleratorType("gpu"),
+						types.AcceleratorType("gpu"),
+					},
+					AcceleratorCount: &types.AcceleratorCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorManufacturers: []types.AcceleratorManufacturer{
+						types.AcceleratorManufacturer("amazon-web-services"),
+						types.AcceleratorManufacturer("amazon-web-services"),
+					},
+					AcceleratorNames: []types.AcceleratorName{
+						types.AcceleratorName("a100"),
+						types.AcceleratorName("a100"),
+					},
+					AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					AllowedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+				},
+				FipsEnabled: ptr.Bool(true),
+				CapacityReservations: &types.CapacityReservationRequest{
+					ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
+					ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
+				},
+			},
+			PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
+			InfrastructureOptimization: &types.InfrastructureOptimization{
+				ScaleInAfter: ptr.Int32(1),
+			},
+			AutoRepairConfiguration: &types.AutoRepairConfiguration{
+				ActionsStatus: types.AutoRepairActionsStatus("ENABLED"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18938,7 +23385,10 @@ func TestCheckResponseSnapshot_Error_MissingVersionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateContainerAgent(context.Background(), &UpdateContainerAgentInput{})
+	_, opErr := svc.UpdateContainerAgent(context.Background(), &UpdateContainerAgentInput{
+		Cluster:           ptr.String("__Cluster__"),
+		ContainerInstance: ptr.String("__ContainerInstance__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18963,7 +23413,65 @@ func TestCheckResponseSnapshot_Error_NamespaceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Settings: []types.ClusterSetting{
+			{
+				Name:  types.ClusterSettingName("containerInsights"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.ClusterSettingName("containerInsights"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Configuration: &types.ClusterConfiguration{
+			ExecuteCommandConfiguration: &types.ExecuteCommandConfiguration{
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+				Logging:  types.ExecuteCommandLogging("NONE"),
+				LogConfiguration: &types.ExecuteCommandLogConfiguration{
+					CloudWatchLogGroupName:      ptr.String("__CloudWatchLogGroupName__"),
+					CloudWatchEncryptionEnabled: true,
+					S3BucketName:                ptr.String("__S3BucketName__"),
+					S3EncryptionEnabled:         true,
+					S3KeyPrefix:                 ptr.String("__S3KeyPrefix__"),
+				},
+			},
+			ManagedStorageConfiguration: &types.ManagedStorageConfiguration{
+				KmsKeyId:                        ptr.String("__KmsKeyId__"),
+				FargateEphemeralStorageKmsKeyId: ptr.String("__FargateEphemeralStorageKmsKeyId__"),
+			},
+		},
+		CapacityProviders: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DefaultCapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+		},
+		ServiceConnectDefaults: &types.ClusterServiceConnectDefaultsRequest{
+			Namespace: ptr.String("__Namespace__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18988,7 +23496,10 @@ func TestCheckResponseSnapshot_Error_NoUpdateAvailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateContainerAgent(context.Background(), &UpdateContainerAgentInput{})
+	_, opErr := svc.UpdateContainerAgent(context.Background(), &UpdateContainerAgentInput{
+		Cluster:           ptr.String("__Cluster__"),
+		ContainerInstance: ptr.String("__ContainerInstance__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19013,7 +23524,78 @@ func TestCheckResponseSnapshot_Error_PlatformTaskDefinitionIncompatibilityExcept
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExpressGatewayService(context.Background(), &CreateExpressGatewayServiceInput{})
+	_, opErr := svc.CreateExpressGatewayService(context.Background(), &CreateExpressGatewayServiceInput{
+		ExecutionRoleArn:      ptr.String("__ExecutionRoleArn__"),
+		InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+		ServiceName:           ptr.String("__ServiceName__"),
+		Cluster:               ptr.String("__Cluster__"),
+		HealthCheckPath:       ptr.String("__HealthCheckPath__"),
+		PrimaryContainer: &types.ExpressGatewayContainer{
+			Image:         ptr.String("__Image__"),
+			ContainerPort: ptr.Int32(1),
+			AwsLogsConfiguration: &types.ExpressGatewayServiceAwsLogsConfiguration{
+				LogGroup:        ptr.String("__LogGroup__"),
+				LogStreamPrefix: ptr.String("__LogStreamPrefix__"),
+			},
+			RepositoryCredentials: &types.ExpressGatewayRepositoryCredentials{
+				CredentialsParameter: ptr.String("__CredentialsParameter__"),
+			},
+			Command: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Environment: []types.KeyValuePair{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Secrets: []types.Secret{
+				{
+					Name:      ptr.String("__Name__"),
+					ValueFrom: ptr.String("__ValueFrom__"),
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					ValueFrom: ptr.String("__ValueFrom__"),
+				},
+			},
+		},
+		TaskRoleArn: ptr.String("__TaskRoleArn__"),
+		NetworkConfiguration: &types.ExpressGatewayServiceNetworkConfiguration{
+			SecurityGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Cpu:    ptr.String("__Cpu__"),
+		Memory: ptr.String("__Memory__"),
+		ScalingTarget: &types.ExpressGatewayScalingTarget{
+			MinTaskCount:           ptr.Int32(1),
+			MaxTaskCount:           ptr.Int32(1),
+			AutoScalingMetric:      types.ExpressGatewayServiceScalingMetric("AVERAGE_CPU"),
+			AutoScalingTargetValue: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19038,7 +23620,40 @@ func TestCheckResponseSnapshot_Error_PlatformUnknownException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDaemon(context.Background(), &CreateDaemonInput{})
+	_, opErr := svc.CreateDaemon(context.Background(), &CreateDaemonInput{
+		DaemonName:              ptr.String("__DaemonName__"),
+		ClusterArn:              ptr.String("__ClusterArn__"),
+		DaemonTaskDefinitionArn: ptr.String("__DaemonTaskDefinitionArn__"),
+		CapacityProviderArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeploymentConfiguration: &types.DaemonDeploymentConfiguration{
+			DrainPercent: ptr.Float64(1.0),
+			Alarms: &types.DaemonAlarmConfiguration{
+				AlarmNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Enable: true,
+			},
+			BakeTimeInMinutes: 1,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PropagateTags:        types.DaemonPropagateTags("DAEMON"),
+		EnableECSManagedTags: true,
+		EnableExecuteCommand: true,
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19063,7 +23678,25 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutClusterCapacityProviders(context.Background(), &PutClusterCapacityProvidersInput{})
+	_, opErr := svc.PutClusterCapacityProviders(context.Background(), &PutClusterCapacityProvidersInput{
+		Cluster: ptr.String("__Cluster__"),
+		CapacityProviders: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DefaultCapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19088,7 +23721,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeExpressGatewayService(context.Background(), &DescribeExpressGatewayServiceInput{})
+	_, opErr := svc.DescribeExpressGatewayService(context.Background(), &DescribeExpressGatewayServiceInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		Include: []types.ExpressGatewayServiceInclude{
+			types.ExpressGatewayServiceInclude("TAGS"),
+			types.ExpressGatewayServiceInclude("TAGS"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19113,7 +23752,11 @@ func TestCheckResponseSnapshot_Error_ServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{})
+	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{
+		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
+		HookId:               ptr.String("__HookId__"),
+		Action:               types.DeploymentLifecycleHookAction("ROLLBACK"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19138,7 +23781,11 @@ func TestCheckResponseSnapshot_Error_ServiceDeploymentNotFoundException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{})
+	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{
+		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
+		HookId:               ptr.String("__HookId__"),
+		Action:               types.DeploymentLifecycleHookAction("ROLLBACK"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19163,7 +23810,94 @@ func TestCheckResponseSnapshot_Error_ServiceNotActiveException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTaskSet(context.Background(), &CreateTaskSetInput{})
+	_, opErr := svc.CreateTaskSet(context.Background(), &CreateTaskSetInput{
+		Service:        ptr.String("__Service__"),
+		Cluster:        ptr.String("__Cluster__"),
+		ExternalId:     ptr.String("__ExternalId__"),
+		TaskDefinition: ptr.String("__TaskDefinition__"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			AwsvpcConfiguration: &types.AwsVpcConfiguration{
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AssignPublicIp: types.AssignPublicIp("ENABLED"),
+			},
+		},
+		LoadBalancers: []types.LoadBalancer{
+			{
+				TargetGroupArn:   ptr.String("__TargetGroupArn__"),
+				LoadBalancerName: ptr.String("__LoadBalancerName__"),
+				ContainerName:    ptr.String("__ContainerName__"),
+				ContainerPort:    ptr.Int32(1),
+				AdvancedConfiguration: &types.AdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+					RoleArn:                 ptr.String("__RoleArn__"),
+				},
+			},
+			{
+				TargetGroupArn:   ptr.String("__TargetGroupArn__"),
+				LoadBalancerName: ptr.String("__LoadBalancerName__"),
+				ContainerName:    ptr.String("__ContainerName__"),
+				ContainerPort:    ptr.Int32(1),
+				AdvancedConfiguration: &types.AdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+					RoleArn:                 ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		ServiceRegistries: []types.ServiceRegistry{
+			{
+				RegistryArn:   ptr.String("__RegistryArn__"),
+				Port:          ptr.Int32(1),
+				ContainerName: ptr.String("__ContainerName__"),
+				ContainerPort: ptr.Int32(1),
+			},
+			{
+				RegistryArn:   ptr.String("__RegistryArn__"),
+				Port:          ptr.Int32(1),
+				ContainerName: ptr.String("__ContainerName__"),
+				ContainerPort: ptr.Int32(1),
+			},
+		},
+		LaunchType: types.LaunchType("EC2"),
+		CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		Scale: &types.Scale{
+			Value: 1.0,
+			Unit:  types.ScaleUnit("PERCENT"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19188,7 +23922,94 @@ func TestCheckResponseSnapshot_Error_ServiceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTaskSet(context.Background(), &CreateTaskSetInput{})
+	_, opErr := svc.CreateTaskSet(context.Background(), &CreateTaskSetInput{
+		Service:        ptr.String("__Service__"),
+		Cluster:        ptr.String("__Cluster__"),
+		ExternalId:     ptr.String("__ExternalId__"),
+		TaskDefinition: ptr.String("__TaskDefinition__"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			AwsvpcConfiguration: &types.AwsVpcConfiguration{
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AssignPublicIp: types.AssignPublicIp("ENABLED"),
+			},
+		},
+		LoadBalancers: []types.LoadBalancer{
+			{
+				TargetGroupArn:   ptr.String("__TargetGroupArn__"),
+				LoadBalancerName: ptr.String("__LoadBalancerName__"),
+				ContainerName:    ptr.String("__ContainerName__"),
+				ContainerPort:    ptr.Int32(1),
+				AdvancedConfiguration: &types.AdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+					RoleArn:                 ptr.String("__RoleArn__"),
+				},
+			},
+			{
+				TargetGroupArn:   ptr.String("__TargetGroupArn__"),
+				LoadBalancerName: ptr.String("__LoadBalancerName__"),
+				ContainerName:    ptr.String("__ContainerName__"),
+				ContainerPort:    ptr.Int32(1),
+				AdvancedConfiguration: &types.AdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+					RoleArn:                 ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		ServiceRegistries: []types.ServiceRegistry{
+			{
+				RegistryArn:   ptr.String("__RegistryArn__"),
+				Port:          ptr.Int32(1),
+				ContainerName: ptr.String("__ContainerName__"),
+				ContainerPort: ptr.Int32(1),
+			},
+			{
+				RegistryArn:   ptr.String("__RegistryArn__"),
+				Port:          ptr.Int32(1),
+				ContainerName: ptr.String("__ContainerName__"),
+				ContainerPort: ptr.Int32(1),
+			},
+		},
+		LaunchType: types.LaunchType("EC2"),
+		CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+			{
+				CapacityProvider: ptr.String("__CapacityProvider__"),
+				Weight:           1,
+				Base:             1,
+			},
+		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		Scale: &types.Scale{
+			Value: 1.0,
+			Unit:  types.ScaleUnit("PERCENT"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19213,7 +24034,13 @@ func TestCheckResponseSnapshot_Error_TargetNotConnectedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteCommand(context.Background(), &ExecuteCommandInput{})
+	_, opErr := svc.ExecuteCommand(context.Background(), &ExecuteCommandInput{
+		Cluster:     ptr.String("__Cluster__"),
+		Container:   ptr.String("__Container__"),
+		Command:     ptr.String("__Command__"),
+		Interactive: true,
+		Task:        ptr.String("__Task__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19238,7 +24065,23 @@ func TestCheckResponseSnapshot_Error_TargetNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAttributes(context.Background(), &DeleteAttributesInput{})
+	_, opErr := svc.DeleteAttributes(context.Background(), &DeleteAttributesInput{
+		Cluster: ptr.String("__Cluster__"),
+		Attributes: []types.Attribute{
+			{
+				Name:       ptr.String("__Name__"),
+				Value:      ptr.String("__Value__"),
+				TargetType: types.TargetType("container-instance"),
+				TargetId:   ptr.String("__TargetId__"),
+			},
+			{
+				Name:       ptr.String("__Name__"),
+				Value:      ptr.String("__Value__"),
+				TargetType: types.TargetType("container-instance"),
+				TargetId:   ptr.String("__TargetId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19263,7 +24106,12 @@ func TestCheckResponseSnapshot_Error_TaskSetNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteTaskSet(context.Background(), &DeleteTaskSetInput{})
+	_, opErr := svc.DeleteTaskSet(context.Background(), &DeleteTaskSetInput{
+		Cluster: ptr.String("__Cluster__"),
+		Service: ptr.String("__Service__"),
+		TaskSet: ptr.String("__TaskSet__"),
+		Force:   ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19288,7 +24136,11 @@ func TestCheckResponseSnapshot_Error_UnsupportedFeatureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{})
+	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{
+		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
+		HookId:               ptr.String("__HookId__"),
+		Action:               types.DeploymentLifecycleHookAction("ROLLBACK"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19313,7 +24165,146 @@ func TestCheckResponseSnapshot_Error_UpdateInProgressException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{})
+	_, opErr := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{
+		Name:    ptr.String("__Name__"),
+		Cluster: ptr.String("__Cluster__"),
+		AutoScalingGroupProvider: &types.AutoScalingGroupProvider{
+			AutoScalingGroupArn: ptr.String("__AutoScalingGroupArn__"),
+			ManagedScaling: &types.ManagedScaling{
+				Status:                 types.ManagedScalingStatus("ENABLED"),
+				TargetCapacity:         ptr.Int32(1),
+				MinimumScalingStepSize: ptr.Int32(1),
+				MaximumScalingStepSize: ptr.Int32(1),
+				InstanceWarmupPeriod:   ptr.Int32(1),
+			},
+			ManagedTerminationProtection: types.ManagedTerminationProtection("ENABLED"),
+			ManagedDraining:              types.ManagedDraining("ENABLED"),
+		},
+		ManagedInstancesProvider: &types.CreateManagedInstancesProviderConfiguration{
+			InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+			InstanceLaunchTemplate: &types.InstanceLaunchTemplate{
+				Ec2InstanceProfileArn: ptr.String("__Ec2InstanceProfileArn__"),
+				NetworkConfiguration: &types.ManagedInstancesNetworkConfiguration{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StorageConfiguration: &types.ManagedInstancesStorageConfiguration{
+					StorageSizeGiB: ptr.Int32(1),
+				},
+				LocalStorageConfiguration: &types.ManagedInstancesLocalStorageConfiguration{
+					UseLocalStorage: true,
+				},
+				Monitoring:                      types.ManagedInstancesMonitoringOptions("BASIC"),
+				CapacityOptionType:              types.CapacityOptionType("ON_DEMAND"),
+				InstanceMetadataTagsPropagation: ptr.Bool(true),
+				InstanceRequirements: &types.InstanceRequirementsRequest{
+					VCpuCount: &types.VCpuCountRangeRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					MemoryMiB: &types.MemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					CpuManufacturers: []types.CpuManufacturer{
+						types.CpuManufacturer("intel"),
+						types.CpuManufacturer("intel"),
+					},
+					MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					ExcludedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					InstanceGenerations: []types.InstanceGeneration{
+						types.InstanceGeneration("current"),
+						types.InstanceGeneration("current"),
+					},
+					SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+					OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+					BareMetal:               types.BareMetal("included"),
+					BurstablePerformance:    types.BurstablePerformance("included"),
+					RequireHibernateSupport: ptr.Bool(true),
+					NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					LocalStorage: types.LocalStorage("included"),
+					LocalStorageTypes: []types.LocalStorageType{
+						types.LocalStorageType("hdd"),
+						types.LocalStorageType("hdd"),
+					},
+					TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorTypes: []types.AcceleratorType{
+						types.AcceleratorType("gpu"),
+						types.AcceleratorType("gpu"),
+					},
+					AcceleratorCount: &types.AcceleratorCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorManufacturers: []types.AcceleratorManufacturer{
+						types.AcceleratorManufacturer("amazon-web-services"),
+						types.AcceleratorManufacturer("amazon-web-services"),
+					},
+					AcceleratorNames: []types.AcceleratorName{
+						types.AcceleratorName("a100"),
+						types.AcceleratorName("a100"),
+					},
+					AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					AllowedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+				},
+				FipsEnabled: ptr.Bool(true),
+				CapacityReservations: &types.CapacityReservationRequest{
+					ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
+					ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
+				},
+			},
+			PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
+			InfrastructureOptimization: &types.InfrastructureOptimization{
+				ScaleInAfter: ptr.Int32(1),
+			},
+			AutoRepairConfiguration: &types.AutoRepairConfiguration{
+				ActionsStatus: types.AutoRepairActionsStatus("ENABLED"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20190729.ListAvailableManagedRuleGroups
+
+{"ManagedRuleGroups":[{"Description":"__Description__","Name":"__Name__","VendorName":"__VendorName__","VersioningSupported":true},{"Description":"__Description__","Name":"__Name__","VendorName":"__VendorName__","VersioningSupported":true}],"NextMarker":"__NextMarker__"}

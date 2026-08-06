@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.SendAgreementCancellationRequest
+
+{"agreementCancellationRequestId":"__AgreementCancellationRequestId__","agreementId":"__AgreementId__","createdAt":946684800,"description":"__Description__","reasonCode":"INCORRECT_TERMS_ACCEPTED","status":"PENDING_APPROVAL","updatedAt":946684800}

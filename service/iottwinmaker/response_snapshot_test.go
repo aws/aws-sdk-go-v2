@@ -381,7 +381,129 @@ func TestCheckResponseSnapshot_BatchPutPropertyValues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchPutPropertyValues(context.Background(), &BatchPutPropertyValuesInput{})
+	got, err := svc.BatchPutPropertyValues(context.Background(), &BatchPutPropertyValuesInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Entries: []types.PropertyValueEntry{
+			{
+				EntityPropertyReference: &types.EntityPropertyReference{
+					ComponentName: ptr.String("__ComponentName__"),
+					ComponentPath: ptr.String("__ComponentPath__"),
+					ExternalIdProperty: map[string]string{
+						"key0": "__Value__",
+					},
+					EntityId:     ptr.String("__EntityId__"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				PropertyValues: []types.PropertyValue{
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+				},
+			},
+			{
+				EntityPropertyReference: &types.EntityPropertyReference{
+					ComponentName: ptr.String("__ComponentName__"),
+					ComponentPath: ptr.String("__ComponentPath__"),
+					ExternalIdProperty: map[string]string{
+						"key0": "__Value__",
+					},
+					EntityId:     ptr.String("__EntityId__"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				PropertyValues: []types.PropertyValue{
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -418,7 +540,9 @@ func TestCheckResponseSnapshot_CancelMetadataTransferJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelMetadataTransferJob(context.Background(), &CancelMetadataTransferJobInput{})
+	got, err := svc.CancelMetadataTransferJob(context.Background(), &CancelMetadataTransferJobInput{
+		MetadataTransferJobId: ptr.String("__MetadataTransferJobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -441,7 +565,129 @@ func TestCheckResponseSnapshot_CreateComponentType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateComponentType(context.Background(), &CreateComponentTypeInput{})
+	got, err := svc.CreateComponentType(context.Background(), &CreateComponentTypeInput{
+		WorkspaceId:     ptr.String("__WorkspaceId__"),
+		IsSingleton:     ptr.Bool(true),
+		ComponentTypeId: ptr.String("__ComponentTypeId__"),
+		Description:     ptr.String("__Description__"),
+		PropertyDefinitions: map[string]types.PropertyDefinitionRequest{
+			"key0": {
+				DataType: &types.DataType{
+					Type:       types.Type("RELATIONSHIP"),
+					NestedType: nil,
+					AllowedValues: []types.DataValue{
+						{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+					},
+					UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
+					Relationship: &types.Relationship{
+						TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
+						RelationshipType:      ptr.String("__RelationshipType__"),
+					},
+				},
+				IsRequiredInEntity: ptr.Bool(true),
+				IsExternalId:       ptr.Bool(true),
+				IsStoredExternally: ptr.Bool(true),
+				IsTimeSeries:       ptr.Bool(true),
+				DefaultValue: &types.DataValue{
+					BooleanValue: ptr.Bool(true),
+					DoubleValue:  ptr.Float64(1.0),
+					IntegerValue: ptr.Int32(1),
+					LongValue:    ptr.Int64(1),
+					StringValue:  ptr.String("__StringValue__"),
+					ListValue: []types.DataValue{
+						{},
+						{},
+					},
+					MapValue: map[string]types.DataValue{
+						"key0": {},
+					},
+					RelationshipValue: &types.RelationshipValue{
+						TargetEntityId:      ptr.String("__TargetEntityId__"),
+						TargetComponentName: ptr.String("__TargetComponentName__"),
+					},
+					Expression: ptr.String("__Expression__"),
+				},
+				Configuration: map[string]string{
+					"key0": "__Value__",
+				},
+				DisplayName: ptr.String("__DisplayName__"),
+			},
+		},
+		ExtendsFrom: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Functions: map[string]types.FunctionRequest{
+			"key0": {
+				RequiredProperties: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Scope: types.Scope("ENTITY"),
+				ImplementedBy: &types.DataConnector{
+					Lambda: &types.LambdaFunction{
+						Arn: ptr.String("__Arn__"),
+					},
+					IsNative: ptr.Bool(true),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PropertyGroups: map[string]types.PropertyGroupRequest{
+			"key0": {
+				GroupType: types.GroupType("TABULAR"),
+				PropertyNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ComponentTypeName: ptr.String("__ComponentTypeName__"),
+		CompositeComponentTypes: map[string]types.CompositeComponentTypeRequest{
+			"key0": {
+				ComponentTypeId: ptr.String("__ComponentTypeId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,7 +711,251 @@ func TestCheckResponseSnapshot_CreateEntity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEntity(context.Background(), &CreateEntityInput{})
+	got, err := svc.CreateEntity(context.Background(), &CreateEntityInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		EntityId:    ptr.String("__EntityId__"),
+		EntityName:  ptr.String("__EntityName__"),
+		Description: ptr.String("__Description__"),
+		Components: map[string]types.ComponentRequest{
+			"key0": {
+				Description:     ptr.String("__Description__"),
+				ComponentTypeId: ptr.String("__ComponentTypeId__"),
+				Properties: map[string]types.PropertyRequest{
+					"key0": {
+						Definition: &types.PropertyDefinitionRequest{
+							DataType: &types.DataType{
+								Type:       types.Type("RELATIONSHIP"),
+								NestedType: nil,
+								AllowedValues: []types.DataValue{
+									{
+										BooleanValue: ptr.Bool(true),
+										DoubleValue:  ptr.Float64(1.0),
+										IntegerValue: ptr.Int32(1),
+										LongValue:    ptr.Int64(1),
+										StringValue:  ptr.String("__StringValue__"),
+										ListValue: []types.DataValue{
+											{},
+											{},
+										},
+										MapValue: map[string]types.DataValue{
+											"key0": {},
+										},
+										RelationshipValue: &types.RelationshipValue{
+											TargetEntityId:      ptr.String("__TargetEntityId__"),
+											TargetComponentName: ptr.String("__TargetComponentName__"),
+										},
+										Expression: ptr.String("__Expression__"),
+									},
+									{
+										BooleanValue: ptr.Bool(true),
+										DoubleValue:  ptr.Float64(1.0),
+										IntegerValue: ptr.Int32(1),
+										LongValue:    ptr.Int64(1),
+										StringValue:  ptr.String("__StringValue__"),
+										ListValue: []types.DataValue{
+											{},
+											{},
+										},
+										MapValue: map[string]types.DataValue{
+											"key0": {},
+										},
+										RelationshipValue: &types.RelationshipValue{
+											TargetEntityId:      ptr.String("__TargetEntityId__"),
+											TargetComponentName: ptr.String("__TargetComponentName__"),
+										},
+										Expression: ptr.String("__Expression__"),
+									},
+								},
+								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
+								Relationship: &types.Relationship{
+									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
+									RelationshipType:      ptr.String("__RelationshipType__"),
+								},
+							},
+							IsRequiredInEntity: ptr.Bool(true),
+							IsExternalId:       ptr.Bool(true),
+							IsStoredExternally: ptr.Bool(true),
+							IsTimeSeries:       ptr.Bool(true),
+							DefaultValue: &types.DataValue{
+								BooleanValue: ptr.Bool(true),
+								DoubleValue:  ptr.Float64(1.0),
+								IntegerValue: ptr.Int32(1),
+								LongValue:    ptr.Int64(1),
+								StringValue:  ptr.String("__StringValue__"),
+								ListValue: []types.DataValue{
+									{},
+									{},
+								},
+								MapValue: map[string]types.DataValue{
+									"key0": {},
+								},
+								RelationshipValue: &types.RelationshipValue{
+									TargetEntityId:      ptr.String("__TargetEntityId__"),
+									TargetComponentName: ptr.String("__TargetComponentName__"),
+								},
+								Expression: ptr.String("__Expression__"),
+							},
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							DisplayName: ptr.String("__DisplayName__"),
+						},
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						UpdateType: types.PropertyUpdateType("UPDATE"),
+					},
+				},
+				PropertyGroups: map[string]types.ComponentPropertyGroupRequest{
+					"key0": {
+						GroupType: types.GroupType("TABULAR"),
+						PropertyNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
+					},
+				},
+			},
+		},
+		CompositeComponents: map[string]types.CompositeComponentRequest{
+			"key0": {
+				Description: ptr.String("__Description__"),
+				Properties: map[string]types.PropertyRequest{
+					"key0": {
+						Definition: &types.PropertyDefinitionRequest{
+							DataType: &types.DataType{
+								Type:       types.Type("RELATIONSHIP"),
+								NestedType: nil,
+								AllowedValues: []types.DataValue{
+									{
+										BooleanValue: ptr.Bool(true),
+										DoubleValue:  ptr.Float64(1.0),
+										IntegerValue: ptr.Int32(1),
+										LongValue:    ptr.Int64(1),
+										StringValue:  ptr.String("__StringValue__"),
+										ListValue: []types.DataValue{
+											{},
+											{},
+										},
+										MapValue: map[string]types.DataValue{
+											"key0": {},
+										},
+										RelationshipValue: &types.RelationshipValue{
+											TargetEntityId:      ptr.String("__TargetEntityId__"),
+											TargetComponentName: ptr.String("__TargetComponentName__"),
+										},
+										Expression: ptr.String("__Expression__"),
+									},
+									{
+										BooleanValue: ptr.Bool(true),
+										DoubleValue:  ptr.Float64(1.0),
+										IntegerValue: ptr.Int32(1),
+										LongValue:    ptr.Int64(1),
+										StringValue:  ptr.String("__StringValue__"),
+										ListValue: []types.DataValue{
+											{},
+											{},
+										},
+										MapValue: map[string]types.DataValue{
+											"key0": {},
+										},
+										RelationshipValue: &types.RelationshipValue{
+											TargetEntityId:      ptr.String("__TargetEntityId__"),
+											TargetComponentName: ptr.String("__TargetComponentName__"),
+										},
+										Expression: ptr.String("__Expression__"),
+									},
+								},
+								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
+								Relationship: &types.Relationship{
+									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
+									RelationshipType:      ptr.String("__RelationshipType__"),
+								},
+							},
+							IsRequiredInEntity: ptr.Bool(true),
+							IsExternalId:       ptr.Bool(true),
+							IsStoredExternally: ptr.Bool(true),
+							IsTimeSeries:       ptr.Bool(true),
+							DefaultValue: &types.DataValue{
+								BooleanValue: ptr.Bool(true),
+								DoubleValue:  ptr.Float64(1.0),
+								IntegerValue: ptr.Int32(1),
+								LongValue:    ptr.Int64(1),
+								StringValue:  ptr.String("__StringValue__"),
+								ListValue: []types.DataValue{
+									{},
+									{},
+								},
+								MapValue: map[string]types.DataValue{
+									"key0": {},
+								},
+								RelationshipValue: &types.RelationshipValue{
+									TargetEntityId:      ptr.String("__TargetEntityId__"),
+									TargetComponentName: ptr.String("__TargetComponentName__"),
+								},
+								Expression: ptr.String("__Expression__"),
+							},
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							DisplayName: ptr.String("__DisplayName__"),
+						},
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						UpdateType: types.PropertyUpdateType("UPDATE"),
+					},
+				},
+				PropertyGroups: map[string]types.ComponentPropertyGroupRequest{
+					"key0": {
+						GroupType: types.GroupType("TABULAR"),
+						PropertyNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
+					},
+				},
+			},
+		},
+		ParentEntityId: ptr.String("__ParentEntityId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -496,7 +986,103 @@ func TestCheckResponseSnapshot_CreateMetadataTransferJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMetadataTransferJob(context.Background(), &CreateMetadataTransferJobInput{})
+	got, err := svc.CreateMetadataTransferJob(context.Background(), &CreateMetadataTransferJobInput{
+		MetadataTransferJobId: ptr.String("__MetadataTransferJobId__"),
+		Description:           ptr.String("__Description__"),
+		Sources: []types.SourceConfiguration{
+			{
+				Type: types.SourceType("s3"),
+				S3Configuration: &types.S3SourceConfiguration{
+					Location: ptr.String("__Location__"),
+				},
+				IotSiteWiseConfiguration: &types.IotSiteWiseSourceConfiguration{
+					Filters: []types.IotSiteWiseSourceConfigurationFilter{
+						&types.IotSiteWiseSourceConfigurationFilterMemberFilterByAssetModel{
+							Value: types.FilterByAssetModel{
+								AssetModelId:         ptr.String("__AssetModelId__"),
+								AssetModelExternalId: ptr.String("__AssetModelExternalId__"),
+								IncludeOffspring:     ptr.Bool(true),
+								IncludeAssets:        ptr.Bool(true),
+							},
+						},
+						&types.IotSiteWiseSourceConfigurationFilterMemberFilterByAssetModel{
+							Value: types.FilterByAssetModel{
+								AssetModelId:         ptr.String("__AssetModelId__"),
+								AssetModelExternalId: ptr.String("__AssetModelExternalId__"),
+								IncludeOffspring:     ptr.Bool(true),
+								IncludeAssets:        ptr.Bool(true),
+							},
+						},
+					},
+				},
+				IotTwinMakerConfiguration: &types.IotTwinMakerSourceConfiguration{
+					Workspace: ptr.String("__Workspace__"),
+					Filters: []types.IotTwinMakerSourceConfigurationFilter{
+						&types.IotTwinMakerSourceConfigurationFilterMemberFilterByComponentType{
+							Value: types.FilterByComponentType{
+								ComponentTypeId: ptr.String("__ComponentTypeId__"),
+							},
+						},
+						&types.IotTwinMakerSourceConfigurationFilterMemberFilterByComponentType{
+							Value: types.FilterByComponentType{
+								ComponentTypeId: ptr.String("__ComponentTypeId__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Type: types.SourceType("s3"),
+				S3Configuration: &types.S3SourceConfiguration{
+					Location: ptr.String("__Location__"),
+				},
+				IotSiteWiseConfiguration: &types.IotSiteWiseSourceConfiguration{
+					Filters: []types.IotSiteWiseSourceConfigurationFilter{
+						&types.IotSiteWiseSourceConfigurationFilterMemberFilterByAssetModel{
+							Value: types.FilterByAssetModel{
+								AssetModelId:         ptr.String("__AssetModelId__"),
+								AssetModelExternalId: ptr.String("__AssetModelExternalId__"),
+								IncludeOffspring:     ptr.Bool(true),
+								IncludeAssets:        ptr.Bool(true),
+							},
+						},
+						&types.IotSiteWiseSourceConfigurationFilterMemberFilterByAssetModel{
+							Value: types.FilterByAssetModel{
+								AssetModelId:         ptr.String("__AssetModelId__"),
+								AssetModelExternalId: ptr.String("__AssetModelExternalId__"),
+								IncludeOffspring:     ptr.Bool(true),
+								IncludeAssets:        ptr.Bool(true),
+							},
+						},
+					},
+				},
+				IotTwinMakerConfiguration: &types.IotTwinMakerSourceConfiguration{
+					Workspace: ptr.String("__Workspace__"),
+					Filters: []types.IotTwinMakerSourceConfigurationFilter{
+						&types.IotTwinMakerSourceConfigurationFilterMemberFilterByComponentType{
+							Value: types.FilterByComponentType{
+								ComponentTypeId: ptr.String("__ComponentTypeId__"),
+							},
+						},
+						&types.IotTwinMakerSourceConfigurationFilterMemberFilterByComponentType{
+							Value: types.FilterByComponentType{
+								ComponentTypeId: ptr.String("__ComponentTypeId__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		Destination: &types.DestinationConfiguration{
+			Type: types.DestinationType("s3"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				Location: ptr.String("__Location__"),
+			},
+			IotTwinMakerConfiguration: &types.IotTwinMakerDestinationConfiguration{
+				Workspace: ptr.String("__Workspace__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -518,7 +1104,22 @@ func TestCheckResponseSnapshot_CreateScene(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateScene(context.Background(), &CreateSceneInput{})
+	got, err := svc.CreateScene(context.Background(), &CreateSceneInput{
+		WorkspaceId:     ptr.String("__WorkspaceId__"),
+		SceneId:         ptr.String("__SceneId__"),
+		ContentLocation: ptr.String("__ContentLocation__"),
+		Description:     ptr.String("__Description__"),
+		Capabilities: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		SceneMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -541,7 +1142,14 @@ func TestCheckResponseSnapshot_CreateSyncJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSyncJob(context.Background(), &CreateSyncJobInput{})
+	got, err := svc.CreateSyncJob(context.Background(), &CreateSyncJobInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		SyncSource:  ptr.String("__SyncSource__"),
+		SyncRole:    ptr.String("__SyncRole__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -563,7 +1171,15 @@ func TestCheckResponseSnapshot_CreateWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{})
+	got, err := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Description: ptr.String("__Description__"),
+		S3Location:  ptr.String("__S3Location__"),
+		Role:        ptr.String("__Role__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -584,7 +1200,10 @@ func TestCheckResponseSnapshot_DeleteComponentType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteComponentType(context.Background(), &DeleteComponentTypeInput{})
+	got, err := svc.DeleteComponentType(context.Background(), &DeleteComponentTypeInput{
+		WorkspaceId:     ptr.String("__WorkspaceId__"),
+		ComponentTypeId: ptr.String("__ComponentTypeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -605,7 +1224,11 @@ func TestCheckResponseSnapshot_DeleteEntity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEntity(context.Background(), &DeleteEntityInput{})
+	got, err := svc.DeleteEntity(context.Background(), &DeleteEntityInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		EntityId:    ptr.String("__EntityId__"),
+		IsRecursive: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -624,7 +1247,10 @@ func TestCheckResponseSnapshot_DeleteScene(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScene(context.Background(), &DeleteSceneInput{})
+	got, err := svc.DeleteScene(context.Background(), &DeleteSceneInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		SceneId:     ptr.String("__SceneId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -645,7 +1271,10 @@ func TestCheckResponseSnapshot_DeleteSyncJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSyncJob(context.Background(), &DeleteSyncJobInput{})
+	got, err := svc.DeleteSyncJob(context.Background(), &DeleteSyncJobInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		SyncSource:  ptr.String("__SyncSource__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -666,7 +1295,9 @@ func TestCheckResponseSnapshot_DeleteWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspace(context.Background(), &DeleteWorkspaceInput{})
+	got, err := svc.DeleteWorkspace(context.Background(), &DeleteWorkspaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -690,14 +1321,14 @@ func TestCheckResponseSnapshot_ExecuteQuery(t *testing.T) {
 		Rows: []types.Row{
 			{
 				RowData: []document.Interface{
-					nil,
-					nil,
+					document.NewLazyDocument("__Document__"),
+					document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
 				RowData: []document.Interface{
-					nil,
-					nil,
+					document.NewLazyDocument("__Document__"),
+					document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -711,7 +1342,12 @@ func TestCheckResponseSnapshot_ExecuteQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{})
+	got, err := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{
+		WorkspaceId:    ptr.String("__WorkspaceId__"),
+		QueryStatement: ptr.String("__QueryStatement__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -868,7 +1504,10 @@ func TestCheckResponseSnapshot_GetComponentType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComponentType(context.Background(), &GetComponentTypeInput{})
+	got, err := svc.GetComponentType(context.Background(), &GetComponentTypeInput{
+		WorkspaceId:     ptr.String("__WorkspaceId__"),
+		ComponentTypeId: ptr.String("__ComponentTypeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1066,7 +1705,10 @@ func TestCheckResponseSnapshot_GetEntity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEntity(context.Background(), &GetEntityInput{})
+	got, err := svc.GetEntity(context.Background(), &GetEntityInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		EntityId:    ptr.String("__EntityId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1200,7 +1842,9 @@ func TestCheckResponseSnapshot_GetMetadataTransferJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetadataTransferJob(context.Background(), &GetMetadataTransferJobInput{})
+	got, err := svc.GetMetadataTransferJob(context.Background(), &GetMetadataTransferJobInput{
+		MetadataTransferJobId: ptr.String("__MetadataTransferJobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1391,7 +2035,80 @@ func TestCheckResponseSnapshot_GetPropertyValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPropertyValue(context.Background(), &GetPropertyValueInput{})
+	got, err := svc.GetPropertyValue(context.Background(), &GetPropertyValueInput{
+		ComponentName:   ptr.String("__ComponentName__"),
+		ComponentPath:   ptr.String("__ComponentPath__"),
+		ComponentTypeId: ptr.String("__ComponentTypeId__"),
+		EntityId:        ptr.String("__EntityId__"),
+		SelectedProperties: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WorkspaceId:       ptr.String("__WorkspaceId__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		PropertyGroupName: ptr.String("__PropertyGroupName__"),
+		TabularConditions: &types.TabularConditions{
+			OrderBy: []types.OrderBy{
+				{
+					Order:        types.Order("ASCENDING"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				{
+					Order:        types.Order("ASCENDING"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+			},
+			PropertyFilters: []types.PropertyFilter{
+				{
+					PropertyName: ptr.String("__PropertyName__"),
+					Operator:     ptr.String("__Operator__"),
+					Value: &types.DataValue{
+						BooleanValue: ptr.Bool(true),
+						DoubleValue:  ptr.Float64(1.0),
+						IntegerValue: ptr.Int32(1),
+						LongValue:    ptr.Int64(1),
+						StringValue:  ptr.String("__StringValue__"),
+						ListValue: []types.DataValue{
+							{},
+							{},
+						},
+						MapValue: map[string]types.DataValue{
+							"key0": {},
+						},
+						RelationshipValue: &types.RelationshipValue{
+							TargetEntityId:      ptr.String("__TargetEntityId__"),
+							TargetComponentName: ptr.String("__TargetComponentName__"),
+						},
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				{
+					PropertyName: ptr.String("__PropertyName__"),
+					Operator:     ptr.String("__Operator__"),
+					Value: &types.DataValue{
+						BooleanValue: ptr.Bool(true),
+						DoubleValue:  ptr.Float64(1.0),
+						IntegerValue: ptr.Int32(1),
+						LongValue:    ptr.Int64(1),
+						StringValue:  ptr.String("__StringValue__"),
+						ListValue: []types.DataValue{
+							{},
+							{},
+						},
+						MapValue: map[string]types.DataValue{
+							"key0": {},
+						},
+						RelationshipValue: &types.RelationshipValue{
+							TargetEntityId:      ptr.String("__TargetEntityId__"),
+							TargetComponentName: ptr.String("__TargetComponentName__"),
+						},
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1532,7 +2249,76 @@ func TestCheckResponseSnapshot_GetPropertyValueHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPropertyValueHistory(context.Background(), &GetPropertyValueHistoryInput{})
+	got, err := svc.GetPropertyValueHistory(context.Background(), &GetPropertyValueHistoryInput{
+		WorkspaceId:     ptr.String("__WorkspaceId__"),
+		EntityId:        ptr.String("__EntityId__"),
+		ComponentName:   ptr.String("__ComponentName__"),
+		ComponentPath:   ptr.String("__ComponentPath__"),
+		ComponentTypeId: ptr.String("__ComponentTypeId__"),
+		SelectedProperties: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PropertyFilters: []types.PropertyFilter{
+			{
+				PropertyName: ptr.String("__PropertyName__"),
+				Operator:     ptr.String("__Operator__"),
+				Value: &types.DataValue{
+					BooleanValue: ptr.Bool(true),
+					DoubleValue:  ptr.Float64(1.0),
+					IntegerValue: ptr.Int32(1),
+					LongValue:    ptr.Int64(1),
+					StringValue:  ptr.String("__StringValue__"),
+					ListValue: []types.DataValue{
+						{},
+						{},
+					},
+					MapValue: map[string]types.DataValue{
+						"key0": {},
+					},
+					RelationshipValue: &types.RelationshipValue{
+						TargetEntityId:      ptr.String("__TargetEntityId__"),
+						TargetComponentName: ptr.String("__TargetComponentName__"),
+					},
+					Expression: ptr.String("__Expression__"),
+				},
+			},
+			{
+				PropertyName: ptr.String("__PropertyName__"),
+				Operator:     ptr.String("__Operator__"),
+				Value: &types.DataValue{
+					BooleanValue: ptr.Bool(true),
+					DoubleValue:  ptr.Float64(1.0),
+					IntegerValue: ptr.Int32(1),
+					LongValue:    ptr.Int64(1),
+					StringValue:  ptr.String("__StringValue__"),
+					ListValue: []types.DataValue{
+						{},
+						{},
+					},
+					MapValue: map[string]types.DataValue{
+						"key0": {},
+					},
+					RelationshipValue: &types.RelationshipValue{
+						TargetEntityId:      ptr.String("__TargetEntityId__"),
+						TargetComponentName: ptr.String("__TargetComponentName__"),
+					},
+					Expression: ptr.String("__Expression__"),
+				},
+			},
+		},
+		StartDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDateTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Interpolation: &types.InterpolationParameters{
+			InterpolationType: types.InterpolationType("LINEAR"),
+			IntervalInSeconds: ptr.Int64(1),
+		},
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		OrderByTime: types.OrderByTime("ASCENDING"),
+		StartTime:   ptr.String("__StartTime__"),
+		EndTime:     ptr.String("__EndTime__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1573,7 +2359,10 @@ func TestCheckResponseSnapshot_GetScene(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetScene(context.Background(), &GetSceneInput{})
+	got, err := svc.GetScene(context.Background(), &GetSceneInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		SceneId:     ptr.String("__SceneId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1606,7 +2395,10 @@ func TestCheckResponseSnapshot_GetSyncJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSyncJob(context.Background(), &GetSyncJobInput{})
+	got, err := svc.GetSyncJob(context.Background(), &GetSyncJobInput{
+		SyncSource:  ptr.String("__SyncSource__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1637,7 +2429,9 @@ func TestCheckResponseSnapshot_GetWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkspace(context.Background(), &GetWorkspaceInput{})
+	got, err := svc.GetWorkspace(context.Background(), &GetWorkspaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1692,7 +2486,19 @@ func TestCheckResponseSnapshot_ListComponentTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComponentTypes(context.Background(), &ListComponentTypesInput{})
+	got, err := svc.ListComponentTypes(context.Background(), &ListComponentTypesInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Filters: []types.ListComponentTypesFilter{
+			&types.ListComponentTypesFilterMemberExtendsFrom{
+				Value: "__ListComponentTypesFilterMemberExtendsFrom__",
+			},
+			&types.ListComponentTypesFilterMemberExtendsFrom{
+				Value: "__ListComponentTypesFilterMemberExtendsFrom__",
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1765,7 +2571,13 @@ func TestCheckResponseSnapshot_ListComponents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComponents(context.Background(), &ListComponentsInput{})
+	got, err := svc.ListComponents(context.Background(), &ListComponentsInput{
+		WorkspaceId:   ptr.String("__WorkspaceId__"),
+		EntityId:      ptr.String("__EntityId__"),
+		ComponentPath: ptr.String("__ComponentPath__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1822,7 +2634,19 @@ func TestCheckResponseSnapshot_ListEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEntities(context.Background(), &ListEntitiesInput{})
+	got, err := svc.ListEntities(context.Background(), &ListEntitiesInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Filters: []types.ListEntitiesFilter{
+			&types.ListEntitiesFilterMemberParentEntityId{
+				Value: "__ListEntitiesFilterMemberParentEntityId__",
+			},
+			&types.ListEntitiesFilterMemberParentEntityId{
+				Value: "__ListEntitiesFilterMemberParentEntityId__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1885,7 +2709,20 @@ func TestCheckResponseSnapshot_ListMetadataTransferJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMetadataTransferJobs(context.Background(), &ListMetadataTransferJobsInput{})
+	got, err := svc.ListMetadataTransferJobs(context.Background(), &ListMetadataTransferJobsInput{
+		SourceType:      types.SourceType("s3"),
+		DestinationType: types.DestinationType("s3"),
+		Filters: []types.ListMetadataTransferJobsFilter{
+			&types.ListMetadataTransferJobsFilterMemberWorkspaceId{
+				Value: "__ListMetadataTransferJobsFilterMemberWorkspaceId__",
+			},
+			&types.ListMetadataTransferJobsFilterMemberWorkspaceId{
+				Value: "__ListMetadataTransferJobsFilterMemberWorkspaceId__",
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2116,7 +2953,14 @@ func TestCheckResponseSnapshot_ListProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProperties(context.Background(), &ListPropertiesInput{})
+	got, err := svc.ListProperties(context.Background(), &ListPropertiesInput{
+		WorkspaceId:   ptr.String("__WorkspaceId__"),
+		ComponentName: ptr.String("__ComponentName__"),
+		ComponentPath: ptr.String("__ComponentPath__"),
+		EntityId:      ptr.String("__EntityId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2155,7 +2999,11 @@ func TestCheckResponseSnapshot_ListScenes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListScenes(context.Background(), &ListScenesInput{})
+	got, err := svc.ListScenes(context.Background(), &ListScenesInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2206,7 +3054,11 @@ func TestCheckResponseSnapshot_ListSyncJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSyncJobs(context.Background(), &ListSyncJobsInput{})
+	got, err := svc.ListSyncJobs(context.Background(), &ListSyncJobsInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2255,7 +3107,20 @@ func TestCheckResponseSnapshot_ListSyncResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSyncResources(context.Background(), &ListSyncResourcesInput{})
+	got, err := svc.ListSyncResources(context.Background(), &ListSyncResourcesInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		SyncSource:  ptr.String("__SyncSource__"),
+		Filters: []types.SyncResourceFilter{
+			&types.SyncResourceFilterMemberState{
+				Value: types.SyncResourceState("INITIALIZING"),
+			},
+			&types.SyncResourceFilterMemberState{
+				Value: types.SyncResourceState("INITIALIZING"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2279,7 +3144,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2324,7 +3193,10 @@ func TestCheckResponseSnapshot_ListWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkspaces(context.Background(), &ListWorkspacesInput{})
+	got, err := svc.ListWorkspaces(context.Background(), &ListWorkspacesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2343,7 +3215,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2362,7 +3239,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2386,7 +3269,126 @@ func TestCheckResponseSnapshot_UpdateComponentType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateComponentType(context.Background(), &UpdateComponentTypeInput{})
+	got, err := svc.UpdateComponentType(context.Background(), &UpdateComponentTypeInput{
+		WorkspaceId:     ptr.String("__WorkspaceId__"),
+		IsSingleton:     ptr.Bool(true),
+		ComponentTypeId: ptr.String("__ComponentTypeId__"),
+		Description:     ptr.String("__Description__"),
+		PropertyDefinitions: map[string]types.PropertyDefinitionRequest{
+			"key0": {
+				DataType: &types.DataType{
+					Type:       types.Type("RELATIONSHIP"),
+					NestedType: nil,
+					AllowedValues: []types.DataValue{
+						{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+					},
+					UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
+					Relationship: &types.Relationship{
+						TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
+						RelationshipType:      ptr.String("__RelationshipType__"),
+					},
+				},
+				IsRequiredInEntity: ptr.Bool(true),
+				IsExternalId:       ptr.Bool(true),
+				IsStoredExternally: ptr.Bool(true),
+				IsTimeSeries:       ptr.Bool(true),
+				DefaultValue: &types.DataValue{
+					BooleanValue: ptr.Bool(true),
+					DoubleValue:  ptr.Float64(1.0),
+					IntegerValue: ptr.Int32(1),
+					LongValue:    ptr.Int64(1),
+					StringValue:  ptr.String("__StringValue__"),
+					ListValue: []types.DataValue{
+						{},
+						{},
+					},
+					MapValue: map[string]types.DataValue{
+						"key0": {},
+					},
+					RelationshipValue: &types.RelationshipValue{
+						TargetEntityId:      ptr.String("__TargetEntityId__"),
+						TargetComponentName: ptr.String("__TargetComponentName__"),
+					},
+					Expression: ptr.String("__Expression__"),
+				},
+				Configuration: map[string]string{
+					"key0": "__Value__",
+				},
+				DisplayName: ptr.String("__DisplayName__"),
+			},
+		},
+		ExtendsFrom: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Functions: map[string]types.FunctionRequest{
+			"key0": {
+				RequiredProperties: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Scope: types.Scope("ENTITY"),
+				ImplementedBy: &types.DataConnector{
+					Lambda: &types.LambdaFunction{
+						Arn: ptr.String("__Arn__"),
+					},
+					IsNative: ptr.Bool(true),
+				},
+			},
+		},
+		PropertyGroups: map[string]types.PropertyGroupRequest{
+			"key0": {
+				GroupType: types.GroupType("TABULAR"),
+				PropertyNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ComponentTypeName: ptr.String("__ComponentTypeName__"),
+		CompositeComponentTypes: map[string]types.CompositeComponentTypeRequest{
+			"key0": {
+				ComponentTypeId: ptr.String("__ComponentTypeId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2408,7 +3410,253 @@ func TestCheckResponseSnapshot_UpdateEntity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEntity(context.Background(), &UpdateEntityInput{})
+	got, err := svc.UpdateEntity(context.Background(), &UpdateEntityInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		EntityId:    ptr.String("__EntityId__"),
+		EntityName:  ptr.String("__EntityName__"),
+		Description: ptr.String("__Description__"),
+		ComponentUpdates: map[string]types.ComponentUpdateRequest{
+			"key0": {
+				UpdateType:      types.ComponentUpdateType("CREATE"),
+				Description:     ptr.String("__Description__"),
+				ComponentTypeId: ptr.String("__ComponentTypeId__"),
+				PropertyUpdates: map[string]types.PropertyRequest{
+					"key0": {
+						Definition: &types.PropertyDefinitionRequest{
+							DataType: &types.DataType{
+								Type:       types.Type("RELATIONSHIP"),
+								NestedType: nil,
+								AllowedValues: []types.DataValue{
+									{
+										BooleanValue: ptr.Bool(true),
+										DoubleValue:  ptr.Float64(1.0),
+										IntegerValue: ptr.Int32(1),
+										LongValue:    ptr.Int64(1),
+										StringValue:  ptr.String("__StringValue__"),
+										ListValue: []types.DataValue{
+											{},
+											{},
+										},
+										MapValue: map[string]types.DataValue{
+											"key0": {},
+										},
+										RelationshipValue: &types.RelationshipValue{
+											TargetEntityId:      ptr.String("__TargetEntityId__"),
+											TargetComponentName: ptr.String("__TargetComponentName__"),
+										},
+										Expression: ptr.String("__Expression__"),
+									},
+									{
+										BooleanValue: ptr.Bool(true),
+										DoubleValue:  ptr.Float64(1.0),
+										IntegerValue: ptr.Int32(1),
+										LongValue:    ptr.Int64(1),
+										StringValue:  ptr.String("__StringValue__"),
+										ListValue: []types.DataValue{
+											{},
+											{},
+										},
+										MapValue: map[string]types.DataValue{
+											"key0": {},
+										},
+										RelationshipValue: &types.RelationshipValue{
+											TargetEntityId:      ptr.String("__TargetEntityId__"),
+											TargetComponentName: ptr.String("__TargetComponentName__"),
+										},
+										Expression: ptr.String("__Expression__"),
+									},
+								},
+								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
+								Relationship: &types.Relationship{
+									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
+									RelationshipType:      ptr.String("__RelationshipType__"),
+								},
+							},
+							IsRequiredInEntity: ptr.Bool(true),
+							IsExternalId:       ptr.Bool(true),
+							IsStoredExternally: ptr.Bool(true),
+							IsTimeSeries:       ptr.Bool(true),
+							DefaultValue: &types.DataValue{
+								BooleanValue: ptr.Bool(true),
+								DoubleValue:  ptr.Float64(1.0),
+								IntegerValue: ptr.Int32(1),
+								LongValue:    ptr.Int64(1),
+								StringValue:  ptr.String("__StringValue__"),
+								ListValue: []types.DataValue{
+									{},
+									{},
+								},
+								MapValue: map[string]types.DataValue{
+									"key0": {},
+								},
+								RelationshipValue: &types.RelationshipValue{
+									TargetEntityId:      ptr.String("__TargetEntityId__"),
+									TargetComponentName: ptr.String("__TargetComponentName__"),
+								},
+								Expression: ptr.String("__Expression__"),
+							},
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							DisplayName: ptr.String("__DisplayName__"),
+						},
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						UpdateType: types.PropertyUpdateType("UPDATE"),
+					},
+				},
+				PropertyGroupUpdates: map[string]types.ComponentPropertyGroupRequest{
+					"key0": {
+						GroupType: types.GroupType("TABULAR"),
+						PropertyNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
+					},
+				},
+			},
+		},
+		CompositeComponentUpdates: map[string]types.CompositeComponentUpdateRequest{
+			"key0": {
+				UpdateType:  types.ComponentUpdateType("CREATE"),
+				Description: ptr.String("__Description__"),
+				PropertyUpdates: map[string]types.PropertyRequest{
+					"key0": {
+						Definition: &types.PropertyDefinitionRequest{
+							DataType: &types.DataType{
+								Type:       types.Type("RELATIONSHIP"),
+								NestedType: nil,
+								AllowedValues: []types.DataValue{
+									{
+										BooleanValue: ptr.Bool(true),
+										DoubleValue:  ptr.Float64(1.0),
+										IntegerValue: ptr.Int32(1),
+										LongValue:    ptr.Int64(1),
+										StringValue:  ptr.String("__StringValue__"),
+										ListValue: []types.DataValue{
+											{},
+											{},
+										},
+										MapValue: map[string]types.DataValue{
+											"key0": {},
+										},
+										RelationshipValue: &types.RelationshipValue{
+											TargetEntityId:      ptr.String("__TargetEntityId__"),
+											TargetComponentName: ptr.String("__TargetComponentName__"),
+										},
+										Expression: ptr.String("__Expression__"),
+									},
+									{
+										BooleanValue: ptr.Bool(true),
+										DoubleValue:  ptr.Float64(1.0),
+										IntegerValue: ptr.Int32(1),
+										LongValue:    ptr.Int64(1),
+										StringValue:  ptr.String("__StringValue__"),
+										ListValue: []types.DataValue{
+											{},
+											{},
+										},
+										MapValue: map[string]types.DataValue{
+											"key0": {},
+										},
+										RelationshipValue: &types.RelationshipValue{
+											TargetEntityId:      ptr.String("__TargetEntityId__"),
+											TargetComponentName: ptr.String("__TargetComponentName__"),
+										},
+										Expression: ptr.String("__Expression__"),
+									},
+								},
+								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
+								Relationship: &types.Relationship{
+									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
+									RelationshipType:      ptr.String("__RelationshipType__"),
+								},
+							},
+							IsRequiredInEntity: ptr.Bool(true),
+							IsExternalId:       ptr.Bool(true),
+							IsStoredExternally: ptr.Bool(true),
+							IsTimeSeries:       ptr.Bool(true),
+							DefaultValue: &types.DataValue{
+								BooleanValue: ptr.Bool(true),
+								DoubleValue:  ptr.Float64(1.0),
+								IntegerValue: ptr.Int32(1),
+								LongValue:    ptr.Int64(1),
+								StringValue:  ptr.String("__StringValue__"),
+								ListValue: []types.DataValue{
+									{},
+									{},
+								},
+								MapValue: map[string]types.DataValue{
+									"key0": {},
+								},
+								RelationshipValue: &types.RelationshipValue{
+									TargetEntityId:      ptr.String("__TargetEntityId__"),
+									TargetComponentName: ptr.String("__TargetComponentName__"),
+								},
+								Expression: ptr.String("__Expression__"),
+							},
+							Configuration: map[string]string{
+								"key0": "__Value__",
+							},
+							DisplayName: ptr.String("__DisplayName__"),
+						},
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						UpdateType: types.PropertyUpdateType("UPDATE"),
+					},
+				},
+				PropertyGroupUpdates: map[string]types.ComponentPropertyGroupRequest{
+					"key0": {
+						GroupType: types.GroupType("TABULAR"),
+						PropertyNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
+					},
+				},
+			},
+		},
+		ParentEntityUpdate: &types.ParentEntityUpdateRequest{
+			UpdateType:     types.ParentEntityUpdateType("UPDATE"),
+			ParentEntityId: ptr.String("__ParentEntityId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2456,7 +3704,13 @@ func TestCheckResponseSnapshot_UpdatePricingPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePricingPlan(context.Background(), &UpdatePricingPlanInput{})
+	got, err := svc.UpdatePricingPlan(context.Background(), &UpdatePricingPlanInput{
+		PricingMode: types.PricingMode("BASIC"),
+		BundleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2477,7 +3731,19 @@ func TestCheckResponseSnapshot_UpdateScene(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateScene(context.Background(), &UpdateSceneInput{})
+	got, err := svc.UpdateScene(context.Background(), &UpdateSceneInput{
+		WorkspaceId:     ptr.String("__WorkspaceId__"),
+		SceneId:         ptr.String("__SceneId__"),
+		ContentLocation: ptr.String("__ContentLocation__"),
+		Description:     ptr.String("__Description__"),
+		Capabilities: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SceneMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2498,7 +3764,12 @@ func TestCheckResponseSnapshot_UpdateWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspace(context.Background(), &UpdateWorkspaceInput{})
+	got, err := svc.UpdateWorkspace(context.Background(), &UpdateWorkspaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Description: ptr.String("__Description__"),
+		Role:        ptr.String("__Role__"),
+		S3Location:  ptr.String("__S3Location__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2519,7 +3790,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelMetadataTransferJob(context.Background(), &CancelMetadataTransferJobInput{})
+	_, opErr := svc.CancelMetadataTransferJob(context.Background(), &CancelMetadataTransferJobInput{
+		MetadataTransferJobId: ptr.String("__MetadataTransferJobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2544,7 +3817,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelMetadataTransferJob(context.Background(), &CancelMetadataTransferJobInput{})
+	_, opErr := svc.CancelMetadataTransferJob(context.Background(), &CancelMetadataTransferJobInput{
+		MetadataTransferJobId: ptr.String("__MetadataTransferJobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2569,7 +3844,80 @@ func TestCheckResponseSnapshot_Error_ConnectorFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetPropertyValue(context.Background(), &GetPropertyValueInput{})
+	_, opErr := svc.GetPropertyValue(context.Background(), &GetPropertyValueInput{
+		ComponentName:   ptr.String("__ComponentName__"),
+		ComponentPath:   ptr.String("__ComponentPath__"),
+		ComponentTypeId: ptr.String("__ComponentTypeId__"),
+		EntityId:        ptr.String("__EntityId__"),
+		SelectedProperties: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WorkspaceId:       ptr.String("__WorkspaceId__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		PropertyGroupName: ptr.String("__PropertyGroupName__"),
+		TabularConditions: &types.TabularConditions{
+			OrderBy: []types.OrderBy{
+				{
+					Order:        types.Order("ASCENDING"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				{
+					Order:        types.Order("ASCENDING"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+			},
+			PropertyFilters: []types.PropertyFilter{
+				{
+					PropertyName: ptr.String("__PropertyName__"),
+					Operator:     ptr.String("__Operator__"),
+					Value: &types.DataValue{
+						BooleanValue: ptr.Bool(true),
+						DoubleValue:  ptr.Float64(1.0),
+						IntegerValue: ptr.Int32(1),
+						LongValue:    ptr.Int64(1),
+						StringValue:  ptr.String("__StringValue__"),
+						ListValue: []types.DataValue{
+							{},
+							{},
+						},
+						MapValue: map[string]types.DataValue{
+							"key0": {},
+						},
+						RelationshipValue: &types.RelationshipValue{
+							TargetEntityId:      ptr.String("__TargetEntityId__"),
+							TargetComponentName: ptr.String("__TargetComponentName__"),
+						},
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				{
+					PropertyName: ptr.String("__PropertyName__"),
+					Operator:     ptr.String("__Operator__"),
+					Value: &types.DataValue{
+						BooleanValue: ptr.Bool(true),
+						DoubleValue:  ptr.Float64(1.0),
+						IntegerValue: ptr.Int32(1),
+						LongValue:    ptr.Int64(1),
+						StringValue:  ptr.String("__StringValue__"),
+						ListValue: []types.DataValue{
+							{},
+							{},
+						},
+						MapValue: map[string]types.DataValue{
+							"key0": {},
+						},
+						RelationshipValue: &types.RelationshipValue{
+							TargetEntityId:      ptr.String("__TargetEntityId__"),
+							TargetComponentName: ptr.String("__TargetComponentName__"),
+						},
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2594,7 +3942,80 @@ func TestCheckResponseSnapshot_Error_ConnectorTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetPropertyValue(context.Background(), &GetPropertyValueInput{})
+	_, opErr := svc.GetPropertyValue(context.Background(), &GetPropertyValueInput{
+		ComponentName:   ptr.String("__ComponentName__"),
+		ComponentPath:   ptr.String("__ComponentPath__"),
+		ComponentTypeId: ptr.String("__ComponentTypeId__"),
+		EntityId:        ptr.String("__EntityId__"),
+		SelectedProperties: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WorkspaceId:       ptr.String("__WorkspaceId__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		PropertyGroupName: ptr.String("__PropertyGroupName__"),
+		TabularConditions: &types.TabularConditions{
+			OrderBy: []types.OrderBy{
+				{
+					Order:        types.Order("ASCENDING"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				{
+					Order:        types.Order("ASCENDING"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+			},
+			PropertyFilters: []types.PropertyFilter{
+				{
+					PropertyName: ptr.String("__PropertyName__"),
+					Operator:     ptr.String("__Operator__"),
+					Value: &types.DataValue{
+						BooleanValue: ptr.Bool(true),
+						DoubleValue:  ptr.Float64(1.0),
+						IntegerValue: ptr.Int32(1),
+						LongValue:    ptr.Int64(1),
+						StringValue:  ptr.String("__StringValue__"),
+						ListValue: []types.DataValue{
+							{},
+							{},
+						},
+						MapValue: map[string]types.DataValue{
+							"key0": {},
+						},
+						RelationshipValue: &types.RelationshipValue{
+							TargetEntityId:      ptr.String("__TargetEntityId__"),
+							TargetComponentName: ptr.String("__TargetComponentName__"),
+						},
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				{
+					PropertyName: ptr.String("__PropertyName__"),
+					Operator:     ptr.String("__Operator__"),
+					Value: &types.DataValue{
+						BooleanValue: ptr.Bool(true),
+						DoubleValue:  ptr.Float64(1.0),
+						IntegerValue: ptr.Int32(1),
+						LongValue:    ptr.Int64(1),
+						StringValue:  ptr.String("__StringValue__"),
+						ListValue: []types.DataValue{
+							{},
+							{},
+						},
+						MapValue: map[string]types.DataValue{
+							"key0": {},
+						},
+						RelationshipValue: &types.RelationshipValue{
+							TargetEntityId:      ptr.String("__TargetEntityId__"),
+							TargetComponentName: ptr.String("__TargetComponentName__"),
+						},
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2619,7 +4040,129 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchPutPropertyValues(context.Background(), &BatchPutPropertyValuesInput{})
+	_, opErr := svc.BatchPutPropertyValues(context.Background(), &BatchPutPropertyValuesInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Entries: []types.PropertyValueEntry{
+			{
+				EntityPropertyReference: &types.EntityPropertyReference{
+					ComponentName: ptr.String("__ComponentName__"),
+					ComponentPath: ptr.String("__ComponentPath__"),
+					ExternalIdProperty: map[string]string{
+						"key0": "__Value__",
+					},
+					EntityId:     ptr.String("__EntityId__"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				PropertyValues: []types.PropertyValue{
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+				},
+			},
+			{
+				EntityPropertyReference: &types.EntityPropertyReference{
+					ComponentName: ptr.String("__ComponentName__"),
+					ComponentPath: ptr.String("__ComponentPath__"),
+					ExternalIdProperty: map[string]string{
+						"key0": "__Value__",
+					},
+					EntityId:     ptr.String("__EntityId__"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				PropertyValues: []types.PropertyValue{
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2644,7 +4187,12 @@ func TestCheckResponseSnapshot_Error_QueryTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{})
+	_, opErr := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{
+		WorkspaceId:    ptr.String("__WorkspaceId__"),
+		QueryStatement: ptr.String("__QueryStatement__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2669,7 +4217,129 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchPutPropertyValues(context.Background(), &BatchPutPropertyValuesInput{})
+	_, opErr := svc.BatchPutPropertyValues(context.Background(), &BatchPutPropertyValuesInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Entries: []types.PropertyValueEntry{
+			{
+				EntityPropertyReference: &types.EntityPropertyReference{
+					ComponentName: ptr.String("__ComponentName__"),
+					ComponentPath: ptr.String("__ComponentPath__"),
+					ExternalIdProperty: map[string]string{
+						"key0": "__Value__",
+					},
+					EntityId:     ptr.String("__EntityId__"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				PropertyValues: []types.PropertyValue{
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+				},
+			},
+			{
+				EntityPropertyReference: &types.EntityPropertyReference{
+					ComponentName: ptr.String("__ComponentName__"),
+					ComponentPath: ptr.String("__ComponentPath__"),
+					ExternalIdProperty: map[string]string{
+						"key0": "__Value__",
+					},
+					EntityId:     ptr.String("__EntityId__"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				PropertyValues: []types.PropertyValue{
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2694,7 +4364,129 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComponentType(context.Background(), &CreateComponentTypeInput{})
+	_, opErr := svc.CreateComponentType(context.Background(), &CreateComponentTypeInput{
+		WorkspaceId:     ptr.String("__WorkspaceId__"),
+		IsSingleton:     ptr.Bool(true),
+		ComponentTypeId: ptr.String("__ComponentTypeId__"),
+		Description:     ptr.String("__Description__"),
+		PropertyDefinitions: map[string]types.PropertyDefinitionRequest{
+			"key0": {
+				DataType: &types.DataType{
+					Type:       types.Type("RELATIONSHIP"),
+					NestedType: nil,
+					AllowedValues: []types.DataValue{
+						{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+					},
+					UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
+					Relationship: &types.Relationship{
+						TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
+						RelationshipType:      ptr.String("__RelationshipType__"),
+					},
+				},
+				IsRequiredInEntity: ptr.Bool(true),
+				IsExternalId:       ptr.Bool(true),
+				IsStoredExternally: ptr.Bool(true),
+				IsTimeSeries:       ptr.Bool(true),
+				DefaultValue: &types.DataValue{
+					BooleanValue: ptr.Bool(true),
+					DoubleValue:  ptr.Float64(1.0),
+					IntegerValue: ptr.Int32(1),
+					LongValue:    ptr.Int64(1),
+					StringValue:  ptr.String("__StringValue__"),
+					ListValue: []types.DataValue{
+						{},
+						{},
+					},
+					MapValue: map[string]types.DataValue{
+						"key0": {},
+					},
+					RelationshipValue: &types.RelationshipValue{
+						TargetEntityId:      ptr.String("__TargetEntityId__"),
+						TargetComponentName: ptr.String("__TargetComponentName__"),
+					},
+					Expression: ptr.String("__Expression__"),
+				},
+				Configuration: map[string]string{
+					"key0": "__Value__",
+				},
+				DisplayName: ptr.String("__DisplayName__"),
+			},
+		},
+		ExtendsFrom: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Functions: map[string]types.FunctionRequest{
+			"key0": {
+				RequiredProperties: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Scope: types.Scope("ENTITY"),
+				ImplementedBy: &types.DataConnector{
+					Lambda: &types.LambdaFunction{
+						Arn: ptr.String("__Arn__"),
+					},
+					IsNative: ptr.Bool(true),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PropertyGroups: map[string]types.PropertyGroupRequest{
+			"key0": {
+				GroupType: types.GroupType("TABULAR"),
+				PropertyNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ComponentTypeName: ptr.String("__ComponentTypeName__"),
+		CompositeComponentTypes: map[string]types.CompositeComponentTypeRequest{
+			"key0": {
+				ComponentTypeId: ptr.String("__ComponentTypeId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2719,7 +4511,129 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchPutPropertyValues(context.Background(), &BatchPutPropertyValuesInput{})
+	_, opErr := svc.BatchPutPropertyValues(context.Background(), &BatchPutPropertyValuesInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Entries: []types.PropertyValueEntry{
+			{
+				EntityPropertyReference: &types.EntityPropertyReference{
+					ComponentName: ptr.String("__ComponentName__"),
+					ComponentPath: ptr.String("__ComponentPath__"),
+					ExternalIdProperty: map[string]string{
+						"key0": "__Value__",
+					},
+					EntityId:     ptr.String("__EntityId__"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				PropertyValues: []types.PropertyValue{
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+				},
+			},
+			{
+				EntityPropertyReference: &types.EntityPropertyReference{
+					ComponentName: ptr.String("__ComponentName__"),
+					ComponentPath: ptr.String("__ComponentPath__"),
+					ExternalIdProperty: map[string]string{
+						"key0": "__Value__",
+					},
+					EntityId:     ptr.String("__EntityId__"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				PropertyValues: []types.PropertyValue{
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2744,7 +4658,12 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2769,7 +4688,129 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchPutPropertyValues(context.Background(), &BatchPutPropertyValuesInput{})
+	_, opErr := svc.BatchPutPropertyValues(context.Background(), &BatchPutPropertyValuesInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Entries: []types.PropertyValueEntry{
+			{
+				EntityPropertyReference: &types.EntityPropertyReference{
+					ComponentName: ptr.String("__ComponentName__"),
+					ComponentPath: ptr.String("__ComponentPath__"),
+					ExternalIdProperty: map[string]string{
+						"key0": "__Value__",
+					},
+					EntityId:     ptr.String("__EntityId__"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				PropertyValues: []types.PropertyValue{
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+				},
+			},
+			{
+				EntityPropertyReference: &types.EntityPropertyReference{
+					ComponentName: ptr.String("__ComponentName__"),
+					ComponentPath: ptr.String("__ComponentPath__"),
+					ExternalIdProperty: map[string]string{
+						"key0": "__Value__",
+					},
+					EntityId:     ptr.String("__EntityId__"),
+					PropertyName: ptr.String("__PropertyName__"),
+				},
+				PropertyValues: []types.PropertyValue{
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+					{
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value: &types.DataValue{
+							BooleanValue: ptr.Bool(true),
+							DoubleValue:  ptr.Float64(1.0),
+							IntegerValue: ptr.Int32(1),
+							LongValue:    ptr.Int64(1),
+							StringValue:  ptr.String("__StringValue__"),
+							ListValue: []types.DataValue{
+								{},
+								{},
+							},
+							MapValue: map[string]types.DataValue{
+								"key0": {},
+							},
+							RelationshipValue: &types.RelationshipValue{
+								TargetEntityId:      ptr.String("__TargetEntityId__"),
+								TargetComponentName: ptr.String("__TargetComponentName__"),
+							},
+							Expression: ptr.String("__Expression__"),
+						},
+						Time: ptr.String("__Time__"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

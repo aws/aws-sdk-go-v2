@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.GetMaintenanceWindowExecution
+
+{"EndTime":946684800,"StartTime":946684800,"Status":"PENDING","StatusDetails":"__StatusDetails__","TaskIds":["__Member__","__Member__"],"WindowExecutionId":"__WindowExecutionId__"}

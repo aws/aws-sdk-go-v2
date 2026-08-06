@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","readiness":"READY","readinessChecks":[{"readiness":"READY","readinessCheckName":"__ReadinessCheckName__"},{"readiness":"READY","readinessCheckName":"__ReadinessCheckName__"}]}

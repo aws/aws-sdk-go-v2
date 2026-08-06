@@ -1,5 +1,0 @@
-PUT /HttpPayloadWithXmlName
-
-Content-Type: application/xml
-
-<Hello><name>__Name__</name></Hello>

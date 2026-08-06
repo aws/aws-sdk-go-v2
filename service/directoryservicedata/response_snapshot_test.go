@@ -116,7 +116,13 @@ func TestCheckResponseSnapshot_AddGroupMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{})
+	got, err := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		GroupName:   ptr.String("__GroupName__"),
+		MemberName:  ptr.String("__MemberName__"),
+		MemberRealm: ptr.String("__MemberRealm__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,7 +145,18 @@ func TestCheckResponseSnapshot_CreateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		DirectoryId:    ptr.String("__DirectoryId__"),
+		SAMAccountName: ptr.String("__SAMAccountName__"),
+		GroupType:      types.GroupType("Distribution"),
+		GroupScope:     types.GroupScope("DomainLocal"),
+		OtherAttributes: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +179,19 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUser(context.Background(), &CreateUserInput{})
+	got, err := svc.CreateUser(context.Background(), &CreateUserInput{
+		DirectoryId:    ptr.String("__DirectoryId__"),
+		SAMAccountName: ptr.String("__SAMAccountName__"),
+		EmailAddress:   ptr.String("__EmailAddress__"),
+		GivenName:      ptr.String("__GivenName__"),
+		Surname:        ptr.String("__Surname__"),
+		OtherAttributes: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -181,7 +210,11 @@ func TestCheckResponseSnapshot_DeleteGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{})
+	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{
+		DirectoryId:    ptr.String("__DirectoryId__"),
+		SAMAccountName: ptr.String("__SAMAccountName__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -200,7 +233,11 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		DirectoryId:    ptr.String("__DirectoryId__"),
+		SAMAccountName: ptr.String("__SAMAccountName__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -232,7 +269,15 @@ func TestCheckResponseSnapshot_DescribeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGroup(context.Background(), &DescribeGroupInput{})
+	got, err := svc.DescribeGroup(context.Background(), &DescribeGroupInput{
+		DirectoryId:    ptr.String("__DirectoryId__"),
+		Realm:          ptr.String("__Realm__"),
+		SAMAccountName: ptr.String("__SAMAccountName__"),
+		OtherAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +312,15 @@ func TestCheckResponseSnapshot_DescribeUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUser(context.Background(), &DescribeUserInput{})
+	got, err := svc.DescribeUser(context.Background(), &DescribeUserInput{
+		DirectoryId:    ptr.String("__DirectoryId__"),
+		SAMAccountName: ptr.String("__SAMAccountName__"),
+		OtherAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Realm: ptr.String("__Realm__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -286,7 +339,11 @@ func TestCheckResponseSnapshot_DisableUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableUser(context.Background(), &DisableUserInput{})
+	got, err := svc.DisableUser(context.Background(), &DisableUserInput{
+		DirectoryId:    ptr.String("__DirectoryId__"),
+		SAMAccountName: ptr.String("__SAMAccountName__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +379,14 @@ func TestCheckResponseSnapshot_ListGroupMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupMembers(context.Background(), &ListGroupMembersInput{})
+	got, err := svc.ListGroupMembers(context.Background(), &ListGroupMembersInput{
+		DirectoryId:    ptr.String("__DirectoryId__"),
+		Realm:          ptr.String("__Realm__"),
+		MemberRealm:    ptr.String("__MemberRealm__"),
+		SAMAccountName: ptr.String("__SAMAccountName__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -359,7 +423,12 @@ func TestCheckResponseSnapshot_ListGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{})
+	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Realm:       ptr.String("__Realm__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -397,7 +466,14 @@ func TestCheckResponseSnapshot_ListGroupsForMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupsForMember(context.Background(), &ListGroupsForMemberInput{})
+	got, err := svc.ListGroupsForMember(context.Background(), &ListGroupsForMemberInput{
+		DirectoryId:    ptr.String("__DirectoryId__"),
+		Realm:          ptr.String("__Realm__"),
+		MemberRealm:    ptr.String("__MemberRealm__"),
+		SAMAccountName: ptr.String("__SAMAccountName__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -436,7 +512,12 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsers(context.Background(), &ListUsersInput{})
+	got, err := svc.ListUsers(context.Background(), &ListUsersInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Realm:       ptr.String("__Realm__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -455,7 +536,13 @@ func TestCheckResponseSnapshot_RemoveGroupMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveGroupMember(context.Background(), &RemoveGroupMemberInput{})
+	got, err := svc.RemoveGroupMember(context.Background(), &RemoveGroupMemberInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		GroupName:   ptr.String("__GroupName__"),
+		MemberName:  ptr.String("__MemberName__"),
+		MemberRealm: ptr.String("__MemberRealm__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -504,7 +591,17 @@ func TestCheckResponseSnapshot_SearchGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchGroups(context.Background(), &SearchGroupsInput{})
+	got, err := svc.SearchGroups(context.Background(), &SearchGroupsInput{
+		DirectoryId:  ptr.String("__DirectoryId__"),
+		SearchString: ptr.String("__SearchString__"),
+		SearchAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Realm:      ptr.String("__Realm__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -559,7 +656,17 @@ func TestCheckResponseSnapshot_SearchUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchUsers(context.Background(), &SearchUsersInput{})
+	got, err := svc.SearchUsers(context.Background(), &SearchUsersInput{
+		DirectoryId:  ptr.String("__DirectoryId__"),
+		Realm:        ptr.String("__Realm__"),
+		SearchString: ptr.String("__SearchString__"),
+		SearchAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -578,7 +685,19 @@ func TestCheckResponseSnapshot_UpdateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{})
+	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{
+		DirectoryId:    ptr.String("__DirectoryId__"),
+		SAMAccountName: ptr.String("__SAMAccountName__"),
+		GroupType:      types.GroupType("Distribution"),
+		GroupScope:     types.GroupScope("DomainLocal"),
+		OtherAttributes: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		UpdateType:  types.UpdateType("ADD"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -597,7 +716,20 @@ func TestCheckResponseSnapshot_UpdateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{})
+	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{
+		DirectoryId:    ptr.String("__DirectoryId__"),
+		SAMAccountName: ptr.String("__SAMAccountName__"),
+		EmailAddress:   ptr.String("__EmailAddress__"),
+		GivenName:      ptr.String("__GivenName__"),
+		Surname:        ptr.String("__Surname__"),
+		OtherAttributes: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		UpdateType:  types.UpdateType("ADD"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -619,7 +751,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{})
+	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		GroupName:   ptr.String("__GroupName__"),
+		MemberName:  ptr.String("__MemberName__"),
+		MemberRealm: ptr.String("__MemberRealm__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -644,7 +782,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{})
+	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		GroupName:   ptr.String("__GroupName__"),
+		MemberName:  ptr.String("__MemberName__"),
+		MemberRealm: ptr.String("__MemberRealm__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -670,7 +814,13 @@ func TestCheckResponseSnapshot_Error_DirectoryUnavailableException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{})
+	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		GroupName:   ptr.String("__GroupName__"),
+		MemberName:  ptr.String("__MemberName__"),
+		MemberRealm: ptr.String("__MemberRealm__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -695,7 +845,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{})
+	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		GroupName:   ptr.String("__GroupName__"),
+		MemberName:  ptr.String("__MemberName__"),
+		MemberRealm: ptr.String("__MemberRealm__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -720,7 +876,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{})
+	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		GroupName:   ptr.String("__GroupName__"),
+		MemberName:  ptr.String("__MemberName__"),
+		MemberRealm: ptr.String("__MemberRealm__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -746,7 +908,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{})
+	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		GroupName:   ptr.String("__GroupName__"),
+		MemberName:  ptr.String("__MemberName__"),
+		MemberRealm: ptr.String("__MemberRealm__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -772,7 +940,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{})
+	_, opErr := svc.AddGroupMember(context.Background(), &AddGroupMemberInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		GroupName:   ptr.String("__GroupName__"),
+		MemberName:  ptr.String("__MemberName__"),
+		MemberRealm: ptr.String("__MemberRealm__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

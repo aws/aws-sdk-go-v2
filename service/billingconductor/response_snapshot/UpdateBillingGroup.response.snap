@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccountGrouping":{"AutoAssociate":true,"ResponsibilityTransferArn":"__ResponsibilityTransferArn__"},"Arn":"__Arn__","Description":"__Description__","LastModifiedTime":1,"Name":"__Name__","PricingPlanArn":"__PricingPlanArn__","PrimaryAccountId":"__PrimaryAccountId__","Size":1,"Status":"ACTIVE","StatusReason":"__StatusReason__"}

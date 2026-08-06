@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"RefreshSchedules":[{"DatasetArn":"__DatasetArn__","DatasetId":"__DatasetId__","DatasetName":"__DatasetName__","RefreshSchedule":{"BasedOnSpiceSchedule":true,"IsEnabled":true,"RepeatAt":"__RepeatAt__","StartingAt":946684800,"Timezone":"__Timezone__","TopicScheduleType":"HOURLY"}},{"DatasetArn":"__DatasetArn__","DatasetId":"__DatasetId__","DatasetName":"__DatasetName__","RefreshSchedule":{"BasedOnSpiceSchedule":true,"IsEnabled":true,"RepeatAt":"__RepeatAt__","StartingAt":946684800,"Timezone":"__Timezone__","TopicScheduleType":"HOURLY"}}],"RequestId":"__RequestId__","Status":200,"TopicArn":"__TopicArn__","TopicId":"__TopicId__"}

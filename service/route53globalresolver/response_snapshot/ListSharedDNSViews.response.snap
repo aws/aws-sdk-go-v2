@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dnsViews":[{"arn":"__Arn__","clientToken":"__ClientToken__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","dnssecValidation":"ENABLED","ednsClientSubnet":"ENABLED","firewallRulesFailOpen":"ENABLED","globalResolverId":"__GlobalResolverId__","id":"__Id__","name":"__Name__","ownerAccountId":"__OwnerAccountId__","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z"},{"arn":"__Arn__","clientToken":"__ClientToken__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","dnssecValidation":"ENABLED","ednsClientSubnet":"ENABLED","firewallRulesFailOpen":"ENABLED","globalResolverId":"__GlobalResolverId__","id":"__Id__","name":"__Name__","ownerAccountId":"__OwnerAccountId__","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

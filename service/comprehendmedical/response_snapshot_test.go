@@ -140,7 +140,9 @@ func TestCheckResponseSnapshot_DescribeEntitiesDetectionV2Job(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEntitiesDetectionV2Job(context.Background(), &DescribeEntitiesDetectionV2JobInput{})
+	got, err := svc.DescribeEntitiesDetectionV2Job(context.Background(), &DescribeEntitiesDetectionV2JobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +184,9 @@ func TestCheckResponseSnapshot_DescribeICD10CMInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeICD10CMInferenceJob(context.Background(), &DescribeICD10CMInferenceJobInput{})
+	got, err := svc.DescribeICD10CMInferenceJob(context.Background(), &DescribeICD10CMInferenceJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +228,9 @@ func TestCheckResponseSnapshot_DescribePHIDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePHIDetectionJob(context.Background(), &DescribePHIDetectionJobInput{})
+	got, err := svc.DescribePHIDetectionJob(context.Background(), &DescribePHIDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -266,7 +272,9 @@ func TestCheckResponseSnapshot_DescribeRxNormInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRxNormInferenceJob(context.Background(), &DescribeRxNormInferenceJobInput{})
+	got, err := svc.DescribeRxNormInferenceJob(context.Background(), &DescribeRxNormInferenceJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -308,7 +316,9 @@ func TestCheckResponseSnapshot_DescribeSNOMEDCTInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSNOMEDCTInferenceJob(context.Background(), &DescribeSNOMEDCTInferenceJobInput{})
+	got, err := svc.DescribeSNOMEDCTInferenceJob(context.Background(), &DescribeSNOMEDCTInferenceJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -508,7 +518,9 @@ func TestCheckResponseSnapshot_DetectEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectEntities(context.Background(), &DetectEntitiesInput{})
+	got, err := svc.DetectEntities(context.Background(), &DetectEntitiesInput{
+		Text: ptr.String("__Text__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -708,7 +720,9 @@ func TestCheckResponseSnapshot_DetectEntitiesV2(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectEntitiesV2(context.Background(), &DetectEntitiesV2Input{})
+	got, err := svc.DetectEntitiesV2(context.Background(), &DetectEntitiesV2Input{
+		Text: ptr.String("__Text__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -858,7 +872,9 @@ func TestCheckResponseSnapshot_DetectPHI(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectPHI(context.Background(), &DetectPHIInput{})
+	got, err := svc.DetectPHI(context.Background(), &DetectPHIInput{
+		Text: ptr.String("__Text__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1032,7 +1048,9 @@ func TestCheckResponseSnapshot_InferICD10CM(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InferICD10CM(context.Background(), &InferICD10CMInput{})
+	got, err := svc.InferICD10CM(context.Background(), &InferICD10CMInput{
+		Text: ptr.String("__Text__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1198,7 +1216,9 @@ func TestCheckResponseSnapshot_InferRxNorm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InferRxNorm(context.Background(), &InferRxNormInput{})
+	got, err := svc.InferRxNorm(context.Background(), &InferRxNormInput{
+		Text: ptr.String("__Text__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1428,7 +1448,9 @@ func TestCheckResponseSnapshot_InferSNOMEDCT(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InferSNOMEDCT(context.Background(), &InferSNOMEDCTInput{})
+	got, err := svc.InferSNOMEDCT(context.Background(), &InferSNOMEDCTInput{
+		Text: ptr.String("__Text__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1495,7 +1517,16 @@ func TestCheckResponseSnapshot_ListEntitiesDetectionV2Jobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEntitiesDetectionV2Jobs(context.Background(), &ListEntitiesDetectionV2JobsInput{})
+	got, err := svc.ListEntitiesDetectionV2Jobs(context.Background(), &ListEntitiesDetectionV2JobsInput{
+		Filter: &types.ComprehendMedicalAsyncJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1562,7 +1593,16 @@ func TestCheckResponseSnapshot_ListICD10CMInferenceJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListICD10CMInferenceJobs(context.Background(), &ListICD10CMInferenceJobsInput{})
+	got, err := svc.ListICD10CMInferenceJobs(context.Background(), &ListICD10CMInferenceJobsInput{
+		Filter: &types.ComprehendMedicalAsyncJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1629,7 +1669,16 @@ func TestCheckResponseSnapshot_ListPHIDetectionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPHIDetectionJobs(context.Background(), &ListPHIDetectionJobsInput{})
+	got, err := svc.ListPHIDetectionJobs(context.Background(), &ListPHIDetectionJobsInput{
+		Filter: &types.ComprehendMedicalAsyncJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1696,7 +1745,16 @@ func TestCheckResponseSnapshot_ListRxNormInferenceJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRxNormInferenceJobs(context.Background(), &ListRxNormInferenceJobsInput{})
+	got, err := svc.ListRxNormInferenceJobs(context.Background(), &ListRxNormInferenceJobsInput{
+		Filter: &types.ComprehendMedicalAsyncJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1763,7 +1821,16 @@ func TestCheckResponseSnapshot_ListSNOMEDCTInferenceJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSNOMEDCTInferenceJobs(context.Background(), &ListSNOMEDCTInferenceJobsInput{})
+	got, err := svc.ListSNOMEDCTInferenceJobs(context.Background(), &ListSNOMEDCTInferenceJobsInput{
+		Filter: &types.ComprehendMedicalAsyncJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1784,7 +1851,21 @@ func TestCheckResponseSnapshot_StartEntitiesDetectionV2Job(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartEntitiesDetectionV2Job(context.Background(), &StartEntitiesDetectionV2JobInput{})
+	got, err := svc.StartEntitiesDetectionV2Job(context.Background(), &StartEntitiesDetectionV2JobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		JobName:            ptr.String("__JobName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		KMSKey:             ptr.String("__KMSKey__"),
+		LanguageCode:       types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1805,7 +1886,21 @@ func TestCheckResponseSnapshot_StartICD10CMInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartICD10CMInferenceJob(context.Background(), &StartICD10CMInferenceJobInput{})
+	got, err := svc.StartICD10CMInferenceJob(context.Background(), &StartICD10CMInferenceJobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		JobName:            ptr.String("__JobName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		KMSKey:             ptr.String("__KMSKey__"),
+		LanguageCode:       types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1826,7 +1921,21 @@ func TestCheckResponseSnapshot_StartPHIDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartPHIDetectionJob(context.Background(), &StartPHIDetectionJobInput{})
+	got, err := svc.StartPHIDetectionJob(context.Background(), &StartPHIDetectionJobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		JobName:            ptr.String("__JobName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		KMSKey:             ptr.String("__KMSKey__"),
+		LanguageCode:       types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1847,7 +1956,21 @@ func TestCheckResponseSnapshot_StartRxNormInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRxNormInferenceJob(context.Background(), &StartRxNormInferenceJobInput{})
+	got, err := svc.StartRxNormInferenceJob(context.Background(), &StartRxNormInferenceJobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		JobName:            ptr.String("__JobName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		KMSKey:             ptr.String("__KMSKey__"),
+		LanguageCode:       types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1868,7 +1991,21 @@ func TestCheckResponseSnapshot_StartSNOMEDCTInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSNOMEDCTInferenceJob(context.Background(), &StartSNOMEDCTInferenceJobInput{})
+	got, err := svc.StartSNOMEDCTInferenceJob(context.Background(), &StartSNOMEDCTInferenceJobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		JobName:            ptr.String("__JobName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		KMSKey:             ptr.String("__KMSKey__"),
+		LanguageCode:       types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1889,7 +2026,9 @@ func TestCheckResponseSnapshot_StopEntitiesDetectionV2Job(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopEntitiesDetectionV2Job(context.Background(), &StopEntitiesDetectionV2JobInput{})
+	got, err := svc.StopEntitiesDetectionV2Job(context.Background(), &StopEntitiesDetectionV2JobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1910,7 +2049,9 @@ func TestCheckResponseSnapshot_StopICD10CMInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopICD10CMInferenceJob(context.Background(), &StopICD10CMInferenceJobInput{})
+	got, err := svc.StopICD10CMInferenceJob(context.Background(), &StopICD10CMInferenceJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1931,7 +2072,9 @@ func TestCheckResponseSnapshot_StopPHIDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopPHIDetectionJob(context.Background(), &StopPHIDetectionJobInput{})
+	got, err := svc.StopPHIDetectionJob(context.Background(), &StopPHIDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1952,7 +2095,9 @@ func TestCheckResponseSnapshot_StopRxNormInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopRxNormInferenceJob(context.Background(), &StopRxNormInferenceJobInput{})
+	got, err := svc.StopRxNormInferenceJob(context.Background(), &StopRxNormInferenceJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1973,7 +2118,9 @@ func TestCheckResponseSnapshot_StopSNOMEDCTInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopSNOMEDCTInferenceJob(context.Background(), &StopSNOMEDCTInferenceJobInput{})
+	got, err := svc.StopSNOMEDCTInferenceJob(context.Background(), &StopSNOMEDCTInferenceJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1994,7 +2141,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeEntitiesDetectionV2Job(context.Background(), &DescribeEntitiesDetectionV2JobInput{})
+	_, opErr := svc.DescribeEntitiesDetectionV2Job(context.Background(), &DescribeEntitiesDetectionV2JobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2019,7 +2168,9 @@ func TestCheckResponseSnapshot_Error_InvalidEncodingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DetectEntities(context.Background(), &DetectEntitiesInput{})
+	_, opErr := svc.DetectEntities(context.Background(), &DetectEntitiesInput{
+		Text: ptr.String("__Text__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2044,7 +2195,9 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeEntitiesDetectionV2Job(context.Background(), &DescribeEntitiesDetectionV2JobInput{})
+	_, opErr := svc.DescribeEntitiesDetectionV2Job(context.Background(), &DescribeEntitiesDetectionV2JobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2069,7 +2222,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeEntitiesDetectionV2Job(context.Background(), &DescribeEntitiesDetectionV2JobInput{})
+	_, opErr := svc.DescribeEntitiesDetectionV2Job(context.Background(), &DescribeEntitiesDetectionV2JobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2094,7 +2249,9 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DetectEntities(context.Background(), &DetectEntitiesInput{})
+	_, opErr := svc.DetectEntities(context.Background(), &DetectEntitiesInput{
+		Text: ptr.String("__Text__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2119,7 +2276,9 @@ func TestCheckResponseSnapshot_Error_TextSizeLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DetectEntities(context.Background(), &DetectEntitiesInput{})
+	_, opErr := svc.DetectEntities(context.Background(), &DetectEntitiesInput{
+		Text: ptr.String("__Text__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2144,7 +2303,9 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeEntitiesDetectionV2Job(context.Background(), &DescribeEntitiesDetectionV2JobInput{})
+	_, opErr := svc.DescribeEntitiesDetectionV2Job(context.Background(), &DescribeEntitiesDetectionV2JobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2169,7 +2330,16 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListEntitiesDetectionV2Jobs(context.Background(), &ListEntitiesDetectionV2JobsInput{})
+	_, opErr := svc.ListEntitiesDetectionV2Jobs(context.Background(), &ListEntitiesDetectionV2JobsInput{
+		Filter: &types.ComprehendMedicalAsyncJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

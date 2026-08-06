@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"finding":{"action":["__Member__","__Member__"],"analyzedAt":"2000-01-01T00:00:00Z","condition":{"key0":"__Value__"},"createdAt":"2000-01-01T00:00:00Z","error":"__Error__","id":"__Id__","isPublic":true,"principal":{"key0":"__Value__"},"resource":"__Resource__","resourceControlPolicyRestriction":"APPLICABLE","resourceOwnerAccount":"__ResourceOwnerAccount__","resourceType":"AWS::S3::Bucket","sources":[{"detail":{"accessPointAccount":"__AccessPointAccount__","accessPointArn":"__AccessPointArn__"},"type":"POLICY"},{"detail":{"accessPointAccount":"__AccessPointAccount__","accessPointArn":"__AccessPointArn__"},"type":"POLICY"}],"status":"ACTIVE","updatedAt":"2000-01-01T00:00:00Z"}}

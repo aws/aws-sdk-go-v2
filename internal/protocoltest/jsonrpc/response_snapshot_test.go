@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/document"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -117,7 +118,9 @@ func TestCheckResponseSnapshot_ContentTypeParameters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ContentTypeParameters(context.Background(), &ContentTypeParametersInput{})
+	got, err := svc.ContentTypeParameters(context.Background(), &ContentTypeParametersInput{
+		Value: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -195,7 +198,9 @@ func TestCheckResponseSnapshot_EndpointWithHostLabelOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EndpointWithHostLabelOperation(context.Background(), &EndpointWithHostLabelOperationInput{})
+	got, err := svc.EndpointWithHostLabelOperation(context.Background(), &EndpointWithHostLabelOperationInput{
+		Label: ptr.String("Label-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -290,7 +295,22 @@ func TestCheckResponseSnapshot_JsonEnums(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JsonEnums(context.Background(), &JsonEnumsInput{})
+	got, err := svc.JsonEnums(context.Background(), &JsonEnumsInput{
+		FooEnum1: types.FooEnum("Foo"),
+		FooEnum2: types.FooEnum("Foo"),
+		FooEnum3: types.FooEnum("Foo"),
+		FooEnumList: []types.FooEnum{
+			types.FooEnum("Foo"),
+			types.FooEnum("Foo"),
+		},
+		FooEnumSet: []types.FooEnum{
+			types.FooEnum("Foo"),
+			types.FooEnum("Foo"),
+		},
+		FooEnumMap: map[string]types.FooEnum{
+			"key0": types.FooEnum("Foo"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -324,7 +344,22 @@ func TestCheckResponseSnapshot_JsonIntEnums(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JsonIntEnums(context.Background(), &JsonIntEnumsInput{})
+	got, err := svc.JsonIntEnums(context.Background(), &JsonIntEnumsInput{
+		IntEnum1: types.IntegerEnum(1),
+		IntEnum2: types.IntegerEnum(1),
+		IntEnum3: types.IntegerEnum(1),
+		IntEnumList: []types.IntegerEnum{
+			types.IntegerEnum(1),
+			types.IntegerEnum(1),
+		},
+		IntEnumSet: []types.IntegerEnum{
+			types.IntegerEnum(1),
+			types.IntegerEnum(1),
+		},
+		IntEnumMap: map[string]types.IntegerEnum{
+			"key0": types.IntegerEnum(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -347,7 +382,11 @@ func TestCheckResponseSnapshot_JsonUnions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JsonUnions(context.Background(), &JsonUnionsInput{})
+	got, err := svc.JsonUnions(context.Background(), &JsonUnionsInput{
+		Contents: &types.MyUnionMemberStringValue{
+			Value: "__MyUnionMemberStringValue__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -751,7 +790,392 @@ func TestCheckResponseSnapshot_KitchenSinkOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.KitchenSinkOperation(context.Background(), &KitchenSinkOperationInput{})
+	got, err := svc.KitchenSinkOperation(context.Background(), &KitchenSinkOperationInput{
+		Blob:              []byte("blob"),
+		Boolean:           ptr.Bool(true),
+		Double:            ptr.Float64(1.0),
+		EmptyStruct:       &types.EmptyStruct{},
+		Float:             ptr.Float32(1.0),
+		HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Integer:           ptr.Int32(1),
+		Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		JsonValue:         ptr.String("__JsonValue__"),
+		ListOfLists: [][]string{
+			{
+				"__Member__",
+				"__Member__",
+			},
+			{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ListOfMapsOfStrings: []map[string]string{
+			{
+				"key0": "__Value__",
+			},
+			{
+				"key0": "__Value__",
+			},
+		},
+		ListOfStrings: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ListOfStructs: []types.SimpleStruct{
+			{
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Long: ptr.Int64(1),
+		MapOfListsOfStrings: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MapOfMaps: map[string]map[string]string{
+			"key0": {
+				"key0": "__Value__",
+			},
+		},
+		MapOfStrings: map[string]string{
+			"key0": "__Value__",
+		},
+		MapOfStructs: map[string]types.SimpleStruct{
+			"key0": {
+				Value: ptr.String("__Value__"),
+			},
+		},
+		RecursiveList: []types.KitchenSink{
+			{
+				Blob:              []byte("blob"),
+				Boolean:           ptr.Bool(true),
+				Double:            ptr.Float64(1.0),
+				EmptyStruct:       &types.EmptyStruct{},
+				Float:             ptr.Float32(1.0),
+				HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Integer:           ptr.Int32(1),
+				Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JsonValue:         ptr.String("__JsonValue__"),
+				ListOfLists: [][]string{
+					{
+						"__Member__",
+						"__Member__",
+					},
+					{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ListOfMapsOfStrings: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+				ListOfStrings: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ListOfStructs: []types.SimpleStruct{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Long: ptr.Int64(1),
+				MapOfListsOfStrings: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MapOfMaps: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+				MapOfStrings: map[string]string{
+					"key0": "__Value__",
+				},
+				MapOfStructs: map[string]types.SimpleStruct{
+					"key0": {
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RecursiveList: []types.KitchenSink{
+					{},
+					{},
+				},
+				RecursiveMap: map[string]types.KitchenSink{
+					"key0": {},
+				},
+				RecursiveStruct: nil,
+				SimpleStruct: &types.SimpleStruct{
+					Value: ptr.String("__Value__"),
+				},
+				String_: ptr.String("__String___"),
+				StructWithJsonName: &types.StructWithJsonName{
+					Value: ptr.String("__Value__"),
+				},
+				Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Blob:              []byte("blob"),
+				Boolean:           ptr.Bool(true),
+				Double:            ptr.Float64(1.0),
+				EmptyStruct:       &types.EmptyStruct{},
+				Float:             ptr.Float32(1.0),
+				HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Integer:           ptr.Int32(1),
+				Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JsonValue:         ptr.String("__JsonValue__"),
+				ListOfLists: [][]string{
+					{
+						"__Member__",
+						"__Member__",
+					},
+					{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ListOfMapsOfStrings: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+				ListOfStrings: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ListOfStructs: []types.SimpleStruct{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Long: ptr.Int64(1),
+				MapOfListsOfStrings: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MapOfMaps: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+				MapOfStrings: map[string]string{
+					"key0": "__Value__",
+				},
+				MapOfStructs: map[string]types.SimpleStruct{
+					"key0": {
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RecursiveList: []types.KitchenSink{
+					{},
+					{},
+				},
+				RecursiveMap: map[string]types.KitchenSink{
+					"key0": {},
+				},
+				RecursiveStruct: nil,
+				SimpleStruct: &types.SimpleStruct{
+					Value: ptr.String("__Value__"),
+				},
+				String_: ptr.String("__String___"),
+				StructWithJsonName: &types.StructWithJsonName{
+					Value: ptr.String("__Value__"),
+				},
+				Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		RecursiveMap: map[string]types.KitchenSink{
+			"key0": {
+				Blob:              []byte("blob"),
+				Boolean:           ptr.Bool(true),
+				Double:            ptr.Float64(1.0),
+				EmptyStruct:       &types.EmptyStruct{},
+				Float:             ptr.Float32(1.0),
+				HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Integer:           ptr.Int32(1),
+				Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JsonValue:         ptr.String("__JsonValue__"),
+				ListOfLists: [][]string{
+					{
+						"__Member__",
+						"__Member__",
+					},
+					{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ListOfMapsOfStrings: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+				ListOfStrings: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ListOfStructs: []types.SimpleStruct{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Long: ptr.Int64(1),
+				MapOfListsOfStrings: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MapOfMaps: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+				MapOfStrings: map[string]string{
+					"key0": "__Value__",
+				},
+				MapOfStructs: map[string]types.SimpleStruct{
+					"key0": {
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RecursiveList: []types.KitchenSink{
+					{},
+					{},
+				},
+				RecursiveMap: map[string]types.KitchenSink{
+					"key0": {},
+				},
+				RecursiveStruct: nil,
+				SimpleStruct: &types.SimpleStruct{
+					Value: ptr.String("__Value__"),
+				},
+				String_: ptr.String("__String___"),
+				StructWithJsonName: &types.StructWithJsonName{
+					Value: ptr.String("__Value__"),
+				},
+				Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		RecursiveStruct: &types.KitchenSink{
+			Blob:              []byte("blob"),
+			Boolean:           ptr.Bool(true),
+			Double:            ptr.Float64(1.0),
+			EmptyStruct:       &types.EmptyStruct{},
+			Float:             ptr.Float32(1.0),
+			HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Integer:           ptr.Int32(1),
+			Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			JsonValue:         ptr.String("__JsonValue__"),
+			ListOfLists: [][]string{
+				{
+					"__Member__",
+					"__Member__",
+				},
+				{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ListOfMapsOfStrings: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
+				},
+			},
+			ListOfStrings: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ListOfStructs: []types.SimpleStruct{
+				{
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Long: ptr.Int64(1),
+			MapOfListsOfStrings: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			MapOfMaps: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+			MapOfStrings: map[string]string{
+				"key0": "__Value__",
+			},
+			MapOfStructs: map[string]types.SimpleStruct{
+				"key0": {
+					Value: ptr.String("__Value__"),
+				},
+			},
+			RecursiveList: []types.KitchenSink{
+				{},
+				{},
+			},
+			RecursiveMap: map[string]types.KitchenSink{
+				"key0": {},
+			},
+			RecursiveStruct: nil,
+			SimpleStruct: &types.SimpleStruct{
+				Value: ptr.String("__Value__"),
+			},
+			String_: ptr.String("__String___"),
+			StructWithJsonName: &types.StructWithJsonName{
+				Value: ptr.String("__Value__"),
+			},
+			Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SimpleStruct: &types.SimpleStruct{
+			Value: ptr.String("__Value__"),
+		},
+		String_: ptr.String("__String___"),
+		StructWithJsonName: &types.StructWithJsonName{
+			Value: ptr.String("__Value__"),
+		},
+		Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -772,7 +1196,9 @@ func TestCheckResponseSnapshot_NullOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NullOperation(context.Background(), &NullOperationInput{})
+	got, err := svc.NullOperation(context.Background(), &NullOperationInput{
+		String_: ptr.String("__String___"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -793,7 +1219,9 @@ func TestCheckResponseSnapshot_OperationWithOptionalInputOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OperationWithOptionalInputOutput(context.Background(), &OperationWithOptionalInputOutputInput{})
+	got, err := svc.OperationWithOptionalInputOutput(context.Background(), &OperationWithOptionalInputOutputInput{
+		Value: ptr.String("__Value__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -804,7 +1232,7 @@ func TestCheckResponseSnapshot_OperationWithOptionalInputOutput(t *testing.T) {
 
 func TestCheckResponseSnapshot_PutAndGetInlineDocuments(t *testing.T) {
 	want := &PutAndGetInlineDocumentsOutput{
-		InlineDocument: nil,
+		InlineDocument: document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("PutAndGetInlineDocuments.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -814,7 +1242,9 @@ func TestCheckResponseSnapshot_PutAndGetInlineDocuments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAndGetInlineDocuments(context.Background(), &PutAndGetInlineDocumentsInput{})
+	got, err := svc.PutAndGetInlineDocuments(context.Background(), &PutAndGetInlineDocumentsInput{
+		InlineDocument: document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -833,7 +1263,10 @@ func TestCheckResponseSnapshot_PutWithContentEncoding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutWithContentEncoding(context.Background(), &PutWithContentEncodingInput{})
+	got, err := svc.PutWithContentEncoding(context.Background(), &PutWithContentEncodingInput{
+		Encoding: ptr.String("__Encoding__"),
+		Data:     ptr.String("__Data__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -855,7 +1288,10 @@ func TestCheckResponseSnapshot_SimpleScalarProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SimpleScalarProperties(context.Background(), &SimpleScalarPropertiesInput{})
+	got, err := svc.SimpleScalarProperties(context.Background(), &SimpleScalarPropertiesInput{
+		FloatValue:  ptr.Float32(1.0),
+		DoubleValue: ptr.Float64(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -882,7 +1318,15 @@ func TestCheckResponseSnapshot_SparseNullsOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SparseNullsOperation(context.Background(), &SparseNullsOperationInput{})
+	got, err := svc.SparseNullsOperation(context.Background(), &SparseNullsOperationInput{
+		SparseStringList: []*string{
+			ptr.String("__Member__"),
+			ptr.String("__Member__"),
+		},
+		SparseStringMap: map[string]*string{
+			"key0": ptr.String("__Value__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1365,7 @@ func TestCheckResponseSnapshot_Error_ComplexError(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ErrorWithMembers(t *testing.T) {
 	want := &types.ErrorWithMembers{
-		Code: ptr.String("__Code__"),
+		Code: ptr.String("ErrorWithMembers"),
 		ComplexData: &types.KitchenSink{
 			Blob:              []byte("blob"),
 			Boolean:           ptr.Bool(true),
@@ -1019,7 +1463,392 @@ func TestCheckResponseSnapshot_Error_ErrorWithMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.KitchenSinkOperation(context.Background(), &KitchenSinkOperationInput{})
+	_, opErr := svc.KitchenSinkOperation(context.Background(), &KitchenSinkOperationInput{
+		Blob:              []byte("blob"),
+		Boolean:           ptr.Bool(true),
+		Double:            ptr.Float64(1.0),
+		EmptyStruct:       &types.EmptyStruct{},
+		Float:             ptr.Float32(1.0),
+		HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Integer:           ptr.Int32(1),
+		Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		JsonValue:         ptr.String("__JsonValue__"),
+		ListOfLists: [][]string{
+			{
+				"__Member__",
+				"__Member__",
+			},
+			{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ListOfMapsOfStrings: []map[string]string{
+			{
+				"key0": "__Value__",
+			},
+			{
+				"key0": "__Value__",
+			},
+		},
+		ListOfStrings: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ListOfStructs: []types.SimpleStruct{
+			{
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Long: ptr.Int64(1),
+		MapOfListsOfStrings: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MapOfMaps: map[string]map[string]string{
+			"key0": {
+				"key0": "__Value__",
+			},
+		},
+		MapOfStrings: map[string]string{
+			"key0": "__Value__",
+		},
+		MapOfStructs: map[string]types.SimpleStruct{
+			"key0": {
+				Value: ptr.String("__Value__"),
+			},
+		},
+		RecursiveList: []types.KitchenSink{
+			{
+				Blob:              []byte("blob"),
+				Boolean:           ptr.Bool(true),
+				Double:            ptr.Float64(1.0),
+				EmptyStruct:       &types.EmptyStruct{},
+				Float:             ptr.Float32(1.0),
+				HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Integer:           ptr.Int32(1),
+				Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JsonValue:         ptr.String("__JsonValue__"),
+				ListOfLists: [][]string{
+					{
+						"__Member__",
+						"__Member__",
+					},
+					{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ListOfMapsOfStrings: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+				ListOfStrings: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ListOfStructs: []types.SimpleStruct{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Long: ptr.Int64(1),
+				MapOfListsOfStrings: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MapOfMaps: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+				MapOfStrings: map[string]string{
+					"key0": "__Value__",
+				},
+				MapOfStructs: map[string]types.SimpleStruct{
+					"key0": {
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RecursiveList: []types.KitchenSink{
+					{},
+					{},
+				},
+				RecursiveMap: map[string]types.KitchenSink{
+					"key0": {},
+				},
+				RecursiveStruct: nil,
+				SimpleStruct: &types.SimpleStruct{
+					Value: ptr.String("__Value__"),
+				},
+				String_: ptr.String("__String___"),
+				StructWithJsonName: &types.StructWithJsonName{
+					Value: ptr.String("__Value__"),
+				},
+				Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Blob:              []byte("blob"),
+				Boolean:           ptr.Bool(true),
+				Double:            ptr.Float64(1.0),
+				EmptyStruct:       &types.EmptyStruct{},
+				Float:             ptr.Float32(1.0),
+				HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Integer:           ptr.Int32(1),
+				Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JsonValue:         ptr.String("__JsonValue__"),
+				ListOfLists: [][]string{
+					{
+						"__Member__",
+						"__Member__",
+					},
+					{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ListOfMapsOfStrings: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+				ListOfStrings: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ListOfStructs: []types.SimpleStruct{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Long: ptr.Int64(1),
+				MapOfListsOfStrings: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MapOfMaps: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+				MapOfStrings: map[string]string{
+					"key0": "__Value__",
+				},
+				MapOfStructs: map[string]types.SimpleStruct{
+					"key0": {
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RecursiveList: []types.KitchenSink{
+					{},
+					{},
+				},
+				RecursiveMap: map[string]types.KitchenSink{
+					"key0": {},
+				},
+				RecursiveStruct: nil,
+				SimpleStruct: &types.SimpleStruct{
+					Value: ptr.String("__Value__"),
+				},
+				String_: ptr.String("__String___"),
+				StructWithJsonName: &types.StructWithJsonName{
+					Value: ptr.String("__Value__"),
+				},
+				Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		RecursiveMap: map[string]types.KitchenSink{
+			"key0": {
+				Blob:              []byte("blob"),
+				Boolean:           ptr.Bool(true),
+				Double:            ptr.Float64(1.0),
+				EmptyStruct:       &types.EmptyStruct{},
+				Float:             ptr.Float32(1.0),
+				HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Integer:           ptr.Int32(1),
+				Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JsonValue:         ptr.String("__JsonValue__"),
+				ListOfLists: [][]string{
+					{
+						"__Member__",
+						"__Member__",
+					},
+					{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ListOfMapsOfStrings: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+				ListOfStrings: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ListOfStructs: []types.SimpleStruct{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Long: ptr.Int64(1),
+				MapOfListsOfStrings: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MapOfMaps: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+				MapOfStrings: map[string]string{
+					"key0": "__Value__",
+				},
+				MapOfStructs: map[string]types.SimpleStruct{
+					"key0": {
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RecursiveList: []types.KitchenSink{
+					{},
+					{},
+				},
+				RecursiveMap: map[string]types.KitchenSink{
+					"key0": {},
+				},
+				RecursiveStruct: nil,
+				SimpleStruct: &types.SimpleStruct{
+					Value: ptr.String("__Value__"),
+				},
+				String_: ptr.String("__String___"),
+				StructWithJsonName: &types.StructWithJsonName{
+					Value: ptr.String("__Value__"),
+				},
+				Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		RecursiveStruct: &types.KitchenSink{
+			Blob:              []byte("blob"),
+			Boolean:           ptr.Bool(true),
+			Double:            ptr.Float64(1.0),
+			EmptyStruct:       &types.EmptyStruct{},
+			Float:             ptr.Float32(1.0),
+			HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Integer:           ptr.Int32(1),
+			Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			JsonValue:         ptr.String("__JsonValue__"),
+			ListOfLists: [][]string{
+				{
+					"__Member__",
+					"__Member__",
+				},
+				{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ListOfMapsOfStrings: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
+				},
+			},
+			ListOfStrings: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ListOfStructs: []types.SimpleStruct{
+				{
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Long: ptr.Int64(1),
+			MapOfListsOfStrings: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			MapOfMaps: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+			MapOfStrings: map[string]string{
+				"key0": "__Value__",
+			},
+			MapOfStructs: map[string]types.SimpleStruct{
+				"key0": {
+					Value: ptr.String("__Value__"),
+				},
+			},
+			RecursiveList: []types.KitchenSink{
+				{},
+				{},
+			},
+			RecursiveMap: map[string]types.KitchenSink{
+				"key0": {},
+			},
+			RecursiveStruct: nil,
+			SimpleStruct: &types.SimpleStruct{
+				Value: ptr.String("__Value__"),
+			},
+			String_: ptr.String("__String___"),
+			StructWithJsonName: &types.StructWithJsonName{
+				Value: ptr.String("__Value__"),
+			},
+			Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SimpleStruct: &types.SimpleStruct{
+			Value: ptr.String("__Value__"),
+		},
+		String_: ptr.String("__String___"),
+		StructWithJsonName: &types.StructWithJsonName{
+			Value: ptr.String("__Value__"),
+		},
+		Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1042,7 +1871,392 @@ func TestCheckResponseSnapshot_Error_ErrorWithoutMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.KitchenSinkOperation(context.Background(), &KitchenSinkOperationInput{})
+	_, opErr := svc.KitchenSinkOperation(context.Background(), &KitchenSinkOperationInput{
+		Blob:              []byte("blob"),
+		Boolean:           ptr.Bool(true),
+		Double:            ptr.Float64(1.0),
+		EmptyStruct:       &types.EmptyStruct{},
+		Float:             ptr.Float32(1.0),
+		HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Integer:           ptr.Int32(1),
+		Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		JsonValue:         ptr.String("__JsonValue__"),
+		ListOfLists: [][]string{
+			{
+				"__Member__",
+				"__Member__",
+			},
+			{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ListOfMapsOfStrings: []map[string]string{
+			{
+				"key0": "__Value__",
+			},
+			{
+				"key0": "__Value__",
+			},
+		},
+		ListOfStrings: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ListOfStructs: []types.SimpleStruct{
+			{
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Long: ptr.Int64(1),
+		MapOfListsOfStrings: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MapOfMaps: map[string]map[string]string{
+			"key0": {
+				"key0": "__Value__",
+			},
+		},
+		MapOfStrings: map[string]string{
+			"key0": "__Value__",
+		},
+		MapOfStructs: map[string]types.SimpleStruct{
+			"key0": {
+				Value: ptr.String("__Value__"),
+			},
+		},
+		RecursiveList: []types.KitchenSink{
+			{
+				Blob:              []byte("blob"),
+				Boolean:           ptr.Bool(true),
+				Double:            ptr.Float64(1.0),
+				EmptyStruct:       &types.EmptyStruct{},
+				Float:             ptr.Float32(1.0),
+				HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Integer:           ptr.Int32(1),
+				Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JsonValue:         ptr.String("__JsonValue__"),
+				ListOfLists: [][]string{
+					{
+						"__Member__",
+						"__Member__",
+					},
+					{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ListOfMapsOfStrings: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+				ListOfStrings: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ListOfStructs: []types.SimpleStruct{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Long: ptr.Int64(1),
+				MapOfListsOfStrings: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MapOfMaps: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+				MapOfStrings: map[string]string{
+					"key0": "__Value__",
+				},
+				MapOfStructs: map[string]types.SimpleStruct{
+					"key0": {
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RecursiveList: []types.KitchenSink{
+					{},
+					{},
+				},
+				RecursiveMap: map[string]types.KitchenSink{
+					"key0": {},
+				},
+				RecursiveStruct: nil,
+				SimpleStruct: &types.SimpleStruct{
+					Value: ptr.String("__Value__"),
+				},
+				String_: ptr.String("__String___"),
+				StructWithJsonName: &types.StructWithJsonName{
+					Value: ptr.String("__Value__"),
+				},
+				Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Blob:              []byte("blob"),
+				Boolean:           ptr.Bool(true),
+				Double:            ptr.Float64(1.0),
+				EmptyStruct:       &types.EmptyStruct{},
+				Float:             ptr.Float32(1.0),
+				HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Integer:           ptr.Int32(1),
+				Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JsonValue:         ptr.String("__JsonValue__"),
+				ListOfLists: [][]string{
+					{
+						"__Member__",
+						"__Member__",
+					},
+					{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ListOfMapsOfStrings: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+				ListOfStrings: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ListOfStructs: []types.SimpleStruct{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Long: ptr.Int64(1),
+				MapOfListsOfStrings: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MapOfMaps: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+				MapOfStrings: map[string]string{
+					"key0": "__Value__",
+				},
+				MapOfStructs: map[string]types.SimpleStruct{
+					"key0": {
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RecursiveList: []types.KitchenSink{
+					{},
+					{},
+				},
+				RecursiveMap: map[string]types.KitchenSink{
+					"key0": {},
+				},
+				RecursiveStruct: nil,
+				SimpleStruct: &types.SimpleStruct{
+					Value: ptr.String("__Value__"),
+				},
+				String_: ptr.String("__String___"),
+				StructWithJsonName: &types.StructWithJsonName{
+					Value: ptr.String("__Value__"),
+				},
+				Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		RecursiveMap: map[string]types.KitchenSink{
+			"key0": {
+				Blob:              []byte("blob"),
+				Boolean:           ptr.Bool(true),
+				Double:            ptr.Float64(1.0),
+				EmptyStruct:       &types.EmptyStruct{},
+				Float:             ptr.Float32(1.0),
+				HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Integer:           ptr.Int32(1),
+				Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JsonValue:         ptr.String("__JsonValue__"),
+				ListOfLists: [][]string{
+					{
+						"__Member__",
+						"__Member__",
+					},
+					{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ListOfMapsOfStrings: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+				ListOfStrings: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ListOfStructs: []types.SimpleStruct{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Long: ptr.Int64(1),
+				MapOfListsOfStrings: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MapOfMaps: map[string]map[string]string{
+					"key0": {
+						"key0": "__Value__",
+					},
+				},
+				MapOfStrings: map[string]string{
+					"key0": "__Value__",
+				},
+				MapOfStructs: map[string]types.SimpleStruct{
+					"key0": {
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RecursiveList: []types.KitchenSink{
+					{},
+					{},
+				},
+				RecursiveMap: map[string]types.KitchenSink{
+					"key0": {},
+				},
+				RecursiveStruct: nil,
+				SimpleStruct: &types.SimpleStruct{
+					Value: ptr.String("__Value__"),
+				},
+				String_: ptr.String("__String___"),
+				StructWithJsonName: &types.StructWithJsonName{
+					Value: ptr.String("__Value__"),
+				},
+				Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		RecursiveStruct: &types.KitchenSink{
+			Blob:              []byte("blob"),
+			Boolean:           ptr.Bool(true),
+			Double:            ptr.Float64(1.0),
+			EmptyStruct:       &types.EmptyStruct{},
+			Float:             ptr.Float32(1.0),
+			HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Integer:           ptr.Int32(1),
+			Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			JsonValue:         ptr.String("__JsonValue__"),
+			ListOfLists: [][]string{
+				{
+					"__Member__",
+					"__Member__",
+				},
+				{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ListOfMapsOfStrings: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
+				},
+			},
+			ListOfStrings: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ListOfStructs: []types.SimpleStruct{
+				{
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Long: ptr.Int64(1),
+			MapOfListsOfStrings: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			MapOfMaps: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+			MapOfStrings: map[string]string{
+				"key0": "__Value__",
+			},
+			MapOfStructs: map[string]types.SimpleStruct{
+				"key0": {
+					Value: ptr.String("__Value__"),
+				},
+			},
+			RecursiveList: []types.KitchenSink{
+				{},
+				{},
+			},
+			RecursiveMap: map[string]types.KitchenSink{
+				"key0": {},
+			},
+			RecursiveStruct: nil,
+			SimpleStruct: &types.SimpleStruct{
+				Value: ptr.String("__Value__"),
+			},
+			String_: ptr.String("__String___"),
+			StructWithJsonName: &types.StructWithJsonName{
+				Value: ptr.String("__Value__"),
+			},
+			Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SimpleStruct: &types.SimpleStruct{
+			Value: ptr.String("__Value__"),
+		},
+		String_: ptr.String("__String___"),
+		StructWithJsonName: &types.StructWithJsonName{
+			Value: ptr.String("__Value__"),
+		},
+		Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

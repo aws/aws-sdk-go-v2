@@ -122,7 +122,20 @@ func TestCheckResponseSnapshot_CreateToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	got, err := svc.CreateToken(context.Background(), &CreateTokenInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		GrantType:    ptr.String("__GrantType__"),
+		DeviceCode:   ptr.String("__DeviceCode__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +168,22 @@ func TestCheckResponseSnapshot_CreateTokenWithIAM(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTokenWithIAM(context.Background(), &CreateTokenWithIAMInput{})
+	got, err := svc.CreateTokenWithIAM(context.Background(), &CreateTokenWithIAMInput{
+		ClientId:     ptr.String("__ClientId__"),
+		GrantType:    ptr.String("__GrantType__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Assertion:    ptr.String("__Assertion__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:        ptr.String("__RedirectUri__"),
+		SubjectToken:       ptr.String("__SubjectToken__"),
+		SubjectTokenType:   ptr.String("__SubjectTokenType__"),
+		RequestedTokenType: ptr.String("__RequestedTokenType__"),
+		CodeVerifier:       ptr.String("__CodeVerifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -181,7 +209,24 @@ func TestCheckResponseSnapshot_RegisterClient(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterClient(context.Background(), &RegisterClientInput{})
+	got, err := svc.RegisterClient(context.Background(), &RegisterClientInput{
+		ClientName: ptr.String("__ClientName__"),
+		ClientType: ptr.String("__ClientType__"),
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUris: []string{
+			"__Member__",
+			"__Member__",
+		},
+		GrantTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IssuerUrl:              ptr.String("__IssuerUrl__"),
+		EntitledApplicationArn: ptr.String("__EntitledApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -207,7 +252,11 @@ func TestCheckResponseSnapshot_StartDeviceAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDeviceAuthorization(context.Background(), &StartDeviceAuthorizationInput{})
+	got, err := svc.StartDeviceAuthorization(context.Background(), &StartDeviceAuthorizationInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		StartUrl:     ptr.String("__StartUrl__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -230,7 +279,20 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		GrantType:    ptr.String("__GrantType__"),
+		DeviceCode:   ptr.String("__DeviceCode__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -256,7 +318,20 @@ func TestCheckResponseSnapshot_Error_AuthorizationPendingException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		GrantType:    ptr.String("__GrantType__"),
+		DeviceCode:   ptr.String("__DeviceCode__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -282,7 +357,20 @@ func TestCheckResponseSnapshot_Error_ExpiredTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		GrantType:    ptr.String("__GrantType__"),
+		DeviceCode:   ptr.String("__DeviceCode__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -308,7 +396,20 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		GrantType:    ptr.String("__GrantType__"),
+		DeviceCode:   ptr.String("__DeviceCode__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -334,7 +435,20 @@ func TestCheckResponseSnapshot_Error_InvalidClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		GrantType:    ptr.String("__GrantType__"),
+		DeviceCode:   ptr.String("__DeviceCode__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -360,7 +474,24 @@ func TestCheckResponseSnapshot_Error_InvalidClientMetadataException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterClient(context.Background(), &RegisterClientInput{})
+	_, opErr := svc.RegisterClient(context.Background(), &RegisterClientInput{
+		ClientName: ptr.String("__ClientName__"),
+		ClientType: ptr.String("__ClientType__"),
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUris: []string{
+			"__Member__",
+			"__Member__",
+		},
+		GrantTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IssuerUrl:              ptr.String("__IssuerUrl__"),
+		EntitledApplicationArn: ptr.String("__EntitledApplicationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -386,7 +517,20 @@ func TestCheckResponseSnapshot_Error_InvalidGrantException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		GrantType:    ptr.String("__GrantType__"),
+		DeviceCode:   ptr.String("__DeviceCode__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -412,7 +556,24 @@ func TestCheckResponseSnapshot_Error_InvalidRedirectUriException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterClient(context.Background(), &RegisterClientInput{})
+	_, opErr := svc.RegisterClient(context.Background(), &RegisterClientInput{
+		ClientName: ptr.String("__ClientName__"),
+		ClientType: ptr.String("__ClientType__"),
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUris: []string{
+			"__Member__",
+			"__Member__",
+		},
+		GrantTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IssuerUrl:              ptr.String("__IssuerUrl__"),
+		EntitledApplicationArn: ptr.String("__EntitledApplicationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -439,7 +600,20 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		GrantType:    ptr.String("__GrantType__"),
+		DeviceCode:   ptr.String("__DeviceCode__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -467,7 +641,22 @@ func TestCheckResponseSnapshot_Error_InvalidRequestRegionException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTokenWithIAM(context.Background(), &CreateTokenWithIAMInput{})
+	_, opErr := svc.CreateTokenWithIAM(context.Background(), &CreateTokenWithIAMInput{
+		ClientId:     ptr.String("__ClientId__"),
+		GrantType:    ptr.String("__GrantType__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Assertion:    ptr.String("__Assertion__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:        ptr.String("__RedirectUri__"),
+		SubjectToken:       ptr.String("__SubjectToken__"),
+		SubjectTokenType:   ptr.String("__SubjectTokenType__"),
+		RequestedTokenType: ptr.String("__RequestedTokenType__"),
+		CodeVerifier:       ptr.String("__CodeVerifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -493,7 +682,20 @@ func TestCheckResponseSnapshot_Error_InvalidScopeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		GrantType:    ptr.String("__GrantType__"),
+		DeviceCode:   ptr.String("__DeviceCode__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -519,7 +721,20 @@ func TestCheckResponseSnapshot_Error_SlowDownException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		GrantType:    ptr.String("__GrantType__"),
+		DeviceCode:   ptr.String("__DeviceCode__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -545,7 +760,20 @@ func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		GrantType:    ptr.String("__GrantType__"),
+		DeviceCode:   ptr.String("__DeviceCode__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -571,7 +799,20 @@ func TestCheckResponseSnapshot_Error_UnsupportedGrantTypeException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	_, opErr := svc.CreateToken(context.Background(), &CreateTokenInput{
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		GrantType:    ptr.String("__GrantType__"),
+		DeviceCode:   ptr.String("__DeviceCode__"),
+		Code:         ptr.String("__Code__"),
+		RefreshToken: ptr.String("__RefreshToken__"),
+		Scope: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

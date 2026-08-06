@@ -1,5 +1,0 @@
-POST /XmlEmptyBlobs
-
-Content-Type: application/xml
-
-<XmlEmptyBlobsRequest><data>YmxvYg==</data></XmlEmptyBlobsRequest>

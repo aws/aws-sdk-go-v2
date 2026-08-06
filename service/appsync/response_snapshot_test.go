@@ -124,7 +124,10 @@ func TestCheckResponseSnapshot_AssociateApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateApi(context.Background(), &AssociateApiInput{})
+	got, err := svc.AssociateApi(context.Background(), &AssociateApiInput{
+		DomainName: ptr.String("__DomainName__"),
+		ApiId:      ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +162,14 @@ func TestCheckResponseSnapshot_AssociateMergedGraphqlApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateMergedGraphqlApi(context.Background(), &AssociateMergedGraphqlApiInput{})
+	got, err := svc.AssociateMergedGraphqlApi(context.Background(), &AssociateMergedGraphqlApiInput{
+		SourceApiIdentifier: ptr.String("__SourceApiIdentifier__"),
+		MergedApiIdentifier: ptr.String("__MergedApiIdentifier__"),
+		Description:         ptr.String("__Description__"),
+		SourceApiAssociationConfig: &types.SourceApiAssociationConfig{
+			MergeType: types.MergeType("MANUAL_MERGE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -194,7 +204,14 @@ func TestCheckResponseSnapshot_AssociateSourceGraphqlApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateSourceGraphqlApi(context.Background(), &AssociateSourceGraphqlApiInput{})
+	got, err := svc.AssociateSourceGraphqlApi(context.Background(), &AssociateSourceGraphqlApiInput{
+		MergedApiIdentifier: ptr.String("__MergedApiIdentifier__"),
+		SourceApiIdentifier: ptr.String("__SourceApiIdentifier__"),
+		Description:         ptr.String("__Description__"),
+		SourceApiAssociationConfig: &types.SourceApiAssociationConfig{
+			MergeType: types.MergeType("MANUAL_MERGE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +316,83 @@ func TestCheckResponseSnapshot_CreateApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApi(context.Background(), &CreateApiInput{})
+	got, err := svc.CreateApi(context.Background(), &CreateApiInput{
+		Name:         ptr.String("__Name__"),
+		OwnerContact: ptr.String("__OwnerContact__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		EventConfig: &types.EventConfig{
+			AuthProviders: []types.AuthProvider{
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+					CognitoConfig: &types.CognitoConfig{
+						UserPoolId:       ptr.String("__UserPoolId__"),
+						AwsRegion:        ptr.String("__AwsRegion__"),
+						AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+					},
+					OpenIDConnectConfig: &types.OpenIDConnectConfig{
+						Issuer:   ptr.String("__Issuer__"),
+						ClientId: ptr.String("__ClientId__"),
+						IatTTL:   1,
+						AuthTTL:  1,
+					},
+					LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+						AuthorizerResultTtlInSeconds: 1,
+						AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+						IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+					},
+				},
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+					CognitoConfig: &types.CognitoConfig{
+						UserPoolId:       ptr.String("__UserPoolId__"),
+						AwsRegion:        ptr.String("__AwsRegion__"),
+						AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+					},
+					OpenIDConnectConfig: &types.OpenIDConnectConfig{
+						Issuer:   ptr.String("__Issuer__"),
+						ClientId: ptr.String("__ClientId__"),
+						IatTTL:   1,
+						AuthTTL:  1,
+					},
+					LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+						AuthorizerResultTtlInSeconds: 1,
+						AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+						IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+					},
+				},
+			},
+			ConnectionAuthModes: []types.AuthMode{
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+			},
+			DefaultPublishAuthModes: []types.AuthMode{
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+			},
+			DefaultSubscribeAuthModes: []types.AuthMode{
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+			},
+			LogConfig: &types.EventLogConfig{
+				LogLevel:              types.EventLogLevel("NONE"),
+				CloudWatchLogsRoleArn: ptr.String("__CloudWatchLogsRoleArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -328,7 +421,15 @@ func TestCheckResponseSnapshot_CreateApiCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApiCache(context.Background(), &CreateApiCacheInput{})
+	got, err := svc.CreateApiCache(context.Background(), &CreateApiCacheInput{
+		ApiId:                    ptr.String("__ApiId__"),
+		Ttl:                      1,
+		TransitEncryptionEnabled: true,
+		AtRestEncryptionEnabled:  true,
+		ApiCachingBehavior:       types.ApiCachingBehavior("FULL_REQUEST_CACHING"),
+		Type:                     types.ApiCacheType("T2_SMALL"),
+		HealthMetricsConfig:      types.CacheHealthMetricsConfig("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -354,7 +455,11 @@ func TestCheckResponseSnapshot_CreateApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{})
+	got, err := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{
+		ApiId:       ptr.String("__ApiId__"),
+		Description: ptr.String("__Description__"),
+		Expires:     1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +526,50 @@ func TestCheckResponseSnapshot_CreateChannelNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannelNamespace(context.Background(), &CreateChannelNamespaceInput{})
+	got, err := svc.CreateChannelNamespace(context.Background(), &CreateChannelNamespaceInput{
+		ApiId: ptr.String("__ApiId__"),
+		Name:  ptr.String("__Name__"),
+		SubscribeAuthModes: []types.AuthMode{
+			{
+				AuthType: types.AuthenticationType("API_KEY"),
+			},
+			{
+				AuthType: types.AuthenticationType("API_KEY"),
+			},
+		},
+		PublishAuthModes: []types.AuthMode{
+			{
+				AuthType: types.AuthenticationType("API_KEY"),
+			},
+			{
+				AuthType: types.AuthenticationType("API_KEY"),
+			},
+		},
+		CodeHandlers: ptr.String("__CodeHandlers__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		HandlerConfigs: &types.HandlerConfigs{
+			OnPublish: &types.HandlerConfig{
+				Behavior: types.HandlerBehavior("CODE"),
+				Integration: &types.Integration{
+					DataSourceName: ptr.String("__DataSourceName__"),
+					LambdaConfig: &types.LambdaConfig{
+						InvokeType: types.InvokeType("REQUEST_RESPONSE"),
+					},
+				},
+			},
+			OnSubscribe: &types.HandlerConfig{
+				Behavior: types.HandlerBehavior("CODE"),
+				Integration: &types.Integration{
+					DataSourceName: ptr.String("__DataSourceName__"),
+					LambdaConfig: &types.LambdaConfig{
+						InvokeType: types.InvokeType("REQUEST_RESPONSE"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -494,7 +642,59 @@ func TestCheckResponseSnapshot_CreateDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataSource(context.Background(), &CreateDataSourceInput{})
+	got, err := svc.CreateDataSource(context.Background(), &CreateDataSourceInput{
+		ApiId:          ptr.String("__ApiId__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		Type:           types.DataSourceType("AWS_LAMBDA"),
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		DynamodbConfig: &types.DynamodbDataSourceConfig{
+			TableName:            ptr.String("__TableName__"),
+			AwsRegion:            ptr.String("__AwsRegion__"),
+			UseCallerCredentials: true,
+			DeltaSyncConfig: &types.DeltaSyncConfig{
+				BaseTableTTL:       1,
+				DeltaSyncTableName: ptr.String("__DeltaSyncTableName__"),
+				DeltaSyncTableTTL:  1,
+			},
+			Versioned: true,
+		},
+		LambdaConfig: &types.LambdaDataSourceConfig{
+			LambdaFunctionArn: ptr.String("__LambdaFunctionArn__"),
+		},
+		ElasticsearchConfig: &types.ElasticsearchDataSourceConfig{
+			Endpoint:  ptr.String("__Endpoint__"),
+			AwsRegion: ptr.String("__AwsRegion__"),
+		},
+		OpenSearchServiceConfig: &types.OpenSearchServiceDataSourceConfig{
+			Endpoint:  ptr.String("__Endpoint__"),
+			AwsRegion: ptr.String("__AwsRegion__"),
+		},
+		HttpConfig: &types.HttpDataSourceConfig{
+			Endpoint: ptr.String("__Endpoint__"),
+			AuthorizationConfig: &types.AuthorizationConfig{
+				AuthorizationType: types.AuthorizationType("AWS_IAM"),
+				AwsIamConfig: &types.AwsIamConfig{
+					SigningRegion:      ptr.String("__SigningRegion__"),
+					SigningServiceName: ptr.String("__SigningServiceName__"),
+				},
+			},
+		},
+		RelationalDatabaseConfig: &types.RelationalDatabaseDataSourceConfig{
+			RelationalDatabaseSourceType: types.RelationalDatabaseSourceType("RDS_HTTP_ENDPOINT"),
+			RdsHttpEndpointConfig: &types.RdsHttpEndpointConfig{
+				AwsRegion:           ptr.String("__AwsRegion__"),
+				DbClusterIdentifier: ptr.String("__DbClusterIdentifier__"),
+				DatabaseName:        ptr.String("__DatabaseName__"),
+				Schema:              ptr.String("__Schema__"),
+				AwsSecretStoreArn:   ptr.String("__AwsSecretStoreArn__"),
+			},
+		},
+		EventBridgeConfig: &types.EventBridgeDataSourceConfig{
+			EventBusArn: ptr.String("__EventBusArn__"),
+		},
+		MetricsConfig: types.DataSourceLevelMetricsConfig("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -525,7 +725,14 @@ func TestCheckResponseSnapshot_CreateDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomainName(context.Background(), &CreateDomainNameInput{})
+	got, err := svc.CreateDomainName(context.Background(), &CreateDomainNameInput{
+		DomainName:     ptr.String("__DomainName__"),
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Description:    ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -568,7 +775,28 @@ func TestCheckResponseSnapshot_CreateFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFunction(context.Background(), &CreateFunctionInput{})
+	got, err := svc.CreateFunction(context.Background(), &CreateFunctionInput{
+		ApiId:                   ptr.String("__ApiId__"),
+		Name:                    ptr.String("__Name__"),
+		Description:             ptr.String("__Description__"),
+		DataSourceName:          ptr.String("__DataSourceName__"),
+		RequestMappingTemplate:  ptr.String("__RequestMappingTemplate__"),
+		ResponseMappingTemplate: ptr.String("__ResponseMappingTemplate__"),
+		FunctionVersion:         ptr.String("__FunctionVersion__"),
+		SyncConfig: &types.SyncConfig{
+			ConflictHandler:   types.ConflictHandlerType("OPTIMISTIC_CONCURRENCY"),
+			ConflictDetection: types.ConflictDetectionType("VERSION"),
+			LambdaConflictHandlerConfig: &types.LambdaConflictHandlerConfig{
+				LambdaConflictHandlerArn: ptr.String("__LambdaConflictHandlerArn__"),
+			},
+		},
+		MaxBatchSize: 1,
+		Runtime: &types.AppSyncRuntime{
+			Name:           types.RuntimeName("APPSYNC_JS"),
+			RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		},
+		Code: ptr.String("__Code__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -680,7 +908,88 @@ func TestCheckResponseSnapshot_CreateGraphqlApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGraphqlApi(context.Background(), &CreateGraphqlApiInput{})
+	got, err := svc.CreateGraphqlApi(context.Background(), &CreateGraphqlApiInput{
+		Name: ptr.String("__Name__"),
+		LogConfig: &types.LogConfig{
+			FieldLogLevel:         types.FieldLogLevel("NONE"),
+			CloudWatchLogsRoleArn: ptr.String("__CloudWatchLogsRoleArn__"),
+			ExcludeVerboseContent: true,
+		},
+		AuthenticationType: types.AuthenticationType("API_KEY"),
+		UserPoolConfig: &types.UserPoolConfig{
+			UserPoolId:       ptr.String("__UserPoolId__"),
+			AwsRegion:        ptr.String("__AwsRegion__"),
+			DefaultAction:    types.DefaultAction("ALLOW"),
+			AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+		},
+		OpenIDConnectConfig: &types.OpenIDConnectConfig{
+			Issuer:   ptr.String("__Issuer__"),
+			ClientId: ptr.String("__ClientId__"),
+			IatTTL:   1,
+			AuthTTL:  1,
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AdditionalAuthenticationProviders: []types.AdditionalAuthenticationProvider{
+			{
+				AuthenticationType: types.AuthenticationType("API_KEY"),
+				OpenIDConnectConfig: &types.OpenIDConnectConfig{
+					Issuer:   ptr.String("__Issuer__"),
+					ClientId: ptr.String("__ClientId__"),
+					IatTTL:   1,
+					AuthTTL:  1,
+				},
+				UserPoolConfig: &types.CognitoUserPoolConfig{
+					UserPoolId:       ptr.String("__UserPoolId__"),
+					AwsRegion:        ptr.String("__AwsRegion__"),
+					AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+				},
+				LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+					AuthorizerResultTtlInSeconds: 1,
+					AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+					IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+				},
+			},
+			{
+				AuthenticationType: types.AuthenticationType("API_KEY"),
+				OpenIDConnectConfig: &types.OpenIDConnectConfig{
+					Issuer:   ptr.String("__Issuer__"),
+					ClientId: ptr.String("__ClientId__"),
+					IatTTL:   1,
+					AuthTTL:  1,
+				},
+				UserPoolConfig: &types.CognitoUserPoolConfig{
+					UserPoolId:       ptr.String("__UserPoolId__"),
+					AwsRegion:        ptr.String("__AwsRegion__"),
+					AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+				},
+				LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+					AuthorizerResultTtlInSeconds: 1,
+					AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+					IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+				},
+			},
+		},
+		XrayEnabled: true,
+		LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+			AuthorizerResultTtlInSeconds: 1,
+			AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+			IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+		},
+		ApiType:                   types.GraphQLApiType("GRAPHQL"),
+		MergedApiExecutionRoleArn: ptr.String("__MergedApiExecutionRoleArn__"),
+		Visibility:                types.GraphQLApiVisibility("GLOBAL"),
+		OwnerContact:              ptr.String("__OwnerContact__"),
+		IntrospectionConfig:       types.GraphQLApiIntrospectionConfig("ENABLED"),
+		QueryDepthLimit:           1,
+		ResolverCountLimit:        1,
+		EnhancedMetricsConfig: &types.EnhancedMetricsConfig{
+			ResolverLevelMetricsBehavior:   types.ResolverLevelMetricsBehavior("FULL_REQUEST_RESOLVER_METRICS"),
+			DataSourceLevelMetricsBehavior: types.DataSourceLevelMetricsBehavior("FULL_REQUEST_DATA_SOURCE_METRICS"),
+			OperationLevelMetricsConfig:    types.OperationLevelMetricsConfig("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -736,7 +1045,42 @@ func TestCheckResponseSnapshot_CreateResolver(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResolver(context.Background(), &CreateResolverInput{})
+	got, err := svc.CreateResolver(context.Background(), &CreateResolverInput{
+		ApiId:                   ptr.String("__ApiId__"),
+		TypeName:                ptr.String("__TypeName__"),
+		FieldName:               ptr.String("__FieldName__"),
+		DataSourceName:          ptr.String("__DataSourceName__"),
+		RequestMappingTemplate:  ptr.String("__RequestMappingTemplate__"),
+		ResponseMappingTemplate: ptr.String("__ResponseMappingTemplate__"),
+		Kind:                    types.ResolverKind("UNIT"),
+		PipelineConfig: &types.PipelineConfig{
+			Functions: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		SyncConfig: &types.SyncConfig{
+			ConflictHandler:   types.ConflictHandlerType("OPTIMISTIC_CONCURRENCY"),
+			ConflictDetection: types.ConflictDetectionType("VERSION"),
+			LambdaConflictHandlerConfig: &types.LambdaConflictHandlerConfig{
+				LambdaConflictHandlerArn: ptr.String("__LambdaConflictHandlerArn__"),
+			},
+		},
+		CachingConfig: &types.CachingConfig{
+			Ttl: 1,
+			CachingKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxBatchSize: 1,
+		Runtime: &types.AppSyncRuntime{
+			Name:           types.RuntimeName("APPSYNC_JS"),
+			RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		},
+		Code:          ptr.String("__Code__"),
+		MetricsConfig: types.ResolverLevelMetricsConfig("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -763,7 +1107,11 @@ func TestCheckResponseSnapshot_CreateType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateType(context.Background(), &CreateTypeInput{})
+	got, err := svc.CreateType(context.Background(), &CreateTypeInput{
+		ApiId:      ptr.String("__ApiId__"),
+		Definition: ptr.String("__Definition__"),
+		Format:     types.TypeDefinitionFormat("SDL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -782,7 +1130,9 @@ func TestCheckResponseSnapshot_DeleteApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApi(context.Background(), &DeleteApiInput{})
+	got, err := svc.DeleteApi(context.Background(), &DeleteApiInput{
+		ApiId: ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -801,7 +1151,9 @@ func TestCheckResponseSnapshot_DeleteApiCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApiCache(context.Background(), &DeleteApiCacheInput{})
+	got, err := svc.DeleteApiCache(context.Background(), &DeleteApiCacheInput{
+		ApiId: ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -820,7 +1172,10 @@ func TestCheckResponseSnapshot_DeleteApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApiKey(context.Background(), &DeleteApiKeyInput{})
+	got, err := svc.DeleteApiKey(context.Background(), &DeleteApiKeyInput{
+		ApiId: ptr.String("__ApiId__"),
+		Id:    ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -839,7 +1194,10 @@ func TestCheckResponseSnapshot_DeleteChannelNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannelNamespace(context.Background(), &DeleteChannelNamespaceInput{})
+	got, err := svc.DeleteChannelNamespace(context.Background(), &DeleteChannelNamespaceInput{
+		ApiId: ptr.String("__ApiId__"),
+		Name:  ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -858,7 +1216,10 @@ func TestCheckResponseSnapshot_DeleteDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{})
+	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{
+		ApiId: ptr.String("__ApiId__"),
+		Name:  ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -877,7 +1238,9 @@ func TestCheckResponseSnapshot_DeleteDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomainName(context.Background(), &DeleteDomainNameInput{})
+	got, err := svc.DeleteDomainName(context.Background(), &DeleteDomainNameInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -896,7 +1259,10 @@ func TestCheckResponseSnapshot_DeleteFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{})
+	got, err := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{
+		ApiId:      ptr.String("__ApiId__"),
+		FunctionId: ptr.String("__FunctionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -915,7 +1281,9 @@ func TestCheckResponseSnapshot_DeleteGraphqlApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGraphqlApi(context.Background(), &DeleteGraphqlApiInput{})
+	got, err := svc.DeleteGraphqlApi(context.Background(), &DeleteGraphqlApiInput{
+		ApiId: ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -934,7 +1302,11 @@ func TestCheckResponseSnapshot_DeleteResolver(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResolver(context.Background(), &DeleteResolverInput{})
+	got, err := svc.DeleteResolver(context.Background(), &DeleteResolverInput{
+		ApiId:     ptr.String("__ApiId__"),
+		TypeName:  ptr.String("__TypeName__"),
+		FieldName: ptr.String("__FieldName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -953,7 +1325,10 @@ func TestCheckResponseSnapshot_DeleteType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteType(context.Background(), &DeleteTypeInput{})
+	got, err := svc.DeleteType(context.Background(), &DeleteTypeInput{
+		ApiId:    ptr.String("__ApiId__"),
+		TypeName: ptr.String("__TypeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -972,7 +1347,9 @@ func TestCheckResponseSnapshot_DisassociateApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateApi(context.Background(), &DisassociateApiInput{})
+	got, err := svc.DisassociateApi(context.Background(), &DisassociateApiInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -993,7 +1370,10 @@ func TestCheckResponseSnapshot_DisassociateMergedGraphqlApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMergedGraphqlApi(context.Background(), &DisassociateMergedGraphqlApiInput{})
+	got, err := svc.DisassociateMergedGraphqlApi(context.Background(), &DisassociateMergedGraphqlApiInput{
+		SourceApiIdentifier: ptr.String("__SourceApiIdentifier__"),
+		AssociationId:       ptr.String("__AssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1014,7 +1394,10 @@ func TestCheckResponseSnapshot_DisassociateSourceGraphqlApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateSourceGraphqlApi(context.Background(), &DisassociateSourceGraphqlApiInput{})
+	got, err := svc.DisassociateSourceGraphqlApi(context.Background(), &DisassociateSourceGraphqlApiInput{
+		MergedApiIdentifier: ptr.String("__MergedApiIdentifier__"),
+		AssociationId:       ptr.String("__AssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1064,7 +1447,15 @@ func TestCheckResponseSnapshot_EvaluateCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EvaluateCode(context.Background(), &EvaluateCodeInput{})
+	got, err := svc.EvaluateCode(context.Background(), &EvaluateCodeInput{
+		Runtime: &types.AppSyncRuntime{
+			Name:           types.RuntimeName("APPSYNC_JS"),
+			RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		},
+		Code:     ptr.String("__Code__"),
+		Context:  ptr.String("__Context__"),
+		Function: ptr.String("__Function__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1094,7 +1485,10 @@ func TestCheckResponseSnapshot_EvaluateMappingTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EvaluateMappingTemplate(context.Background(), &EvaluateMappingTemplateInput{})
+	got, err := svc.EvaluateMappingTemplate(context.Background(), &EvaluateMappingTemplateInput{
+		Template: ptr.String("__Template__"),
+		Context:  ptr.String("__Context__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1113,7 +1507,9 @@ func TestCheckResponseSnapshot_FlushApiCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.FlushApiCache(context.Background(), &FlushApiCacheInput{})
+	got, err := svc.FlushApiCache(context.Background(), &FlushApiCacheInput{
+		ApiId: ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1218,7 +1614,9 @@ func TestCheckResponseSnapshot_GetApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApi(context.Background(), &GetApiInput{})
+	got, err := svc.GetApi(context.Background(), &GetApiInput{
+		ApiId: ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1244,7 +1642,9 @@ func TestCheckResponseSnapshot_GetApiAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApiAssociation(context.Background(), &GetApiAssociationInput{})
+	got, err := svc.GetApiAssociation(context.Background(), &GetApiAssociationInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1273,7 +1673,9 @@ func TestCheckResponseSnapshot_GetApiCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApiCache(context.Background(), &GetApiCacheInput{})
+	got, err := svc.GetApiCache(context.Background(), &GetApiCacheInput{
+		ApiId: ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1340,7 +1742,10 @@ func TestCheckResponseSnapshot_GetChannelNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannelNamespace(context.Background(), &GetChannelNamespaceInput{})
+	got, err := svc.GetChannelNamespace(context.Background(), &GetChannelNamespaceInput{
+		ApiId: ptr.String("__ApiId__"),
+		Name:  ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1413,7 +1818,10 @@ func TestCheckResponseSnapshot_GetDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataSource(context.Background(), &GetDataSourceInput{})
+	got, err := svc.GetDataSource(context.Background(), &GetDataSourceInput{
+		ApiId: ptr.String("__ApiId__"),
+		Name:  ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1551,7 +1959,12 @@ func TestCheckResponseSnapshot_GetDataSourceIntrospection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataSourceIntrospection(context.Background(), &GetDataSourceIntrospectionInput{})
+	got, err := svc.GetDataSourceIntrospection(context.Background(), &GetDataSourceIntrospectionInput{
+		IntrospectionId:  ptr.String("__IntrospectionId__"),
+		IncludeModelsSDL: true,
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1582,7 +1995,9 @@ func TestCheckResponseSnapshot_GetDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainName(context.Background(), &GetDomainNameInput{})
+	got, err := svc.GetDomainName(context.Background(), &GetDomainNameInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1625,7 +2040,10 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunction(context.Background(), &GetFunctionInput{})
+	got, err := svc.GetFunction(context.Background(), &GetFunctionInput{
+		ApiId:      ptr.String("__ApiId__"),
+		FunctionId: ptr.String("__FunctionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1737,7 +2155,9 @@ func TestCheckResponseSnapshot_GetGraphqlApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGraphqlApi(context.Background(), &GetGraphqlApiInput{})
+	got, err := svc.GetGraphqlApi(context.Background(), &GetGraphqlApiInput{
+		ApiId: ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1760,7 +2180,9 @@ func TestCheckResponseSnapshot_GetGraphqlApiEnvironmentVariables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGraphqlApiEnvironmentVariables(context.Background(), &GetGraphqlApiEnvironmentVariablesInput{})
+	got, err := svc.GetGraphqlApiEnvironmentVariables(context.Background(), &GetGraphqlApiEnvironmentVariablesInput{
+		ApiId: ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1781,7 +2203,11 @@ func TestCheckResponseSnapshot_GetIntrospectionSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntrospectionSchema(context.Background(), &GetIntrospectionSchemaInput{})
+	got, err := svc.GetIntrospectionSchema(context.Background(), &GetIntrospectionSchemaInput{
+		ApiId:             ptr.String("__ApiId__"),
+		Format:            types.OutputType("SDL"),
+		IncludeDirectives: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1837,7 +2263,11 @@ func TestCheckResponseSnapshot_GetResolver(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResolver(context.Background(), &GetResolverInput{})
+	got, err := svc.GetResolver(context.Background(), &GetResolverInput{
+		ApiId:     ptr.String("__ApiId__"),
+		TypeName:  ptr.String("__TypeName__"),
+		FieldName: ptr.String("__FieldName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1859,7 +2289,9 @@ func TestCheckResponseSnapshot_GetSchemaCreationStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSchemaCreationStatus(context.Background(), &GetSchemaCreationStatusInput{})
+	got, err := svc.GetSchemaCreationStatus(context.Background(), &GetSchemaCreationStatusInput{
+		ApiId: ptr.String("__ApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1894,7 +2326,10 @@ func TestCheckResponseSnapshot_GetSourceApiAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSourceApiAssociation(context.Background(), &GetSourceApiAssociationInput{})
+	got, err := svc.GetSourceApiAssociation(context.Background(), &GetSourceApiAssociationInput{
+		MergedApiIdentifier: ptr.String("__MergedApiIdentifier__"),
+		AssociationId:       ptr.String("__AssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1921,7 +2356,11 @@ func TestCheckResponseSnapshot_GetType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetType(context.Background(), &GetTypeInput{})
+	got, err := svc.GetType(context.Background(), &GetTypeInput{
+		ApiId:    ptr.String("__ApiId__"),
+		TypeName: ptr.String("__TypeName__"),
+		Format:   types.TypeDefinitionFormat("SDL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1956,7 +2395,11 @@ func TestCheckResponseSnapshot_ListApiKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApiKeys(context.Background(), &ListApiKeysInput{})
+	got, err := svc.ListApiKeys(context.Background(), &ListApiKeysInput{
+		ApiId:      ptr.String("__ApiId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2149,7 +2592,10 @@ func TestCheckResponseSnapshot_ListApis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApis(context.Background(), &ListApisInput{})
+	got, err := svc.ListApis(context.Background(), &ListApisInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2266,7 +2712,11 @@ func TestCheckResponseSnapshot_ListChannelNamespaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannelNamespaces(context.Background(), &ListChannelNamespacesInput{})
+	got, err := svc.ListChannelNamespaces(context.Background(), &ListChannelNamespacesInput{
+		ApiId:      ptr.String("__ApiId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2395,7 +2845,11 @@ func TestCheckResponseSnapshot_ListDataSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSources(context.Background(), &ListDataSourcesInput{})
+	got, err := svc.ListDataSources(context.Background(), &ListDataSourcesInput{
+		ApiId:      ptr.String("__ApiId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2440,7 +2894,10 @@ func TestCheckResponseSnapshot_ListDomainNames(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainNames(context.Background(), &ListDomainNamesInput{})
+	got, err := svc.ListDomainNames(context.Background(), &ListDomainNamesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2509,7 +2966,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFunctions(context.Background(), &ListFunctionsInput{})
+	got, err := svc.ListFunctions(context.Background(), &ListFunctionsInput{
+		ApiId:      ptr.String("__ApiId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2716,7 +3177,12 @@ func TestCheckResponseSnapshot_ListGraphqlApis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGraphqlApis(context.Background(), &ListGraphqlApisInput{})
+	got, err := svc.ListGraphqlApis(context.Background(), &ListGraphqlApisInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+		ApiType:    types.GraphQLApiType("GRAPHQL"),
+		Owner:      types.Ownership("CURRENT_ACCOUNT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2811,7 +3277,12 @@ func TestCheckResponseSnapshot_ListResolvers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResolvers(context.Background(), &ListResolversInput{})
+	got, err := svc.ListResolvers(context.Background(), &ListResolversInput{
+		ApiId:      ptr.String("__ApiId__"),
+		TypeName:   ptr.String("__TypeName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2906,7 +3377,12 @@ func TestCheckResponseSnapshot_ListResolversByFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResolversByFunction(context.Background(), &ListResolversByFunctionInput{})
+	got, err := svc.ListResolversByFunction(context.Background(), &ListResolversByFunctionInput{
+		ApiId:      ptr.String("__ApiId__"),
+		FunctionId: ptr.String("__FunctionId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2947,7 +3423,11 @@ func TestCheckResponseSnapshot_ListSourceApiAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSourceApiAssociations(context.Background(), &ListSourceApiAssociationsInput{})
+	got, err := svc.ListSourceApiAssociations(context.Background(), &ListSourceApiAssociationsInput{
+		ApiId:      ptr.String("__ApiId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2970,7 +3450,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3007,7 +3489,12 @@ func TestCheckResponseSnapshot_ListTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTypes(context.Background(), &ListTypesInput{})
+	got, err := svc.ListTypes(context.Background(), &ListTypesInput{
+		ApiId:      ptr.String("__ApiId__"),
+		Format:     types.TypeDefinitionFormat("SDL"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3044,7 +3531,13 @@ func TestCheckResponseSnapshot_ListTypesByAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTypesByAssociation(context.Background(), &ListTypesByAssociationInput{})
+	got, err := svc.ListTypesByAssociation(context.Background(), &ListTypesByAssociationInput{
+		MergedApiIdentifier: ptr.String("__MergedApiIdentifier__"),
+		AssociationId:       ptr.String("__AssociationId__"),
+		Format:              types.TypeDefinitionFormat("SDL"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3067,7 +3560,12 @@ func TestCheckResponseSnapshot_PutGraphqlApiEnvironmentVariables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutGraphqlApiEnvironmentVariables(context.Background(), &PutGraphqlApiEnvironmentVariablesInput{})
+	got, err := svc.PutGraphqlApiEnvironmentVariables(context.Background(), &PutGraphqlApiEnvironmentVariablesInput{
+		ApiId: ptr.String("__ApiId__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3090,7 +3588,13 @@ func TestCheckResponseSnapshot_StartDataSourceIntrospection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDataSourceIntrospection(context.Background(), &StartDataSourceIntrospectionInput{})
+	got, err := svc.StartDataSourceIntrospection(context.Background(), &StartDataSourceIntrospectionInput{
+		RdsDataApiConfig: &types.RdsDataApiConfig{
+			ResourceArn:  ptr.String("__ResourceArn__"),
+			SecretArn:    ptr.String("__SecretArn__"),
+			DatabaseName: ptr.String("__DatabaseName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3111,7 +3615,10 @@ func TestCheckResponseSnapshot_StartSchemaCreation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSchemaCreation(context.Background(), &StartSchemaCreationInput{})
+	got, err := svc.StartSchemaCreation(context.Background(), &StartSchemaCreationInput{
+		ApiId:      ptr.String("__ApiId__"),
+		Definition: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3132,7 +3639,10 @@ func TestCheckResponseSnapshot_StartSchemaMerge(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSchemaMerge(context.Background(), &StartSchemaMergeInput{})
+	got, err := svc.StartSchemaMerge(context.Background(), &StartSchemaMergeInput{
+		AssociationId:       ptr.String("__AssociationId__"),
+		MergedApiIdentifier: ptr.String("__MergedApiIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3151,7 +3661,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3170,7 +3685,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3275,7 +3796,81 @@ func TestCheckResponseSnapshot_UpdateApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApi(context.Background(), &UpdateApiInput{})
+	got, err := svc.UpdateApi(context.Background(), &UpdateApiInput{
+		ApiId:        ptr.String("__ApiId__"),
+		Name:         ptr.String("__Name__"),
+		OwnerContact: ptr.String("__OwnerContact__"),
+		EventConfig: &types.EventConfig{
+			AuthProviders: []types.AuthProvider{
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+					CognitoConfig: &types.CognitoConfig{
+						UserPoolId:       ptr.String("__UserPoolId__"),
+						AwsRegion:        ptr.String("__AwsRegion__"),
+						AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+					},
+					OpenIDConnectConfig: &types.OpenIDConnectConfig{
+						Issuer:   ptr.String("__Issuer__"),
+						ClientId: ptr.String("__ClientId__"),
+						IatTTL:   1,
+						AuthTTL:  1,
+					},
+					LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+						AuthorizerResultTtlInSeconds: 1,
+						AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+						IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+					},
+				},
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+					CognitoConfig: &types.CognitoConfig{
+						UserPoolId:       ptr.String("__UserPoolId__"),
+						AwsRegion:        ptr.String("__AwsRegion__"),
+						AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+					},
+					OpenIDConnectConfig: &types.OpenIDConnectConfig{
+						Issuer:   ptr.String("__Issuer__"),
+						ClientId: ptr.String("__ClientId__"),
+						IatTTL:   1,
+						AuthTTL:  1,
+					},
+					LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+						AuthorizerResultTtlInSeconds: 1,
+						AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+						IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+					},
+				},
+			},
+			ConnectionAuthModes: []types.AuthMode{
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+			},
+			DefaultPublishAuthModes: []types.AuthMode{
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+			},
+			DefaultSubscribeAuthModes: []types.AuthMode{
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+			},
+			LogConfig: &types.EventLogConfig{
+				LogLevel:              types.EventLogLevel("NONE"),
+				CloudWatchLogsRoleArn: ptr.String("__CloudWatchLogsRoleArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3304,7 +3899,13 @@ func TestCheckResponseSnapshot_UpdateApiCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApiCache(context.Background(), &UpdateApiCacheInput{})
+	got, err := svc.UpdateApiCache(context.Background(), &UpdateApiCacheInput{
+		ApiId:               ptr.String("__ApiId__"),
+		Ttl:                 1,
+		ApiCachingBehavior:  types.ApiCachingBehavior("FULL_REQUEST_CACHING"),
+		Type:                types.ApiCacheType("T2_SMALL"),
+		HealthMetricsConfig: types.CacheHealthMetricsConfig("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3330,7 +3931,12 @@ func TestCheckResponseSnapshot_UpdateApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApiKey(context.Background(), &UpdateApiKeyInput{})
+	got, err := svc.UpdateApiKey(context.Background(), &UpdateApiKeyInput{
+		ApiId:       ptr.String("__ApiId__"),
+		Id:          ptr.String("__Id__"),
+		Description: ptr.String("__Description__"),
+		Expires:     1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3397,7 +4003,47 @@ func TestCheckResponseSnapshot_UpdateChannelNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannelNamespace(context.Background(), &UpdateChannelNamespaceInput{})
+	got, err := svc.UpdateChannelNamespace(context.Background(), &UpdateChannelNamespaceInput{
+		ApiId: ptr.String("__ApiId__"),
+		Name:  ptr.String("__Name__"),
+		SubscribeAuthModes: []types.AuthMode{
+			{
+				AuthType: types.AuthenticationType("API_KEY"),
+			},
+			{
+				AuthType: types.AuthenticationType("API_KEY"),
+			},
+		},
+		PublishAuthModes: []types.AuthMode{
+			{
+				AuthType: types.AuthenticationType("API_KEY"),
+			},
+			{
+				AuthType: types.AuthenticationType("API_KEY"),
+			},
+		},
+		CodeHandlers: ptr.String("__CodeHandlers__"),
+		HandlerConfigs: &types.HandlerConfigs{
+			OnPublish: &types.HandlerConfig{
+				Behavior: types.HandlerBehavior("CODE"),
+				Integration: &types.Integration{
+					DataSourceName: ptr.String("__DataSourceName__"),
+					LambdaConfig: &types.LambdaConfig{
+						InvokeType: types.InvokeType("REQUEST_RESPONSE"),
+					},
+				},
+			},
+			OnSubscribe: &types.HandlerConfig{
+				Behavior: types.HandlerBehavior("CODE"),
+				Integration: &types.Integration{
+					DataSourceName: ptr.String("__DataSourceName__"),
+					LambdaConfig: &types.LambdaConfig{
+						InvokeType: types.InvokeType("REQUEST_RESPONSE"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3470,7 +4116,59 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{})
+	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{
+		ApiId:          ptr.String("__ApiId__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		Type:           types.DataSourceType("AWS_LAMBDA"),
+		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
+		DynamodbConfig: &types.DynamodbDataSourceConfig{
+			TableName:            ptr.String("__TableName__"),
+			AwsRegion:            ptr.String("__AwsRegion__"),
+			UseCallerCredentials: true,
+			DeltaSyncConfig: &types.DeltaSyncConfig{
+				BaseTableTTL:       1,
+				DeltaSyncTableName: ptr.String("__DeltaSyncTableName__"),
+				DeltaSyncTableTTL:  1,
+			},
+			Versioned: true,
+		},
+		LambdaConfig: &types.LambdaDataSourceConfig{
+			LambdaFunctionArn: ptr.String("__LambdaFunctionArn__"),
+		},
+		ElasticsearchConfig: &types.ElasticsearchDataSourceConfig{
+			Endpoint:  ptr.String("__Endpoint__"),
+			AwsRegion: ptr.String("__AwsRegion__"),
+		},
+		OpenSearchServiceConfig: &types.OpenSearchServiceDataSourceConfig{
+			Endpoint:  ptr.String("__Endpoint__"),
+			AwsRegion: ptr.String("__AwsRegion__"),
+		},
+		HttpConfig: &types.HttpDataSourceConfig{
+			Endpoint: ptr.String("__Endpoint__"),
+			AuthorizationConfig: &types.AuthorizationConfig{
+				AuthorizationType: types.AuthorizationType("AWS_IAM"),
+				AwsIamConfig: &types.AwsIamConfig{
+					SigningRegion:      ptr.String("__SigningRegion__"),
+					SigningServiceName: ptr.String("__SigningServiceName__"),
+				},
+			},
+		},
+		RelationalDatabaseConfig: &types.RelationalDatabaseDataSourceConfig{
+			RelationalDatabaseSourceType: types.RelationalDatabaseSourceType("RDS_HTTP_ENDPOINT"),
+			RdsHttpEndpointConfig: &types.RdsHttpEndpointConfig{
+				AwsRegion:           ptr.String("__AwsRegion__"),
+				DbClusterIdentifier: ptr.String("__DbClusterIdentifier__"),
+				DatabaseName:        ptr.String("__DatabaseName__"),
+				Schema:              ptr.String("__Schema__"),
+				AwsSecretStoreArn:   ptr.String("__AwsSecretStoreArn__"),
+			},
+		},
+		EventBridgeConfig: &types.EventBridgeDataSourceConfig{
+			EventBusArn: ptr.String("__EventBusArn__"),
+		},
+		MetricsConfig: types.DataSourceLevelMetricsConfig("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3501,7 +4199,10 @@ func TestCheckResponseSnapshot_UpdateDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomainName(context.Background(), &UpdateDomainNameInput{})
+	got, err := svc.UpdateDomainName(context.Background(), &UpdateDomainNameInput{
+		DomainName:  ptr.String("__DomainName__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3544,7 +4245,29 @@ func TestCheckResponseSnapshot_UpdateFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFunction(context.Background(), &UpdateFunctionInput{})
+	got, err := svc.UpdateFunction(context.Background(), &UpdateFunctionInput{
+		ApiId:                   ptr.String("__ApiId__"),
+		Name:                    ptr.String("__Name__"),
+		Description:             ptr.String("__Description__"),
+		FunctionId:              ptr.String("__FunctionId__"),
+		DataSourceName:          ptr.String("__DataSourceName__"),
+		RequestMappingTemplate:  ptr.String("__RequestMappingTemplate__"),
+		ResponseMappingTemplate: ptr.String("__ResponseMappingTemplate__"),
+		FunctionVersion:         ptr.String("__FunctionVersion__"),
+		SyncConfig: &types.SyncConfig{
+			ConflictHandler:   types.ConflictHandlerType("OPTIMISTIC_CONCURRENCY"),
+			ConflictDetection: types.ConflictDetectionType("VERSION"),
+			LambdaConflictHandlerConfig: &types.LambdaConflictHandlerConfig{
+				LambdaConflictHandlerArn: ptr.String("__LambdaConflictHandlerArn__"),
+			},
+		},
+		MaxBatchSize: 1,
+		Runtime: &types.AppSyncRuntime{
+			Name:           types.RuntimeName("APPSYNC_JS"),
+			RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		},
+		Code: ptr.String("__Code__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3656,7 +4379,84 @@ func TestCheckResponseSnapshot_UpdateGraphqlApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGraphqlApi(context.Background(), &UpdateGraphqlApiInput{})
+	got, err := svc.UpdateGraphqlApi(context.Background(), &UpdateGraphqlApiInput{
+		ApiId: ptr.String("__ApiId__"),
+		Name:  ptr.String("__Name__"),
+		LogConfig: &types.LogConfig{
+			FieldLogLevel:         types.FieldLogLevel("NONE"),
+			CloudWatchLogsRoleArn: ptr.String("__CloudWatchLogsRoleArn__"),
+			ExcludeVerboseContent: true,
+		},
+		AuthenticationType: types.AuthenticationType("API_KEY"),
+		UserPoolConfig: &types.UserPoolConfig{
+			UserPoolId:       ptr.String("__UserPoolId__"),
+			AwsRegion:        ptr.String("__AwsRegion__"),
+			DefaultAction:    types.DefaultAction("ALLOW"),
+			AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+		},
+		OpenIDConnectConfig: &types.OpenIDConnectConfig{
+			Issuer:   ptr.String("__Issuer__"),
+			ClientId: ptr.String("__ClientId__"),
+			IatTTL:   1,
+			AuthTTL:  1,
+		},
+		AdditionalAuthenticationProviders: []types.AdditionalAuthenticationProvider{
+			{
+				AuthenticationType: types.AuthenticationType("API_KEY"),
+				OpenIDConnectConfig: &types.OpenIDConnectConfig{
+					Issuer:   ptr.String("__Issuer__"),
+					ClientId: ptr.String("__ClientId__"),
+					IatTTL:   1,
+					AuthTTL:  1,
+				},
+				UserPoolConfig: &types.CognitoUserPoolConfig{
+					UserPoolId:       ptr.String("__UserPoolId__"),
+					AwsRegion:        ptr.String("__AwsRegion__"),
+					AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+				},
+				LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+					AuthorizerResultTtlInSeconds: 1,
+					AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+					IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+				},
+			},
+			{
+				AuthenticationType: types.AuthenticationType("API_KEY"),
+				OpenIDConnectConfig: &types.OpenIDConnectConfig{
+					Issuer:   ptr.String("__Issuer__"),
+					ClientId: ptr.String("__ClientId__"),
+					IatTTL:   1,
+					AuthTTL:  1,
+				},
+				UserPoolConfig: &types.CognitoUserPoolConfig{
+					UserPoolId:       ptr.String("__UserPoolId__"),
+					AwsRegion:        ptr.String("__AwsRegion__"),
+					AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+				},
+				LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+					AuthorizerResultTtlInSeconds: 1,
+					AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+					IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+				},
+			},
+		},
+		XrayEnabled: true,
+		LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+			AuthorizerResultTtlInSeconds: 1,
+			AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+			IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+		},
+		MergedApiExecutionRoleArn: ptr.String("__MergedApiExecutionRoleArn__"),
+		OwnerContact:              ptr.String("__OwnerContact__"),
+		IntrospectionConfig:       types.GraphQLApiIntrospectionConfig("ENABLED"),
+		QueryDepthLimit:           1,
+		ResolverCountLimit:        1,
+		EnhancedMetricsConfig: &types.EnhancedMetricsConfig{
+			ResolverLevelMetricsBehavior:   types.ResolverLevelMetricsBehavior("FULL_REQUEST_RESOLVER_METRICS"),
+			DataSourceLevelMetricsBehavior: types.DataSourceLevelMetricsBehavior("FULL_REQUEST_DATA_SOURCE_METRICS"),
+			OperationLevelMetricsConfig:    types.OperationLevelMetricsConfig("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3712,7 +4512,42 @@ func TestCheckResponseSnapshot_UpdateResolver(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResolver(context.Background(), &UpdateResolverInput{})
+	got, err := svc.UpdateResolver(context.Background(), &UpdateResolverInput{
+		ApiId:                   ptr.String("__ApiId__"),
+		TypeName:                ptr.String("__TypeName__"),
+		FieldName:               ptr.String("__FieldName__"),
+		DataSourceName:          ptr.String("__DataSourceName__"),
+		RequestMappingTemplate:  ptr.String("__RequestMappingTemplate__"),
+		ResponseMappingTemplate: ptr.String("__ResponseMappingTemplate__"),
+		Kind:                    types.ResolverKind("UNIT"),
+		PipelineConfig: &types.PipelineConfig{
+			Functions: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		SyncConfig: &types.SyncConfig{
+			ConflictHandler:   types.ConflictHandlerType("OPTIMISTIC_CONCURRENCY"),
+			ConflictDetection: types.ConflictDetectionType("VERSION"),
+			LambdaConflictHandlerConfig: &types.LambdaConflictHandlerConfig{
+				LambdaConflictHandlerArn: ptr.String("__LambdaConflictHandlerArn__"),
+			},
+		},
+		CachingConfig: &types.CachingConfig{
+			Ttl: 1,
+			CachingKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxBatchSize: 1,
+		Runtime: &types.AppSyncRuntime{
+			Name:           types.RuntimeName("APPSYNC_JS"),
+			RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		},
+		Code:          ptr.String("__Code__"),
+		MetricsConfig: types.ResolverLevelMetricsConfig("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3747,7 +4582,14 @@ func TestCheckResponseSnapshot_UpdateSourceApiAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSourceApiAssociation(context.Background(), &UpdateSourceApiAssociationInput{})
+	got, err := svc.UpdateSourceApiAssociation(context.Background(), &UpdateSourceApiAssociationInput{
+		AssociationId:       ptr.String("__AssociationId__"),
+		MergedApiIdentifier: ptr.String("__MergedApiIdentifier__"),
+		Description:         ptr.String("__Description__"),
+		SourceApiAssociationConfig: &types.SourceApiAssociationConfig{
+			MergeType: types.MergeType("MANUAL_MERGE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3774,7 +4616,12 @@ func TestCheckResponseSnapshot_UpdateType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateType(context.Background(), &UpdateTypeInput{})
+	got, err := svc.UpdateType(context.Background(), &UpdateTypeInput{
+		ApiId:      ptr.String("__ApiId__"),
+		TypeName:   ptr.String("__TypeName__"),
+		Definition: ptr.String("__Definition__"),
+		Format:     types.TypeDefinitionFormat("SDL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3795,7 +4642,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApi(context.Background(), &AssociateApiInput{})
+	_, opErr := svc.AssociateApi(context.Background(), &AssociateApiInput{
+		DomainName: ptr.String("__DomainName__"),
+		ApiId:      ptr.String("__ApiId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3820,7 +4670,11 @@ func TestCheckResponseSnapshot_Error_ApiKeyLimitExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{})
+	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{
+		ApiId:       ptr.String("__ApiId__"),
+		Description: ptr.String("__Description__"),
+		Expires:     1,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3845,7 +4699,11 @@ func TestCheckResponseSnapshot_Error_ApiKeyValidityOutOfBoundsException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{})
+	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{
+		ApiId:       ptr.String("__ApiId__"),
+		Description: ptr.String("__Description__"),
+		Expires:     1,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3870,7 +4728,88 @@ func TestCheckResponseSnapshot_Error_ApiLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGraphqlApi(context.Background(), &CreateGraphqlApiInput{})
+	_, opErr := svc.CreateGraphqlApi(context.Background(), &CreateGraphqlApiInput{
+		Name: ptr.String("__Name__"),
+		LogConfig: &types.LogConfig{
+			FieldLogLevel:         types.FieldLogLevel("NONE"),
+			CloudWatchLogsRoleArn: ptr.String("__CloudWatchLogsRoleArn__"),
+			ExcludeVerboseContent: true,
+		},
+		AuthenticationType: types.AuthenticationType("API_KEY"),
+		UserPoolConfig: &types.UserPoolConfig{
+			UserPoolId:       ptr.String("__UserPoolId__"),
+			AwsRegion:        ptr.String("__AwsRegion__"),
+			DefaultAction:    types.DefaultAction("ALLOW"),
+			AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+		},
+		OpenIDConnectConfig: &types.OpenIDConnectConfig{
+			Issuer:   ptr.String("__Issuer__"),
+			ClientId: ptr.String("__ClientId__"),
+			IatTTL:   1,
+			AuthTTL:  1,
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AdditionalAuthenticationProviders: []types.AdditionalAuthenticationProvider{
+			{
+				AuthenticationType: types.AuthenticationType("API_KEY"),
+				OpenIDConnectConfig: &types.OpenIDConnectConfig{
+					Issuer:   ptr.String("__Issuer__"),
+					ClientId: ptr.String("__ClientId__"),
+					IatTTL:   1,
+					AuthTTL:  1,
+				},
+				UserPoolConfig: &types.CognitoUserPoolConfig{
+					UserPoolId:       ptr.String("__UserPoolId__"),
+					AwsRegion:        ptr.String("__AwsRegion__"),
+					AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+				},
+				LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+					AuthorizerResultTtlInSeconds: 1,
+					AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+					IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+				},
+			},
+			{
+				AuthenticationType: types.AuthenticationType("API_KEY"),
+				OpenIDConnectConfig: &types.OpenIDConnectConfig{
+					Issuer:   ptr.String("__Issuer__"),
+					ClientId: ptr.String("__ClientId__"),
+					IatTTL:   1,
+					AuthTTL:  1,
+				},
+				UserPoolConfig: &types.CognitoUserPoolConfig{
+					UserPoolId:       ptr.String("__UserPoolId__"),
+					AwsRegion:        ptr.String("__AwsRegion__"),
+					AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+				},
+				LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+					AuthorizerResultTtlInSeconds: 1,
+					AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+					IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+				},
+			},
+		},
+		XrayEnabled: true,
+		LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+			AuthorizerResultTtlInSeconds: 1,
+			AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+			IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+		},
+		ApiType:                   types.GraphQLApiType("GRAPHQL"),
+		MergedApiExecutionRoleArn: ptr.String("__MergedApiExecutionRoleArn__"),
+		Visibility:                types.GraphQLApiVisibility("GLOBAL"),
+		OwnerContact:              ptr.String("__OwnerContact__"),
+		IntrospectionConfig:       types.GraphQLApiIntrospectionConfig("ENABLED"),
+		QueryDepthLimit:           1,
+		ResolverCountLimit:        1,
+		EnhancedMetricsConfig: &types.EnhancedMetricsConfig{
+			ResolverLevelMetricsBehavior:   types.ResolverLevelMetricsBehavior("FULL_REQUEST_RESOLVER_METRICS"),
+			DataSourceLevelMetricsBehavior: types.DataSourceLevelMetricsBehavior("FULL_REQUEST_DATA_SOURCE_METRICS"),
+			OperationLevelMetricsConfig:    types.OperationLevelMetricsConfig("ENABLED"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3918,7 +4857,10 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApi(context.Background(), &AssociateApiInput{})
+	_, opErr := svc.AssociateApi(context.Background(), &AssociateApiInput{
+		DomainName: ptr.String("__DomainName__"),
+		ApiId:      ptr.String("__ApiId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3943,7 +4885,14 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMergedGraphqlApi(context.Background(), &AssociateMergedGraphqlApiInput{})
+	_, opErr := svc.AssociateMergedGraphqlApi(context.Background(), &AssociateMergedGraphqlApiInput{
+		SourceApiIdentifier: ptr.String("__SourceApiIdentifier__"),
+		MergedApiIdentifier: ptr.String("__MergedApiIdentifier__"),
+		Description:         ptr.String("__Description__"),
+		SourceApiAssociationConfig: &types.SourceApiAssociationConfig{
+			MergeType: types.MergeType("MANUAL_MERGE"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3968,7 +4917,50 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannelNamespace(context.Background(), &CreateChannelNamespaceInput{})
+	_, opErr := svc.CreateChannelNamespace(context.Background(), &CreateChannelNamespaceInput{
+		ApiId: ptr.String("__ApiId__"),
+		Name:  ptr.String("__Name__"),
+		SubscribeAuthModes: []types.AuthMode{
+			{
+				AuthType: types.AuthenticationType("API_KEY"),
+			},
+			{
+				AuthType: types.AuthenticationType("API_KEY"),
+			},
+		},
+		PublishAuthModes: []types.AuthMode{
+			{
+				AuthType: types.AuthenticationType("API_KEY"),
+			},
+			{
+				AuthType: types.AuthenticationType("API_KEY"),
+			},
+		},
+		CodeHandlers: ptr.String("__CodeHandlers__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		HandlerConfigs: &types.HandlerConfigs{
+			OnPublish: &types.HandlerConfig{
+				Behavior: types.HandlerBehavior("CODE"),
+				Integration: &types.Integration{
+					DataSourceName: ptr.String("__DataSourceName__"),
+					LambdaConfig: &types.LambdaConfig{
+						InvokeType: types.InvokeType("REQUEST_RESPONSE"),
+					},
+				},
+			},
+			OnSubscribe: &types.HandlerConfig{
+				Behavior: types.HandlerBehavior("CODE"),
+				Integration: &types.Integration{
+					DataSourceName: ptr.String("__DataSourceName__"),
+					LambdaConfig: &types.LambdaConfig{
+						InvokeType: types.InvokeType("REQUEST_RESPONSE"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3993,7 +4985,11 @@ func TestCheckResponseSnapshot_Error_GraphQLSchemaException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetIntrospectionSchema(context.Background(), &GetIntrospectionSchemaInput{})
+	_, opErr := svc.GetIntrospectionSchema(context.Background(), &GetIntrospectionSchemaInput{
+		ApiId:             ptr.String("__ApiId__"),
+		Format:            types.OutputType("SDL"),
+		IncludeDirectives: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4018,7 +5014,10 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApi(context.Background(), &AssociateApiInput{})
+	_, opErr := svc.AssociateApi(context.Background(), &AssociateApiInput{
+		DomainName: ptr.String("__DomainName__"),
+		ApiId:      ptr.String("__ApiId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4043,7 +5042,14 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMergedGraphqlApi(context.Background(), &AssociateMergedGraphqlApiInput{})
+	_, opErr := svc.AssociateMergedGraphqlApi(context.Background(), &AssociateMergedGraphqlApiInput{
+		SourceApiIdentifier: ptr.String("__SourceApiIdentifier__"),
+		MergedApiIdentifier: ptr.String("__MergedApiIdentifier__"),
+		Description:         ptr.String("__Description__"),
+		SourceApiAssociationConfig: &types.SourceApiAssociationConfig{
+			MergeType: types.MergeType("MANUAL_MERGE"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4068,7 +5074,10 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApi(context.Background(), &AssociateApiInput{})
+	_, opErr := svc.AssociateApi(context.Background(), &AssociateApiInput{
+		DomainName: ptr.String("__DomainName__"),
+		ApiId:      ptr.String("__ApiId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4093,7 +5102,83 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApi(context.Background(), &CreateApiInput{})
+	_, opErr := svc.CreateApi(context.Background(), &CreateApiInput{
+		Name:         ptr.String("__Name__"),
+		OwnerContact: ptr.String("__OwnerContact__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		EventConfig: &types.EventConfig{
+			AuthProviders: []types.AuthProvider{
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+					CognitoConfig: &types.CognitoConfig{
+						UserPoolId:       ptr.String("__UserPoolId__"),
+						AwsRegion:        ptr.String("__AwsRegion__"),
+						AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+					},
+					OpenIDConnectConfig: &types.OpenIDConnectConfig{
+						Issuer:   ptr.String("__Issuer__"),
+						ClientId: ptr.String("__ClientId__"),
+						IatTTL:   1,
+						AuthTTL:  1,
+					},
+					LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+						AuthorizerResultTtlInSeconds: 1,
+						AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+						IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+					},
+				},
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+					CognitoConfig: &types.CognitoConfig{
+						UserPoolId:       ptr.String("__UserPoolId__"),
+						AwsRegion:        ptr.String("__AwsRegion__"),
+						AppIdClientRegex: ptr.String("__AppIdClientRegex__"),
+					},
+					OpenIDConnectConfig: &types.OpenIDConnectConfig{
+						Issuer:   ptr.String("__Issuer__"),
+						ClientId: ptr.String("__ClientId__"),
+						IatTTL:   1,
+						AuthTTL:  1,
+					},
+					LambdaAuthorizerConfig: &types.LambdaAuthorizerConfig{
+						AuthorizerResultTtlInSeconds: 1,
+						AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+						IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+					},
+				},
+			},
+			ConnectionAuthModes: []types.AuthMode{
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+			},
+			DefaultPublishAuthModes: []types.AuthMode{
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+			},
+			DefaultSubscribeAuthModes: []types.AuthMode{
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+				{
+					AuthType: types.AuthenticationType("API_KEY"),
+				},
+			},
+			LogConfig: &types.EventLogConfig{
+				LogLevel:              types.EventLogLevel("NONE"),
+				CloudWatchLogsRoleArn: ptr.String("__CloudWatchLogsRoleArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4118,7 +5203,14 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMergedGraphqlApi(context.Background(), &AssociateMergedGraphqlApiInput{})
+	_, opErr := svc.AssociateMergedGraphqlApi(context.Background(), &AssociateMergedGraphqlApiInput{
+		SourceApiIdentifier: ptr.String("__SourceApiIdentifier__"),
+		MergedApiIdentifier: ptr.String("__MergedApiIdentifier__"),
+		Description:         ptr.String("__Description__"),
+		SourceApiAssociationConfig: &types.SourceApiAssociationConfig{
+			MergeType: types.MergeType("MANUAL_MERGE"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.GetActivityTask
+
+{"input":"__Input__","taskToken":"__TaskToken__"}

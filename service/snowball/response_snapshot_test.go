@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_CancelCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelCluster(context.Background(), &CancelClusterInput{})
+	got, err := svc.CancelCluster(context.Background(), &CancelClusterInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +138,9 @@ func TestCheckResponseSnapshot_CancelJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelJob(context.Background(), &CancelJobInput{})
+	got, err := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,7 +161,25 @@ func TestCheckResponseSnapshot_CreateAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAddress(context.Background(), &CreateAddressInput{})
+	got, err := svc.CreateAddress(context.Background(), &CreateAddressInput{
+		Address: &types.Address{
+			AddressId:            ptr.String("__AddressId__"),
+			Name:                 ptr.String("__Name__"),
+			Company:              ptr.String("__Company__"),
+			Street1:              ptr.String("__Street1__"),
+			Street2:              ptr.String("__Street2__"),
+			Street3:              ptr.String("__Street3__"),
+			City:                 ptr.String("__City__"),
+			StateOrProvince:      ptr.String("__StateOrProvince__"),
+			PrefectureOrDistrict: ptr.String("__PrefectureOrDistrict__"),
+			Landmark:             ptr.String("__Landmark__"),
+			Country:              ptr.String("__Country__"),
+			PostalCode:           ptr.String("__PostalCode__"),
+			PhoneNumber:          ptr.String("__PhoneNumber__"),
+			IsRestricted:         true,
+			Type:                 types.AddressType("CUST_PICKUP"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -198,7 +220,130 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		JobType: types.JobType("IMPORT"),
+		Resources: &types.JobResource{
+			S3Resources: []types.S3Resource{
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+			},
+			LambdaResources: []types.LambdaResource{
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+			},
+			Ec2AmiResources: []types.Ec2AmiResource{
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+			},
+		},
+		OnDeviceServiceConfiguration: &types.OnDeviceServiceConfiguration{
+			NFSOnDeviceService: &types.NFSOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			TGWOnDeviceService: &types.TGWOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			EKSOnDeviceService: &types.EKSOnDeviceServiceConfiguration{
+				KubernetesVersion:  ptr.String("__KubernetesVersion__"),
+				EKSAnywhereVersion: ptr.String("__EKSAnywhereVersion__"),
+			},
+			S3OnDeviceService: &types.S3OnDeviceServiceConfiguration{
+				StorageLimit:   ptr.Float64(1.0),
+				StorageUnit:    types.StorageUnit("TB"),
+				ServiceSize:    ptr.Int32(1),
+				FaultTolerance: ptr.Int32(1),
+			},
+		},
+		Description:    ptr.String("__Description__"),
+		AddressId:      ptr.String("__AddressId__"),
+		KmsKeyARN:      ptr.String("__KmsKeyARN__"),
+		RoleARN:        ptr.String("__RoleARN__"),
+		SnowballType:   types.SnowballType("STANDARD"),
+		ShippingOption: types.ShippingOption("SECOND_DAY"),
+		Notification: &types.Notification{
+			SnsTopicARN: ptr.String("__SnsTopicARN__"),
+			JobStatesToNotify: []types.JobState{
+				types.JobState("New"),
+				types.JobState("New"),
+			},
+			NotifyAll:               true,
+			DevicePickupSnsTopicARN: ptr.String("__DevicePickupSnsTopicARN__"),
+		},
+		ForwardingAddressId: ptr.String("__ForwardingAddressId__"),
+		TaxDocuments: &types.TaxDocuments{
+			IND: &types.INDTaxDocuments{
+				GSTIN: ptr.String("__GSTIN__"),
+			},
+		},
+		RemoteManagement:   types.RemoteManagement("INSTALLED_ONLY"),
+		InitialClusterSize: ptr.Int32(1),
+		ForceCreateJobs:    true,
+		LongTermPricingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnowballCapacityPreference: types.SnowballCapacity("T50"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -219,7 +364,143 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateJob(context.Background(), &CreateJobInput{})
+	got, err := svc.CreateJob(context.Background(), &CreateJobInput{
+		JobType: types.JobType("IMPORT"),
+		Resources: &types.JobResource{
+			S3Resources: []types.S3Resource{
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+			},
+			LambdaResources: []types.LambdaResource{
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+			},
+			Ec2AmiResources: []types.Ec2AmiResource{
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+			},
+		},
+		OnDeviceServiceConfiguration: &types.OnDeviceServiceConfiguration{
+			NFSOnDeviceService: &types.NFSOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			TGWOnDeviceService: &types.TGWOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			EKSOnDeviceService: &types.EKSOnDeviceServiceConfiguration{
+				KubernetesVersion:  ptr.String("__KubernetesVersion__"),
+				EKSAnywhereVersion: ptr.String("__EKSAnywhereVersion__"),
+			},
+			S3OnDeviceService: &types.S3OnDeviceServiceConfiguration{
+				StorageLimit:   ptr.Float64(1.0),
+				StorageUnit:    types.StorageUnit("TB"),
+				ServiceSize:    ptr.Int32(1),
+				FaultTolerance: ptr.Int32(1),
+			},
+		},
+		Description:                ptr.String("__Description__"),
+		AddressId:                  ptr.String("__AddressId__"),
+		KmsKeyARN:                  ptr.String("__KmsKeyARN__"),
+		RoleARN:                    ptr.String("__RoleARN__"),
+		SnowballCapacityPreference: types.SnowballCapacity("T50"),
+		ShippingOption:             types.ShippingOption("SECOND_DAY"),
+		Notification: &types.Notification{
+			SnsTopicARN: ptr.String("__SnsTopicARN__"),
+			JobStatesToNotify: []types.JobState{
+				types.JobState("New"),
+				types.JobState("New"),
+			},
+			NotifyAll:               true,
+			DevicePickupSnsTopicARN: ptr.String("__DevicePickupSnsTopicARN__"),
+		},
+		ClusterId:           ptr.String("__ClusterId__"),
+		SnowballType:        types.SnowballType("STANDARD"),
+		ForwardingAddressId: ptr.String("__ForwardingAddressId__"),
+		TaxDocuments: &types.TaxDocuments{
+			IND: &types.INDTaxDocuments{
+				GSTIN: ptr.String("__GSTIN__"),
+			},
+		},
+		DeviceConfiguration: &types.DeviceConfiguration{
+			SnowconeDeviceConfiguration: &types.SnowconeDeviceConfiguration{
+				WirelessConnection: &types.WirelessConnection{
+					IsWifiEnabled: true,
+				},
+			},
+		},
+		RemoteManagement:  types.RemoteManagement("INSTALLED_ONLY"),
+		LongTermPricingId: ptr.String("__LongTermPricingId__"),
+		ImpactLevel:       types.ImpactLevel("IL2"),
+		PickupDetails: &types.PickupDetails{
+			Name:                         ptr.String("__Name__"),
+			PhoneNumber:                  ptr.String("__PhoneNumber__"),
+			Email:                        ptr.String("__Email__"),
+			IdentificationNumber:         ptr.String("__IdentificationNumber__"),
+			IdentificationExpirationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			IdentificationIssuingOrg:     ptr.String("__IdentificationIssuingOrg__"),
+			DevicePickupId:               ptr.String("__DevicePickupId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -240,7 +521,11 @@ func TestCheckResponseSnapshot_CreateLongTermPricing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLongTermPricing(context.Background(), &CreateLongTermPricingInput{})
+	got, err := svc.CreateLongTermPricing(context.Background(), &CreateLongTermPricingInput{
+		LongTermPricingType:        types.LongTermPricingType("OneYear"),
+		IsLongTermPricingAutoRenew: ptr.Bool(true),
+		SnowballType:               types.SnowballType("STANDARD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -261,7 +546,10 @@ func TestCheckResponseSnapshot_CreateReturnShippingLabel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReturnShippingLabel(context.Background(), &CreateReturnShippingLabelInput{})
+	got, err := svc.CreateReturnShippingLabel(context.Background(), &CreateReturnShippingLabelInput{
+		JobId:          ptr.String("__JobId__"),
+		ShippingOption: types.ShippingOption("SECOND_DAY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +586,9 @@ func TestCheckResponseSnapshot_DescribeAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAddress(context.Background(), &DescribeAddressInput{})
+	got, err := svc.DescribeAddress(context.Background(), &DescribeAddressInput{
+		AddressId: ptr.String("__AddressId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -355,7 +645,10 @@ func TestCheckResponseSnapshot_DescribeAddresses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAddresses(context.Background(), &DescribeAddressesInput{})
+	got, err := svc.DescribeAddresses(context.Background(), &DescribeAddressesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -494,7 +787,9 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCluster(context.Background(), &DescribeClusterInput{})
+	got, err := svc.DescribeCluster(context.Background(), &DescribeClusterInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1297,9 @@ func TestCheckResponseSnapshot_DescribeJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeJob(context.Background(), &DescribeJobInput{})
+	got, err := svc.DescribeJob(context.Background(), &DescribeJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1025,7 +1322,9 @@ func TestCheckResponseSnapshot_DescribeReturnShippingLabel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReturnShippingLabel(context.Background(), &DescribeReturnShippingLabelInput{})
+	got, err := svc.DescribeReturnShippingLabel(context.Background(), &DescribeReturnShippingLabelInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1046,7 +1345,9 @@ func TestCheckResponseSnapshot_GetJobManifest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJobManifest(context.Background(), &GetJobManifestInput{})
+	got, err := svc.GetJobManifest(context.Background(), &GetJobManifestInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1067,7 +1368,9 @@ func TestCheckResponseSnapshot_GetJobUnlockCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJobUnlockCode(context.Background(), &GetJobUnlockCodeInput{})
+	got, err := svc.GetJobUnlockCode(context.Background(), &GetJobUnlockCodeInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1110,7 +1413,9 @@ func TestCheckResponseSnapshot_GetSoftwareUpdates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSoftwareUpdates(context.Background(), &GetSoftwareUpdatesInput{})
+	got, err := svc.GetSoftwareUpdates(context.Background(), &GetSoftwareUpdatesInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1151,7 +1456,11 @@ func TestCheckResponseSnapshot_ListClusterJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClusterJobs(context.Background(), &ListClusterJobsInput{})
+	got, err := svc.ListClusterJobs(context.Background(), &ListClusterJobsInput{
+		ClusterId:  ptr.String("__ClusterId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1186,7 +1495,10 @@ func TestCheckResponseSnapshot_ListClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClusters(context.Background(), &ListClustersInput{})
+	got, err := svc.ListClusters(context.Background(), &ListClustersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1217,7 +1529,10 @@ func TestCheckResponseSnapshot_ListCompatibleImages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCompatibleImages(context.Background(), &ListCompatibleImagesInput{})
+	got, err := svc.ListCompatibleImages(context.Background(), &ListCompatibleImagesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1258,7 +1573,10 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobs(context.Background(), &ListJobsInput{})
+	got, err := svc.ListJobs(context.Background(), &ListJobsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1311,7 +1629,10 @@ func TestCheckResponseSnapshot_ListLongTermPricing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLongTermPricing(context.Background(), &ListLongTermPricingInput{})
+	got, err := svc.ListLongTermPricing(context.Background(), &ListLongTermPricingInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1368,7 +1689,10 @@ func TestCheckResponseSnapshot_ListPickupLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPickupLocations(context.Background(), &ListPickupLocationsInput{})
+	got, err := svc.ListPickupLocations(context.Background(), &ListPickupLocationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1412,7 +1736,25 @@ func TestCheckResponseSnapshot_ListServiceVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceVersions(context.Background(), &ListServiceVersionsInput{})
+	got, err := svc.ListServiceVersions(context.Background(), &ListServiceVersionsInput{
+		ServiceName: types.ServiceName("KUBERNETES"),
+		DependentServices: []types.DependentService{
+			{
+				ServiceName: types.ServiceName("KUBERNETES"),
+				ServiceVersion: &types.ServiceVersion{
+					Version: ptr.String("__Version__"),
+				},
+			},
+			{
+				ServiceName: types.ServiceName("KUBERNETES"),
+				ServiceVersion: &types.ServiceVersion{
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1431,7 +1773,115 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{})
+	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{
+		ClusterId:   ptr.String("__ClusterId__"),
+		RoleARN:     ptr.String("__RoleARN__"),
+		Description: ptr.String("__Description__"),
+		Resources: &types.JobResource{
+			S3Resources: []types.S3Resource{
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+			},
+			LambdaResources: []types.LambdaResource{
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+			},
+			Ec2AmiResources: []types.Ec2AmiResource{
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+			},
+		},
+		OnDeviceServiceConfiguration: &types.OnDeviceServiceConfiguration{
+			NFSOnDeviceService: &types.NFSOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			TGWOnDeviceService: &types.TGWOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			EKSOnDeviceService: &types.EKSOnDeviceServiceConfiguration{
+				KubernetesVersion:  ptr.String("__KubernetesVersion__"),
+				EKSAnywhereVersion: ptr.String("__EKSAnywhereVersion__"),
+			},
+			S3OnDeviceService: &types.S3OnDeviceServiceConfiguration{
+				StorageLimit:   ptr.Float64(1.0),
+				StorageUnit:    types.StorageUnit("TB"),
+				ServiceSize:    ptr.Int32(1),
+				FaultTolerance: ptr.Int32(1),
+			},
+		},
+		AddressId:      ptr.String("__AddressId__"),
+		ShippingOption: types.ShippingOption("SECOND_DAY"),
+		Notification: &types.Notification{
+			SnsTopicARN: ptr.String("__SnsTopicARN__"),
+			JobStatesToNotify: []types.JobState{
+				types.JobState("New"),
+				types.JobState("New"),
+			},
+			NotifyAll:               true,
+			DevicePickupSnsTopicARN: ptr.String("__DevicePickupSnsTopicARN__"),
+		},
+		ForwardingAddressId: ptr.String("__ForwardingAddressId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1450,7 +1900,125 @@ func TestCheckResponseSnapshot_UpdateJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateJob(context.Background(), &UpdateJobInput{})
+	got, err := svc.UpdateJob(context.Background(), &UpdateJobInput{
+		JobId:   ptr.String("__JobId__"),
+		RoleARN: ptr.String("__RoleARN__"),
+		Notification: &types.Notification{
+			SnsTopicARN: ptr.String("__SnsTopicARN__"),
+			JobStatesToNotify: []types.JobState{
+				types.JobState("New"),
+				types.JobState("New"),
+			},
+			NotifyAll:               true,
+			DevicePickupSnsTopicARN: ptr.String("__DevicePickupSnsTopicARN__"),
+		},
+		Resources: &types.JobResource{
+			S3Resources: []types.S3Resource{
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+			},
+			LambdaResources: []types.LambdaResource{
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+			},
+			Ec2AmiResources: []types.Ec2AmiResource{
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+			},
+		},
+		OnDeviceServiceConfiguration: &types.OnDeviceServiceConfiguration{
+			NFSOnDeviceService: &types.NFSOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			TGWOnDeviceService: &types.TGWOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			EKSOnDeviceService: &types.EKSOnDeviceServiceConfiguration{
+				KubernetesVersion:  ptr.String("__KubernetesVersion__"),
+				EKSAnywhereVersion: ptr.String("__EKSAnywhereVersion__"),
+			},
+			S3OnDeviceService: &types.S3OnDeviceServiceConfiguration{
+				StorageLimit:   ptr.Float64(1.0),
+				StorageUnit:    types.StorageUnit("TB"),
+				ServiceSize:    ptr.Int32(1),
+				FaultTolerance: ptr.Int32(1),
+			},
+		},
+		AddressId:                  ptr.String("__AddressId__"),
+		ShippingOption:             types.ShippingOption("SECOND_DAY"),
+		Description:                ptr.String("__Description__"),
+		SnowballCapacityPreference: types.SnowballCapacity("T50"),
+		ForwardingAddressId:        ptr.String("__ForwardingAddressId__"),
+		PickupDetails: &types.PickupDetails{
+			Name:                         ptr.String("__Name__"),
+			PhoneNumber:                  ptr.String("__PhoneNumber__"),
+			Email:                        ptr.String("__Email__"),
+			IdentificationNumber:         ptr.String("__IdentificationNumber__"),
+			IdentificationExpirationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			IdentificationIssuingOrg:     ptr.String("__IdentificationIssuingOrg__"),
+			DevicePickupId:               ptr.String("__DevicePickupId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1469,7 +2037,10 @@ func TestCheckResponseSnapshot_UpdateJobShipmentState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateJobShipmentState(context.Background(), &UpdateJobShipmentStateInput{})
+	got, err := svc.UpdateJobShipmentState(context.Background(), &UpdateJobShipmentStateInput{
+		JobId:         ptr.String("__JobId__"),
+		ShipmentState: types.ShipmentState("RECEIVED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1488,7 +2059,11 @@ func TestCheckResponseSnapshot_UpdateLongTermPricing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLongTermPricing(context.Background(), &UpdateLongTermPricingInput{})
+	got, err := svc.UpdateLongTermPricing(context.Background(), &UpdateLongTermPricingInput{
+		LongTermPricingId:          ptr.String("__LongTermPricingId__"),
+		ReplacementJob:             ptr.String("__ReplacementJob__"),
+		IsLongTermPricingAutoRenew: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1509,7 +2084,143 @@ func TestCheckResponseSnapshot_Error_ClusterLimitExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{})
+	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{
+		JobType: types.JobType("IMPORT"),
+		Resources: &types.JobResource{
+			S3Resources: []types.S3Resource{
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+			},
+			LambdaResources: []types.LambdaResource{
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+			},
+			Ec2AmiResources: []types.Ec2AmiResource{
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+			},
+		},
+		OnDeviceServiceConfiguration: &types.OnDeviceServiceConfiguration{
+			NFSOnDeviceService: &types.NFSOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			TGWOnDeviceService: &types.TGWOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			EKSOnDeviceService: &types.EKSOnDeviceServiceConfiguration{
+				KubernetesVersion:  ptr.String("__KubernetesVersion__"),
+				EKSAnywhereVersion: ptr.String("__EKSAnywhereVersion__"),
+			},
+			S3OnDeviceService: &types.S3OnDeviceServiceConfiguration{
+				StorageLimit:   ptr.Float64(1.0),
+				StorageUnit:    types.StorageUnit("TB"),
+				ServiceSize:    ptr.Int32(1),
+				FaultTolerance: ptr.Int32(1),
+			},
+		},
+		Description:                ptr.String("__Description__"),
+		AddressId:                  ptr.String("__AddressId__"),
+		KmsKeyARN:                  ptr.String("__KmsKeyARN__"),
+		RoleARN:                    ptr.String("__RoleARN__"),
+		SnowballCapacityPreference: types.SnowballCapacity("T50"),
+		ShippingOption:             types.ShippingOption("SECOND_DAY"),
+		Notification: &types.Notification{
+			SnsTopicARN: ptr.String("__SnsTopicARN__"),
+			JobStatesToNotify: []types.JobState{
+				types.JobState("New"),
+				types.JobState("New"),
+			},
+			NotifyAll:               true,
+			DevicePickupSnsTopicARN: ptr.String("__DevicePickupSnsTopicARN__"),
+		},
+		ClusterId:           ptr.String("__ClusterId__"),
+		SnowballType:        types.SnowballType("STANDARD"),
+		ForwardingAddressId: ptr.String("__ForwardingAddressId__"),
+		TaxDocuments: &types.TaxDocuments{
+			IND: &types.INDTaxDocuments{
+				GSTIN: ptr.String("__GSTIN__"),
+			},
+		},
+		DeviceConfiguration: &types.DeviceConfiguration{
+			SnowconeDeviceConfiguration: &types.SnowconeDeviceConfiguration{
+				WirelessConnection: &types.WirelessConnection{
+					IsWifiEnabled: true,
+				},
+			},
+		},
+		RemoteManagement:  types.RemoteManagement("INSTALLED_ONLY"),
+		LongTermPricingId: ptr.String("__LongTermPricingId__"),
+		ImpactLevel:       types.ImpactLevel("IL2"),
+		PickupDetails: &types.PickupDetails{
+			Name:                         ptr.String("__Name__"),
+			PhoneNumber:                  ptr.String("__PhoneNumber__"),
+			Email:                        ptr.String("__Email__"),
+			IdentificationNumber:         ptr.String("__IdentificationNumber__"),
+			IdentificationExpirationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			IdentificationIssuingOrg:     ptr.String("__IdentificationIssuingOrg__"),
+			DevicePickupId:               ptr.String("__DevicePickupId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1535,7 +2246,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReturnShippingLabel(context.Background(), &CreateReturnShippingLabelInput{})
+	_, opErr := svc.CreateReturnShippingLabel(context.Background(), &CreateReturnShippingLabelInput{
+		JobId:          ptr.String("__JobId__"),
+		ShippingOption: types.ShippingOption("SECOND_DAY"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1560,7 +2274,130 @@ func TestCheckResponseSnapshot_Error_Ec2RequestFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		JobType: types.JobType("IMPORT"),
+		Resources: &types.JobResource{
+			S3Resources: []types.S3Resource{
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+			},
+			LambdaResources: []types.LambdaResource{
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+			},
+			Ec2AmiResources: []types.Ec2AmiResource{
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+			},
+		},
+		OnDeviceServiceConfiguration: &types.OnDeviceServiceConfiguration{
+			NFSOnDeviceService: &types.NFSOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			TGWOnDeviceService: &types.TGWOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			EKSOnDeviceService: &types.EKSOnDeviceServiceConfiguration{
+				KubernetesVersion:  ptr.String("__KubernetesVersion__"),
+				EKSAnywhereVersion: ptr.String("__EKSAnywhereVersion__"),
+			},
+			S3OnDeviceService: &types.S3OnDeviceServiceConfiguration{
+				StorageLimit:   ptr.Float64(1.0),
+				StorageUnit:    types.StorageUnit("TB"),
+				ServiceSize:    ptr.Int32(1),
+				FaultTolerance: ptr.Int32(1),
+			},
+		},
+		Description:    ptr.String("__Description__"),
+		AddressId:      ptr.String("__AddressId__"),
+		KmsKeyARN:      ptr.String("__KmsKeyARN__"),
+		RoleARN:        ptr.String("__RoleARN__"),
+		SnowballType:   types.SnowballType("STANDARD"),
+		ShippingOption: types.ShippingOption("SECOND_DAY"),
+		Notification: &types.Notification{
+			SnsTopicARN: ptr.String("__SnsTopicARN__"),
+			JobStatesToNotify: []types.JobState{
+				types.JobState("New"),
+				types.JobState("New"),
+			},
+			NotifyAll:               true,
+			DevicePickupSnsTopicARN: ptr.String("__DevicePickupSnsTopicARN__"),
+		},
+		ForwardingAddressId: ptr.String("__ForwardingAddressId__"),
+		TaxDocuments: &types.TaxDocuments{
+			IND: &types.INDTaxDocuments{
+				GSTIN: ptr.String("__GSTIN__"),
+			},
+		},
+		RemoteManagement:   types.RemoteManagement("INSTALLED_ONLY"),
+		InitialClusterSize: ptr.Int32(1),
+		ForceCreateJobs:    true,
+		LongTermPricingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnowballCapacityPreference: types.SnowballCapacity("T50"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1585,7 +2422,25 @@ func TestCheckResponseSnapshot_Error_InvalidAddressException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAddress(context.Background(), &CreateAddressInput{})
+	_, opErr := svc.CreateAddress(context.Background(), &CreateAddressInput{
+		Address: &types.Address{
+			AddressId:            ptr.String("__AddressId__"),
+			Name:                 ptr.String("__Name__"),
+			Company:              ptr.String("__Company__"),
+			Street1:              ptr.String("__Street1__"),
+			Street2:              ptr.String("__Street2__"),
+			Street3:              ptr.String("__Street3__"),
+			City:                 ptr.String("__City__"),
+			StateOrProvince:      ptr.String("__StateOrProvince__"),
+			PrefectureOrDistrict: ptr.String("__PrefectureOrDistrict__"),
+			Landmark:             ptr.String("__Landmark__"),
+			Country:              ptr.String("__Country__"),
+			PostalCode:           ptr.String("__PostalCode__"),
+			PhoneNumber:          ptr.String("__PhoneNumber__"),
+			IsRestricted:         true,
+			Type:                 types.AddressType("CUST_PICKUP"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1610,7 +2465,130 @@ func TestCheckResponseSnapshot_Error_InvalidInputCombinationException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		JobType: types.JobType("IMPORT"),
+		Resources: &types.JobResource{
+			S3Resources: []types.S3Resource{
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+				{
+					BucketArn: ptr.String("__BucketArn__"),
+					KeyRange: &types.KeyRange{
+						BeginMarker: ptr.String("__BeginMarker__"),
+						EndMarker:   ptr.String("__EndMarker__"),
+					},
+					TargetOnDeviceServices: []types.TargetOnDeviceService{
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+						{
+							ServiceName:    types.DeviceServiceName("NFS_ON_DEVICE_SERVICE"),
+							TransferOption: types.TransferOption("IMPORT"),
+						},
+					},
+				},
+			},
+			LambdaResources: []types.LambdaResource{
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+				{
+					LambdaArn: ptr.String("__LambdaArn__"),
+					EventTriggers: []types.EventTriggerDefinition{
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+						{
+							EventResourceARN: ptr.String("__EventResourceARN__"),
+						},
+					},
+				},
+			},
+			Ec2AmiResources: []types.Ec2AmiResource{
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+				{
+					AmiId:         ptr.String("__AmiId__"),
+					SnowballAmiId: ptr.String("__SnowballAmiId__"),
+				},
+			},
+		},
+		OnDeviceServiceConfiguration: &types.OnDeviceServiceConfiguration{
+			NFSOnDeviceService: &types.NFSOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			TGWOnDeviceService: &types.TGWOnDeviceServiceConfiguration{
+				StorageLimit: 1,
+				StorageUnit:  types.StorageUnit("TB"),
+			},
+			EKSOnDeviceService: &types.EKSOnDeviceServiceConfiguration{
+				KubernetesVersion:  ptr.String("__KubernetesVersion__"),
+				EKSAnywhereVersion: ptr.String("__EKSAnywhereVersion__"),
+			},
+			S3OnDeviceService: &types.S3OnDeviceServiceConfiguration{
+				StorageLimit:   ptr.Float64(1.0),
+				StorageUnit:    types.StorageUnit("TB"),
+				ServiceSize:    ptr.Int32(1),
+				FaultTolerance: ptr.Int32(1),
+			},
+		},
+		Description:    ptr.String("__Description__"),
+		AddressId:      ptr.String("__AddressId__"),
+		KmsKeyARN:      ptr.String("__KmsKeyARN__"),
+		RoleARN:        ptr.String("__RoleARN__"),
+		SnowballType:   types.SnowballType("STANDARD"),
+		ShippingOption: types.ShippingOption("SECOND_DAY"),
+		Notification: &types.Notification{
+			SnsTopicARN: ptr.String("__SnsTopicARN__"),
+			JobStatesToNotify: []types.JobState{
+				types.JobState("New"),
+				types.JobState("New"),
+			},
+			NotifyAll:               true,
+			DevicePickupSnsTopicARN: ptr.String("__DevicePickupSnsTopicARN__"),
+		},
+		ForwardingAddressId: ptr.String("__ForwardingAddressId__"),
+		TaxDocuments: &types.TaxDocuments{
+			IND: &types.INDTaxDocuments{
+				GSTIN: ptr.String("__GSTIN__"),
+			},
+		},
+		RemoteManagement:   types.RemoteManagement("INSTALLED_ONLY"),
+		InitialClusterSize: ptr.Int32(1),
+		ForceCreateJobs:    true,
+		LongTermPricingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnowballCapacityPreference: types.SnowballCapacity("T50"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1635,7 +2613,9 @@ func TestCheckResponseSnapshot_Error_InvalidJobStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelCluster(context.Background(), &CancelClusterInput{})
+	_, opErr := svc.CancelCluster(context.Background(), &CancelClusterInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1660,7 +2640,10 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAddresses(context.Background(), &DescribeAddressesInput{})
+	_, opErr := svc.DescribeAddresses(context.Background(), &DescribeAddressesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1686,7 +2669,9 @@ func TestCheckResponseSnapshot_Error_InvalidResourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelCluster(context.Background(), &CancelClusterInput{})
+	_, opErr := svc.CancelCluster(context.Background(), &CancelClusterInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1711,7 +2696,9 @@ func TestCheckResponseSnapshot_Error_KMSRequestFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelCluster(context.Background(), &CancelClusterInput{})
+	_, opErr := svc.CancelCluster(context.Background(), &CancelClusterInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1736,7 +2723,10 @@ func TestCheckResponseSnapshot_Error_ReturnShippingLabelAlreadyExistsException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReturnShippingLabel(context.Background(), &CreateReturnShippingLabelInput{})
+	_, opErr := svc.CreateReturnShippingLabel(context.Background(), &CreateReturnShippingLabelInput{
+		JobId:          ptr.String("__JobId__"),
+		ShippingOption: types.ShippingOption("SECOND_DAY"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1761,7 +2751,25 @@ func TestCheckResponseSnapshot_Error_UnsupportedAddressException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAddress(context.Background(), &CreateAddressInput{})
+	_, opErr := svc.CreateAddress(context.Background(), &CreateAddressInput{
+		Address: &types.Address{
+			AddressId:            ptr.String("__AddressId__"),
+			Name:                 ptr.String("__Name__"),
+			Company:              ptr.String("__Company__"),
+			Street1:              ptr.String("__Street1__"),
+			Street2:              ptr.String("__Street2__"),
+			Street3:              ptr.String("__Street3__"),
+			City:                 ptr.String("__City__"),
+			StateOrProvince:      ptr.String("__StateOrProvince__"),
+			PrefectureOrDistrict: ptr.String("__PrefectureOrDistrict__"),
+			Landmark:             ptr.String("__Landmark__"),
+			Country:              ptr.String("__Country__"),
+			PostalCode:           ptr.String("__PostalCode__"),
+			PhoneNumber:          ptr.String("__PhoneNumber__"),
+			IsRestricted:         true,
+			Type:                 types.AddressType("CUST_PICKUP"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

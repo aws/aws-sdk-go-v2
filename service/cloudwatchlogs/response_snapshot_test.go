@@ -116,7 +116,11 @@ func TestCheckResponseSnapshot_AssociateKmsKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateKmsKey(context.Background(), &AssociateKmsKeyInput{})
+	got, err := svc.AssociateKmsKey(context.Background(), &AssociateKmsKeyInput{
+		LogGroupName:       ptr.String("__LogGroupName__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -137,7 +141,13 @@ func TestCheckResponseSnapshot_AssociateSourceToS3TableIntegration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateSourceToS3TableIntegration(context.Background(), &AssociateSourceToS3TableIntegrationInput{})
+	got, err := svc.AssociateSourceToS3TableIntegration(context.Background(), &AssociateSourceToS3TableIntegrationInput{
+		IntegrationArn: ptr.String("__IntegrationArn__"),
+		DataSource: &types.DataSource{
+			Name: ptr.String("__Name__"),
+			Type: ptr.String("__Type__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -156,7 +166,9 @@ func TestCheckResponseSnapshot_CancelExportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{})
+	got, err := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +195,9 @@ func TestCheckResponseSnapshot_CancelImportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelImportTask(context.Background(), &CancelImportTaskInput{})
+	got, err := svc.CancelImportTask(context.Background(), &CancelImportTaskInput{
+		ImportId: ptr.String("__ImportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +236,22 @@ func TestCheckResponseSnapshot_CreateDelivery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDelivery(context.Background(), &CreateDeliveryInput{})
+	got, err := svc.CreateDelivery(context.Background(), &CreateDeliveryInput{
+		DeliverySourceName:     ptr.String("__DeliverySourceName__"),
+		DeliveryDestinationArn: ptr.String("__DeliveryDestinationArn__"),
+		RecordFields: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FieldDelimiter: ptr.String("__FieldDelimiter__"),
+		S3DeliveryConfiguration: &types.S3DeliveryConfiguration{
+			SuffixPath:               ptr.String("__SuffixPath__"),
+			EnableHiveCompatiblePath: ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -243,7 +272,15 @@ func TestCheckResponseSnapshot_CreateExportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExportTask(context.Background(), &CreateExportTaskInput{})
+	got, err := svc.CreateExportTask(context.Background(), &CreateExportTaskInput{
+		TaskName:            ptr.String("__TaskName__"),
+		LogGroupName:        ptr.String("__LogGroupName__"),
+		LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+		From:                ptr.Int64(1),
+		To:                  ptr.Int64(1),
+		Destination:         ptr.String("__Destination__"),
+		DestinationPrefix:   ptr.String("__DestinationPrefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -266,7 +303,14 @@ func TestCheckResponseSnapshot_CreateImportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateImportTask(context.Background(), &CreateImportTaskInput{})
+	got, err := svc.CreateImportTask(context.Background(), &CreateImportTaskInput{
+		ImportSourceArn: ptr.String("__ImportSourceArn__"),
+		ImportRoleArn:   ptr.String("__ImportRoleArn__"),
+		ImportFilter: &types.ImportFilter{
+			StartEventTime: ptr.Int64(1),
+			EndEventTime:   ptr.Int64(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -287,7 +331,20 @@ func TestCheckResponseSnapshot_CreateLogAnomalyDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLogAnomalyDetector(context.Background(), &CreateLogAnomalyDetectorInput{})
+	got, err := svc.CreateLogAnomalyDetector(context.Background(), &CreateLogAnomalyDetectorInput{
+		LogGroupArnList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DetectorName:          ptr.String("__DetectorName__"),
+		EvaluationFrequency:   types.EvaluationFrequency("ONE_MIN"),
+		FilterPattern:         ptr.String("__FilterPattern__"),
+		KmsKeyId:              ptr.String("__KmsKeyId__"),
+		AnomalyVisibilityTime: ptr.Int64(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -306,7 +363,15 @@ func TestCheckResponseSnapshot_CreateLogGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLogGroup(context.Background(), &CreateLogGroupInput{})
+	got, err := svc.CreateLogGroup(context.Background(), &CreateLogGroupInput{
+		LogGroupName: ptr.String("__LogGroupName__"),
+		KmsKeyId:     ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogGroupClass:             types.LogGroupClass("STANDARD"),
+		DeletionProtectionEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -325,7 +390,10 @@ func TestCheckResponseSnapshot_CreateLogStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLogStream(context.Background(), &CreateLogStreamInput{})
+	got, err := svc.CreateLogStream(context.Background(), &CreateLogStreamInput{
+		LogGroupName:  ptr.String("__LogGroupName__"),
+		LogStreamName: ptr.String("__LogStreamName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -347,7 +415,16 @@ func TestCheckResponseSnapshot_CreateLookupTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLookupTable(context.Background(), &CreateLookupTableInput{})
+	got, err := svc.CreateLookupTable(context.Background(), &CreateLookupTableInput{
+		LookupTableName: ptr.String("__LookupTableName__"),
+		Description:     ptr.String("__Description__"),
+		TableBody:       ptr.String("__TableBody__"),
+		QueryId:         ptr.String("__QueryId__"),
+		KmsKeyId:        ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +446,44 @@ func TestCheckResponseSnapshot_CreateScheduledQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateScheduledQuery(context.Background(), &CreateScheduledQueryInput{})
+	got, err := svc.CreateScheduledQuery(context.Background(), &CreateScheduledQueryInput{
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		QueryLanguage: types.QueryLanguage("CWLI"),
+		QueryString:   ptr.String("__QueryString__"),
+		LogGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ScheduleExpression: ptr.String("__ScheduleExpression__"),
+		Timezone:           ptr.String("__Timezone__"),
+		StartTimeOffset:    ptr.Int64(1),
+		EndTimeOffset:      ptr.Int64(1),
+		DestinationConfiguration: &types.DestinationConfiguration{
+			S3Configuration: &types.S3Configuration{
+				DestinationIdentifier: ptr.String("__DestinationIdentifier__"),
+				RoleArn:               ptr.String("__RoleArn__"),
+				OwnerAccountId:        ptr.String("__OwnerAccountId__"),
+				KmsKeyId:              ptr.String("__KmsKeyId__"),
+			},
+			LookupTableConfiguration: &types.LookupTableConfiguration{
+				TableName:   ptr.String("__TableName__"),
+				RoleArn:     ptr.String("__RoleArn__"),
+				Description: ptr.String("__Description__"),
+				KmsKeyId:    ptr.String("__KmsKeyId__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		ScheduleStartTime: ptr.Int64(1),
+		ScheduleEndTime:   ptr.Int64(1),
+		ExecutionRoleArn:  ptr.String("__ExecutionRoleArn__"),
+		State:             types.ScheduledQueryState("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -388,7 +502,10 @@ func TestCheckResponseSnapshot_DeleteAccountPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccountPolicy(context.Background(), &DeleteAccountPolicyInput{})
+	got, err := svc.DeleteAccountPolicy(context.Background(), &DeleteAccountPolicyInput{
+		PolicyName: ptr.String("__PolicyName__"),
+		PolicyType: types.PolicyType("DATA_PROTECTION_POLICY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -407,7 +524,9 @@ func TestCheckResponseSnapshot_DeleteDataProtectionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataProtectionPolicy(context.Background(), &DeleteDataProtectionPolicyInput{})
+	got, err := svc.DeleteDataProtectionPolicy(context.Background(), &DeleteDataProtectionPolicyInput{
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -426,7 +545,9 @@ func TestCheckResponseSnapshot_DeleteDelivery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDelivery(context.Background(), &DeleteDeliveryInput{})
+	got, err := svc.DeleteDelivery(context.Background(), &DeleteDeliveryInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -445,7 +566,9 @@ func TestCheckResponseSnapshot_DeleteDeliveryDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeliveryDestination(context.Background(), &DeleteDeliveryDestinationInput{})
+	got, err := svc.DeleteDeliveryDestination(context.Background(), &DeleteDeliveryDestinationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -464,7 +587,9 @@ func TestCheckResponseSnapshot_DeleteDeliveryDestinationPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeliveryDestinationPolicy(context.Background(), &DeleteDeliveryDestinationPolicyInput{})
+	got, err := svc.DeleteDeliveryDestinationPolicy(context.Background(), &DeleteDeliveryDestinationPolicyInput{
+		DeliveryDestinationName: ptr.String("__DeliveryDestinationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -483,7 +608,9 @@ func TestCheckResponseSnapshot_DeleteDeliverySource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeliverySource(context.Background(), &DeleteDeliverySourceInput{})
+	got, err := svc.DeleteDeliverySource(context.Background(), &DeleteDeliverySourceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -502,7 +629,9 @@ func TestCheckResponseSnapshot_DeleteDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDestination(context.Background(), &DeleteDestinationInput{})
+	got, err := svc.DeleteDestination(context.Background(), &DeleteDestinationInput{
+		DestinationName: ptr.String("__DestinationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -521,7 +650,9 @@ func TestCheckResponseSnapshot_DeleteIndexPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIndexPolicy(context.Background(), &DeleteIndexPolicyInput{})
+	got, err := svc.DeleteIndexPolicy(context.Background(), &DeleteIndexPolicyInput{
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -540,7 +671,10 @@ func TestCheckResponseSnapshot_DeleteIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIntegration(context.Background(), &DeleteIntegrationInput{})
+	got, err := svc.DeleteIntegration(context.Background(), &DeleteIntegrationInput{
+		IntegrationName: ptr.String("__IntegrationName__"),
+		Force:           true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -559,7 +693,9 @@ func TestCheckResponseSnapshot_DeleteLogAnomalyDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLogAnomalyDetector(context.Background(), &DeleteLogAnomalyDetectorInput{})
+	got, err := svc.DeleteLogAnomalyDetector(context.Background(), &DeleteLogAnomalyDetectorInput{
+		AnomalyDetectorArn: ptr.String("__AnomalyDetectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -578,7 +714,9 @@ func TestCheckResponseSnapshot_DeleteLogGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLogGroup(context.Background(), &DeleteLogGroupInput{})
+	got, err := svc.DeleteLogGroup(context.Background(), &DeleteLogGroupInput{
+		LogGroupName: ptr.String("__LogGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -597,7 +735,10 @@ func TestCheckResponseSnapshot_DeleteLogStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLogStream(context.Background(), &DeleteLogStreamInput{})
+	got, err := svc.DeleteLogStream(context.Background(), &DeleteLogStreamInput{
+		LogGroupName:  ptr.String("__LogGroupName__"),
+		LogStreamName: ptr.String("__LogStreamName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -616,7 +757,9 @@ func TestCheckResponseSnapshot_DeleteLookupTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLookupTable(context.Background(), &DeleteLookupTableInput{})
+	got, err := svc.DeleteLookupTable(context.Background(), &DeleteLookupTableInput{
+		LookupTableArn: ptr.String("__LookupTableArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -635,7 +778,10 @@ func TestCheckResponseSnapshot_DeleteMetricFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMetricFilter(context.Background(), &DeleteMetricFilterInput{})
+	got, err := svc.DeleteMetricFilter(context.Background(), &DeleteMetricFilterInput{
+		LogGroupName: ptr.String("__LogGroupName__"),
+		FilterName:   ptr.String("__FilterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -656,7 +802,9 @@ func TestCheckResponseSnapshot_DeleteQueryDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQueryDefinition(context.Background(), &DeleteQueryDefinitionInput{})
+	got, err := svc.DeleteQueryDefinition(context.Background(), &DeleteQueryDefinitionInput{
+		QueryDefinitionId: ptr.String("__QueryDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -675,7 +823,11 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		PolicyName:         ptr.String("__PolicyName__"),
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		ExpectedRevisionId: ptr.String("__ExpectedRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -694,7 +846,9 @@ func TestCheckResponseSnapshot_DeleteRetentionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRetentionPolicy(context.Background(), &DeleteRetentionPolicyInput{})
+	got, err := svc.DeleteRetentionPolicy(context.Background(), &DeleteRetentionPolicyInput{
+		LogGroupName: ptr.String("__LogGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -713,7 +867,9 @@ func TestCheckResponseSnapshot_DeleteScheduledQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScheduledQuery(context.Background(), &DeleteScheduledQueryInput{})
+	got, err := svc.DeleteScheduledQuery(context.Background(), &DeleteScheduledQueryInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -732,7 +888,10 @@ func TestCheckResponseSnapshot_DeleteSubscriptionFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSubscriptionFilter(context.Background(), &DeleteSubscriptionFilterInput{})
+	got, err := svc.DeleteSubscriptionFilter(context.Background(), &DeleteSubscriptionFilterInput{
+		LogGroupName: ptr.String("__LogGroupName__"),
+		FilterName:   ptr.String("__FilterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -751,7 +910,10 @@ func TestCheckResponseSnapshot_DeleteSyslogConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSyslogConfiguration(context.Background(), &DeleteSyslogConfigurationInput{})
+	got, err := svc.DeleteSyslogConfiguration(context.Background(), &DeleteSyslogConfigurationInput{
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+		VpcEndpointId:      ptr.String("__VpcEndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -770,7 +932,9 @@ func TestCheckResponseSnapshot_DeleteTransformer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTransformer(context.Background(), &DeleteTransformerInput{})
+	got, err := svc.DeleteTransformer(context.Background(), &DeleteTransformerInput{
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -811,7 +975,15 @@ func TestCheckResponseSnapshot_DescribeAccountPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccountPolicies(context.Background(), &DescribeAccountPoliciesInput{})
+	got, err := svc.DescribeAccountPolicies(context.Background(), &DescribeAccountPoliciesInput{
+		PolicyType: types.PolicyType("DATA_PROTECTION_POLICY"),
+		PolicyName: ptr.String("__PolicyName__"),
+		AccountIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -970,7 +1142,23 @@ func TestCheckResponseSnapshot_DescribeConfigurationTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConfigurationTemplates(context.Background(), &DescribeConfigurationTemplatesInput{})
+	got, err := svc.DescribeConfigurationTemplates(context.Background(), &DescribeConfigurationTemplatesInput{
+		Service: ptr.String("__Service__"),
+		LogTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeliveryDestinationTypes: []types.DeliveryDestinationType{
+			types.DeliveryDestinationType("S3"),
+			types.DeliveryDestinationType("S3"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1031,7 +1219,10 @@ func TestCheckResponseSnapshot_DescribeDeliveries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDeliveries(context.Background(), &DescribeDeliveriesInput{})
+	got, err := svc.DescribeDeliveries(context.Background(), &DescribeDeliveriesInput{
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1078,7 +1269,10 @@ func TestCheckResponseSnapshot_DescribeDeliveryDestinations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDeliveryDestinations(context.Background(), &DescribeDeliveryDestinationsInput{})
+	got, err := svc.DescribeDeliveryDestinations(context.Background(), &DescribeDeliveryDestinationsInput{
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1137,7 +1331,10 @@ func TestCheckResponseSnapshot_DescribeDeliverySources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDeliverySources(context.Background(), &DescribeDeliverySourcesInput{})
+	got, err := svc.DescribeDeliverySources(context.Background(), &DescribeDeliverySourcesInput{
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1176,7 +1373,11 @@ func TestCheckResponseSnapshot_DescribeDestinations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDestinations(context.Background(), &DescribeDestinationsInput{})
+	got, err := svc.DescribeDestinations(context.Background(), &DescribeDestinationsInput{
+		DestinationNamePrefix: ptr.String("__DestinationNamePrefix__"),
+		NextToken:             ptr.String("__NextToken__"),
+		Limit:                 ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1233,7 +1434,12 @@ func TestCheckResponseSnapshot_DescribeExportTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeExportTasks(context.Background(), &DescribeExportTasksInput{})
+	got, err := svc.DescribeExportTasks(context.Background(), &DescribeExportTasksInput{
+		TaskId:     ptr.String("__TaskId__"),
+		StatusCode: types.ExportTaskStatusCode("CANCELLED"),
+		NextToken:  ptr.String("__NextToken__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1274,7 +1480,17 @@ func TestCheckResponseSnapshot_DescribeFieldIndexes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFieldIndexes(context.Background(), &DescribeFieldIndexesInput{})
+	got, err := svc.DescribeFieldIndexes(context.Background(), &DescribeFieldIndexesInput{
+		LogGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IndexCategories: []types.IndexCategory{
+			types.IndexCategory("DEFAULT"),
+			types.IndexCategory("DEFAULT"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1309,7 +1525,15 @@ func TestCheckResponseSnapshot_DescribeImportTaskBatches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeImportTaskBatches(context.Background(), &DescribeImportTaskBatchesInput{})
+	got, err := svc.DescribeImportTaskBatches(context.Background(), &DescribeImportTaskBatchesInput{
+		ImportId: ptr.String("__ImportId__"),
+		BatchImportStatus: []types.ImportStatus{
+			types.ImportStatus("IN_PROGRESS"),
+			types.ImportStatus("IN_PROGRESS"),
+		},
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1364,7 +1588,13 @@ func TestCheckResponseSnapshot_DescribeImportTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeImportTasks(context.Background(), &DescribeImportTasksInput{})
+	got, err := svc.DescribeImportTasks(context.Background(), &DescribeImportTasksInput{
+		ImportId:        ptr.String("__ImportId__"),
+		ImportStatus:    types.ImportStatus("IN_PROGRESS"),
+		ImportSourceArn: ptr.String("__ImportSourceArn__"),
+		Limit:           ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1401,7 +1631,13 @@ func TestCheckResponseSnapshot_DescribeIndexPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeIndexPolicies(context.Background(), &DescribeIndexPoliciesInput{})
+	got, err := svc.DescribeIndexPolicies(context.Background(), &DescribeIndexPoliciesInput{
+		LogGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1460,7 +1696,22 @@ func TestCheckResponseSnapshot_DescribeLogGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLogGroups(context.Background(), &DescribeLogGroupsInput{})
+	got, err := svc.DescribeLogGroups(context.Background(), &DescribeLogGroupsInput{
+		AccountIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogGroupNamePrefix:    ptr.String("__LogGroupNamePrefix__"),
+		LogGroupNamePattern:   ptr.String("__LogGroupNamePattern__"),
+		NextToken:             ptr.String("__NextToken__"),
+		Limit:                 ptr.Int32(1),
+		IncludeLinkedAccounts: ptr.Bool(true),
+		LogGroupClass:         types.LogGroupClass("STANDARD"),
+		LogGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1503,7 +1754,15 @@ func TestCheckResponseSnapshot_DescribeLogStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLogStreams(context.Background(), &DescribeLogStreamsInput{})
+	got, err := svc.DescribeLogStreams(context.Background(), &DescribeLogStreamsInput{
+		LogGroupName:        ptr.String("__LogGroupName__"),
+		LogGroupIdentifier:  ptr.String("__LogGroupIdentifier__"),
+		LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+		OrderBy:             types.OrderBy("LogStreamName"),
+		Descending:          ptr.Bool(true),
+		NextToken:           ptr.String("__NextToken__"),
+		Limit:               ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1552,7 +1811,11 @@ func TestCheckResponseSnapshot_DescribeLookupTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLookupTables(context.Background(), &DescribeLookupTablesInput{})
+	got, err := svc.DescribeLookupTables(context.Background(), &DescribeLookupTablesInput{
+		LookupTableNamePrefix: ptr.String("__LookupTableNamePrefix__"),
+		MaxResults:            1,
+		NextToken:             ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1643,7 +1906,14 @@ func TestCheckResponseSnapshot_DescribeMetricFilters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMetricFilters(context.Background(), &DescribeMetricFiltersInput{})
+	got, err := svc.DescribeMetricFilters(context.Background(), &DescribeMetricFiltersInput{
+		LogGroupName:     ptr.String("__LogGroupName__"),
+		FilterNamePrefix: ptr.String("__FilterNamePrefix__"),
+		NextToken:        ptr.String("__NextToken__"),
+		Limit:            ptr.Int32(1),
+		MetricName:       ptr.String("__MetricName__"),
+		MetricNamespace:  ptr.String("__MetricNamespace__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1688,7 +1958,13 @@ func TestCheckResponseSnapshot_DescribeQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeQueries(context.Background(), &DescribeQueriesInput{})
+	got, err := svc.DescribeQueries(context.Background(), &DescribeQueriesInput{
+		LogGroupName:  ptr.String("__LogGroupName__"),
+		Status:        types.QueryStatus("Scheduled"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		QueryLanguage: types.QueryLanguage("CWLI"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1757,7 +2033,12 @@ func TestCheckResponseSnapshot_DescribeQueryDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeQueryDefinitions(context.Background(), &DescribeQueryDefinitionsInput{})
+	got, err := svc.DescribeQueryDefinitions(context.Background(), &DescribeQueryDefinitionsInput{
+		QueryLanguage:             types.QueryLanguage("CWLI"),
+		QueryDefinitionNamePrefix: ptr.String("__QueryDefinitionNamePrefix__"),
+		MaxResults:                ptr.Int32(1),
+		NextToken:                 ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1796,7 +2077,12 @@ func TestCheckResponseSnapshot_DescribeResourcePolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResourcePolicies(context.Background(), &DescribeResourcePoliciesInput{})
+	got, err := svc.DescribeResourcePolicies(context.Background(), &DescribeResourcePoliciesInput{
+		NextToken:   ptr.String("__NextToken__"),
+		Limit:       ptr.Int32(1),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		PolicyScope: types.PolicyScope("ACCOUNT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1849,7 +2135,12 @@ func TestCheckResponseSnapshot_DescribeSubscriptionFilters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSubscriptionFilters(context.Background(), &DescribeSubscriptionFiltersInput{})
+	got, err := svc.DescribeSubscriptionFilters(context.Background(), &DescribeSubscriptionFiltersInput{
+		LogGroupName:     ptr.String("__LogGroupName__"),
+		FilterNamePrefix: ptr.String("__FilterNamePrefix__"),
+		NextToken:        ptr.String("__NextToken__"),
+		Limit:            ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1868,7 +2159,10 @@ func TestCheckResponseSnapshot_DisassociateKmsKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateKmsKey(context.Background(), &DisassociateKmsKeyInput{})
+	got, err := svc.DisassociateKmsKey(context.Background(), &DisassociateKmsKeyInput{
+		LogGroupName:       ptr.String("__LogGroupName__"),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1889,7 +2183,9 @@ func TestCheckResponseSnapshot_DisassociateSourceFromS3TableIntegration(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateSourceFromS3TableIntegration(context.Background(), &DisassociateSourceFromS3TableIntegrationInput{})
+	got, err := svc.DisassociateSourceFromS3TableIntegration(context.Background(), &DisassociateSourceFromS3TableIntegrationInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1936,7 +2232,23 @@ func TestCheckResponseSnapshot_FilterLogEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.FilterLogEvents(context.Background(), &FilterLogEventsInput{})
+	got, err := svc.FilterLogEvents(context.Background(), &FilterLogEventsInput{
+		LogGroupName:       ptr.String("__LogGroupName__"),
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+		LogStreamNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+		StartTime:           ptr.Int64(1),
+		EndTime:             ptr.Int64(1),
+		FilterPattern:       ptr.String("__FilterPattern__"),
+		NextToken:           ptr.String("__NextToken__"),
+		Limit:               ptr.Int32(1),
+		StartFromHead:       ptr.Bool(true),
+		Interleaved:         ptr.Bool(true),
+		Unmask:              true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1959,7 +2271,9 @@ func TestCheckResponseSnapshot_GetDataProtectionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataProtectionPolicy(context.Background(), &GetDataProtectionPolicyInput{})
+	got, err := svc.GetDataProtectionPolicy(context.Background(), &GetDataProtectionPolicyInput{
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1998,7 +2312,9 @@ func TestCheckResponseSnapshot_GetDelivery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDelivery(context.Background(), &GetDeliveryInput{})
+	got, err := svc.GetDelivery(context.Background(), &GetDeliveryInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2030,7 +2346,9 @@ func TestCheckResponseSnapshot_GetDeliveryDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeliveryDestination(context.Background(), &GetDeliveryDestinationInput{})
+	got, err := svc.GetDeliveryDestination(context.Background(), &GetDeliveryDestinationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2053,7 +2371,9 @@ func TestCheckResponseSnapshot_GetDeliveryDestinationPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeliveryDestinationPolicy(context.Background(), &GetDeliveryDestinationPolicyInput{})
+	got, err := svc.GetDeliveryDestinationPolicy(context.Background(), &GetDeliveryDestinationPolicyInput{
+		DeliveryDestinationName: ptr.String("__DeliveryDestinationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2091,7 +2411,9 @@ func TestCheckResponseSnapshot_GetDeliverySource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeliverySource(context.Background(), &GetDeliverySourceInput{})
+	got, err := svc.GetDeliverySource(context.Background(), &GetDeliverySourceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2177,7 +2499,9 @@ func TestCheckResponseSnapshot_GetIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntegration(context.Background(), &GetIntegrationInput{})
+	got, err := svc.GetIntegration(context.Background(), &GetIntegrationInput{
+		IntegrationName: ptr.String("__IntegrationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2209,7 +2533,9 @@ func TestCheckResponseSnapshot_GetLogAnomalyDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLogAnomalyDetector(context.Background(), &GetLogAnomalyDetectorInput{})
+	got, err := svc.GetLogAnomalyDetector(context.Background(), &GetLogAnomalyDetectorInput{
+		AnomalyDetectorArn: ptr.String("__AnomalyDetectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2243,7 +2569,17 @@ func TestCheckResponseSnapshot_GetLogEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLogEvents(context.Background(), &GetLogEventsInput{})
+	got, err := svc.GetLogEvents(context.Background(), &GetLogEventsInput{
+		LogGroupName:       ptr.String("__LogGroupName__"),
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+		LogStreamName:      ptr.String("__LogStreamName__"),
+		StartTime:          ptr.Int64(1),
+		EndTime:            ptr.Int64(1),
+		NextToken:          ptr.String("__NextToken__"),
+		Limit:              ptr.Int32(1),
+		StartFromHead:      ptr.Bool(true),
+		Unmask:             true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2287,7 +2623,10 @@ func TestCheckResponseSnapshot_GetLogFields(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLogFields(context.Background(), &GetLogFieldsInput{})
+	got, err := svc.GetLogFields(context.Background(), &GetLogFieldsInput{
+		DataSourceName: ptr.String("__DataSourceName__"),
+		DataSourceType: ptr.String("__DataSourceType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2317,13 +2656,21 @@ func TestCheckResponseSnapshot_GetLogGroupFields(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLogGroupFields(context.Background(), &GetLogGroupFieldsInput{})
+	got, err := svc.GetLogGroupFields(context.Background(), &GetLogGroupFieldsInput{
+		LogGroupName:       ptr.String("__LogGroupName__"),
+		Time:               ptr.Int64(1),
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetLogGroupFields.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_GetLogObject(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_GetLogRecord(t *testing.T) {
@@ -2340,7 +2687,10 @@ func TestCheckResponseSnapshot_GetLogRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLogRecord(context.Background(), &GetLogRecordInput{})
+	got, err := svc.GetLogRecord(context.Background(), &GetLogRecordInput{
+		LogRecordPointer: ptr.String("__LogRecordPointer__"),
+		Unmask:           true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2367,7 +2717,9 @@ func TestCheckResponseSnapshot_GetLookupTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLookupTable(context.Background(), &GetLookupTableInput{})
+	got, err := svc.GetLookupTable(context.Background(), &GetLookupTableInput{
+		LookupTableArn: ptr.String("__LookupTableArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2421,7 +2773,11 @@ func TestCheckResponseSnapshot_GetQueryResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{})
+	got, err := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{
+		QueryId:   ptr.String("__QueryId__"),
+		NextToken: ptr.String("__NextToken__"),
+		MaxItems:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2480,7 +2836,9 @@ func TestCheckResponseSnapshot_GetScheduledQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetScheduledQuery(context.Background(), &GetScheduledQueryInput{})
+	got, err := svc.GetScheduledQuery(context.Background(), &GetScheduledQueryInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2549,7 +2907,17 @@ func TestCheckResponseSnapshot_GetScheduledQueryHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetScheduledQueryHistory(context.Background(), &GetScheduledQueryHistoryInput{})
+	got, err := svc.GetScheduledQueryHistory(context.Background(), &GetScheduledQueryHistoryInput{
+		Identifier: ptr.String("__Identifier__"),
+		StartTime:  ptr.Int64(1),
+		EndTime:    ptr.Int64(1),
+		ExecutionStatuses: []types.ExecutionStatus{
+			types.ExecutionStatus("Running"),
+			types.ExecutionStatus("Running"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2972,7 +3340,9 @@ func TestCheckResponseSnapshot_GetTransformer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTransformer(context.Background(), &GetTransformerInput{})
+	got, err := svc.GetTransformer(context.Background(), &GetTransformerInput{
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3021,7 +3391,28 @@ func TestCheckResponseSnapshot_ListAggregateLogGroupSummaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAggregateLogGroupSummaries(context.Background(), &ListAggregateLogGroupSummariesInput{})
+	got, err := svc.ListAggregateLogGroupSummaries(context.Background(), &ListAggregateLogGroupSummariesInput{
+		AccountIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IncludeLinkedAccounts: ptr.Bool(true),
+		LogGroupClass:         types.LogGroupClass("STANDARD"),
+		LogGroupNamePattern:   ptr.String("__LogGroupNamePattern__"),
+		DataSources: []types.DataSourceFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+		GroupBy:   types.ListAggregateLogGroupSummariesGroupBy("DATA_SOURCE_NAME_TYPE_AND_FORMAT"),
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3152,7 +3543,12 @@ func TestCheckResponseSnapshot_ListAnomalies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnomalies(context.Background(), &ListAnomaliesInput{})
+	got, err := svc.ListAnomalies(context.Background(), &ListAnomaliesInput{
+		AnomalyDetectorArn: ptr.String("__AnomalyDetectorArn__"),
+		SuppressionState:   types.SuppressionState("SUPPRESSED"),
+		Limit:              ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3184,7 +3580,11 @@ func TestCheckResponseSnapshot_ListIntegrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIntegrations(context.Background(), &ListIntegrationsInput{})
+	got, err := svc.ListIntegrations(context.Background(), &ListIntegrationsInput{
+		IntegrationNamePrefix: ptr.String("__IntegrationNamePrefix__"),
+		IntegrationType:       types.IntegrationType("OPENSEARCH"),
+		IntegrationStatus:     types.IntegrationStatus("PROVISIONING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3237,7 +3637,11 @@ func TestCheckResponseSnapshot_ListLogAnomalyDetectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLogAnomalyDetectors(context.Background(), &ListLogAnomalyDetectorsInput{})
+	got, err := svc.ListLogAnomalyDetectors(context.Background(), &ListLogAnomalyDetectorsInput{
+		FilterLogGroupArn: ptr.String("__FilterLogGroupArn__"),
+		Limit:             ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3270,7 +3674,47 @@ func TestCheckResponseSnapshot_ListLogGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLogGroups(context.Background(), &ListLogGroupsInput{})
+	got, err := svc.ListLogGroups(context.Background(), &ListLogGroupsInput{
+		LogGroupNamePattern:   ptr.String("__LogGroupNamePattern__"),
+		LogGroupClass:         types.LogGroupClass("STANDARD"),
+		IncludeLinkedAccounts: ptr.Bool(true),
+		AccountIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+		DataSources: []types.DataSourceFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+		FieldIndexNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogGroupTags: []types.TagFilter{
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3295,7 +3739,11 @@ func TestCheckResponseSnapshot_ListLogGroupsForQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLogGroupsForQuery(context.Background(), &ListLogGroupsForQueryInput{})
+	got, err := svc.ListLogGroupsForQuery(context.Background(), &ListLogGroupsForQueryInput{
+		QueryId:    ptr.String("__QueryId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3376,7 +3824,12 @@ func TestCheckResponseSnapshot_ListScheduledQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListScheduledQueries(context.Background(), &ListScheduledQueriesInput{})
+	got, err := svc.ListScheduledQueries(context.Background(), &ListScheduledQueriesInput{
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		State:        types.ScheduledQueryState("ENABLED"),
+		ScheduleType: types.ScheduleType("CUSTOMER_MANAGED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3421,7 +3874,11 @@ func TestCheckResponseSnapshot_ListSourcesForS3TableIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSourcesForS3TableIntegration(context.Background(), &ListSourcesForS3TableIntegrationInput{})
+	got, err := svc.ListSourcesForS3TableIntegration(context.Background(), &ListSourcesForS3TableIntegrationInput{
+		IntegrationArn: ptr.String("__IntegrationArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3456,7 +3913,12 @@ func TestCheckResponseSnapshot_ListSyslogConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSyslogConfigurations(context.Background(), &ListSyslogConfigurationsInput{})
+	got, err := svc.ListSyslogConfigurations(context.Background(), &ListSyslogConfigurationsInput{
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+		VpcEndpointId:      ptr.String("__VpcEndpointId__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3479,7 +3941,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3502,7 +3966,9 @@ func TestCheckResponseSnapshot_ListTagsLogGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsLogGroup(context.Background(), &ListTagsLogGroupInput{})
+	got, err := svc.ListTagsLogGroup(context.Background(), &ListTagsLogGroupInput{
+		LogGroupName: ptr.String("__LogGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3531,7 +3997,13 @@ func TestCheckResponseSnapshot_PutAccountPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountPolicy(context.Background(), &PutAccountPolicyInput{})
+	got, err := svc.PutAccountPolicy(context.Background(), &PutAccountPolicyInput{
+		PolicyName:        ptr.String("__PolicyName__"),
+		PolicyDocument:    ptr.String("__PolicyDocument__"),
+		PolicyType:        types.PolicyType("DATA_PROTECTION_POLICY"),
+		Scope:             types.Scope("ALL"),
+		SelectionCriteria: ptr.String("__SelectionCriteria__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3550,7 +4022,10 @@ func TestCheckResponseSnapshot_PutBearerTokenAuthentication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBearerTokenAuthentication(context.Background(), &PutBearerTokenAuthenticationInput{})
+	got, err := svc.PutBearerTokenAuthentication(context.Background(), &PutBearerTokenAuthenticationInput{
+		LogGroupIdentifier:               ptr.String("__LogGroupIdentifier__"),
+		BearerTokenAuthenticationEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3573,7 +4048,10 @@ func TestCheckResponseSnapshot_PutDataProtectionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDataProtectionPolicy(context.Background(), &PutDataProtectionPolicyInput{})
+	got, err := svc.PutDataProtectionPolicy(context.Background(), &PutDataProtectionPolicyInput{
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+		PolicyDocument:     ptr.String("__PolicyDocument__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3605,7 +4083,17 @@ func TestCheckResponseSnapshot_PutDeliveryDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDeliveryDestination(context.Background(), &PutDeliveryDestinationInput{})
+	got, err := svc.PutDeliveryDestination(context.Background(), &PutDeliveryDestinationInput{
+		Name:         ptr.String("__Name__"),
+		OutputFormat: types.OutputFormat("json"),
+		DeliveryDestinationConfiguration: &types.DeliveryDestinationConfiguration{
+			DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
+		},
+		DeliveryDestinationType: types.DeliveryDestinationType("S3"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3628,7 +4116,10 @@ func TestCheckResponseSnapshot_PutDeliveryDestinationPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDeliveryDestinationPolicy(context.Background(), &PutDeliveryDestinationPolicyInput{})
+	got, err := svc.PutDeliveryDestinationPolicy(context.Background(), &PutDeliveryDestinationPolicyInput{
+		DeliveryDestinationName:   ptr.String("__DeliveryDestinationName__"),
+		DeliveryDestinationPolicy: ptr.String("__DeliveryDestinationPolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3666,7 +4157,17 @@ func TestCheckResponseSnapshot_PutDeliverySource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDeliverySource(context.Background(), &PutDeliverySourceInput{})
+	got, err := svc.PutDeliverySource(context.Background(), &PutDeliverySourceInput{
+		Name:        ptr.String("__Name__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		LogType:     ptr.String("__LogType__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeliverySourceConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3694,7 +4195,14 @@ func TestCheckResponseSnapshot_PutDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDestination(context.Background(), &PutDestinationInput{})
+	got, err := svc.PutDestination(context.Background(), &PutDestinationInput{
+		DestinationName: ptr.String("__DestinationName__"),
+		TargetArn:       ptr.String("__TargetArn__"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3713,7 +4221,11 @@ func TestCheckResponseSnapshot_PutDestinationPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDestinationPolicy(context.Background(), &PutDestinationPolicyInput{})
+	got, err := svc.PutDestinationPolicy(context.Background(), &PutDestinationPolicyInput{
+		DestinationName: ptr.String("__DestinationName__"),
+		AccessPolicy:    ptr.String("__AccessPolicy__"),
+		ForceUpdate:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3740,7 +4252,10 @@ func TestCheckResponseSnapshot_PutIndexPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutIndexPolicy(context.Background(), &PutIndexPolicyInput{})
+	got, err := svc.PutIndexPolicy(context.Background(), &PutIndexPolicyInput{
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+		PolicyDocument:     ptr.String("__PolicyDocument__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3762,7 +4277,22 @@ func TestCheckResponseSnapshot_PutIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutIntegration(context.Background(), &PutIntegrationInput{})
+	got, err := svc.PutIntegration(context.Background(), &PutIntegrationInput{
+		IntegrationName: ptr.String("__IntegrationName__"),
+		ResourceConfig: &types.ResourceConfigMemberOpenSearchResourceConfig{
+			Value: types.OpenSearchResourceConfig{
+				KmsKeyArn:         ptr.String("__KmsKeyArn__"),
+				DataSourceRoleArn: ptr.String("__DataSourceRoleArn__"),
+				DashboardViewerPrincipals: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ApplicationArn: ptr.String("__ApplicationArn__"),
+				RetentionDays:  ptr.Int32(1),
+			},
+		},
+		IntegrationType: types.IntegrationType("OPENSEARCH"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3791,7 +4321,29 @@ func TestCheckResponseSnapshot_PutLogEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLogEvents(context.Background(), &PutLogEventsInput{})
+	got, err := svc.PutLogEvents(context.Background(), &PutLogEventsInput{
+		LogGroupName:  ptr.String("__LogGroupName__"),
+		LogStreamName: ptr.String("__LogStreamName__"),
+		LogEvents: []types.InputLogEvent{
+			{
+				Timestamp: ptr.Int64(1),
+				Message:   ptr.String("__Message__"),
+			},
+			{
+				Timestamp: ptr.Int64(1),
+				Message:   ptr.String("__Message__"),
+			},
+		},
+		SequenceToken: ptr.String("__SequenceToken__"),
+		Entity: &types.Entity{
+			KeyAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3810,7 +4362,10 @@ func TestCheckResponseSnapshot_PutLogGroupDeletionProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLogGroupDeletionProtection(context.Background(), &PutLogGroupDeletionProtectionInput{})
+	got, err := svc.PutLogGroupDeletionProtection(context.Background(), &PutLogGroupDeletionProtectionInput{
+		LogGroupIdentifier:        ptr.String("__LogGroupIdentifier__"),
+		DeletionProtectionEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3829,7 +4384,39 @@ func TestCheckResponseSnapshot_PutMetricFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMetricFilter(context.Background(), &PutMetricFilterInput{})
+	got, err := svc.PutMetricFilter(context.Background(), &PutMetricFilterInput{
+		LogGroupName:  ptr.String("__LogGroupName__"),
+		FilterName:    ptr.String("__FilterName__"),
+		FilterPattern: ptr.String("__FilterPattern__"),
+		MetricTransformations: []types.MetricTransformation{
+			{
+				MetricName:      ptr.String("__MetricName__"),
+				MetricNamespace: ptr.String("__MetricNamespace__"),
+				MetricValue:     ptr.String("__MetricValue__"),
+				DefaultValue:    ptr.Float64(1.0),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Unit: types.StandardUnit("Seconds"),
+			},
+			{
+				MetricName:      ptr.String("__MetricName__"),
+				MetricNamespace: ptr.String("__MetricNamespace__"),
+				MetricValue:     ptr.String("__MetricValue__"),
+				DefaultValue:    ptr.Float64(1.0),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Unit: types.StandardUnit("Seconds"),
+			},
+		},
+		ApplyOnTransformedLogs: true,
+		FieldSelectionCriteria: ptr.String("__FieldSelectionCriteria__"),
+		EmitSystemFieldDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3850,7 +4437,29 @@ func TestCheckResponseSnapshot_PutQueryDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutQueryDefinition(context.Background(), &PutQueryDefinitionInput{})
+	got, err := svc.PutQueryDefinition(context.Background(), &PutQueryDefinitionInput{
+		QueryLanguage:     types.QueryLanguage("CWLI"),
+		Name:              ptr.String("__Name__"),
+		QueryDefinitionId: ptr.String("__QueryDefinitionId__"),
+		LogGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		QueryString: ptr.String("__QueryString__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Parameters: []types.QueryParameter{
+			{
+				Name:         ptr.String("__Name__"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+				Description:  ptr.String("__Description__"),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+				Description:  ptr.String("__Description__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3879,7 +4488,12 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		PolicyName:         ptr.String("__PolicyName__"),
+		PolicyDocument:     ptr.String("__PolicyDocument__"),
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		ExpectedRevisionId: ptr.String("__ExpectedRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3898,7 +4512,10 @@ func TestCheckResponseSnapshot_PutRetentionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRetentionPolicy(context.Background(), &PutRetentionPolicyInput{})
+	got, err := svc.PutRetentionPolicy(context.Background(), &PutRetentionPolicyInput{
+		LogGroupName:    ptr.String("__LogGroupName__"),
+		RetentionInDays: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3920,7 +4537,9 @@ func TestCheckResponseSnapshot_PutStorageTierPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutStorageTierPolicy(context.Background(), &PutStorageTierPolicyInput{})
+	got, err := svc.PutStorageTierPolicy(context.Background(), &PutStorageTierPolicyInput{
+		StorageTier: types.StorageTier("STANDARD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3939,7 +4558,20 @@ func TestCheckResponseSnapshot_PutSubscriptionFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSubscriptionFilter(context.Background(), &PutSubscriptionFilterInput{})
+	got, err := svc.PutSubscriptionFilter(context.Background(), &PutSubscriptionFilterInput{
+		LogGroupName:           ptr.String("__LogGroupName__"),
+		FilterName:             ptr.String("__FilterName__"),
+		FilterPattern:          ptr.String("__FilterPattern__"),
+		DestinationArn:         ptr.String("__DestinationArn__"),
+		RoleArn:                ptr.String("__RoleArn__"),
+		Distribution:           types.Distribution("Random"),
+		ApplyOnTransformedLogs: true,
+		FieldSelectionCriteria: ptr.String("__FieldSelectionCriteria__"),
+		EmitSystemFields: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3958,7 +4590,10 @@ func TestCheckResponseSnapshot_PutSyslogConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSyslogConfiguration(context.Background(), &PutSyslogConfigurationInput{})
+	got, err := svc.PutSyslogConfiguration(context.Background(), &PutSyslogConfigurationInput{
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+		VpcEndpointId:      ptr.String("__VpcEndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3977,13 +4612,397 @@ func TestCheckResponseSnapshot_PutTransformer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTransformer(context.Background(), &PutTransformerInput{})
+	got, err := svc.PutTransformer(context.Background(), &PutTransformerInput{
+		LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
+		TransformerConfig: []types.Processor{
+			{
+				AddKeys: &types.AddKeys{
+					Entries: []types.AddKeyEntry{
+						{
+							Key:               ptr.String("__Key__"),
+							Value:             ptr.String("__Value__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Key:               ptr.String("__Key__"),
+							Value:             ptr.String("__Value__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				CopyValue: &types.CopyValue{
+					Entries: []types.CopyValueEntry{
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				Csv: &types.CSV{
+					QuoteCharacter: ptr.String("__QuoteCharacter__"),
+					Delimiter:      ptr.String("__Delimiter__"),
+					Columns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Source:      ptr.String("__Source__"),
+					Destination: ptr.String("__Destination__"),
+				},
+				DateTimeConverter: &types.DateTimeConverter{
+					Source:       ptr.String("__Source__"),
+					Target:       ptr.String("__Target__"),
+					TargetFormat: ptr.String("__TargetFormat__"),
+					MatchPatterns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SourceTimezone: ptr.String("__SourceTimezone__"),
+					TargetTimezone: ptr.String("__TargetTimezone__"),
+					Locale:         ptr.String("__Locale__"),
+				},
+				DeleteKeys: &types.DeleteKeys{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Grok: &types.Grok{
+					Source: ptr.String("__Source__"),
+					Match:  ptr.String("__Match__"),
+				},
+				ListToMap: &types.ListToMap{
+					Source:           ptr.String("__Source__"),
+					Key:              ptr.String("__Key__"),
+					ValueKey:         ptr.String("__ValueKey__"),
+					Target:           ptr.String("__Target__"),
+					Flatten:          true,
+					FlattenedElement: types.FlattenedElement("first"),
+				},
+				LowerCaseString: &types.LowerCaseString{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MoveKeys: &types.MoveKeys{
+					Entries: []types.MoveKeyEntry{
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				ParseCloudfront: &types.ParseCloudfront{
+					Source: ptr.String("__Source__"),
+				},
+				ParseJSON: &types.ParseJSON{
+					Source:      ptr.String("__Source__"),
+					Destination: ptr.String("__Destination__"),
+				},
+				ParseKeyValue: &types.ParseKeyValue{
+					Source:            ptr.String("__Source__"),
+					Destination:       ptr.String("__Destination__"),
+					FieldDelimiter:    ptr.String("__FieldDelimiter__"),
+					KeyValueDelimiter: ptr.String("__KeyValueDelimiter__"),
+					KeyPrefix:         ptr.String("__KeyPrefix__"),
+					NonMatchValue:     ptr.String("__NonMatchValue__"),
+					OverwriteIfExists: true,
+				},
+				ParseRoute53: &types.ParseRoute53{
+					Source: ptr.String("__Source__"),
+				},
+				ParseToOCSF: &types.ParseToOCSF{
+					Source:         ptr.String("__Source__"),
+					EventSource:    types.EventSource("CloudTrail"),
+					OcsfVersion:    types.OCSFVersion("V1.1"),
+					MappingVersion: ptr.String("__MappingVersion__"),
+				},
+				ParsePostgres: &types.ParsePostgres{
+					Source: ptr.String("__Source__"),
+				},
+				ParseVPC: &types.ParseVPC{
+					Source: ptr.String("__Source__"),
+				},
+				ParseWAF: &types.ParseWAF{
+					Source: ptr.String("__Source__"),
+				},
+				RenameKeys: &types.RenameKeys{
+					Entries: []types.RenameKeyEntry{
+						{
+							Key:               ptr.String("__Key__"),
+							RenameTo:          ptr.String("__RenameTo__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Key:               ptr.String("__Key__"),
+							RenameTo:          ptr.String("__RenameTo__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				SplitString: &types.SplitString{
+					Entries: []types.SplitStringEntry{
+						{
+							Source:    ptr.String("__Source__"),
+							Delimiter: ptr.String("__Delimiter__"),
+						},
+						{
+							Source:    ptr.String("__Source__"),
+							Delimiter: ptr.String("__Delimiter__"),
+						},
+					},
+				},
+				SubstituteString: &types.SubstituteString{
+					Entries: []types.SubstituteStringEntry{
+						{
+							Source: ptr.String("__Source__"),
+							From:   ptr.String("__From__"),
+							To:     ptr.String("__To__"),
+						},
+						{
+							Source: ptr.String("__Source__"),
+							From:   ptr.String("__From__"),
+							To:     ptr.String("__To__"),
+						},
+					},
+				},
+				TrimString: &types.TrimString{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				TypeConverter: &types.TypeConverter{
+					Entries: []types.TypeConverterEntry{
+						{
+							Key:  ptr.String("__Key__"),
+							Type: types.Type("boolean"),
+						},
+						{
+							Key:  ptr.String("__Key__"),
+							Type: types.Type("boolean"),
+						},
+					},
+				},
+				UpperCaseString: &types.UpperCaseString{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				AddKeys: &types.AddKeys{
+					Entries: []types.AddKeyEntry{
+						{
+							Key:               ptr.String("__Key__"),
+							Value:             ptr.String("__Value__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Key:               ptr.String("__Key__"),
+							Value:             ptr.String("__Value__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				CopyValue: &types.CopyValue{
+					Entries: []types.CopyValueEntry{
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				Csv: &types.CSV{
+					QuoteCharacter: ptr.String("__QuoteCharacter__"),
+					Delimiter:      ptr.String("__Delimiter__"),
+					Columns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Source:      ptr.String("__Source__"),
+					Destination: ptr.String("__Destination__"),
+				},
+				DateTimeConverter: &types.DateTimeConverter{
+					Source:       ptr.String("__Source__"),
+					Target:       ptr.String("__Target__"),
+					TargetFormat: ptr.String("__TargetFormat__"),
+					MatchPatterns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SourceTimezone: ptr.String("__SourceTimezone__"),
+					TargetTimezone: ptr.String("__TargetTimezone__"),
+					Locale:         ptr.String("__Locale__"),
+				},
+				DeleteKeys: &types.DeleteKeys{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Grok: &types.Grok{
+					Source: ptr.String("__Source__"),
+					Match:  ptr.String("__Match__"),
+				},
+				ListToMap: &types.ListToMap{
+					Source:           ptr.String("__Source__"),
+					Key:              ptr.String("__Key__"),
+					ValueKey:         ptr.String("__ValueKey__"),
+					Target:           ptr.String("__Target__"),
+					Flatten:          true,
+					FlattenedElement: types.FlattenedElement("first"),
+				},
+				LowerCaseString: &types.LowerCaseString{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MoveKeys: &types.MoveKeys{
+					Entries: []types.MoveKeyEntry{
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				ParseCloudfront: &types.ParseCloudfront{
+					Source: ptr.String("__Source__"),
+				},
+				ParseJSON: &types.ParseJSON{
+					Source:      ptr.String("__Source__"),
+					Destination: ptr.String("__Destination__"),
+				},
+				ParseKeyValue: &types.ParseKeyValue{
+					Source:            ptr.String("__Source__"),
+					Destination:       ptr.String("__Destination__"),
+					FieldDelimiter:    ptr.String("__FieldDelimiter__"),
+					KeyValueDelimiter: ptr.String("__KeyValueDelimiter__"),
+					KeyPrefix:         ptr.String("__KeyPrefix__"),
+					NonMatchValue:     ptr.String("__NonMatchValue__"),
+					OverwriteIfExists: true,
+				},
+				ParseRoute53: &types.ParseRoute53{
+					Source: ptr.String("__Source__"),
+				},
+				ParseToOCSF: &types.ParseToOCSF{
+					Source:         ptr.String("__Source__"),
+					EventSource:    types.EventSource("CloudTrail"),
+					OcsfVersion:    types.OCSFVersion("V1.1"),
+					MappingVersion: ptr.String("__MappingVersion__"),
+				},
+				ParsePostgres: &types.ParsePostgres{
+					Source: ptr.String("__Source__"),
+				},
+				ParseVPC: &types.ParseVPC{
+					Source: ptr.String("__Source__"),
+				},
+				ParseWAF: &types.ParseWAF{
+					Source: ptr.String("__Source__"),
+				},
+				RenameKeys: &types.RenameKeys{
+					Entries: []types.RenameKeyEntry{
+						{
+							Key:               ptr.String("__Key__"),
+							RenameTo:          ptr.String("__RenameTo__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Key:               ptr.String("__Key__"),
+							RenameTo:          ptr.String("__RenameTo__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				SplitString: &types.SplitString{
+					Entries: []types.SplitStringEntry{
+						{
+							Source:    ptr.String("__Source__"),
+							Delimiter: ptr.String("__Delimiter__"),
+						},
+						{
+							Source:    ptr.String("__Source__"),
+							Delimiter: ptr.String("__Delimiter__"),
+						},
+					},
+				},
+				SubstituteString: &types.SubstituteString{
+					Entries: []types.SubstituteStringEntry{
+						{
+							Source: ptr.String("__Source__"),
+							From:   ptr.String("__From__"),
+							To:     ptr.String("__To__"),
+						},
+						{
+							Source: ptr.String("__Source__"),
+							From:   ptr.String("__From__"),
+							To:     ptr.String("__To__"),
+						},
+					},
+				},
+				TrimString: &types.TrimString{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				TypeConverter: &types.TypeConverter{
+					Entries: []types.TypeConverterEntry{
+						{
+							Key:  ptr.String("__Key__"),
+							Type: types.Type("boolean"),
+						},
+						{
+							Key:  ptr.String("__Key__"),
+							Type: types.Type("boolean"),
+						},
+					},
+				},
+				UpperCaseString: &types.UpperCaseString{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutTransformer.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_StartLiveTail(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_StartQuery(t *testing.T) {
@@ -3998,7 +5017,22 @@ func TestCheckResponseSnapshot_StartQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartQuery(context.Background(), &StartQueryInput{})
+	got, err := svc.StartQuery(context.Background(), &StartQueryInput{
+		QueryLanguage: types.QueryLanguage("CWLI"),
+		LogGroupName:  ptr.String("__LogGroupName__"),
+		LogGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StartTime:   ptr.Int64(1),
+		EndTime:     ptr.Int64(1),
+		QueryString: ptr.String("__QueryString__"),
+		Limit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4019,7 +5053,9 @@ func TestCheckResponseSnapshot_StopQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopQuery(context.Background(), &StopQueryInput{})
+	got, err := svc.StopQuery(context.Background(), &StopQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4038,7 +5074,12 @@ func TestCheckResponseSnapshot_TagLogGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagLogGroup(context.Background(), &TagLogGroupInput{})
+	got, err := svc.TagLogGroup(context.Background(), &TagLogGroupInput{
+		LogGroupName: ptr.String("__LogGroupName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4057,7 +5098,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4093,7 +5139,13 @@ func TestCheckResponseSnapshot_TestMetricFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestMetricFilter(context.Background(), &TestMetricFilterInput{})
+	got, err := svc.TestMetricFilter(context.Background(), &TestMetricFilterInput{
+		FilterPattern: ptr.String("__FilterPattern__"),
+		LogEventMessages: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4125,7 +5177,390 @@ func TestCheckResponseSnapshot_TestTransformer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestTransformer(context.Background(), &TestTransformerInput{})
+	got, err := svc.TestTransformer(context.Background(), &TestTransformerInput{
+		TransformerConfig: []types.Processor{
+			{
+				AddKeys: &types.AddKeys{
+					Entries: []types.AddKeyEntry{
+						{
+							Key:               ptr.String("__Key__"),
+							Value:             ptr.String("__Value__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Key:               ptr.String("__Key__"),
+							Value:             ptr.String("__Value__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				CopyValue: &types.CopyValue{
+					Entries: []types.CopyValueEntry{
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				Csv: &types.CSV{
+					QuoteCharacter: ptr.String("__QuoteCharacter__"),
+					Delimiter:      ptr.String("__Delimiter__"),
+					Columns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Source:      ptr.String("__Source__"),
+					Destination: ptr.String("__Destination__"),
+				},
+				DateTimeConverter: &types.DateTimeConverter{
+					Source:       ptr.String("__Source__"),
+					Target:       ptr.String("__Target__"),
+					TargetFormat: ptr.String("__TargetFormat__"),
+					MatchPatterns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SourceTimezone: ptr.String("__SourceTimezone__"),
+					TargetTimezone: ptr.String("__TargetTimezone__"),
+					Locale:         ptr.String("__Locale__"),
+				},
+				DeleteKeys: &types.DeleteKeys{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Grok: &types.Grok{
+					Source: ptr.String("__Source__"),
+					Match:  ptr.String("__Match__"),
+				},
+				ListToMap: &types.ListToMap{
+					Source:           ptr.String("__Source__"),
+					Key:              ptr.String("__Key__"),
+					ValueKey:         ptr.String("__ValueKey__"),
+					Target:           ptr.String("__Target__"),
+					Flatten:          true,
+					FlattenedElement: types.FlattenedElement("first"),
+				},
+				LowerCaseString: &types.LowerCaseString{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MoveKeys: &types.MoveKeys{
+					Entries: []types.MoveKeyEntry{
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				ParseCloudfront: &types.ParseCloudfront{
+					Source: ptr.String("__Source__"),
+				},
+				ParseJSON: &types.ParseJSON{
+					Source:      ptr.String("__Source__"),
+					Destination: ptr.String("__Destination__"),
+				},
+				ParseKeyValue: &types.ParseKeyValue{
+					Source:            ptr.String("__Source__"),
+					Destination:       ptr.String("__Destination__"),
+					FieldDelimiter:    ptr.String("__FieldDelimiter__"),
+					KeyValueDelimiter: ptr.String("__KeyValueDelimiter__"),
+					KeyPrefix:         ptr.String("__KeyPrefix__"),
+					NonMatchValue:     ptr.String("__NonMatchValue__"),
+					OverwriteIfExists: true,
+				},
+				ParseRoute53: &types.ParseRoute53{
+					Source: ptr.String("__Source__"),
+				},
+				ParseToOCSF: &types.ParseToOCSF{
+					Source:         ptr.String("__Source__"),
+					EventSource:    types.EventSource("CloudTrail"),
+					OcsfVersion:    types.OCSFVersion("V1.1"),
+					MappingVersion: ptr.String("__MappingVersion__"),
+				},
+				ParsePostgres: &types.ParsePostgres{
+					Source: ptr.String("__Source__"),
+				},
+				ParseVPC: &types.ParseVPC{
+					Source: ptr.String("__Source__"),
+				},
+				ParseWAF: &types.ParseWAF{
+					Source: ptr.String("__Source__"),
+				},
+				RenameKeys: &types.RenameKeys{
+					Entries: []types.RenameKeyEntry{
+						{
+							Key:               ptr.String("__Key__"),
+							RenameTo:          ptr.String("__RenameTo__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Key:               ptr.String("__Key__"),
+							RenameTo:          ptr.String("__RenameTo__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				SplitString: &types.SplitString{
+					Entries: []types.SplitStringEntry{
+						{
+							Source:    ptr.String("__Source__"),
+							Delimiter: ptr.String("__Delimiter__"),
+						},
+						{
+							Source:    ptr.String("__Source__"),
+							Delimiter: ptr.String("__Delimiter__"),
+						},
+					},
+				},
+				SubstituteString: &types.SubstituteString{
+					Entries: []types.SubstituteStringEntry{
+						{
+							Source: ptr.String("__Source__"),
+							From:   ptr.String("__From__"),
+							To:     ptr.String("__To__"),
+						},
+						{
+							Source: ptr.String("__Source__"),
+							From:   ptr.String("__From__"),
+							To:     ptr.String("__To__"),
+						},
+					},
+				},
+				TrimString: &types.TrimString{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				TypeConverter: &types.TypeConverter{
+					Entries: []types.TypeConverterEntry{
+						{
+							Key:  ptr.String("__Key__"),
+							Type: types.Type("boolean"),
+						},
+						{
+							Key:  ptr.String("__Key__"),
+							Type: types.Type("boolean"),
+						},
+					},
+				},
+				UpperCaseString: &types.UpperCaseString{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				AddKeys: &types.AddKeys{
+					Entries: []types.AddKeyEntry{
+						{
+							Key:               ptr.String("__Key__"),
+							Value:             ptr.String("__Value__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Key:               ptr.String("__Key__"),
+							Value:             ptr.String("__Value__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				CopyValue: &types.CopyValue{
+					Entries: []types.CopyValueEntry{
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				Csv: &types.CSV{
+					QuoteCharacter: ptr.String("__QuoteCharacter__"),
+					Delimiter:      ptr.String("__Delimiter__"),
+					Columns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Source:      ptr.String("__Source__"),
+					Destination: ptr.String("__Destination__"),
+				},
+				DateTimeConverter: &types.DateTimeConverter{
+					Source:       ptr.String("__Source__"),
+					Target:       ptr.String("__Target__"),
+					TargetFormat: ptr.String("__TargetFormat__"),
+					MatchPatterns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SourceTimezone: ptr.String("__SourceTimezone__"),
+					TargetTimezone: ptr.String("__TargetTimezone__"),
+					Locale:         ptr.String("__Locale__"),
+				},
+				DeleteKeys: &types.DeleteKeys{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Grok: &types.Grok{
+					Source: ptr.String("__Source__"),
+					Match:  ptr.String("__Match__"),
+				},
+				ListToMap: &types.ListToMap{
+					Source:           ptr.String("__Source__"),
+					Key:              ptr.String("__Key__"),
+					ValueKey:         ptr.String("__ValueKey__"),
+					Target:           ptr.String("__Target__"),
+					Flatten:          true,
+					FlattenedElement: types.FlattenedElement("first"),
+				},
+				LowerCaseString: &types.LowerCaseString{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				MoveKeys: &types.MoveKeys{
+					Entries: []types.MoveKeyEntry{
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Source:            ptr.String("__Source__"),
+							Target:            ptr.String("__Target__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				ParseCloudfront: &types.ParseCloudfront{
+					Source: ptr.String("__Source__"),
+				},
+				ParseJSON: &types.ParseJSON{
+					Source:      ptr.String("__Source__"),
+					Destination: ptr.String("__Destination__"),
+				},
+				ParseKeyValue: &types.ParseKeyValue{
+					Source:            ptr.String("__Source__"),
+					Destination:       ptr.String("__Destination__"),
+					FieldDelimiter:    ptr.String("__FieldDelimiter__"),
+					KeyValueDelimiter: ptr.String("__KeyValueDelimiter__"),
+					KeyPrefix:         ptr.String("__KeyPrefix__"),
+					NonMatchValue:     ptr.String("__NonMatchValue__"),
+					OverwriteIfExists: true,
+				},
+				ParseRoute53: &types.ParseRoute53{
+					Source: ptr.String("__Source__"),
+				},
+				ParseToOCSF: &types.ParseToOCSF{
+					Source:         ptr.String("__Source__"),
+					EventSource:    types.EventSource("CloudTrail"),
+					OcsfVersion:    types.OCSFVersion("V1.1"),
+					MappingVersion: ptr.String("__MappingVersion__"),
+				},
+				ParsePostgres: &types.ParsePostgres{
+					Source: ptr.String("__Source__"),
+				},
+				ParseVPC: &types.ParseVPC{
+					Source: ptr.String("__Source__"),
+				},
+				ParseWAF: &types.ParseWAF{
+					Source: ptr.String("__Source__"),
+				},
+				RenameKeys: &types.RenameKeys{
+					Entries: []types.RenameKeyEntry{
+						{
+							Key:               ptr.String("__Key__"),
+							RenameTo:          ptr.String("__RenameTo__"),
+							OverwriteIfExists: true,
+						},
+						{
+							Key:               ptr.String("__Key__"),
+							RenameTo:          ptr.String("__RenameTo__"),
+							OverwriteIfExists: true,
+						},
+					},
+				},
+				SplitString: &types.SplitString{
+					Entries: []types.SplitStringEntry{
+						{
+							Source:    ptr.String("__Source__"),
+							Delimiter: ptr.String("__Delimiter__"),
+						},
+						{
+							Source:    ptr.String("__Source__"),
+							Delimiter: ptr.String("__Delimiter__"),
+						},
+					},
+				},
+				SubstituteString: &types.SubstituteString{
+					Entries: []types.SubstituteStringEntry{
+						{
+							Source: ptr.String("__Source__"),
+							From:   ptr.String("__From__"),
+							To:     ptr.String("__To__"),
+						},
+						{
+							Source: ptr.String("__Source__"),
+							From:   ptr.String("__From__"),
+							To:     ptr.String("__To__"),
+						},
+					},
+				},
+				TrimString: &types.TrimString{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				TypeConverter: &types.TypeConverter{
+					Entries: []types.TypeConverterEntry{
+						{
+							Key:  ptr.String("__Key__"),
+							Type: types.Type("boolean"),
+						},
+						{
+							Key:  ptr.String("__Key__"),
+							Type: types.Type("boolean"),
+						},
+					},
+				},
+				UpperCaseString: &types.UpperCaseString{
+					WithKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		LogEventMessages: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4144,7 +5579,13 @@ func TestCheckResponseSnapshot_UntagLogGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagLogGroup(context.Background(), &UntagLogGroupInput{})
+	got, err := svc.UntagLogGroup(context.Background(), &UntagLogGroupInput{
+		LogGroupName: ptr.String("__LogGroupName__"),
+		Tags: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4163,7 +5604,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4182,7 +5629,17 @@ func TestCheckResponseSnapshot_UpdateAnomaly(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAnomaly(context.Background(), &UpdateAnomalyInput{})
+	got, err := svc.UpdateAnomaly(context.Background(), &UpdateAnomalyInput{
+		AnomalyId:          ptr.String("__AnomalyId__"),
+		PatternId:          ptr.String("__PatternId__"),
+		AnomalyDetectorArn: ptr.String("__AnomalyDetectorArn__"),
+		SuppressionType:    types.SuppressionType("LIMITED"),
+		SuppressionPeriod: &types.SuppressionPeriod{
+			Value:           1,
+			SuppressionUnit: types.SuppressionUnit("SECONDS"),
+		},
+		Baseline: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4201,7 +5658,18 @@ func TestCheckResponseSnapshot_UpdateDeliveryConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDeliveryConfiguration(context.Background(), &UpdateDeliveryConfigurationInput{})
+	got, err := svc.UpdateDeliveryConfiguration(context.Background(), &UpdateDeliveryConfigurationInput{
+		Id: ptr.String("__Id__"),
+		RecordFields: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FieldDelimiter: ptr.String("__FieldDelimiter__"),
+		S3DeliveryConfiguration: &types.S3DeliveryConfiguration{
+			SuffixPath:               ptr.String("__SuffixPath__"),
+			EnableHiveCompatiblePath: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4220,7 +5688,13 @@ func TestCheckResponseSnapshot_UpdateLogAnomalyDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLogAnomalyDetector(context.Background(), &UpdateLogAnomalyDetectorInput{})
+	got, err := svc.UpdateLogAnomalyDetector(context.Background(), &UpdateLogAnomalyDetectorInput{
+		AnomalyDetectorArn:    ptr.String("__AnomalyDetectorArn__"),
+		EvaluationFrequency:   types.EvaluationFrequency("ONE_MIN"),
+		FilterPattern:         ptr.String("__FilterPattern__"),
+		AnomalyVisibilityTime: ptr.Int64(1),
+		Enabled:               ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4242,7 +5716,13 @@ func TestCheckResponseSnapshot_UpdateLookupTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLookupTable(context.Background(), &UpdateLookupTableInput{})
+	got, err := svc.UpdateLookupTable(context.Background(), &UpdateLookupTableInput{
+		LookupTableArn: ptr.String("__LookupTableArn__"),
+		Description:    ptr.String("__Description__"),
+		TableBody:      ptr.String("__TableBody__"),
+		QueryId:        ptr.String("__QueryId__"),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4301,7 +5781,41 @@ func TestCheckResponseSnapshot_UpdateScheduledQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateScheduledQuery(context.Background(), &UpdateScheduledQueryInput{})
+	got, err := svc.UpdateScheduledQuery(context.Background(), &UpdateScheduledQueryInput{
+		Identifier:    ptr.String("__Identifier__"),
+		Description:   ptr.String("__Description__"),
+		QueryLanguage: types.QueryLanguage("CWLI"),
+		QueryString:   ptr.String("__QueryString__"),
+		LogGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ScheduleExpression: ptr.String("__ScheduleExpression__"),
+		Timezone:           ptr.String("__Timezone__"),
+		StartTimeOffset:    ptr.Int64(1),
+		EndTimeOffset:      ptr.Int64(1),
+		DestinationConfiguration: &types.DestinationConfiguration{
+			S3Configuration: &types.S3Configuration{
+				DestinationIdentifier: ptr.String("__DestinationIdentifier__"),
+				RoleArn:               ptr.String("__RoleArn__"),
+				OwnerAccountId:        ptr.String("__OwnerAccountId__"),
+				KmsKeyId:              ptr.String("__KmsKeyId__"),
+			},
+			LookupTableConfiguration: &types.LookupTableConfiguration{
+				TableName:   ptr.String("__TableName__"),
+				RoleArn:     ptr.String("__RoleArn__"),
+				Description: ptr.String("__Description__"),
+				KmsKeyId:    ptr.String("__KmsKeyId__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		ScheduleStartTime: ptr.Int64(1),
+		ScheduleEndTime:   ptr.Int64(1),
+		ExecutionRoleArn:  ptr.String("__ExecutionRoleArn__"),
+		State:             types.ScheduledQueryState("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4322,7 +5836,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceToS3TableIntegration(context.Background(), &AssociateSourceToS3TableIntegrationInput{})
+	_, opErr := svc.AssociateSourceToS3TableIntegration(context.Background(), &AssociateSourceToS3TableIntegrationInput{
+		IntegrationArn: ptr.String("__IntegrationArn__"),
+		DataSource: &types.DataSource{
+			Name: ptr.String("__Name__"),
+			Type: ptr.String("__Type__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4347,7 +5867,22 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDelivery(context.Background(), &CreateDeliveryInput{})
+	_, opErr := svc.CreateDelivery(context.Background(), &CreateDeliveryInput{
+		DeliverySourceName:     ptr.String("__DeliverySourceName__"),
+		DeliveryDestinationArn: ptr.String("__DeliveryDestinationArn__"),
+		RecordFields: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FieldDelimiter: ptr.String("__FieldDelimiter__"),
+		S3DeliveryConfiguration: &types.S3DeliveryConfiguration{
+			SuffixPath:               ptr.String("__SuffixPath__"),
+			EnableHiveCompatiblePath: ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4373,7 +5908,29 @@ func TestCheckResponseSnapshot_Error_DataAlreadyAcceptedException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLogEvents(context.Background(), &PutLogEventsInput{})
+	_, opErr := svc.PutLogEvents(context.Background(), &PutLogEventsInput{
+		LogGroupName:  ptr.String("__LogGroupName__"),
+		LogStreamName: ptr.String("__LogStreamName__"),
+		LogEvents: []types.InputLogEvent{
+			{
+				Timestamp: ptr.Int64(1),
+				Message:   ptr.String("__Message__"),
+			},
+			{
+				Timestamp: ptr.Int64(1),
+				Message:   ptr.String("__Message__"),
+			},
+		},
+		SequenceToken: ptr.String("__SequenceToken__"),
+		Entity: &types.Entity{
+			KeyAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4398,7 +5955,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceToS3TableIntegration(context.Background(), &AssociateSourceToS3TableIntegrationInput{})
+	_, opErr := svc.AssociateSourceToS3TableIntegration(context.Background(), &AssociateSourceToS3TableIntegrationInput{
+		IntegrationArn: ptr.String("__IntegrationArn__"),
+		DataSource: &types.DataSource{
+			Name: ptr.String("__Name__"),
+			Type: ptr.String("__Type__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4423,7 +5986,9 @@ func TestCheckResponseSnapshot_Error_InvalidOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{})
+	_, opErr := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4448,7 +6013,11 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateKmsKey(context.Background(), &AssociateKmsKeyInput{})
+	_, opErr := svc.AssociateKmsKey(context.Background(), &AssociateKmsKeyInput{
+		LogGroupName:       ptr.String("__LogGroupName__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4474,7 +6043,29 @@ func TestCheckResponseSnapshot_Error_InvalidSequenceTokenException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLogEvents(context.Background(), &PutLogEventsInput{})
+	_, opErr := svc.PutLogEvents(context.Background(), &PutLogEventsInput{
+		LogGroupName:  ptr.String("__LogGroupName__"),
+		LogStreamName: ptr.String("__LogStreamName__"),
+		LogEvents: []types.InputLogEvent{
+			{
+				Timestamp: ptr.Int64(1),
+				Message:   ptr.String("__Message__"),
+			},
+			{
+				Timestamp: ptr.Int64(1),
+				Message:   ptr.String("__Message__"),
+			},
+		},
+		SequenceToken: ptr.String("__SequenceToken__"),
+		Entity: &types.Entity{
+			KeyAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4499,7 +6090,15 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExportTask(context.Background(), &CreateExportTaskInput{})
+	_, opErr := svc.CreateExportTask(context.Background(), &CreateExportTaskInput{
+		TaskName:            ptr.String("__TaskName__"),
+		LogGroupName:        ptr.String("__LogGroupName__"),
+		LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+		From:                ptr.Int64(1),
+		To:                  ptr.Int64(1),
+		Destination:         ptr.String("__Destination__"),
+		DestinationPrefix:   ptr.String("__DestinationPrefix__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4531,7 +6130,22 @@ func TestCheckResponseSnapshot_Error_MalformedQueryException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartQuery(context.Background(), &StartQueryInput{})
+	_, opErr := svc.StartQuery(context.Background(), &StartQueryInput{
+		QueryLanguage: types.QueryLanguage("CWLI"),
+		LogGroupName:  ptr.String("__LogGroupName__"),
+		LogGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StartTime:   ptr.Int64(1),
+		EndTime:     ptr.Int64(1),
+		QueryString: ptr.String("__QueryString__"),
+		Limit:       ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4556,7 +6170,11 @@ func TestCheckResponseSnapshot_Error_OperationAbortedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateKmsKey(context.Background(), &AssociateKmsKeyInput{})
+	_, opErr := svc.AssociateKmsKey(context.Background(), &AssociateKmsKeyInput{
+		LogGroupName:       ptr.String("__LogGroupName__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4581,7 +6199,15 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExportTask(context.Background(), &CreateExportTaskInput{})
+	_, opErr := svc.CreateExportTask(context.Background(), &CreateExportTaskInput{
+		TaskName:            ptr.String("__TaskName__"),
+		LogGroupName:        ptr.String("__LogGroupName__"),
+		LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+		From:                ptr.Int64(1),
+		To:                  ptr.Int64(1),
+		Destination:         ptr.String("__Destination__"),
+		DestinationPrefix:   ptr.String("__DestinationPrefix__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4606,7 +6232,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateKmsKey(context.Background(), &AssociateKmsKeyInput{})
+	_, opErr := svc.AssociateKmsKey(context.Background(), &AssociateKmsKeyInput{
+		LogGroupName:       ptr.String("__LogGroupName__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4631,7 +6261,22 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDelivery(context.Background(), &CreateDeliveryInput{})
+	_, opErr := svc.CreateDelivery(context.Background(), &CreateDeliveryInput{
+		DeliverySourceName:     ptr.String("__DeliverySourceName__"),
+		DeliveryDestinationArn: ptr.String("__DeliveryDestinationArn__"),
+		RecordFields: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FieldDelimiter: ptr.String("__FieldDelimiter__"),
+		S3DeliveryConfiguration: &types.S3DeliveryConfiguration{
+			SuffixPath:               ptr.String("__SuffixPath__"),
+			EnableHiveCompatiblePath: ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4656,7 +6301,11 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateKmsKey(context.Background(), &AssociateKmsKeyInput{})
+	_, opErr := svc.AssociateKmsKey(context.Background(), &AssociateKmsKeyInput{
+		LogGroupName:       ptr.String("__LogGroupName__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4681,7 +6330,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceToS3TableIntegration(context.Background(), &AssociateSourceToS3TableIntegrationInput{})
+	_, opErr := svc.AssociateSourceToS3TableIntegration(context.Background(), &AssociateSourceToS3TableIntegrationInput{
+		IntegrationArn: ptr.String("__IntegrationArn__"),
+		DataSource: &types.DataSource{
+			Name: ptr.String("__Name__"),
+			Type: ptr.String("__Type__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4707,7 +6362,12 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4732,7 +6392,29 @@ func TestCheckResponseSnapshot_Error_UnrecognizedClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLogEvents(context.Background(), &PutLogEventsInput{})
+	_, opErr := svc.PutLogEvents(context.Background(), &PutLogEventsInput{
+		LogGroupName:  ptr.String("__LogGroupName__"),
+		LogStreamName: ptr.String("__LogStreamName__"),
+		LogEvents: []types.InputLogEvent{
+			{
+				Timestamp: ptr.Int64(1),
+				Message:   ptr.String("__Message__"),
+			},
+			{
+				Timestamp: ptr.Int64(1),
+				Message:   ptr.String("__Message__"),
+			},
+		},
+		SequenceToken: ptr.String("__SequenceToken__"),
+		Entity: &types.Entity{
+			KeyAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4757,7 +6439,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceToS3TableIntegration(context.Background(), &AssociateSourceToS3TableIntegrationInput{})
+	_, opErr := svc.AssociateSourceToS3TableIntegration(context.Background(), &AssociateSourceToS3TableIntegrationInput{
+		IntegrationArn: ptr.String("__IntegrationArn__"),
+		DataSource: &types.DataSource{
+			Name: ptr.String("__Name__"),
+			Type: ptr.String("__Type__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

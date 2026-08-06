@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Invites":[{"EmailAddress":"__EmailAddress__","EmailStatus":"NotSent","InviteId":"__InviteId__","Status":"Pending"},{"EmailAddress":"__EmailAddress__","EmailStatus":"NotSent","InviteId":"__InviteId__","Status":"Pending"}]}

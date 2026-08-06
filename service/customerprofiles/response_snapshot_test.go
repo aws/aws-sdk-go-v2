@@ -123,7 +123,15 @@ func TestCheckResponseSnapshot_AddProfileKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddProfileKey(context.Background(), &AddProfileKeyInput{})
+	got, err := svc.AddProfileKey(context.Background(), &AddProfileKeyInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		KeyName:   ptr.String("__KeyName__"),
+		Values: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +188,21 @@ func TestCheckResponseSnapshot_BatchGetCalculatedAttributeForProfile(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetCalculatedAttributeForProfile(context.Background(), &BatchGetCalculatedAttributeForProfileInput{})
+	got, err := svc.BatchGetCalculatedAttributeForProfile(context.Background(), &BatchGetCalculatedAttributeForProfileInput{
+		CalculatedAttributeName: ptr.String("__CalculatedAttributeName__"),
+		DomainName:              ptr.String("__DomainName__"),
+		ProfileIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConditionOverrides: &types.ConditionOverrides{
+			Range: &types.RangeOverride{
+				Start: ptr.Int32(1),
+				End:   1,
+				Unit:  types.RangeUnit("DAYS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -452,7 +474,13 @@ func TestCheckResponseSnapshot_BatchGetProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetProfile(context.Background(), &BatchGetProfileInput{})
+	got, err := svc.BatchGetProfile(context.Background(), &BatchGetProfileInput{
+		DomainName: ptr.String("__DomainName__"),
+		ProfileIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -494,7 +522,20 @@ func TestCheckResponseSnapshot_BatchPutProfileObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchPutProfileObject(context.Background(), &BatchPutProfileObjectInput{})
+	got, err := svc.BatchPutProfileObject(context.Background(), &BatchPutProfileObjectInput{
+		DomainName:     ptr.String("__DomainName__"),
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+		Items: []types.BatchPutProfileObjectRequestItem{
+			{
+				Id:     ptr.String("__Id__"),
+				Object: ptr.String("__Object__"),
+			},
+			{
+				Id:     ptr.String("__Id__"),
+				Object: ptr.String("__Object__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -616,7 +657,104 @@ func TestCheckResponseSnapshot_CreateCalculatedAttributeDefinition(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCalculatedAttributeDefinition(context.Background(), &CreateCalculatedAttributeDefinitionInput{})
+	got, err := svc.CreateCalculatedAttributeDefinition(context.Background(), &CreateCalculatedAttributeDefinitionInput{
+		DomainName:              ptr.String("__DomainName__"),
+		CalculatedAttributeName: ptr.String("__CalculatedAttributeName__"),
+		DisplayName:             ptr.String("__DisplayName__"),
+		Description:             ptr.String("__Description__"),
+		AttributeDetails: &types.AttributeDetails{
+			Attributes: []types.AttributeItem{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			Expression: ptr.String("__Expression__"),
+		},
+		Conditions: &types.Conditions{
+			Range: &types.Range{
+				Value: ptr.Int32(1),
+				Unit:  types.Unit("DAYS"),
+				ValueRange: &types.ValueRange{
+					Start: ptr.Int32(1),
+					End:   ptr.Int32(1),
+				},
+				TimestampSource: ptr.String("__TimestampSource__"),
+				TimestampFormat: ptr.String("__TimestampFormat__"),
+			},
+			ObjectCount: ptr.Int32(1),
+			Threshold: &types.Threshold{
+				Value:    ptr.String("__Value__"),
+				Operator: types.Operator("EQUAL_TO"),
+			},
+		},
+		Filter: &types.Filter{
+			Include: types.Include("ALL"),
+			Groups: []types.FilterGroup{
+				{
+					Type: types.Type("ALL"),
+					Dimensions: []types.FilterDimension{
+						{
+							Attributes: map[string]types.FilterAttributeDimension{
+								"key0": {
+									DimensionType: types.FilterDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							Attributes: map[string]types.FilterAttributeDimension{
+								"key0": {
+									DimensionType: types.FilterDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					Type: types.Type("ALL"),
+					Dimensions: []types.FilterDimension{
+						{
+							Attributes: map[string]types.FilterAttributeDimension{
+								"key0": {
+									DimensionType: types.FilterDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							Attributes: map[string]types.FilterAttributeDimension{
+								"key0": {
+									DimensionType: types.FilterDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Statistic:         types.Statistic("FIRST_OCCURRENCE"),
+		UseHistoricalData: ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -730,7 +868,95 @@ func TestCheckResponseSnapshot_CreateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		DomainName:            ptr.String("__DomainName__"),
+		DefaultExpirationDays: ptr.Int32(1),
+		DefaultEncryptionKey:  ptr.String("__DefaultEncryptionKey__"),
+		DeadLetterQueueUrl:    ptr.String("__DeadLetterQueueUrl__"),
+		Matching: &types.MatchingRequest{
+			Enabled: ptr.Bool(true),
+			JobSchedule: &types.JobSchedule{
+				DayOfTheWeek: types.JobScheduleDayOfTheWeek("SUNDAY"),
+				Time:         ptr.String("__Time__"),
+			},
+			AutoMerging: &types.AutoMerging{
+				Enabled: ptr.Bool(true),
+				Consolidation: &types.Consolidation{
+					MatchingAttributesList: [][]string{
+						{
+							"__Member__",
+							"__Member__",
+						},
+						{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ConflictResolution: &types.ConflictResolution{
+					ConflictResolvingModel: types.ConflictResolvingModel("RECENCY"),
+					SourceName:             ptr.String("__SourceName__"),
+				},
+				MinAllowedConfidenceScoreForMerging: ptr.Float64(1.0),
+			},
+			ExportingConfig: &types.ExportingConfig{
+				S3Exporting: &types.S3ExportingConfig{
+					S3BucketName: ptr.String("__S3BucketName__"),
+					S3KeyName:    ptr.String("__S3KeyName__"),
+				},
+			},
+		},
+		RuleBasedMatching: &types.RuleBasedMatchingRequest{
+			Enabled: ptr.Bool(true),
+			MatchingRules: []types.MatchingRule{
+				{
+					Rule: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Rule: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			MaxAllowedRuleLevelForMerging:  ptr.Int32(1),
+			MaxAllowedRuleLevelForMatching: ptr.Int32(1),
+			AttributeTypesSelector: &types.AttributeTypesSelector{
+				AttributeMatchingModel: types.AttributeMatchingModel("ONE_TO_ONE"),
+				Address: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PhoneNumber: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EmailAddress: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ConflictResolution: &types.ConflictResolution{
+				ConflictResolvingModel: types.ConflictResolvingModel("RECENCY"),
+				SourceName:             ptr.String("__SourceName__"),
+			},
+			ExportingConfig: &types.ExportingConfig{
+				S3Exporting: &types.S3ExportingConfig{
+					S3BucketName: ptr.String("__S3BucketName__"),
+					S3KeyName:    ptr.String("__S3KeyName__"),
+				},
+			},
+		},
+		DataStore: &types.DataStoreRequest{
+			Enabled: ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -762,7 +988,18 @@ func TestCheckResponseSnapshot_CreateDomainLayout(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomainLayout(context.Background(), &CreateDomainLayoutInput{})
+	got, err := svc.CreateDomainLayout(context.Background(), &CreateDomainLayoutInput{
+		DomainName:           ptr.String("__DomainName__"),
+		LayoutDefinitionName: ptr.String("__LayoutDefinitionName__"),
+		Description:          ptr.String("__Description__"),
+		DisplayName:          ptr.String("__DisplayName__"),
+		IsDefault:            true,
+		LayoutType:           types.LayoutType("PROFILE_EXPLORER"),
+		Layout:               ptr.String("__Layout__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -786,7 +1023,14 @@ func TestCheckResponseSnapshot_CreateEventStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEventStream(context.Background(), &CreateEventStreamInput{})
+	got, err := svc.CreateEventStream(context.Background(), &CreateEventStreamInput{
+		DomainName:      ptr.String("__DomainName__"),
+		Uri:             ptr.String("__Uri__"),
+		EventStreamName: ptr.String("__EventStreamName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -932,7 +1176,133 @@ func TestCheckResponseSnapshot_CreateEventTrigger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEventTrigger(context.Background(), &CreateEventTriggerInput{})
+	got, err := svc.CreateEventTrigger(context.Background(), &CreateEventTriggerInput{
+		DomainName:       ptr.String("__DomainName__"),
+		EventTriggerName: ptr.String("__EventTriggerName__"),
+		ObjectTypeName:   ptr.String("__ObjectTypeName__"),
+		Description:      ptr.String("__Description__"),
+		EventTriggerConditions: []types.EventTriggerCondition{
+			{
+				EventTriggerDimensions: []types.EventTriggerDimension{
+					{
+						ObjectAttributes: []types.ObjectAttribute{
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						ObjectAttributes: []types.ObjectAttribute{
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				LogicalOperator: types.EventTriggerLogicalOperator("ANY"),
+			},
+			{
+				EventTriggerDimensions: []types.EventTriggerDimension{
+					{
+						ObjectAttributes: []types.ObjectAttribute{
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						ObjectAttributes: []types.ObjectAttribute{
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				LogicalOperator: types.EventTriggerLogicalOperator("ANY"),
+			},
+		},
+		SegmentFilter: ptr.String("__SegmentFilter__"),
+		EventTriggerLimits: &types.EventTriggerLimits{
+			EventExpiration: ptr.Int64(1),
+			Periods: []types.Period{
+				{
+					Unit:                     types.PeriodUnit("MINUTES"),
+					Value:                    ptr.Int32(1),
+					MaxInvocationsPerProfile: ptr.Int32(1),
+					Unlimited:                true,
+				},
+				{
+					Unit:                     types.PeriodUnit("MINUTES"),
+					Value:                    ptr.Int32(1),
+					MaxInvocationsPerProfile: ptr.Int32(1),
+					Unlimited:                true,
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -954,7 +1324,113 @@ func TestCheckResponseSnapshot_CreateIntegrationWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIntegrationWorkflow(context.Background(), &CreateIntegrationWorkflowInput{})
+	got, err := svc.CreateIntegrationWorkflow(context.Background(), &CreateIntegrationWorkflowInput{
+		DomainName:   ptr.String("__DomainName__"),
+		WorkflowType: types.WorkflowType("APPFLOW_INTEGRATION"),
+		IntegrationConfig: &types.IntegrationConfig{
+			AppflowIntegration: &types.AppflowIntegration{
+				FlowDefinition: &types.FlowDefinition{
+					Description: ptr.String("__Description__"),
+					FlowName:    ptr.String("__FlowName__"),
+					KmsArn:      ptr.String("__KmsArn__"),
+					SourceFlowConfig: &types.SourceFlowConfig{
+						ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+						ConnectorType:        types.SourceConnectorType("Salesforce"),
+						IncrementalPullConfig: &types.IncrementalPullConfig{
+							DatetimeTypeFieldName: ptr.String("__DatetimeTypeFieldName__"),
+						},
+						SourceConnectorProperties: &types.SourceConnectorProperties{
+							Marketo: &types.MarketoSourceProperties{
+								Object: ptr.String("__Object__"),
+							},
+							S3: &types.S3SourceProperties{
+								BucketName:   ptr.String("__BucketName__"),
+								BucketPrefix: ptr.String("__BucketPrefix__"),
+							},
+							Salesforce: &types.SalesforceSourceProperties{
+								Object:                   ptr.String("__Object__"),
+								EnableDynamicFieldUpdate: true,
+								IncludeDeletedRecords:    true,
+							},
+							ServiceNow: &types.ServiceNowSourceProperties{
+								Object: ptr.String("__Object__"),
+							},
+							Zendesk: &types.ZendeskSourceProperties{
+								Object: ptr.String("__Object__"),
+							},
+						},
+					},
+					Tasks: []types.Task{
+						{
+							ConnectorOperator: &types.ConnectorOperator{
+								Marketo:    types.MarketoConnectorOperator("PROJECTION"),
+								S3:         types.S3ConnectorOperator("PROJECTION"),
+								Salesforce: types.SalesforceConnectorOperator("PROJECTION"),
+								ServiceNow: types.ServiceNowConnectorOperator("PROJECTION"),
+								Zendesk:    types.ZendeskConnectorOperator("PROJECTION"),
+							},
+							DestinationField: ptr.String("__DestinationField__"),
+							SourceFields: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TaskProperties: map[string]string{
+								"key0": "__Value__",
+							},
+							TaskType: types.TaskType("Arithmetic"),
+						},
+						{
+							ConnectorOperator: &types.ConnectorOperator{
+								Marketo:    types.MarketoConnectorOperator("PROJECTION"),
+								S3:         types.S3ConnectorOperator("PROJECTION"),
+								Salesforce: types.SalesforceConnectorOperator("PROJECTION"),
+								ServiceNow: types.ServiceNowConnectorOperator("PROJECTION"),
+								Zendesk:    types.ZendeskConnectorOperator("PROJECTION"),
+							},
+							DestinationField: ptr.String("__DestinationField__"),
+							SourceFields: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TaskProperties: map[string]string{
+								"key0": "__Value__",
+							},
+							TaskType: types.TaskType("Arithmetic"),
+						},
+					},
+					TriggerConfig: &types.TriggerConfig{
+						TriggerType: types.TriggerType("Scheduled"),
+						TriggerProperties: &types.TriggerProperties{
+							Scheduled: &types.ScheduledTriggerProperties{
+								ScheduleExpression: ptr.String("__ScheduleExpression__"),
+								DataPullMode:       types.DataPullMode("Incremental"),
+								ScheduleStartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								ScheduleEndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Timezone:           ptr.String("__Timezone__"),
+								ScheduleOffset:     ptr.Int64(1),
+								FirstExecutionFrom: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							},
+						},
+					},
+				},
+				Batches: []types.Batch{
+					{
+						StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+		},
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+		RoleArn:        ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -975,7 +1451,109 @@ func TestCheckResponseSnapshot_CreateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProfile(context.Background(), &CreateProfileInput{})
+	got, err := svc.CreateProfile(context.Background(), &CreateProfileInput{
+		DomainName:            ptr.String("__DomainName__"),
+		AccountNumber:         ptr.String("__AccountNumber__"),
+		AdditionalInformation: ptr.String("__AdditionalInformation__"),
+		PartyType:             types.PartyType("INDIVIDUAL"),
+		BusinessName:          ptr.String("__BusinessName__"),
+		FirstName:             ptr.String("__FirstName__"),
+		MiddleName:            ptr.String("__MiddleName__"),
+		LastName:              ptr.String("__LastName__"),
+		BirthDate:             ptr.String("__BirthDate__"),
+		Gender:                types.Gender("MALE"),
+		PhoneNumber:           ptr.String("__PhoneNumber__"),
+		MobilePhoneNumber:     ptr.String("__MobilePhoneNumber__"),
+		HomePhoneNumber:       ptr.String("__HomePhoneNumber__"),
+		BusinessPhoneNumber:   ptr.String("__BusinessPhoneNumber__"),
+		EmailAddress:          ptr.String("__EmailAddress__"),
+		PersonalEmailAddress:  ptr.String("__PersonalEmailAddress__"),
+		BusinessEmailAddress:  ptr.String("__BusinessEmailAddress__"),
+		Address: &types.Address{
+			Address1:   ptr.String("__Address1__"),
+			Address2:   ptr.String("__Address2__"),
+			Address3:   ptr.String("__Address3__"),
+			Address4:   ptr.String("__Address4__"),
+			City:       ptr.String("__City__"),
+			County:     ptr.String("__County__"),
+			State:      ptr.String("__State__"),
+			Province:   ptr.String("__Province__"),
+			Country:    ptr.String("__Country__"),
+			PostalCode: ptr.String("__PostalCode__"),
+		},
+		ShippingAddress: &types.Address{
+			Address1:   ptr.String("__Address1__"),
+			Address2:   ptr.String("__Address2__"),
+			Address3:   ptr.String("__Address3__"),
+			Address4:   ptr.String("__Address4__"),
+			City:       ptr.String("__City__"),
+			County:     ptr.String("__County__"),
+			State:      ptr.String("__State__"),
+			Province:   ptr.String("__Province__"),
+			Country:    ptr.String("__Country__"),
+			PostalCode: ptr.String("__PostalCode__"),
+		},
+		MailingAddress: &types.Address{
+			Address1:   ptr.String("__Address1__"),
+			Address2:   ptr.String("__Address2__"),
+			Address3:   ptr.String("__Address3__"),
+			Address4:   ptr.String("__Address4__"),
+			City:       ptr.String("__City__"),
+			County:     ptr.String("__County__"),
+			State:      ptr.String("__State__"),
+			Province:   ptr.String("__Province__"),
+			Country:    ptr.String("__Country__"),
+			PostalCode: ptr.String("__PostalCode__"),
+		},
+		BillingAddress: &types.Address{
+			Address1:   ptr.String("__Address1__"),
+			Address2:   ptr.String("__Address2__"),
+			Address3:   ptr.String("__Address3__"),
+			Address4:   ptr.String("__Address4__"),
+			City:       ptr.String("__City__"),
+			County:     ptr.String("__County__"),
+			State:      ptr.String("__State__"),
+			Province:   ptr.String("__Province__"),
+			Country:    ptr.String("__Country__"),
+			PostalCode: ptr.String("__PostalCode__"),
+		},
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		PartyTypeString: ptr.String("__PartyTypeString__"),
+		GenderString:    ptr.String("__GenderString__"),
+		ProfileType:     types.ProfileType("ACCOUNT_PROFILE"),
+		EngagementPreferences: &types.EngagementPreferences{
+			Phone: []types.ContactPreference{
+				{
+					KeyName:     ptr.String("__KeyName__"),
+					KeyValue:    ptr.String("__KeyValue__"),
+					ProfileId:   ptr.String("__ProfileId__"),
+					ContactType: types.ContactType("PhoneNumber"),
+				},
+				{
+					KeyName:     ptr.String("__KeyName__"),
+					KeyValue:    ptr.String("__KeyValue__"),
+					ProfileId:   ptr.String("__ProfileId__"),
+					ContactType: types.ContactType("PhoneNumber"),
+				},
+			},
+			Email: []types.ContactPreference{
+				{
+					KeyName:     ptr.String("__KeyName__"),
+					KeyValue:    ptr.String("__KeyValue__"),
+					ProfileId:   ptr.String("__ProfileId__"),
+					ContactType: types.ContactType("PhoneNumber"),
+				},
+				{
+					KeyName:     ptr.String("__KeyName__"),
+					KeyValue:    ptr.String("__KeyValue__"),
+					ProfileId:   ptr.String("__ProfileId__"),
+					ContactType: types.ContactType("PhoneNumber"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -999,7 +1577,62 @@ func TestCheckResponseSnapshot_CreateRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRecommender(context.Background(), &CreateRecommenderInput{})
+	got, err := svc.CreateRecommender(context.Background(), &CreateRecommenderInput{
+		DomainName:            ptr.String("__DomainName__"),
+		RecommenderName:       ptr.String("__RecommenderName__"),
+		RecommenderRecipeName: types.RecommenderRecipeName("recommended-for-you"),
+		RecommenderConfig: &types.RecommenderConfig{
+			EventsConfig: &types.EventsConfig{
+				EventParametersList: []types.EventParameters{
+					{
+						EventType:           ptr.String("__EventType__"),
+						EventValueThreshold: ptr.Float64(1.0),
+						EventWeight:         ptr.Float64(1.0),
+					},
+					{
+						EventType:           ptr.String("__EventType__"),
+						EventValueThreshold: ptr.Float64(1.0),
+						EventWeight:         ptr.Float64(1.0),
+					},
+				},
+			},
+			TrainingFrequency: ptr.Int32(1),
+			InferenceConfig: &types.InferenceConfig{
+				MinProvisionedTPS: ptr.Int32(1),
+			},
+			IncludedColumns: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ExcludedColumns: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DiversityConfig: &types.DiversityConfig{
+				DiversityColumns: []types.DiversityColumn{
+					{
+						Name:    ptr.String("__Name__"),
+						CapType: types.DiversityCapType("PERCENTAGE"),
+						Target:  ptr.String("__Target__"),
+					},
+					{
+						Name:    ptr.String("__Name__"),
+						CapType: types.DiversityCapType("PERCENTAGE"),
+						Target:  ptr.String("__Target__"),
+					},
+				},
+			},
+		},
+		Description:           ptr.String("__Description__"),
+		RecommenderSchemaName: ptr.String("__RecommenderSchemaName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1023,7 +1656,16 @@ func TestCheckResponseSnapshot_CreateRecommenderFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRecommenderFilter(context.Background(), &CreateRecommenderFilterInput{})
+	got, err := svc.CreateRecommenderFilter(context.Background(), &CreateRecommenderFilterInput{
+		DomainName:                  ptr.String("__DomainName__"),
+		RecommenderFilterName:       ptr.String("__RecommenderFilterName__"),
+		RecommenderFilterExpression: ptr.String("__RecommenderFilterExpression__"),
+		RecommenderSchemaName:       ptr.String("__RecommenderSchemaName__"),
+		Description:                 ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1064,7 +1706,27 @@ func TestCheckResponseSnapshot_CreateRecommenderSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRecommenderSchema(context.Background(), &CreateRecommenderSchemaInput{})
+	got, err := svc.CreateRecommenderSchema(context.Background(), &CreateRecommenderSchemaInput{
+		DomainName:            ptr.String("__DomainName__"),
+		RecommenderSchemaName: ptr.String("__RecommenderSchemaName__"),
+		Fields: map[string][]types.RecommenderSchemaField{
+			"key0": {
+				{
+					TargetFieldName: ptr.String("__TargetFieldName__"),
+					ContentType:     types.ContentType("STRING"),
+					FeatureType:     types.FeatureType("TEXTUAL"),
+				},
+				{
+					TargetFieldName: ptr.String("__TargetFieldName__"),
+					ContentType:     types.ContentType("STRING"),
+					FeatureType:     types.FeatureType("TEXTUAL"),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1092,7 +1754,1297 @@ func TestCheckResponseSnapshot_CreateSegmentDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSegmentDefinition(context.Background(), &CreateSegmentDefinitionInput{})
+	got, err := svc.CreateSegmentDefinition(context.Background(), &CreateSegmentDefinitionInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+		DisplayName:           ptr.String("__DisplayName__"),
+		Description:           ptr.String("__Description__"),
+		SegmentGroups: &types.SegmentGroup{
+			Groups: []types.Group{
+				{
+					Dimensions: []types.Dimension{
+						&types.DimensionMemberProfileAttributes{
+							Value: types.ProfileAttributes{
+								AccountNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								AdditionalInformation: &types.ExtraLengthValueProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FirstName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								LastName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MiddleName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								GenderString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PartyTypeString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BirthDate: &types.DateDimension{
+									DimensionType: types.DateDimensionType("BEFORE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessPhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								HomePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MobilePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								EmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PersonalEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Address: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ShippingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								MailingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								BillingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										DimensionType: types.AttributeDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ProfileType: &types.ProfileTypeDimension{
+									DimensionType: types.ProfileTypeDimensionType("INCLUSIVE"),
+									Values: []types.ProfileType{
+										types.ProfileType("ACCOUNT_PROFILE"),
+										types.ProfileType("ACCOUNT_PROFILE"),
+									},
+								},
+							},
+						},
+						&types.DimensionMemberProfileAttributes{
+							Value: types.ProfileAttributes{
+								AccountNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								AdditionalInformation: &types.ExtraLengthValueProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FirstName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								LastName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MiddleName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								GenderString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PartyTypeString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BirthDate: &types.DateDimension{
+									DimensionType: types.DateDimensionType("BEFORE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessPhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								HomePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MobilePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								EmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PersonalEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Address: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ShippingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								MailingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								BillingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										DimensionType: types.AttributeDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ProfileType: &types.ProfileTypeDimension{
+									DimensionType: types.ProfileTypeDimensionType("INCLUSIVE"),
+									Values: []types.ProfileType{
+										types.ProfileType("ACCOUNT_PROFILE"),
+										types.ProfileType("ACCOUNT_PROFILE"),
+									},
+								},
+							},
+						},
+					},
+					SourceSegments: []types.SourceSegment{
+						{
+							SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+						},
+						{
+							SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+						},
+					},
+					SourceType: types.IncludeOptions("ALL"),
+					Type:       types.IncludeOptions("ALL"),
+				},
+				{
+					Dimensions: []types.Dimension{
+						&types.DimensionMemberProfileAttributes{
+							Value: types.ProfileAttributes{
+								AccountNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								AdditionalInformation: &types.ExtraLengthValueProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FirstName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								LastName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MiddleName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								GenderString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PartyTypeString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BirthDate: &types.DateDimension{
+									DimensionType: types.DateDimensionType("BEFORE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessPhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								HomePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MobilePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								EmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PersonalEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Address: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ShippingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								MailingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								BillingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										DimensionType: types.AttributeDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ProfileType: &types.ProfileTypeDimension{
+									DimensionType: types.ProfileTypeDimensionType("INCLUSIVE"),
+									Values: []types.ProfileType{
+										types.ProfileType("ACCOUNT_PROFILE"),
+										types.ProfileType("ACCOUNT_PROFILE"),
+									},
+								},
+							},
+						},
+						&types.DimensionMemberProfileAttributes{
+							Value: types.ProfileAttributes{
+								AccountNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								AdditionalInformation: &types.ExtraLengthValueProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FirstName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								LastName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MiddleName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								GenderString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PartyTypeString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BirthDate: &types.DateDimension{
+									DimensionType: types.DateDimensionType("BEFORE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessPhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								HomePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MobilePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								EmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PersonalEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Address: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ShippingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								MailingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								BillingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										DimensionType: types.AttributeDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ProfileType: &types.ProfileTypeDimension{
+									DimensionType: types.ProfileTypeDimensionType("INCLUSIVE"),
+									Values: []types.ProfileType{
+										types.ProfileType("ACCOUNT_PROFILE"),
+										types.ProfileType("ACCOUNT_PROFILE"),
+									},
+								},
+							},
+						},
+					},
+					SourceSegments: []types.SourceSegment{
+						{
+							SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+						},
+						{
+							SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+						},
+					},
+					SourceType: types.IncludeOptions("ALL"),
+					Type:       types.IncludeOptions("ALL"),
+				},
+			},
+			Include: types.IncludeOptions("ALL"),
+		},
+		SegmentSqlQuery: ptr.String("__SegmentSqlQuery__"),
+		SegmentSort: &types.SegmentSort{
+			Attributes: []types.SortAttribute{
+				{
+					Name:     ptr.String("__Name__"),
+					DataType: types.SegmentSortDataType("STRING"),
+					Order:    types.SegmentSortOrder("ASC"),
+					Type:     types.SortAttributeType("PROFILE"),
+				},
+				{
+					Name:     ptr.String("__Name__"),
+					DataType: types.SegmentSortDataType("STRING"),
+					Order:    types.SegmentSortOrder("ASC"),
+					Type:     types.SortAttributeType("PROFILE"),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1105,7 +3057,7 @@ func TestCheckResponseSnapshot_CreateSegmentEstimate(t *testing.T) {
 	want := &CreateSegmentEstimateOutput{
 		DomainName: ptr.String("__DomainName__"),
 		EstimateId: ptr.String("__EstimateId__"),
-		StatusCode: 1,
+		StatusCode: 200,
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateSegmentEstimate.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1115,7 +3067,1275 @@ func TestCheckResponseSnapshot_CreateSegmentEstimate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSegmentEstimate(context.Background(), &CreateSegmentEstimateInput{})
+	got, err := svc.CreateSegmentEstimate(context.Background(), &CreateSegmentEstimateInput{
+		DomainName: ptr.String("__DomainName__"),
+		SegmentQuery: &types.SegmentGroupStructure{
+			Groups: []types.Group{
+				{
+					Dimensions: []types.Dimension{
+						&types.DimensionMemberProfileAttributes{
+							Value: types.ProfileAttributes{
+								AccountNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								AdditionalInformation: &types.ExtraLengthValueProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FirstName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								LastName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MiddleName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								GenderString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PartyTypeString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BirthDate: &types.DateDimension{
+									DimensionType: types.DateDimensionType("BEFORE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessPhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								HomePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MobilePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								EmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PersonalEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Address: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ShippingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								MailingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								BillingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										DimensionType: types.AttributeDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ProfileType: &types.ProfileTypeDimension{
+									DimensionType: types.ProfileTypeDimensionType("INCLUSIVE"),
+									Values: []types.ProfileType{
+										types.ProfileType("ACCOUNT_PROFILE"),
+										types.ProfileType("ACCOUNT_PROFILE"),
+									},
+								},
+							},
+						},
+						&types.DimensionMemberProfileAttributes{
+							Value: types.ProfileAttributes{
+								AccountNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								AdditionalInformation: &types.ExtraLengthValueProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FirstName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								LastName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MiddleName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								GenderString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PartyTypeString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BirthDate: &types.DateDimension{
+									DimensionType: types.DateDimensionType("BEFORE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessPhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								HomePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MobilePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								EmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PersonalEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Address: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ShippingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								MailingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								BillingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										DimensionType: types.AttributeDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ProfileType: &types.ProfileTypeDimension{
+									DimensionType: types.ProfileTypeDimensionType("INCLUSIVE"),
+									Values: []types.ProfileType{
+										types.ProfileType("ACCOUNT_PROFILE"),
+										types.ProfileType("ACCOUNT_PROFILE"),
+									},
+								},
+							},
+						},
+					},
+					SourceSegments: []types.SourceSegment{
+						{
+							SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+						},
+						{
+							SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+						},
+					},
+					SourceType: types.IncludeOptions("ALL"),
+					Type:       types.IncludeOptions("ALL"),
+				},
+				{
+					Dimensions: []types.Dimension{
+						&types.DimensionMemberProfileAttributes{
+							Value: types.ProfileAttributes{
+								AccountNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								AdditionalInformation: &types.ExtraLengthValueProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FirstName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								LastName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MiddleName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								GenderString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PartyTypeString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BirthDate: &types.DateDimension{
+									DimensionType: types.DateDimensionType("BEFORE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessPhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								HomePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MobilePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								EmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PersonalEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Address: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ShippingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								MailingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								BillingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										DimensionType: types.AttributeDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ProfileType: &types.ProfileTypeDimension{
+									DimensionType: types.ProfileTypeDimensionType("INCLUSIVE"),
+									Values: []types.ProfileType{
+										types.ProfileType("ACCOUNT_PROFILE"),
+										types.ProfileType("ACCOUNT_PROFILE"),
+									},
+								},
+							},
+						},
+						&types.DimensionMemberProfileAttributes{
+							Value: types.ProfileAttributes{
+								AccountNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								AdditionalInformation: &types.ExtraLengthValueProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								FirstName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								LastName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MiddleName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								GenderString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PartyTypeString: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BirthDate: &types.DateDimension{
+									DimensionType: types.DateDimensionType("BEFORE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessName: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessPhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								HomePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MobilePhoneNumber: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								EmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								PersonalEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BusinessEmailAddress: &types.ProfileDimension{
+									DimensionType: types.StringDimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Address: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ShippingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								MailingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								BillingAddress: &types.AddressDimension{
+									City: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Country: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									County: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									PostalCode: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Province: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									State: &types.ProfileDimension{
+										DimensionType: types.StringDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										DimensionType: types.AttributeDimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								ProfileType: &types.ProfileTypeDimension{
+									DimensionType: types.ProfileTypeDimensionType("INCLUSIVE"),
+									Values: []types.ProfileType{
+										types.ProfileType("ACCOUNT_PROFILE"),
+										types.ProfileType("ACCOUNT_PROFILE"),
+									},
+								},
+							},
+						},
+					},
+					SourceSegments: []types.SourceSegment{
+						{
+							SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+						},
+						{
+							SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+						},
+					},
+					SourceType: types.IncludeOptions("ALL"),
+					Type:       types.IncludeOptions("ALL"),
+				},
+			},
+			Include: types.IncludeOptions("ALL"),
+		},
+		SegmentSqlQuery: ptr.String("__SegmentSqlQuery__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1136,7 +4356,14 @@ func TestCheckResponseSnapshot_CreateSegmentSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSegmentSnapshot(context.Background(), &CreateSegmentSnapshotInput{})
+	got, err := svc.CreateSegmentSnapshot(context.Background(), &CreateSegmentSnapshotInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+		DataFormat:            types.DataFormat("CSV"),
+		EncryptionKey:         ptr.String("__EncryptionKey__"),
+		RoleArn:               ptr.String("__RoleArn__"),
+		DestinationUri:        ptr.String("__DestinationUri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1157,7 +4384,19 @@ func TestCheckResponseSnapshot_CreateUploadJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUploadJob(context.Background(), &CreateUploadJobInput{})
+	got, err := svc.CreateUploadJob(context.Background(), &CreateUploadJobInput{
+		DomainName:  ptr.String("__DomainName__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Fields: map[string]types.ObjectTypeField{
+			"key0": {
+				Source:      ptr.String("__Source__"),
+				Target:      ptr.String("__Target__"),
+				ContentType: types.FieldContentType("STRING"),
+			},
+		},
+		UniqueKey:  ptr.String("__UniqueKey__"),
+		DataExpiry: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1176,7 +4415,10 @@ func TestCheckResponseSnapshot_DeleteCalculatedAttributeDefinition(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCalculatedAttributeDefinition(context.Background(), &DeleteCalculatedAttributeDefinitionInput{})
+	got, err := svc.DeleteCalculatedAttributeDefinition(context.Background(), &DeleteCalculatedAttributeDefinitionInput{
+		DomainName:              ptr.String("__DomainName__"),
+		CalculatedAttributeName: ptr.String("__CalculatedAttributeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1197,7 +4439,9 @@ func TestCheckResponseSnapshot_DeleteDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{})
+	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1218,7 +4462,10 @@ func TestCheckResponseSnapshot_DeleteDomainLayout(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomainLayout(context.Background(), &DeleteDomainLayoutInput{})
+	got, err := svc.DeleteDomainLayout(context.Background(), &DeleteDomainLayoutInput{
+		DomainName:           ptr.String("__DomainName__"),
+		LayoutDefinitionName: ptr.String("__LayoutDefinitionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1237,7 +4484,10 @@ func TestCheckResponseSnapshot_DeleteDomainObjectType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomainObjectType(context.Background(), &DeleteDomainObjectTypeInput{})
+	got, err := svc.DeleteDomainObjectType(context.Background(), &DeleteDomainObjectTypeInput{
+		DomainName:     ptr.String("__DomainName__"),
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1256,7 +4506,10 @@ func TestCheckResponseSnapshot_DeleteEventStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventStream(context.Background(), &DeleteEventStreamInput{})
+	got, err := svc.DeleteEventStream(context.Background(), &DeleteEventStreamInput{
+		DomainName:      ptr.String("__DomainName__"),
+		EventStreamName: ptr.String("__EventStreamName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1277,7 +4530,10 @@ func TestCheckResponseSnapshot_DeleteEventTrigger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventTrigger(context.Background(), &DeleteEventTriggerInput{})
+	got, err := svc.DeleteEventTrigger(context.Background(), &DeleteEventTriggerInput{
+		DomainName:       ptr.String("__DomainName__"),
+		EventTriggerName: ptr.String("__EventTriggerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1298,7 +4554,10 @@ func TestCheckResponseSnapshot_DeleteIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIntegration(context.Background(), &DeleteIntegrationInput{})
+	got, err := svc.DeleteIntegration(context.Background(), &DeleteIntegrationInput{
+		DomainName: ptr.String("__DomainName__"),
+		Uri:        ptr.String("__Uri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1319,7 +4578,10 @@ func TestCheckResponseSnapshot_DeleteProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProfile(context.Background(), &DeleteProfileInput{})
+	got, err := svc.DeleteProfile(context.Background(), &DeleteProfileInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1340,7 +4602,15 @@ func TestCheckResponseSnapshot_DeleteProfileKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProfileKey(context.Background(), &DeleteProfileKeyInput{})
+	got, err := svc.DeleteProfileKey(context.Background(), &DeleteProfileKeyInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		KeyName:   ptr.String("__KeyName__"),
+		Values: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1361,7 +4631,12 @@ func TestCheckResponseSnapshot_DeleteProfileObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProfileObject(context.Background(), &DeleteProfileObjectInput{})
+	got, err := svc.DeleteProfileObject(context.Background(), &DeleteProfileObjectInput{
+		ProfileId:              ptr.String("__ProfileId__"),
+		ProfileObjectUniqueKey: ptr.String("__ProfileObjectUniqueKey__"),
+		ObjectTypeName:         ptr.String("__ObjectTypeName__"),
+		DomainName:             ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1382,7 +4657,10 @@ func TestCheckResponseSnapshot_DeleteProfileObjectType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProfileObjectType(context.Background(), &DeleteProfileObjectTypeInput{})
+	got, err := svc.DeleteProfileObjectType(context.Background(), &DeleteProfileObjectTypeInput{
+		DomainName:     ptr.String("__DomainName__"),
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1401,7 +4679,10 @@ func TestCheckResponseSnapshot_DeleteRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRecommender(context.Background(), &DeleteRecommenderInput{})
+	got, err := svc.DeleteRecommender(context.Background(), &DeleteRecommenderInput{
+		DomainName:      ptr.String("__DomainName__"),
+		RecommenderName: ptr.String("__RecommenderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1422,7 +4703,10 @@ func TestCheckResponseSnapshot_DeleteRecommenderFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRecommenderFilter(context.Background(), &DeleteRecommenderFilterInput{})
+	got, err := svc.DeleteRecommenderFilter(context.Background(), &DeleteRecommenderFilterInput{
+		DomainName:            ptr.String("__DomainName__"),
+		RecommenderFilterName: ptr.String("__RecommenderFilterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1441,7 +4725,10 @@ func TestCheckResponseSnapshot_DeleteRecommenderSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRecommenderSchema(context.Background(), &DeleteRecommenderSchemaInput{})
+	got, err := svc.DeleteRecommenderSchema(context.Background(), &DeleteRecommenderSchemaInput{
+		DomainName:            ptr.String("__DomainName__"),
+		RecommenderSchemaName: ptr.String("__RecommenderSchemaName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1462,7 +4749,10 @@ func TestCheckResponseSnapshot_DeleteSegmentDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSegmentDefinition(context.Background(), &DeleteSegmentDefinitionInput{})
+	got, err := svc.DeleteSegmentDefinition(context.Background(), &DeleteSegmentDefinitionInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1481,7 +4771,10 @@ func TestCheckResponseSnapshot_DeleteWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkflow(context.Background(), &DeleteWorkflowInput{})
+	got, err := svc.DeleteWorkflow(context.Background(), &DeleteWorkflowInput{
+		DomainName: ptr.String("__DomainName__"),
+		WorkflowId: ptr.String("__WorkflowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1571,7 +4864,13 @@ func TestCheckResponseSnapshot_DetectProfileObjectType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectProfileObjectType(context.Background(), &DetectProfileObjectTypeInput{})
+	got, err := svc.DetectProfileObjectType(context.Background(), &DetectProfileObjectTypeInput{
+		Objects: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1595,7 +4894,26 @@ func TestCheckResponseSnapshot_GetAutoMergingPreview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutoMergingPreview(context.Background(), &GetAutoMergingPreviewInput{})
+	got, err := svc.GetAutoMergingPreview(context.Background(), &GetAutoMergingPreviewInput{
+		DomainName: ptr.String("__DomainName__"),
+		Consolidation: &types.Consolidation{
+			MatchingAttributesList: [][]string{
+				{
+					"__Member__",
+					"__Member__",
+				},
+				{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ConflictResolution: &types.ConflictResolution{
+			ConflictResolvingModel: types.ConflictResolvingModel("RECENCY"),
+			SourceName:             ptr.String("__SourceName__"),
+		},
+		MinAllowedConfidenceScoreForMerging: ptr.Float64(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1717,7 +5035,10 @@ func TestCheckResponseSnapshot_GetCalculatedAttributeDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCalculatedAttributeDefinition(context.Background(), &GetCalculatedAttributeDefinitionInput{})
+	got, err := svc.GetCalculatedAttributeDefinition(context.Background(), &GetCalculatedAttributeDefinitionInput{
+		DomainName:              ptr.String("__DomainName__"),
+		CalculatedAttributeName: ptr.String("__CalculatedAttributeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1742,7 +5063,11 @@ func TestCheckResponseSnapshot_GetCalculatedAttributeForProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCalculatedAttributeForProfile(context.Background(), &GetCalculatedAttributeForProfileInput{})
+	got, err := svc.GetCalculatedAttributeForProfile(context.Background(), &GetCalculatedAttributeForProfileInput{
+		DomainName:              ptr.String("__DomainName__"),
+		ProfileId:               ptr.String("__ProfileId__"),
+		CalculatedAttributeName: ptr.String("__CalculatedAttributeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1862,7 +5187,9 @@ func TestCheckResponseSnapshot_GetDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomain(context.Background(), &GetDomainInput{})
+	got, err := svc.GetDomain(context.Background(), &GetDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1894,7 +5221,10 @@ func TestCheckResponseSnapshot_GetDomainLayout(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainLayout(context.Background(), &GetDomainLayoutInput{})
+	got, err := svc.GetDomainLayout(context.Background(), &GetDomainLayoutInput{
+		DomainName:           ptr.String("__DomainName__"),
+		LayoutDefinitionName: ptr.String("__LayoutDefinitionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1930,7 +5260,10 @@ func TestCheckResponseSnapshot_GetDomainObjectType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainObjectType(context.Background(), &GetDomainObjectTypeInput{})
+	got, err := svc.GetDomainObjectType(context.Background(), &GetDomainObjectTypeInput{
+		DomainName:     ptr.String("__DomainName__"),
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1964,7 +5297,10 @@ func TestCheckResponseSnapshot_GetEventStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventStream(context.Background(), &GetEventStreamInput{})
+	got, err := svc.GetEventStream(context.Background(), &GetEventStreamInput{
+		DomainName:      ptr.String("__DomainName__"),
+		EventStreamName: ptr.String("__EventStreamName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2110,7 +5446,10 @@ func TestCheckResponseSnapshot_GetEventTrigger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventTrigger(context.Background(), &GetEventTriggerInput{})
+	got, err := svc.GetEventTrigger(context.Background(), &GetEventTriggerInput{
+		DomainName:       ptr.String("__DomainName__"),
+		EventTriggerName: ptr.String("__EventTriggerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2169,7 +5508,10 @@ func TestCheckResponseSnapshot_GetIdentityResolutionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdentityResolutionJob(context.Background(), &GetIdentityResolutionJobInput{})
+	got, err := svc.GetIdentityResolutionJob(context.Background(), &GetIdentityResolutionJobInput{
+		DomainName: ptr.String("__DomainName__"),
+		JobId:      ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2208,7 +5550,10 @@ func TestCheckResponseSnapshot_GetIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntegration(context.Background(), &GetIntegrationInput{})
+	got, err := svc.GetIntegration(context.Background(), &GetIntegrationInput{
+		DomainName: ptr.String("__DomainName__"),
+		Uri:        ptr.String("__Uri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2249,7 +5594,11 @@ func TestCheckResponseSnapshot_GetMatches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMatches(context.Background(), &GetMatchesInput{})
+	got, err := svc.GetMatches(context.Background(), &GetMatchesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2283,7 +5632,11 @@ func TestCheckResponseSnapshot_GetObjectTypeAttributeStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObjectTypeAttributeStatistics(context.Background(), &GetObjectTypeAttributeStatisticsInput{})
+	got, err := svc.GetObjectTypeAttributeStatistics(context.Background(), &GetObjectTypeAttributeStatisticsInput{
+		DomainName:     ptr.String("__DomainName__"),
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+		AttributeName:  ptr.String("__AttributeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2311,7 +5664,11 @@ func TestCheckResponseSnapshot_GetProfileHistoryRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfileHistoryRecord(context.Background(), &GetProfileHistoryRecordInput{})
+	got, err := svc.GetProfileHistoryRecord(context.Background(), &GetProfileHistoryRecordInput{
+		DomainName: ptr.String("__DomainName__"),
+		ProfileId:  ptr.String("__ProfileId__"),
+		Id:         ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2377,7 +5734,10 @@ func TestCheckResponseSnapshot_GetProfileObjectType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfileObjectType(context.Background(), &GetProfileObjectTypeInput{})
+	got, err := svc.GetProfileObjectType(context.Background(), &GetProfileObjectTypeInput{
+		DomainName:     ptr.String("__DomainName__"),
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2433,7 +5793,9 @@ func TestCheckResponseSnapshot_GetProfileObjectTypeTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfileObjectTypeTemplate(context.Background(), &GetProfileObjectTypeTemplateInput{})
+	got, err := svc.GetProfileObjectTypeTemplate(context.Background(), &GetProfileObjectTypeTemplateInput{
+		TemplateId: ptr.String("__TemplateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2495,7 +5857,63 @@ func TestCheckResponseSnapshot_GetProfileRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfileRecommendations(context.Background(), &GetProfileRecommendationsInput{})
+	got, err := svc.GetProfileRecommendations(context.Background(), &GetProfileRecommendationsInput{
+		DomainName:      ptr.String("__DomainName__"),
+		ProfileId:       ptr.String("__ProfileId__"),
+		RecommenderName: ptr.String("__RecommenderName__"),
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
+		RecommenderFilters: []types.RecommenderFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		RecommenderPromotionalFilters: []types.RecommenderPromotionalFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: map[string]string{
+					"key0": "__Value__",
+				},
+				PromotionName:        ptr.String("__PromotionName__"),
+				PercentPromotedItems: ptr.Int32(1),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: map[string]string{
+					"key0": "__Value__",
+				},
+				PromotionName:        ptr.String("__PromotionName__"),
+				PercentPromotedItems: ptr.Int32(1),
+			},
+		},
+		CandidateIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		MetadataConfig: &types.MetadataConfig{
+			MetadataColumns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		DiversityConfig: &types.RecommendationDiversityConfig{
+			Enabled: ptr.Bool(true),
+			Values: map[string]int32{
+				"key0": 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2642,7 +6060,11 @@ func TestCheckResponseSnapshot_GetRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommender(context.Background(), &GetRecommenderInput{})
+	got, err := svc.GetRecommender(context.Background(), &GetRecommenderInput{
+		DomainName:           ptr.String("__DomainName__"),
+		RecommenderName:      ptr.String("__RecommenderName__"),
+		TrainingMetricsCount: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2672,7 +6094,10 @@ func TestCheckResponseSnapshot_GetRecommenderFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommenderFilter(context.Background(), &GetRecommenderFilterInput{})
+	got, err := svc.GetRecommenderFilter(context.Background(), &GetRecommenderFilterInput{
+		DomainName:            ptr.String("__DomainName__"),
+		RecommenderFilterName: ptr.String("__RecommenderFilterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2709,7 +6134,10 @@ func TestCheckResponseSnapshot_GetRecommenderSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommenderSchema(context.Background(), &GetRecommenderSchemaInput{})
+	got, err := svc.GetRecommenderSchema(context.Background(), &GetRecommenderSchemaInput{
+		DomainName:            ptr.String("__DomainName__"),
+		RecommenderSchemaName: ptr.String("__RecommenderSchemaName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4020,7 +7448,10 @@ func TestCheckResponseSnapshot_GetSegmentDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSegmentDefinition(context.Background(), &GetSegmentDefinitionInput{})
+	got, err := svc.GetSegmentDefinition(context.Background(), &GetSegmentDefinitionInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4036,7 +7467,7 @@ func TestCheckResponseSnapshot_GetSegmentEstimate(t *testing.T) {
 		Status:     types.EstimateStatus("RUNNING"),
 		Estimate:   ptr.String("__Estimate__"),
 		Message:    ptr.String("__Message__"),
-		StatusCode: 1,
+		StatusCode: 200,
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetSegmentEstimate.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4046,7 +7477,10 @@ func TestCheckResponseSnapshot_GetSegmentEstimate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSegmentEstimate(context.Background(), &GetSegmentEstimateInput{})
+	got, err := svc.GetSegmentEstimate(context.Background(), &GetSegmentEstimateInput{
+		DomainName: ptr.String("__DomainName__"),
+		EstimateId: ptr.String("__EstimateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4328,7 +7762,14 @@ func TestCheckResponseSnapshot_GetSegmentMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSegmentMembership(context.Background(), &GetSegmentMembershipInput{})
+	got, err := svc.GetSegmentMembership(context.Background(), &GetSegmentMembershipInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+		ProfileIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4355,7 +7796,11 @@ func TestCheckResponseSnapshot_GetSegmentSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSegmentSnapshot(context.Background(), &GetSegmentSnapshotInput{})
+	got, err := svc.GetSegmentSnapshot(context.Background(), &GetSegmentSnapshotInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+		SnapshotId:            ptr.String("__SnapshotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4384,7 +7829,14 @@ func TestCheckResponseSnapshot_GetSimilarProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSimilarProfiles(context.Background(), &GetSimilarProfilesInput{})
+	got, err := svc.GetSimilarProfiles(context.Background(), &GetSimilarProfilesInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		DomainName:  ptr.String("__DomainName__"),
+		MatchType:   types.MatchType("RULE_BASED_MATCHING"),
+		SearchKey:   ptr.String("__SearchKey__"),
+		SearchValue: ptr.String("__SearchValue__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4424,7 +7876,10 @@ func TestCheckResponseSnapshot_GetUploadJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUploadJob(context.Background(), &GetUploadJobInput{})
+	got, err := svc.GetUploadJob(context.Background(), &GetUploadJobInput{
+		DomainName: ptr.String("__DomainName__"),
+		JobId:      ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4447,7 +7902,10 @@ func TestCheckResponseSnapshot_GetUploadJobPath(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUploadJobPath(context.Background(), &GetUploadJobPathInput{})
+	got, err := svc.GetUploadJobPath(context.Background(), &GetUploadJobPathInput{
+		DomainName: ptr.String("__DomainName__"),
+		JobId:      ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4487,7 +7945,10 @@ func TestCheckResponseSnapshot_GetWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflow(context.Background(), &GetWorkflowInput{})
+	got, err := svc.GetWorkflow(context.Background(), &GetWorkflowInput{
+		DomainName: ptr.String("__DomainName__"),
+		WorkflowId: ptr.String("__WorkflowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4536,7 +7997,12 @@ func TestCheckResponseSnapshot_GetWorkflowSteps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflowSteps(context.Background(), &GetWorkflowStepsInput{})
+	got, err := svc.GetWorkflowSteps(context.Background(), &GetWorkflowStepsInput{
+		DomainName: ptr.String("__DomainName__"),
+		WorkflowId: ptr.String("__WorkflowId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4601,7 +8067,12 @@ func TestCheckResponseSnapshot_ListAccountIntegrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountIntegrations(context.Background(), &ListAccountIntegrationsInput{})
+	got, err := svc.ListAccountIntegrations(context.Background(), &ListAccountIntegrationsInput{
+		Uri:           ptr.String("__Uri__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		IncludeHidden: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4648,7 +8119,11 @@ func TestCheckResponseSnapshot_ListCalculatedAttributeDefinitions(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCalculatedAttributeDefinitions(context.Background(), &ListCalculatedAttributeDefinitionsInput{})
+	got, err := svc.ListCalculatedAttributeDefinitions(context.Background(), &ListCalculatedAttributeDefinitionsInput{
+		DomainName: ptr.String("__DomainName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4685,7 +8160,12 @@ func TestCheckResponseSnapshot_ListCalculatedAttributesForProfile(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCalculatedAttributesForProfile(context.Background(), &ListCalculatedAttributesForProfileInput{})
+	got, err := svc.ListCalculatedAttributesForProfile(context.Background(), &ListCalculatedAttributesForProfileInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		DomainName: ptr.String("__DomainName__"),
+		ProfileId:  ptr.String("__ProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4732,7 +8212,11 @@ func TestCheckResponseSnapshot_ListDomainLayouts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainLayouts(context.Background(), &ListDomainLayoutsInput{})
+	got, err := svc.ListDomainLayouts(context.Background(), &ListDomainLayoutsInput{
+		DomainName: ptr.String("__DomainName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4773,7 +8257,11 @@ func TestCheckResponseSnapshot_ListDomainObjectTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainObjectTypes(context.Background(), &ListDomainObjectTypesInput{})
+	got, err := svc.ListDomainObjectTypes(context.Background(), &ListDomainObjectTypesInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4812,7 +8300,10 @@ func TestCheckResponseSnapshot_ListDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{})
+	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4865,7 +8356,11 @@ func TestCheckResponseSnapshot_ListEventStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventStreams(context.Background(), &ListEventStreamsInput{})
+	got, err := svc.ListEventStreams(context.Background(), &ListEventStreamsInput{
+		DomainName: ptr.String("__DomainName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4908,7 +8403,11 @@ func TestCheckResponseSnapshot_ListEventTriggers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventTriggers(context.Background(), &ListEventTriggersInput{})
+	got, err := svc.ListEventTriggers(context.Background(), &ListEventTriggersInput{
+		DomainName: ptr.String("__DomainName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4969,7 +8468,11 @@ func TestCheckResponseSnapshot_ListIdentityResolutionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdentityResolutionJobs(context.Background(), &ListIdentityResolutionJobsInput{})
+	got, err := svc.ListIdentityResolutionJobs(context.Background(), &ListIdentityResolutionJobsInput{
+		DomainName: ptr.String("__DomainName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5034,7 +8537,12 @@ func TestCheckResponseSnapshot_ListIntegrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIntegrations(context.Background(), &ListIntegrationsInput{})
+	got, err := svc.ListIntegrations(context.Background(), &ListIntegrationsInput{
+		DomainName:    ptr.String("__DomainName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		IncludeHidden: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5065,7 +8573,13 @@ func TestCheckResponseSnapshot_ListObjectTypeAttributeValues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObjectTypeAttributeValues(context.Background(), &ListObjectTypeAttributeValuesInput{})
+	got, err := svc.ListObjectTypeAttributeValues(context.Background(), &ListObjectTypeAttributeValuesInput{
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		DomainName:     ptr.String("__DomainName__"),
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+		AttributeName:  ptr.String("__AttributeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5096,7 +8610,12 @@ func TestCheckResponseSnapshot_ListObjectTypeAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObjectTypeAttributes(context.Background(), &ListObjectTypeAttributesInput{})
+	got, err := svc.ListObjectTypeAttributes(context.Background(), &ListObjectTypeAttributesInput{
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		DomainName:     ptr.String("__DomainName__"),
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5117,7 +8636,7 @@ func TestCheckResponseSnapshot_ListProfileAttributeValues(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		StatusCode: 1,
+		StatusCode: 200,
 	}
 	status, header, body, err := serdeRespReadSnapshot("ListProfileAttributeValues.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -5127,7 +8646,10 @@ func TestCheckResponseSnapshot_ListProfileAttributeValues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfileAttributeValues(context.Background(), &ListProfileAttributeValuesInput{})
+	got, err := svc.ListProfileAttributeValues(context.Background(), &ListProfileAttributeValuesInput{
+		DomainName:    ptr.String("__DomainName__"),
+		AttributeName: ptr.String("__AttributeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5168,7 +8690,15 @@ func TestCheckResponseSnapshot_ListProfileHistoryRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfileHistoryRecords(context.Background(), &ListProfileHistoryRecordsInput{})
+	got, err := svc.ListProfileHistoryRecords(context.Background(), &ListProfileHistoryRecordsInput{
+		DomainName:     ptr.String("__DomainName__"),
+		ProfileId:      ptr.String("__ProfileId__"),
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		ActionType:     types.ActionType("ADDED_PROFILE_KEY"),
+		PerformedBy:    ptr.String("__PerformedBy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5201,7 +8731,10 @@ func TestCheckResponseSnapshot_ListProfileObjectTypeTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfileObjectTypeTemplates(context.Background(), &ListProfileObjectTypeTemplatesInput{})
+	got, err := svc.ListProfileObjectTypeTemplates(context.Background(), &ListProfileObjectTypeTemplatesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5248,7 +8781,11 @@ func TestCheckResponseSnapshot_ListProfileObjectTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfileObjectTypes(context.Background(), &ListProfileObjectTypesInput{})
+	got, err := svc.ListProfileObjectTypes(context.Background(), &ListProfileObjectTypesInput{
+		DomainName: ptr.String("__DomainName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5281,7 +8818,20 @@ func TestCheckResponseSnapshot_ListProfileObjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfileObjects(context.Background(), &ListProfileObjectsInput{})
+	got, err := svc.ListProfileObjects(context.Background(), &ListProfileObjectsInput{
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		DomainName:     ptr.String("__DomainName__"),
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+		ProfileId:      ptr.String("__ProfileId__"),
+		ObjectFilter: &types.ObjectFilter{
+			KeyName: ptr.String("__KeyName__"),
+			Values: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5328,7 +8878,11 @@ func TestCheckResponseSnapshot_ListRecommenderFilters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommenderFilters(context.Background(), &ListRecommenderFiltersInput{})
+	got, err := svc.ListRecommenderFilters(context.Background(), &ListRecommenderFiltersInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5359,7 +8913,10 @@ func TestCheckResponseSnapshot_ListRecommenderRecipes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommenderRecipes(context.Background(), &ListRecommenderRecipesInput{})
+	got, err := svc.ListRecommenderRecipes(context.Background(), &ListRecommenderRecipesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5420,7 +8977,11 @@ func TestCheckResponseSnapshot_ListRecommenderSchemas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommenderSchemas(context.Background(), &ListRecommenderSchemasInput{})
+	got, err := svc.ListRecommenderSchemas(context.Background(), &ListRecommenderSchemasInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5667,7 +9228,11 @@ func TestCheckResponseSnapshot_ListRecommenders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommenders(context.Background(), &ListRecommendersInput{})
+	got, err := svc.ListRecommenders(context.Background(), &ListRecommendersInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5692,7 +9257,11 @@ func TestCheckResponseSnapshot_ListRuleBasedMatches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRuleBasedMatches(context.Background(), &ListRuleBasedMatchesInput{})
+	got, err := svc.ListRuleBasedMatches(context.Background(), &ListRuleBasedMatchesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5737,7 +9306,11 @@ func TestCheckResponseSnapshot_ListSegmentDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSegmentDefinitions(context.Background(), &ListSegmentDefinitionsInput{})
+	got, err := svc.ListSegmentDefinitions(context.Background(), &ListSegmentDefinitionsInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5760,7 +9333,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5801,7 +9376,11 @@ func TestCheckResponseSnapshot_ListUploadJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUploadJobs(context.Background(), &ListUploadJobsInput{})
+	got, err := svc.ListUploadJobs(context.Background(), &ListUploadJobsInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5840,7 +9419,15 @@ func TestCheckResponseSnapshot_ListWorkflows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflows(context.Background(), &ListWorkflowsInput{})
+	got, err := svc.ListWorkflows(context.Background(), &ListWorkflowsInput{
+		DomainName:     ptr.String("__DomainName__"),
+		WorkflowType:   types.WorkflowType("APPFLOW_INTEGRATION"),
+		Status:         types.Status("NOT_STARTED"),
+		QueryStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QueryEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5861,7 +9448,41 @@ func TestCheckResponseSnapshot_MergeProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MergeProfiles(context.Background(), &MergeProfilesInput{})
+	got, err := svc.MergeProfiles(context.Background(), &MergeProfilesInput{
+		DomainName:    ptr.String("__DomainName__"),
+		MainProfileId: ptr.String("__MainProfileId__"),
+		ProfileIdsToBeMerged: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FieldSourceProfileIds: &types.FieldSourceProfileIds{
+			AccountNumber:         ptr.String("__AccountNumber__"),
+			AdditionalInformation: ptr.String("__AdditionalInformation__"),
+			PartyType:             ptr.String("__PartyType__"),
+			BusinessName:          ptr.String("__BusinessName__"),
+			FirstName:             ptr.String("__FirstName__"),
+			MiddleName:            ptr.String("__MiddleName__"),
+			LastName:              ptr.String("__LastName__"),
+			BirthDate:             ptr.String("__BirthDate__"),
+			Gender:                ptr.String("__Gender__"),
+			PhoneNumber:           ptr.String("__PhoneNumber__"),
+			MobilePhoneNumber:     ptr.String("__MobilePhoneNumber__"),
+			HomePhoneNumber:       ptr.String("__HomePhoneNumber__"),
+			BusinessPhoneNumber:   ptr.String("__BusinessPhoneNumber__"),
+			EmailAddress:          ptr.String("__EmailAddress__"),
+			PersonalEmailAddress:  ptr.String("__PersonalEmailAddress__"),
+			BusinessEmailAddress:  ptr.String("__BusinessEmailAddress__"),
+			Address:               ptr.String("__Address__"),
+			ShippingAddress:       ptr.String("__ShippingAddress__"),
+			MailingAddress:        ptr.String("__MailingAddress__"),
+			BillingAddress:        ptr.String("__BillingAddress__"),
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+			ProfileType:           ptr.String("__ProfileType__"),
+			EngagementPreferences: ptr.String("__EngagementPreferences__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5897,7 +9518,23 @@ func TestCheckResponseSnapshot_PutDomainObjectType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDomainObjectType(context.Background(), &PutDomainObjectTypeInput{})
+	got, err := svc.PutDomainObjectType(context.Background(), &PutDomainObjectTypeInput{
+		DomainName:     ptr.String("__DomainName__"),
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+		Description:    ptr.String("__Description__"),
+		EncryptionKey:  ptr.String("__EncryptionKey__"),
+		Fields: map[string]types.DomainObjectTypeField{
+			"key0": {
+				Source:      ptr.String("__Source__"),
+				Target:      ptr.String("__Target__"),
+				ContentType: types.ContentType("STRING"),
+				FeatureType: types.FeatureType("TEXTUAL"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5936,7 +9573,107 @@ func TestCheckResponseSnapshot_PutIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutIntegration(context.Background(), &PutIntegrationInput{})
+	got, err := svc.PutIntegration(context.Background(), &PutIntegrationInput{
+		DomainName:     ptr.String("__DomainName__"),
+		Uri:            ptr.String("__Uri__"),
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+		ObjectTypeNames: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		FlowDefinition: &types.FlowDefinition{
+			Description: ptr.String("__Description__"),
+			FlowName:    ptr.String("__FlowName__"),
+			KmsArn:      ptr.String("__KmsArn__"),
+			SourceFlowConfig: &types.SourceFlowConfig{
+				ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+				ConnectorType:        types.SourceConnectorType("Salesforce"),
+				IncrementalPullConfig: &types.IncrementalPullConfig{
+					DatetimeTypeFieldName: ptr.String("__DatetimeTypeFieldName__"),
+				},
+				SourceConnectorProperties: &types.SourceConnectorProperties{
+					Marketo: &types.MarketoSourceProperties{
+						Object: ptr.String("__Object__"),
+					},
+					S3: &types.S3SourceProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+					},
+					Salesforce: &types.SalesforceSourceProperties{
+						Object:                   ptr.String("__Object__"),
+						EnableDynamicFieldUpdate: true,
+						IncludeDeletedRecords:    true,
+					},
+					ServiceNow: &types.ServiceNowSourceProperties{
+						Object: ptr.String("__Object__"),
+					},
+					Zendesk: &types.ZendeskSourceProperties{
+						Object: ptr.String("__Object__"),
+					},
+				},
+			},
+			Tasks: []types.Task{
+				{
+					ConnectorOperator: &types.ConnectorOperator{
+						Marketo:    types.MarketoConnectorOperator("PROJECTION"),
+						S3:         types.S3ConnectorOperator("PROJECTION"),
+						Salesforce: types.SalesforceConnectorOperator("PROJECTION"),
+						ServiceNow: types.ServiceNowConnectorOperator("PROJECTION"),
+						Zendesk:    types.ZendeskConnectorOperator("PROJECTION"),
+					},
+					DestinationField: ptr.String("__DestinationField__"),
+					SourceFields: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TaskProperties: map[string]string{
+						"key0": "__Value__",
+					},
+					TaskType: types.TaskType("Arithmetic"),
+				},
+				{
+					ConnectorOperator: &types.ConnectorOperator{
+						Marketo:    types.MarketoConnectorOperator("PROJECTION"),
+						S3:         types.S3ConnectorOperator("PROJECTION"),
+						Salesforce: types.SalesforceConnectorOperator("PROJECTION"),
+						ServiceNow: types.ServiceNowConnectorOperator("PROJECTION"),
+						Zendesk:    types.ZendeskConnectorOperator("PROJECTION"),
+					},
+					DestinationField: ptr.String("__DestinationField__"),
+					SourceFields: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TaskProperties: map[string]string{
+						"key0": "__Value__",
+					},
+					TaskType: types.TaskType("Arithmetic"),
+				},
+			},
+			TriggerConfig: &types.TriggerConfig{
+				TriggerType: types.TriggerType("Scheduled"),
+				TriggerProperties: &types.TriggerProperties{
+					Scheduled: &types.ScheduledTriggerProperties{
+						ScheduleExpression: ptr.String("__ScheduleExpression__"),
+						DataPullMode:       types.DataPullMode("Incremental"),
+						ScheduleStartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ScheduleEndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Timezone:           ptr.String("__Timezone__"),
+						ScheduleOffset:     ptr.Int64(1),
+						FirstExecutionFrom: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		EventTriggerNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scope: types.Scope("PROFILE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5957,7 +9694,11 @@ func TestCheckResponseSnapshot_PutProfileObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutProfileObject(context.Background(), &PutProfileObjectInput{})
+	got, err := svc.PutProfileObject(context.Background(), &PutProfileObjectInput{
+		ObjectTypeName: ptr.String("__ObjectTypeName__"),
+		Object:         ptr.String("__Object__"),
+		DomainName:     ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6023,7 +9764,52 @@ func TestCheckResponseSnapshot_PutProfileObjectType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutProfileObjectType(context.Background(), &PutProfileObjectTypeInput{})
+	got, err := svc.PutProfileObjectType(context.Background(), &PutProfileObjectTypeInput{
+		DomainName:                       ptr.String("__DomainName__"),
+		ObjectTypeName:                   ptr.String("__ObjectTypeName__"),
+		Description:                      ptr.String("__Description__"),
+		TemplateId:                       ptr.String("__TemplateId__"),
+		ExpirationDays:                   ptr.Int32(1),
+		EncryptionKey:                    ptr.String("__EncryptionKey__"),
+		AllowProfileCreation:             true,
+		SourceLastUpdatedTimestampFormat: ptr.String("__SourceLastUpdatedTimestampFormat__"),
+		MaxProfileObjectCount:            ptr.Int32(1),
+		SourcePriority:                   ptr.Int32(1),
+		Fields: map[string]types.ObjectTypeField{
+			"key0": {
+				Source:      ptr.String("__Source__"),
+				Target:      ptr.String("__Target__"),
+				ContentType: types.FieldContentType("STRING"),
+			},
+		},
+		Keys: map[string][]types.ObjectTypeKey{
+			"key0": {
+				{
+					StandardIdentifiers: []types.StandardIdentifier{
+						types.StandardIdentifier("PROFILE"),
+						types.StandardIdentifier("PROFILE"),
+					},
+					FieldNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					StandardIdentifiers: []types.StandardIdentifier{
+						types.StandardIdentifier("PROFILE"),
+						types.StandardIdentifier("PROFILE"),
+					},
+					FieldNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6284,7 +10070,33 @@ func TestCheckResponseSnapshot_SearchProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchProfiles(context.Background(), &SearchProfilesInput{})
+	got, err := svc.SearchProfiles(context.Background(), &SearchProfilesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		DomainName: ptr.String("__DomainName__"),
+		KeyName:    ptr.String("__KeyName__"),
+		Values: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AdditionalSearchKeys: []types.AdditionalSearchKey{
+			{
+				KeyName: ptr.String("__KeyName__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				KeyName: ptr.String("__KeyName__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		LogicalOperator: types.LogicalOperator("AND"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6303,7 +10115,10 @@ func TestCheckResponseSnapshot_StartRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRecommender(context.Background(), &StartRecommenderInput{})
+	got, err := svc.StartRecommender(context.Background(), &StartRecommenderInput{
+		DomainName:      ptr.String("__DomainName__"),
+		RecommenderName: ptr.String("__RecommenderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6322,7 +10137,10 @@ func TestCheckResponseSnapshot_StartUploadJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartUploadJob(context.Background(), &StartUploadJobInput{})
+	got, err := svc.StartUploadJob(context.Background(), &StartUploadJobInput{
+		DomainName: ptr.String("__DomainName__"),
+		JobId:      ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6341,7 +10159,10 @@ func TestCheckResponseSnapshot_StopRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopRecommender(context.Background(), &StopRecommenderInput{})
+	got, err := svc.StopRecommender(context.Background(), &StopRecommenderInput{
+		DomainName:      ptr.String("__DomainName__"),
+		RecommenderName: ptr.String("__RecommenderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6360,7 +10181,10 @@ func TestCheckResponseSnapshot_StopUploadJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopUploadJob(context.Background(), &StopUploadJobInput{})
+	got, err := svc.StopUploadJob(context.Background(), &StopUploadJobInput{
+		DomainName: ptr.String("__DomainName__"),
+		JobId:      ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6379,7 +10203,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6398,7 +10227,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6461,7 +10296,29 @@ func TestCheckResponseSnapshot_UpdateCalculatedAttributeDefinition(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCalculatedAttributeDefinition(context.Background(), &UpdateCalculatedAttributeDefinitionInput{})
+	got, err := svc.UpdateCalculatedAttributeDefinition(context.Background(), &UpdateCalculatedAttributeDefinitionInput{
+		DomainName:              ptr.String("__DomainName__"),
+		CalculatedAttributeName: ptr.String("__CalculatedAttributeName__"),
+		DisplayName:             ptr.String("__DisplayName__"),
+		Description:             ptr.String("__Description__"),
+		Conditions: &types.Conditions{
+			Range: &types.Range{
+				Value: ptr.Int32(1),
+				Unit:  types.Unit("DAYS"),
+				ValueRange: &types.ValueRange{
+					Start: ptr.Int32(1),
+					End:   ptr.Int32(1),
+				},
+				TimestampSource: ptr.String("__TimestampSource__"),
+				TimestampFormat: ptr.String("__TimestampFormat__"),
+			},
+			ObjectCount: ptr.Int32(1),
+			Threshold: &types.Threshold{
+				Value:    ptr.String("__Value__"),
+				Operator: types.Operator("EQUAL_TO"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6575,7 +10432,95 @@ func TestCheckResponseSnapshot_UpdateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomain(context.Background(), &UpdateDomainInput{})
+	got, err := svc.UpdateDomain(context.Background(), &UpdateDomainInput{
+		DomainName:            ptr.String("__DomainName__"),
+		DefaultExpirationDays: ptr.Int32(1),
+		DefaultEncryptionKey:  ptr.String("__DefaultEncryptionKey__"),
+		DeadLetterQueueUrl:    ptr.String("__DeadLetterQueueUrl__"),
+		Matching: &types.MatchingRequest{
+			Enabled: ptr.Bool(true),
+			JobSchedule: &types.JobSchedule{
+				DayOfTheWeek: types.JobScheduleDayOfTheWeek("SUNDAY"),
+				Time:         ptr.String("__Time__"),
+			},
+			AutoMerging: &types.AutoMerging{
+				Enabled: ptr.Bool(true),
+				Consolidation: &types.Consolidation{
+					MatchingAttributesList: [][]string{
+						{
+							"__Member__",
+							"__Member__",
+						},
+						{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ConflictResolution: &types.ConflictResolution{
+					ConflictResolvingModel: types.ConflictResolvingModel("RECENCY"),
+					SourceName:             ptr.String("__SourceName__"),
+				},
+				MinAllowedConfidenceScoreForMerging: ptr.Float64(1.0),
+			},
+			ExportingConfig: &types.ExportingConfig{
+				S3Exporting: &types.S3ExportingConfig{
+					S3BucketName: ptr.String("__S3BucketName__"),
+					S3KeyName:    ptr.String("__S3KeyName__"),
+				},
+			},
+		},
+		RuleBasedMatching: &types.RuleBasedMatchingRequest{
+			Enabled: ptr.Bool(true),
+			MatchingRules: []types.MatchingRule{
+				{
+					Rule: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Rule: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			MaxAllowedRuleLevelForMerging:  ptr.Int32(1),
+			MaxAllowedRuleLevelForMatching: ptr.Int32(1),
+			AttributeTypesSelector: &types.AttributeTypesSelector{
+				AttributeMatchingModel: types.AttributeMatchingModel("ONE_TO_ONE"),
+				Address: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PhoneNumber: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EmailAddress: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ConflictResolution: &types.ConflictResolution{
+				ConflictResolvingModel: types.ConflictResolvingModel("RECENCY"),
+				SourceName:             ptr.String("__SourceName__"),
+			},
+			ExportingConfig: &types.ExportingConfig{
+				S3Exporting: &types.S3ExportingConfig{
+					S3BucketName: ptr.String("__S3BucketName__"),
+					S3KeyName:    ptr.String("__S3KeyName__"),
+				},
+			},
+		},
+		DataStore: &types.DataStoreRequest{
+			Enabled: ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6607,7 +10552,15 @@ func TestCheckResponseSnapshot_UpdateDomainLayout(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomainLayout(context.Background(), &UpdateDomainLayoutInput{})
+	got, err := svc.UpdateDomainLayout(context.Background(), &UpdateDomainLayoutInput{
+		DomainName:           ptr.String("__DomainName__"),
+		LayoutDefinitionName: ptr.String("__LayoutDefinitionName__"),
+		Description:          ptr.String("__Description__"),
+		DisplayName:          ptr.String("__DisplayName__"),
+		IsDefault:            true,
+		LayoutType:           types.LayoutType("PROFILE_EXPLORER"),
+		Layout:               ptr.String("__Layout__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6753,7 +10706,130 @@ func TestCheckResponseSnapshot_UpdateEventTrigger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEventTrigger(context.Background(), &UpdateEventTriggerInput{})
+	got, err := svc.UpdateEventTrigger(context.Background(), &UpdateEventTriggerInput{
+		DomainName:       ptr.String("__DomainName__"),
+		EventTriggerName: ptr.String("__EventTriggerName__"),
+		ObjectTypeName:   ptr.String("__ObjectTypeName__"),
+		Description:      ptr.String("__Description__"),
+		EventTriggerConditions: []types.EventTriggerCondition{
+			{
+				EventTriggerDimensions: []types.EventTriggerDimension{
+					{
+						ObjectAttributes: []types.ObjectAttribute{
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						ObjectAttributes: []types.ObjectAttribute{
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				LogicalOperator: types.EventTriggerLogicalOperator("ANY"),
+			},
+			{
+				EventTriggerDimensions: []types.EventTriggerDimension{
+					{
+						ObjectAttributes: []types.ObjectAttribute{
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						ObjectAttributes: []types.ObjectAttribute{
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Source:             ptr.String("__Source__"),
+								FieldName:          ptr.String("__FieldName__"),
+								ComparisonOperator: types.ComparisonOperator("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				LogicalOperator: types.EventTriggerLogicalOperator("ANY"),
+			},
+		},
+		SegmentFilter: ptr.String("__SegmentFilter__"),
+		EventTriggerLimits: &types.EventTriggerLimits{
+			EventExpiration: ptr.Int64(1),
+			Periods: []types.Period{
+				{
+					Unit:                     types.PeriodUnit("MINUTES"),
+					Value:                    ptr.Int32(1),
+					MaxInvocationsPerProfile: ptr.Int32(1),
+					Unlimited:                true,
+				},
+				{
+					Unit:                     types.PeriodUnit("MINUTES"),
+					Value:                    ptr.Int32(1),
+					MaxInvocationsPerProfile: ptr.Int32(1),
+					Unlimited:                true,
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6774,7 +10850,110 @@ func TestCheckResponseSnapshot_UpdateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProfile(context.Background(), &UpdateProfileInput{})
+	got, err := svc.UpdateProfile(context.Background(), &UpdateProfileInput{
+		DomainName:            ptr.String("__DomainName__"),
+		ProfileId:             ptr.String("__ProfileId__"),
+		AdditionalInformation: ptr.String("__AdditionalInformation__"),
+		AccountNumber:         ptr.String("__AccountNumber__"),
+		PartyType:             types.PartyType("INDIVIDUAL"),
+		BusinessName:          ptr.String("__BusinessName__"),
+		FirstName:             ptr.String("__FirstName__"),
+		MiddleName:            ptr.String("__MiddleName__"),
+		LastName:              ptr.String("__LastName__"),
+		BirthDate:             ptr.String("__BirthDate__"),
+		Gender:                types.Gender("MALE"),
+		PhoneNumber:           ptr.String("__PhoneNumber__"),
+		MobilePhoneNumber:     ptr.String("__MobilePhoneNumber__"),
+		HomePhoneNumber:       ptr.String("__HomePhoneNumber__"),
+		BusinessPhoneNumber:   ptr.String("__BusinessPhoneNumber__"),
+		EmailAddress:          ptr.String("__EmailAddress__"),
+		PersonalEmailAddress:  ptr.String("__PersonalEmailAddress__"),
+		BusinessEmailAddress:  ptr.String("__BusinessEmailAddress__"),
+		Address: &types.UpdateAddress{
+			Address1:   ptr.String("__Address1__"),
+			Address2:   ptr.String("__Address2__"),
+			Address3:   ptr.String("__Address3__"),
+			Address4:   ptr.String("__Address4__"),
+			City:       ptr.String("__City__"),
+			County:     ptr.String("__County__"),
+			State:      ptr.String("__State__"),
+			Province:   ptr.String("__Province__"),
+			Country:    ptr.String("__Country__"),
+			PostalCode: ptr.String("__PostalCode__"),
+		},
+		ShippingAddress: &types.UpdateAddress{
+			Address1:   ptr.String("__Address1__"),
+			Address2:   ptr.String("__Address2__"),
+			Address3:   ptr.String("__Address3__"),
+			Address4:   ptr.String("__Address4__"),
+			City:       ptr.String("__City__"),
+			County:     ptr.String("__County__"),
+			State:      ptr.String("__State__"),
+			Province:   ptr.String("__Province__"),
+			Country:    ptr.String("__Country__"),
+			PostalCode: ptr.String("__PostalCode__"),
+		},
+		MailingAddress: &types.UpdateAddress{
+			Address1:   ptr.String("__Address1__"),
+			Address2:   ptr.String("__Address2__"),
+			Address3:   ptr.String("__Address3__"),
+			Address4:   ptr.String("__Address4__"),
+			City:       ptr.String("__City__"),
+			County:     ptr.String("__County__"),
+			State:      ptr.String("__State__"),
+			Province:   ptr.String("__Province__"),
+			Country:    ptr.String("__Country__"),
+			PostalCode: ptr.String("__PostalCode__"),
+		},
+		BillingAddress: &types.UpdateAddress{
+			Address1:   ptr.String("__Address1__"),
+			Address2:   ptr.String("__Address2__"),
+			Address3:   ptr.String("__Address3__"),
+			Address4:   ptr.String("__Address4__"),
+			City:       ptr.String("__City__"),
+			County:     ptr.String("__County__"),
+			State:      ptr.String("__State__"),
+			Province:   ptr.String("__Province__"),
+			Country:    ptr.String("__Country__"),
+			PostalCode: ptr.String("__PostalCode__"),
+		},
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		PartyTypeString: ptr.String("__PartyTypeString__"),
+		GenderString:    ptr.String("__GenderString__"),
+		ProfileType:     types.ProfileType("ACCOUNT_PROFILE"),
+		EngagementPreferences: &types.EngagementPreferences{
+			Phone: []types.ContactPreference{
+				{
+					KeyName:     ptr.String("__KeyName__"),
+					KeyValue:    ptr.String("__KeyValue__"),
+					ProfileId:   ptr.String("__ProfileId__"),
+					ContactType: types.ContactType("PhoneNumber"),
+				},
+				{
+					KeyName:     ptr.String("__KeyName__"),
+					KeyValue:    ptr.String("__KeyValue__"),
+					ProfileId:   ptr.String("__ProfileId__"),
+					ContactType: types.ContactType("PhoneNumber"),
+				},
+			},
+			Email: []types.ContactPreference{
+				{
+					KeyName:     ptr.String("__KeyName__"),
+					KeyValue:    ptr.String("__KeyValue__"),
+					ProfileId:   ptr.String("__ProfileId__"),
+					ContactType: types.ContactType("PhoneNumber"),
+				},
+				{
+					KeyName:     ptr.String("__KeyName__"),
+					KeyValue:    ptr.String("__KeyValue__"),
+					ProfileId:   ptr.String("__ProfileId__"),
+					ContactType: types.ContactType("PhoneNumber"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6795,7 +10974,58 @@ func TestCheckResponseSnapshot_UpdateRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRecommender(context.Background(), &UpdateRecommenderInput{})
+	got, err := svc.UpdateRecommender(context.Background(), &UpdateRecommenderInput{
+		DomainName:      ptr.String("__DomainName__"),
+		RecommenderName: ptr.String("__RecommenderName__"),
+		Description:     ptr.String("__Description__"),
+		RecommenderConfig: &types.RecommenderConfig{
+			EventsConfig: &types.EventsConfig{
+				EventParametersList: []types.EventParameters{
+					{
+						EventType:           ptr.String("__EventType__"),
+						EventValueThreshold: ptr.Float64(1.0),
+						EventWeight:         ptr.Float64(1.0),
+					},
+					{
+						EventType:           ptr.String("__EventType__"),
+						EventValueThreshold: ptr.Float64(1.0),
+						EventWeight:         ptr.Float64(1.0),
+					},
+				},
+			},
+			TrainingFrequency: ptr.Int32(1),
+			InferenceConfig: &types.InferenceConfig{
+				MinProvisionedTPS: ptr.Int32(1),
+			},
+			IncludedColumns: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ExcludedColumns: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DiversityConfig: &types.DiversityConfig{
+				DiversityColumns: []types.DiversityColumn{
+					{
+						Name:    ptr.String("__Name__"),
+						CapType: types.DiversityCapType("PERCENTAGE"),
+						Target:  ptr.String("__Target__"),
+					},
+					{
+						Name:    ptr.String("__Name__"),
+						CapType: types.DiversityCapType("PERCENTAGE"),
+						Target:  ptr.String("__Target__"),
+					},
+				},
+			},
+		},
+		RecommenderVersionName: ptr.String("__RecommenderVersionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6816,7 +11046,15 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddProfileKey(context.Background(), &AddProfileKeyInput{})
+	_, opErr := svc.AddProfileKey(context.Background(), &AddProfileKeyInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		KeyName:   ptr.String("__KeyName__"),
+		Values: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6841,7 +11079,15 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddProfileKey(context.Background(), &AddProfileKeyInput{})
+	_, opErr := svc.AddProfileKey(context.Background(), &AddProfileKeyInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		KeyName:   ptr.String("__KeyName__"),
+		Values: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6866,7 +11112,15 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddProfileKey(context.Background(), &AddProfileKeyInput{})
+	_, opErr := svc.AddProfileKey(context.Background(), &AddProfileKeyInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		KeyName:   ptr.String("__KeyName__"),
+		Values: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6891,7 +11145,15 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddProfileKey(context.Background(), &AddProfileKeyInput{})
+	_, opErr := svc.AddProfileKey(context.Background(), &AddProfileKeyInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		KeyName:   ptr.String("__KeyName__"),
+		Values: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6916,7 +11178,15 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddProfileKey(context.Background(), &AddProfileKeyInput{})
+	_, opErr := svc.AddProfileKey(context.Background(), &AddProfileKeyInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		KeyName:   ptr.String("__KeyName__"),
+		Values: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

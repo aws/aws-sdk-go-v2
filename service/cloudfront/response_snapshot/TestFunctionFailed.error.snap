@@ -1,0 +1,4 @@
+500
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>TestFunctionFailed</Code><Message>__Message__</Message></Error></ErrorResponse>

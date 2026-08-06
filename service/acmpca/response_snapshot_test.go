@@ -119,7 +119,179 @@ func TestCheckResponseSnapshot_CreateCertificateAuthority(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCertificateAuthority(context.Background(), &CreateCertificateAuthorityInput{})
+	got, err := svc.CreateCertificateAuthority(context.Background(), &CreateCertificateAuthorityInput{
+		CertificateAuthorityConfiguration: &types.CertificateAuthorityConfiguration{
+			KeyAlgorithm:     types.KeyAlgorithm("RSA_2048"),
+			SigningAlgorithm: types.SigningAlgorithm("SHA256WITHECDSA"),
+			Subject: &types.ASN1Subject{
+				Country:                    ptr.String("__Country__"),
+				Organization:               ptr.String("__Organization__"),
+				OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+				DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+				State:                      ptr.String("__State__"),
+				CommonName:                 ptr.String("__CommonName__"),
+				SerialNumber:               ptr.String("__SerialNumber__"),
+				Locality:                   ptr.String("__Locality__"),
+				Title:                      ptr.String("__Title__"),
+				Surname:                    ptr.String("__Surname__"),
+				GivenName:                  ptr.String("__GivenName__"),
+				Initials:                   ptr.String("__Initials__"),
+				Pseudonym:                  ptr.String("__Pseudonym__"),
+				GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+				CustomAttributes: []types.CustomAttribute{
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+				},
+			},
+			CsrExtensions: &types.CsrExtensions{
+				KeyUsage: &types.KeyUsage{
+					DigitalSignature: true,
+					NonRepudiation:   true,
+					KeyEncipherment:  true,
+					DataEncipherment: true,
+					KeyAgreement:     true,
+					KeyCertSign:      true,
+					CRLSign:          true,
+					EncipherOnly:     true,
+					DecipherOnly:     true,
+				},
+				SubjectInformationAccess: []types.AccessDescription{
+					{
+						AccessMethod: &types.AccessMethod{
+							CustomObjectIdentifier: ptr.String("__CustomObjectIdentifier__"),
+							AccessMethodType:       types.AccessMethodType("CA_REPOSITORY"),
+						},
+						AccessLocation: &types.GeneralName{
+							OtherName: &types.OtherName{
+								TypeId: ptr.String("__TypeId__"),
+								Value:  ptr.String("__Value__"),
+							},
+							Rfc822Name: ptr.String("__Rfc822Name__"),
+							DnsName:    ptr.String("__DnsName__"),
+							DirectoryName: &types.ASN1Subject{
+								Country:                    ptr.String("__Country__"),
+								Organization:               ptr.String("__Organization__"),
+								OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+								DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+								State:                      ptr.String("__State__"),
+								CommonName:                 ptr.String("__CommonName__"),
+								SerialNumber:               ptr.String("__SerialNumber__"),
+								Locality:                   ptr.String("__Locality__"),
+								Title:                      ptr.String("__Title__"),
+								Surname:                    ptr.String("__Surname__"),
+								GivenName:                  ptr.String("__GivenName__"),
+								Initials:                   ptr.String("__Initials__"),
+								Pseudonym:                  ptr.String("__Pseudonym__"),
+								GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+								CustomAttributes: []types.CustomAttribute{
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+								},
+							},
+							EdiPartyName: &types.EdiPartyName{
+								PartyName:    ptr.String("__PartyName__"),
+								NameAssigner: ptr.String("__NameAssigner__"),
+							},
+							UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+							IpAddress:                 ptr.String("__IpAddress__"),
+							RegisteredId:              ptr.String("__RegisteredId__"),
+						},
+					},
+					{
+						AccessMethod: &types.AccessMethod{
+							CustomObjectIdentifier: ptr.String("__CustomObjectIdentifier__"),
+							AccessMethodType:       types.AccessMethodType("CA_REPOSITORY"),
+						},
+						AccessLocation: &types.GeneralName{
+							OtherName: &types.OtherName{
+								TypeId: ptr.String("__TypeId__"),
+								Value:  ptr.String("__Value__"),
+							},
+							Rfc822Name: ptr.String("__Rfc822Name__"),
+							DnsName:    ptr.String("__DnsName__"),
+							DirectoryName: &types.ASN1Subject{
+								Country:                    ptr.String("__Country__"),
+								Organization:               ptr.String("__Organization__"),
+								OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+								DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+								State:                      ptr.String("__State__"),
+								CommonName:                 ptr.String("__CommonName__"),
+								SerialNumber:               ptr.String("__SerialNumber__"),
+								Locality:                   ptr.String("__Locality__"),
+								Title:                      ptr.String("__Title__"),
+								Surname:                    ptr.String("__Surname__"),
+								GivenName:                  ptr.String("__GivenName__"),
+								Initials:                   ptr.String("__Initials__"),
+								Pseudonym:                  ptr.String("__Pseudonym__"),
+								GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+								CustomAttributes: []types.CustomAttribute{
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+								},
+							},
+							EdiPartyName: &types.EdiPartyName{
+								PartyName:    ptr.String("__PartyName__"),
+								NameAssigner: ptr.String("__NameAssigner__"),
+							},
+							UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+							IpAddress:                 ptr.String("__IpAddress__"),
+							RegisteredId:              ptr.String("__RegisteredId__"),
+						},
+					},
+				},
+			},
+		},
+		RevocationConfiguration: &types.RevocationConfiguration{
+			CrlConfiguration: &types.CrlConfiguration{
+				Enabled:          ptr.Bool(true),
+				ExpirationInDays: ptr.Int32(1),
+				CustomCname:      ptr.String("__CustomCname__"),
+				S3BucketName:     ptr.String("__S3BucketName__"),
+				S3ObjectAcl:      types.S3ObjectAcl("PUBLIC_READ"),
+				CrlDistributionPointExtensionConfiguration: &types.CrlDistributionPointExtensionConfiguration{
+					OmitExtension: ptr.Bool(true),
+				},
+				CrlType:    types.CrlType("COMPLETE"),
+				CustomPath: ptr.String("__CustomPath__"),
+			},
+			OcspConfiguration: &types.OcspConfiguration{
+				Enabled:         ptr.Bool(true),
+				OcspCustomCname: ptr.String("__OcspCustomCname__"),
+			},
+		},
+		CertificateAuthorityType:   types.CertificateAuthorityType("ROOT"),
+		IdempotencyToken:           ptr.String("__IdempotencyToken__"),
+		KeyStorageSecurityStandard: types.KeyStorageSecurityStandard("FIPS_140_2_LEVEL_2_OR_HIGHER"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UsageMode: types.CertificateAuthorityUsageMode("GENERAL_PURPOSE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +313,11 @@ func TestCheckResponseSnapshot_CreateCertificateAuthorityAuditReport(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCertificateAuthorityAuditReport(context.Background(), &CreateCertificateAuthorityAuditReportInput{})
+	got, err := svc.CreateCertificateAuthorityAuditReport(context.Background(), &CreateCertificateAuthorityAuditReportInput{
+		CertificateAuthorityArn:   ptr.String("__CertificateAuthorityArn__"),
+		S3BucketName:              ptr.String("__S3BucketName__"),
+		AuditReportResponseFormat: types.AuditReportResponseFormat("JSON"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +336,15 @@ func TestCheckResponseSnapshot_CreatePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePermission(context.Background(), &CreatePermissionInput{})
+	got, err := svc.CreatePermission(context.Background(), &CreatePermissionInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Principal:               ptr.String("__Principal__"),
+		SourceAccount:           ptr.String("__SourceAccount__"),
+		Actions: []types.ActionType{
+			types.ActionType("IssueCertificate"),
+			types.ActionType("IssueCertificate"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,7 +363,10 @@ func TestCheckResponseSnapshot_DeleteCertificateAuthority(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCertificateAuthority(context.Background(), &DeleteCertificateAuthorityInput{})
+	got, err := svc.DeleteCertificateAuthority(context.Background(), &DeleteCertificateAuthorityInput{
+		CertificateAuthorityArn:     ptr.String("__CertificateAuthorityArn__"),
+		PermanentDeletionTimeInDays: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -198,7 +385,11 @@ func TestCheckResponseSnapshot_DeletePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePermission(context.Background(), &DeletePermissionInput{})
+	got, err := svc.DeletePermission(context.Background(), &DeletePermissionInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Principal:               ptr.String("__Principal__"),
+		SourceAccount:           ptr.String("__SourceAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -217,7 +408,9 @@ func TestCheckResponseSnapshot_DeletePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePolicy(context.Background(), &DeletePolicyInput{})
+	got, err := svc.DeletePolicy(context.Background(), &DeletePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -409,7 +602,9 @@ func TestCheckResponseSnapshot_DescribeCertificateAuthority(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCertificateAuthority(context.Background(), &DescribeCertificateAuthorityInput{})
+	got, err := svc.DescribeCertificateAuthority(context.Background(), &DescribeCertificateAuthorityInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -433,7 +628,10 @@ func TestCheckResponseSnapshot_DescribeCertificateAuthorityAuditReport(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCertificateAuthorityAuditReport(context.Background(), &DescribeCertificateAuthorityAuditReportInput{})
+	got, err := svc.DescribeCertificateAuthorityAuditReport(context.Background(), &DescribeCertificateAuthorityAuditReportInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		AuditReportId:           ptr.String("__AuditReportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -455,7 +653,10 @@ func TestCheckResponseSnapshot_GetCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCertificate(context.Background(), &GetCertificateInput{})
+	got, err := svc.GetCertificate(context.Background(), &GetCertificateInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		CertificateArn:          ptr.String("__CertificateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -477,7 +678,9 @@ func TestCheckResponseSnapshot_GetCertificateAuthorityCertificate(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCertificateAuthorityCertificate(context.Background(), &GetCertificateAuthorityCertificateInput{})
+	got, err := svc.GetCertificateAuthorityCertificate(context.Background(), &GetCertificateAuthorityCertificateInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -498,7 +701,9 @@ func TestCheckResponseSnapshot_GetCertificateAuthorityCsr(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCertificateAuthorityCsr(context.Background(), &GetCertificateAuthorityCsrInput{})
+	got, err := svc.GetCertificateAuthorityCsr(context.Background(), &GetCertificateAuthorityCsrInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -519,7 +724,9 @@ func TestCheckResponseSnapshot_GetPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{})
+	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -538,7 +745,11 @@ func TestCheckResponseSnapshot_ImportCertificateAuthorityCertificate(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportCertificateAuthorityCertificate(context.Background(), &ImportCertificateAuthorityCertificateInput{})
+	got, err := svc.ImportCertificateAuthorityCertificate(context.Background(), &ImportCertificateAuthorityCertificateInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Certificate:             []byte("blob"),
+		CertificateChain:        []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -559,7 +770,204 @@ func TestCheckResponseSnapshot_IssueCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.IssueCertificate(context.Background(), &IssueCertificateInput{})
+	got, err := svc.IssueCertificate(context.Background(), &IssueCertificateInput{
+		ApiPassthrough: &types.ApiPassthrough{
+			Extensions: &types.Extensions{
+				CertificatePolicies: []types.PolicyInformation{
+					{
+						CertPolicyId: ptr.String("__CertPolicyId__"),
+						PolicyQualifiers: []types.PolicyQualifierInfo{
+							{
+								PolicyQualifierId: types.PolicyQualifierId("CPS"),
+								Qualifier: &types.Qualifier{
+									CpsUri: ptr.String("__CpsUri__"),
+								},
+							},
+							{
+								PolicyQualifierId: types.PolicyQualifierId("CPS"),
+								Qualifier: &types.Qualifier{
+									CpsUri: ptr.String("__CpsUri__"),
+								},
+							},
+						},
+					},
+					{
+						CertPolicyId: ptr.String("__CertPolicyId__"),
+						PolicyQualifiers: []types.PolicyQualifierInfo{
+							{
+								PolicyQualifierId: types.PolicyQualifierId("CPS"),
+								Qualifier: &types.Qualifier{
+									CpsUri: ptr.String("__CpsUri__"),
+								},
+							},
+							{
+								PolicyQualifierId: types.PolicyQualifierId("CPS"),
+								Qualifier: &types.Qualifier{
+									CpsUri: ptr.String("__CpsUri__"),
+								},
+							},
+						},
+					},
+				},
+				ExtendedKeyUsage: []types.ExtendedKeyUsage{
+					{
+						ExtendedKeyUsageType:             types.ExtendedKeyUsageType("SERVER_AUTH"),
+						ExtendedKeyUsageObjectIdentifier: ptr.String("__ExtendedKeyUsageObjectIdentifier__"),
+					},
+					{
+						ExtendedKeyUsageType:             types.ExtendedKeyUsageType("SERVER_AUTH"),
+						ExtendedKeyUsageObjectIdentifier: ptr.String("__ExtendedKeyUsageObjectIdentifier__"),
+					},
+				},
+				KeyUsage: &types.KeyUsage{
+					DigitalSignature: true,
+					NonRepudiation:   true,
+					KeyEncipherment:  true,
+					DataEncipherment: true,
+					KeyAgreement:     true,
+					KeyCertSign:      true,
+					CRLSign:          true,
+					EncipherOnly:     true,
+					DecipherOnly:     true,
+				},
+				SubjectAlternativeNames: []types.GeneralName{
+					{
+						OtherName: &types.OtherName{
+							TypeId: ptr.String("__TypeId__"),
+							Value:  ptr.String("__Value__"),
+						},
+						Rfc822Name: ptr.String("__Rfc822Name__"),
+						DnsName:    ptr.String("__DnsName__"),
+						DirectoryName: &types.ASN1Subject{
+							Country:                    ptr.String("__Country__"),
+							Organization:               ptr.String("__Organization__"),
+							OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+							DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+							State:                      ptr.String("__State__"),
+							CommonName:                 ptr.String("__CommonName__"),
+							SerialNumber:               ptr.String("__SerialNumber__"),
+							Locality:                   ptr.String("__Locality__"),
+							Title:                      ptr.String("__Title__"),
+							Surname:                    ptr.String("__Surname__"),
+							GivenName:                  ptr.String("__GivenName__"),
+							Initials:                   ptr.String("__Initials__"),
+							Pseudonym:                  ptr.String("__Pseudonym__"),
+							GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+							CustomAttributes: []types.CustomAttribute{
+								{
+									ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+									Value:            ptr.String("__Value__"),
+								},
+								{
+									ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+									Value:            ptr.String("__Value__"),
+								},
+							},
+						},
+						EdiPartyName: &types.EdiPartyName{
+							PartyName:    ptr.String("__PartyName__"),
+							NameAssigner: ptr.String("__NameAssigner__"),
+						},
+						UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+						IpAddress:                 ptr.String("__IpAddress__"),
+						RegisteredId:              ptr.String("__RegisteredId__"),
+					},
+					{
+						OtherName: &types.OtherName{
+							TypeId: ptr.String("__TypeId__"),
+							Value:  ptr.String("__Value__"),
+						},
+						Rfc822Name: ptr.String("__Rfc822Name__"),
+						DnsName:    ptr.String("__DnsName__"),
+						DirectoryName: &types.ASN1Subject{
+							Country:                    ptr.String("__Country__"),
+							Organization:               ptr.String("__Organization__"),
+							OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+							DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+							State:                      ptr.String("__State__"),
+							CommonName:                 ptr.String("__CommonName__"),
+							SerialNumber:               ptr.String("__SerialNumber__"),
+							Locality:                   ptr.String("__Locality__"),
+							Title:                      ptr.String("__Title__"),
+							Surname:                    ptr.String("__Surname__"),
+							GivenName:                  ptr.String("__GivenName__"),
+							Initials:                   ptr.String("__Initials__"),
+							Pseudonym:                  ptr.String("__Pseudonym__"),
+							GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+							CustomAttributes: []types.CustomAttribute{
+								{
+									ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+									Value:            ptr.String("__Value__"),
+								},
+								{
+									ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+									Value:            ptr.String("__Value__"),
+								},
+							},
+						},
+						EdiPartyName: &types.EdiPartyName{
+							PartyName:    ptr.String("__PartyName__"),
+							NameAssigner: ptr.String("__NameAssigner__"),
+						},
+						UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+						IpAddress:                 ptr.String("__IpAddress__"),
+						RegisteredId:              ptr.String("__RegisteredId__"),
+					},
+				},
+				CustomExtensions: []types.CustomExtension{
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+						Critical:         ptr.Bool(true),
+					},
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+						Critical:         ptr.Bool(true),
+					},
+				},
+			},
+			Subject: &types.ASN1Subject{
+				Country:                    ptr.String("__Country__"),
+				Organization:               ptr.String("__Organization__"),
+				OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+				DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+				State:                      ptr.String("__State__"),
+				CommonName:                 ptr.String("__CommonName__"),
+				SerialNumber:               ptr.String("__SerialNumber__"),
+				Locality:                   ptr.String("__Locality__"),
+				Title:                      ptr.String("__Title__"),
+				Surname:                    ptr.String("__Surname__"),
+				GivenName:                  ptr.String("__GivenName__"),
+				Initials:                   ptr.String("__Initials__"),
+				Pseudonym:                  ptr.String("__Pseudonym__"),
+				GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+				CustomAttributes: []types.CustomAttribute{
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Csr:                     []byte("blob"),
+		SigningAlgorithm:        types.SigningAlgorithm("SHA256WITHECDSA"),
+		TemplateArn:             ptr.String("__TemplateArn__"),
+		Validity: &types.Validity{
+			Value: ptr.Int64(1),
+			Type:  types.ValidityPeriodType("END_DATE"),
+		},
+		ValidityNotBefore: &types.Validity{
+			Value: ptr.Int64(1),
+			Type:  types.ValidityPeriodType("END_DATE"),
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -926,7 +1334,11 @@ func TestCheckResponseSnapshot_ListCertificateAuthorities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCertificateAuthorities(context.Background(), &ListCertificateAuthoritiesInput{})
+	got, err := svc.ListCertificateAuthorities(context.Background(), &ListCertificateAuthoritiesInput{
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		ResourceOwner: types.ResourceOwner("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -971,7 +1383,11 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPermissions(context.Background(), &ListPermissionsInput{})
+	got, err := svc.ListPermissions(context.Background(), &ListPermissionsInput{
+		MaxResults:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1418,11 @@ func TestCheckResponseSnapshot_ListTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTags(context.Background(), &ListTagsInput{})
+	got, err := svc.ListTags(context.Background(), &ListTagsInput{
+		MaxResults:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1021,7 +1441,10 @@ func TestCheckResponseSnapshot_PutPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPolicy(context.Background(), &PutPolicyInput{})
+	got, err := svc.PutPolicy(context.Background(), &PutPolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1040,7 +1463,9 @@ func TestCheckResponseSnapshot_RestoreCertificateAuthority(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreCertificateAuthority(context.Background(), &RestoreCertificateAuthorityInput{})
+	got, err := svc.RestoreCertificateAuthority(context.Background(), &RestoreCertificateAuthorityInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1059,7 +1484,11 @@ func TestCheckResponseSnapshot_RevokeCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeCertificate(context.Background(), &RevokeCertificateInput{})
+	got, err := svc.RevokeCertificate(context.Background(), &RevokeCertificateInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		CertificateSerial:       ptr.String("__CertificateSerial__"),
+		RevocationReason:        types.RevocationReason("UNSPECIFIED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1078,7 +1507,19 @@ func TestCheckResponseSnapshot_TagCertificateAuthority(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagCertificateAuthority(context.Background(), &TagCertificateAuthorityInput{})
+	got, err := svc.TagCertificateAuthority(context.Background(), &TagCertificateAuthorityInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1097,7 +1538,19 @@ func TestCheckResponseSnapshot_UntagCertificateAuthority(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagCertificateAuthority(context.Background(), &UntagCertificateAuthorityInput{})
+	got, err := svc.UntagCertificateAuthority(context.Background(), &UntagCertificateAuthorityInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1116,7 +1569,28 @@ func TestCheckResponseSnapshot_UpdateCertificateAuthority(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCertificateAuthority(context.Background(), &UpdateCertificateAuthorityInput{})
+	got, err := svc.UpdateCertificateAuthority(context.Background(), &UpdateCertificateAuthorityInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		RevocationConfiguration: &types.RevocationConfiguration{
+			CrlConfiguration: &types.CrlConfiguration{
+				Enabled:          ptr.Bool(true),
+				ExpirationInDays: ptr.Int32(1),
+				CustomCname:      ptr.String("__CustomCname__"),
+				S3BucketName:     ptr.String("__S3BucketName__"),
+				S3ObjectAcl:      types.S3ObjectAcl("PUBLIC_READ"),
+				CrlDistributionPointExtensionConfiguration: &types.CrlDistributionPointExtensionConfiguration{
+					OmitExtension: ptr.Bool(true),
+				},
+				CrlType:    types.CrlType("COMPLETE"),
+				CustomPath: ptr.String("__CustomPath__"),
+			},
+			OcspConfiguration: &types.OcspConfiguration{
+				Enabled:         ptr.Bool(true),
+				OcspCustomCname: ptr.String("__OcspCustomCname__"),
+			},
+		},
+		Status: types.CertificateAuthorityStatus("CREATING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1137,7 +1611,11 @@ func TestCheckResponseSnapshot_Error_CertificateMismatchException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ImportCertificateAuthorityCertificate(context.Background(), &ImportCertificateAuthorityCertificateInput{})
+	_, opErr := svc.ImportCertificateAuthorityCertificate(context.Background(), &ImportCertificateAuthorityCertificateInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Certificate:             []byte("blob"),
+		CertificateChain:        []byte("blob"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1162,7 +1640,10 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCertificateAuthority(context.Background(), &DeleteCertificateAuthorityInput{})
+	_, opErr := svc.DeleteCertificateAuthority(context.Background(), &DeleteCertificateAuthorityInput{
+		CertificateAuthorityArn:     ptr.String("__CertificateAuthorityArn__"),
+		PermanentDeletionTimeInDays: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1187,7 +1668,179 @@ func TestCheckResponseSnapshot_Error_InvalidArgsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCertificateAuthority(context.Background(), &CreateCertificateAuthorityInput{})
+	_, opErr := svc.CreateCertificateAuthority(context.Background(), &CreateCertificateAuthorityInput{
+		CertificateAuthorityConfiguration: &types.CertificateAuthorityConfiguration{
+			KeyAlgorithm:     types.KeyAlgorithm("RSA_2048"),
+			SigningAlgorithm: types.SigningAlgorithm("SHA256WITHECDSA"),
+			Subject: &types.ASN1Subject{
+				Country:                    ptr.String("__Country__"),
+				Organization:               ptr.String("__Organization__"),
+				OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+				DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+				State:                      ptr.String("__State__"),
+				CommonName:                 ptr.String("__CommonName__"),
+				SerialNumber:               ptr.String("__SerialNumber__"),
+				Locality:                   ptr.String("__Locality__"),
+				Title:                      ptr.String("__Title__"),
+				Surname:                    ptr.String("__Surname__"),
+				GivenName:                  ptr.String("__GivenName__"),
+				Initials:                   ptr.String("__Initials__"),
+				Pseudonym:                  ptr.String("__Pseudonym__"),
+				GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+				CustomAttributes: []types.CustomAttribute{
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+				},
+			},
+			CsrExtensions: &types.CsrExtensions{
+				KeyUsage: &types.KeyUsage{
+					DigitalSignature: true,
+					NonRepudiation:   true,
+					KeyEncipherment:  true,
+					DataEncipherment: true,
+					KeyAgreement:     true,
+					KeyCertSign:      true,
+					CRLSign:          true,
+					EncipherOnly:     true,
+					DecipherOnly:     true,
+				},
+				SubjectInformationAccess: []types.AccessDescription{
+					{
+						AccessMethod: &types.AccessMethod{
+							CustomObjectIdentifier: ptr.String("__CustomObjectIdentifier__"),
+							AccessMethodType:       types.AccessMethodType("CA_REPOSITORY"),
+						},
+						AccessLocation: &types.GeneralName{
+							OtherName: &types.OtherName{
+								TypeId: ptr.String("__TypeId__"),
+								Value:  ptr.String("__Value__"),
+							},
+							Rfc822Name: ptr.String("__Rfc822Name__"),
+							DnsName:    ptr.String("__DnsName__"),
+							DirectoryName: &types.ASN1Subject{
+								Country:                    ptr.String("__Country__"),
+								Organization:               ptr.String("__Organization__"),
+								OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+								DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+								State:                      ptr.String("__State__"),
+								CommonName:                 ptr.String("__CommonName__"),
+								SerialNumber:               ptr.String("__SerialNumber__"),
+								Locality:                   ptr.String("__Locality__"),
+								Title:                      ptr.String("__Title__"),
+								Surname:                    ptr.String("__Surname__"),
+								GivenName:                  ptr.String("__GivenName__"),
+								Initials:                   ptr.String("__Initials__"),
+								Pseudonym:                  ptr.String("__Pseudonym__"),
+								GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+								CustomAttributes: []types.CustomAttribute{
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+								},
+							},
+							EdiPartyName: &types.EdiPartyName{
+								PartyName:    ptr.String("__PartyName__"),
+								NameAssigner: ptr.String("__NameAssigner__"),
+							},
+							UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+							IpAddress:                 ptr.String("__IpAddress__"),
+							RegisteredId:              ptr.String("__RegisteredId__"),
+						},
+					},
+					{
+						AccessMethod: &types.AccessMethod{
+							CustomObjectIdentifier: ptr.String("__CustomObjectIdentifier__"),
+							AccessMethodType:       types.AccessMethodType("CA_REPOSITORY"),
+						},
+						AccessLocation: &types.GeneralName{
+							OtherName: &types.OtherName{
+								TypeId: ptr.String("__TypeId__"),
+								Value:  ptr.String("__Value__"),
+							},
+							Rfc822Name: ptr.String("__Rfc822Name__"),
+							DnsName:    ptr.String("__DnsName__"),
+							DirectoryName: &types.ASN1Subject{
+								Country:                    ptr.String("__Country__"),
+								Organization:               ptr.String("__Organization__"),
+								OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+								DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+								State:                      ptr.String("__State__"),
+								CommonName:                 ptr.String("__CommonName__"),
+								SerialNumber:               ptr.String("__SerialNumber__"),
+								Locality:                   ptr.String("__Locality__"),
+								Title:                      ptr.String("__Title__"),
+								Surname:                    ptr.String("__Surname__"),
+								GivenName:                  ptr.String("__GivenName__"),
+								Initials:                   ptr.String("__Initials__"),
+								Pseudonym:                  ptr.String("__Pseudonym__"),
+								GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+								CustomAttributes: []types.CustomAttribute{
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+								},
+							},
+							EdiPartyName: &types.EdiPartyName{
+								PartyName:    ptr.String("__PartyName__"),
+								NameAssigner: ptr.String("__NameAssigner__"),
+							},
+							UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+							IpAddress:                 ptr.String("__IpAddress__"),
+							RegisteredId:              ptr.String("__RegisteredId__"),
+						},
+					},
+				},
+			},
+		},
+		RevocationConfiguration: &types.RevocationConfiguration{
+			CrlConfiguration: &types.CrlConfiguration{
+				Enabled:          ptr.Bool(true),
+				ExpirationInDays: ptr.Int32(1),
+				CustomCname:      ptr.String("__CustomCname__"),
+				S3BucketName:     ptr.String("__S3BucketName__"),
+				S3ObjectAcl:      types.S3ObjectAcl("PUBLIC_READ"),
+				CrlDistributionPointExtensionConfiguration: &types.CrlDistributionPointExtensionConfiguration{
+					OmitExtension: ptr.Bool(true),
+				},
+				CrlType:    types.CrlType("COMPLETE"),
+				CustomPath: ptr.String("__CustomPath__"),
+			},
+			OcspConfiguration: &types.OcspConfiguration{
+				Enabled:         ptr.Bool(true),
+				OcspCustomCname: ptr.String("__OcspCustomCname__"),
+			},
+		},
+		CertificateAuthorityType:   types.CertificateAuthorityType("ROOT"),
+		IdempotencyToken:           ptr.String("__IdempotencyToken__"),
+		KeyStorageSecurityStandard: types.KeyStorageSecurityStandard("FIPS_140_2_LEVEL_2_OR_HIGHER"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UsageMode: types.CertificateAuthorityUsageMode("GENERAL_PURPOSE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1212,7 +1865,11 @@ func TestCheckResponseSnapshot_Error_InvalidArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCertificateAuthorityAuditReport(context.Background(), &CreateCertificateAuthorityAuditReportInput{})
+	_, opErr := svc.CreateCertificateAuthorityAuditReport(context.Background(), &CreateCertificateAuthorityAuditReportInput{
+		CertificateAuthorityArn:   ptr.String("__CertificateAuthorityArn__"),
+		S3BucketName:              ptr.String("__S3BucketName__"),
+		AuditReportResponseFormat: types.AuditReportResponseFormat("JSON"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1237,7 +1894,11 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListCertificateAuthorities(context.Background(), &ListCertificateAuthoritiesInput{})
+	_, opErr := svc.ListCertificateAuthorities(context.Background(), &ListCertificateAuthoritiesInput{
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		ResourceOwner: types.ResourceOwner("SELF"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1262,7 +1923,179 @@ func TestCheckResponseSnapshot_Error_InvalidPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCertificateAuthority(context.Background(), &CreateCertificateAuthorityInput{})
+	_, opErr := svc.CreateCertificateAuthority(context.Background(), &CreateCertificateAuthorityInput{
+		CertificateAuthorityConfiguration: &types.CertificateAuthorityConfiguration{
+			KeyAlgorithm:     types.KeyAlgorithm("RSA_2048"),
+			SigningAlgorithm: types.SigningAlgorithm("SHA256WITHECDSA"),
+			Subject: &types.ASN1Subject{
+				Country:                    ptr.String("__Country__"),
+				Organization:               ptr.String("__Organization__"),
+				OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+				DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+				State:                      ptr.String("__State__"),
+				CommonName:                 ptr.String("__CommonName__"),
+				SerialNumber:               ptr.String("__SerialNumber__"),
+				Locality:                   ptr.String("__Locality__"),
+				Title:                      ptr.String("__Title__"),
+				Surname:                    ptr.String("__Surname__"),
+				GivenName:                  ptr.String("__GivenName__"),
+				Initials:                   ptr.String("__Initials__"),
+				Pseudonym:                  ptr.String("__Pseudonym__"),
+				GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+				CustomAttributes: []types.CustomAttribute{
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+				},
+			},
+			CsrExtensions: &types.CsrExtensions{
+				KeyUsage: &types.KeyUsage{
+					DigitalSignature: true,
+					NonRepudiation:   true,
+					KeyEncipherment:  true,
+					DataEncipherment: true,
+					KeyAgreement:     true,
+					KeyCertSign:      true,
+					CRLSign:          true,
+					EncipherOnly:     true,
+					DecipherOnly:     true,
+				},
+				SubjectInformationAccess: []types.AccessDescription{
+					{
+						AccessMethod: &types.AccessMethod{
+							CustomObjectIdentifier: ptr.String("__CustomObjectIdentifier__"),
+							AccessMethodType:       types.AccessMethodType("CA_REPOSITORY"),
+						},
+						AccessLocation: &types.GeneralName{
+							OtherName: &types.OtherName{
+								TypeId: ptr.String("__TypeId__"),
+								Value:  ptr.String("__Value__"),
+							},
+							Rfc822Name: ptr.String("__Rfc822Name__"),
+							DnsName:    ptr.String("__DnsName__"),
+							DirectoryName: &types.ASN1Subject{
+								Country:                    ptr.String("__Country__"),
+								Organization:               ptr.String("__Organization__"),
+								OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+								DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+								State:                      ptr.String("__State__"),
+								CommonName:                 ptr.String("__CommonName__"),
+								SerialNumber:               ptr.String("__SerialNumber__"),
+								Locality:                   ptr.String("__Locality__"),
+								Title:                      ptr.String("__Title__"),
+								Surname:                    ptr.String("__Surname__"),
+								GivenName:                  ptr.String("__GivenName__"),
+								Initials:                   ptr.String("__Initials__"),
+								Pseudonym:                  ptr.String("__Pseudonym__"),
+								GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+								CustomAttributes: []types.CustomAttribute{
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+								},
+							},
+							EdiPartyName: &types.EdiPartyName{
+								PartyName:    ptr.String("__PartyName__"),
+								NameAssigner: ptr.String("__NameAssigner__"),
+							},
+							UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+							IpAddress:                 ptr.String("__IpAddress__"),
+							RegisteredId:              ptr.String("__RegisteredId__"),
+						},
+					},
+					{
+						AccessMethod: &types.AccessMethod{
+							CustomObjectIdentifier: ptr.String("__CustomObjectIdentifier__"),
+							AccessMethodType:       types.AccessMethodType("CA_REPOSITORY"),
+						},
+						AccessLocation: &types.GeneralName{
+							OtherName: &types.OtherName{
+								TypeId: ptr.String("__TypeId__"),
+								Value:  ptr.String("__Value__"),
+							},
+							Rfc822Name: ptr.String("__Rfc822Name__"),
+							DnsName:    ptr.String("__DnsName__"),
+							DirectoryName: &types.ASN1Subject{
+								Country:                    ptr.String("__Country__"),
+								Organization:               ptr.String("__Organization__"),
+								OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+								DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+								State:                      ptr.String("__State__"),
+								CommonName:                 ptr.String("__CommonName__"),
+								SerialNumber:               ptr.String("__SerialNumber__"),
+								Locality:                   ptr.String("__Locality__"),
+								Title:                      ptr.String("__Title__"),
+								Surname:                    ptr.String("__Surname__"),
+								GivenName:                  ptr.String("__GivenName__"),
+								Initials:                   ptr.String("__Initials__"),
+								Pseudonym:                  ptr.String("__Pseudonym__"),
+								GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+								CustomAttributes: []types.CustomAttribute{
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+								},
+							},
+							EdiPartyName: &types.EdiPartyName{
+								PartyName:    ptr.String("__PartyName__"),
+								NameAssigner: ptr.String("__NameAssigner__"),
+							},
+							UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+							IpAddress:                 ptr.String("__IpAddress__"),
+							RegisteredId:              ptr.String("__RegisteredId__"),
+						},
+					},
+				},
+			},
+		},
+		RevocationConfiguration: &types.RevocationConfiguration{
+			CrlConfiguration: &types.CrlConfiguration{
+				Enabled:          ptr.Bool(true),
+				ExpirationInDays: ptr.Int32(1),
+				CustomCname:      ptr.String("__CustomCname__"),
+				S3BucketName:     ptr.String("__S3BucketName__"),
+				S3ObjectAcl:      types.S3ObjectAcl("PUBLIC_READ"),
+				CrlDistributionPointExtensionConfiguration: &types.CrlDistributionPointExtensionConfiguration{
+					OmitExtension: ptr.Bool(true),
+				},
+				CrlType:    types.CrlType("COMPLETE"),
+				CustomPath: ptr.String("__CustomPath__"),
+			},
+			OcspConfiguration: &types.OcspConfiguration{
+				Enabled:         ptr.Bool(true),
+				OcspCustomCname: ptr.String("__OcspCustomCname__"),
+			},
+		},
+		CertificateAuthorityType:   types.CertificateAuthorityType("ROOT"),
+		IdempotencyToken:           ptr.String("__IdempotencyToken__"),
+		KeyStorageSecurityStandard: types.KeyStorageSecurityStandard("FIPS_140_2_LEVEL_2_OR_HIGHER"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UsageMode: types.CertificateAuthorityUsageMode("GENERAL_PURPOSE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1287,7 +2120,11 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ImportCertificateAuthorityCertificate(context.Background(), &ImportCertificateAuthorityCertificateInput{})
+	_, opErr := svc.ImportCertificateAuthorityCertificate(context.Background(), &ImportCertificateAuthorityCertificateInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Certificate:             []byte("blob"),
+		CertificateChain:        []byte("blob"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1312,7 +2149,11 @@ func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCertificateAuthorityAuditReport(context.Background(), &CreateCertificateAuthorityAuditReportInput{})
+	_, opErr := svc.CreateCertificateAuthorityAuditReport(context.Background(), &CreateCertificateAuthorityAuditReportInput{
+		CertificateAuthorityArn:   ptr.String("__CertificateAuthorityArn__"),
+		S3BucketName:              ptr.String("__S3BucketName__"),
+		AuditReportResponseFormat: types.AuditReportResponseFormat("JSON"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1337,7 +2178,179 @@ func TestCheckResponseSnapshot_Error_InvalidTagException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCertificateAuthority(context.Background(), &CreateCertificateAuthorityInput{})
+	_, opErr := svc.CreateCertificateAuthority(context.Background(), &CreateCertificateAuthorityInput{
+		CertificateAuthorityConfiguration: &types.CertificateAuthorityConfiguration{
+			KeyAlgorithm:     types.KeyAlgorithm("RSA_2048"),
+			SigningAlgorithm: types.SigningAlgorithm("SHA256WITHECDSA"),
+			Subject: &types.ASN1Subject{
+				Country:                    ptr.String("__Country__"),
+				Organization:               ptr.String("__Organization__"),
+				OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+				DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+				State:                      ptr.String("__State__"),
+				CommonName:                 ptr.String("__CommonName__"),
+				SerialNumber:               ptr.String("__SerialNumber__"),
+				Locality:                   ptr.String("__Locality__"),
+				Title:                      ptr.String("__Title__"),
+				Surname:                    ptr.String("__Surname__"),
+				GivenName:                  ptr.String("__GivenName__"),
+				Initials:                   ptr.String("__Initials__"),
+				Pseudonym:                  ptr.String("__Pseudonym__"),
+				GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+				CustomAttributes: []types.CustomAttribute{
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+				},
+			},
+			CsrExtensions: &types.CsrExtensions{
+				KeyUsage: &types.KeyUsage{
+					DigitalSignature: true,
+					NonRepudiation:   true,
+					KeyEncipherment:  true,
+					DataEncipherment: true,
+					KeyAgreement:     true,
+					KeyCertSign:      true,
+					CRLSign:          true,
+					EncipherOnly:     true,
+					DecipherOnly:     true,
+				},
+				SubjectInformationAccess: []types.AccessDescription{
+					{
+						AccessMethod: &types.AccessMethod{
+							CustomObjectIdentifier: ptr.String("__CustomObjectIdentifier__"),
+							AccessMethodType:       types.AccessMethodType("CA_REPOSITORY"),
+						},
+						AccessLocation: &types.GeneralName{
+							OtherName: &types.OtherName{
+								TypeId: ptr.String("__TypeId__"),
+								Value:  ptr.String("__Value__"),
+							},
+							Rfc822Name: ptr.String("__Rfc822Name__"),
+							DnsName:    ptr.String("__DnsName__"),
+							DirectoryName: &types.ASN1Subject{
+								Country:                    ptr.String("__Country__"),
+								Organization:               ptr.String("__Organization__"),
+								OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+								DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+								State:                      ptr.String("__State__"),
+								CommonName:                 ptr.String("__CommonName__"),
+								SerialNumber:               ptr.String("__SerialNumber__"),
+								Locality:                   ptr.String("__Locality__"),
+								Title:                      ptr.String("__Title__"),
+								Surname:                    ptr.String("__Surname__"),
+								GivenName:                  ptr.String("__GivenName__"),
+								Initials:                   ptr.String("__Initials__"),
+								Pseudonym:                  ptr.String("__Pseudonym__"),
+								GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+								CustomAttributes: []types.CustomAttribute{
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+								},
+							},
+							EdiPartyName: &types.EdiPartyName{
+								PartyName:    ptr.String("__PartyName__"),
+								NameAssigner: ptr.String("__NameAssigner__"),
+							},
+							UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+							IpAddress:                 ptr.String("__IpAddress__"),
+							RegisteredId:              ptr.String("__RegisteredId__"),
+						},
+					},
+					{
+						AccessMethod: &types.AccessMethod{
+							CustomObjectIdentifier: ptr.String("__CustomObjectIdentifier__"),
+							AccessMethodType:       types.AccessMethodType("CA_REPOSITORY"),
+						},
+						AccessLocation: &types.GeneralName{
+							OtherName: &types.OtherName{
+								TypeId: ptr.String("__TypeId__"),
+								Value:  ptr.String("__Value__"),
+							},
+							Rfc822Name: ptr.String("__Rfc822Name__"),
+							DnsName:    ptr.String("__DnsName__"),
+							DirectoryName: &types.ASN1Subject{
+								Country:                    ptr.String("__Country__"),
+								Organization:               ptr.String("__Organization__"),
+								OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+								DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+								State:                      ptr.String("__State__"),
+								CommonName:                 ptr.String("__CommonName__"),
+								SerialNumber:               ptr.String("__SerialNumber__"),
+								Locality:                   ptr.String("__Locality__"),
+								Title:                      ptr.String("__Title__"),
+								Surname:                    ptr.String("__Surname__"),
+								GivenName:                  ptr.String("__GivenName__"),
+								Initials:                   ptr.String("__Initials__"),
+								Pseudonym:                  ptr.String("__Pseudonym__"),
+								GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+								CustomAttributes: []types.CustomAttribute{
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+								},
+							},
+							EdiPartyName: &types.EdiPartyName{
+								PartyName:    ptr.String("__PartyName__"),
+								NameAssigner: ptr.String("__NameAssigner__"),
+							},
+							UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+							IpAddress:                 ptr.String("__IpAddress__"),
+							RegisteredId:              ptr.String("__RegisteredId__"),
+						},
+					},
+				},
+			},
+		},
+		RevocationConfiguration: &types.RevocationConfiguration{
+			CrlConfiguration: &types.CrlConfiguration{
+				Enabled:          ptr.Bool(true),
+				ExpirationInDays: ptr.Int32(1),
+				CustomCname:      ptr.String("__CustomCname__"),
+				S3BucketName:     ptr.String("__S3BucketName__"),
+				S3ObjectAcl:      types.S3ObjectAcl("PUBLIC_READ"),
+				CrlDistributionPointExtensionConfiguration: &types.CrlDistributionPointExtensionConfiguration{
+					OmitExtension: ptr.Bool(true),
+				},
+				CrlType:    types.CrlType("COMPLETE"),
+				CustomPath: ptr.String("__CustomPath__"),
+			},
+			OcspConfiguration: &types.OcspConfiguration{
+				Enabled:         ptr.Bool(true),
+				OcspCustomCname: ptr.String("__OcspCustomCname__"),
+			},
+		},
+		CertificateAuthorityType:   types.CertificateAuthorityType("ROOT"),
+		IdempotencyToken:           ptr.String("__IdempotencyToken__"),
+		KeyStorageSecurityStandard: types.KeyStorageSecurityStandard("FIPS_140_2_LEVEL_2_OR_HIGHER"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UsageMode: types.CertificateAuthorityUsageMode("GENERAL_PURPOSE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1362,7 +2375,179 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCertificateAuthority(context.Background(), &CreateCertificateAuthorityInput{})
+	_, opErr := svc.CreateCertificateAuthority(context.Background(), &CreateCertificateAuthorityInput{
+		CertificateAuthorityConfiguration: &types.CertificateAuthorityConfiguration{
+			KeyAlgorithm:     types.KeyAlgorithm("RSA_2048"),
+			SigningAlgorithm: types.SigningAlgorithm("SHA256WITHECDSA"),
+			Subject: &types.ASN1Subject{
+				Country:                    ptr.String("__Country__"),
+				Organization:               ptr.String("__Organization__"),
+				OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+				DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+				State:                      ptr.String("__State__"),
+				CommonName:                 ptr.String("__CommonName__"),
+				SerialNumber:               ptr.String("__SerialNumber__"),
+				Locality:                   ptr.String("__Locality__"),
+				Title:                      ptr.String("__Title__"),
+				Surname:                    ptr.String("__Surname__"),
+				GivenName:                  ptr.String("__GivenName__"),
+				Initials:                   ptr.String("__Initials__"),
+				Pseudonym:                  ptr.String("__Pseudonym__"),
+				GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+				CustomAttributes: []types.CustomAttribute{
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+				},
+			},
+			CsrExtensions: &types.CsrExtensions{
+				KeyUsage: &types.KeyUsage{
+					DigitalSignature: true,
+					NonRepudiation:   true,
+					KeyEncipherment:  true,
+					DataEncipherment: true,
+					KeyAgreement:     true,
+					KeyCertSign:      true,
+					CRLSign:          true,
+					EncipherOnly:     true,
+					DecipherOnly:     true,
+				},
+				SubjectInformationAccess: []types.AccessDescription{
+					{
+						AccessMethod: &types.AccessMethod{
+							CustomObjectIdentifier: ptr.String("__CustomObjectIdentifier__"),
+							AccessMethodType:       types.AccessMethodType("CA_REPOSITORY"),
+						},
+						AccessLocation: &types.GeneralName{
+							OtherName: &types.OtherName{
+								TypeId: ptr.String("__TypeId__"),
+								Value:  ptr.String("__Value__"),
+							},
+							Rfc822Name: ptr.String("__Rfc822Name__"),
+							DnsName:    ptr.String("__DnsName__"),
+							DirectoryName: &types.ASN1Subject{
+								Country:                    ptr.String("__Country__"),
+								Organization:               ptr.String("__Organization__"),
+								OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+								DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+								State:                      ptr.String("__State__"),
+								CommonName:                 ptr.String("__CommonName__"),
+								SerialNumber:               ptr.String("__SerialNumber__"),
+								Locality:                   ptr.String("__Locality__"),
+								Title:                      ptr.String("__Title__"),
+								Surname:                    ptr.String("__Surname__"),
+								GivenName:                  ptr.String("__GivenName__"),
+								Initials:                   ptr.String("__Initials__"),
+								Pseudonym:                  ptr.String("__Pseudonym__"),
+								GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+								CustomAttributes: []types.CustomAttribute{
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+								},
+							},
+							EdiPartyName: &types.EdiPartyName{
+								PartyName:    ptr.String("__PartyName__"),
+								NameAssigner: ptr.String("__NameAssigner__"),
+							},
+							UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+							IpAddress:                 ptr.String("__IpAddress__"),
+							RegisteredId:              ptr.String("__RegisteredId__"),
+						},
+					},
+					{
+						AccessMethod: &types.AccessMethod{
+							CustomObjectIdentifier: ptr.String("__CustomObjectIdentifier__"),
+							AccessMethodType:       types.AccessMethodType("CA_REPOSITORY"),
+						},
+						AccessLocation: &types.GeneralName{
+							OtherName: &types.OtherName{
+								TypeId: ptr.String("__TypeId__"),
+								Value:  ptr.String("__Value__"),
+							},
+							Rfc822Name: ptr.String("__Rfc822Name__"),
+							DnsName:    ptr.String("__DnsName__"),
+							DirectoryName: &types.ASN1Subject{
+								Country:                    ptr.String("__Country__"),
+								Organization:               ptr.String("__Organization__"),
+								OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+								DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+								State:                      ptr.String("__State__"),
+								CommonName:                 ptr.String("__CommonName__"),
+								SerialNumber:               ptr.String("__SerialNumber__"),
+								Locality:                   ptr.String("__Locality__"),
+								Title:                      ptr.String("__Title__"),
+								Surname:                    ptr.String("__Surname__"),
+								GivenName:                  ptr.String("__GivenName__"),
+								Initials:                   ptr.String("__Initials__"),
+								Pseudonym:                  ptr.String("__Pseudonym__"),
+								GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+								CustomAttributes: []types.CustomAttribute{
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+									{
+										ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+										Value:            ptr.String("__Value__"),
+									},
+								},
+							},
+							EdiPartyName: &types.EdiPartyName{
+								PartyName:    ptr.String("__PartyName__"),
+								NameAssigner: ptr.String("__NameAssigner__"),
+							},
+							UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+							IpAddress:                 ptr.String("__IpAddress__"),
+							RegisteredId:              ptr.String("__RegisteredId__"),
+						},
+					},
+				},
+			},
+		},
+		RevocationConfiguration: &types.RevocationConfiguration{
+			CrlConfiguration: &types.CrlConfiguration{
+				Enabled:          ptr.Bool(true),
+				ExpirationInDays: ptr.Int32(1),
+				CustomCname:      ptr.String("__CustomCname__"),
+				S3BucketName:     ptr.String("__S3BucketName__"),
+				S3ObjectAcl:      types.S3ObjectAcl("PUBLIC_READ"),
+				CrlDistributionPointExtensionConfiguration: &types.CrlDistributionPointExtensionConfiguration{
+					OmitExtension: ptr.Bool(true),
+				},
+				CrlType:    types.CrlType("COMPLETE"),
+				CustomPath: ptr.String("__CustomPath__"),
+			},
+			OcspConfiguration: &types.OcspConfiguration{
+				Enabled:         ptr.Bool(true),
+				OcspCustomCname: ptr.String("__OcspCustomCname__"),
+			},
+		},
+		CertificateAuthorityType:   types.CertificateAuthorityType("ROOT"),
+		IdempotencyToken:           ptr.String("__IdempotencyToken__"),
+		KeyStorageSecurityStandard: types.KeyStorageSecurityStandard("FIPS_140_2_LEVEL_2_OR_HIGHER"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UsageMode: types.CertificateAuthorityUsageMode("GENERAL_PURPOSE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1387,7 +2572,9 @@ func TestCheckResponseSnapshot_Error_LockoutPreventedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeletePolicy(context.Background(), &DeletePolicyInput{})
+	_, opErr := svc.DeletePolicy(context.Background(), &DeletePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1412,7 +2599,204 @@ func TestCheckResponseSnapshot_Error_MalformedCSRException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.IssueCertificate(context.Background(), &IssueCertificateInput{})
+	_, opErr := svc.IssueCertificate(context.Background(), &IssueCertificateInput{
+		ApiPassthrough: &types.ApiPassthrough{
+			Extensions: &types.Extensions{
+				CertificatePolicies: []types.PolicyInformation{
+					{
+						CertPolicyId: ptr.String("__CertPolicyId__"),
+						PolicyQualifiers: []types.PolicyQualifierInfo{
+							{
+								PolicyQualifierId: types.PolicyQualifierId("CPS"),
+								Qualifier: &types.Qualifier{
+									CpsUri: ptr.String("__CpsUri__"),
+								},
+							},
+							{
+								PolicyQualifierId: types.PolicyQualifierId("CPS"),
+								Qualifier: &types.Qualifier{
+									CpsUri: ptr.String("__CpsUri__"),
+								},
+							},
+						},
+					},
+					{
+						CertPolicyId: ptr.String("__CertPolicyId__"),
+						PolicyQualifiers: []types.PolicyQualifierInfo{
+							{
+								PolicyQualifierId: types.PolicyQualifierId("CPS"),
+								Qualifier: &types.Qualifier{
+									CpsUri: ptr.String("__CpsUri__"),
+								},
+							},
+							{
+								PolicyQualifierId: types.PolicyQualifierId("CPS"),
+								Qualifier: &types.Qualifier{
+									CpsUri: ptr.String("__CpsUri__"),
+								},
+							},
+						},
+					},
+				},
+				ExtendedKeyUsage: []types.ExtendedKeyUsage{
+					{
+						ExtendedKeyUsageType:             types.ExtendedKeyUsageType("SERVER_AUTH"),
+						ExtendedKeyUsageObjectIdentifier: ptr.String("__ExtendedKeyUsageObjectIdentifier__"),
+					},
+					{
+						ExtendedKeyUsageType:             types.ExtendedKeyUsageType("SERVER_AUTH"),
+						ExtendedKeyUsageObjectIdentifier: ptr.String("__ExtendedKeyUsageObjectIdentifier__"),
+					},
+				},
+				KeyUsage: &types.KeyUsage{
+					DigitalSignature: true,
+					NonRepudiation:   true,
+					KeyEncipherment:  true,
+					DataEncipherment: true,
+					KeyAgreement:     true,
+					KeyCertSign:      true,
+					CRLSign:          true,
+					EncipherOnly:     true,
+					DecipherOnly:     true,
+				},
+				SubjectAlternativeNames: []types.GeneralName{
+					{
+						OtherName: &types.OtherName{
+							TypeId: ptr.String("__TypeId__"),
+							Value:  ptr.String("__Value__"),
+						},
+						Rfc822Name: ptr.String("__Rfc822Name__"),
+						DnsName:    ptr.String("__DnsName__"),
+						DirectoryName: &types.ASN1Subject{
+							Country:                    ptr.String("__Country__"),
+							Organization:               ptr.String("__Organization__"),
+							OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+							DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+							State:                      ptr.String("__State__"),
+							CommonName:                 ptr.String("__CommonName__"),
+							SerialNumber:               ptr.String("__SerialNumber__"),
+							Locality:                   ptr.String("__Locality__"),
+							Title:                      ptr.String("__Title__"),
+							Surname:                    ptr.String("__Surname__"),
+							GivenName:                  ptr.String("__GivenName__"),
+							Initials:                   ptr.String("__Initials__"),
+							Pseudonym:                  ptr.String("__Pseudonym__"),
+							GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+							CustomAttributes: []types.CustomAttribute{
+								{
+									ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+									Value:            ptr.String("__Value__"),
+								},
+								{
+									ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+									Value:            ptr.String("__Value__"),
+								},
+							},
+						},
+						EdiPartyName: &types.EdiPartyName{
+							PartyName:    ptr.String("__PartyName__"),
+							NameAssigner: ptr.String("__NameAssigner__"),
+						},
+						UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+						IpAddress:                 ptr.String("__IpAddress__"),
+						RegisteredId:              ptr.String("__RegisteredId__"),
+					},
+					{
+						OtherName: &types.OtherName{
+							TypeId: ptr.String("__TypeId__"),
+							Value:  ptr.String("__Value__"),
+						},
+						Rfc822Name: ptr.String("__Rfc822Name__"),
+						DnsName:    ptr.String("__DnsName__"),
+						DirectoryName: &types.ASN1Subject{
+							Country:                    ptr.String("__Country__"),
+							Organization:               ptr.String("__Organization__"),
+							OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+							DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+							State:                      ptr.String("__State__"),
+							CommonName:                 ptr.String("__CommonName__"),
+							SerialNumber:               ptr.String("__SerialNumber__"),
+							Locality:                   ptr.String("__Locality__"),
+							Title:                      ptr.String("__Title__"),
+							Surname:                    ptr.String("__Surname__"),
+							GivenName:                  ptr.String("__GivenName__"),
+							Initials:                   ptr.String("__Initials__"),
+							Pseudonym:                  ptr.String("__Pseudonym__"),
+							GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+							CustomAttributes: []types.CustomAttribute{
+								{
+									ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+									Value:            ptr.String("__Value__"),
+								},
+								{
+									ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+									Value:            ptr.String("__Value__"),
+								},
+							},
+						},
+						EdiPartyName: &types.EdiPartyName{
+							PartyName:    ptr.String("__PartyName__"),
+							NameAssigner: ptr.String("__NameAssigner__"),
+						},
+						UniformResourceIdentifier: ptr.String("__UniformResourceIdentifier__"),
+						IpAddress:                 ptr.String("__IpAddress__"),
+						RegisteredId:              ptr.String("__RegisteredId__"),
+					},
+				},
+				CustomExtensions: []types.CustomExtension{
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+						Critical:         ptr.Bool(true),
+					},
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+						Critical:         ptr.Bool(true),
+					},
+				},
+			},
+			Subject: &types.ASN1Subject{
+				Country:                    ptr.String("__Country__"),
+				Organization:               ptr.String("__Organization__"),
+				OrganizationalUnit:         ptr.String("__OrganizationalUnit__"),
+				DistinguishedNameQualifier: ptr.String("__DistinguishedNameQualifier__"),
+				State:                      ptr.String("__State__"),
+				CommonName:                 ptr.String("__CommonName__"),
+				SerialNumber:               ptr.String("__SerialNumber__"),
+				Locality:                   ptr.String("__Locality__"),
+				Title:                      ptr.String("__Title__"),
+				Surname:                    ptr.String("__Surname__"),
+				GivenName:                  ptr.String("__GivenName__"),
+				Initials:                   ptr.String("__Initials__"),
+				Pseudonym:                  ptr.String("__Pseudonym__"),
+				GenerationQualifier:        ptr.String("__GenerationQualifier__"),
+				CustomAttributes: []types.CustomAttribute{
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+					{
+						ObjectIdentifier: ptr.String("__ObjectIdentifier__"),
+						Value:            ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Csr:                     []byte("blob"),
+		SigningAlgorithm:        types.SigningAlgorithm("SHA256WITHECDSA"),
+		TemplateArn:             ptr.String("__TemplateArn__"),
+		Validity: &types.Validity{
+			Value: ptr.Int64(1),
+			Type:  types.ValidityPeriodType("END_DATE"),
+		},
+		ValidityNotBefore: &types.Validity{
+			Value: ptr.Int64(1),
+			Type:  types.ValidityPeriodType("END_DATE"),
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1437,7 +2821,11 @@ func TestCheckResponseSnapshot_Error_MalformedCertificateException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ImportCertificateAuthorityCertificate(context.Background(), &ImportCertificateAuthorityCertificateInput{})
+	_, opErr := svc.ImportCertificateAuthorityCertificate(context.Background(), &ImportCertificateAuthorityCertificateInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Certificate:             []byte("blob"),
+		CertificateChain:        []byte("blob"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1462,7 +2850,15 @@ func TestCheckResponseSnapshot_Error_PermissionAlreadyExistsException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePermission(context.Background(), &CreatePermissionInput{})
+	_, opErr := svc.CreatePermission(context.Background(), &CreatePermissionInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Principal:               ptr.String("__Principal__"),
+		SourceAccount:           ptr.String("__SourceAccount__"),
+		Actions: []types.ActionType{
+			types.ActionType("IssueCertificate"),
+			types.ActionType("IssueCertificate"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1487,7 +2883,11 @@ func TestCheckResponseSnapshot_Error_RequestAlreadyProcessedException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RevokeCertificate(context.Background(), &RevokeCertificateInput{})
+	_, opErr := svc.RevokeCertificate(context.Background(), &RevokeCertificateInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		CertificateSerial:       ptr.String("__CertificateSerial__"),
+		RevocationReason:        types.RevocationReason("UNSPECIFIED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1512,7 +2912,11 @@ func TestCheckResponseSnapshot_Error_RequestFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCertificateAuthorityAuditReport(context.Background(), &CreateCertificateAuthorityAuditReportInput{})
+	_, opErr := svc.CreateCertificateAuthorityAuditReport(context.Background(), &CreateCertificateAuthorityAuditReportInput{
+		CertificateAuthorityArn:   ptr.String("__CertificateAuthorityArn__"),
+		S3BucketName:              ptr.String("__S3BucketName__"),
+		AuditReportResponseFormat: types.AuditReportResponseFormat("JSON"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1537,7 +2941,11 @@ func TestCheckResponseSnapshot_Error_RequestInProgressException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCertificateAuthorityAuditReport(context.Background(), &CreateCertificateAuthorityAuditReportInput{})
+	_, opErr := svc.CreateCertificateAuthorityAuditReport(context.Background(), &CreateCertificateAuthorityAuditReportInput{
+		CertificateAuthorityArn:   ptr.String("__CertificateAuthorityArn__"),
+		S3BucketName:              ptr.String("__S3BucketName__"),
+		AuditReportResponseFormat: types.AuditReportResponseFormat("JSON"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1562,7 +2970,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCertificateAuthorityAuditReport(context.Background(), &CreateCertificateAuthorityAuditReportInput{})
+	_, opErr := svc.CreateCertificateAuthorityAuditReport(context.Background(), &CreateCertificateAuthorityAuditReportInput{
+		CertificateAuthorityArn:   ptr.String("__CertificateAuthorityArn__"),
+		S3BucketName:              ptr.String("__S3BucketName__"),
+		AuditReportResponseFormat: types.AuditReportResponseFormat("JSON"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1587,7 +2999,19 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagCertificateAuthority(context.Background(), &TagCertificateAuthorityInput{})
+	_, opErr := svc.TagCertificateAuthority(context.Background(), &TagCertificateAuthorityInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

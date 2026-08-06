@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"complianceInquiries":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","id":"__Id__","inputSource":"TEXT","name":"__Name__","status":"PROCESSING","statusMessage":"Compliance inquiry processing is complete."},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","id":"__Id__","inputSource":"TEXT","name":"__Name__","status":"PROCESSING","statusMessage":"Compliance inquiry processing is complete."}],"nextToken":"__NextToken__"}

@@ -164,7 +164,13 @@ func TestCheckResponseSnapshot_AddKeyReplicationRegions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{})
+	got, err := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -195,7 +201,11 @@ func TestCheckResponseSnapshot_AssociateMpaTeam(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateMpaTeam(context.Background(), &AssociateMpaTeamInput{})
+	got, err := svc.AssociateMpaTeam(context.Background(), &AssociateMpaTeamInput{
+		Action:           types.MpaOperation("IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE"),
+		MpaTeamArn:       ptr.String("__MpaTeamArn__"),
+		RequesterComment: ptr.String("__RequesterComment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -219,7 +229,10 @@ func TestCheckResponseSnapshot_CreateAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	got, err := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		AliasName: ptr.String("__AliasName__"),
+		KeyArn:    ptr.String("__KeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -285,7 +298,42 @@ func TestCheckResponseSnapshot_CreateKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKey(context.Background(), &CreateKeyInput{})
+	got, err := svc.CreateKey(context.Background(), &CreateKeyInput{
+		KeyAttributes: &types.KeyAttributes{
+			KeyUsage:     types.KeyUsage("TR31_B0_BASE_DERIVATION_KEY"),
+			KeyClass:     types.KeyClass("SYMMETRIC_KEY"),
+			KeyAlgorithm: types.KeyAlgorithm("TDES_2KEY"),
+			KeyModesOfUse: &types.KeyModesOfUse{
+				Encrypt:        true,
+				Decrypt:        true,
+				Wrap:           true,
+				Unwrap:         true,
+				Generate:       true,
+				Sign:           true,
+				Verify:         true,
+				DeriveKey:      true,
+				NoRestrictions: true,
+			},
+		},
+		KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		Exportable:             ptr.Bool(true),
+		Enabled:                ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DeriveKeyUsage: types.DeriveKeyUsage("TR31_B0_BASE_DERIVATION_KEY"),
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -304,7 +352,9 @@ func TestCheckResponseSnapshot_DeleteAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAlias(context.Background(), &DeleteAliasInput{})
+	got, err := svc.DeleteAlias(context.Background(), &DeleteAliasInput{
+		AliasName: ptr.String("__AliasName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -370,7 +420,10 @@ func TestCheckResponseSnapshot_DeleteKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKey(context.Background(), &DeleteKeyInput{})
+	got, err := svc.DeleteKey(context.Background(), &DeleteKeyInput{
+		KeyIdentifier:   ptr.String("__KeyIdentifier__"),
+		DeleteKeyInDays: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -389,7 +442,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -413,7 +468,12 @@ func TestCheckResponseSnapshot_DisableDefaultKeyReplicationRegions(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableDefaultKeyReplicationRegions(context.Background(), &DisableDefaultKeyReplicationRegionsInput{})
+	got, err := svc.DisableDefaultKeyReplicationRegions(context.Background(), &DisableDefaultKeyReplicationRegionsInput{
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -444,7 +504,10 @@ func TestCheckResponseSnapshot_DisassociateMpaTeam(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMpaTeam(context.Background(), &DisassociateMpaTeamInput{})
+	got, err := svc.DisassociateMpaTeam(context.Background(), &DisassociateMpaTeamInput{
+		Action:           types.MpaOperation("IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE"),
+		RequesterComment: ptr.String("__RequesterComment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -468,7 +531,12 @@ func TestCheckResponseSnapshot_EnableDefaultKeyReplicationRegions(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableDefaultKeyReplicationRegions(context.Background(), &EnableDefaultKeyReplicationRegionsInput{})
+	got, err := svc.EnableDefaultKeyReplicationRegions(context.Background(), &EnableDefaultKeyReplicationRegionsInput{
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -495,7 +563,38 @@ func TestCheckResponseSnapshot_ExportKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportKey(context.Background(), &ExportKeyInput{})
+	got, err := svc.ExportKey(context.Background(), &ExportKeyInput{
+		KeyMaterial: &types.ExportKeyMaterialMemberTr31KeyBlock{
+			Value: types.ExportTr31KeyBlock{
+				WrappingKeyIdentifier: ptr.String("__WrappingKeyIdentifier__"),
+				KeyBlockHeaders: &types.KeyBlockHeaders{
+					KeyModesOfUse: &types.KeyModesOfUse{
+						Encrypt:        true,
+						Decrypt:        true,
+						Wrap:           true,
+						Unwrap:         true,
+						Generate:       true,
+						Sign:           true,
+						Verify:         true,
+						DeriveKey:      true,
+						NoRestrictions: true,
+					},
+					KeyExportability: types.KeyExportability("EXPORTABLE"),
+					KeyVersion:       ptr.String("__KeyVersion__"),
+					OptionalBlocks: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		ExportKeyIdentifier: ptr.String("__ExportKeyIdentifier__"),
+		ExportAttributes: &types.ExportAttributes{
+			ExportDukptInitialKey: &types.ExportDukptInitialKey{
+				KeySerialNumber: ptr.String("__KeySerialNumber__"),
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -519,7 +618,9 @@ func TestCheckResponseSnapshot_GetAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAlias(context.Background(), &GetAliasInput{})
+	got, err := svc.GetAlias(context.Background(), &GetAliasInput{
+		AliasName: ptr.String("__AliasName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -540,7 +641,19 @@ func TestCheckResponseSnapshot_GetCertificateSigningRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCertificateSigningRequest(context.Background(), &GetCertificateSigningRequestInput{})
+	got, err := svc.GetCertificateSigningRequest(context.Background(), &GetCertificateSigningRequestInput{
+		KeyIdentifier:    ptr.String("__KeyIdentifier__"),
+		SigningAlgorithm: types.SigningAlgorithmType("SHA224"),
+		CertificateSubject: &types.CertificateSubjectType{
+			CommonName:       ptr.String("__CommonName__"),
+			OrganizationUnit: ptr.String("__OrganizationUnit__"),
+			Organization:     ptr.String("__Organization__"),
+			City:             ptr.String("__City__"),
+			Country:          ptr.String("__Country__"),
+			StateOrProvince:  ptr.String("__StateOrProvince__"),
+			EmailAddress:     ptr.String("__EmailAddress__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -630,7 +743,9 @@ func TestCheckResponseSnapshot_GetKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKey(context.Background(), &GetKeyInput{})
+	got, err := svc.GetKey(context.Background(), &GetKeyInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -661,7 +776,9 @@ func TestCheckResponseSnapshot_GetMpaTeamAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMpaTeamAssociation(context.Background(), &GetMpaTeamAssociationInput{})
+	got, err := svc.GetMpaTeamAssociation(context.Background(), &GetMpaTeamAssociationInput{
+		Action: types.MpaOperation("IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -686,7 +803,11 @@ func TestCheckResponseSnapshot_GetParametersForExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetParametersForExport(context.Background(), &GetParametersForExportInput{})
+	got, err := svc.GetParametersForExport(context.Background(), &GetParametersForExportInput{
+		KeyMaterialType:         types.KeyMaterialType("TR34_KEY_BLOCK"),
+		SigningKeyAlgorithm:     types.KeyAlgorithm("TDES_2KEY"),
+		ReuseLastGeneratedToken: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -711,7 +832,11 @@ func TestCheckResponseSnapshot_GetParametersForImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetParametersForImport(context.Background(), &GetParametersForImportInput{})
+	got, err := svc.GetParametersForImport(context.Background(), &GetParametersForImportInput{
+		KeyMaterialType:         types.KeyMaterialType("TR34_KEY_BLOCK"),
+		WrappingKeyAlgorithm:    types.KeyAlgorithm("TDES_2KEY"),
+		ReuseLastGeneratedToken: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -733,7 +858,9 @@ func TestCheckResponseSnapshot_GetPublicKeyCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPublicKeyCertificate(context.Background(), &GetPublicKeyCertificateInput{})
+	got, err := svc.GetPublicKeyCertificate(context.Background(), &GetPublicKeyCertificateInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -755,7 +882,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -821,7 +950,46 @@ func TestCheckResponseSnapshot_ImportKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportKey(context.Background(), &ImportKeyInput{})
+	got, err := svc.ImportKey(context.Background(), &ImportKeyInput{
+		KeyMaterial: &types.ImportKeyMaterialMemberRootCertificatePublicKey{
+			Value: types.RootCertificatePublicKey{
+				KeyAttributes: &types.KeyAttributes{
+					KeyUsage:     types.KeyUsage("TR31_B0_BASE_DERIVATION_KEY"),
+					KeyClass:     types.KeyClass("SYMMETRIC_KEY"),
+					KeyAlgorithm: types.KeyAlgorithm("TDES_2KEY"),
+					KeyModesOfUse: &types.KeyModesOfUse{
+						Encrypt:        true,
+						Decrypt:        true,
+						Wrap:           true,
+						Unwrap:         true,
+						Generate:       true,
+						Sign:           true,
+						Verify:         true,
+						DeriveKey:      true,
+						NoRestrictions: true,
+					},
+				},
+				PublicKeyCertificate: ptr.String("__PublicKeyCertificate__"),
+			},
+		},
+		KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		Enabled:                ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RequesterComment: ptr.String("__RequesterComment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -852,7 +1020,11 @@ func TestCheckResponseSnapshot_ListAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAliases(context.Background(), &ListAliasesInput{})
+	got, err := svc.ListAliases(context.Background(), &ListAliasesInput{
+		KeyArn:     ptr.String("__KeyArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -925,7 +1097,11 @@ func TestCheckResponseSnapshot_ListKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKeys(context.Background(), &ListKeysInput{})
+	got, err := svc.ListKeys(context.Background(), &ListKeysInput{
+		KeyState:   types.KeyState("CREATE_IN_PROGRESS"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -956,7 +1132,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -978,7 +1158,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1044,7 +1227,13 @@ func TestCheckResponseSnapshot_RemoveKeyReplicationRegions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveKeyReplicationRegions(context.Background(), &RemoveKeyReplicationRegionsInput{})
+	got, err := svc.RemoveKeyReplicationRegions(context.Background(), &RemoveKeyReplicationRegionsInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1110,7 +1299,9 @@ func TestCheckResponseSnapshot_RestoreKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreKey(context.Background(), &RestoreKeyInput{})
+	got, err := svc.RestoreKey(context.Background(), &RestoreKeyInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1176,7 +1367,9 @@ func TestCheckResponseSnapshot_StartKeyUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartKeyUsage(context.Background(), &StartKeyUsageInput{})
+	got, err := svc.StartKeyUsage(context.Background(), &StartKeyUsageInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1242,7 +1435,9 @@ func TestCheckResponseSnapshot_StopKeyUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopKeyUsage(context.Background(), &StopKeyUsageInput{})
+	got, err := svc.StopKeyUsage(context.Background(), &StopKeyUsageInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1261,7 +1456,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1280,7 +1487,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1304,7 +1517,10 @@ func TestCheckResponseSnapshot_UpdateAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAlias(context.Background(), &UpdateAliasInput{})
+	got, err := svc.UpdateAlias(context.Background(), &UpdateAliasInput{
+		AliasName: ptr.String("__AliasName__"),
+		KeyArn:    ptr.String("__KeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1325,7 +1541,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{})
+	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1350,7 +1572,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{})
+	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1375,7 +1603,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{})
+	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1400,7 +1634,10 @@ func TestCheckResponseSnapshot_Error_PublicPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1425,7 +1662,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{})
+	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1450,7 +1693,13 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{})
+	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1475,7 +1724,11 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMpaTeam(context.Background(), &AssociateMpaTeamInput{})
+	_, opErr := svc.AssociateMpaTeam(context.Background(), &AssociateMpaTeamInput{
+		Action:           types.MpaOperation("IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE"),
+		MpaTeamArn:       ptr.String("__MpaTeamArn__"),
+		RequesterComment: ptr.String("__RequesterComment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1500,7 +1753,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{})
+	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1525,7 +1784,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{})
+	_, opErr := svc.AddKeyReplicationRegions(context.Background(), &AddKeyReplicationRegionsInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		ReplicationRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

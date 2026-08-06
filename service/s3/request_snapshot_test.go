@@ -3942,6 +3942,7 @@ func TestCheckRequestSnapshot_PutBucketWebsite(t *testing.T) {
 func TestCheckRequestSnapshot_PutObject(t *testing.T) {
 	input := &PutObjectInput{
 		ACL:                types.ObjectCannedACL("private"),
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
 		Bucket:             ptr.String("__Bucket__"),
 		CacheControl:       ptr.String("__CacheControl__"),
 		ContentDisposition: ptr.String("__ContentDisposition__"),
@@ -4085,6 +4086,7 @@ func TestCheckRequestSnapshot_PutObjectAnnotation(t *testing.T) {
 		Key:                 ptr.String("__Key__"),
 		VersionId:           ptr.String("__VersionId__"),
 		AnnotationName:      ptr.String("__AnnotationName__"),
+		AnnotationPayload:   io.NopCloser(bytes.NewReader([]byte("__AnnotationPayload__"))),
 		ObjectIfMatch:       ptr.String("__ObjectIfMatch__"),
 		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
 		ChecksumCRC32:       ptr.String("__ChecksumCRC32__"),
@@ -4641,6 +4643,7 @@ func TestCheckRequestSnapshot_UpdateObjectEncryption(t *testing.T) {
 
 func TestCheckRequestSnapshot_UploadPart(t *testing.T) {
 	input := &UploadPartInput{
+		Body:                 io.NopCloser(bytes.NewReader([]byte("__Body__"))),
 		Bucket:               ptr.String("__Bucket__"),
 		ContentLength:        ptr.Int64(1),
 		ContentMD5:           ptr.String("__ContentMD5__"),
@@ -4736,6 +4739,7 @@ func TestCheckRequestSnapshot_WriteGetObjectResponse(t *testing.T) {
 	input := &WriteGetObjectResponseInput{
 		RequestRoute:       ptr.String("RequestRoute-value"),
 		RequestToken:       ptr.String("__RequestToken__"),
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
 		StatusCode:         ptr.Int32(1),
 		ErrorCode:          ptr.String("__ErrorCode__"),
 		ErrorMessage:       ptr.String("__ErrorMessage__"),
@@ -8563,6 +8567,7 @@ func TestUpdateRequestSnapshot_PutBucketWebsite(t *testing.T) {
 func TestUpdateRequestSnapshot_PutObject(t *testing.T) {
 	input := &PutObjectInput{
 		ACL:                types.ObjectCannedACL("private"),
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
 		Bucket:             ptr.String("__Bucket__"),
 		CacheControl:       ptr.String("__CacheControl__"),
 		ContentDisposition: ptr.String("__ContentDisposition__"),
@@ -8706,6 +8711,7 @@ func TestUpdateRequestSnapshot_PutObjectAnnotation(t *testing.T) {
 		Key:                 ptr.String("__Key__"),
 		VersionId:           ptr.String("__VersionId__"),
 		AnnotationName:      ptr.String("__AnnotationName__"),
+		AnnotationPayload:   io.NopCloser(bytes.NewReader([]byte("__AnnotationPayload__"))),
 		ObjectIfMatch:       ptr.String("__ObjectIfMatch__"),
 		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
 		ChecksumCRC32:       ptr.String("__ChecksumCRC32__"),
@@ -9262,6 +9268,7 @@ func TestUpdateRequestSnapshot_UpdateObjectEncryption(t *testing.T) {
 
 func TestUpdateRequestSnapshot_UploadPart(t *testing.T) {
 	input := &UploadPartInput{
+		Body:                 io.NopCloser(bytes.NewReader([]byte("__Body__"))),
 		Bucket:               ptr.String("__Bucket__"),
 		ContentLength:        ptr.Int64(1),
 		ContentMD5:           ptr.String("__ContentMD5__"),
@@ -9357,6 +9364,7 @@ func TestUpdateRequestSnapshot_WriteGetObjectResponse(t *testing.T) {
 	input := &WriteGetObjectResponseInput{
 		RequestRoute:       ptr.String("RequestRoute-value"),
 		RequestToken:       ptr.String("__RequestToken__"),
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
 		StatusCode:         ptr.Int32(1),
 		ErrorCode:          ptr.String("__ErrorCode__"),
 		ErrorMessage:       ptr.String("__ErrorMessage__"),

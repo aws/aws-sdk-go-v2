@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.ListSourcesForS3TableIntegration
+
+{"nextToken":"__NextToken__","sources":[{"createdTimeStamp":1,"dataSource":{"name":"__Name__","type":"__Type__"},"identifier":"__Identifier__","parentSourceIdentifier":"__ParentSourceIdentifier__","status":"ACTIVE","statusReason":"__StatusReason__"},{"createdTimeStamp":1,"dataSource":{"name":"__Name__","type":"__Type__"},"identifier":"__Identifier__","parentSourceIdentifier":"__ParentSourceIdentifier__","status":"ACTIVE","statusReason":"__StatusReason__"}]}

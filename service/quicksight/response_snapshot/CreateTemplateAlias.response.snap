@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"RequestId":"__RequestId__","Status":200,"TemplateAlias":{"AliasName":"__AliasName__","Arn":"__Arn__","TemplateVersionNumber":1}}

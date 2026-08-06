@@ -156,7 +156,34 @@ func TestCheckResponseSnapshot_BatchCreateBillScenarioCommitmentModification(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{})
+	got, err := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		CommitmentModifications: []types.BatchCreateBillScenarioCommitmentModificationEntry{
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +373,160 @@ func TestCheckResponseSnapshot_BatchCreateBillScenarioUsageModification(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateBillScenarioUsageModification(context.Background(), &BatchCreateBillScenarioUsageModificationInput{})
+	got, err := svc.BatchCreateBillScenarioUsageModification(context.Background(), &BatchCreateBillScenarioUsageModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		UsageModifications: []types.BatchCreateBillScenarioUsageModificationEntry{
+			{
+				ServiceCode:      ptr.String("__ServiceCode__"),
+				UsageType:        ptr.String("__UsageType__"),
+				Operation:        ptr.String("__Operation__"),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				Key:              ptr.String("__Key__"),
+				Group:            ptr.String("__Group__"),
+				UsageAccountId:   ptr.String("__UsageAccountId__"),
+				Amounts: []types.UsageAmount{
+					{
+						StartHour: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Amount:    ptr.Float64(1.0),
+					},
+					{
+						StartHour: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Amount:    ptr.Float64(1.0),
+					},
+				},
+				HistoricalUsage: &types.HistoricalUsageEntity{
+					ServiceCode:    ptr.String("__ServiceCode__"),
+					UsageType:      ptr.String("__UsageType__"),
+					Operation:      ptr.String("__Operation__"),
+					Location:       ptr.String("__Location__"),
+					UsageAccountId: ptr.String("__UsageAccountId__"),
+					BillInterval: &types.BillInterval{
+						Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					FilterExpression: &types.Expression{
+						And: []types.Expression{
+							{},
+							{},
+						},
+						Or: []types.Expression{
+							{},
+							{},
+						},
+						Not: nil,
+						CostCategories: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Tags: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				ServiceCode:      ptr.String("__ServiceCode__"),
+				UsageType:        ptr.String("__UsageType__"),
+				Operation:        ptr.String("__Operation__"),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				Key:              ptr.String("__Key__"),
+				Group:            ptr.String("__Group__"),
+				UsageAccountId:   ptr.String("__UsageAccountId__"),
+				Amounts: []types.UsageAmount{
+					{
+						StartHour: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Amount:    ptr.Float64(1.0),
+					},
+					{
+						StartHour: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Amount:    ptr.Float64(1.0),
+					},
+				},
+				HistoricalUsage: &types.HistoricalUsageEntity{
+					ServiceCode:    ptr.String("__ServiceCode__"),
+					UsageType:      ptr.String("__UsageType__"),
+					Operation:      ptr.String("__Operation__"),
+					Location:       ptr.String("__Location__"),
+					UsageAccountId: ptr.String("__UsageAccountId__"),
+					BillInterval: &types.BillInterval{
+						Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					FilterExpression: &types.Expression{
+						And: []types.Expression{
+							{},
+							{},
+						},
+						Or: []types.Expression{
+							{},
+							{},
+						},
+						Not: nil,
+						CostCategories: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Tags: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -524,7 +704,140 @@ func TestCheckResponseSnapshot_BatchCreateWorkloadEstimateUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateWorkloadEstimateUsage(context.Background(), &BatchCreateWorkloadEstimateUsageInput{})
+	got, err := svc.BatchCreateWorkloadEstimateUsage(context.Background(), &BatchCreateWorkloadEstimateUsageInput{
+		WorkloadEstimateId: ptr.String("__WorkloadEstimateId__"),
+		Usage: []types.BatchCreateWorkloadEstimateUsageEntry{
+			{
+				ServiceCode:    ptr.String("__ServiceCode__"),
+				UsageType:      ptr.String("__UsageType__"),
+				Operation:      ptr.String("__Operation__"),
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				Amount:         ptr.Float64(1.0),
+				HistoricalUsage: &types.HistoricalUsageEntity{
+					ServiceCode:    ptr.String("__ServiceCode__"),
+					UsageType:      ptr.String("__UsageType__"),
+					Operation:      ptr.String("__Operation__"),
+					Location:       ptr.String("__Location__"),
+					UsageAccountId: ptr.String("__UsageAccountId__"),
+					BillInterval: &types.BillInterval{
+						Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					FilterExpression: &types.Expression{
+						And: []types.Expression{
+							{},
+							{},
+						},
+						Or: []types.Expression{
+							{},
+							{},
+						},
+						Not: nil,
+						CostCategories: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Tags: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				ServiceCode:    ptr.String("__ServiceCode__"),
+				UsageType:      ptr.String("__UsageType__"),
+				Operation:      ptr.String("__Operation__"),
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				Amount:         ptr.Float64(1.0),
+				HistoricalUsage: &types.HistoricalUsageEntity{
+					ServiceCode:    ptr.String("__ServiceCode__"),
+					UsageType:      ptr.String("__UsageType__"),
+					Operation:      ptr.String("__Operation__"),
+					Location:       ptr.String("__Location__"),
+					UsageAccountId: ptr.String("__UsageAccountId__"),
+					BillInterval: &types.BillInterval{
+						Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					FilterExpression: &types.Expression{
+						And: []types.Expression{
+							{},
+							{},
+						},
+						Or: []types.Expression{
+							{},
+							{},
+						},
+						Not: nil,
+						CostCategories: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Tags: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -556,7 +869,13 @@ func TestCheckResponseSnapshot_BatchDeleteBillScenarioCommitmentModification(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteBillScenarioCommitmentModification(context.Background(), &BatchDeleteBillScenarioCommitmentModificationInput{})
+	got, err := svc.BatchDeleteBillScenarioCommitmentModification(context.Background(), &BatchDeleteBillScenarioCommitmentModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -588,7 +907,13 @@ func TestCheckResponseSnapshot_BatchDeleteBillScenarioUsageModification(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteBillScenarioUsageModification(context.Background(), &BatchDeleteBillScenarioUsageModificationInput{})
+	got, err := svc.BatchDeleteBillScenarioUsageModification(context.Background(), &BatchDeleteBillScenarioUsageModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -620,7 +945,13 @@ func TestCheckResponseSnapshot_BatchDeleteWorkloadEstimateUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteWorkloadEstimateUsage(context.Background(), &BatchDeleteWorkloadEstimateUsageInput{})
+	got, err := svc.BatchDeleteWorkloadEstimateUsage(context.Background(), &BatchDeleteWorkloadEstimateUsageInput{
+		WorkloadEstimateId: ptr.String("__WorkloadEstimateId__"),
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -676,7 +1007,19 @@ func TestCheckResponseSnapshot_BatchUpdateBillScenarioCommitmentModification(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateBillScenarioCommitmentModification(context.Background(), &BatchUpdateBillScenarioCommitmentModificationInput{})
+	got, err := svc.BatchUpdateBillScenarioCommitmentModification(context.Background(), &BatchUpdateBillScenarioCommitmentModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		CommitmentModifications: []types.BatchUpdateBillScenarioCommitmentModificationEntry{
+			{
+				Id:    ptr.String("__Id__"),
+				Group: ptr.String("__Group__"),
+			},
+			{
+				Id:    ptr.String("__Id__"),
+				Group: ptr.String("__Group__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -864,7 +1207,39 @@ func TestCheckResponseSnapshot_BatchUpdateBillScenarioUsageModification(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateBillScenarioUsageModification(context.Background(), &BatchUpdateBillScenarioUsageModificationInput{})
+	got, err := svc.BatchUpdateBillScenarioUsageModification(context.Background(), &BatchUpdateBillScenarioUsageModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		UsageModifications: []types.BatchUpdateBillScenarioUsageModificationEntry{
+			{
+				Id:    ptr.String("__Id__"),
+				Group: ptr.String("__Group__"),
+				Amounts: []types.UsageAmount{
+					{
+						StartHour: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Amount:    ptr.Float64(1.0),
+					},
+					{
+						StartHour: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Amount:    ptr.Float64(1.0),
+					},
+				},
+			},
+			{
+				Id:    ptr.String("__Id__"),
+				Group: ptr.String("__Group__"),
+				Amounts: []types.UsageAmount{
+					{
+						StartHour: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Amount:    ptr.Float64(1.0),
+					},
+					{
+						StartHour: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Amount:    ptr.Float64(1.0),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1040,7 +1415,21 @@ func TestCheckResponseSnapshot_BatchUpdateWorkloadEstimateUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateWorkloadEstimateUsage(context.Background(), &BatchUpdateWorkloadEstimateUsageInput{})
+	got, err := svc.BatchUpdateWorkloadEstimateUsage(context.Background(), &BatchUpdateWorkloadEstimateUsageInput{
+		WorkloadEstimateId: ptr.String("__WorkloadEstimateId__"),
+		Usage: []types.BatchUpdateWorkloadEstimateUsageEntry{
+			{
+				Id:     ptr.String("__Id__"),
+				Group:  ptr.String("__Group__"),
+				Amount: ptr.Float64(1.0),
+			},
+			{
+				Id:     ptr.String("__Id__"),
+				Group:  ptr.String("__Group__"),
+				Amount: ptr.Float64(1.0),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1097,7 +1486,14 @@ func TestCheckResponseSnapshot_CreateBillEstimate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBillEstimate(context.Background(), &CreateBillEstimateInput{})
+	got, err := svc.CreateBillEstimate(context.Background(), &CreateBillEstimateInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		Name:           ptr.String("__Name__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1129,7 +1525,15 @@ func TestCheckResponseSnapshot_CreateBillScenario(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBillScenario(context.Background(), &CreateBillScenarioInput{})
+	got, err := svc.CreateBillScenario(context.Background(), &CreateBillScenarioInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		GroupSharingPreference:                types.GroupSharingPreferenceEnum("OPEN"),
+		CostCategoryGroupSharingPreferenceArn: ptr.String("__CostCategoryGroupSharingPreferenceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1159,7 +1563,14 @@ func TestCheckResponseSnapshot_CreateWorkloadEstimate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkloadEstimate(context.Background(), &CreateWorkloadEstimateInput{})
+	got, err := svc.CreateWorkloadEstimate(context.Background(), &CreateWorkloadEstimateInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		RateType:    types.WorkloadEstimateRateType("BEFORE_DISCOUNTS"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1178,7 +1589,9 @@ func TestCheckResponseSnapshot_DeleteBillEstimate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBillEstimate(context.Background(), &DeleteBillEstimateInput{})
+	got, err := svc.DeleteBillEstimate(context.Background(), &DeleteBillEstimateInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1197,7 +1610,9 @@ func TestCheckResponseSnapshot_DeleteBillScenario(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBillScenario(context.Background(), &DeleteBillScenarioInput{})
+	got, err := svc.DeleteBillScenario(context.Background(), &DeleteBillScenarioInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1216,7 +1631,9 @@ func TestCheckResponseSnapshot_DeleteWorkloadEstimate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkloadEstimate(context.Background(), &DeleteWorkloadEstimateInput{})
+	got, err := svc.DeleteWorkloadEstimate(context.Background(), &DeleteWorkloadEstimateInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1273,7 +1690,9 @@ func TestCheckResponseSnapshot_GetBillEstimate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBillEstimate(context.Background(), &GetBillEstimateInput{})
+	got, err := svc.GetBillEstimate(context.Background(), &GetBillEstimateInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1305,7 +1724,9 @@ func TestCheckResponseSnapshot_GetBillScenario(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBillScenario(context.Background(), &GetBillScenarioInput{})
+	got, err := svc.GetBillScenario(context.Background(), &GetBillScenarioInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1367,7 +1788,9 @@ func TestCheckResponseSnapshot_GetWorkloadEstimate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkloadEstimate(context.Background(), &GetWorkloadEstimateInput{})
+	got, err := svc.GetWorkloadEstimate(context.Background(), &GetWorkloadEstimateInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1424,7 +1847,11 @@ func TestCheckResponseSnapshot_ListBillEstimateCommitments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBillEstimateCommitments(context.Background(), &ListBillEstimateCommitmentsInput{})
+	got, err := svc.ListBillEstimateCommitments(context.Background(), &ListBillEstimateCommitmentsInput{
+		BillEstimateId: ptr.String("__BillEstimateId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1469,7 +1896,11 @@ func TestCheckResponseSnapshot_ListBillEstimateInputCommitmentModifications(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBillEstimateInputCommitmentModifications(context.Background(), &ListBillEstimateInputCommitmentModificationsInput{})
+	got, err := svc.ListBillEstimateInputCommitmentModifications(context.Background(), &ListBillEstimateInputCommitmentModificationsInput{
+		BillEstimateId: ptr.String("__BillEstimateId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1646,7 +2077,29 @@ func TestCheckResponseSnapshot_ListBillEstimateInputUsageModifications(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBillEstimateInputUsageModifications(context.Background(), &ListBillEstimateInputUsageModificationsInput{})
+	got, err := svc.ListBillEstimateInputUsageModifications(context.Background(), &ListBillEstimateInputUsageModificationsInput{
+		BillEstimateId: ptr.String("__BillEstimateId__"),
+		Filters: []types.ListUsageFilter{
+			{
+				Name: types.ListUsageFilterName("USAGE_ACCOUNT_ID"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+			{
+				Name: types.ListUsageFilterName("USAGE_ACCOUNT_ID"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1733,7 +2186,29 @@ func TestCheckResponseSnapshot_ListBillEstimateLineItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBillEstimateLineItems(context.Background(), &ListBillEstimateLineItemsInput{})
+	got, err := svc.ListBillEstimateLineItems(context.Background(), &ListBillEstimateLineItemsInput{
+		BillEstimateId: ptr.String("__BillEstimateId__"),
+		Filters: []types.ListBillEstimateLineItemsFilter{
+			{
+				Name: types.ListBillEstimateLineItemsFilterName("USAGE_ACCOUNT_ID"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+			{
+				Name: types.ListBillEstimateLineItemsFilterName("USAGE_ACCOUNT_ID"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1778,7 +2253,36 @@ func TestCheckResponseSnapshot_ListBillEstimates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBillEstimates(context.Background(), &ListBillEstimatesInput{})
+	got, err := svc.ListBillEstimates(context.Background(), &ListBillEstimatesInput{
+		Filters: []types.ListBillEstimatesFilter{
+			{
+				Name: types.ListBillEstimatesFilterName("STATUS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+			{
+				Name: types.ListBillEstimatesFilterName("STATUS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+		},
+		CreatedAtFilter: &types.FilterTimestamp{
+			AfterTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			BeforeTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		ExpiresAtFilter: &types.FilterTimestamp{
+			AfterTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			BeforeTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1823,7 +2327,11 @@ func TestCheckResponseSnapshot_ListBillScenarioCommitmentModifications(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBillScenarioCommitmentModifications(context.Background(), &ListBillScenarioCommitmentModificationsInput{})
+	got, err := svc.ListBillScenarioCommitmentModifications(context.Background(), &ListBillScenarioCommitmentModificationsInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2000,7 +2508,29 @@ func TestCheckResponseSnapshot_ListBillScenarioUsageModifications(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBillScenarioUsageModifications(context.Background(), &ListBillScenarioUsageModificationsInput{})
+	got, err := svc.ListBillScenarioUsageModifications(context.Background(), &ListBillScenarioUsageModificationsInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		Filters: []types.ListUsageFilter{
+			{
+				Name: types.ListUsageFilterName("USAGE_ACCOUNT_ID"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+			{
+				Name: types.ListUsageFilterName("USAGE_ACCOUNT_ID"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2051,7 +2581,36 @@ func TestCheckResponseSnapshot_ListBillScenarios(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBillScenarios(context.Background(), &ListBillScenariosInput{})
+	got, err := svc.ListBillScenarios(context.Background(), &ListBillScenariosInput{
+		Filters: []types.ListBillScenariosFilter{
+			{
+				Name: types.ListBillScenariosFilterName("STATUS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+			{
+				Name: types.ListBillScenariosFilterName("STATUS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+		},
+		CreatedAtFilter: &types.FilterTimestamp{
+			AfterTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			BeforeTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		ExpiresAtFilter: &types.FilterTimestamp{
+			AfterTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			BeforeTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2074,7 +2633,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2239,7 +2800,29 @@ func TestCheckResponseSnapshot_ListWorkloadEstimateUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkloadEstimateUsage(context.Background(), &ListWorkloadEstimateUsageInput{})
+	got, err := svc.ListWorkloadEstimateUsage(context.Background(), &ListWorkloadEstimateUsageInput{
+		WorkloadEstimateId: ptr.String("__WorkloadEstimateId__"),
+		Filters: []types.ListUsageFilter{
+			{
+				Name: types.ListUsageFilterName("USAGE_ACCOUNT_ID"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+			{
+				Name: types.ListUsageFilterName("USAGE_ACCOUNT_ID"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2286,7 +2869,36 @@ func TestCheckResponseSnapshot_ListWorkloadEstimates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkloadEstimates(context.Background(), &ListWorkloadEstimatesInput{})
+	got, err := svc.ListWorkloadEstimates(context.Background(), &ListWorkloadEstimatesInput{
+		CreatedAtFilter: &types.FilterTimestamp{
+			AfterTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			BeforeTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		ExpiresAtFilter: &types.FilterTimestamp{
+			AfterTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			BeforeTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Filters: []types.ListWorkloadEstimatesFilter{
+			{
+				Name: types.ListWorkloadEstimatesFilterName("STATUS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+			{
+				Name: types.ListWorkloadEstimatesFilterName("STATUS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOption: types.MatchOption("EQUALS"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2305,7 +2917,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2324,7 +2941,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2381,7 +3004,11 @@ func TestCheckResponseSnapshot_UpdateBillEstimate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBillEstimate(context.Background(), &UpdateBillEstimateInput{})
+	got, err := svc.UpdateBillEstimate(context.Background(), &UpdateBillEstimateInput{
+		Identifier: ptr.String("__Identifier__"),
+		Name:       ptr.String("__Name__"),
+		ExpiresAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2413,7 +3040,13 @@ func TestCheckResponseSnapshot_UpdateBillScenario(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBillScenario(context.Background(), &UpdateBillScenarioInput{})
+	got, err := svc.UpdateBillScenario(context.Background(), &UpdateBillScenarioInput{
+		Identifier:                            ptr.String("__Identifier__"),
+		Name:                                  ptr.String("__Name__"),
+		ExpiresAt:                             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GroupSharingPreference:                types.GroupSharingPreferenceEnum("OPEN"),
+		CostCategoryGroupSharingPreferenceArn: ptr.String("__CostCategoryGroupSharingPreferenceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2445,7 +3078,20 @@ func TestCheckResponseSnapshot_UpdatePreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePreferences(context.Background(), &UpdatePreferencesInput{})
+	got, err := svc.UpdatePreferences(context.Background(), &UpdatePreferencesInput{
+		ManagementAccountRateTypeSelections: []types.RateType{
+			types.RateType("BEFORE_DISCOUNTS"),
+			types.RateType("BEFORE_DISCOUNTS"),
+		},
+		MemberAccountRateTypeSelections: []types.RateType{
+			types.RateType("BEFORE_DISCOUNTS"),
+			types.RateType("BEFORE_DISCOUNTS"),
+		},
+		StandaloneAccountRateTypeSelections: []types.RateType{
+			types.RateType("BEFORE_DISCOUNTS"),
+			types.RateType("BEFORE_DISCOUNTS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2475,7 +3121,11 @@ func TestCheckResponseSnapshot_UpdateWorkloadEstimate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkloadEstimate(context.Background(), &UpdateWorkloadEstimateInput{})
+	got, err := svc.UpdateWorkloadEstimate(context.Background(), &UpdateWorkloadEstimateInput{
+		Identifier: ptr.String("__Identifier__"),
+		Name:       ptr.String("__Name__"),
+		ExpiresAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2496,7 +3146,34 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{})
+	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		CommitmentModifications: []types.BatchCreateBillScenarioCommitmentModificationEntry{
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2523,7 +3200,34 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{})
+	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		CommitmentModifications: []types.BatchCreateBillScenarioCommitmentModificationEntry{
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2548,7 +3252,34 @@ func TestCheckResponseSnapshot_Error_DataUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{})
+	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		CommitmentModifications: []types.BatchCreateBillScenarioCommitmentModificationEntry{
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2574,7 +3305,34 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{})
+	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		CommitmentModifications: []types.BatchCreateBillScenarioCommitmentModificationEntry{
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2601,7 +3359,34 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{})
+	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		CommitmentModifications: []types.BatchCreateBillScenarioCommitmentModificationEntry{
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2630,7 +3415,160 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateBillScenarioUsageModification(context.Background(), &BatchCreateBillScenarioUsageModificationInput{})
+	_, opErr := svc.BatchCreateBillScenarioUsageModification(context.Background(), &BatchCreateBillScenarioUsageModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		UsageModifications: []types.BatchCreateBillScenarioUsageModificationEntry{
+			{
+				ServiceCode:      ptr.String("__ServiceCode__"),
+				UsageType:        ptr.String("__UsageType__"),
+				Operation:        ptr.String("__Operation__"),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				Key:              ptr.String("__Key__"),
+				Group:            ptr.String("__Group__"),
+				UsageAccountId:   ptr.String("__UsageAccountId__"),
+				Amounts: []types.UsageAmount{
+					{
+						StartHour: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Amount:    ptr.Float64(1.0),
+					},
+					{
+						StartHour: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Amount:    ptr.Float64(1.0),
+					},
+				},
+				HistoricalUsage: &types.HistoricalUsageEntity{
+					ServiceCode:    ptr.String("__ServiceCode__"),
+					UsageType:      ptr.String("__UsageType__"),
+					Operation:      ptr.String("__Operation__"),
+					Location:       ptr.String("__Location__"),
+					UsageAccountId: ptr.String("__UsageAccountId__"),
+					BillInterval: &types.BillInterval{
+						Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					FilterExpression: &types.Expression{
+						And: []types.Expression{
+							{},
+							{},
+						},
+						Or: []types.Expression{
+							{},
+							{},
+						},
+						Not: nil,
+						CostCategories: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Tags: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				ServiceCode:      ptr.String("__ServiceCode__"),
+				UsageType:        ptr.String("__UsageType__"),
+				Operation:        ptr.String("__Operation__"),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				Key:              ptr.String("__Key__"),
+				Group:            ptr.String("__Group__"),
+				UsageAccountId:   ptr.String("__UsageAccountId__"),
+				Amounts: []types.UsageAmount{
+					{
+						StartHour: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Amount:    ptr.Float64(1.0),
+					},
+					{
+						StartHour: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Amount:    ptr.Float64(1.0),
+					},
+				},
+				HistoricalUsage: &types.HistoricalUsageEntity{
+					ServiceCode:    ptr.String("__ServiceCode__"),
+					UsageType:      ptr.String("__UsageType__"),
+					Operation:      ptr.String("__Operation__"),
+					Location:       ptr.String("__Location__"),
+					UsageAccountId: ptr.String("__UsageAccountId__"),
+					BillInterval: &types.BillInterval{
+						Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					FilterExpression: &types.Expression{
+						And: []types.Expression{
+							{},
+							{},
+						},
+						Or: []types.Expression{
+							{},
+							{},
+						},
+						Not: nil,
+						CostCategories: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Tags: &types.ExpressionFilter{
+							Key: ptr.String("__Key__"),
+							MatchOptions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2658,7 +3596,34 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{})
+	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		CommitmentModifications: []types.BatchCreateBillScenarioCommitmentModificationEntry{
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2694,7 +3659,34 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{})
+	_, opErr := svc.BatchCreateBillScenarioCommitmentModification(context.Background(), &BatchCreateBillScenarioCommitmentModificationInput{
+		BillScenarioId: ptr.String("__BillScenarioId__"),
+		CommitmentModifications: []types.BatchCreateBillScenarioCommitmentModificationEntry{
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+			{
+				Key:            ptr.String("__Key__"),
+				Group:          ptr.String("__Group__"),
+				UsageAccountId: ptr.String("__UsageAccountId__"),
+				CommitmentAction: &types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction{
+					Value: types.AddReservedInstanceAction{
+						ReservedInstancesOfferingId: ptr.String("__ReservedInstancesOfferingId__"),
+						InstanceCount:               ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

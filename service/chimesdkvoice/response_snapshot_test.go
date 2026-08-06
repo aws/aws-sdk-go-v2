@@ -130,7 +130,14 @@ func TestCheckResponseSnapshot_AssociatePhoneNumbersWithVoiceConnector(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{})
+	got, err := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForceAssociate: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +169,14 @@ func TestCheckResponseSnapshot_AssociatePhoneNumbersWithVoiceConnectorGroup(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociatePhoneNumbersWithVoiceConnectorGroup(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorGroupInput{})
+	got, err := svc.AssociatePhoneNumbersWithVoiceConnectorGroup(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorGroupInput{
+		VoiceConnectorGroupId: ptr.String("__VoiceConnectorGroupId__"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForceAssociate: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -194,7 +208,12 @@ func TestCheckResponseSnapshot_BatchDeletePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeletePhoneNumber(context.Background(), &BatchDeletePhoneNumberInput{})
+	got, err := svc.BatchDeletePhoneNumber(context.Background(), &BatchDeletePhoneNumberInput{
+		PhoneNumberIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,7 +245,22 @@ func TestCheckResponseSnapshot_BatchUpdatePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdatePhoneNumber(context.Background(), &BatchUpdatePhoneNumberInput{})
+	got, err := svc.BatchUpdatePhoneNumber(context.Background(), &BatchUpdatePhoneNumberInput{
+		UpdatePhoneNumberRequestItems: []types.UpdatePhoneNumberRequestItem{
+			{
+				PhoneNumberId: ptr.String("__PhoneNumberId__"),
+				ProductType:   types.PhoneNumberProductType("VoiceConnector"),
+				CallingName:   ptr.String("__CallingName__"),
+				Name:          ptr.String("__Name__"),
+			},
+			{
+				PhoneNumberId: ptr.String("__PhoneNumberId__"),
+				ProductType:   types.PhoneNumberProductType("VoiceConnector"),
+				CallingName:   ptr.String("__CallingName__"),
+				Name:          ptr.String("__Name__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -265,7 +299,14 @@ func TestCheckResponseSnapshot_CreatePhoneNumberOrder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePhoneNumberOrder(context.Background(), &CreatePhoneNumberOrderInput{})
+	got, err := svc.CreatePhoneNumberOrder(context.Background(), &CreatePhoneNumberOrderInput{
+		ProductType: types.PhoneNumberProductType("VoiceConnector"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -315,7 +356,25 @@ func TestCheckResponseSnapshot_CreateProxySession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProxySession(context.Background(), &CreateProxySessionInput{})
+	got, err := svc.CreateProxySession(context.Background(), &CreateProxySessionInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		ParticipantPhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name:          ptr.String("__Name__"),
+		ExpiryMinutes: ptr.Int32(1),
+		Capabilities: []types.Capability{
+			types.Capability("Voice"),
+			types.Capability("Voice"),
+		},
+		NumberSelectionBehavior: types.NumberSelectionBehavior("PreferSticky"),
+		GeoMatchLevel:           types.GeoMatchLevel("Country"),
+		GeoMatchParams: &types.GeoMatchParams{
+			Country:  ptr.String("__Country__"),
+			AreaCode: ptr.String("__AreaCode__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -351,7 +410,28 @@ func TestCheckResponseSnapshot_CreateSipMediaApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSipMediaApplication(context.Background(), &CreateSipMediaApplicationInput{})
+	got, err := svc.CreateSipMediaApplication(context.Background(), &CreateSipMediaApplicationInput{
+		AwsRegion: ptr.String("__AwsRegion__"),
+		Name:      ptr.String("__Name__"),
+		Endpoints: []types.SipMediaApplicationEndpoint{
+			{
+				LambdaArn: ptr.String("__LambdaArn__"),
+			},
+			{
+				LambdaArn: ptr.String("__LambdaArn__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -374,7 +454,17 @@ func TestCheckResponseSnapshot_CreateSipMediaApplicationCall(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSipMediaApplicationCall(context.Background(), &CreateSipMediaApplicationCallInput{})
+	got, err := svc.CreateSipMediaApplicationCall(context.Background(), &CreateSipMediaApplicationCallInput{
+		FromPhoneNumber:       ptr.String("__FromPhoneNumber__"),
+		ToPhoneNumber:         ptr.String("__ToPhoneNumber__"),
+		SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+		SipHeaders: map[string]string{
+			"key0": "__Value__",
+		},
+		ArgumentsMap: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -415,7 +505,24 @@ func TestCheckResponseSnapshot_CreateSipRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSipRule(context.Background(), &CreateSipRuleInput{})
+	got, err := svc.CreateSipRule(context.Background(), &CreateSipRuleInput{
+		Name:         ptr.String("__Name__"),
+		TriggerType:  types.SipRuleTriggerType("ToPhoneNumber"),
+		TriggerValue: ptr.String("__TriggerValue__"),
+		Disabled:     ptr.Bool(true),
+		TargetApplications: []types.SipRuleTargetApplication{
+			{
+				SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+				Priority:              ptr.Int32(1),
+				AwsRegion:             ptr.String("__AwsRegion__"),
+			},
+			{
+				SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+				Priority:              ptr.Int32(1),
+				AwsRegion:             ptr.String("__AwsRegion__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -447,7 +554,23 @@ func TestCheckResponseSnapshot_CreateVoiceConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVoiceConnector(context.Background(), &CreateVoiceConnectorInput{})
+	got, err := svc.CreateVoiceConnector(context.Background(), &CreateVoiceConnectorInput{
+		Name:              ptr.String("__Name__"),
+		AwsRegion:         types.VoiceConnectorAwsRegion("us-east-1"),
+		RequireEncryption: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IntegrationType: types.VoiceConnectorIntegrationType("CONNECT_CALL_TRANSFER_CONNECTOR"),
+		NetworkType:     types.NetworkType("IPV4_ONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -485,7 +608,20 @@ func TestCheckResponseSnapshot_CreateVoiceConnectorGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVoiceConnectorGroup(context.Background(), &CreateVoiceConnectorGroupInput{})
+	got, err := svc.CreateVoiceConnectorGroup(context.Background(), &CreateVoiceConnectorGroupInput{
+		Name: ptr.String("__Name__"),
+		VoiceConnectorItems: []types.VoiceConnectorItem{
+			{
+				VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+				Priority:         ptr.Int32(1),
+			},
+			{
+				VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+				Priority:         ptr.Int32(1),
+			},
+		},
+		CallDistributionType: types.CallDistributionType("PriorityWeightedDistribution"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -513,7 +649,9 @@ func TestCheckResponseSnapshot_CreateVoiceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVoiceProfile(context.Background(), &CreateVoiceProfileInput{})
+	got, err := svc.CreateVoiceProfile(context.Background(), &CreateVoiceProfileInput{
+		SpeakerSearchTaskId: ptr.String("__SpeakerSearchTaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -544,7 +682,24 @@ func TestCheckResponseSnapshot_CreateVoiceProfileDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVoiceProfileDomain(context.Background(), &CreateVoiceProfileDomainInput{})
+	got, err := svc.CreateVoiceProfileDomain(context.Background(), &CreateVoiceProfileDomainInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -563,7 +718,9 @@ func TestCheckResponseSnapshot_DeletePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePhoneNumber(context.Background(), &DeletePhoneNumberInput{})
+	got, err := svc.DeletePhoneNumber(context.Background(), &DeletePhoneNumberInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -582,7 +739,10 @@ func TestCheckResponseSnapshot_DeleteProxySession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProxySession(context.Background(), &DeleteProxySessionInput{})
+	got, err := svc.DeleteProxySession(context.Background(), &DeleteProxySessionInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		ProxySessionId:   ptr.String("__ProxySessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -601,7 +761,9 @@ func TestCheckResponseSnapshot_DeleteSipMediaApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSipMediaApplication(context.Background(), &DeleteSipMediaApplicationInput{})
+	got, err := svc.DeleteSipMediaApplication(context.Background(), &DeleteSipMediaApplicationInput{
+		SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -620,7 +782,9 @@ func TestCheckResponseSnapshot_DeleteSipRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSipRule(context.Background(), &DeleteSipRuleInput{})
+	got, err := svc.DeleteSipRule(context.Background(), &DeleteSipRuleInput{
+		SipRuleId: ptr.String("__SipRuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -639,7 +803,9 @@ func TestCheckResponseSnapshot_DeleteVoiceConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceConnector(context.Background(), &DeleteVoiceConnectorInput{})
+	got, err := svc.DeleteVoiceConnector(context.Background(), &DeleteVoiceConnectorInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -658,7 +824,9 @@ func TestCheckResponseSnapshot_DeleteVoiceConnectorEmergencyCallingConfiguration
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceConnectorEmergencyCallingConfiguration(context.Background(), &DeleteVoiceConnectorEmergencyCallingConfigurationInput{})
+	got, err := svc.DeleteVoiceConnectorEmergencyCallingConfiguration(context.Background(), &DeleteVoiceConnectorEmergencyCallingConfigurationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -677,7 +845,9 @@ func TestCheckResponseSnapshot_DeleteVoiceConnectorExternalSystemsConfiguration(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceConnectorExternalSystemsConfiguration(context.Background(), &DeleteVoiceConnectorExternalSystemsConfigurationInput{})
+	got, err := svc.DeleteVoiceConnectorExternalSystemsConfiguration(context.Background(), &DeleteVoiceConnectorExternalSystemsConfigurationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -696,7 +866,9 @@ func TestCheckResponseSnapshot_DeleteVoiceConnectorGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceConnectorGroup(context.Background(), &DeleteVoiceConnectorGroupInput{})
+	got, err := svc.DeleteVoiceConnectorGroup(context.Background(), &DeleteVoiceConnectorGroupInput{
+		VoiceConnectorGroupId: ptr.String("__VoiceConnectorGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -715,7 +887,9 @@ func TestCheckResponseSnapshot_DeleteVoiceConnectorOrigination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceConnectorOrigination(context.Background(), &DeleteVoiceConnectorOriginationInput{})
+	got, err := svc.DeleteVoiceConnectorOrigination(context.Background(), &DeleteVoiceConnectorOriginationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -734,7 +908,9 @@ func TestCheckResponseSnapshot_DeleteVoiceConnectorProxy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceConnectorProxy(context.Background(), &DeleteVoiceConnectorProxyInput{})
+	got, err := svc.DeleteVoiceConnectorProxy(context.Background(), &DeleteVoiceConnectorProxyInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -753,7 +929,9 @@ func TestCheckResponseSnapshot_DeleteVoiceConnectorStreamingConfiguration(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceConnectorStreamingConfiguration(context.Background(), &DeleteVoiceConnectorStreamingConfigurationInput{})
+	got, err := svc.DeleteVoiceConnectorStreamingConfiguration(context.Background(), &DeleteVoiceConnectorStreamingConfigurationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -772,7 +950,9 @@ func TestCheckResponseSnapshot_DeleteVoiceConnectorTermination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceConnectorTermination(context.Background(), &DeleteVoiceConnectorTerminationInput{})
+	got, err := svc.DeleteVoiceConnectorTermination(context.Background(), &DeleteVoiceConnectorTerminationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -791,7 +971,13 @@ func TestCheckResponseSnapshot_DeleteVoiceConnectorTerminationCredentials(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceConnectorTerminationCredentials(context.Background(), &DeleteVoiceConnectorTerminationCredentialsInput{})
+	got, err := svc.DeleteVoiceConnectorTerminationCredentials(context.Background(), &DeleteVoiceConnectorTerminationCredentialsInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		Usernames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -810,7 +996,9 @@ func TestCheckResponseSnapshot_DeleteVoiceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceProfile(context.Background(), &DeleteVoiceProfileInput{})
+	got, err := svc.DeleteVoiceProfile(context.Background(), &DeleteVoiceProfileInput{
+		VoiceProfileId: ptr.String("__VoiceProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -829,7 +1017,9 @@ func TestCheckResponseSnapshot_DeleteVoiceProfileDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceProfileDomain(context.Background(), &DeleteVoiceProfileDomainInput{})
+	got, err := svc.DeleteVoiceProfileDomain(context.Background(), &DeleteVoiceProfileDomainInput{
+		VoiceProfileDomainId: ptr.String("__VoiceProfileDomainId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -861,7 +1051,13 @@ func TestCheckResponseSnapshot_DisassociatePhoneNumbersFromVoiceConnector(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociatePhoneNumbersFromVoiceConnector(context.Background(), &DisassociatePhoneNumbersFromVoiceConnectorInput{})
+	got, err := svc.DisassociatePhoneNumbersFromVoiceConnector(context.Background(), &DisassociatePhoneNumbersFromVoiceConnectorInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -893,7 +1089,13 @@ func TestCheckResponseSnapshot_DisassociatePhoneNumbersFromVoiceConnectorGroup(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociatePhoneNumbersFromVoiceConnectorGroup(context.Background(), &DisassociatePhoneNumbersFromVoiceConnectorGroupInput{})
+	got, err := svc.DisassociatePhoneNumbersFromVoiceConnectorGroup(context.Background(), &DisassociatePhoneNumbersFromVoiceConnectorGroupInput{
+		VoiceConnectorGroupId: ptr.String("__VoiceConnectorGroupId__"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -972,7 +1174,9 @@ func TestCheckResponseSnapshot_GetPhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPhoneNumber(context.Background(), &GetPhoneNumberInput{})
+	got, err := svc.GetPhoneNumber(context.Background(), &GetPhoneNumberInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1011,7 +1215,9 @@ func TestCheckResponseSnapshot_GetPhoneNumberOrder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPhoneNumberOrder(context.Background(), &GetPhoneNumberOrderInput{})
+	got, err := svc.GetPhoneNumberOrder(context.Background(), &GetPhoneNumberOrderInput{
+		PhoneNumberOrderId: ptr.String("__PhoneNumberOrderId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1083,7 +1289,10 @@ func TestCheckResponseSnapshot_GetProxySession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProxySession(context.Background(), &GetProxySessionInput{})
+	got, err := svc.GetProxySession(context.Background(), &GetProxySessionInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		ProxySessionId:   ptr.String("__ProxySessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1119,7 +1328,9 @@ func TestCheckResponseSnapshot_GetSipMediaApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSipMediaApplication(context.Background(), &GetSipMediaApplicationInput{})
+	got, err := svc.GetSipMediaApplication(context.Background(), &GetSipMediaApplicationInput{
+		SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1146,7 +1357,9 @@ func TestCheckResponseSnapshot_GetSipMediaApplicationAlexaSkillConfiguration(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSipMediaApplicationAlexaSkillConfiguration(context.Background(), &GetSipMediaApplicationAlexaSkillConfigurationInput{})
+	got, err := svc.GetSipMediaApplicationAlexaSkillConfiguration(context.Background(), &GetSipMediaApplicationAlexaSkillConfigurationInput{
+		SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1169,7 +1382,9 @@ func TestCheckResponseSnapshot_GetSipMediaApplicationLoggingConfiguration(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSipMediaApplicationLoggingConfiguration(context.Background(), &GetSipMediaApplicationLoggingConfigurationInput{})
+	got, err := svc.GetSipMediaApplicationLoggingConfiguration(context.Background(), &GetSipMediaApplicationLoggingConfigurationInput{
+		SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1210,7 +1425,9 @@ func TestCheckResponseSnapshot_GetSipRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSipRule(context.Background(), &GetSipRuleInput{})
+	got, err := svc.GetSipRule(context.Background(), &GetSipRuleInput{
+		SipRuleId: ptr.String("__SipRuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1256,7 +1473,10 @@ func TestCheckResponseSnapshot_GetSpeakerSearchTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSpeakerSearchTask(context.Background(), &GetSpeakerSearchTaskInput{})
+	got, err := svc.GetSpeakerSearchTask(context.Background(), &GetSpeakerSearchTaskInput{
+		VoiceConnectorId:    ptr.String("__VoiceConnectorId__"),
+		SpeakerSearchTaskId: ptr.String("__SpeakerSearchTaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1288,7 +1508,9 @@ func TestCheckResponseSnapshot_GetVoiceConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceConnector(context.Background(), &GetVoiceConnectorInput{})
+	got, err := svc.GetVoiceConnector(context.Background(), &GetVoiceConnectorInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1322,7 +1544,9 @@ func TestCheckResponseSnapshot_GetVoiceConnectorEmergencyCallingConfiguration(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceConnectorEmergencyCallingConfiguration(context.Background(), &GetVoiceConnectorEmergencyCallingConfigurationInput{})
+	got, err := svc.GetVoiceConnectorEmergencyCallingConfiguration(context.Background(), &GetVoiceConnectorEmergencyCallingConfigurationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1352,7 +1576,9 @@ func TestCheckResponseSnapshot_GetVoiceConnectorExternalSystemsConfiguration(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceConnectorExternalSystemsConfiguration(context.Background(), &GetVoiceConnectorExternalSystemsConfigurationInput{})
+	got, err := svc.GetVoiceConnectorExternalSystemsConfiguration(context.Background(), &GetVoiceConnectorExternalSystemsConfigurationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1390,7 +1616,9 @@ func TestCheckResponseSnapshot_GetVoiceConnectorGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceConnectorGroup(context.Background(), &GetVoiceConnectorGroupInput{})
+	got, err := svc.GetVoiceConnectorGroup(context.Background(), &GetVoiceConnectorGroupInput{
+		VoiceConnectorGroupId: ptr.String("__VoiceConnectorGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1414,7 +1642,9 @@ func TestCheckResponseSnapshot_GetVoiceConnectorLoggingConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceConnectorLoggingConfiguration(context.Background(), &GetVoiceConnectorLoggingConfigurationInput{})
+	got, err := svc.GetVoiceConnectorLoggingConfiguration(context.Background(), &GetVoiceConnectorLoggingConfigurationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1453,7 +1683,9 @@ func TestCheckResponseSnapshot_GetVoiceConnectorOrigination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceConnectorOrigination(context.Background(), &GetVoiceConnectorOriginationInput{})
+	got, err := svc.GetVoiceConnectorOrigination(context.Background(), &GetVoiceConnectorOriginationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1482,7 +1714,9 @@ func TestCheckResponseSnapshot_GetVoiceConnectorProxy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceConnectorProxy(context.Background(), &GetVoiceConnectorProxyInput{})
+	got, err := svc.GetVoiceConnectorProxy(context.Background(), &GetVoiceConnectorProxyInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1518,7 +1752,9 @@ func TestCheckResponseSnapshot_GetVoiceConnectorStreamingConfiguration(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceConnectorStreamingConfiguration(context.Background(), &GetVoiceConnectorStreamingConfigurationInput{})
+	got, err := svc.GetVoiceConnectorStreamingConfiguration(context.Background(), &GetVoiceConnectorStreamingConfigurationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1551,7 +1787,9 @@ func TestCheckResponseSnapshot_GetVoiceConnectorTermination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceConnectorTermination(context.Background(), &GetVoiceConnectorTerminationInput{})
+	got, err := svc.GetVoiceConnectorTermination(context.Background(), &GetVoiceConnectorTerminationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1575,7 +1813,9 @@ func TestCheckResponseSnapshot_GetVoiceConnectorTerminationHealth(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceConnectorTerminationHealth(context.Background(), &GetVoiceConnectorTerminationHealthInput{})
+	got, err := svc.GetVoiceConnectorTerminationHealth(context.Background(), &GetVoiceConnectorTerminationHealthInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1603,7 +1843,9 @@ func TestCheckResponseSnapshot_GetVoiceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceProfile(context.Background(), &GetVoiceProfileInput{})
+	got, err := svc.GetVoiceProfile(context.Background(), &GetVoiceProfileInput{
+		VoiceProfileId: ptr.String("__VoiceProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1634,7 +1876,9 @@ func TestCheckResponseSnapshot_GetVoiceProfileDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceProfileDomain(context.Background(), &GetVoiceProfileDomainInput{})
+	got, err := svc.GetVoiceProfileDomain(context.Background(), &GetVoiceProfileDomainInput{
+		VoiceProfileDomainId: ptr.String("__VoiceProfileDomainId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1667,7 +1911,11 @@ func TestCheckResponseSnapshot_GetVoiceToneAnalysisTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceToneAnalysisTask(context.Background(), &GetVoiceToneAnalysisTaskInput{})
+	got, err := svc.GetVoiceToneAnalysisTask(context.Background(), &GetVoiceToneAnalysisTaskInput{
+		VoiceConnectorId:        ptr.String("__VoiceConnectorId__"),
+		VoiceToneAnalysisTaskId: ptr.String("__VoiceToneAnalysisTaskId__"),
+		IsCaller:                ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1752,7 +2000,10 @@ func TestCheckResponseSnapshot_ListPhoneNumberOrders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPhoneNumberOrders(context.Background(), &ListPhoneNumberOrdersInput{})
+	got, err := svc.ListPhoneNumberOrders(context.Background(), &ListPhoneNumberOrdersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1847,7 +2098,14 @@ func TestCheckResponseSnapshot_ListPhoneNumbers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPhoneNumbers(context.Background(), &ListPhoneNumbersInput{})
+	got, err := svc.ListPhoneNumbers(context.Background(), &ListPhoneNumbersInput{
+		Status:      ptr.String("__Status__"),
+		ProductType: types.PhoneNumberProductType("VoiceConnector"),
+		FilterName:  types.PhoneNumberAssociationName("VoiceConnectorId"),
+		FilterValue: ptr.String("__FilterValue__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1930,7 +2188,12 @@ func TestCheckResponseSnapshot_ListProxySessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProxySessions(context.Background(), &ListProxySessionsInput{})
+	got, err := svc.ListProxySessions(context.Background(), &ListProxySessionsInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		Status:           types.ProxySessionStatus("Open"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1985,7 +2248,10 @@ func TestCheckResponseSnapshot_ListSipMediaApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSipMediaApplications(context.Background(), &ListSipMediaApplicationsInput{})
+	got, err := svc.ListSipMediaApplications(context.Background(), &ListSipMediaApplicationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2050,7 +2316,11 @@ func TestCheckResponseSnapshot_ListSipRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSipRules(context.Background(), &ListSipRulesInput{})
+	got, err := svc.ListSipRules(context.Background(), &ListSipRulesInput{
+		SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2086,7 +2356,9 @@ func TestCheckResponseSnapshot_ListSupportedPhoneNumberCountries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSupportedPhoneNumberCountries(context.Background(), &ListSupportedPhoneNumberCountriesInput{})
+	got, err := svc.ListSupportedPhoneNumberCountries(context.Background(), &ListSupportedPhoneNumberCountriesInput{
+		ProductType: types.PhoneNumberProductType("VoiceConnector"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2116,7 +2388,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2175,7 +2449,10 @@ func TestCheckResponseSnapshot_ListVoiceConnectorGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVoiceConnectorGroups(context.Background(), &ListVoiceConnectorGroupsInput{})
+	got, err := svc.ListVoiceConnectorGroups(context.Background(), &ListVoiceConnectorGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2199,7 +2476,9 @@ func TestCheckResponseSnapshot_ListVoiceConnectorTerminationCredentials(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVoiceConnectorTerminationCredentials(context.Background(), &ListVoiceConnectorTerminationCredentialsInput{})
+	got, err := svc.ListVoiceConnectorTerminationCredentials(context.Background(), &ListVoiceConnectorTerminationCredentialsInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2246,7 +2525,10 @@ func TestCheckResponseSnapshot_ListVoiceConnectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVoiceConnectors(context.Background(), &ListVoiceConnectorsInput{})
+	got, err := svc.ListVoiceConnectors(context.Background(), &ListVoiceConnectorsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2285,7 +2567,10 @@ func TestCheckResponseSnapshot_ListVoiceProfileDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVoiceProfileDomains(context.Background(), &ListVoiceProfileDomainsInput{})
+	got, err := svc.ListVoiceProfileDomains(context.Background(), &ListVoiceProfileDomainsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2324,7 +2609,11 @@ func TestCheckResponseSnapshot_ListVoiceProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVoiceProfiles(context.Background(), &ListVoiceProfilesInput{})
+	got, err := svc.ListVoiceProfiles(context.Background(), &ListVoiceProfilesInput{
+		VoiceProfileDomainId: ptr.String("__VoiceProfileDomainId__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2351,7 +2640,16 @@ func TestCheckResponseSnapshot_PutSipMediaApplicationAlexaSkillConfiguration(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSipMediaApplicationAlexaSkillConfiguration(context.Background(), &PutSipMediaApplicationAlexaSkillConfigurationInput{})
+	got, err := svc.PutSipMediaApplicationAlexaSkillConfiguration(context.Background(), &PutSipMediaApplicationAlexaSkillConfigurationInput{
+		SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+		SipMediaApplicationAlexaSkillConfiguration: &types.SipMediaApplicationAlexaSkillConfiguration{
+			AlexaSkillStatus: types.AlexaSkillStatus("ACTIVE"),
+			AlexaSkillIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2374,7 +2672,12 @@ func TestCheckResponseSnapshot_PutSipMediaApplicationLoggingConfiguration(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSipMediaApplicationLoggingConfiguration(context.Background(), &PutSipMediaApplicationLoggingConfigurationInput{})
+	got, err := svc.PutSipMediaApplicationLoggingConfiguration(context.Background(), &PutSipMediaApplicationLoggingConfigurationInput{
+		SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+		SipMediaApplicationLoggingConfiguration: &types.SipMediaApplicationLoggingConfiguration{
+			EnableSipMediaApplicationMessageLogs: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2408,7 +2711,23 @@ func TestCheckResponseSnapshot_PutVoiceConnectorEmergencyCallingConfiguration(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutVoiceConnectorEmergencyCallingConfiguration(context.Background(), &PutVoiceConnectorEmergencyCallingConfigurationInput{})
+	got, err := svc.PutVoiceConnectorEmergencyCallingConfiguration(context.Background(), &PutVoiceConnectorEmergencyCallingConfigurationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		EmergencyCallingConfiguration: &types.EmergencyCallingConfiguration{
+			DNIS: []types.DNISEmergencyCallingConfiguration{
+				{
+					EmergencyPhoneNumber: ptr.String("__EmergencyPhoneNumber__"),
+					TestPhoneNumber:      ptr.String("__TestPhoneNumber__"),
+					CallingCountry:       ptr.String("__CallingCountry__"),
+				},
+				{
+					EmergencyPhoneNumber: ptr.String("__EmergencyPhoneNumber__"),
+					TestPhoneNumber:      ptr.String("__TestPhoneNumber__"),
+					CallingCountry:       ptr.String("__CallingCountry__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2438,7 +2757,17 @@ func TestCheckResponseSnapshot_PutVoiceConnectorExternalSystemsConfiguration(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutVoiceConnectorExternalSystemsConfiguration(context.Background(), &PutVoiceConnectorExternalSystemsConfigurationInput{})
+	got, err := svc.PutVoiceConnectorExternalSystemsConfiguration(context.Background(), &PutVoiceConnectorExternalSystemsConfigurationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		SessionBorderControllerTypes: []types.SessionBorderControllerType{
+			types.SessionBorderControllerType("RIBBON_SBC"),
+			types.SessionBorderControllerType("RIBBON_SBC"),
+		},
+		ContactCenterSystemTypes: []types.ContactCenterSystemType{
+			types.ContactCenterSystemType("GENESYS_ENGAGE_ON_PREMISES"),
+			types.ContactCenterSystemType("GENESYS_ENGAGE_ON_PREMISES"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2462,7 +2791,13 @@ func TestCheckResponseSnapshot_PutVoiceConnectorLoggingConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutVoiceConnectorLoggingConfiguration(context.Background(), &PutVoiceConnectorLoggingConfigurationInput{})
+	got, err := svc.PutVoiceConnectorLoggingConfiguration(context.Background(), &PutVoiceConnectorLoggingConfigurationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			EnableSIPLogs:         ptr.Bool(true),
+			EnableMediaMetricLogs: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2501,7 +2836,28 @@ func TestCheckResponseSnapshot_PutVoiceConnectorOrigination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutVoiceConnectorOrigination(context.Background(), &PutVoiceConnectorOriginationInput{})
+	got, err := svc.PutVoiceConnectorOrigination(context.Background(), &PutVoiceConnectorOriginationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		Origination: &types.Origination{
+			Routes: []types.OriginationRoute{
+				{
+					Host:     ptr.String("__Host__"),
+					Port:     ptr.Int32(1),
+					Protocol: types.OriginationRouteProtocol("TCP"),
+					Priority: ptr.Int32(1),
+					Weight:   ptr.Int32(1),
+				},
+				{
+					Host:     ptr.String("__Host__"),
+					Port:     ptr.Int32(1),
+					Protocol: types.OriginationRouteProtocol("TCP"),
+					Priority: ptr.Int32(1),
+					Weight:   ptr.Int32(1),
+				},
+			},
+			Disabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2530,7 +2886,16 @@ func TestCheckResponseSnapshot_PutVoiceConnectorProxy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutVoiceConnectorProxy(context.Background(), &PutVoiceConnectorProxyInput{})
+	got, err := svc.PutVoiceConnectorProxy(context.Background(), &PutVoiceConnectorProxyInput{
+		VoiceConnectorId:            ptr.String("__VoiceConnectorId__"),
+		DefaultSessionExpiryMinutes: ptr.Int32(1),
+		PhoneNumberPoolCountries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FallBackPhoneNumber: ptr.String("__FallBackPhoneNumber__"),
+		Disabled:            ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2566,7 +2931,25 @@ func TestCheckResponseSnapshot_PutVoiceConnectorStreamingConfiguration(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutVoiceConnectorStreamingConfiguration(context.Background(), &PutVoiceConnectorStreamingConfigurationInput{})
+	got, err := svc.PutVoiceConnectorStreamingConfiguration(context.Background(), &PutVoiceConnectorStreamingConfigurationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		StreamingConfiguration: &types.StreamingConfiguration{
+			DataRetentionInHours: ptr.Int32(1),
+			Disabled:             ptr.Bool(true),
+			StreamingNotificationTargets: []types.StreamingNotificationTarget{
+				{
+					NotificationTarget: types.NotificationTarget("EventBridge"),
+				},
+				{
+					NotificationTarget: types.NotificationTarget("EventBridge"),
+				},
+			},
+			MediaInsightsConfiguration: &types.MediaInsightsConfiguration{
+				Disabled:         ptr.Bool(true),
+				ConfigurationArn: ptr.String("__ConfigurationArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2599,7 +2982,22 @@ func TestCheckResponseSnapshot_PutVoiceConnectorTermination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutVoiceConnectorTermination(context.Background(), &PutVoiceConnectorTerminationInput{})
+	got, err := svc.PutVoiceConnectorTermination(context.Background(), &PutVoiceConnectorTerminationInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		Termination: &types.Termination{
+			CpsLimit:           ptr.Int32(1),
+			DefaultPhoneNumber: ptr.String("__DefaultPhoneNumber__"),
+			CallingRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CidrAllowedList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Disabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2618,7 +3016,19 @@ func TestCheckResponseSnapshot_PutVoiceConnectorTerminationCredentials(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutVoiceConnectorTerminationCredentials(context.Background(), &PutVoiceConnectorTerminationCredentialsInput{})
+	got, err := svc.PutVoiceConnectorTerminationCredentials(context.Background(), &PutVoiceConnectorTerminationCredentialsInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		Credentials: []types.Credential{
+			{
+				Username: ptr.String("__Username__"),
+				Password: ptr.String("__Password__"),
+			},
+			{
+				Username: ptr.String("__Username__"),
+				Password: ptr.String("__Password__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2674,7 +3084,9 @@ func TestCheckResponseSnapshot_RestorePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestorePhoneNumber(context.Background(), &RestorePhoneNumberInput{})
+	got, err := svc.RestorePhoneNumber(context.Background(), &RestorePhoneNumberInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2699,7 +3111,16 @@ func TestCheckResponseSnapshot_SearchAvailablePhoneNumbers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchAvailablePhoneNumbers(context.Background(), &SearchAvailablePhoneNumbersInput{})
+	got, err := svc.SearchAvailablePhoneNumbers(context.Background(), &SearchAvailablePhoneNumbersInput{
+		AreaCode:        ptr.String("__AreaCode__"),
+		City:            ptr.String("__City__"),
+		Country:         ptr.String("__Country__"),
+		State:           ptr.String("__State__"),
+		TollFreePrefix:  ptr.String("__TollFreePrefix__"),
+		PhoneNumberType: types.PhoneNumberType("Local"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2745,7 +3166,13 @@ func TestCheckResponseSnapshot_StartSpeakerSearchTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSpeakerSearchTask(context.Background(), &StartSpeakerSearchTaskInput{})
+	got, err := svc.StartSpeakerSearchTask(context.Background(), &StartSpeakerSearchTaskInput{
+		VoiceConnectorId:     ptr.String("__VoiceConnectorId__"),
+		TransactionId:        ptr.String("__TransactionId__"),
+		VoiceProfileDomainId: ptr.String("__VoiceProfileDomainId__"),
+		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
+		CallLeg:              types.CallLegType("Caller"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2778,7 +3205,12 @@ func TestCheckResponseSnapshot_StartVoiceToneAnalysisTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartVoiceToneAnalysisTask(context.Background(), &StartVoiceToneAnalysisTaskInput{})
+	got, err := svc.StartVoiceToneAnalysisTask(context.Background(), &StartVoiceToneAnalysisTaskInput{
+		VoiceConnectorId:   ptr.String("__VoiceConnectorId__"),
+		TransactionId:      ptr.String("__TransactionId__"),
+		LanguageCode:       types.LanguageCode("en-US"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2797,7 +3229,10 @@ func TestCheckResponseSnapshot_StopSpeakerSearchTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopSpeakerSearchTask(context.Background(), &StopSpeakerSearchTaskInput{})
+	got, err := svc.StopSpeakerSearchTask(context.Background(), &StopSpeakerSearchTaskInput{
+		VoiceConnectorId:    ptr.String("__VoiceConnectorId__"),
+		SpeakerSearchTaskId: ptr.String("__SpeakerSearchTaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2816,7 +3251,10 @@ func TestCheckResponseSnapshot_StopVoiceToneAnalysisTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopVoiceToneAnalysisTask(context.Background(), &StopVoiceToneAnalysisTaskInput{})
+	got, err := svc.StopVoiceToneAnalysisTask(context.Background(), &StopVoiceToneAnalysisTaskInput{
+		VoiceConnectorId:        ptr.String("__VoiceConnectorId__"),
+		VoiceToneAnalysisTaskId: ptr.String("__VoiceToneAnalysisTaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2835,7 +3273,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2854,7 +3304,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2873,7 +3329,11 @@ func TestCheckResponseSnapshot_UpdateGlobalSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGlobalSettings(context.Background(), &UpdateGlobalSettingsInput{})
+	got, err := svc.UpdateGlobalSettings(context.Background(), &UpdateGlobalSettingsInput{
+		VoiceConnector: &types.VoiceConnectorSettings{
+			CdrBucket: ptr.String("__CdrBucket__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2929,7 +3389,12 @@ func TestCheckResponseSnapshot_UpdatePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePhoneNumber(context.Background(), &UpdatePhoneNumberInput{})
+	got, err := svc.UpdatePhoneNumber(context.Background(), &UpdatePhoneNumberInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+		ProductType:   types.PhoneNumberProductType("VoiceConnector"),
+		CallingName:   ptr.String("__CallingName__"),
+		Name:          ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2948,7 +3413,9 @@ func TestCheckResponseSnapshot_UpdatePhoneNumberSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePhoneNumberSettings(context.Background(), &UpdatePhoneNumberSettingsInput{})
+	got, err := svc.UpdatePhoneNumberSettings(context.Background(), &UpdatePhoneNumberSettingsInput{
+		CallingName: ptr.String("__CallingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2998,7 +3465,15 @@ func TestCheckResponseSnapshot_UpdateProxySession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProxySession(context.Background(), &UpdateProxySessionInput{})
+	got, err := svc.UpdateProxySession(context.Background(), &UpdateProxySessionInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		ProxySessionId:   ptr.String("__ProxySessionId__"),
+		Capabilities: []types.Capability{
+			types.Capability("Voice"),
+			types.Capability("Voice"),
+		},
+		ExpiryMinutes: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3034,7 +3509,18 @@ func TestCheckResponseSnapshot_UpdateSipMediaApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSipMediaApplication(context.Background(), &UpdateSipMediaApplicationInput{})
+	got, err := svc.UpdateSipMediaApplication(context.Background(), &UpdateSipMediaApplicationInput{
+		SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+		Name:                  ptr.String("__Name__"),
+		Endpoints: []types.SipMediaApplicationEndpoint{
+			{
+				LambdaArn: ptr.String("__LambdaArn__"),
+			},
+			{
+				LambdaArn: ptr.String("__LambdaArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3057,7 +3543,13 @@ func TestCheckResponseSnapshot_UpdateSipMediaApplicationCall(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSipMediaApplicationCall(context.Background(), &UpdateSipMediaApplicationCallInput{})
+	got, err := svc.UpdateSipMediaApplicationCall(context.Background(), &UpdateSipMediaApplicationCallInput{
+		SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+		TransactionId:         ptr.String("__TransactionId__"),
+		Arguments: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3098,7 +3590,23 @@ func TestCheckResponseSnapshot_UpdateSipRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSipRule(context.Background(), &UpdateSipRuleInput{})
+	got, err := svc.UpdateSipRule(context.Background(), &UpdateSipRuleInput{
+		SipRuleId: ptr.String("__SipRuleId__"),
+		Name:      ptr.String("__Name__"),
+		Disabled:  ptr.Bool(true),
+		TargetApplications: []types.SipRuleTargetApplication{
+			{
+				SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+				Priority:              ptr.Int32(1),
+				AwsRegion:             ptr.String("__AwsRegion__"),
+			},
+			{
+				SipMediaApplicationId: ptr.String("__SipMediaApplicationId__"),
+				Priority:              ptr.Int32(1),
+				AwsRegion:             ptr.String("__AwsRegion__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3130,7 +3638,11 @@ func TestCheckResponseSnapshot_UpdateVoiceConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVoiceConnector(context.Background(), &UpdateVoiceConnectorInput{})
+	got, err := svc.UpdateVoiceConnector(context.Background(), &UpdateVoiceConnectorInput{
+		VoiceConnectorId:  ptr.String("__VoiceConnectorId__"),
+		Name:              ptr.String("__Name__"),
+		RequireEncryption: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3168,7 +3680,21 @@ func TestCheckResponseSnapshot_UpdateVoiceConnectorGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVoiceConnectorGroup(context.Background(), &UpdateVoiceConnectorGroupInput{})
+	got, err := svc.UpdateVoiceConnectorGroup(context.Background(), &UpdateVoiceConnectorGroupInput{
+		VoiceConnectorGroupId: ptr.String("__VoiceConnectorGroupId__"),
+		Name:                  ptr.String("__Name__"),
+		VoiceConnectorItems: []types.VoiceConnectorItem{
+			{
+				VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+				Priority:         ptr.Int32(1),
+			},
+			{
+				VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+				Priority:         ptr.Int32(1),
+			},
+		},
+		CallDistributionType: types.CallDistributionType("PriorityWeightedDistribution"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3196,7 +3722,10 @@ func TestCheckResponseSnapshot_UpdateVoiceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVoiceProfile(context.Background(), &UpdateVoiceProfileInput{})
+	got, err := svc.UpdateVoiceProfile(context.Background(), &UpdateVoiceProfileInput{
+		VoiceProfileId:      ptr.String("__VoiceProfileId__"),
+		SpeakerSearchTaskId: ptr.String("__SpeakerSearchTaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3227,7 +3756,11 @@ func TestCheckResponseSnapshot_UpdateVoiceProfileDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVoiceProfileDomain(context.Background(), &UpdateVoiceProfileDomainInput{})
+	got, err := svc.UpdateVoiceProfileDomain(context.Background(), &UpdateVoiceProfileDomainInput{
+		VoiceProfileDomainId: ptr.String("__VoiceProfileDomainId__"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3281,7 +3814,15 @@ func TestCheckResponseSnapshot_ValidateE911Address(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidateE911Address(context.Background(), &ValidateE911AddressInput{})
+	got, err := svc.ValidateE911Address(context.Background(), &ValidateE911AddressInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		StreetNumber: ptr.String("__StreetNumber__"),
+		StreetInfo:   ptr.String("__StreetInfo__"),
+		City:         ptr.String("__City__"),
+		State:        ptr.String("__State__"),
+		Country:      ptr.String("__Country__"),
+		PostalCode:   ptr.String("__PostalCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3292,7 +3833,7 @@ func TestCheckResponseSnapshot_ValidateE911Address(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("AccessDeniedException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
@@ -3303,7 +3844,14 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{})
+	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForceAssociate: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3318,7 +3866,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 	want := &types.BadRequestException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("BadRequestException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("BadRequestException.error")
@@ -3329,7 +3877,14 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{})
+	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForceAssociate: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3344,7 +3899,7 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ConflictException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
@@ -3355,7 +3910,28 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSipMediaApplication(context.Background(), &CreateSipMediaApplicationInput{})
+	_, opErr := svc.CreateSipMediaApplication(context.Background(), &CreateSipMediaApplicationInput{
+		AwsRegion: ptr.String("__AwsRegion__"),
+		Name:      ptr.String("__Name__"),
+		Endpoints: []types.SipMediaApplicationEndpoint{
+			{
+				LambdaArn: ptr.String("__LambdaArn__"),
+			},
+			{
+				LambdaArn: ptr.String("__LambdaArn__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3370,7 +3946,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 	want := &types.ForbiddenException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ForbiddenException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ForbiddenException.error")
@@ -3381,7 +3957,14 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{})
+	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForceAssociate: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3396,7 +3979,7 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_GoneException(t *testing.T) {
 	want := &types.GoneException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("GoneException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GoneException.error")
@@ -3407,7 +3990,9 @@ func TestCheckResponseSnapshot_Error_GoneException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateVoiceProfile(context.Background(), &CreateVoiceProfileInput{})
+	_, opErr := svc.CreateVoiceProfile(context.Background(), &CreateVoiceProfileInput{
+		SpeakerSearchTaskId: ptr.String("__SpeakerSearchTaskId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3422,7 +4007,7 @@ func TestCheckResponseSnapshot_Error_GoneException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 	want := &types.NotFoundException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("NotFoundException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("NotFoundException.error")
@@ -3433,7 +4018,14 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{})
+	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForceAssociate: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3448,7 +4040,7 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T) {
 	want := &types.ResourceLimitExceededException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ResourceLimitExceededException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceLimitExceededException.error")
@@ -3459,7 +4051,14 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePhoneNumberOrder(context.Background(), &CreatePhoneNumberOrderInput{})
+	_, opErr := svc.CreatePhoneNumberOrder(context.Background(), &CreatePhoneNumberOrderInput{
+		ProductType: types.PhoneNumberProductType("VoiceConnector"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3474,7 +4073,7 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 
 func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 	want := &types.ServiceFailureException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ServiceFailureException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceFailureException.error")
@@ -3485,7 +4084,14 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{})
+	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForceAssociate: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3500,7 +4106,7 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 	want := &types.ServiceUnavailableException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ServiceUnavailableException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceUnavailableException.error")
@@ -3511,7 +4117,14 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{})
+	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForceAssociate: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3526,7 +4139,7 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 	want := &types.ThrottledClientException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ThrottledClientException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ThrottledClientException.error")
@@ -3537,7 +4150,14 @@ func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{})
+	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForceAssociate: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3552,7 +4172,7 @@ func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 	want := &types.UnauthorizedClientException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("UnauthorizedClientException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UnauthorizedClientException.error")
@@ -3563,7 +4183,14 @@ func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{})
+	_, opErr := svc.AssociatePhoneNumbersWithVoiceConnector(context.Background(), &AssociatePhoneNumbersWithVoiceConnectorInput{
+		VoiceConnectorId: ptr.String("__VoiceConnectorId__"),
+		E164PhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForceAssociate: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3578,7 +4205,7 @@ func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_UnprocessableEntityException(t *testing.T) {
 	want := &types.UnprocessableEntityException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("UnprocessableEntityException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UnprocessableEntityException.error")
@@ -3589,7 +4216,13 @@ func TestCheckResponseSnapshot_Error_UnprocessableEntityException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSpeakerSearchTask(context.Background(), &StartSpeakerSearchTaskInput{})
+	_, opErr := svc.StartSpeakerSearchTask(context.Background(), &StartSpeakerSearchTaskInput{
+		VoiceConnectorId:     ptr.String("__VoiceConnectorId__"),
+		TransactionId:        ptr.String("__TransactionId__"),
+		VoiceProfileDomainId: ptr.String("__VoiceProfileDomainId__"),
+		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
+		CallLeg:              types.CallLegType("Caller"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

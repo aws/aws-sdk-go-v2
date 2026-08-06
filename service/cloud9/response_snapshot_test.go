@@ -119,7 +119,28 @@ func TestCheckResponseSnapshot_CreateEnvironmentEC2(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{})
+	got, err := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		InstanceType:             ptr.String("__InstanceType__"),
+		SubnetId:                 ptr.String("__SubnetId__"),
+		ImageId:                  ptr.String("__ImageId__"),
+		AutomaticStopTimeMinutes: ptr.Int32(1),
+		OwnerArn:                 ptr.String("__OwnerArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConnectionType: types.ConnectionType("CONNECT_SSH"),
+		DryRun:         ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -146,7 +167,11 @@ func TestCheckResponseSnapshot_CreateEnvironmentMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironmentMembership(context.Background(), &CreateEnvironmentMembershipInput{})
+	got, err := svc.CreateEnvironmentMembership(context.Background(), &CreateEnvironmentMembershipInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		UserArn:       ptr.String("__UserArn__"),
+		Permissions:   types.MemberPermissions("read-write"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,7 +190,9 @@ func TestCheckResponseSnapshot_DeleteEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{})
+	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +211,10 @@ func TestCheckResponseSnapshot_DeleteEnvironmentMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironmentMembership(context.Background(), &DeleteEnvironmentMembershipInput{})
+	got, err := svc.DeleteEnvironmentMembership(context.Background(), &DeleteEnvironmentMembershipInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		UserArn:       ptr.String("__UserArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -221,7 +251,16 @@ func TestCheckResponseSnapshot_DescribeEnvironmentMemberships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEnvironmentMemberships(context.Background(), &DescribeEnvironmentMembershipsInput{})
+	got, err := svc.DescribeEnvironmentMemberships(context.Background(), &DescribeEnvironmentMembershipsInput{
+		UserArn:       ptr.String("__UserArn__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		Permissions: []types.Permissions{
+			types.Permissions("owner"),
+			types.Permissions("owner"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -243,7 +282,9 @@ func TestCheckResponseSnapshot_DescribeEnvironmentStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEnvironmentStatus(context.Background(), &DescribeEnvironmentStatusInput{})
+	got, err := svc.DescribeEnvironmentStatus(context.Background(), &DescribeEnvironmentStatusInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +336,12 @@ func TestCheckResponseSnapshot_DescribeEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEnvironments(context.Background(), &DescribeEnvironmentsInput{})
+	got, err := svc.DescribeEnvironments(context.Background(), &DescribeEnvironmentsInput{
+		EnvironmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -320,7 +366,10 @@ func TestCheckResponseSnapshot_ListEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{})
+	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -350,7 +399,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +420,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -388,7 +451,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -407,7 +476,12 @@ func TestCheckResponseSnapshot_UpdateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{})
+	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{
+		EnvironmentId:            ptr.String("__EnvironmentId__"),
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		ManagedCredentialsAction: types.ManagedCredentialsAction("ENABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +508,11 @@ func TestCheckResponseSnapshot_UpdateEnvironmentMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironmentMembership(context.Background(), &UpdateEnvironmentMembershipInput{})
+	got, err := svc.UpdateEnvironmentMembership(context.Background(), &UpdateEnvironmentMembershipInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		UserArn:       ptr.String("__UserArn__"),
+		Permissions:   types.MemberPermissions("read-write"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -457,7 +535,28 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{})
+	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		InstanceType:             ptr.String("__InstanceType__"),
+		SubnetId:                 ptr.String("__SubnetId__"),
+		ImageId:                  ptr.String("__ImageId__"),
+		AutomaticStopTimeMinutes: ptr.Int32(1),
+		OwnerArn:                 ptr.String("__OwnerArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConnectionType: types.ConnectionType("CONNECT_SSH"),
+		DryRun:         ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -484,7 +583,19 @@ func TestCheckResponseSnapshot_Error_ConcurrentAccessException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -511,7 +622,28 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{})
+	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		InstanceType:             ptr.String("__InstanceType__"),
+		SubnetId:                 ptr.String("__SubnetId__"),
+		ImageId:                  ptr.String("__ImageId__"),
+		AutomaticStopTimeMinutes: ptr.Int32(1),
+		OwnerArn:                 ptr.String("__OwnerArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConnectionType: types.ConnectionType("CONNECT_SSH"),
+		DryRun:         ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -538,7 +670,28 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{})
+	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		InstanceType:             ptr.String("__InstanceType__"),
+		SubnetId:                 ptr.String("__SubnetId__"),
+		ImageId:                  ptr.String("__ImageId__"),
+		AutomaticStopTimeMinutes: ptr.Int32(1),
+		OwnerArn:                 ptr.String("__OwnerArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConnectionType: types.ConnectionType("CONNECT_SSH"),
+		DryRun:         ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -565,7 +718,28 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{})
+	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		InstanceType:             ptr.String("__InstanceType__"),
+		SubnetId:                 ptr.String("__SubnetId__"),
+		ImageId:                  ptr.String("__ImageId__"),
+		AutomaticStopTimeMinutes: ptr.Int32(1),
+		OwnerArn:                 ptr.String("__OwnerArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConnectionType: types.ConnectionType("CONNECT_SSH"),
+		DryRun:         ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -592,7 +766,28 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{})
+	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		InstanceType:             ptr.String("__InstanceType__"),
+		SubnetId:                 ptr.String("__SubnetId__"),
+		ImageId:                  ptr.String("__ImageId__"),
+		AutomaticStopTimeMinutes: ptr.Int32(1),
+		OwnerArn:                 ptr.String("__OwnerArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConnectionType: types.ConnectionType("CONNECT_SSH"),
+		DryRun:         ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -619,7 +814,28 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{})
+	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		InstanceType:             ptr.String("__InstanceType__"),
+		SubnetId:                 ptr.String("__SubnetId__"),
+		ImageId:                  ptr.String("__ImageId__"),
+		AutomaticStopTimeMinutes: ptr.Int32(1),
+		OwnerArn:                 ptr.String("__OwnerArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConnectionType: types.ConnectionType("CONNECT_SSH"),
+		DryRun:         ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -646,7 +862,28 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{})
+	_, opErr := svc.CreateEnvironmentEC2(context.Background(), &CreateEnvironmentEC2Input{
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		InstanceType:             ptr.String("__InstanceType__"),
+		SubnetId:                 ptr.String("__SubnetId__"),
+		ImageId:                  ptr.String("__ImageId__"),
+		AutomaticStopTimeMinutes: ptr.Int32(1),
+		OwnerArn:                 ptr.String("__OwnerArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConnectionType: types.ConnectionType("CONNECT_SSH"),
+		DryRun:         ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

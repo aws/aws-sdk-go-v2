@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","creationDate":946684800,"lastModifiedDate":946684800,"name":"__Name__","stringValues":["__Member__","__Member__"],"type":"TOPIC_FILTER"}

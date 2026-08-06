@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetLoadBalancer
+
+{"loadBalancer":{"arn":"__Arn__","configurationOptions":{"key0":"__Value__"},"createdAt":946684800,"dnsName":"__DnsName__","healthCheckPath":"__HealthCheckPath__","httpsRedirectionEnabled":true,"instanceHealthSummary":[{"instanceHealth":"initial","instanceHealthReason":"Lb.RegistrationInProgress","instanceName":"__InstanceName__"},{"instanceHealth":"initial","instanceHealthReason":"Lb.RegistrationInProgress","instanceName":"__InstanceName__"}],"instancePort":1,"ipAddressType":"dualstack","location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"name":"__Name__","protocol":"HTTP_HTTPS","publicPorts":[1,1],"resourceType":"ContainerService","state":"active","supportCode":"__SupportCode__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"tlsCertificateSummaries":[{"isAttached":true,"name":"__Name__"},{"isAttached":true,"name":"__Name__"}],"tlsPolicyName":"__TlsPolicyName__"}}

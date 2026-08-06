@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.ListExplainabilities
+
+{"Explainabilities":[{"CreationTime":946684800,"ExplainabilityArn":"__ExplainabilityArn__","ExplainabilityConfig":{"TimePointGranularity":"ALL","TimeSeriesGranularity":"ALL"},"ExplainabilityName":"__ExplainabilityName__","LastModificationTime":946684800,"Message":"__Message__","ResourceArn":"__ResourceArn__","Status":"__Status__"},{"CreationTime":946684800,"ExplainabilityArn":"__ExplainabilityArn__","ExplainabilityConfig":{"TimePointGranularity":"ALL","TimeSeriesGranularity":"ALL"},"ExplainabilityName":"__ExplainabilityName__","LastModificationTime":946684800,"Message":"__Message__","ResourceArn":"__ResourceArn__","Status":"__Status__"}],"NextToken":"__NextToken__"}

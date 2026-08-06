@@ -195,7 +195,67 @@ func TestCheckResponseSnapshot_CreateApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApp(context.Background(), &CreateAppInput{})
+	got, err := svc.CreateApp(context.Background(), &CreateAppInput{
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		Repository:        ptr.String("__Repository__"),
+		Platform:          types.Platform("WEB"),
+		ComputeRoleArn:    ptr.String("__ComputeRoleArn__"),
+		IamServiceRoleArn: ptr.String("__IamServiceRoleArn__"),
+		OauthToken:        ptr.String("__OauthToken__"),
+		AccessToken:       ptr.String("__AccessToken__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		EnableBranchAutoBuild:    ptr.Bool(true),
+		EnableBranchAutoDeletion: ptr.Bool(true),
+		EnableBasicAuth:          ptr.Bool(true),
+		BasicAuthCredentials:     ptr.String("__BasicAuthCredentials__"),
+		CustomRules: []types.CustomRule{
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		BuildSpec:                ptr.String("__BuildSpec__"),
+		CustomHeaders:            ptr.String("__CustomHeaders__"),
+		EnableAutoBranchCreation: ptr.Bool(true),
+		AutoBranchCreationPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoBranchCreationConfig: &types.AutoBranchCreationConfig{
+			Stage:           types.Stage("PRODUCTION"),
+			Framework:       ptr.String("__Framework__"),
+			EnableAutoBuild: ptr.Bool(true),
+			EnvironmentVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			BasicAuthCredentials:       ptr.String("__BasicAuthCredentials__"),
+			EnableBasicAuth:            ptr.Bool(true),
+			EnablePerformanceMode:      ptr.Bool(true),
+			BuildSpec:                  ptr.String("__BuildSpec__"),
+			EnablePullRequestPreview:   ptr.Bool(true),
+			PullRequestEnvironmentName: ptr.String("__PullRequestEnvironmentName__"),
+		},
+		JobConfig: &types.JobConfig{
+			BuildComputeType: types.BuildComputeType("STANDARD_8GB"),
+		},
+		CacheConfig: &types.CacheConfig{
+			Type: types.CacheConfigType("AMPLIFY_MANAGED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +283,12 @@ func TestCheckResponseSnapshot_CreateBackendEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBackendEnvironment(context.Background(), &CreateBackendEnvironmentInput{})
+	got, err := svc.CreateBackendEnvironment(context.Background(), &CreateBackendEnvironmentInput{
+		AppId:               ptr.String("__AppId__"),
+		EnvironmentName:     ptr.String("__EnvironmentName__"),
+		StackName:           ptr.String("__StackName__"),
+		DeploymentArtifacts: ptr.String("__DeploymentArtifacts__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -287,7 +352,35 @@ func TestCheckResponseSnapshot_CreateBranch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBranch(context.Background(), &CreateBranchInput{})
+	got, err := svc.CreateBranch(context.Background(), &CreateBranchInput{
+		AppId:                ptr.String("__AppId__"),
+		BranchName:           ptr.String("__BranchName__"),
+		Description:          ptr.String("__Description__"),
+		Stage:                types.Stage("PRODUCTION"),
+		Framework:            ptr.String("__Framework__"),
+		EnableNotification:   ptr.Bool(true),
+		EnableAutoBuild:      ptr.Bool(true),
+		EnableSkewProtection: ptr.Bool(true),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		BasicAuthCredentials:  ptr.String("__BasicAuthCredentials__"),
+		EnableBasicAuth:       ptr.Bool(true),
+		EnablePerformanceMode: ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		BuildSpec:                  ptr.String("__BuildSpec__"),
+		Ttl:                        ptr.String("__Ttl__"),
+		DisplayName:                ptr.String("__DisplayName__"),
+		EnablePullRequestPreview:   ptr.Bool(true),
+		PullRequestEnvironmentName: ptr.String("__PullRequestEnvironmentName__"),
+		BackendEnvironmentArn:      ptr.String("__BackendEnvironmentArn__"),
+		Backend: &types.Backend{
+			StackArn: ptr.String("__StackArn__"),
+		},
+		ComputeRoleArn: ptr.String("__ComputeRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -312,7 +405,13 @@ func TestCheckResponseSnapshot_CreateDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		AppId:      ptr.String("__AppId__"),
+		BranchName: ptr.String("__BranchName__"),
+		FileMap: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +468,30 @@ func TestCheckResponseSnapshot_CreateDomainAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomainAssociation(context.Background(), &CreateDomainAssociationInput{})
+	got, err := svc.CreateDomainAssociation(context.Background(), &CreateDomainAssociationInput{
+		AppId:               ptr.String("__AppId__"),
+		DomainName:          ptr.String("__DomainName__"),
+		EnableAutoSubDomain: ptr.Bool(true),
+		SubDomainSettings: []types.SubDomainSetting{
+			{
+				Prefix:     ptr.String("__Prefix__"),
+				BranchName: ptr.String("__BranchName__"),
+			},
+			{
+				Prefix:     ptr.String("__Prefix__"),
+				BranchName: ptr.String("__BranchName__"),
+			},
+		},
+		AutoSubDomainCreationPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoSubDomainIAMRole: ptr.String("__AutoSubDomainIAMRole__"),
+		CertificateSettings: &types.CertificateSettings{
+			Type:                 types.CertificateType("AMPLIFY_MANAGED"),
+			CustomCertificateArn: ptr.String("__CustomCertificateArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -399,7 +521,11 @@ func TestCheckResponseSnapshot_CreateWebhook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWebhook(context.Background(), &CreateWebhookInput{})
+	got, err := svc.CreateWebhook(context.Background(), &CreateWebhookInput{
+		AppId:       ptr.String("__AppId__"),
+		BranchName:  ptr.String("__BranchName__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -496,7 +622,9 @@ func TestCheckResponseSnapshot_DeleteApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApp(context.Background(), &DeleteAppInput{})
+	got, err := svc.DeleteApp(context.Background(), &DeleteAppInput{
+		AppId: ptr.String("__AppId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -524,7 +652,10 @@ func TestCheckResponseSnapshot_DeleteBackendEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBackendEnvironment(context.Background(), &DeleteBackendEnvironmentInput{})
+	got, err := svc.DeleteBackendEnvironment(context.Background(), &DeleteBackendEnvironmentInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -588,7 +719,10 @@ func TestCheckResponseSnapshot_DeleteBranch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBranch(context.Background(), &DeleteBranchInput{})
+	got, err := svc.DeleteBranch(context.Background(), &DeleteBranchInput{
+		AppId:      ptr.String("__AppId__"),
+		BranchName: ptr.String("__BranchName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -645,7 +779,10 @@ func TestCheckResponseSnapshot_DeleteDomainAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomainAssociation(context.Background(), &DeleteDomainAssociationInput{})
+	got, err := svc.DeleteDomainAssociation(context.Background(), &DeleteDomainAssociationInput{
+		AppId:      ptr.String("__AppId__"),
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -678,7 +815,11 @@ func TestCheckResponseSnapshot_DeleteJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteJob(context.Background(), &DeleteJobInput{})
+	got, err := svc.DeleteJob(context.Background(), &DeleteJobInput{
+		AppId:      ptr.String("__AppId__"),
+		BranchName: ptr.String("__BranchName__"),
+		JobId:      ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -708,7 +849,9 @@ func TestCheckResponseSnapshot_DeleteWebhook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWebhook(context.Background(), &DeleteWebhookInput{})
+	got, err := svc.DeleteWebhook(context.Background(), &DeleteWebhookInput{
+		WebhookId: ptr.String("__WebhookId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -729,7 +872,12 @@ func TestCheckResponseSnapshot_GenerateAccessLogs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateAccessLogs(context.Background(), &GenerateAccessLogsInput{})
+	got, err := svc.GenerateAccessLogs(context.Background(), &GenerateAccessLogsInput{
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DomainName: ptr.String("__DomainName__"),
+		AppId:      ptr.String("__AppId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -826,7 +974,9 @@ func TestCheckResponseSnapshot_GetApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApp(context.Background(), &GetAppInput{})
+	got, err := svc.GetApp(context.Background(), &GetAppInput{
+		AppId: ptr.String("__AppId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -848,7 +998,9 @@ func TestCheckResponseSnapshot_GetArtifactUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetArtifactUrl(context.Background(), &GetArtifactUrlInput{})
+	got, err := svc.GetArtifactUrl(context.Background(), &GetArtifactUrlInput{
+		ArtifactId: ptr.String("__ArtifactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -876,7 +1028,10 @@ func TestCheckResponseSnapshot_GetBackendEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBackendEnvironment(context.Background(), &GetBackendEnvironmentInput{})
+	got, err := svc.GetBackendEnvironment(context.Background(), &GetBackendEnvironmentInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -940,7 +1095,10 @@ func TestCheckResponseSnapshot_GetBranch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBranch(context.Background(), &GetBranchInput{})
+	got, err := svc.GetBranch(context.Background(), &GetBranchInput{
+		AppId:      ptr.String("__AppId__"),
+		BranchName: ptr.String("__BranchName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -997,7 +1155,10 @@ func TestCheckResponseSnapshot_GetDomainAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainAssociation(context.Background(), &GetDomainAssociationInput{})
+	got, err := svc.GetDomainAssociation(context.Background(), &GetDomainAssociationInput{
+		AppId:      ptr.String("__AppId__"),
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1064,7 +1225,11 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJob(context.Background(), &GetJobInput{})
+	got, err := svc.GetJob(context.Background(), &GetJobInput{
+		AppId:      ptr.String("__AppId__"),
+		BranchName: ptr.String("__BranchName__"),
+		JobId:      ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1094,7 +1259,9 @@ func TestCheckResponseSnapshot_GetWebhook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWebhook(context.Background(), &GetWebhookInput{})
+	got, err := svc.GetWebhook(context.Background(), &GetWebhookInput{
+		WebhookId: ptr.String("__WebhookId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1271,7 +1438,10 @@ func TestCheckResponseSnapshot_ListApps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApps(context.Background(), &ListAppsInput{})
+	got, err := svc.ListApps(context.Background(), &ListAppsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1302,7 +1472,13 @@ func TestCheckResponseSnapshot_ListArtifacts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListArtifacts(context.Background(), &ListArtifactsInput{})
+	got, err := svc.ListArtifacts(context.Background(), &ListArtifactsInput{
+		AppId:      ptr.String("__AppId__"),
+		BranchName: ptr.String("__BranchName__"),
+		JobId:      ptr.String("__JobId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1341,7 +1517,12 @@ func TestCheckResponseSnapshot_ListBackendEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBackendEnvironments(context.Background(), &ListBackendEnvironmentsInput{})
+	got, err := svc.ListBackendEnvironments(context.Background(), &ListBackendEnvironmentsInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1452,7 +1633,11 @@ func TestCheckResponseSnapshot_ListBranches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBranches(context.Background(), &ListBranchesInput{})
+	got, err := svc.ListBranches(context.Background(), &ListBranchesInput{
+		AppId:      ptr.String("__AppId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1549,7 +1734,11 @@ func TestCheckResponseSnapshot_ListDomainAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainAssociations(context.Background(), &ListDomainAssociationsInput{})
+	got, err := svc.ListDomainAssociations(context.Background(), &ListDomainAssociationsInput{
+		AppId:      ptr.String("__AppId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1598,7 +1787,12 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobs(context.Background(), &ListJobsInput{})
+	got, err := svc.ListJobs(context.Background(), &ListJobsInput{
+		AppId:      ptr.String("__AppId__"),
+		BranchName: ptr.String("__BranchName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1621,7 +1815,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1664,7 +1860,11 @@ func TestCheckResponseSnapshot_ListWebhooks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWebhooks(context.Background(), &ListWebhooksInput{})
+	got, err := svc.ListWebhooks(context.Background(), &ListWebhooksInput{
+		AppId:      ptr.String("__AppId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1697,7 +1897,13 @@ func TestCheckResponseSnapshot_StartDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDeployment(context.Background(), &StartDeploymentInput{})
+	got, err := svc.StartDeployment(context.Background(), &StartDeploymentInput{
+		AppId:         ptr.String("__AppId__"),
+		BranchName:    ptr.String("__BranchName__"),
+		JobId:         ptr.String("__JobId__"),
+		SourceUrl:     ptr.String("__SourceUrl__"),
+		SourceUrlType: types.SourceUrlType("ZIP"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1730,7 +1936,16 @@ func TestCheckResponseSnapshot_StartJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartJob(context.Background(), &StartJobInput{})
+	got, err := svc.StartJob(context.Background(), &StartJobInput{
+		AppId:         ptr.String("__AppId__"),
+		BranchName:    ptr.String("__BranchName__"),
+		JobId:         ptr.String("__JobId__"),
+		JobType:       types.JobType("RELEASE"),
+		JobReason:     ptr.String("__JobReason__"),
+		CommitId:      ptr.String("__CommitId__"),
+		CommitMessage: ptr.String("__CommitMessage__"),
+		CommitTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1763,7 +1978,11 @@ func TestCheckResponseSnapshot_StopJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopJob(context.Background(), &StopJobInput{})
+	got, err := svc.StopJob(context.Background(), &StopJobInput{
+		AppId:      ptr.String("__AppId__"),
+		BranchName: ptr.String("__BranchName__"),
+		JobId:      ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1782,7 +2001,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1801,7 +2025,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1898,7 +2128,65 @@ func TestCheckResponseSnapshot_UpdateApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApp(context.Background(), &UpdateAppInput{})
+	got, err := svc.UpdateApp(context.Background(), &UpdateAppInput{
+		AppId:             ptr.String("__AppId__"),
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		Platform:          types.Platform("WEB"),
+		ComputeRoleArn:    ptr.String("__ComputeRoleArn__"),
+		IamServiceRoleArn: ptr.String("__IamServiceRoleArn__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		EnableBranchAutoBuild:    ptr.Bool(true),
+		EnableBranchAutoDeletion: ptr.Bool(true),
+		EnableBasicAuth:          ptr.Bool(true),
+		BasicAuthCredentials:     ptr.String("__BasicAuthCredentials__"),
+		CustomRules: []types.CustomRule{
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+		},
+		BuildSpec:                ptr.String("__BuildSpec__"),
+		CustomHeaders:            ptr.String("__CustomHeaders__"),
+		EnableAutoBranchCreation: ptr.Bool(true),
+		AutoBranchCreationPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoBranchCreationConfig: &types.AutoBranchCreationConfig{
+			Stage:           types.Stage("PRODUCTION"),
+			Framework:       ptr.String("__Framework__"),
+			EnableAutoBuild: ptr.Bool(true),
+			EnvironmentVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			BasicAuthCredentials:       ptr.String("__BasicAuthCredentials__"),
+			EnableBasicAuth:            ptr.Bool(true),
+			EnablePerformanceMode:      ptr.Bool(true),
+			BuildSpec:                  ptr.String("__BuildSpec__"),
+			EnablePullRequestPreview:   ptr.Bool(true),
+			PullRequestEnvironmentName: ptr.String("__PullRequestEnvironmentName__"),
+		},
+		Repository:  ptr.String("__Repository__"),
+		OauthToken:  ptr.String("__OauthToken__"),
+		AccessToken: ptr.String("__AccessToken__"),
+		JobConfig: &types.JobConfig{
+			BuildComputeType: types.BuildComputeType("STANDARD_8GB"),
+		},
+		CacheConfig: &types.CacheConfig{
+			Type: types.CacheConfigType("AMPLIFY_MANAGED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1962,7 +2250,32 @@ func TestCheckResponseSnapshot_UpdateBranch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBranch(context.Background(), &UpdateBranchInput{})
+	got, err := svc.UpdateBranch(context.Background(), &UpdateBranchInput{
+		AppId:                ptr.String("__AppId__"),
+		BranchName:           ptr.String("__BranchName__"),
+		Description:          ptr.String("__Description__"),
+		Framework:            ptr.String("__Framework__"),
+		Stage:                types.Stage("PRODUCTION"),
+		EnableNotification:   ptr.Bool(true),
+		EnableAutoBuild:      ptr.Bool(true),
+		EnableSkewProtection: ptr.Bool(true),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		BasicAuthCredentials:       ptr.String("__BasicAuthCredentials__"),
+		EnableBasicAuth:            ptr.Bool(true),
+		EnablePerformanceMode:      ptr.Bool(true),
+		BuildSpec:                  ptr.String("__BuildSpec__"),
+		Ttl:                        ptr.String("__Ttl__"),
+		DisplayName:                ptr.String("__DisplayName__"),
+		EnablePullRequestPreview:   ptr.Bool(true),
+		PullRequestEnvironmentName: ptr.String("__PullRequestEnvironmentName__"),
+		BackendEnvironmentArn:      ptr.String("__BackendEnvironmentArn__"),
+		Backend: &types.Backend{
+			StackArn: ptr.String("__StackArn__"),
+		},
+		ComputeRoleArn: ptr.String("__ComputeRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2019,7 +2332,30 @@ func TestCheckResponseSnapshot_UpdateDomainAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomainAssociation(context.Background(), &UpdateDomainAssociationInput{})
+	got, err := svc.UpdateDomainAssociation(context.Background(), &UpdateDomainAssociationInput{
+		AppId:               ptr.String("__AppId__"),
+		DomainName:          ptr.String("__DomainName__"),
+		EnableAutoSubDomain: ptr.Bool(true),
+		SubDomainSettings: []types.SubDomainSetting{
+			{
+				Prefix:     ptr.String("__Prefix__"),
+				BranchName: ptr.String("__BranchName__"),
+			},
+			{
+				Prefix:     ptr.String("__Prefix__"),
+				BranchName: ptr.String("__BranchName__"),
+			},
+		},
+		AutoSubDomainCreationPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoSubDomainIAMRole: ptr.String("__AutoSubDomainIAMRole__"),
+		CertificateSettings: &types.CertificateSettings{
+			Type:                 types.CertificateType("AMPLIFY_MANAGED"),
+			CustomCertificateArn: ptr.String("__CustomCertificateArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2049,7 +2385,11 @@ func TestCheckResponseSnapshot_UpdateWebhook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWebhook(context.Background(), &UpdateWebhookInput{})
+	got, err := svc.UpdateWebhook(context.Background(), &UpdateWebhookInput{
+		WebhookId:   ptr.String("__WebhookId__"),
+		BranchName:  ptr.String("__BranchName__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2070,7 +2410,67 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{})
+	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		Repository:        ptr.String("__Repository__"),
+		Platform:          types.Platform("WEB"),
+		ComputeRoleArn:    ptr.String("__ComputeRoleArn__"),
+		IamServiceRoleArn: ptr.String("__IamServiceRoleArn__"),
+		OauthToken:        ptr.String("__OauthToken__"),
+		AccessToken:       ptr.String("__AccessToken__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		EnableBranchAutoBuild:    ptr.Bool(true),
+		EnableBranchAutoDeletion: ptr.Bool(true),
+		EnableBasicAuth:          ptr.Bool(true),
+		BasicAuthCredentials:     ptr.String("__BasicAuthCredentials__"),
+		CustomRules: []types.CustomRule{
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		BuildSpec:                ptr.String("__BuildSpec__"),
+		CustomHeaders:            ptr.String("__CustomHeaders__"),
+		EnableAutoBranchCreation: ptr.Bool(true),
+		AutoBranchCreationPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoBranchCreationConfig: &types.AutoBranchCreationConfig{
+			Stage:           types.Stage("PRODUCTION"),
+			Framework:       ptr.String("__Framework__"),
+			EnableAutoBuild: ptr.Bool(true),
+			EnvironmentVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			BasicAuthCredentials:       ptr.String("__BasicAuthCredentials__"),
+			EnableBasicAuth:            ptr.Bool(true),
+			EnablePerformanceMode:      ptr.Bool(true),
+			BuildSpec:                  ptr.String("__BuildSpec__"),
+			EnablePullRequestPreview:   ptr.Bool(true),
+			PullRequestEnvironmentName: ptr.String("__PullRequestEnvironmentName__"),
+		},
+		JobConfig: &types.JobConfig{
+			BuildComputeType: types.BuildComputeType("STANDARD_8GB"),
+		},
+		CacheConfig: &types.CacheConfig{
+			Type: types.CacheConfigType("AMPLIFY_MANAGED"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2095,7 +2495,67 @@ func TestCheckResponseSnapshot_Error_DependentServiceFailureException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{})
+	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		Repository:        ptr.String("__Repository__"),
+		Platform:          types.Platform("WEB"),
+		ComputeRoleArn:    ptr.String("__ComputeRoleArn__"),
+		IamServiceRoleArn: ptr.String("__IamServiceRoleArn__"),
+		OauthToken:        ptr.String("__OauthToken__"),
+		AccessToken:       ptr.String("__AccessToken__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		EnableBranchAutoBuild:    ptr.Bool(true),
+		EnableBranchAutoDeletion: ptr.Bool(true),
+		EnableBasicAuth:          ptr.Bool(true),
+		BasicAuthCredentials:     ptr.String("__BasicAuthCredentials__"),
+		CustomRules: []types.CustomRule{
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		BuildSpec:                ptr.String("__BuildSpec__"),
+		CustomHeaders:            ptr.String("__CustomHeaders__"),
+		EnableAutoBranchCreation: ptr.Bool(true),
+		AutoBranchCreationPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoBranchCreationConfig: &types.AutoBranchCreationConfig{
+			Stage:           types.Stage("PRODUCTION"),
+			Framework:       ptr.String("__Framework__"),
+			EnableAutoBuild: ptr.Bool(true),
+			EnvironmentVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			BasicAuthCredentials:       ptr.String("__BasicAuthCredentials__"),
+			EnableBasicAuth:            ptr.Bool(true),
+			EnablePerformanceMode:      ptr.Bool(true),
+			BuildSpec:                  ptr.String("__BuildSpec__"),
+			EnablePullRequestPreview:   ptr.Bool(true),
+			PullRequestEnvironmentName: ptr.String("__PullRequestEnvironmentName__"),
+		},
+		JobConfig: &types.JobConfig{
+			BuildComputeType: types.BuildComputeType("STANDARD_8GB"),
+		},
+		CacheConfig: &types.CacheConfig{
+			Type: types.CacheConfigType("AMPLIFY_MANAGED"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2120,7 +2580,67 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{})
+	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		Repository:        ptr.String("__Repository__"),
+		Platform:          types.Platform("WEB"),
+		ComputeRoleArn:    ptr.String("__ComputeRoleArn__"),
+		IamServiceRoleArn: ptr.String("__IamServiceRoleArn__"),
+		OauthToken:        ptr.String("__OauthToken__"),
+		AccessToken:       ptr.String("__AccessToken__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		EnableBranchAutoBuild:    ptr.Bool(true),
+		EnableBranchAutoDeletion: ptr.Bool(true),
+		EnableBasicAuth:          ptr.Bool(true),
+		BasicAuthCredentials:     ptr.String("__BasicAuthCredentials__"),
+		CustomRules: []types.CustomRule{
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		BuildSpec:                ptr.String("__BuildSpec__"),
+		CustomHeaders:            ptr.String("__CustomHeaders__"),
+		EnableAutoBranchCreation: ptr.Bool(true),
+		AutoBranchCreationPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoBranchCreationConfig: &types.AutoBranchCreationConfig{
+			Stage:           types.Stage("PRODUCTION"),
+			Framework:       ptr.String("__Framework__"),
+			EnableAutoBuild: ptr.Bool(true),
+			EnvironmentVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			BasicAuthCredentials:       ptr.String("__BasicAuthCredentials__"),
+			EnableBasicAuth:            ptr.Bool(true),
+			EnablePerformanceMode:      ptr.Bool(true),
+			BuildSpec:                  ptr.String("__BuildSpec__"),
+			EnablePullRequestPreview:   ptr.Bool(true),
+			PullRequestEnvironmentName: ptr.String("__PullRequestEnvironmentName__"),
+		},
+		JobConfig: &types.JobConfig{
+			BuildComputeType: types.BuildComputeType("STANDARD_8GB"),
+		},
+		CacheConfig: &types.CacheConfig{
+			Type: types.CacheConfigType("AMPLIFY_MANAGED"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2145,7 +2665,67 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{})
+	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		Repository:        ptr.String("__Repository__"),
+		Platform:          types.Platform("WEB"),
+		ComputeRoleArn:    ptr.String("__ComputeRoleArn__"),
+		IamServiceRoleArn: ptr.String("__IamServiceRoleArn__"),
+		OauthToken:        ptr.String("__OauthToken__"),
+		AccessToken:       ptr.String("__AccessToken__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		EnableBranchAutoBuild:    ptr.Bool(true),
+		EnableBranchAutoDeletion: ptr.Bool(true),
+		EnableBasicAuth:          ptr.Bool(true),
+		BasicAuthCredentials:     ptr.String("__BasicAuthCredentials__"),
+		CustomRules: []types.CustomRule{
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		BuildSpec:                ptr.String("__BuildSpec__"),
+		CustomHeaders:            ptr.String("__CustomHeaders__"),
+		EnableAutoBranchCreation: ptr.Bool(true),
+		AutoBranchCreationPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoBranchCreationConfig: &types.AutoBranchCreationConfig{
+			Stage:           types.Stage("PRODUCTION"),
+			Framework:       ptr.String("__Framework__"),
+			EnableAutoBuild: ptr.Bool(true),
+			EnvironmentVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			BasicAuthCredentials:       ptr.String("__BasicAuthCredentials__"),
+			EnableBasicAuth:            ptr.Bool(true),
+			EnablePerformanceMode:      ptr.Bool(true),
+			BuildSpec:                  ptr.String("__BuildSpec__"),
+			EnablePullRequestPreview:   ptr.Bool(true),
+			PullRequestEnvironmentName: ptr.String("__PullRequestEnvironmentName__"),
+		},
+		JobConfig: &types.JobConfig{
+			BuildComputeType: types.BuildComputeType("STANDARD_8GB"),
+		},
+		CacheConfig: &types.CacheConfig{
+			Type: types.CacheConfigType("AMPLIFY_MANAGED"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2170,7 +2750,12 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBackendEnvironment(context.Background(), &CreateBackendEnvironmentInput{})
+	_, opErr := svc.CreateBackendEnvironment(context.Background(), &CreateBackendEnvironmentInput{
+		AppId:               ptr.String("__AppId__"),
+		EnvironmentName:     ptr.String("__EnvironmentName__"),
+		StackName:           ptr.String("__StackName__"),
+		DeploymentArtifacts: ptr.String("__DeploymentArtifacts__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2185,7 +2770,7 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ResourceNotFoundException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
@@ -2196,7 +2781,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2221,7 +2808,67 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{})
+	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		Repository:        ptr.String("__Repository__"),
+		Platform:          types.Platform("WEB"),
+		ComputeRoleArn:    ptr.String("__ComputeRoleArn__"),
+		IamServiceRoleArn: ptr.String("__IamServiceRoleArn__"),
+		OauthToken:        ptr.String("__OauthToken__"),
+		AccessToken:       ptr.String("__AccessToken__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		EnableBranchAutoBuild:    ptr.Bool(true),
+		EnableBranchAutoDeletion: ptr.Bool(true),
+		EnableBasicAuth:          ptr.Bool(true),
+		BasicAuthCredentials:     ptr.String("__BasicAuthCredentials__"),
+		CustomRules: []types.CustomRule{
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+			{
+				Source:    ptr.String("__Source__"),
+				Target:    ptr.String("__Target__"),
+				Status:    ptr.String("__Status__"),
+				Condition: ptr.String("__Condition__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		BuildSpec:                ptr.String("__BuildSpec__"),
+		CustomHeaders:            ptr.String("__CustomHeaders__"),
+		EnableAutoBranchCreation: ptr.Bool(true),
+		AutoBranchCreationPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoBranchCreationConfig: &types.AutoBranchCreationConfig{
+			Stage:           types.Stage("PRODUCTION"),
+			Framework:       ptr.String("__Framework__"),
+			EnableAutoBuild: ptr.Bool(true),
+			EnvironmentVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			BasicAuthCredentials:       ptr.String("__BasicAuthCredentials__"),
+			EnableBasicAuth:            ptr.Bool(true),
+			EnablePerformanceMode:      ptr.Bool(true),
+			BuildSpec:                  ptr.String("__BuildSpec__"),
+			EnablePullRequestPreview:   ptr.Bool(true),
+			PullRequestEnvironmentName: ptr.String("__PullRequestEnvironmentName__"),
+		},
+		JobConfig: &types.JobConfig{
+			BuildComputeType: types.BuildComputeType("STANDARD_8GB"),
+		},
+		CacheConfig: &types.CacheConfig{
+			Type: types.CacheConfigType("AMPLIFY_MANAGED"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

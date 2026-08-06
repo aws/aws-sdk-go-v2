@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"thumbnailDetails":{"flowArn":"__FlowArn__","thumbnail":"__Thumbnail__","thumbnailMessages":[{"code":"__Code__","message":"__Message__","resourceName":"__ResourceName__"},{"code":"__Code__","message":"__Message__","resourceName":"__ResourceName__"}],"timecode":"__Timecode__","timestamp":"2000-01-01T00:00:00Z"}}

@@ -2,4 +2,4 @@ POST /asset/agent-space/__AgentSpaceId__/assets
 
 Content-Type: application/json
 
-{"assetType":"__AssetType__","clientToken":"__ClientToken__","content":{"file":{"body":{"bytes":"YmxvYg=="},"path":"__Path__"}}}
+{"assetType":"__AssetType__","clientToken":"__ClientToken__","content":{"file":{"body":{"bytes":"YmxvYg=="},"metadata":"__Document__","path":"__Path__"}},"metadata":"__Document__"}

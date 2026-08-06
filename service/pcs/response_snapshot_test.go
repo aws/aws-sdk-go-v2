@@ -218,7 +218,69 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Scheduler: &types.SchedulerRequest{
+			Type:    types.SchedulerType("SLURM"),
+			Version: ptr.String("__Version__"),
+		},
+		Size: types.Size("SMALL"),
+		Networking: &types.NetworkingRequest{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			NetworkType: types.NetworkType("IPV4"),
+		},
+		SlurmConfiguration: &types.ClusterSlurmConfigurationRequest{
+			ScaleDownIdleTimeInSeconds: ptr.Int32(1),
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			SlurmdbdCustomSettings: []types.SlurmdbdCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			CgroupCustomSettings: []types.CgroupCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			Accounting: &types.AccountingRequest{
+				DefaultPurgeTimeInDays: ptr.Int32(1),
+				Mode:                   types.AccountingMode("STANDARD"),
+			},
+			SlurmRest: &types.SlurmRestRequest{
+				Mode: types.SlurmRestMode("STANDARD"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -361,7 +423,118 @@ func TestCheckResponseSnapshot_CreateComputeNodeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateComputeNodeGroup(context.Background(), &CreateComputeNodeGroupInput{})
+	got, err := svc.CreateComputeNodeGroup(context.Background(), &CreateComputeNodeGroupInput{
+		ClusterIdentifier:    ptr.String("__ClusterIdentifier__"),
+		ComputeNodeGroupName: ptr.String("__ComputeNodeGroupName__"),
+		AmiId:                ptr.String("__AmiId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PurchaseOption: types.PurchaseOption("ONDEMAND"),
+		CustomLaunchTemplate: &types.CustomLaunchTemplate{
+			Id:      ptr.String("__Id__"),
+			Version: ptr.String("__Version__"),
+		},
+		IamInstanceProfileArn: ptr.String("__IamInstanceProfileArn__"),
+		ScalingConfiguration: &types.ScalingConfigurationRequest{
+			MinInstanceCount: 1,
+			MaxInstanceCount: 1,
+		},
+		InstanceConfigs: []types.InstanceConfig{
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+		},
+		SpotOptions: &types.SpotOptions{
+			AllocationStrategy: types.SpotAllocationStrategy("lowest-price"),
+		},
+		SlurmConfiguration: &types.ComputeNodeGroupSlurmConfigurationRequest{
+			ScaleDownIdleTimeInSeconds: ptr.Int32(1),
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+		},
+		NodeLifecycleActions: &types.NodeLifecycleActionsRequest{
+			Stages: &types.NodeLifecycleStages{
+				NodeBootstrapped: []types.NodeLifecycleScript{
+					{
+						Name: ptr.String("__Name__"),
+						ScriptSource: &types.ScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+						Arguments: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OnError:         types.OnError("TERMINATE"),
+						ExecutionPolicy: types.ExecutionPolicy("FIRST_BOOT_ONLY"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						ScriptSource: &types.ScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+						Arguments: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OnError:         types.OnError("TERMINATE"),
+						ExecutionPolicy: types.ExecutionPolicy("FIRST_BOOT_ONLY"),
+					},
+				},
+				NodeReady: []types.NodeLifecycleScript{
+					{
+						Name: ptr.String("__Name__"),
+						ScriptSource: &types.ScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+						Arguments: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OnError:         types.OnError("TERMINATE"),
+						ExecutionPolicy: types.ExecutionPolicy("FIRST_BOOT_ONLY"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						ScriptSource: &types.ScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+						Arguments: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OnError:         types.OnError("TERMINATE"),
+						ExecutionPolicy: types.ExecutionPolicy("FIRST_BOOT_ONLY"),
+					},
+				},
+			},
+			ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -420,7 +593,34 @@ func TestCheckResponseSnapshot_CreateQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQueue(context.Background(), &CreateQueueInput{})
+	got, err := svc.CreateQueue(context.Background(), &CreateQueueInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		QueueName:         ptr.String("__QueueName__"),
+		ComputeNodeGroupConfigurations: []types.ComputeNodeGroupConfiguration{
+			{
+				ComputeNodeGroupId: ptr.String("__ComputeNodeGroupId__"),
+			},
+			{
+				ComputeNodeGroupId: ptr.String("__ComputeNodeGroupId__"),
+			},
+		},
+		SlurmConfiguration: &types.QueueSlurmConfigurationRequest{
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -439,7 +639,10 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -458,7 +661,11 @@ func TestCheckResponseSnapshot_DeleteComputeNodeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteComputeNodeGroup(context.Background(), &DeleteComputeNodeGroupInput{})
+	got, err := svc.DeleteComputeNodeGroup(context.Background(), &DeleteComputeNodeGroupInput{
+		ClusterIdentifier:          ptr.String("__ClusterIdentifier__"),
+		ComputeNodeGroupIdentifier: ptr.String("__ComputeNodeGroupIdentifier__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -477,7 +684,11 @@ func TestCheckResponseSnapshot_DeleteQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQueue(context.Background(), &DeleteQueueInput{})
+	got, err := svc.DeleteQueue(context.Background(), &DeleteQueueInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		QueueIdentifier:   ptr.String("__QueueIdentifier__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -597,7 +808,9 @@ func TestCheckResponseSnapshot_GetCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCluster(context.Background(), &GetClusterInput{})
+	got, err := svc.GetCluster(context.Background(), &GetClusterInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -740,7 +953,10 @@ func TestCheckResponseSnapshot_GetComputeNodeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComputeNodeGroup(context.Background(), &GetComputeNodeGroupInput{})
+	got, err := svc.GetComputeNodeGroup(context.Background(), &GetComputeNodeGroupInput{
+		ClusterIdentifier:          ptr.String("__ClusterIdentifier__"),
+		ComputeNodeGroupIdentifier: ptr.String("__ComputeNodeGroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -799,7 +1015,10 @@ func TestCheckResponseSnapshot_GetQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueue(context.Background(), &GetQueueInput{})
+	got, err := svc.GetQueue(context.Background(), &GetQueueInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		QueueIdentifier:   ptr.String("__QueueIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -838,7 +1057,10 @@ func TestCheckResponseSnapshot_ListClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClusters(context.Background(), &ListClustersInput{})
+	got, err := svc.ListClusters(context.Background(), &ListClustersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -879,7 +1101,11 @@ func TestCheckResponseSnapshot_ListComputeNodeGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComputeNodeGroups(context.Background(), &ListComputeNodeGroupsInput{})
+	got, err := svc.ListComputeNodeGroups(context.Background(), &ListComputeNodeGroupsInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -920,7 +1146,11 @@ func TestCheckResponseSnapshot_ListQueues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueues(context.Background(), &ListQueuesInput{})
+	got, err := svc.ListQueues(context.Background(), &ListQueuesInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -943,7 +1173,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1049,7 +1281,10 @@ func TestCheckResponseSnapshot_RegisterComputeNodeGroupInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterComputeNodeGroupInstance(context.Background(), &RegisterComputeNodeGroupInstanceInput{})
+	got, err := svc.RegisterComputeNodeGroupInstance(context.Background(), &RegisterComputeNodeGroupInstanceInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		BootstrapId:       ptr.String("__BootstrapId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1068,7 +1303,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1087,7 +1327,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1207,7 +1453,53 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{})
+	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+		SlurmConfiguration: &types.UpdateClusterSlurmConfigurationRequest{
+			ScaleDownIdleTimeInSeconds: ptr.Int32(1),
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			SlurmdbdCustomSettings: []types.SlurmdbdCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			CgroupCustomSettings: []types.CgroupCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			Accounting: &types.UpdateAccountingRequest{
+				DefaultPurgeTimeInDays: ptr.Int32(1),
+				Mode:                   types.AccountingMode("STANDARD"),
+			},
+			SlurmRest: &types.UpdateSlurmRestRequest{
+				Mode: types.SlurmRestMode("STANDARD"),
+			},
+		},
+		Scheduler: &types.UpdateSchedulerRequest{
+			Version: ptr.String("__Version__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1350,7 +1642,107 @@ func TestCheckResponseSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateComputeNodeGroup(context.Background(), &UpdateComputeNodeGroupInput{})
+	got, err := svc.UpdateComputeNodeGroup(context.Background(), &UpdateComputeNodeGroupInput{
+		ClusterIdentifier:          ptr.String("__ClusterIdentifier__"),
+		ComputeNodeGroupIdentifier: ptr.String("__ComputeNodeGroupIdentifier__"),
+		AmiId:                      ptr.String("__AmiId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CustomLaunchTemplate: &types.CustomLaunchTemplate{
+			Id:      ptr.String("__Id__"),
+			Version: ptr.String("__Version__"),
+		},
+		PurchaseOption: types.PurchaseOption("ONDEMAND"),
+		SpotOptions: &types.SpotOptions{
+			AllocationStrategy: types.SpotAllocationStrategy("lowest-price"),
+		},
+		ScalingConfiguration: &types.ScalingConfigurationRequest{
+			MinInstanceCount: 1,
+			MaxInstanceCount: 1,
+		},
+		IamInstanceProfileArn: ptr.String("__IamInstanceProfileArn__"),
+		SlurmConfiguration: &types.UpdateComputeNodeGroupSlurmConfigurationRequest{
+			ScaleDownIdleTimeInSeconds: ptr.Int32(1),
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+		},
+		NodeLifecycleActions: &types.UpdateNodeLifecycleActionsRequest{
+			Stages: &types.NodeLifecycleStages{
+				NodeBootstrapped: []types.NodeLifecycleScript{
+					{
+						Name: ptr.String("__Name__"),
+						ScriptSource: &types.ScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+						Arguments: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OnError:         types.OnError("TERMINATE"),
+						ExecutionPolicy: types.ExecutionPolicy("FIRST_BOOT_ONLY"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						ScriptSource: &types.ScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+						Arguments: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OnError:         types.OnError("TERMINATE"),
+						ExecutionPolicy: types.ExecutionPolicy("FIRST_BOOT_ONLY"),
+					},
+				},
+				NodeReady: []types.NodeLifecycleScript{
+					{
+						Name: ptr.String("__Name__"),
+						ScriptSource: &types.ScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+						Arguments: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OnError:         types.OnError("TERMINATE"),
+						ExecutionPolicy: types.ExecutionPolicy("FIRST_BOOT_ONLY"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						ScriptSource: &types.ScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+						Arguments: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OnError:         types.OnError("TERMINATE"),
+						ExecutionPolicy: types.ExecutionPolicy("FIRST_BOOT_ONLY"),
+					},
+				},
+			},
+			ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1409,7 +1801,31 @@ func TestCheckResponseSnapshot_UpdateQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQueue(context.Background(), &UpdateQueueInput{})
+	got, err := svc.UpdateQueue(context.Background(), &UpdateQueueInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		QueueIdentifier:   ptr.String("__QueueIdentifier__"),
+		ComputeNodeGroupConfigurations: []types.ComputeNodeGroupConfiguration{
+			{
+				ComputeNodeGroupId: ptr.String("__ComputeNodeGroupId__"),
+			},
+			{
+				ComputeNodeGroupId: ptr.String("__ComputeNodeGroupId__"),
+			},
+		},
+		SlurmConfiguration: &types.UpdateQueueSlurmConfigurationRequest{
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1430,7 +1846,69 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Scheduler: &types.SchedulerRequest{
+			Type:    types.SchedulerType("SLURM"),
+			Version: ptr.String("__Version__"),
+		},
+		Size: types.Size("SMALL"),
+		Networking: &types.NetworkingRequest{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			NetworkType: types.NetworkType("IPV4"),
+		},
+		SlurmConfiguration: &types.ClusterSlurmConfigurationRequest{
+			ScaleDownIdleTimeInSeconds: ptr.Int32(1),
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			SlurmdbdCustomSettings: []types.SlurmdbdCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			CgroupCustomSettings: []types.CgroupCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			Accounting: &types.AccountingRequest{
+				DefaultPurgeTimeInDays: ptr.Int32(1),
+				Mode:                   types.AccountingMode("STANDARD"),
+			},
+			SlurmRest: &types.SlurmRestRequest{
+				Mode: types.SlurmRestMode("STANDARD"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1457,7 +1935,69 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Scheduler: &types.SchedulerRequest{
+			Type:    types.SchedulerType("SLURM"),
+			Version: ptr.String("__Version__"),
+		},
+		Size: types.Size("SMALL"),
+		Networking: &types.NetworkingRequest{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			NetworkType: types.NetworkType("IPV4"),
+		},
+		SlurmConfiguration: &types.ClusterSlurmConfigurationRequest{
+			ScaleDownIdleTimeInSeconds: ptr.Int32(1),
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			SlurmdbdCustomSettings: []types.SlurmdbdCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			CgroupCustomSettings: []types.CgroupCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			Accounting: &types.AccountingRequest{
+				DefaultPurgeTimeInDays: ptr.Int32(1),
+				Mode:                   types.AccountingMode("STANDARD"),
+			},
+			SlurmRest: &types.SlurmRestRequest{
+				Mode: types.SlurmRestMode("STANDARD"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1482,7 +2022,69 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Scheduler: &types.SchedulerRequest{
+			Type:    types.SchedulerType("SLURM"),
+			Version: ptr.String("__Version__"),
+		},
+		Size: types.Size("SMALL"),
+		Networking: &types.NetworkingRequest{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			NetworkType: types.NetworkType("IPV4"),
+		},
+		SlurmConfiguration: &types.ClusterSlurmConfigurationRequest{
+			ScaleDownIdleTimeInSeconds: ptr.Int32(1),
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			SlurmdbdCustomSettings: []types.SlurmdbdCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			CgroupCustomSettings: []types.CgroupCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			Accounting: &types.AccountingRequest{
+				DefaultPurgeTimeInDays: ptr.Int32(1),
+				Mode:                   types.AccountingMode("STANDARD"),
+			},
+			SlurmRest: &types.SlurmRestRequest{
+				Mode: types.SlurmRestMode("STANDARD"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1509,7 +2111,118 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComputeNodeGroup(context.Background(), &CreateComputeNodeGroupInput{})
+	_, opErr := svc.CreateComputeNodeGroup(context.Background(), &CreateComputeNodeGroupInput{
+		ClusterIdentifier:    ptr.String("__ClusterIdentifier__"),
+		ComputeNodeGroupName: ptr.String("__ComputeNodeGroupName__"),
+		AmiId:                ptr.String("__AmiId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PurchaseOption: types.PurchaseOption("ONDEMAND"),
+		CustomLaunchTemplate: &types.CustomLaunchTemplate{
+			Id:      ptr.String("__Id__"),
+			Version: ptr.String("__Version__"),
+		},
+		IamInstanceProfileArn: ptr.String("__IamInstanceProfileArn__"),
+		ScalingConfiguration: &types.ScalingConfigurationRequest{
+			MinInstanceCount: 1,
+			MaxInstanceCount: 1,
+		},
+		InstanceConfigs: []types.InstanceConfig{
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+		},
+		SpotOptions: &types.SpotOptions{
+			AllocationStrategy: types.SpotAllocationStrategy("lowest-price"),
+		},
+		SlurmConfiguration: &types.ComputeNodeGroupSlurmConfigurationRequest{
+			ScaleDownIdleTimeInSeconds: ptr.Int32(1),
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+		},
+		NodeLifecycleActions: &types.NodeLifecycleActionsRequest{
+			Stages: &types.NodeLifecycleStages{
+				NodeBootstrapped: []types.NodeLifecycleScript{
+					{
+						Name: ptr.String("__Name__"),
+						ScriptSource: &types.ScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+						Arguments: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OnError:         types.OnError("TERMINATE"),
+						ExecutionPolicy: types.ExecutionPolicy("FIRST_BOOT_ONLY"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						ScriptSource: &types.ScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+						Arguments: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OnError:         types.OnError("TERMINATE"),
+						ExecutionPolicy: types.ExecutionPolicy("FIRST_BOOT_ONLY"),
+					},
+				},
+				NodeReady: []types.NodeLifecycleScript{
+					{
+						Name: ptr.String("__Name__"),
+						ScriptSource: &types.ScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+						Arguments: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OnError:         types.OnError("TERMINATE"),
+						ExecutionPolicy: types.ExecutionPolicy("FIRST_BOOT_ONLY"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						ScriptSource: &types.ScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+						Arguments: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OnError:         types.OnError("TERMINATE"),
+						ExecutionPolicy: types.ExecutionPolicy("FIRST_BOOT_ONLY"),
+					},
+				},
+			},
+			ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1538,7 +2251,69 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Scheduler: &types.SchedulerRequest{
+			Type:    types.SchedulerType("SLURM"),
+			Version: ptr.String("__Version__"),
+		},
+		Size: types.Size("SMALL"),
+		Networking: &types.NetworkingRequest{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			NetworkType: types.NetworkType("IPV4"),
+		},
+		SlurmConfiguration: &types.ClusterSlurmConfigurationRequest{
+			ScaleDownIdleTimeInSeconds: ptr.Int32(1),
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			SlurmdbdCustomSettings: []types.SlurmdbdCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			CgroupCustomSettings: []types.CgroupCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			Accounting: &types.AccountingRequest{
+				DefaultPurgeTimeInDays: ptr.Int32(1),
+				Mode:                   types.AccountingMode("STANDARD"),
+			},
+			SlurmRest: &types.SlurmRestRequest{
+				Mode: types.SlurmRestMode("STANDARD"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1564,7 +2339,69 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Scheduler: &types.SchedulerRequest{
+			Type:    types.SchedulerType("SLURM"),
+			Version: ptr.String("__Version__"),
+		},
+		Size: types.Size("SMALL"),
+		Networking: &types.NetworkingRequest{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			NetworkType: types.NetworkType("IPV4"),
+		},
+		SlurmConfiguration: &types.ClusterSlurmConfigurationRequest{
+			ScaleDownIdleTimeInSeconds: ptr.Int32(1),
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			SlurmdbdCustomSettings: []types.SlurmdbdCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			CgroupCustomSettings: []types.CgroupCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			Accounting: &types.AccountingRequest{
+				DefaultPurgeTimeInDays: ptr.Int32(1),
+				Mode:                   types.AccountingMode("STANDARD"),
+			},
+			SlurmRest: &types.SlurmRestRequest{
+				Mode: types.SlurmRestMode("STANDARD"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1600,7 +2437,69 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Scheduler: &types.SchedulerRequest{
+			Type:    types.SchedulerType("SLURM"),
+			Version: ptr.String("__Version__"),
+		},
+		Size: types.Size("SMALL"),
+		Networking: &types.NetworkingRequest{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			NetworkType: types.NetworkType("IPV4"),
+		},
+		SlurmConfiguration: &types.ClusterSlurmConfigurationRequest{
+			ScaleDownIdleTimeInSeconds: ptr.Int32(1),
+			SlurmCustomSettings: []types.SlurmCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			SlurmdbdCustomSettings: []types.SlurmdbdCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			CgroupCustomSettings: []types.CgroupCustomSetting{
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+				{
+					ParameterName:  ptr.String("__ParameterName__"),
+					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			Accounting: &types.AccountingRequest{
+				DefaultPurgeTimeInDays: ptr.Int32(1),
+				Mode:                   types.AccountingMode("STANDARD"),
+			},
+			SlurmRest: &types.SlurmRestRequest{
+				Mode: types.SlurmRestMode("STANDARD"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

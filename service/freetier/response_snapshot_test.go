@@ -133,7 +133,10 @@ func TestCheckResponseSnapshot_GetAccountActivity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccountActivity(context.Background(), &GetAccountActivityInput{})
+	got, err := svc.GetAccountActivity(context.Background(), &GetAccountActivityInput{
+		ActivityId:   ptr.String("__ActivityId__"),
+		LanguageCode: types.LanguageCode("en-US"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -208,7 +211,32 @@ func TestCheckResponseSnapshot_GetFreeTierUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFreeTierUsage(context.Background(), &GetFreeTierUsageInput{})
+	got, err := svc.GetFreeTierUsage(context.Background(), &GetFreeTierUsageInput{
+		Filter: &types.Expression{
+			Or: []types.Expression{
+				{},
+				{},
+			},
+			And: []types.Expression{
+				{},
+				{},
+			},
+			Not: nil,
+			Dimensions: &types.DimensionValues{
+				Key: types.Dimension("SERVICE"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -253,7 +281,15 @@ func TestCheckResponseSnapshot_ListAccountActivities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountActivities(context.Background(), &ListAccountActivitiesInput{})
+	got, err := svc.ListAccountActivities(context.Background(), &ListAccountActivitiesInput{
+		FilterActivityStatuses: []types.ActivityStatus{
+			types.ActivityStatus("NOT_STARTED"),
+			types.ActivityStatus("NOT_STARTED"),
+		},
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		LanguageCode: types.LanguageCode("en-US"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -276,7 +312,9 @@ func TestCheckResponseSnapshot_UpgradeAccountPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpgradeAccountPlan(context.Background(), &UpgradeAccountPlanInput{})
+	got, err := svc.UpgradeAccountPlan(context.Background(), &UpgradeAccountPlanInput{
+		AccountPlanType: types.AccountPlanType("FREE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +360,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetAccountActivity(context.Background(), &GetAccountActivityInput{})
+	_, opErr := svc.GetAccountActivity(context.Background(), &GetAccountActivityInput{
+		ActivityId:   ptr.String("__ActivityId__"),
+		LanguageCode: types.LanguageCode("en-US"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -347,7 +388,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetAccountActivity(context.Background(), &GetAccountActivityInput{})
+	_, opErr := svc.GetAccountActivity(context.Background(), &GetAccountActivityInput{
+		ActivityId:   ptr.String("__ActivityId__"),
+		LanguageCode: types.LanguageCode("en-US"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -372,7 +416,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetAccountActivity(context.Background(), &GetAccountActivityInput{})
+	_, opErr := svc.GetAccountActivity(context.Background(), &GetAccountActivityInput{
+		ActivityId:   ptr.String("__ActivityId__"),
+		LanguageCode: types.LanguageCode("en-US"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -397,7 +444,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetAccountActivity(context.Background(), &GetAccountActivityInput{})
+	_, opErr := svc.GetAccountActivity(context.Background(), &GetAccountActivityInput{
+		ActivityId:   ptr.String("__ActivityId__"),
+		LanguageCode: types.LanguageCode("en-US"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

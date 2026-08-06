@@ -147,7 +147,23 @@ func TestCheckResponseSnapshot_AssociateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateService(context.Background(), &AssociateServiceInput{})
+	got, err := svc.AssociateService(context.Background(), &AssociateServiceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ServiceId:    ptr.String("__ServiceId__"),
+		Configuration: &types.ServiceConfigurationMemberSourceAws{
+			Value: types.SourceAwsConfiguration{
+				AccountId:        ptr.String("__AccountId__"),
+				AccountType:      types.SourceAccountType("source"),
+				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
+				ExternalId:       ptr.String("__ExternalId__"),
+			},
+		},
+		Capabilities: map[string]types.CapabilityConfiguration{
+			"key0": {
+				Enabled: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,7 +195,16 @@ func TestCheckResponseSnapshot_CreateAgentSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAgentSpace(context.Background(), &CreateAgentSpaceInput{})
+	got, err := svc.CreateAgentSpace(context.Background(), &CreateAgentSpaceInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Locale:      ptr.String("__Locale__"),
+		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -193,7 +218,7 @@ func TestCheckResponseSnapshot_CreateAsset(t *testing.T) {
 		Asset: &types.Asset{
 			AssetId:   ptr.String("__AssetId__"),
 			AssetType: ptr.String("__AssetType__"),
-			Metadata:  nil,
+			Metadata:  document.NewLazyDocument("__Document__"),
 			Version:   ptr.Int32(1),
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -207,7 +232,21 @@ func TestCheckResponseSnapshot_CreateAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAsset(context.Background(), &CreateAssetInput{})
+	got, err := svc.CreateAsset(context.Background(), &CreateAssetInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AssetType:    ptr.String("__AssetType__"),
+		Metadata:     document.NewLazyDocument("__Document__"),
+		Content: &types.AssetContentMemberFile{
+			Value: types.AssetFileContent{
+				Path: ptr.String("__Path__"),
+				Body: &types.AssetFileBodyMemberBytes{
+					Value: []byte("blob"),
+				},
+				Metadata: document.NewLazyDocument("__Document__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +262,7 @@ func TestCheckResponseSnapshot_CreateAssetFile(t *testing.T) {
 			Content: &types.AssetFileBodyMemberBytes{
 				Value: []byte("blob"),
 			},
-			Metadata:  nil,
+			Metadata:  document.NewLazyDocument("__Document__"),
 			Version:   ptr.Int32(1),
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -237,7 +276,16 @@ func TestCheckResponseSnapshot_CreateAssetFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAssetFile(context.Background(), &CreateAssetFileInput{})
+	got, err := svc.CreateAssetFile(context.Background(), &CreateAssetFileInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AssetId:      ptr.String("__AssetId__"),
+		Path:         ptr.String("__Path__"),
+		Content: &types.AssetFileBodyMemberBytes{
+			Value: []byte("blob"),
+		},
+		Metadata:    document.NewLazyDocument("__Document__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,8 +315,8 @@ func TestCheckResponseSnapshot_CreateBacklogTask(t *testing.T) {
 			CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Version:         ptr.Int32(1),
-			SupportMetadata: nil,
-			Metadata:        nil,
+			SupportMetadata: document.NewLazyDocument("__Document__"),
+			Metadata:        document.NewLazyDocument("__Document__"),
 			PrimaryTaskId:   ptr.String("__PrimaryTaskId__"),
 			StatusReason:    ptr.String("__StatusReason__"),
 			HasLinkedTasks:  true,
@@ -282,7 +330,21 @@ func TestCheckResponseSnapshot_CreateBacklogTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBacklogTask(context.Background(), &CreateBacklogTaskInput{})
+	got, err := svc.CreateBacklogTask(context.Background(), &CreateBacklogTaskInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		Reference: &types.ReferenceInput{
+			System:        ptr.String("__System__"),
+			Title:         ptr.String("__Title__"),
+			ReferenceId:   ptr.String("__ReferenceId__"),
+			ReferenceUrl:  ptr.String("__ReferenceUrl__"),
+			AssociationId: ptr.String("__AssociationId__"),
+		},
+		TaskType:    types.TaskType("INVESTIGATION"),
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Priority:    types.Priority("CRITICAL"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -304,7 +366,11 @@ func TestCheckResponseSnapshot_CreateChat(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChat(context.Background(), &CreateChatInput{})
+	got, err := svc.CreateChat(context.Background(), &CreateChatInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		UserId:       ptr.String("__UserId__"),
+		UserType:     types.UserType("IAM"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +403,34 @@ func TestCheckResponseSnapshot_CreatePrivateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePrivateConnection(context.Background(), &CreatePrivateConnectionInput{})
+	got, err := svc.CreatePrivateConnection(context.Background(), &CreatePrivateConnectionInput{
+		Name: ptr.String("__Name__"),
+		Mode: &types.PrivateConnectionModeMemberServiceManaged{
+			Value: types.ServiceManagedInput{
+				HostAddress: ptr.String("__HostAddress__"),
+				VpcId:       ptr.String("__VpcId__"),
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				IpAddressType:       types.IpAddressType("IPV4"),
+				Ipv4AddressesPerEni: ptr.Int32(1),
+				PortRanges: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Certificate:   ptr.String("__Certificate__"),
+				DnsResolution: types.ResourceConfigDnsResolution("PUBLIC"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -357,7 +450,7 @@ func TestCheckResponseSnapshot_CreateTrigger(t *testing.T) {
 					Expression: ptr.String("__Expression__"),
 				},
 			},
-			Action:    nil,
+			Action:    document.NewLazyDocument("__Document__"),
 			Status:    ptr.String("__Status__"),
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -371,7 +464,18 @@ func TestCheckResponseSnapshot_CreateTrigger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrigger(context.Background(), &CreateTriggerInput{})
+	got, err := svc.CreateTrigger(context.Background(), &CreateTriggerInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		Type:         ptr.String("__Type__"),
+		Condition: &types.TriggerConditionMemberSchedule{
+			Value: types.ScheduleCondition{
+				Expression: ptr.String("__Expression__"),
+			},
+		},
+		Action:      document.NewLazyDocument("__Document__"),
+		Status:      ptr.String("__Status__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -390,7 +494,9 @@ func TestCheckResponseSnapshot_DeleteAgentSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAgentSpace(context.Background(), &DeleteAgentSpaceInput{})
+	got, err := svc.DeleteAgentSpace(context.Background(), &DeleteAgentSpaceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -409,7 +515,10 @@ func TestCheckResponseSnapshot_DeleteAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAsset(context.Background(), &DeleteAssetInput{})
+	got, err := svc.DeleteAsset(context.Background(), &DeleteAssetInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AssetId:      ptr.String("__AssetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -428,7 +537,11 @@ func TestCheckResponseSnapshot_DeleteAssetFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAssetFile(context.Background(), &DeleteAssetFileInput{})
+	got, err := svc.DeleteAssetFile(context.Background(), &DeleteAssetFileInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AssetId:      ptr.String("__AssetId__"),
+		Path:         ptr.String("__Path__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -450,7 +563,9 @@ func TestCheckResponseSnapshot_DeletePrivateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePrivateConnection(context.Background(), &DeletePrivateConnectionInput{})
+	got, err := svc.DeletePrivateConnection(context.Background(), &DeletePrivateConnectionInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +584,10 @@ func TestCheckResponseSnapshot_DeleteTrigger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrigger(context.Background(), &DeleteTriggerInput{})
+	got, err := svc.DeleteTrigger(context.Background(), &DeleteTriggerInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		TriggerId:    ptr.String("__TriggerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -488,7 +606,9 @@ func TestCheckResponseSnapshot_DeregisterService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterService(context.Background(), &DeregisterServiceInput{})
+	got, err := svc.DeregisterService(context.Background(), &DeregisterServiceInput{
+		ServiceId: ptr.String("__ServiceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -521,7 +641,9 @@ func TestCheckResponseSnapshot_DescribePrivateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePrivateConnection(context.Background(), &DescribePrivateConnectionInput{})
+	got, err := svc.DescribePrivateConnection(context.Background(), &DescribePrivateConnectionInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -540,7 +662,10 @@ func TestCheckResponseSnapshot_DisableOperatorApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableOperatorApp(context.Background(), &DisableOperatorAppInput{})
+	got, err := svc.DisableOperatorApp(context.Background(), &DisableOperatorAppInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AuthFlow:     types.AuthFlow("iam"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -559,7 +684,10 @@ func TestCheckResponseSnapshot_DisassociateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateService(context.Background(), &DisassociateServiceInput{})
+	got, err := svc.DisassociateService(context.Background(), &DisassociateServiceInput{
+		AgentSpaceId:  ptr.String("__AgentSpaceId__"),
+		AssociationId: ptr.String("__AssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -601,7 +729,16 @@ func TestCheckResponseSnapshot_EnableOperatorApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableOperatorApp(context.Background(), &EnableOperatorAppInput{})
+	got, err := svc.EnableOperatorApp(context.Background(), &EnableOperatorAppInput{
+		AgentSpaceId:       ptr.String("__AgentSpaceId__"),
+		AuthFlow:           types.AuthFlow("iam"),
+		OperatorAppRoleArn: ptr.String("__OperatorAppRoleArn__"),
+		IdcInstanceArn:     ptr.String("__IdcInstanceArn__"),
+		IssuerUrl:          ptr.String("__IssuerUrl__"),
+		IdpClientId:        ptr.String("__IdpClientId__"),
+		IdpClientSecret:    ptr.String("__IdpClientSecret__"),
+		Provider:           ptr.String("__Provider__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -671,7 +808,9 @@ func TestCheckResponseSnapshot_GetAgentSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgentSpace(context.Background(), &GetAgentSpaceInput{})
+	got, err := svc.GetAgentSpace(context.Background(), &GetAgentSpaceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -685,7 +824,7 @@ func TestCheckResponseSnapshot_GetAsset(t *testing.T) {
 		Asset: &types.Asset{
 			AssetId:   ptr.String("__AssetId__"),
 			AssetType: ptr.String("__AssetType__"),
-			Metadata:  nil,
+			Metadata:  document.NewLazyDocument("__Document__"),
 			Version:   ptr.Int32(1),
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -699,7 +838,11 @@ func TestCheckResponseSnapshot_GetAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAsset(context.Background(), &GetAssetInput{})
+	got, err := svc.GetAsset(context.Background(), &GetAssetInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AssetId:      ptr.String("__AssetId__"),
+		AssetVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -723,7 +866,11 @@ func TestCheckResponseSnapshot_GetAssetContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssetContent(context.Background(), &GetAssetContentInput{})
+	got, err := svc.GetAssetContent(context.Background(), &GetAssetContentInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AssetId:      ptr.String("__AssetId__"),
+		AssetVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -739,7 +886,7 @@ func TestCheckResponseSnapshot_GetAssetFile(t *testing.T) {
 			Content: &types.AssetFileBodyMemberBytes{
 				Value: []byte("blob"),
 			},
-			Metadata:  nil,
+			Metadata:  document.NewLazyDocument("__Document__"),
 			Version:   ptr.Int32(1),
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -753,7 +900,12 @@ func TestCheckResponseSnapshot_GetAssetFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssetFile(context.Background(), &GetAssetFileInput{})
+	got, err := svc.GetAssetFile(context.Background(), &GetAssetFileInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AssetId:      ptr.String("__AssetId__"),
+		Path:         ptr.String("__Path__"),
+		AssetVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -794,7 +946,10 @@ func TestCheckResponseSnapshot_GetAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssociation(context.Background(), &GetAssociationInput{})
+	got, err := svc.GetAssociation(context.Background(), &GetAssociationInput{
+		AgentSpaceId:  ptr.String("__AgentSpaceId__"),
+		AssociationId: ptr.String("__AssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -824,8 +979,8 @@ func TestCheckResponseSnapshot_GetBacklogTask(t *testing.T) {
 			CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Version:         ptr.Int32(1),
-			SupportMetadata: nil,
-			Metadata:        nil,
+			SupportMetadata: document.NewLazyDocument("__Document__"),
+			Metadata:        document.NewLazyDocument("__Document__"),
 			PrimaryTaskId:   ptr.String("__PrimaryTaskId__"),
 			StatusReason:    ptr.String("__StatusReason__"),
 			HasLinkedTasks:  true,
@@ -839,7 +994,10 @@ func TestCheckResponseSnapshot_GetBacklogTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBacklogTask(context.Background(), &GetBacklogTaskInput{})
+	got, err := svc.GetBacklogTask(context.Background(), &GetBacklogTaskInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		TaskId:       ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -880,7 +1038,9 @@ func TestCheckResponseSnapshot_GetOperatorApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOperatorApp(context.Background(), &GetOperatorAppInput{})
+	got, err := svc.GetOperatorApp(context.Background(), &GetOperatorAppInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -920,7 +1080,11 @@ func TestCheckResponseSnapshot_GetRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommendation(context.Background(), &GetRecommendationInput{})
+	got, err := svc.GetRecommendation(context.Background(), &GetRecommendationInput{
+		AgentSpaceId:          ptr.String("__AgentSpaceId__"),
+		RecommendationId:      ptr.String("__RecommendationId__"),
+		RecommendationVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -936,8 +1100,8 @@ func TestCheckResponseSnapshot_GetService(t *testing.T) {
 			ServiceType: types.Service("github"),
 			Name:        ptr.String("__Name__"),
 			AccessibleResources: []document.Interface{
-				nil,
-				nil,
+				document.NewLazyDocument("__Document__"),
+				document.NewLazyDocument("__Document__"),
 			},
 			AdditionalServiceDetails: &types.AdditionalServiceDetailsMemberGithub{
 				Value: types.RegisteredGithubServiceDetails{
@@ -961,7 +1125,9 @@ func TestCheckResponseSnapshot_GetService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetService(context.Background(), &GetServiceInput{})
+	got, err := svc.GetService(context.Background(), &GetServiceInput{
+		ServiceId: ptr.String("__ServiceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -981,7 +1147,7 @@ func TestCheckResponseSnapshot_GetTrigger(t *testing.T) {
 					Expression: ptr.String("__Expression__"),
 				},
 			},
-			Action:    nil,
+			Action:    document.NewLazyDocument("__Document__"),
 			Status:    ptr.String("__Status__"),
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -995,7 +1161,10 @@ func TestCheckResponseSnapshot_GetTrigger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrigger(context.Background(), &GetTriggerInput{})
+	got, err := svc.GetTrigger(context.Background(), &GetTriggerInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		TriggerId:    ptr.String("__TriggerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1036,7 +1205,10 @@ func TestCheckResponseSnapshot_ListAgentSpaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgentSpaces(context.Background(), &ListAgentSpacesInput{})
+	got, err := svc.ListAgentSpaces(context.Background(), &ListAgentSpacesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1050,14 +1222,14 @@ func TestCheckResponseSnapshot_ListAssetFiles(t *testing.T) {
 		Items: []types.AssetFileSummary{
 			{
 				Path:      ptr.String("__Path__"),
-				Metadata:  nil,
+				Metadata:  document.NewLazyDocument("__Document__"),
 				Version:   ptr.Int32(1),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				Path:      ptr.String("__Path__"),
-				Metadata:  nil,
+				Metadata:  document.NewLazyDocument("__Document__"),
 				Version:   ptr.Int32(1),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1073,7 +1245,13 @@ func TestCheckResponseSnapshot_ListAssetFiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetFiles(context.Background(), &ListAssetFilesInput{})
+	got, err := svc.ListAssetFiles(context.Background(), &ListAssetFilesInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AssetId:      ptr.String("__AssetId__"),
+		AssetVersion: ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1104,7 +1282,10 @@ func TestCheckResponseSnapshot_ListAssetTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetTypes(context.Background(), &ListAssetTypesInput{})
+	got, err := svc.ListAssetTypes(context.Background(), &ListAssetTypesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1137,7 +1318,12 @@ func TestCheckResponseSnapshot_ListAssetVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetVersions(context.Background(), &ListAssetVersionsInput{})
+	got, err := svc.ListAssetVersions(context.Background(), &ListAssetVersionsInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AssetId:      ptr.String("__AssetId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1152,7 +1338,7 @@ func TestCheckResponseSnapshot_ListAssets(t *testing.T) {
 			{
 				AssetId:   ptr.String("__AssetId__"),
 				AssetType: ptr.String("__AssetType__"),
-				Metadata:  nil,
+				Metadata:  document.NewLazyDocument("__Document__"),
 				Version:   ptr.Int32(1),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1160,7 +1346,7 @@ func TestCheckResponseSnapshot_ListAssets(t *testing.T) {
 			{
 				AssetId:   ptr.String("__AssetId__"),
 				AssetType: ptr.String("__AssetType__"),
-				Metadata:  nil,
+				Metadata:  document.NewLazyDocument("__Document__"),
 				Version:   ptr.Int32(1),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1176,7 +1362,14 @@ func TestCheckResponseSnapshot_ListAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssets(context.Background(), &ListAssetsInput{})
+	got, err := svc.ListAssets(context.Background(), &ListAssetsInput{
+		AgentSpaceId:  ptr.String("__AgentSpaceId__"),
+		AssetType:     ptr.String("__AssetType__"),
+		UpdatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1241,7 +1434,12 @@ func TestCheckResponseSnapshot_ListAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociations(context.Background(), &ListAssociationsInput{})
+	got, err := svc.ListAssociations(context.Background(), &ListAssociationsInput{
+		AgentSpaceId:       ptr.String("__AgentSpaceId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		FilterServiceTypes: ptr.String("__FilterServiceTypes__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1272,8 +1470,8 @@ func TestCheckResponseSnapshot_ListBacklogTasks(t *testing.T) {
 				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Version:         ptr.Int32(1),
-				SupportMetadata: nil,
-				Metadata:        nil,
+				SupportMetadata: document.NewLazyDocument("__Document__"),
+				Metadata:        document.NewLazyDocument("__Document__"),
 				PrimaryTaskId:   ptr.String("__PrimaryTaskId__"),
 				StatusReason:    ptr.String("__StatusReason__"),
 				HasLinkedTasks:  true,
@@ -1297,8 +1495,8 @@ func TestCheckResponseSnapshot_ListBacklogTasks(t *testing.T) {
 				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Version:         ptr.Int32(1),
-				SupportMetadata: nil,
-				Metadata:        nil,
+				SupportMetadata: document.NewLazyDocument("__Document__"),
+				Metadata:        document.NewLazyDocument("__Document__"),
 				PrimaryTaskId:   ptr.String("__PrimaryTaskId__"),
 				StatusReason:    ptr.String("__StatusReason__"),
 				HasLinkedTasks:  true,
@@ -1314,7 +1512,30 @@ func TestCheckResponseSnapshot_ListBacklogTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBacklogTasks(context.Background(), &ListBacklogTasksInput{})
+	got, err := svc.ListBacklogTasks(context.Background(), &ListBacklogTasksInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		Filter: &types.TaskFilter{
+			CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Priority: []types.Priority{
+				types.Priority("CRITICAL"),
+				types.Priority("CRITICAL"),
+			},
+			Status: []types.TaskStatus{
+				types.TaskStatus("PENDING_TRIAGE"),
+				types.TaskStatus("PENDING_TRIAGE"),
+			},
+			TaskType: []types.TaskType{
+				types.TaskType("INVESTIGATION"),
+				types.TaskType("INVESTIGATION"),
+			},
+			PrimaryTaskId: ptr.String("__PrimaryTaskId__"),
+		},
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+		SortField: types.TaskSortField("CREATED_AT"),
+		Order:     types.TaskSortOrder("ASC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1349,7 +1570,12 @@ func TestCheckResponseSnapshot_ListChats(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChats(context.Background(), &ListChatsInput{})
+	got, err := svc.ListChats(context.Background(), &ListChatsInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		UserId:       ptr.String("__UserId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1394,7 +1620,12 @@ func TestCheckResponseSnapshot_ListExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExecutions(context.Background(), &ListExecutionsInput{})
+	got, err := svc.ListExecutions(context.Background(), &ListExecutionsInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		TaskId:       ptr.String("__TaskId__"),
+		Limit:        ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1459,7 +1690,13 @@ func TestCheckResponseSnapshot_ListGoals(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGoals(context.Background(), &ListGoalsInput{})
+	got, err := svc.ListGoals(context.Background(), &ListGoalsInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		Status:       types.GoalStatus("ACTIVE"),
+		GoalType:     types.GoalType("CUSTOMER_DEFINED"),
+		Limit:        ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1475,7 +1712,7 @@ func TestCheckResponseSnapshot_ListJournalRecords(t *testing.T) {
 				AgentSpaceId: ptr.String("__AgentSpaceId__"),
 				ExecutionId:  ptr.String("__ExecutionId__"),
 				RecordId:     ptr.String("__RecordId__"),
-				Content:      nil,
+				Content:      document.NewLazyDocument("__Document__"),
 				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				RecordType:   ptr.String("__RecordType__"),
 				UserReference: &types.UserReference{
@@ -1487,7 +1724,7 @@ func TestCheckResponseSnapshot_ListJournalRecords(t *testing.T) {
 				AgentSpaceId: ptr.String("__AgentSpaceId__"),
 				ExecutionId:  ptr.String("__ExecutionId__"),
 				RecordId:     ptr.String("__RecordId__"),
-				Content:      nil,
+				Content:      document.NewLazyDocument("__Document__"),
 				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				RecordType:   ptr.String("__RecordType__"),
 				UserReference: &types.UserReference{
@@ -1506,7 +1743,14 @@ func TestCheckResponseSnapshot_ListJournalRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJournalRecords(context.Background(), &ListJournalRecordsInput{})
+	got, err := svc.ListJournalRecords(context.Background(), &ListJournalRecordsInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ExecutionId:  ptr.String("__ExecutionId__"),
+		Limit:        ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		RecordType:   ptr.String("__RecordType__"),
+		Order:        types.OrderType("ASC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1557,7 +1801,10 @@ func TestCheckResponseSnapshot_ListPendingMessages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPendingMessages(context.Background(), &ListPendingMessagesInput{})
+	got, err := svc.ListPendingMessages(context.Background(), &ListPendingMessagesInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ExecutionId:  ptr.String("__ExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1666,7 +1913,15 @@ func TestCheckResponseSnapshot_ListRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{})
+	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		TaskId:       ptr.String("__TaskId__"),
+		GoalId:       ptr.String("__GoalId__"),
+		Status:       types.RecommendationStatus("PROPOSED"),
+		Priority:     types.RecommendationPriority("HIGH"),
+		Limit:        ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1684,8 +1939,8 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 				ServiceType: types.Service("github"),
 				Name:        ptr.String("__Name__"),
 				AccessibleResources: []document.Interface{
-					nil,
-					nil,
+					document.NewLazyDocument("__Document__"),
+					document.NewLazyDocument("__Document__"),
 				},
 				AdditionalServiceDetails: &types.AdditionalServiceDetailsMemberGithub{
 					Value: types.RegisteredGithubServiceDetails{
@@ -1702,8 +1957,8 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 				ServiceType: types.Service("github"),
 				Name:        ptr.String("__Name__"),
 				AccessibleResources: []document.Interface{
-					nil,
-					nil,
+					document.NewLazyDocument("__Document__"),
+					document.NewLazyDocument("__Document__"),
 				},
 				AdditionalServiceDetails: &types.AdditionalServiceDetailsMemberGithub{
 					Value: types.RegisteredGithubServiceDetails{
@@ -1725,7 +1980,11 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServices(context.Background(), &ListServicesInput{})
+	got, err := svc.ListServices(context.Background(), &ListServicesInput{
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		FilterServiceType: types.Service("github"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1748,7 +2007,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1769,7 +2030,7 @@ func TestCheckResponseSnapshot_ListTriggers(t *testing.T) {
 						Expression: ptr.String("__Expression__"),
 					},
 				},
-				Action:    nil,
+				Action:    document.NewLazyDocument("__Document__"),
 				Status:    ptr.String("__Status__"),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1783,7 +2044,7 @@ func TestCheckResponseSnapshot_ListTriggers(t *testing.T) {
 						Expression: ptr.String("__Expression__"),
 					},
 				},
-				Action:    nil,
+				Action:    document.NewLazyDocument("__Document__"),
 				Status:    ptr.String("__Status__"),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1799,7 +2060,12 @@ func TestCheckResponseSnapshot_ListTriggers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTriggers(context.Background(), &ListTriggersInput{})
+	got, err := svc.ListTriggers(context.Background(), &ListTriggersInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		Status:       ptr.String("__Status__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1831,7 +2097,10 @@ func TestCheckResponseSnapshot_ListWebhooks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWebhooks(context.Background(), &ListWebhooksInput{})
+	got, err := svc.ListWebhooks(context.Background(), &ListWebhooksInput{
+		AgentSpaceId:  ptr.String("__AgentSpaceId__"),
+		AssociationId: ptr.String("__AssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1861,13 +2130,42 @@ func TestCheckResponseSnapshot_RegisterService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterService(context.Background(), &RegisterServiceInput{})
+	got, err := svc.RegisterService(context.Background(), &RegisterServiceInput{
+		Service: types.PostRegisterServiceSupportedService("dynatrace"),
+		ServiceDetails: &types.ServiceDetailsMemberDynatrace{
+			Value: types.DynatraceServiceDetails{
+				AccountUrn: ptr.String("__AccountUrn__"),
+				AuthorizationConfig: &types.DynatraceServiceAuthorizationConfigMemberOAuthClientCredentials{
+					Value: types.DynatraceOAuthClientCredentialsConfig{
+						ClientName: ptr.String("__ClientName__"),
+						ClientId:   ptr.String("__ClientId__"),
+						ExchangeParameters: map[string]string{
+							"key0": "__Value__",
+						},
+						ClientSecret: ptr.String("__ClientSecret__"),
+					},
+				},
+			},
+		},
+		KmsKeyArn:                        ptr.String("__KmsKeyArn__"),
+		PrivateConnectionName:            ptr.String("__PrivateConnectionName__"),
+		TargetUrlPrivateConnectionName:   ptr.String("__TargetUrlPrivateConnectionName__"),
+		ExchangeUrlPrivateConnectionName: ptr.String("__ExchangeUrlPrivateConnectionName__"),
+		Name:                             ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RegisterService.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_SendMessage(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
@@ -1880,7 +2178,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1899,7 +2202,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1928,7 +2237,12 @@ func TestCheckResponseSnapshot_UpdateAgentSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAgentSpace(context.Background(), &UpdateAgentSpaceInput{})
+	got, err := svc.UpdateAgentSpace(context.Background(), &UpdateAgentSpaceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		Locale:       ptr.String("__Locale__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1942,7 +2256,7 @@ func TestCheckResponseSnapshot_UpdateAsset(t *testing.T) {
 		Asset: &types.Asset{
 			AssetId:   ptr.String("__AssetId__"),
 			AssetType: ptr.String("__AssetType__"),
-			Metadata:  nil,
+			Metadata:  document.NewLazyDocument("__Document__"),
 			Version:   ptr.Int32(1),
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1956,7 +2270,21 @@ func TestCheckResponseSnapshot_UpdateAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAsset(context.Background(), &UpdateAssetInput{})
+	got, err := svc.UpdateAsset(context.Background(), &UpdateAssetInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AssetId:      ptr.String("__AssetId__"),
+		Metadata:     document.NewLazyDocument("__Document__"),
+		Content: &types.AssetContentMemberFile{
+			Value: types.AssetFileContent{
+				Path: ptr.String("__Path__"),
+				Body: &types.AssetFileBodyMemberBytes{
+					Value: []byte("blob"),
+				},
+				Metadata: document.NewLazyDocument("__Document__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1972,7 +2300,7 @@ func TestCheckResponseSnapshot_UpdateAssetFile(t *testing.T) {
 			Content: &types.AssetFileBodyMemberBytes{
 				Value: []byte("blob"),
 			},
-			Metadata:  nil,
+			Metadata:  document.NewLazyDocument("__Document__"),
 			Version:   ptr.Int32(1),
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1986,7 +2314,16 @@ func TestCheckResponseSnapshot_UpdateAssetFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAssetFile(context.Background(), &UpdateAssetFileInput{})
+	got, err := svc.UpdateAssetFile(context.Background(), &UpdateAssetFileInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AssetId:      ptr.String("__AssetId__"),
+		Path:         ptr.String("__Path__"),
+		Content: &types.AssetFileBodyMemberBytes{
+			Value: []byte("blob"),
+		},
+		Metadata:    document.NewLazyDocument("__Document__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2034,7 +2371,23 @@ func TestCheckResponseSnapshot_UpdateAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAssociation(context.Background(), &UpdateAssociationInput{})
+	got, err := svc.UpdateAssociation(context.Background(), &UpdateAssociationInput{
+		AgentSpaceId:  ptr.String("__AgentSpaceId__"),
+		AssociationId: ptr.String("__AssociationId__"),
+		Configuration: &types.ServiceConfigurationMemberSourceAws{
+			Value: types.SourceAwsConfiguration{
+				AccountId:        ptr.String("__AccountId__"),
+				AccountType:      types.SourceAccountType("source"),
+				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
+				ExternalId:       ptr.String("__ExternalId__"),
+			},
+		},
+		Capabilities: map[string]types.CapabilityConfiguration{
+			"key0": {
+				Enabled: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2064,8 +2417,8 @@ func TestCheckResponseSnapshot_UpdateBacklogTask(t *testing.T) {
 			CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Version:         ptr.Int32(1),
-			SupportMetadata: nil,
-			Metadata:        nil,
+			SupportMetadata: document.NewLazyDocument("__Document__"),
+			Metadata:        document.NewLazyDocument("__Document__"),
 			PrimaryTaskId:   ptr.String("__PrimaryTaskId__"),
 			StatusReason:    ptr.String("__StatusReason__"),
 			HasLinkedTasks:  true,
@@ -2079,7 +2432,12 @@ func TestCheckResponseSnapshot_UpdateBacklogTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBacklogTask(context.Background(), &UpdateBacklogTaskInput{})
+	got, err := svc.UpdateBacklogTask(context.Background(), &UpdateBacklogTaskInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		TaskId:       ptr.String("__TaskId__"),
+		TaskStatus:   types.TaskStatus("PENDING_TRIAGE"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2120,7 +2478,14 @@ func TestCheckResponseSnapshot_UpdateGoal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGoal(context.Background(), &UpdateGoalInput{})
+	got, err := svc.UpdateGoal(context.Background(), &UpdateGoalInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		GoalId:       ptr.String("__GoalId__"),
+		EvaluationSchedule: &types.GoalScheduleInput{
+			State: types.SchedulerState("ENABLED"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2149,7 +2514,10 @@ func TestCheckResponseSnapshot_UpdateOperatorAppIdpConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOperatorAppIdpConfig(context.Background(), &UpdateOperatorAppIdpConfigInput{})
+	got, err := svc.UpdateOperatorAppIdpConfig(context.Background(), &UpdateOperatorAppIdpConfigInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		IdpClientSecret: ptr.String("__IdpClientSecret__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2179,7 +2547,10 @@ func TestCheckResponseSnapshot_UpdatePrivateConnectionCertificate(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePrivateConnectionCertificate(context.Background(), &UpdatePrivateConnectionCertificateInput{})
+	got, err := svc.UpdatePrivateConnectionCertificate(context.Background(), &UpdatePrivateConnectionCertificateInput{
+		Name:        ptr.String("__Name__"),
+		Certificate: ptr.String("__Certificate__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2219,7 +2590,13 @@ func TestCheckResponseSnapshot_UpdateRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRecommendation(context.Background(), &UpdateRecommendationInput{})
+	got, err := svc.UpdateRecommendation(context.Background(), &UpdateRecommendationInput{
+		AgentSpaceId:      ptr.String("__AgentSpaceId__"),
+		RecommendationId:  ptr.String("__RecommendationId__"),
+		Status:            types.RecommendationStatus("PROPOSED"),
+		AdditionalContext: ptr.String("__AdditionalContext__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2239,7 +2616,7 @@ func TestCheckResponseSnapshot_UpdateTrigger(t *testing.T) {
 					Expression: ptr.String("__Expression__"),
 				},
 			},
-			Action:    nil,
+			Action:    document.NewLazyDocument("__Document__"),
 			Status:    ptr.String("__Status__"),
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2253,7 +2630,12 @@ func TestCheckResponseSnapshot_UpdateTrigger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTrigger(context.Background(), &UpdateTriggerInput{})
+	got, err := svc.UpdateTrigger(context.Background(), &UpdateTriggerInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		TriggerId:    ptr.String("__TriggerId__"),
+		Status:       ptr.String("__Status__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2272,7 +2654,9 @@ func TestCheckResponseSnapshot_ValidateAwsAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidateAwsAssociations(context.Background(), &ValidateAwsAssociationsInput{})
+	got, err := svc.ValidateAwsAssociations(context.Background(), &ValidateAwsAssociationsInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2293,7 +2677,23 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{})
+	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ServiceId:    ptr.String("__ServiceId__"),
+		Configuration: &types.ServiceConfigurationMemberSourceAws{
+			Value: types.SourceAwsConfiguration{
+				AccountId:        ptr.String("__AccountId__"),
+				AccountType:      types.SourceAccountType("source"),
+				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
+				ExternalId:       ptr.String("__ExternalId__"),
+			},
+		},
+		Capabilities: map[string]types.CapabilityConfiguration{
+			"key0": {
+				Enabled: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2318,7 +2718,23 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{})
+	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ServiceId:    ptr.String("__ServiceId__"),
+		Configuration: &types.ServiceConfigurationMemberSourceAws{
+			Value: types.SourceAwsConfiguration{
+				AccountId:        ptr.String("__AccountId__"),
+				AccountType:      types.SourceAccountType("source"),
+				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
+				ExternalId:       ptr.String("__ExternalId__"),
+			},
+		},
+		Capabilities: map[string]types.CapabilityConfiguration{
+			"key0": {
+				Enabled: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2343,7 +2759,23 @@ func TestCheckResponseSnapshot_Error_ContentSizeExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{})
+	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ServiceId:    ptr.String("__ServiceId__"),
+		Configuration: &types.ServiceConfigurationMemberSourceAws{
+			Value: types.SourceAwsConfiguration{
+				AccountId:        ptr.String("__AccountId__"),
+				AccountType:      types.SourceAccountType("source"),
+				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
+				ExternalId:       ptr.String("__ExternalId__"),
+			},
+		},
+		Capabilities: map[string]types.CapabilityConfiguration{
+			"key0": {
+				Enabled: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2369,7 +2801,10 @@ func TestCheckResponseSnapshot_Error_IdentityCenterServiceException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisableOperatorApp(context.Background(), &DisableOperatorAppInput{})
+	_, opErr := svc.DisableOperatorApp(context.Background(), &DisableOperatorAppInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		AuthFlow:     types.AuthFlow("iam"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2394,7 +2829,23 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{})
+	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ServiceId:    ptr.String("__ServiceId__"),
+		Configuration: &types.ServiceConfigurationMemberSourceAws{
+			Value: types.SourceAwsConfiguration{
+				AccountId:        ptr.String("__AccountId__"),
+				AccountType:      types.SourceAccountType("source"),
+				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
+				ExternalId:       ptr.String("__ExternalId__"),
+			},
+		},
+		Capabilities: map[string]types.CapabilityConfiguration{
+			"key0": {
+				Enabled: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2419,7 +2870,23 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{})
+	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ServiceId:    ptr.String("__ServiceId__"),
+		Configuration: &types.ServiceConfigurationMemberSourceAws{
+			Value: types.SourceAwsConfiguration{
+				AccountId:        ptr.String("__AccountId__"),
+				AccountType:      types.SourceAccountType("source"),
+				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
+				ExternalId:       ptr.String("__ExternalId__"),
+			},
+		},
+		Capabilities: map[string]types.CapabilityConfiguration{
+			"key0": {
+				Enabled: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2444,7 +2911,23 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{})
+	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ServiceId:    ptr.String("__ServiceId__"),
+		Configuration: &types.ServiceConfigurationMemberSourceAws{
+			Value: types.SourceAwsConfiguration{
+				AccountId:        ptr.String("__AccountId__"),
+				AccountType:      types.SourceAccountType("source"),
+				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
+				ExternalId:       ptr.String("__ExternalId__"),
+			},
+		},
+		Capabilities: map[string]types.CapabilityConfiguration{
+			"key0": {
+				Enabled: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2469,7 +2952,23 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{})
+	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ServiceId:    ptr.String("__ServiceId__"),
+		Configuration: &types.ServiceConfigurationMemberSourceAws{
+			Value: types.SourceAwsConfiguration{
+				AccountId:        ptr.String("__AccountId__"),
+				AccountType:      types.SourceAccountType("source"),
+				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
+				ExternalId:       ptr.String("__ExternalId__"),
+			},
+		},
+		Capabilities: map[string]types.CapabilityConfiguration{
+			"key0": {
+				Enabled: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2494,7 +2993,23 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{})
+	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ServiceId:    ptr.String("__ServiceId__"),
+		Configuration: &types.ServiceConfigurationMemberSourceAws{
+			Value: types.SourceAwsConfiguration{
+				AccountId:        ptr.String("__AccountId__"),
+				AccountType:      types.SourceAccountType("source"),
+				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
+				ExternalId:       ptr.String("__ExternalId__"),
+			},
+		},
+		Capabilities: map[string]types.CapabilityConfiguration{
+			"key0": {
+				Enabled: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2529,7 +3044,23 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{})
+	_, opErr := svc.AssociateService(context.Background(), &AssociateServiceInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ServiceId:    ptr.String("__ServiceId__"),
+		Configuration: &types.ServiceConfigurationMemberSourceAws{
+			Value: types.SourceAwsConfiguration{
+				AccountId:        ptr.String("__AccountId__"),
+				AccountType:      types.SourceAccountType("source"),
+				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
+				ExternalId:       ptr.String("__ExternalId__"),
+			},
+		},
+		Capabilities: map[string]types.CapabilityConfiguration{
+			"key0": {
+				Enabled: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

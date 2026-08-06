@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"creationDateTime":946684800,"failureReasons":["__Member__","__Member__"],"lastUpdatedDataTime":946684800,"target":{"botAliasTarget":{"botAliasId":"__BotAliasId__","botId":"__BotId__","localeId":"__LocaleId__"}},"testSetDiscrepancyRawOutputUrl":"__TestSetDiscrepancyRawOutputUrl__","testSetDiscrepancyReportId":"__TestSetDiscrepancyReportId__","testSetDiscrepancyReportStatus":"InProgress","testSetDiscrepancyTopErrors":{"intentDiscrepancies":[{"errorMessage":"__ErrorMessage__","intentName":"__IntentName__"},{"errorMessage":"__ErrorMessage__","intentName":"__IntentName__"}],"slotDiscrepancies":[{"errorMessage":"__ErrorMessage__","intentName":"__IntentName__","slotName":"__SlotName__"},{"errorMessage":"__ErrorMessage__","intentName":"__IntentName__","slotName":"__SlotName__"}]},"testSetId":"__TestSetId__"}

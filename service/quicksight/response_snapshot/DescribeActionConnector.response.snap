@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ActionConnector":{"ActionConnectorId":"__ActionConnectorId__","Arn":"__Arn__","AuthenticationConfig":{"AuthenticationMetadata":{"AuthorizationCodeGrantMetadata":{"AuthorizationCodeGrantCredentialsSource":"PLAIN_CREDENTIALS","BaseEndpoint":"__BaseEndpoint__","ReadAuthorizationCodeGrantCredentialsDetails":{"ReadAuthorizationCodeGrantDetails":{"AuthorizationEndpoint":"__AuthorizationEndpoint__","ClientId":"__ClientId__","TokenEndpoint":"__TokenEndpoint__"}},"RedirectUrl":"__RedirectUrl__"}},"AuthenticationType":"BASIC"},"CreatedTime":946684800,"Description":"__Description__","EnabledActions":["__Member__","__Member__"],"Error":{"Message":"__Message__","Type":"INTERNAL_FAILURE"},"LastUpdatedTime":946684800,"Name":"__Name__","Status":"CREATION_IN_PROGRESS","Type":"GENERIC_HTTP","VpcConnectionArn":"__VpcConnectionArn__"},"RequestId":"__RequestId__","Status":200}

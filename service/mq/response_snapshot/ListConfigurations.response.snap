@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configurations":[{"arn":"__Arn__","authenticationStrategy":"SIMPLE","created":"2000-01-01T00:00:00Z","description":"__Description__","engineType":"ACTIVEMQ","engineVersion":"__EngineVersion__","id":"__Id__","latestRevision":{"created":"2000-01-01T00:00:00Z","description":"__Description__","revision":1},"name":"__Name__","tags":{"key0":"__Value__"}},{"arn":"__Arn__","authenticationStrategy":"SIMPLE","created":"2000-01-01T00:00:00Z","description":"__Description__","engineType":"ACTIVEMQ","engineVersion":"__EngineVersion__","id":"__Id__","latestRevision":{"created":"2000-01-01T00:00:00Z","description":"__Description__","revision":1},"name":"__Name__","tags":{"key0":"__Value__"}}],"maxResults":1,"nextToken":"__NextToken__"}

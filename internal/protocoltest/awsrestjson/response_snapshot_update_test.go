@@ -5,12 +5,15 @@
 package awsrestjson
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/document"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
 	smithy "github.com/aws/smithy-go"
+	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"github.com/aws/smithy-go/transport/http/protocol/restjson1"
@@ -33,6 +36,11 @@ func serdeRespCreatePath(path string) (*os.File, error) {
 }
 
 func serdeRespWriteSnapshot(op string, status int, header http.Header, body []byte) error {
+	if es, eh, eb, err := serdeRespReadSnapshot(op); err == nil &&
+		es == status && serdeRespHeaderEqual(eh, header) && bytes.Equal(body, eb) {
+		return nil
+	}
+
 	f, err := serdeRespCreatePath(serdeRespSSPath(op))
 	if err != nil {
 		return err
@@ -61,11 +69,64 @@ func serdeRespWriteSnapshot(op string, status int, header http.Header, body []by
 	return err
 }
 
-// serdeRespXMLErrorEnvelope wraps serialized error members in the XML
-// error envelope the restXml/query deserializers parse:
-// <ErrorResponse><Error><Code>CODE</Code>MEMBERS</Error></ErrorResponse>.
-// It strips the serialized body's outer root element and re-parents the
-// members under <Error>.
+func serdeRespHeaderEqual(a, b http.Header) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for k, av := range a {
+		bv, ok := b[k]
+		if !ok || !slices.Equal(av, bv) {
+			return false
+		}
+	}
+	return true
+}
+
+// inject __type into cbor since our error "serializers" don't like a real response would have
+func serdeRespSpliceCBORType(t *testing.T, body []byte, code string) []byte {
+	pair := append(
+		smithycbor.Encode(smithycbor.String("__type")),
+		smithycbor.Encode(smithycbor.String(code))...,
+	)
+	if len(body) == 0 {
+		return append(append([]byte{0xbf}, pair...), 0xff)
+	}
+
+	if body[0] != 0xbf {
+		t.Fatalf("expected cbor indefinite map header, got %#x", body[0])
+	}
+
+	out := make([]byte, 0, len(body)+len(pair))
+	out = append(out, 0xbf)
+	out = append(out, pair...)
+	return append(out, body[1:]...)
+}
+
+// inject __type into json since our error "serializers" don't like a real response would have
+func serdeRespSpliceJSONType(t *testing.T, body []byte, code string) []byte {
+	quoted, err := json.Marshal(code)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	entry := append([]byte(`"__type":`), quoted...)
+	trimmed := bytes.TrimLeft(body, " \t\r\n")
+	if len(trimmed) == 0 {
+		return append(append([]byte{'{'}, entry...), '}')
+	}
+	if trimmed[0] != '{' {
+		t.Fatalf("expected json object body, got %q", trimmed[0])
+	}
+
+	rest := bytes.TrimLeft(trimmed[1:], " \t\r\n")
+	out := append([]byte{'{'}, entry...)
+	if len(rest) > 0 && rest[0] != '}' {
+		out = append(out, ',')
+	}
+	return append(out, rest...)
+}
+
+// inject the xml envelope since our error "serializers" don't like a real response woul have
 func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	inner := ""
 	s := strings.TrimSpace(string(body))
@@ -196,7 +257,7 @@ func TestUpdateResponseSnapshot_DatetimeOffsets(t *testing.T) {
 func TestUpdateResponseSnapshot_DocumentType(t *testing.T) {
 	want := &DocumentTypeOutput{
 		StringValue:   ptr.String("__StringValue__"),
-		DocumentValue: nil,
+		DocumentValue: document.NewLazyDocument("__Document__"),
 	}
 	proto := restjson1.New(schemas.RestJson)
 	opSchema := smithy.NewOperationSchema(schemas.DocumentType, schemas.DocumentTypeInputOutput, schemas.DocumentTypeInputOutput)
@@ -221,7 +282,7 @@ func TestUpdateResponseSnapshot_DocumentType(t *testing.T) {
 func TestUpdateResponseSnapshot_DocumentTypeAsMapValue(t *testing.T) {
 	want := &DocumentTypeAsMapValueOutput{
 		DocValuedMap: map[string]document.Interface{
-			"key0": nil,
+			"key0": document.NewLazyDocument("__Document__"),
 		},
 	}
 	proto := restjson1.New(schemas.RestJson)
@@ -246,7 +307,7 @@ func TestUpdateResponseSnapshot_DocumentTypeAsMapValue(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DocumentTypeAsPayload(t *testing.T) {
 	want := &DocumentTypeAsPayloadOutput{
-		DocumentValue: nil,
+		DocumentValue: document.NewLazyDocument("__Document__"),
 	}
 	proto := restjson1.New(schemas.RestJson)
 	opSchema := smithy.NewOperationSchema(schemas.DocumentTypeAsPayload, schemas.DocumentTypeAsPayloadInputOutput, schemas.DocumentTypeAsPayloadInputOutput)
@@ -428,33 +489,6 @@ func TestUpdateResponseSnapshot_HttpChecksumRequired(t *testing.T) {
 	}
 }
 
-func TestUpdateResponseSnapshot_HttpEmptyPrefixHeaders(t *testing.T) {
-	want := &HttpEmptyPrefixHeadersOutput{
-		PrefixHeaders: map[string]string{
-			"key0": "__Value__",
-		},
-		SpecificHeader: ptr.String("__SpecificHeader__"),
-	}
-	proto := restjson1.New(schemas.RestJson)
-	opSchema := smithy.NewOperationSchema(schemas.HttpEmptyPrefixHeaders, schemas.HttpEmptyPrefixHeadersOutput, schemas.HttpEmptyPrefixHeadersOutput)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	if err := serdeRespWriteSnapshot("HttpEmptyPrefixHeaders.response", 200, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateResponseSnapshot_HttpEnumPayload(t *testing.T) {
 	want := &HttpEnumPayloadOutput{
 		Payload: types.StringEnum("enumvalue"),
@@ -609,32 +643,6 @@ func TestUpdateResponseSnapshot_HttpPrefixHeaders(t *testing.T) {
 	}
 }
 
-func TestUpdateResponseSnapshot_HttpPrefixHeadersInResponse(t *testing.T) {
-	want := &HttpPrefixHeadersInResponseOutput{
-		PrefixHeaders: map[string]string{
-			"key0": "__Value__",
-		},
-	}
-	proto := restjson1.New(schemas.RestJson)
-	opSchema := smithy.NewOperationSchema(schemas.HttpPrefixHeadersInResponse, schemas.HttpPrefixHeadersInResponseOutput, schemas.HttpPrefixHeadersInResponseOutput)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	if err := serdeRespWriteSnapshot("HttpPrefixHeadersInResponse.response", 200, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateResponseSnapshot_HttpQueryParamsOnlyOperation(t *testing.T) {
 	want := &HttpQueryParamsOnlyOperationOutput{}
 	proto := restjson1.New(schemas.RestJson)
@@ -769,7 +777,7 @@ func TestUpdateResponseSnapshot_HttpRequestWithRegexLiteral(t *testing.T) {
 
 func TestUpdateResponseSnapshot_HttpResponseCode(t *testing.T) {
 	want := &HttpResponseCodeOutput{
-		Status: ptr.Int32(1),
+		Status: ptr.Int32(200),
 	}
 	proto := restjson1.New(schemas.RestJson)
 	opSchema := smithy.NewOperationSchema(schemas.HttpResponseCode, schemas.HttpResponseCodeOutput, schemas.HttpResponseCodeOutput)
@@ -811,30 +819,6 @@ func TestUpdateResponseSnapshot_HttpStringPayload(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("HttpStringPayload.response", 200, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateResponseSnapshot_IgnoreQueryParamsInResponse(t *testing.T) {
-	want := &IgnoreQueryParamsInResponseOutput{
-		Baz: ptr.String("__Baz__"),
-	}
-	proto := restjson1.New(schemas.RestJson)
-	opSchema := smithy.NewOperationSchema(schemas.IgnoreQueryParamsInResponse, schemas.IgnoreQueryParamsInResponseOutput, schemas.IgnoreQueryParamsInResponseOutput)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	if err := serdeRespWriteSnapshot("IgnoreQueryParamsInResponse.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2079,11 +2063,11 @@ func TestUpdateResponseSnapshot_OperationWithDefaults(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		DefaultDocumentMap:     nil,
-		DefaultDocumentString:  nil,
-		DefaultDocumentBoolean: nil,
-		DefaultDocumentList:    nil,
-		DefaultNullDocument:    nil,
+		DefaultDocumentMap:     document.NewLazyDocument("__Document__"),
+		DefaultDocumentString:  document.NewLazyDocument("__Document__"),
+		DefaultDocumentBoolean: document.NewLazyDocument("__Document__"),
+		DefaultDocumentList:    document.NewLazyDocument("__Document__"),
+		DefaultNullDocument:    document.NewLazyDocument("__Document__"),
 		DefaultTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		DefaultBlob:            []byte("blob"),
 		DefaultByte:            ptr.Int8(1),
@@ -2376,7 +2360,7 @@ func TestUpdateResponseSnapshot_ResponseCodeHttpFallback(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ResponseCodeRequired(t *testing.T) {
 	want := &ResponseCodeRequiredOutput{
-		ResponseCode: ptr.Int32(1),
+		ResponseCode: ptr.Int32(200),
 	}
 	proto := restjson1.New(schemas.RestJson)
 	opSchema := smithy.NewOperationSchema(schemas.ResponseCodeRequired, schemas.ResponseCodeRequiredOutput, schemas.ResponseCodeRequiredOutput)
@@ -2507,7 +2491,8 @@ func TestUpdateResponseSnapshot_SparseJsonMaps(t *testing.T) {
 
 func TestUpdateResponseSnapshot_StreamingTraits(t *testing.T) {
 	want := &StreamingTraitsOutput{
-		Foo: ptr.String("__Foo__"),
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
 	}
 	proto := restjson1.New(schemas.RestJson)
 	opSchema := smithy.NewOperationSchema(schemas.StreamingTraits, schemas.StreamingTraitsInputOutput, schemas.StreamingTraitsInputOutput)
@@ -2553,7 +2538,8 @@ func TestUpdateResponseSnapshot_StreamingTraitsRequireLength(t *testing.T) {
 
 func TestUpdateResponseSnapshot_StreamingTraitsWithMediaType(t *testing.T) {
 	want := &StreamingTraitsWithMediaTypeOutput{
-		Foo: ptr.String("__Foo__"),
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
 	}
 	proto := restjson1.New(schemas.RestJson)
 	opSchema := smithy.NewOperationSchema(schemas.StreamingTraitsWithMediaType, schemas.StreamingTraitsWithMediaTypeInputOutput, schemas.StreamingTraitsWithMediaTypeInputOutput)
@@ -2825,9 +2811,7 @@ func TestUpdateResponseSnapshot_Error_ComplexError(t *testing.T) {
 		}
 		body = b
 	}
-	// Route to the modeled error via the standard error-type header; the serialized JSON members
-	// remain the body for the error deserializer.
-	built.Header.Set("X-Amzn-ErrorType", want.ErrorCode())
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ComplexError.error", 403, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2850,9 +2834,7 @@ func TestUpdateResponseSnapshot_Error_FooError(t *testing.T) {
 		}
 		body = b
 	}
-	// Route to the modeled error via the standard error-type header; the serialized JSON members
-	// remain the body for the error deserializer.
-	built.Header.Set("X-Amzn-ErrorType", want.ErrorCode())
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("FooError.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2877,9 +2859,7 @@ func TestUpdateResponseSnapshot_Error_InvalidGreeting(t *testing.T) {
 		}
 		body = b
 	}
-	// Route to the modeled error via the standard error-type header; the serialized JSON members
-	// remain the body for the error deserializer.
-	built.Header.Set("X-Amzn-ErrorType", want.ErrorCode())
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidGreeting.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

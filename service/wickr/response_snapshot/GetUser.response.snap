@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"firstName":"__FirstName__","isAdmin":true,"lastActivity":1,"lastLogin":1,"lastName":"__LastName__","securityGroupIds":["__Member__","__Member__"],"status":1,"suspended":true,"userId":"__UserId__","username":"__Username__"}

@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/tnb/document"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -117,7 +118,9 @@ func TestCheckResponseSnapshot_CancelSolNetworkOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelSolNetworkOperation(context.Background(), &CancelSolNetworkOperationInput{})
+	got, err := svc.CancelSolNetworkOperation(context.Background(), &CancelSolNetworkOperationInput{
+		NsLcmOpOccId: ptr.String("__NsLcmOpOccId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -145,7 +148,11 @@ func TestCheckResponseSnapshot_CreateSolFunctionPackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSolFunctionPackage(context.Background(), &CreateSolFunctionPackageInput{})
+	got, err := svc.CreateSolFunctionPackage(context.Background(), &CreateSolFunctionPackageInput{
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -172,7 +179,14 @@ func TestCheckResponseSnapshot_CreateSolNetworkInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSolNetworkInstance(context.Background(), &CreateSolNetworkInstanceInput{})
+	got, err := svc.CreateSolNetworkInstance(context.Background(), &CreateSolNetworkInstanceInput{
+		NsdInfoId:     ptr.String("__NsdInfoId__"),
+		NsName:        ptr.String("__NsName__"),
+		NsDescription: ptr.String("__NsDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -200,7 +214,11 @@ func TestCheckResponseSnapshot_CreateSolNetworkPackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSolNetworkPackage(context.Background(), &CreateSolNetworkPackageInput{})
+	got, err := svc.CreateSolNetworkPackage(context.Background(), &CreateSolNetworkPackageInput{
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -219,7 +237,9 @@ func TestCheckResponseSnapshot_DeleteSolFunctionPackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSolFunctionPackage(context.Background(), &DeleteSolFunctionPackageInput{})
+	got, err := svc.DeleteSolFunctionPackage(context.Background(), &DeleteSolFunctionPackageInput{
+		VnfPkgId: ptr.String("__VnfPkgId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -238,7 +258,9 @@ func TestCheckResponseSnapshot_DeleteSolNetworkInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSolNetworkInstance(context.Background(), &DeleteSolNetworkInstanceInput{})
+	got, err := svc.DeleteSolNetworkInstance(context.Background(), &DeleteSolNetworkInstanceInput{
+		NsInstanceId: ptr.String("__NsInstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -257,7 +279,9 @@ func TestCheckResponseSnapshot_DeleteSolNetworkPackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSolNetworkPackage(context.Background(), &DeleteSolNetworkPackageInput{})
+	got, err := svc.DeleteSolNetworkPackage(context.Background(), &DeleteSolNetworkPackageInput{
+		NsdInfoId: ptr.String("__NsdInfoId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -312,7 +336,9 @@ func TestCheckResponseSnapshot_GetSolFunctionInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSolFunctionInstance(context.Background(), &GetSolFunctionInstanceInput{})
+	got, err := svc.GetSolFunctionInstance(context.Background(), &GetSolFunctionInstanceInput{
+		VnfInstanceId: ptr.String("__VnfInstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -360,7 +386,9 @@ func TestCheckResponseSnapshot_GetSolFunctionPackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSolFunctionPackage(context.Background(), &GetSolFunctionPackageInput{})
+	got, err := svc.GetSolFunctionPackage(context.Background(), &GetSolFunctionPackageInput{
+		VnfPkgId: ptr.String("__VnfPkgId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -382,7 +410,10 @@ func TestCheckResponseSnapshot_GetSolFunctionPackageContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSolFunctionPackageContent(context.Background(), &GetSolFunctionPackageContentInput{})
+	got, err := svc.GetSolFunctionPackageContent(context.Background(), &GetSolFunctionPackageContentInput{
+		VnfPkgId: ptr.String("__VnfPkgId__"),
+		Accept:   types.PackageContentType("application/zip"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -404,7 +435,10 @@ func TestCheckResponseSnapshot_GetSolFunctionPackageDescriptor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSolFunctionPackageDescriptor(context.Background(), &GetSolFunctionPackageDescriptorInput{})
+	got, err := svc.GetSolFunctionPackageDescriptor(context.Background(), &GetSolFunctionPackageDescriptorInput{
+		VnfPkgId: ptr.String("__VnfPkgId__"),
+		Accept:   types.DescriptorContentType("text/plain"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -441,7 +475,9 @@ func TestCheckResponseSnapshot_GetSolNetworkInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSolNetworkInstance(context.Background(), &GetSolNetworkInstanceInput{})
+	got, err := svc.GetSolNetworkInstance(context.Background(), &GetSolNetworkInstanceInput{
+		NsInstanceId: ptr.String("__NsInstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,15 +501,15 @@ func TestCheckResponseSnapshot_GetSolNetworkOperation(t *testing.T) {
 		Metadata: &types.GetSolNetworkOperationMetadata{
 			UpdateNsMetadata: &types.UpdateNsMetadata{
 				NsdInfoId:             ptr.String("__NsdInfoId__"),
-				AdditionalParamsForNs: nil,
+				AdditionalParamsForNs: document.NewLazyDocument("__Document__"),
 			},
 			ModifyVnfInfoMetadata: &types.ModifyVnfInfoMetadata{
 				VnfInstanceId:             ptr.String("__VnfInstanceId__"),
-				VnfConfigurableProperties: nil,
+				VnfConfigurableProperties: document.NewLazyDocument("__Document__"),
 			},
 			InstantiateMetadata: &types.InstantiateMetadata{
 				NsdInfoId:             ptr.String("__NsdInfoId__"),
-				AdditionalParamsForNs: nil,
+				AdditionalParamsForNs: document.NewLazyDocument("__Document__"),
 			},
 			CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -518,7 +554,9 @@ func TestCheckResponseSnapshot_GetSolNetworkOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSolNetworkOperation(context.Background(), &GetSolNetworkOperationInput{})
+	got, err := svc.GetSolNetworkOperation(context.Background(), &GetSolNetworkOperationInput{
+		NsLcmOpOccId: ptr.String("__NsLcmOpOccId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -569,7 +607,9 @@ func TestCheckResponseSnapshot_GetSolNetworkPackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSolNetworkPackage(context.Background(), &GetSolNetworkPackageInput{})
+	got, err := svc.GetSolNetworkPackage(context.Background(), &GetSolNetworkPackageInput{
+		NsdInfoId: ptr.String("__NsdInfoId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -591,7 +631,10 @@ func TestCheckResponseSnapshot_GetSolNetworkPackageContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSolNetworkPackageContent(context.Background(), &GetSolNetworkPackageContentInput{})
+	got, err := svc.GetSolNetworkPackageContent(context.Background(), &GetSolNetworkPackageContentInput{
+		NsdInfoId: ptr.String("__NsdInfoId__"),
+		Accept:    types.PackageContentType("application/zip"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -613,7 +656,9 @@ func TestCheckResponseSnapshot_GetSolNetworkPackageDescriptor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSolNetworkPackageDescriptor(context.Background(), &GetSolNetworkPackageDescriptorInput{})
+	got, err := svc.GetSolNetworkPackageDescriptor(context.Background(), &GetSolNetworkPackageDescriptorInput{
+		NsdInfoId: ptr.String("__NsdInfoId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -637,7 +682,14 @@ func TestCheckResponseSnapshot_InstantiateSolNetworkInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InstantiateSolNetworkInstance(context.Background(), &InstantiateSolNetworkInstanceInput{})
+	got, err := svc.InstantiateSolNetworkInstance(context.Background(), &InstantiateSolNetworkInstanceInput{
+		NsInstanceId:          ptr.String("__NsInstanceId__"),
+		DryRun:                ptr.Bool(true),
+		AdditionalParamsForNs: document.NewLazyDocument("__Document__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -690,7 +742,10 @@ func TestCheckResponseSnapshot_ListSolFunctionInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSolFunctionInstances(context.Background(), &ListSolFunctionInstancesInput{})
+	got, err := svc.ListSolFunctionInstances(context.Background(), &ListSolFunctionInstancesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -743,7 +798,10 @@ func TestCheckResponseSnapshot_ListSolFunctionPackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSolFunctionPackages(context.Background(), &ListSolFunctionPackagesInput{})
+	got, err := svc.ListSolFunctionPackages(context.Background(), &ListSolFunctionPackagesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -792,7 +850,10 @@ func TestCheckResponseSnapshot_ListSolNetworkInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSolNetworkInstances(context.Background(), &ListSolNetworkInstancesInput{})
+	got, err := svc.ListSolNetworkInstances(context.Background(), &ListSolNetworkInstancesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -851,7 +912,11 @@ func TestCheckResponseSnapshot_ListSolNetworkOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSolNetworkOperations(context.Background(), &ListSolNetworkOperationsInput{})
+	got, err := svc.ListSolNetworkOperations(context.Background(), &ListSolNetworkOperationsInput{
+		NsInstanceId: ptr.String("__NsInstanceId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -914,7 +979,10 @@ func TestCheckResponseSnapshot_ListSolNetworkPackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSolNetworkPackages(context.Background(), &ListSolNetworkPackagesInput{})
+	got, err := svc.ListSolNetworkPackages(context.Background(), &ListSolNetworkPackagesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -937,7 +1005,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -976,7 +1046,11 @@ func TestCheckResponseSnapshot_PutSolFunctionPackageContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSolFunctionPackageContent(context.Background(), &PutSolFunctionPackageContentInput{})
+	got, err := svc.PutSolFunctionPackageContent(context.Background(), &PutSolFunctionPackageContentInput{
+		VnfPkgId:    ptr.String("__VnfPkgId__"),
+		ContentType: types.PackageContentType("application/zip"),
+		File:        []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1019,7 +1093,11 @@ func TestCheckResponseSnapshot_PutSolNetworkPackageContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSolNetworkPackageContent(context.Background(), &PutSolNetworkPackageContentInput{})
+	got, err := svc.PutSolNetworkPackageContent(context.Background(), &PutSolNetworkPackageContentInput{
+		NsdInfoId:   ptr.String("__NsdInfoId__"),
+		ContentType: types.PackageContentType("application/zip"),
+		File:        []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1038,7 +1116,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1062,7 +1145,12 @@ func TestCheckResponseSnapshot_TerminateSolNetworkInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateSolNetworkInstance(context.Background(), &TerminateSolNetworkInstanceInput{})
+	got, err := svc.TerminateSolNetworkInstance(context.Background(), &TerminateSolNetworkInstanceInput{
+		NsInstanceId: ptr.String("__NsInstanceId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1081,7 +1169,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1102,7 +1196,10 @@ func TestCheckResponseSnapshot_UpdateSolFunctionPackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSolFunctionPackage(context.Background(), &UpdateSolFunctionPackageInput{})
+	got, err := svc.UpdateSolFunctionPackage(context.Background(), &UpdateSolFunctionPackageInput{
+		VnfPkgId:         ptr.String("__VnfPkgId__"),
+		OperationalState: types.OperationalState("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1126,7 +1223,21 @@ func TestCheckResponseSnapshot_UpdateSolNetworkInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSolNetworkInstance(context.Background(), &UpdateSolNetworkInstanceInput{})
+	got, err := svc.UpdateSolNetworkInstance(context.Background(), &UpdateSolNetworkInstanceInput{
+		NsInstanceId: ptr.String("__NsInstanceId__"),
+		UpdateType:   types.UpdateSolNetworkType("MODIFY_VNF_INFORMATION"),
+		ModifyVnfInfoData: &types.UpdateSolNetworkModify{
+			VnfInstanceId:             ptr.String("__VnfInstanceId__"),
+			VnfConfigurableProperties: document.NewLazyDocument("__Document__"),
+		},
+		UpdateNs: &types.UpdateSolNetworkServiceData{
+			NsdInfoId:             ptr.String("__NsdInfoId__"),
+			AdditionalParamsForNs: document.NewLazyDocument("__Document__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1147,7 +1258,10 @@ func TestCheckResponseSnapshot_UpdateSolNetworkPackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSolNetworkPackage(context.Background(), &UpdateSolNetworkPackageInput{})
+	got, err := svc.UpdateSolNetworkPackage(context.Background(), &UpdateSolNetworkPackageInput{
+		NsdInfoId:           ptr.String("__NsdInfoId__"),
+		NsdOperationalState: types.NsdOperationalState("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1186,7 +1300,11 @@ func TestCheckResponseSnapshot_ValidateSolFunctionPackageContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidateSolFunctionPackageContent(context.Background(), &ValidateSolFunctionPackageContentInput{})
+	got, err := svc.ValidateSolFunctionPackageContent(context.Background(), &ValidateSolFunctionPackageContentInput{
+		VnfPkgId:    ptr.String("__VnfPkgId__"),
+		ContentType: types.PackageContentType("application/zip"),
+		File:        []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1229,7 +1347,11 @@ func TestCheckResponseSnapshot_ValidateSolNetworkPackageContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidateSolNetworkPackageContent(context.Background(), &ValidateSolNetworkPackageContentInput{})
+	got, err := svc.ValidateSolNetworkPackageContent(context.Background(), &ValidateSolNetworkPackageContentInput{
+		NsdInfoId:   ptr.String("__NsdInfoId__"),
+		ContentType: types.PackageContentType("application/zip"),
+		File:        []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1250,7 +1372,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelSolNetworkOperation(context.Background(), &CancelSolNetworkOperationInput{})
+	_, opErr := svc.CancelSolNetworkOperation(context.Background(), &CancelSolNetworkOperationInput{
+		NsLcmOpOccId: ptr.String("__NsLcmOpOccId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1275,7 +1399,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelSolNetworkOperation(context.Background(), &CancelSolNetworkOperationInput{})
+	_, opErr := svc.CancelSolNetworkOperation(context.Background(), &CancelSolNetworkOperationInput{
+		NsLcmOpOccId: ptr.String("__NsLcmOpOccId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1300,7 +1426,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelSolNetworkOperation(context.Background(), &CancelSolNetworkOperationInput{})
+	_, opErr := svc.CancelSolNetworkOperation(context.Background(), &CancelSolNetworkOperationInput{
+		NsLcmOpOccId: ptr.String("__NsLcmOpOccId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1325,7 +1453,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSolFunctionPackage(context.Background(), &CreateSolFunctionPackageInput{})
+	_, opErr := svc.CreateSolFunctionPackage(context.Background(), &CreateSolFunctionPackageInput{
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1350,7 +1482,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelSolNetworkOperation(context.Background(), &CancelSolNetworkOperationInput{})
+	_, opErr := svc.CancelSolNetworkOperation(context.Background(), &CancelSolNetworkOperationInput{
+		NsLcmOpOccId: ptr.String("__NsLcmOpOccId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1375,7 +1509,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelSolNetworkOperation(context.Background(), &CancelSolNetworkOperationInput{})
+	_, opErr := svc.CancelSolNetworkOperation(context.Background(), &CancelSolNetworkOperationInput{
+		NsLcmOpOccId: ptr.String("__NsLcmOpOccId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

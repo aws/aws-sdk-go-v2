@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/document"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -117,7 +118,9 @@ func TestCheckResponseSnapshot_ContentTypeParameters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ContentTypeParameters(context.Background(), &ContentTypeParametersInput{})
+	got, err := svc.ContentTypeParameters(context.Background(), &ContentTypeParametersInput{
+		Value: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +177,9 @@ func TestCheckResponseSnapshot_EndpointWithHostLabelOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EndpointWithHostLabelOperation(context.Background(), &EndpointWithHostLabelOperationInput{})
+	got, err := svc.EndpointWithHostLabelOperation(context.Background(), &EndpointWithHostLabelOperationInput{
+		Label: ptr.String("Label-value"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -195,7 +200,9 @@ func TestCheckResponseSnapshot_GreetingWithErrors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GreetingWithErrors(context.Background(), &GreetingWithErrorsInput{})
+	got, err := svc.GreetingWithErrors(context.Background(), &GreetingWithErrorsInput{
+		Greeting: ptr.String("__Greeting__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +244,11 @@ func TestCheckResponseSnapshot_JsonUnions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JsonUnions(context.Background(), &JsonUnionsInput{})
+	got, err := svc.JsonUnions(context.Background(), &JsonUnionsInput{
+		Contents: &types.MyUnionMemberStringValue{
+			Value: "__MyUnionMemberStringValue__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -292,11 +303,11 @@ func TestCheckResponseSnapshot_OperationWithDefaults(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		DefaultDocumentMap:     nil,
-		DefaultDocumentString:  nil,
-		DefaultDocumentBoolean: nil,
-		DefaultDocumentList:    nil,
-		DefaultNullDocument:    nil,
+		DefaultDocumentMap:     document.NewLazyDocument("__Document__"),
+		DefaultDocumentString:  document.NewLazyDocument("__Document__"),
+		DefaultDocumentBoolean: document.NewLazyDocument("__Document__"),
+		DefaultDocumentList:    document.NewLazyDocument("__Document__"),
+		DefaultNullDocument:    document.NewLazyDocument("__Document__"),
 		DefaultTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		DefaultBlob:            []byte("blob"),
 		DefaultByte:            ptr.Int8(1),
@@ -328,7 +339,48 @@ func TestCheckResponseSnapshot_OperationWithDefaults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OperationWithDefaults(context.Background(), &OperationWithDefaultsInput{})
+	got, err := svc.OperationWithDefaults(context.Background(), &OperationWithDefaultsInput{
+		Defaults: &types.Defaults{
+			DefaultString:  ptr.String("__DefaultString__"),
+			DefaultBoolean: ptr.Bool(true),
+			DefaultList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			DefaultDocumentMap:     document.NewLazyDocument("__Document__"),
+			DefaultDocumentString:  document.NewLazyDocument("__Document__"),
+			DefaultDocumentBoolean: document.NewLazyDocument("__Document__"),
+			DefaultDocumentList:    document.NewLazyDocument("__Document__"),
+			DefaultNullDocument:    document.NewLazyDocument("__Document__"),
+			DefaultTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DefaultBlob:            []byte("blob"),
+			DefaultByte:            ptr.Int8(1),
+			DefaultShort:           ptr.Int16(1),
+			DefaultInteger:         ptr.Int32(1),
+			DefaultLong:            ptr.Int64(1),
+			DefaultFloat:           ptr.Float32(1.0),
+			DefaultDouble:          ptr.Float64(1.0),
+			DefaultMap: map[string]string{
+				"key0": "__Value__",
+			},
+			DefaultEnum:    types.TestEnum("FOO"),
+			DefaultIntEnum: types.TestIntEnum(1),
+			EmptyString:    ptr.String("__EmptyString__"),
+			FalseBoolean:   true,
+			EmptyBlob:      []byte("blob"),
+			ZeroByte:       1,
+			ZeroShort:      1,
+			ZeroInteger:    1,
+			ZeroLong:       1,
+			ZeroFloat:      1.0,
+			ZeroDouble:     1.0,
+		},
+		ClientOptionalDefaults: &types.ClientOptionalDefaults{
+			Member: ptr.Int32(1),
+		},
+		TopLevelDefault:      ptr.String("__TopLevelDefault__"),
+		OtherTopLevelDefault: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -380,7 +432,42 @@ func TestCheckResponseSnapshot_OperationWithNestedStructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OperationWithNestedStructure(context.Background(), &OperationWithNestedStructureInput{})
+	got, err := svc.OperationWithNestedStructure(context.Background(), &OperationWithNestedStructureInput{
+		TopLevel: &types.TopLevel{
+			Dialog: &types.Dialog{
+				Language: ptr.String("__Language__"),
+				Greeting: ptr.String("__Greeting__"),
+				Farewell: &types.Farewell{
+					Phrase: ptr.String("__Phrase__"),
+				},
+			},
+			DialogList: []types.Dialog{
+				{
+					Language: ptr.String("__Language__"),
+					Greeting: ptr.String("__Greeting__"),
+					Farewell: &types.Farewell{
+						Phrase: ptr.String("__Phrase__"),
+					},
+				},
+				{
+					Language: ptr.String("__Language__"),
+					Greeting: ptr.String("__Greeting__"),
+					Farewell: &types.Farewell{
+						Phrase: ptr.String("__Phrase__"),
+					},
+				},
+			},
+			DialogMap: map[string]types.Dialog{
+				"key0": {
+					Language: ptr.String("__Language__"),
+					Greeting: ptr.String("__Greeting__"),
+					Farewell: &types.Farewell{
+						Phrase: ptr.String("__Phrase__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -475,7 +562,10 @@ func TestCheckResponseSnapshot_PutWithContentEncoding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutWithContentEncoding(context.Background(), &PutWithContentEncodingInput{})
+	got, err := svc.PutWithContentEncoding(context.Background(), &PutWithContentEncodingInput{
+		Encoding: ptr.String("__Encoding__"),
+		Data:     ptr.String("__Data__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -516,7 +606,10 @@ func TestCheckResponseSnapshot_SimpleScalarProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SimpleScalarProperties(context.Background(), &SimpleScalarPropertiesInput{})
+	got, err := svc.SimpleScalarProperties(context.Background(), &SimpleScalarPropertiesInput{
+		FloatValue:  ptr.Float32(1.0),
+		DoubleValue: ptr.Float64(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -540,7 +633,9 @@ func TestCheckResponseSnapshot_Error_ComplexError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GreetingWithErrors(context.Background(), &GreetingWithErrorsInput{})
+	_, opErr := svc.GreetingWithErrors(context.Background(), &GreetingWithErrorsInput{
+		Greeting: ptr.String("__Greeting__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -563,7 +658,9 @@ func TestCheckResponseSnapshot_Error_FooError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GreetingWithErrors(context.Background(), &GreetingWithErrorsInput{})
+	_, opErr := svc.GreetingWithErrors(context.Background(), &GreetingWithErrorsInput{
+		Greeting: ptr.String("__Greeting__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -588,7 +685,9 @@ func TestCheckResponseSnapshot_Error_InvalidGreeting(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GreetingWithErrors(context.Background(), &GreetingWithErrorsInput{})
+	_, opErr := svc.GreetingWithErrors(context.Background(), &GreetingWithErrorsInput{
+		Greeting: ptr.String("__Greeting__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

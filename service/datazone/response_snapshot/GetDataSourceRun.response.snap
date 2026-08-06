@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":"2000-01-01T00:00:00Z","dataSourceConfigurationSnapshot":"__DataSourceConfigurationSnapshot__","dataSourceId":"__DataSourceId__","domainId":"__DomainId__","errorMessage":{"errorDetail":"__ErrorDetail__","errorType":"ACCESS_DENIED_EXCEPTION"},"id":"__Id__","lineageSummary":{"importStatus":"IN_PROGRESS"},"projectId":"__ProjectId__","runStatisticsForAssets":{"added":1,"failed":1,"skipped":1,"unchanged":1,"updated":1},"startedAt":"2000-01-01T00:00:00Z","status":"REQUESTED","stoppedAt":"2000-01-01T00:00:00Z","type":"PRIORITIZED","updatedAt":"2000-01-01T00:00:00Z"}

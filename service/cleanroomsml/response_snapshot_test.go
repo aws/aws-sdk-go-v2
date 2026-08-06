@@ -117,7 +117,11 @@ func TestCheckResponseSnapshot_CancelTrainedModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelTrainedModel(context.Background(), &CancelTrainedModelInput{})
+	got, err := svc.CancelTrainedModel(context.Background(), &CancelTrainedModelInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		TrainedModelArn:      ptr.String("__TrainedModelArn__"),
+		VersionIdentifier:    ptr.String("__VersionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +140,10 @@ func TestCheckResponseSnapshot_CancelTrainedModelInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelTrainedModelInferenceJob(context.Background(), &CancelTrainedModelInferenceJobInput{})
+	got, err := svc.CancelTrainedModelInferenceJob(context.Background(), &CancelTrainedModelInferenceJobInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		TrainedModelInferenceJobArn: ptr.String("__TrainedModelInferenceJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,7 +164,17 @@ func TestCheckResponseSnapshot_CreateAudienceModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAudienceModel(context.Background(), &CreateAudienceModelInput{})
+	got, err := svc.CreateAudienceModel(context.Background(), &CreateAudienceModelInput{
+		TrainingDataStartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TrainingDataEndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Name:                  ptr.String("__Name__"),
+		TrainingDatasetArn:    ptr.String("__TrainingDatasetArn__"),
+		KmsKeyArn:             ptr.String("__KmsKeyArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +195,35 @@ func TestCheckResponseSnapshot_CreateConfiguredAudienceModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfiguredAudienceModel(context.Background(), &CreateConfiguredAudienceModelInput{})
+	got, err := svc.CreateConfiguredAudienceModel(context.Background(), &CreateConfiguredAudienceModelInput{
+		Name:             ptr.String("__Name__"),
+		AudienceModelArn: ptr.String("__AudienceModelArn__"),
+		OutputConfig: &types.ConfiguredAudienceModelOutputConfig{
+			Destination: &types.AudienceDestination{
+				S3Destination: &types.S3ConfigMap{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+		Description: ptr.String("__Description__"),
+		SharedAudienceMetrics: []types.SharedAudienceMetrics{
+			types.SharedAudienceMetrics("ALL"),
+			types.SharedAudienceMetrics("ALL"),
+		},
+		MinMatchingSeedSize: ptr.Int32(1),
+		AudienceSizeConfig: &types.AudienceSizeConfig{
+			AudienceSizeType: types.AudienceSizeType("ABSOLUTE"),
+			AudienceSizeBins: []int32{
+				1,
+				1,
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ChildResourceTagOnCreatePolicy: types.TagOnCreatePolicy("FROM_PARENT_RESOURCE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -199,7 +244,39 @@ func TestCheckResponseSnapshot_CreateConfiguredModelAlgorithm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfiguredModelAlgorithm(context.Background(), &CreateConfiguredModelAlgorithmInput{})
+	got, err := svc.CreateConfiguredModelAlgorithm(context.Background(), &CreateConfiguredModelAlgorithmInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		TrainingContainerConfig: &types.ContainerConfig{
+			ImageUri: ptr.String("__ImageUri__"),
+			Entrypoint: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Arguments: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MetricDefinitions: []types.MetricDefinition{
+				{
+					Name:  ptr.String("__Name__"),
+					Regex: ptr.String("__Regex__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Regex: ptr.String("__Regex__"),
+				},
+			},
+		},
+		InferenceContainerConfig: &types.InferenceContainerConfig{
+			ImageUri: ptr.String("__ImageUri__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -220,7 +297,128 @@ func TestCheckResponseSnapshot_CreateConfiguredModelAlgorithmAssociation(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfiguredModelAlgorithmAssociation(context.Background(), &CreateConfiguredModelAlgorithmAssociationInput{})
+	got, err := svc.CreateConfiguredModelAlgorithmAssociation(context.Background(), &CreateConfiguredModelAlgorithmAssociationInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		ConfiguredModelAlgorithmArn: ptr.String("__ConfiguredModelAlgorithmArn__"),
+		Name:                        ptr.String("__Name__"),
+		Description:                 ptr.String("__Description__"),
+		PrivacyConfiguration: &types.PrivacyConfiguration{
+			Policies: &types.PrivacyConfigurationPolicies{
+				TrainedModels: &types.TrainedModelsConfigurationPolicy{
+					ContainerLogs: []types.LogsConfigurationPolicy{
+						{
+							AllowedAccountIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							FilterPattern: ptr.String("__FilterPattern__"),
+							LogType:       types.LogType("ALL"),
+							LogRedactionConfiguration: &types.LogRedactionConfiguration{
+								EntitiesToRedact: []types.EntityType{
+									types.EntityType("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION"),
+									types.EntityType("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION"),
+								},
+								CustomEntityConfig: &types.CustomEntityConfig{
+									CustomDataIdentifiers: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							AllowedAccountIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							FilterPattern: ptr.String("__FilterPattern__"),
+							LogType:       types.LogType("ALL"),
+							LogRedactionConfiguration: &types.LogRedactionConfiguration{
+								EntitiesToRedact: []types.EntityType{
+									types.EntityType("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION"),
+									types.EntityType("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION"),
+								},
+								CustomEntityConfig: &types.CustomEntityConfig{
+									CustomDataIdentifiers: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+					ContainerMetrics: &types.MetricsConfigurationPolicy{
+						NoiseLevel: types.NoiseLevelType("HIGH"),
+					},
+					MaxArtifactSize: &types.TrainedModelArtifactMaxSize{
+						Unit:  types.TrainedModelArtifactMaxSizeUnitType("GB"),
+						Value: ptr.Float64(1.0),
+					},
+				},
+				TrainedModelExports: &types.TrainedModelExportsConfigurationPolicy{
+					MaxSize: &types.TrainedModelExportsMaxSize{
+						Unit:  types.TrainedModelExportsMaxSizeUnitType("GB"),
+						Value: ptr.Float64(1.0),
+					},
+					FilesToExport: []types.TrainedModelExportFileType{
+						types.TrainedModelExportFileType("MODEL"),
+						types.TrainedModelExportFileType("MODEL"),
+					},
+				},
+				TrainedModelInferenceJobs: &types.TrainedModelInferenceJobsConfigurationPolicy{
+					ContainerLogs: []types.LogsConfigurationPolicy{
+						{
+							AllowedAccountIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							FilterPattern: ptr.String("__FilterPattern__"),
+							LogType:       types.LogType("ALL"),
+							LogRedactionConfiguration: &types.LogRedactionConfiguration{
+								EntitiesToRedact: []types.EntityType{
+									types.EntityType("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION"),
+									types.EntityType("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION"),
+								},
+								CustomEntityConfig: &types.CustomEntityConfig{
+									CustomDataIdentifiers: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							AllowedAccountIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							FilterPattern: ptr.String("__FilterPattern__"),
+							LogType:       types.LogType("ALL"),
+							LogRedactionConfiguration: &types.LogRedactionConfiguration{
+								EntitiesToRedact: []types.EntityType{
+									types.EntityType("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION"),
+									types.EntityType("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION"),
+								},
+								CustomEntityConfig: &types.CustomEntityConfig{
+									CustomDataIdentifiers: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+					MaxOutputSize: &types.TrainedModelInferenceMaxOutputSize{
+						Unit:  types.TrainedModelInferenceMaxOutputSizeUnitType("GB"),
+						Value: ptr.Float64(1.0),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +439,50 @@ func TestCheckResponseSnapshot_CreateMLInputChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMLInputChannel(context.Background(), &CreateMLInputChannelInput{})
+	got, err := svc.CreateMLInputChannel(context.Background(), &CreateMLInputChannelInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		ConfiguredModelAlgorithmAssociations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InputChannel: &types.InputChannel{
+			DataSource: &types.InputChannelDataSourceMemberProtectedQueryInputParameters{
+				Value: types.ProtectedQueryInputParameters{
+					SqlParameters: &types.ProtectedQuerySQLParameters{
+						QueryString:         ptr.String("__QueryString__"),
+						AnalysisTemplateArn: ptr.String("__AnalysisTemplateArn__"),
+						Parameters: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					ComputeConfiguration: &types.ComputeConfigurationMemberWorker{
+						Value: types.WorkerComputeConfiguration{
+							Type:   types.WorkerComputeType("CR.1X"),
+							Number: ptr.Int32(1),
+							Properties: &types.WorkerComputeConfigurationPropertiesMemberSpark{
+								Value: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+						},
+					},
+					ResultFormat: types.ResultFormat("CSV"),
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+		Name:            ptr.String("__Name__"),
+		RetentionInDays: ptr.Int32(1),
+		Description:     ptr.String("__Description__"),
+		KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PayerConfiguration: &types.PayerConfiguration{
+			ComputePayerAccountId:       ptr.String("__ComputePayerAccountId__"),
+			SyntheticDataPayerAccountId: ptr.String("__SyntheticDataPayerAccountId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -263,7 +504,56 @@ func TestCheckResponseSnapshot_CreateTrainedModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrainedModel(context.Background(), &CreateTrainedModelInput{})
+	got, err := svc.CreateTrainedModel(context.Background(), &CreateTrainedModelInput{
+		MembershipIdentifier:                   ptr.String("__MembershipIdentifier__"),
+		Name:                                   ptr.String("__Name__"),
+		ConfiguredModelAlgorithmAssociationArn: ptr.String("__ConfiguredModelAlgorithmAssociationArn__"),
+		Hyperparameters: map[string]string{
+			"key0": "__Value__",
+		},
+		Environment: map[string]string{
+			"key0": "__Value__",
+		},
+		ResourceConfig: &types.ResourceConfig{
+			InstanceCount:  ptr.Int32(1),
+			InstanceType:   types.InstanceType("ml.m4.xlarge"),
+			VolumeSizeInGB: ptr.Int32(1),
+		},
+		StoppingCondition: &types.StoppingCondition{
+			MaxRuntimeInSeconds: ptr.Int32(1),
+		},
+		IncrementalTrainingDataChannels: []types.IncrementalTrainingDataChannel{
+			{
+				TrainedModelArn:   ptr.String("__TrainedModelArn__"),
+				VersionIdentifier: ptr.String("__VersionIdentifier__"),
+				ChannelName:       ptr.String("__ChannelName__"),
+			},
+			{
+				TrainedModelArn:   ptr.String("__TrainedModelArn__"),
+				VersionIdentifier: ptr.String("__VersionIdentifier__"),
+				ChannelName:       ptr.String("__ChannelName__"),
+			},
+		},
+		DataChannels: []types.ModelTrainingDataChannel{
+			{
+				MlInputChannelArn:      ptr.String("__MlInputChannelArn__"),
+				ChannelName:            ptr.String("__ChannelName__"),
+				S3DataDistributionType: types.S3DataDistributionType("FullyReplicated"),
+			},
+			{
+				MlInputChannelArn:      ptr.String("__MlInputChannelArn__"),
+				ChannelName:            ptr.String("__ChannelName__"),
+				S3DataDistributionType: types.S3DataDistributionType("FullyReplicated"),
+			},
+		},
+		TrainingInputMode: types.TrainingInputMode("File"),
+		Description:       ptr.String("__Description__"),
+		KmsKeyArn:         ptr.String("__KmsKeyArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		MlModelTrainingPayerAccountId: ptr.String("__MlModelTrainingPayerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -284,7 +574,72 @@ func TestCheckResponseSnapshot_CreateTrainingDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrainingDataset(context.Background(), &CreateTrainingDatasetInput{})
+	got, err := svc.CreateTrainingDataset(context.Background(), &CreateTrainingDatasetInput{
+		Name:    ptr.String("__Name__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		TrainingData: []types.Dataset{
+			{
+				Type: types.DatasetType("INTERACTIONS"),
+				InputConfig: &types.DatasetInputConfig{
+					Schema: []types.ColumnSchema{
+						{
+							ColumnName: ptr.String("__ColumnName__"),
+							ColumnTypes: []types.ColumnType{
+								types.ColumnType("USER_ID"),
+								types.ColumnType("USER_ID"),
+							},
+						},
+						{
+							ColumnName: ptr.String("__ColumnName__"),
+							ColumnTypes: []types.ColumnType{
+								types.ColumnType("USER_ID"),
+								types.ColumnType("USER_ID"),
+							},
+						},
+					},
+					DataSource: &types.DataSource{
+						GlueDataSource: &types.GlueDataSource{
+							TableName:    ptr.String("__TableName__"),
+							DatabaseName: ptr.String("__DatabaseName__"),
+							CatalogId:    ptr.String("__CatalogId__"),
+						},
+					},
+				},
+			},
+			{
+				Type: types.DatasetType("INTERACTIONS"),
+				InputConfig: &types.DatasetInputConfig{
+					Schema: []types.ColumnSchema{
+						{
+							ColumnName: ptr.String("__ColumnName__"),
+							ColumnTypes: []types.ColumnType{
+								types.ColumnType("USER_ID"),
+								types.ColumnType("USER_ID"),
+							},
+						},
+						{
+							ColumnName: ptr.String("__ColumnName__"),
+							ColumnTypes: []types.ColumnType{
+								types.ColumnType("USER_ID"),
+								types.ColumnType("USER_ID"),
+							},
+						},
+					},
+					DataSource: &types.DataSource{
+						GlueDataSource: &types.GlueDataSource{
+							TableName:    ptr.String("__TableName__"),
+							DatabaseName: ptr.String("__DatabaseName__"),
+							CatalogId:    ptr.String("__CatalogId__"),
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -303,7 +658,9 @@ func TestCheckResponseSnapshot_DeleteAudienceGenerationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAudienceGenerationJob(context.Background(), &DeleteAudienceGenerationJobInput{})
+	got, err := svc.DeleteAudienceGenerationJob(context.Background(), &DeleteAudienceGenerationJobInput{
+		AudienceGenerationJobArn: ptr.String("__AudienceGenerationJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +679,9 @@ func TestCheckResponseSnapshot_DeleteAudienceModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAudienceModel(context.Background(), &DeleteAudienceModelInput{})
+	got, err := svc.DeleteAudienceModel(context.Background(), &DeleteAudienceModelInput{
+		AudienceModelArn: ptr.String("__AudienceModelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +700,9 @@ func TestCheckResponseSnapshot_DeleteConfiguredAudienceModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfiguredAudienceModel(context.Background(), &DeleteConfiguredAudienceModelInput{})
+	got, err := svc.DeleteConfiguredAudienceModel(context.Background(), &DeleteConfiguredAudienceModelInput{
+		ConfiguredAudienceModelArn: ptr.String("__ConfiguredAudienceModelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -360,7 +721,9 @@ func TestCheckResponseSnapshot_DeleteConfiguredAudienceModelPolicy(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfiguredAudienceModelPolicy(context.Background(), &DeleteConfiguredAudienceModelPolicyInput{})
+	got, err := svc.DeleteConfiguredAudienceModelPolicy(context.Background(), &DeleteConfiguredAudienceModelPolicyInput{
+		ConfiguredAudienceModelArn: ptr.String("__ConfiguredAudienceModelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -379,7 +742,9 @@ func TestCheckResponseSnapshot_DeleteConfiguredModelAlgorithm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfiguredModelAlgorithm(context.Background(), &DeleteConfiguredModelAlgorithmInput{})
+	got, err := svc.DeleteConfiguredModelAlgorithm(context.Background(), &DeleteConfiguredModelAlgorithmInput{
+		ConfiguredModelAlgorithmArn: ptr.String("__ConfiguredModelAlgorithmArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -398,7 +763,10 @@ func TestCheckResponseSnapshot_DeleteConfiguredModelAlgorithmAssociation(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfiguredModelAlgorithmAssociation(context.Background(), &DeleteConfiguredModelAlgorithmAssociationInput{})
+	got, err := svc.DeleteConfiguredModelAlgorithmAssociation(context.Background(), &DeleteConfiguredModelAlgorithmAssociationInput{
+		ConfiguredModelAlgorithmAssociationArn: ptr.String("__ConfiguredModelAlgorithmAssociationArn__"),
+		MembershipIdentifier:                   ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -417,7 +785,9 @@ func TestCheckResponseSnapshot_DeleteMLConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMLConfiguration(context.Background(), &DeleteMLConfigurationInput{})
+	got, err := svc.DeleteMLConfiguration(context.Background(), &DeleteMLConfigurationInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -436,7 +806,10 @@ func TestCheckResponseSnapshot_DeleteMLInputChannelData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMLInputChannelData(context.Background(), &DeleteMLInputChannelDataInput{})
+	got, err := svc.DeleteMLInputChannelData(context.Background(), &DeleteMLInputChannelDataInput{
+		MlInputChannelArn:    ptr.String("__MlInputChannelArn__"),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -455,7 +828,11 @@ func TestCheckResponseSnapshot_DeleteTrainedModelOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrainedModelOutput(context.Background(), &DeleteTrainedModelOutputInput{})
+	got, err := svc.DeleteTrainedModelOutput(context.Background(), &DeleteTrainedModelOutputInput{
+		TrainedModelArn:      ptr.String("__TrainedModelArn__"),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		VersionIdentifier:    ptr.String("__VersionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -474,7 +851,9 @@ func TestCheckResponseSnapshot_DeleteTrainingDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrainingDataset(context.Background(), &DeleteTrainingDatasetInput{})
+	got, err := svc.DeleteTrainingDataset(context.Background(), &DeleteTrainingDatasetInput{
+		TrainingDatasetArn: ptr.String("__TrainingDatasetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -555,7 +934,9 @@ func TestCheckResponseSnapshot_GetAudienceGenerationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAudienceGenerationJob(context.Background(), &GetAudienceGenerationJobInput{})
+	got, err := svc.GetAudienceGenerationJob(context.Background(), &GetAudienceGenerationJobInput{
+		AudienceGenerationJobArn: ptr.String("__AudienceGenerationJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -592,7 +973,9 @@ func TestCheckResponseSnapshot_GetAudienceModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAudienceModel(context.Background(), &GetAudienceModelInput{})
+	got, err := svc.GetAudienceModel(context.Background(), &GetAudienceModelInput{
+		AudienceModelArn: ptr.String("__AudienceModelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -734,7 +1117,10 @@ func TestCheckResponseSnapshot_GetCollaborationConfiguredModelAlgorithmAssociati
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCollaborationConfiguredModelAlgorithmAssociation(context.Background(), &GetCollaborationConfiguredModelAlgorithmAssociationInput{})
+	got, err := svc.GetCollaborationConfiguredModelAlgorithmAssociation(context.Background(), &GetCollaborationConfiguredModelAlgorithmAssociationInput{
+		ConfiguredModelAlgorithmAssociationArn: ptr.String("__ConfiguredModelAlgorithmAssociationArn__"),
+		CollaborationIdentifier:                ptr.String("__CollaborationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -859,7 +1245,10 @@ func TestCheckResponseSnapshot_GetCollaborationMLInputChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCollaborationMLInputChannel(context.Background(), &GetCollaborationMLInputChannelInput{})
+	got, err := svc.GetCollaborationMLInputChannel(context.Background(), &GetCollaborationMLInputChannelInput{
+		MlInputChannelArn:       ptr.String("__MlInputChannelArn__"),
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1310,11 @@ func TestCheckResponseSnapshot_GetCollaborationTrainedModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCollaborationTrainedModel(context.Background(), &GetCollaborationTrainedModelInput{})
+	got, err := svc.GetCollaborationTrainedModel(context.Background(), &GetCollaborationTrainedModelInput{
+		TrainedModelArn:         ptr.String("__TrainedModelArn__"),
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		VersionIdentifier:       ptr.String("__VersionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -972,7 +1365,9 @@ func TestCheckResponseSnapshot_GetConfiguredAudienceModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguredAudienceModel(context.Background(), &GetConfiguredAudienceModelInput{})
+	got, err := svc.GetConfiguredAudienceModel(context.Background(), &GetConfiguredAudienceModelInput{
+		ConfiguredAudienceModelArn: ptr.String("__ConfiguredAudienceModelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -995,7 +1390,9 @@ func TestCheckResponseSnapshot_GetConfiguredAudienceModelPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguredAudienceModelPolicy(context.Background(), &GetConfiguredAudienceModelPolicyInput{})
+	got, err := svc.GetConfiguredAudienceModelPolicy(context.Background(), &GetConfiguredAudienceModelPolicyInput{
+		ConfiguredAudienceModelArn: ptr.String("__ConfiguredAudienceModelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1049,7 +1446,9 @@ func TestCheckResponseSnapshot_GetConfiguredModelAlgorithm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguredModelAlgorithm(context.Background(), &GetConfiguredModelAlgorithmInput{})
+	got, err := svc.GetConfiguredModelAlgorithm(context.Background(), &GetConfiguredModelAlgorithmInput{
+		ConfiguredModelAlgorithmArn: ptr.String("__ConfiguredModelAlgorithmArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1193,7 +1592,10 @@ func TestCheckResponseSnapshot_GetConfiguredModelAlgorithmAssociation(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguredModelAlgorithmAssociation(context.Background(), &GetConfiguredModelAlgorithmAssociationInput{})
+	got, err := svc.GetConfiguredModelAlgorithmAssociation(context.Background(), &GetConfiguredModelAlgorithmAssociationInput{
+		ConfiguredModelAlgorithmAssociationArn: ptr.String("__ConfiguredModelAlgorithmAssociationArn__"),
+		MembershipIdentifier:                   ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1224,7 +1626,9 @@ func TestCheckResponseSnapshot_GetMLConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMLConfiguration(context.Background(), &GetMLConfigurationInput{})
+	got, err := svc.GetMLConfiguration(context.Background(), &GetMLConfigurationInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1381,7 +1785,10 @@ func TestCheckResponseSnapshot_GetMLInputChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMLInputChannel(context.Background(), &GetMLInputChannelInput{})
+	got, err := svc.GetMLInputChannel(context.Background(), &GetMLInputChannelInput{
+		MlInputChannelArn:    ptr.String("__MlInputChannelArn__"),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1464,7 +1871,11 @@ func TestCheckResponseSnapshot_GetTrainedModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrainedModel(context.Background(), &GetTrainedModelInput{})
+	got, err := svc.GetTrainedModel(context.Background(), &GetTrainedModelInput{
+		TrainedModelArn:      ptr.String("__TrainedModelArn__"),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		VersionIdentifier:    ptr.String("__VersionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1532,7 +1943,10 @@ func TestCheckResponseSnapshot_GetTrainedModelInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrainedModelInferenceJob(context.Background(), &GetTrainedModelInferenceJobInput{})
+	got, err := svc.GetTrainedModelInferenceJob(context.Background(), &GetTrainedModelInferenceJobInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		TrainedModelInferenceJobArn: ptr.String("__TrainedModelInferenceJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1620,7 +2034,9 @@ func TestCheckResponseSnapshot_GetTrainingDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrainingDataset(context.Background(), &GetTrainingDatasetInput{})
+	got, err := svc.GetTrainingDataset(context.Background(), &GetTrainingDatasetInput{
+		TrainingDatasetArn: ptr.String("__TrainingDatasetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1677,7 +2093,11 @@ func TestCheckResponseSnapshot_ListAudienceExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAudienceExportJobs(context.Background(), &ListAudienceExportJobsInput{})
+	got, err := svc.ListAudienceExportJobs(context.Background(), &ListAudienceExportJobsInput{
+		NextToken:                ptr.String("__NextToken__"),
+		MaxResults:               ptr.Int32(1),
+		AudienceGenerationJobArn: ptr.String("__AudienceGenerationJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1722,7 +2142,12 @@ func TestCheckResponseSnapshot_ListAudienceGenerationJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAudienceGenerationJobs(context.Background(), &ListAudienceGenerationJobsInput{})
+	got, err := svc.ListAudienceGenerationJobs(context.Background(), &ListAudienceGenerationJobsInput{
+		NextToken:                  ptr.String("__NextToken__"),
+		MaxResults:                 ptr.Int32(1),
+		ConfiguredAudienceModelArn: ptr.String("__ConfiguredAudienceModelArn__"),
+		CollaborationId:            ptr.String("__CollaborationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1763,7 +2188,10 @@ func TestCheckResponseSnapshot_ListAudienceModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAudienceModels(context.Background(), &ListAudienceModelsInput{})
+	got, err := svc.ListAudienceModels(context.Background(), &ListAudienceModelsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1808,7 +2236,11 @@ func TestCheckResponseSnapshot_ListCollaborationConfiguredModelAlgorithmAssociat
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollaborationConfiguredModelAlgorithmAssociations(context.Background(), &ListCollaborationConfiguredModelAlgorithmAssociationsInput{})
+	got, err := svc.ListCollaborationConfiguredModelAlgorithmAssociations(context.Background(), &ListCollaborationConfiguredModelAlgorithmAssociationsInput{
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1869,7 +2301,11 @@ func TestCheckResponseSnapshot_ListCollaborationMLInputChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollaborationMLInputChannels(context.Background(), &ListCollaborationMLInputChannelsInput{})
+	got, err := svc.ListCollaborationMLInputChannels(context.Background(), &ListCollaborationMLInputChannelsInput{
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1944,7 +2380,13 @@ func TestCheckResponseSnapshot_ListCollaborationTrainedModelExportJobs(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollaborationTrainedModelExportJobs(context.Background(), &ListCollaborationTrainedModelExportJobsInput{})
+	got, err := svc.ListCollaborationTrainedModelExportJobs(context.Background(), &ListCollaborationTrainedModelExportJobsInput{
+		NextToken:                     ptr.String("__NextToken__"),
+		MaxResults:                    ptr.Int32(1),
+		CollaborationIdentifier:       ptr.String("__CollaborationIdentifier__"),
+		TrainedModelArn:               ptr.String("__TrainedModelArn__"),
+		TrainedModelVersionIdentifier: ptr.String("__TrainedModelVersionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2027,7 +2469,13 @@ func TestCheckResponseSnapshot_ListCollaborationTrainedModelInferenceJobs(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollaborationTrainedModelInferenceJobs(context.Background(), &ListCollaborationTrainedModelInferenceJobsInput{})
+	got, err := svc.ListCollaborationTrainedModelInferenceJobs(context.Background(), &ListCollaborationTrainedModelInferenceJobsInput{
+		NextToken:                     ptr.String("__NextToken__"),
+		MaxResults:                    ptr.Int32(1),
+		CollaborationIdentifier:       ptr.String("__CollaborationIdentifier__"),
+		TrainedModelArn:               ptr.String("__TrainedModelArn__"),
+		TrainedModelVersionIdentifier: ptr.String("__TrainedModelVersionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2102,7 +2550,11 @@ func TestCheckResponseSnapshot_ListCollaborationTrainedModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollaborationTrainedModels(context.Background(), &ListCollaborationTrainedModelsInput{})
+	got, err := svc.ListCollaborationTrainedModels(context.Background(), &ListCollaborationTrainedModelsInput{
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2159,7 +2611,10 @@ func TestCheckResponseSnapshot_ListConfiguredAudienceModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfiguredAudienceModels(context.Background(), &ListConfiguredAudienceModelsInput{})
+	got, err := svc.ListConfiguredAudienceModels(context.Background(), &ListConfiguredAudienceModelsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2202,7 +2657,11 @@ func TestCheckResponseSnapshot_ListConfiguredModelAlgorithmAssociations(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfiguredModelAlgorithmAssociations(context.Background(), &ListConfiguredModelAlgorithmAssociationsInput{})
+	got, err := svc.ListConfiguredModelAlgorithmAssociations(context.Background(), &ListConfiguredModelAlgorithmAssociationsInput{
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2239,7 +2698,10 @@ func TestCheckResponseSnapshot_ListConfiguredModelAlgorithms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfiguredModelAlgorithms(context.Background(), &ListConfiguredModelAlgorithmsInput{})
+	got, err := svc.ListConfiguredModelAlgorithms(context.Background(), &ListConfiguredModelAlgorithmsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2300,7 +2762,11 @@ func TestCheckResponseSnapshot_ListMLInputChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMLInputChannels(context.Background(), &ListMLInputChannelsInput{})
+	got, err := svc.ListMLInputChannels(context.Background(), &ListMLInputChannelsInput{
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2323,7 +2789,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2404,7 +2872,13 @@ func TestCheckResponseSnapshot_ListTrainedModelInferenceJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrainedModelInferenceJobs(context.Background(), &ListTrainedModelInferenceJobsInput{})
+	got, err := svc.ListTrainedModelInferenceJobs(context.Background(), &ListTrainedModelInferenceJobsInput{
+		NextToken:                     ptr.String("__NextToken__"),
+		MaxResults:                    ptr.Int32(1),
+		MembershipIdentifier:          ptr.String("__MembershipIdentifier__"),
+		TrainedModelArn:               ptr.String("__TrainedModelArn__"),
+		TrainedModelVersionIdentifier: ptr.String("__TrainedModelVersionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2477,7 +2951,13 @@ func TestCheckResponseSnapshot_ListTrainedModelVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrainedModelVersions(context.Background(), &ListTrainedModelVersionsInput{})
+	got, err := svc.ListTrainedModelVersions(context.Background(), &ListTrainedModelVersionsInput{
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		TrainedModelArn:      ptr.String("__TrainedModelArn__"),
+		Status:               types.TrainedModelStatus("CREATE_PENDING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2550,7 +3030,11 @@ func TestCheckResponseSnapshot_ListTrainedModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrainedModels(context.Background(), &ListTrainedModelsInput{})
+	got, err := svc.ListTrainedModels(context.Background(), &ListTrainedModelsInput{
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2589,7 +3073,10 @@ func TestCheckResponseSnapshot_ListTrainingDatasets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrainingDatasets(context.Background(), &ListTrainingDatasetsInput{})
+	got, err := svc.ListTrainingDatasets(context.Background(), &ListTrainingDatasetsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2611,7 +3098,12 @@ func TestCheckResponseSnapshot_PutConfiguredAudienceModelPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfiguredAudienceModelPolicy(context.Background(), &PutConfiguredAudienceModelPolicyInput{})
+	got, err := svc.PutConfiguredAudienceModelPolicy(context.Background(), &PutConfiguredAudienceModelPolicyInput{
+		ConfiguredAudienceModelArn:    ptr.String("__ConfiguredAudienceModelArn__"),
+		ConfiguredAudienceModelPolicy: ptr.String("__ConfiguredAudienceModelPolicy__"),
+		PreviousPolicyHash:            ptr.String("__PreviousPolicyHash__"),
+		PolicyExistenceCondition:      types.PolicyExistenceCondition("POLICY_MUST_EXIST"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2630,7 +3122,17 @@ func TestCheckResponseSnapshot_PutMLConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMLConfiguration(context.Background(), &PutMLConfigurationInput{})
+	got, err := svc.PutMLConfiguration(context.Background(), &PutMLConfigurationInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		DefaultOutputLocation: &types.MLOutputConfiguration{
+			Destination: &types.Destination{
+				S3Destination: &types.S3ConfigMap{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2649,7 +3151,15 @@ func TestCheckResponseSnapshot_StartAudienceExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAudienceExportJob(context.Background(), &StartAudienceExportJobInput{})
+	got, err := svc.StartAudienceExportJob(context.Background(), &StartAudienceExportJobInput{
+		Name:                     ptr.String("__Name__"),
+		AudienceGenerationJobArn: ptr.String("__AudienceGenerationJobArn__"),
+		AudienceSize: &types.AudienceSize{
+			Type:  types.AudienceSizeType("ABSOLUTE"),
+			Value: ptr.Int32(1),
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2670,7 +3180,40 @@ func TestCheckResponseSnapshot_StartAudienceGenerationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAudienceGenerationJob(context.Background(), &StartAudienceGenerationJobInput{})
+	got, err := svc.StartAudienceGenerationJob(context.Background(), &StartAudienceGenerationJobInput{
+		Name:                       ptr.String("__Name__"),
+		ConfiguredAudienceModelArn: ptr.String("__ConfiguredAudienceModelArn__"),
+		SeedAudience: &types.AudienceGenerationJobDataSource{
+			DataSource: &types.S3ConfigMap{
+				S3Uri: ptr.String("__S3Uri__"),
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+			SqlParameters: &types.ProtectedQuerySQLParameters{
+				QueryString:         ptr.String("__QueryString__"),
+				AnalysisTemplateArn: ptr.String("__AnalysisTemplateArn__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			SqlComputeConfiguration: &types.ComputeConfigurationMemberWorker{
+				Value: types.WorkerComputeConfiguration{
+					Type:   types.WorkerComputeType("CR.1X"),
+					Number: ptr.Int32(1),
+					Properties: &types.WorkerComputeConfigurationPropertiesMemberSpark{
+						Value: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+		},
+		IncludeSeedInOutput: true,
+		CollaborationId:     ptr.String("__CollaborationId__"),
+		Description:         ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2689,7 +3232,23 @@ func TestCheckResponseSnapshot_StartTrainedModelExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTrainedModelExportJob(context.Background(), &StartTrainedModelExportJobInput{})
+	got, err := svc.StartTrainedModelExportJob(context.Background(), &StartTrainedModelExportJobInput{
+		Name:                          ptr.String("__Name__"),
+		TrainedModelArn:               ptr.String("__TrainedModelArn__"),
+		TrainedModelVersionIdentifier: ptr.String("__TrainedModelVersionIdentifier__"),
+		MembershipIdentifier:          ptr.String("__MembershipIdentifier__"),
+		OutputConfiguration: &types.TrainedModelExportOutputConfiguration{
+			Members: []types.TrainedModelExportReceiverMember{
+				{
+					AccountId: ptr.String("__AccountId__"),
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+				},
+			},
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2710,7 +3269,43 @@ func TestCheckResponseSnapshot_StartTrainedModelInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTrainedModelInferenceJob(context.Background(), &StartTrainedModelInferenceJobInput{})
+	got, err := svc.StartTrainedModelInferenceJob(context.Background(), &StartTrainedModelInferenceJobInput{
+		MembershipIdentifier:                   ptr.String("__MembershipIdentifier__"),
+		Name:                                   ptr.String("__Name__"),
+		TrainedModelArn:                        ptr.String("__TrainedModelArn__"),
+		TrainedModelVersionIdentifier:          ptr.String("__TrainedModelVersionIdentifier__"),
+		ConfiguredModelAlgorithmAssociationArn: ptr.String("__ConfiguredModelAlgorithmAssociationArn__"),
+		ResourceConfig: &types.InferenceResourceConfig{
+			InstanceType:  types.InferenceInstanceType("ml.r7i.48xlarge"),
+			InstanceCount: ptr.Int32(1),
+		},
+		OutputConfiguration: &types.InferenceOutputConfiguration{
+			Accept: ptr.String("__Accept__"),
+			Members: []types.InferenceReceiverMember{
+				{
+					AccountId: ptr.String("__AccountId__"),
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+				},
+			},
+		},
+		DataSource: &types.ModelInferenceDataSource{
+			MlInputChannelArn: ptr.String("__MlInputChannelArn__"),
+		},
+		Description: ptr.String("__Description__"),
+		ContainerExecutionParameters: &types.InferenceContainerExecutionParameters{
+			MaxPayloadInMB: ptr.Int32(1),
+		},
+		Environment: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		MlModelInferencePayerAccountId: ptr.String("__MlModelInferencePayerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2729,7 +3324,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2748,7 +3348,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2769,7 +3375,31 @@ func TestCheckResponseSnapshot_UpdateConfiguredAudienceModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfiguredAudienceModel(context.Background(), &UpdateConfiguredAudienceModelInput{})
+	got, err := svc.UpdateConfiguredAudienceModel(context.Background(), &UpdateConfiguredAudienceModelInput{
+		ConfiguredAudienceModelArn: ptr.String("__ConfiguredAudienceModelArn__"),
+		OutputConfig: &types.ConfiguredAudienceModelOutputConfig{
+			Destination: &types.AudienceDestination{
+				S3Destination: &types.S3ConfigMap{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+		AudienceModelArn: ptr.String("__AudienceModelArn__"),
+		SharedAudienceMetrics: []types.SharedAudienceMetrics{
+			types.SharedAudienceMetrics("ALL"),
+			types.SharedAudienceMetrics("ALL"),
+		},
+		MinMatchingSeedSize: ptr.Int32(1),
+		AudienceSizeConfig: &types.AudienceSizeConfig{
+			AudienceSizeType: types.AudienceSizeType("ABSOLUTE"),
+			AudienceSizeBins: []int32{
+				1,
+				1,
+			},
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2790,7 +3420,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTrainedModel(context.Background(), &CancelTrainedModelInput{})
+	_, opErr := svc.CancelTrainedModel(context.Background(), &CancelTrainedModelInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		TrainedModelArn:      ptr.String("__TrainedModelArn__"),
+		VersionIdentifier:    ptr.String("__VersionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2815,7 +3449,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTrainedModel(context.Background(), &CancelTrainedModelInput{})
+	_, opErr := svc.CancelTrainedModel(context.Background(), &CancelTrainedModelInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		TrainedModelArn:      ptr.String("__TrainedModelArn__"),
+		VersionIdentifier:    ptr.String("__VersionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2840,7 +3478,56 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrainedModel(context.Background(), &CreateTrainedModelInput{})
+	_, opErr := svc.CreateTrainedModel(context.Background(), &CreateTrainedModelInput{
+		MembershipIdentifier:                   ptr.String("__MembershipIdentifier__"),
+		Name:                                   ptr.String("__Name__"),
+		ConfiguredModelAlgorithmAssociationArn: ptr.String("__ConfiguredModelAlgorithmAssociationArn__"),
+		Hyperparameters: map[string]string{
+			"key0": "__Value__",
+		},
+		Environment: map[string]string{
+			"key0": "__Value__",
+		},
+		ResourceConfig: &types.ResourceConfig{
+			InstanceCount:  ptr.Int32(1),
+			InstanceType:   types.InstanceType("ml.m4.xlarge"),
+			VolumeSizeInGB: ptr.Int32(1),
+		},
+		StoppingCondition: &types.StoppingCondition{
+			MaxRuntimeInSeconds: ptr.Int32(1),
+		},
+		IncrementalTrainingDataChannels: []types.IncrementalTrainingDataChannel{
+			{
+				TrainedModelArn:   ptr.String("__TrainedModelArn__"),
+				VersionIdentifier: ptr.String("__VersionIdentifier__"),
+				ChannelName:       ptr.String("__ChannelName__"),
+			},
+			{
+				TrainedModelArn:   ptr.String("__TrainedModelArn__"),
+				VersionIdentifier: ptr.String("__VersionIdentifier__"),
+				ChannelName:       ptr.String("__ChannelName__"),
+			},
+		},
+		DataChannels: []types.ModelTrainingDataChannel{
+			{
+				MlInputChannelArn:      ptr.String("__MlInputChannelArn__"),
+				ChannelName:            ptr.String("__ChannelName__"),
+				S3DataDistributionType: types.S3DataDistributionType("FullyReplicated"),
+			},
+			{
+				MlInputChannelArn:      ptr.String("__MlInputChannelArn__"),
+				ChannelName:            ptr.String("__ChannelName__"),
+				S3DataDistributionType: types.S3DataDistributionType("FullyReplicated"),
+			},
+		},
+		TrainingInputMode: types.TrainingInputMode("File"),
+		Description:       ptr.String("__Description__"),
+		KmsKeyArn:         ptr.String("__KmsKeyArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		MlModelTrainingPayerAccountId: ptr.String("__MlModelTrainingPayerAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2865,7 +3552,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTrainedModel(context.Background(), &CancelTrainedModelInput{})
+	_, opErr := svc.CancelTrainedModel(context.Background(), &CancelTrainedModelInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		TrainedModelArn:      ptr.String("__TrainedModelArn__"),
+		VersionIdentifier:    ptr.String("__VersionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2892,7 +3583,17 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAudienceModel(context.Background(), &CreateAudienceModelInput{})
+	_, opErr := svc.CreateAudienceModel(context.Background(), &CreateAudienceModelInput{
+		TrainingDataStartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TrainingDataEndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Name:                  ptr.String("__Name__"),
+		TrainingDatasetArn:    ptr.String("__TrainingDatasetArn__"),
+		KmsKeyArn:             ptr.String("__KmsKeyArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2917,7 +3618,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTrainedModel(context.Background(), &CancelTrainedModelInput{})
+	_, opErr := svc.CancelTrainedModel(context.Background(), &CancelTrainedModelInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		TrainedModelArn:      ptr.String("__TrainedModelArn__"),
+		VersionIdentifier:    ptr.String("__VersionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2942,7 +3647,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTrainedModel(context.Background(), &CancelTrainedModelInput{})
+	_, opErr := svc.CancelTrainedModel(context.Background(), &CancelTrainedModelInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		TrainedModelArn:      ptr.String("__TrainedModelArn__"),
+		VersionIdentifier:    ptr.String("__VersionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

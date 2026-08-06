@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCloud9WorkspaceManagementService.CreateEnvironmentMembership
+
+{"membership":{"environmentId":"__EnvironmentId__","lastAccess":946684800,"permissions":"owner","userArn":"__UserArn__","userId":"__UserId__"}}

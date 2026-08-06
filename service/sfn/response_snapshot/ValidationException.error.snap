@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.CreateStateMachine
+
+{"__type":"ValidationException","message":"__Message__","reason":"API_DOES_NOT_SUPPORT_LABELED_ARNS"}

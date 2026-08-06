@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CertificateManager.CreateAcmeExternalAccountBinding
+
+{"ExternalAccountBinding":{"AcmeEndpointArn":"__AcmeEndpointArn__","AcmeExternalAccountBindingArn":"__AcmeExternalAccountBindingArn__","CreatedAt":946684800,"ExpiresAt":946684800,"LastUsedAt":946684800,"RevokedAt":946684800,"RoleArn":"__RoleArn__","UpdatedAt":946684800}}

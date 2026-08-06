@@ -119,7 +119,13 @@ func TestCheckResponseSnapshot_CompleteSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{})
+	got, err := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{
+		SnapshotId:                ptr.String("__SnapshotId__"),
+		ChangedBlocksCount:        ptr.Int32(1),
+		Checksum:                  ptr.String("__Checksum__"),
+		ChecksumAlgorithm:         types.ChecksumAlgorithm("SHA256"),
+		ChecksumAggregationMethod: types.ChecksumAggregationMethod("LINEAR"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -131,6 +137,7 @@ func TestCheckResponseSnapshot_CompleteSnapshot(t *testing.T) {
 func TestCheckResponseSnapshot_GetSnapshotBlock(t *testing.T) {
 	want := &GetSnapshotBlockOutput{
 		DataLength:        ptr.Int32(1),
+		BlockData:         io.NopCloser(bytes.NewReader([]byte("__BlockData__"))),
 		Checksum:          ptr.String("__Checksum__"),
 		ChecksumAlgorithm: types.ChecksumAlgorithm("SHA256"),
 	}
@@ -142,7 +149,11 @@ func TestCheckResponseSnapshot_GetSnapshotBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSnapshotBlock(context.Background(), &GetSnapshotBlockInput{})
+	got, err := svc.GetSnapshotBlock(context.Background(), &GetSnapshotBlockInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		BlockIndex: ptr.Int32(1),
+		BlockToken: ptr.String("__BlockToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +189,13 @@ func TestCheckResponseSnapshot_ListChangedBlocks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChangedBlocks(context.Background(), &ListChangedBlocksInput{})
+	got, err := svc.ListChangedBlocks(context.Background(), &ListChangedBlocksInput{
+		FirstSnapshotId:    ptr.String("__FirstSnapshotId__"),
+		SecondSnapshotId:   ptr.String("__SecondSnapshotId__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+		StartingBlockIndex: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -212,7 +229,12 @@ func TestCheckResponseSnapshot_ListSnapshotBlocks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSnapshotBlocks(context.Background(), &ListSnapshotBlocksInput{})
+	got, err := svc.ListSnapshotBlocks(context.Background(), &ListSnapshotBlocksInput{
+		SnapshotId:         ptr.String("__SnapshotId__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+		StartingBlockIndex: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -234,7 +256,15 @@ func TestCheckResponseSnapshot_PutSnapshotBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSnapshotBlock(context.Background(), &PutSnapshotBlockInput{})
+	got, err := svc.PutSnapshotBlock(context.Background(), &PutSnapshotBlockInput{
+		SnapshotId:        ptr.String("__SnapshotId__"),
+		BlockIndex:        ptr.Int32(1),
+		BlockData:         io.NopCloser(bytes.NewReader([]byte("__BlockData__"))),
+		DataLength:        ptr.Int32(1),
+		Progress:          ptr.Int32(1),
+		Checksum:          ptr.String("__Checksum__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("SHA256"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +304,25 @@ func TestCheckResponseSnapshot_StartSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSnapshot(context.Background(), &StartSnapshotInput{})
+	got, err := svc.StartSnapshot(context.Background(), &StartSnapshotInput{
+		VolumeSize:       ptr.Int64(1),
+		ParentSnapshotId: ptr.String("__ParentSnapshotId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Encrypted:   ptr.Bool(true),
+		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+		Timeout:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +344,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{})
+	_, opErr := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{
+		SnapshotId:                ptr.String("__SnapshotId__"),
+		ChangedBlocksCount:        ptr.Int32(1),
+		Checksum:                  ptr.String("__Checksum__"),
+		ChecksumAlgorithm:         types.ChecksumAlgorithm("SHA256"),
+		ChecksumAggregationMethod: types.ChecksumAggregationMethod("LINEAR"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -321,7 +375,25 @@ func TestCheckResponseSnapshot_Error_ConcurrentLimitExceededException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSnapshot(context.Background(), &StartSnapshotInput{})
+	_, opErr := svc.StartSnapshot(context.Background(), &StartSnapshotInput{
+		VolumeSize:       ptr.Int64(1),
+		ParentSnapshotId: ptr.String("__ParentSnapshotId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Encrypted:   ptr.Bool(true),
+		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+		Timeout:     ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -346,7 +418,25 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSnapshot(context.Background(), &StartSnapshotInput{})
+	_, opErr := svc.StartSnapshot(context.Background(), &StartSnapshotInput{
+		VolumeSize:       ptr.Int64(1),
+		ParentSnapshotId: ptr.String("__ParentSnapshotId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Encrypted:   ptr.Bool(true),
+		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+		Timeout:     ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -371,7 +461,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{})
+	_, opErr := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{
+		SnapshotId:                ptr.String("__SnapshotId__"),
+		ChangedBlocksCount:        ptr.Int32(1),
+		Checksum:                  ptr.String("__Checksum__"),
+		ChecksumAlgorithm:         types.ChecksumAlgorithm("SHA256"),
+		ChecksumAggregationMethod: types.ChecksumAggregationMethod("LINEAR"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -397,7 +493,13 @@ func TestCheckResponseSnapshot_Error_RequestThrottledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{})
+	_, opErr := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{
+		SnapshotId:                ptr.String("__SnapshotId__"),
+		ChangedBlocksCount:        ptr.Int32(1),
+		Checksum:                  ptr.String("__Checksum__"),
+		ChecksumAlgorithm:         types.ChecksumAlgorithm("SHA256"),
+		ChecksumAggregationMethod: types.ChecksumAggregationMethod("LINEAR"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -423,7 +525,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{})
+	_, opErr := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{
+		SnapshotId:                ptr.String("__SnapshotId__"),
+		ChangedBlocksCount:        ptr.Int32(1),
+		Checksum:                  ptr.String("__Checksum__"),
+		ChecksumAlgorithm:         types.ChecksumAlgorithm("SHA256"),
+		ChecksumAggregationMethod: types.ChecksumAggregationMethod("LINEAR"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -449,7 +557,13 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{})
+	_, opErr := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{
+		SnapshotId:                ptr.String("__SnapshotId__"),
+		ChangedBlocksCount:        ptr.Int32(1),
+		Checksum:                  ptr.String("__Checksum__"),
+		ChecksumAlgorithm:         types.ChecksumAlgorithm("SHA256"),
+		ChecksumAggregationMethod: types.ChecksumAggregationMethod("LINEAR"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -475,7 +589,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{})
+	_, opErr := svc.CompleteSnapshot(context.Background(), &CompleteSnapshotInput{
+		SnapshotId:                ptr.String("__SnapshotId__"),
+		ChangedBlocksCount:        ptr.Int32(1),
+		Checksum:                  ptr.String("__Checksum__"),
+		ChecksumAlgorithm:         types.ChecksumAlgorithm("SHA256"),
+		ChecksumAggregationMethod: types.ChecksumAggregationMethod("LINEAR"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

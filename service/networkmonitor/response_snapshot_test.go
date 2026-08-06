@@ -125,7 +125,36 @@ func TestCheckResponseSnapshot_CreateMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	got, err := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Probes: []types.CreateMonitorProbeInput{
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AggregationPeriod: ptr.Int64(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +189,23 @@ func TestCheckResponseSnapshot_CreateProbe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProbe(context.Background(), &CreateProbeInput{})
+	got, err := svc.CreateProbe(context.Background(), &CreateProbeInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Probe: &types.ProbeInput{
+			SourceArn:       ptr.String("__SourceArn__"),
+			Destination:     ptr.String("__Destination__"),
+			DestinationPort: ptr.Int32(1),
+			Protocol:        types.Protocol("TCP"),
+			PacketSize:      ptr.Int32(1),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,7 +224,9 @@ func TestCheckResponseSnapshot_DeleteMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMonitor(context.Background(), &DeleteMonitorInput{})
+	got, err := svc.DeleteMonitor(context.Background(), &DeleteMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -198,7 +245,10 @@ func TestCheckResponseSnapshot_DeleteProbe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProbe(context.Background(), &DeleteProbeInput{})
+	got, err := svc.DeleteProbe(context.Background(), &DeleteProbeInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		ProbeId:     ptr.String("__ProbeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -263,7 +313,9 @@ func TestCheckResponseSnapshot_GetMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMonitor(context.Background(), &GetMonitorInput{})
+	got, err := svc.GetMonitor(context.Background(), &GetMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +350,10 @@ func TestCheckResponseSnapshot_GetProbe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProbe(context.Background(), &GetProbeInput{})
+	got, err := svc.GetProbe(context.Background(), &GetProbeInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		ProbeId:     ptr.String("__ProbeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -339,7 +394,11 @@ func TestCheckResponseSnapshot_ListMonitors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMonitors(context.Background(), &ListMonitorsInput{})
+	got, err := svc.ListMonitors(context.Background(), &ListMonitorsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		State:      ptr.String("__State__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -362,7 +421,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -381,7 +442,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -400,7 +466,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -427,7 +499,10 @@ func TestCheckResponseSnapshot_UpdateMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMonitor(context.Background(), &UpdateMonitorInput{})
+	got, err := svc.UpdateMonitor(context.Background(), &UpdateMonitorInput{
+		MonitorName:       ptr.String("__MonitorName__"),
+		AggregationPeriod: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +537,15 @@ func TestCheckResponseSnapshot_UpdateProbe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProbe(context.Background(), &UpdateProbeInput{})
+	got, err := svc.UpdateProbe(context.Background(), &UpdateProbeInput{
+		MonitorName:     ptr.String("__MonitorName__"),
+		ProbeId:         ptr.String("__ProbeId__"),
+		State:           types.ProbeState("PENDING"),
+		Destination:     ptr.String("__Destination__"),
+		DestinationPort: ptr.Int32(1),
+		Protocol:        types.Protocol("TCP"),
+		PacketSize:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -483,7 +566,36 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Probes: []types.CreateMonitorProbeInput{
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AggregationPeriod: ptr.Int64(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -508,7 +620,36 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Probes: []types.CreateMonitorProbeInput{
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AggregationPeriod: ptr.Int64(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -533,7 +674,36 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Probes: []types.CreateMonitorProbeInput{
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AggregationPeriod: ptr.Int64(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -558,7 +728,23 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateProbe(context.Background(), &CreateProbeInput{})
+	_, opErr := svc.CreateProbe(context.Background(), &CreateProbeInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Probe: &types.ProbeInput{
+			SourceArn:       ptr.String("__SourceArn__"),
+			Destination:     ptr.String("__Destination__"),
+			DestinationPort: ptr.Int32(1),
+			Protocol:        types.Protocol("TCP"),
+			PacketSize:      ptr.Int32(1),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -583,7 +769,36 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Probes: []types.CreateMonitorProbeInput{
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AggregationPeriod: ptr.Int64(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -608,7 +823,36 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Probes: []types.CreateMonitorProbeInput{
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AggregationPeriod: ptr.Int64(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -633,7 +877,36 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Probes: []types.CreateMonitorProbeInput{
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				SourceArn:       ptr.String("__SourceArn__"),
+				Destination:     ptr.String("__Destination__"),
+				DestinationPort: ptr.Int32(1),
+				Protocol:        types.Protocol("TCP"),
+				PacketSize:      ptr.Int32(1),
+				ProbeTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AggregationPeriod: ptr.Int64(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

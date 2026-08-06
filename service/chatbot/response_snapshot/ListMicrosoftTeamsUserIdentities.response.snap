@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","TeamsUserIdentities":[{"AwsUserIdentity":"__AwsUserIdentity__","ChatConfigurationArn":"__ChatConfigurationArn__","IamRoleArn":"__IamRoleArn__","TeamId":"__TeamId__","TeamsChannelId":"__TeamsChannelId__","TeamsTenantId":"__TeamsTenantId__","UserId":"__UserId__"},{"AwsUserIdentity":"__AwsUserIdentity__","ChatConfigurationArn":"__ChatConfigurationArn__","IamRoleArn":"__IamRoleArn__","TeamId":"__TeamId__","TeamsChannelId":"__TeamsChannelId__","TeamsTenantId":"__TeamsTenantId__","UserId":"__UserId__"}]}

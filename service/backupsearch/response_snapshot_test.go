@@ -350,7 +350,9 @@ func TestCheckResponseSnapshot_GetSearchJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSearchJob(context.Background(), &GetSearchJobInput{})
+	got, err := svc.GetSearchJob(context.Background(), &GetSearchJobInput{
+		SearchJobIdentifier: ptr.String("__SearchJobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -383,7 +385,9 @@ func TestCheckResponseSnapshot_GetSearchResultExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSearchResultExportJob(context.Background(), &GetSearchResultExportJobInput{})
+	got, err := svc.GetSearchResultExportJob(context.Background(), &GetSearchResultExportJobInput{
+		ExportJobIdentifier: ptr.String("__ExportJobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -424,7 +428,11 @@ func TestCheckResponseSnapshot_ListSearchJobBackups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSearchJobBackups(context.Background(), &ListSearchJobBackupsInput{})
+	got, err := svc.ListSearchJobBackups(context.Background(), &ListSearchJobBackupsInput{
+		SearchJobIdentifier: ptr.String("__SearchJobIdentifier__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -471,7 +479,11 @@ func TestCheckResponseSnapshot_ListSearchJobResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSearchJobResults(context.Background(), &ListSearchJobResultsInput{})
+	got, err := svc.ListSearchJobResults(context.Background(), &ListSearchJobResultsInput{
+		SearchJobIdentifier: ptr.String("__SearchJobIdentifier__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -520,7 +532,11 @@ func TestCheckResponseSnapshot_ListSearchJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSearchJobs(context.Background(), &ListSearchJobsInput{})
+	got, err := svc.ListSearchJobs(context.Background(), &ListSearchJobsInput{
+		ByStatus:   types.SearchJobState("RUNNING"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -561,7 +577,12 @@ func TestCheckResponseSnapshot_ListSearchResultExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSearchResultExportJobs(context.Background(), &ListSearchResultExportJobsInput{})
+	got, err := svc.ListSearchResultExportJobs(context.Background(), &ListSearchResultExportJobsInput{
+		Status:              types.ExportJobStatus("RUNNING"),
+		SearchJobIdentifier: ptr.String("__SearchJobIdentifier__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -584,7 +605,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -607,7 +630,229 @@ func TestCheckResponseSnapshot_StartSearchJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSearchJob(context.Background(), &StartSearchJobInput{})
+	got, err := svc.StartSearchJob(context.Background(), &StartSearchJobInput{
+		Tags: map[string]*string{
+			"key0": ptr.String("__Value__"),
+		},
+		Name:             ptr.String("__Name__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		SearchScope: &types.SearchScope{
+			BackupResourceTypes: []types.ResourceType{
+				types.ResourceType("S3"),
+				types.ResourceType("S3"),
+			},
+			BackupResourceCreationTime: &types.BackupCreationTimeFilter{
+				CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			SourceResourceArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BackupResourceArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BackupResourceTags: map[string]*string{
+				"key0": ptr.String("__Value__"),
+			},
+		},
+		ItemFilters: &types.ItemFilters{
+			S3ItemFilters: []types.S3ItemFilter{
+				{
+					ObjectKeys: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+					Sizes: []types.LongCondition{
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+					},
+					CreationTimes: []types.TimeCondition{
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+					},
+					VersionIds: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+					ETags: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+				},
+				{
+					ObjectKeys: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+					Sizes: []types.LongCondition{
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+					},
+					CreationTimes: []types.TimeCondition{
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+					},
+					VersionIds: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+					ETags: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+				},
+			},
+			EBSItemFilters: []types.EBSItemFilter{
+				{
+					FilePaths: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+					Sizes: []types.LongCondition{
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+					},
+					CreationTimes: []types.TimeCondition{
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+					},
+					LastModificationTimes: []types.TimeCondition{
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+					},
+				},
+				{
+					FilePaths: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+					Sizes: []types.LongCondition{
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+					},
+					CreationTimes: []types.TimeCondition{
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+					},
+					LastModificationTimes: []types.TimeCondition{
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -629,7 +874,20 @@ func TestCheckResponseSnapshot_StartSearchResultExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSearchResultExportJob(context.Background(), &StartSearchResultExportJobInput{})
+	got, err := svc.StartSearchResultExportJob(context.Background(), &StartSearchResultExportJobInput{
+		SearchJobIdentifier: ptr.String("__SearchJobIdentifier__"),
+		ExportSpecification: &types.ExportSpecificationMemberS3ExportSpecification{
+			Value: types.S3ExportSpecification{
+				DestinationBucket: ptr.String("__DestinationBucket__"),
+				DestinationPrefix: ptr.String("__DestinationPrefix__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]*string{
+			"key0": ptr.String("__Value__"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -648,7 +906,9 @@ func TestCheckResponseSnapshot_StopSearchJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopSearchJob(context.Background(), &StopSearchJobInput{})
+	got, err := svc.StopSearchJob(context.Background(), &StopSearchJobInput{
+		SearchJobIdentifier: ptr.String("__SearchJobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -667,7 +927,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]*string{
+			"key0": ptr.String("__Value__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -686,7 +951,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -707,7 +978,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetSearchJob(context.Background(), &GetSearchJobInput{})
+	_, opErr := svc.GetSearchJob(context.Background(), &GetSearchJobInput{
+		SearchJobIdentifier: ptr.String("__SearchJobIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -734,7 +1007,229 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSearchJob(context.Background(), &StartSearchJobInput{})
+	_, opErr := svc.StartSearchJob(context.Background(), &StartSearchJobInput{
+		Tags: map[string]*string{
+			"key0": ptr.String("__Value__"),
+		},
+		Name:             ptr.String("__Name__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		SearchScope: &types.SearchScope{
+			BackupResourceTypes: []types.ResourceType{
+				types.ResourceType("S3"),
+				types.ResourceType("S3"),
+			},
+			BackupResourceCreationTime: &types.BackupCreationTimeFilter{
+				CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			SourceResourceArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BackupResourceArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BackupResourceTags: map[string]*string{
+				"key0": ptr.String("__Value__"),
+			},
+		},
+		ItemFilters: &types.ItemFilters{
+			S3ItemFilters: []types.S3ItemFilter{
+				{
+					ObjectKeys: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+					Sizes: []types.LongCondition{
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+					},
+					CreationTimes: []types.TimeCondition{
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+					},
+					VersionIds: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+					ETags: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+				},
+				{
+					ObjectKeys: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+					Sizes: []types.LongCondition{
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+					},
+					CreationTimes: []types.TimeCondition{
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+					},
+					VersionIds: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+					ETags: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+				},
+			},
+			EBSItemFilters: []types.EBSItemFilter{
+				{
+					FilePaths: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+					Sizes: []types.LongCondition{
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+					},
+					CreationTimes: []types.TimeCondition{
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+					},
+					LastModificationTimes: []types.TimeCondition{
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+					},
+				},
+				{
+					FilePaths: []types.StringCondition{
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.String("__Value__"),
+							Operator: types.StringConditionOperator("EQUALS_TO"),
+						},
+					},
+					Sizes: []types.LongCondition{
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Int64(1),
+							Operator: types.LongConditionOperator("EQUALS_TO"),
+						},
+					},
+					CreationTimes: []types.TimeCondition{
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+					},
+					LastModificationTimes: []types.TimeCondition{
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+						{
+							Value:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Operator: types.TimeConditionOperator("EQUALS_TO"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -760,7 +1255,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetSearchJob(context.Background(), &GetSearchJobInput{})
+	_, opErr := svc.GetSearchJob(context.Background(), &GetSearchJobInput{
+		SearchJobIdentifier: ptr.String("__SearchJobIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -787,7 +1284,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetSearchJob(context.Background(), &GetSearchJobInput{})
+	_, opErr := svc.GetSearchJob(context.Background(), &GetSearchJobInput{
+		SearchJobIdentifier: ptr.String("__SearchJobIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -816,7 +1315,12 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListSearchResultExportJobs(context.Background(), &ListSearchResultExportJobsInput{})
+	_, opErr := svc.ListSearchResultExportJobs(context.Background(), &ListSearchResultExportJobsInput{
+		Status:              types.ExportJobStatus("RUNNING"),
+		SearchJobIdentifier: ptr.String("__SearchJobIdentifier__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -844,7 +1348,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetSearchJob(context.Background(), &GetSearchJobInput{})
+	_, opErr := svc.GetSearchJob(context.Background(), &GetSearchJobInput{
+		SearchJobIdentifier: ptr.String("__SearchJobIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -869,7 +1375,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetSearchJob(context.Background(), &GetSearchJobInput{})
+	_, opErr := svc.GetSearchJob(context.Background(), &GetSearchJobInput{
+		SearchJobIdentifier: ptr.String("__SearchJobIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

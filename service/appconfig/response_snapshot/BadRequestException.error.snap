@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"BadRequestException","Details":{"InvalidConfiguration":[{"Constraint":"__Constraint__","Location":"__Location__","Reason":"__Reason__","Type":"__Type__","Value":"__Value__"},{"Constraint":"__Constraint__","Location":"__Location__","Reason":"__Reason__","Type":"__Type__","Value":"__Value__"}]},"Message":"__Message__","Reason":"InvalidConfiguration"}

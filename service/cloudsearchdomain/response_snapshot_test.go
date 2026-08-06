@@ -184,7 +184,22 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Search(context.Background(), &SearchInput{})
+	got, err := svc.Search(context.Background(), &SearchInput{
+		Cursor:       ptr.String("__Cursor__"),
+		Expr:         ptr.String("__Expr__"),
+		Facet:        ptr.String("__Facet__"),
+		FilterQuery:  ptr.String("__FilterQuery__"),
+		Highlight:    ptr.String("__Highlight__"),
+		Partial:      true,
+		Query:        ptr.String("__Query__"),
+		QueryOptions: ptr.String("__QueryOptions__"),
+		QueryParser:  types.QueryParser("simple"),
+		Return:       ptr.String("__Return__"),
+		Size:         1,
+		Sort:         ptr.String("__Sort__"),
+		Start:        1,
+		Stats:        ptr.String("__Stats__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +239,11 @@ func TestCheckResponseSnapshot_Suggest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Suggest(context.Background(), &SuggestInput{})
+	got, err := svc.Suggest(context.Background(), &SuggestInput{
+		Query:     ptr.String("__Query__"),
+		Suggester: ptr.String("__Suggester__"),
+		Size:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -255,7 +274,10 @@ func TestCheckResponseSnapshot_UploadDocuments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UploadDocuments(context.Background(), &UploadDocumentsInput{})
+	got, err := svc.UploadDocuments(context.Background(), &UploadDocumentsInput{
+		Documents:   io.NopCloser(bytes.NewReader([]byte("__Documents__"))),
+		ContentType: types.ContentType("application/json"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -277,7 +299,10 @@ func TestCheckResponseSnapshot_Error_DocumentServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UploadDocuments(context.Background(), &UploadDocumentsInput{})
+	_, opErr := svc.UploadDocuments(context.Background(), &UploadDocumentsInput{
+		Documents:   io.NopCloser(bytes.NewReader([]byte("__Documents__"))),
+		ContentType: types.ContentType("application/json"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -302,7 +327,22 @@ func TestCheckResponseSnapshot_Error_SearchException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Search(context.Background(), &SearchInput{})
+	_, opErr := svc.Search(context.Background(), &SearchInput{
+		Cursor:       ptr.String("__Cursor__"),
+		Expr:         ptr.String("__Expr__"),
+		Facet:        ptr.String("__Facet__"),
+		FilterQuery:  ptr.String("__FilterQuery__"),
+		Highlight:    ptr.String("__Highlight__"),
+		Partial:      true,
+		Query:        ptr.String("__Query__"),
+		QueryOptions: ptr.String("__QueryOptions__"),
+		QueryParser:  types.QueryParser("simple"),
+		Return:       ptr.String("__Return__"),
+		Size:         1,
+		Sort:         ptr.String("__Sort__"),
+		Start:        1,
+		Stats:        ptr.String("__Stats__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.SubmitRegistrationVersion
+
+{"AwsReview":true,"RegistrationArn":"__RegistrationArn__","RegistrationId":"__RegistrationId__","RegistrationVersionStatus":"DRAFT","RegistrationVersionStatusHistory":{"ApprovedTimestamp":946684800,"ArchivedTimestamp":946684800,"AwsReviewingTimestamp":946684800,"DeniedTimestamp":946684800,"DiscardedTimestamp":946684800,"DraftTimestamp":946684800,"RequiresAuthenticationTimestamp":946684800,"ReviewingTimestamp":946684800,"RevokedTimestamp":946684800,"SubmittedTimestamp":946684800},"VersionNumber":1}

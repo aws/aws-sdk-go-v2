@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"MonitoredResourceIdentifiers":[{"LastUpdated":946684800,"MonitoredResourceName":"__MonitoredResourceName__","ResourceCollection":{"CloudFormation":{"StackNames":["__Member__","__Member__"]},"Tags":[{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]},{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]}]},"ResourcePermission":"FULL_PERMISSION","Type":"__Type__"},{"LastUpdated":946684800,"MonitoredResourceName":"__MonitoredResourceName__","ResourceCollection":{"CloudFormation":{"StackNames":["__Member__","__Member__"]},"Tags":[{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]},{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]}]},"ResourcePermission":"FULL_PERMISSION","Type":"__Type__"}],"NextToken":"__NextToken__"}

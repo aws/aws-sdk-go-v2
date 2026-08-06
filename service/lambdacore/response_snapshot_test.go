@@ -140,7 +140,31 @@ func TestCheckResponseSnapshot_CreateNetworkConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNetworkConnector(context.Background(), &CreateNetworkConnectorInput{})
+	got, err := svc.CreateNetworkConnector(context.Background(), &CreateNetworkConnectorInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.NetworkConnectorConfigurationMemberVpcEgressConfiguration{
+			Value: types.NetworkConnectorVpcEgressConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NetworkProtocol: types.NetworkProtocol("IPv4"),
+				AssociatedComputeResourceTypes: []types.ComputeResourceType{
+					types.ComputeResourceType("MicroVm"),
+					types.ComputeResourceType("MicroVm"),
+				},
+			},
+		},
+		OperatorRole: ptr.String("__OperatorRole__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +206,9 @@ func TestCheckResponseSnapshot_DeleteNetworkConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNetworkConnector(context.Background(), &DeleteNetworkConnectorInput{})
+	got, err := svc.DeleteNetworkConnector(context.Background(), &DeleteNetworkConnectorInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -231,7 +257,9 @@ func TestCheckResponseSnapshot_GetNetworkConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNetworkConnector(context.Background(), &GetNetworkConnectorInput{})
+	got, err := svc.GetNetworkConnector(context.Background(), &GetNetworkConnectorInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +298,11 @@ func TestCheckResponseSnapshot_ListNetworkConnectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNetworkConnectors(context.Background(), &ListNetworkConnectorsInput{})
+	got, err := svc.ListNetworkConnectors(context.Background(), &ListNetworkConnectorsInput{
+		State:    types.NetworkConnectorState("PENDING"),
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -315,7 +347,28 @@ func TestCheckResponseSnapshot_UpdateNetworkConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNetworkConnector(context.Background(), &UpdateNetworkConnectorInput{})
+	got, err := svc.UpdateNetworkConnector(context.Background(), &UpdateNetworkConnectorInput{
+		Identifier: ptr.String("__Identifier__"),
+		Configuration: &types.NetworkConnectorConfigurationMemberVpcEgressConfiguration{
+			Value: types.NetworkConnectorVpcEgressConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NetworkProtocol: types.NetworkProtocol("IPv4"),
+				AssociatedComputeResourceTypes: []types.ComputeResourceType{
+					types.ComputeResourceType("MicroVm"),
+					types.ComputeResourceType("MicroVm"),
+				},
+			},
+		},
+		OperatorRole: ptr.String("__OperatorRole__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +390,31 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNetworkConnector(context.Background(), &CreateNetworkConnectorInput{})
+	_, opErr := svc.CreateNetworkConnector(context.Background(), &CreateNetworkConnectorInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.NetworkConnectorConfigurationMemberVpcEgressConfiguration{
+			Value: types.NetworkConnectorVpcEgressConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NetworkProtocol: types.NetworkProtocol("IPv4"),
+				AssociatedComputeResourceTypes: []types.ComputeResourceType{
+					types.ComputeResourceType("MicroVm"),
+					types.ComputeResourceType("MicroVm"),
+				},
+			},
+		},
+		OperatorRole: ptr.String("__OperatorRole__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -363,7 +440,31 @@ func TestCheckResponseSnapshot_Error_NetworkConnectorLimitExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNetworkConnector(context.Background(), &CreateNetworkConnectorInput{})
+	_, opErr := svc.CreateNetworkConnector(context.Background(), &CreateNetworkConnectorInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.NetworkConnectorConfigurationMemberVpcEgressConfiguration{
+			Value: types.NetworkConnectorVpcEgressConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NetworkProtocol: types.NetworkProtocol("IPv4"),
+				AssociatedComputeResourceTypes: []types.ComputeResourceType{
+					types.ComputeResourceType("MicroVm"),
+					types.ComputeResourceType("MicroVm"),
+				},
+			},
+		},
+		OperatorRole: ptr.String("__OperatorRole__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -389,7 +490,31 @@ func TestCheckResponseSnapshot_Error_ResourceConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNetworkConnector(context.Background(), &CreateNetworkConnectorInput{})
+	_, opErr := svc.CreateNetworkConnector(context.Background(), &CreateNetworkConnectorInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.NetworkConnectorConfigurationMemberVpcEgressConfiguration{
+			Value: types.NetworkConnectorVpcEgressConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NetworkProtocol: types.NetworkProtocol("IPv4"),
+				AssociatedComputeResourceTypes: []types.ComputeResourceType{
+					types.ComputeResourceType("MicroVm"),
+					types.ComputeResourceType("MicroVm"),
+				},
+			},
+		},
+		OperatorRole: ptr.String("__OperatorRole__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -415,7 +540,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteNetworkConnector(context.Background(), &DeleteNetworkConnectorInput{})
+	_, opErr := svc.DeleteNetworkConnector(context.Background(), &DeleteNetworkConnectorInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -441,7 +568,31 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNetworkConnector(context.Background(), &CreateNetworkConnectorInput{})
+	_, opErr := svc.CreateNetworkConnector(context.Background(), &CreateNetworkConnectorInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.NetworkConnectorConfigurationMemberVpcEgressConfiguration{
+			Value: types.NetworkConnectorVpcEgressConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NetworkProtocol: types.NetworkProtocol("IPv4"),
+				AssociatedComputeResourceTypes: []types.ComputeResourceType{
+					types.ComputeResourceType("MicroVm"),
+					types.ComputeResourceType("MicroVm"),
+				},
+			},
+		},
+		OperatorRole: ptr.String("__OperatorRole__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -469,7 +620,31 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNetworkConnector(context.Background(), &CreateNetworkConnectorInput{})
+	_, opErr := svc.CreateNetworkConnector(context.Background(), &CreateNetworkConnectorInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.NetworkConnectorConfigurationMemberVpcEgressConfiguration{
+			Value: types.NetworkConnectorVpcEgressConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NetworkProtocol: types.NetworkProtocol("IPv4"),
+				AssociatedComputeResourceTypes: []types.ComputeResourceType{
+					types.ComputeResourceType("MicroVm"),
+					types.ComputeResourceType("MicroVm"),
+				},
+			},
+		},
+		OperatorRole: ptr.String("__OperatorRole__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

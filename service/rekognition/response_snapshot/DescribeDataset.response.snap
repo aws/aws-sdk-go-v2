@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.DescribeDataset
+
+{"DatasetDescription":{"CreationTimestamp":946684800,"DatasetStats":{"ErrorEntries":1,"LabeledEntries":1,"TotalEntries":1,"TotalLabels":1},"LastUpdatedTimestamp":946684800,"Status":"CREATE_IN_PROGRESS","StatusMessage":"__StatusMessage__","StatusMessageCode":"SUCCESS"}}

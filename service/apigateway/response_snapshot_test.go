@@ -133,7 +133,27 @@ func TestCheckResponseSnapshot_CreateApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{})
+	got, err := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Enabled:            true,
+		GenerateDistinctId: true,
+		Value:              ptr.String("__Value__"),
+		StageKeys: []types.StageKey{
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+		},
+		CustomerId: ptr.String("__CustomerId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -166,7 +186,21 @@ func TestCheckResponseSnapshot_CreateAuthorizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAuthorizer(context.Background(), &CreateAuthorizerInput{})
+	got, err := svc.CreateAuthorizer(context.Background(), &CreateAuthorizerInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		Name:      ptr.String("__Name__"),
+		Type:      types.AuthorizerType("TOKEN"),
+		ProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AuthType:                     ptr.String("__AuthType__"),
+		AuthorizerUri:                ptr.String("__AuthorizerUri__"),
+		AuthorizerCredentials:        ptr.String("__AuthorizerCredentials__"),
+		IdentitySource:               ptr.String("__IdentitySource__"),
+		IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
+		AuthorizerResultTtlInSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -189,7 +223,13 @@ func TestCheckResponseSnapshot_CreateBasePathMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBasePathMapping(context.Background(), &CreateBasePathMappingInput{})
+	got, err := svc.CreateBasePathMapping(context.Background(), &CreateBasePathMappingInput{
+		DomainName:   ptr.String("__DomainName__"),
+		DomainNameId: ptr.String("__DomainNameId__"),
+		BasePath:     ptr.String("__BasePath__"),
+		RestApiId:    ptr.String("__RestApiId__"),
+		Stage:        ptr.String("__Stage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -220,7 +260,25 @@ func TestCheckResponseSnapshot_CreateDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		RestApiId:           ptr.String("__RestApiId__"),
+		StageName:           ptr.String("__StageName__"),
+		StageDescription:    ptr.String("__StageDescription__"),
+		Description:         ptr.String("__Description__"),
+		CacheClusterEnabled: ptr.Bool(true),
+		CacheClusterSize:    types.CacheClusterSize("0.5"),
+		Variables: map[string]string{
+			"key0": "__Value__",
+		},
+		CanarySettings: &types.DeploymentCanarySettings{
+			PercentTraffic: 1.0,
+			StageVariableOverrides: map[string]string{
+				"key0": "__Value__",
+			},
+			UseStageCache: true,
+		},
+		TracingEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -249,7 +307,17 @@ func TestCheckResponseSnapshot_CreateDocumentationPart(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDocumentationPart(context.Background(), &CreateDocumentationPartInput{})
+	got, err := svc.CreateDocumentationPart(context.Background(), &CreateDocumentationPartInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		Location: &types.DocumentationPartLocation{
+			Type:       types.DocumentationPartType("API"),
+			Path:       ptr.String("__Path__"),
+			Method:     ptr.String("__Method__"),
+			StatusCode: ptr.String("__StatusCode__"),
+			Name:       ptr.String("__Name__"),
+		},
+		Properties: ptr.String("__Properties__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -272,7 +340,12 @@ func TestCheckResponseSnapshot_CreateDocumentationVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDocumentationVersion(context.Background(), &CreateDocumentationVersionInput{})
+	got, err := svc.CreateDocumentationVersion(context.Background(), &CreateDocumentationVersionInput{
+		RestApiId:            ptr.String("__RestApiId__"),
+		DocumentationVersion: ptr.String("__DocumentationVersion__"),
+		StageName:            ptr.String("__StageName__"),
+		Description:          ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -334,7 +407,39 @@ func TestCheckResponseSnapshot_CreateDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomainName(context.Background(), &CreateDomainNameInput{})
+	got, err := svc.CreateDomainName(context.Background(), &CreateDomainNameInput{
+		DomainName:              ptr.String("__DomainName__"),
+		CertificateName:         ptr.String("__CertificateName__"),
+		CertificateBody:         ptr.String("__CertificateBody__"),
+		CertificatePrivateKey:   ptr.String("__CertificatePrivateKey__"),
+		CertificateChain:        ptr.String("__CertificateChain__"),
+		CertificateArn:          ptr.String("__CertificateArn__"),
+		RegionalCertificateName: ptr.String("__RegionalCertificateName__"),
+		RegionalCertificateArn:  ptr.String("__RegionalCertificateArn__"),
+		EndpointConfiguration: &types.EndpointConfiguration{
+			Types: []types.EndpointType{
+				types.EndpointType("REGIONAL"),
+				types.EndpointType("REGIONAL"),
+			},
+			IpAddressType: types.IpAddressType("ipv4"),
+			VpcEndpointIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		SecurityPolicy:     types.SecurityPolicy("TLS_1_0"),
+		EndpointAccessMode: types.EndpointAccessMode("BASIC"),
+		MutualTlsAuthentication: &types.MutualTlsAuthenticationInput{
+			TruststoreUri:     ptr.String("__TruststoreUri__"),
+			TruststoreVersion: ptr.String("__TruststoreVersion__"),
+		},
+		OwnershipVerificationCertificateArn: ptr.String("__OwnershipVerificationCertificateArn__"),
+		Policy:                              ptr.String("__Policy__"),
+		RoutingMode:                         types.RoutingMode("BASE_PATH_MAPPING_ONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -361,7 +466,14 @@ func TestCheckResponseSnapshot_CreateDomainNameAccessAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomainNameAccessAssociation(context.Background(), &CreateDomainNameAccessAssociationInput{})
+	got, err := svc.CreateDomainNameAccessAssociation(context.Background(), &CreateDomainNameAccessAssociationInput{
+		DomainNameArn:               ptr.String("__DomainNameArn__"),
+		AccessAssociationSourceType: types.AccessAssociationSourceType("VPCE"),
+		AccessAssociationSource:     ptr.String("__AccessAssociationSource__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -386,7 +498,13 @@ func TestCheckResponseSnapshot_CreateModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateModel(context.Background(), &CreateModelInput{})
+	got, err := svc.CreateModel(context.Background(), &CreateModelInput{
+		RestApiId:   ptr.String("__RestApiId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Schema:      ptr.String("__Schema__"),
+		ContentType: ptr.String("__ContentType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -410,7 +528,12 @@ func TestCheckResponseSnapshot_CreateRequestValidator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRequestValidator(context.Background(), &CreateRequestValidatorInput{})
+	got, err := svc.CreateRequestValidator(context.Background(), &CreateRequestValidatorInput{
+		RestApiId:                 ptr.String("__RestApiId__"),
+		Name:                      ptr.String("__Name__"),
+		ValidateRequestBody:       true,
+		ValidateRequestParameters: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -505,7 +628,11 @@ func TestCheckResponseSnapshot_CreateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	got, err := svc.CreateResource(context.Background(), &CreateResourceInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		ParentId:  ptr.String("__ParentId__"),
+		PathPart:  ptr.String("__PathPart__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -561,7 +688,36 @@ func TestCheckResponseSnapshot_CreateRestApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRestApi(context.Background(), &CreateRestApiInput{})
+	got, err := svc.CreateRestApi(context.Background(), &CreateRestApiInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Version:     ptr.String("__Version__"),
+		CloneFrom:   ptr.String("__CloneFrom__"),
+		BinaryMediaTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MinimumCompressionSize: ptr.Int32(1),
+		ApiKeySource:           types.ApiKeySourceType("HEADER"),
+		EndpointConfiguration: &types.EndpointConfiguration{
+			Types: []types.EndpointType{
+				types.EndpointType("REGIONAL"),
+				types.EndpointType("REGIONAL"),
+			},
+			IpAddressType: types.IpAddressType("ipv4"),
+			VpcEndpointIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Policy: ptr.String("__Policy__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DisableExecuteApiEndpoint: true,
+		SecurityPolicy:            types.SecurityPolicy("TLS_1_0"),
+		EndpointAccessMode:        types.EndpointAccessMode("BASIC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -625,7 +781,30 @@ func TestCheckResponseSnapshot_CreateStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStage(context.Background(), &CreateStageInput{})
+	got, err := svc.CreateStage(context.Background(), &CreateStageInput{
+		RestApiId:           ptr.String("__RestApiId__"),
+		StageName:           ptr.String("__StageName__"),
+		DeploymentId:        ptr.String("__DeploymentId__"),
+		Description:         ptr.String("__Description__"),
+		CacheClusterEnabled: true,
+		CacheClusterSize:    types.CacheClusterSize("0.5"),
+		Variables: map[string]string{
+			"key0": "__Value__",
+		},
+		DocumentationVersion: ptr.String("__DocumentationVersion__"),
+		CanarySettings: &types.CanarySettings{
+			PercentTraffic: 1.0,
+			DeploymentId:   ptr.String("__DeploymentId__"),
+			StageVariableOverrides: map[string]string{
+				"key0": "__Value__",
+			},
+			UseStageCache: true,
+		},
+		TracingEnabled: true,
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -683,7 +862,44 @@ func TestCheckResponseSnapshot_CreateUsagePlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUsagePlan(context.Background(), &CreateUsagePlanInput{})
+	got, err := svc.CreateUsagePlan(context.Background(), &CreateUsagePlanInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ApiStages: []types.ApiStage{
+			{
+				ApiId: ptr.String("__ApiId__"),
+				Stage: ptr.String("__Stage__"),
+				Throttle: map[string]types.ThrottleSettings{
+					"key0": {
+						BurstLimit: 1,
+						RateLimit:  1.0,
+					},
+				},
+			},
+			{
+				ApiId: ptr.String("__ApiId__"),
+				Stage: ptr.String("__Stage__"),
+				Throttle: map[string]types.ThrottleSettings{
+					"key0": {
+						BurstLimit: 1,
+						RateLimit:  1.0,
+					},
+				},
+			},
+		},
+		Throttle: &types.ThrottleSettings{
+			BurstLimit: 1,
+			RateLimit:  1.0,
+		},
+		Quota: &types.QuotaSettings{
+			Limit:  1,
+			Offset: 1,
+			Period: types.QuotaPeriodType("DAY"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -707,7 +923,11 @@ func TestCheckResponseSnapshot_CreateUsagePlanKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUsagePlanKey(context.Background(), &CreateUsagePlanKeyInput{})
+	got, err := svc.CreateUsagePlanKey(context.Background(), &CreateUsagePlanKeyInput{
+		UsagePlanId: ptr.String("__UsagePlanId__"),
+		KeyId:       ptr.String("__KeyId__"),
+		KeyType:     ptr.String("__KeyType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -739,7 +959,17 @@ func TestCheckResponseSnapshot_CreateVpcLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVpcLink(context.Background(), &CreateVpcLinkInput{})
+	got, err := svc.CreateVpcLink(context.Background(), &CreateVpcLinkInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		TargetArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -758,7 +988,9 @@ func TestCheckResponseSnapshot_DeleteApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApiKey(context.Background(), &DeleteApiKeyInput{})
+	got, err := svc.DeleteApiKey(context.Background(), &DeleteApiKeyInput{
+		ApiKey: ptr.String("__ApiKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -777,7 +1009,10 @@ func TestCheckResponseSnapshot_DeleteAuthorizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAuthorizer(context.Background(), &DeleteAuthorizerInput{})
+	got, err := svc.DeleteAuthorizer(context.Background(), &DeleteAuthorizerInput{
+		RestApiId:    ptr.String("__RestApiId__"),
+		AuthorizerId: ptr.String("__AuthorizerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -796,7 +1031,11 @@ func TestCheckResponseSnapshot_DeleteBasePathMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBasePathMapping(context.Background(), &DeleteBasePathMappingInput{})
+	got, err := svc.DeleteBasePathMapping(context.Background(), &DeleteBasePathMappingInput{
+		DomainName:   ptr.String("__DomainName__"),
+		DomainNameId: ptr.String("__DomainNameId__"),
+		BasePath:     ptr.String("__BasePath__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -815,7 +1054,9 @@ func TestCheckResponseSnapshot_DeleteClientCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteClientCertificate(context.Background(), &DeleteClientCertificateInput{})
+	got, err := svc.DeleteClientCertificate(context.Background(), &DeleteClientCertificateInput{
+		ClientCertificateId: ptr.String("__ClientCertificateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -834,7 +1075,10 @@ func TestCheckResponseSnapshot_DeleteDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeployment(context.Background(), &DeleteDeploymentInput{})
+	got, err := svc.DeleteDeployment(context.Background(), &DeleteDeploymentInput{
+		RestApiId:    ptr.String("__RestApiId__"),
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -853,7 +1097,10 @@ func TestCheckResponseSnapshot_DeleteDocumentationPart(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDocumentationPart(context.Background(), &DeleteDocumentationPartInput{})
+	got, err := svc.DeleteDocumentationPart(context.Background(), &DeleteDocumentationPartInput{
+		RestApiId:           ptr.String("__RestApiId__"),
+		DocumentationPartId: ptr.String("__DocumentationPartId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -872,7 +1119,10 @@ func TestCheckResponseSnapshot_DeleteDocumentationVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDocumentationVersion(context.Background(), &DeleteDocumentationVersionInput{})
+	got, err := svc.DeleteDocumentationVersion(context.Background(), &DeleteDocumentationVersionInput{
+		RestApiId:            ptr.String("__RestApiId__"),
+		DocumentationVersion: ptr.String("__DocumentationVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -891,7 +1141,10 @@ func TestCheckResponseSnapshot_DeleteDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomainName(context.Background(), &DeleteDomainNameInput{})
+	got, err := svc.DeleteDomainName(context.Background(), &DeleteDomainNameInput{
+		DomainName:   ptr.String("__DomainName__"),
+		DomainNameId: ptr.String("__DomainNameId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -910,7 +1163,9 @@ func TestCheckResponseSnapshot_DeleteDomainNameAccessAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomainNameAccessAssociation(context.Background(), &DeleteDomainNameAccessAssociationInput{})
+	got, err := svc.DeleteDomainNameAccessAssociation(context.Background(), &DeleteDomainNameAccessAssociationInput{
+		DomainNameAccessAssociationArn: ptr.String("__DomainNameAccessAssociationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -929,7 +1184,10 @@ func TestCheckResponseSnapshot_DeleteGatewayResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGatewayResponse(context.Background(), &DeleteGatewayResponseInput{})
+	got, err := svc.DeleteGatewayResponse(context.Background(), &DeleteGatewayResponseInput{
+		RestApiId:    ptr.String("__RestApiId__"),
+		ResponseType: types.GatewayResponseType("DEFAULT_4XX"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -948,7 +1206,11 @@ func TestCheckResponseSnapshot_DeleteIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIntegration(context.Background(), &DeleteIntegrationInput{})
+	got, err := svc.DeleteIntegration(context.Background(), &DeleteIntegrationInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -967,7 +1229,12 @@ func TestCheckResponseSnapshot_DeleteIntegrationResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIntegrationResponse(context.Background(), &DeleteIntegrationResponseInput{})
+	got, err := svc.DeleteIntegrationResponse(context.Background(), &DeleteIntegrationResponseInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+		StatusCode: ptr.String("__StatusCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -986,7 +1253,11 @@ func TestCheckResponseSnapshot_DeleteMethod(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMethod(context.Background(), &DeleteMethodInput{})
+	got, err := svc.DeleteMethod(context.Background(), &DeleteMethodInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1005,7 +1276,12 @@ func TestCheckResponseSnapshot_DeleteMethodResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMethodResponse(context.Background(), &DeleteMethodResponseInput{})
+	got, err := svc.DeleteMethodResponse(context.Background(), &DeleteMethodResponseInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+		StatusCode: ptr.String("__StatusCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1024,7 +1300,10 @@ func TestCheckResponseSnapshot_DeleteModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteModel(context.Background(), &DeleteModelInput{})
+	got, err := svc.DeleteModel(context.Background(), &DeleteModelInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		ModelName: ptr.String("__ModelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1043,7 +1322,10 @@ func TestCheckResponseSnapshot_DeleteRequestValidator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRequestValidator(context.Background(), &DeleteRequestValidatorInput{})
+	got, err := svc.DeleteRequestValidator(context.Background(), &DeleteRequestValidatorInput{
+		RestApiId:          ptr.String("__RestApiId__"),
+		RequestValidatorId: ptr.String("__RequestValidatorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1062,7 +1344,10 @@ func TestCheckResponseSnapshot_DeleteResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResource(context.Background(), &DeleteResourceInput{})
+	got, err := svc.DeleteResource(context.Background(), &DeleteResourceInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1081,7 +1366,9 @@ func TestCheckResponseSnapshot_DeleteRestApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRestApi(context.Background(), &DeleteRestApiInput{})
+	got, err := svc.DeleteRestApi(context.Background(), &DeleteRestApiInput{
+		RestApiId: ptr.String("__RestApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1100,7 +1387,10 @@ func TestCheckResponseSnapshot_DeleteStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStage(context.Background(), &DeleteStageInput{})
+	got, err := svc.DeleteStage(context.Background(), &DeleteStageInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		StageName: ptr.String("__StageName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1119,7 +1409,9 @@ func TestCheckResponseSnapshot_DeleteUsagePlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUsagePlan(context.Background(), &DeleteUsagePlanInput{})
+	got, err := svc.DeleteUsagePlan(context.Background(), &DeleteUsagePlanInput{
+		UsagePlanId: ptr.String("__UsagePlanId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1138,7 +1430,10 @@ func TestCheckResponseSnapshot_DeleteUsagePlanKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUsagePlanKey(context.Background(), &DeleteUsagePlanKeyInput{})
+	got, err := svc.DeleteUsagePlanKey(context.Background(), &DeleteUsagePlanKeyInput{
+		UsagePlanId: ptr.String("__UsagePlanId__"),
+		KeyId:       ptr.String("__KeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1157,7 +1452,9 @@ func TestCheckResponseSnapshot_DeleteVpcLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVpcLink(context.Background(), &DeleteVpcLinkInput{})
+	got, err := svc.DeleteVpcLink(context.Background(), &DeleteVpcLinkInput{
+		VpcLinkId: ptr.String("__VpcLinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1176,7 +1473,10 @@ func TestCheckResponseSnapshot_FlushStageAuthorizersCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.FlushStageAuthorizersCache(context.Background(), &FlushStageAuthorizersCacheInput{})
+	got, err := svc.FlushStageAuthorizersCache(context.Background(), &FlushStageAuthorizersCacheInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		StageName: ptr.String("__StageName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1195,7 +1495,10 @@ func TestCheckResponseSnapshot_FlushStageCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.FlushStageCache(context.Background(), &FlushStageCacheInput{})
+	got, err := svc.FlushStageCache(context.Background(), &FlushStageCacheInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		StageName: ptr.String("__StageName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1223,7 +1526,12 @@ func TestCheckResponseSnapshot_GenerateClientCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateClientCertificate(context.Background(), &GenerateClientCertificateInput{})
+	got, err := svc.GenerateClientCertificate(context.Background(), &GenerateClientCertificateInput{
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1288,7 +1596,10 @@ func TestCheckResponseSnapshot_GetApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApiKey(context.Background(), &GetApiKeyInput{})
+	got, err := svc.GetApiKey(context.Background(), &GetApiKeyInput{
+		ApiKey:       ptr.String("__ApiKey__"),
+		IncludeValue: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1298,64 +1609,7 @@ func TestCheckResponseSnapshot_GetApiKey(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetApiKeys(t *testing.T) {
-	want := &GetApiKeysOutput{
-		Warnings: []string{
-			"__Member__",
-			"__Member__",
-		},
-		Items: []types.ApiKey{
-			{
-				Id:              ptr.String("__Id__"),
-				Value:           ptr.String("__Value__"),
-				Name:            ptr.String("__Name__"),
-				CustomerId:      ptr.String("__CustomerId__"),
-				Description:     ptr.String("__Description__"),
-				Enabled:         true,
-				CreatedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LastUpdatedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				StageKeys: []string{
-					"__Member__",
-					"__Member__",
-				},
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-			},
-			{
-				Id:              ptr.String("__Id__"),
-				Value:           ptr.String("__Value__"),
-				Name:            ptr.String("__Name__"),
-				CustomerId:      ptr.String("__CustomerId__"),
-				Description:     ptr.String("__Description__"),
-				Enabled:         true,
-				CreatedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LastUpdatedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				StageKeys: []string{
-					"__Member__",
-					"__Member__",
-				},
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetApiKeys.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApiKeys(context.Background(), &GetApiKeysInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetApiKeys.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetAuthorizer(t *testing.T) {
@@ -1382,7 +1636,10 @@ func TestCheckResponseSnapshot_GetAuthorizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAuthorizer(context.Background(), &GetAuthorizerInput{})
+	got, err := svc.GetAuthorizer(context.Background(), &GetAuthorizerInput{
+		RestApiId:    ptr.String("__RestApiId__"),
+		AuthorizerId: ptr.String("__AuthorizerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1392,56 +1649,7 @@ func TestCheckResponseSnapshot_GetAuthorizer(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetAuthorizers(t *testing.T) {
-	want := &GetAuthorizersOutput{
-		Items: []types.Authorizer{
-			{
-				Id:   ptr.String("__Id__"),
-				Name: ptr.String("__Name__"),
-				Type: types.AuthorizerType("TOKEN"),
-				ProviderARNs: []string{
-					"__Member__",
-					"__Member__",
-				},
-				AuthType:                     ptr.String("__AuthType__"),
-				AuthorizerUri:                ptr.String("__AuthorizerUri__"),
-				AuthorizerCredentials:        ptr.String("__AuthorizerCredentials__"),
-				IdentitySource:               ptr.String("__IdentitySource__"),
-				IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
-				AuthorizerResultTtlInSeconds: ptr.Int32(1),
-			},
-			{
-				Id:   ptr.String("__Id__"),
-				Name: ptr.String("__Name__"),
-				Type: types.AuthorizerType("TOKEN"),
-				ProviderARNs: []string{
-					"__Member__",
-					"__Member__",
-				},
-				AuthType:                     ptr.String("__AuthType__"),
-				AuthorizerUri:                ptr.String("__AuthorizerUri__"),
-				AuthorizerCredentials:        ptr.String("__AuthorizerCredentials__"),
-				IdentitySource:               ptr.String("__IdentitySource__"),
-				IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
-				AuthorizerResultTtlInSeconds: ptr.Int32(1),
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetAuthorizers.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAuthorizers(context.Background(), &GetAuthorizersInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetAuthorizers.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetBasePathMapping(t *testing.T) {
@@ -1458,7 +1666,11 @@ func TestCheckResponseSnapshot_GetBasePathMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBasePathMapping(context.Background(), &GetBasePathMappingInput{})
+	got, err := svc.GetBasePathMapping(context.Background(), &GetBasePathMappingInput{
+		DomainName:   ptr.String("__DomainName__"),
+		DomainNameId: ptr.String("__DomainNameId__"),
+		BasePath:     ptr.String("__BasePath__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1468,36 +1680,7 @@ func TestCheckResponseSnapshot_GetBasePathMapping(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetBasePathMappings(t *testing.T) {
-	want := &GetBasePathMappingsOutput{
-		Items: []types.BasePathMapping{
-			{
-				BasePath:  ptr.String("__BasePath__"),
-				RestApiId: ptr.String("__RestApiId__"),
-				Stage:     ptr.String("__Stage__"),
-			},
-			{
-				BasePath:  ptr.String("__BasePath__"),
-				RestApiId: ptr.String("__RestApiId__"),
-				Stage:     ptr.String("__Stage__"),
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetBasePathMappings.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBasePathMappings(context.Background(), &GetBasePathMappingsInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetBasePathMappings.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetClientCertificate(t *testing.T) {
@@ -1519,7 +1702,9 @@ func TestCheckResponseSnapshot_GetClientCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetClientCertificate(context.Background(), &GetClientCertificateInput{})
+	got, err := svc.GetClientCertificate(context.Background(), &GetClientCertificateInput{
+		ClientCertificateId: ptr.String("__ClientCertificateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1529,46 +1714,7 @@ func TestCheckResponseSnapshot_GetClientCertificate(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetClientCertificates(t *testing.T) {
-	want := &GetClientCertificatesOutput{
-		Items: []types.ClientCertificate{
-			{
-				ClientCertificateId:   ptr.String("__ClientCertificateId__"),
-				Description:           ptr.String("__Description__"),
-				PemEncodedCertificate: ptr.String("__PemEncodedCertificate__"),
-				CreatedDate:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				ExpirationDate:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-			},
-			{
-				ClientCertificateId:   ptr.String("__ClientCertificateId__"),
-				Description:           ptr.String("__Description__"),
-				PemEncodedCertificate: ptr.String("__PemEncodedCertificate__"),
-				CreatedDate:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				ExpirationDate:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetClientCertificates.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetClientCertificates(context.Background(), &GetClientCertificatesInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetClientCertificates.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetDeployment(t *testing.T) {
@@ -1593,7 +1739,14 @@ func TestCheckResponseSnapshot_GetDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{})
+	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{
+		RestApiId:    ptr.String("__RestApiId__"),
+		DeploymentId: ptr.String("__DeploymentId__"),
+		Embed: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1603,52 +1756,7 @@ func TestCheckResponseSnapshot_GetDeployment(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetDeployments(t *testing.T) {
-	want := &GetDeploymentsOutput{
-		Items: []types.Deployment{
-			{
-				Id:          ptr.String("__Id__"),
-				Description: ptr.String("__Description__"),
-				CreatedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				ApiSummary: map[string]map[string]types.MethodSnapshot{
-					"key0": {
-						"key0": {
-							AuthorizationType: ptr.String("__AuthorizationType__"),
-							ApiKeyRequired:    true,
-						},
-					},
-				},
-			},
-			{
-				Id:          ptr.String("__Id__"),
-				Description: ptr.String("__Description__"),
-				CreatedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				ApiSummary: map[string]map[string]types.MethodSnapshot{
-					"key0": {
-						"key0": {
-							AuthorizationType: ptr.String("__AuthorizationType__"),
-							ApiKeyRequired:    true,
-						},
-					},
-				},
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetDeployments.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeployments(context.Background(), &GetDeploymentsInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetDeployments.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetDocumentationPart(t *testing.T) {
@@ -1671,7 +1779,10 @@ func TestCheckResponseSnapshot_GetDocumentationPart(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDocumentationPart(context.Background(), &GetDocumentationPartInput{})
+	got, err := svc.GetDocumentationPart(context.Background(), &GetDocumentationPartInput{
+		RestApiId:           ptr.String("__RestApiId__"),
+		DocumentationPartId: ptr.String("__DocumentationPartId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1681,48 +1792,7 @@ func TestCheckResponseSnapshot_GetDocumentationPart(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetDocumentationParts(t *testing.T) {
-	want := &GetDocumentationPartsOutput{
-		Items: []types.DocumentationPart{
-			{
-				Id: ptr.String("__Id__"),
-				Location: &types.DocumentationPartLocation{
-					Type:       types.DocumentationPartType("API"),
-					Path:       ptr.String("__Path__"),
-					Method:     ptr.String("__Method__"),
-					StatusCode: ptr.String("__StatusCode__"),
-					Name:       ptr.String("__Name__"),
-				},
-				Properties: ptr.String("__Properties__"),
-			},
-			{
-				Id: ptr.String("__Id__"),
-				Location: &types.DocumentationPartLocation{
-					Type:       types.DocumentationPartType("API"),
-					Path:       ptr.String("__Path__"),
-					Method:     ptr.String("__Method__"),
-					StatusCode: ptr.String("__StatusCode__"),
-					Name:       ptr.String("__Name__"),
-				},
-				Properties: ptr.String("__Properties__"),
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetDocumentationParts.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDocumentationParts(context.Background(), &GetDocumentationPartsInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetDocumentationParts.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetDocumentationVersion(t *testing.T) {
@@ -1739,7 +1809,10 @@ func TestCheckResponseSnapshot_GetDocumentationVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDocumentationVersion(context.Background(), &GetDocumentationVersionInput{})
+	got, err := svc.GetDocumentationVersion(context.Background(), &GetDocumentationVersionInput{
+		RestApiId:            ptr.String("__RestApiId__"),
+		DocumentationVersion: ptr.String("__DocumentationVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1749,36 +1822,7 @@ func TestCheckResponseSnapshot_GetDocumentationVersion(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetDocumentationVersions(t *testing.T) {
-	want := &GetDocumentationVersionsOutput{
-		Items: []types.DocumentationVersion{
-			{
-				Version:     ptr.String("__Version__"),
-				CreatedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Description: ptr.String("__Description__"),
-			},
-			{
-				Version:     ptr.String("__Version__"),
-				CreatedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Description: ptr.String("__Description__"),
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetDocumentationVersions.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDocumentationVersions(context.Background(), &GetDocumentationVersionsInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetDocumentationVersions.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetDomainName(t *testing.T) {
@@ -1834,7 +1878,10 @@ func TestCheckResponseSnapshot_GetDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainName(context.Background(), &GetDomainNameInput{})
+	got, err := svc.GetDomainName(context.Background(), &GetDomainNameInput{
+		DomainName:   ptr.String("__DomainName__"),
+		DomainNameId: ptr.String("__DomainNameId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1844,155 +1891,11 @@ func TestCheckResponseSnapshot_GetDomainName(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetDomainNameAccessAssociations(t *testing.T) {
-	want := &GetDomainNameAccessAssociationsOutput{
-		Items: []types.DomainNameAccessAssociation{
-			{
-				DomainNameAccessAssociationArn: ptr.String("__DomainNameAccessAssociationArn__"),
-				DomainNameArn:                  ptr.String("__DomainNameArn__"),
-				AccessAssociationSourceType:    types.AccessAssociationSourceType("VPCE"),
-				AccessAssociationSource:        ptr.String("__AccessAssociationSource__"),
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-			},
-			{
-				DomainNameAccessAssociationArn: ptr.String("__DomainNameAccessAssociationArn__"),
-				DomainNameArn:                  ptr.String("__DomainNameArn__"),
-				AccessAssociationSourceType:    types.AccessAssociationSourceType("VPCE"),
-				AccessAssociationSource:        ptr.String("__AccessAssociationSource__"),
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetDomainNameAccessAssociations.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainNameAccessAssociations(context.Background(), &GetDomainNameAccessAssociationsInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetDomainNameAccessAssociations.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetDomainNames(t *testing.T) {
-	want := &GetDomainNamesOutput{
-		Items: []types.DomainName{
-			{
-				DomainName:               ptr.String("__DomainName__"),
-				DomainNameId:             ptr.String("__DomainNameId__"),
-				DomainNameArn:            ptr.String("__DomainNameArn__"),
-				CertificateName:          ptr.String("__CertificateName__"),
-				CertificateArn:           ptr.String("__CertificateArn__"),
-				CertificateUploadDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				RegionalDomainName:       ptr.String("__RegionalDomainName__"),
-				RegionalHostedZoneId:     ptr.String("__RegionalHostedZoneId__"),
-				RegionalCertificateName:  ptr.String("__RegionalCertificateName__"),
-				RegionalCertificateArn:   ptr.String("__RegionalCertificateArn__"),
-				DistributionDomainName:   ptr.String("__DistributionDomainName__"),
-				DistributionHostedZoneId: ptr.String("__DistributionHostedZoneId__"),
-				EndpointConfiguration: &types.EndpointConfiguration{
-					Types: []types.EndpointType{
-						types.EndpointType("REGIONAL"),
-						types.EndpointType("REGIONAL"),
-					},
-					IpAddressType: types.IpAddressType("ipv4"),
-					VpcEndpointIds: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				DomainNameStatus:        types.DomainNameStatus("AVAILABLE"),
-				DomainNameStatusMessage: ptr.String("__DomainNameStatusMessage__"),
-				SecurityPolicy:          types.SecurityPolicy("TLS_1_0"),
-				EndpointAccessMode:      types.EndpointAccessMode("BASIC"),
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-				MutualTlsAuthentication: &types.MutualTlsAuthentication{
-					TruststoreUri:     ptr.String("__TruststoreUri__"),
-					TruststoreVersion: ptr.String("__TruststoreVersion__"),
-					TruststoreWarnings: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				OwnershipVerificationCertificateArn: ptr.String("__OwnershipVerificationCertificateArn__"),
-				ManagementPolicy:                    ptr.String("__ManagementPolicy__"),
-				Policy:                              ptr.String("__Policy__"),
-				RoutingMode:                         types.RoutingMode("BASE_PATH_MAPPING_ONLY"),
-			},
-			{
-				DomainName:               ptr.String("__DomainName__"),
-				DomainNameId:             ptr.String("__DomainNameId__"),
-				DomainNameArn:            ptr.String("__DomainNameArn__"),
-				CertificateName:          ptr.String("__CertificateName__"),
-				CertificateArn:           ptr.String("__CertificateArn__"),
-				CertificateUploadDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				RegionalDomainName:       ptr.String("__RegionalDomainName__"),
-				RegionalHostedZoneId:     ptr.String("__RegionalHostedZoneId__"),
-				RegionalCertificateName:  ptr.String("__RegionalCertificateName__"),
-				RegionalCertificateArn:   ptr.String("__RegionalCertificateArn__"),
-				DistributionDomainName:   ptr.String("__DistributionDomainName__"),
-				DistributionHostedZoneId: ptr.String("__DistributionHostedZoneId__"),
-				EndpointConfiguration: &types.EndpointConfiguration{
-					Types: []types.EndpointType{
-						types.EndpointType("REGIONAL"),
-						types.EndpointType("REGIONAL"),
-					},
-					IpAddressType: types.IpAddressType("ipv4"),
-					VpcEndpointIds: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				DomainNameStatus:        types.DomainNameStatus("AVAILABLE"),
-				DomainNameStatusMessage: ptr.String("__DomainNameStatusMessage__"),
-				SecurityPolicy:          types.SecurityPolicy("TLS_1_0"),
-				EndpointAccessMode:      types.EndpointAccessMode("BASIC"),
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-				MutualTlsAuthentication: &types.MutualTlsAuthentication{
-					TruststoreUri:     ptr.String("__TruststoreUri__"),
-					TruststoreVersion: ptr.String("__TruststoreVersion__"),
-					TruststoreWarnings: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				OwnershipVerificationCertificateArn: ptr.String("__OwnershipVerificationCertificateArn__"),
-				ManagementPolicy:                    ptr.String("__ManagementPolicy__"),
-				Policy:                              ptr.String("__Policy__"),
-				RoutingMode:                         types.RoutingMode("BASE_PATH_MAPPING_ONLY"),
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetDomainNames.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainNames(context.Background(), &GetDomainNamesInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetDomainNames.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetExport(t *testing.T) {
@@ -2009,7 +1912,15 @@ func TestCheckResponseSnapshot_GetExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExport(context.Background(), &GetExportInput{})
+	got, err := svc.GetExport(context.Background(), &GetExportInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		StageName:  ptr.String("__StageName__"),
+		ExportType: ptr.String("__ExportType__"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		Accepts: ptr.String("__Accepts__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2038,7 +1949,10 @@ func TestCheckResponseSnapshot_GetGatewayResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGatewayResponse(context.Background(), &GetGatewayResponseInput{})
+	got, err := svc.GetGatewayResponse(context.Background(), &GetGatewayResponseInput{
+		RestApiId:    ptr.String("__RestApiId__"),
+		ResponseType: types.GatewayResponseType("DEFAULT_4XX"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2048,48 +1962,7 @@ func TestCheckResponseSnapshot_GetGatewayResponse(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetGatewayResponses(t *testing.T) {
-	want := &GetGatewayResponsesOutput{
-		Items: []types.GatewayResponse{
-			{
-				ResponseType: types.GatewayResponseType("DEFAULT_4XX"),
-				StatusCode:   ptr.String("__StatusCode__"),
-				ResponseParameters: map[string]string{
-					"key0": "__Value__",
-				},
-				ResponseTemplates: map[string]string{
-					"key0": "__Value__",
-				},
-				DefaultResponse: true,
-			},
-			{
-				ResponseType: types.GatewayResponseType("DEFAULT_4XX"),
-				StatusCode:   ptr.String("__StatusCode__"),
-				ResponseParameters: map[string]string{
-					"key0": "__Value__",
-				},
-				ResponseTemplates: map[string]string{
-					"key0": "__Value__",
-				},
-				DefaultResponse: true,
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetGatewayResponses.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGatewayResponses(context.Background(), &GetGatewayResponsesInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetGatewayResponses.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetIntegration(t *testing.T) {
@@ -2141,7 +2014,11 @@ func TestCheckResponseSnapshot_GetIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntegration(context.Background(), &GetIntegrationInput{})
+	got, err := svc.GetIntegration(context.Background(), &GetIntegrationInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2170,7 +2047,12 @@ func TestCheckResponseSnapshot_GetIntegrationResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntegrationResponse(context.Background(), &GetIntegrationResponseInput{})
+	got, err := svc.GetIntegrationResponse(context.Background(), &GetIntegrationResponseInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+		StatusCode: ptr.String("__StatusCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2257,7 +2139,11 @@ func TestCheckResponseSnapshot_GetMethod(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMethod(context.Background(), &GetMethodInput{})
+	got, err := svc.GetMethod(context.Background(), &GetMethodInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2284,7 +2170,12 @@ func TestCheckResponseSnapshot_GetMethodResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMethodResponse(context.Background(), &GetMethodResponseInput{})
+	got, err := svc.GetMethodResponse(context.Background(), &GetMethodResponseInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+		StatusCode: ptr.String("__StatusCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2309,7 +2200,11 @@ func TestCheckResponseSnapshot_GetModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModel(context.Background(), &GetModelInput{})
+	got, err := svc.GetModel(context.Background(), &GetModelInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		ModelName: ptr.String("__ModelName__"),
+		Flatten:   true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2330,7 +2225,10 @@ func TestCheckResponseSnapshot_GetModelTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModelTemplate(context.Background(), &GetModelTemplateInput{})
+	got, err := svc.GetModelTemplate(context.Background(), &GetModelTemplateInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		ModelName: ptr.String("__ModelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2340,40 +2238,7 @@ func TestCheckResponseSnapshot_GetModelTemplate(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetModels(t *testing.T) {
-	want := &GetModelsOutput{
-		Items: []types.Model{
-			{
-				Id:          ptr.String("__Id__"),
-				Name:        ptr.String("__Name__"),
-				Description: ptr.String("__Description__"),
-				Schema:      ptr.String("__Schema__"),
-				ContentType: ptr.String("__ContentType__"),
-			},
-			{
-				Id:          ptr.String("__Id__"),
-				Name:        ptr.String("__Name__"),
-				Description: ptr.String("__Description__"),
-				Schema:      ptr.String("__Schema__"),
-				ContentType: ptr.String("__ContentType__"),
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetModels.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModels(context.Background(), &GetModelsInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetModels.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetRequestValidator(t *testing.T) {
@@ -2391,7 +2256,10 @@ func TestCheckResponseSnapshot_GetRequestValidator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRequestValidator(context.Background(), &GetRequestValidatorInput{})
+	got, err := svc.GetRequestValidator(context.Background(), &GetRequestValidatorInput{
+		RestApiId:          ptr.String("__RestApiId__"),
+		RequestValidatorId: ptr.String("__RequestValidatorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2401,38 +2269,7 @@ func TestCheckResponseSnapshot_GetRequestValidator(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetRequestValidators(t *testing.T) {
-	want := &GetRequestValidatorsOutput{
-		Items: []types.RequestValidator{
-			{
-				Id:                        ptr.String("__Id__"),
-				Name:                      ptr.String("__Name__"),
-				ValidateRequestBody:       true,
-				ValidateRequestParameters: true,
-			},
-			{
-				Id:                        ptr.String("__Id__"),
-				Name:                      ptr.String("__Name__"),
-				ValidateRequestBody:       true,
-				ValidateRequestParameters: true,
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetRequestValidators.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRequestValidators(context.Background(), &GetRequestValidatorsInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetRequestValidators.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetResource(t *testing.T) {
@@ -2521,7 +2358,14 @@ func TestCheckResponseSnapshot_GetResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResource(context.Background(), &GetResourceInput{})
+	got, err := svc.GetResource(context.Background(), &GetResourceInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		Embed: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2531,180 +2375,7 @@ func TestCheckResponseSnapshot_GetResource(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetResources(t *testing.T) {
-	want := &GetResourcesOutput{
-		Items: []types.Resource{
-			{
-				Id:       ptr.String("__Id__"),
-				ParentId: ptr.String("__ParentId__"),
-				PathPart: ptr.String("__PathPart__"),
-				Path:     ptr.String("__Path__"),
-				ResourceMethods: map[string]types.Method{
-					"key0": {
-						HttpMethod:         ptr.String("__HttpMethod__"),
-						AuthorizationType:  ptr.String("__AuthorizationType__"),
-						AuthorizerId:       ptr.String("__AuthorizerId__"),
-						ApiKeyRequired:     ptr.Bool(true),
-						RequestValidatorId: ptr.String("__RequestValidatorId__"),
-						OperationName:      ptr.String("__OperationName__"),
-						RequestParameters: map[string]bool{
-							"key0": true,
-						},
-						RequestModels: map[string]string{
-							"key0": "__Value__",
-						},
-						MethodResponses: map[string]types.MethodResponse{
-							"key0": {
-								StatusCode: ptr.String("__StatusCode__"),
-								ResponseParameters: map[string]bool{
-									"key0": true,
-								},
-								ResponseModels: map[string]string{
-									"key0": "__Value__",
-								},
-							},
-						},
-						MethodIntegration: &types.Integration{
-							Type:           types.IntegrationType("HTTP"),
-							HttpMethod:     ptr.String("__HttpMethod__"),
-							Uri:            ptr.String("__Uri__"),
-							ConnectionType: types.ConnectionType("INTERNET"),
-							ConnectionId:   ptr.String("__ConnectionId__"),
-							Credentials:    ptr.String("__Credentials__"),
-							RequestParameters: map[string]string{
-								"key0": "__Value__",
-							},
-							RequestTemplates: map[string]string{
-								"key0": "__Value__",
-							},
-							PassthroughBehavior: ptr.String("__PassthroughBehavior__"),
-							ContentHandling:     types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
-							TimeoutInMillis:     1,
-							CacheNamespace:      ptr.String("__CacheNamespace__"),
-							CacheKeyParameters: []string{
-								"__Member__",
-								"__Member__",
-							},
-							IntegrationResponses: map[string]types.IntegrationResponse{
-								"key0": {
-									StatusCode:       ptr.String("__StatusCode__"),
-									SelectionPattern: ptr.String("__SelectionPattern__"),
-									ResponseParameters: map[string]string{
-										"key0": "__Value__",
-									},
-									ResponseTemplates: map[string]string{
-										"key0": "__Value__",
-									},
-									ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
-								},
-							},
-							TlsConfig: &types.TlsConfig{
-								InsecureSkipVerification: true,
-							},
-							ResponseTransferMode: types.ResponseTransferMode("BUFFERED"),
-							IntegrationTarget:    ptr.String("__IntegrationTarget__"),
-						},
-						AuthorizationScopes: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-			},
-			{
-				Id:       ptr.String("__Id__"),
-				ParentId: ptr.String("__ParentId__"),
-				PathPart: ptr.String("__PathPart__"),
-				Path:     ptr.String("__Path__"),
-				ResourceMethods: map[string]types.Method{
-					"key0": {
-						HttpMethod:         ptr.String("__HttpMethod__"),
-						AuthorizationType:  ptr.String("__AuthorizationType__"),
-						AuthorizerId:       ptr.String("__AuthorizerId__"),
-						ApiKeyRequired:     ptr.Bool(true),
-						RequestValidatorId: ptr.String("__RequestValidatorId__"),
-						OperationName:      ptr.String("__OperationName__"),
-						RequestParameters: map[string]bool{
-							"key0": true,
-						},
-						RequestModels: map[string]string{
-							"key0": "__Value__",
-						},
-						MethodResponses: map[string]types.MethodResponse{
-							"key0": {
-								StatusCode: ptr.String("__StatusCode__"),
-								ResponseParameters: map[string]bool{
-									"key0": true,
-								},
-								ResponseModels: map[string]string{
-									"key0": "__Value__",
-								},
-							},
-						},
-						MethodIntegration: &types.Integration{
-							Type:           types.IntegrationType("HTTP"),
-							HttpMethod:     ptr.String("__HttpMethod__"),
-							Uri:            ptr.String("__Uri__"),
-							ConnectionType: types.ConnectionType("INTERNET"),
-							ConnectionId:   ptr.String("__ConnectionId__"),
-							Credentials:    ptr.String("__Credentials__"),
-							RequestParameters: map[string]string{
-								"key0": "__Value__",
-							},
-							RequestTemplates: map[string]string{
-								"key0": "__Value__",
-							},
-							PassthroughBehavior: ptr.String("__PassthroughBehavior__"),
-							ContentHandling:     types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
-							TimeoutInMillis:     1,
-							CacheNamespace:      ptr.String("__CacheNamespace__"),
-							CacheKeyParameters: []string{
-								"__Member__",
-								"__Member__",
-							},
-							IntegrationResponses: map[string]types.IntegrationResponse{
-								"key0": {
-									StatusCode:       ptr.String("__StatusCode__"),
-									SelectionPattern: ptr.String("__SelectionPattern__"),
-									ResponseParameters: map[string]string{
-										"key0": "__Value__",
-									},
-									ResponseTemplates: map[string]string{
-										"key0": "__Value__",
-									},
-									ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
-								},
-							},
-							TlsConfig: &types.TlsConfig{
-								InsecureSkipVerification: true,
-							},
-							ResponseTransferMode: types.ResponseTransferMode("BUFFERED"),
-							IntegrationTarget:    ptr.String("__IntegrationTarget__"),
-						},
-						AuthorizationScopes: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetResources.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResources(context.Background(), &GetResourcesInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetResources.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetRestApi(t *testing.T) {
@@ -2754,7 +2425,9 @@ func TestCheckResponseSnapshot_GetRestApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRestApi(context.Background(), &GetRestApiInput{})
+	got, err := svc.GetRestApi(context.Background(), &GetRestApiInput{
+		RestApiId: ptr.String("__RestApiId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2764,102 +2437,7 @@ func TestCheckResponseSnapshot_GetRestApi(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetRestApis(t *testing.T) {
-	want := &GetRestApisOutput{
-		Items: []types.RestApi{
-			{
-				Id:          ptr.String("__Id__"),
-				Name:        ptr.String("__Name__"),
-				Description: ptr.String("__Description__"),
-				CreatedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Version:     ptr.String("__Version__"),
-				Warnings: []string{
-					"__Member__",
-					"__Member__",
-				},
-				BinaryMediaTypes: []string{
-					"__Member__",
-					"__Member__",
-				},
-				MinimumCompressionSize: ptr.Int32(1),
-				ApiKeySource:           types.ApiKeySourceType("HEADER"),
-				EndpointConfiguration: &types.EndpointConfiguration{
-					Types: []types.EndpointType{
-						types.EndpointType("REGIONAL"),
-						types.EndpointType("REGIONAL"),
-					},
-					IpAddressType: types.IpAddressType("ipv4"),
-					VpcEndpointIds: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				Policy: ptr.String("__Policy__"),
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-				DisableExecuteApiEndpoint: true,
-				RootResourceId:            ptr.String("__RootResourceId__"),
-				SecurityPolicy:            types.SecurityPolicy("TLS_1_0"),
-				EndpointAccessMode:        types.EndpointAccessMode("BASIC"),
-				ApiStatus:                 types.ApiStatus("UPDATING"),
-				ApiStatusMessage:          ptr.String("__ApiStatusMessage__"),
-			},
-			{
-				Id:          ptr.String("__Id__"),
-				Name:        ptr.String("__Name__"),
-				Description: ptr.String("__Description__"),
-				CreatedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Version:     ptr.String("__Version__"),
-				Warnings: []string{
-					"__Member__",
-					"__Member__",
-				},
-				BinaryMediaTypes: []string{
-					"__Member__",
-					"__Member__",
-				},
-				MinimumCompressionSize: ptr.Int32(1),
-				ApiKeySource:           types.ApiKeySourceType("HEADER"),
-				EndpointConfiguration: &types.EndpointConfiguration{
-					Types: []types.EndpointType{
-						types.EndpointType("REGIONAL"),
-						types.EndpointType("REGIONAL"),
-					},
-					IpAddressType: types.IpAddressType("ipv4"),
-					VpcEndpointIds: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				Policy: ptr.String("__Policy__"),
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-				DisableExecuteApiEndpoint: true,
-				RootResourceId:            ptr.String("__RootResourceId__"),
-				SecurityPolicy:            types.SecurityPolicy("TLS_1_0"),
-				EndpointAccessMode:        types.EndpointAccessMode("BASIC"),
-				ApiStatus:                 types.ApiStatus("UPDATING"),
-				ApiStatusMessage:          ptr.String("__ApiStatusMessage__"),
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetRestApis.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRestApis(context.Background(), &GetRestApisInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetRestApis.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetSdk(t *testing.T) {
@@ -2876,7 +2454,14 @@ func TestCheckResponseSnapshot_GetSdk(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSdk(context.Background(), &GetSdkInput{})
+	got, err := svc.GetSdk(context.Background(), &GetSdkInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		StageName: ptr.String("__StageName__"),
+		SdkType:   ptr.String("__SdkType__"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2915,7 +2500,9 @@ func TestCheckResponseSnapshot_GetSdkType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSdkType(context.Background(), &GetSdkTypeInput{})
+	got, err := svc.GetSdkType(context.Background(), &GetSdkTypeInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2979,7 +2566,10 @@ func TestCheckResponseSnapshot_GetSdkTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSdkTypes(context.Background(), &GetSdkTypesInput{})
+	got, err := svc.GetSdkTypes(context.Background(), &GetSdkTypesInput{
+		Position: ptr.String("__Position__"),
+		Limit:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3043,7 +2633,10 @@ func TestCheckResponseSnapshot_GetStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStage(context.Background(), &GetStageInput{})
+	got, err := svc.GetStage(context.Background(), &GetStageInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		StageName: ptr.String("__StageName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3157,7 +2750,10 @@ func TestCheckResponseSnapshot_GetStages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStages(context.Background(), &GetStagesInput{})
+	got, err := svc.GetStages(context.Background(), &GetStagesInput{
+		RestApiId:    ptr.String("__RestApiId__"),
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3180,7 +2776,11 @@ func TestCheckResponseSnapshot_GetTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTags(context.Background(), &GetTagsInput{})
+	got, err := svc.GetTags(context.Background(), &GetTagsInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Position:    ptr.String("__Position__"),
+		Limit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3190,39 +2790,7 @@ func TestCheckResponseSnapshot_GetTags(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetUsage(t *testing.T) {
-	want := &GetUsageOutput{
-		UsagePlanId: ptr.String("__UsagePlanId__"),
-		StartDate:   ptr.String("__StartDate__"),
-		EndDate:     ptr.String("__EndDate__"),
-		Items: map[string][][]int64{
-			"key0": {
-				{
-					1,
-					1,
-				},
-				{
-					1,
-					1,
-				},
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetUsage.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUsage(context.Background(), &GetUsageInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetUsage.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetUsagePlan(t *testing.T) {
@@ -3274,7 +2842,9 @@ func TestCheckResponseSnapshot_GetUsagePlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUsagePlan(context.Background(), &GetUsagePlanInput{})
+	got, err := svc.GetUsagePlan(context.Background(), &GetUsagePlanInput{
+		UsagePlanId: ptr.String("__UsagePlanId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3298,7 +2868,10 @@ func TestCheckResponseSnapshot_GetUsagePlanKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUsagePlanKey(context.Background(), &GetUsagePlanKeyInput{})
+	got, err := svc.GetUsagePlanKey(context.Background(), &GetUsagePlanKeyInput{
+		UsagePlanId: ptr.String("__UsagePlanId__"),
+		KeyId:       ptr.String("__KeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3308,141 +2881,11 @@ func TestCheckResponseSnapshot_GetUsagePlanKey(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetUsagePlanKeys(t *testing.T) {
-	want := &GetUsagePlanKeysOutput{
-		Items: []types.UsagePlanKey{
-			{
-				Id:    ptr.String("__Id__"),
-				Type:  ptr.String("__Type__"),
-				Value: ptr.String("__Value__"),
-				Name:  ptr.String("__Name__"),
-			},
-			{
-				Id:    ptr.String("__Id__"),
-				Type:  ptr.String("__Type__"),
-				Value: ptr.String("__Value__"),
-				Name:  ptr.String("__Name__"),
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetUsagePlanKeys.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUsagePlanKeys(context.Background(), &GetUsagePlanKeysInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetUsagePlanKeys.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetUsagePlans(t *testing.T) {
-	want := &GetUsagePlansOutput{
-		Items: []types.UsagePlan{
-			{
-				Id:          ptr.String("__Id__"),
-				Name:        ptr.String("__Name__"),
-				Description: ptr.String("__Description__"),
-				ApiStages: []types.ApiStage{
-					{
-						ApiId: ptr.String("__ApiId__"),
-						Stage: ptr.String("__Stage__"),
-						Throttle: map[string]types.ThrottleSettings{
-							"key0": {
-								BurstLimit: 1,
-								RateLimit:  1.0,
-							},
-						},
-					},
-					{
-						ApiId: ptr.String("__ApiId__"),
-						Stage: ptr.String("__Stage__"),
-						Throttle: map[string]types.ThrottleSettings{
-							"key0": {
-								BurstLimit: 1,
-								RateLimit:  1.0,
-							},
-						},
-					},
-				},
-				Throttle: &types.ThrottleSettings{
-					BurstLimit: 1,
-					RateLimit:  1.0,
-				},
-				Quota: &types.QuotaSettings{
-					Limit:  1,
-					Offset: 1,
-					Period: types.QuotaPeriodType("DAY"),
-				},
-				ProductCode: ptr.String("__ProductCode__"),
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-			},
-			{
-				Id:          ptr.String("__Id__"),
-				Name:        ptr.String("__Name__"),
-				Description: ptr.String("__Description__"),
-				ApiStages: []types.ApiStage{
-					{
-						ApiId: ptr.String("__ApiId__"),
-						Stage: ptr.String("__Stage__"),
-						Throttle: map[string]types.ThrottleSettings{
-							"key0": {
-								BurstLimit: 1,
-								RateLimit:  1.0,
-							},
-						},
-					},
-					{
-						ApiId: ptr.String("__ApiId__"),
-						Stage: ptr.String("__Stage__"),
-						Throttle: map[string]types.ThrottleSettings{
-							"key0": {
-								BurstLimit: 1,
-								RateLimit:  1.0,
-							},
-						},
-					},
-				},
-				Throttle: &types.ThrottleSettings{
-					BurstLimit: 1,
-					RateLimit:  1.0,
-				},
-				Quota: &types.QuotaSettings{
-					Limit:  1,
-					Offset: 1,
-					Period: types.QuotaPeriodType("DAY"),
-				},
-				ProductCode: ptr.String("__ProductCode__"),
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetUsagePlans.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUsagePlans(context.Background(), &GetUsagePlansInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetUsagePlans.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetVpcLink(t *testing.T) {
@@ -3468,7 +2911,9 @@ func TestCheckResponseSnapshot_GetVpcLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVpcLink(context.Background(), &GetVpcLinkInput{})
+	got, err := svc.GetVpcLink(context.Background(), &GetVpcLinkInput{
+		VpcLinkId: ptr.String("__VpcLinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3478,54 +2923,7 @@ func TestCheckResponseSnapshot_GetVpcLink(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetVpcLinks(t *testing.T) {
-	want := &GetVpcLinksOutput{
-		Items: []types.VpcLink{
-			{
-				Id:          ptr.String("__Id__"),
-				Name:        ptr.String("__Name__"),
-				Description: ptr.String("__Description__"),
-				TargetArns: []string{
-					"__Member__",
-					"__Member__",
-				},
-				Status:        types.VpcLinkStatus("AVAILABLE"),
-				StatusMessage: ptr.String("__StatusMessage__"),
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-			},
-			{
-				Id:          ptr.String("__Id__"),
-				Name:        ptr.String("__Name__"),
-				Description: ptr.String("__Description__"),
-				TargetArns: []string{
-					"__Member__",
-					"__Member__",
-				},
-				Status:        types.VpcLinkStatus("AVAILABLE"),
-				StatusMessage: ptr.String("__StatusMessage__"),
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetVpcLinks.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVpcLinks(context.Background(), &GetVpcLinksInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetVpcLinks.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_ImportApiKeys(t *testing.T) {
@@ -3547,7 +2945,11 @@ func TestCheckResponseSnapshot_ImportApiKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportApiKeys(context.Background(), &ImportApiKeysInput{})
+	got, err := svc.ImportApiKeys(context.Background(), &ImportApiKeysInput{
+		Body:           []byte("blob"),
+		Format:         types.ApiKeysFormat("csv"),
+		FailOnWarnings: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3575,7 +2977,12 @@ func TestCheckResponseSnapshot_ImportDocumentationParts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportDocumentationParts(context.Background(), &ImportDocumentationPartsInput{})
+	got, err := svc.ImportDocumentationParts(context.Background(), &ImportDocumentationPartsInput{
+		RestApiId:      ptr.String("__RestApiId__"),
+		Mode:           types.PutMode("merge"),
+		FailOnWarnings: true,
+		Body:           []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3631,7 +3038,13 @@ func TestCheckResponseSnapshot_ImportRestApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportRestApi(context.Background(), &ImportRestApiInput{})
+	got, err := svc.ImportRestApi(context.Background(), &ImportRestApiInput{
+		FailOnWarnings: true,
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		Body: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3660,7 +3073,17 @@ func TestCheckResponseSnapshot_PutGatewayResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutGatewayResponse(context.Background(), &PutGatewayResponseInput{})
+	got, err := svc.PutGatewayResponse(context.Background(), &PutGatewayResponseInput{
+		RestApiId:    ptr.String("__RestApiId__"),
+		ResponseType: types.GatewayResponseType("DEFAULT_4XX"),
+		StatusCode:   ptr.String("__StatusCode__"),
+		ResponseParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ResponseTemplates: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3718,7 +3141,36 @@ func TestCheckResponseSnapshot_PutIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutIntegration(context.Background(), &PutIntegrationInput{})
+	got, err := svc.PutIntegration(context.Background(), &PutIntegrationInput{
+		RestApiId:             ptr.String("__RestApiId__"),
+		ResourceId:            ptr.String("__ResourceId__"),
+		HttpMethod:            ptr.String("__HttpMethod__"),
+		Type:                  types.IntegrationType("HTTP"),
+		IntegrationHttpMethod: ptr.String("__IntegrationHttpMethod__"),
+		Uri:                   ptr.String("__Uri__"),
+		ConnectionType:        types.ConnectionType("INTERNET"),
+		ConnectionId:          ptr.String("__ConnectionId__"),
+		Credentials:           ptr.String("__Credentials__"),
+		RequestParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestTemplates: map[string]string{
+			"key0": "__Value__",
+		},
+		PassthroughBehavior: ptr.String("__PassthroughBehavior__"),
+		CacheNamespace:      ptr.String("__CacheNamespace__"),
+		CacheKeyParameters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
+		TimeoutInMillis: ptr.Int32(1),
+		TlsConfig: &types.TlsConfig{
+			InsecureSkipVerification: true,
+		},
+		ResponseTransferMode: types.ResponseTransferMode("BUFFERED"),
+		IntegrationTarget:    ptr.String("__IntegrationTarget__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3747,7 +3199,20 @@ func TestCheckResponseSnapshot_PutIntegrationResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutIntegrationResponse(context.Background(), &PutIntegrationResponseInput{})
+	got, err := svc.PutIntegrationResponse(context.Background(), &PutIntegrationResponseInput{
+		RestApiId:        ptr.String("__RestApiId__"),
+		ResourceId:       ptr.String("__ResourceId__"),
+		HttpMethod:       ptr.String("__HttpMethod__"),
+		StatusCode:       ptr.String("__StatusCode__"),
+		SelectionPattern: ptr.String("__SelectionPattern__"),
+		ResponseParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ResponseTemplates: map[string]string{
+			"key0": "__Value__",
+		},
+		ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3834,7 +3299,26 @@ func TestCheckResponseSnapshot_PutMethod(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMethod(context.Background(), &PutMethodInput{})
+	got, err := svc.PutMethod(context.Background(), &PutMethodInput{
+		RestApiId:         ptr.String("__RestApiId__"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		HttpMethod:        ptr.String("__HttpMethod__"),
+		AuthorizationType: ptr.String("__AuthorizationType__"),
+		AuthorizerId:      ptr.String("__AuthorizerId__"),
+		ApiKeyRequired:    true,
+		OperationName:     ptr.String("__OperationName__"),
+		RequestParameters: map[string]bool{
+			"key0": true,
+		},
+		RequestModels: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestValidatorId: ptr.String("__RequestValidatorId__"),
+		AuthorizationScopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3861,7 +3345,18 @@ func TestCheckResponseSnapshot_PutMethodResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMethodResponse(context.Background(), &PutMethodResponseInput{})
+	got, err := svc.PutMethodResponse(context.Background(), &PutMethodResponseInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+		StatusCode: ptr.String("__StatusCode__"),
+		ResponseParameters: map[string]bool{
+			"key0": true,
+		},
+		ResponseModels: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3917,7 +3412,15 @@ func TestCheckResponseSnapshot_PutRestApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRestApi(context.Background(), &PutRestApiInput{})
+	got, err := svc.PutRestApi(context.Background(), &PutRestApiInput{
+		RestApiId:      ptr.String("__RestApiId__"),
+		Mode:           types.PutMode("merge"),
+		FailOnWarnings: true,
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		Body: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3936,7 +3439,10 @@ func TestCheckResponseSnapshot_RejectDomainNameAccessAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectDomainNameAccessAssociation(context.Background(), &RejectDomainNameAccessAssociationInput{})
+	got, err := svc.RejectDomainNameAccessAssociation(context.Background(), &RejectDomainNameAccessAssociationInput{
+		DomainNameAccessAssociationArn: ptr.String("__DomainNameAccessAssociationArn__"),
+		DomainNameArn:                  ptr.String("__DomainNameArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3955,7 +3461,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3989,7 +3500,27 @@ func TestCheckResponseSnapshot_TestInvokeAuthorizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestInvokeAuthorizer(context.Background(), &TestInvokeAuthorizerInput{})
+	got, err := svc.TestInvokeAuthorizer(context.Background(), &TestInvokeAuthorizerInput{
+		RestApiId:    ptr.String("__RestApiId__"),
+		AuthorizerId: ptr.String("__AuthorizerId__"),
+		Headers: map[string]string{
+			"key0": "__Value__",
+		},
+		MultiValueHeaders: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PathWithQueryString: ptr.String("__PathWithQueryString__"),
+		Body:                ptr.String("__Body__"),
+		StageVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		AdditionalContext: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4022,7 +3553,26 @@ func TestCheckResponseSnapshot_TestInvokeMethod(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestInvokeMethod(context.Background(), &TestInvokeMethodInput{})
+	got, err := svc.TestInvokeMethod(context.Background(), &TestInvokeMethodInput{
+		RestApiId:           ptr.String("__RestApiId__"),
+		ResourceId:          ptr.String("__ResourceId__"),
+		HttpMethod:          ptr.String("__HttpMethod__"),
+		PathWithQueryString: ptr.String("__PathWithQueryString__"),
+		Body:                ptr.String("__Body__"),
+		Headers: map[string]string{
+			"key0": "__Value__",
+		},
+		MultiValueHeaders: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientCertificateId: ptr.String("__ClientCertificateId__"),
+		StageVariables: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4041,7 +3591,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4071,7 +3627,22 @@ func TestCheckResponseSnapshot_UpdateAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccount(context.Background(), &UpdateAccountInput{})
+	got, err := svc.UpdateAccount(context.Background(), &UpdateAccountInput{
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4106,7 +3677,23 @@ func TestCheckResponseSnapshot_UpdateApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApiKey(context.Background(), &UpdateApiKeyInput{})
+	got, err := svc.UpdateApiKey(context.Background(), &UpdateApiKeyInput{
+		ApiKey: ptr.String("__ApiKey__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4139,7 +3726,24 @@ func TestCheckResponseSnapshot_UpdateAuthorizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAuthorizer(context.Background(), &UpdateAuthorizerInput{})
+	got, err := svc.UpdateAuthorizer(context.Background(), &UpdateAuthorizerInput{
+		RestApiId:    ptr.String("__RestApiId__"),
+		AuthorizerId: ptr.String("__AuthorizerId__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4162,7 +3766,25 @@ func TestCheckResponseSnapshot_UpdateBasePathMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBasePathMapping(context.Background(), &UpdateBasePathMappingInput{})
+	got, err := svc.UpdateBasePathMapping(context.Background(), &UpdateBasePathMappingInput{
+		DomainName:   ptr.String("__DomainName__"),
+		DomainNameId: ptr.String("__DomainNameId__"),
+		BasePath:     ptr.String("__BasePath__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4190,7 +3812,23 @@ func TestCheckResponseSnapshot_UpdateClientCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateClientCertificate(context.Background(), &UpdateClientCertificateInput{})
+	got, err := svc.UpdateClientCertificate(context.Background(), &UpdateClientCertificateInput{
+		ClientCertificateId: ptr.String("__ClientCertificateId__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4221,7 +3859,24 @@ func TestCheckResponseSnapshot_UpdateDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDeployment(context.Background(), &UpdateDeploymentInput{})
+	got, err := svc.UpdateDeployment(context.Background(), &UpdateDeploymentInput{
+		RestApiId:    ptr.String("__RestApiId__"),
+		DeploymentId: ptr.String("__DeploymentId__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4250,7 +3905,24 @@ func TestCheckResponseSnapshot_UpdateDocumentationPart(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDocumentationPart(context.Background(), &UpdateDocumentationPartInput{})
+	got, err := svc.UpdateDocumentationPart(context.Background(), &UpdateDocumentationPartInput{
+		RestApiId:           ptr.String("__RestApiId__"),
+		DocumentationPartId: ptr.String("__DocumentationPartId__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4273,7 +3945,24 @@ func TestCheckResponseSnapshot_UpdateDocumentationVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDocumentationVersion(context.Background(), &UpdateDocumentationVersionInput{})
+	got, err := svc.UpdateDocumentationVersion(context.Background(), &UpdateDocumentationVersionInput{
+		RestApiId:            ptr.String("__RestApiId__"),
+		DocumentationVersion: ptr.String("__DocumentationVersion__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4335,7 +4024,24 @@ func TestCheckResponseSnapshot_UpdateDomainName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomainName(context.Background(), &UpdateDomainNameInput{})
+	got, err := svc.UpdateDomainName(context.Background(), &UpdateDomainNameInput{
+		DomainName:   ptr.String("__DomainName__"),
+		DomainNameId: ptr.String("__DomainNameId__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4364,7 +4070,24 @@ func TestCheckResponseSnapshot_UpdateGatewayResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGatewayResponse(context.Background(), &UpdateGatewayResponseInput{})
+	got, err := svc.UpdateGatewayResponse(context.Background(), &UpdateGatewayResponseInput{
+		RestApiId:    ptr.String("__RestApiId__"),
+		ResponseType: types.GatewayResponseType("DEFAULT_4XX"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4422,7 +4145,25 @@ func TestCheckResponseSnapshot_UpdateIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIntegration(context.Background(), &UpdateIntegrationInput{})
+	got, err := svc.UpdateIntegration(context.Background(), &UpdateIntegrationInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4451,7 +4192,26 @@ func TestCheckResponseSnapshot_UpdateIntegrationResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIntegrationResponse(context.Background(), &UpdateIntegrationResponseInput{})
+	got, err := svc.UpdateIntegrationResponse(context.Background(), &UpdateIntegrationResponseInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+		StatusCode: ptr.String("__StatusCode__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4538,7 +4298,25 @@ func TestCheckResponseSnapshot_UpdateMethod(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMethod(context.Background(), &UpdateMethodInput{})
+	got, err := svc.UpdateMethod(context.Background(), &UpdateMethodInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4565,7 +4343,26 @@ func TestCheckResponseSnapshot_UpdateMethodResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMethodResponse(context.Background(), &UpdateMethodResponseInput{})
+	got, err := svc.UpdateMethodResponse(context.Background(), &UpdateMethodResponseInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		HttpMethod: ptr.String("__HttpMethod__"),
+		StatusCode: ptr.String("__StatusCode__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4590,7 +4387,24 @@ func TestCheckResponseSnapshot_UpdateModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateModel(context.Background(), &UpdateModelInput{})
+	got, err := svc.UpdateModel(context.Background(), &UpdateModelInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		ModelName: ptr.String("__ModelName__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4614,7 +4428,24 @@ func TestCheckResponseSnapshot_UpdateRequestValidator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRequestValidator(context.Background(), &UpdateRequestValidatorInput{})
+	got, err := svc.UpdateRequestValidator(context.Background(), &UpdateRequestValidatorInput{
+		RestApiId:          ptr.String("__RestApiId__"),
+		RequestValidatorId: ptr.String("__RequestValidatorId__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4709,7 +4540,24 @@ func TestCheckResponseSnapshot_UpdateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResource(context.Background(), &UpdateResourceInput{})
+	got, err := svc.UpdateResource(context.Background(), &UpdateResourceInput{
+		RestApiId:  ptr.String("__RestApiId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4765,7 +4613,23 @@ func TestCheckResponseSnapshot_UpdateRestApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRestApi(context.Background(), &UpdateRestApiInput{})
+	got, err := svc.UpdateRestApi(context.Background(), &UpdateRestApiInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4829,7 +4693,24 @@ func TestCheckResponseSnapshot_UpdateStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStage(context.Background(), &UpdateStageInput{})
+	got, err := svc.UpdateStage(context.Background(), &UpdateStageInput{
+		RestApiId: ptr.String("__RestApiId__"),
+		StageName: ptr.String("__StageName__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4839,39 +4720,7 @@ func TestCheckResponseSnapshot_UpdateStage(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_UpdateUsage(t *testing.T) {
-	want := &UpdateUsageOutput{
-		UsagePlanId: ptr.String("__UsagePlanId__"),
-		StartDate:   ptr.String("__StartDate__"),
-		EndDate:     ptr.String("__EndDate__"),
-		Items: map[string][][]int64{
-			"key0": {
-				{
-					1,
-					1,
-				},
-				{
-					1,
-					1,
-				},
-			},
-		},
-		Position: ptr.String("__Position__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("UpdateUsage.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUsage(context.Background(), &UpdateUsageInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "UpdateUsage.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_UpdateUsagePlan(t *testing.T) {
@@ -4923,7 +4772,23 @@ func TestCheckResponseSnapshot_UpdateUsagePlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUsagePlan(context.Background(), &UpdateUsagePlanInput{})
+	got, err := svc.UpdateUsagePlan(context.Background(), &UpdateUsagePlanInput{
+		UsagePlanId: ptr.String("__UsagePlanId__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4955,7 +4820,23 @@ func TestCheckResponseSnapshot_UpdateVpcLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVpcLink(context.Background(), &UpdateVpcLinkInput{})
+	got, err := svc.UpdateVpcLink(context.Background(), &UpdateVpcLinkInput{
+		VpcLinkId: ptr.String("__VpcLinkId__"),
+		PatchOperations: []types.PatchOperation{
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+			{
+				Op:    types.Op("add"),
+				Path:  ptr.String("__Path__"),
+				Value: ptr.String("__Value__"),
+				From:  ptr.String("__From__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4976,7 +4857,27 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{})
+	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Enabled:            true,
+		GenerateDistinctId: true,
+		Value:              ptr.String("__Value__"),
+		StageKeys: []types.StageKey{
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+		},
+		CustomerId: ptr.String("__CustomerId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5001,7 +4902,27 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{})
+	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Enabled:            true,
+		GenerateDistinctId: true,
+		Value:              ptr.String("__Value__"),
+		StageKeys: []types.StageKey{
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+		},
+		CustomerId: ptr.String("__CustomerId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5027,7 +4948,27 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{})
+	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Enabled:            true,
+		GenerateDistinctId: true,
+		Value:              ptr.String("__Value__"),
+		StageKeys: []types.StageKey{
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+		},
+		CustomerId: ptr.String("__CustomerId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5052,7 +4993,27 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{})
+	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Enabled:            true,
+		GenerateDistinctId: true,
+		Value:              ptr.String("__Value__"),
+		StageKeys: []types.StageKey{
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+		},
+		CustomerId: ptr.String("__CustomerId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5078,7 +5039,25 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		RestApiId:           ptr.String("__RestApiId__"),
+		StageName:           ptr.String("__StageName__"),
+		StageDescription:    ptr.String("__StageDescription__"),
+		Description:         ptr.String("__Description__"),
+		CacheClusterEnabled: ptr.Bool(true),
+		CacheClusterSize:    types.CacheClusterSize("0.5"),
+		Variables: map[string]string{
+			"key0": "__Value__",
+		},
+		CanarySettings: &types.DeploymentCanarySettings{
+			PercentTraffic: 1.0,
+			StageVariableOverrides: map[string]string{
+				"key0": "__Value__",
+			},
+			UseStageCache: true,
+		},
+		TracingEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5104,7 +5083,27 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{})
+	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Enabled:            true,
+		GenerateDistinctId: true,
+		Value:              ptr.String("__Value__"),
+		StageKeys: []types.StageKey{
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+		},
+		CustomerId: ptr.String("__CustomerId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5129,7 +5128,27 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{})
+	_, opErr := svc.CreateApiKey(context.Background(), &CreateApiKeyInput{
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Enabled:            true,
+		GenerateDistinctId: true,
+		Value:              ptr.String("__Value__"),
+		StageKeys: []types.StageKey{
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+			{
+				RestApiId: ptr.String("__RestApiId__"),
+				StageName: ptr.String("__StageName__"),
+			},
+		},
+		CustomerId: ptr.String("__CustomerId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

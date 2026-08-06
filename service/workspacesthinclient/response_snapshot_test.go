@@ -145,7 +145,34 @@ func TestCheckResponseSnapshot_CreateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:                      ptr.String("__Name__"),
+		DesktopArn:                ptr.String("__DesktopArn__"),
+		DesktopEndpoint:           ptr.String("__DesktopEndpoint__"),
+		SoftwareSetUpdateSchedule: types.SoftwareSetUpdateSchedule("USE_MAINTENANCE_WINDOW"),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			Type:            types.MaintenanceWindowType("SYSTEM"),
+			StartTimeHour:   ptr.Int32(1),
+			StartTimeMinute: ptr.Int32(1),
+			EndTimeHour:     ptr.Int32(1),
+			EndTimeMinute:   ptr.Int32(1),
+			DaysOfTheWeek: []types.DayOfWeek{
+				types.DayOfWeek("MONDAY"),
+				types.DayOfWeek("MONDAY"),
+			},
+			ApplyTimeOf: types.ApplyTimeOf("UTC"),
+		},
+		SoftwareSetUpdateMode: types.SoftwareSetUpdateMode("USE_LATEST"),
+		DesiredSoftwareSetId:  ptr.String("__DesiredSoftwareSetId__"),
+		KmsKeyArn:             ptr.String("__KmsKeyArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeviceCreationTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +191,10 @@ func TestCheckResponseSnapshot_DeleteDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDevice(context.Background(), &DeleteDeviceInput{})
+	got, err := svc.DeleteDevice(context.Background(), &DeleteDeviceInput{
+		Id:          ptr.String("__Id__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +213,10 @@ func TestCheckResponseSnapshot_DeleteEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{})
+	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{
+		Id:          ptr.String("__Id__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +235,11 @@ func TestCheckResponseSnapshot_DeregisterDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterDevice(context.Background(), &DeregisterDeviceInput{})
+	got, err := svc.DeregisterDevice(context.Background(), &DeregisterDeviceInput{
+		Id:                 ptr.String("__Id__"),
+		TargetDeviceStatus: types.TargetDeviceStatus("DEREGISTERED"),
+		ClientToken:        ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -245,7 +282,9 @@ func TestCheckResponseSnapshot_GetDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDevice(context.Background(), &GetDeviceInput{})
+	got, err := svc.GetDevice(context.Background(), &GetDeviceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +338,9 @@ func TestCheckResponseSnapshot_GetEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{})
+	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +378,9 @@ func TestCheckResponseSnapshot_GetSoftwareSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSoftwareSet(context.Background(), &GetSoftwareSetInput{})
+	got, err := svc.GetSoftwareSet(context.Background(), &GetSoftwareSetInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -396,7 +439,10 @@ func TestCheckResponseSnapshot_ListDevices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDevices(context.Background(), &ListDevicesInput{})
+	got, err := svc.ListDevices(context.Background(), &ListDevicesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -473,7 +519,10 @@ func TestCheckResponseSnapshot_ListEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{})
+	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -512,7 +561,10 @@ func TestCheckResponseSnapshot_ListSoftwareSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSoftwareSets(context.Background(), &ListSoftwareSetsInput{})
+	got, err := svc.ListSoftwareSets(context.Background(), &ListSoftwareSetsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -535,7 +587,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +608,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -573,7 +632,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -611,7 +676,12 @@ func TestCheckResponseSnapshot_UpdateDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDevice(context.Background(), &UpdateDeviceInput{})
+	got, err := svc.UpdateDevice(context.Background(), &UpdateDeviceInput{
+		Id:                        ptr.String("__Id__"),
+		Name:                      ptr.String("__Name__"),
+		DesiredSoftwareSetId:      ptr.String("__DesiredSoftwareSetId__"),
+		SoftwareSetUpdateSchedule: types.SoftwareSetUpdateSchedule("USE_MAINTENANCE_WINDOW"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -658,7 +728,30 @@ func TestCheckResponseSnapshot_UpdateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{})
+	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{
+		Id:                        ptr.String("__Id__"),
+		Name:                      ptr.String("__Name__"),
+		DesktopArn:                ptr.String("__DesktopArn__"),
+		DesktopEndpoint:           ptr.String("__DesktopEndpoint__"),
+		SoftwareSetUpdateSchedule: types.SoftwareSetUpdateSchedule("USE_MAINTENANCE_WINDOW"),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			Type:            types.MaintenanceWindowType("SYSTEM"),
+			StartTimeHour:   ptr.Int32(1),
+			StartTimeMinute: ptr.Int32(1),
+			EndTimeHour:     ptr.Int32(1),
+			EndTimeMinute:   ptr.Int32(1),
+			DaysOfTheWeek: []types.DayOfWeek{
+				types.DayOfWeek("MONDAY"),
+				types.DayOfWeek("MONDAY"),
+			},
+			ApplyTimeOf: types.ApplyTimeOf("UTC"),
+		},
+		SoftwareSetUpdateMode: types.SoftwareSetUpdateMode("USE_LATEST"),
+		DesiredSoftwareSetId:  ptr.String("__DesiredSoftwareSetId__"),
+		DeviceCreationTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -677,7 +770,10 @@ func TestCheckResponseSnapshot_UpdateSoftwareSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSoftwareSet(context.Background(), &UpdateSoftwareSetInput{})
+	got, err := svc.UpdateSoftwareSet(context.Background(), &UpdateSoftwareSetInput{
+		Id:               ptr.String("__Id__"),
+		ValidationStatus: types.SoftwareSetValidationStatus("VALIDATED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -698,7 +794,34 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:                      ptr.String("__Name__"),
+		DesktopArn:                ptr.String("__DesktopArn__"),
+		DesktopEndpoint:           ptr.String("__DesktopEndpoint__"),
+		SoftwareSetUpdateSchedule: types.SoftwareSetUpdateSchedule("USE_MAINTENANCE_WINDOW"),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			Type:            types.MaintenanceWindowType("SYSTEM"),
+			StartTimeHour:   ptr.Int32(1),
+			StartTimeMinute: ptr.Int32(1),
+			EndTimeHour:     ptr.Int32(1),
+			EndTimeMinute:   ptr.Int32(1),
+			DaysOfTheWeek: []types.DayOfWeek{
+				types.DayOfWeek("MONDAY"),
+				types.DayOfWeek("MONDAY"),
+			},
+			ApplyTimeOf: types.ApplyTimeOf("UTC"),
+		},
+		SoftwareSetUpdateMode: types.SoftwareSetUpdateMode("USE_LATEST"),
+		DesiredSoftwareSetId:  ptr.String("__DesiredSoftwareSetId__"),
+		KmsKeyArn:             ptr.String("__KmsKeyArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeviceCreationTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -725,7 +848,34 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:                      ptr.String("__Name__"),
+		DesktopArn:                ptr.String("__DesktopArn__"),
+		DesktopEndpoint:           ptr.String("__DesktopEndpoint__"),
+		SoftwareSetUpdateSchedule: types.SoftwareSetUpdateSchedule("USE_MAINTENANCE_WINDOW"),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			Type:            types.MaintenanceWindowType("SYSTEM"),
+			StartTimeHour:   ptr.Int32(1),
+			StartTimeMinute: ptr.Int32(1),
+			EndTimeHour:     ptr.Int32(1),
+			EndTimeMinute:   ptr.Int32(1),
+			DaysOfTheWeek: []types.DayOfWeek{
+				types.DayOfWeek("MONDAY"),
+				types.DayOfWeek("MONDAY"),
+			},
+			ApplyTimeOf: types.ApplyTimeOf("UTC"),
+		},
+		SoftwareSetUpdateMode: types.SoftwareSetUpdateMode("USE_LATEST"),
+		DesiredSoftwareSetId:  ptr.String("__DesiredSoftwareSetId__"),
+		KmsKeyArn:             ptr.String("__KmsKeyArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeviceCreationTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -751,7 +901,34 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:                      ptr.String("__Name__"),
+		DesktopArn:                ptr.String("__DesktopArn__"),
+		DesktopEndpoint:           ptr.String("__DesktopEndpoint__"),
+		SoftwareSetUpdateSchedule: types.SoftwareSetUpdateSchedule("USE_MAINTENANCE_WINDOW"),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			Type:            types.MaintenanceWindowType("SYSTEM"),
+			StartTimeHour:   ptr.Int32(1),
+			StartTimeMinute: ptr.Int32(1),
+			EndTimeHour:     ptr.Int32(1),
+			EndTimeMinute:   ptr.Int32(1),
+			DaysOfTheWeek: []types.DayOfWeek{
+				types.DayOfWeek("MONDAY"),
+				types.DayOfWeek("MONDAY"),
+			},
+			ApplyTimeOf: types.ApplyTimeOf("UTC"),
+		},
+		SoftwareSetUpdateMode: types.SoftwareSetUpdateMode("USE_LATEST"),
+		DesiredSoftwareSetId:  ptr.String("__DesiredSoftwareSetId__"),
+		KmsKeyArn:             ptr.String("__KmsKeyArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeviceCreationTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -778,7 +955,34 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:                      ptr.String("__Name__"),
+		DesktopArn:                ptr.String("__DesktopArn__"),
+		DesktopEndpoint:           ptr.String("__DesktopEndpoint__"),
+		SoftwareSetUpdateSchedule: types.SoftwareSetUpdateSchedule("USE_MAINTENANCE_WINDOW"),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			Type:            types.MaintenanceWindowType("SYSTEM"),
+			StartTimeHour:   ptr.Int32(1),
+			StartTimeMinute: ptr.Int32(1),
+			EndTimeHour:     ptr.Int32(1),
+			EndTimeMinute:   ptr.Int32(1),
+			DaysOfTheWeek: []types.DayOfWeek{
+				types.DayOfWeek("MONDAY"),
+				types.DayOfWeek("MONDAY"),
+			},
+			ApplyTimeOf: types.ApplyTimeOf("UTC"),
+		},
+		SoftwareSetUpdateMode: types.SoftwareSetUpdateMode("USE_LATEST"),
+		DesiredSoftwareSetId:  ptr.String("__DesiredSoftwareSetId__"),
+		KmsKeyArn:             ptr.String("__KmsKeyArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeviceCreationTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -807,7 +1011,34 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:                      ptr.String("__Name__"),
+		DesktopArn:                ptr.String("__DesktopArn__"),
+		DesktopEndpoint:           ptr.String("__DesktopEndpoint__"),
+		SoftwareSetUpdateSchedule: types.SoftwareSetUpdateSchedule("USE_MAINTENANCE_WINDOW"),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			Type:            types.MaintenanceWindowType("SYSTEM"),
+			StartTimeHour:   ptr.Int32(1),
+			StartTimeMinute: ptr.Int32(1),
+			EndTimeHour:     ptr.Int32(1),
+			EndTimeMinute:   ptr.Int32(1),
+			DaysOfTheWeek: []types.DayOfWeek{
+				types.DayOfWeek("MONDAY"),
+				types.DayOfWeek("MONDAY"),
+			},
+			ApplyTimeOf: types.ApplyTimeOf("UTC"),
+		},
+		SoftwareSetUpdateMode: types.SoftwareSetUpdateMode("USE_LATEST"),
+		DesiredSoftwareSetId:  ptr.String("__DesiredSoftwareSetId__"),
+		KmsKeyArn:             ptr.String("__KmsKeyArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeviceCreationTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -835,7 +1066,34 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:                      ptr.String("__Name__"),
+		DesktopArn:                ptr.String("__DesktopArn__"),
+		DesktopEndpoint:           ptr.String("__DesktopEndpoint__"),
+		SoftwareSetUpdateSchedule: types.SoftwareSetUpdateSchedule("USE_MAINTENANCE_WINDOW"),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			Type:            types.MaintenanceWindowType("SYSTEM"),
+			StartTimeHour:   ptr.Int32(1),
+			StartTimeMinute: ptr.Int32(1),
+			EndTimeHour:     ptr.Int32(1),
+			EndTimeMinute:   ptr.Int32(1),
+			DaysOfTheWeek: []types.DayOfWeek{
+				types.DayOfWeek("MONDAY"),
+				types.DayOfWeek("MONDAY"),
+			},
+			ApplyTimeOf: types.ApplyTimeOf("UTC"),
+		},
+		SoftwareSetUpdateMode: types.SoftwareSetUpdateMode("USE_LATEST"),
+		DesiredSoftwareSetId:  ptr.String("__DesiredSoftwareSetId__"),
+		KmsKeyArn:             ptr.String("__KmsKeyArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeviceCreationTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -871,7 +1129,34 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:                      ptr.String("__Name__"),
+		DesktopArn:                ptr.String("__DesktopArn__"),
+		DesktopEndpoint:           ptr.String("__DesktopEndpoint__"),
+		SoftwareSetUpdateSchedule: types.SoftwareSetUpdateSchedule("USE_MAINTENANCE_WINDOW"),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			Type:            types.MaintenanceWindowType("SYSTEM"),
+			StartTimeHour:   ptr.Int32(1),
+			StartTimeMinute: ptr.Int32(1),
+			EndTimeHour:     ptr.Int32(1),
+			EndTimeMinute:   ptr.Int32(1),
+			DaysOfTheWeek: []types.DayOfWeek{
+				types.DayOfWeek("MONDAY"),
+				types.DayOfWeek("MONDAY"),
+			},
+			ApplyTimeOf: types.ApplyTimeOf("UTC"),
+		},
+		SoftwareSetUpdateMode: types.SoftwareSetUpdateMode("USE_LATEST"),
+		DesiredSoftwareSetId:  ptr.String("__DesiredSoftwareSetId__"),
+		KmsKeyArn:             ptr.String("__KmsKeyArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeviceCreationTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

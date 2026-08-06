@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: JsonRpc10.OperationWithRequiredMembersWithDefaults
-
-{"requiredBlob":"YmxvYg==","requiredBoolean":true,"requiredByte":1,"requiredDouble":1,"requiredEnum":"FOO","requiredFloat":1,"requiredIntEnum":1,"requiredInteger":1,"requiredList":["__Member__","__Member__"],"requiredLong":1,"requiredMap":{"key0":"__Value__"},"requiredShort":1,"requiredString":"__RequiredString__","requiredTimestamp":946684800}

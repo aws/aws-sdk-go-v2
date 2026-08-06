@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.DeleteDirectConnectGatewayAssociation
+
+{"directConnectGatewayAssociation":{"allowedPrefixesToDirectConnectGateway":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}],"associatedCoreNetwork":{"attachmentId":"__AttachmentId__","id":"__Id__","ownerAccount":"__OwnerAccount__"},"associatedGateway":{"id":"__Id__","ownerAccount":"__OwnerAccount__","region":"__Region__","type":"virtualPrivateGateway"},"associationId":"__AssociationId__","associationState":"associating","directConnectGatewayId":"__DirectConnectGatewayId__","directConnectGatewayOwnerAccount":"__DirectConnectGatewayOwnerAccount__","stateChangeError":"__StateChangeError__","virtualGatewayId":"__VirtualGatewayId__","virtualGatewayOwnerAccount":"__VirtualGatewayOwnerAccount__","virtualGatewayRegion":"__VirtualGatewayRegion__"}}

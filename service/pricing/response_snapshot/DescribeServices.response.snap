@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSPriceListService.DescribeServices
+
+{"FormatVersion":"__FormatVersion__","NextToken":"__NextToken__","Services":[{"AttributeNames":["__Member__","__Member__"],"ServiceCode":"__ServiceCode__"},{"AttributeNames":["__Member__","__Member__"],"ServiceCode":"__ServiceCode__"}]}

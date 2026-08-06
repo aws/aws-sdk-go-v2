@@ -108,6 +108,10 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_AgenticRetrieveStream(t *testing.T) {
+	t.Skip("event stream operation")
+}
+
 func TestCheckResponseSnapshot_CreateInvocation(t *testing.T) {
 	want := &CreateInvocationOutput{
 		SessionId:    ptr.String("__SessionId__"),
@@ -122,7 +126,11 @@ func TestCheckResponseSnapshot_CreateInvocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInvocation(context.Background(), &CreateInvocationInput{})
+	got, err := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
+		InvocationId:      ptr.String("__InvocationId__"),
+		Description:       ptr.String("__Description__"),
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -146,7 +154,15 @@ func TestCheckResponseSnapshot_CreateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSession(context.Background(), &CreateSessionInput{})
+	got, err := svc.CreateSession(context.Background(), &CreateSessionInput{
+		SessionMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,7 +181,12 @@ func TestCheckResponseSnapshot_DeleteAgentMemory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAgentMemory(context.Background(), &DeleteAgentMemoryInput{})
+	got, err := svc.DeleteAgentMemory(context.Background(), &DeleteAgentMemoryInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentAliasId: ptr.String("__AgentAliasId__"),
+		MemoryId:     ptr.String("__MemoryId__"),
+		SessionId:    ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +205,9 @@ func TestCheckResponseSnapshot_DeleteSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	got, err := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -207,7 +230,9 @@ func TestCheckResponseSnapshot_EndSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EndSession(context.Background(), &EndSessionInput{})
+	got, err := svc.EndSession(context.Background(), &EndSessionInput{
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +262,21 @@ func TestCheckResponseSnapshot_GenerateQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateQuery(context.Background(), &GenerateQueryInput{})
+	got, err := svc.GenerateQuery(context.Background(), &GenerateQueryInput{
+		QueryGenerationInput: &types.QueryGenerationInput{
+			Type: types.InputQueryType("TEXT"),
+			Text: ptr.String("__Text__"),
+		},
+		TransformationConfiguration: &types.TransformationConfiguration{
+			Mode: types.QueryTransformationMode("TEXT_TO_SQL"),
+			TextToSqlConfiguration: &types.TextToSqlConfiguration{
+				Type: types.TextToSqlConfigurationType("KNOWLEDGE_BASE"),
+				KnowledgeBaseConfiguration: &types.TextToSqlKnowledgeBaseConfiguration{
+					KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +317,14 @@ func TestCheckResponseSnapshot_GetAgentMemory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgentMemory(context.Background(), &GetAgentMemoryInput{})
+	got, err := svc.GetAgentMemory(context.Background(), &GetAgentMemoryInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxItems:     ptr.Int32(1),
+		AgentId:      ptr.String("__AgentId__"),
+		AgentAliasId: ptr.String("__AgentAliasId__"),
+		MemoryType:   types.MemoryType("SESSION_SUMMARY"),
+		MemoryId:     ptr.String("__MemoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -301,7 +347,15 @@ func TestCheckResponseSnapshot_GetDocumentContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDocumentContent(context.Background(), &GetDocumentContentInput{})
+	got, err := svc.GetDocumentContent(context.Background(), &GetDocumentContentInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentId:      ptr.String("__DocumentId__"),
+		OutputFormat:    types.DocumentOutputFormat("RAW"),
+		UserContext: &types.UserContext{
+			UserId: ptr.String("__UserId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -327,7 +381,11 @@ func TestCheckResponseSnapshot_GetExecutionFlowSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExecutionFlowSnapshot(context.Background(), &GetExecutionFlowSnapshotInput{})
+	got, err := svc.GetExecutionFlowSnapshot(context.Background(), &GetExecutionFlowSnapshotInput{
+		FlowIdentifier:      ptr.String("__FlowIdentifier__"),
+		FlowAliasIdentifier: ptr.String("__FlowAliasIdentifier__"),
+		ExecutionIdentifier: ptr.String("__ExecutionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -366,7 +424,11 @@ func TestCheckResponseSnapshot_GetFlowExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFlowExecution(context.Background(), &GetFlowExecutionInput{})
+	got, err := svc.GetFlowExecution(context.Background(), &GetFlowExecutionInput{
+		FlowIdentifier:      ptr.String("__FlowIdentifier__"),
+		FlowAliasIdentifier: ptr.String("__FlowAliasIdentifier__"),
+		ExecutionIdentifier: ptr.String("__ExecutionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +464,11 @@ func TestCheckResponseSnapshot_GetInvocationStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInvocationStep(context.Background(), &GetInvocationStepInput{})
+	got, err := svc.GetInvocationStep(context.Background(), &GetInvocationStepInput{
+		InvocationIdentifier: ptr.String("__InvocationIdentifier__"),
+		InvocationStepId:     ptr.String("__InvocationStepId__"),
+		SessionIdentifier:    ptr.String("__SessionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -431,13 +497,27 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSession(context.Background(), &GetSessionInput{})
+	got, err := svc.GetSession(context.Background(), &GetSessionInput{
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetSession.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_InvokeAgent(t *testing.T) {
+	t.Skip("event stream operation")
+}
+
+func TestCheckResponseSnapshot_InvokeFlow(t *testing.T) {
+	t.Skip("event stream operation")
+}
+
+func TestCheckResponseSnapshot_InvokeInlineAgent(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_ListFlowExecutionEvents(t *testing.T) {
@@ -451,13 +531,13 @@ func TestCheckResponseSnapshot_ListFlowExecutionEvents(t *testing.T) {
 						{
 							Name: ptr.String("__Name__"),
 							Content: &types.FlowExecutionContentMemberDocument{
-								Value: nil,
+								Value: document.NewLazyDocument("__Document__"),
 							},
 						},
 						{
 							Name: ptr.String("__Name__"),
 							Content: &types.FlowExecutionContentMemberDocument{
-								Value: nil,
+								Value: document.NewLazyDocument("__Document__"),
 							},
 						},
 					},
@@ -471,13 +551,13 @@ func TestCheckResponseSnapshot_ListFlowExecutionEvents(t *testing.T) {
 						{
 							Name: ptr.String("__Name__"),
 							Content: &types.FlowExecutionContentMemberDocument{
-								Value: nil,
+								Value: document.NewLazyDocument("__Document__"),
 							},
 						},
 						{
 							Name: ptr.String("__Name__"),
 							Content: &types.FlowExecutionContentMemberDocument{
-								Value: nil,
+								Value: document.NewLazyDocument("__Document__"),
 							},
 						},
 					},
@@ -494,7 +574,14 @@ func TestCheckResponseSnapshot_ListFlowExecutionEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlowExecutionEvents(context.Background(), &ListFlowExecutionEventsInput{})
+	got, err := svc.ListFlowExecutionEvents(context.Background(), &ListFlowExecutionEventsInput{
+		FlowIdentifier:      ptr.String("__FlowIdentifier__"),
+		FlowAliasIdentifier: ptr.String("__FlowAliasIdentifier__"),
+		ExecutionIdentifier: ptr.String("__ExecutionIdentifier__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+		EventType:           types.FlowExecutionEventType("Node"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -535,7 +622,12 @@ func TestCheckResponseSnapshot_ListFlowExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlowExecutions(context.Background(), &ListFlowExecutionsInput{})
+	got, err := svc.ListFlowExecutions(context.Background(), &ListFlowExecutionsInput{
+		FlowIdentifier:      ptr.String("__FlowIdentifier__"),
+		FlowAliasIdentifier: ptr.String("__FlowAliasIdentifier__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -570,7 +662,12 @@ func TestCheckResponseSnapshot_ListInvocationSteps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvocationSteps(context.Background(), &ListInvocationStepsInput{})
+	got, err := svc.ListInvocationSteps(context.Background(), &ListInvocationStepsInput{
+		InvocationIdentifier: ptr.String("__InvocationIdentifier__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+		SessionIdentifier:    ptr.String("__SessionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -603,7 +700,11 @@ func TestCheckResponseSnapshot_ListInvocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvocations(context.Background(), &ListInvocationsInput{})
+	got, err := svc.ListInvocations(context.Background(), &ListInvocationsInput{
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -640,7 +741,10 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{})
+	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -663,13 +767,19 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListTagsForResource.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_OptimizePrompt(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_PutInvocationStep(t *testing.T) {
@@ -684,7 +794,22 @@ func TestCheckResponseSnapshot_PutInvocationStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutInvocationStep(context.Background(), &PutInvocationStepInput{})
+	got, err := svc.PutInvocationStep(context.Background(), &PutInvocationStepInput{
+		SessionIdentifier:    ptr.String("__SessionIdentifier__"),
+		InvocationIdentifier: ptr.String("__InvocationIdentifier__"),
+		InvocationStepTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Payload: &types.InvocationStepPayloadMemberContentBlocks{
+			Value: []types.BedrockSessionContentBlock{
+				&types.BedrockSessionContentBlockMemberText{
+					Value: "__BedrockSessionContentBlockMemberText__",
+				},
+				&types.BedrockSessionContentBlockMemberText{
+					Value: "__BedrockSessionContentBlockMemberText__",
+				},
+			},
+		},
+		InvocationStepId: ptr.String("__InvocationStepId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -704,7 +829,7 @@ func TestCheckResponseSnapshot_Rerank(t *testing.T) {
 					TextDocument: &types.RerankTextDocument{
 						Text: ptr.String("__Text__"),
 					},
-					JsonDocument: nil,
+					JsonDocument: document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -715,7 +840,7 @@ func TestCheckResponseSnapshot_Rerank(t *testing.T) {
 					TextDocument: &types.RerankTextDocument{
 						Text: ptr.String("__Text__"),
 					},
-					JsonDocument: nil,
+					JsonDocument: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -729,7 +854,57 @@ func TestCheckResponseSnapshot_Rerank(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Rerank(context.Background(), &RerankInput{})
+	got, err := svc.Rerank(context.Background(), &RerankInput{
+		Queries: []types.RerankQuery{
+			{
+				Type: types.RerankQueryContentType("TEXT"),
+				TextQuery: &types.RerankTextDocument{
+					Text: ptr.String("__Text__"),
+				},
+			},
+			{
+				Type: types.RerankQueryContentType("TEXT"),
+				TextQuery: &types.RerankTextDocument{
+					Text: ptr.String("__Text__"),
+				},
+			},
+		},
+		Sources: []types.RerankSource{
+			{
+				Type: types.RerankSourceType("INLINE"),
+				InlineDocumentSource: &types.RerankDocument{
+					Type: types.RerankDocumentType("TEXT"),
+					TextDocument: &types.RerankTextDocument{
+						Text: ptr.String("__Text__"),
+					},
+					JsonDocument: document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				Type: types.RerankSourceType("INLINE"),
+				InlineDocumentSource: &types.RerankDocument{
+					Type: types.RerankDocumentType("TEXT"),
+					TextDocument: &types.RerankTextDocument{
+						Text: ptr.String("__Text__"),
+					},
+					JsonDocument: document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+		RerankingConfiguration: &types.RerankingConfiguration{
+			Type: types.RerankingConfigurationType("BEDROCK_RERANKING_MODEL"),
+			BedrockRerankingConfiguration: &types.BedrockRerankingConfiguration{
+				NumberOfResults: ptr.Int32(1),
+				ModelConfiguration: &types.BedrockRerankingModelConfiguration{
+					ModelArn: ptr.String("__ModelArn__"),
+					AdditionalModelRequestFields: map[string]document.Interface{
+						"key0": document.NewLazyDocument("__Document__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -802,7 +977,7 @@ func TestCheckResponseSnapshot_Retrieve(t *testing.T) {
 				},
 				Score: ptr.Float64(1.0),
 				Metadata: map[string]document.Interface{
-					"key0": nil,
+					"key0": document.NewLazyDocument("__Document__"),
 				},
 				DocumentId: ptr.String("__DocumentId__"),
 			},
@@ -867,7 +1042,7 @@ func TestCheckResponseSnapshot_Retrieve(t *testing.T) {
 				},
 				Score: ptr.Float64(1.0),
 				Metadata: map[string]document.Interface{
-					"key0": nil,
+					"key0": document.NewLazyDocument("__Document__"),
 				},
 				DocumentId: ptr.String("__DocumentId__"),
 			},
@@ -883,7 +1058,112 @@ func TestCheckResponseSnapshot_Retrieve(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Retrieve(context.Background(), &RetrieveInput{})
+	got, err := svc.Retrieve(context.Background(), &RetrieveInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		RetrievalQuery: &types.KnowledgeBaseQuery{
+			Type: types.KnowledgeBaseQueryType("TEXT"),
+			Text: ptr.String("__Text__"),
+			Image: &types.InputImage{
+				Format:        types.InputImageFormat("png"),
+				InlineContent: []byte("blob"),
+			},
+		},
+		RetrievalConfiguration: &types.KnowledgeBaseRetrievalConfiguration{
+			VectorSearchConfiguration: &types.KnowledgeBaseVectorSearchConfiguration{
+				NumberOfResults:    ptr.Int32(1),
+				OverrideSearchType: types.SearchType("HYBRID"),
+				Filter: &types.RetrievalFilterMemberEquals{
+					Value: types.FilterAttribute{
+						Key:   ptr.String("__Key__"),
+						Value: document.NewLazyDocument("__Document__"),
+					},
+				},
+				RerankingConfiguration: &types.VectorSearchRerankingConfiguration{
+					Type: types.VectorSearchRerankingConfigurationType("BEDROCK_RERANKING_MODEL"),
+					BedrockRerankingConfiguration: &types.VectorSearchBedrockRerankingConfiguration{
+						ModelConfiguration: &types.VectorSearchBedrockRerankingModelConfiguration{
+							ModelArn: ptr.String("__ModelArn__"),
+							AdditionalModelRequestFields: map[string]document.Interface{
+								"key0": document.NewLazyDocument("__Document__"),
+							},
+						},
+						NumberOfRerankedResults: ptr.Int32(1),
+						MetadataConfiguration: &types.MetadataConfigurationForReranking{
+							SelectionMode: types.RerankingMetadataSelectionMode("SELECTIVE"),
+							SelectiveModeConfiguration: &types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude{
+								Value: []types.FieldForReranking{
+									{
+										FieldName: ptr.String("__FieldName__"),
+									},
+									{
+										FieldName: ptr.String("__FieldName__"),
+									},
+								},
+							},
+						},
+					},
+				},
+				ImplicitFilterConfiguration: &types.ImplicitFilterConfiguration{
+					MetadataAttributes: []types.MetadataAttributeSchema{
+						{
+							Key:         ptr.String("__Key__"),
+							Type:        types.AttributeType("STRING"),
+							Description: ptr.String("__Description__"),
+						},
+						{
+							Key:         ptr.String("__Key__"),
+							Type:        types.AttributeType("STRING"),
+							Description: ptr.String("__Description__"),
+						},
+					},
+					ModelArn: ptr.String("__ModelArn__"),
+				},
+			},
+			ManagedSearchConfiguration: &types.ManagedSearchConfiguration{
+				NumberOfResults: ptr.Int32(1),
+				Filter: &types.RetrievalFilterMemberEquals{
+					Value: types.FilterAttribute{
+						Key:   ptr.String("__Key__"),
+						Value: document.NewLazyDocument("__Document__"),
+					},
+				},
+				RerankingModelType: types.RerankingModelType("CUSTOM"),
+				RerankingConfiguration: &types.ManagedSearchRerankingConfiguration{
+					Type: types.ManagedSearchRerankingConfigurationType("BEDROCK_RERANKING_MODEL"),
+					BedrockRerankingConfiguration: &types.ManagedSearchBedrockRerankingConfiguration{
+						ModelConfiguration: &types.ManagedSearchBedrockRerankingModelConfiguration{
+							ModelArn: ptr.String("__ModelArn__"),
+							AdditionalModelRequestFields: map[string]document.Interface{
+								"key0": document.NewLazyDocument("__Document__"),
+							},
+						},
+						NumberOfRerankedResults: ptr.Int32(1),
+						MetadataConfiguration: &types.MetadataConfigurationForReranking{
+							SelectionMode: types.RerankingMetadataSelectionMode("SELECTIVE"),
+							SelectiveModeConfiguration: &types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude{
+								Value: []types.FieldForReranking{
+									{
+										FieldName: ptr.String("__FieldName__"),
+									},
+									{
+										FieldName: ptr.String("__FieldName__"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		GuardrailConfiguration: &types.GuardrailConfiguration{
+			GuardrailId:      ptr.String("__GuardrailId__"),
+			GuardrailVersion: ptr.String("__GuardrailVersion__"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+		UserContext: &types.UserContext{
+			UserId: ptr.String("__UserId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -970,7 +1250,7 @@ func TestCheckResponseSnapshot_RetrieveAndGenerate(t *testing.T) {
 							},
 						},
 						Metadata: map[string]document.Interface{
-							"key0": nil,
+							"key0": document.NewLazyDocument("__Document__"),
 						},
 					},
 					{
@@ -1033,7 +1313,7 @@ func TestCheckResponseSnapshot_RetrieveAndGenerate(t *testing.T) {
 							},
 						},
 						Metadata: map[string]document.Interface{
-							"key0": nil,
+							"key0": document.NewLazyDocument("__Document__"),
 						},
 					},
 				},
@@ -1109,7 +1389,7 @@ func TestCheckResponseSnapshot_RetrieveAndGenerate(t *testing.T) {
 							},
 						},
 						Metadata: map[string]document.Interface{
-							"key0": nil,
+							"key0": document.NewLazyDocument("__Document__"),
 						},
 					},
 					{
@@ -1172,7 +1452,7 @@ func TestCheckResponseSnapshot_RetrieveAndGenerate(t *testing.T) {
 							},
 						},
 						Metadata: map[string]document.Interface{
-							"key0": nil,
+							"key0": document.NewLazyDocument("__Document__"),
 						},
 					},
 				},
@@ -1188,13 +1468,226 @@ func TestCheckResponseSnapshot_RetrieveAndGenerate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RetrieveAndGenerate(context.Background(), &RetrieveAndGenerateInput{})
+	got, err := svc.RetrieveAndGenerate(context.Background(), &RetrieveAndGenerateInput{
+		SessionId: ptr.String("__SessionId__"),
+		Input: &types.RetrieveAndGenerateInput{
+			Text: ptr.String("__Text__"),
+		},
+		RetrieveAndGenerateConfiguration: &types.RetrieveAndGenerateConfiguration{
+			Type: types.RetrieveAndGenerateType("KNOWLEDGE_BASE"),
+			KnowledgeBaseConfiguration: &types.KnowledgeBaseRetrieveAndGenerateConfiguration{
+				KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+				ModelArn:        ptr.String("__ModelArn__"),
+				RetrievalConfiguration: &types.KnowledgeBaseRetrievalConfiguration{
+					VectorSearchConfiguration: &types.KnowledgeBaseVectorSearchConfiguration{
+						NumberOfResults:    ptr.Int32(1),
+						OverrideSearchType: types.SearchType("HYBRID"),
+						Filter: &types.RetrievalFilterMemberEquals{
+							Value: types.FilterAttribute{
+								Key:   ptr.String("__Key__"),
+								Value: document.NewLazyDocument("__Document__"),
+							},
+						},
+						RerankingConfiguration: &types.VectorSearchRerankingConfiguration{
+							Type: types.VectorSearchRerankingConfigurationType("BEDROCK_RERANKING_MODEL"),
+							BedrockRerankingConfiguration: &types.VectorSearchBedrockRerankingConfiguration{
+								ModelConfiguration: &types.VectorSearchBedrockRerankingModelConfiguration{
+									ModelArn: ptr.String("__ModelArn__"),
+									AdditionalModelRequestFields: map[string]document.Interface{
+										"key0": document.NewLazyDocument("__Document__"),
+									},
+								},
+								NumberOfRerankedResults: ptr.Int32(1),
+								MetadataConfiguration: &types.MetadataConfigurationForReranking{
+									SelectionMode: types.RerankingMetadataSelectionMode("SELECTIVE"),
+									SelectiveModeConfiguration: &types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude{
+										Value: []types.FieldForReranking{
+											{
+												FieldName: ptr.String("__FieldName__"),
+											},
+											{
+												FieldName: ptr.String("__FieldName__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						ImplicitFilterConfiguration: &types.ImplicitFilterConfiguration{
+							MetadataAttributes: []types.MetadataAttributeSchema{
+								{
+									Key:         ptr.String("__Key__"),
+									Type:        types.AttributeType("STRING"),
+									Description: ptr.String("__Description__"),
+								},
+								{
+									Key:         ptr.String("__Key__"),
+									Type:        types.AttributeType("STRING"),
+									Description: ptr.String("__Description__"),
+								},
+							},
+							ModelArn: ptr.String("__ModelArn__"),
+						},
+					},
+					ManagedSearchConfiguration: &types.ManagedSearchConfiguration{
+						NumberOfResults: ptr.Int32(1),
+						Filter: &types.RetrievalFilterMemberEquals{
+							Value: types.FilterAttribute{
+								Key:   ptr.String("__Key__"),
+								Value: document.NewLazyDocument("__Document__"),
+							},
+						},
+						RerankingModelType: types.RerankingModelType("CUSTOM"),
+						RerankingConfiguration: &types.ManagedSearchRerankingConfiguration{
+							Type: types.ManagedSearchRerankingConfigurationType("BEDROCK_RERANKING_MODEL"),
+							BedrockRerankingConfiguration: &types.ManagedSearchBedrockRerankingConfiguration{
+								ModelConfiguration: &types.ManagedSearchBedrockRerankingModelConfiguration{
+									ModelArn: ptr.String("__ModelArn__"),
+									AdditionalModelRequestFields: map[string]document.Interface{
+										"key0": document.NewLazyDocument("__Document__"),
+									},
+								},
+								NumberOfRerankedResults: ptr.Int32(1),
+								MetadataConfiguration: &types.MetadataConfigurationForReranking{
+									SelectionMode: types.RerankingMetadataSelectionMode("SELECTIVE"),
+									SelectiveModeConfiguration: &types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude{
+										Value: []types.FieldForReranking{
+											{
+												FieldName: ptr.String("__FieldName__"),
+											},
+											{
+												FieldName: ptr.String("__FieldName__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				GenerationConfiguration: &types.GenerationConfiguration{
+					PromptTemplate: &types.PromptTemplate{
+						TextPromptTemplate: ptr.String("__TextPromptTemplate__"),
+					},
+					GuardrailConfiguration: &types.GuardrailConfiguration{
+						GuardrailId:      ptr.String("__GuardrailId__"),
+						GuardrailVersion: ptr.String("__GuardrailVersion__"),
+					},
+					InferenceConfig: &types.InferenceConfig{
+						TextInferenceConfig: &types.TextInferenceConfig{
+							Temperature: ptr.Float32(1.0),
+							TopP:        ptr.Float32(1.0),
+							MaxTokens:   ptr.Int32(1),
+							StopSequences: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					AdditionalModelRequestFields: map[string]document.Interface{
+						"key0": document.NewLazyDocument("__Document__"),
+					},
+					PerformanceConfig: &types.PerformanceConfiguration{
+						Latency: types.PerformanceConfigLatency("standard"),
+					},
+				},
+				OrchestrationConfiguration: &types.OrchestrationConfiguration{
+					PromptTemplate: &types.PromptTemplate{
+						TextPromptTemplate: ptr.String("__TextPromptTemplate__"),
+					},
+					InferenceConfig: &types.InferenceConfig{
+						TextInferenceConfig: &types.TextInferenceConfig{
+							Temperature: ptr.Float32(1.0),
+							TopP:        ptr.Float32(1.0),
+							MaxTokens:   ptr.Int32(1),
+							StopSequences: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					AdditionalModelRequestFields: map[string]document.Interface{
+						"key0": document.NewLazyDocument("__Document__"),
+					},
+					QueryTransformationConfiguration: &types.QueryTransformationConfiguration{
+						Type: types.QueryTransformationType("QUERY_DECOMPOSITION"),
+					},
+					PerformanceConfig: &types.PerformanceConfiguration{
+						Latency: types.PerformanceConfigLatency("standard"),
+					},
+				},
+			},
+			ExternalSourcesConfiguration: &types.ExternalSourcesRetrieveAndGenerateConfiguration{
+				ModelArn: ptr.String("__ModelArn__"),
+				Sources: []types.ExternalSource{
+					{
+						SourceType: types.ExternalSourceType("S3"),
+						S3Location: &types.S3ObjectDoc{
+							Uri: ptr.String("__Uri__"),
+						},
+						ByteContent: &types.ByteContentDoc{
+							Identifier:  ptr.String("__Identifier__"),
+							ContentType: ptr.String("__ContentType__"),
+							Data:        []byte("blob"),
+						},
+					},
+					{
+						SourceType: types.ExternalSourceType("S3"),
+						S3Location: &types.S3ObjectDoc{
+							Uri: ptr.String("__Uri__"),
+						},
+						ByteContent: &types.ByteContentDoc{
+							Identifier:  ptr.String("__Identifier__"),
+							ContentType: ptr.String("__ContentType__"),
+							Data:        []byte("blob"),
+						},
+					},
+				},
+				GenerationConfiguration: &types.ExternalSourcesGenerationConfiguration{
+					PromptTemplate: &types.PromptTemplate{
+						TextPromptTemplate: ptr.String("__TextPromptTemplate__"),
+					},
+					GuardrailConfiguration: &types.GuardrailConfiguration{
+						GuardrailId:      ptr.String("__GuardrailId__"),
+						GuardrailVersion: ptr.String("__GuardrailVersion__"),
+					},
+					InferenceConfig: &types.InferenceConfig{
+						TextInferenceConfig: &types.TextInferenceConfig{
+							Temperature: ptr.Float32(1.0),
+							TopP:        ptr.Float32(1.0),
+							MaxTokens:   ptr.Int32(1),
+							StopSequences: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					AdditionalModelRequestFields: map[string]document.Interface{
+						"key0": document.NewLazyDocument("__Document__"),
+					},
+					PerformanceConfig: &types.PerformanceConfiguration{
+						Latency: types.PerformanceConfigLatency("standard"),
+					},
+				},
+			},
+		},
+		SessionConfiguration: &types.RetrieveAndGenerateSessionConfiguration{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		UserContext: &types.UserContext{
+			UserId: ptr.String("__UserId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RetrieveAndGenerate.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_RetrieveAndGenerateStream(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_StartFlowExecution(t *testing.T) {
@@ -1209,7 +1702,34 @@ func TestCheckResponseSnapshot_StartFlowExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFlowExecution(context.Background(), &StartFlowExecutionInput{})
+	got, err := svc.StartFlowExecution(context.Background(), &StartFlowExecutionInput{
+		FlowIdentifier:      ptr.String("__FlowIdentifier__"),
+		FlowAliasIdentifier: ptr.String("__FlowAliasIdentifier__"),
+		FlowExecutionName:   ptr.String("__FlowExecutionName__"),
+		Inputs: []types.FlowInput{
+			{
+				NodeName:       ptr.String("__NodeName__"),
+				NodeOutputName: ptr.String("__NodeOutputName__"),
+				Content: &types.FlowInputContentMemberDocument{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+				NodeInputName: ptr.String("__NodeInputName__"),
+			},
+			{
+				NodeName:       ptr.String("__NodeName__"),
+				NodeOutputName: ptr.String("__NodeOutputName__"),
+				Content: &types.FlowInputContentMemberDocument{
+					Value: document.NewLazyDocument("__Document__"),
+				},
+				NodeInputName: ptr.String("__NodeInputName__"),
+			},
+		},
+		ModelPerformanceConfiguration: &types.ModelPerformanceConfiguration{
+			PerformanceConfig: &types.PerformanceConfiguration{
+				Latency: types.PerformanceConfigLatency("standard"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1231,7 +1751,11 @@ func TestCheckResponseSnapshot_StopFlowExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopFlowExecution(context.Background(), &StopFlowExecutionInput{})
+	got, err := svc.StopFlowExecution(context.Background(), &StopFlowExecutionInput{
+		FlowIdentifier:      ptr.String("__FlowIdentifier__"),
+		FlowAliasIdentifier: ptr.String("__FlowAliasIdentifier__"),
+		ExecutionIdentifier: ptr.String("__ExecutionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1250,7 +1774,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1269,7 +1798,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1294,7 +1829,12 @@ func TestCheckResponseSnapshot_UpdateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSession(context.Background(), &UpdateSessionInput{})
+	got, err := svc.UpdateSession(context.Background(), &UpdateSessionInput{
+		SessionMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1315,7 +1855,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{})
+	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
+		InvocationId:      ptr.String("__InvocationId__"),
+		Description:       ptr.String("__Description__"),
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1341,7 +1885,12 @@ func TestCheckResponseSnapshot_Error_BadGatewayException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAgentMemory(context.Background(), &DeleteAgentMemoryInput{})
+	_, opErr := svc.DeleteAgentMemory(context.Background(), &DeleteAgentMemoryInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentAliasId: ptr.String("__AgentAliasId__"),
+		MemoryId:     ptr.String("__MemoryId__"),
+		SessionId:    ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1366,7 +1915,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{})
+	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
+		InvocationId:      ptr.String("__InvocationId__"),
+		Description:       ptr.String("__Description__"),
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1392,7 +1945,12 @@ func TestCheckResponseSnapshot_Error_DependencyFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAgentMemory(context.Background(), &DeleteAgentMemoryInput{})
+	_, opErr := svc.DeleteAgentMemory(context.Background(), &DeleteAgentMemoryInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentAliasId: ptr.String("__AgentAliasId__"),
+		MemoryId:     ptr.String("__MemoryId__"),
+		SessionId:    ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1418,7 +1976,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{})
+	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
+		InvocationId:      ptr.String("__InvocationId__"),
+		Description:       ptr.String("__Description__"),
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1443,7 +2005,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{})
+	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
+		InvocationId:      ptr.String("__InvocationId__"),
+		Description:       ptr.String("__Description__"),
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1468,7 +2034,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{})
+	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
+		InvocationId:      ptr.String("__InvocationId__"),
+		Description:       ptr.String("__Description__"),
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1493,7 +2063,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{})
+	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
+		InvocationId:      ptr.String("__InvocationId__"),
+		Description:       ptr.String("__Description__"),
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1518,7 +2092,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{})
+	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
+		InvocationId:      ptr.String("__InvocationId__"),
+		Description:       ptr.String("__Description__"),
+		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

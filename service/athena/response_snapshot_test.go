@@ -148,7 +148,12 @@ func TestCheckResponseSnapshot_BatchGetNamedQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetNamedQuery(context.Background(), &BatchGetNamedQueryInput{})
+	got, err := svc.BatchGetNamedQuery(context.Background(), &BatchGetNamedQueryInput{
+		NamedQueryIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +201,13 @@ func TestCheckResponseSnapshot_BatchGetPreparedStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetPreparedStatement(context.Background(), &BatchGetPreparedStatementInput{})
+	got, err := svc.BatchGetPreparedStatement(context.Background(), &BatchGetPreparedStatementInput{
+		PreparedStatementNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WorkGroup: ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -376,7 +387,12 @@ func TestCheckResponseSnapshot_BatchGetQueryExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetQueryExecution(context.Background(), &BatchGetQueryExecutionInput{})
+	got, err := svc.BatchGetQueryExecution(context.Background(), &BatchGetQueryExecutionInput{
+		QueryExecutionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -395,7 +411,9 @@ func TestCheckResponseSnapshot_CancelCapacityReservation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelCapacityReservation(context.Background(), &CancelCapacityReservationInput{})
+	got, err := svc.CancelCapacityReservation(context.Background(), &CancelCapacityReservationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -414,7 +432,20 @@ func TestCheckResponseSnapshot_CreateCapacityReservation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCapacityReservation(context.Background(), &CreateCapacityReservationInput{})
+	got, err := svc.CreateCapacityReservation(context.Background(), &CreateCapacityReservationInput{
+		TargetDpus: ptr.Int32(1),
+		Name:       ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -445,7 +476,24 @@ func TestCheckResponseSnapshot_CreateDataCatalog(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataCatalog(context.Background(), &CreateDataCatalogInput{})
+	got, err := svc.CreateDataCatalog(context.Background(), &CreateDataCatalogInput{
+		Name:        ptr.String("__Name__"),
+		Type:        types.DataCatalogType("LAMBDA"),
+		Description: ptr.String("__Description__"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -466,7 +514,14 @@ func TestCheckResponseSnapshot_CreateNamedQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNamedQuery(context.Background(), &CreateNamedQueryInput{})
+	got, err := svc.CreateNamedQuery(context.Background(), &CreateNamedQueryInput{
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Database:           ptr.String("__Database__"),
+		QueryString:        ptr.String("__QueryString__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		WorkGroup:          ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -487,7 +542,11 @@ func TestCheckResponseSnapshot_CreateNotebook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNotebook(context.Background(), &CreateNotebookInput{})
+	got, err := svc.CreateNotebook(context.Background(), &CreateNotebookInput{
+		WorkGroup:          ptr.String("__WorkGroup__"),
+		Name:               ptr.String("__Name__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -506,7 +565,12 @@ func TestCheckResponseSnapshot_CreatePreparedStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePreparedStatement(context.Background(), &CreatePreparedStatementInput{})
+	got, err := svc.CreatePreparedStatement(context.Background(), &CreatePreparedStatementInput{
+		StatementName:  ptr.String("__StatementName__"),
+		WorkGroup:      ptr.String("__WorkGroup__"),
+		QueryStatement: ptr.String("__QueryStatement__"),
+		Description:    ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -529,7 +593,9 @@ func TestCheckResponseSnapshot_CreatePresignedNotebookUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePresignedNotebookUrl(context.Background(), &CreatePresignedNotebookUrlInput{})
+	got, err := svc.CreatePresignedNotebookUrl(context.Background(), &CreatePresignedNotebookUrlInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -548,7 +614,109 @@ func TestCheckResponseSnapshot_CreateWorkGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkGroup(context.Background(), &CreateWorkGroupInput{})
+	got, err := svc.CreateWorkGroup(context.Background(), &CreateWorkGroupInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.WorkGroupConfiguration{
+			ResultConfiguration: &types.ResultConfiguration{
+				OutputLocation: ptr.String("__OutputLocation__"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					EncryptionOption: types.EncryptionOption("SSE_S3"),
+					KmsKey:           ptr.String("__KmsKey__"),
+				},
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				AclConfiguration: &types.AclConfiguration{
+					S3AclOption: types.S3AclOption("BUCKET_OWNER_FULL_CONTROL"),
+				},
+			},
+			ManagedQueryResultsConfiguration: &types.ManagedQueryResultsConfiguration{
+				Enabled: true,
+				EncryptionConfiguration: &types.ManagedQueryResultsEncryptionConfiguration{
+					KmsKey: ptr.String("__KmsKey__"),
+				},
+			},
+			EnforceWorkGroupConfiguration:   ptr.Bool(true),
+			PublishCloudWatchMetricsEnabled: ptr.Bool(true),
+			BytesScannedCutoffPerQuery:      ptr.Int64(1),
+			RequesterPaysEnabled:            ptr.Bool(true),
+			EngineVersion: &types.EngineVersion{
+				SelectedEngineVersion:  ptr.String("__SelectedEngineVersion__"),
+				EffectiveEngineVersion: ptr.String("__EffectiveEngineVersion__"),
+			},
+			AdditionalConfiguration: ptr.String("__AdditionalConfiguration__"),
+			ExecutionRole:           ptr.String("__ExecutionRole__"),
+			MonitoringConfiguration: &types.MonitoringConfiguration{
+				CloudWatchLoggingConfiguration: &types.CloudWatchLoggingConfiguration{
+					Enabled:             ptr.Bool(true),
+					LogGroup:            ptr.String("__LogGroup__"),
+					LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+					LogTypes: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ManagedLoggingConfiguration: &types.ManagedLoggingConfiguration{
+					Enabled: ptr.Bool(true),
+					KmsKey:  ptr.String("__KmsKey__"),
+				},
+				S3LoggingConfiguration: &types.S3LoggingConfiguration{
+					Enabled:     ptr.Bool(true),
+					KmsKey:      ptr.String("__KmsKey__"),
+					LogLocation: ptr.String("__LogLocation__"),
+				},
+			},
+			EngineConfiguration: &types.EngineConfiguration{
+				CoordinatorDpuSize:     ptr.Int32(1),
+				MaxConcurrentDpus:      ptr.Int32(1),
+				DefaultExecutorDpuSize: ptr.Int32(1),
+				AdditionalConfigs: map[string]string{
+					"key0": "__Value__",
+				},
+				SparkProperties: map[string]string{
+					"key0": "__Value__",
+				},
+				Classifications: []types.Classification{
+					{
+						Name: ptr.String("__Name__"),
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			CustomerContentEncryptionConfiguration: &types.CustomerContentEncryptionConfiguration{
+				KmsKey: ptr.String("__KmsKey__"),
+			},
+			EnableMinimumEncryptionConfiguration: ptr.Bool(true),
+			IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+				EnableIdentityCenter:      ptr.Bool(true),
+				IdentityCenterInstanceArn: ptr.String("__IdentityCenterInstanceArn__"),
+			},
+			QueryResultsS3AccessGrantsConfiguration: &types.QueryResultsS3AccessGrantsConfiguration{
+				EnableS3AccessGrants:  ptr.Bool(true),
+				CreateUserLevelPrefix: ptr.Bool(true),
+				AuthenticationType:    types.AuthenticationType("DIRECTORY_IDENTITY"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -567,7 +735,9 @@ func TestCheckResponseSnapshot_DeleteCapacityReservation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCapacityReservation(context.Background(), &DeleteCapacityReservationInput{})
+	got, err := svc.DeleteCapacityReservation(context.Background(), &DeleteCapacityReservationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -598,7 +768,10 @@ func TestCheckResponseSnapshot_DeleteDataCatalog(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataCatalog(context.Background(), &DeleteDataCatalogInput{})
+	got, err := svc.DeleteDataCatalog(context.Background(), &DeleteDataCatalogInput{
+		Name:              ptr.String("__Name__"),
+		DeleteCatalogOnly: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -617,7 +790,9 @@ func TestCheckResponseSnapshot_DeleteNamedQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNamedQuery(context.Background(), &DeleteNamedQueryInput{})
+	got, err := svc.DeleteNamedQuery(context.Background(), &DeleteNamedQueryInput{
+		NamedQueryId: ptr.String("__NamedQueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -636,7 +811,9 @@ func TestCheckResponseSnapshot_DeleteNotebook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNotebook(context.Background(), &DeleteNotebookInput{})
+	got, err := svc.DeleteNotebook(context.Background(), &DeleteNotebookInput{
+		NotebookId: ptr.String("__NotebookId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -655,7 +832,10 @@ func TestCheckResponseSnapshot_DeletePreparedStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePreparedStatement(context.Background(), &DeletePreparedStatementInput{})
+	got, err := svc.DeletePreparedStatement(context.Background(), &DeletePreparedStatementInput{
+		StatementName: ptr.String("__StatementName__"),
+		WorkGroup:     ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -674,7 +854,10 @@ func TestCheckResponseSnapshot_DeleteWorkGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkGroup(context.Background(), &DeleteWorkGroupInput{})
+	got, err := svc.DeleteWorkGroup(context.Background(), &DeleteWorkGroupInput{
+		WorkGroup:             ptr.String("__WorkGroup__"),
+		RecursiveDeleteOption: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -703,7 +886,9 @@ func TestCheckResponseSnapshot_ExportNotebook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportNotebook(context.Background(), &ExportNotebookInput{})
+	got, err := svc.ExportNotebook(context.Background(), &ExportNotebookInput{
+		NotebookId: ptr.String("__NotebookId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -743,7 +928,9 @@ func TestCheckResponseSnapshot_GetCalculationExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCalculationExecution(context.Background(), &GetCalculationExecutionInput{})
+	got, err := svc.GetCalculationExecution(context.Background(), &GetCalculationExecutionInput{
+		CalculationExecutionId: ptr.String("__CalculationExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -764,7 +951,9 @@ func TestCheckResponseSnapshot_GetCalculationExecutionCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCalculationExecutionCode(context.Background(), &GetCalculationExecutionCodeInput{})
+	got, err := svc.GetCalculationExecutionCode(context.Background(), &GetCalculationExecutionCodeInput{
+		CalculationExecutionId: ptr.String("__CalculationExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -794,7 +983,9 @@ func TestCheckResponseSnapshot_GetCalculationExecutionStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCalculationExecutionStatus(context.Background(), &GetCalculationExecutionStatusInput{})
+	got, err := svc.GetCalculationExecutionStatus(context.Background(), &GetCalculationExecutionStatusInput{
+		CalculationExecutionId: ptr.String("__CalculationExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -831,7 +1022,9 @@ func TestCheckResponseSnapshot_GetCapacityAssignmentConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCapacityAssignmentConfiguration(context.Background(), &GetCapacityAssignmentConfigurationInput{})
+	got, err := svc.GetCapacityAssignmentConfiguration(context.Background(), &GetCapacityAssignmentConfigurationInput{
+		CapacityReservationName: ptr.String("__CapacityReservationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -865,7 +1058,9 @@ func TestCheckResponseSnapshot_GetCapacityReservation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCapacityReservation(context.Background(), &GetCapacityReservationInput{})
+	got, err := svc.GetCapacityReservation(context.Background(), &GetCapacityReservationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -896,7 +1091,10 @@ func TestCheckResponseSnapshot_GetDataCatalog(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataCatalog(context.Background(), &GetDataCatalogInput{})
+	got, err := svc.GetDataCatalog(context.Background(), &GetDataCatalogInput{
+		Name:      ptr.String("__Name__"),
+		WorkGroup: ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -923,7 +1121,11 @@ func TestCheckResponseSnapshot_GetDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDatabase(context.Background(), &GetDatabaseInput{})
+	got, err := svc.GetDatabase(context.Background(), &GetDatabaseInput{
+		CatalogName:  ptr.String("__CatalogName__"),
+		DatabaseName: ptr.String("__DatabaseName__"),
+		WorkGroup:    ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -951,7 +1153,9 @@ func TestCheckResponseSnapshot_GetNamedQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNamedQuery(context.Background(), &GetNamedQueryInput{})
+	got, err := svc.GetNamedQuery(context.Background(), &GetNamedQueryInput{
+		NamedQueryId: ptr.String("__NamedQueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -979,7 +1183,9 @@ func TestCheckResponseSnapshot_GetNotebookMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNotebookMetadata(context.Background(), &GetNotebookMetadataInput{})
+	got, err := svc.GetNotebookMetadata(context.Background(), &GetNotebookMetadataInput{
+		NotebookId: ptr.String("__NotebookId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1006,7 +1212,10 @@ func TestCheckResponseSnapshot_GetPreparedStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPreparedStatement(context.Background(), &GetPreparedStatementInput{})
+	got, err := svc.GetPreparedStatement(context.Background(), &GetPreparedStatementInput{
+		StatementName: ptr.String("__StatementName__"),
+		WorkGroup:     ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1099,7 +1308,9 @@ func TestCheckResponseSnapshot_GetQueryExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryExecution(context.Background(), &GetQueryExecutionInput{})
+	got, err := svc.GetQueryExecution(context.Background(), &GetQueryExecutionInput{
+		QueryExecutionId: ptr.String("__QueryExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1173,7 +1384,12 @@ func TestCheckResponseSnapshot_GetQueryResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{})
+	got, err := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{
+		QueryExecutionId: ptr.String("__QueryExecutionId__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		QueryResultType:  types.QueryResultType("DATA_MANIFEST"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1234,7 +1450,9 @@ func TestCheckResponseSnapshot_GetQueryRuntimeStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryRuntimeStatistics(context.Background(), &GetQueryRuntimeStatisticsInput{})
+	got, err := svc.GetQueryRuntimeStatistics(context.Background(), &GetQueryRuntimeStatisticsInput{
+		QueryExecutionId: ptr.String("__QueryExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1255,7 +1473,9 @@ func TestCheckResponseSnapshot_GetResourceDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceDashboard(context.Background(), &GetResourceDashboardInput{})
+	got, err := svc.GetResourceDashboard(context.Background(), &GetResourceDashboardInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1348,7 +1568,9 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSession(context.Background(), &GetSessionInput{})
+	got, err := svc.GetSession(context.Background(), &GetSessionInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1371,7 +1593,9 @@ func TestCheckResponseSnapshot_GetSessionEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSessionEndpoint(context.Background(), &GetSessionEndpointInput{})
+	got, err := svc.GetSessionEndpoint(context.Background(), &GetSessionEndpointInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1400,7 +1624,9 @@ func TestCheckResponseSnapshot_GetSessionStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSessionStatus(context.Background(), &GetSessionStatusInput{})
+	got, err := svc.GetSessionStatus(context.Background(), &GetSessionStatusInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1453,7 +1679,12 @@ func TestCheckResponseSnapshot_GetTableMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableMetadata(context.Background(), &GetTableMetadataInput{})
+	got, err := svc.GetTableMetadata(context.Background(), &GetTableMetadataInput{
+		CatalogName:  ptr.String("__CatalogName__"),
+		DatabaseName: ptr.String("__DatabaseName__"),
+		TableName:    ptr.String("__TableName__"),
+		WorkGroup:    ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1569,7 +1800,9 @@ func TestCheckResponseSnapshot_GetWorkGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkGroup(context.Background(), &GetWorkGroupInput{})
+	got, err := svc.GetWorkGroup(context.Background(), &GetWorkGroupInput{
+		WorkGroup: ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1590,7 +1823,14 @@ func TestCheckResponseSnapshot_ImportNotebook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportNotebook(context.Background(), &ImportNotebookInput{})
+	got, err := svc.ImportNotebook(context.Background(), &ImportNotebookInput{
+		WorkGroup:             ptr.String("__WorkGroup__"),
+		Name:                  ptr.String("__Name__"),
+		Payload:               ptr.String("__Payload__"),
+		Type:                  types.NotebookType("IPYNB"),
+		NotebookS3LocationUri: ptr.String("__NotebookS3LocationUri__"),
+		ClientRequestToken:    ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1627,7 +1867,10 @@ func TestCheckResponseSnapshot_ListApplicationDPUSizes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationDPUSizes(context.Background(), &ListApplicationDPUSizesInput{})
+	got, err := svc.ListApplicationDPUSizes(context.Background(), &ListApplicationDPUSizesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1670,7 +1913,12 @@ func TestCheckResponseSnapshot_ListCalculationExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCalculationExecutions(context.Background(), &ListCalculationExecutionsInput{})
+	got, err := svc.ListCalculationExecutions(context.Background(), &ListCalculationExecutionsInput{
+		SessionId:   ptr.String("__SessionId__"),
+		StateFilter: types.CalculationExecutionState("CREATING"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1721,7 +1969,10 @@ func TestCheckResponseSnapshot_ListCapacityReservations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCapacityReservations(context.Background(), &ListCapacityReservationsInput{})
+	got, err := svc.ListCapacityReservations(context.Background(), &ListCapacityReservationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1758,7 +2009,11 @@ func TestCheckResponseSnapshot_ListDataCatalogs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataCatalogs(context.Background(), &ListDataCatalogsInput{})
+	got, err := svc.ListDataCatalogs(context.Background(), &ListDataCatalogsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		WorkGroup:  ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1795,7 +2050,12 @@ func TestCheckResponseSnapshot_ListDatabases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatabases(context.Background(), &ListDatabasesInput{})
+	got, err := svc.ListDatabases(context.Background(), &ListDatabasesInput{
+		CatalogName: ptr.String("__CatalogName__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		WorkGroup:   ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1826,7 +2086,10 @@ func TestCheckResponseSnapshot_ListEngineVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEngineVersions(context.Background(), &ListEngineVersionsInput{})
+	got, err := svc.ListEngineVersions(context.Background(), &ListEngineVersionsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1866,7 +2129,12 @@ func TestCheckResponseSnapshot_ListExecutors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExecutors(context.Background(), &ListExecutorsInput{})
+	got, err := svc.ListExecutors(context.Background(), &ListExecutorsInput{
+		SessionId:           ptr.String("__SessionId__"),
+		ExecutorStateFilter: types.ExecutorState("CREATING"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1891,7 +2159,11 @@ func TestCheckResponseSnapshot_ListNamedQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNamedQueries(context.Background(), &ListNamedQueriesInput{})
+	got, err := svc.ListNamedQueries(context.Background(), &ListNamedQueriesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		WorkGroup:  ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1930,7 +2202,14 @@ func TestCheckResponseSnapshot_ListNotebookMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotebookMetadata(context.Background(), &ListNotebookMetadataInput{})
+	got, err := svc.ListNotebookMetadata(context.Background(), &ListNotebookMetadataInput{
+		Filters: &types.FilterDefinition{
+			Name: ptr.String("__Name__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		WorkGroup:  ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1961,7 +2240,11 @@ func TestCheckResponseSnapshot_ListNotebookSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotebookSessions(context.Background(), &ListNotebookSessionsInput{})
+	got, err := svc.ListNotebookSessions(context.Background(), &ListNotebookSessionsInput{
+		NotebookId: ptr.String("__NotebookId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1992,7 +2275,11 @@ func TestCheckResponseSnapshot_ListPreparedStatements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPreparedStatements(context.Background(), &ListPreparedStatementsInput{})
+	got, err := svc.ListPreparedStatements(context.Background(), &ListPreparedStatementsInput{
+		WorkGroup:  ptr.String("__WorkGroup__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2017,7 +2304,11 @@ func TestCheckResponseSnapshot_ListQueryExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueryExecutions(context.Background(), &ListQueryExecutionsInput{})
+	got, err := svc.ListQueryExecutions(context.Background(), &ListQueryExecutionsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		WorkGroup:  ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2074,7 +2365,12 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{})
+	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{
+		WorkGroup:   ptr.String("__WorkGroup__"),
+		StateFilter: types.SessionState("CREATING"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2163,7 +2459,14 @@ func TestCheckResponseSnapshot_ListTableMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTableMetadata(context.Background(), &ListTableMetadataInput{})
+	got, err := svc.ListTableMetadata(context.Background(), &ListTableMetadataInput{
+		CatalogName:  ptr.String("__CatalogName__"),
+		DatabaseName: ptr.String("__DatabaseName__"),
+		Expression:   ptr.String("__Expression__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		WorkGroup:    ptr.String("__WorkGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2194,7 +2497,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2239,7 +2546,10 @@ func TestCheckResponseSnapshot_ListWorkGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkGroups(context.Background(), &ListWorkGroupsInput{})
+	got, err := svc.ListWorkGroups(context.Background(), &ListWorkGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2258,7 +2568,23 @@ func TestCheckResponseSnapshot_PutCapacityAssignmentConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutCapacityAssignmentConfiguration(context.Background(), &PutCapacityAssignmentConfigurationInput{})
+	got, err := svc.PutCapacityAssignmentConfiguration(context.Background(), &PutCapacityAssignmentConfigurationInput{
+		CapacityReservationName: ptr.String("__CapacityReservationName__"),
+		CapacityAssignments: []types.CapacityAssignment{
+			{
+				WorkGroupNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				WorkGroupNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2280,7 +2606,15 @@ func TestCheckResponseSnapshot_StartCalculationExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCalculationExecution(context.Background(), &StartCalculationExecutionInput{})
+	got, err := svc.StartCalculationExecution(context.Background(), &StartCalculationExecutionInput{
+		SessionId:   ptr.String("__SessionId__"),
+		Description: ptr.String("__Description__"),
+		CalculationConfiguration: &types.CalculationConfiguration{
+			CodeBlock: ptr.String("__CodeBlock__"),
+		},
+		CodeBlock:          ptr.String("__CodeBlock__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2301,7 +2635,61 @@ func TestCheckResponseSnapshot_StartQueryExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartQueryExecution(context.Background(), &StartQueryExecutionInput{})
+	got, err := svc.StartQueryExecution(context.Background(), &StartQueryExecutionInput{
+		QueryString:        ptr.String("__QueryString__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		QueryExecutionContext: &types.QueryExecutionContext{
+			Database: ptr.String("__Database__"),
+			Catalog:  ptr.String("__Catalog__"),
+		},
+		ResultConfiguration: &types.ResultConfiguration{
+			OutputLocation: ptr.String("__OutputLocation__"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				EncryptionOption: types.EncryptionOption("SSE_S3"),
+				KmsKey:           ptr.String("__KmsKey__"),
+			},
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+			AclConfiguration: &types.AclConfiguration{
+				S3AclOption: types.S3AclOption("BUCKET_OWNER_FULL_CONTROL"),
+			},
+		},
+		WorkGroup: ptr.String("__WorkGroup__"),
+		ExecutionParameters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResultReuseConfiguration: &types.ResultReuseConfiguration{
+			ResultReuseByAgeConfiguration: &types.ResultReuseByAgeConfiguration{
+				Enabled:         true,
+				MaxAgeInMinutes: ptr.Int32(1),
+			},
+		},
+		EngineConfiguration: &types.EngineConfiguration{
+			CoordinatorDpuSize:     ptr.Int32(1),
+			MaxConcurrentDpus:      ptr.Int32(1),
+			DefaultExecutorDpuSize: ptr.Int32(1),
+			AdditionalConfigs: map[string]string{
+				"key0": "__Value__",
+			},
+			SparkProperties: map[string]string{
+				"key0": "__Value__",
+			},
+			Classifications: []types.Classification{
+				{
+					Name: ptr.String("__Name__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2323,7 +2711,72 @@ func TestCheckResponseSnapshot_StartSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSession(context.Background(), &StartSessionInput{})
+	got, err := svc.StartSession(context.Background(), &StartSessionInput{
+		Description: ptr.String("__Description__"),
+		WorkGroup:   ptr.String("__WorkGroup__"),
+		EngineConfiguration: &types.EngineConfiguration{
+			CoordinatorDpuSize:     ptr.Int32(1),
+			MaxConcurrentDpus:      ptr.Int32(1),
+			DefaultExecutorDpuSize: ptr.Int32(1),
+			AdditionalConfigs: map[string]string{
+				"key0": "__Value__",
+			},
+			SparkProperties: map[string]string{
+				"key0": "__Value__",
+			},
+			Classifications: []types.Classification{
+				{
+					Name: ptr.String("__Name__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		ExecutionRole: ptr.String("__ExecutionRole__"),
+		MonitoringConfiguration: &types.MonitoringConfiguration{
+			CloudWatchLoggingConfiguration: &types.CloudWatchLoggingConfiguration{
+				Enabled:             ptr.Bool(true),
+				LogGroup:            ptr.String("__LogGroup__"),
+				LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+				LogTypes: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ManagedLoggingConfiguration: &types.ManagedLoggingConfiguration{
+				Enabled: ptr.Bool(true),
+				KmsKey:  ptr.String("__KmsKey__"),
+			},
+			S3LoggingConfiguration: &types.S3LoggingConfiguration{
+				Enabled:     ptr.Bool(true),
+				KmsKey:      ptr.String("__KmsKey__"),
+				LogLocation: ptr.String("__LogLocation__"),
+			},
+		},
+		NotebookVersion:             ptr.String("__NotebookVersion__"),
+		SessionIdleTimeoutInMinutes: ptr.Int32(1),
+		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CopyWorkGroupTags: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2344,7 +2797,9 @@ func TestCheckResponseSnapshot_StopCalculationExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopCalculationExecution(context.Background(), &StopCalculationExecutionInput{})
+	got, err := svc.StopCalculationExecution(context.Background(), &StopCalculationExecutionInput{
+		CalculationExecutionId: ptr.String("__CalculationExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2363,7 +2818,9 @@ func TestCheckResponseSnapshot_StopQueryExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopQueryExecution(context.Background(), &StopQueryExecutionInput{})
+	got, err := svc.StopQueryExecution(context.Background(), &StopQueryExecutionInput{
+		QueryExecutionId: ptr.String("__QueryExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2382,7 +2839,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2403,7 +2872,9 @@ func TestCheckResponseSnapshot_TerminateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateSession(context.Background(), &TerminateSessionInput{})
+	got, err := svc.TerminateSession(context.Background(), &TerminateSessionInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2422,7 +2893,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2441,7 +2918,10 @@ func TestCheckResponseSnapshot_UpdateCapacityReservation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCapacityReservation(context.Background(), &UpdateCapacityReservationInput{})
+	got, err := svc.UpdateCapacityReservation(context.Background(), &UpdateCapacityReservationInput{
+		TargetDpus: ptr.Int32(1),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2460,7 +2940,14 @@ func TestCheckResponseSnapshot_UpdateDataCatalog(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataCatalog(context.Background(), &UpdateDataCatalogInput{})
+	got, err := svc.UpdateDataCatalog(context.Background(), &UpdateDataCatalogInput{
+		Name:        ptr.String("__Name__"),
+		Type:        types.DataCatalogType("LAMBDA"),
+		Description: ptr.String("__Description__"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2479,7 +2966,12 @@ func TestCheckResponseSnapshot_UpdateNamedQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNamedQuery(context.Background(), &UpdateNamedQueryInput{})
+	got, err := svc.UpdateNamedQuery(context.Background(), &UpdateNamedQueryInput{
+		NamedQueryId: ptr.String("__NamedQueryId__"),
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		QueryString:  ptr.String("__QueryString__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2498,7 +2990,13 @@ func TestCheckResponseSnapshot_UpdateNotebook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNotebook(context.Background(), &UpdateNotebookInput{})
+	got, err := svc.UpdateNotebook(context.Background(), &UpdateNotebookInput{
+		NotebookId:         ptr.String("__NotebookId__"),
+		Payload:            ptr.String("__Payload__"),
+		Type:               types.NotebookType("IPYNB"),
+		SessionId:          ptr.String("__SessionId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2517,7 +3015,11 @@ func TestCheckResponseSnapshot_UpdateNotebookMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNotebookMetadata(context.Background(), &UpdateNotebookMetadataInput{})
+	got, err := svc.UpdateNotebookMetadata(context.Background(), &UpdateNotebookMetadataInput{
+		NotebookId:         ptr.String("__NotebookId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Name:               ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2536,7 +3038,12 @@ func TestCheckResponseSnapshot_UpdatePreparedStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePreparedStatement(context.Background(), &UpdatePreparedStatementInput{})
+	got, err := svc.UpdatePreparedStatement(context.Background(), &UpdatePreparedStatementInput{
+		StatementName:  ptr.String("__StatementName__"),
+		WorkGroup:      ptr.String("__WorkGroup__"),
+		QueryStatement: ptr.String("__QueryStatement__"),
+		Description:    ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2555,7 +3062,103 @@ func TestCheckResponseSnapshot_UpdateWorkGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkGroup(context.Background(), &UpdateWorkGroupInput{})
+	got, err := svc.UpdateWorkGroup(context.Background(), &UpdateWorkGroupInput{
+		WorkGroup:   ptr.String("__WorkGroup__"),
+		Description: ptr.String("__Description__"),
+		ConfigurationUpdates: &types.WorkGroupConfigurationUpdates{
+			EnforceWorkGroupConfiguration: ptr.Bool(true),
+			ResultConfigurationUpdates: &types.ResultConfigurationUpdates{
+				OutputLocation:       ptr.String("__OutputLocation__"),
+				RemoveOutputLocation: ptr.Bool(true),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					EncryptionOption: types.EncryptionOption("SSE_S3"),
+					KmsKey:           ptr.String("__KmsKey__"),
+				},
+				RemoveEncryptionConfiguration: ptr.Bool(true),
+				ExpectedBucketOwner:           ptr.String("__ExpectedBucketOwner__"),
+				RemoveExpectedBucketOwner:     ptr.Bool(true),
+				AclConfiguration: &types.AclConfiguration{
+					S3AclOption: types.S3AclOption("BUCKET_OWNER_FULL_CONTROL"),
+				},
+				RemoveAclConfiguration: ptr.Bool(true),
+			},
+			ManagedQueryResultsConfigurationUpdates: &types.ManagedQueryResultsConfigurationUpdates{
+				Enabled: ptr.Bool(true),
+				EncryptionConfiguration: &types.ManagedQueryResultsEncryptionConfiguration{
+					KmsKey: ptr.String("__KmsKey__"),
+				},
+				RemoveEncryptionConfiguration: ptr.Bool(true),
+			},
+			PublishCloudWatchMetricsEnabled:  ptr.Bool(true),
+			BytesScannedCutoffPerQuery:       ptr.Int64(1),
+			RemoveBytesScannedCutoffPerQuery: ptr.Bool(true),
+			RequesterPaysEnabled:             ptr.Bool(true),
+			EngineVersion: &types.EngineVersion{
+				SelectedEngineVersion:  ptr.String("__SelectedEngineVersion__"),
+				EffectiveEngineVersion: ptr.String("__EffectiveEngineVersion__"),
+			},
+			RemoveCustomerContentEncryptionConfiguration: ptr.Bool(true),
+			AdditionalConfiguration:                      ptr.String("__AdditionalConfiguration__"),
+			ExecutionRole:                                ptr.String("__ExecutionRole__"),
+			CustomerContentEncryptionConfiguration: &types.CustomerContentEncryptionConfiguration{
+				KmsKey: ptr.String("__KmsKey__"),
+			},
+			EnableMinimumEncryptionConfiguration: ptr.Bool(true),
+			QueryResultsS3AccessGrantsConfiguration: &types.QueryResultsS3AccessGrantsConfiguration{
+				EnableS3AccessGrants:  ptr.Bool(true),
+				CreateUserLevelPrefix: ptr.Bool(true),
+				AuthenticationType:    types.AuthenticationType("DIRECTORY_IDENTITY"),
+			},
+			MonitoringConfiguration: &types.MonitoringConfiguration{
+				CloudWatchLoggingConfiguration: &types.CloudWatchLoggingConfiguration{
+					Enabled:             ptr.Bool(true),
+					LogGroup:            ptr.String("__LogGroup__"),
+					LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+					LogTypes: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ManagedLoggingConfiguration: &types.ManagedLoggingConfiguration{
+					Enabled: ptr.Bool(true),
+					KmsKey:  ptr.String("__KmsKey__"),
+				},
+				S3LoggingConfiguration: &types.S3LoggingConfiguration{
+					Enabled:     ptr.Bool(true),
+					KmsKey:      ptr.String("__KmsKey__"),
+					LogLocation: ptr.String("__LogLocation__"),
+				},
+			},
+			EngineConfiguration: &types.EngineConfiguration{
+				CoordinatorDpuSize:     ptr.Int32(1),
+				MaxConcurrentDpus:      ptr.Int32(1),
+				DefaultExecutorDpuSize: ptr.Int32(1),
+				AdditionalConfigs: map[string]string{
+					"key0": "__Value__",
+				},
+				SparkProperties: map[string]string{
+					"key0": "__Value__",
+				},
+				Classifications: []types.Classification{
+					{
+						Name: ptr.String("__Name__"),
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+		},
+		State: types.WorkGroupState("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2576,7 +3179,12 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetNamedQuery(context.Background(), &BatchGetNamedQueryInput{})
+	_, opErr := svc.BatchGetNamedQuery(context.Background(), &BatchGetNamedQueryInput{
+		NamedQueryIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2602,7 +3210,12 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetNamedQuery(context.Background(), &BatchGetNamedQueryInput{})
+	_, opErr := svc.BatchGetNamedQuery(context.Background(), &BatchGetNamedQueryInput{
+		NamedQueryIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2627,7 +3240,11 @@ func TestCheckResponseSnapshot_Error_MetadataException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetDatabase(context.Background(), &GetDatabaseInput{})
+	_, opErr := svc.GetDatabase(context.Background(), &GetDatabaseInput{
+		CatalogName:  ptr.String("__CatalogName__"),
+		DatabaseName: ptr.String("__DatabaseName__"),
+		WorkGroup:    ptr.String("__WorkGroup__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2653,7 +3270,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePresignedNotebookUrl(context.Background(), &CreatePresignedNotebookUrlInput{})
+	_, opErr := svc.CreatePresignedNotebookUrl(context.Background(), &CreatePresignedNotebookUrlInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2678,7 +3297,72 @@ func TestCheckResponseSnapshot_Error_SessionAlreadyExistsException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSession(context.Background(), &StartSessionInput{})
+	_, opErr := svc.StartSession(context.Background(), &StartSessionInput{
+		Description: ptr.String("__Description__"),
+		WorkGroup:   ptr.String("__WorkGroup__"),
+		EngineConfiguration: &types.EngineConfiguration{
+			CoordinatorDpuSize:     ptr.Int32(1),
+			MaxConcurrentDpus:      ptr.Int32(1),
+			DefaultExecutorDpuSize: ptr.Int32(1),
+			AdditionalConfigs: map[string]string{
+				"key0": "__Value__",
+			},
+			SparkProperties: map[string]string{
+				"key0": "__Value__",
+			},
+			Classifications: []types.Classification{
+				{
+					Name: ptr.String("__Name__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		ExecutionRole: ptr.String("__ExecutionRole__"),
+		MonitoringConfiguration: &types.MonitoringConfiguration{
+			CloudWatchLoggingConfiguration: &types.CloudWatchLoggingConfiguration{
+				Enabled:             ptr.Bool(true),
+				LogGroup:            ptr.String("__LogGroup__"),
+				LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+				LogTypes: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ManagedLoggingConfiguration: &types.ManagedLoggingConfiguration{
+				Enabled: ptr.Bool(true),
+				KmsKey:  ptr.String("__KmsKey__"),
+			},
+			S3LoggingConfiguration: &types.S3LoggingConfiguration{
+				Enabled:     ptr.Bool(true),
+				KmsKey:      ptr.String("__KmsKey__"),
+				LogLocation: ptr.String("__LogLocation__"),
+			},
+		},
+		NotebookVersion:             ptr.String("__NotebookVersion__"),
+		SessionIdleTimeoutInMinutes: ptr.Int32(1),
+		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CopyWorkGroupTags: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2704,7 +3388,11 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNotebook(context.Background(), &CreateNotebookInput{})
+	_, opErr := svc.CreateNotebook(context.Background(), &CreateNotebookInput{
+		WorkGroup:          ptr.String("__WorkGroup__"),
+		Name:               ptr.String("__Name__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DeleteInventory
+
+{"DeletionId":"__DeletionId__","DeletionSummary":{"RemainingCount":1,"SummaryItems":[{"Count":1,"RemainingCount":1,"Version":"__Version__"},{"Count":1,"RemainingCount":1,"Version":"__Version__"}],"TotalCount":1},"TypeName":"__TypeName__"}

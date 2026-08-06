@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DeliverabilityTestReports":[{"CreateDate":946684800,"DeliverabilityTestStatus":"IN_PROGRESS","FromEmailAddress":"__FromEmailAddress__","ReportId":"__ReportId__","ReportName":"__ReportName__","Subject":"__Subject__"},{"CreateDate":946684800,"DeliverabilityTestStatus":"IN_PROGRESS","FromEmailAddress":"__FromEmailAddress__","ReportId":"__ReportId__","ReportName":"__ReportName__","Subject":"__Subject__"}],"NextToken":"__NextToken__"}

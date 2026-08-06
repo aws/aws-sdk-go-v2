@@ -131,7 +131,12 @@ func TestCheckResponseSnapshot_ConfigureLogs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{})
+	got, err := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{
+		EgressAccessLogs: &types.EgressAccessLogs{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,7 +178,16 @@ func TestCheckResponseSnapshot_CreateAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAsset(context.Background(), &CreateAssetInput{})
+	got, err := svc.CreateAsset(context.Background(), &CreateAssetInput{
+		Id:               ptr.String("__Id__"),
+		PackagingGroupId: ptr.String("__PackagingGroupId__"),
+		ResourceId:       ptr.String("__ResourceId__"),
+		SourceArn:        ptr.String("__SourceArn__"),
+		SourceRoleArn:    ptr.String("__SourceRoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +391,190 @@ func TestCheckResponseSnapshot_CreatePackagingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePackagingConfiguration(context.Background(), &CreatePackagingConfigurationInput{})
+	got, err := svc.CreatePackagingConfiguration(context.Background(), &CreatePackagingConfigurationInput{
+		CmafPackage: &types.CmafPackage{
+			Encryption: &types.CmafEncryption{
+				ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+				SpekeKeyProvider: &types.SpekeKeyProvider{
+					EncryptionContractConfiguration: &types.EncryptionContractConfiguration{
+						PresetSpeke20Audio: types.PresetSpeke20Audio("PRESET-AUDIO-1"),
+						PresetSpeke20Video: types.PresetSpeke20Video("PRESET-VIDEO-1"),
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+					SystemIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Url: ptr.String("__Url__"),
+				},
+			},
+			HlsManifests: []types.HlsManifest{
+				{
+					AdMarkers:                      types.AdMarkers("NONE"),
+					IncludeIframeOnlyStream:        ptr.Bool(true),
+					ManifestName:                   ptr.String("__ManifestName__"),
+					ProgramDateTimeIntervalSeconds: ptr.Int32(1),
+					RepeatExtXKey:                  ptr.Bool(true),
+					StreamSelection: &types.StreamSelection{
+						MaxVideoBitsPerSecond: ptr.Int32(1),
+						MinVideoBitsPerSecond: ptr.Int32(1),
+						StreamOrder:           types.StreamOrder("ORIGINAL"),
+					},
+				},
+				{
+					AdMarkers:                      types.AdMarkers("NONE"),
+					IncludeIframeOnlyStream:        ptr.Bool(true),
+					ManifestName:                   ptr.String("__ManifestName__"),
+					ProgramDateTimeIntervalSeconds: ptr.Int32(1),
+					RepeatExtXKey:                  ptr.Bool(true),
+					StreamSelection: &types.StreamSelection{
+						MaxVideoBitsPerSecond: ptr.Int32(1),
+						MinVideoBitsPerSecond: ptr.Int32(1),
+						StreamOrder:           types.StreamOrder("ORIGINAL"),
+					},
+				},
+			},
+			IncludeEncoderConfigurationInSegments: ptr.Bool(true),
+			SegmentDurationSeconds:                ptr.Int32(1),
+		},
+		DashPackage: &types.DashPackage{
+			DashManifests: []types.DashManifest{
+				{
+					ManifestLayout:       types.ManifestLayout("FULL"),
+					ManifestName:         ptr.String("__ManifestName__"),
+					MinBufferTimeSeconds: ptr.Int32(1),
+					Profile:              types.Profile("NONE"),
+					ScteMarkersSource:    types.ScteMarkersSource("SEGMENTS"),
+					StreamSelection: &types.StreamSelection{
+						MaxVideoBitsPerSecond: ptr.Int32(1),
+						MinVideoBitsPerSecond: ptr.Int32(1),
+						StreamOrder:           types.StreamOrder("ORIGINAL"),
+					},
+				},
+				{
+					ManifestLayout:       types.ManifestLayout("FULL"),
+					ManifestName:         ptr.String("__ManifestName__"),
+					MinBufferTimeSeconds: ptr.Int32(1),
+					Profile:              types.Profile("NONE"),
+					ScteMarkersSource:    types.ScteMarkersSource("SEGMENTS"),
+					StreamSelection: &types.StreamSelection{
+						MaxVideoBitsPerSecond: ptr.Int32(1),
+						MinVideoBitsPerSecond: ptr.Int32(1),
+						StreamOrder:           types.StreamOrder("ORIGINAL"),
+					},
+				},
+			},
+			Encryption: &types.DashEncryption{
+				SpekeKeyProvider: &types.SpekeKeyProvider{
+					EncryptionContractConfiguration: &types.EncryptionContractConfiguration{
+						PresetSpeke20Audio: types.PresetSpeke20Audio("PRESET-AUDIO-1"),
+						PresetSpeke20Video: types.PresetSpeke20Video("PRESET-VIDEO-1"),
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+					SystemIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Url: ptr.String("__Url__"),
+				},
+			},
+			IncludeEncoderConfigurationInSegments: ptr.Bool(true),
+			IncludeIframeOnlyStream:               ptr.Bool(true),
+			PeriodTriggers: []types.PeriodTriggersElement{
+				types.PeriodTriggersElement("ADS"),
+				types.PeriodTriggersElement("ADS"),
+			},
+			SegmentDurationSeconds: ptr.Int32(1),
+			SegmentTemplateFormat:  types.SegmentTemplateFormat("NUMBER_WITH_TIMELINE"),
+		},
+		HlsPackage: &types.HlsPackage{
+			Encryption: &types.HlsEncryption{
+				ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+				EncryptionMethod:             types.EncryptionMethod("AES_128"),
+				SpekeKeyProvider: &types.SpekeKeyProvider{
+					EncryptionContractConfiguration: &types.EncryptionContractConfiguration{
+						PresetSpeke20Audio: types.PresetSpeke20Audio("PRESET-AUDIO-1"),
+						PresetSpeke20Video: types.PresetSpeke20Video("PRESET-VIDEO-1"),
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+					SystemIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Url: ptr.String("__Url__"),
+				},
+			},
+			HlsManifests: []types.HlsManifest{
+				{
+					AdMarkers:                      types.AdMarkers("NONE"),
+					IncludeIframeOnlyStream:        ptr.Bool(true),
+					ManifestName:                   ptr.String("__ManifestName__"),
+					ProgramDateTimeIntervalSeconds: ptr.Int32(1),
+					RepeatExtXKey:                  ptr.Bool(true),
+					StreamSelection: &types.StreamSelection{
+						MaxVideoBitsPerSecond: ptr.Int32(1),
+						MinVideoBitsPerSecond: ptr.Int32(1),
+						StreamOrder:           types.StreamOrder("ORIGINAL"),
+					},
+				},
+				{
+					AdMarkers:                      types.AdMarkers("NONE"),
+					IncludeIframeOnlyStream:        ptr.Bool(true),
+					ManifestName:                   ptr.String("__ManifestName__"),
+					ProgramDateTimeIntervalSeconds: ptr.Int32(1),
+					RepeatExtXKey:                  ptr.Bool(true),
+					StreamSelection: &types.StreamSelection{
+						MaxVideoBitsPerSecond: ptr.Int32(1),
+						MinVideoBitsPerSecond: ptr.Int32(1),
+						StreamOrder:           types.StreamOrder("ORIGINAL"),
+					},
+				},
+			},
+			IncludeDvbSubtitles:    ptr.Bool(true),
+			SegmentDurationSeconds: ptr.Int32(1),
+			UseAudioRenditionGroup: ptr.Bool(true),
+		},
+		Id: ptr.String("__Id__"),
+		MssPackage: &types.MssPackage{
+			Encryption: &types.MssEncryption{
+				SpekeKeyProvider: &types.SpekeKeyProvider{
+					EncryptionContractConfiguration: &types.EncryptionContractConfiguration{
+						PresetSpeke20Audio: types.PresetSpeke20Audio("PRESET-AUDIO-1"),
+						PresetSpeke20Video: types.PresetSpeke20Video("PRESET-VIDEO-1"),
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+					SystemIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Url: ptr.String("__Url__"),
+				},
+			},
+			MssManifests: []types.MssManifest{
+				{
+					ManifestName: ptr.String("__ManifestName__"),
+					StreamSelection: &types.StreamSelection{
+						MaxVideoBitsPerSecond: ptr.Int32(1),
+						MinVideoBitsPerSecond: ptr.Int32(1),
+						StreamOrder:           types.StreamOrder("ORIGINAL"),
+					},
+				},
+				{
+					ManifestName: ptr.String("__ManifestName__"),
+					StreamSelection: &types.StreamSelection{
+						MaxVideoBitsPerSecond: ptr.Int32(1),
+						MinVideoBitsPerSecond: ptr.Int32(1),
+						StreamOrder:           types.StreamOrder("ORIGINAL"),
+					},
+				},
+			},
+			SegmentDurationSeconds: ptr.Int32(1),
+		},
+		PackagingGroupId: ptr.String("__PackagingGroupId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -411,7 +608,19 @@ func TestCheckResponseSnapshot_CreatePackagingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePackagingGroup(context.Background(), &CreatePackagingGroupInput{})
+	got, err := svc.CreatePackagingGroup(context.Background(), &CreatePackagingGroupInput{
+		Authorization: &types.Authorization{
+			CdnIdentifierSecret: ptr.String("__CdnIdentifierSecret__"),
+			SecretsRoleArn:      ptr.String("__SecretsRoleArn__"),
+		},
+		EgressAccessLogs: &types.EgressAccessLogs{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		Id: ptr.String("__Id__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -430,7 +639,9 @@ func TestCheckResponseSnapshot_DeleteAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAsset(context.Background(), &DeleteAssetInput{})
+	got, err := svc.DeleteAsset(context.Background(), &DeleteAssetInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -449,7 +660,9 @@ func TestCheckResponseSnapshot_DeletePackagingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePackagingConfiguration(context.Background(), &DeletePackagingConfigurationInput{})
+	got, err := svc.DeletePackagingConfiguration(context.Background(), &DeletePackagingConfigurationInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -468,7 +681,9 @@ func TestCheckResponseSnapshot_DeletePackagingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePackagingGroup(context.Background(), &DeletePackagingGroupInput{})
+	got, err := svc.DeletePackagingGroup(context.Background(), &DeletePackagingGroupInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -510,7 +725,9 @@ func TestCheckResponseSnapshot_DescribeAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAsset(context.Background(), &DescribeAssetInput{})
+	got, err := svc.DescribeAsset(context.Background(), &DescribeAssetInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -714,7 +931,9 @@ func TestCheckResponseSnapshot_DescribePackagingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePackagingConfiguration(context.Background(), &DescribePackagingConfigurationInput{})
+	got, err := svc.DescribePackagingConfiguration(context.Background(), &DescribePackagingConfigurationInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -749,7 +968,9 @@ func TestCheckResponseSnapshot_DescribePackagingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePackagingGroup(context.Background(), &DescribePackagingGroupInput{})
+	got, err := svc.DescribePackagingGroup(context.Background(), &DescribePackagingGroupInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -796,7 +1017,11 @@ func TestCheckResponseSnapshot_ListAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssets(context.Background(), &ListAssetsInput{})
+	got, err := svc.ListAssets(context.Background(), &ListAssetsInput{
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		PackagingGroupId: ptr.String("__PackagingGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1191,7 +1416,11 @@ func TestCheckResponseSnapshot_ListPackagingConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPackagingConfigurations(context.Background(), &ListPackagingConfigurationsInput{})
+	got, err := svc.ListPackagingConfigurations(context.Background(), &ListPackagingConfigurationsInput{
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		PackagingGroupId: ptr.String("__PackagingGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1248,7 +1477,10 @@ func TestCheckResponseSnapshot_ListPackagingGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPackagingGroups(context.Background(), &ListPackagingGroupsInput{})
+	got, err := svc.ListPackagingGroups(context.Background(), &ListPackagingGroupsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1271,7 +1503,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1290,7 +1524,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1309,7 +1548,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1344,7 +1589,13 @@ func TestCheckResponseSnapshot_UpdatePackagingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePackagingGroup(context.Background(), &UpdatePackagingGroupInput{})
+	got, err := svc.UpdatePackagingGroup(context.Background(), &UpdatePackagingGroupInput{
+		Authorization: &types.Authorization{
+			CdnIdentifierSecret: ptr.String("__CdnIdentifierSecret__"),
+			SecretsRoleArn:      ptr.String("__SecretsRoleArn__"),
+		},
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1365,7 +1616,12 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{})
+	_, opErr := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{
+		EgressAccessLogs: &types.EgressAccessLogs{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1390,7 +1646,12 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{})
+	_, opErr := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{
+		EgressAccessLogs: &types.EgressAccessLogs{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1415,7 +1676,12 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{})
+	_, opErr := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{
+		EgressAccessLogs: &types.EgressAccessLogs{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1440,7 +1706,12 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{})
+	_, opErr := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{
+		EgressAccessLogs: &types.EgressAccessLogs{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1465,7 +1736,12 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{})
+	_, opErr := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{
+		EgressAccessLogs: &types.EgressAccessLogs{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1490,7 +1766,12 @@ func TestCheckResponseSnapshot_Error_UnprocessableEntityException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{})
+	_, opErr := svc.ConfigureLogs(context.Background(), &ConfigureLogsInput{
+		EgressAccessLogs: &types.EgressAccessLogs{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

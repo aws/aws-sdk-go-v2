@@ -120,7 +120,20 @@ func TestCheckResponseSnapshot_AddTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTags(context.Background(), &AddTagsInput{})
+	got, err := svc.AddTags(context.Background(), &AddTagsInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.TaggableResourceType("BatchPrediction"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +154,13 @@ func TestCheckResponseSnapshot_CreateBatchPrediction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBatchPrediction(context.Background(), &CreateBatchPredictionInput{})
+	got, err := svc.CreateBatchPrediction(context.Background(), &CreateBatchPredictionInput{
+		BatchPredictionId:           ptr.String("__BatchPredictionId__"),
+		BatchPredictionName:         ptr.String("__BatchPredictionName__"),
+		MLModelId:                   ptr.String("__MLModelId__"),
+		BatchPredictionDataSourceId: ptr.String("__BatchPredictionDataSourceId__"),
+		OutputUri:                   ptr.String("__OutputUri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +181,34 @@ func TestCheckResponseSnapshot_CreateDataSourceFromRDS(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataSourceFromRDS(context.Background(), &CreateDataSourceFromRDSInput{})
+	got, err := svc.CreateDataSourceFromRDS(context.Background(), &CreateDataSourceFromRDSInput{
+		DataSourceId:   ptr.String("__DataSourceId__"),
+		DataSourceName: ptr.String("__DataSourceName__"),
+		RDSData: &types.RDSDataSpec{
+			DatabaseInformation: &types.RDSDatabase{
+				InstanceIdentifier: ptr.String("__InstanceIdentifier__"),
+				DatabaseName:       ptr.String("__DatabaseName__"),
+			},
+			SelectSqlQuery: ptr.String("__SelectSqlQuery__"),
+			DatabaseCredentials: &types.RDSDatabaseCredentials{
+				Username: ptr.String("__Username__"),
+				Password: ptr.String("__Password__"),
+			},
+			S3StagingLocation: ptr.String("__S3StagingLocation__"),
+			DataRearrangement: ptr.String("__DataRearrangement__"),
+			DataSchema:        ptr.String("__DataSchema__"),
+			DataSchemaUri:     ptr.String("__DataSchemaUri__"),
+			ResourceRole:      ptr.String("__ResourceRole__"),
+			ServiceRole:       ptr.String("__ServiceRole__"),
+			SubnetId:          ptr.String("__SubnetId__"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		RoleARN:           ptr.String("__RoleARN__"),
+		ComputeStatistics: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +229,27 @@ func TestCheckResponseSnapshot_CreateDataSourceFromRedshift(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataSourceFromRedshift(context.Background(), &CreateDataSourceFromRedshiftInput{})
+	got, err := svc.CreateDataSourceFromRedshift(context.Background(), &CreateDataSourceFromRedshiftInput{
+		DataSourceId:   ptr.String("__DataSourceId__"),
+		DataSourceName: ptr.String("__DataSourceName__"),
+		DataSpec: &types.RedshiftDataSpec{
+			DatabaseInformation: &types.RedshiftDatabase{
+				DatabaseName:      ptr.String("__DatabaseName__"),
+				ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+			},
+			SelectSqlQuery: ptr.String("__SelectSqlQuery__"),
+			DatabaseCredentials: &types.RedshiftDatabaseCredentials{
+				Username: ptr.String("__Username__"),
+				Password: ptr.String("__Password__"),
+			},
+			S3StagingLocation: ptr.String("__S3StagingLocation__"),
+			DataRearrangement: ptr.String("__DataRearrangement__"),
+			DataSchema:        ptr.String("__DataSchema__"),
+			DataSchemaUri:     ptr.String("__DataSchemaUri__"),
+		},
+		RoleARN:           ptr.String("__RoleARN__"),
+		ComputeStatistics: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -204,7 +270,17 @@ func TestCheckResponseSnapshot_CreateDataSourceFromS3(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataSourceFromS3(context.Background(), &CreateDataSourceFromS3Input{})
+	got, err := svc.CreateDataSourceFromS3(context.Background(), &CreateDataSourceFromS3Input{
+		DataSourceId:   ptr.String("__DataSourceId__"),
+		DataSourceName: ptr.String("__DataSourceName__"),
+		DataSpec: &types.S3DataSpec{
+			DataLocationS3:       ptr.String("__DataLocationS3__"),
+			DataRearrangement:    ptr.String("__DataRearrangement__"),
+			DataSchema:           ptr.String("__DataSchema__"),
+			DataSchemaLocationS3: ptr.String("__DataSchemaLocationS3__"),
+		},
+		ComputeStatistics: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,7 +301,12 @@ func TestCheckResponseSnapshot_CreateEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEvaluation(context.Background(), &CreateEvaluationInput{})
+	got, err := svc.CreateEvaluation(context.Background(), &CreateEvaluationInput{
+		EvaluationId:           ptr.String("__EvaluationId__"),
+		EvaluationName:         ptr.String("__EvaluationName__"),
+		MLModelId:              ptr.String("__MLModelId__"),
+		EvaluationDataSourceId: ptr.String("__EvaluationDataSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +327,17 @@ func TestCheckResponseSnapshot_CreateMLModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMLModel(context.Background(), &CreateMLModelInput{})
+	got, err := svc.CreateMLModel(context.Background(), &CreateMLModelInput{
+		MLModelId:   ptr.String("__MLModelId__"),
+		MLModelName: ptr.String("__MLModelName__"),
+		MLModelType: types.MLModelType("REGRESSION"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		TrainingDataSourceId: ptr.String("__TrainingDataSourceId__"),
+		Recipe:               ptr.String("__Recipe__"),
+		RecipeUri:            ptr.String("__RecipeUri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -273,7 +364,9 @@ func TestCheckResponseSnapshot_CreateRealtimeEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRealtimeEndpoint(context.Background(), &CreateRealtimeEndpointInput{})
+	got, err := svc.CreateRealtimeEndpoint(context.Background(), &CreateRealtimeEndpointInput{
+		MLModelId: ptr.String("__MLModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -294,7 +387,9 @@ func TestCheckResponseSnapshot_DeleteBatchPrediction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBatchPrediction(context.Background(), &DeleteBatchPredictionInput{})
+	got, err := svc.DeleteBatchPrediction(context.Background(), &DeleteBatchPredictionInput{
+		BatchPredictionId: ptr.String("__BatchPredictionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -315,7 +410,9 @@ func TestCheckResponseSnapshot_DeleteDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{})
+	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{
+		DataSourceId: ptr.String("__DataSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -336,7 +433,9 @@ func TestCheckResponseSnapshot_DeleteEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEvaluation(context.Background(), &DeleteEvaluationInput{})
+	got, err := svc.DeleteEvaluation(context.Background(), &DeleteEvaluationInput{
+		EvaluationId: ptr.String("__EvaluationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -357,7 +456,9 @@ func TestCheckResponseSnapshot_DeleteMLModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMLModel(context.Background(), &DeleteMLModelInput{})
+	got, err := svc.DeleteMLModel(context.Background(), &DeleteMLModelInput{
+		MLModelId: ptr.String("__MLModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -384,7 +485,9 @@ func TestCheckResponseSnapshot_DeleteRealtimeEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRealtimeEndpoint(context.Background(), &DeleteRealtimeEndpointInput{})
+	got, err := svc.DeleteRealtimeEndpoint(context.Background(), &DeleteRealtimeEndpointInput{
+		MLModelId: ptr.String("__MLModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -406,7 +509,14 @@ func TestCheckResponseSnapshot_DeleteTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTags(context.Background(), &DeleteTagsInput{})
+	got, err := svc.DeleteTags(context.Background(), &DeleteTagsInput{
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.TaggableResourceType("BatchPrediction"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,7 +575,19 @@ func TestCheckResponseSnapshot_DescribeBatchPredictions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBatchPredictions(context.Background(), &DescribeBatchPredictionsInput{})
+	got, err := svc.DescribeBatchPredictions(context.Background(), &DescribeBatchPredictionsInput{
+		FilterVariable: types.BatchPredictionFilterVariable("CreatedAt"),
+		EQ:             ptr.String("__EQ__"),
+		GT:             ptr.String("__GT__"),
+		LT:             ptr.String("__LT__"),
+		GE:             ptr.String("__GE__"),
+		LE:             ptr.String("__LE__"),
+		NE:             ptr.String("__NE__"),
+		Prefix:         ptr.String("__Prefix__"),
+		SortOrder:      types.SortOrder("asc"),
+		NextToken:      ptr.String("__NextToken__"),
+		Limit:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -562,7 +684,19 @@ func TestCheckResponseSnapshot_DescribeDataSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataSources(context.Background(), &DescribeDataSourcesInput{})
+	got, err := svc.DescribeDataSources(context.Background(), &DescribeDataSourcesInput{
+		FilterVariable: types.DataSourceFilterVariable("CreatedAt"),
+		EQ:             ptr.String("__EQ__"),
+		GT:             ptr.String("__GT__"),
+		LT:             ptr.String("__LT__"),
+		GE:             ptr.String("__GE__"),
+		LE:             ptr.String("__LE__"),
+		NE:             ptr.String("__NE__"),
+		Prefix:         ptr.String("__Prefix__"),
+		SortOrder:      types.SortOrder("asc"),
+		NextToken:      ptr.String("__NextToken__"),
+		Limit:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -625,7 +759,19 @@ func TestCheckResponseSnapshot_DescribeEvaluations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEvaluations(context.Background(), &DescribeEvaluationsInput{})
+	got, err := svc.DescribeEvaluations(context.Background(), &DescribeEvaluationsInput{
+		FilterVariable: types.EvaluationFilterVariable("CreatedAt"),
+		EQ:             ptr.String("__EQ__"),
+		GT:             ptr.String("__GT__"),
+		LT:             ptr.String("__LT__"),
+		GE:             ptr.String("__GE__"),
+		LE:             ptr.String("__LE__"),
+		NE:             ptr.String("__NE__"),
+		Prefix:         ptr.String("__Prefix__"),
+		SortOrder:      types.SortOrder("asc"),
+		NextToken:      ptr.String("__NextToken__"),
+		Limit:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -704,7 +850,19 @@ func TestCheckResponseSnapshot_DescribeMLModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMLModels(context.Background(), &DescribeMLModelsInput{})
+	got, err := svc.DescribeMLModels(context.Background(), &DescribeMLModelsInput{
+		FilterVariable: types.MLModelFilterVariable("CreatedAt"),
+		EQ:             ptr.String("__EQ__"),
+		GT:             ptr.String("__GT__"),
+		LT:             ptr.String("__LT__"),
+		GE:             ptr.String("__GE__"),
+		LE:             ptr.String("__LE__"),
+		NE:             ptr.String("__NE__"),
+		Prefix:         ptr.String("__Prefix__"),
+		SortOrder:      types.SortOrder("asc"),
+		NextToken:      ptr.String("__NextToken__"),
+		Limit:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -736,7 +894,10 @@ func TestCheckResponseSnapshot_DescribeTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{})
+	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.TaggableResourceType("BatchPrediction"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -773,7 +934,9 @@ func TestCheckResponseSnapshot_GetBatchPrediction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBatchPrediction(context.Background(), &GetBatchPredictionInput{})
+	got, err := svc.GetBatchPrediction(context.Background(), &GetBatchPredictionInput{
+		BatchPredictionId: ptr.String("__BatchPredictionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -830,7 +993,10 @@ func TestCheckResponseSnapshot_GetDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataSource(context.Background(), &GetDataSourceInput{})
+	got, err := svc.GetDataSource(context.Background(), &GetDataSourceInput{
+		DataSourceId: ptr.String("__DataSourceId__"),
+		Verbose:      true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -869,7 +1035,9 @@ func TestCheckResponseSnapshot_GetEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEvaluation(context.Background(), &GetEvaluationInput{})
+	got, err := svc.GetEvaluation(context.Background(), &GetEvaluationInput{
+		EvaluationId: ptr.String("__EvaluationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -917,13 +1085,20 @@ func TestCheckResponseSnapshot_GetMLModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMLModel(context.Background(), &GetMLModelInput{})
+	got, err := svc.GetMLModel(context.Background(), &GetMLModelInput{
+		MLModelId: ptr.String("__MLModelId__"),
+		Verbose:   true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetMLModel.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_Predict(t *testing.T) {
+	t.Skip("endpoint customization")
 }
 
 func TestCheckResponseSnapshot_UpdateBatchPrediction(t *testing.T) {
@@ -938,7 +1113,10 @@ func TestCheckResponseSnapshot_UpdateBatchPrediction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBatchPrediction(context.Background(), &UpdateBatchPredictionInput{})
+	got, err := svc.UpdateBatchPrediction(context.Background(), &UpdateBatchPredictionInput{
+		BatchPredictionId:   ptr.String("__BatchPredictionId__"),
+		BatchPredictionName: ptr.String("__BatchPredictionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -959,7 +1137,10 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{})
+	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{
+		DataSourceId:   ptr.String("__DataSourceId__"),
+		DataSourceName: ptr.String("__DataSourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -980,7 +1161,10 @@ func TestCheckResponseSnapshot_UpdateEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEvaluation(context.Background(), &UpdateEvaluationInput{})
+	got, err := svc.UpdateEvaluation(context.Background(), &UpdateEvaluationInput{
+		EvaluationId:   ptr.String("__EvaluationId__"),
+		EvaluationName: ptr.String("__EvaluationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1001,7 +1185,11 @@ func TestCheckResponseSnapshot_UpdateMLModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMLModel(context.Background(), &UpdateMLModelInput{})
+	got, err := svc.UpdateMLModel(context.Background(), &UpdateMLModelInput{
+		MLModelId:      ptr.String("__MLModelId__"),
+		MLModelName:    ptr.String("__MLModelName__"),
+		ScoreThreshold: ptr.Float32(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1023,7 +1211,13 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchPrediction(context.Background(), &CreateBatchPredictionInput{})
+	_, opErr := svc.CreateBatchPrediction(context.Background(), &CreateBatchPredictionInput{
+		BatchPredictionId:           ptr.String("__BatchPredictionId__"),
+		BatchPredictionName:         ptr.String("__BatchPredictionName__"),
+		MLModelId:                   ptr.String("__MLModelId__"),
+		BatchPredictionDataSourceId: ptr.String("__BatchPredictionDataSourceId__"),
+		OutputUri:                   ptr.String("__OutputUri__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1049,7 +1243,20 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.TaggableResourceType("BatchPrediction"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1075,7 +1282,20 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.TaggableResourceType("BatchPrediction"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1100,7 +1320,20 @@ func TestCheckResponseSnapshot_Error_InvalidTagException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.TaggableResourceType("BatchPrediction"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1126,7 +1359,20 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.TaggableResourceType("BatchPrediction"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1151,7 +1397,20 @@ func TestCheckResponseSnapshot_Error_TagLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.TaggableResourceType("BatchPrediction"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

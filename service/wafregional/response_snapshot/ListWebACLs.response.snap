@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_Regional_20161128.ListWebACLs
+
+{"NextMarker":"__NextMarker__","WebACLs":[{"Name":"__Name__","WebACLId":"__WebACLId__"},{"Name":"__Name__","WebACLId":"__WebACLId__"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"id":"__Id__","tableBucketARN":"__TableBucketARN__"}

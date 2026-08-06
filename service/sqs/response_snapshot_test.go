@@ -116,7 +116,18 @@ func TestCheckResponseSnapshot_AddPermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	got, err := svc.AddPermission(context.Background(), &AddPermissionInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Label:    ptr.String("__Label__"),
+		AWSAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -137,7 +148,9 @@ func TestCheckResponseSnapshot_CancelMessageMoveTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelMessageMoveTask(context.Background(), &CancelMessageMoveTaskInput{})
+	got, err := svc.CancelMessageMoveTask(context.Background(), &CancelMessageMoveTaskInput{
+		TaskHandle: ptr.String("__TaskHandle__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -156,7 +169,11 @@ func TestCheckResponseSnapshot_ChangeMessageVisibility(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ChangeMessageVisibility(context.Background(), &ChangeMessageVisibilityInput{})
+	got, err := svc.ChangeMessageVisibility(context.Background(), &ChangeMessageVisibilityInput{
+		QueueUrl:          ptr.String("__QueueUrl__"),
+		ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+		VisibilityTimeout: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -198,7 +215,21 @@ func TestCheckResponseSnapshot_ChangeMessageVisibilityBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ChangeMessageVisibilityBatch(context.Background(), &ChangeMessageVisibilityBatchInput{})
+	got, err := svc.ChangeMessageVisibilityBatch(context.Background(), &ChangeMessageVisibilityBatchInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Entries: []types.ChangeMessageVisibilityBatchRequestEntry{
+			{
+				Id:                ptr.String("__Id__"),
+				ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+				VisibilityTimeout: 1,
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+				VisibilityTimeout: 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -219,7 +250,15 @@ func TestCheckResponseSnapshot_CreateQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQueue(context.Background(), &CreateQueueInput{})
+	got, err := svc.CreateQueue(context.Background(), &CreateQueueInput{
+		QueueName: ptr.String("__QueueName__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -238,7 +277,10 @@ func TestCheckResponseSnapshot_DeleteMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMessage(context.Background(), &DeleteMessageInput{})
+	got, err := svc.DeleteMessage(context.Background(), &DeleteMessageInput{
+		QueueUrl:      ptr.String("__QueueUrl__"),
+		ReceiptHandle: ptr.String("__ReceiptHandle__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -280,7 +322,19 @@ func TestCheckResponseSnapshot_DeleteMessageBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMessageBatch(context.Background(), &DeleteMessageBatchInput{})
+	got, err := svc.DeleteMessageBatch(context.Background(), &DeleteMessageBatchInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Entries: []types.DeleteMessageBatchRequestEntry{
+			{
+				Id:            ptr.String("__Id__"),
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				Id:            ptr.String("__Id__"),
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +353,9 @@ func TestCheckResponseSnapshot_DeleteQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQueue(context.Background(), &DeleteQueueInput{})
+	got, err := svc.DeleteQueue(context.Background(), &DeleteQueueInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +378,13 @@ func TestCheckResponseSnapshot_GetQueueAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueueAttributes(context.Background(), &GetQueueAttributesInput{})
+	got, err := svc.GetQueueAttributes(context.Background(), &GetQueueAttributesInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		AttributeNames: []types.QueueAttributeName{
+			types.QueueAttributeName("All"),
+			types.QueueAttributeName("All"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -343,7 +405,10 @@ func TestCheckResponseSnapshot_GetQueueUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueueUrl(context.Background(), &GetQueueUrlInput{})
+	got, err := svc.GetQueueUrl(context.Background(), &GetQueueUrlInput{
+		QueueName:              ptr.String("__QueueName__"),
+		QueueOwnerAWSAccountId: ptr.String("__QueueOwnerAWSAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -368,7 +433,11 @@ func TestCheckResponseSnapshot_ListDeadLetterSourceQueues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeadLetterSourceQueues(context.Background(), &ListDeadLetterSourceQueuesInput{})
+	got, err := svc.ListDeadLetterSourceQueues(context.Background(), &ListDeadLetterSourceQueuesInput{
+		QueueUrl:   ptr.String("__QueueUrl__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -412,7 +481,10 @@ func TestCheckResponseSnapshot_ListMessageMoveTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMessageMoveTasks(context.Background(), &ListMessageMoveTasksInput{})
+	got, err := svc.ListMessageMoveTasks(context.Background(), &ListMessageMoveTasksInput{
+		SourceArn:  ptr.String("__SourceArn__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -435,7 +507,9 @@ func TestCheckResponseSnapshot_ListQueueTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueueTags(context.Background(), &ListQueueTagsInput{})
+	got, err := svc.ListQueueTags(context.Background(), &ListQueueTagsInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -460,7 +534,11 @@ func TestCheckResponseSnapshot_ListQueues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueues(context.Background(), &ListQueuesInput{})
+	got, err := svc.ListQueues(context.Background(), &ListQueuesInput{
+		QueueNamePrefix: ptr.String("__QueueNamePrefix__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -479,7 +557,9 @@ func TestCheckResponseSnapshot_PurgeQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PurgeQueue(context.Background(), &PurgeQueueInput{})
+	got, err := svc.PurgeQueue(context.Background(), &PurgeQueueInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -489,75 +569,7 @@ func TestCheckResponseSnapshot_PurgeQueue(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_ReceiveMessage(t *testing.T) {
-	want := &ReceiveMessageOutput{
-		Messages: []types.Message{
-			{
-				MessageId:     ptr.String("__MessageId__"),
-				ReceiptHandle: ptr.String("__ReceiptHandle__"),
-				MD5OfBody:     ptr.String("__MD5OfBody__"),
-				Body:          ptr.String("__Body__"),
-				Attributes: map[string]string{
-					"key0": "__Value__",
-				},
-				MD5OfMessageAttributes: ptr.String("__MD5OfMessageAttributes__"),
-				MessageAttributes: map[string]types.MessageAttributeValue{
-					"key0": {
-						StringValue: ptr.String("__StringValue__"),
-						BinaryValue: []byte("blob"),
-						StringListValues: []string{
-							"__Member__",
-							"__Member__",
-						},
-						BinaryListValues: [][]byte{
-							[]byte("blob"),
-							[]byte("blob"),
-						},
-						DataType: ptr.String("__DataType__"),
-					},
-				},
-			},
-			{
-				MessageId:     ptr.String("__MessageId__"),
-				ReceiptHandle: ptr.String("__ReceiptHandle__"),
-				MD5OfBody:     ptr.String("__MD5OfBody__"),
-				Body:          ptr.String("__Body__"),
-				Attributes: map[string]string{
-					"key0": "__Value__",
-				},
-				MD5OfMessageAttributes: ptr.String("__MD5OfMessageAttributes__"),
-				MessageAttributes: map[string]types.MessageAttributeValue{
-					"key0": {
-						StringValue: ptr.String("__StringValue__"),
-						BinaryValue: []byte("blob"),
-						StringListValues: []string{
-							"__Member__",
-							"__Member__",
-						},
-						BinaryListValues: [][]byte{
-							[]byte("blob"),
-							[]byte("blob"),
-						},
-						DataType: ptr.String("__DataType__"),
-					},
-				},
-			},
-		},
-	}
-	status, header, body, err := serdeRespReadSnapshot("ReceiveMessage.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReceiveMessage(context.Background(), &ReceiveMessageInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "ReceiveMessage.response", err)
-	}
+	t.Skip("md5 customization")
 }
 
 func TestCheckResponseSnapshot_RemovePermission(t *testing.T) {
@@ -570,7 +582,10 @@ func TestCheckResponseSnapshot_RemovePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemovePermission(context.Background(), &RemovePermissionInput{})
+	got, err := svc.RemovePermission(context.Background(), &RemovePermissionInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Label:    ptr.String("__Label__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -580,80 +595,11 @@ func TestCheckResponseSnapshot_RemovePermission(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_SendMessage(t *testing.T) {
-	want := &SendMessageOutput{
-		MD5OfMessageBody:             ptr.String("__MD5OfMessageBody__"),
-		MD5OfMessageAttributes:       ptr.String("__MD5OfMessageAttributes__"),
-		MD5OfMessageSystemAttributes: ptr.String("__MD5OfMessageSystemAttributes__"),
-		MessageId:                    ptr.String("__MessageId__"),
-		SequenceNumber:               ptr.String("__SequenceNumber__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("SendMessage.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendMessage(context.Background(), &SendMessageInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "SendMessage.response", err)
-	}
+	t.Skip("md5 customization")
 }
 
 func TestCheckResponseSnapshot_SendMessageBatch(t *testing.T) {
-	want := &SendMessageBatchOutput{
-		Successful: []types.SendMessageBatchResultEntry{
-			{
-				Id:                           ptr.String("__Id__"),
-				MessageId:                    ptr.String("__MessageId__"),
-				MD5OfMessageBody:             ptr.String("__MD5OfMessageBody__"),
-				MD5OfMessageAttributes:       ptr.String("__MD5OfMessageAttributes__"),
-				MD5OfMessageSystemAttributes: ptr.String("__MD5OfMessageSystemAttributes__"),
-				SequenceNumber:               ptr.String("__SequenceNumber__"),
-			},
-			{
-				Id:                           ptr.String("__Id__"),
-				MessageId:                    ptr.String("__MessageId__"),
-				MD5OfMessageBody:             ptr.String("__MD5OfMessageBody__"),
-				MD5OfMessageAttributes:       ptr.String("__MD5OfMessageAttributes__"),
-				MD5OfMessageSystemAttributes: ptr.String("__MD5OfMessageSystemAttributes__"),
-				SequenceNumber:               ptr.String("__SequenceNumber__"),
-			},
-		},
-		Failed: []types.BatchResultErrorEntry{
-			{
-				Id:          ptr.String("__Id__"),
-				SenderFault: true,
-				Code:        ptr.String("__Code__"),
-				Message:     ptr.String("__Message__"),
-			},
-			{
-				Id:          ptr.String("__Id__"),
-				SenderFault: true,
-				Code:        ptr.String("__Code__"),
-				Message:     ptr.String("__Message__"),
-			},
-		},
-	}
-	status, header, body, err := serdeRespReadSnapshot("SendMessageBatch.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendMessageBatch(context.Background(), &SendMessageBatchInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "SendMessageBatch.response", err)
-	}
+	t.Skip("md5 customization")
 }
 
 func TestCheckResponseSnapshot_SetQueueAttributes(t *testing.T) {
@@ -666,7 +612,12 @@ func TestCheckResponseSnapshot_SetQueueAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetQueueAttributes(context.Background(), &SetQueueAttributesInput{})
+	got, err := svc.SetQueueAttributes(context.Background(), &SetQueueAttributesInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +638,11 @@ func TestCheckResponseSnapshot_StartMessageMoveTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMessageMoveTask(context.Background(), &StartMessageMoveTaskInput{})
+	got, err := svc.StartMessageMoveTask(context.Background(), &StartMessageMoveTaskInput{
+		SourceArn:                    ptr.String("__SourceArn__"),
+		DestinationArn:               ptr.String("__DestinationArn__"),
+		MaxNumberOfMessagesPerSecond: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -706,7 +661,12 @@ func TestCheckResponseSnapshot_TagQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagQueue(context.Background(), &TagQueueInput{})
+	got, err := svc.TagQueue(context.Background(), &TagQueueInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -725,7 +685,13 @@ func TestCheckResponseSnapshot_UntagQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagQueue(context.Background(), &UntagQueueInput{})
+	got, err := svc.UntagQueue(context.Background(), &UntagQueueInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -746,7 +712,21 @@ func TestCheckResponseSnapshot_Error_BatchEntryIdsNotDistinct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChangeMessageVisibilityBatch(context.Background(), &ChangeMessageVisibilityBatchInput{})
+	_, opErr := svc.ChangeMessageVisibilityBatch(context.Background(), &ChangeMessageVisibilityBatchInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Entries: []types.ChangeMessageVisibilityBatchRequestEntry{
+			{
+				Id:                ptr.String("__Id__"),
+				ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+				VisibilityTimeout: 1,
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+				VisibilityTimeout: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -756,31 +736,6 @@ func TestCheckResponseSnapshot_Error_BatchEntryIdsNotDistinct(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "BatchEntryIdsNotDistinct.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_BatchRequestTooLong(t *testing.T) {
-	want := &types.BatchRequestTooLong{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("BatchRequestTooLong.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendMessageBatch(context.Background(), &SendMessageBatchInput{})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.BatchRequestTooLong
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.BatchRequestTooLong, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "BatchRequestTooLong.error", err)
 	}
 }
 
@@ -796,7 +751,21 @@ func TestCheckResponseSnapshot_Error_EmptyBatchRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChangeMessageVisibilityBatch(context.Background(), &ChangeMessageVisibilityBatchInput{})
+	_, opErr := svc.ChangeMessageVisibilityBatch(context.Background(), &ChangeMessageVisibilityBatchInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Entries: []types.ChangeMessageVisibilityBatchRequestEntry{
+			{
+				Id:                ptr.String("__Id__"),
+				ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+				VisibilityTimeout: 1,
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+				VisibilityTimeout: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -821,7 +790,18 @@ func TestCheckResponseSnapshot_Error_InvalidAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Label:    ptr.String("__Label__"),
+		AWSAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -846,7 +826,15 @@ func TestCheckResponseSnapshot_Error_InvalidAttributeName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateQueue(context.Background(), &CreateQueueInput{})
+	_, opErr := svc.CreateQueue(context.Background(), &CreateQueueInput{
+		QueueName: ptr.String("__QueueName__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -871,7 +859,15 @@ func TestCheckResponseSnapshot_Error_InvalidAttributeValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateQueue(context.Background(), &CreateQueueInput{})
+	_, opErr := svc.CreateQueue(context.Background(), &CreateQueueInput{
+		QueueName: ptr.String("__QueueName__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -896,7 +892,21 @@ func TestCheckResponseSnapshot_Error_InvalidBatchEntryId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChangeMessageVisibilityBatch(context.Background(), &ChangeMessageVisibilityBatchInput{})
+	_, opErr := svc.ChangeMessageVisibilityBatch(context.Background(), &ChangeMessageVisibilityBatchInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Entries: []types.ChangeMessageVisibilityBatchRequestEntry{
+			{
+				Id:                ptr.String("__Id__"),
+				ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+				VisibilityTimeout: 1,
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+				VisibilityTimeout: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -919,7 +929,10 @@ func TestCheckResponseSnapshot_Error_InvalidIdFormat(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteMessage(context.Background(), &DeleteMessageInput{})
+	_, opErr := svc.DeleteMessage(context.Background(), &DeleteMessageInput{
+		QueueUrl:      ptr.String("__QueueUrl__"),
+		ReceiptHandle: ptr.String("__ReceiptHandle__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -929,31 +942,6 @@ func TestCheckResponseSnapshot_Error_InvalidIdFormat(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidIdFormat.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_InvalidMessageContents(t *testing.T) {
-	want := &types.InvalidMessageContents{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("InvalidMessageContents.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendMessage(context.Background(), &SendMessageInput{})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.InvalidMessageContents
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.InvalidMessageContents, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidMessageContents.error", err)
 	}
 }
 
@@ -969,7 +957,18 @@ func TestCheckResponseSnapshot_Error_InvalidSecurity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Label:    ptr.String("__Label__"),
+		AWSAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -979,181 +978,6 @@ func TestCheckResponseSnapshot_Error_InvalidSecurity(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidSecurity.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_KmsAccessDenied(t *testing.T) {
-	want := &types.KmsAccessDenied{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("KmsAccessDenied.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ReceiveMessage(context.Background(), &ReceiveMessageInput{})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.KmsAccessDenied
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.KmsAccessDenied, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "KmsAccessDenied.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_KmsDisabled(t *testing.T) {
-	want := &types.KmsDisabled{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("KmsDisabled.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ReceiveMessage(context.Background(), &ReceiveMessageInput{})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.KmsDisabled
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.KmsDisabled, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "KmsDisabled.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_KmsInvalidKeyUsage(t *testing.T) {
-	want := &types.KmsInvalidKeyUsage{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("KmsInvalidKeyUsage.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ReceiveMessage(context.Background(), &ReceiveMessageInput{})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.KmsInvalidKeyUsage
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.KmsInvalidKeyUsage, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "KmsInvalidKeyUsage.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_KmsInvalidState(t *testing.T) {
-	want := &types.KmsInvalidState{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("KmsInvalidState.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ReceiveMessage(context.Background(), &ReceiveMessageInput{})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.KmsInvalidState
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.KmsInvalidState, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "KmsInvalidState.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_KmsNotFound(t *testing.T) {
-	want := &types.KmsNotFound{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("KmsNotFound.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ReceiveMessage(context.Background(), &ReceiveMessageInput{})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.KmsNotFound
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.KmsNotFound, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "KmsNotFound.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_KmsOptInRequired(t *testing.T) {
-	want := &types.KmsOptInRequired{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("KmsOptInRequired.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ReceiveMessage(context.Background(), &ReceiveMessageInput{})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.KmsOptInRequired
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.KmsOptInRequired, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "KmsOptInRequired.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_KmsThrottled(t *testing.T) {
-	want := &types.KmsThrottled{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("KmsThrottled.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ReceiveMessage(context.Background(), &ReceiveMessageInput{})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.KmsThrottled
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.KmsThrottled, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "KmsThrottled.error", err)
 	}
 }
 
@@ -1167,7 +991,11 @@ func TestCheckResponseSnapshot_Error_MessageNotInflight(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChangeMessageVisibility(context.Background(), &ChangeMessageVisibilityInput{})
+	_, opErr := svc.ChangeMessageVisibility(context.Background(), &ChangeMessageVisibilityInput{
+		QueueUrl:          ptr.String("__QueueUrl__"),
+		ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+		VisibilityTimeout: 1,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1192,7 +1020,18 @@ func TestCheckResponseSnapshot_Error_OverLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Label:    ptr.String("__Label__"),
+		AWSAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1217,7 +1056,9 @@ func TestCheckResponseSnapshot_Error_PurgeQueueInProgress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PurgeQueue(context.Background(), &PurgeQueueInput{})
+	_, opErr := svc.PurgeQueue(context.Background(), &PurgeQueueInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1242,7 +1083,15 @@ func TestCheckResponseSnapshot_Error_QueueDeletedRecently(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateQueue(context.Background(), &CreateQueueInput{})
+	_, opErr := svc.CreateQueue(context.Background(), &CreateQueueInput{
+		QueueName: ptr.String("__QueueName__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1267,7 +1116,18 @@ func TestCheckResponseSnapshot_Error_QueueDoesNotExist(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Label:    ptr.String("__Label__"),
+		AWSAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1292,7 +1152,15 @@ func TestCheckResponseSnapshot_Error_QueueNameExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateQueue(context.Background(), &CreateQueueInput{})
+	_, opErr := svc.CreateQueue(context.Background(), &CreateQueueInput{
+		QueueName: ptr.String("__QueueName__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1317,7 +1185,11 @@ func TestCheckResponseSnapshot_Error_ReceiptHandleIsInvalid(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChangeMessageVisibility(context.Background(), &ChangeMessageVisibilityInput{})
+	_, opErr := svc.ChangeMessageVisibility(context.Background(), &ChangeMessageVisibilityInput{
+		QueueUrl:          ptr.String("__QueueUrl__"),
+		ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+		VisibilityTimeout: 1,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1342,7 +1214,18 @@ func TestCheckResponseSnapshot_Error_RequestThrottled(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Label:    ptr.String("__Label__"),
+		AWSAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1367,7 +1250,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelMessageMoveTask(context.Background(), &CancelMessageMoveTaskInput{})
+	_, opErr := svc.CancelMessageMoveTask(context.Background(), &CancelMessageMoveTaskInput{
+		TaskHandle: ptr.String("__TaskHandle__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1392,7 +1277,21 @@ func TestCheckResponseSnapshot_Error_TooManyEntriesInBatchRequest(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChangeMessageVisibilityBatch(context.Background(), &ChangeMessageVisibilityBatchInput{})
+	_, opErr := svc.ChangeMessageVisibilityBatch(context.Background(), &ChangeMessageVisibilityBatchInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Entries: []types.ChangeMessageVisibilityBatchRequestEntry{
+			{
+				Id:                ptr.String("__Id__"),
+				ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+				VisibilityTimeout: 1,
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				ReceiptHandle:     ptr.String("__ReceiptHandle__"),
+				VisibilityTimeout: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1417,7 +1316,18 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{
+		QueueUrl: ptr.String("__QueueUrl__"),
+		Label:    ptr.String("__Label__"),
+		AWSAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

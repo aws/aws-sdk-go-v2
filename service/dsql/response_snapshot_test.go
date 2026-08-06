@@ -136,7 +136,23 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		DeletionProtectionEnabled: ptr.Bool(true),
+		KmsEncryptionKey:          ptr.String("__KmsEncryptionKey__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MultiRegionProperties: &types.MultiRegionProperties{
+			WitnessRegion: ptr.String("__WitnessRegion__"),
+			Clusters: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Policy:                         ptr.String("__Policy__"),
+		BypassPolicyLockoutSafetyCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -163,7 +179,21 @@ func TestCheckResponseSnapshot_CreateStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStream(context.Background(), &CreateStreamInput{})
+	got, err := svc.CreateStream(context.Background(), &CreateStreamInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		TargetDefinition: &types.TargetDefinitionMemberKinesis{
+			Value: types.KinesisTargetDefinition{
+				StreamArn: ptr.String("__StreamArn__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+			},
+		},
+		Ordering: types.StreamOrdering("UNORDERED"),
+		Format:   types.StreamFormat("JSON"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -187,7 +217,10 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -208,7 +241,11 @@ func TestCheckResponseSnapshot_DeleteClusterPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteClusterPolicy(context.Background(), &DeleteClusterPolicyInput{})
+	got, err := svc.DeleteClusterPolicy(context.Background(), &DeleteClusterPolicyInput{
+		Identifier:            ptr.String("__Identifier__"),
+		ExpectedPolicyVersion: ptr.String("__ExpectedPolicyVersion__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -233,7 +270,11 @@ func TestCheckResponseSnapshot_DeleteStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStream(context.Background(), &DeleteStreamInput{})
+	got, err := svc.DeleteStream(context.Background(), &DeleteStreamInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		StreamIdentifier:  ptr.String("__StreamIdentifier__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +315,9 @@ func TestCheckResponseSnapshot_GetCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCluster(context.Background(), &GetClusterInput{})
+	got, err := svc.GetCluster(context.Background(), &GetClusterInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +339,9 @@ func TestCheckResponseSnapshot_GetClusterPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetClusterPolicy(context.Background(), &GetClusterPolicyInput{})
+	got, err := svc.GetClusterPolicy(context.Background(), &GetClusterPolicyInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -336,7 +381,10 @@ func TestCheckResponseSnapshot_GetStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStream(context.Background(), &GetStreamInput{})
+	got, err := svc.GetStream(context.Background(), &GetStreamInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		StreamIdentifier:  ptr.String("__StreamIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -358,7 +406,9 @@ func TestCheckResponseSnapshot_GetVpcEndpointServiceName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVpcEndpointServiceName(context.Background(), &GetVpcEndpointServiceNameInput{})
+	got, err := svc.GetVpcEndpointServiceName(context.Background(), &GetVpcEndpointServiceNameInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -389,7 +439,10 @@ func TestCheckResponseSnapshot_ListClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClusters(context.Background(), &ListClustersInput{})
+	got, err := svc.ListClusters(context.Background(), &ListClustersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -426,7 +479,11 @@ func TestCheckResponseSnapshot_ListStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreams(context.Background(), &ListStreamsInput{})
+	got, err := svc.ListStreams(context.Background(), &ListStreamsInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -449,7 +506,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +529,13 @@ func TestCheckResponseSnapshot_PutClusterPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutClusterPolicy(context.Background(), &PutClusterPolicyInput{})
+	got, err := svc.PutClusterPolicy(context.Background(), &PutClusterPolicyInput{
+		Identifier:                     ptr.String("__Identifier__"),
+		Policy:                         ptr.String("__Policy__"),
+		BypassPolicyLockoutSafetyCheck: true,
+		ExpectedPolicyVersion:          ptr.String("__ExpectedPolicyVersion__"),
+		ClientToken:                    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -489,7 +554,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -508,7 +578,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -532,7 +608,19 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{})
+	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{
+		Identifier:                ptr.String("__Identifier__"),
+		DeletionProtectionEnabled: ptr.Bool(true),
+		KmsEncryptionKey:          ptr.String("__KmsEncryptionKey__"),
+		ClientToken:               ptr.String("__ClientToken__"),
+		MultiRegionProperties: &types.MultiRegionProperties{
+			WitnessRegion: ptr.String("__WitnessRegion__"),
+			Clusters: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -553,7 +641,23 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		DeletionProtectionEnabled: ptr.Bool(true),
+		KmsEncryptionKey:          ptr.String("__KmsEncryptionKey__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MultiRegionProperties: &types.MultiRegionProperties{
+			WitnessRegion: ptr.String("__WitnessRegion__"),
+			Clusters: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Policy:                         ptr.String("__Policy__"),
+		BypassPolicyLockoutSafetyCheck: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -580,7 +684,23 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		DeletionProtectionEnabled: ptr.Bool(true),
+		KmsEncryptionKey:          ptr.String("__KmsEncryptionKey__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MultiRegionProperties: &types.MultiRegionProperties{
+			WitnessRegion: ptr.String("__WitnessRegion__"),
+			Clusters: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Policy:                         ptr.String("__Policy__"),
+		BypassPolicyLockoutSafetyCheck: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -606,7 +726,23 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		DeletionProtectionEnabled: ptr.Bool(true),
+		KmsEncryptionKey:          ptr.String("__KmsEncryptionKey__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MultiRegionProperties: &types.MultiRegionProperties{
+			WitnessRegion: ptr.String("__WitnessRegion__"),
+			Clusters: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Policy:                         ptr.String("__Policy__"),
+		BypassPolicyLockoutSafetyCheck: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -633,7 +769,21 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStream(context.Background(), &CreateStreamInput{})
+	_, opErr := svc.CreateStream(context.Background(), &CreateStreamInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		TargetDefinition: &types.TargetDefinitionMemberKinesis{
+			Value: types.KinesisTargetDefinition{
+				StreamArn: ptr.String("__StreamArn__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+			},
+		},
+		Ordering: types.StreamOrdering("UNORDERED"),
+		Format:   types.StreamFormat("JSON"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -662,7 +812,23 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		DeletionProtectionEnabled: ptr.Bool(true),
+		KmsEncryptionKey:          ptr.String("__KmsEncryptionKey__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MultiRegionProperties: &types.MultiRegionProperties{
+			WitnessRegion: ptr.String("__WitnessRegion__"),
+			Clusters: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Policy:                         ptr.String("__Policy__"),
+		BypassPolicyLockoutSafetyCheck: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -690,7 +856,23 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		DeletionProtectionEnabled: ptr.Bool(true),
+		KmsEncryptionKey:          ptr.String("__KmsEncryptionKey__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MultiRegionProperties: &types.MultiRegionProperties{
+			WitnessRegion: ptr.String("__WitnessRegion__"),
+			Clusters: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Policy:                         ptr.String("__Policy__"),
+		BypassPolicyLockoutSafetyCheck: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -726,7 +908,23 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		DeletionProtectionEnabled: ptr.Bool(true),
+		KmsEncryptionKey:          ptr.String("__KmsEncryptionKey__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MultiRegionProperties: &types.MultiRegionProperties{
+			WitnessRegion: ptr.String("__WitnessRegion__"),
+			Clusters: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Policy:                         ptr.String("__Policy__"),
+		BypassPolicyLockoutSafetyCheck: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"signature":"__Signature__","slots":[{"name":"__Name__"},{"name":"__Name__"}],"supportedLocales":["de-DE","de-DE"]}

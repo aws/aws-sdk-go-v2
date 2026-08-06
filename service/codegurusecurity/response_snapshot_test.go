@@ -266,7 +266,18 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetFindings(context.Background(), &BatchGetFindingsInput{})
+	got, err := svc.BatchGetFindings(context.Background(), &BatchGetFindingsInput{
+		FindingIdentifiers: []types.FindingIdentifier{
+			{
+				ScanName:  ptr.String("__ScanName__"),
+				FindingId: ptr.String("__FindingId__"),
+			},
+			{
+				ScanName:  ptr.String("__ScanName__"),
+				FindingId: ptr.String("__FindingId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -293,7 +304,18 @@ func TestCheckResponseSnapshot_CreateScan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateScan(context.Background(), &CreateScanInput{})
+	got, err := svc.CreateScan(context.Background(), &CreateScanInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ResourceId: &types.ResourceIdMemberCodeArtifactId{
+			Value: "__ResourceIdMemberCodeArtifactId__",
+		},
+		ScanName:     ptr.String("__ScanName__"),
+		ScanType:     types.ScanType("Standard"),
+		AnalysisType: types.AnalysisType("Security"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -318,7 +340,9 @@ func TestCheckResponseSnapshot_CreateUploadUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUploadUrl(context.Background(), &CreateUploadUrlInput{})
+	got, err := svc.CreateUploadUrl(context.Background(), &CreateUploadUrlInput{
+		ScanName: ptr.String("__ScanName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -496,7 +520,12 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFindings(context.Background(), &GetFindingsInput{})
+	got, err := svc.GetFindings(context.Background(), &GetFindingsInput{
+		ScanName:   ptr.String("__ScanName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Status:     types.Status("Closed"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -556,7 +585,9 @@ func TestCheckResponseSnapshot_GetMetricsSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetricsSummary(context.Background(), &GetMetricsSummaryInput{})
+	got, err := svc.GetMetricsSummary(context.Background(), &GetMetricsSummaryInput{
+		Date: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -585,7 +616,10 @@ func TestCheckResponseSnapshot_GetScan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetScan(context.Background(), &GetScanInput{})
+	got, err := svc.GetScan(context.Background(), &GetScanInput{
+		ScanName: ptr.String("__ScanName__"),
+		RunId:    ptr.String("__RunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -670,7 +704,12 @@ func TestCheckResponseSnapshot_ListFindingsMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFindingsMetrics(context.Background(), &ListFindingsMetricsInput{})
+	got, err := svc.ListFindingsMetrics(context.Background(), &ListFindingsMetricsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -709,7 +748,10 @@ func TestCheckResponseSnapshot_ListScans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListScans(context.Background(), &ListScansInput{})
+	got, err := svc.ListScans(context.Background(), &ListScansInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -732,7 +774,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -751,7 +795,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -770,7 +819,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -793,7 +848,11 @@ func TestCheckResponseSnapshot_UpdateAccountConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountConfiguration(context.Background(), &UpdateAccountConfigurationInput{})
+	got, err := svc.UpdateAccountConfiguration(context.Background(), &UpdateAccountConfigurationInput{
+		EncryptionConfig: &types.EncryptionConfig{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -817,7 +876,18 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetFindings(context.Background(), &BatchGetFindingsInput{})
+	_, opErr := svc.BatchGetFindings(context.Background(), &BatchGetFindingsInput{
+		FindingIdentifiers: []types.FindingIdentifier{
+			{
+				ScanName:  ptr.String("__ScanName__"),
+				FindingId: ptr.String("__FindingId__"),
+			},
+			{
+				ScanName:  ptr.String("__ScanName__"),
+				FindingId: ptr.String("__FindingId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -845,7 +915,18 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateScan(context.Background(), &CreateScanInput{})
+	_, opErr := svc.CreateScan(context.Background(), &CreateScanInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ResourceId: &types.ResourceIdMemberCodeArtifactId{
+			Value: "__ResourceIdMemberCodeArtifactId__",
+		},
+		ScanName:     ptr.String("__ScanName__"),
+		ScanType:     types.ScanType("Standard"),
+		AnalysisType: types.AnalysisType("Security"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -871,7 +952,18 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetFindings(context.Background(), &BatchGetFindingsInput{})
+	_, opErr := svc.BatchGetFindings(context.Background(), &BatchGetFindingsInput{
+		FindingIdentifiers: []types.FindingIdentifier{
+			{
+				ScanName:  ptr.String("__ScanName__"),
+				FindingId: ptr.String("__FindingId__"),
+			},
+			{
+				ScanName:  ptr.String("__ScanName__"),
+				FindingId: ptr.String("__FindingId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -899,7 +991,18 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateScan(context.Background(), &CreateScanInput{})
+	_, opErr := svc.CreateScan(context.Background(), &CreateScanInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ResourceId: &types.ResourceIdMemberCodeArtifactId{
+			Value: "__ResourceIdMemberCodeArtifactId__",
+		},
+		ScanName:     ptr.String("__ScanName__"),
+		ScanType:     types.ScanType("Standard"),
+		AnalysisType: types.AnalysisType("Security"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -927,7 +1030,18 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetFindings(context.Background(), &BatchGetFindingsInput{})
+	_, opErr := svc.BatchGetFindings(context.Background(), &BatchGetFindingsInput{
+		FindingIdentifiers: []types.FindingIdentifier{
+			{
+				ScanName:  ptr.String("__ScanName__"),
+				FindingId: ptr.String("__FindingId__"),
+			},
+			{
+				ScanName:  ptr.String("__ScanName__"),
+				FindingId: ptr.String("__FindingId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -964,7 +1078,18 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetFindings(context.Background(), &BatchGetFindingsInput{})
+	_, opErr := svc.BatchGetFindings(context.Background(), &BatchGetFindingsInput{
+		FindingIdentifiers: []types.FindingIdentifier{
+			{
+				ScanName:  ptr.String("__ScanName__"),
+				FindingId: ptr.String("__FindingId__"),
+			},
+			{
+				ScanName:  ptr.String("__ScanName__"),
+				FindingId: ptr.String("__FindingId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

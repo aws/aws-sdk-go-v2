@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftData.ListSessions
+
+{"NextToken":"__NextToken__","Sessions":[{"ClusterIdentifier":"__ClusterIdentifier__","CreatedAt":946684800,"CurrentStatementId":"__CurrentStatementId__","Database":"__Database__","DbUser":"__DbUser__","SessionAliveSeconds":1,"SessionId":"__SessionId__","SessionTtl":946684800,"Status":"AVAILABLE","UpdatedAt":946684800,"WorkgroupName":"__WorkgroupName__"},{"ClusterIdentifier":"__ClusterIdentifier__","CreatedAt":946684800,"CurrentStatementId":"__CurrentStatementId__","Database":"__Database__","DbUser":"__DbUser__","SessionAliveSeconds":1,"SessionId":"__SessionId__","SessionTtl":946684800,"Status":"AVAILABLE","UpdatedAt":946684800,"WorkgroupName":"__WorkgroupName__"}]}

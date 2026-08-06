@@ -173,7 +173,10 @@ func TestCheckResponseSnapshot_CreateBotVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{})
+	got, err := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{
+		Name:     ptr.String("__Name__"),
+		Checksum: ptr.String("__Checksum__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -401,7 +404,10 @@ func TestCheckResponseSnapshot_CreateIntentVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIntentVersion(context.Background(), &CreateIntentVersionInput{})
+	got, err := svc.CreateIntentVersion(context.Background(), &CreateIntentVersionInput{
+		Name:     ptr.String("__Name__"),
+		Checksum: ptr.String("__Checksum__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -457,7 +463,10 @@ func TestCheckResponseSnapshot_CreateSlotTypeVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSlotTypeVersion(context.Background(), &CreateSlotTypeVersionInput{})
+	got, err := svc.CreateSlotTypeVersion(context.Background(), &CreateSlotTypeVersionInput{
+		Name:     ptr.String("__Name__"),
+		Checksum: ptr.String("__Checksum__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -476,7 +485,9 @@ func TestCheckResponseSnapshot_DeleteBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBot(context.Background(), &DeleteBotInput{})
+	got, err := svc.DeleteBot(context.Background(), &DeleteBotInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -495,7 +506,10 @@ func TestCheckResponseSnapshot_DeleteBotAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBotAlias(context.Background(), &DeleteBotAliasInput{})
+	got, err := svc.DeleteBotAlias(context.Background(), &DeleteBotAliasInput{
+		Name:    ptr.String("__Name__"),
+		BotName: ptr.String("__BotName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -514,7 +528,11 @@ func TestCheckResponseSnapshot_DeleteBotChannelAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBotChannelAssociation(context.Background(), &DeleteBotChannelAssociationInput{})
+	got, err := svc.DeleteBotChannelAssociation(context.Background(), &DeleteBotChannelAssociationInput{
+		Name:     ptr.String("__Name__"),
+		BotName:  ptr.String("__BotName__"),
+		BotAlias: ptr.String("__BotAlias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -533,7 +551,10 @@ func TestCheckResponseSnapshot_DeleteBotVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBotVersion(context.Background(), &DeleteBotVersionInput{})
+	got, err := svc.DeleteBotVersion(context.Background(), &DeleteBotVersionInput{
+		Name:    ptr.String("__Name__"),
+		Version: ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -552,7 +573,9 @@ func TestCheckResponseSnapshot_DeleteIntent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIntent(context.Background(), &DeleteIntentInput{})
+	got, err := svc.DeleteIntent(context.Background(), &DeleteIntentInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -571,7 +594,10 @@ func TestCheckResponseSnapshot_DeleteIntentVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIntentVersion(context.Background(), &DeleteIntentVersionInput{})
+	got, err := svc.DeleteIntentVersion(context.Background(), &DeleteIntentVersionInput{
+		Name:    ptr.String("__Name__"),
+		Version: ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -590,7 +616,9 @@ func TestCheckResponseSnapshot_DeleteSlotType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSlotType(context.Background(), &DeleteSlotTypeInput{})
+	got, err := svc.DeleteSlotType(context.Background(), &DeleteSlotTypeInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -609,7 +637,10 @@ func TestCheckResponseSnapshot_DeleteSlotTypeVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSlotTypeVersion(context.Background(), &DeleteSlotTypeVersionInput{})
+	got, err := svc.DeleteSlotTypeVersion(context.Background(), &DeleteSlotTypeVersionInput{
+		Name:    ptr.String("__Name__"),
+		Version: ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -628,7 +659,10 @@ func TestCheckResponseSnapshot_DeleteUtterances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUtterances(context.Background(), &DeleteUtterancesInput{})
+	got, err := svc.DeleteUtterances(context.Background(), &DeleteUtterancesInput{
+		BotName: ptr.String("__BotName__"),
+		UserId:  ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -704,7 +738,10 @@ func TestCheckResponseSnapshot_GetBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBot(context.Background(), &GetBotInput{})
+	got, err := svc.GetBot(context.Background(), &GetBotInput{
+		Name:           ptr.String("__Name__"),
+		VersionOrAlias: ptr.String("__VersionOrAlias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -750,7 +787,10 @@ func TestCheckResponseSnapshot_GetBotAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBotAlias(context.Background(), &GetBotAliasInput{})
+	got, err := svc.GetBotAlias(context.Background(), &GetBotAliasInput{
+		Name:    ptr.String("__Name__"),
+		BotName: ptr.String("__BotName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -829,7 +869,12 @@ func TestCheckResponseSnapshot_GetBotAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBotAliases(context.Background(), &GetBotAliasesInput{})
+	got, err := svc.GetBotAliases(context.Background(), &GetBotAliasesInput{
+		BotName:      ptr.String("__BotName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		NameContains: ptr.String("__NameContains__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -860,7 +905,11 @@ func TestCheckResponseSnapshot_GetBotChannelAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBotChannelAssociation(context.Background(), &GetBotChannelAssociationInput{})
+	got, err := svc.GetBotChannelAssociation(context.Background(), &GetBotChannelAssociationInput{
+		Name:     ptr.String("__Name__"),
+		BotName:  ptr.String("__BotName__"),
+		BotAlias: ptr.String("__BotAlias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -909,7 +958,13 @@ func TestCheckResponseSnapshot_GetBotChannelAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBotChannelAssociations(context.Background(), &GetBotChannelAssociationsInput{})
+	got, err := svc.GetBotChannelAssociations(context.Background(), &GetBotChannelAssociationsInput{
+		BotName:      ptr.String("__BotName__"),
+		BotAlias:     ptr.String("__BotAlias__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		NameContains: ptr.String("__NameContains__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -948,7 +1003,11 @@ func TestCheckResponseSnapshot_GetBotVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBotVersions(context.Background(), &GetBotVersionsInput{})
+	got, err := svc.GetBotVersions(context.Background(), &GetBotVersionsInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -987,7 +1046,11 @@ func TestCheckResponseSnapshot_GetBots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBots(context.Background(), &GetBotsInput{})
+	got, err := svc.GetBots(context.Background(), &GetBotsInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		NameContains: ptr.String("__NameContains__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1020,7 +1083,9 @@ func TestCheckResponseSnapshot_GetBuiltinIntent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBuiltinIntent(context.Background(), &GetBuiltinIntentInput{})
+	got, err := svc.GetBuiltinIntent(context.Background(), &GetBuiltinIntentInput{
+		Signature: ptr.String("__Signature__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1057,7 +1122,12 @@ func TestCheckResponseSnapshot_GetBuiltinIntents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBuiltinIntents(context.Background(), &GetBuiltinIntentsInput{})
+	got, err := svc.GetBuiltinIntents(context.Background(), &GetBuiltinIntentsInput{
+		Locale:            types.Locale("de-DE"),
+		SignatureContains: ptr.String("__SignatureContains__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1094,7 +1164,12 @@ func TestCheckResponseSnapshot_GetBuiltinSlotTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBuiltinSlotTypes(context.Background(), &GetBuiltinSlotTypesInput{})
+	got, err := svc.GetBuiltinSlotTypes(context.Background(), &GetBuiltinSlotTypesInput{
+		Locale:            types.Locale("de-DE"),
+		SignatureContains: ptr.String("__SignatureContains__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1121,7 +1196,12 @@ func TestCheckResponseSnapshot_GetExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExport(context.Background(), &GetExportInput{})
+	got, err := svc.GetExport(context.Background(), &GetExportInput{
+		Name:         ptr.String("__Name__"),
+		Version:      ptr.String("__Version__"),
+		ResourceType: types.ResourceType("BOT"),
+		ExportType:   types.ExportType("ALEXA_SKILLS_KIT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1151,7 +1231,9 @@ func TestCheckResponseSnapshot_GetImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImport(context.Background(), &GetImportInput{})
+	got, err := svc.GetImport(context.Background(), &GetImportInput{
+		ImportId: ptr.String("__ImportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1379,7 +1461,10 @@ func TestCheckResponseSnapshot_GetIntent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntent(context.Background(), &GetIntentInput{})
+	got, err := svc.GetIntent(context.Background(), &GetIntentInput{
+		Name:    ptr.String("__Name__"),
+		Version: ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1416,7 +1501,11 @@ func TestCheckResponseSnapshot_GetIntentVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntentVersions(context.Background(), &GetIntentVersionsInput{})
+	got, err := svc.GetIntentVersions(context.Background(), &GetIntentVersionsInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1453,7 +1542,11 @@ func TestCheckResponseSnapshot_GetIntents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntents(context.Background(), &GetIntentsInput{})
+	got, err := svc.GetIntents(context.Background(), &GetIntentsInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		NameContains: ptr.String("__NameContains__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1508,7 +1601,9 @@ func TestCheckResponseSnapshot_GetMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMigration(context.Background(), &GetMigrationInput{})
+	got, err := svc.GetMigration(context.Background(), &GetMigrationInput{
+		MigrationId: ptr.String("__MigrationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1553,7 +1648,14 @@ func TestCheckResponseSnapshot_GetMigrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMigrations(context.Background(), &GetMigrationsInput{})
+	got, err := svc.GetMigrations(context.Background(), &GetMigrationsInput{
+		SortByAttribute:       types.MigrationSortAttribute("V1_BOT_NAME"),
+		SortByOrder:           types.SortOrder("ASCENDING"),
+		V1BotNameContains:     ptr.String("__V1BotNameContains__"),
+		MigrationStatusEquals: types.MigrationStatus("IN_PROGRESS"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1609,7 +1711,10 @@ func TestCheckResponseSnapshot_GetSlotType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSlotType(context.Background(), &GetSlotTypeInput{})
+	got, err := svc.GetSlotType(context.Background(), &GetSlotTypeInput{
+		Name:    ptr.String("__Name__"),
+		Version: ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1646,7 +1751,11 @@ func TestCheckResponseSnapshot_GetSlotTypeVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSlotTypeVersions(context.Background(), &GetSlotTypeVersionsInput{})
+	got, err := svc.GetSlotTypeVersions(context.Background(), &GetSlotTypeVersionsInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1683,7 +1792,11 @@ func TestCheckResponseSnapshot_GetSlotTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSlotTypes(context.Background(), &GetSlotTypesInput{})
+	got, err := svc.GetSlotTypes(context.Background(), &GetSlotTypesInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		NameContains: ptr.String("__NameContains__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1744,7 +1857,14 @@ func TestCheckResponseSnapshot_GetUtterancesView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUtterancesView(context.Background(), &GetUtterancesViewInput{})
+	got, err := svc.GetUtterancesView(context.Background(), &GetUtterancesViewInput{
+		BotName: ptr.String("__BotName__"),
+		BotVersions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StatusType: types.StatusType("Detected"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1774,7 +1894,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1861,7 +1983,71 @@ func TestCheckResponseSnapshot_PutBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBot(context.Background(), &PutBotInput{})
+	got, err := svc.PutBot(context.Background(), &PutBotInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Intents: []types.Intent{
+			{
+				IntentName:    ptr.String("__IntentName__"),
+				IntentVersion: ptr.String("__IntentVersion__"),
+			},
+			{
+				IntentName:    ptr.String("__IntentName__"),
+				IntentVersion: ptr.String("__IntentVersion__"),
+			},
+		},
+		EnableModelImprovements:      ptr.Bool(true),
+		NluIntentConfidenceThreshold: ptr.Float64(1.0),
+		ClarificationPrompt: &types.Prompt{
+			Messages: []types.Message{
+				{
+					ContentType: types.ContentType("PlainText"),
+					Content:     ptr.String("__Content__"),
+					GroupNumber: ptr.Int32(1),
+				},
+				{
+					ContentType: types.ContentType("PlainText"),
+					Content:     ptr.String("__Content__"),
+					GroupNumber: ptr.Int32(1),
+				},
+			},
+			MaxAttempts:  ptr.Int32(1),
+			ResponseCard: ptr.String("__ResponseCard__"),
+		},
+		AbortStatement: &types.Statement{
+			Messages: []types.Message{
+				{
+					ContentType: types.ContentType("PlainText"),
+					Content:     ptr.String("__Content__"),
+					GroupNumber: ptr.Int32(1),
+				},
+				{
+					ContentType: types.ContentType("PlainText"),
+					Content:     ptr.String("__Content__"),
+					GroupNumber: ptr.Int32(1),
+				},
+			},
+			ResponseCard: ptr.String("__ResponseCard__"),
+		},
+		IdleSessionTTLInSeconds: ptr.Int32(1),
+		VoiceId:                 ptr.String("__VoiceId__"),
+		Checksum:                ptr.String("__Checksum__"),
+		ProcessBehavior:         types.ProcessBehavior("SAVE"),
+		Locale:                  types.Locale("de-DE"),
+		ChildDirected:           ptr.Bool(true),
+		DetectSentiment:         ptr.Bool(true),
+		CreateVersion:           ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1917,7 +2103,40 @@ func TestCheckResponseSnapshot_PutBotAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBotAlias(context.Background(), &PutBotAliasInput{})
+	got, err := svc.PutBotAlias(context.Background(), &PutBotAliasInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		BotVersion:  ptr.String("__BotVersion__"),
+		BotName:     ptr.String("__BotName__"),
+		Checksum:    ptr.String("__Checksum__"),
+		ConversationLogs: &types.ConversationLogsRequest{
+			LogSettings: []types.LogSettingsRequest{
+				{
+					LogType:     types.LogType("AUDIO"),
+					Destination: types.Destination("CLOUDWATCH_LOGS"),
+					KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+					ResourceArn: ptr.String("__ResourceArn__"),
+				},
+				{
+					LogType:     types.LogType("AUDIO"),
+					Destination: types.Destination("CLOUDWATCH_LOGS"),
+					KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+					ResourceArn: ptr.String("__ResourceArn__"),
+				},
+			},
+			IamRoleArn: ptr.String("__IamRoleArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2146,7 +2365,214 @@ func TestCheckResponseSnapshot_PutIntent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutIntent(context.Background(), &PutIntentInput{})
+	got, err := svc.PutIntent(context.Background(), &PutIntentInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Slots: []types.Slot{
+			{
+				Name:            ptr.String("__Name__"),
+				Description:     ptr.String("__Description__"),
+				SlotConstraint:  types.SlotConstraint("Required"),
+				SlotType:        ptr.String("__SlotType__"),
+				SlotTypeVersion: ptr.String("__SlotTypeVersion__"),
+				ValueElicitationPrompt: &types.Prompt{
+					Messages: []types.Message{
+						{
+							ContentType: types.ContentType("PlainText"),
+							Content:     ptr.String("__Content__"),
+							GroupNumber: ptr.Int32(1),
+						},
+						{
+							ContentType: types.ContentType("PlainText"),
+							Content:     ptr.String("__Content__"),
+							GroupNumber: ptr.Int32(1),
+						},
+					},
+					MaxAttempts:  ptr.Int32(1),
+					ResponseCard: ptr.String("__ResponseCard__"),
+				},
+				Priority: ptr.Int32(1),
+				SampleUtterances: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResponseCard:       ptr.String("__ResponseCard__"),
+				ObfuscationSetting: types.ObfuscationSetting("NONE"),
+				DefaultValueSpec: &types.SlotDefaultValueSpec{
+					DefaultValueList: []types.SlotDefaultValue{
+						{
+							DefaultValue: ptr.String("__DefaultValue__"),
+						},
+						{
+							DefaultValue: ptr.String("__DefaultValue__"),
+						},
+					},
+				},
+			},
+			{
+				Name:            ptr.String("__Name__"),
+				Description:     ptr.String("__Description__"),
+				SlotConstraint:  types.SlotConstraint("Required"),
+				SlotType:        ptr.String("__SlotType__"),
+				SlotTypeVersion: ptr.String("__SlotTypeVersion__"),
+				ValueElicitationPrompt: &types.Prompt{
+					Messages: []types.Message{
+						{
+							ContentType: types.ContentType("PlainText"),
+							Content:     ptr.String("__Content__"),
+							GroupNumber: ptr.Int32(1),
+						},
+						{
+							ContentType: types.ContentType("PlainText"),
+							Content:     ptr.String("__Content__"),
+							GroupNumber: ptr.Int32(1),
+						},
+					},
+					MaxAttempts:  ptr.Int32(1),
+					ResponseCard: ptr.String("__ResponseCard__"),
+				},
+				Priority: ptr.Int32(1),
+				SampleUtterances: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResponseCard:       ptr.String("__ResponseCard__"),
+				ObfuscationSetting: types.ObfuscationSetting("NONE"),
+				DefaultValueSpec: &types.SlotDefaultValueSpec{
+					DefaultValueList: []types.SlotDefaultValue{
+						{
+							DefaultValue: ptr.String("__DefaultValue__"),
+						},
+						{
+							DefaultValue: ptr.String("__DefaultValue__"),
+						},
+					},
+				},
+			},
+		},
+		SampleUtterances: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConfirmationPrompt: &types.Prompt{
+			Messages: []types.Message{
+				{
+					ContentType: types.ContentType("PlainText"),
+					Content:     ptr.String("__Content__"),
+					GroupNumber: ptr.Int32(1),
+				},
+				{
+					ContentType: types.ContentType("PlainText"),
+					Content:     ptr.String("__Content__"),
+					GroupNumber: ptr.Int32(1),
+				},
+			},
+			MaxAttempts:  ptr.Int32(1),
+			ResponseCard: ptr.String("__ResponseCard__"),
+		},
+		RejectionStatement: &types.Statement{
+			Messages: []types.Message{
+				{
+					ContentType: types.ContentType("PlainText"),
+					Content:     ptr.String("__Content__"),
+					GroupNumber: ptr.Int32(1),
+				},
+				{
+					ContentType: types.ContentType("PlainText"),
+					Content:     ptr.String("__Content__"),
+					GroupNumber: ptr.Int32(1),
+				},
+			},
+			ResponseCard: ptr.String("__ResponseCard__"),
+		},
+		FollowUpPrompt: &types.FollowUpPrompt{
+			Prompt: &types.Prompt{
+				Messages: []types.Message{
+					{
+						ContentType: types.ContentType("PlainText"),
+						Content:     ptr.String("__Content__"),
+						GroupNumber: ptr.Int32(1),
+					},
+					{
+						ContentType: types.ContentType("PlainText"),
+						Content:     ptr.String("__Content__"),
+						GroupNumber: ptr.Int32(1),
+					},
+				},
+				MaxAttempts:  ptr.Int32(1),
+				ResponseCard: ptr.String("__ResponseCard__"),
+			},
+			RejectionStatement: &types.Statement{
+				Messages: []types.Message{
+					{
+						ContentType: types.ContentType("PlainText"),
+						Content:     ptr.String("__Content__"),
+						GroupNumber: ptr.Int32(1),
+					},
+					{
+						ContentType: types.ContentType("PlainText"),
+						Content:     ptr.String("__Content__"),
+						GroupNumber: ptr.Int32(1),
+					},
+				},
+				ResponseCard: ptr.String("__ResponseCard__"),
+			},
+		},
+		ConclusionStatement: &types.Statement{
+			Messages: []types.Message{
+				{
+					ContentType: types.ContentType("PlainText"),
+					Content:     ptr.String("__Content__"),
+					GroupNumber: ptr.Int32(1),
+				},
+				{
+					ContentType: types.ContentType("PlainText"),
+					Content:     ptr.String("__Content__"),
+					GroupNumber: ptr.Int32(1),
+				},
+			},
+			ResponseCard: ptr.String("__ResponseCard__"),
+		},
+		DialogCodeHook: &types.CodeHook{
+			Uri:            ptr.String("__Uri__"),
+			MessageVersion: ptr.String("__MessageVersion__"),
+		},
+		FulfillmentActivity: &types.FulfillmentActivity{
+			Type: types.FulfillmentActivityType("ReturnIntent"),
+			CodeHook: &types.CodeHook{
+				Uri:            ptr.String("__Uri__"),
+				MessageVersion: ptr.String("__MessageVersion__"),
+			},
+		},
+		ParentIntentSignature: ptr.String("__ParentIntentSignature__"),
+		Checksum:              ptr.String("__Checksum__"),
+		CreateVersion:         ptr.Bool(true),
+		KendraConfiguration: &types.KendraConfiguration{
+			KendraIndex:       ptr.String("__KendraIndex__"),
+			QueryFilterString: ptr.String("__QueryFilterString__"),
+			Role:              ptr.String("__Role__"),
+		},
+		InputContexts: []types.InputContext{
+			{
+				Name: ptr.String("__Name__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+			},
+		},
+		OutputContexts: []types.OutputContext{
+			{
+				Name:                ptr.String("__Name__"),
+				TimeToLiveInSeconds: ptr.Int32(1),
+				TurnsToLive:         ptr.Int32(1),
+			},
+			{
+				Name:                ptr.String("__Name__"),
+				TimeToLiveInSeconds: ptr.Int32(1),
+				TurnsToLive:         ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2203,7 +2629,42 @@ func TestCheckResponseSnapshot_PutSlotType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSlotType(context.Background(), &PutSlotTypeInput{})
+	got, err := svc.PutSlotType(context.Background(), &PutSlotTypeInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		EnumerationValues: []types.EnumerationValue{
+			{
+				Value: ptr.String("__Value__"),
+				Synonyms: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Value: ptr.String("__Value__"),
+				Synonyms: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Checksum:                ptr.String("__Checksum__"),
+		ValueSelectionStrategy:  types.SlotValueSelectionStrategy("ORIGINAL_VALUE"),
+		CreateVersion:           ptr.Bool(true),
+		ParentSlotTypeSignature: ptr.String("__ParentSlotTypeSignature__"),
+		SlotTypeConfigurations: []types.SlotTypeConfiguration{
+			{
+				RegexConfiguration: &types.SlotTypeRegexConfiguration{
+					Pattern: ptr.String("__Pattern__"),
+				},
+			},
+			{
+				RegexConfiguration: &types.SlotTypeRegexConfiguration{
+					Pattern: ptr.String("__Pattern__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2239,7 +2700,21 @@ func TestCheckResponseSnapshot_StartImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartImport(context.Background(), &StartImportInput{})
+	got, err := svc.StartImport(context.Background(), &StartImportInput{
+		Payload:       []byte("blob"),
+		ResourceType:  types.ResourceType("BOT"),
+		MergeStrategy: types.MergeStrategy("OVERWRITE_LATEST"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2267,7 +2742,13 @@ func TestCheckResponseSnapshot_StartMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMigration(context.Background(), &StartMigrationInput{})
+	got, err := svc.StartMigration(context.Background(), &StartMigrationInput{
+		V1BotName:         ptr.String("__V1BotName__"),
+		V1BotVersion:      ptr.String("__V1BotVersion__"),
+		V2BotName:         ptr.String("__V2BotName__"),
+		V2BotRole:         ptr.String("__V2BotRole__"),
+		MigrationStrategy: types.MigrationStrategy("CREATE_NEW"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2286,7 +2767,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2305,7 +2798,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2326,7 +2825,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartMigration(context.Background(), &StartMigrationInput{})
+	_, opErr := svc.StartMigration(context.Background(), &StartMigrationInput{
+		V1BotName:         ptr.String("__V1BotName__"),
+		V1BotVersion:      ptr.String("__V1BotVersion__"),
+		V2BotName:         ptr.String("__V2BotName__"),
+		V2BotRole:         ptr.String("__V2BotRole__"),
+		MigrationStrategy: types.MigrationStrategy("CREATE_NEW"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2351,7 +2856,10 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{})
+	_, opErr := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{
+		Name:     ptr.String("__Name__"),
+		Checksum: ptr.String("__Checksum__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2376,7 +2884,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{})
+	_, opErr := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{
+		Name:     ptr.String("__Name__"),
+		Checksum: ptr.String("__Checksum__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2401,7 +2912,10 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{})
+	_, opErr := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{
+		Name:     ptr.String("__Name__"),
+		Checksum: ptr.String("__Checksum__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2427,7 +2941,10 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{})
+	_, opErr := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{
+		Name:     ptr.String("__Name__"),
+		Checksum: ptr.String("__Checksum__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2452,7 +2969,10 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{})
+	_, opErr := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{
+		Name:     ptr.String("__Name__"),
+		Checksum: ptr.String("__Checksum__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2477,7 +2997,10 @@ func TestCheckResponseSnapshot_Error_PreconditionFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{})
+	_, opErr := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{
+		Name:     ptr.String("__Name__"),
+		Checksum: ptr.String("__Checksum__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2506,7 +3029,9 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteBot(context.Background(), &DeleteBotInput{})
+	_, opErr := svc.DeleteBot(context.Background(), &DeleteBotInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

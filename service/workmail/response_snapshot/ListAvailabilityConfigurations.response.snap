@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.ListAvailabilityConfigurations
+
+{"AvailabilityConfigurations":[{"DateCreated":946684800,"DateModified":946684800,"DomainName":"__DomainName__","EwsProvider":{"EwsEndpoint":"__EwsEndpoint__","EwsUsername":"__EwsUsername__"},"LambdaProvider":{"LambdaArn":"__LambdaArn__"},"ProviderType":"EWS"},{"DateCreated":946684800,"DateModified":946684800,"DomainName":"__DomainName__","EwsProvider":{"EwsEndpoint":"__EwsEndpoint__","EwsUsername":"__EwsUsername__"},"LambdaProvider":{"LambdaArn":"__LambdaArn__"},"ProviderType":"EWS"}],"NextToken":"__NextToken__"}

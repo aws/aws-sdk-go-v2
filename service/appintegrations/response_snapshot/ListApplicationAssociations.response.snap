@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApplicationAssociations":[{"ApplicationArn":"__ApplicationArn__","ApplicationAssociationArn":"__ApplicationAssociationArn__","ClientId":"__ClientId__"},{"ApplicationArn":"__ApplicationArn__","ApplicationAssociationArn":"__ApplicationAssociationArn__","ClientId":"__ClientId__"}],"NextToken":"__NextToken__"}

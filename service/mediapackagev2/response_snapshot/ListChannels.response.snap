@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"Arn":"__Arn__","ChannelGroupName":"__ChannelGroupName__","ChannelName":"__ChannelName__","CreatedAt":946684800,"Description":"__Description__","InputType":"HLS","ModifiedAt":946684800,"OutputLockingMode":"EPOCH_LOCKED"},{"Arn":"__Arn__","ChannelGroupName":"__ChannelGroupName__","ChannelName":"__ChannelName__","CreatedAt":946684800,"Description":"__Description__","InputType":"HLS","ModifiedAt":946684800,"OutputLockingMode":"EPOCH_LOCKED"}],"NextToken":"__NextToken__"}

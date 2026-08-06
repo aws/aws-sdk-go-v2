@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeRegistrationFieldValues
+
+{"NextToken":"__NextToken__","RegistrationArn":"__RegistrationArn__","RegistrationFieldValues":[{"DeniedReason":"__DeniedReason__","Feedback":"__Feedback__","FieldPath":"__FieldPath__","RegistrationAttachmentId":"__RegistrationAttachmentId__","SelectChoices":["__Member__","__Member__"],"TextValue":"__TextValue__"},{"DeniedReason":"__DeniedReason__","Feedback":"__Feedback__","FieldPath":"__FieldPath__","RegistrationAttachmentId":"__RegistrationAttachmentId__","SelectChoices":["__Member__","__Member__"],"TextValue":"__TextValue__"}],"RegistrationId":"__RegistrationId__","VersionNumber":1}

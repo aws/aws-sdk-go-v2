@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.CopySnapshot
+
+{"Snapshot":{"ARN":"__ARN__","ClusterConfiguration":{"Description":"__Description__","Engine":"__Engine__","EngineVersion":"__EngineVersion__","MaintenanceWindow":"__MaintenanceWindow__","MultiRegionClusterName":"__MultiRegionClusterName__","MultiRegionParameterGroupName":"__MultiRegionParameterGroupName__","Name":"__Name__","NodeType":"__NodeType__","NumShards":1,"ParameterGroupName":"__ParameterGroupName__","Port":1,"Shards":[{"Configuration":{"ReplicaCount":1,"Slots":"__Slots__"},"Name":"__Name__","Size":"__Size__","SnapshotCreationTime":946684800},{"Configuration":{"ReplicaCount":1,"Slots":"__Slots__"},"Name":"__Name__","Size":"__Size__","SnapshotCreationTime":946684800}],"SnapshotRetentionLimit":1,"SnapshotWindow":"__SnapshotWindow__","SubnetGroupName":"__SubnetGroupName__","TopicArn":"__TopicArn__","VpcId":"__VpcId__"},"DataTiering":"true","KmsKeyId":"__KmsKeyId__","Name":"__Name__","Source":"__Source__","Status":"__Status__"}}

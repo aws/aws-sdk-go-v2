@@ -41,7 +41,9 @@ func (v *PutAndGetInlineDocumentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAndGetInlineDocumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteDocument(schemas.PutAndGetInlineDocumentsInputOutput_inlineDocument, &smithydocument.Opaque{Value: v.InlineDocument})
+	if v.InlineDocument != nil {
+		s.WriteDocument(schemas.PutAndGetInlineDocumentsInputOutput_inlineDocument, &smithydocument.Opaque{Value: v.InlineDocument})
+	}
 }
 func (v *PutAndGetInlineDocumentsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutAndGetInlineDocumentsInputOutput, func(s *smithy.Schema) error {
@@ -76,7 +78,9 @@ func (v *PutAndGetInlineDocumentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAndGetInlineDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteDocument(schemas.PutAndGetInlineDocumentsInputOutput_inlineDocument, &smithydocument.Opaque{Value: v.InlineDocument})
+	if v.InlineDocument != nil {
+		s.WriteDocument(schemas.PutAndGetInlineDocumentsInputOutput_inlineDocument, &smithydocument.Opaque{Value: v.InlineDocument})
+	}
 }
 func (v *PutAndGetInlineDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutAndGetInlineDocumentsInputOutput, func(s *smithy.Schema) error {

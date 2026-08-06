@@ -128,7 +128,19 @@ func TestCheckResponseSnapshot_AddTagsToResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	got, err := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -166,7 +178,11 @@ func TestCheckResponseSnapshot_AuthorizeCacheSecurityGroupIngress(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AuthorizeCacheSecurityGroupIngress(context.Background(), &AuthorizeCacheSecurityGroupIngressInput{})
+	got, err := svc.AuthorizeCacheSecurityGroupIngress(context.Background(), &AuthorizeCacheSecurityGroupIngressInput{
+		CacheSecurityGroupName:  ptr.String("__CacheSecurityGroupName__"),
+		EC2SecurityGroupName:    ptr.String("__EC2SecurityGroupName__"),
+		EC2SecurityGroupOwnerId: ptr.String("__EC2SecurityGroupOwnerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -216,7 +232,17 @@ func TestCheckResponseSnapshot_BatchApplyUpdateAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchApplyUpdateAction(context.Background(), &BatchApplyUpdateActionInput{})
+	got, err := svc.BatchApplyUpdateAction(context.Background(), &BatchApplyUpdateActionInput{
+		ReplicationGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CacheClusterIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceUpdateName: ptr.String("__ServiceUpdateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -266,7 +292,17 @@ func TestCheckResponseSnapshot_BatchStopUpdateAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchStopUpdateAction(context.Background(), &BatchStopUpdateActionInput{})
+	got, err := svc.BatchStopUpdateAction(context.Background(), &BatchStopUpdateActionInput{
+		ReplicationGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CacheClusterIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceUpdateName: ptr.String("__ServiceUpdateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -494,7 +530,10 @@ func TestCheckResponseSnapshot_CompleteMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteMigration(context.Background(), &CompleteMigrationInput{})
+	got, err := svc.CompleteMigration(context.Background(), &CompleteMigrationInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		Force:              ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -529,7 +568,21 @@ func TestCheckResponseSnapshot_CopyServerlessCacheSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyServerlessCacheSnapshot(context.Background(), &CopyServerlessCacheSnapshotInput{})
+	got, err := svc.CopyServerlessCacheSnapshot(context.Background(), &CopyServerlessCacheSnapshotInput{
+		SourceServerlessCacheSnapshotName: ptr.String("__SourceServerlessCacheSnapshotName__"),
+		TargetServerlessCacheSnapshotName: ptr.String("__TargetServerlessCacheSnapshotName__"),
+		KmsKeyId:                          ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -627,7 +680,22 @@ func TestCheckResponseSnapshot_CopySnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopySnapshot(context.Background(), &CopySnapshotInput{})
+	got, err := svc.CopySnapshot(context.Background(), &CopySnapshotInput{
+		SourceSnapshotName: ptr.String("__SourceSnapshotName__"),
+		TargetSnapshotName: ptr.String("__TargetSnapshotName__"),
+		TargetBucket:       ptr.String("__TargetBucket__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -814,7 +882,91 @@ func TestCheckResponseSnapshot_CreateCacheCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{})
+	got, err := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{
+		CacheClusterId:            ptr.String("__CacheClusterId__"),
+		ReplicationGroupId:        ptr.String("__ReplicationGroupId__"),
+		AZMode:                    types.AZMode("single-az"),
+		PreferredAvailabilityZone: ptr.String("__PreferredAvailabilityZone__"),
+		PreferredAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumCacheNodes:           ptr.Int32(1),
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		OutpostMode:                types.OutpostMode("single-outpost"),
+		PreferredOutpostArn:        ptr.String("__PreferredOutpostArn__"),
+		PreferredOutpostArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		TransitEncryptionEnabled: ptr.Bool(true),
+		NetworkType:              types.NetworkType("ipv4"),
+		IpDiscovery:              types.IpDiscovery("ipv4"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -841,7 +993,21 @@ func TestCheckResponseSnapshot_CreateCacheParameterGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCacheParameterGroup(context.Background(), &CreateCacheParameterGroupInput{})
+	got, err := svc.CreateCacheParameterGroup(context.Background(), &CreateCacheParameterGroupInput{
+		CacheParameterGroupName:   ptr.String("__CacheParameterGroupName__"),
+		CacheParameterGroupFamily: ptr.String("__CacheParameterGroupFamily__"),
+		Description:               ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -879,7 +1045,20 @@ func TestCheckResponseSnapshot_CreateCacheSecurityGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCacheSecurityGroup(context.Background(), &CreateCacheSecurityGroupInput{})
+	got, err := svc.CreateCacheSecurityGroup(context.Background(), &CreateCacheSecurityGroupInput{
+		CacheSecurityGroupName: ptr.String("__CacheSecurityGroupName__"),
+		Description:            ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -937,7 +1116,24 @@ func TestCheckResponseSnapshot_CreateCacheSubnetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCacheSubnetGroup(context.Background(), &CreateCacheSubnetGroupInput{})
+	got, err := svc.CreateCacheSubnetGroup(context.Background(), &CreateCacheSubnetGroupInput{
+		CacheSubnetGroupName:        ptr.String("__CacheSubnetGroupName__"),
+		CacheSubnetGroupDescription: ptr.String("__CacheSubnetGroupDescription__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -996,7 +1192,11 @@ func TestCheckResponseSnapshot_CreateGlobalReplicationGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGlobalReplicationGroup(context.Background(), &CreateGlobalReplicationGroupInput{})
+	got, err := svc.CreateGlobalReplicationGroup(context.Background(), &CreateGlobalReplicationGroupInput{
+		GlobalReplicationGroupIdSuffix:    ptr.String("__GlobalReplicationGroupIdSuffix__"),
+		GlobalReplicationGroupDescription: ptr.String("__GlobalReplicationGroupDescription__"),
+		PrimaryReplicationGroupId:         ptr.String("__PrimaryReplicationGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1224,7 +1424,132 @@ func TestCheckResponseSnapshot_CreateReplicationGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{})
+	got, err := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{
+		ReplicationGroupId:          ptr.String("__ReplicationGroupId__"),
+		ReplicationGroupDescription: ptr.String("__ReplicationGroupDescription__"),
+		GlobalReplicationGroupId:    ptr.String("__GlobalReplicationGroupId__"),
+		PrimaryClusterId:            ptr.String("__PrimaryClusterId__"),
+		AutomaticFailoverEnabled:    ptr.Bool(true),
+		MultiAZEnabled:              ptr.Bool(true),
+		NumCacheClusters:            ptr.Int32(1),
+		PreferredCacheClusterAZs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumNodeGroups:        ptr.Int32(1),
+		ReplicasPerNodeGroup: ptr.Int32(1),
+		NodeGroupConfiguration: []types.NodeGroupConfiguration{
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		TransitEncryptionEnabled:   ptr.Bool(true),
+		AtRestEncryptionEnabled:    ptr.Bool(true),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		UserGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		DataTieringEnabled:          ptr.Bool(true),
+		NetworkType:                 types.NetworkType("ipv4"),
+		IpDiscovery:                 types.IpDiscovery("ipv4"),
+		TransitEncryptionMode:       types.TransitEncryptionMode("preferred"),
+		ClusterMode:                 types.ClusterMode("enabled"),
+		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
+		Durability:                  types.Durability("default"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1287,7 +1612,50 @@ func TestCheckResponseSnapshot_CreateServerlessCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServerlessCache(context.Background(), &CreateServerlessCacheInput{})
+	got, err := svc.CreateServerlessCache(context.Background(), &CreateServerlessCacheInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		Description:         ptr.String("__Description__"),
+		Engine:              ptr.String("__Engine__"),
+		MajorEngineVersion:  ptr.String("__MajorEngineVersion__"),
+		CacheUsageLimits: &types.CacheUsageLimits{
+			DataStorage: &types.DataStorage{
+				Maximum: ptr.Int32(1),
+				Minimum: ptr.Int32(1),
+				Unit:    types.DataStorageUnit("GB"),
+			},
+			ECPUPerSecond: &types.ECPUPerSecond{
+				Maximum: ptr.Int32(1),
+				Minimum: ptr.Int32(1),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotArnsToRestore: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UserGroupId: ptr.String("__UserGroupId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotRetentionLimit: ptr.Int32(1),
+		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
+		NetworkType:            types.NetworkType("ipv4"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1322,7 +1690,21 @@ func TestCheckResponseSnapshot_CreateServerlessCacheSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServerlessCacheSnapshot(context.Background(), &CreateServerlessCacheSnapshotInput{})
+	got, err := svc.CreateServerlessCacheSnapshot(context.Background(), &CreateServerlessCacheSnapshotInput{
+		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
+		ServerlessCacheName:         ptr.String("__ServerlessCacheName__"),
+		KmsKeyId:                    ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1420,7 +1802,22 @@ func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{})
+	got, err := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		CacheClusterId:     ptr.String("__CacheClusterId__"),
+		SnapshotName:       ptr.String("__SnapshotName__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1455,7 +1852,34 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUser(context.Background(), &CreateUserInput{})
+	got, err := svc.CreateUser(context.Background(), &CreateUserInput{
+		UserId:   ptr.String("__UserId__"),
+		UserName: ptr.String("__UserName__"),
+		Engine:   ptr.String("__Engine__"),
+		Passwords: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AccessString:       ptr.String("__AccessString__"),
+		NoPasswordRequired: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AuthenticationMode: &types.AuthenticationMode{
+			Type: types.InputAuthenticationType("password"),
+			Passwords: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1502,7 +1926,24 @@ func TestCheckResponseSnapshot_CreateUserGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUserGroup(context.Background(), &CreateUserGroupInput{})
+	got, err := svc.CreateUserGroup(context.Background(), &CreateUserGroupInput{
+		UserGroupId: ptr.String("__UserGroupId__"),
+		Engine:      ptr.String("__Engine__"),
+		UserIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1561,7 +2002,19 @@ func TestCheckResponseSnapshot_DecreaseNodeGroupsInGlobalReplicationGroup(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DecreaseNodeGroupsInGlobalReplicationGroup(context.Background(), &DecreaseNodeGroupsInGlobalReplicationGroupInput{})
+	got, err := svc.DecreaseNodeGroupsInGlobalReplicationGroup(context.Background(), &DecreaseNodeGroupsInGlobalReplicationGroupInput{
+		GlobalReplicationGroupId: ptr.String("__GlobalReplicationGroupId__"),
+		NodeGroupCount:           ptr.Int32(1),
+		GlobalNodeGroupsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		GlobalNodeGroupsToRetain: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ApplyImmediately: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1789,7 +2242,41 @@ func TestCheckResponseSnapshot_DecreaseReplicaCount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DecreaseReplicaCount(context.Background(), &DecreaseReplicaCountInput{})
+	got, err := svc.DecreaseReplicaCount(context.Background(), &DecreaseReplicaCountInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		NewReplicaCount:    ptr.Int32(1),
+		ReplicaConfiguration: []types.ConfigureShard{
+			{
+				NodeGroupId:     ptr.String("__NodeGroupId__"),
+				NewReplicaCount: ptr.Int32(1),
+				PreferredAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PreferredOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				NodeGroupId:     ptr.String("__NodeGroupId__"),
+				NewReplicaCount: ptr.Int32(1),
+				PreferredAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PreferredOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ReplicasToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ApplyImmediately: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1976,7 +2463,10 @@ func TestCheckResponseSnapshot_DeleteCacheCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCacheCluster(context.Background(), &DeleteCacheClusterInput{})
+	got, err := svc.DeleteCacheCluster(context.Background(), &DeleteCacheClusterInput{
+		CacheClusterId:          ptr.String("__CacheClusterId__"),
+		FinalSnapshotIdentifier: ptr.String("__FinalSnapshotIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1995,7 +2485,9 @@ func TestCheckResponseSnapshot_DeleteCacheParameterGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCacheParameterGroup(context.Background(), &DeleteCacheParameterGroupInput{})
+	got, err := svc.DeleteCacheParameterGroup(context.Background(), &DeleteCacheParameterGroupInput{
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2014,7 +2506,9 @@ func TestCheckResponseSnapshot_DeleteCacheSecurityGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCacheSecurityGroup(context.Background(), &DeleteCacheSecurityGroupInput{})
+	got, err := svc.DeleteCacheSecurityGroup(context.Background(), &DeleteCacheSecurityGroupInput{
+		CacheSecurityGroupName: ptr.String("__CacheSecurityGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2033,7 +2527,9 @@ func TestCheckResponseSnapshot_DeleteCacheSubnetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCacheSubnetGroup(context.Background(), &DeleteCacheSubnetGroupInput{})
+	got, err := svc.DeleteCacheSubnetGroup(context.Background(), &DeleteCacheSubnetGroupInput{
+		CacheSubnetGroupName: ptr.String("__CacheSubnetGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2092,7 +2588,10 @@ func TestCheckResponseSnapshot_DeleteGlobalReplicationGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGlobalReplicationGroup(context.Background(), &DeleteGlobalReplicationGroupInput{})
+	got, err := svc.DeleteGlobalReplicationGroup(context.Background(), &DeleteGlobalReplicationGroupInput{
+		GlobalReplicationGroupId:      ptr.String("__GlobalReplicationGroupId__"),
+		RetainPrimaryReplicationGroup: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2320,7 +2819,11 @@ func TestCheckResponseSnapshot_DeleteReplicationGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReplicationGroup(context.Background(), &DeleteReplicationGroupInput{})
+	got, err := svc.DeleteReplicationGroup(context.Background(), &DeleteReplicationGroupInput{
+		ReplicationGroupId:      ptr.String("__ReplicationGroupId__"),
+		RetainPrimaryCluster:    ptr.Bool(true),
+		FinalSnapshotIdentifier: ptr.String("__FinalSnapshotIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2383,7 +2886,10 @@ func TestCheckResponseSnapshot_DeleteServerlessCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServerlessCache(context.Background(), &DeleteServerlessCacheInput{})
+	got, err := svc.DeleteServerlessCache(context.Background(), &DeleteServerlessCacheInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		FinalSnapshotName:   ptr.String("__FinalSnapshotName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2418,7 +2924,9 @@ func TestCheckResponseSnapshot_DeleteServerlessCacheSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServerlessCacheSnapshot(context.Background(), &DeleteServerlessCacheSnapshotInput{})
+	got, err := svc.DeleteServerlessCacheSnapshot(context.Background(), &DeleteServerlessCacheSnapshotInput{
+		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2516,7 +3024,9 @@ func TestCheckResponseSnapshot_DeleteSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSnapshot(context.Background(), &DeleteSnapshotInput{})
+	got, err := svc.DeleteSnapshot(context.Background(), &DeleteSnapshotInput{
+		SnapshotName: ptr.String("__SnapshotName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2551,7 +3061,9 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		UserId: ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2598,7 +3110,9 @@ func TestCheckResponseSnapshot_DeleteUserGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUserGroup(context.Background(), &DeleteUserGroupInput{})
+	got, err := svc.DeleteUserGroup(context.Background(), &DeleteUserGroupInput{
+		UserGroupId: ptr.String("__UserGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2955,7 +3469,13 @@ func TestCheckResponseSnapshot_DescribeCacheClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCacheClusters(context.Background(), &DescribeCacheClustersInput{})
+	got, err := svc.DescribeCacheClusters(context.Background(), &DescribeCacheClustersInput{
+		CacheClusterId:                          ptr.String("__CacheClusterId__"),
+		MaxRecords:                              ptr.Int32(1),
+		Marker:                                  ptr.String("__Marker__"),
+		ShowCacheNodeInfo:                       ptr.Bool(true),
+		ShowCacheClustersNotInReplicationGroups: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2992,7 +3512,14 @@ func TestCheckResponseSnapshot_DescribeCacheEngineVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCacheEngineVersions(context.Background(), &DescribeCacheEngineVersionsInput{})
+	got, err := svc.DescribeCacheEngineVersions(context.Background(), &DescribeCacheEngineVersionsInput{
+		Engine:                    ptr.String("__Engine__"),
+		EngineVersion:             ptr.String("__EngineVersion__"),
+		CacheParameterGroupFamily: ptr.String("__CacheParameterGroupFamily__"),
+		MaxRecords:                ptr.Int32(1),
+		Marker:                    ptr.String("__Marker__"),
+		DefaultOnly:               ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3029,7 +3556,11 @@ func TestCheckResponseSnapshot_DescribeCacheParameterGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCacheParameterGroups(context.Background(), &DescribeCacheParameterGroupsInput{})
+	got, err := svc.DescribeCacheParameterGroups(context.Background(), &DescribeCacheParameterGroupsInput{
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		MaxRecords:              ptr.Int32(1),
+		Marker:                  ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3116,7 +3647,12 @@ func TestCheckResponseSnapshot_DescribeCacheParameters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCacheParameters(context.Background(), &DescribeCacheParametersInput{})
+	got, err := svc.DescribeCacheParameters(context.Background(), &DescribeCacheParametersInput{
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		Source:                  ptr.String("__Source__"),
+		MaxRecords:              ptr.Int32(1),
+		Marker:                  ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3175,7 +3711,11 @@ func TestCheckResponseSnapshot_DescribeCacheSecurityGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCacheSecurityGroups(context.Background(), &DescribeCacheSecurityGroupsInput{})
+	got, err := svc.DescribeCacheSecurityGroups(context.Background(), &DescribeCacheSecurityGroupsInput{
+		CacheSecurityGroupName: ptr.String("__CacheSecurityGroupName__"),
+		MaxRecords:             ptr.Int32(1),
+		Marker:                 ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3274,7 +3814,11 @@ func TestCheckResponseSnapshot_DescribeCacheSubnetGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCacheSubnetGroups(context.Background(), &DescribeCacheSubnetGroupsInput{})
+	got, err := svc.DescribeCacheSubnetGroups(context.Background(), &DescribeCacheSubnetGroupsInput{
+		CacheSubnetGroupName: ptr.String("__CacheSubnetGroupName__"),
+		MaxRecords:           ptr.Int32(1),
+		Marker:               ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3364,7 +3908,11 @@ func TestCheckResponseSnapshot_DescribeEngineDefaultParameters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEngineDefaultParameters(context.Background(), &DescribeEngineDefaultParametersInput{})
+	got, err := svc.DescribeEngineDefaultParameters(context.Background(), &DescribeEngineDefaultParametersInput{
+		CacheParameterGroupFamily: ptr.String("__CacheParameterGroupFamily__"),
+		MaxRecords:                ptr.Int32(1),
+		Marker:                    ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3399,7 +3947,15 @@ func TestCheckResponseSnapshot_DescribeEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEvents(context.Background(), &DescribeEventsInput{})
+	got, err := svc.DescribeEvents(context.Background(), &DescribeEventsInput{
+		SourceIdentifier: ptr.String("__SourceIdentifier__"),
+		SourceType:       types.SourceType("cache-cluster"),
+		StartTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Duration:         ptr.Int32(1),
+		MaxRecords:       ptr.Int32(1),
+		Marker:           ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3500,7 +4056,12 @@ func TestCheckResponseSnapshot_DescribeGlobalReplicationGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGlobalReplicationGroups(context.Background(), &DescribeGlobalReplicationGroupsInput{})
+	got, err := svc.DescribeGlobalReplicationGroups(context.Background(), &DescribeGlobalReplicationGroupsInput{
+		GlobalReplicationGroupId: ptr.String("__GlobalReplicationGroupId__"),
+		MaxRecords:               ptr.Int32(1),
+		Marker:                   ptr.String("__Marker__"),
+		ShowMemberInfo:           ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3939,7 +4500,11 @@ func TestCheckResponseSnapshot_DescribeReplicationGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplicationGroups(context.Background(), &DescribeReplicationGroupsInput{})
+	got, err := svc.DescribeReplicationGroups(context.Background(), &DescribeReplicationGroupsInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		MaxRecords:         ptr.Int32(1),
+		Marker:             ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4010,7 +4575,16 @@ func TestCheckResponseSnapshot_DescribeReservedCacheNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReservedCacheNodes(context.Background(), &DescribeReservedCacheNodesInput{})
+	got, err := svc.DescribeReservedCacheNodes(context.Background(), &DescribeReservedCacheNodesInput{
+		ReservedCacheNodeId:          ptr.String("__ReservedCacheNodeId__"),
+		ReservedCacheNodesOfferingId: ptr.String("__ReservedCacheNodesOfferingId__"),
+		CacheNodeType:                ptr.String("__CacheNodeType__"),
+		Duration:                     ptr.String("__Duration__"),
+		ProductDescription:           ptr.String("__ProductDescription__"),
+		OfferingType:                 ptr.String("__OfferingType__"),
+		MaxRecords:                   ptr.Int32(1),
+		Marker:                       ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4071,7 +4645,15 @@ func TestCheckResponseSnapshot_DescribeReservedCacheNodesOfferings(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReservedCacheNodesOfferings(context.Background(), &DescribeReservedCacheNodesOfferingsInput{})
+	got, err := svc.DescribeReservedCacheNodesOfferings(context.Background(), &DescribeReservedCacheNodesOfferingsInput{
+		ReservedCacheNodesOfferingId: ptr.String("__ReservedCacheNodesOfferingId__"),
+		CacheNodeType:                ptr.String("__CacheNodeType__"),
+		Duration:                     ptr.String("__Duration__"),
+		ProductDescription:           ptr.String("__ProductDescription__"),
+		OfferingType:                 ptr.String("__OfferingType__"),
+		MaxRecords:                   ptr.Int32(1),
+		Marker:                       ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4124,7 +4706,13 @@ func TestCheckResponseSnapshot_DescribeServerlessCacheSnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServerlessCacheSnapshots(context.Background(), &DescribeServerlessCacheSnapshotsInput{})
+	got, err := svc.DescribeServerlessCacheSnapshots(context.Background(), &DescribeServerlessCacheSnapshotsInput{
+		ServerlessCacheName:         ptr.String("__ServerlessCacheName__"),
+		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
+		SnapshotType:                ptr.String("__SnapshotType__"),
+		NextToken:                   ptr.String("__NextToken__"),
+		MaxResults:                  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4233,7 +4821,11 @@ func TestCheckResponseSnapshot_DescribeServerlessCaches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServerlessCaches(context.Background(), &DescribeServerlessCachesInput{})
+	got, err := svc.DescribeServerlessCaches(context.Background(), &DescribeServerlessCachesInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4284,7 +4876,15 @@ func TestCheckResponseSnapshot_DescribeServiceUpdates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServiceUpdates(context.Background(), &DescribeServiceUpdatesInput{})
+	got, err := svc.DescribeServiceUpdates(context.Background(), &DescribeServiceUpdatesInput{
+		ServiceUpdateName: ptr.String("__ServiceUpdateName__"),
+		ServiceUpdateStatus: []types.ServiceUpdateStatus{
+			types.ServiceUpdateStatus("available"),
+			types.ServiceUpdateStatus("available"),
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4463,7 +5063,15 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSnapshots(context.Background(), &DescribeSnapshotsInput{})
+	got, err := svc.DescribeSnapshots(context.Background(), &DescribeSnapshotsInput{
+		ReplicationGroupId:  ptr.String("__ReplicationGroupId__"),
+		CacheClusterId:      ptr.String("__CacheClusterId__"),
+		SnapshotName:        ptr.String("__SnapshotName__"),
+		SnapshotSource:      ptr.String("__SnapshotSource__"),
+		Marker:              ptr.String("__Marker__"),
+		MaxRecords:          ptr.Int32(1),
+		ShowNodeGroupConfig: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4676,7 +5284,33 @@ func TestCheckResponseSnapshot_DescribeUpdateActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUpdateActions(context.Background(), &DescribeUpdateActionsInput{})
+	got, err := svc.DescribeUpdateActions(context.Background(), &DescribeUpdateActionsInput{
+		ServiceUpdateName: ptr.String("__ServiceUpdateName__"),
+		ReplicationGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CacheClusterIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Engine: ptr.String("__Engine__"),
+		ServiceUpdateStatus: []types.ServiceUpdateStatus{
+			types.ServiceUpdateStatus("available"),
+			types.ServiceUpdateStatus("available"),
+		},
+		ServiceUpdateTimeRange: &types.TimeRangeFilter{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		UpdateActionStatus: []types.UpdateActionStatus{
+			types.UpdateActionStatus("not-applied"),
+			types.UpdateActionStatus("not-applied"),
+		},
+		ShowNodeLevelUpdateStatus: ptr.Bool(true),
+		MaxRecords:                ptr.Int32(1),
+		Marker:                    ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4757,7 +5391,11 @@ func TestCheckResponseSnapshot_DescribeUserGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUserGroups(context.Background(), &DescribeUserGroupsInput{})
+	got, err := svc.DescribeUserGroups(context.Background(), &DescribeUserGroupsInput{
+		UserGroupId: ptr.String("__UserGroupId__"),
+		MaxRecords:  ptr.Int32(1),
+		Marker:      ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4814,7 +5452,28 @@ func TestCheckResponseSnapshot_DescribeUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUsers(context.Background(), &DescribeUsersInput{})
+	got, err := svc.DescribeUsers(context.Background(), &DescribeUsersInput{
+		Engine: ptr.String("__Engine__"),
+		UserId: ptr.String("__UserId__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4873,7 +5532,11 @@ func TestCheckResponseSnapshot_DisassociateGlobalReplicationGroup(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateGlobalReplicationGroup(context.Background(), &DisassociateGlobalReplicationGroupInput{})
+	got, err := svc.DisassociateGlobalReplicationGroup(context.Background(), &DisassociateGlobalReplicationGroupInput{
+		GlobalReplicationGroupId: ptr.String("__GlobalReplicationGroupId__"),
+		ReplicationGroupId:       ptr.String("__ReplicationGroupId__"),
+		ReplicationGroupRegion:   ptr.String("__ReplicationGroupRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4908,7 +5571,10 @@ func TestCheckResponseSnapshot_ExportServerlessCacheSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportServerlessCacheSnapshot(context.Background(), &ExportServerlessCacheSnapshotInput{})
+	got, err := svc.ExportServerlessCacheSnapshot(context.Background(), &ExportServerlessCacheSnapshotInput{
+		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
+		S3BucketName:                ptr.String("__S3BucketName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4967,7 +5633,11 @@ func TestCheckResponseSnapshot_FailoverGlobalReplicationGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.FailoverGlobalReplicationGroup(context.Background(), &FailoverGlobalReplicationGroupInput{})
+	got, err := svc.FailoverGlobalReplicationGroup(context.Background(), &FailoverGlobalReplicationGroupInput{
+		GlobalReplicationGroupId:  ptr.String("__GlobalReplicationGroupId__"),
+		PrimaryRegion:             ptr.String("__PrimaryRegion__"),
+		PrimaryReplicationGroupId: ptr.String("__PrimaryReplicationGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5026,7 +5696,53 @@ func TestCheckResponseSnapshot_IncreaseNodeGroupsInGlobalReplicationGroup(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.IncreaseNodeGroupsInGlobalReplicationGroup(context.Background(), &IncreaseNodeGroupsInGlobalReplicationGroupInput{})
+	got, err := svc.IncreaseNodeGroupsInGlobalReplicationGroup(context.Background(), &IncreaseNodeGroupsInGlobalReplicationGroupInput{
+		GlobalReplicationGroupId: ptr.String("__GlobalReplicationGroupId__"),
+		NodeGroupCount:           ptr.Int32(1),
+		RegionalConfigurations: []types.RegionalConfiguration{
+			{
+				ReplicationGroupId:     ptr.String("__ReplicationGroupId__"),
+				ReplicationGroupRegion: ptr.String("__ReplicationGroupRegion__"),
+				ReshardingConfiguration: []types.ReshardingConfiguration{
+					{
+						NodeGroupId: ptr.String("__NodeGroupId__"),
+						PreferredAvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						NodeGroupId: ptr.String("__NodeGroupId__"),
+						PreferredAvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				ReplicationGroupId:     ptr.String("__ReplicationGroupId__"),
+				ReplicationGroupRegion: ptr.String("__ReplicationGroupRegion__"),
+				ReshardingConfiguration: []types.ReshardingConfiguration{
+					{
+						NodeGroupId: ptr.String("__NodeGroupId__"),
+						PreferredAvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						NodeGroupId: ptr.String("__NodeGroupId__"),
+						PreferredAvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		ApplyImmediately: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5254,7 +5970,37 @@ func TestCheckResponseSnapshot_IncreaseReplicaCount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.IncreaseReplicaCount(context.Background(), &IncreaseReplicaCountInput{})
+	got, err := svc.IncreaseReplicaCount(context.Background(), &IncreaseReplicaCountInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		NewReplicaCount:    ptr.Int32(1),
+		ReplicaConfiguration: []types.ConfigureShard{
+			{
+				NodeGroupId:     ptr.String("__NodeGroupId__"),
+				NewReplicaCount: ptr.Int32(1),
+				PreferredAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PreferredOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				NodeGroupId:     ptr.String("__NodeGroupId__"),
+				NewReplicaCount: ptr.Int32(1),
+				PreferredAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PreferredOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ApplyImmediately: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5282,7 +6028,10 @@ func TestCheckResponseSnapshot_ListAllowedNodeTypeModifications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAllowedNodeTypeModifications(context.Background(), &ListAllowedNodeTypeModificationsInput{})
+	got, err := svc.ListAllowedNodeTypeModifications(context.Background(), &ListAllowedNodeTypeModificationsInput{
+		CacheClusterId:     ptr.String("__CacheClusterId__"),
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5312,7 +6061,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5499,7 +6250,75 @@ func TestCheckResponseSnapshot_ModifyCacheCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyCacheCluster(context.Background(), &ModifyCacheClusterInput{})
+	got, err := svc.ModifyCacheCluster(context.Background(), &ModifyCacheClusterInput{
+		CacheClusterId: ptr.String("__CacheClusterId__"),
+		NumCacheNodes:  ptr.Int32(1),
+		CacheNodeIdsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AZMode: types.AZMode("single-az"),
+		NewAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		CacheParameterGroupName:    ptr.String("__CacheParameterGroupName__"),
+		NotificationTopicStatus:    ptr.String("__NotificationTopicStatus__"),
+		ApplyImmediately:           ptr.Bool(true),
+		Engine:                     ptr.String("__Engine__"),
+		EngineVersion:              ptr.String("__EngineVersion__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		CacheNodeType:              ptr.String("__CacheNodeType__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		AuthTokenUpdateStrategy:    types.AuthTokenUpdateStrategyType("SET"),
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		IpDiscovery: types.IpDiscovery("ipv4"),
+		ScaleConfig: &types.ScaleConfig{
+			ScalePercentage:      ptr.Int32(1),
+			ScaleIntervalMinutes: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5520,7 +6339,19 @@ func TestCheckResponseSnapshot_ModifyCacheParameterGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyCacheParameterGroup(context.Background(), &ModifyCacheParameterGroupInput{})
+	got, err := svc.ModifyCacheParameterGroup(context.Background(), &ModifyCacheParameterGroupInput{
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		ParameterNameValues: []types.ParameterNameValue{
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5578,7 +6409,14 @@ func TestCheckResponseSnapshot_ModifyCacheSubnetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyCacheSubnetGroup(context.Background(), &ModifyCacheSubnetGroupInput{})
+	got, err := svc.ModifyCacheSubnetGroup(context.Background(), &ModifyCacheSubnetGroupInput{
+		CacheSubnetGroupName:        ptr.String("__CacheSubnetGroupName__"),
+		CacheSubnetGroupDescription: ptr.String("__CacheSubnetGroupDescription__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5637,7 +6475,16 @@ func TestCheckResponseSnapshot_ModifyGlobalReplicationGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyGlobalReplicationGroup(context.Background(), &ModifyGlobalReplicationGroupInput{})
+	got, err := svc.ModifyGlobalReplicationGroup(context.Background(), &ModifyGlobalReplicationGroupInput{
+		GlobalReplicationGroupId:          ptr.String("__GlobalReplicationGroupId__"),
+		ApplyImmediately:                  ptr.Bool(true),
+		CacheNodeType:                     ptr.String("__CacheNodeType__"),
+		Engine:                            ptr.String("__Engine__"),
+		EngineVersion:                     ptr.String("__EngineVersion__"),
+		CacheParameterGroupName:           ptr.String("__CacheParameterGroupName__"),
+		GlobalReplicationGroupDescription: ptr.String("__GlobalReplicationGroupDescription__"),
+		AutomaticFailoverEnabled:          ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5865,7 +6712,80 @@ func TestCheckResponseSnapshot_ModifyReplicationGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyReplicationGroup(context.Background(), &ModifyReplicationGroupInput{})
+	got, err := svc.ModifyReplicationGroup(context.Background(), &ModifyReplicationGroupInput{
+		ReplicationGroupId:          ptr.String("__ReplicationGroupId__"),
+		ReplicationGroupDescription: ptr.String("__ReplicationGroupDescription__"),
+		PrimaryClusterId:            ptr.String("__PrimaryClusterId__"),
+		SnapshottingClusterId:       ptr.String("__SnapshottingClusterId__"),
+		AutomaticFailoverEnabled:    ptr.Bool(true),
+		MultiAZEnabled:              ptr.Bool(true),
+		NodeGroupId:                 ptr.String("__NodeGroupId__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		CacheParameterGroupName:    ptr.String("__CacheParameterGroupName__"),
+		NotificationTopicStatus:    ptr.String("__NotificationTopicStatus__"),
+		ApplyImmediately:           ptr.Bool(true),
+		Engine:                     ptr.String("__Engine__"),
+		EngineVersion:              ptr.String("__EngineVersion__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		CacheNodeType:              ptr.String("__CacheNodeType__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		AuthTokenUpdateStrategy:    types.AuthTokenUpdateStrategyType("SET"),
+		UserGroupIdsToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserGroupIdsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveUserGroups: ptr.Bool(true),
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		IpDiscovery:              types.IpDiscovery("ipv4"),
+		TransitEncryptionEnabled: ptr.Bool(true),
+		TransitEncryptionMode:    types.TransitEncryptionMode("preferred"),
+		ClusterMode:              types.ClusterMode("enabled"),
+		Durability:               types.Durability("default"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6093,7 +7013,35 @@ func TestCheckResponseSnapshot_ModifyReplicationGroupShardConfiguration(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyReplicationGroupShardConfiguration(context.Background(), &ModifyReplicationGroupShardConfigurationInput{})
+	got, err := svc.ModifyReplicationGroupShardConfiguration(context.Background(), &ModifyReplicationGroupShardConfigurationInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		NodeGroupCount:     ptr.Int32(1),
+		ApplyImmediately:   ptr.Bool(true),
+		ReshardingConfiguration: []types.ReshardingConfiguration{
+			{
+				NodeGroupId: ptr.String("__NodeGroupId__"),
+				PreferredAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				NodeGroupId: ptr.String("__NodeGroupId__"),
+				PreferredAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NodeGroupsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NodeGroupsToRetain: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6156,7 +7104,31 @@ func TestCheckResponseSnapshot_ModifyServerlessCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyServerlessCache(context.Background(), &ModifyServerlessCacheInput{})
+	got, err := svc.ModifyServerlessCache(context.Background(), &ModifyServerlessCacheInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		Description:         ptr.String("__Description__"),
+		CacheUsageLimits: &types.CacheUsageLimits{
+			DataStorage: &types.DataStorage{
+				Maximum: ptr.Int32(1),
+				Minimum: ptr.Int32(1),
+				Unit:    types.DataStorageUnit("GB"),
+			},
+			ECPUPerSecond: &types.ECPUPerSecond{
+				Maximum: ptr.Int32(1),
+				Minimum: ptr.Int32(1),
+			},
+		},
+		RemoveUserGroup: ptr.Bool(true),
+		UserGroupId:     ptr.String("__UserGroupId__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotRetentionLimit: ptr.Int32(1),
+		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
+		Engine:                 ptr.String("__Engine__"),
+		MajorEngineVersion:     ptr.String("__MajorEngineVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6191,7 +7163,24 @@ func TestCheckResponseSnapshot_ModifyUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyUser(context.Background(), &ModifyUserInput{})
+	got, err := svc.ModifyUser(context.Background(), &ModifyUserInput{
+		UserId:             ptr.String("__UserId__"),
+		AccessString:       ptr.String("__AccessString__"),
+		AppendAccessString: ptr.String("__AppendAccessString__"),
+		Passwords: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NoPasswordRequired: ptr.Bool(true),
+		AuthenticationMode: &types.AuthenticationMode{
+			Type: types.InputAuthenticationType("password"),
+			Passwords: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Engine: ptr.String("__Engine__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6238,7 +7227,18 @@ func TestCheckResponseSnapshot_ModifyUserGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyUserGroup(context.Background(), &ModifyUserGroupInput{})
+	got, err := svc.ModifyUserGroup(context.Background(), &ModifyUserGroupInput{
+		UserGroupId: ptr.String("__UserGroupId__"),
+		UserIdsToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserIdsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Engine: ptr.String("__Engine__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6282,7 +7282,21 @@ func TestCheckResponseSnapshot_PurchaseReservedCacheNodesOffering(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PurchaseReservedCacheNodesOffering(context.Background(), &PurchaseReservedCacheNodesOfferingInput{})
+	got, err := svc.PurchaseReservedCacheNodesOffering(context.Background(), &PurchaseReservedCacheNodesOfferingInput{
+		ReservedCacheNodesOfferingId: ptr.String("__ReservedCacheNodesOfferingId__"),
+		ReservedCacheNodeId:          ptr.String("__ReservedCacheNodeId__"),
+		CacheNodeCount:               ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6341,7 +7355,10 @@ func TestCheckResponseSnapshot_RebalanceSlotsInGlobalReplicationGroup(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RebalanceSlotsInGlobalReplicationGroup(context.Background(), &RebalanceSlotsInGlobalReplicationGroupInput{})
+	got, err := svc.RebalanceSlotsInGlobalReplicationGroup(context.Background(), &RebalanceSlotsInGlobalReplicationGroupInput{
+		GlobalReplicationGroupId: ptr.String("__GlobalReplicationGroupId__"),
+		ApplyImmediately:         ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6528,7 +7545,13 @@ func TestCheckResponseSnapshot_RebootCacheCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RebootCacheCluster(context.Background(), &RebootCacheClusterInput{})
+	got, err := svc.RebootCacheCluster(context.Background(), &RebootCacheClusterInput{
+		CacheClusterId: ptr.String("__CacheClusterId__"),
+		CacheNodeIdsToReboot: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6558,7 +7581,13 @@ func TestCheckResponseSnapshot_RemoveTagsFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTagsFromResource(context.Background(), &RemoveTagsFromResourceInput{})
+	got, err := svc.RemoveTagsFromResource(context.Background(), &RemoveTagsFromResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6579,7 +7608,20 @@ func TestCheckResponseSnapshot_ResetCacheParameterGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetCacheParameterGroup(context.Background(), &ResetCacheParameterGroupInput{})
+	got, err := svc.ResetCacheParameterGroup(context.Background(), &ResetCacheParameterGroupInput{
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		ResetAllParameters:      ptr.Bool(true),
+		ParameterNameValues: []types.ParameterNameValue{
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6617,7 +7659,11 @@ func TestCheckResponseSnapshot_RevokeCacheSecurityGroupIngress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeCacheSecurityGroupIngress(context.Background(), &RevokeCacheSecurityGroupIngressInput{})
+	got, err := svc.RevokeCacheSecurityGroupIngress(context.Background(), &RevokeCacheSecurityGroupIngressInput{
+		CacheSecurityGroupName:  ptr.String("__CacheSecurityGroupName__"),
+		EC2SecurityGroupName:    ptr.String("__EC2SecurityGroupName__"),
+		EC2SecurityGroupOwnerId: ptr.String("__EC2SecurityGroupOwnerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6845,7 +7891,19 @@ func TestCheckResponseSnapshot_StartMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMigration(context.Background(), &StartMigrationInput{})
+	got, err := svc.StartMigration(context.Background(), &StartMigrationInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		CustomerNodeEndpointList: []types.CustomerNodeEndpoint{
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7073,7 +8131,10 @@ func TestCheckResponseSnapshot_TestFailover(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestFailover(context.Background(), &TestFailoverInput{})
+	got, err := svc.TestFailover(context.Background(), &TestFailoverInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		NodeGroupId:        ptr.String("__NodeGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7301,7 +8362,19 @@ func TestCheckResponseSnapshot_TestMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestMigration(context.Background(), &TestMigrationInput{})
+	got, err := svc.TestMigration(context.Background(), &TestMigrationInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		CustomerNodeEndpointList: []types.CustomerNodeEndpoint{
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7322,7 +8395,10 @@ func TestCheckResponseSnapshot_Error_APICallRateForCustomerExceededFault(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TestFailover(context.Background(), &TestFailoverInput{})
+	_, opErr := svc.TestFailover(context.Background(), &TestFailoverInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		NodeGroupId:        ptr.String("__NodeGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7347,7 +8423,11 @@ func TestCheckResponseSnapshot_Error_AuthorizationAlreadyExistsFault(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AuthorizeCacheSecurityGroupIngress(context.Background(), &AuthorizeCacheSecurityGroupIngressInput{})
+	_, opErr := svc.AuthorizeCacheSecurityGroupIngress(context.Background(), &AuthorizeCacheSecurityGroupIngressInput{
+		CacheSecurityGroupName:  ptr.String("__CacheSecurityGroupName__"),
+		EC2SecurityGroupName:    ptr.String("__EC2SecurityGroupName__"),
+		EC2SecurityGroupOwnerId: ptr.String("__EC2SecurityGroupOwnerId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7372,7 +8452,11 @@ func TestCheckResponseSnapshot_Error_AuthorizationNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RevokeCacheSecurityGroupIngress(context.Background(), &RevokeCacheSecurityGroupIngressInput{})
+	_, opErr := svc.RevokeCacheSecurityGroupIngress(context.Background(), &RevokeCacheSecurityGroupIngressInput{
+		CacheSecurityGroupName:  ptr.String("__CacheSecurityGroupName__"),
+		EC2SecurityGroupName:    ptr.String("__EC2SecurityGroupName__"),
+		EC2SecurityGroupOwnerId: ptr.String("__EC2SecurityGroupOwnerId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7397,7 +8481,91 @@ func TestCheckResponseSnapshot_Error_CacheClusterAlreadyExistsFault(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{})
+	_, opErr := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{
+		CacheClusterId:            ptr.String("__CacheClusterId__"),
+		ReplicationGroupId:        ptr.String("__ReplicationGroupId__"),
+		AZMode:                    types.AZMode("single-az"),
+		PreferredAvailabilityZone: ptr.String("__PreferredAvailabilityZone__"),
+		PreferredAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumCacheNodes:           ptr.Int32(1),
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		OutpostMode:                types.OutpostMode("single-outpost"),
+		PreferredOutpostArn:        ptr.String("__PreferredOutpostArn__"),
+		PreferredOutpostArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		TransitEncryptionEnabled: ptr.Bool(true),
+		NetworkType:              types.NetworkType("ipv4"),
+		IpDiscovery:              types.IpDiscovery("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7422,7 +8590,19 @@ func TestCheckResponseSnapshot_Error_CacheClusterNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7447,7 +8627,21 @@ func TestCheckResponseSnapshot_Error_CacheParameterGroupAlreadyExistsFault(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheParameterGroup(context.Background(), &CreateCacheParameterGroupInput{})
+	_, opErr := svc.CreateCacheParameterGroup(context.Background(), &CreateCacheParameterGroupInput{
+		CacheParameterGroupName:   ptr.String("__CacheParameterGroupName__"),
+		CacheParameterGroupFamily: ptr.String("__CacheParameterGroupFamily__"),
+		Description:               ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7472,7 +8666,19 @@ func TestCheckResponseSnapshot_Error_CacheParameterGroupNotFoundFault(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7497,7 +8703,21 @@ func TestCheckResponseSnapshot_Error_CacheParameterGroupQuotaExceededFault(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheParameterGroup(context.Background(), &CreateCacheParameterGroupInput{})
+	_, opErr := svc.CreateCacheParameterGroup(context.Background(), &CreateCacheParameterGroupInput{
+		CacheParameterGroupName:   ptr.String("__CacheParameterGroupName__"),
+		CacheParameterGroupFamily: ptr.String("__CacheParameterGroupFamily__"),
+		Description:               ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7522,7 +8742,20 @@ func TestCheckResponseSnapshot_Error_CacheSecurityGroupAlreadyExistsFault(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheSecurityGroup(context.Background(), &CreateCacheSecurityGroupInput{})
+	_, opErr := svc.CreateCacheSecurityGroup(context.Background(), &CreateCacheSecurityGroupInput{
+		CacheSecurityGroupName: ptr.String("__CacheSecurityGroupName__"),
+		Description:            ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7547,7 +8780,19 @@ func TestCheckResponseSnapshot_Error_CacheSecurityGroupNotFoundFault(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7572,7 +8817,20 @@ func TestCheckResponseSnapshot_Error_CacheSecurityGroupQuotaExceededFault(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheSecurityGroup(context.Background(), &CreateCacheSecurityGroupInput{})
+	_, opErr := svc.CreateCacheSecurityGroup(context.Background(), &CreateCacheSecurityGroupInput{
+		CacheSecurityGroupName: ptr.String("__CacheSecurityGroupName__"),
+		Description:            ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7597,7 +8855,24 @@ func TestCheckResponseSnapshot_Error_CacheSubnetGroupAlreadyExistsFault(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheSubnetGroup(context.Background(), &CreateCacheSubnetGroupInput{})
+	_, opErr := svc.CreateCacheSubnetGroup(context.Background(), &CreateCacheSubnetGroupInput{
+		CacheSubnetGroupName:        ptr.String("__CacheSubnetGroupName__"),
+		CacheSubnetGroupDescription: ptr.String("__CacheSubnetGroupDescription__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7622,7 +8897,9 @@ func TestCheckResponseSnapshot_Error_CacheSubnetGroupInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCacheSubnetGroup(context.Background(), &DeleteCacheSubnetGroupInput{})
+	_, opErr := svc.DeleteCacheSubnetGroup(context.Background(), &DeleteCacheSubnetGroupInput{
+		CacheSubnetGroupName: ptr.String("__CacheSubnetGroupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7647,7 +8924,19 @@ func TestCheckResponseSnapshot_Error_CacheSubnetGroupNotFoundFault(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7672,7 +8961,24 @@ func TestCheckResponseSnapshot_Error_CacheSubnetGroupQuotaExceededFault(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheSubnetGroup(context.Background(), &CreateCacheSubnetGroupInput{})
+	_, opErr := svc.CreateCacheSubnetGroup(context.Background(), &CreateCacheSubnetGroupInput{
+		CacheSubnetGroupName:        ptr.String("__CacheSubnetGroupName__"),
+		CacheSubnetGroupDescription: ptr.String("__CacheSubnetGroupDescription__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7697,7 +9003,24 @@ func TestCheckResponseSnapshot_Error_CacheSubnetQuotaExceededFault(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheSubnetGroup(context.Background(), &CreateCacheSubnetGroupInput{})
+	_, opErr := svc.CreateCacheSubnetGroup(context.Background(), &CreateCacheSubnetGroupInput{
+		CacheSubnetGroupName:        ptr.String("__CacheSubnetGroupName__"),
+		CacheSubnetGroupDescription: ptr.String("__CacheSubnetGroupDescription__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7722,7 +9045,91 @@ func TestCheckResponseSnapshot_Error_ClusterQuotaForCustomerExceededFault(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{})
+	_, opErr := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{
+		CacheClusterId:            ptr.String("__CacheClusterId__"),
+		ReplicationGroupId:        ptr.String("__ReplicationGroupId__"),
+		AZMode:                    types.AZMode("single-az"),
+		PreferredAvailabilityZone: ptr.String("__PreferredAvailabilityZone__"),
+		PreferredAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumCacheNodes:           ptr.Int32(1),
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		OutpostMode:                types.OutpostMode("single-outpost"),
+		PreferredOutpostArn:        ptr.String("__PreferredOutpostArn__"),
+		PreferredOutpostArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		TransitEncryptionEnabled: ptr.Bool(true),
+		NetworkType:              types.NetworkType("ipv4"),
+		IpDiscovery:              types.IpDiscovery("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7747,7 +9154,9 @@ func TestCheckResponseSnapshot_Error_DefaultUserAssociatedToUserGroupFault(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	_, opErr := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		UserId: ptr.String("__UserId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7772,7 +9181,24 @@ func TestCheckResponseSnapshot_Error_DefaultUserRequired(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUserGroup(context.Background(), &CreateUserGroupInput{})
+	_, opErr := svc.CreateUserGroup(context.Background(), &CreateUserGroupInput{
+		UserGroupId: ptr.String("__UserGroupId__"),
+		Engine:      ptr.String("__Engine__"),
+		UserIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7797,7 +9223,34 @@ func TestCheckResponseSnapshot_Error_DuplicateUserNameFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUser(context.Background(), &CreateUserInput{})
+	_, opErr := svc.CreateUser(context.Background(), &CreateUserInput{
+		UserId:   ptr.String("__UserId__"),
+		UserName: ptr.String("__UserName__"),
+		Engine:   ptr.String("__Engine__"),
+		Passwords: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AccessString:       ptr.String("__AccessString__"),
+		NoPasswordRequired: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AuthenticationMode: &types.AuthenticationMode{
+			Type: types.InputAuthenticationType("password"),
+			Passwords: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7822,7 +9275,11 @@ func TestCheckResponseSnapshot_Error_GlobalReplicationGroupAlreadyExistsFault(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGlobalReplicationGroup(context.Background(), &CreateGlobalReplicationGroupInput{})
+	_, opErr := svc.CreateGlobalReplicationGroup(context.Background(), &CreateGlobalReplicationGroupInput{
+		GlobalReplicationGroupIdSuffix:    ptr.String("__GlobalReplicationGroupIdSuffix__"),
+		GlobalReplicationGroupDescription: ptr.String("__GlobalReplicationGroupDescription__"),
+		PrimaryReplicationGroupId:         ptr.String("__PrimaryReplicationGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7847,7 +9304,132 @@ func TestCheckResponseSnapshot_Error_GlobalReplicationGroupNotFoundFault(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{})
+	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{
+		ReplicationGroupId:          ptr.String("__ReplicationGroupId__"),
+		ReplicationGroupDescription: ptr.String("__ReplicationGroupDescription__"),
+		GlobalReplicationGroupId:    ptr.String("__GlobalReplicationGroupId__"),
+		PrimaryClusterId:            ptr.String("__PrimaryClusterId__"),
+		AutomaticFailoverEnabled:    ptr.Bool(true),
+		MultiAZEnabled:              ptr.Bool(true),
+		NumCacheClusters:            ptr.Int32(1),
+		PreferredCacheClusterAZs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumNodeGroups:        ptr.Int32(1),
+		ReplicasPerNodeGroup: ptr.Int32(1),
+		NodeGroupConfiguration: []types.NodeGroupConfiguration{
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		TransitEncryptionEnabled:   ptr.Bool(true),
+		AtRestEncryptionEnabled:    ptr.Bool(true),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		UserGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		DataTieringEnabled:          ptr.Bool(true),
+		NetworkType:                 types.NetworkType("ipv4"),
+		IpDiscovery:                 types.IpDiscovery("ipv4"),
+		TransitEncryptionMode:       types.TransitEncryptionMode("preferred"),
+		ClusterMode:                 types.ClusterMode("enabled"),
+		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
+		Durability:                  types.Durability("default"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7872,7 +9454,91 @@ func TestCheckResponseSnapshot_Error_InsufficientCacheClusterCapacityFault(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{})
+	_, opErr := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{
+		CacheClusterId:            ptr.String("__CacheClusterId__"),
+		ReplicationGroupId:        ptr.String("__ReplicationGroupId__"),
+		AZMode:                    types.AZMode("single-az"),
+		PreferredAvailabilityZone: ptr.String("__PreferredAvailabilityZone__"),
+		PreferredAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumCacheNodes:           ptr.Int32(1),
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		OutpostMode:                types.OutpostMode("single-outpost"),
+		PreferredOutpostArn:        ptr.String("__PreferredOutpostArn__"),
+		PreferredOutpostArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		TransitEncryptionEnabled: ptr.Bool(true),
+		NetworkType:              types.NetworkType("ipv4"),
+		IpDiscovery:              types.IpDiscovery("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7897,7 +9563,19 @@ func TestCheckResponseSnapshot_Error_InvalidARNFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7922,7 +9600,132 @@ func TestCheckResponseSnapshot_Error_InvalidCacheClusterStateFault(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{})
+	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{
+		ReplicationGroupId:          ptr.String("__ReplicationGroupId__"),
+		ReplicationGroupDescription: ptr.String("__ReplicationGroupDescription__"),
+		GlobalReplicationGroupId:    ptr.String("__GlobalReplicationGroupId__"),
+		PrimaryClusterId:            ptr.String("__PrimaryClusterId__"),
+		AutomaticFailoverEnabled:    ptr.Bool(true),
+		MultiAZEnabled:              ptr.Bool(true),
+		NumCacheClusters:            ptr.Int32(1),
+		PreferredCacheClusterAZs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumNodeGroups:        ptr.Int32(1),
+		ReplicasPerNodeGroup: ptr.Int32(1),
+		NodeGroupConfiguration: []types.NodeGroupConfiguration{
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		TransitEncryptionEnabled:   ptr.Bool(true),
+		AtRestEncryptionEnabled:    ptr.Bool(true),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		UserGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		DataTieringEnabled:          ptr.Bool(true),
+		NetworkType:                 types.NetworkType("ipv4"),
+		IpDiscovery:                 types.IpDiscovery("ipv4"),
+		TransitEncryptionMode:       types.TransitEncryptionMode("preferred"),
+		ClusterMode:                 types.ClusterMode("enabled"),
+		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
+		Durability:                  types.Durability("default"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7947,7 +9750,21 @@ func TestCheckResponseSnapshot_Error_InvalidCacheParameterGroupStateFault(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheParameterGroup(context.Background(), &CreateCacheParameterGroupInput{})
+	_, opErr := svc.CreateCacheParameterGroup(context.Background(), &CreateCacheParameterGroupInput{
+		CacheParameterGroupName:   ptr.String("__CacheParameterGroupName__"),
+		CacheParameterGroupFamily: ptr.String("__CacheParameterGroupFamily__"),
+		Description:               ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7972,7 +9789,11 @@ func TestCheckResponseSnapshot_Error_InvalidCacheSecurityGroupStateFault(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AuthorizeCacheSecurityGroupIngress(context.Background(), &AuthorizeCacheSecurityGroupIngressInput{})
+	_, opErr := svc.AuthorizeCacheSecurityGroupIngress(context.Background(), &AuthorizeCacheSecurityGroupIngressInput{
+		CacheSecurityGroupName:  ptr.String("__CacheSecurityGroupName__"),
+		EC2SecurityGroupName:    ptr.String("__EC2SecurityGroupName__"),
+		EC2SecurityGroupOwnerId: ptr.String("__EC2SecurityGroupOwnerId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7997,7 +9818,50 @@ func TestCheckResponseSnapshot_Error_InvalidCredentialsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateServerlessCache(context.Background(), &CreateServerlessCacheInput{})
+	_, opErr := svc.CreateServerlessCache(context.Background(), &CreateServerlessCacheInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		Description:         ptr.String("__Description__"),
+		Engine:              ptr.String("__Engine__"),
+		MajorEngineVersion:  ptr.String("__MajorEngineVersion__"),
+		CacheUsageLimits: &types.CacheUsageLimits{
+			DataStorage: &types.DataStorage{
+				Maximum: ptr.Int32(1),
+				Minimum: ptr.Int32(1),
+				Unit:    types.DataStorageUnit("GB"),
+			},
+			ECPUPerSecond: &types.ECPUPerSecond{
+				Maximum: ptr.Int32(1),
+				Minimum: ptr.Int32(1),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotArnsToRestore: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UserGroupId: ptr.String("__UserGroupId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotRetentionLimit: ptr.Int32(1),
+		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
+		NetworkType:            types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8022,7 +9886,132 @@ func TestCheckResponseSnapshot_Error_InvalidGlobalReplicationGroupStateFault(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{})
+	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{
+		ReplicationGroupId:          ptr.String("__ReplicationGroupId__"),
+		ReplicationGroupDescription: ptr.String("__ReplicationGroupDescription__"),
+		GlobalReplicationGroupId:    ptr.String("__GlobalReplicationGroupId__"),
+		PrimaryClusterId:            ptr.String("__PrimaryClusterId__"),
+		AutomaticFailoverEnabled:    ptr.Bool(true),
+		MultiAZEnabled:              ptr.Bool(true),
+		NumCacheClusters:            ptr.Int32(1),
+		PreferredCacheClusterAZs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumNodeGroups:        ptr.Int32(1),
+		ReplicasPerNodeGroup: ptr.Int32(1),
+		NodeGroupConfiguration: []types.NodeGroupConfiguration{
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		TransitEncryptionEnabled:   ptr.Bool(true),
+		AtRestEncryptionEnabled:    ptr.Bool(true),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		UserGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		DataTieringEnabled:          ptr.Bool(true),
+		NetworkType:                 types.NetworkType("ipv4"),
+		IpDiscovery:                 types.IpDiscovery("ipv4"),
+		TransitEncryptionMode:       types.TransitEncryptionMode("preferred"),
+		ClusterMode:                 types.ClusterMode("enabled"),
+		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
+		Durability:                  types.Durability("default"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8047,7 +10036,37 @@ func TestCheckResponseSnapshot_Error_InvalidKMSKeyFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.IncreaseReplicaCount(context.Background(), &IncreaseReplicaCountInput{})
+	_, opErr := svc.IncreaseReplicaCount(context.Background(), &IncreaseReplicaCountInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		NewReplicaCount:    ptr.Int32(1),
+		ReplicaConfiguration: []types.ConfigureShard{
+			{
+				NodeGroupId:     ptr.String("__NodeGroupId__"),
+				NewReplicaCount: ptr.Int32(1),
+				PreferredAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PreferredOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				NodeGroupId:     ptr.String("__NodeGroupId__"),
+				NewReplicaCount: ptr.Int32(1),
+				PreferredAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PreferredOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ApplyImmediately: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8072,7 +10091,11 @@ func TestCheckResponseSnapshot_Error_InvalidParameterCombinationException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AuthorizeCacheSecurityGroupIngress(context.Background(), &AuthorizeCacheSecurityGroupIngressInput{})
+	_, opErr := svc.AuthorizeCacheSecurityGroupIngress(context.Background(), &AuthorizeCacheSecurityGroupIngressInput{
+		CacheSecurityGroupName:  ptr.String("__CacheSecurityGroupName__"),
+		EC2SecurityGroupName:    ptr.String("__EC2SecurityGroupName__"),
+		EC2SecurityGroupOwnerId: ptr.String("__EC2SecurityGroupOwnerId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8097,7 +10120,11 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AuthorizeCacheSecurityGroupIngress(context.Background(), &AuthorizeCacheSecurityGroupIngressInput{})
+	_, opErr := svc.AuthorizeCacheSecurityGroupIngress(context.Background(), &AuthorizeCacheSecurityGroupIngressInput{
+		CacheSecurityGroupName:  ptr.String("__CacheSecurityGroupName__"),
+		EC2SecurityGroupName:    ptr.String("__EC2SecurityGroupName__"),
+		EC2SecurityGroupOwnerId: ptr.String("__EC2SecurityGroupOwnerId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8122,7 +10149,19 @@ func TestCheckResponseSnapshot_Error_InvalidReplicationGroupStateFault(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8147,7 +10186,19 @@ func TestCheckResponseSnapshot_Error_InvalidServerlessCacheSnapshotStateFault(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8172,7 +10223,19 @@ func TestCheckResponseSnapshot_Error_InvalidServerlessCacheStateFault(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8197,7 +10260,22 @@ func TestCheckResponseSnapshot_Error_InvalidSnapshotStateFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopySnapshot(context.Background(), &CopySnapshotInput{})
+	_, opErr := svc.CopySnapshot(context.Background(), &CopySnapshotInput{
+		SourceSnapshotName: ptr.String("__SourceSnapshotName__"),
+		TargetSnapshotName: ptr.String("__TargetSnapshotName__"),
+		TargetBucket:       ptr.String("__TargetBucket__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8222,7 +10300,24 @@ func TestCheckResponseSnapshot_Error_InvalidSubnet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheSubnetGroup(context.Background(), &CreateCacheSubnetGroupInput{})
+	_, opErr := svc.CreateCacheSubnetGroup(context.Background(), &CreateCacheSubnetGroupInput{
+		CacheSubnetGroupName:        ptr.String("__CacheSubnetGroupName__"),
+		CacheSubnetGroupDescription: ptr.String("__CacheSubnetGroupDescription__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8247,7 +10342,132 @@ func TestCheckResponseSnapshot_Error_InvalidUserGroupStateFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{})
+	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{
+		ReplicationGroupId:          ptr.String("__ReplicationGroupId__"),
+		ReplicationGroupDescription: ptr.String("__ReplicationGroupDescription__"),
+		GlobalReplicationGroupId:    ptr.String("__GlobalReplicationGroupId__"),
+		PrimaryClusterId:            ptr.String("__PrimaryClusterId__"),
+		AutomaticFailoverEnabled:    ptr.Bool(true),
+		MultiAZEnabled:              ptr.Bool(true),
+		NumCacheClusters:            ptr.Int32(1),
+		PreferredCacheClusterAZs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumNodeGroups:        ptr.Int32(1),
+		ReplicasPerNodeGroup: ptr.Int32(1),
+		NodeGroupConfiguration: []types.NodeGroupConfiguration{
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		TransitEncryptionEnabled:   ptr.Bool(true),
+		AtRestEncryptionEnabled:    ptr.Bool(true),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		UserGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		DataTieringEnabled:          ptr.Bool(true),
+		NetworkType:                 types.NetworkType("ipv4"),
+		IpDiscovery:                 types.IpDiscovery("ipv4"),
+		TransitEncryptionMode:       types.TransitEncryptionMode("preferred"),
+		ClusterMode:                 types.ClusterMode("enabled"),
+		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
+		Durability:                  types.Durability("default"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8272,7 +10492,9 @@ func TestCheckResponseSnapshot_Error_InvalidUserStateFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	_, opErr := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		UserId: ptr.String("__UserId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8297,7 +10519,91 @@ func TestCheckResponseSnapshot_Error_InvalidVPCNetworkStateFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{})
+	_, opErr := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{
+		CacheClusterId:            ptr.String("__CacheClusterId__"),
+		ReplicationGroupId:        ptr.String("__ReplicationGroupId__"),
+		AZMode:                    types.AZMode("single-az"),
+		PreferredAvailabilityZone: ptr.String("__PreferredAvailabilityZone__"),
+		PreferredAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumCacheNodes:           ptr.Int32(1),
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		OutpostMode:                types.OutpostMode("single-outpost"),
+		PreferredOutpostArn:        ptr.String("__PreferredOutpostArn__"),
+		PreferredOutpostArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		TransitEncryptionEnabled: ptr.Bool(true),
+		NetworkType:              types.NetworkType("ipv4"),
+		IpDiscovery:              types.IpDiscovery("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8322,7 +10628,41 @@ func TestCheckResponseSnapshot_Error_NoOperationFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DecreaseReplicaCount(context.Background(), &DecreaseReplicaCountInput{})
+	_, opErr := svc.DecreaseReplicaCount(context.Background(), &DecreaseReplicaCountInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		NewReplicaCount:    ptr.Int32(1),
+		ReplicaConfiguration: []types.ConfigureShard{
+			{
+				NodeGroupId:     ptr.String("__NodeGroupId__"),
+				NewReplicaCount: ptr.Int32(1),
+				PreferredAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PreferredOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				NodeGroupId:     ptr.String("__NodeGroupId__"),
+				NewReplicaCount: ptr.Int32(1),
+				PreferredAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PreferredOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ReplicasToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ApplyImmediately: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8347,7 +10687,10 @@ func TestCheckResponseSnapshot_Error_NodeGroupNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TestFailover(context.Background(), &TestFailoverInput{})
+	_, opErr := svc.TestFailover(context.Background(), &TestFailoverInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		NodeGroupId:        ptr.String("__NodeGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8372,7 +10715,132 @@ func TestCheckResponseSnapshot_Error_NodeGroupsPerReplicationGroupQuotaExceededF
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{})
+	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{
+		ReplicationGroupId:          ptr.String("__ReplicationGroupId__"),
+		ReplicationGroupDescription: ptr.String("__ReplicationGroupDescription__"),
+		GlobalReplicationGroupId:    ptr.String("__GlobalReplicationGroupId__"),
+		PrimaryClusterId:            ptr.String("__PrimaryClusterId__"),
+		AutomaticFailoverEnabled:    ptr.Bool(true),
+		MultiAZEnabled:              ptr.Bool(true),
+		NumCacheClusters:            ptr.Int32(1),
+		PreferredCacheClusterAZs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumNodeGroups:        ptr.Int32(1),
+		ReplicasPerNodeGroup: ptr.Int32(1),
+		NodeGroupConfiguration: []types.NodeGroupConfiguration{
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		TransitEncryptionEnabled:   ptr.Bool(true),
+		AtRestEncryptionEnabled:    ptr.Bool(true),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		UserGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		DataTieringEnabled:          ptr.Bool(true),
+		NetworkType:                 types.NetworkType("ipv4"),
+		IpDiscovery:                 types.IpDiscovery("ipv4"),
+		TransitEncryptionMode:       types.TransitEncryptionMode("preferred"),
+		ClusterMode:                 types.ClusterMode("enabled"),
+		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
+		Durability:                  types.Durability("default"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8397,7 +10865,91 @@ func TestCheckResponseSnapshot_Error_NodeQuotaForClusterExceededFault(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{})
+	_, opErr := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{
+		CacheClusterId:            ptr.String("__CacheClusterId__"),
+		ReplicationGroupId:        ptr.String("__ReplicationGroupId__"),
+		AZMode:                    types.AZMode("single-az"),
+		PreferredAvailabilityZone: ptr.String("__PreferredAvailabilityZone__"),
+		PreferredAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumCacheNodes:           ptr.Int32(1),
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		OutpostMode:                types.OutpostMode("single-outpost"),
+		PreferredOutpostArn:        ptr.String("__PreferredOutpostArn__"),
+		PreferredOutpostArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		TransitEncryptionEnabled: ptr.Bool(true),
+		NetworkType:              types.NetworkType("ipv4"),
+		IpDiscovery:              types.IpDiscovery("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8422,7 +10974,91 @@ func TestCheckResponseSnapshot_Error_NodeQuotaForCustomerExceededFault(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{})
+	_, opErr := svc.CreateCacheCluster(context.Background(), &CreateCacheClusterInput{
+		CacheClusterId:            ptr.String("__CacheClusterId__"),
+		ReplicationGroupId:        ptr.String("__ReplicationGroupId__"),
+		AZMode:                    types.AZMode("single-az"),
+		PreferredAvailabilityZone: ptr.String("__PreferredAvailabilityZone__"),
+		PreferredAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumCacheNodes:           ptr.Int32(1),
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		OutpostMode:                types.OutpostMode("single-outpost"),
+		PreferredOutpostArn:        ptr.String("__PreferredOutpostArn__"),
+		PreferredOutpostArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		TransitEncryptionEnabled: ptr.Bool(true),
+		NetworkType:              types.NetworkType("ipv4"),
+		IpDiscovery:              types.IpDiscovery("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8447,7 +11083,132 @@ func TestCheckResponseSnapshot_Error_ReplicationGroupAlreadyExistsFault(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{})
+	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{
+		ReplicationGroupId:          ptr.String("__ReplicationGroupId__"),
+		ReplicationGroupDescription: ptr.String("__ReplicationGroupDescription__"),
+		GlobalReplicationGroupId:    ptr.String("__GlobalReplicationGroupId__"),
+		PrimaryClusterId:            ptr.String("__PrimaryClusterId__"),
+		AutomaticFailoverEnabled:    ptr.Bool(true),
+		MultiAZEnabled:              ptr.Bool(true),
+		NumCacheClusters:            ptr.Int32(1),
+		PreferredCacheClusterAZs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NumNodeGroups:        ptr.Int32(1),
+		ReplicasPerNodeGroup: ptr.Int32(1),
+		NodeGroupConfiguration: []types.NodeGroupConfiguration{
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				NodeGroupId:             ptr.String("__NodeGroupId__"),
+				Slots:                   ptr.String("__Slots__"),
+				ReplicaCount:            ptr.Int32(1),
+				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
+				ReplicaAvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
+				ReplicaOutpostArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CacheNodeType:           ptr.String("__CacheNodeType__"),
+		Engine:                  ptr.String("__Engine__"),
+		EngineVersion:           ptr.String("__EngineVersion__"),
+		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
+		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
+		CacheSecurityGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SnapshotArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotName:               ptr.String("__SnapshotName__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Port:                       ptr.Int32(1),
+		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
+		AutoMinorVersionUpgrade:    ptr.Bool(true),
+		SnapshotRetentionLimit:     ptr.Int32(1),
+		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
+		AuthToken:                  ptr.String("__AuthToken__"),
+		TransitEncryptionEnabled:   ptr.Bool(true),
+		AtRestEncryptionEnabled:    ptr.Bool(true),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		UserGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				LogType:         types.LogType("slow-log"),
+				DestinationType: types.DestinationType("cloudwatch-logs"),
+				DestinationDetails: &types.DestinationDetails{
+					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+					},
+				},
+				LogFormat: types.LogFormat("text"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		DataTieringEnabled:          ptr.Bool(true),
+		NetworkType:                 types.NetworkType("ipv4"),
+		IpDiscovery:                 types.IpDiscovery("ipv4"),
+		TransitEncryptionMode:       types.TransitEncryptionMode("preferred"),
+		ClusterMode:                 types.ClusterMode("enabled"),
+		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
+		Durability:                  types.Durability("default"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8472,7 +11233,19 @@ func TestCheckResponseSnapshot_Error_ReplicationGroupAlreadyUnderMigrationFault(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartMigration(context.Background(), &StartMigrationInput{})
+	_, opErr := svc.StartMigration(context.Background(), &StartMigrationInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		CustomerNodeEndpointList: []types.CustomerNodeEndpoint{
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8497,7 +11270,19 @@ func TestCheckResponseSnapshot_Error_ReplicationGroupNotFoundFault(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8522,7 +11307,10 @@ func TestCheckResponseSnapshot_Error_ReplicationGroupNotUnderMigrationFault(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteMigration(context.Background(), &CompleteMigrationInput{})
+	_, opErr := svc.CompleteMigration(context.Background(), &CompleteMigrationInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		Force:              ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8547,7 +11335,21 @@ func TestCheckResponseSnapshot_Error_ReservedCacheNodeAlreadyExistsFault(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PurchaseReservedCacheNodesOffering(context.Background(), &PurchaseReservedCacheNodesOfferingInput{})
+	_, opErr := svc.PurchaseReservedCacheNodesOffering(context.Background(), &PurchaseReservedCacheNodesOfferingInput{
+		ReservedCacheNodesOfferingId: ptr.String("__ReservedCacheNodesOfferingId__"),
+		ReservedCacheNodeId:          ptr.String("__ReservedCacheNodeId__"),
+		CacheNodeCount:               ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8572,7 +11374,19 @@ func TestCheckResponseSnapshot_Error_ReservedCacheNodeNotFoundFault(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8597,7 +11411,21 @@ func TestCheckResponseSnapshot_Error_ReservedCacheNodeQuotaExceededFault(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PurchaseReservedCacheNodesOffering(context.Background(), &PurchaseReservedCacheNodesOfferingInput{})
+	_, opErr := svc.PurchaseReservedCacheNodesOffering(context.Background(), &PurchaseReservedCacheNodesOfferingInput{
+		ReservedCacheNodesOfferingId: ptr.String("__ReservedCacheNodesOfferingId__"),
+		ReservedCacheNodeId:          ptr.String("__ReservedCacheNodeId__"),
+		CacheNodeCount:               ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8622,7 +11450,15 @@ func TestCheckResponseSnapshot_Error_ReservedCacheNodesOfferingNotFoundFault(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeReservedCacheNodesOfferings(context.Background(), &DescribeReservedCacheNodesOfferingsInput{})
+	_, opErr := svc.DescribeReservedCacheNodesOfferings(context.Background(), &DescribeReservedCacheNodesOfferingsInput{
+		ReservedCacheNodesOfferingId: ptr.String("__ReservedCacheNodesOfferingId__"),
+		CacheNodeType:                ptr.String("__CacheNodeType__"),
+		Duration:                     ptr.String("__Duration__"),
+		ProductDescription:           ptr.String("__ProductDescription__"),
+		OfferingType:                 ptr.String("__OfferingType__"),
+		MaxRecords:                   ptr.Int32(1),
+		Marker:                       ptr.String("__Marker__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8647,7 +11483,50 @@ func TestCheckResponseSnapshot_Error_ServerlessCacheAlreadyExistsFault(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateServerlessCache(context.Background(), &CreateServerlessCacheInput{})
+	_, opErr := svc.CreateServerlessCache(context.Background(), &CreateServerlessCacheInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		Description:         ptr.String("__Description__"),
+		Engine:              ptr.String("__Engine__"),
+		MajorEngineVersion:  ptr.String("__MajorEngineVersion__"),
+		CacheUsageLimits: &types.CacheUsageLimits{
+			DataStorage: &types.DataStorage{
+				Maximum: ptr.Int32(1),
+				Minimum: ptr.Int32(1),
+				Unit:    types.DataStorageUnit("GB"),
+			},
+			ECPUPerSecond: &types.ECPUPerSecond{
+				Maximum: ptr.Int32(1),
+				Minimum: ptr.Int32(1),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotArnsToRestore: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UserGroupId: ptr.String("__UserGroupId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotRetentionLimit: ptr.Int32(1),
+		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
+		NetworkType:            types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8672,7 +11551,19 @@ func TestCheckResponseSnapshot_Error_ServerlessCacheNotFoundFault(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8697,7 +11588,50 @@ func TestCheckResponseSnapshot_Error_ServerlessCacheQuotaForCustomerExceededFaul
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateServerlessCache(context.Background(), &CreateServerlessCacheInput{})
+	_, opErr := svc.CreateServerlessCache(context.Background(), &CreateServerlessCacheInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		Description:         ptr.String("__Description__"),
+		Engine:              ptr.String("__Engine__"),
+		MajorEngineVersion:  ptr.String("__MajorEngineVersion__"),
+		CacheUsageLimits: &types.CacheUsageLimits{
+			DataStorage: &types.DataStorage{
+				Maximum: ptr.Int32(1),
+				Minimum: ptr.Int32(1),
+				Unit:    types.DataStorageUnit("GB"),
+			},
+			ECPUPerSecond: &types.ECPUPerSecond{
+				Maximum: ptr.Int32(1),
+				Minimum: ptr.Int32(1),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotArnsToRestore: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UserGroupId: ptr.String("__UserGroupId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SnapshotRetentionLimit: ptr.Int32(1),
+		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
+		NetworkType:            types.NetworkType("ipv4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8722,7 +11656,21 @@ func TestCheckResponseSnapshot_Error_ServerlessCacheSnapshotAlreadyExistsFault(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyServerlessCacheSnapshot(context.Background(), &CopyServerlessCacheSnapshotInput{})
+	_, opErr := svc.CopyServerlessCacheSnapshot(context.Background(), &CopyServerlessCacheSnapshotInput{
+		SourceServerlessCacheSnapshotName: ptr.String("__SourceServerlessCacheSnapshotName__"),
+		TargetServerlessCacheSnapshotName: ptr.String("__TargetServerlessCacheSnapshotName__"),
+		KmsKeyId:                          ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8747,7 +11695,19 @@ func TestCheckResponseSnapshot_Error_ServerlessCacheSnapshotNotFoundFault(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8772,7 +11732,21 @@ func TestCheckResponseSnapshot_Error_ServerlessCacheSnapshotQuotaExceededFault(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyServerlessCacheSnapshot(context.Background(), &CopyServerlessCacheSnapshotInput{})
+	_, opErr := svc.CopyServerlessCacheSnapshot(context.Background(), &CopyServerlessCacheSnapshotInput{
+		SourceServerlessCacheSnapshotName: ptr.String("__SourceServerlessCacheSnapshotName__"),
+		TargetServerlessCacheSnapshotName: ptr.String("__TargetServerlessCacheSnapshotName__"),
+		KmsKeyId:                          ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8797,7 +11771,21 @@ func TestCheckResponseSnapshot_Error_ServiceLinkedRoleNotFoundFault(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyServerlessCacheSnapshot(context.Background(), &CopyServerlessCacheSnapshotInput{})
+	_, opErr := svc.CopyServerlessCacheSnapshot(context.Background(), &CopyServerlessCacheSnapshotInput{
+		SourceServerlessCacheSnapshotName: ptr.String("__SourceServerlessCacheSnapshotName__"),
+		TargetServerlessCacheSnapshotName: ptr.String("__TargetServerlessCacheSnapshotName__"),
+		KmsKeyId:                          ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8822,7 +11810,17 @@ func TestCheckResponseSnapshot_Error_ServiceUpdateNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchApplyUpdateAction(context.Background(), &BatchApplyUpdateActionInput{})
+	_, opErr := svc.BatchApplyUpdateAction(context.Background(), &BatchApplyUpdateActionInput{
+		ReplicationGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CacheClusterIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceUpdateName: ptr.String("__ServiceUpdateName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8847,7 +11845,22 @@ func TestCheckResponseSnapshot_Error_SnapshotAlreadyExistsFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopySnapshot(context.Background(), &CopySnapshotInput{})
+	_, opErr := svc.CopySnapshot(context.Background(), &CopySnapshotInput{
+		SourceSnapshotName: ptr.String("__SourceSnapshotName__"),
+		TargetSnapshotName: ptr.String("__TargetSnapshotName__"),
+		TargetBucket:       ptr.String("__TargetBucket__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8872,7 +11885,22 @@ func TestCheckResponseSnapshot_Error_SnapshotFeatureNotSupportedFault(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{})
+	_, opErr := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		CacheClusterId:     ptr.String("__CacheClusterId__"),
+		SnapshotName:       ptr.String("__SnapshotName__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8897,7 +11925,19 @@ func TestCheckResponseSnapshot_Error_SnapshotNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8922,7 +11962,22 @@ func TestCheckResponseSnapshot_Error_SnapshotQuotaExceededFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopySnapshot(context.Background(), &CopySnapshotInput{})
+	_, opErr := svc.CopySnapshot(context.Background(), &CopySnapshotInput{
+		SourceSnapshotName: ptr.String("__SourceSnapshotName__"),
+		TargetSnapshotName: ptr.String("__TargetSnapshotName__"),
+		TargetBucket:       ptr.String("__TargetBucket__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8947,7 +12002,14 @@ func TestCheckResponseSnapshot_Error_SubnetInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ModifyCacheSubnetGroup(context.Background(), &ModifyCacheSubnetGroupInput{})
+	_, opErr := svc.ModifyCacheSubnetGroup(context.Background(), &ModifyCacheSubnetGroupInput{
+		CacheSubnetGroupName:        ptr.String("__CacheSubnetGroupName__"),
+		CacheSubnetGroupDescription: ptr.String("__CacheSubnetGroupDescription__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8972,7 +12034,24 @@ func TestCheckResponseSnapshot_Error_SubnetNotAllowedFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCacheSubnetGroup(context.Background(), &CreateCacheSubnetGroupInput{})
+	_, opErr := svc.CreateCacheSubnetGroup(context.Background(), &CreateCacheSubnetGroupInput{
+		CacheSubnetGroupName:        ptr.String("__CacheSubnetGroupName__"),
+		CacheSubnetGroupDescription: ptr.String("__CacheSubnetGroupDescription__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8997,7 +12076,13 @@ func TestCheckResponseSnapshot_Error_TagNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RemoveTagsFromResource(context.Background(), &RemoveTagsFromResourceInput{})
+	_, opErr := svc.RemoveTagsFromResource(context.Background(), &RemoveTagsFromResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -9022,7 +12107,19 @@ func TestCheckResponseSnapshot_Error_TagQuotaPerResourceExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -9047,7 +12144,10 @@ func TestCheckResponseSnapshot_Error_TestFailoverNotAvailableFault(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TestFailover(context.Background(), &TestFailoverInput{})
+	_, opErr := svc.TestFailover(context.Background(), &TestFailoverInput{
+		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		NodeGroupId:        ptr.String("__NodeGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -9072,7 +12172,34 @@ func TestCheckResponseSnapshot_Error_UserAlreadyExistsFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUser(context.Background(), &CreateUserInput{})
+	_, opErr := svc.CreateUser(context.Background(), &CreateUserInput{
+		UserId:   ptr.String("__UserId__"),
+		UserName: ptr.String("__UserName__"),
+		Engine:   ptr.String("__Engine__"),
+		Passwords: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AccessString:       ptr.String("__AccessString__"),
+		NoPasswordRequired: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AuthenticationMode: &types.AuthenticationMode{
+			Type: types.InputAuthenticationType("password"),
+			Passwords: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -9097,7 +12224,24 @@ func TestCheckResponseSnapshot_Error_UserGroupAlreadyExistsFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUserGroup(context.Background(), &CreateUserGroupInput{})
+	_, opErr := svc.CreateUserGroup(context.Background(), &CreateUserGroupInput{
+		UserGroupId: ptr.String("__UserGroupId__"),
+		Engine:      ptr.String("__Engine__"),
+		UserIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -9122,7 +12266,19 @@ func TestCheckResponseSnapshot_Error_UserGroupNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -9147,7 +12303,24 @@ func TestCheckResponseSnapshot_Error_UserGroupQuotaExceededFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUserGroup(context.Background(), &CreateUserGroupInput{})
+	_, opErr := svc.CreateUserGroup(context.Background(), &CreateUserGroupInput{
+		UserGroupId: ptr.String("__UserGroupId__"),
+		Engine:      ptr.String("__Engine__"),
+		UserIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -9172,7 +12345,19 @@ func TestCheckResponseSnapshot_Error_UserNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -9197,7 +12382,34 @@ func TestCheckResponseSnapshot_Error_UserQuotaExceededFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUser(context.Background(), &CreateUserInput{})
+	_, opErr := svc.CreateUser(context.Background(), &CreateUserInput{
+		UserId:   ptr.String("__UserId__"),
+		UserName: ptr.String("__UserName__"),
+		Engine:   ptr.String("__Engine__"),
+		Passwords: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AccessString:       ptr.String("__AccessString__"),
+		NoPasswordRequired: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AuthenticationMode: &types.AuthenticationMode{
+			Type: types.InputAuthenticationType("password"),
+			Passwords: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

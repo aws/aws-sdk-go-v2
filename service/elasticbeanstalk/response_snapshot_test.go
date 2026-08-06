@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_AbortEnvironmentUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AbortEnvironmentUpdate(context.Background(), &AbortEnvironmentUpdateInput{})
+	got, err := svc.AbortEnvironmentUpdate(context.Background(), &AbortEnvironmentUpdateInput{
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +144,11 @@ func TestCheckResponseSnapshot_ApplyEnvironmentManagedAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ApplyEnvironmentManagedAction(context.Background(), &ApplyEnvironmentManagedActionInput{})
+	got, err := svc.ApplyEnvironmentManagedAction(context.Background(), &ApplyEnvironmentManagedActionInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		ActionId:        ptr.String("__ActionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +167,10 @@ func TestCheckResponseSnapshot_AssociateEnvironmentOperationsRole(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateEnvironmentOperationsRole(context.Background(), &AssociateEnvironmentOperationsRoleInput{})
+	got, err := svc.AssociateEnvironmentOperationsRole(context.Background(), &AssociateEnvironmentOperationsRoleInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		OperationsRole:  ptr.String("__OperationsRole__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +192,9 @@ func TestCheckResponseSnapshot_CheckDNSAvailability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckDNSAvailability(context.Background(), &CheckDNSAvailabilityInput{})
+	got, err := svc.CheckDNSAvailability(context.Background(), &CheckDNSAvailabilityInput{
+		CNAMEPrefix: ptr.String("__CNAMEPrefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -307,7 +319,14 @@ func TestCheckResponseSnapshot_ComposeEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ComposeEnvironments(context.Background(), &ComposeEnvironmentsInput{})
+	got, err := svc.ComposeEnvironments(context.Background(), &ComposeEnvironmentsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		GroupName:       ptr.String("__GroupName__"),
+		VersionLabels: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -357,7 +376,35 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Description:     ptr.String("__Description__"),
+		ResourceLifecycleConfig: &types.ApplicationResourceLifecycleConfig{
+			ServiceRole: ptr.String("__ServiceRole__"),
+			VersionLifecycleConfig: &types.ApplicationVersionLifecycleConfig{
+				MaxCountRule: &types.MaxCountRule{
+					Enabled:            ptr.Bool(true),
+					MaxCount:           ptr.Int32(1),
+					DeleteSourceFromS3: ptr.Bool(true),
+				},
+				MaxAgeRule: &types.MaxAgeRule{
+					Enabled:            ptr.Bool(true),
+					MaxAgeInDays:       ptr.Int32(1),
+					DeleteSourceFromS3: ptr.Bool(true),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -396,7 +443,39 @@ func TestCheckResponseSnapshot_CreateApplicationVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplicationVersion(context.Background(), &CreateApplicationVersionInput{})
+	got, err := svc.CreateApplicationVersion(context.Background(), &CreateApplicationVersionInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		VersionLabel:    ptr.String("__VersionLabel__"),
+		Description:     ptr.String("__Description__"),
+		SourceBuildInformation: &types.SourceBuildInformation{
+			SourceType:       types.SourceType("Git"),
+			SourceRepository: types.SourceRepository("CodeCommit"),
+			SourceLocation:   ptr.String("__SourceLocation__"),
+		},
+		SourceBundle: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		BuildConfiguration: &types.BuildConfiguration{
+			ArtifactName:         ptr.String("__ArtifactName__"),
+			CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+			ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+			Image:                ptr.String("__Image__"),
+			TimeoutInMinutes:     ptr.Int32(1),
+		},
+		AutoCreateApplication: ptr.Bool(true),
+		Process:               ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -439,7 +518,42 @@ func TestCheckResponseSnapshot_CreateConfigurationTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfigurationTemplate(context.Background(), &CreateConfigurationTemplateInput{})
+	got, err := svc.CreateConfigurationTemplate(context.Background(), &CreateConfigurationTemplateInput{
+		ApplicationName:   ptr.String("__ApplicationName__"),
+		TemplateName:      ptr.String("__TemplateName__"),
+		SolutionStackName: ptr.String("__SolutionStackName__"),
+		PlatformArn:       ptr.String("__PlatformArn__"),
+		SourceConfiguration: &types.SourceConfiguration{
+			ApplicationName: ptr.String("__ApplicationName__"),
+			TemplateName:    ptr.String("__TemplateName__"),
+		},
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		Description:   ptr.String("__Description__"),
+		OptionSettings: []types.ConfigurationOptionSetting{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -508,7 +622,59 @@ func TestCheckResponseSnapshot_CreateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		GroupName:       ptr.String("__GroupName__"),
+		Description:     ptr.String("__Description__"),
+		CNAMEPrefix:     ptr.String("__CNAMEPrefix__"),
+		Tier: &types.EnvironmentTier{
+			Name:    ptr.String("__Name__"),
+			Type:    ptr.String("__Type__"),
+			Version: ptr.String("__Version__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		VersionLabel:      ptr.String("__VersionLabel__"),
+		TemplateName:      ptr.String("__TemplateName__"),
+		SolutionStackName: ptr.String("__SolutionStackName__"),
+		PlatformArn:       ptr.String("__PlatformArn__"),
+		OptionSettings: []types.ConfigurationOptionSetting{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+		},
+		OptionsToRemove: []types.OptionSpecification{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+			},
+		},
+		OperationsRole: ptr.String("__OperationsRole__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -551,7 +717,39 @@ func TestCheckResponseSnapshot_CreatePlatformVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePlatformVersion(context.Background(), &CreatePlatformVersionInput{})
+	got, err := svc.CreatePlatformVersion(context.Background(), &CreatePlatformVersionInput{
+		PlatformName:    ptr.String("__PlatformName__"),
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		PlatformDefinitionBundle: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		OptionSettings: []types.ConfigurationOptionSetting{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -591,7 +789,10 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		TerminateEnvByForce: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -610,7 +811,11 @@ func TestCheckResponseSnapshot_DeleteApplicationVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplicationVersion(context.Background(), &DeleteApplicationVersionInput{})
+	got, err := svc.DeleteApplicationVersion(context.Background(), &DeleteApplicationVersionInput{
+		ApplicationName:    ptr.String("__ApplicationName__"),
+		VersionLabel:       ptr.String("__VersionLabel__"),
+		DeleteSourceBundle: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -629,7 +834,10 @@ func TestCheckResponseSnapshot_DeleteConfigurationTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigurationTemplate(context.Background(), &DeleteConfigurationTemplateInput{})
+	got, err := svc.DeleteConfigurationTemplate(context.Background(), &DeleteConfigurationTemplateInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		TemplateName:    ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -648,7 +856,10 @@ func TestCheckResponseSnapshot_DeleteEnvironmentConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironmentConfiguration(context.Background(), &DeleteEnvironmentConfigurationInput{})
+	got, err := svc.DeleteEnvironmentConfiguration(context.Background(), &DeleteEnvironmentConfigurationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -688,7 +899,9 @@ func TestCheckResponseSnapshot_DeletePlatformVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePlatformVersion(context.Background(), &DeletePlatformVersionInput{})
+	got, err := svc.DeletePlatformVersion(context.Background(), &DeletePlatformVersionInput{
+		PlatformArn: ptr.String("__PlatformArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -786,7 +999,15 @@ func TestCheckResponseSnapshot_DescribeApplicationVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplicationVersions(context.Background(), &DescribeApplicationVersionsInput{})
+	got, err := svc.DescribeApplicationVersions(context.Background(), &DescribeApplicationVersionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		VersionLabels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxRecords: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -868,7 +1089,12 @@ func TestCheckResponseSnapshot_DescribeApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplications(context.Background(), &DescribeApplicationsInput{})
+	got, err := svc.DescribeApplications(context.Background(), &DescribeApplicationsInput{
+		ApplicationNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -930,7 +1156,25 @@ func TestCheckResponseSnapshot_DescribeConfigurationOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConfigurationOptions(context.Background(), &DescribeConfigurationOptionsInput{})
+	got, err := svc.DescribeConfigurationOptions(context.Background(), &DescribeConfigurationOptionsInput{
+		ApplicationName:   ptr.String("__ApplicationName__"),
+		TemplateName:      ptr.String("__TemplateName__"),
+		EnvironmentName:   ptr.String("__EnvironmentName__"),
+		SolutionStackName: ptr.String("__SolutionStackName__"),
+		PlatformArn:       ptr.String("__PlatformArn__"),
+		Options: []types.OptionSpecification{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1246,11 @@ func TestCheckResponseSnapshot_DescribeConfigurationSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConfigurationSettings(context.Background(), &DescribeConfigurationSettingsInput{})
+	got, err := svc.DescribeConfigurationSettings(context.Background(), &DescribeConfigurationSettingsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		TemplateName:    ptr.String("__TemplateName__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1061,7 +1309,14 @@ func TestCheckResponseSnapshot_DescribeEnvironmentHealth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEnvironmentHealth(context.Background(), &DescribeEnvironmentHealthInput{})
+	got, err := svc.DescribeEnvironmentHealth(context.Background(), &DescribeEnvironmentHealthInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		AttributeNames: []types.EnvironmentHealthAttribute{
+			types.EnvironmentHealthAttribute("Status"),
+			types.EnvironmentHealthAttribute("Status"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1104,7 +1359,12 @@ func TestCheckResponseSnapshot_DescribeEnvironmentManagedActionHistory(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEnvironmentManagedActionHistory(context.Background(), &DescribeEnvironmentManagedActionHistoryInput{})
+	got, err := svc.DescribeEnvironmentManagedActionHistory(context.Background(), &DescribeEnvironmentManagedActionHistoryInput{
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxItems:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1140,7 +1400,11 @@ func TestCheckResponseSnapshot_DescribeEnvironmentManagedActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEnvironmentManagedActions(context.Background(), &DescribeEnvironmentManagedActionsInput{})
+	got, err := svc.DescribeEnvironmentManagedActions(context.Background(), &DescribeEnvironmentManagedActionsInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		Status:          types.ActionStatus("Scheduled"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1221,7 +1485,10 @@ func TestCheckResponseSnapshot_DescribeEnvironmentResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEnvironmentResources(context.Background(), &DescribeEnvironmentResourcesInput{})
+	got, err := svc.DescribeEnvironmentResources(context.Background(), &DescribeEnvironmentResourcesInput{
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1346,7 +1613,22 @@ func TestCheckResponseSnapshot_DescribeEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEnvironments(context.Background(), &DescribeEnvironmentsInput{})
+	got, err := svc.DescribeEnvironments(context.Background(), &DescribeEnvironmentsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		VersionLabel:    ptr.String("__VersionLabel__"),
+		EnvironmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EnvironmentNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IncludeDeleted:        ptr.Bool(true),
+		IncludedDeletedBackTo: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxRecords:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1391,7 +1673,20 @@ func TestCheckResponseSnapshot_DescribeEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEvents(context.Background(), &DescribeEventsInput{})
+	got, err := svc.DescribeEvents(context.Background(), &DescribeEventsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		VersionLabel:    ptr.String("__VersionLabel__"),
+		TemplateName:    ptr.String("__TemplateName__"),
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		PlatformArn:     ptr.String("__PlatformArn__"),
+		RequestId:       ptr.String("__RequestId__"),
+		Severity:        types.EventSeverity("TRACE"),
+		StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxRecords:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1523,7 +1818,15 @@ func TestCheckResponseSnapshot_DescribeInstancesHealth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInstancesHealth(context.Background(), &DescribeInstancesHealthInput{})
+	got, err := svc.DescribeInstancesHealth(context.Background(), &DescribeInstancesHealthInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		AttributeNames: []types.InstancesHealthAttribute{
+			types.InstancesHealthAttribute("HealthStatus"),
+			types.InstancesHealthAttribute("HealthStatus"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1599,7 +1902,9 @@ func TestCheckResponseSnapshot_DescribePlatformVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePlatformVersion(context.Background(), &DescribePlatformVersionInput{})
+	got, err := svc.DescribePlatformVersion(context.Background(), &DescribePlatformVersionInput{
+		PlatformArn: ptr.String("__PlatformArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1618,7 +1923,9 @@ func TestCheckResponseSnapshot_DisassociateEnvironmentOperationsRole(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateEnvironmentOperationsRole(context.Background(), &DisassociateEnvironmentOperationsRoleInput{})
+	got, err := svc.DisassociateEnvironmentOperationsRole(context.Background(), &DisassociateEnvironmentOperationsRoleInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1701,7 +2008,28 @@ func TestCheckResponseSnapshot_ListPlatformBranches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlatformBranches(context.Background(), &ListPlatformBranchesInput{})
+	got, err := svc.ListPlatformBranches(context.Background(), &ListPlatformBranchesInput{
+		Filters: []types.SearchFilter{
+			{
+				Attribute: ptr.String("__Attribute__"),
+				Operator:  ptr.String("__Operator__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Attribute: ptr.String("__Attribute__"),
+				Operator:  ptr.String("__Operator__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1764,7 +2092,28 @@ func TestCheckResponseSnapshot_ListPlatformVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlatformVersions(context.Background(), &ListPlatformVersionsInput{})
+	got, err := svc.ListPlatformVersions(context.Background(), &ListPlatformVersionsInput{
+		Filters: []types.PlatformFilter{
+			{
+				Type:     ptr.String("__Type__"),
+				Operator: ptr.String("__Operator__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Type:     ptr.String("__Type__"),
+				Operator: ptr.String("__Operator__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1795,7 +2144,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1814,7 +2165,10 @@ func TestCheckResponseSnapshot_RebuildEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RebuildEnvironment(context.Background(), &RebuildEnvironmentInput{})
+	got, err := svc.RebuildEnvironment(context.Background(), &RebuildEnvironmentInput{
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1833,7 +2187,11 @@ func TestCheckResponseSnapshot_RequestEnvironmentInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RequestEnvironmentInfo(context.Background(), &RequestEnvironmentInfoInput{})
+	got, err := svc.RequestEnvironmentInfo(context.Background(), &RequestEnvironmentInfoInput{
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		InfoType:        types.EnvironmentInfoType("tail"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1852,7 +2210,10 @@ func TestCheckResponseSnapshot_RestartAppServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestartAppServer(context.Background(), &RestartAppServerInput{})
+	got, err := svc.RestartAppServer(context.Background(), &RestartAppServerInput{
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1886,7 +2247,11 @@ func TestCheckResponseSnapshot_RetrieveEnvironmentInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RetrieveEnvironmentInfo(context.Background(), &RetrieveEnvironmentInfoInput{})
+	got, err := svc.RetrieveEnvironmentInfo(context.Background(), &RetrieveEnvironmentInfoInput{
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		InfoType:        types.EnvironmentInfoType("tail"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1905,7 +2270,12 @@ func TestCheckResponseSnapshot_SwapEnvironmentCNAMEs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SwapEnvironmentCNAMEs(context.Background(), &SwapEnvironmentCNAMEsInput{})
+	got, err := svc.SwapEnvironmentCNAMEs(context.Background(), &SwapEnvironmentCNAMEsInput{
+		SourceEnvironmentId:        ptr.String("__SourceEnvironmentId__"),
+		SourceEnvironmentName:      ptr.String("__SourceEnvironmentName__"),
+		DestinationEnvironmentId:   ptr.String("__DestinationEnvironmentId__"),
+		DestinationEnvironmentName: ptr.String("__DestinationEnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1974,7 +2344,12 @@ func TestCheckResponseSnapshot_TerminateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateEnvironment(context.Background(), &TerminateEnvironmentInput{})
+	got, err := svc.TerminateEnvironment(context.Background(), &TerminateEnvironmentInput{
+		EnvironmentId:      ptr.String("__EnvironmentId__"),
+		EnvironmentName:    ptr.String("__EnvironmentName__"),
+		TerminateResources: ptr.Bool(true),
+		ForceTerminate:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2024,7 +2399,10 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2060,7 +2438,24 @@ func TestCheckResponseSnapshot_UpdateApplicationResourceLifecycle(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplicationResourceLifecycle(context.Background(), &UpdateApplicationResourceLifecycleInput{})
+	got, err := svc.UpdateApplicationResourceLifecycle(context.Background(), &UpdateApplicationResourceLifecycleInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		ResourceLifecycleConfig: &types.ApplicationResourceLifecycleConfig{
+			ServiceRole: ptr.String("__ServiceRole__"),
+			VersionLifecycleConfig: &types.ApplicationVersionLifecycleConfig{
+				MaxCountRule: &types.MaxCountRule{
+					Enabled:            ptr.Bool(true),
+					MaxCount:           ptr.Int32(1),
+					DeleteSourceFromS3: ptr.Bool(true),
+				},
+				MaxAgeRule: &types.MaxAgeRule{
+					Enabled:            ptr.Bool(true),
+					MaxAgeInDays:       ptr.Int32(1),
+					DeleteSourceFromS3: ptr.Bool(true),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2099,7 +2494,11 @@ func TestCheckResponseSnapshot_UpdateApplicationVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplicationVersion(context.Background(), &UpdateApplicationVersionInput{})
+	got, err := svc.UpdateApplicationVersion(context.Background(), &UpdateApplicationVersionInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		VersionLabel:    ptr.String("__VersionLabel__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2142,7 +2541,37 @@ func TestCheckResponseSnapshot_UpdateConfigurationTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfigurationTemplate(context.Background(), &UpdateConfigurationTemplateInput{})
+	got, err := svc.UpdateConfigurationTemplate(context.Background(), &UpdateConfigurationTemplateInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		TemplateName:    ptr.String("__TemplateName__"),
+		Description:     ptr.String("__Description__"),
+		OptionSettings: []types.ConfigurationOptionSetting{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+		},
+		OptionsToRemove: []types.OptionSpecification{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2211,7 +2640,48 @@ func TestCheckResponseSnapshot_UpdateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{})
+	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		GroupName:       ptr.String("__GroupName__"),
+		Description:     ptr.String("__Description__"),
+		Tier: &types.EnvironmentTier{
+			Name:    ptr.String("__Name__"),
+			Type:    ptr.String("__Type__"),
+			Version: ptr.String("__Version__"),
+		},
+		VersionLabel:      ptr.String("__VersionLabel__"),
+		TemplateName:      ptr.String("__TemplateName__"),
+		SolutionStackName: ptr.String("__SolutionStackName__"),
+		PlatformArn:       ptr.String("__PlatformArn__"),
+		OptionSettings: []types.ConfigurationOptionSetting{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+		},
+		OptionsToRemove: []types.OptionSpecification{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2230,7 +2700,23 @@ func TestCheckResponseSnapshot_UpdateTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTagsForResource(context.Background(), &UpdateTagsForResourceInput{})
+	got, err := svc.UpdateTagsForResource(context.Background(), &UpdateTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagsToAdd: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TagsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2264,7 +2750,25 @@ func TestCheckResponseSnapshot_ValidateConfigurationSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidateConfigurationSettings(context.Background(), &ValidateConfigurationSettingsInput{})
+	got, err := svc.ValidateConfigurationSettings(context.Background(), &ValidateConfigurationSettingsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		TemplateName:    ptr.String("__TemplateName__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		OptionSettings: []types.ConfigurationOptionSetting{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2285,7 +2789,39 @@ func TestCheckResponseSnapshot_Error_CodeBuildNotInServiceRegionException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplicationVersion(context.Background(), &CreateApplicationVersionInput{})
+	_, opErr := svc.CreateApplicationVersion(context.Background(), &CreateApplicationVersionInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		VersionLabel:    ptr.String("__VersionLabel__"),
+		Description:     ptr.String("__Description__"),
+		SourceBuildInformation: &types.SourceBuildInformation{
+			SourceType:       types.SourceType("Git"),
+			SourceRepository: types.SourceRepository("CodeCommit"),
+			SourceLocation:   ptr.String("__SourceLocation__"),
+		},
+		SourceBundle: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		BuildConfiguration: &types.BuildConfiguration{
+			ArtifactName:         ptr.String("__ArtifactName__"),
+			CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+			ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+			Image:                ptr.String("__Image__"),
+			TimeoutInMinutes:     ptr.Int32(1),
+		},
+		AutoCreateApplication: ptr.Bool(true),
+		Process:               ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2310,7 +2846,11 @@ func TestCheckResponseSnapshot_Error_ElasticBeanstalkServiceException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyEnvironmentManagedAction(context.Background(), &ApplyEnvironmentManagedActionInput{})
+	_, opErr := svc.ApplyEnvironmentManagedAction(context.Background(), &ApplyEnvironmentManagedActionInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		ActionId:        ptr.String("__ActionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2335,7 +2875,10 @@ func TestCheckResponseSnapshot_Error_InsufficientPrivilegesException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortEnvironmentUpdate(context.Background(), &AbortEnvironmentUpdateInput{})
+	_, opErr := svc.AbortEnvironmentUpdate(context.Background(), &AbortEnvironmentUpdateInput{
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2360,7 +2903,14 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeEnvironmentHealth(context.Background(), &DescribeEnvironmentHealthInput{})
+	_, opErr := svc.DescribeEnvironmentHealth(context.Background(), &DescribeEnvironmentHealthInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		AttributeNames: []types.EnvironmentHealthAttribute{
+			types.EnvironmentHealthAttribute("Status"),
+			types.EnvironmentHealthAttribute("Status"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2385,7 +2935,11 @@ func TestCheckResponseSnapshot_Error_ManagedActionInvalidStateException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyEnvironmentManagedAction(context.Background(), &ApplyEnvironmentManagedActionInput{})
+	_, opErr := svc.ApplyEnvironmentManagedAction(context.Background(), &ApplyEnvironmentManagedActionInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		ActionId:        ptr.String("__ActionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2410,7 +2964,10 @@ func TestCheckResponseSnapshot_Error_OperationInProgressException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	_, opErr := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		TerminateEnvByForce: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2435,7 +2992,9 @@ func TestCheckResponseSnapshot_Error_PlatformVersionStillReferencedException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeletePlatformVersion(context.Background(), &DeletePlatformVersionInput{})
+	_, opErr := svc.DeletePlatformVersion(context.Background(), &DeletePlatformVersionInput{
+		PlatformArn: ptr.String("__PlatformArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2460,7 +3019,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2485,7 +3046,9 @@ func TestCheckResponseSnapshot_Error_ResourceTypeNotSupportedException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2510,7 +3073,39 @@ func TestCheckResponseSnapshot_Error_S3LocationNotInServiceRegionException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplicationVersion(context.Background(), &CreateApplicationVersionInput{})
+	_, opErr := svc.CreateApplicationVersion(context.Background(), &CreateApplicationVersionInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		VersionLabel:    ptr.String("__VersionLabel__"),
+		Description:     ptr.String("__Description__"),
+		SourceBuildInformation: &types.SourceBuildInformation{
+			SourceType:       types.SourceType("Git"),
+			SourceRepository: types.SourceRepository("CodeCommit"),
+			SourceLocation:   ptr.String("__SourceLocation__"),
+		},
+		SourceBundle: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		BuildConfiguration: &types.BuildConfiguration{
+			ArtifactName:         ptr.String("__ArtifactName__"),
+			CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+			ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+			Image:                ptr.String("__Image__"),
+			TimeoutInMinutes:     ptr.Int32(1),
+		},
+		AutoCreateApplication: ptr.Bool(true),
+		Process:               ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2560,7 +3155,11 @@ func TestCheckResponseSnapshot_Error_SourceBundleDeletionException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteApplicationVersion(context.Background(), &DeleteApplicationVersionInput{})
+	_, opErr := svc.DeleteApplicationVersion(context.Background(), &DeleteApplicationVersionInput{
+		ApplicationName:    ptr.String("__ApplicationName__"),
+		VersionLabel:       ptr.String("__VersionLabel__"),
+		DeleteSourceBundle: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2585,7 +3184,39 @@ func TestCheckResponseSnapshot_Error_TooManyApplicationVersionsException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplicationVersion(context.Background(), &CreateApplicationVersionInput{})
+	_, opErr := svc.CreateApplicationVersion(context.Background(), &CreateApplicationVersionInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		VersionLabel:    ptr.String("__VersionLabel__"),
+		Description:     ptr.String("__Description__"),
+		SourceBuildInformation: &types.SourceBuildInformation{
+			SourceType:       types.SourceType("Git"),
+			SourceRepository: types.SourceRepository("CodeCommit"),
+			SourceLocation:   ptr.String("__SourceLocation__"),
+		},
+		SourceBundle: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		BuildConfiguration: &types.BuildConfiguration{
+			ArtifactName:         ptr.String("__ArtifactName__"),
+			CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+			ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+			Image:                ptr.String("__Image__"),
+			TimeoutInMinutes:     ptr.Int32(1),
+		},
+		AutoCreateApplication: ptr.Bool(true),
+		Process:               ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2610,7 +3241,35 @@ func TestCheckResponseSnapshot_Error_TooManyApplicationsException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Description:     ptr.String("__Description__"),
+		ResourceLifecycleConfig: &types.ApplicationResourceLifecycleConfig{
+			ServiceRole: ptr.String("__ServiceRole__"),
+			VersionLifecycleConfig: &types.ApplicationVersionLifecycleConfig{
+				MaxCountRule: &types.MaxCountRule{
+					Enabled:            ptr.Bool(true),
+					MaxCount:           ptr.Int32(1),
+					DeleteSourceFromS3: ptr.Bool(true),
+				},
+				MaxAgeRule: &types.MaxAgeRule{
+					Enabled:            ptr.Bool(true),
+					MaxAgeInDays:       ptr.Int32(1),
+					DeleteSourceFromS3: ptr.Bool(true),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2635,7 +3294,42 @@ func TestCheckResponseSnapshot_Error_TooManyBucketsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationTemplate(context.Background(), &CreateConfigurationTemplateInput{})
+	_, opErr := svc.CreateConfigurationTemplate(context.Background(), &CreateConfigurationTemplateInput{
+		ApplicationName:   ptr.String("__ApplicationName__"),
+		TemplateName:      ptr.String("__TemplateName__"),
+		SolutionStackName: ptr.String("__SolutionStackName__"),
+		PlatformArn:       ptr.String("__PlatformArn__"),
+		SourceConfiguration: &types.SourceConfiguration{
+			ApplicationName: ptr.String("__ApplicationName__"),
+			TemplateName:    ptr.String("__TemplateName__"),
+		},
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		Description:   ptr.String("__Description__"),
+		OptionSettings: []types.ConfigurationOptionSetting{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2660,7 +3354,42 @@ func TestCheckResponseSnapshot_Error_TooManyConfigurationTemplatesException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationTemplate(context.Background(), &CreateConfigurationTemplateInput{})
+	_, opErr := svc.CreateConfigurationTemplate(context.Background(), &CreateConfigurationTemplateInput{
+		ApplicationName:   ptr.String("__ApplicationName__"),
+		TemplateName:      ptr.String("__TemplateName__"),
+		SolutionStackName: ptr.String("__SolutionStackName__"),
+		PlatformArn:       ptr.String("__PlatformArn__"),
+		SourceConfiguration: &types.SourceConfiguration{
+			ApplicationName: ptr.String("__ApplicationName__"),
+			TemplateName:    ptr.String("__TemplateName__"),
+		},
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		Description:   ptr.String("__Description__"),
+		OptionSettings: []types.ConfigurationOptionSetting{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2685,7 +3414,14 @@ func TestCheckResponseSnapshot_Error_TooManyEnvironmentsException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ComposeEnvironments(context.Background(), &ComposeEnvironmentsInput{})
+	_, opErr := svc.ComposeEnvironments(context.Background(), &ComposeEnvironmentsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		GroupName:       ptr.String("__GroupName__"),
+		VersionLabels: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2710,7 +3446,39 @@ func TestCheckResponseSnapshot_Error_TooManyPlatformsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePlatformVersion(context.Background(), &CreatePlatformVersionInput{})
+	_, opErr := svc.CreatePlatformVersion(context.Background(), &CreatePlatformVersionInput{
+		PlatformName:    ptr.String("__PlatformName__"),
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		PlatformDefinitionBundle: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		OptionSettings: []types.ConfigurationOptionSetting{
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+			{
+				ResourceName: ptr.String("__ResourceName__"),
+				Namespace:    ptr.String("__Namespace__"),
+				OptionName:   ptr.String("__OptionName__"),
+				Value:        ptr.String("__Value__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2735,7 +3503,23 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateTagsForResource(context.Background(), &UpdateTagsForResourceInput{})
+	_, opErr := svc.UpdateTagsForResource(context.Background(), &UpdateTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagsToAdd: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TagsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

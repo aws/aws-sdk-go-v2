@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"awsIotJobArn":"__AwsIotJobArn__","awsIotJobId":"__AwsIotJobId__","otaUpdateArn":"__OtaUpdateArn__","otaUpdateId":"__OtaUpdateId__","otaUpdateStatus":"CREATE_PENDING"}

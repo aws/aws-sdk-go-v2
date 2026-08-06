@@ -122,7 +122,9 @@ func TestCheckResponseSnapshot_GetLatestConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLatestConfiguration(context.Background(), &GetLatestConfigurationInput{})
+	got, err := svc.GetLatestConfiguration(context.Background(), &GetLatestConfigurationInput{
+		ConfigurationToken: ptr.String("__ConfigurationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -143,7 +145,12 @@ func TestCheckResponseSnapshot_StartConfigurationSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartConfigurationSession(context.Background(), &StartConfigurationSessionInput{})
+	got, err := svc.StartConfigurationSession(context.Background(), &StartConfigurationSessionInput{
+		ApplicationIdentifier:                ptr.String("__ApplicationIdentifier__"),
+		EnvironmentIdentifier:                ptr.String("__EnvironmentIdentifier__"),
+		ConfigurationProfileIdentifier:       ptr.String("__ConfigurationProfileIdentifier__"),
+		RequiredMinimumPollIntervalInSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -172,7 +179,9 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetLatestConfiguration(context.Background(), &GetLatestConfigurationInput{})
+	_, opErr := svc.GetLatestConfiguration(context.Background(), &GetLatestConfigurationInput{
+		ConfigurationToken: ptr.String("__ConfigurationToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -197,7 +206,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetLatestConfiguration(context.Background(), &GetLatestConfigurationInput{})
+	_, opErr := svc.GetLatestConfiguration(context.Background(), &GetLatestConfigurationInput{
+		ConfigurationToken: ptr.String("__ConfigurationToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -226,7 +237,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetLatestConfiguration(context.Background(), &GetLatestConfigurationInput{})
+	_, opErr := svc.GetLatestConfiguration(context.Background(), &GetLatestConfigurationInput{
+		ConfigurationToken: ptr.String("__ConfigurationToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -251,7 +264,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetLatestConfiguration(context.Background(), &GetLatestConfigurationInput{})
+	_, opErr := svc.GetLatestConfiguration(context.Background(), &GetLatestConfigurationInput{
+		ConfigurationToken: ptr.String("__ConfigurationToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"commandArn":"__CommandArn__","completedAt":946684800,"createdAt":946684800,"executionId":"__ExecutionId__","executionTimeoutSeconds":1,"lastUpdatedAt":946684800,"parameters":{"key0":{"B":true,"BIN":"YmxvYg==","D":1,"I":1,"L":1,"S":"__S__","UL":"__UL__"}},"result":{"key0":{"B":true,"BIN":"YmxvYg==","S":"__S__"}},"startedAt":946684800,"status":"CREATED","statusReason":{"reasonCode":"__ReasonCode__","reasonDescription":"__ReasonDescription__"},"targetArn":"__TargetArn__","timeToLive":946684800}

@@ -137,7 +137,13 @@ func TestCheckResponseSnapshot_AssumeRoleForPodIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{})
+	got, err := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Token:       ptr.String("__Token__"),
+		EksNodeName: ptr.String("__EksNodeName__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Zone:        ptr.String("__Zone__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -158,7 +164,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{})
+	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Token:       ptr.String("__Token__"),
+		EksNodeName: ptr.String("__EksNodeName__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Zone:        ptr.String("__Zone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -183,7 +195,13 @@ func TestCheckResponseSnapshot_Error_ExpiredTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{})
+	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Token:       ptr.String("__Token__"),
+		EksNodeName: ptr.String("__EksNodeName__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Zone:        ptr.String("__Zone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -208,7 +226,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{})
+	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Token:       ptr.String("__Token__"),
+		EksNodeName: ptr.String("__EksNodeName__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Zone:        ptr.String("__Zone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -233,7 +257,13 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{})
+	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Token:       ptr.String("__Token__"),
+		EksNodeName: ptr.String("__EksNodeName__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Zone:        ptr.String("__Zone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -258,7 +288,13 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{})
+	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Token:       ptr.String("__Token__"),
+		EksNodeName: ptr.String("__EksNodeName__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Zone:        ptr.String("__Zone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -283,7 +319,13 @@ func TestCheckResponseSnapshot_Error_InvalidTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{})
+	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Token:       ptr.String("__Token__"),
+		EksNodeName: ptr.String("__EksNodeName__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Zone:        ptr.String("__Zone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -308,7 +350,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{})
+	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Token:       ptr.String("__Token__"),
+		EksNodeName: ptr.String("__EksNodeName__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Zone:        ptr.String("__Zone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -333,7 +381,13 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{})
+	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Token:       ptr.String("__Token__"),
+		EksNodeName: ptr.String("__EksNodeName__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Zone:        ptr.String("__Zone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -358,7 +412,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{})
+	_, opErr := svc.AssumeRoleForPodIdentity(context.Background(), &AssumeRoleForPodIdentityInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Token:       ptr.String("__Token__"),
+		EksNodeName: ptr.String("__EksNodeName__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Zone:        ptr.String("__Zone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -121,7 +121,12 @@ func TestCheckResponseSnapshot_DeleteSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	got, err := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -345,7 +350,12 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSession(context.Background(), &GetSessionInput{})
+	got, err := svc.GetSession(context.Background(), &GetSessionInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -361,6 +371,7 @@ func TestCheckResponseSnapshot_PutSession(t *testing.T) {
 		SessionState:      ptr.String("__SessionState__"),
 		RequestAttributes: ptr.String("__RequestAttributes__"),
 		SessionId:         ptr.String("__SessionId__"),
+		AudioStream:       io.NopCloser(bytes.NewReader([]byte("__AudioStream__"))),
 	}
 	status, header, body, err := serdeRespReadSnapshot("PutSession.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -370,7 +381,137 @@ func TestCheckResponseSnapshot_PutSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSession(context.Background(), &PutSessionInput{})
+	got, err := svc.PutSession(context.Background(), &PutSessionInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SessionId:  ptr.String("__SessionId__"),
+		Messages: []types.Message{
+			{
+				Content:     ptr.String("__Content__"),
+				ContentType: types.MessageContentType("CustomPayload"),
+				ImageResponseCard: &types.ImageResponseCard{
+					Title:    ptr.String("__Title__"),
+					Subtitle: ptr.String("__Subtitle__"),
+					ImageUrl: ptr.String("__ImageUrl__"),
+					Buttons: []types.Button{
+						{
+							Text:  ptr.String("__Text__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Text:  ptr.String("__Text__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			{
+				Content:     ptr.String("__Content__"),
+				ContentType: types.MessageContentType("CustomPayload"),
+				ImageResponseCard: &types.ImageResponseCard{
+					Title:    ptr.String("__Title__"),
+					Subtitle: ptr.String("__Subtitle__"),
+					ImageUrl: ptr.String("__ImageUrl__"),
+					Buttons: []types.Button{
+						{
+							Text:  ptr.String("__Text__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Text:  ptr.String("__Text__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+		},
+		SessionState: &types.SessionState{
+			DialogAction: &types.DialogAction{
+				Type:                 types.DialogActionType("Close"),
+				SlotToElicit:         ptr.String("__SlotToElicit__"),
+				SlotElicitationStyle: types.StyleType("Default"),
+				SubSlotToElicit: &types.ElicitSubSlot{
+					Name:            ptr.String("__Name__"),
+					SubSlotToElicit: nil,
+				},
+			},
+			Intent: &types.Intent{
+				Name: ptr.String("__Name__"),
+				Slots: map[string]types.Slot{
+					"key0": {
+						Value: &types.Value{
+							OriginalValue:    ptr.String("__OriginalValue__"),
+							InterpretedValue: ptr.String("__InterpretedValue__"),
+							ResolvedValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Shape: types.Shape("Scalar"),
+						Values: []types.Slot{
+							{},
+							{},
+						},
+						SubSlots: map[string]types.Slot{
+							"key0": {},
+						},
+					},
+				},
+				State:             types.IntentState("Failed"),
+				ConfirmationState: types.ConfirmationState("Confirmed"),
+			},
+			ActiveContexts: []types.ActiveContext{
+				{
+					Name: ptr.String("__Name__"),
+					TimeToLive: &types.ActiveContextTimeToLive{
+						TimeToLiveInSeconds: ptr.Int32(1),
+						TurnsToLive:         ptr.Int32(1),
+					},
+					ContextAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					TimeToLive: &types.ActiveContextTimeToLive{
+						TimeToLiveInSeconds: ptr.Int32(1),
+						TurnsToLive:         ptr.Int32(1),
+					},
+					ContextAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			SessionAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			OriginatingRequestId: ptr.String("__OriginatingRequestId__"),
+			RuntimeHints: &types.RuntimeHints{
+				SlotHints: map[string]map[string]types.RuntimeHintDetails{
+					"key0": {
+						"key0": {
+							RuntimeHintValues: []types.RuntimeHintValue{
+								{
+									Phrase: ptr.String("__Phrase__"),
+								},
+								{
+									Phrase: ptr.String("__Phrase__"),
+								},
+							},
+							SubSlotHints: map[string]types.RuntimeHintDetails{
+								"key0": {},
+							},
+						},
+					},
+				},
+			},
+		},
+		RequestAttributes: map[string]string{
+			"key0": "__Value__",
+		},
+		ResponseContentType: ptr.String("__ResponseContentType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -601,7 +742,97 @@ func TestCheckResponseSnapshot_RecognizeText(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RecognizeText(context.Background(), &RecognizeTextInput{})
+	got, err := svc.RecognizeText(context.Background(), &RecognizeTextInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SessionId:  ptr.String("__SessionId__"),
+		Text:       ptr.String("__Text__"),
+		SessionState: &types.SessionState{
+			DialogAction: &types.DialogAction{
+				Type:                 types.DialogActionType("Close"),
+				SlotToElicit:         ptr.String("__SlotToElicit__"),
+				SlotElicitationStyle: types.StyleType("Default"),
+				SubSlotToElicit: &types.ElicitSubSlot{
+					Name:            ptr.String("__Name__"),
+					SubSlotToElicit: nil,
+				},
+			},
+			Intent: &types.Intent{
+				Name: ptr.String("__Name__"),
+				Slots: map[string]types.Slot{
+					"key0": {
+						Value: &types.Value{
+							OriginalValue:    ptr.String("__OriginalValue__"),
+							InterpretedValue: ptr.String("__InterpretedValue__"),
+							ResolvedValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Shape: types.Shape("Scalar"),
+						Values: []types.Slot{
+							{},
+							{},
+						},
+						SubSlots: map[string]types.Slot{
+							"key0": {},
+						},
+					},
+				},
+				State:             types.IntentState("Failed"),
+				ConfirmationState: types.ConfirmationState("Confirmed"),
+			},
+			ActiveContexts: []types.ActiveContext{
+				{
+					Name: ptr.String("__Name__"),
+					TimeToLive: &types.ActiveContextTimeToLive{
+						TimeToLiveInSeconds: ptr.Int32(1),
+						TurnsToLive:         ptr.Int32(1),
+					},
+					ContextAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					TimeToLive: &types.ActiveContextTimeToLive{
+						TimeToLiveInSeconds: ptr.Int32(1),
+						TurnsToLive:         ptr.Int32(1),
+					},
+					ContextAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			SessionAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			OriginatingRequestId: ptr.String("__OriginatingRequestId__"),
+			RuntimeHints: &types.RuntimeHints{
+				SlotHints: map[string]map[string]types.RuntimeHintDetails{
+					"key0": {
+						"key0": {
+							RuntimeHintValues: []types.RuntimeHintValue{
+								{
+									Phrase: ptr.String("__Phrase__"),
+								},
+								{
+									Phrase: ptr.String("__Phrase__"),
+								},
+							},
+							SubSlotHints: map[string]types.RuntimeHintDetails{
+								"key0": {},
+							},
+						},
+					},
+				},
+			},
+		},
+		RequestAttributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -620,6 +851,7 @@ func TestCheckResponseSnapshot_RecognizeUtterance(t *testing.T) {
 		RequestAttributes:   ptr.String("__RequestAttributes__"),
 		SessionId:           ptr.String("__SessionId__"),
 		InputTranscript:     ptr.String("__InputTranscript__"),
+		AudioStream:         io.NopCloser(bytes.NewReader([]byte("__AudioStream__"))),
 		RecognizedBotMember: ptr.String("__RecognizedBotMember__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("RecognizeUtterance.response")
@@ -630,13 +862,27 @@ func TestCheckResponseSnapshot_RecognizeUtterance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RecognizeUtterance(context.Background(), &RecognizeUtteranceInput{})
+	got, err := svc.RecognizeUtterance(context.Background(), &RecognizeUtteranceInput{
+		BotId:               ptr.String("__BotId__"),
+		BotAliasId:          ptr.String("__BotAliasId__"),
+		LocaleId:            ptr.String("__LocaleId__"),
+		SessionId:           ptr.String("__SessionId__"),
+		SessionState:        ptr.String("__SessionState__"),
+		RequestAttributes:   ptr.String("__RequestAttributes__"),
+		RequestContentType:  ptr.String("__RequestContentType__"),
+		ResponseContentType: ptr.String("__ResponseContentType__"),
+		InputStream:         io.NopCloser(bytes.NewReader([]byte("__InputStream__"))),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RecognizeUtterance.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_StartConversation(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
@@ -651,7 +897,12 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -676,7 +927,137 @@ func TestCheckResponseSnapshot_Error_BadGatewayException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutSession(context.Background(), &PutSessionInput{})
+	_, opErr := svc.PutSession(context.Background(), &PutSessionInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SessionId:  ptr.String("__SessionId__"),
+		Messages: []types.Message{
+			{
+				Content:     ptr.String("__Content__"),
+				ContentType: types.MessageContentType("CustomPayload"),
+				ImageResponseCard: &types.ImageResponseCard{
+					Title:    ptr.String("__Title__"),
+					Subtitle: ptr.String("__Subtitle__"),
+					ImageUrl: ptr.String("__ImageUrl__"),
+					Buttons: []types.Button{
+						{
+							Text:  ptr.String("__Text__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Text:  ptr.String("__Text__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			{
+				Content:     ptr.String("__Content__"),
+				ContentType: types.MessageContentType("CustomPayload"),
+				ImageResponseCard: &types.ImageResponseCard{
+					Title:    ptr.String("__Title__"),
+					Subtitle: ptr.String("__Subtitle__"),
+					ImageUrl: ptr.String("__ImageUrl__"),
+					Buttons: []types.Button{
+						{
+							Text:  ptr.String("__Text__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Text:  ptr.String("__Text__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+		},
+		SessionState: &types.SessionState{
+			DialogAction: &types.DialogAction{
+				Type:                 types.DialogActionType("Close"),
+				SlotToElicit:         ptr.String("__SlotToElicit__"),
+				SlotElicitationStyle: types.StyleType("Default"),
+				SubSlotToElicit: &types.ElicitSubSlot{
+					Name:            ptr.String("__Name__"),
+					SubSlotToElicit: nil,
+				},
+			},
+			Intent: &types.Intent{
+				Name: ptr.String("__Name__"),
+				Slots: map[string]types.Slot{
+					"key0": {
+						Value: &types.Value{
+							OriginalValue:    ptr.String("__OriginalValue__"),
+							InterpretedValue: ptr.String("__InterpretedValue__"),
+							ResolvedValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Shape: types.Shape("Scalar"),
+						Values: []types.Slot{
+							{},
+							{},
+						},
+						SubSlots: map[string]types.Slot{
+							"key0": {},
+						},
+					},
+				},
+				State:             types.IntentState("Failed"),
+				ConfirmationState: types.ConfirmationState("Confirmed"),
+			},
+			ActiveContexts: []types.ActiveContext{
+				{
+					Name: ptr.String("__Name__"),
+					TimeToLive: &types.ActiveContextTimeToLive{
+						TimeToLiveInSeconds: ptr.Int32(1),
+						TurnsToLive:         ptr.Int32(1),
+					},
+					ContextAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					TimeToLive: &types.ActiveContextTimeToLive{
+						TimeToLiveInSeconds: ptr.Int32(1),
+						TurnsToLive:         ptr.Int32(1),
+					},
+					ContextAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			SessionAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			OriginatingRequestId: ptr.String("__OriginatingRequestId__"),
+			RuntimeHints: &types.RuntimeHints{
+				SlotHints: map[string]map[string]types.RuntimeHintDetails{
+					"key0": {
+						"key0": {
+							RuntimeHintValues: []types.RuntimeHintValue{
+								{
+									Phrase: ptr.String("__Phrase__"),
+								},
+								{
+									Phrase: ptr.String("__Phrase__"),
+								},
+							},
+							SubSlotHints: map[string]types.RuntimeHintDetails{
+								"key0": {},
+							},
+						},
+					},
+				},
+			},
+		},
+		RequestAttributes: map[string]string{
+			"key0": "__Value__",
+		},
+		ResponseContentType: ptr.String("__ResponseContentType__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -701,7 +1082,12 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -726,7 +1112,137 @@ func TestCheckResponseSnapshot_Error_DependencyFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutSession(context.Background(), &PutSessionInput{})
+	_, opErr := svc.PutSession(context.Background(), &PutSessionInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SessionId:  ptr.String("__SessionId__"),
+		Messages: []types.Message{
+			{
+				Content:     ptr.String("__Content__"),
+				ContentType: types.MessageContentType("CustomPayload"),
+				ImageResponseCard: &types.ImageResponseCard{
+					Title:    ptr.String("__Title__"),
+					Subtitle: ptr.String("__Subtitle__"),
+					ImageUrl: ptr.String("__ImageUrl__"),
+					Buttons: []types.Button{
+						{
+							Text:  ptr.String("__Text__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Text:  ptr.String("__Text__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			{
+				Content:     ptr.String("__Content__"),
+				ContentType: types.MessageContentType("CustomPayload"),
+				ImageResponseCard: &types.ImageResponseCard{
+					Title:    ptr.String("__Title__"),
+					Subtitle: ptr.String("__Subtitle__"),
+					ImageUrl: ptr.String("__ImageUrl__"),
+					Buttons: []types.Button{
+						{
+							Text:  ptr.String("__Text__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Text:  ptr.String("__Text__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+		},
+		SessionState: &types.SessionState{
+			DialogAction: &types.DialogAction{
+				Type:                 types.DialogActionType("Close"),
+				SlotToElicit:         ptr.String("__SlotToElicit__"),
+				SlotElicitationStyle: types.StyleType("Default"),
+				SubSlotToElicit: &types.ElicitSubSlot{
+					Name:            ptr.String("__Name__"),
+					SubSlotToElicit: nil,
+				},
+			},
+			Intent: &types.Intent{
+				Name: ptr.String("__Name__"),
+				Slots: map[string]types.Slot{
+					"key0": {
+						Value: &types.Value{
+							OriginalValue:    ptr.String("__OriginalValue__"),
+							InterpretedValue: ptr.String("__InterpretedValue__"),
+							ResolvedValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Shape: types.Shape("Scalar"),
+						Values: []types.Slot{
+							{},
+							{},
+						},
+						SubSlots: map[string]types.Slot{
+							"key0": {},
+						},
+					},
+				},
+				State:             types.IntentState("Failed"),
+				ConfirmationState: types.ConfirmationState("Confirmed"),
+			},
+			ActiveContexts: []types.ActiveContext{
+				{
+					Name: ptr.String("__Name__"),
+					TimeToLive: &types.ActiveContextTimeToLive{
+						TimeToLiveInSeconds: ptr.Int32(1),
+						TurnsToLive:         ptr.Int32(1),
+					},
+					ContextAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					TimeToLive: &types.ActiveContextTimeToLive{
+						TimeToLiveInSeconds: ptr.Int32(1),
+						TurnsToLive:         ptr.Int32(1),
+					},
+					ContextAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			SessionAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			OriginatingRequestId: ptr.String("__OriginatingRequestId__"),
+			RuntimeHints: &types.RuntimeHints{
+				SlotHints: map[string]map[string]types.RuntimeHintDetails{
+					"key0": {
+						"key0": {
+							RuntimeHintValues: []types.RuntimeHintValue{
+								{
+									Phrase: ptr.String("__Phrase__"),
+								},
+								{
+									Phrase: ptr.String("__Phrase__"),
+								},
+							},
+							SubSlotHints: map[string]types.RuntimeHintDetails{
+								"key0": {},
+							},
+						},
+					},
+				},
+			},
+		},
+		RequestAttributes: map[string]string{
+			"key0": "__Value__",
+		},
+		ResponseContentType: ptr.String("__ResponseContentType__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -751,7 +1267,12 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -776,7 +1297,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -801,7 +1327,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -826,7 +1357,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

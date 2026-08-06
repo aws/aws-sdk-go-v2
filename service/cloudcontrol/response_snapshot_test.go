@@ -131,7 +131,9 @@ func TestCheckResponseSnapshot_CancelResourceRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelResourceRequest(context.Background(), &CancelResourceRequestInput{})
+	got, err := svc.CancelResourceRequest(context.Background(), &CancelResourceRequestInput{
+		RequestToken: ptr.String("__RequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +166,13 @@ func TestCheckResponseSnapshot_CreateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	got, err := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -197,7 +205,13 @@ func TestCheckResponseSnapshot_DeleteResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResource(context.Background(), &DeleteResourceInput{})
+	got, err := svc.DeleteResource(context.Background(), &DeleteResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Identifier:    ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +236,12 @@ func TestCheckResponseSnapshot_GetResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResource(context.Background(), &GetResourceInput{})
+	got, err := svc.GetResource(context.Background(), &GetResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		Identifier:    ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -277,7 +296,9 @@ func TestCheckResponseSnapshot_GetResourceRequestStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceRequestStatus(context.Background(), &GetResourceRequestStatusInput{})
+	got, err := svc.GetResourceRequestStatus(context.Background(), &GetResourceRequestStatusInput{
+		RequestToken: ptr.String("__RequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +347,20 @@ func TestCheckResponseSnapshot_ListResourceRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceRequests(context.Background(), &ListResourceRequestsInput{})
+	got, err := svc.ListResourceRequests(context.Background(), &ListResourceRequestsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		ResourceRequestStatusFilter: &types.ResourceRequestStatusFilter{
+			Operations: []types.Operation{
+				types.Operation("CREATE"),
+				types.Operation("CREATE"),
+			},
+			OperationStatuses: []types.OperationStatus{
+				types.OperationStatus("PENDING"),
+				types.OperationStatus("PENDING"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -358,7 +392,14 @@ func TestCheckResponseSnapshot_ListResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResources(context.Background(), &ListResourcesInput{})
+	got, err := svc.ListResources(context.Background(), &ListResourcesInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		ResourceModel: ptr.String("__ResourceModel__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -391,7 +432,14 @@ func TestCheckResponseSnapshot_UpdateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResource(context.Background(), &UpdateResourceInput{})
+	got, err := svc.UpdateResource(context.Background(), &UpdateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Identifier:    ptr.String("__Identifier__"),
+		PatchDocument: ptr.String("__PatchDocument__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -412,7 +460,13 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -437,7 +491,13 @@ func TestCheckResponseSnapshot_Error_ClientTokenConflictException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -462,7 +522,9 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelResourceRequest(context.Background(), &CancelResourceRequestInput{})
+	_, opErr := svc.CancelResourceRequest(context.Background(), &CancelResourceRequestInput{
+		RequestToken: ptr.String("__RequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -487,7 +549,13 @@ func TestCheckResponseSnapshot_Error_ConcurrentOperationException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -512,7 +580,13 @@ func TestCheckResponseSnapshot_Error_GeneralServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -537,7 +611,13 @@ func TestCheckResponseSnapshot_Error_HandlerFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -562,7 +642,13 @@ func TestCheckResponseSnapshot_Error_HandlerInternalFailureException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -587,7 +673,13 @@ func TestCheckResponseSnapshot_Error_InvalidCredentialsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -612,7 +704,13 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -637,7 +735,13 @@ func TestCheckResponseSnapshot_Error_NetworkFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -662,7 +766,13 @@ func TestCheckResponseSnapshot_Error_NotStabilizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -687,7 +797,13 @@ func TestCheckResponseSnapshot_Error_NotUpdatableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -712,7 +828,13 @@ func TestCheckResponseSnapshot_Error_PrivateTypeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -737,7 +859,9 @@ func TestCheckResponseSnapshot_Error_RequestTokenNotFoundException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelResourceRequest(context.Background(), &CancelResourceRequestInput{})
+	_, opErr := svc.CancelResourceRequest(context.Background(), &CancelResourceRequestInput{
+		RequestToken: ptr.String("__RequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -762,7 +886,13 @@ func TestCheckResponseSnapshot_Error_ResourceConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -787,7 +917,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -812,7 +948,13 @@ func TestCheckResponseSnapshot_Error_ServiceInternalErrorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -837,7 +979,13 @@ func TestCheckResponseSnapshot_Error_ServiceLimitExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -862,7 +1010,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -887,7 +1041,13 @@ func TestCheckResponseSnapshot_Error_TypeNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -912,7 +1072,13 @@ func TestCheckResponseSnapshot_Error_UnsupportedActionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	_, opErr := svc.CreateResource(context.Background(), &CreateResourceInput{
+		TypeName:      ptr.String("__TypeName__"),
+		TypeVersionId: ptr.String("__TypeVersionId__"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		DesiredState:  ptr.String("__DesiredState__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

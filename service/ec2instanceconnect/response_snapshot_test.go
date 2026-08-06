@@ -119,7 +119,12 @@ func TestCheckResponseSnapshot_SendSSHPublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{})
+	got, err := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		InstanceOSUser:   ptr.String("__InstanceOSUser__"),
+		SSHPublicKey:     ptr.String("__SSHPublicKey__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +146,11 @@ func TestCheckResponseSnapshot_SendSerialConsoleSSHPublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendSerialConsoleSSHPublicKey(context.Background(), &SendSerialConsoleSSHPublicKeyInput{})
+	got, err := svc.SendSerialConsoleSSHPublicKey(context.Background(), &SendSerialConsoleSSHPublicKeyInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		SerialPort:   1,
+		SSHPublicKey: ptr.String("__SSHPublicKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +171,12 @@ func TestCheckResponseSnapshot_Error_AuthException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{})
+	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		InstanceOSUser:   ptr.String("__InstanceOSUser__"),
+		SSHPublicKey:     ptr.String("__SSHPublicKey__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -187,7 +201,12 @@ func TestCheckResponseSnapshot_Error_EC2InstanceNotFoundException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{})
+	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		InstanceOSUser:   ptr.String("__InstanceOSUser__"),
+		SSHPublicKey:     ptr.String("__SSHPublicKey__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -212,7 +231,12 @@ func TestCheckResponseSnapshot_Error_EC2InstanceStateInvalidException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{})
+	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		InstanceOSUser:   ptr.String("__InstanceOSUser__"),
+		SSHPublicKey:     ptr.String("__SSHPublicKey__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -237,7 +261,11 @@ func TestCheckResponseSnapshot_Error_EC2InstanceTypeInvalidException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendSerialConsoleSSHPublicKey(context.Background(), &SendSerialConsoleSSHPublicKeyInput{})
+	_, opErr := svc.SendSerialConsoleSSHPublicKey(context.Background(), &SendSerialConsoleSSHPublicKeyInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		SerialPort:   1,
+		SSHPublicKey: ptr.String("__SSHPublicKey__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -262,7 +290,12 @@ func TestCheckResponseSnapshot_Error_EC2InstanceUnavailableException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{})
+	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		InstanceOSUser:   ptr.String("__InstanceOSUser__"),
+		SSHPublicKey:     ptr.String("__SSHPublicKey__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -287,7 +320,12 @@ func TestCheckResponseSnapshot_Error_InvalidArgsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{})
+	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		InstanceOSUser:   ptr.String("__InstanceOSUser__"),
+		SSHPublicKey:     ptr.String("__SSHPublicKey__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -312,7 +350,11 @@ func TestCheckResponseSnapshot_Error_SerialConsoleAccessDisabledException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendSerialConsoleSSHPublicKey(context.Background(), &SendSerialConsoleSSHPublicKeyInput{})
+	_, opErr := svc.SendSerialConsoleSSHPublicKey(context.Background(), &SendSerialConsoleSSHPublicKeyInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		SerialPort:   1,
+		SSHPublicKey: ptr.String("__SSHPublicKey__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -337,7 +379,11 @@ func TestCheckResponseSnapshot_Error_SerialConsoleSessionLimitExceededException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendSerialConsoleSSHPublicKey(context.Background(), &SendSerialConsoleSSHPublicKeyInput{})
+	_, opErr := svc.SendSerialConsoleSSHPublicKey(context.Background(), &SendSerialConsoleSSHPublicKeyInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		SerialPort:   1,
+		SSHPublicKey: ptr.String("__SSHPublicKey__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -362,7 +408,11 @@ func TestCheckResponseSnapshot_Error_SerialConsoleSessionUnavailableException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendSerialConsoleSSHPublicKey(context.Background(), &SendSerialConsoleSSHPublicKeyInput{})
+	_, opErr := svc.SendSerialConsoleSSHPublicKey(context.Background(), &SendSerialConsoleSSHPublicKeyInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		SerialPort:   1,
+		SSHPublicKey: ptr.String("__SSHPublicKey__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -387,7 +437,11 @@ func TestCheckResponseSnapshot_Error_SerialConsoleSessionUnsupportedException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendSerialConsoleSSHPublicKey(context.Background(), &SendSerialConsoleSSHPublicKeyInput{})
+	_, opErr := svc.SendSerialConsoleSSHPublicKey(context.Background(), &SendSerialConsoleSSHPublicKeyInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		SerialPort:   1,
+		SSHPublicKey: ptr.String("__SSHPublicKey__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -412,7 +466,12 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{})
+	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		InstanceOSUser:   ptr.String("__InstanceOSUser__"),
+		SSHPublicKey:     ptr.String("__SSHPublicKey__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -437,7 +496,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{})
+	_, opErr := svc.SendSSHPublicKey(context.Background(), &SendSSHPublicKeyInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		InstanceOSUser:   ptr.String("__InstanceOSUser__"),
+		SSHPublicKey:     ptr.String("__SSHPublicKey__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

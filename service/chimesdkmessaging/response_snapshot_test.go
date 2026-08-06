@@ -117,7 +117,11 @@ func TestCheckResponseSnapshot_AssociateChannelFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{})
+	got, err := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{
+		ChannelArn:     ptr.String("__ChannelArn__"),
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+		ChimeBearer:    ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -168,7 +172,16 @@ func TestCheckResponseSnapshot_BatchCreateChannelMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateChannelMembership(context.Background(), &BatchCreateChannelMembershipInput{})
+	got, err := svc.BatchCreateChannelMembership(context.Background(), &BatchCreateChannelMembershipInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		Type:       types.ChannelMembershipType("DEFAULT"),
+		MemberArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChimeBearer:  ptr.String("__ChimeBearer__"),
+		SubChannelId: ptr.String("__SubChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -190,7 +203,31 @@ func TestCheckResponseSnapshot_ChannelFlowCallback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ChannelFlowCallback(context.Background(), &ChannelFlowCallbackInput{})
+	got, err := svc.ChannelFlowCallback(context.Background(), &ChannelFlowCallbackInput{
+		CallbackId:     ptr.String("__CallbackId__"),
+		ChannelArn:     ptr.String("__ChannelArn__"),
+		DeleteResource: true,
+		ChannelMessage: &types.ChannelMessageCallback{
+			MessageId: ptr.String("__MessageId__"),
+			Content:   ptr.String("__Content__"),
+			Metadata:  ptr.String("__Metadata__"),
+			PushNotification: &types.PushNotificationConfiguration{
+				Title: ptr.String("__Title__"),
+				Body:  ptr.String("__Body__"),
+				Type:  types.PushNotificationType("DEFAULT"),
+			},
+			MessageAttributes: map[string]types.MessageAttributeValue{
+				"key0": {
+					StringValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			SubChannelId: ptr.String("__SubChannelId__"),
+			ContentType:  ptr.String("__ContentType__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +248,43 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		AppInstanceArn:     ptr.String("__AppInstanceArn__"),
+		Name:               ptr.String("__Name__"),
+		Mode:               types.ChannelMode("UNRESTRICTED"),
+		Privacy:            types.ChannelPrivacy("PUBLIC"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+		ChannelId:   ptr.String("__ChannelId__"),
+		MemberArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ModeratorArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ElasticChannelConfiguration: &types.ElasticChannelConfiguration{
+			MaximumSubChannels:             ptr.Int32(1),
+			TargetMembershipsPerSubChannel: ptr.Int32(1),
+			MinimumMembershipPercentage:    ptr.Int32(1),
+		},
+		ExpirationSettings: &types.ExpirationSettings{
+			ExpirationDays:      ptr.Int32(1),
+			ExpirationCriterion: types.ExpirationCriterion("CREATED_TIMESTAMP"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -236,7 +309,11 @@ func TestCheckResponseSnapshot_CreateChannelBan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannelBan(context.Background(), &CreateChannelBanInput{})
+	got, err := svc.CreateChannelBan(context.Background(), &CreateChannelBanInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		MemberArn:   ptr.String("__MemberArn__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -257,7 +334,45 @@ func TestCheckResponseSnapshot_CreateChannelFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannelFlow(context.Background(), &CreateChannelFlowInput{})
+	got, err := svc.CreateChannelFlow(context.Background(), &CreateChannelFlowInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+		Processors: []types.Processor{
+			{
+				Name: ptr.String("__Name__"),
+				Configuration: &types.ProcessorConfiguration{
+					Lambda: &types.LambdaConfiguration{
+						ResourceArn:    ptr.String("__ResourceArn__"),
+						InvocationType: types.InvocationType("ASYNC"),
+					},
+				},
+				ExecutionOrder: ptr.Int32(1),
+				FallbackAction: types.FallbackAction("CONTINUE"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Configuration: &types.ProcessorConfiguration{
+					Lambda: &types.LambdaConfiguration{
+						ResourceArn:    ptr.String("__ResourceArn__"),
+						InvocationType: types.InvocationType("ASYNC"),
+					},
+				},
+				ExecutionOrder: ptr.Int32(1),
+				FallbackAction: types.FallbackAction("CONTINUE"),
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -283,7 +398,13 @@ func TestCheckResponseSnapshot_CreateChannelMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannelMembership(context.Background(), &CreateChannelMembershipInput{})
+	got, err := svc.CreateChannelMembership(context.Background(), &CreateChannelMembershipInput{
+		ChannelArn:   ptr.String("__ChannelArn__"),
+		MemberArn:    ptr.String("__MemberArn__"),
+		Type:         types.ChannelMembershipType("DEFAULT"),
+		ChimeBearer:  ptr.String("__ChimeBearer__"),
+		SubChannelId: ptr.String("__SubChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -308,7 +429,11 @@ func TestCheckResponseSnapshot_CreateChannelModerator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannelModerator(context.Background(), &CreateChannelModeratorInput{})
+	got, err := svc.CreateChannelModerator(context.Background(), &CreateChannelModeratorInput{
+		ChannelArn:          ptr.String("__ChannelArn__"),
+		ChannelModeratorArn: ptr.String("__ChannelModeratorArn__"),
+		ChimeBearer:         ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -327,7 +452,10 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{})
+	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +474,11 @@ func TestCheckResponseSnapshot_DeleteChannelBan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannelBan(context.Background(), &DeleteChannelBanInput{})
+	got, err := svc.DeleteChannelBan(context.Background(), &DeleteChannelBanInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		MemberArn:   ptr.String("__MemberArn__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -365,7 +497,9 @@ func TestCheckResponseSnapshot_DeleteChannelFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannelFlow(context.Background(), &DeleteChannelFlowInput{})
+	got, err := svc.DeleteChannelFlow(context.Background(), &DeleteChannelFlowInput{
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -384,7 +518,12 @@ func TestCheckResponseSnapshot_DeleteChannelMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannelMembership(context.Background(), &DeleteChannelMembershipInput{})
+	got, err := svc.DeleteChannelMembership(context.Background(), &DeleteChannelMembershipInput{
+		ChannelArn:   ptr.String("__ChannelArn__"),
+		MemberArn:    ptr.String("__MemberArn__"),
+		ChimeBearer:  ptr.String("__ChimeBearer__"),
+		SubChannelId: ptr.String("__SubChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -403,7 +542,12 @@ func TestCheckResponseSnapshot_DeleteChannelMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannelMessage(context.Background(), &DeleteChannelMessageInput{})
+	got, err := svc.DeleteChannelMessage(context.Background(), &DeleteChannelMessageInput{
+		ChannelArn:   ptr.String("__ChannelArn__"),
+		MessageId:    ptr.String("__MessageId__"),
+		ChimeBearer:  ptr.String("__ChimeBearer__"),
+		SubChannelId: ptr.String("__SubChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -422,7 +566,11 @@ func TestCheckResponseSnapshot_DeleteChannelModerator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannelModerator(context.Background(), &DeleteChannelModeratorInput{})
+	got, err := svc.DeleteChannelModerator(context.Background(), &DeleteChannelModeratorInput{
+		ChannelArn:          ptr.String("__ChannelArn__"),
+		ChannelModeratorArn: ptr.String("__ChannelModeratorArn__"),
+		ChimeBearer:         ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -441,7 +589,9 @@ func TestCheckResponseSnapshot_DeleteMessagingStreamingConfigurations(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMessagingStreamingConfigurations(context.Background(), &DeleteMessagingStreamingConfigurationsInput{})
+	got, err := svc.DeleteMessagingStreamingConfigurations(context.Background(), &DeleteMessagingStreamingConfigurationsInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -485,7 +635,10 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChannel(context.Background(), &DescribeChannelInput{})
+	got, err := svc.DescribeChannel(context.Background(), &DescribeChannelInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -517,7 +670,11 @@ func TestCheckResponseSnapshot_DescribeChannelBan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChannelBan(context.Background(), &DescribeChannelBanInput{})
+	got, err := svc.DescribeChannelBan(context.Background(), &DescribeChannelBanInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		MemberArn:   ptr.String("__MemberArn__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -567,7 +724,9 @@ func TestCheckResponseSnapshot_DescribeChannelFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChannelFlow(context.Background(), &DescribeChannelFlowInput{})
+	got, err := svc.DescribeChannelFlow(context.Background(), &DescribeChannelFlowInput{
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -602,7 +761,12 @@ func TestCheckResponseSnapshot_DescribeChannelMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChannelMembership(context.Background(), &DescribeChannelMembershipInput{})
+	got, err := svc.DescribeChannelMembership(context.Background(), &DescribeChannelMembershipInput{
+		ChannelArn:   ptr.String("__ChannelArn__"),
+		MemberArn:    ptr.String("__MemberArn__"),
+		ChimeBearer:  ptr.String("__ChimeBearer__"),
+		SubChannelId: ptr.String("__SubChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -637,7 +801,11 @@ func TestCheckResponseSnapshot_DescribeChannelMembershipForAppInstanceUser(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChannelMembershipForAppInstanceUser(context.Background(), &DescribeChannelMembershipForAppInstanceUserInput{})
+	got, err := svc.DescribeChannelMembershipForAppInstanceUser(context.Background(), &DescribeChannelMembershipForAppInstanceUserInput{
+		ChannelArn:         ptr.String("__ChannelArn__"),
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+		ChimeBearer:        ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -667,7 +835,11 @@ func TestCheckResponseSnapshot_DescribeChannelModeratedByAppInstanceUser(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChannelModeratedByAppInstanceUser(context.Background(), &DescribeChannelModeratedByAppInstanceUserInput{})
+	got, err := svc.DescribeChannelModeratedByAppInstanceUser(context.Background(), &DescribeChannelModeratedByAppInstanceUserInput{
+		ChannelArn:         ptr.String("__ChannelArn__"),
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+		ChimeBearer:        ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -699,7 +871,11 @@ func TestCheckResponseSnapshot_DescribeChannelModerator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChannelModerator(context.Background(), &DescribeChannelModeratorInput{})
+	got, err := svc.DescribeChannelModerator(context.Background(), &DescribeChannelModeratorInput{
+		ChannelArn:          ptr.String("__ChannelArn__"),
+		ChannelModeratorArn: ptr.String("__ChannelModeratorArn__"),
+		ChimeBearer:         ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -718,7 +894,11 @@ func TestCheckResponseSnapshot_DisassociateChannelFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateChannelFlow(context.Background(), &DisassociateChannelFlowInput{})
+	got, err := svc.DisassociateChannelFlow(context.Background(), &DisassociateChannelFlowInput{
+		ChannelArn:     ptr.String("__ChannelArn__"),
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+		ChimeBearer:    ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -749,7 +929,11 @@ func TestCheckResponseSnapshot_GetChannelMembershipPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannelMembershipPreferences(context.Background(), &GetChannelMembershipPreferencesInput{})
+	got, err := svc.GetChannelMembershipPreferences(context.Background(), &GetChannelMembershipPreferencesInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		MemberArn:   ptr.String("__MemberArn__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -807,7 +991,12 @@ func TestCheckResponseSnapshot_GetChannelMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannelMessage(context.Background(), &GetChannelMessageInput{})
+	got, err := svc.GetChannelMessage(context.Background(), &GetChannelMessageInput{
+		ChannelArn:   ptr.String("__ChannelArn__"),
+		MessageId:    ptr.String("__MessageId__"),
+		ChimeBearer:  ptr.String("__ChimeBearer__"),
+		SubChannelId: ptr.String("__SubChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -831,7 +1020,12 @@ func TestCheckResponseSnapshot_GetChannelMessageStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannelMessageStatus(context.Background(), &GetChannelMessageStatusInput{})
+	got, err := svc.GetChannelMessageStatus(context.Background(), &GetChannelMessageStatusInput{
+		ChannelArn:   ptr.String("__ChannelArn__"),
+		MessageId:    ptr.String("__MessageId__"),
+		ChimeBearer:  ptr.String("__ChimeBearer__"),
+		SubChannelId: ptr.String("__SubChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -854,7 +1048,9 @@ func TestCheckResponseSnapshot_GetMessagingSessionEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMessagingSessionEndpoint(context.Background(), &GetMessagingSessionEndpointInput{})
+	got, err := svc.GetMessagingSessionEndpoint(context.Background(), &GetMessagingSessionEndpointInput{
+		NetworkType: types.NetworkType("IPV4_ONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -884,7 +1080,9 @@ func TestCheckResponseSnapshot_GetMessagingStreamingConfigurations(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMessagingStreamingConfigurations(context.Background(), &GetMessagingStreamingConfigurationsInput{})
+	got, err := svc.GetMessagingStreamingConfigurations(context.Background(), &GetMessagingStreamingConfigurationsInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -920,7 +1118,12 @@ func TestCheckResponseSnapshot_ListChannelBans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannelBans(context.Background(), &ListChannelBansInput{})
+	got, err := svc.ListChannelBans(context.Background(), &ListChannelBansInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -999,7 +1202,11 @@ func TestCheckResponseSnapshot_ListChannelFlows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannelFlows(context.Background(), &ListChannelFlowsInput{})
+	got, err := svc.ListChannelFlows(context.Background(), &ListChannelFlowsInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1035,7 +1242,14 @@ func TestCheckResponseSnapshot_ListChannelMemberships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannelMemberships(context.Background(), &ListChannelMembershipsInput{})
+	got, err := svc.ListChannelMemberships(context.Background(), &ListChannelMembershipsInput{
+		ChannelArn:   ptr.String("__ChannelArn__"),
+		Type:         types.ChannelMembershipType("DEFAULT"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		ChimeBearer:  ptr.String("__ChimeBearer__"),
+		SubChannelId: ptr.String("__SubChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1088,7 +1302,12 @@ func TestCheckResponseSnapshot_ListChannelMembershipsForAppInstanceUser(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannelMembershipsForAppInstanceUser(context.Background(), &ListChannelMembershipsForAppInstanceUserInput{})
+	got, err := svc.ListChannelMembershipsForAppInstanceUser(context.Background(), &ListChannelMembershipsForAppInstanceUserInput{
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		ChimeBearer:        ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1183,7 +1402,16 @@ func TestCheckResponseSnapshot_ListChannelMessages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannelMessages(context.Background(), &ListChannelMessagesInput{})
+	got, err := svc.ListChannelMessages(context.Background(), &ListChannelMessagesInput{
+		ChannelArn:   ptr.String("__ChannelArn__"),
+		SortOrder:    types.SortOrder("ASCENDING"),
+		NotBefore:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NotAfter:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		ChimeBearer:  ptr.String("__ChimeBearer__"),
+		SubChannelId: ptr.String("__SubChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1219,7 +1447,12 @@ func TestCheckResponseSnapshot_ListChannelModerators(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannelModerators(context.Background(), &ListChannelModeratorsInput{})
+	got, err := svc.ListChannelModerators(context.Background(), &ListChannelModeratorsInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1258,7 +1491,13 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{})
+	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+		Privacy:        types.ChannelPrivacy("PUBLIC"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+		ChimeBearer:    ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1295,7 +1534,11 @@ func TestCheckResponseSnapshot_ListChannelsAssociatedWithChannelFlow(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannelsAssociatedWithChannelFlow(context.Background(), &ListChannelsAssociatedWithChannelFlowInput{})
+	got, err := svc.ListChannelsAssociatedWithChannelFlow(context.Background(), &ListChannelsAssociatedWithChannelFlowInput{
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1338,7 +1581,12 @@ func TestCheckResponseSnapshot_ListChannelsModeratedByAppInstanceUser(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannelsModeratedByAppInstanceUser(context.Background(), &ListChannelsModeratedByAppInstanceUserInput{})
+	got, err := svc.ListChannelsModeratedByAppInstanceUser(context.Background(), &ListChannelsModeratedByAppInstanceUserInput{
+		AppInstanceUserArn: ptr.String("__AppInstanceUserArn__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		ChimeBearer:        ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1370,7 +1618,12 @@ func TestCheckResponseSnapshot_ListSubChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubChannels(context.Background(), &ListSubChannelsInput{})
+	got, err := svc.ListSubChannels(context.Background(), &ListSubChannelsInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1400,7 +1653,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1425,7 +1680,14 @@ func TestCheckResponseSnapshot_PutChannelExpirationSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutChannelExpirationSettings(context.Background(), &PutChannelExpirationSettingsInput{})
+	got, err := svc.PutChannelExpirationSettings(context.Background(), &PutChannelExpirationSettingsInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+		ExpirationSettings: &types.ExpirationSettings{
+			ExpirationDays:      ptr.Int32(1),
+			ExpirationCriterion: types.ExpirationCriterion("CREATED_TIMESTAMP"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1456,7 +1718,17 @@ func TestCheckResponseSnapshot_PutChannelMembershipPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutChannelMembershipPreferences(context.Background(), &PutChannelMembershipPreferencesInput{})
+	got, err := svc.PutChannelMembershipPreferences(context.Background(), &PutChannelMembershipPreferencesInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		MemberArn:   ptr.String("__MemberArn__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+		Preferences: &types.ChannelMembershipPreferences{
+			PushNotifications: &types.PushNotificationPreferences{
+				AllowNotifications: types.AllowNotifications("ALL"),
+				FilterRule:         ptr.String("__FilterRule__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1486,7 +1758,19 @@ func TestCheckResponseSnapshot_PutMessagingStreamingConfigurations(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMessagingStreamingConfigurations(context.Background(), &PutMessagingStreamingConfigurationsInput{})
+	got, err := svc.PutMessagingStreamingConfigurations(context.Background(), &PutMessagingStreamingConfigurationsInput{
+		AppInstanceArn: ptr.String("__AppInstanceArn__"),
+		StreamingConfigurations: []types.StreamingConfiguration{
+			{
+				DataType:    types.MessagingDataType("Channel"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				DataType:    types.MessagingDataType("Channel"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1509,7 +1793,12 @@ func TestCheckResponseSnapshot_RedactChannelMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RedactChannelMessage(context.Background(), &RedactChannelMessageInput{})
+	got, err := svc.RedactChannelMessage(context.Background(), &RedactChannelMessageInput{
+		ChannelArn:   ptr.String("__ChannelArn__"),
+		MessageId:    ptr.String("__MessageId__"),
+		ChimeBearer:  ptr.String("__ChimeBearer__"),
+		SubChannelId: ptr.String("__SubChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1548,7 +1837,29 @@ func TestCheckResponseSnapshot_SearchChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchChannels(context.Background(), &SearchChannelsInput{})
+	got, err := svc.SearchChannels(context.Background(), &SearchChannelsInput{
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+		Fields: []types.SearchField{
+			{
+				Key: types.SearchFieldKey("MEMBERS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.SearchFieldOperator("EQUALS"),
+			},
+			{
+				Key: types.SearchFieldKey("MEMBERS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.SearchFieldOperator("EQUALS"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1575,7 +1886,38 @@ func TestCheckResponseSnapshot_SendChannelMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendChannelMessage(context.Background(), &SendChannelMessageInput{})
+	got, err := svc.SendChannelMessage(context.Background(), &SendChannelMessageInput{
+		ChannelArn:         ptr.String("__ChannelArn__"),
+		Content:            ptr.String("__Content__"),
+		Type:               types.ChannelMessageType("STANDARD"),
+		Persistence:        types.ChannelMessagePersistenceType("PERSISTENT"),
+		Metadata:           ptr.String("__Metadata__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ChimeBearer:        ptr.String("__ChimeBearer__"),
+		PushNotification: &types.PushNotificationConfiguration{
+			Title: ptr.String("__Title__"),
+			Body:  ptr.String("__Body__"),
+			Type:  types.PushNotificationType("DEFAULT"),
+		},
+		MessageAttributes: map[string]types.MessageAttributeValue{
+			"key0": {
+				StringValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		SubChannelId: ptr.String("__SubChannelId__"),
+		ContentType:  ptr.String("__ContentType__"),
+		Target: []types.Target{
+			{
+				MemberArn: ptr.String("__MemberArn__"),
+			},
+			{
+				MemberArn: ptr.String("__MemberArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1594,7 +1936,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1613,7 +1967,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1634,7 +1994,13 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{})
+	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		Name:        ptr.String("__Name__"),
+		Mode:        types.ChannelMode("UNRESTRICTED"),
+		Metadata:    ptr.String("__Metadata__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1655,7 +2021,34 @@ func TestCheckResponseSnapshot_UpdateChannelFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannelFlow(context.Background(), &UpdateChannelFlowInput{})
+	got, err := svc.UpdateChannelFlow(context.Background(), &UpdateChannelFlowInput{
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+		Processors: []types.Processor{
+			{
+				Name: ptr.String("__Name__"),
+				Configuration: &types.ProcessorConfiguration{
+					Lambda: &types.LambdaConfiguration{
+						ResourceArn:    ptr.String("__ResourceArn__"),
+						InvocationType: types.InvocationType("ASYNC"),
+					},
+				},
+				ExecutionOrder: ptr.Int32(1),
+				FallbackAction: types.FallbackAction("CONTINUE"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Configuration: &types.ProcessorConfiguration{
+					Lambda: &types.LambdaConfiguration{
+						ResourceArn:    ptr.String("__ResourceArn__"),
+						InvocationType: types.InvocationType("ASYNC"),
+					},
+				},
+				ExecutionOrder: ptr.Int32(1),
+				FallbackAction: types.FallbackAction("CONTINUE"),
+			},
+		},
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1682,7 +2075,15 @@ func TestCheckResponseSnapshot_UpdateChannelMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannelMessage(context.Background(), &UpdateChannelMessageInput{})
+	got, err := svc.UpdateChannelMessage(context.Background(), &UpdateChannelMessageInput{
+		ChannelArn:   ptr.String("__ChannelArn__"),
+		MessageId:    ptr.String("__MessageId__"),
+		Content:      ptr.String("__Content__"),
+		Metadata:     ptr.String("__Metadata__"),
+		ChimeBearer:  ptr.String("__ChimeBearer__"),
+		SubChannelId: ptr.String("__SubChannelId__"),
+		ContentType:  ptr.String("__ContentType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1703,7 +2104,10 @@ func TestCheckResponseSnapshot_UpdateChannelReadMarker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannelReadMarker(context.Background(), &UpdateChannelReadMarkerInput{})
+	got, err := svc.UpdateChannelReadMarker(context.Background(), &UpdateChannelReadMarkerInput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		ChimeBearer: ptr.String("__ChimeBearer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1714,7 +2118,7 @@ func TestCheckResponseSnapshot_UpdateChannelReadMarker(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 	want := &types.BadRequestException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("BadRequestException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("BadRequestException.error")
@@ -1725,7 +2129,11 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{})
+	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{
+		ChannelArn:     ptr.String("__ChannelArn__"),
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+		ChimeBearer:    ptr.String("__ChimeBearer__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1740,7 +2148,7 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ConflictException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
@@ -1751,7 +2159,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{})
+	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{
+		ChannelArn:     ptr.String("__ChannelArn__"),
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+		ChimeBearer:    ptr.String("__ChimeBearer__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1766,7 +2178,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 	want := &types.ForbiddenException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ForbiddenException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ForbiddenException.error")
@@ -1777,7 +2189,11 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{})
+	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{
+		ChannelArn:     ptr.String("__ChannelArn__"),
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+		ChimeBearer:    ptr.String("__ChimeBearer__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1792,7 +2208,7 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 	want := &types.NotFoundException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("NotFoundException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("NotFoundException.error")
@@ -1803,7 +2219,11 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{})
+	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{
+		ChannelArn:     ptr.String("__ChannelArn__"),
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+		ChimeBearer:    ptr.String("__ChimeBearer__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1818,7 +2238,7 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T) {
 	want := &types.ResourceLimitExceededException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ResourceLimitExceededException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceLimitExceededException.error")
@@ -1829,7 +2249,16 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateChannelMembership(context.Background(), &BatchCreateChannelMembershipInput{})
+	_, opErr := svc.BatchCreateChannelMembership(context.Background(), &BatchCreateChannelMembershipInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		Type:       types.ChannelMembershipType("DEFAULT"),
+		MemberArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChimeBearer:  ptr.String("__ChimeBearer__"),
+		SubChannelId: ptr.String("__SubChannelId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1844,7 +2273,7 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 
 func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 	want := &types.ServiceFailureException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ServiceFailureException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceFailureException.error")
@@ -1855,7 +2284,11 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{})
+	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{
+		ChannelArn:     ptr.String("__ChannelArn__"),
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+		ChimeBearer:    ptr.String("__ChimeBearer__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1870,7 +2303,7 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 	want := &types.ServiceUnavailableException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ServiceUnavailableException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceUnavailableException.error")
@@ -1881,7 +2314,11 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{})
+	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{
+		ChannelArn:     ptr.String("__ChannelArn__"),
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+		ChimeBearer:    ptr.String("__ChimeBearer__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1896,7 +2333,7 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 	want := &types.ThrottledClientException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("ThrottledClientException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ThrottledClientException.error")
@@ -1907,7 +2344,11 @@ func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{})
+	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{
+		ChannelArn:     ptr.String("__ChannelArn__"),
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+		ChimeBearer:    ptr.String("__ChimeBearer__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1922,7 +2363,7 @@ func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 	want := &types.UnauthorizedClientException{
-		Code:    types.ErrorCode("BadRequest"),
+		Code:    types.ErrorCode("UnauthorizedClientException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UnauthorizedClientException.error")
@@ -1933,7 +2374,11 @@ func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{})
+	_, opErr := svc.AssociateChannelFlow(context.Background(), &AssociateChannelFlowInput{
+		ChannelArn:     ptr.String("__ChannelArn__"),
+		ChannelFlowArn: ptr.String("__ChannelFlowArn__"),
+		ChimeBearer:    ptr.String("__ChimeBearer__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -221,7 +221,42 @@ func TestCheckResponseSnapshot_AcceptLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptLink(context.Background(), &AcceptLinkInput{})
+	got, err := svc.AcceptLink(context.Background(), &AcceptLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		Attributes: &types.LinkAttributes{
+			ResponderErrorMasking: []types.ResponderErrorMaskingForHttpCode{
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+			},
+			CustomerProvidedId: ptr.String("__CustomerProvidedId__"),
+		},
+		LogSettings: &types.LinkLogSettings{
+			ApplicationLogs: &types.LinkApplicationLogConfiguration{
+				Sampling: &types.LinkApplicationLogSampling{
+					ErrorLog:  ptr.Float64(1.0),
+					FilterLog: ptr.Float64(1.0),
+				},
+			},
+		},
+		TimeoutInMillis: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -244,7 +279,11 @@ func TestCheckResponseSnapshot_AssociateCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateCertificate(context.Background(), &AssociateCertificateInput{})
+	got, err := svc.AssociateCertificate(context.Background(), &AssociateCertificateInput{
+		GatewayId:         ptr.String("__GatewayId__"),
+		AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -268,7 +307,44 @@ func TestCheckResponseSnapshot_CreateInboundExternalLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInboundExternalLink(context.Background(), &CreateInboundExternalLinkInput{})
+	got, err := svc.CreateInboundExternalLink(context.Background(), &CreateInboundExternalLinkInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		GatewayId:   ptr.String("__GatewayId__"),
+		Attributes: &types.LinkAttributes{
+			ResponderErrorMasking: []types.ResponderErrorMaskingForHttpCode{
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+			},
+			CustomerProvidedId: ptr.String("__CustomerProvidedId__"),
+		},
+		LogSettings: &types.LinkLogSettings{
+			ApplicationLogs: &types.LinkApplicationLogConfiguration{
+				Sampling: &types.LinkApplicationLogSampling{
+					ErrorLog:  ptr.Float64(1.0),
+					FilterLog: ptr.Float64(1.0),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +468,46 @@ func TestCheckResponseSnapshot_CreateLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLink(context.Background(), &CreateLinkInput{})
+	got, err := svc.CreateLink(context.Background(), &CreateLinkInput{
+		GatewayId:     ptr.String("__GatewayId__"),
+		PeerGatewayId: ptr.String("__PeerGatewayId__"),
+		Attributes: &types.LinkAttributes{
+			ResponderErrorMasking: []types.ResponderErrorMaskingForHttpCode{
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+			},
+			CustomerProvidedId: ptr.String("__CustomerProvidedId__"),
+		},
+		HttpResponderAllowed: ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogSettings: &types.LinkLogSettings{
+			ApplicationLogs: &types.LinkApplicationLogConfiguration{
+				Sampling: &types.LinkApplicationLogSampling{
+					ErrorLog:  ptr.Float64(1.0),
+					FilterLog: ptr.Float64(1.0),
+				},
+			},
+		},
+		TimeoutInMillis: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -415,7 +530,26 @@ func TestCheckResponseSnapshot_CreateLinkRoutingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLinkRoutingRule(context.Background(), &CreateLinkRoutingRuleInput{})
+	got, err := svc.CreateLinkRoutingRule(context.Background(), &CreateLinkRoutingRuleInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		GatewayId:   ptr.String("__GatewayId__"),
+		LinkId:      ptr.String("__LinkId__"),
+		Priority:    ptr.Int32(1),
+		Conditions: &types.RuleCondition{
+			HostHeader:         ptr.String("__HostHeader__"),
+			HostHeaderWildcard: ptr.String("__HostHeaderWildcard__"),
+			PathPrefix:         ptr.String("__PathPrefix__"),
+			PathExact:          ptr.String("__PathExact__"),
+			QueryStringEquals: &types.QueryStringKeyValuePair{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			QueryStringExists: ptr.String("__QueryStringExists__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -438,7 +572,45 @@ func TestCheckResponseSnapshot_CreateOutboundExternalLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOutboundExternalLink(context.Background(), &CreateOutboundExternalLinkInput{})
+	got, err := svc.CreateOutboundExternalLink(context.Background(), &CreateOutboundExternalLinkInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		GatewayId:   ptr.String("__GatewayId__"),
+		Attributes: &types.LinkAttributes{
+			ResponderErrorMasking: []types.ResponderErrorMaskingForHttpCode{
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+			},
+			CustomerProvidedId: ptr.String("__CustomerProvidedId__"),
+		},
+		PublicEndpoint: ptr.String("__PublicEndpoint__"),
+		LogSettings: &types.LinkLogSettings{
+			ApplicationLogs: &types.LinkApplicationLogConfiguration{
+				Sampling: &types.LinkApplicationLogSampling{
+					ErrorLog:  ptr.Float64(1.0),
+					FilterLog: ptr.Float64(1.0),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -461,7 +633,22 @@ func TestCheckResponseSnapshot_CreateRequesterGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRequesterGateway(context.Background(), &CreateRequesterGatewayInput{})
+	got, err := svc.CreateRequesterGateway(context.Background(), &CreateRequesterGatewayInput{
+		VpcId: ptr.String("__VpcId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -490,7 +677,57 @@ func TestCheckResponseSnapshot_CreateResponderGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResponderGateway(context.Background(), &CreateResponderGatewayInput{})
+	got, err := svc.CreateResponderGateway(context.Background(), &CreateResponderGatewayInput{
+		VpcId: ptr.String("__VpcId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DomainName: ptr.String("__DomainName__"),
+		Port:       ptr.Int32(1),
+		Protocol:   types.Protocol("HTTP"),
+		ListenerConfig: &types.ListenerConfig{
+			Protocols: []types.Protocol{
+				types.Protocol("HTTP"),
+				types.Protocol("HTTP"),
+			},
+		},
+		TrustStoreConfiguration: &types.TrustStoreConfiguration{
+			CertificateAuthorityCertificates: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ManagedEndpointConfiguration: &types.ManagedEndpointConfigurationMemberAutoScalingGroups{
+			Value: types.AutoScalingGroupsConfiguration{
+				AutoScalingGroupNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleArn: ptr.String("__RoleArn__"),
+				HealthCheckConfig: &types.HealthCheckConfig{
+					Port:                    ptr.Int32(1),
+					Path:                    ptr.String("__Path__"),
+					Protocol:                types.Protocol("HTTP"),
+					TimeoutMs:               ptr.Int32(1),
+					IntervalSeconds:         ptr.Int32(1),
+					StatusCodeMatcher:       ptr.String("__StatusCodeMatcher__"),
+					HealthyThresholdCount:   ptr.Int32(1),
+					UnhealthyThresholdCount: ptr.Int32(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		GatewayType: types.GatewayType("EXTERNAL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -512,7 +749,10 @@ func TestCheckResponseSnapshot_DeleteInboundExternalLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInboundExternalLink(context.Background(), &DeleteInboundExternalLinkInput{})
+	got, err := svc.DeleteInboundExternalLink(context.Background(), &DeleteInboundExternalLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -534,7 +774,10 @@ func TestCheckResponseSnapshot_DeleteLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLink(context.Background(), &DeleteLinkInput{})
+	got, err := svc.DeleteLink(context.Background(), &DeleteLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -556,7 +799,11 @@ func TestCheckResponseSnapshot_DeleteLinkRoutingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLinkRoutingRule(context.Background(), &DeleteLinkRoutingRuleInput{})
+	got, err := svc.DeleteLinkRoutingRule(context.Background(), &DeleteLinkRoutingRuleInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		RuleId:    ptr.String("__RuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -578,7 +825,10 @@ func TestCheckResponseSnapshot_DeleteOutboundExternalLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOutboundExternalLink(context.Background(), &DeleteOutboundExternalLinkInput{})
+	got, err := svc.DeleteOutboundExternalLink(context.Background(), &DeleteOutboundExternalLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -600,7 +850,9 @@ func TestCheckResponseSnapshot_DeleteRequesterGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRequesterGateway(context.Background(), &DeleteRequesterGatewayInput{})
+	got, err := svc.DeleteRequesterGateway(context.Background(), &DeleteRequesterGatewayInput{
+		GatewayId: ptr.String("__GatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -622,7 +874,9 @@ func TestCheckResponseSnapshot_DeleteResponderGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResponderGateway(context.Background(), &DeleteResponderGatewayInput{})
+	got, err := svc.DeleteResponderGateway(context.Background(), &DeleteResponderGatewayInput{
+		GatewayId: ptr.String("__GatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -645,7 +899,10 @@ func TestCheckResponseSnapshot_DisassociateCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateCertificate(context.Background(), &DisassociateCertificateInput{})
+	got, err := svc.DisassociateCertificate(context.Background(), &DisassociateCertificateInput{
+		GatewayId:         ptr.String("__GatewayId__"),
+		AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -670,7 +927,10 @@ func TestCheckResponseSnapshot_GetCertificateAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCertificateAssociation(context.Background(), &GetCertificateAssociationInput{})
+	got, err := svc.GetCertificateAssociation(context.Background(), &GetCertificateAssociationInput{
+		GatewayId:         ptr.String("__GatewayId__"),
+		AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -795,7 +1055,10 @@ func TestCheckResponseSnapshot_GetInboundExternalLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInboundExternalLink(context.Background(), &GetInboundExternalLinkInput{})
+	got, err := svc.GetInboundExternalLink(context.Background(), &GetInboundExternalLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -923,7 +1186,10 @@ func TestCheckResponseSnapshot_GetLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLink(context.Background(), &GetLinkInput{})
+	got, err := svc.GetLink(context.Background(), &GetLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -964,7 +1230,11 @@ func TestCheckResponseSnapshot_GetLinkRoutingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLinkRoutingRule(context.Background(), &GetLinkRoutingRuleInput{})
+	got, err := svc.GetLinkRoutingRule(context.Background(), &GetLinkRoutingRuleInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		RuleId:    ptr.String("__RuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1089,7 +1359,10 @@ func TestCheckResponseSnapshot_GetOutboundExternalLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOutboundExternalLink(context.Background(), &GetOutboundExternalLinkInput{})
+	got, err := svc.GetOutboundExternalLink(context.Background(), &GetOutboundExternalLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1129,7 +1402,9 @@ func TestCheckResponseSnapshot_GetRequesterGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRequesterGateway(context.Background(), &GetRequesterGatewayInput{})
+	got, err := svc.GetRequesterGateway(context.Background(), &GetRequesterGatewayInput{
+		GatewayId: ptr.String("__GatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1205,7 +1480,9 @@ func TestCheckResponseSnapshot_GetResponderGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResponderGateway(context.Background(), &GetResponderGatewayInput{})
+	got, err := svc.GetResponderGateway(context.Background(), &GetResponderGatewayInput{
+		GatewayId: ptr.String("__GatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1240,7 +1517,11 @@ func TestCheckResponseSnapshot_ListCertificateAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCertificateAssociations(context.Background(), &ListCertificateAssociationsInput{})
+	got, err := svc.ListCertificateAssociations(context.Background(), &ListCertificateAssociationsInput{
+		GatewayId:  ptr.String("__GatewayId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1299,7 +1580,12 @@ func TestCheckResponseSnapshot_ListLinkRoutingRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLinkRoutingRules(context.Background(), &ListLinkRoutingRulesInput{})
+	got, err := svc.ListLinkRoutingRules(context.Background(), &ListLinkRoutingRulesInput{
+		GatewayId:  ptr.String("__GatewayId__"),
+		LinkId:     ptr.String("__LinkId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1540,7 +1826,11 @@ func TestCheckResponseSnapshot_ListLinks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLinks(context.Background(), &ListLinksInput{})
+	got, err := svc.ListLinks(context.Background(), &ListLinksInput{
+		GatewayId:  ptr.String("__GatewayId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1565,7 +1855,10 @@ func TestCheckResponseSnapshot_ListRequesterGateways(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRequesterGateways(context.Background(), &ListRequesterGatewaysInput{})
+	got, err := svc.ListRequesterGateways(context.Background(), &ListRequesterGatewaysInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1590,7 +1883,10 @@ func TestCheckResponseSnapshot_ListResponderGateways(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResponderGateways(context.Background(), &ListResponderGatewaysInput{})
+	got, err := svc.ListResponderGateways(context.Background(), &ListResponderGatewaysInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1613,7 +1909,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1736,7 +2034,10 @@ func TestCheckResponseSnapshot_RejectLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectLink(context.Background(), &RejectLinkInput{})
+	got, err := svc.RejectLink(context.Background(), &RejectLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1755,7 +2056,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1774,7 +2080,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1796,7 +2108,19 @@ func TestCheckResponseSnapshot_UpdateLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLink(context.Background(), &UpdateLinkInput{})
+	got, err := svc.UpdateLink(context.Background(), &UpdateLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		LogSettings: &types.LinkLogSettings{
+			ApplicationLogs: &types.LinkApplicationLogConfiguration{
+				Sampling: &types.LinkApplicationLogSampling{
+					ErrorLog:  ptr.Float64(1.0),
+					FilterLog: ptr.Float64(1.0),
+				},
+			},
+		},
+		TimeoutInMillis: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1819,7 +2143,43 @@ func TestCheckResponseSnapshot_UpdateLinkModuleFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLinkModuleFlow(context.Background(), &UpdateLinkModuleFlowInput{})
+	got, err := svc.UpdateLinkModuleFlow(context.Background(), &UpdateLinkModuleFlowInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		GatewayId:   ptr.String("__GatewayId__"),
+		LinkId:      ptr.String("__LinkId__"),
+		Modules: []types.ModuleConfiguration{
+			{
+				Version: ptr.String("__Version__"),
+				Name:    ptr.String("__Name__"),
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ModuleParameters: &types.ModuleParametersMemberNoBid{
+					Value: types.NoBidModuleParameters{
+						Reason:                ptr.String("__Reason__"),
+						ReasonCode:            ptr.Int32(1),
+						PassThroughPercentage: ptr.Float32(1.0),
+					},
+				},
+			},
+			{
+				Version: ptr.String("__Version__"),
+				Name:    ptr.String("__Name__"),
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ModuleParameters: &types.ModuleParametersMemberNoBid{
+					Value: types.NoBidModuleParameters{
+						Reason:                ptr.String("__Reason__"),
+						ReasonCode:            ptr.Int32(1),
+						PassThroughPercentage: ptr.Float32(1.0),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1842,7 +2202,23 @@ func TestCheckResponseSnapshot_UpdateLinkRoutingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLinkRoutingRule(context.Background(), &UpdateLinkRoutingRuleInput{})
+	got, err := svc.UpdateLinkRoutingRule(context.Background(), &UpdateLinkRoutingRuleInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		RuleId:    ptr.String("__RuleId__"),
+		Priority:  ptr.Int32(1),
+		Conditions: &types.RuleCondition{
+			HostHeader:         ptr.String("__HostHeader__"),
+			HostHeaderWildcard: ptr.String("__HostHeaderWildcard__"),
+			PathPrefix:         ptr.String("__PathPrefix__"),
+			PathExact:          ptr.String("__PathExact__"),
+			QueryStringEquals: &types.QueryStringKeyValuePair{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			QueryStringExists: ptr.String("__QueryStringExists__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1864,7 +2240,11 @@ func TestCheckResponseSnapshot_UpdateRequesterGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRequesterGateway(context.Background(), &UpdateRequesterGatewayInput{})
+	got, err := svc.UpdateRequesterGateway(context.Background(), &UpdateRequesterGatewayInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		GatewayId:   ptr.String("__GatewayId__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1886,7 +2266,45 @@ func TestCheckResponseSnapshot_UpdateResponderGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResponderGateway(context.Background(), &UpdateResponderGatewayInput{})
+	got, err := svc.UpdateResponderGateway(context.Background(), &UpdateResponderGatewayInput{
+		DomainName: ptr.String("__DomainName__"),
+		Port:       ptr.Int32(1),
+		Protocol:   types.Protocol("HTTP"),
+		ListenerConfig: &types.ListenerConfig{
+			Protocols: []types.Protocol{
+				types.Protocol("HTTP"),
+				types.Protocol("HTTP"),
+			},
+		},
+		TrustStoreConfiguration: &types.TrustStoreConfiguration{
+			CertificateAuthorityCertificates: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ManagedEndpointConfiguration: &types.ManagedEndpointConfigurationMemberAutoScalingGroups{
+			Value: types.AutoScalingGroupsConfiguration{
+				AutoScalingGroupNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleArn: ptr.String("__RoleArn__"),
+				HealthCheckConfig: &types.HealthCheckConfig{
+					Port:                    ptr.Int32(1),
+					Path:                    ptr.String("__Path__"),
+					Protocol:                types.Protocol("HTTP"),
+					TimeoutMs:               ptr.Int32(1),
+					IntervalSeconds:         ptr.Int32(1),
+					StatusCodeMatcher:       ptr.String("__StatusCodeMatcher__"),
+					HealthyThresholdCount:   ptr.Int32(1),
+					UnhealthyThresholdCount: ptr.Int32(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		GatewayId:   ptr.String("__GatewayId__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1907,7 +2325,42 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptLink(context.Background(), &AcceptLinkInput{})
+	_, opErr := svc.AcceptLink(context.Background(), &AcceptLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		Attributes: &types.LinkAttributes{
+			ResponderErrorMasking: []types.ResponderErrorMaskingForHttpCode{
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+			},
+			CustomerProvidedId: ptr.String("__CustomerProvidedId__"),
+		},
+		LogSettings: &types.LinkLogSettings{
+			ApplicationLogs: &types.LinkApplicationLogConfiguration{
+				Sampling: &types.LinkApplicationLogSampling{
+					ErrorLog:  ptr.Float64(1.0),
+					FilterLog: ptr.Float64(1.0),
+				},
+			},
+		},
+		TimeoutInMillis: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1932,7 +2385,42 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptLink(context.Background(), &AcceptLinkInput{})
+	_, opErr := svc.AcceptLink(context.Background(), &AcceptLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		Attributes: &types.LinkAttributes{
+			ResponderErrorMasking: []types.ResponderErrorMaskingForHttpCode{
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+			},
+			CustomerProvidedId: ptr.String("__CustomerProvidedId__"),
+		},
+		LogSettings: &types.LinkLogSettings{
+			ApplicationLogs: &types.LinkApplicationLogConfiguration{
+				Sampling: &types.LinkApplicationLogSampling{
+					ErrorLog:  ptr.Float64(1.0),
+					FilterLog: ptr.Float64(1.0),
+				},
+			},
+		},
+		TimeoutInMillis: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1957,7 +2445,42 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptLink(context.Background(), &AcceptLinkInput{})
+	_, opErr := svc.AcceptLink(context.Background(), &AcceptLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		Attributes: &types.LinkAttributes{
+			ResponderErrorMasking: []types.ResponderErrorMaskingForHttpCode{
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+			},
+			CustomerProvidedId: ptr.String("__CustomerProvidedId__"),
+		},
+		LogSettings: &types.LinkLogSettings{
+			ApplicationLogs: &types.LinkApplicationLogConfiguration{
+				Sampling: &types.LinkApplicationLogSampling{
+					ErrorLog:  ptr.Float64(1.0),
+					FilterLog: ptr.Float64(1.0),
+				},
+			},
+		},
+		TimeoutInMillis: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1982,7 +2505,42 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptLink(context.Background(), &AcceptLinkInput{})
+	_, opErr := svc.AcceptLink(context.Background(), &AcceptLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		Attributes: &types.LinkAttributes{
+			ResponderErrorMasking: []types.ResponderErrorMaskingForHttpCode{
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+			},
+			CustomerProvidedId: ptr.String("__CustomerProvidedId__"),
+		},
+		LogSettings: &types.LinkLogSettings{
+			ApplicationLogs: &types.LinkApplicationLogConfiguration{
+				Sampling: &types.LinkApplicationLogSampling{
+					ErrorLog:  ptr.Float64(1.0),
+					FilterLog: ptr.Float64(1.0),
+				},
+			},
+		},
+		TimeoutInMillis: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2007,7 +2565,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCertificate(context.Background(), &AssociateCertificateInput{})
+	_, opErr := svc.AssociateCertificate(context.Background(), &AssociateCertificateInput{
+		GatewayId:         ptr.String("__GatewayId__"),
+		AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2032,7 +2594,42 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptLink(context.Background(), &AcceptLinkInput{})
+	_, opErr := svc.AcceptLink(context.Background(), &AcceptLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		Attributes: &types.LinkAttributes{
+			ResponderErrorMasking: []types.ResponderErrorMaskingForHttpCode{
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+			},
+			CustomerProvidedId: ptr.String("__CustomerProvidedId__"),
+		},
+		LogSettings: &types.LinkLogSettings{
+			ApplicationLogs: &types.LinkApplicationLogConfiguration{
+				Sampling: &types.LinkApplicationLogSampling{
+					ErrorLog:  ptr.Float64(1.0),
+					FilterLog: ptr.Float64(1.0),
+				},
+			},
+		},
+		TimeoutInMillis: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2057,7 +2654,42 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptLink(context.Background(), &AcceptLinkInput{})
+	_, opErr := svc.AcceptLink(context.Background(), &AcceptLinkInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		Attributes: &types.LinkAttributes{
+			ResponderErrorMasking: []types.ResponderErrorMaskingForHttpCode{
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+				{
+					HttpCode: ptr.String("__HttpCode__"),
+					Action:   types.ResponderErrorMaskingAction("NO_BID"),
+					LoggingTypes: []types.ResponderErrorMaskingLoggingType{
+						types.ResponderErrorMaskingLoggingType("NONE"),
+						types.ResponderErrorMaskingLoggingType("NONE"),
+					},
+					ResponseLoggingPercentage: ptr.Float32(1.0),
+				},
+			},
+			CustomerProvidedId: ptr.String("__CustomerProvidedId__"),
+		},
+		LogSettings: &types.LinkLogSettings{
+			ApplicationLogs: &types.LinkApplicationLogConfiguration{
+				Sampling: &types.LinkApplicationLogSampling{
+					ErrorLog:  ptr.Float64(1.0),
+					FilterLog: ptr.Float64(1.0),
+				},
+			},
+		},
+		TimeoutInMillis: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.CarrierLookup
+
+{"Carrier":"__Carrier__","Country":"__Country__","DialingCountryCode":"__DialingCountryCode__","E164PhoneNumber":"__E164PhoneNumber__","IsoCountryCode":"__IsoCountryCode__","MCC":"__MCC__","MNC":"__MNC__","PhoneNumberType":"MOBILE"}

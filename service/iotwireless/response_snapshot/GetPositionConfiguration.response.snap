@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Destination":"__Destination__","Solvers":{"SemtechGnss":{"Fec":"ROSE","Provider":"Semtech","Status":"Enabled","Type":"GNSS"}}}

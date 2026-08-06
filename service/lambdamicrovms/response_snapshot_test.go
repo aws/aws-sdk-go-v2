@@ -121,7 +121,18 @@ func TestCheckResponseSnapshot_CreateMicrovmAuthToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{})
+	got, err := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{
+		MicrovmIdentifier:   ptr.String("__MicrovmIdentifier__"),
+		ExpirationInMinutes: ptr.Int32(1),
+		AllowedPorts: []types.PortSpecification{
+			&types.PortSpecificationMemberPort{
+				Value: 1,
+			},
+			&types.PortSpecificationMemberPort{
+				Value: 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -208,7 +219,69 @@ func TestCheckResponseSnapshot_CreateMicrovmImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMicrovmImage(context.Background(), &CreateMicrovmImageInput{})
+	got, err := svc.CreateMicrovmImage(context.Background(), &CreateMicrovmImageInput{
+		BaseImageArn:     ptr.String("__BaseImageArn__"),
+		BaseImageVersion: ptr.String("__BaseImageVersion__"),
+		BuildRoleArn:     ptr.String("__BuildRoleArn__"),
+		Description:      ptr.String("__Description__"),
+		CodeArtifact: &types.CodeArtifactMemberUri{
+			Value: "__CodeArtifactMemberUri__",
+		},
+		Logging: &types.LoggingMemberDisabled{
+			Value: types.LoggingDisabled{},
+		},
+		EgressNetworkConnectors: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CpuConfigurations: []types.CpuConfiguration{
+			{
+				Architecture: types.Architecture("ARM_64"),
+			},
+			{
+				Architecture: types.Architecture("ARM_64"),
+			},
+		},
+		Resources: []types.Resources{
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
+			},
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
+			},
+		},
+		AdditionalOsCapabilities: []types.Capability{
+			types.Capability("ALL"),
+			types.Capability("ALL"),
+		},
+		Hooks: &types.Hooks{
+			Port: ptr.Int32(1),
+			MicrovmHooks: &types.MicrovmHooks{
+				Run:                       types.HookState("DISABLED"),
+				RunTimeoutInSeconds:       ptr.Int32(1),
+				Resume:                    types.HookState("DISABLED"),
+				ResumeTimeoutInSeconds:    ptr.Int32(1),
+				Suspend:                   types.HookState("DISABLED"),
+				SuspendTimeoutInSeconds:   ptr.Int32(1),
+				Terminate:                 types.HookState("DISABLED"),
+				TerminateTimeoutInSeconds: ptr.Int32(1),
+			},
+			MicrovmImageHooks: &types.MicrovmImageHooks{
+				Ready:                    types.HookState("DISABLED"),
+				ReadyTimeoutInSeconds:    ptr.Int32(1),
+				Validate:                 types.HookState("DISABLED"),
+				ValidateTimeoutInSeconds: ptr.Int32(1),
+			},
+		},
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -231,7 +304,10 @@ func TestCheckResponseSnapshot_CreateMicrovmShellAuthToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMicrovmShellAuthToken(context.Background(), &CreateMicrovmShellAuthTokenInput{})
+	got, err := svc.CreateMicrovmShellAuthToken(context.Background(), &CreateMicrovmShellAuthTokenInput{
+		MicrovmIdentifier:   ptr.String("__MicrovmIdentifier__"),
+		ExpirationInMinutes: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -253,7 +329,9 @@ func TestCheckResponseSnapshot_DeleteMicrovmImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMicrovmImage(context.Background(), &DeleteMicrovmImageInput{})
+	got, err := svc.DeleteMicrovmImage(context.Background(), &DeleteMicrovmImageInput{
+		ImageIdentifier: ptr.String("__ImageIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -276,7 +354,10 @@ func TestCheckResponseSnapshot_DeleteMicrovmImageVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMicrovmImageVersion(context.Background(), &DeleteMicrovmImageVersionInput{})
+	got, err := svc.DeleteMicrovmImageVersion(context.Background(), &DeleteMicrovmImageVersionInput{
+		ImageIdentifier: ptr.String("__ImageIdentifier__"),
+		ImageVersion:    ptr.String("__ImageVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -319,7 +400,9 @@ func TestCheckResponseSnapshot_GetMicrovm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMicrovm(context.Background(), &GetMicrovmInput{})
+	got, err := svc.GetMicrovm(context.Background(), &GetMicrovmInput{
+		MicrovmIdentifier: ptr.String("__MicrovmIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -349,7 +432,9 @@ func TestCheckResponseSnapshot_GetMicrovmImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMicrovmImage(context.Background(), &GetMicrovmImageInput{})
+	got, err := svc.GetMicrovmImage(context.Background(), &GetMicrovmImageInput{
+		ImageIdentifier: ptr.String("__ImageIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -383,7 +468,11 @@ func TestCheckResponseSnapshot_GetMicrovmImageBuild(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMicrovmImageBuild(context.Background(), &GetMicrovmImageBuildInput{})
+	got, err := svc.GetMicrovmImageBuild(context.Background(), &GetMicrovmImageBuildInput{
+		ImageIdentifier: ptr.String("__ImageIdentifier__"),
+		ImageVersion:    ptr.String("__ImageVersion__"),
+		BuildId:         ptr.String("__BuildId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +558,10 @@ func TestCheckResponseSnapshot_GetMicrovmImageVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMicrovmImageVersion(context.Background(), &GetMicrovmImageVersionInput{})
+	got, err := svc.GetMicrovmImageVersion(context.Background(), &GetMicrovmImageVersionInput{
+		ImageIdentifier: ptr.String("__ImageIdentifier__"),
+		ImageVersion:    ptr.String("__ImageVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -504,7 +596,11 @@ func TestCheckResponseSnapshot_ListManagedMicrovmImageVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedMicrovmImageVersions(context.Background(), &ListManagedMicrovmImageVersionsInput{})
+	got, err := svc.ListManagedMicrovmImageVersions(context.Background(), &ListManagedMicrovmImageVersionsInput{
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		ImageIdentifier: ptr.String("__ImageIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -537,7 +633,10 @@ func TestCheckResponseSnapshot_ListManagedMicrovmImages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedMicrovmImages(context.Background(), &ListManagedMicrovmImagesInput{})
+	got, err := svc.ListManagedMicrovmImages(context.Background(), &ListManagedMicrovmImagesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -582,7 +681,15 @@ func TestCheckResponseSnapshot_ListMicrovmImageBuilds(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMicrovmImageBuilds(context.Background(), &ListMicrovmImageBuildsInput{})
+	got, err := svc.ListMicrovmImageBuilds(context.Background(), &ListMicrovmImageBuildsInput{
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		ImageIdentifier:   ptr.String("__ImageIdentifier__"),
+		ImageVersion:      ptr.String("__ImageVersion__"),
+		Architecture:      types.Architecture("ARM_64"),
+		Chipset:           types.Chipset("GRAVITON"),
+		ChipsetGeneration: ptr.String("__ChipsetGeneration__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -741,7 +848,11 @@ func TestCheckResponseSnapshot_ListMicrovmImageVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMicrovmImageVersions(context.Background(), &ListMicrovmImageVersionsInput{})
+	got, err := svc.ListMicrovmImageVersions(context.Background(), &ListMicrovmImageVersionsInput{
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		ImageIdentifier: ptr.String("__ImageIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -780,7 +891,11 @@ func TestCheckResponseSnapshot_ListMicrovmImages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMicrovmImages(context.Background(), &ListMicrovmImagesInput{})
+	got, err := svc.ListMicrovmImages(context.Background(), &ListMicrovmImagesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		NameFilter: ptr.String("__NameFilter__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -817,7 +932,12 @@ func TestCheckResponseSnapshot_ListMicrovms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMicrovms(context.Background(), &ListMicrovmsInput{})
+	got, err := svc.ListMicrovms(context.Background(), &ListMicrovmsInput{
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		ImageIdentifier: ptr.String("__ImageIdentifier__"),
+		ImageVersion:    ptr.String("__ImageVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -840,7 +960,9 @@ func TestCheckResponseSnapshot_ListTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTags(context.Background(), &ListTagsInput{})
+	got, err := svc.ListTags(context.Background(), &ListTagsInput{
+		Resource: ptr.String("__Resource__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -859,7 +981,9 @@ func TestCheckResponseSnapshot_ResumeMicrovm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResumeMicrovm(context.Background(), &ResumeMicrovmInput{})
+	got, err := svc.ResumeMicrovm(context.Background(), &ResumeMicrovmInput{
+		MicrovmIdentifier: ptr.String("__MicrovmIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -902,7 +1026,30 @@ func TestCheckResponseSnapshot_RunMicrovm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RunMicrovm(context.Background(), &RunMicrovmInput{})
+	got, err := svc.RunMicrovm(context.Background(), &RunMicrovmInput{
+		IngressNetworkConnectors: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EgressNetworkConnectors: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ImageIdentifier:  ptr.String("__ImageIdentifier__"),
+		ImageVersion:     ptr.String("__ImageVersion__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		IdlePolicy: &types.IdlePolicy{
+			MaxIdleDurationSeconds:   ptr.Int32(1),
+			SuspendedDurationSeconds: ptr.Int32(1),
+			AutoResumeEnabled:        ptr.Bool(true),
+		},
+		Logging: &types.LoggingMemberDisabled{
+			Value: types.LoggingDisabled{},
+		},
+		RunHookPayload:           ptr.String("__RunHookPayload__"),
+		MaximumDurationInSeconds: ptr.Int32(1),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1068,9 @@ func TestCheckResponseSnapshot_SuspendMicrovm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SuspendMicrovm(context.Background(), &SuspendMicrovmInput{})
+	got, err := svc.SuspendMicrovm(context.Background(), &SuspendMicrovmInput{
+		MicrovmIdentifier: ptr.String("__MicrovmIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -940,7 +1089,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Resource: ptr.String("__Resource__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -959,7 +1113,9 @@ func TestCheckResponseSnapshot_TerminateMicrovm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateMicrovm(context.Background(), &TerminateMicrovmInput{})
+	got, err := svc.TerminateMicrovm(context.Background(), &TerminateMicrovmInput{
+		MicrovmIdentifier: ptr.String("__MicrovmIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -978,7 +1134,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Resource: ptr.String("__Resource__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1062,7 +1224,66 @@ func TestCheckResponseSnapshot_UpdateMicrovmImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMicrovmImage(context.Background(), &UpdateMicrovmImageInput{})
+	got, err := svc.UpdateMicrovmImage(context.Background(), &UpdateMicrovmImageInput{
+		BaseImageArn:     ptr.String("__BaseImageArn__"),
+		BaseImageVersion: ptr.String("__BaseImageVersion__"),
+		BuildRoleArn:     ptr.String("__BuildRoleArn__"),
+		Description:      ptr.String("__Description__"),
+		CodeArtifact: &types.CodeArtifactMemberUri{
+			Value: "__CodeArtifactMemberUri__",
+		},
+		Logging: &types.LoggingMemberDisabled{
+			Value: types.LoggingDisabled{},
+		},
+		EgressNetworkConnectors: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CpuConfigurations: []types.CpuConfiguration{
+			{
+				Architecture: types.Architecture("ARM_64"),
+			},
+			{
+				Architecture: types.Architecture("ARM_64"),
+			},
+		},
+		Resources: []types.Resources{
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
+			},
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
+			},
+		},
+		AdditionalOsCapabilities: []types.Capability{
+			types.Capability("ALL"),
+			types.Capability("ALL"),
+		},
+		Hooks: &types.Hooks{
+			Port: ptr.Int32(1),
+			MicrovmHooks: &types.MicrovmHooks{
+				Run:                       types.HookState("DISABLED"),
+				RunTimeoutInSeconds:       ptr.Int32(1),
+				Resume:                    types.HookState("DISABLED"),
+				ResumeTimeoutInSeconds:    ptr.Int32(1),
+				Suspend:                   types.HookState("DISABLED"),
+				SuspendTimeoutInSeconds:   ptr.Int32(1),
+				Terminate:                 types.HookState("DISABLED"),
+				TerminateTimeoutInSeconds: ptr.Int32(1),
+			},
+			MicrovmImageHooks: &types.MicrovmImageHooks{
+				Ready:                    types.HookState("DISABLED"),
+				ReadyTimeoutInSeconds:    ptr.Int32(1),
+				Validate:                 types.HookState("DISABLED"),
+				ValidateTimeoutInSeconds: ptr.Int32(1),
+			},
+		},
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		ImageIdentifier: ptr.String("__ImageIdentifier__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1148,7 +1369,11 @@ func TestCheckResponseSnapshot_UpdateMicrovmImageVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMicrovmImageVersion(context.Background(), &UpdateMicrovmImageVersionInput{})
+	got, err := svc.UpdateMicrovmImageVersion(context.Background(), &UpdateMicrovmImageVersionInput{
+		ImageIdentifier: ptr.String("__ImageIdentifier__"),
+		ImageVersion:    ptr.String("__ImageVersion__"),
+		Status:          types.MicrovmImageVersionStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1169,7 +1394,18 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{})
+	_, opErr := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{
+		MicrovmIdentifier:   ptr.String("__MicrovmIdentifier__"),
+		ExpirationInMinutes: ptr.Int32(1),
+		AllowedPorts: []types.PortSpecification{
+			&types.PortSpecificationMemberPort{
+				Value: 1,
+			},
+			&types.PortSpecificationMemberPort{
+				Value: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1196,7 +1432,69 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMicrovmImage(context.Background(), &CreateMicrovmImageInput{})
+	_, opErr := svc.CreateMicrovmImage(context.Background(), &CreateMicrovmImageInput{
+		BaseImageArn:     ptr.String("__BaseImageArn__"),
+		BaseImageVersion: ptr.String("__BaseImageVersion__"),
+		BuildRoleArn:     ptr.String("__BuildRoleArn__"),
+		Description:      ptr.String("__Description__"),
+		CodeArtifact: &types.CodeArtifactMemberUri{
+			Value: "__CodeArtifactMemberUri__",
+		},
+		Logging: &types.LoggingMemberDisabled{
+			Value: types.LoggingDisabled{},
+		},
+		EgressNetworkConnectors: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CpuConfigurations: []types.CpuConfiguration{
+			{
+				Architecture: types.Architecture("ARM_64"),
+			},
+			{
+				Architecture: types.Architecture("ARM_64"),
+			},
+		},
+		Resources: []types.Resources{
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
+			},
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
+			},
+		},
+		AdditionalOsCapabilities: []types.Capability{
+			types.Capability("ALL"),
+			types.Capability("ALL"),
+		},
+		Hooks: &types.Hooks{
+			Port: ptr.Int32(1),
+			MicrovmHooks: &types.MicrovmHooks{
+				Run:                       types.HookState("DISABLED"),
+				RunTimeoutInSeconds:       ptr.Int32(1),
+				Resume:                    types.HookState("DISABLED"),
+				ResumeTimeoutInSeconds:    ptr.Int32(1),
+				Suspend:                   types.HookState("DISABLED"),
+				SuspendTimeoutInSeconds:   ptr.Int32(1),
+				Terminate:                 types.HookState("DISABLED"),
+				TerminateTimeoutInSeconds: ptr.Int32(1),
+			},
+			MicrovmImageHooks: &types.MicrovmImageHooks{
+				Ready:                    types.HookState("DISABLED"),
+				ReadyTimeoutInSeconds:    ptr.Int32(1),
+				Validate:                 types.HookState("DISABLED"),
+				ValidateTimeoutInSeconds: ptr.Int32(1),
+			},
+		},
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1222,7 +1520,18 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{})
+	_, opErr := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{
+		MicrovmIdentifier:   ptr.String("__MicrovmIdentifier__"),
+		ExpirationInMinutes: ptr.Int32(1),
+		AllowedPorts: []types.PortSpecification{
+			&types.PortSpecificationMemberPort{
+				Value: 1,
+			},
+			&types.PortSpecificationMemberPort{
+				Value: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1248,7 +1557,9 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTags(context.Background(), &ListTagsInput{})
+	_, opErr := svc.ListTags(context.Background(), &ListTagsInput{
+		Resource: ptr.String("__Resource__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1274,7 +1585,12 @@ func TestCheckResponseSnapshot_Error_ResourceConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		Resource: ptr.String("__Resource__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1301,7 +1617,18 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{})
+	_, opErr := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{
+		MicrovmIdentifier:   ptr.String("__MicrovmIdentifier__"),
+		ExpirationInMinutes: ptr.Int32(1),
+		AllowedPorts: []types.PortSpecification{
+			&types.PortSpecificationMemberPort{
+				Value: 1,
+			},
+			&types.PortSpecificationMemberPort{
+				Value: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1327,7 +1654,9 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTags(context.Background(), &ListTagsInput{})
+	_, opErr := svc.ListTags(context.Background(), &ListTagsInput{
+		Resource: ptr.String("__Resource__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1356,7 +1685,69 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMicrovmImage(context.Background(), &CreateMicrovmImageInput{})
+	_, opErr := svc.CreateMicrovmImage(context.Background(), &CreateMicrovmImageInput{
+		BaseImageArn:     ptr.String("__BaseImageArn__"),
+		BaseImageVersion: ptr.String("__BaseImageVersion__"),
+		BuildRoleArn:     ptr.String("__BuildRoleArn__"),
+		Description:      ptr.String("__Description__"),
+		CodeArtifact: &types.CodeArtifactMemberUri{
+			Value: "__CodeArtifactMemberUri__",
+		},
+		Logging: &types.LoggingMemberDisabled{
+			Value: types.LoggingDisabled{},
+		},
+		EgressNetworkConnectors: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CpuConfigurations: []types.CpuConfiguration{
+			{
+				Architecture: types.Architecture("ARM_64"),
+			},
+			{
+				Architecture: types.Architecture("ARM_64"),
+			},
+		},
+		Resources: []types.Resources{
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
+			},
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
+			},
+		},
+		AdditionalOsCapabilities: []types.Capability{
+			types.Capability("ALL"),
+			types.Capability("ALL"),
+		},
+		Hooks: &types.Hooks{
+			Port: ptr.Int32(1),
+			MicrovmHooks: &types.MicrovmHooks{
+				Run:                       types.HookState("DISABLED"),
+				RunTimeoutInSeconds:       ptr.Int32(1),
+				Resume:                    types.HookState("DISABLED"),
+				ResumeTimeoutInSeconds:    ptr.Int32(1),
+				Suspend:                   types.HookState("DISABLED"),
+				SuspendTimeoutInSeconds:   ptr.Int32(1),
+				Terminate:                 types.HookState("DISABLED"),
+				TerminateTimeoutInSeconds: ptr.Int32(1),
+			},
+			MicrovmImageHooks: &types.MicrovmImageHooks{
+				Ready:                    types.HookState("DISABLED"),
+				ReadyTimeoutInSeconds:    ptr.Int32(1),
+				Validate:                 types.HookState("DISABLED"),
+				ValidateTimeoutInSeconds: ptr.Int32(1),
+			},
+		},
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1384,7 +1775,18 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{})
+	_, opErr := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{
+		MicrovmIdentifier:   ptr.String("__MicrovmIdentifier__"),
+		ExpirationInMinutes: ptr.Int32(1),
+		AllowedPorts: []types.PortSpecification{
+			&types.PortSpecificationMemberPort{
+				Value: 1,
+			},
+			&types.PortSpecificationMemberPort{
+				Value: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1410,7 +1812,9 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTags(context.Background(), &ListTagsInput{})
+	_, opErr := svc.ListTags(context.Background(), &ListTagsInput{
+		Resource: ptr.String("__Resource__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1435,7 +1839,18 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{})
+	_, opErr := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{
+		MicrovmIdentifier:   ptr.String("__MicrovmIdentifier__"),
+		ExpirationInMinutes: ptr.Int32(1),
+		AllowedPorts: []types.PortSpecification{
+			&types.PortSpecificationMemberPort{
+				Value: 1,
+			},
+			&types.PortSpecificationMemberPort{
+				Value: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

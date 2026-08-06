@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"snapshot":{"adminUserName":"__AdminUserName__","clusterArn":"__ClusterArn__","clusterCreationTime":"__ClusterCreationTime__","kmsKeyId":"__KmsKeyId__","snapshotArn":"__SnapshotArn__","snapshotCreationTime":"__SnapshotCreationTime__","snapshotName":"__SnapshotName__","snapshotType":"MANUAL","status":"CREATING","subnetIds":["__Member__","__Member__"],"vpcSecurityGroupIds":["__Member__","__Member__"]}}

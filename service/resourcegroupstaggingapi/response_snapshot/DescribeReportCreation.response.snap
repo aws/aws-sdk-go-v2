@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ResourceGroupsTaggingAPI_20170126.DescribeReportCreation
+
+{"ErrorMessage":"__ErrorMessage__","S3Location":"__S3Location__","StartDate":"__StartDate__","Status":"__Status__"}

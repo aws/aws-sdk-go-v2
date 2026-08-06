@@ -123,7 +123,10 @@ func TestCheckResponseSnapshot_AcceptChannelHandshake(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptChannelHandshake(context.Background(), &AcceptChannelHandshakeInput{})
+	got, err := svc.AcceptChannelHandshake(context.Background(), &AcceptChannelHandshakeInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -148,7 +151,10 @@ func TestCheckResponseSnapshot_CancelChannelHandshake(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelChannelHandshake(context.Background(), &CancelChannelHandshakeInput{})
+	got, err := svc.CancelChannelHandshake(context.Background(), &CancelChannelHandshakeInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -172,7 +178,31 @@ func TestCheckResponseSnapshot_CreateChannelHandshake(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannelHandshake(context.Background(), &CreateChannelHandshakeInput{})
+	got, err := svc.CreateChannelHandshake(context.Background(), &CreateChannelHandshakeInput{
+		HandshakeType:                types.HandshakeType("START_SERVICE_PERIOD"),
+		Catalog:                      ptr.String("__Catalog__"),
+		AssociatedResourceIdentifier: ptr.String("__AssociatedResourceIdentifier__"),
+		Payload: &types.ChannelHandshakePayloadMemberStartServicePeriodPayload{
+			Value: types.StartServicePeriodPayload{
+				ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+				Note:                               ptr.String("__Note__"),
+				ServicePeriodType:                  types.ServicePeriodType("MINIMUM_NOTICE_PERIOD"),
+				MinimumNoticeDays:                  ptr.String("__MinimumNoticeDays__"),
+				EndDate:                            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +226,23 @@ func TestCheckResponseSnapshot_CreateProgramManagementAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProgramManagementAccount(context.Background(), &CreateProgramManagementAccountInput{})
+	got, err := svc.CreateProgramManagementAccount(context.Background(), &CreateProgramManagementAccountInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Program:     types.Program("SOLUTION_PROVIDER"),
+		DisplayName: ptr.String("__DisplayName__"),
+		AccountId:   ptr.String("__AccountId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -220,7 +266,33 @@ func TestCheckResponseSnapshot_CreateRelationship(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRelationship(context.Background(), &CreateRelationshipInput{})
+	got, err := svc.CreateRelationship(context.Background(), &CreateRelationshipInput{
+		Catalog:                            ptr.String("__Catalog__"),
+		AssociationType:                    types.AssociationType("DOWNSTREAM_SELLER"),
+		ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+		AssociatedAccountId:                ptr.String("__AssociatedAccountId__"),
+		DisplayName:                        ptr.String("__DisplayName__"),
+		ResaleAccountModel:                 types.ResaleAccountModel("DISTRIBUTOR"),
+		Sector:                             types.Sector("COMMERCIAL"),
+		ClientToken:                        ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		RequestedSupportPlan: &types.SupportPlanMemberResoldEnterprise{
+			Value: types.ResoldEnterprise{
+				Coverage:        types.Coverage("ENTIRE_ORGANIZATION"),
+				TamLocation:     ptr.String("__TamLocation__"),
+				ChargeAccountId: ptr.String("__ChargeAccountId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -239,7 +311,11 @@ func TestCheckResponseSnapshot_DeleteProgramManagementAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProgramManagementAccount(context.Background(), &DeleteProgramManagementAccountInput{})
+	got, err := svc.DeleteProgramManagementAccount(context.Background(), &DeleteProgramManagementAccountInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -258,7 +334,12 @@ func TestCheckResponseSnapshot_DeleteRelationship(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRelationship(context.Background(), &DeleteRelationshipInput{})
+	got, err := svc.DeleteRelationship(context.Background(), &DeleteRelationshipInput{
+		Catalog:                            ptr.String("__Catalog__"),
+		Identifier:                         ptr.String("__Identifier__"),
+		ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+		ClientToken:                        ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -293,7 +374,11 @@ func TestCheckResponseSnapshot_GetRelationship(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRelationship(context.Background(), &GetRelationshipInput{})
+	got, err := svc.GetRelationship(context.Background(), &GetRelationshipInput{
+		Catalog:                            ptr.String("__Catalog__"),
+		ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+		Identifier:                         ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -362,7 +447,35 @@ func TestCheckResponseSnapshot_ListChannelHandshakes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannelHandshakes(context.Background(), &ListChannelHandshakesInput{})
+	got, err := svc.ListChannelHandshakes(context.Background(), &ListChannelHandshakesInput{
+		HandshakeType:   types.HandshakeType("START_SERVICE_PERIOD"),
+		Catalog:         ptr.String("__Catalog__"),
+		ParticipantType: types.ParticipantType("SENDER"),
+		MaxResults:      ptr.Int32(1),
+		Statuses: []types.HandshakeStatus{
+			types.HandshakeStatus("PENDING"),
+			types.HandshakeStatus("PENDING"),
+		},
+		AssociatedResourceIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		HandshakeTypeFilters: &types.ListChannelHandshakesTypeFiltersMemberStartServicePeriodTypeFilters{
+			Value: types.StartServicePeriodTypeFilters{
+				ServicePeriodTypes: []types.ServicePeriodType{
+					types.ServicePeriodType("MINIMUM_NOTICE_PERIOD"),
+					types.ServicePeriodType("MINIMUM_NOTICE_PERIOD"),
+				},
+			},
+		},
+		HandshakeTypeSort: &types.ListChannelHandshakesTypeSortMemberStartServicePeriodTypeSort{
+			Value: types.StartServicePeriodTypeSort{
+				SortOrder: types.SortOrder("Ascending"),
+				SortBy:    types.StartServicePeriodTypeSortName("UpdatedAt"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -411,7 +524,31 @@ func TestCheckResponseSnapshot_ListProgramManagementAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProgramManagementAccounts(context.Background(), &ListProgramManagementAccountsInput{})
+	got, err := svc.ListProgramManagementAccounts(context.Background(), &ListProgramManagementAccountsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		DisplayNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Programs: []types.Program{
+			types.Program("SOLUTION_PROVIDER"),
+			types.Program("SOLUTION_PROVIDER"),
+		},
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Statuses: []types.ProgramManagementAccountStatus{
+			types.ProgramManagementAccountStatus("PENDING"),
+			types.ProgramManagementAccountStatus("PENDING"),
+		},
+		Sort: &types.ListProgramManagementAccountsSortBase{
+			SortOrder: types.SortOrder("Ascending"),
+			SortBy:    types.ListProgramManagementAccountsSortName("UpdatedAt"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +599,31 @@ func TestCheckResponseSnapshot_ListRelationships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRelationships(context.Background(), &ListRelationshipsInput{})
+	got, err := svc.ListRelationships(context.Background(), &ListRelationshipsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		AssociatedAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AssociationTypes: []types.AssociationType{
+			types.AssociationType("DOWNSTREAM_SELLER"),
+			types.AssociationType("DOWNSTREAM_SELLER"),
+		},
+		DisplayNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ProgramManagementAccountIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Sort: &types.ListRelationshipsSortBase{
+			SortOrder: types.SortOrder("Ascending"),
+			SortBy:    types.ListRelationshipsSortName("UpdatedAt"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -492,7 +653,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -517,7 +680,10 @@ func TestCheckResponseSnapshot_RejectChannelHandshake(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectChannelHandshake(context.Background(), &RejectChannelHandshakeInput{})
+	got, err := svc.RejectChannelHandshake(context.Background(), &RejectChannelHandshakeInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -536,7 +702,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -555,7 +733,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -581,7 +765,12 @@ func TestCheckResponseSnapshot_UpdateProgramManagementAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProgramManagementAccount(context.Background(), &UpdateProgramManagementAccountInput{})
+	got, err := svc.UpdateProgramManagementAccount(context.Background(), &UpdateProgramManagementAccountInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		Revision:    ptr.String("__Revision__"),
+		DisplayName: ptr.String("__DisplayName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -607,7 +796,20 @@ func TestCheckResponseSnapshot_UpdateRelationship(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRelationship(context.Background(), &UpdateRelationshipInput{})
+	got, err := svc.UpdateRelationship(context.Background(), &UpdateRelationshipInput{
+		Catalog:                            ptr.String("__Catalog__"),
+		Identifier:                         ptr.String("__Identifier__"),
+		ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+		Revision:                           ptr.String("__Revision__"),
+		DisplayName:                        ptr.String("__DisplayName__"),
+		RequestedSupportPlan: &types.SupportPlanMemberResoldEnterprise{
+			Value: types.ResoldEnterprise{
+				Coverage:        types.Coverage("ENTIRE_ORGANIZATION"),
+				TamLocation:     ptr.String("__TamLocation__"),
+				ChargeAccountId: ptr.String("__ChargeAccountId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -629,7 +831,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptChannelHandshake(context.Background(), &AcceptChannelHandshakeInput{})
+	_, opErr := svc.AcceptChannelHandshake(context.Background(), &AcceptChannelHandshakeInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -656,7 +861,31 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannelHandshake(context.Background(), &CreateChannelHandshakeInput{})
+	_, opErr := svc.CreateChannelHandshake(context.Background(), &CreateChannelHandshakeInput{
+		HandshakeType:                types.HandshakeType("START_SERVICE_PERIOD"),
+		Catalog:                      ptr.String("__Catalog__"),
+		AssociatedResourceIdentifier: ptr.String("__AssociatedResourceIdentifier__"),
+		Payload: &types.ChannelHandshakePayloadMemberStartServicePeriodPayload{
+			Value: types.StartServicePeriodPayload{
+				ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+				Note:                               ptr.String("__Note__"),
+				ServicePeriodType:                  types.ServicePeriodType("MINIMUM_NOTICE_PERIOD"),
+				MinimumNoticeDays:                  ptr.String("__MinimumNoticeDays__"),
+				EndDate:                            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -681,7 +910,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptChannelHandshake(context.Background(), &AcceptChannelHandshakeInput{})
+	_, opErr := svc.AcceptChannelHandshake(context.Background(), &AcceptChannelHandshakeInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -708,7 +940,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptChannelHandshake(context.Background(), &AcceptChannelHandshakeInput{})
+	_, opErr := svc.AcceptChannelHandshake(context.Background(), &AcceptChannelHandshakeInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -736,7 +971,31 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannelHandshake(context.Background(), &CreateChannelHandshakeInput{})
+	_, opErr := svc.CreateChannelHandshake(context.Background(), &CreateChannelHandshakeInput{
+		HandshakeType:                types.HandshakeType("START_SERVICE_PERIOD"),
+		Catalog:                      ptr.String("__Catalog__"),
+		AssociatedResourceIdentifier: ptr.String("__AssociatedResourceIdentifier__"),
+		Payload: &types.ChannelHandshakePayloadMemberStartServicePeriodPayload{
+			Value: types.StartServicePeriodPayload{
+				ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+				Note:                               ptr.String("__Note__"),
+				ServicePeriodType:                  types.ServicePeriodType("MINIMUM_NOTICE_PERIOD"),
+				MinimumNoticeDays:                  ptr.String("__MinimumNoticeDays__"),
+				EndDate:                            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -763,7 +1022,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptChannelHandshake(context.Background(), &AcceptChannelHandshakeInput{})
+	_, opErr := svc.AcceptChannelHandshake(context.Background(), &AcceptChannelHandshakeInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -801,7 +1063,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptChannelHandshake(context.Background(), &AcceptChannelHandshakeInput{})
+	_, opErr := svc.AcceptChannelHandshake(context.Background(), &AcceptChannelHandshakeInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configuration":{"continuousIntegrationScanConfiguration":{"supportedEvents":["PULL_REQUEST","PULL_REQUEST"]},"periodicScanConfiguration":{"frequency":"WEEKLY","frequencyExpression":"__FrequencyExpression__"},"ruleSetCategories":["SAST","SAST"]},"createdAt":946684800,"lastUpdatedAt":946684800,"level":"ORGANIZATION","name":"__Name__","scanConfigurationArn":"__ScanConfigurationArn__","scopeSettings":{"projectSelectionScope":"ALL"},"tags":{"key0":"__Value__"}}

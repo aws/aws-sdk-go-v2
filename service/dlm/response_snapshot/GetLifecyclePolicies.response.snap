@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Policies":[{"DefaultPolicy":true,"Description":"__Description__","PolicyId":"__PolicyId__","PolicyType":"EBS_SNAPSHOT_MANAGEMENT","State":"ENABLED","Tags":{"key0":"__Value__"}},{"DefaultPolicy":true,"Description":"__Description__","PolicyId":"__PolicyId__","PolicyType":"EBS_SNAPSHOT_MANAGEMENT","State":"ENABLED","Tags":{"key0":"__Value__"}}]}

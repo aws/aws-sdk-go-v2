@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -132,7 +133,17 @@ func TestCheckResponseSnapshot_AssociateAgentCollaborator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{})
+	got, err := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentVersion: ptr.String("__AgentVersion__"),
+		AgentDescriptor: &types.AgentDescriptor{
+			AliasArn: ptr.String("__AliasArn__"),
+		},
+		CollaboratorName:         ptr.String("__CollaboratorName__"),
+		CollaborationInstruction: ptr.String("__CollaborationInstruction__"),
+		RelayConversationHistory: types.RelayConversationHistory("TO_COLLABORATOR"),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +172,13 @@ func TestCheckResponseSnapshot_AssociateAgentKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAgentKnowledgeBase(context.Background(), &AssociateAgentKnowledgeBaseInput{})
+	got, err := svc.AssociateAgentKnowledgeBase(context.Background(), &AssociateAgentKnowledgeBaseInput{
+		AgentId:            ptr.String("__AgentId__"),
+		AgentVersion:       ptr.String("__AgentVersion__"),
+		KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+		Description:        ptr.String("__Description__"),
+		KnowledgeBaseState: types.KnowledgeBaseState("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -221,7 +238,7 @@ func TestCheckResponseSnapshot_CreateAgent(t *testing.T) {
 						},
 						ParserMode:                   types.CreationMode("DEFAULT"),
 						FoundationModel:              ptr.String("__FoundationModel__"),
-						AdditionalModelRequestFields: nil,
+						AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 					},
 					{
 						PromptType:         types.PromptType("PRE_PROCESSING"),
@@ -240,7 +257,7 @@ func TestCheckResponseSnapshot_CreateAgent(t *testing.T) {
 						},
 						ParserMode:                   types.CreationMode("DEFAULT"),
 						FoundationModel:              ptr.String("__FoundationModel__"),
-						AdditionalModelRequestFields: nil,
+						AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 					},
 				},
 				OverrideLambda: ptr.String("__OverrideLambda__"),
@@ -270,7 +287,83 @@ func TestCheckResponseSnapshot_CreateAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAgent(context.Background(), &CreateAgentInput{})
+	got, err := svc.CreateAgent(context.Background(), &CreateAgentInput{
+		AgentName:         ptr.String("__AgentName__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+		Instruction:       ptr.String("__Instruction__"),
+		FoundationModel:   ptr.String("__FoundationModel__"),
+		Description:       ptr.String("__Description__"),
+		OrchestrationType: types.OrchestrationType("DEFAULT"),
+		CustomOrchestration: &types.CustomOrchestration{
+			Executor: &types.OrchestrationExecutorMemberLambda{
+				Value: "__OrchestrationExecutorMemberLambda__",
+			},
+		},
+		IdleSessionTTLInSeconds:  ptr.Int32(1),
+		AgentResourceRoleArn:     ptr.String("__AgentResourceRoleArn__"),
+		CustomerEncryptionKeyArn: ptr.String("__CustomerEncryptionKeyArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PromptOverrideConfiguration: &types.PromptOverrideConfiguration{
+			PromptConfigurations: []types.PromptConfiguration{
+				{
+					PromptType:         types.PromptType("PRE_PROCESSING"),
+					PromptCreationMode: types.CreationMode("DEFAULT"),
+					PromptState:        types.PromptState("ENABLED"),
+					BasePromptTemplate: ptr.String("__BasePromptTemplate__"),
+					InferenceConfiguration: &types.InferenceConfiguration{
+						Temperature:   ptr.Float32(1.0),
+						TopP:          ptr.Float32(1.0),
+						TopK:          ptr.Int32(1),
+						MaximumLength: ptr.Int32(1),
+						StopSequences: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ParserMode:                   types.CreationMode("DEFAULT"),
+					FoundationModel:              ptr.String("__FoundationModel__"),
+					AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
+				},
+				{
+					PromptType:         types.PromptType("PRE_PROCESSING"),
+					PromptCreationMode: types.CreationMode("DEFAULT"),
+					PromptState:        types.PromptState("ENABLED"),
+					BasePromptTemplate: ptr.String("__BasePromptTemplate__"),
+					InferenceConfiguration: &types.InferenceConfiguration{
+						Temperature:   ptr.Float32(1.0),
+						TopP:          ptr.Float32(1.0),
+						TopK:          ptr.Int32(1),
+						MaximumLength: ptr.Int32(1),
+						StopSequences: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ParserMode:                   types.CreationMode("DEFAULT"),
+					FoundationModel:              ptr.String("__FoundationModel__"),
+					AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
+				},
+			},
+			OverrideLambda: ptr.String("__OverrideLambda__"),
+		},
+		GuardrailConfiguration: &types.GuardrailConfiguration{
+			GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+		},
+		MemoryConfiguration: &types.MemoryConfiguration{
+			EnabledMemoryTypes: []types.MemoryType{
+				types.MemoryType("SESSION_SUMMARY"),
+				types.MemoryType("SESSION_SUMMARY"),
+			},
+			StorageDays: ptr.Int32(1),
+			SessionSummaryConfiguration: &types.SessionSummaryConfiguration{
+				MaxRecentSessions: ptr.Int32(1),
+			},
+		},
+		AgentCollaboration: types.AgentCollaboration("SUPERVISOR"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -342,7 +435,55 @@ func TestCheckResponseSnapshot_CreateAgentActionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAgentActionGroup(context.Background(), &CreateAgentActionGroupInput{})
+	got, err := svc.CreateAgentActionGroup(context.Background(), &CreateAgentActionGroupInput{
+		AgentId:                    ptr.String("__AgentId__"),
+		AgentVersion:               ptr.String("__AgentVersion__"),
+		ActionGroupName:            ptr.String("__ActionGroupName__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+		Description:                ptr.String("__Description__"),
+		ParentActionGroupSignature: types.ActionGroupSignature("AMAZON.UserInput"),
+		ParentActionGroupSignatureParams: map[string]string{
+			"key0": "__Value__",
+		},
+		ActionGroupExecutor: &types.ActionGroupExecutorMemberLambda{
+			Value: "__ActionGroupExecutorMemberLambda__",
+		},
+		ApiSchema: &types.APISchemaMemberS3{
+			Value: types.S3Identifier{
+				S3BucketName: ptr.String("__S3BucketName__"),
+				S3ObjectKey:  ptr.String("__S3ObjectKey__"),
+			},
+		},
+		ActionGroupState: types.ActionGroupState("ENABLED"),
+		FunctionSchema: &types.FunctionSchemaMemberFunctions{
+			Value: []types.Function{
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Parameters: map[string]types.ParameterDetail{
+						"key0": {
+							Description: ptr.String("__Description__"),
+							Type:        types.Type("string"),
+							Required:    ptr.Bool(true),
+						},
+					},
+					RequireConfirmation: types.RequireConfirmation("ENABLED"),
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Parameters: map[string]types.ParameterDetail{
+						"key0": {
+							Description: ptr.String("__Description__"),
+							Type:        types.Type("string"),
+							Required:    ptr.Bool(true),
+						},
+					},
+					RequireConfirmation: types.RequireConfirmation("ENABLED"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -418,7 +559,25 @@ func TestCheckResponseSnapshot_CreateAgentAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAgentAlias(context.Background(), &CreateAgentAliasInput{})
+	got, err := svc.CreateAgentAlias(context.Background(), &CreateAgentAliasInput{
+		AgentId:        ptr.String("__AgentId__"),
+		AgentAliasName: ptr.String("__AgentAliasName__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Description:    ptr.String("__Description__"),
+		RoutingConfiguration: []types.AgentAliasRoutingConfigurationListItem{
+			{
+				AgentVersion:          ptr.String("__AgentVersion__"),
+				ProvisionedThroughput: ptr.String("__ProvisionedThroughput__"),
+			},
+			{
+				AgentVersion:          ptr.String("__AgentVersion__"),
+				ProvisionedThroughput: ptr.String("__ProvisionedThroughput__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +612,7 @@ func TestCheckResponseSnapshot_CreateDataSource(t *testing.T) {
 							VideoExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
 						},
 					},
-					ConnectorParameters: nil,
+					ConnectorParameters: document.NewLazyDocument("__Document__"),
 				},
 				S3Configuration: &types.S3DataSourceConfiguration{
 					BucketArn: ptr.String("__BucketArn__"),
@@ -708,7 +867,269 @@ func TestCheckResponseSnapshot_CreateDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataSource(context.Background(), &CreateDataSourceInput{})
+	got, err := svc.CreateDataSource(context.Background(), &CreateDataSourceInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			Type: types.DataSourceType("S3"),
+			ManagedKnowledgeBaseConnectorConfiguration: &types.ManagedKnowledgeBaseConnectorConfiguration{
+				DeletionProtectionConfiguration: &types.DeletionProtectionConfiguration{
+					DeletionProtectionStatus:    types.EnabledOrDisabledState("ENABLED"),
+					DeletionProtectionThreshold: ptr.Int32(1),
+				},
+				MediaExtractionConfiguration: &types.MediaExtractionConfiguration{
+					ImageExtractionConfiguration: &types.ImageExtractionConfiguration{
+						ImageExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
+					},
+					AudioExtractionConfiguration: &types.AudioExtractionConfiguration{
+						AudioExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
+					},
+					VideoExtractionConfiguration: &types.VideoExtractionConfiguration{
+						VideoExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
+					},
+				},
+				ConnectorParameters: document.NewLazyDocument("__Document__"),
+			},
+			S3Configuration: &types.S3DataSourceConfiguration{
+				BucketArn: ptr.String("__BucketArn__"),
+				InclusionPrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+			},
+			WebConfiguration: &types.WebDataSourceConfiguration{
+				SourceConfiguration: &types.WebSourceConfiguration{
+					UrlConfiguration: &types.UrlConfiguration{
+						SeedUrls: []types.SeedUrl{
+							{
+								Url: ptr.String("__Url__"),
+							},
+							{
+								Url: ptr.String("__Url__"),
+							},
+						},
+					},
+				},
+				CrawlerConfiguration: &types.WebCrawlerConfiguration{
+					CrawlerLimits: &types.WebCrawlerLimits{
+						RateLimit: ptr.Int32(1),
+						MaxPages:  ptr.Int32(1),
+					},
+					InclusionFilters: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExclusionFilters: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Scope:           types.WebScopeType("HOST_ONLY"),
+					UserAgent:       ptr.String("__UserAgent__"),
+					UserAgentHeader: ptr.String("__UserAgentHeader__"),
+				},
+			},
+			ConfluenceConfiguration: &types.ConfluenceDataSourceConfiguration{
+				SourceConfiguration: &types.ConfluenceSourceConfiguration{
+					HostUrl:              ptr.String("__HostUrl__"),
+					HostType:             types.ConfluenceHostType("SAAS"),
+					AuthType:             types.ConfluenceAuthType("BASIC"),
+					CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				},
+				CrawlerConfiguration: &types.ConfluenceCrawlerConfiguration{
+					FilterConfiguration: &types.CrawlFilterConfiguration{
+						Type: types.CrawlFilterConfigurationType("PATTERN"),
+						PatternObjectFilter: &types.PatternObjectFilterConfiguration{
+							Filters: []types.PatternObjectFilter{
+								{
+									ObjectType: ptr.String("__ObjectType__"),
+									InclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									ObjectType: ptr.String("__ObjectType__"),
+									InclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			SalesforceConfiguration: &types.SalesforceDataSourceConfiguration{
+				SourceConfiguration: &types.SalesforceSourceConfiguration{
+					HostUrl:              ptr.String("__HostUrl__"),
+					AuthType:             types.SalesforceAuthType("OAUTH2_CLIENT_CREDENTIALS"),
+					CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				},
+				CrawlerConfiguration: &types.SalesforceCrawlerConfiguration{
+					FilterConfiguration: &types.CrawlFilterConfiguration{
+						Type: types.CrawlFilterConfigurationType("PATTERN"),
+						PatternObjectFilter: &types.PatternObjectFilterConfiguration{
+							Filters: []types.PatternObjectFilter{
+								{
+									ObjectType: ptr.String("__ObjectType__"),
+									InclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									ObjectType: ptr.String("__ObjectType__"),
+									InclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			SharePointConfiguration: &types.SharePointDataSourceConfiguration{
+				SourceConfiguration: &types.SharePointSourceConfiguration{
+					TenantId: ptr.String("__TenantId__"),
+					Domain:   ptr.String("__Domain__"),
+					SiteUrls: []string{
+						"__Member__",
+						"__Member__",
+					},
+					HostType:             types.SharePointHostType("ONLINE"),
+					AuthType:             types.SharePointAuthType("OAUTH2_CLIENT_CREDENTIALS"),
+					CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				},
+				CrawlerConfiguration: &types.SharePointCrawlerConfiguration{
+					FilterConfiguration: &types.CrawlFilterConfiguration{
+						Type: types.CrawlFilterConfigurationType("PATTERN"),
+						PatternObjectFilter: &types.PatternObjectFilterConfiguration{
+							Filters: []types.PatternObjectFilter{
+								{
+									ObjectType: ptr.String("__ObjectType__"),
+									InclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									ObjectType: ptr.String("__ObjectType__"),
+									InclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		DataDeletionPolicy: types.DataDeletionPolicy("RETAIN"),
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		VectorIngestionConfiguration: &types.VectorIngestionConfiguration{
+			ChunkingConfiguration: &types.ChunkingConfiguration{
+				ChunkingStrategy: types.ChunkingStrategy("FIXED_SIZE"),
+				FixedSizeChunkingConfiguration: &types.FixedSizeChunkingConfiguration{
+					MaxTokens:         ptr.Int32(1),
+					OverlapPercentage: ptr.Int32(1),
+				},
+				HierarchicalChunkingConfiguration: &types.HierarchicalChunkingConfiguration{
+					LevelConfigurations: []types.HierarchicalChunkingLevelConfiguration{
+						{
+							MaxTokens: ptr.Int32(1),
+						},
+						{
+							MaxTokens: ptr.Int32(1),
+						},
+					},
+					OverlapTokens: ptr.Int32(1),
+				},
+				SemanticChunkingConfiguration: &types.SemanticChunkingConfiguration{
+					MaxTokens:                     ptr.Int32(1),
+					BufferSize:                    ptr.Int32(1),
+					BreakpointPercentileThreshold: ptr.Int32(1),
+				},
+			},
+			CustomTransformationConfiguration: &types.CustomTransformationConfiguration{
+				IntermediateStorage: &types.IntermediateStorage{
+					S3Location: &types.S3Location{
+						Uri: ptr.String("__Uri__"),
+					},
+				},
+				Transformations: []types.Transformation{
+					{
+						TransformationFunction: &types.TransformationFunction{
+							TransformationLambdaConfiguration: &types.TransformationLambdaConfiguration{
+								LambdaArn: ptr.String("__LambdaArn__"),
+							},
+						},
+						StepToApply: types.StepType("POST_CHUNKING"),
+					},
+					{
+						TransformationFunction: &types.TransformationFunction{
+							TransformationLambdaConfiguration: &types.TransformationLambdaConfiguration{
+								LambdaArn: ptr.String("__LambdaArn__"),
+							},
+						},
+						StepToApply: types.StepType("POST_CHUNKING"),
+					},
+				},
+			},
+			ParsingConfiguration: &types.ParsingConfiguration{
+				ParsingStrategy: types.ParsingStrategy("BEDROCK_FOUNDATION_MODEL"),
+				BedrockFoundationModelConfiguration: &types.BedrockFoundationModelConfiguration{
+					ModelArn: ptr.String("__ModelArn__"),
+					ParsingPrompt: &types.ParsingPrompt{
+						ParsingPromptText: ptr.String("__ParsingPromptText__"),
+					},
+					ParsingModality: types.ParsingModality("MULTIMODAL"),
+				},
+				BedrockDataAutomationConfiguration: &types.BedrockDataAutomationConfiguration{
+					ParsingModality: types.ParsingModality("MULTIMODAL"),
+				},
+			},
+			ContextEnrichmentConfiguration: &types.ContextEnrichmentConfiguration{
+				Type: types.ContextEnrichmentType("BEDROCK_FOUNDATION_MODEL"),
+				BedrockFoundationModelConfiguration: &types.BedrockFoundationModelContextEnrichmentConfiguration{
+					EnrichmentStrategyConfiguration: &types.EnrichmentStrategyConfiguration{
+						Method: types.EnrichmentStrategyMethod("CHUNK_ENTITY_EXTRACTION"),
+					},
+					ModelArn: ptr.String("__ModelArn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -830,7 +1251,108 @@ func TestCheckResponseSnapshot_CreateFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFlow(context.Background(), &CreateFlowInput{})
+	got, err := svc.CreateFlow(context.Background(), &CreateFlowInput{
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		ExecutionRoleArn:         ptr.String("__ExecutionRoleArn__"),
+		CustomerEncryptionKeyArn: ptr.String("__CustomerEncryptionKeyArn__"),
+		Definition: &types.FlowDefinition{
+			Nodes: []types.FlowNode{
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.FlowNodeType("Input"),
+					Configuration: &types.FlowNodeConfigurationMemberInput{
+						Value: types.InputFlowNodeConfiguration{},
+					},
+					Inputs: []types.FlowNodeInput{
+						{
+							Name:       ptr.String("__Name__"),
+							Type:       types.FlowNodeIODataType("String"),
+							Expression: ptr.String("__Expression__"),
+							Category:   types.FlowNodeInputCategory("LoopCondition"),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Type:       types.FlowNodeIODataType("String"),
+							Expression: ptr.String("__Expression__"),
+							Category:   types.FlowNodeInputCategory("LoopCondition"),
+						},
+					},
+					Outputs: []types.FlowNodeOutput{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.FlowNodeIODataType("String"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.FlowNodeIODataType("String"),
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.FlowNodeType("Input"),
+					Configuration: &types.FlowNodeConfigurationMemberInput{
+						Value: types.InputFlowNodeConfiguration{},
+					},
+					Inputs: []types.FlowNodeInput{
+						{
+							Name:       ptr.String("__Name__"),
+							Type:       types.FlowNodeIODataType("String"),
+							Expression: ptr.String("__Expression__"),
+							Category:   types.FlowNodeInputCategory("LoopCondition"),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Type:       types.FlowNodeIODataType("String"),
+							Expression: ptr.String("__Expression__"),
+							Category:   types.FlowNodeInputCategory("LoopCondition"),
+						},
+					},
+					Outputs: []types.FlowNodeOutput{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.FlowNodeIODataType("String"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.FlowNodeIODataType("String"),
+						},
+					},
+				},
+			},
+			Connections: []types.FlowConnection{
+				{
+					Type:   types.FlowConnectionType("Data"),
+					Name:   ptr.String("__Name__"),
+					Source: ptr.String("__Source__"),
+					Target: ptr.String("__Target__"),
+					Configuration: &types.FlowConnectionConfigurationMemberData{
+						Value: types.FlowDataConnectionConfiguration{
+							SourceOutput: ptr.String("__SourceOutput__"),
+							TargetInput:  ptr.String("__TargetInput__"),
+						},
+					},
+				},
+				{
+					Type:   types.FlowConnectionType("Data"),
+					Name:   ptr.String("__Name__"),
+					Source: ptr.String("__Source__"),
+					Target: ptr.String("__Target__"),
+					Configuration: &types.FlowConnectionConfigurationMemberData{
+						Value: types.FlowDataConnectionConfiguration{
+							SourceOutput: ptr.String("__SourceOutput__"),
+							TargetInput:  ptr.String("__TargetInput__"),
+						},
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -869,7 +1391,27 @@ func TestCheckResponseSnapshot_CreateFlowAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFlowAlias(context.Background(), &CreateFlowAliasInput{})
+	got, err := svc.CreateFlowAlias(context.Background(), &CreateFlowAliasInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RoutingConfiguration: []types.FlowAliasRoutingConfigurationListItem{
+			{
+				FlowVersion: ptr.String("__FlowVersion__"),
+			},
+			{
+				FlowVersion: ptr.String("__FlowVersion__"),
+			},
+		},
+		ConcurrencyConfiguration: &types.FlowAliasConcurrencyConfiguration{
+			Type:           types.ConcurrencyType("Automatic"),
+			MaxConcurrency: ptr.Int32(1),
+		},
+		FlowIdentifier: ptr.String("__FlowIdentifier__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -990,7 +1532,11 @@ func TestCheckResponseSnapshot_CreateFlowVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFlowVersion(context.Background(), &CreateFlowVersionInput{})
+	got, err := svc.CreateFlowVersion(context.Background(), &CreateFlowVersionInput{
+		FlowIdentifier: ptr.String("__FlowIdentifier__"),
+		Description:    ptr.String("__Description__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1296,7 +1842,287 @@ func TestCheckResponseSnapshot_CreateKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKnowledgeBase(context.Background(), &CreateKnowledgeBaseInput{})
+	got, err := svc.CreateKnowledgeBase(context.Background(), &CreateKnowledgeBaseInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		KnowledgeBaseConfiguration: &types.KnowledgeBaseConfiguration{
+			Type: types.KnowledgeBaseType("VECTOR"),
+			VectorKnowledgeBaseConfiguration: &types.VectorKnowledgeBaseConfiguration{
+				EmbeddingModelArn: ptr.String("__EmbeddingModelArn__"),
+				EmbeddingModelConfiguration: &types.EmbeddingModelConfiguration{
+					BedrockEmbeddingModelConfiguration: &types.BedrockEmbeddingModelConfiguration{
+						Dimensions:        ptr.Int32(1),
+						EmbeddingDataType: types.EmbeddingDataType("FLOAT32"),
+						Audio: []types.AudioConfiguration{
+							{
+								SegmentationConfiguration: &types.AudioSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+							{
+								SegmentationConfiguration: &types.AudioSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+						},
+						Video: []types.VideoConfiguration{
+							{
+								SegmentationConfiguration: &types.VideoSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+							{
+								SegmentationConfiguration: &types.VideoSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+						},
+					},
+				},
+				SupplementalDataStorageConfiguration: &types.SupplementalDataStorageConfiguration{
+					StorageLocations: []types.SupplementalDataStorageLocation{
+						{
+							Type: types.SupplementalDataStorageLocationType("S3"),
+							S3Location: &types.S3Location{
+								Uri: ptr.String("__Uri__"),
+							},
+						},
+						{
+							Type: types.SupplementalDataStorageLocationType("S3"),
+							S3Location: &types.S3Location{
+								Uri: ptr.String("__Uri__"),
+							},
+						},
+					},
+				},
+			},
+			ManagedKnowledgeBaseConfiguration: &types.ManagedKnowledgeBaseConfiguration{
+				EmbeddingModelType: types.EmbeddingModelType("CUSTOM"),
+				EmbeddingModelArn:  ptr.String("__EmbeddingModelArn__"),
+				EmbeddingModelConfiguration: &types.EmbeddingModelConfiguration{
+					BedrockEmbeddingModelConfiguration: &types.BedrockEmbeddingModelConfiguration{
+						Dimensions:        ptr.Int32(1),
+						EmbeddingDataType: types.EmbeddingDataType("FLOAT32"),
+						Audio: []types.AudioConfiguration{
+							{
+								SegmentationConfiguration: &types.AudioSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+							{
+								SegmentationConfiguration: &types.AudioSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+						},
+						Video: []types.VideoConfiguration{
+							{
+								SegmentationConfiguration: &types.VideoSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+							{
+								SegmentationConfiguration: &types.VideoSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+						},
+					},
+				},
+				ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+			},
+			KendraKnowledgeBaseConfiguration: &types.KendraKnowledgeBaseConfiguration{
+				KendraIndexArn: ptr.String("__KendraIndexArn__"),
+			},
+			SqlKnowledgeBaseConfiguration: &types.SqlKnowledgeBaseConfiguration{
+				Type: types.QueryEngineType("REDSHIFT"),
+				RedshiftConfiguration: &types.RedshiftConfiguration{
+					StorageConfigurations: []types.RedshiftQueryEngineStorageConfiguration{
+						{
+							Type: types.RedshiftQueryEngineStorageType("REDSHIFT"),
+							AwsDataCatalogConfiguration: &types.RedshiftQueryEngineAwsDataCatalogStorageConfiguration{
+								TableNames: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							RedshiftConfiguration: &types.RedshiftQueryEngineRedshiftStorageConfiguration{
+								DatabaseName: ptr.String("__DatabaseName__"),
+							},
+						},
+						{
+							Type: types.RedshiftQueryEngineStorageType("REDSHIFT"),
+							AwsDataCatalogConfiguration: &types.RedshiftQueryEngineAwsDataCatalogStorageConfiguration{
+								TableNames: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							RedshiftConfiguration: &types.RedshiftQueryEngineRedshiftStorageConfiguration{
+								DatabaseName: ptr.String("__DatabaseName__"),
+							},
+						},
+					},
+					QueryEngineConfiguration: &types.RedshiftQueryEngineConfiguration{
+						Type: types.RedshiftQueryEngineType("SERVERLESS"),
+						ServerlessConfiguration: &types.RedshiftServerlessConfiguration{
+							WorkgroupArn: ptr.String("__WorkgroupArn__"),
+							AuthConfiguration: &types.RedshiftServerlessAuthConfiguration{
+								Type:                      types.RedshiftServerlessAuthType("IAM"),
+								UsernamePasswordSecretArn: ptr.String("__UsernamePasswordSecretArn__"),
+							},
+						},
+						ProvisionedConfiguration: &types.RedshiftProvisionedConfiguration{
+							ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+							AuthConfiguration: &types.RedshiftProvisionedAuthConfiguration{
+								Type:                      types.RedshiftProvisionedAuthType("IAM"),
+								DatabaseUser:              ptr.String("__DatabaseUser__"),
+								UsernamePasswordSecretArn: ptr.String("__UsernamePasswordSecretArn__"),
+							},
+						},
+					},
+					QueryGenerationConfiguration: &types.QueryGenerationConfiguration{
+						ExecutionTimeoutSeconds: ptr.Int32(1),
+						GenerationContext: &types.QueryGenerationContext{
+							Tables: []types.QueryGenerationTable{
+								{
+									Name:        ptr.String("__Name__"),
+									Description: ptr.String("__Description__"),
+									Inclusion:   types.IncludeExclude("INCLUDE"),
+									Columns: []types.QueryGenerationColumn{
+										{
+											Name:        ptr.String("__Name__"),
+											Description: ptr.String("__Description__"),
+											Inclusion:   types.IncludeExclude("INCLUDE"),
+										},
+										{
+											Name:        ptr.String("__Name__"),
+											Description: ptr.String("__Description__"),
+											Inclusion:   types.IncludeExclude("INCLUDE"),
+										},
+									},
+								},
+								{
+									Name:        ptr.String("__Name__"),
+									Description: ptr.String("__Description__"),
+									Inclusion:   types.IncludeExclude("INCLUDE"),
+									Columns: []types.QueryGenerationColumn{
+										{
+											Name:        ptr.String("__Name__"),
+											Description: ptr.String("__Description__"),
+											Inclusion:   types.IncludeExclude("INCLUDE"),
+										},
+										{
+											Name:        ptr.String("__Name__"),
+											Description: ptr.String("__Description__"),
+											Inclusion:   types.IncludeExclude("INCLUDE"),
+										},
+									},
+								},
+							},
+							CuratedQueries: []types.CuratedQuery{
+								{
+									NaturalLanguage: ptr.String("__NaturalLanguage__"),
+									Sql:             ptr.String("__Sql__"),
+								},
+								{
+									NaturalLanguage: ptr.String("__NaturalLanguage__"),
+									Sql:             ptr.String("__Sql__"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		StorageConfiguration: &types.StorageConfiguration{
+			Type: types.KnowledgeBaseStorageType("OPENSEARCH_SERVERLESS"),
+			OpensearchServerlessConfiguration: &types.OpenSearchServerlessConfiguration{
+				CollectionArn:   ptr.String("__CollectionArn__"),
+				VectorIndexName: ptr.String("__VectorIndexName__"),
+				FieldMapping: &types.OpenSearchServerlessFieldMapping{
+					VectorField:   ptr.String("__VectorField__"),
+					TextField:     ptr.String("__TextField__"),
+					MetadataField: ptr.String("__MetadataField__"),
+				},
+			},
+			OpensearchManagedClusterConfiguration: &types.OpenSearchManagedClusterConfiguration{
+				DomainEndpoint:  ptr.String("__DomainEndpoint__"),
+				DomainArn:       ptr.String("__DomainArn__"),
+				VectorIndexName: ptr.String("__VectorIndexName__"),
+				FieldMapping: &types.OpenSearchManagedClusterFieldMapping{
+					VectorField:   ptr.String("__VectorField__"),
+					TextField:     ptr.String("__TextField__"),
+					MetadataField: ptr.String("__MetadataField__"),
+				},
+			},
+			PineconeConfiguration: &types.PineconeConfiguration{
+				ConnectionString:     ptr.String("__ConnectionString__"),
+				CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				Namespace:            ptr.String("__Namespace__"),
+				FieldMapping: &types.PineconeFieldMapping{
+					TextField:     ptr.String("__TextField__"),
+					MetadataField: ptr.String("__MetadataField__"),
+				},
+			},
+			RedisEnterpriseCloudConfiguration: &types.RedisEnterpriseCloudConfiguration{
+				Endpoint:             ptr.String("__Endpoint__"),
+				VectorIndexName:      ptr.String("__VectorIndexName__"),
+				CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				FieldMapping: &types.RedisEnterpriseCloudFieldMapping{
+					VectorField:   ptr.String("__VectorField__"),
+					TextField:     ptr.String("__TextField__"),
+					MetadataField: ptr.String("__MetadataField__"),
+				},
+			},
+			RdsConfiguration: &types.RdsConfiguration{
+				ResourceArn:          ptr.String("__ResourceArn__"),
+				CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				DatabaseName:         ptr.String("__DatabaseName__"),
+				TableName:            ptr.String("__TableName__"),
+				FieldMapping: &types.RdsFieldMapping{
+					PrimaryKeyField:     ptr.String("__PrimaryKeyField__"),
+					VectorField:         ptr.String("__VectorField__"),
+					TextField:           ptr.String("__TextField__"),
+					MetadataField:       ptr.String("__MetadataField__"),
+					CustomMetadataField: ptr.String("__CustomMetadataField__"),
+				},
+			},
+			MongoDbAtlasConfiguration: &types.MongoDbAtlasConfiguration{
+				Endpoint:             ptr.String("__Endpoint__"),
+				DatabaseName:         ptr.String("__DatabaseName__"),
+				CollectionName:       ptr.String("__CollectionName__"),
+				VectorIndexName:      ptr.String("__VectorIndexName__"),
+				CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				FieldMapping: &types.MongoDbAtlasFieldMapping{
+					VectorField:   ptr.String("__VectorField__"),
+					TextField:     ptr.String("__TextField__"),
+					MetadataField: ptr.String("__MetadataField__"),
+				},
+				EndpointServiceName: ptr.String("__EndpointServiceName__"),
+				TextIndexName:       ptr.String("__TextIndexName__"),
+			},
+			NeptuneAnalyticsConfiguration: &types.NeptuneAnalyticsConfiguration{
+				GraphArn: ptr.String("__GraphArn__"),
+				FieldMapping: &types.NeptuneAnalyticsFieldMapping{
+					TextField:     ptr.String("__TextField__"),
+					MetadataField: ptr.String("__MetadataField__"),
+				},
+			},
+			S3VectorsConfiguration: &types.S3VectorsConfiguration{
+				VectorBucketArn: ptr.String("__VectorBucketArn__"),
+				IndexArn:        ptr.String("__IndexArn__"),
+				IndexName:       ptr.String("__IndexName__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1353,7 +2179,7 @@ func TestCheckResponseSnapshot_CreatePrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -1401,7 +2227,7 @@ func TestCheckResponseSnapshot_CreatePrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -1423,7 +2249,114 @@ func TestCheckResponseSnapshot_CreatePrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePrompt(context.Background(), &CreatePromptInput{})
+	got, err := svc.CreatePrompt(context.Background(), &CreatePromptInput{
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		CustomerEncryptionKeyArn: ptr.String("__CustomerEncryptionKeyArn__"),
+		DefaultVariant:           ptr.String("__DefaultVariant__"),
+		Variants: []types.PromptVariant{
+			{
+				Name:         ptr.String("__Name__"),
+				TemplateType: types.PromptTemplateType("TEXT"),
+				TemplateConfiguration: &types.PromptTemplateConfigurationMemberText{
+					Value: types.TextPromptTemplateConfiguration{
+						Text: ptr.String("__Text__"),
+						CachePoint: &types.CachePointBlock{
+							Type: types.CachePointType("default"),
+						},
+						InputVariables: []types.PromptInputVariable{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+				},
+				ModelId: ptr.String("__ModelId__"),
+				InferenceConfiguration: &types.PromptInferenceConfigurationMemberText{
+					Value: types.PromptModelInferenceConfiguration{
+						Temperature: ptr.Float32(1.0),
+						TopP:        ptr.Float32(1.0),
+						MaxTokens:   ptr.Int32(1),
+						StopSequences: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Metadata: []types.PromptMetadataEntry{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
+				GenAiResource: &types.PromptGenAiResourceMemberAgent{
+					Value: types.PromptAgentResource{
+						AgentIdentifier: ptr.String("__AgentIdentifier__"),
+					},
+				},
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				TemplateType: types.PromptTemplateType("TEXT"),
+				TemplateConfiguration: &types.PromptTemplateConfigurationMemberText{
+					Value: types.TextPromptTemplateConfiguration{
+						Text: ptr.String("__Text__"),
+						CachePoint: &types.CachePointBlock{
+							Type: types.CachePointType("default"),
+						},
+						InputVariables: []types.PromptInputVariable{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+				},
+				ModelId: ptr.String("__ModelId__"),
+				InferenceConfiguration: &types.PromptInferenceConfigurationMemberText{
+					Value: types.PromptModelInferenceConfiguration{
+						Temperature: ptr.Float32(1.0),
+						TopP:        ptr.Float32(1.0),
+						MaxTokens:   ptr.Int32(1),
+						StopSequences: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Metadata: []types.PromptMetadataEntry{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
+				GenAiResource: &types.PromptGenAiResourceMemberAgent{
+					Value: types.PromptAgentResource{
+						AgentIdentifier: ptr.String("__AgentIdentifier__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1480,7 +2413,7 @@ func TestCheckResponseSnapshot_CreatePromptVersion(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -1528,7 +2461,7 @@ func TestCheckResponseSnapshot_CreatePromptVersion(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -1550,7 +2483,14 @@ func TestCheckResponseSnapshot_CreatePromptVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePromptVersion(context.Background(), &CreatePromptVersionInput{})
+	got, err := svc.CreatePromptVersion(context.Background(), &CreatePromptVersionInput{
+		PromptIdentifier: ptr.String("__PromptIdentifier__"),
+		Description:      ptr.String("__Description__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1572,7 +2512,10 @@ func TestCheckResponseSnapshot_DeleteAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAgent(context.Background(), &DeleteAgentInput{})
+	got, err := svc.DeleteAgent(context.Background(), &DeleteAgentInput{
+		AgentId:                ptr.String("__AgentId__"),
+		SkipResourceInUseCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1591,7 +2534,12 @@ func TestCheckResponseSnapshot_DeleteAgentActionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAgentActionGroup(context.Background(), &DeleteAgentActionGroupInput{})
+	got, err := svc.DeleteAgentActionGroup(context.Background(), &DeleteAgentActionGroupInput{
+		AgentId:                ptr.String("__AgentId__"),
+		AgentVersion:           ptr.String("__AgentVersion__"),
+		ActionGroupId:          ptr.String("__ActionGroupId__"),
+		SkipResourceInUseCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1614,7 +2562,10 @@ func TestCheckResponseSnapshot_DeleteAgentAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAgentAlias(context.Background(), &DeleteAgentAliasInput{})
+	got, err := svc.DeleteAgentAlias(context.Background(), &DeleteAgentAliasInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentAliasId: ptr.String("__AgentAliasId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1637,7 +2588,11 @@ func TestCheckResponseSnapshot_DeleteAgentVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAgentVersion(context.Background(), &DeleteAgentVersionInput{})
+	got, err := svc.DeleteAgentVersion(context.Background(), &DeleteAgentVersionInput{
+		AgentId:                ptr.String("__AgentId__"),
+		AgentVersion:           ptr.String("__AgentVersion__"),
+		SkipResourceInUseCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1660,7 +2615,10 @@ func TestCheckResponseSnapshot_DeleteDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{})
+	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1681,7 +2639,10 @@ func TestCheckResponseSnapshot_DeleteFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFlow(context.Background(), &DeleteFlowInput{})
+	got, err := svc.DeleteFlow(context.Background(), &DeleteFlowInput{
+		FlowIdentifier:         ptr.String("__FlowIdentifier__"),
+		SkipResourceInUseCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1703,7 +2664,10 @@ func TestCheckResponseSnapshot_DeleteFlowAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFlowAlias(context.Background(), &DeleteFlowAliasInput{})
+	got, err := svc.DeleteFlowAlias(context.Background(), &DeleteFlowAliasInput{
+		FlowIdentifier:  ptr.String("__FlowIdentifier__"),
+		AliasIdentifier: ptr.String("__AliasIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1725,7 +2689,11 @@ func TestCheckResponseSnapshot_DeleteFlowVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFlowVersion(context.Background(), &DeleteFlowVersionInput{})
+	got, err := svc.DeleteFlowVersion(context.Background(), &DeleteFlowVersionInput{
+		FlowIdentifier:         ptr.String("__FlowIdentifier__"),
+		FlowVersion:            ptr.String("__FlowVersion__"),
+		SkipResourceInUseCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1747,7 +2715,9 @@ func TestCheckResponseSnapshot_DeleteKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKnowledgeBase(context.Background(), &DeleteKnowledgeBaseInput{})
+	got, err := svc.DeleteKnowledgeBase(context.Background(), &DeleteKnowledgeBaseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1801,7 +2771,31 @@ func TestCheckResponseSnapshot_DeleteKnowledgeBaseDocuments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKnowledgeBaseDocuments(context.Background(), &DeleteKnowledgeBaseDocumentsInput{})
+	got, err := svc.DeleteKnowledgeBaseDocuments(context.Background(), &DeleteKnowledgeBaseDocumentsInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		DocumentIdentifiers: []types.DocumentIdentifier{
+			{
+				DataSourceType: types.ContentDataSourceType("CUSTOM"),
+				S3: &types.S3Location{
+					Uri: ptr.String("__Uri__"),
+				},
+				Custom: &types.CustomDocumentIdentifier{
+					Id: ptr.String("__Id__"),
+				},
+			},
+			{
+				DataSourceType: types.ContentDataSourceType("CUSTOM"),
+				S3: &types.S3Location{
+					Uri: ptr.String("__Uri__"),
+				},
+				Custom: &types.CustomDocumentIdentifier{
+					Id: ptr.String("__Id__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1823,7 +2817,10 @@ func TestCheckResponseSnapshot_DeletePrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePrompt(context.Background(), &DeletePromptInput{})
+	got, err := svc.DeletePrompt(context.Background(), &DeletePromptInput{
+		PromptIdentifier: ptr.String("__PromptIdentifier__"),
+		PromptVersion:    ptr.String("__PromptVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1845,7 +2842,10 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		ExpectedRevisionId: ptr.String("__ExpectedRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1864,7 +2864,11 @@ func TestCheckResponseSnapshot_DisassociateAgentCollaborator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateAgentCollaborator(context.Background(), &DisassociateAgentCollaboratorInput{})
+	got, err := svc.DisassociateAgentCollaborator(context.Background(), &DisassociateAgentCollaboratorInput{
+		AgentId:        ptr.String("__AgentId__"),
+		AgentVersion:   ptr.String("__AgentVersion__"),
+		CollaboratorId: ptr.String("__CollaboratorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1883,7 +2887,11 @@ func TestCheckResponseSnapshot_DisassociateAgentKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateAgentKnowledgeBase(context.Background(), &DisassociateAgentKnowledgeBaseInput{})
+	got, err := svc.DisassociateAgentKnowledgeBase(context.Background(), &DisassociateAgentKnowledgeBaseInput{
+		AgentId:         ptr.String("__AgentId__"),
+		AgentVersion:    ptr.String("__AgentVersion__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1943,7 +2951,7 @@ func TestCheckResponseSnapshot_GetAgent(t *testing.T) {
 						},
 						ParserMode:                   types.CreationMode("DEFAULT"),
 						FoundationModel:              ptr.String("__FoundationModel__"),
-						AdditionalModelRequestFields: nil,
+						AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 					},
 					{
 						PromptType:         types.PromptType("PRE_PROCESSING"),
@@ -1962,7 +2970,7 @@ func TestCheckResponseSnapshot_GetAgent(t *testing.T) {
 						},
 						ParserMode:                   types.CreationMode("DEFAULT"),
 						FoundationModel:              ptr.String("__FoundationModel__"),
-						AdditionalModelRequestFields: nil,
+						AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 					},
 				},
 				OverrideLambda: ptr.String("__OverrideLambda__"),
@@ -1992,7 +3000,9 @@ func TestCheckResponseSnapshot_GetAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgent(context.Background(), &GetAgentInput{})
+	got, err := svc.GetAgent(context.Background(), &GetAgentInput{
+		AgentId: ptr.String("__AgentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2064,7 +3074,11 @@ func TestCheckResponseSnapshot_GetAgentActionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgentActionGroup(context.Background(), &GetAgentActionGroupInput{})
+	got, err := svc.GetAgentActionGroup(context.Background(), &GetAgentActionGroupInput{
+		AgentId:       ptr.String("__AgentId__"),
+		AgentVersion:  ptr.String("__AgentVersion__"),
+		ActionGroupId: ptr.String("__ActionGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2140,7 +3154,10 @@ func TestCheckResponseSnapshot_GetAgentAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgentAlias(context.Background(), &GetAgentAliasInput{})
+	got, err := svc.GetAgentAlias(context.Background(), &GetAgentAliasInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentAliasId: ptr.String("__AgentAliasId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2174,7 +3191,11 @@ func TestCheckResponseSnapshot_GetAgentCollaborator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgentCollaborator(context.Background(), &GetAgentCollaboratorInput{})
+	got, err := svc.GetAgentCollaborator(context.Background(), &GetAgentCollaboratorInput{
+		AgentId:        ptr.String("__AgentId__"),
+		AgentVersion:   ptr.String("__AgentVersion__"),
+		CollaboratorId: ptr.String("__CollaboratorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2203,7 +3224,11 @@ func TestCheckResponseSnapshot_GetAgentKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgentKnowledgeBase(context.Background(), &GetAgentKnowledgeBaseInput{})
+	got, err := svc.GetAgentKnowledgeBase(context.Background(), &GetAgentKnowledgeBaseInput{
+		AgentId:         ptr.String("__AgentId__"),
+		AgentVersion:    ptr.String("__AgentVersion__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2255,7 +3280,7 @@ func TestCheckResponseSnapshot_GetAgentVersion(t *testing.T) {
 						},
 						ParserMode:                   types.CreationMode("DEFAULT"),
 						FoundationModel:              ptr.String("__FoundationModel__"),
-						AdditionalModelRequestFields: nil,
+						AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 					},
 					{
 						PromptType:         types.PromptType("PRE_PROCESSING"),
@@ -2274,7 +3299,7 @@ func TestCheckResponseSnapshot_GetAgentVersion(t *testing.T) {
 						},
 						ParserMode:                   types.CreationMode("DEFAULT"),
 						FoundationModel:              ptr.String("__FoundationModel__"),
-						AdditionalModelRequestFields: nil,
+						AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 					},
 				},
 				OverrideLambda: ptr.String("__OverrideLambda__"),
@@ -2304,7 +3329,10 @@ func TestCheckResponseSnapshot_GetAgentVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgentVersion(context.Background(), &GetAgentVersionInput{})
+	got, err := svc.GetAgentVersion(context.Background(), &GetAgentVersionInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentVersion: ptr.String("__AgentVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2339,7 +3367,7 @@ func TestCheckResponseSnapshot_GetDataSource(t *testing.T) {
 							VideoExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
 						},
 					},
-					ConnectorParameters: nil,
+					ConnectorParameters: document.NewLazyDocument("__Document__"),
 				},
 				S3Configuration: &types.S3DataSourceConfiguration{
 					BucketArn: ptr.String("__BucketArn__"),
@@ -2594,7 +3622,10 @@ func TestCheckResponseSnapshot_GetDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataSource(context.Background(), &GetDataSourceInput{})
+	got, err := svc.GetDataSource(context.Background(), &GetDataSourceInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2738,7 +3769,10 @@ func TestCheckResponseSnapshot_GetFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFlow(context.Background(), &GetFlowInput{})
+	got, err := svc.GetFlow(context.Background(), &GetFlowInput{
+		FlowIdentifier: ptr.String("__FlowIdentifier__"),
+		IncludedData:   types.IncludedData("ALL_DATA"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2777,7 +3811,10 @@ func TestCheckResponseSnapshot_GetFlowAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFlowAlias(context.Background(), &GetFlowAliasInput{})
+	got, err := svc.GetFlowAlias(context.Background(), &GetFlowAliasInput{
+		FlowIdentifier:  ptr.String("__FlowIdentifier__"),
+		AliasIdentifier: ptr.String("__AliasIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2898,7 +3935,11 @@ func TestCheckResponseSnapshot_GetFlowVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFlowVersion(context.Background(), &GetFlowVersionInput{})
+	got, err := svc.GetFlowVersion(context.Background(), &GetFlowVersionInput{
+		FlowIdentifier: ptr.String("__FlowIdentifier__"),
+		FlowVersion:    ptr.String("__FlowVersion__"),
+		IncludedData:   types.IncludedData("ALL_DATA"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2941,7 +3982,11 @@ func TestCheckResponseSnapshot_GetIngestionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIngestionJob(context.Background(), &GetIngestionJobInput{})
+	got, err := svc.GetIngestionJob(context.Background(), &GetIngestionJobInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		IngestionJobId:  ptr.String("__IngestionJobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3247,7 +4292,9 @@ func TestCheckResponseSnapshot_GetKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKnowledgeBase(context.Background(), &GetKnowledgeBaseInput{})
+	got, err := svc.GetKnowledgeBase(context.Background(), &GetKnowledgeBaseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3301,7 +4348,30 @@ func TestCheckResponseSnapshot_GetKnowledgeBaseDocuments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKnowledgeBaseDocuments(context.Background(), &GetKnowledgeBaseDocumentsInput{})
+	got, err := svc.GetKnowledgeBaseDocuments(context.Background(), &GetKnowledgeBaseDocumentsInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentIdentifiers: []types.DocumentIdentifier{
+			{
+				DataSourceType: types.ContentDataSourceType("CUSTOM"),
+				S3: &types.S3Location{
+					Uri: ptr.String("__Uri__"),
+				},
+				Custom: &types.CustomDocumentIdentifier{
+					Id: ptr.String("__Id__"),
+				},
+			},
+			{
+				DataSourceType: types.ContentDataSourceType("CUSTOM"),
+				S3: &types.S3Location{
+					Uri: ptr.String("__Uri__"),
+				},
+				Custom: &types.CustomDocumentIdentifier{
+					Id: ptr.String("__Id__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3358,7 +4428,7 @@ func TestCheckResponseSnapshot_GetPrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -3406,7 +4476,7 @@ func TestCheckResponseSnapshot_GetPrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -3428,7 +4498,11 @@ func TestCheckResponseSnapshot_GetPrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPrompt(context.Background(), &GetPromptInput{})
+	got, err := svc.GetPrompt(context.Background(), &GetPromptInput{
+		PromptIdentifier: ptr.String("__PromptIdentifier__"),
+		PromptVersion:    ptr.String("__PromptVersion__"),
+		IncludedData:     types.IncludedData("ALL_DATA"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3451,7 +4525,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3505,7 +4581,167 @@ func TestCheckResponseSnapshot_IngestKnowledgeBaseDocuments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.IngestKnowledgeBaseDocuments(context.Background(), &IngestKnowledgeBaseDocumentsInput{})
+	got, err := svc.IngestKnowledgeBaseDocuments(context.Background(), &IngestKnowledgeBaseDocumentsInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Documents: []types.KnowledgeBaseDocument{
+			{
+				Metadata: &types.DocumentMetadata{
+					Type: types.MetadataSourceType("IN_LINE_ATTRIBUTE"),
+					InlineAttributes: []types.MetadataAttribute{
+						{
+							Key: ptr.String("__Key__"),
+							Value: &types.MetadataAttributeValue{
+								Type:         types.MetadataValueType("BOOLEAN"),
+								NumberValue:  ptr.Float64(1.0),
+								BooleanValue: ptr.Bool(true),
+								StringValue:  ptr.String("__StringValue__"),
+								StringListValue: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						{
+							Key: ptr.String("__Key__"),
+							Value: &types.MetadataAttributeValue{
+								Type:         types.MetadataValueType("BOOLEAN"),
+								NumberValue:  ptr.Float64(1.0),
+								BooleanValue: ptr.Bool(true),
+								StringValue:  ptr.String("__StringValue__"),
+								StringListValue: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					S3Location: &types.CustomS3Location{
+						Uri:                  ptr.String("__Uri__"),
+						BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+					},
+					AccessControlList: []types.DocumentAccessControlEntry{
+						{
+							Name:   ptr.String("__Name__"),
+							Type:   types.AccessControlPrincipalType("USER"),
+							Access: types.AccessControlAccess("ALLOW"),
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Type:   types.AccessControlPrincipalType("USER"),
+							Access: types.AccessControlAccess("ALLOW"),
+						},
+					},
+				},
+				Content: &types.DocumentContent{
+					DataSourceType: types.ContentDataSourceType("CUSTOM"),
+					Custom: &types.CustomContent{
+						CustomDocumentIdentifier: &types.CustomDocumentIdentifier{
+							Id: ptr.String("__Id__"),
+						},
+						SourceType: types.CustomSourceType("IN_LINE"),
+						S3Location: &types.CustomS3Location{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+						InlineContent: &types.InlineContent{
+							Type: types.InlineContentType("BYTE"),
+							ByteContent: &types.ByteContentDoc{
+								MimeType: ptr.String("__MimeType__"),
+								Data:     []byte("blob"),
+							},
+							TextContent: &types.TextContentDoc{
+								Data: ptr.String("__Data__"),
+							},
+						},
+					},
+					S3: &types.S3Content{
+						S3Location: &types.S3Location{
+							Uri: ptr.String("__Uri__"),
+						},
+					},
+				},
+			},
+			{
+				Metadata: &types.DocumentMetadata{
+					Type: types.MetadataSourceType("IN_LINE_ATTRIBUTE"),
+					InlineAttributes: []types.MetadataAttribute{
+						{
+							Key: ptr.String("__Key__"),
+							Value: &types.MetadataAttributeValue{
+								Type:         types.MetadataValueType("BOOLEAN"),
+								NumberValue:  ptr.Float64(1.0),
+								BooleanValue: ptr.Bool(true),
+								StringValue:  ptr.String("__StringValue__"),
+								StringListValue: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						{
+							Key: ptr.String("__Key__"),
+							Value: &types.MetadataAttributeValue{
+								Type:         types.MetadataValueType("BOOLEAN"),
+								NumberValue:  ptr.Float64(1.0),
+								BooleanValue: ptr.Bool(true),
+								StringValue:  ptr.String("__StringValue__"),
+								StringListValue: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					S3Location: &types.CustomS3Location{
+						Uri:                  ptr.String("__Uri__"),
+						BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+					},
+					AccessControlList: []types.DocumentAccessControlEntry{
+						{
+							Name:   ptr.String("__Name__"),
+							Type:   types.AccessControlPrincipalType("USER"),
+							Access: types.AccessControlAccess("ALLOW"),
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Type:   types.AccessControlPrincipalType("USER"),
+							Access: types.AccessControlAccess("ALLOW"),
+						},
+					},
+				},
+				Content: &types.DocumentContent{
+					DataSourceType: types.ContentDataSourceType("CUSTOM"),
+					Custom: &types.CustomContent{
+						CustomDocumentIdentifier: &types.CustomDocumentIdentifier{
+							Id: ptr.String("__Id__"),
+						},
+						SourceType: types.CustomSourceType("IN_LINE"),
+						S3Location: &types.CustomS3Location{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+						InlineContent: &types.InlineContent{
+							Type: types.InlineContentType("BYTE"),
+							ByteContent: &types.ByteContentDoc{
+								MimeType: ptr.String("__MimeType__"),
+								Data:     []byte("blob"),
+							},
+							TextContent: &types.TextContentDoc{
+								Data: ptr.String("__Data__"),
+							},
+						},
+					},
+					S3: &types.S3Content{
+						S3Location: &types.S3Location{
+							Uri: ptr.String("__Uri__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3542,7 +4778,12 @@ func TestCheckResponseSnapshot_ListAgentActionGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgentActionGroups(context.Background(), &ListAgentActionGroupsInput{})
+	got, err := svc.ListAgentActionGroups(context.Background(), &ListAgentActionGroupsInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentVersion: ptr.String("__AgentVersion__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3603,7 +4844,11 @@ func TestCheckResponseSnapshot_ListAgentAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgentAliases(context.Background(), &ListAgentAliasesInput{})
+	got, err := svc.ListAgentAliases(context.Background(), &ListAgentAliasesInput{
+		AgentId:    ptr.String("__AgentId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3652,7 +4897,12 @@ func TestCheckResponseSnapshot_ListAgentCollaborators(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgentCollaborators(context.Background(), &ListAgentCollaboratorsInput{})
+	got, err := svc.ListAgentCollaborators(context.Background(), &ListAgentCollaboratorsInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentVersion: ptr.String("__AgentVersion__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3687,7 +4937,12 @@ func TestCheckResponseSnapshot_ListAgentKnowledgeBases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgentKnowledgeBases(context.Background(), &ListAgentKnowledgeBasesInput{})
+	got, err := svc.ListAgentKnowledgeBases(context.Background(), &ListAgentKnowledgeBasesInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentVersion: ptr.String("__AgentVersion__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3734,7 +4989,11 @@ func TestCheckResponseSnapshot_ListAgentVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgentVersions(context.Background(), &ListAgentVersionsInput{})
+	got, err := svc.ListAgentVersions(context.Background(), &ListAgentVersionsInput{
+		AgentId:    ptr.String("__AgentId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3781,7 +5040,10 @@ func TestCheckResponseSnapshot_ListAgents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgents(context.Background(), &ListAgentsInput{})
+	got, err := svc.ListAgents(context.Background(), &ListAgentsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3820,7 +5082,11 @@ func TestCheckResponseSnapshot_ListDataSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSources(context.Background(), &ListDataSourcesInput{})
+	got, err := svc.ListDataSources(context.Background(), &ListDataSourcesInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3885,7 +5151,11 @@ func TestCheckResponseSnapshot_ListFlowAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlowAliases(context.Background(), &ListFlowAliasesInput{})
+	got, err := svc.ListFlowAliases(context.Background(), &ListFlowAliasesInput{
+		FlowIdentifier: ptr.String("__FlowIdentifier__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3922,7 +5192,11 @@ func TestCheckResponseSnapshot_ListFlowVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlowVersions(context.Background(), &ListFlowVersionsInput{})
+	got, err := svc.ListFlowVersions(context.Background(), &ListFlowVersionsInput{
+		FlowIdentifier: ptr.String("__FlowIdentifier__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3965,7 +5239,10 @@ func TestCheckResponseSnapshot_ListFlows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlows(context.Background(), &ListFlowsInput{})
+	got, err := svc.ListFlows(context.Background(), &ListFlowsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4026,7 +5303,34 @@ func TestCheckResponseSnapshot_ListIngestionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIngestionJobs(context.Background(), &ListIngestionJobsInput{})
+	got, err := svc.ListIngestionJobs(context.Background(), &ListIngestionJobsInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		Filters: []types.IngestionJobFilter{
+			{
+				Attribute: types.IngestionJobFilterAttribute("STATUS"),
+				Operator:  types.IngestionJobFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Attribute: types.IngestionJobFilterAttribute("STATUS"),
+				Operator:  types.IngestionJobFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		SortBy: &types.IngestionJobSortBy{
+			Attribute: types.IngestionJobSortByAttribute("STATUS"),
+			Order:     types.SortOrder("ASCENDING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4081,7 +5385,12 @@ func TestCheckResponseSnapshot_ListKnowledgeBaseDocuments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKnowledgeBaseDocuments(context.Background(), &ListKnowledgeBaseDocumentsInput{})
+	got, err := svc.ListKnowledgeBaseDocuments(context.Background(), &ListKnowledgeBaseDocumentsInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4118,7 +5427,10 @@ func TestCheckResponseSnapshot_ListKnowledgeBases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKnowledgeBases(context.Background(), &ListKnowledgeBasesInput{})
+	got, err := svc.ListKnowledgeBases(context.Background(), &ListKnowledgeBasesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4159,7 +5471,11 @@ func TestCheckResponseSnapshot_ListPrompts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPrompts(context.Background(), &ListPromptsInput{})
+	got, err := svc.ListPrompts(context.Background(), &ListPromptsInput{
+		PromptIdentifier: ptr.String("__PromptIdentifier__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4182,7 +5498,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4206,7 +5524,9 @@ func TestCheckResponseSnapshot_PrepareAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PrepareAgent(context.Background(), &PrepareAgentInput{})
+	got, err := svc.PrepareAgent(context.Background(), &PrepareAgentInput{
+		AgentId: ptr.String("__AgentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4228,7 +5548,9 @@ func TestCheckResponseSnapshot_PrepareFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PrepareFlow(context.Background(), &PrepareFlowInput{})
+	got, err := svc.PrepareFlow(context.Background(), &PrepareFlowInput{
+		FlowIdentifier: ptr.String("__FlowIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4250,7 +5572,11 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		Policy:             ptr.String("__Policy__"),
+		ExpectedRevisionId: ptr.String("__ExpectedRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4293,7 +5619,12 @@ func TestCheckResponseSnapshot_StartIngestionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartIngestionJob(context.Background(), &StartIngestionJobInput{})
+	got, err := svc.StartIngestionJob(context.Background(), &StartIngestionJobInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4336,7 +5667,11 @@ func TestCheckResponseSnapshot_StopIngestionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopIngestionJob(context.Background(), &StopIngestionJobInput{})
+	got, err := svc.StopIngestionJob(context.Background(), &StopIngestionJobInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		IngestionJobId:  ptr.String("__IngestionJobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4355,7 +5690,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4374,7 +5714,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4434,7 +5780,7 @@ func TestCheckResponseSnapshot_UpdateAgent(t *testing.T) {
 						},
 						ParserMode:                   types.CreationMode("DEFAULT"),
 						FoundationModel:              ptr.String("__FoundationModel__"),
-						AdditionalModelRequestFields: nil,
+						AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 					},
 					{
 						PromptType:         types.PromptType("PRE_PROCESSING"),
@@ -4453,7 +5799,7 @@ func TestCheckResponseSnapshot_UpdateAgent(t *testing.T) {
 						},
 						ParserMode:                   types.CreationMode("DEFAULT"),
 						FoundationModel:              ptr.String("__FoundationModel__"),
-						AdditionalModelRequestFields: nil,
+						AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 					},
 				},
 				OverrideLambda: ptr.String("__OverrideLambda__"),
@@ -4483,7 +5829,80 @@ func TestCheckResponseSnapshot_UpdateAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAgent(context.Background(), &UpdateAgentInput{})
+	got, err := svc.UpdateAgent(context.Background(), &UpdateAgentInput{
+		AgentId:           ptr.String("__AgentId__"),
+		AgentName:         ptr.String("__AgentName__"),
+		Instruction:       ptr.String("__Instruction__"),
+		FoundationModel:   ptr.String("__FoundationModel__"),
+		Description:       ptr.String("__Description__"),
+		OrchestrationType: types.OrchestrationType("DEFAULT"),
+		CustomOrchestration: &types.CustomOrchestration{
+			Executor: &types.OrchestrationExecutorMemberLambda{
+				Value: "__OrchestrationExecutorMemberLambda__",
+			},
+		},
+		IdleSessionTTLInSeconds:  ptr.Int32(1),
+		AgentResourceRoleArn:     ptr.String("__AgentResourceRoleArn__"),
+		CustomerEncryptionKeyArn: ptr.String("__CustomerEncryptionKeyArn__"),
+		PromptOverrideConfiguration: &types.PromptOverrideConfiguration{
+			PromptConfigurations: []types.PromptConfiguration{
+				{
+					PromptType:         types.PromptType("PRE_PROCESSING"),
+					PromptCreationMode: types.CreationMode("DEFAULT"),
+					PromptState:        types.PromptState("ENABLED"),
+					BasePromptTemplate: ptr.String("__BasePromptTemplate__"),
+					InferenceConfiguration: &types.InferenceConfiguration{
+						Temperature:   ptr.Float32(1.0),
+						TopP:          ptr.Float32(1.0),
+						TopK:          ptr.Int32(1),
+						MaximumLength: ptr.Int32(1),
+						StopSequences: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ParserMode:                   types.CreationMode("DEFAULT"),
+					FoundationModel:              ptr.String("__FoundationModel__"),
+					AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
+				},
+				{
+					PromptType:         types.PromptType("PRE_PROCESSING"),
+					PromptCreationMode: types.CreationMode("DEFAULT"),
+					PromptState:        types.PromptState("ENABLED"),
+					BasePromptTemplate: ptr.String("__BasePromptTemplate__"),
+					InferenceConfiguration: &types.InferenceConfiguration{
+						Temperature:   ptr.Float32(1.0),
+						TopP:          ptr.Float32(1.0),
+						TopK:          ptr.Int32(1),
+						MaximumLength: ptr.Int32(1),
+						StopSequences: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ParserMode:                   types.CreationMode("DEFAULT"),
+					FoundationModel:              ptr.String("__FoundationModel__"),
+					AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
+				},
+			},
+			OverrideLambda: ptr.String("__OverrideLambda__"),
+		},
+		GuardrailConfiguration: &types.GuardrailConfiguration{
+			GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+		},
+		MemoryConfiguration: &types.MemoryConfiguration{
+			EnabledMemoryTypes: []types.MemoryType{
+				types.MemoryType("SESSION_SUMMARY"),
+				types.MemoryType("SESSION_SUMMARY"),
+			},
+			StorageDays: ptr.Int32(1),
+			SessionSummaryConfiguration: &types.SessionSummaryConfiguration{
+				MaxRecentSessions: ptr.Int32(1),
+			},
+		},
+		AgentCollaboration: types.AgentCollaboration("SUPERVISOR"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4555,7 +5974,55 @@ func TestCheckResponseSnapshot_UpdateAgentActionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAgentActionGroup(context.Background(), &UpdateAgentActionGroupInput{})
+	got, err := svc.UpdateAgentActionGroup(context.Background(), &UpdateAgentActionGroupInput{
+		AgentId:                    ptr.String("__AgentId__"),
+		AgentVersion:               ptr.String("__AgentVersion__"),
+		ActionGroupId:              ptr.String("__ActionGroupId__"),
+		ActionGroupName:            ptr.String("__ActionGroupName__"),
+		Description:                ptr.String("__Description__"),
+		ParentActionGroupSignature: types.ActionGroupSignature("AMAZON.UserInput"),
+		ParentActionGroupSignatureParams: map[string]string{
+			"key0": "__Value__",
+		},
+		ActionGroupExecutor: &types.ActionGroupExecutorMemberLambda{
+			Value: "__ActionGroupExecutorMemberLambda__",
+		},
+		ActionGroupState: types.ActionGroupState("ENABLED"),
+		ApiSchema: &types.APISchemaMemberS3{
+			Value: types.S3Identifier{
+				S3BucketName: ptr.String("__S3BucketName__"),
+				S3ObjectKey:  ptr.String("__S3ObjectKey__"),
+			},
+		},
+		FunctionSchema: &types.FunctionSchemaMemberFunctions{
+			Value: []types.Function{
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Parameters: map[string]types.ParameterDetail{
+						"key0": {
+							Description: ptr.String("__Description__"),
+							Type:        types.Type("string"),
+							Required:    ptr.Bool(true),
+						},
+					},
+					RequireConfirmation: types.RequireConfirmation("ENABLED"),
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Parameters: map[string]types.ParameterDetail{
+						"key0": {
+							Description: ptr.String("__Description__"),
+							Type:        types.Type("string"),
+							Required:    ptr.Bool(true),
+						},
+					},
+					RequireConfirmation: types.RequireConfirmation("ENABLED"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4631,7 +6098,23 @@ func TestCheckResponseSnapshot_UpdateAgentAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAgentAlias(context.Background(), &UpdateAgentAliasInput{})
+	got, err := svc.UpdateAgentAlias(context.Background(), &UpdateAgentAliasInput{
+		AgentId:        ptr.String("__AgentId__"),
+		AgentAliasId:   ptr.String("__AgentAliasId__"),
+		AgentAliasName: ptr.String("__AgentAliasName__"),
+		Description:    ptr.String("__Description__"),
+		RoutingConfiguration: []types.AgentAliasRoutingConfigurationListItem{
+			{
+				AgentVersion:          ptr.String("__AgentVersion__"),
+				ProvisionedThroughput: ptr.String("__ProvisionedThroughput__"),
+			},
+			{
+				AgentVersion:          ptr.String("__AgentVersion__"),
+				ProvisionedThroughput: ptr.String("__ProvisionedThroughput__"),
+			},
+		},
+		AliasInvocationState: types.AliasInvocationState("ACCEPT_INVOCATIONS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4665,7 +6148,17 @@ func TestCheckResponseSnapshot_UpdateAgentCollaborator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAgentCollaborator(context.Background(), &UpdateAgentCollaboratorInput{})
+	got, err := svc.UpdateAgentCollaborator(context.Background(), &UpdateAgentCollaboratorInput{
+		AgentId:        ptr.String("__AgentId__"),
+		AgentVersion:   ptr.String("__AgentVersion__"),
+		CollaboratorId: ptr.String("__CollaboratorId__"),
+		AgentDescriptor: &types.AgentDescriptor{
+			AliasArn: ptr.String("__AliasArn__"),
+		},
+		CollaboratorName:         ptr.String("__CollaboratorName__"),
+		CollaborationInstruction: ptr.String("__CollaborationInstruction__"),
+		RelayConversationHistory: types.RelayConversationHistory("TO_COLLABORATOR"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4694,7 +6187,13 @@ func TestCheckResponseSnapshot_UpdateAgentKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAgentKnowledgeBase(context.Background(), &UpdateAgentKnowledgeBaseInput{})
+	got, err := svc.UpdateAgentKnowledgeBase(context.Background(), &UpdateAgentKnowledgeBaseInput{
+		AgentId:            ptr.String("__AgentId__"),
+		AgentVersion:       ptr.String("__AgentVersion__"),
+		KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+		Description:        ptr.String("__Description__"),
+		KnowledgeBaseState: types.KnowledgeBaseState("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4729,7 +6228,7 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 							VideoExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
 						},
 					},
-					ConnectorParameters: nil,
+					ConnectorParameters: document.NewLazyDocument("__Document__"),
 				},
 				S3Configuration: &types.S3DataSourceConfiguration{
 					BucketArn: ptr.String("__BucketArn__"),
@@ -4984,7 +6483,269 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{})
+	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			Type: types.DataSourceType("S3"),
+			ManagedKnowledgeBaseConnectorConfiguration: &types.ManagedKnowledgeBaseConnectorConfiguration{
+				DeletionProtectionConfiguration: &types.DeletionProtectionConfiguration{
+					DeletionProtectionStatus:    types.EnabledOrDisabledState("ENABLED"),
+					DeletionProtectionThreshold: ptr.Int32(1),
+				},
+				MediaExtractionConfiguration: &types.MediaExtractionConfiguration{
+					ImageExtractionConfiguration: &types.ImageExtractionConfiguration{
+						ImageExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
+					},
+					AudioExtractionConfiguration: &types.AudioExtractionConfiguration{
+						AudioExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
+					},
+					VideoExtractionConfiguration: &types.VideoExtractionConfiguration{
+						VideoExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
+					},
+				},
+				ConnectorParameters: document.NewLazyDocument("__Document__"),
+			},
+			S3Configuration: &types.S3DataSourceConfiguration{
+				BucketArn: ptr.String("__BucketArn__"),
+				InclusionPrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+			},
+			WebConfiguration: &types.WebDataSourceConfiguration{
+				SourceConfiguration: &types.WebSourceConfiguration{
+					UrlConfiguration: &types.UrlConfiguration{
+						SeedUrls: []types.SeedUrl{
+							{
+								Url: ptr.String("__Url__"),
+							},
+							{
+								Url: ptr.String("__Url__"),
+							},
+						},
+					},
+				},
+				CrawlerConfiguration: &types.WebCrawlerConfiguration{
+					CrawlerLimits: &types.WebCrawlerLimits{
+						RateLimit: ptr.Int32(1),
+						MaxPages:  ptr.Int32(1),
+					},
+					InclusionFilters: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExclusionFilters: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Scope:           types.WebScopeType("HOST_ONLY"),
+					UserAgent:       ptr.String("__UserAgent__"),
+					UserAgentHeader: ptr.String("__UserAgentHeader__"),
+				},
+			},
+			ConfluenceConfiguration: &types.ConfluenceDataSourceConfiguration{
+				SourceConfiguration: &types.ConfluenceSourceConfiguration{
+					HostUrl:              ptr.String("__HostUrl__"),
+					HostType:             types.ConfluenceHostType("SAAS"),
+					AuthType:             types.ConfluenceAuthType("BASIC"),
+					CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				},
+				CrawlerConfiguration: &types.ConfluenceCrawlerConfiguration{
+					FilterConfiguration: &types.CrawlFilterConfiguration{
+						Type: types.CrawlFilterConfigurationType("PATTERN"),
+						PatternObjectFilter: &types.PatternObjectFilterConfiguration{
+							Filters: []types.PatternObjectFilter{
+								{
+									ObjectType: ptr.String("__ObjectType__"),
+									InclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									ObjectType: ptr.String("__ObjectType__"),
+									InclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			SalesforceConfiguration: &types.SalesforceDataSourceConfiguration{
+				SourceConfiguration: &types.SalesforceSourceConfiguration{
+					HostUrl:              ptr.String("__HostUrl__"),
+					AuthType:             types.SalesforceAuthType("OAUTH2_CLIENT_CREDENTIALS"),
+					CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				},
+				CrawlerConfiguration: &types.SalesforceCrawlerConfiguration{
+					FilterConfiguration: &types.CrawlFilterConfiguration{
+						Type: types.CrawlFilterConfigurationType("PATTERN"),
+						PatternObjectFilter: &types.PatternObjectFilterConfiguration{
+							Filters: []types.PatternObjectFilter{
+								{
+									ObjectType: ptr.String("__ObjectType__"),
+									InclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									ObjectType: ptr.String("__ObjectType__"),
+									InclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			SharePointConfiguration: &types.SharePointDataSourceConfiguration{
+				SourceConfiguration: &types.SharePointSourceConfiguration{
+					TenantId: ptr.String("__TenantId__"),
+					Domain:   ptr.String("__Domain__"),
+					SiteUrls: []string{
+						"__Member__",
+						"__Member__",
+					},
+					HostType:             types.SharePointHostType("ONLINE"),
+					AuthType:             types.SharePointAuthType("OAUTH2_CLIENT_CREDENTIALS"),
+					CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				},
+				CrawlerConfiguration: &types.SharePointCrawlerConfiguration{
+					FilterConfiguration: &types.CrawlFilterConfiguration{
+						Type: types.CrawlFilterConfigurationType("PATTERN"),
+						PatternObjectFilter: &types.PatternObjectFilterConfiguration{
+							Filters: []types.PatternObjectFilter{
+								{
+									ObjectType: ptr.String("__ObjectType__"),
+									InclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									ObjectType: ptr.String("__ObjectType__"),
+									InclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExclusionFilters: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		DataDeletionPolicy: types.DataDeletionPolicy("RETAIN"),
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		VectorIngestionConfiguration: &types.VectorIngestionConfiguration{
+			ChunkingConfiguration: &types.ChunkingConfiguration{
+				ChunkingStrategy: types.ChunkingStrategy("FIXED_SIZE"),
+				FixedSizeChunkingConfiguration: &types.FixedSizeChunkingConfiguration{
+					MaxTokens:         ptr.Int32(1),
+					OverlapPercentage: ptr.Int32(1),
+				},
+				HierarchicalChunkingConfiguration: &types.HierarchicalChunkingConfiguration{
+					LevelConfigurations: []types.HierarchicalChunkingLevelConfiguration{
+						{
+							MaxTokens: ptr.Int32(1),
+						},
+						{
+							MaxTokens: ptr.Int32(1),
+						},
+					},
+					OverlapTokens: ptr.Int32(1),
+				},
+				SemanticChunkingConfiguration: &types.SemanticChunkingConfiguration{
+					MaxTokens:                     ptr.Int32(1),
+					BufferSize:                    ptr.Int32(1),
+					BreakpointPercentileThreshold: ptr.Int32(1),
+				},
+			},
+			CustomTransformationConfiguration: &types.CustomTransformationConfiguration{
+				IntermediateStorage: &types.IntermediateStorage{
+					S3Location: &types.S3Location{
+						Uri: ptr.String("__Uri__"),
+					},
+				},
+				Transformations: []types.Transformation{
+					{
+						TransformationFunction: &types.TransformationFunction{
+							TransformationLambdaConfiguration: &types.TransformationLambdaConfiguration{
+								LambdaArn: ptr.String("__LambdaArn__"),
+							},
+						},
+						StepToApply: types.StepType("POST_CHUNKING"),
+					},
+					{
+						TransformationFunction: &types.TransformationFunction{
+							TransformationLambdaConfiguration: &types.TransformationLambdaConfiguration{
+								LambdaArn: ptr.String("__LambdaArn__"),
+							},
+						},
+						StepToApply: types.StepType("POST_CHUNKING"),
+					},
+				},
+			},
+			ParsingConfiguration: &types.ParsingConfiguration{
+				ParsingStrategy: types.ParsingStrategy("BEDROCK_FOUNDATION_MODEL"),
+				BedrockFoundationModelConfiguration: &types.BedrockFoundationModelConfiguration{
+					ModelArn: ptr.String("__ModelArn__"),
+					ParsingPrompt: &types.ParsingPrompt{
+						ParsingPromptText: ptr.String("__ParsingPromptText__"),
+					},
+					ParsingModality: types.ParsingModality("MULTIMODAL"),
+				},
+				BedrockDataAutomationConfiguration: &types.BedrockDataAutomationConfiguration{
+					ParsingModality: types.ParsingModality("MULTIMODAL"),
+				},
+			},
+			ContextEnrichmentConfiguration: &types.ContextEnrichmentConfiguration{
+				Type: types.ContextEnrichmentType("BEDROCK_FOUNDATION_MODEL"),
+				BedrockFoundationModelConfiguration: &types.BedrockFoundationModelContextEnrichmentConfiguration{
+					EnrichmentStrategyConfiguration: &types.EnrichmentStrategyConfiguration{
+						Method: types.EnrichmentStrategyMethod("CHUNK_ENTITY_EXTRACTION"),
+					},
+					ModelArn: ptr.String("__ModelArn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5106,7 +6867,105 @@ func TestCheckResponseSnapshot_UpdateFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFlow(context.Background(), &UpdateFlowInput{})
+	got, err := svc.UpdateFlow(context.Background(), &UpdateFlowInput{
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		ExecutionRoleArn:         ptr.String("__ExecutionRoleArn__"),
+		CustomerEncryptionKeyArn: ptr.String("__CustomerEncryptionKeyArn__"),
+		Definition: &types.FlowDefinition{
+			Nodes: []types.FlowNode{
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.FlowNodeType("Input"),
+					Configuration: &types.FlowNodeConfigurationMemberInput{
+						Value: types.InputFlowNodeConfiguration{},
+					},
+					Inputs: []types.FlowNodeInput{
+						{
+							Name:       ptr.String("__Name__"),
+							Type:       types.FlowNodeIODataType("String"),
+							Expression: ptr.String("__Expression__"),
+							Category:   types.FlowNodeInputCategory("LoopCondition"),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Type:       types.FlowNodeIODataType("String"),
+							Expression: ptr.String("__Expression__"),
+							Category:   types.FlowNodeInputCategory("LoopCondition"),
+						},
+					},
+					Outputs: []types.FlowNodeOutput{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.FlowNodeIODataType("String"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.FlowNodeIODataType("String"),
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.FlowNodeType("Input"),
+					Configuration: &types.FlowNodeConfigurationMemberInput{
+						Value: types.InputFlowNodeConfiguration{},
+					},
+					Inputs: []types.FlowNodeInput{
+						{
+							Name:       ptr.String("__Name__"),
+							Type:       types.FlowNodeIODataType("String"),
+							Expression: ptr.String("__Expression__"),
+							Category:   types.FlowNodeInputCategory("LoopCondition"),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Type:       types.FlowNodeIODataType("String"),
+							Expression: ptr.String("__Expression__"),
+							Category:   types.FlowNodeInputCategory("LoopCondition"),
+						},
+					},
+					Outputs: []types.FlowNodeOutput{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.FlowNodeIODataType("String"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.FlowNodeIODataType("String"),
+						},
+					},
+				},
+			},
+			Connections: []types.FlowConnection{
+				{
+					Type:   types.FlowConnectionType("Data"),
+					Name:   ptr.String("__Name__"),
+					Source: ptr.String("__Source__"),
+					Target: ptr.String("__Target__"),
+					Configuration: &types.FlowConnectionConfigurationMemberData{
+						Value: types.FlowDataConnectionConfiguration{
+							SourceOutput: ptr.String("__SourceOutput__"),
+							TargetInput:  ptr.String("__TargetInput__"),
+						},
+					},
+				},
+				{
+					Type:   types.FlowConnectionType("Data"),
+					Name:   ptr.String("__Name__"),
+					Source: ptr.String("__Source__"),
+					Target: ptr.String("__Target__"),
+					Configuration: &types.FlowConnectionConfigurationMemberData{
+						Value: types.FlowDataConnectionConfiguration{
+							SourceOutput: ptr.String("__SourceOutput__"),
+							TargetInput:  ptr.String("__TargetInput__"),
+						},
+					},
+				},
+			},
+		},
+		FlowIdentifier: ptr.String("__FlowIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5145,7 +7004,24 @@ func TestCheckResponseSnapshot_UpdateFlowAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFlowAlias(context.Background(), &UpdateFlowAliasInput{})
+	got, err := svc.UpdateFlowAlias(context.Background(), &UpdateFlowAliasInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RoutingConfiguration: []types.FlowAliasRoutingConfigurationListItem{
+			{
+				FlowVersion: ptr.String("__FlowVersion__"),
+			},
+			{
+				FlowVersion: ptr.String("__FlowVersion__"),
+			},
+		},
+		ConcurrencyConfiguration: &types.FlowAliasConcurrencyConfiguration{
+			Type:           types.ConcurrencyType("Automatic"),
+			MaxConcurrency: ptr.Int32(1),
+		},
+		FlowIdentifier:  ptr.String("__FlowIdentifier__"),
+		AliasIdentifier: ptr.String("__AliasIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5451,7 +7327,284 @@ func TestCheckResponseSnapshot_UpdateKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKnowledgeBase(context.Background(), &UpdateKnowledgeBaseInput{})
+	got, err := svc.UpdateKnowledgeBase(context.Background(), &UpdateKnowledgeBaseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		KnowledgeBaseConfiguration: &types.KnowledgeBaseConfiguration{
+			Type: types.KnowledgeBaseType("VECTOR"),
+			VectorKnowledgeBaseConfiguration: &types.VectorKnowledgeBaseConfiguration{
+				EmbeddingModelArn: ptr.String("__EmbeddingModelArn__"),
+				EmbeddingModelConfiguration: &types.EmbeddingModelConfiguration{
+					BedrockEmbeddingModelConfiguration: &types.BedrockEmbeddingModelConfiguration{
+						Dimensions:        ptr.Int32(1),
+						EmbeddingDataType: types.EmbeddingDataType("FLOAT32"),
+						Audio: []types.AudioConfiguration{
+							{
+								SegmentationConfiguration: &types.AudioSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+							{
+								SegmentationConfiguration: &types.AudioSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+						},
+						Video: []types.VideoConfiguration{
+							{
+								SegmentationConfiguration: &types.VideoSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+							{
+								SegmentationConfiguration: &types.VideoSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+						},
+					},
+				},
+				SupplementalDataStorageConfiguration: &types.SupplementalDataStorageConfiguration{
+					StorageLocations: []types.SupplementalDataStorageLocation{
+						{
+							Type: types.SupplementalDataStorageLocationType("S3"),
+							S3Location: &types.S3Location{
+								Uri: ptr.String("__Uri__"),
+							},
+						},
+						{
+							Type: types.SupplementalDataStorageLocationType("S3"),
+							S3Location: &types.S3Location{
+								Uri: ptr.String("__Uri__"),
+							},
+						},
+					},
+				},
+			},
+			ManagedKnowledgeBaseConfiguration: &types.ManagedKnowledgeBaseConfiguration{
+				EmbeddingModelType: types.EmbeddingModelType("CUSTOM"),
+				EmbeddingModelArn:  ptr.String("__EmbeddingModelArn__"),
+				EmbeddingModelConfiguration: &types.EmbeddingModelConfiguration{
+					BedrockEmbeddingModelConfiguration: &types.BedrockEmbeddingModelConfiguration{
+						Dimensions:        ptr.Int32(1),
+						EmbeddingDataType: types.EmbeddingDataType("FLOAT32"),
+						Audio: []types.AudioConfiguration{
+							{
+								SegmentationConfiguration: &types.AudioSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+							{
+								SegmentationConfiguration: &types.AudioSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+						},
+						Video: []types.VideoConfiguration{
+							{
+								SegmentationConfiguration: &types.VideoSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+							{
+								SegmentationConfiguration: &types.VideoSegmentationConfiguration{
+									FixedLengthDuration: ptr.Int32(1),
+								},
+							},
+						},
+					},
+				},
+				ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+			},
+			KendraKnowledgeBaseConfiguration: &types.KendraKnowledgeBaseConfiguration{
+				KendraIndexArn: ptr.String("__KendraIndexArn__"),
+			},
+			SqlKnowledgeBaseConfiguration: &types.SqlKnowledgeBaseConfiguration{
+				Type: types.QueryEngineType("REDSHIFT"),
+				RedshiftConfiguration: &types.RedshiftConfiguration{
+					StorageConfigurations: []types.RedshiftQueryEngineStorageConfiguration{
+						{
+							Type: types.RedshiftQueryEngineStorageType("REDSHIFT"),
+							AwsDataCatalogConfiguration: &types.RedshiftQueryEngineAwsDataCatalogStorageConfiguration{
+								TableNames: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							RedshiftConfiguration: &types.RedshiftQueryEngineRedshiftStorageConfiguration{
+								DatabaseName: ptr.String("__DatabaseName__"),
+							},
+						},
+						{
+							Type: types.RedshiftQueryEngineStorageType("REDSHIFT"),
+							AwsDataCatalogConfiguration: &types.RedshiftQueryEngineAwsDataCatalogStorageConfiguration{
+								TableNames: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							RedshiftConfiguration: &types.RedshiftQueryEngineRedshiftStorageConfiguration{
+								DatabaseName: ptr.String("__DatabaseName__"),
+							},
+						},
+					},
+					QueryEngineConfiguration: &types.RedshiftQueryEngineConfiguration{
+						Type: types.RedshiftQueryEngineType("SERVERLESS"),
+						ServerlessConfiguration: &types.RedshiftServerlessConfiguration{
+							WorkgroupArn: ptr.String("__WorkgroupArn__"),
+							AuthConfiguration: &types.RedshiftServerlessAuthConfiguration{
+								Type:                      types.RedshiftServerlessAuthType("IAM"),
+								UsernamePasswordSecretArn: ptr.String("__UsernamePasswordSecretArn__"),
+							},
+						},
+						ProvisionedConfiguration: &types.RedshiftProvisionedConfiguration{
+							ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+							AuthConfiguration: &types.RedshiftProvisionedAuthConfiguration{
+								Type:                      types.RedshiftProvisionedAuthType("IAM"),
+								DatabaseUser:              ptr.String("__DatabaseUser__"),
+								UsernamePasswordSecretArn: ptr.String("__UsernamePasswordSecretArn__"),
+							},
+						},
+					},
+					QueryGenerationConfiguration: &types.QueryGenerationConfiguration{
+						ExecutionTimeoutSeconds: ptr.Int32(1),
+						GenerationContext: &types.QueryGenerationContext{
+							Tables: []types.QueryGenerationTable{
+								{
+									Name:        ptr.String("__Name__"),
+									Description: ptr.String("__Description__"),
+									Inclusion:   types.IncludeExclude("INCLUDE"),
+									Columns: []types.QueryGenerationColumn{
+										{
+											Name:        ptr.String("__Name__"),
+											Description: ptr.String("__Description__"),
+											Inclusion:   types.IncludeExclude("INCLUDE"),
+										},
+										{
+											Name:        ptr.String("__Name__"),
+											Description: ptr.String("__Description__"),
+											Inclusion:   types.IncludeExclude("INCLUDE"),
+										},
+									},
+								},
+								{
+									Name:        ptr.String("__Name__"),
+									Description: ptr.String("__Description__"),
+									Inclusion:   types.IncludeExclude("INCLUDE"),
+									Columns: []types.QueryGenerationColumn{
+										{
+											Name:        ptr.String("__Name__"),
+											Description: ptr.String("__Description__"),
+											Inclusion:   types.IncludeExclude("INCLUDE"),
+										},
+										{
+											Name:        ptr.String("__Name__"),
+											Description: ptr.String("__Description__"),
+											Inclusion:   types.IncludeExclude("INCLUDE"),
+										},
+									},
+								},
+							},
+							CuratedQueries: []types.CuratedQuery{
+								{
+									NaturalLanguage: ptr.String("__NaturalLanguage__"),
+									Sql:             ptr.String("__Sql__"),
+								},
+								{
+									NaturalLanguage: ptr.String("__NaturalLanguage__"),
+									Sql:             ptr.String("__Sql__"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		StorageConfiguration: &types.StorageConfiguration{
+			Type: types.KnowledgeBaseStorageType("OPENSEARCH_SERVERLESS"),
+			OpensearchServerlessConfiguration: &types.OpenSearchServerlessConfiguration{
+				CollectionArn:   ptr.String("__CollectionArn__"),
+				VectorIndexName: ptr.String("__VectorIndexName__"),
+				FieldMapping: &types.OpenSearchServerlessFieldMapping{
+					VectorField:   ptr.String("__VectorField__"),
+					TextField:     ptr.String("__TextField__"),
+					MetadataField: ptr.String("__MetadataField__"),
+				},
+			},
+			OpensearchManagedClusterConfiguration: &types.OpenSearchManagedClusterConfiguration{
+				DomainEndpoint:  ptr.String("__DomainEndpoint__"),
+				DomainArn:       ptr.String("__DomainArn__"),
+				VectorIndexName: ptr.String("__VectorIndexName__"),
+				FieldMapping: &types.OpenSearchManagedClusterFieldMapping{
+					VectorField:   ptr.String("__VectorField__"),
+					TextField:     ptr.String("__TextField__"),
+					MetadataField: ptr.String("__MetadataField__"),
+				},
+			},
+			PineconeConfiguration: &types.PineconeConfiguration{
+				ConnectionString:     ptr.String("__ConnectionString__"),
+				CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				Namespace:            ptr.String("__Namespace__"),
+				FieldMapping: &types.PineconeFieldMapping{
+					TextField:     ptr.String("__TextField__"),
+					MetadataField: ptr.String("__MetadataField__"),
+				},
+			},
+			RedisEnterpriseCloudConfiguration: &types.RedisEnterpriseCloudConfiguration{
+				Endpoint:             ptr.String("__Endpoint__"),
+				VectorIndexName:      ptr.String("__VectorIndexName__"),
+				CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				FieldMapping: &types.RedisEnterpriseCloudFieldMapping{
+					VectorField:   ptr.String("__VectorField__"),
+					TextField:     ptr.String("__TextField__"),
+					MetadataField: ptr.String("__MetadataField__"),
+				},
+			},
+			RdsConfiguration: &types.RdsConfiguration{
+				ResourceArn:          ptr.String("__ResourceArn__"),
+				CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				DatabaseName:         ptr.String("__DatabaseName__"),
+				TableName:            ptr.String("__TableName__"),
+				FieldMapping: &types.RdsFieldMapping{
+					PrimaryKeyField:     ptr.String("__PrimaryKeyField__"),
+					VectorField:         ptr.String("__VectorField__"),
+					TextField:           ptr.String("__TextField__"),
+					MetadataField:       ptr.String("__MetadataField__"),
+					CustomMetadataField: ptr.String("__CustomMetadataField__"),
+				},
+			},
+			MongoDbAtlasConfiguration: &types.MongoDbAtlasConfiguration{
+				Endpoint:             ptr.String("__Endpoint__"),
+				DatabaseName:         ptr.String("__DatabaseName__"),
+				CollectionName:       ptr.String("__CollectionName__"),
+				VectorIndexName:      ptr.String("__VectorIndexName__"),
+				CredentialsSecretArn: ptr.String("__CredentialsSecretArn__"),
+				FieldMapping: &types.MongoDbAtlasFieldMapping{
+					VectorField:   ptr.String("__VectorField__"),
+					TextField:     ptr.String("__TextField__"),
+					MetadataField: ptr.String("__MetadataField__"),
+				},
+				EndpointServiceName: ptr.String("__EndpointServiceName__"),
+				TextIndexName:       ptr.String("__TextIndexName__"),
+			},
+			NeptuneAnalyticsConfiguration: &types.NeptuneAnalyticsConfiguration{
+				GraphArn: ptr.String("__GraphArn__"),
+				FieldMapping: &types.NeptuneAnalyticsFieldMapping{
+					TextField:     ptr.String("__TextField__"),
+					MetadataField: ptr.String("__MetadataField__"),
+				},
+			},
+			S3VectorsConfiguration: &types.S3VectorsConfiguration{
+				VectorBucketArn: ptr.String("__VectorBucketArn__"),
+				IndexArn:        ptr.String("__IndexArn__"),
+				IndexName:       ptr.String("__IndexName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5508,7 +7661,7 @@ func TestCheckResponseSnapshot_UpdatePrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -5556,7 +7709,7 @@ func TestCheckResponseSnapshot_UpdatePrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -5578,7 +7731,111 @@ func TestCheckResponseSnapshot_UpdatePrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePrompt(context.Background(), &UpdatePromptInput{})
+	got, err := svc.UpdatePrompt(context.Background(), &UpdatePromptInput{
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		CustomerEncryptionKeyArn: ptr.String("__CustomerEncryptionKeyArn__"),
+		DefaultVariant:           ptr.String("__DefaultVariant__"),
+		Variants: []types.PromptVariant{
+			{
+				Name:         ptr.String("__Name__"),
+				TemplateType: types.PromptTemplateType("TEXT"),
+				TemplateConfiguration: &types.PromptTemplateConfigurationMemberText{
+					Value: types.TextPromptTemplateConfiguration{
+						Text: ptr.String("__Text__"),
+						CachePoint: &types.CachePointBlock{
+							Type: types.CachePointType("default"),
+						},
+						InputVariables: []types.PromptInputVariable{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+				},
+				ModelId: ptr.String("__ModelId__"),
+				InferenceConfiguration: &types.PromptInferenceConfigurationMemberText{
+					Value: types.PromptModelInferenceConfiguration{
+						Temperature: ptr.Float32(1.0),
+						TopP:        ptr.Float32(1.0),
+						MaxTokens:   ptr.Int32(1),
+						StopSequences: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Metadata: []types.PromptMetadataEntry{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
+				GenAiResource: &types.PromptGenAiResourceMemberAgent{
+					Value: types.PromptAgentResource{
+						AgentIdentifier: ptr.String("__AgentIdentifier__"),
+					},
+				},
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				TemplateType: types.PromptTemplateType("TEXT"),
+				TemplateConfiguration: &types.PromptTemplateConfigurationMemberText{
+					Value: types.TextPromptTemplateConfiguration{
+						Text: ptr.String("__Text__"),
+						CachePoint: &types.CachePointBlock{
+							Type: types.CachePointType("default"),
+						},
+						InputVariables: []types.PromptInputVariable{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+				},
+				ModelId: ptr.String("__ModelId__"),
+				InferenceConfiguration: &types.PromptInferenceConfigurationMemberText{
+					Value: types.PromptModelInferenceConfiguration{
+						Temperature: ptr.Float32(1.0),
+						TopP:        ptr.Float32(1.0),
+						MaxTokens:   ptr.Int32(1),
+						StopSequences: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Metadata: []types.PromptMetadataEntry{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
+				GenAiResource: &types.PromptGenAiResourceMemberAgent{
+					Value: types.PromptAgentResource{
+						AgentIdentifier: ptr.String("__AgentIdentifier__"),
+					},
+				},
+			},
+		},
+		PromptIdentifier: ptr.String("__PromptIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5620,7 +7877,100 @@ func TestCheckResponseSnapshot_ValidateFlowDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidateFlowDefinition(context.Background(), &ValidateFlowDefinitionInput{})
+	got, err := svc.ValidateFlowDefinition(context.Background(), &ValidateFlowDefinitionInput{
+		Definition: &types.FlowDefinition{
+			Nodes: []types.FlowNode{
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.FlowNodeType("Input"),
+					Configuration: &types.FlowNodeConfigurationMemberInput{
+						Value: types.InputFlowNodeConfiguration{},
+					},
+					Inputs: []types.FlowNodeInput{
+						{
+							Name:       ptr.String("__Name__"),
+							Type:       types.FlowNodeIODataType("String"),
+							Expression: ptr.String("__Expression__"),
+							Category:   types.FlowNodeInputCategory("LoopCondition"),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Type:       types.FlowNodeIODataType("String"),
+							Expression: ptr.String("__Expression__"),
+							Category:   types.FlowNodeInputCategory("LoopCondition"),
+						},
+					},
+					Outputs: []types.FlowNodeOutput{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.FlowNodeIODataType("String"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.FlowNodeIODataType("String"),
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.FlowNodeType("Input"),
+					Configuration: &types.FlowNodeConfigurationMemberInput{
+						Value: types.InputFlowNodeConfiguration{},
+					},
+					Inputs: []types.FlowNodeInput{
+						{
+							Name:       ptr.String("__Name__"),
+							Type:       types.FlowNodeIODataType("String"),
+							Expression: ptr.String("__Expression__"),
+							Category:   types.FlowNodeInputCategory("LoopCondition"),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Type:       types.FlowNodeIODataType("String"),
+							Expression: ptr.String("__Expression__"),
+							Category:   types.FlowNodeInputCategory("LoopCondition"),
+						},
+					},
+					Outputs: []types.FlowNodeOutput{
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.FlowNodeIODataType("String"),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Type: types.FlowNodeIODataType("String"),
+						},
+					},
+				},
+			},
+			Connections: []types.FlowConnection{
+				{
+					Type:   types.FlowConnectionType("Data"),
+					Name:   ptr.String("__Name__"),
+					Source: ptr.String("__Source__"),
+					Target: ptr.String("__Target__"),
+					Configuration: &types.FlowConnectionConfigurationMemberData{
+						Value: types.FlowDataConnectionConfiguration{
+							SourceOutput: ptr.String("__SourceOutput__"),
+							TargetInput:  ptr.String("__TargetInput__"),
+						},
+					},
+				},
+				{
+					Type:   types.FlowConnectionType("Data"),
+					Name:   ptr.String("__Name__"),
+					Source: ptr.String("__Source__"),
+					Target: ptr.String("__Target__"),
+					Configuration: &types.FlowConnectionConfigurationMemberData{
+						Value: types.FlowDataConnectionConfiguration{
+							SourceOutput: ptr.String("__SourceOutput__"),
+							TargetInput:  ptr.String("__TargetInput__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5641,7 +7991,17 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{})
+	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentVersion: ptr.String("__AgentVersion__"),
+		AgentDescriptor: &types.AgentDescriptor{
+			AliasArn: ptr.String("__AliasArn__"),
+		},
+		CollaboratorName:         ptr.String("__CollaboratorName__"),
+		CollaborationInstruction: ptr.String("__CollaborationInstruction__"),
+		RelayConversationHistory: types.RelayConversationHistory("TO_COLLABORATOR"),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5666,7 +8026,17 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{})
+	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentVersion: ptr.String("__AgentVersion__"),
+		AgentDescriptor: &types.AgentDescriptor{
+			AliasArn: ptr.String("__AliasArn__"),
+		},
+		CollaboratorName:         ptr.String("__CollaboratorName__"),
+		CollaborationInstruction: ptr.String("__CollaborationInstruction__"),
+		RelayConversationHistory: types.RelayConversationHistory("TO_COLLABORATOR"),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5691,7 +8061,17 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{})
+	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentVersion: ptr.String("__AgentVersion__"),
+		AgentDescriptor: &types.AgentDescriptor{
+			AliasArn: ptr.String("__AliasArn__"),
+		},
+		CollaboratorName:         ptr.String("__CollaboratorName__"),
+		CollaborationInstruction: ptr.String("__CollaborationInstruction__"),
+		RelayConversationHistory: types.RelayConversationHistory("TO_COLLABORATOR"),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5716,7 +8096,17 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{})
+	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentVersion: ptr.String("__AgentVersion__"),
+		AgentDescriptor: &types.AgentDescriptor{
+			AliasArn: ptr.String("__AliasArn__"),
+		},
+		CollaboratorName:         ptr.String("__CollaboratorName__"),
+		CollaborationInstruction: ptr.String("__CollaborationInstruction__"),
+		RelayConversationHistory: types.RelayConversationHistory("TO_COLLABORATOR"),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5741,7 +8131,17 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{})
+	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentVersion: ptr.String("__AgentVersion__"),
+		AgentDescriptor: &types.AgentDescriptor{
+			AliasArn: ptr.String("__AliasArn__"),
+		},
+		CollaboratorName:         ptr.String("__CollaboratorName__"),
+		CollaborationInstruction: ptr.String("__CollaborationInstruction__"),
+		RelayConversationHistory: types.RelayConversationHistory("TO_COLLABORATOR"),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5766,7 +8166,17 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{})
+	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentVersion: ptr.String("__AgentVersion__"),
+		AgentDescriptor: &types.AgentDescriptor{
+			AliasArn: ptr.String("__AliasArn__"),
+		},
+		CollaboratorName:         ptr.String("__CollaboratorName__"),
+		CollaborationInstruction: ptr.String("__CollaborationInstruction__"),
+		RelayConversationHistory: types.RelayConversationHistory("TO_COLLABORATOR"),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5801,7 +8211,17 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{})
+	_, opErr := svc.AssociateAgentCollaborator(context.Background(), &AssociateAgentCollaboratorInput{
+		AgentId:      ptr.String("__AgentId__"),
+		AgentVersion: ptr.String("__AgentVersion__"),
+		AgentDescriptor: &types.AgentDescriptor{
+			AliasArn: ptr.String("__AliasArn__"),
+		},
+		CollaboratorName:         ptr.String("__CollaboratorName__"),
+		CollaborationInstruction: ptr.String("__CollaborationInstruction__"),
+		RelayConversationHistory: types.RelayConversationHistory("TO_COLLABORATOR"),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

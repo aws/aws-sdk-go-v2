@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","authenticationStrategy":"SIMPLE","created":"2000-01-01T00:00:00Z","id":"__Id__","latestRevision":{"created":"2000-01-01T00:00:00Z","description":"__Description__","revision":1},"name":"__Name__"}

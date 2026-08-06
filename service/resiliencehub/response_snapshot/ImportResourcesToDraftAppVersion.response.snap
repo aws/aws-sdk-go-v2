@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appArn":"__AppArn__","appVersion":"__AppVersion__","eksSources":[{"eksClusterArn":"__EksClusterArn__","namespaces":["__Member__","__Member__"]},{"eksClusterArn":"__EksClusterArn__","namespaces":["__Member__","__Member__"]}],"sourceArns":["__Member__","__Member__"],"status":"Pending","terraformSources":[{"s3StateFileUrl":"__S3StateFileUrl__"},{"s3StateFileUrl":"__S3StateFileUrl__"}]}

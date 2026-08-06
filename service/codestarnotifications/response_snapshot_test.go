@@ -119,7 +119,30 @@ func TestCheckResponseSnapshot_CreateNotificationRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{})
+	got, err := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{
+		Name: ptr.String("__Name__"),
+		EventTypeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Resource: ptr.String("__Resource__"),
+		Targets: []types.Target{
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+		},
+		DetailType:         types.DetailType("BASIC"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Status: types.NotificationRuleStatus("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +163,9 @@ func TestCheckResponseSnapshot_DeleteNotificationRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNotificationRule(context.Background(), &DeleteNotificationRuleInput{})
+	got, err := svc.DeleteNotificationRule(context.Background(), &DeleteNotificationRuleInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +184,10 @@ func TestCheckResponseSnapshot_DeleteTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTarget(context.Background(), &DeleteTargetInput{})
+	got, err := svc.DeleteTarget(context.Background(), &DeleteTargetInput{
+		TargetAddress:       ptr.String("__TargetAddress__"),
+		ForceUnsubscribeAll: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -216,7 +244,9 @@ func TestCheckResponseSnapshot_DescribeNotificationRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeNotificationRule(context.Background(), &DescribeNotificationRuleInput{})
+	got, err := svc.DescribeNotificationRule(context.Background(), &DescribeNotificationRuleInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -251,7 +281,20 @@ func TestCheckResponseSnapshot_ListEventTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventTypes(context.Background(), &ListEventTypesInput{})
+	got, err := svc.ListEventTypes(context.Background(), &ListEventTypesInput{
+		Filters: []types.ListEventTypesFilter{
+			{
+				Name:  types.ListEventTypesFilterName("RESOURCE_TYPE"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.ListEventTypesFilterName("RESOURCE_TYPE"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -282,7 +325,20 @@ func TestCheckResponseSnapshot_ListNotificationRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotificationRules(context.Background(), &ListNotificationRulesInput{})
+	got, err := svc.ListNotificationRules(context.Background(), &ListNotificationRulesInput{
+		Filters: []types.ListNotificationRulesFilter{
+			{
+				Name:  types.ListNotificationRulesFilterName("EVENT_TYPE_ID"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.ListNotificationRulesFilterName("EVENT_TYPE_ID"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -305,7 +361,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -338,7 +396,20 @@ func TestCheckResponseSnapshot_ListTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTargets(context.Background(), &ListTargetsInput{})
+	got, err := svc.ListTargets(context.Background(), &ListTargetsInput{
+		Filters: []types.ListTargetsFilter{
+			{
+				Name:  types.ListTargetsFilterName("TARGET_TYPE"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.ListTargetsFilterName("TARGET_TYPE"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -359,7 +430,14 @@ func TestCheckResponseSnapshot_Subscribe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Subscribe(context.Background(), &SubscribeInput{})
+	got, err := svc.Subscribe(context.Background(), &SubscribeInput{
+		Arn: ptr.String("__Arn__"),
+		Target: &types.Target{
+			TargetType:    ptr.String("__TargetType__"),
+			TargetAddress: ptr.String("__TargetAddress__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -382,7 +460,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -403,7 +486,10 @@ func TestCheckResponseSnapshot_Unsubscribe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Unsubscribe(context.Background(), &UnsubscribeInput{})
+	got, err := svc.Unsubscribe(context.Background(), &UnsubscribeInput{
+		Arn:           ptr.String("__Arn__"),
+		TargetAddress: ptr.String("__TargetAddress__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -422,7 +508,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -441,7 +533,26 @@ func TestCheckResponseSnapshot_UpdateNotificationRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNotificationRule(context.Background(), &UpdateNotificationRuleInput{})
+	got, err := svc.UpdateNotificationRule(context.Background(), &UpdateNotificationRuleInput{
+		Arn:    ptr.String("__Arn__"),
+		Name:   ptr.String("__Name__"),
+		Status: types.NotificationRuleStatus("ENABLED"),
+		EventTypeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Targets: []types.Target{
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+		},
+		DetailType: types.DetailType("BASIC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +573,30 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{})
+	_, opErr := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{
+		Name: ptr.String("__Name__"),
+		EventTypeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Resource: ptr.String("__Resource__"),
+		Targets: []types.Target{
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+		},
+		DetailType:         types.DetailType("BASIC"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Status: types.NotificationRuleStatus("ENABLED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -487,7 +621,30 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{})
+	_, opErr := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{
+		Name: ptr.String("__Name__"),
+		EventTypeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Resource: ptr.String("__Resource__"),
+		Targets: []types.Target{
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+		},
+		DetailType:         types.DetailType("BASIC"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Status: types.NotificationRuleStatus("ENABLED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -512,7 +669,30 @@ func TestCheckResponseSnapshot_Error_ConfigurationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{})
+	_, opErr := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{
+		Name: ptr.String("__Name__"),
+		EventTypeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Resource: ptr.String("__Resource__"),
+		Targets: []types.Target{
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+		},
+		DetailType:         types.DetailType("BASIC"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Status: types.NotificationRuleStatus("ENABLED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -537,7 +717,20 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListEventTypes(context.Background(), &ListEventTypesInput{})
+	_, opErr := svc.ListEventTypes(context.Background(), &ListEventTypesInput{
+		Filters: []types.ListEventTypesFilter{
+			{
+				Name:  types.ListEventTypesFilterName("RESOURCE_TYPE"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.ListEventTypesFilterName("RESOURCE_TYPE"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -562,7 +755,30 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{})
+	_, opErr := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{
+		Name: ptr.String("__Name__"),
+		EventTypeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Resource: ptr.String("__Resource__"),
+		Targets: []types.Target{
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+		},
+		DetailType:         types.DetailType("BASIC"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Status: types.NotificationRuleStatus("ENABLED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -587,7 +803,30 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{})
+	_, opErr := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{
+		Name: ptr.String("__Name__"),
+		EventTypeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Resource: ptr.String("__Resource__"),
+		Targets: []types.Target{
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+		},
+		DetailType:         types.DetailType("BASIC"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Status: types.NotificationRuleStatus("ENABLED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -612,7 +851,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeNotificationRule(context.Background(), &DescribeNotificationRuleInput{})
+	_, opErr := svc.DescribeNotificationRule(context.Background(), &DescribeNotificationRuleInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -637,7 +878,30 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{})
+	_, opErr := svc.CreateNotificationRule(context.Background(), &CreateNotificationRuleInput{
+		Name: ptr.String("__Name__"),
+		EventTypeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Resource: ptr.String("__Resource__"),
+		Targets: []types.Target{
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+			{
+				TargetType:    ptr.String("__TargetType__"),
+				TargetAddress: ptr.String("__TargetAddress__"),
+			},
+		},
+		DetailType:         types.DetailType("BASIC"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Status: types.NotificationRuleStatus("ENABLED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

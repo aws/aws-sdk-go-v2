@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"BadRequestException","Details":{"InvalidParameters":{"key0":{"Problem":"Corrupted"}}},"Message":"__Message__","Reason":"InvalidParameters"}

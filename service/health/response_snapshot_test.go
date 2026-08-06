@@ -124,7 +124,11 @@ func TestCheckResponseSnapshot_DescribeAffectedAccountsForOrganization(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAffectedAccountsForOrganization(context.Background(), &DescribeAffectedAccountsForOrganizationInput{})
+	got, err := svc.DescribeAffectedAccountsForOrganization(context.Background(), &DescribeAffectedAccountsForOrganizationInput{
+		EventArn:   ptr.String("__EventArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -177,7 +181,47 @@ func TestCheckResponseSnapshot_DescribeAffectedEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAffectedEntities(context.Background(), &DescribeAffectedEntitiesInput{})
+	got, err := svc.DescribeAffectedEntities(context.Background(), &DescribeAffectedEntitiesInput{
+		Filter: &types.EntityFilter{
+			EventArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EntityArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EntityValues: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LastUpdatedTimes: []types.DateTimeRange{
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			Tags: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
+				},
+			},
+			StatusCodes: []types.EntityStatusCode{
+				types.EntityStatusCode("IMPAIRED"),
+				types.EntityStatusCode("IMPAIRED"),
+			},
+		},
+		Locale:     ptr.String("__Locale__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -244,7 +288,39 @@ func TestCheckResponseSnapshot_DescribeAffectedEntitiesForOrganization(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAffectedEntitiesForOrganization(context.Background(), &DescribeAffectedEntitiesForOrganizationInput{})
+	got, err := svc.DescribeAffectedEntitiesForOrganization(context.Background(), &DescribeAffectedEntitiesForOrganizationInput{
+		OrganizationEntityFilters: []types.EventAccountFilter{
+			{
+				EventArn:     ptr.String("__EventArn__"),
+				AwsAccountId: ptr.String("__AwsAccountId__"),
+			},
+			{
+				EventArn:     ptr.String("__EventArn__"),
+				AwsAccountId: ptr.String("__AwsAccountId__"),
+			},
+		},
+		Locale:     ptr.String("__Locale__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		OrganizationEntityAccountFilters: []types.EntityAccountFilter{
+			{
+				EventArn:     ptr.String("__EventArn__"),
+				AwsAccountId: ptr.String("__AwsAccountId__"),
+				StatusCodes: []types.EntityStatusCode{
+					types.EntityStatusCode("IMPAIRED"),
+					types.EntityStatusCode("IMPAIRED"),
+				},
+			},
+			{
+				EventArn:     ptr.String("__EventArn__"),
+				AwsAccountId: ptr.String("__AwsAccountId__"),
+				StatusCodes: []types.EntityStatusCode{
+					types.EntityStatusCode("IMPAIRED"),
+					types.EntityStatusCode("IMPAIRED"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -280,7 +356,12 @@ func TestCheckResponseSnapshot_DescribeEntityAggregates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEntityAggregates(context.Background(), &DescribeEntityAggregatesInput{})
+	got, err := svc.DescribeEntityAggregates(context.Background(), &DescribeEntityAggregatesInput{
+		EventArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -348,7 +429,16 @@ func TestCheckResponseSnapshot_DescribeEntityAggregatesForOrganization(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEntityAggregatesForOrganization(context.Background(), &DescribeEntityAggregatesForOrganizationInput{})
+	got, err := svc.DescribeEntityAggregatesForOrganization(context.Background(), &DescribeEntityAggregatesForOrganizationInput{
+		EventArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AwsAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -379,7 +469,95 @@ func TestCheckResponseSnapshot_DescribeEventAggregates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEventAggregates(context.Background(), &DescribeEventAggregatesInput{})
+	got, err := svc.DescribeEventAggregates(context.Background(), &DescribeEventAggregatesInput{
+		Filter: &types.EventFilter{
+			Actionabilities: []types.EventActionability{
+				types.EventActionability("ACTION_REQUIRED"),
+				types.EventActionability("ACTION_REQUIRED"),
+			},
+			EventArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EventTypeCodes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Services: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AvailabilityZones: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StartTimes: []types.DateTimeRange{
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EndTimes: []types.DateTimeRange{
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LastUpdatedTimes: []types.DateTimeRange{
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EntityArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EntityValues: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EventTypeCategories: []types.EventTypeCategory{
+				types.EventTypeCategory("issue"),
+				types.EventTypeCategory("issue"),
+			},
+			Tags: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
+				},
+			},
+			EventStatusCodes: []types.EventStatusCode{
+				types.EventStatusCode("open"),
+				types.EventStatusCode("open"),
+			},
+			Personas: []types.EventPersona{
+				types.EventPersona("OPERATIONS"),
+				types.EventPersona("OPERATIONS"),
+			},
+		},
+		AggregateField: types.EventAggregateField("eventTypeCategory"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,7 +643,13 @@ func TestCheckResponseSnapshot_DescribeEventDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEventDetails(context.Background(), &DescribeEventDetailsInput{})
+	got, err := svc.DescribeEventDetails(context.Background(), &DescribeEventDetailsInput{
+		EventArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Locale: ptr.String("__Locale__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -555,7 +739,19 @@ func TestCheckResponseSnapshot_DescribeEventDetailsForOrganization(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEventDetailsForOrganization(context.Background(), &DescribeEventDetailsForOrganizationInput{})
+	got, err := svc.DescribeEventDetailsForOrganization(context.Background(), &DescribeEventDetailsForOrganizationInput{
+		OrganizationEventDetailFilters: []types.EventAccountFilter{
+			{
+				EventArn:     ptr.String("__EventArn__"),
+				AwsAccountId: ptr.String("__AwsAccountId__"),
+			},
+			{
+				EventArn:     ptr.String("__EventArn__"),
+				AwsAccountId: ptr.String("__AwsAccountId__"),
+			},
+		},
+		Locale: ptr.String("__Locale__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -598,7 +794,33 @@ func TestCheckResponseSnapshot_DescribeEventTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEventTypes(context.Background(), &DescribeEventTypesInput{})
+	got, err := svc.DescribeEventTypes(context.Background(), &DescribeEventTypesInput{
+		Filter: &types.EventTypeFilter{
+			EventTypeCodes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Services: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EventTypeCategories: []types.EventTypeCategory{
+				types.EventTypeCategory("issue"),
+				types.EventTypeCategory("issue"),
+			},
+			Actionabilities: []types.EventTypeActionability{
+				types.EventTypeActionability("ACTION_REQUIRED"),
+				types.EventTypeActionability("ACTION_REQUIRED"),
+			},
+			Personas: []types.EventTypePersona{
+				types.EventTypePersona("OPERATIONS"),
+				types.EventTypePersona("OPERATIONS"),
+			},
+		},
+		Locale:     ptr.String("__Locale__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -657,7 +879,95 @@ func TestCheckResponseSnapshot_DescribeEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEvents(context.Background(), &DescribeEventsInput{})
+	got, err := svc.DescribeEvents(context.Background(), &DescribeEventsInput{
+		Filter: &types.EventFilter{
+			Actionabilities: []types.EventActionability{
+				types.EventActionability("ACTION_REQUIRED"),
+				types.EventActionability("ACTION_REQUIRED"),
+			},
+			EventArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EventTypeCodes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Services: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AvailabilityZones: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StartTimes: []types.DateTimeRange{
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EndTimes: []types.DateTimeRange{
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LastUpdatedTimes: []types.DateTimeRange{
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EntityArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EntityValues: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EventTypeCategories: []types.EventTypeCategory{
+				types.EventTypeCategory("issue"),
+				types.EventTypeCategory("issue"),
+			},
+			Tags: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
+				},
+			},
+			EventStatusCodes: []types.EventStatusCode{
+				types.EventStatusCode("open"),
+				types.EventStatusCode("open"),
+			},
+			Personas: []types.EventPersona{
+				types.EventPersona("OPERATIONS"),
+				types.EventPersona("OPERATIONS"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Locale:     ptr.String("__Locale__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -714,7 +1024,65 @@ func TestCheckResponseSnapshot_DescribeEventsForOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEventsForOrganization(context.Background(), &DescribeEventsForOrganizationInput{})
+	got, err := svc.DescribeEventsForOrganization(context.Background(), &DescribeEventsForOrganizationInput{
+		Filter: &types.OrganizationEventFilter{
+			Actionabilities: []types.EventActionability{
+				types.EventActionability("ACTION_REQUIRED"),
+				types.EventActionability("ACTION_REQUIRED"),
+			},
+			EventTypeCodes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AwsAccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Services: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StartTime: &types.DateTimeRange{
+				From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			EndTime: &types.DateTimeRange{
+				From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			LastUpdatedTime: &types.DateTimeRange{
+				From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			EntityArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EntityValues: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EventTypeCategories: []types.EventTypeCategory{
+				types.EventTypeCategory("issue"),
+				types.EventTypeCategory("issue"),
+			},
+			EventStatusCodes: []types.EventStatusCode{
+				types.EventStatusCode("open"),
+				types.EventStatusCode("open"),
+			},
+			Personas: []types.EventPersona{
+				types.EventPersona("OPERATIONS"),
+				types.EventPersona("OPERATIONS"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Locale:     ptr.String("__Locale__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -819,7 +1187,11 @@ func TestCheckResponseSnapshot_Error_InvalidPaginationToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAffectedAccountsForOrganization(context.Background(), &DescribeAffectedAccountsForOrganizationInput{})
+	_, opErr := svc.DescribeAffectedAccountsForOrganization(context.Background(), &DescribeAffectedAccountsForOrganizationInput{
+		EventArn:   ptr.String("__EventArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -844,7 +1216,47 @@ func TestCheckResponseSnapshot_Error_UnsupportedLocale(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAffectedEntities(context.Background(), &DescribeAffectedEntitiesInput{})
+	_, opErr := svc.DescribeAffectedEntities(context.Background(), &DescribeAffectedEntitiesInput{
+		Filter: &types.EntityFilter{
+			EventArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EntityArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EntityValues: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LastUpdatedTimes: []types.DateTimeRange{
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			Tags: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
+				},
+			},
+			StatusCodes: []types.EntityStatusCode{
+				types.EntityStatusCode("IMPAIRED"),
+				types.EntityStatusCode("IMPAIRED"),
+			},
+		},
+		Locale:     ptr.String("__Locale__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.DeleteCommentContent
+
+{"comment":{"authorArn":"__AuthorArn__","callerReactions":["__Member__","__Member__"],"clientRequestToken":"__ClientRequestToken__","commentId":"__CommentId__","content":"__Content__","creationDate":946684800,"deleted":true,"inReplyTo":"__InReplyTo__","lastModifiedDate":946684800,"reactionCounts":{"key0":1}}}

@@ -123,7 +123,13 @@ func TestCheckResponseSnapshot_ConfigureLogsForChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfigureLogsForChannel(context.Background(), &ConfigureLogsForChannelInput{})
+	got, err := svc.ConfigureLogsForChannel(context.Background(), &ConfigureLogsForChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		LogTypes: []types.LogType{
+			types.LogType("AS_RUN"),
+			types.LogType("AS_RUN"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -169,7 +175,34 @@ func TestCheckResponseSnapshot_ConfigureLogsForPlaybackConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfigureLogsForPlaybackConfiguration(context.Background(), &ConfigureLogsForPlaybackConfigurationInput{})
+	got, err := svc.ConfigureLogsForPlaybackConfiguration(context.Background(), &ConfigureLogsForPlaybackConfigurationInput{
+		PercentEnabled:            1,
+		PlaybackConfigurationName: ptr.String("__PlaybackConfigurationName__"),
+		EnabledLoggingStrategies: []types.LoggingStrategy{
+			types.LoggingStrategy("VENDED_LOGS"),
+			types.LoggingStrategy("VENDED_LOGS"),
+		},
+		AdsInteractionLog: &types.AdsInteractionLog{
+			PublishOptInEventTypes: []types.AdsInteractionPublishOptInEventType{
+				types.AdsInteractionPublishOptInEventType("RAW_ADS_RESPONSE"),
+				types.AdsInteractionPublishOptInEventType("RAW_ADS_RESPONSE"),
+			},
+			ExcludeEventTypes: []types.AdsInteractionExcludeEventType{
+				types.AdsInteractionExcludeEventType("AD_MARKER_FOUND"),
+				types.AdsInteractionExcludeEventType("AD_MARKER_FOUND"),
+			},
+		},
+		ManifestServiceInteractionLog: &types.ManifestServiceInteractionLog{
+			PublishOptInEventTypes: []types.ManifestServicePublishOptInEventType{
+				types.ManifestServicePublishOptInEventType("PRE_SESSION_INIT_HOOK_SUMMARY"),
+				types.ManifestServicePublishOptInEventType("PRE_SESSION_INIT_HOOK_SUMMARY"),
+			},
+			ExcludeEventTypes: []types.ManifestServiceExcludeEventType{
+				types.ManifestServiceExcludeEventType("GENERATED_MANIFEST"),
+				types.ManifestServiceExcludeEventType("GENERATED_MANIFEST"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +283,61 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		FillerSlate: &types.SlateSource{
+			SourceLocationName: ptr.String("__SourceLocationName__"),
+			VodSourceName:      ptr.String("__VodSourceName__"),
+		},
+		Outputs: []types.RequestOutputItem{
+			{
+				DashPlaylistSettings: &types.DashPlaylistSettings{
+					ManifestWindowSeconds:             ptr.Int32(1),
+					MinBufferTimeSeconds:              ptr.Int32(1),
+					MinUpdatePeriodSeconds:            ptr.Int32(1),
+					SuggestedPresentationDelaySeconds: ptr.Int32(1),
+				},
+				HlsPlaylistSettings: &types.HlsPlaylistSettings{
+					ManifestWindowSeconds: ptr.Int32(1),
+					AdMarkupType: []types.AdMarkupType{
+						types.AdMarkupType("DATERANGE"),
+						types.AdMarkupType("DATERANGE"),
+					},
+				},
+				ManifestName: ptr.String("__ManifestName__"),
+				SourceGroup:  ptr.String("__SourceGroup__"),
+			},
+			{
+				DashPlaylistSettings: &types.DashPlaylistSettings{
+					ManifestWindowSeconds:             ptr.Int32(1),
+					MinBufferTimeSeconds:              ptr.Int32(1),
+					MinUpdatePeriodSeconds:            ptr.Int32(1),
+					SuggestedPresentationDelaySeconds: ptr.Int32(1),
+				},
+				HlsPlaylistSettings: &types.HlsPlaylistSettings{
+					ManifestWindowSeconds: ptr.Int32(1),
+					AdMarkupType: []types.AdMarkupType{
+						types.AdMarkupType("DATERANGE"),
+						types.AdMarkupType("DATERANGE"),
+					},
+				},
+				ManifestName: ptr.String("__ManifestName__"),
+				SourceGroup:  ptr.String("__SourceGroup__"),
+			},
+		},
+		PlaybackMode: types.PlaybackMode("LOOP"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Tier: types.Tier("BASIC"),
+		TimeShiftConfiguration: &types.TimeShiftConfiguration{
+			MaxTimeDelaySeconds: ptr.Int32(1),
+		},
+		Audiences: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -290,7 +377,25 @@ func TestCheckResponseSnapshot_CreateLiveSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLiveSource(context.Background(), &CreateLiveSourceInput{})
+	got, err := svc.CreateLiveSource(context.Background(), &CreateLiveSourceInput{
+		HttpPackageConfigurations: []types.HttpPackageConfiguration{
+			{
+				Path:        ptr.String("__Path__"),
+				SourceGroup: ptr.String("__SourceGroup__"),
+				Type:        types.Type("DASH"),
+			},
+			{
+				Path:        ptr.String("__Path__"),
+				SourceGroup: ptr.String("__SourceGroup__"),
+				Type:        types.Type("DASH"),
+			},
+		},
+		LiveSourceName:     ptr.String("__LiveSourceName__"),
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -378,7 +483,75 @@ func TestCheckResponseSnapshot_CreatePrefetchSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePrefetchSchedule(context.Background(), &CreatePrefetchScheduleInput{})
+	got, err := svc.CreatePrefetchSchedule(context.Background(), &CreatePrefetchScheduleInput{
+		Consumption: &types.PrefetchConsumption{
+			AvailMatchingCriteria: []types.AvailMatchingCriteria{
+				{
+					DynamicVariable: ptr.String("__DynamicVariable__"),
+					Operator:        types.Operator("EQUALS"),
+				},
+				{
+					DynamicVariable: ptr.String("__DynamicVariable__"),
+					Operator:        types.Operator("EQUALS"),
+				},
+			},
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Name:                      ptr.String("__Name__"),
+		PlaybackConfigurationName: ptr.String("__PlaybackConfigurationName__"),
+		Retrieval: &types.PrefetchRetrieval{
+			DynamicVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			EndTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StartTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TrafficShapingType: types.TrafficShapingType("RETRIEVAL_WINDOW"),
+			TrafficShapingRetrievalWindow: &types.TrafficShapingRetrievalWindow{
+				RetrievalWindowDurationSeconds: ptr.Int32(1),
+			},
+			TrafficShapingTpsConfiguration: &types.TrafficShapingTpsConfiguration{
+				PeakTps:             ptr.Int32(1),
+				PeakConcurrentUsers: ptr.Int32(1),
+			},
+		},
+		RecurringPrefetchConfiguration: &types.RecurringPrefetchConfiguration{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RecurringConsumption: &types.RecurringConsumption{
+				RetrievedAdExpirationSeconds: ptr.Int32(1),
+				AvailMatchingCriteria: []types.AvailMatchingCriteria{
+					{
+						DynamicVariable: ptr.String("__DynamicVariable__"),
+						Operator:        types.Operator("EQUALS"),
+					},
+					{
+						DynamicVariable: ptr.String("__DynamicVariable__"),
+						Operator:        types.Operator("EQUALS"),
+					},
+				},
+			},
+			RecurringRetrieval: &types.RecurringRetrieval{
+				DynamicVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DelayAfterAvailEndSeconds: ptr.Int32(1),
+				TrafficShapingType:        types.TrafficShapingType("RETRIEVAL_WINDOW"),
+				TrafficShapingRetrievalWindow: &types.TrafficShapingRetrievalWindow{
+					RetrievalWindowDurationSeconds: ptr.Int32(1),
+				},
+				TrafficShapingTpsConfiguration: &types.TrafficShapingTpsConfiguration{
+					PeakTps:             ptr.Int32(1),
+					PeakConcurrentUsers: ptr.Int32(1),
+				},
+			},
+		},
+		ScheduleType: types.PrefetchScheduleType("SINGLE"),
+		StreamId:     ptr.String("__StreamId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -960,7 +1133,575 @@ func TestCheckResponseSnapshot_CreateProgram(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProgram(context.Background(), &CreateProgramInput{})
+	got, err := svc.CreateProgram(context.Background(), &CreateProgramInput{
+		AdBreaks: []types.AdBreak{
+			{
+				MessageType:  types.MessageType("SPLICE_INSERT"),
+				OffsetMillis: 1,
+				Slate: &types.SlateSource{
+					SourceLocationName: ptr.String("__SourceLocationName__"),
+					VodSourceName:      ptr.String("__VodSourceName__"),
+				},
+				SpliceInsertMessage: &types.SpliceInsertMessage{
+					AvailNum:        ptr.Int32(1),
+					AvailsExpected:  ptr.Int32(1),
+					SpliceEventId:   ptr.Int32(1),
+					UniqueProgramId: ptr.Int32(1),
+				},
+				TimeSignalMessage: &types.TimeSignalMessage{
+					SegmentationDescriptors: []types.SegmentationDescriptor{
+						{
+							SegmentationEventId:  ptr.Int32(1),
+							SegmentationUpidType: ptr.Int32(1),
+							SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+							SegmentationTypeId:   ptr.Int32(1),
+							SegmentNum:           ptr.Int32(1),
+							SegmentsExpected:     ptr.Int32(1),
+							SubSegmentNum:        ptr.Int32(1),
+							SubSegmentsExpected:  ptr.Int32(1),
+						},
+						{
+							SegmentationEventId:  ptr.Int32(1),
+							SegmentationUpidType: ptr.Int32(1),
+							SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+							SegmentationTypeId:   ptr.Int32(1),
+							SegmentNum:           ptr.Int32(1),
+							SegmentsExpected:     ptr.Int32(1),
+							SubSegmentNum:        ptr.Int32(1),
+							SubSegmentsExpected:  ptr.Int32(1),
+						},
+					},
+				},
+				AdBreakMetadata: []types.KeyValuePair{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				MessageType:  types.MessageType("SPLICE_INSERT"),
+				OffsetMillis: 1,
+				Slate: &types.SlateSource{
+					SourceLocationName: ptr.String("__SourceLocationName__"),
+					VodSourceName:      ptr.String("__VodSourceName__"),
+				},
+				SpliceInsertMessage: &types.SpliceInsertMessage{
+					AvailNum:        ptr.Int32(1),
+					AvailsExpected:  ptr.Int32(1),
+					SpliceEventId:   ptr.Int32(1),
+					UniqueProgramId: ptr.Int32(1),
+				},
+				TimeSignalMessage: &types.TimeSignalMessage{
+					SegmentationDescriptors: []types.SegmentationDescriptor{
+						{
+							SegmentationEventId:  ptr.Int32(1),
+							SegmentationUpidType: ptr.Int32(1),
+							SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+							SegmentationTypeId:   ptr.Int32(1),
+							SegmentNum:           ptr.Int32(1),
+							SegmentsExpected:     ptr.Int32(1),
+							SubSegmentNum:        ptr.Int32(1),
+							SubSegmentsExpected:  ptr.Int32(1),
+						},
+						{
+							SegmentationEventId:  ptr.Int32(1),
+							SegmentationUpidType: ptr.Int32(1),
+							SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+							SegmentationTypeId:   ptr.Int32(1),
+							SegmentNum:           ptr.Int32(1),
+							SegmentsExpected:     ptr.Int32(1),
+							SubSegmentNum:        ptr.Int32(1),
+							SubSegmentsExpected:  ptr.Int32(1),
+						},
+					},
+				},
+				AdBreakMetadata: []types.KeyValuePair{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ChannelName:    ptr.String("__ChannelName__"),
+		LiveSourceName: ptr.String("__LiveSourceName__"),
+		ProgramName:    ptr.String("__ProgramName__"),
+		ScheduleConfiguration: &types.ScheduleConfiguration{
+			Transition: &types.Transition{
+				DurationMillis:           ptr.Int64(1),
+				RelativePosition:         types.RelativePosition("BEFORE_PROGRAM"),
+				RelativeProgram:          ptr.String("__RelativeProgram__"),
+				ScheduledStartTimeMillis: ptr.Int64(1),
+				Type:                     ptr.String("__Type__"),
+			},
+			ClipRange: &types.ClipRange{
+				EndOffsetMillis:   ptr.Int64(1),
+				StartOffsetMillis: ptr.Int64(1),
+			},
+		},
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+		VodSourceName:      ptr.String("__VodSourceName__"),
+		AudienceMedia: []types.AudienceMedia{
+			{
+				Audience: ptr.String("__Audience__"),
+				AlternateMedia: []types.AlternateMedia{
+					{
+						SourceLocationName: ptr.String("__SourceLocationName__"),
+						LiveSourceName:     ptr.String("__LiveSourceName__"),
+						VodSourceName:      ptr.String("__VodSourceName__"),
+						ClipRange: &types.ClipRange{
+							EndOffsetMillis:   ptr.Int64(1),
+							StartOffsetMillis: ptr.Int64(1),
+						},
+						ScheduledStartTimeMillis: ptr.Int64(1),
+						AdBreaks: []types.AdBreak{
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						DurationMillis: ptr.Int64(1),
+					},
+					{
+						SourceLocationName: ptr.String("__SourceLocationName__"),
+						LiveSourceName:     ptr.String("__LiveSourceName__"),
+						VodSourceName:      ptr.String("__VodSourceName__"),
+						ClipRange: &types.ClipRange{
+							EndOffsetMillis:   ptr.Int64(1),
+							StartOffsetMillis: ptr.Int64(1),
+						},
+						ScheduledStartTimeMillis: ptr.Int64(1),
+						AdBreaks: []types.AdBreak{
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						DurationMillis: ptr.Int64(1),
+					},
+				},
+			},
+			{
+				Audience: ptr.String("__Audience__"),
+				AlternateMedia: []types.AlternateMedia{
+					{
+						SourceLocationName: ptr.String("__SourceLocationName__"),
+						LiveSourceName:     ptr.String("__LiveSourceName__"),
+						VodSourceName:      ptr.String("__VodSourceName__"),
+						ClipRange: &types.ClipRange{
+							EndOffsetMillis:   ptr.Int64(1),
+							StartOffsetMillis: ptr.Int64(1),
+						},
+						ScheduledStartTimeMillis: ptr.Int64(1),
+						AdBreaks: []types.AdBreak{
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						DurationMillis: ptr.Int64(1),
+					},
+					{
+						SourceLocationName: ptr.String("__SourceLocationName__"),
+						LiveSourceName:     ptr.String("__LiveSourceName__"),
+						VodSourceName:      ptr.String("__VodSourceName__"),
+						ClipRange: &types.ClipRange{
+							EndOffsetMillis:   ptr.Int64(1),
+							StartOffsetMillis: ptr.Int64(1),
+						},
+						ScheduledStartTimeMillis: ptr.Int64(1),
+						AdBreaks: []types.AdBreak{
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						DurationMillis: ptr.Int64(1),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1011,7 +1752,36 @@ func TestCheckResponseSnapshot_CreateSourceLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSourceLocation(context.Background(), &CreateSourceLocationInput{})
+	got, err := svc.CreateSourceLocation(context.Background(), &CreateSourceLocationInput{
+		AccessConfiguration: &types.AccessConfiguration{
+			AccessType: types.AccessType("S3_SIGV4"),
+			SecretsManagerAccessTokenConfiguration: &types.SecretsManagerAccessTokenConfiguration{
+				HeaderName:      ptr.String("__HeaderName__"),
+				SecretArn:       ptr.String("__SecretArn__"),
+				SecretStringKey: ptr.String("__SecretStringKey__"),
+			},
+		},
+		DefaultSegmentDeliveryConfiguration: &types.DefaultSegmentDeliveryConfiguration{
+			BaseUrl: ptr.String("__BaseUrl__"),
+		},
+		HttpConfiguration: &types.HttpConfiguration{
+			BaseUrl: ptr.String("__BaseUrl__"),
+		},
+		SegmentDeliveryConfigurations: []types.SegmentDeliveryConfiguration{
+			{
+				BaseUrl: ptr.String("__BaseUrl__"),
+				Name:    ptr.String("__Name__"),
+			},
+			{
+				BaseUrl: ptr.String("__BaseUrl__"),
+				Name:    ptr.String("__Name__"),
+			},
+		},
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1051,7 +1821,25 @@ func TestCheckResponseSnapshot_CreateVodSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVodSource(context.Background(), &CreateVodSourceInput{})
+	got, err := svc.CreateVodSource(context.Background(), &CreateVodSourceInput{
+		HttpPackageConfigurations: []types.HttpPackageConfiguration{
+			{
+				Path:        ptr.String("__Path__"),
+				SourceGroup: ptr.String("__SourceGroup__"),
+				Type:        types.Type("DASH"),
+			},
+			{
+				Path:        ptr.String("__Path__"),
+				SourceGroup: ptr.String("__SourceGroup__"),
+				Type:        types.Type("DASH"),
+			},
+		},
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		VodSourceName: ptr.String("__VodSourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1070,7 +1858,9 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{})
+	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1089,7 +1879,9 @@ func TestCheckResponseSnapshot_DeleteChannelPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannelPolicy(context.Background(), &DeleteChannelPolicyInput{})
+	got, err := svc.DeleteChannelPolicy(context.Background(), &DeleteChannelPolicyInput{
+		ChannelName: ptr.String("__ChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1108,7 +1900,9 @@ func TestCheckResponseSnapshot_DeleteFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{})
+	got, err := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{
+		FunctionId: ptr.String("__FunctionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1127,7 +1921,10 @@ func TestCheckResponseSnapshot_DeleteLiveSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLiveSource(context.Background(), &DeleteLiveSourceInput{})
+	got, err := svc.DeleteLiveSource(context.Background(), &DeleteLiveSourceInput{
+		LiveSourceName:     ptr.String("__LiveSourceName__"),
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1146,7 +1943,9 @@ func TestCheckResponseSnapshot_DeletePlaybackConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePlaybackConfiguration(context.Background(), &DeletePlaybackConfigurationInput{})
+	got, err := svc.DeletePlaybackConfiguration(context.Background(), &DeletePlaybackConfigurationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1165,7 +1964,10 @@ func TestCheckResponseSnapshot_DeletePrefetchSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePrefetchSchedule(context.Background(), &DeletePrefetchScheduleInput{})
+	got, err := svc.DeletePrefetchSchedule(context.Background(), &DeletePrefetchScheduleInput{
+		Name:                      ptr.String("__Name__"),
+		PlaybackConfigurationName: ptr.String("__PlaybackConfigurationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1184,7 +1986,10 @@ func TestCheckResponseSnapshot_DeleteProgram(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProgram(context.Background(), &DeleteProgramInput{})
+	got, err := svc.DeleteProgram(context.Background(), &DeleteProgramInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ProgramName: ptr.String("__ProgramName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1203,7 +2008,9 @@ func TestCheckResponseSnapshot_DeleteSourceLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSourceLocation(context.Background(), &DeleteSourceLocationInput{})
+	got, err := svc.DeleteSourceLocation(context.Background(), &DeleteSourceLocationInput{
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1222,7 +2029,10 @@ func TestCheckResponseSnapshot_DeleteVodSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVodSource(context.Background(), &DeleteVodSourceInput{})
+	got, err := svc.DeleteVodSource(context.Background(), &DeleteVodSourceInput{
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+		VodSourceName:      ptr.String("__VodSourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1309,7 +2119,9 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChannel(context.Background(), &DescribeChannelInput{})
+	got, err := svc.DescribeChannel(context.Background(), &DescribeChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1349,7 +2161,10 @@ func TestCheckResponseSnapshot_DescribeLiveSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLiveSource(context.Background(), &DescribeLiveSourceInput{})
+	got, err := svc.DescribeLiveSource(context.Background(), &DescribeLiveSourceInput{
+		LiveSourceName:     ptr.String("__LiveSourceName__"),
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1931,7 +2746,10 @@ func TestCheckResponseSnapshot_DescribeProgram(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProgram(context.Background(), &DescribeProgramInput{})
+	got, err := svc.DescribeProgram(context.Background(), &DescribeProgramInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ProgramName: ptr.String("__ProgramName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1982,7 +2800,9 @@ func TestCheckResponseSnapshot_DescribeSourceLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSourceLocation(context.Background(), &DescribeSourceLocationInput{})
+	got, err := svc.DescribeSourceLocation(context.Background(), &DescribeSourceLocationInput{
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2030,7 +2850,10 @@ func TestCheckResponseSnapshot_DescribeVodSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVodSource(context.Background(), &DescribeVodSourceInput{})
+	got, err := svc.DescribeVodSource(context.Background(), &DescribeVodSourceInput{
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+		VodSourceName:      ptr.String("__VodSourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2051,7 +2874,9 @@ func TestCheckResponseSnapshot_GetChannelPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannelPolicy(context.Background(), &GetChannelPolicyInput{})
+	got, err := svc.GetChannelPolicy(context.Background(), &GetChannelPolicyInput{
+		ChannelName: ptr.String("__ChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2132,7 +2957,13 @@ func TestCheckResponseSnapshot_GetChannelSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannelSchedule(context.Background(), &GetChannelScheduleInput{})
+	got, err := svc.GetChannelSchedule(context.Background(), &GetChannelScheduleInput{
+		ChannelName:     ptr.String("__ChannelName__"),
+		DurationMinutes: ptr.String("__DurationMinutes__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		Audience:        ptr.String("__Audience__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2217,7 +3048,9 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunction(context.Background(), &GetFunctionInput{})
+	got, err := svc.GetFunction(context.Background(), &GetFunctionInput{
+		FunctionId: ptr.String("__FunctionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2351,7 +3184,9 @@ func TestCheckResponseSnapshot_GetPlaybackConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPlaybackConfiguration(context.Background(), &GetPlaybackConfigurationInput{})
+	got, err := svc.GetPlaybackConfiguration(context.Background(), &GetPlaybackConfigurationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2439,7 +3274,10 @@ func TestCheckResponseSnapshot_GetPrefetchSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPrefetchSchedule(context.Background(), &GetPrefetchScheduleInput{})
+	got, err := svc.GetPrefetchSchedule(context.Background(), &GetPrefetchScheduleInput{
+		Name:                      ptr.String("__Name__"),
+		PlaybackConfigurationName: ptr.String("__PlaybackConfigurationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2484,7 +3322,11 @@ func TestCheckResponseSnapshot_ListAlerts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAlerts(context.Background(), &ListAlertsInput{})
+	got, err := svc.ListAlerts(context.Background(), &ListAlertsInput{
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2639,7 +3481,10 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{})
+	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2796,7 +3641,10 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFunctions(context.Background(), &ListFunctionsInput{})
+	got, err := svc.ListFunctions(context.Background(), &ListFunctionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2863,7 +3711,11 @@ func TestCheckResponseSnapshot_ListLiveSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLiveSources(context.Background(), &ListLiveSourcesInput{})
+	got, err := svc.ListLiveSources(context.Background(), &ListLiveSourcesInput{
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3118,7 +3970,10 @@ func TestCheckResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlaybackConfigurations(context.Background(), &ListPlaybackConfigurationsInput{})
+	got, err := svc.ListPlaybackConfigurations(context.Background(), &ListPlaybackConfigurationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3281,7 +4136,13 @@ func TestCheckResponseSnapshot_ListPrefetchSchedules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPrefetchSchedules(context.Background(), &ListPrefetchSchedulesInput{})
+	got, err := svc.ListPrefetchSchedules(context.Background(), &ListPrefetchSchedulesInput{
+		MaxResults:                ptr.Int32(1),
+		NextToken:                 ptr.String("__NextToken__"),
+		PlaybackConfigurationName: ptr.String("__PlaybackConfigurationName__"),
+		ScheduleType:              types.ListPrefetchScheduleType("SINGLE"),
+		StreamId:                  ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3370,7 +4231,10 @@ func TestCheckResponseSnapshot_ListSourceLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSourceLocations(context.Background(), &ListSourceLocationsInput{})
+	got, err := svc.ListSourceLocations(context.Background(), &ListSourceLocationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3393,7 +4257,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3460,7 +4326,11 @@ func TestCheckResponseSnapshot_ListVodSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVodSources(context.Background(), &ListVodSourcesInput{})
+	got, err := svc.ListVodSources(context.Background(), &ListVodSourcesInput{
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3479,7 +4349,10 @@ func TestCheckResponseSnapshot_PutChannelPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutChannelPolicy(context.Background(), &PutChannelPolicyInput{})
+	got, err := svc.PutChannelPolicy(context.Background(), &PutChannelPolicyInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3564,7 +4437,72 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFunction(context.Background(), &PutFunctionInput{})
+	got, err := svc.PutFunction(context.Background(), &PutFunctionInput{
+		FunctionId:   ptr.String("__FunctionId__"),
+		FunctionType: types.FunctionType("HTTP_REQUEST"),
+		Description:  ptr.String("__Description__"),
+		HttpRequestConfiguration: &types.HttpRequestConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			MethodType:                 types.MethodType("GET"),
+			RequestTimeoutMilliseconds: ptr.Int32(1),
+			Url:                        ptr.String("__Url__"),
+			Body:                       ptr.String("__Body__"),
+			Headers: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		CustomOutputConfiguration: &types.CustomOutputConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		ConcurrentExecutorConfiguration: &types.ConcurrentExecutorConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			FunctionList: []types.FunctionRef{
+				{
+					RunCondition: ptr.String("__RunCondition__"),
+					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
+				},
+				{
+					RunCondition: ptr.String("__RunCondition__"),
+					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
+				},
+			},
+			TimeoutMilliseconds: ptr.Int32(1),
+			MaxConcurrency:      ptr.Int32(1),
+		},
+		SequentialExecutorConfiguration: &types.SequentialExecutorConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			FunctionList: []types.FunctionRef{
+				{
+					RunCondition: ptr.String("__RunCondition__"),
+					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
+				},
+				{
+					RunCondition: ptr.String("__RunCondition__"),
+					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
+				},
+			},
+			TimeoutMilliseconds: ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3698,7 +4636,84 @@ func TestCheckResponseSnapshot_PutPlaybackConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPlaybackConfiguration(context.Background(), &PutPlaybackConfigurationInput{})
+	got, err := svc.PutPlaybackConfiguration(context.Background(), &PutPlaybackConfigurationInput{
+		AdDecisionServerUrl: ptr.String("__AdDecisionServerUrl__"),
+		AvailSuppression: &types.AvailSuppression{
+			Mode:       types.Mode("OFF"),
+			Value:      ptr.String("__Value__"),
+			FillPolicy: types.FillPolicy("FULL_AVAIL_ONLY"),
+		},
+		Bumper: &types.Bumper{
+			EndUrl:   ptr.String("__EndUrl__"),
+			StartUrl: ptr.String("__StartUrl__"),
+		},
+		CdnConfiguration: &types.CdnConfiguration{
+			AdSegmentUrlPrefix:      ptr.String("__AdSegmentUrlPrefix__"),
+			ContentSegmentUrlPrefix: ptr.String("__ContentSegmentUrlPrefix__"),
+		},
+		ConfigurationAliases: map[string]map[string]string{
+			"key0": {
+				"key0": "__Value__",
+			},
+		},
+		DashConfiguration: &types.DashConfigurationForPut{
+			MpdLocation:        ptr.String("__MpdLocation__"),
+			OriginManifestType: types.OriginManifestType("SINGLE_PERIOD"),
+		},
+		InsertionMode: types.InsertionMode("STITCHED_ONLY"),
+		LivePreRollConfiguration: &types.LivePreRollConfiguration{
+			AdDecisionServerUrl: ptr.String("__AdDecisionServerUrl__"),
+			MaxDurationSeconds:  ptr.Int32(1),
+			AdDecisionServerConfiguration: &types.PreRollAdDecisionServerConfiguration{
+				VastResponse: &types.PreRollVastResponse{
+					AdSequencingMode: types.PreRollAdSequencingMode("FOLLOW_AD_SEQUENCE"),
+				},
+			},
+		},
+		ManifestProcessingRules: &types.ManifestProcessingRules{
+			AdMarkerPassthrough: &types.AdMarkerPassthrough{
+				Enabled: true,
+			},
+		},
+		Name:                            ptr.String("__Name__"),
+		PersonalizationThresholdSeconds: ptr.Int32(1),
+		SlateAdUrl:                      ptr.String("__SlateAdUrl__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TranscodeProfileName:  ptr.String("__TranscodeProfileName__"),
+		VideoContentSourceUrl: ptr.String("__VideoContentSourceUrl__"),
+		AdConditioningConfiguration: &types.AdConditioningConfiguration{
+			StreamingMediaFileConditioning: types.StreamingMediaFileConditioning("TRANSCODE"),
+		},
+		AdDecisionServerConfiguration: &types.AdDecisionServerConfiguration{
+			HttpRequest: &types.HttpRequest{
+				Method: types.Method("GET"),
+				Body:   ptr.String("__Body__"),
+				Headers: map[string]string{
+					"key0": "__Value__",
+				},
+				CompressRequest: types.CompressionMethod("NONE"),
+			},
+			VastResponse: &types.VastResponse{
+				AdSequencingMode: types.AdSequencingMode("FOLLOW_AD_SEQUENCE"),
+			},
+		},
+		FunctionMapping: map[string]string{
+			"key0": "__Value__",
+		},
+		AdsPersonalizationTimeouts: &types.AdsPersonalizationTimeouts{
+			AdsRequestTimeoutMilliseconds:                     ptr.Int32(1),
+			LiveMaximumAdsPersonalizationTimeMilliseconds:     ptr.Int32(1),
+			VodMaximumAdsPersonalizationTimeMilliseconds:      ptr.Int32(1),
+			PrefetchAdsRequestTimeoutMilliseconds:             ptr.Int32(1),
+			PrefetchMaximumAdsPersonalizationTimeMilliseconds: ptr.Int32(1),
+		},
+		AdsPersonalizationConcurrency: &types.AdsPersonalizationConcurrency{
+			MaxConcurrentAdsRequests:     ptr.Int32(1),
+			EnableVodVastParallelization: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3717,7 +4732,9 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartChannel(context.Background(), &StartChannelInput{})
+	got, err := svc.StartChannel(context.Background(), &StartChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3736,7 +4753,9 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopChannel(context.Background(), &StopChannelInput{})
+	got, err := svc.StopChannel(context.Background(), &StopChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3755,7 +4774,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3774,7 +4798,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3855,7 +4885,56 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{})
+	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		FillerSlate: &types.SlateSource{
+			SourceLocationName: ptr.String("__SourceLocationName__"),
+			VodSourceName:      ptr.String("__VodSourceName__"),
+		},
+		Outputs: []types.RequestOutputItem{
+			{
+				DashPlaylistSettings: &types.DashPlaylistSettings{
+					ManifestWindowSeconds:             ptr.Int32(1),
+					MinBufferTimeSeconds:              ptr.Int32(1),
+					MinUpdatePeriodSeconds:            ptr.Int32(1),
+					SuggestedPresentationDelaySeconds: ptr.Int32(1),
+				},
+				HlsPlaylistSettings: &types.HlsPlaylistSettings{
+					ManifestWindowSeconds: ptr.Int32(1),
+					AdMarkupType: []types.AdMarkupType{
+						types.AdMarkupType("DATERANGE"),
+						types.AdMarkupType("DATERANGE"),
+					},
+				},
+				ManifestName: ptr.String("__ManifestName__"),
+				SourceGroup:  ptr.String("__SourceGroup__"),
+			},
+			{
+				DashPlaylistSettings: &types.DashPlaylistSettings{
+					ManifestWindowSeconds:             ptr.Int32(1),
+					MinBufferTimeSeconds:              ptr.Int32(1),
+					MinUpdatePeriodSeconds:            ptr.Int32(1),
+					SuggestedPresentationDelaySeconds: ptr.Int32(1),
+				},
+				HlsPlaylistSettings: &types.HlsPlaylistSettings{
+					ManifestWindowSeconds: ptr.Int32(1),
+					AdMarkupType: []types.AdMarkupType{
+						types.AdMarkupType("DATERANGE"),
+						types.AdMarkupType("DATERANGE"),
+					},
+				},
+				ManifestName: ptr.String("__ManifestName__"),
+				SourceGroup:  ptr.String("__SourceGroup__"),
+			},
+		},
+		TimeShiftConfiguration: &types.TimeShiftConfiguration{
+			MaxTimeDelaySeconds: ptr.Int32(1),
+		},
+		Audiences: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3895,7 +4974,22 @@ func TestCheckResponseSnapshot_UpdateLiveSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLiveSource(context.Background(), &UpdateLiveSourceInput{})
+	got, err := svc.UpdateLiveSource(context.Background(), &UpdateLiveSourceInput{
+		HttpPackageConfigurations: []types.HttpPackageConfiguration{
+			{
+				Path:        ptr.String("__Path__"),
+				SourceGroup: ptr.String("__SourceGroup__"),
+				Type:        types.Type("DASH"),
+			},
+			{
+				Path:        ptr.String("__Path__"),
+				SourceGroup: ptr.String("__SourceGroup__"),
+				Type:        types.Type("DASH"),
+			},
+		},
+		LiveSourceName:     ptr.String("__LiveSourceName__"),
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4477,7 +5571,566 @@ func TestCheckResponseSnapshot_UpdateProgram(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProgram(context.Background(), &UpdateProgramInput{})
+	got, err := svc.UpdateProgram(context.Background(), &UpdateProgramInput{
+		AdBreaks: []types.AdBreak{
+			{
+				MessageType:  types.MessageType("SPLICE_INSERT"),
+				OffsetMillis: 1,
+				Slate: &types.SlateSource{
+					SourceLocationName: ptr.String("__SourceLocationName__"),
+					VodSourceName:      ptr.String("__VodSourceName__"),
+				},
+				SpliceInsertMessage: &types.SpliceInsertMessage{
+					AvailNum:        ptr.Int32(1),
+					AvailsExpected:  ptr.Int32(1),
+					SpliceEventId:   ptr.Int32(1),
+					UniqueProgramId: ptr.Int32(1),
+				},
+				TimeSignalMessage: &types.TimeSignalMessage{
+					SegmentationDescriptors: []types.SegmentationDescriptor{
+						{
+							SegmentationEventId:  ptr.Int32(1),
+							SegmentationUpidType: ptr.Int32(1),
+							SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+							SegmentationTypeId:   ptr.Int32(1),
+							SegmentNum:           ptr.Int32(1),
+							SegmentsExpected:     ptr.Int32(1),
+							SubSegmentNum:        ptr.Int32(1),
+							SubSegmentsExpected:  ptr.Int32(1),
+						},
+						{
+							SegmentationEventId:  ptr.Int32(1),
+							SegmentationUpidType: ptr.Int32(1),
+							SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+							SegmentationTypeId:   ptr.Int32(1),
+							SegmentNum:           ptr.Int32(1),
+							SegmentsExpected:     ptr.Int32(1),
+							SubSegmentNum:        ptr.Int32(1),
+							SubSegmentsExpected:  ptr.Int32(1),
+						},
+					},
+				},
+				AdBreakMetadata: []types.KeyValuePair{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				MessageType:  types.MessageType("SPLICE_INSERT"),
+				OffsetMillis: 1,
+				Slate: &types.SlateSource{
+					SourceLocationName: ptr.String("__SourceLocationName__"),
+					VodSourceName:      ptr.String("__VodSourceName__"),
+				},
+				SpliceInsertMessage: &types.SpliceInsertMessage{
+					AvailNum:        ptr.Int32(1),
+					AvailsExpected:  ptr.Int32(1),
+					SpliceEventId:   ptr.Int32(1),
+					UniqueProgramId: ptr.Int32(1),
+				},
+				TimeSignalMessage: &types.TimeSignalMessage{
+					SegmentationDescriptors: []types.SegmentationDescriptor{
+						{
+							SegmentationEventId:  ptr.Int32(1),
+							SegmentationUpidType: ptr.Int32(1),
+							SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+							SegmentationTypeId:   ptr.Int32(1),
+							SegmentNum:           ptr.Int32(1),
+							SegmentsExpected:     ptr.Int32(1),
+							SubSegmentNum:        ptr.Int32(1),
+							SubSegmentsExpected:  ptr.Int32(1),
+						},
+						{
+							SegmentationEventId:  ptr.Int32(1),
+							SegmentationUpidType: ptr.Int32(1),
+							SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+							SegmentationTypeId:   ptr.Int32(1),
+							SegmentNum:           ptr.Int32(1),
+							SegmentsExpected:     ptr.Int32(1),
+							SubSegmentNum:        ptr.Int32(1),
+							SubSegmentsExpected:  ptr.Int32(1),
+						},
+					},
+				},
+				AdBreakMetadata: []types.KeyValuePair{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ChannelName: ptr.String("__ChannelName__"),
+		ProgramName: ptr.String("__ProgramName__"),
+		ScheduleConfiguration: &types.UpdateProgramScheduleConfiguration{
+			Transition: &types.UpdateProgramTransition{
+				ScheduledStartTimeMillis: ptr.Int64(1),
+				DurationMillis:           ptr.Int64(1),
+			},
+			ClipRange: &types.ClipRange{
+				EndOffsetMillis:   ptr.Int64(1),
+				StartOffsetMillis: ptr.Int64(1),
+			},
+		},
+		AudienceMedia: []types.AudienceMedia{
+			{
+				Audience: ptr.String("__Audience__"),
+				AlternateMedia: []types.AlternateMedia{
+					{
+						SourceLocationName: ptr.String("__SourceLocationName__"),
+						LiveSourceName:     ptr.String("__LiveSourceName__"),
+						VodSourceName:      ptr.String("__VodSourceName__"),
+						ClipRange: &types.ClipRange{
+							EndOffsetMillis:   ptr.Int64(1),
+							StartOffsetMillis: ptr.Int64(1),
+						},
+						ScheduledStartTimeMillis: ptr.Int64(1),
+						AdBreaks: []types.AdBreak{
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						DurationMillis: ptr.Int64(1),
+					},
+					{
+						SourceLocationName: ptr.String("__SourceLocationName__"),
+						LiveSourceName:     ptr.String("__LiveSourceName__"),
+						VodSourceName:      ptr.String("__VodSourceName__"),
+						ClipRange: &types.ClipRange{
+							EndOffsetMillis:   ptr.Int64(1),
+							StartOffsetMillis: ptr.Int64(1),
+						},
+						ScheduledStartTimeMillis: ptr.Int64(1),
+						AdBreaks: []types.AdBreak{
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						DurationMillis: ptr.Int64(1),
+					},
+				},
+			},
+			{
+				Audience: ptr.String("__Audience__"),
+				AlternateMedia: []types.AlternateMedia{
+					{
+						SourceLocationName: ptr.String("__SourceLocationName__"),
+						LiveSourceName:     ptr.String("__LiveSourceName__"),
+						VodSourceName:      ptr.String("__VodSourceName__"),
+						ClipRange: &types.ClipRange{
+							EndOffsetMillis:   ptr.Int64(1),
+							StartOffsetMillis: ptr.Int64(1),
+						},
+						ScheduledStartTimeMillis: ptr.Int64(1),
+						AdBreaks: []types.AdBreak{
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						DurationMillis: ptr.Int64(1),
+					},
+					{
+						SourceLocationName: ptr.String("__SourceLocationName__"),
+						LiveSourceName:     ptr.String("__LiveSourceName__"),
+						VodSourceName:      ptr.String("__VodSourceName__"),
+						ClipRange: &types.ClipRange{
+							EndOffsetMillis:   ptr.Int64(1),
+							StartOffsetMillis: ptr.Int64(1),
+						},
+						ScheduledStartTimeMillis: ptr.Int64(1),
+						AdBreaks: []types.AdBreak{
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							{
+								MessageType:  types.MessageType("SPLICE_INSERT"),
+								OffsetMillis: 1,
+								Slate: &types.SlateSource{
+									SourceLocationName: ptr.String("__SourceLocationName__"),
+									VodSourceName:      ptr.String("__VodSourceName__"),
+								},
+								SpliceInsertMessage: &types.SpliceInsertMessage{
+									AvailNum:        ptr.Int32(1),
+									AvailsExpected:  ptr.Int32(1),
+									SpliceEventId:   ptr.Int32(1),
+									UniqueProgramId: ptr.Int32(1),
+								},
+								TimeSignalMessage: &types.TimeSignalMessage{
+									SegmentationDescriptors: []types.SegmentationDescriptor{
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+										{
+											SegmentationEventId:  ptr.Int32(1),
+											SegmentationUpidType: ptr.Int32(1),
+											SegmentationUpid:     ptr.String("__SegmentationUpid__"),
+											SegmentationTypeId:   ptr.Int32(1),
+											SegmentNum:           ptr.Int32(1),
+											SegmentsExpected:     ptr.Int32(1),
+											SubSegmentNum:        ptr.Int32(1),
+											SubSegmentsExpected:  ptr.Int32(1),
+										},
+									},
+								},
+								AdBreakMetadata: []types.KeyValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						DurationMillis: ptr.Int64(1),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4528,7 +6181,33 @@ func TestCheckResponseSnapshot_UpdateSourceLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSourceLocation(context.Background(), &UpdateSourceLocationInput{})
+	got, err := svc.UpdateSourceLocation(context.Background(), &UpdateSourceLocationInput{
+		AccessConfiguration: &types.AccessConfiguration{
+			AccessType: types.AccessType("S3_SIGV4"),
+			SecretsManagerAccessTokenConfiguration: &types.SecretsManagerAccessTokenConfiguration{
+				HeaderName:      ptr.String("__HeaderName__"),
+				SecretArn:       ptr.String("__SecretArn__"),
+				SecretStringKey: ptr.String("__SecretStringKey__"),
+			},
+		},
+		DefaultSegmentDeliveryConfiguration: &types.DefaultSegmentDeliveryConfiguration{
+			BaseUrl: ptr.String("__BaseUrl__"),
+		},
+		HttpConfiguration: &types.HttpConfiguration{
+			BaseUrl: ptr.String("__BaseUrl__"),
+		},
+		SegmentDeliveryConfigurations: []types.SegmentDeliveryConfiguration{
+			{
+				BaseUrl: ptr.String("__BaseUrl__"),
+				Name:    ptr.String("__Name__"),
+			},
+			{
+				BaseUrl: ptr.String("__BaseUrl__"),
+				Name:    ptr.String("__Name__"),
+			},
+		},
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4568,7 +6247,22 @@ func TestCheckResponseSnapshot_UpdateVodSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVodSource(context.Background(), &UpdateVodSourceInput{})
+	got, err := svc.UpdateVodSource(context.Background(), &UpdateVodSourceInput{
+		HttpPackageConfigurations: []types.HttpPackageConfiguration{
+			{
+				Path:        ptr.String("__Path__"),
+				SourceGroup: ptr.String("__SourceGroup__"),
+				Type:        types.Type("DASH"),
+			},
+			{
+				Path:        ptr.String("__Path__"),
+				SourceGroup: ptr.String("__SourceGroup__"),
+				Type:        types.Type("DASH"),
+			},
+		},
+		SourceLocationName: ptr.String("__SourceLocationName__"),
+		VodSourceName:      ptr.String("__VodSourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4589,7 +6283,9 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

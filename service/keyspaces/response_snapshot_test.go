@@ -119,7 +119,26 @@ func TestCheckResponseSnapshot_CreateKeyspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKeyspace(context.Background(), &CreateKeyspaceInput{})
+	got, err := svc.CreateKeyspace(context.Background(), &CreateKeyspaceInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ReplicationSpecification: &types.ReplicationSpecification{
+			ReplicationStrategy: types.Rs("SINGLE_REGION"),
+			RegionList: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +159,163 @@ func TestCheckResponseSnapshot_CreateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTable(context.Background(), &CreateTableInput{})
+	got, err := svc.CreateTable(context.Background(), &CreateTableInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		TableName:    ptr.String("__TableName__"),
+		SchemaDefinition: &types.SchemaDefinition{
+			AllColumns: []types.ColumnDefinition{
+				{
+					Name: ptr.String("__Name__"),
+					Type: ptr.String("__Type__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Type: ptr.String("__Type__"),
+				},
+			},
+			PartitionKeys: []types.PartitionKey{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			ClusteringKeys: []types.ClusteringKey{
+				{
+					Name:    ptr.String("__Name__"),
+					OrderBy: types.SortOrder("ASC"),
+				},
+				{
+					Name:    ptr.String("__Name__"),
+					OrderBy: types.SortOrder("ASC"),
+				},
+			},
+			StaticColumns: []types.StaticColumn{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		Comment: &types.Comment{
+			Message: ptr.String("__Message__"),
+		},
+		CapacitySpecification: &types.CapacitySpecification{
+			ThroughputMode:     types.ThroughputMode("PAY_PER_REQUEST"),
+			ReadCapacityUnits:  ptr.Int64(1),
+			WriteCapacityUnits: ptr.Int64(1),
+		},
+		EncryptionSpecification: &types.EncryptionSpecification{
+			Type:             types.EncryptionType("CUSTOMER_MANAGED_KMS_KEY"),
+			KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		},
+		PointInTimeRecovery: &types.PointInTimeRecovery{
+			Status: types.PointInTimeRecoveryStatus("ENABLED"),
+		},
+		Ttl: &types.TimeToLive{
+			Status: types.TimeToLiveStatus("ENABLED"),
+		},
+		DefaultTimeToLive: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientSideTimestamps: &types.ClientSideTimestamps{
+			Status: types.ClientSideTimestampsStatus("ENABLED"),
+		},
+		AutoScalingSpecification: &types.AutoScalingSpecification{
+			WriteCapacityAutoScaling: &types.AutoScalingSettings{
+				AutoScalingDisabled: true,
+				MinimumUnits:        ptr.Int64(1),
+				MaximumUnits:        ptr.Int64(1),
+				ScalingPolicy: &types.AutoScalingPolicy{
+					TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+						DisableScaleIn:   true,
+						ScaleInCooldown:  1,
+						ScaleOutCooldown: 1,
+						TargetValue:      1.0,
+					},
+				},
+			},
+			ReadCapacityAutoScaling: &types.AutoScalingSettings{
+				AutoScalingDisabled: true,
+				MinimumUnits:        ptr.Int64(1),
+				MaximumUnits:        ptr.Int64(1),
+				ScalingPolicy: &types.AutoScalingPolicy{
+					TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+						DisableScaleIn:   true,
+						ScaleInCooldown:  1,
+						ScaleOutCooldown: 1,
+						TargetValue:      1.0,
+					},
+				},
+			},
+		},
+		ReplicaSpecifications: []types.ReplicaSpecification{
+			{
+				Region:            ptr.String("__Region__"),
+				ReadCapacityUnits: ptr.Int64(1),
+				ReadCapacityAutoScaling: &types.AutoScalingSettings{
+					AutoScalingDisabled: true,
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					ScalingPolicy: &types.AutoScalingPolicy{
+						TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+							DisableScaleIn:   true,
+							ScaleInCooldown:  1,
+							ScaleOutCooldown: 1,
+							TargetValue:      1.0,
+						},
+					},
+				},
+			},
+			{
+				Region:            ptr.String("__Region__"),
+				ReadCapacityUnits: ptr.Int64(1),
+				ReadCapacityAutoScaling: &types.AutoScalingSettings{
+					AutoScalingDisabled: true,
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					ScalingPolicy: &types.AutoScalingPolicy{
+						TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+							DisableScaleIn:   true,
+							ScaleInCooldown:  1,
+							ScaleOutCooldown: 1,
+							TargetValue:      1.0,
+						},
+					},
+				},
+			},
+		},
+		CdcSpecification: &types.CdcSpecification{
+			Status:   types.CdcStatus("ENABLED"),
+			ViewType: types.ViewType("NEW_IMAGE"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			PropagateTags: types.CdcPropagateTags("TABLE"),
+		},
+		WarmThroughputSpecification: &types.WarmThroughputSpecification{
+			ReadUnitsPerSecond:  ptr.Int64(1),
+			WriteUnitsPerSecond: ptr.Int64(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +337,20 @@ func TestCheckResponseSnapshot_CreateType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateType(context.Background(), &CreateTypeInput{})
+	got, err := svc.CreateType(context.Background(), &CreateTypeInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		TypeName:     ptr.String("__TypeName__"),
+		FieldDefinitions: []types.FieldDefinition{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -181,7 +369,9 @@ func TestCheckResponseSnapshot_DeleteKeyspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKeyspace(context.Background(), &DeleteKeyspaceInput{})
+	got, err := svc.DeleteKeyspace(context.Background(), &DeleteKeyspaceInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -200,7 +390,10 @@ func TestCheckResponseSnapshot_DeleteTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTable(context.Background(), &DeleteTableInput{})
+	got, err := svc.DeleteTable(context.Background(), &DeleteTableInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		TableName:    ptr.String("__TableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +415,10 @@ func TestCheckResponseSnapshot_DeleteType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteType(context.Background(), &DeleteTypeInput{})
+	got, err := svc.DeleteType(context.Background(), &DeleteTypeInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		TypeName:     ptr.String("__TypeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -261,7 +457,9 @@ func TestCheckResponseSnapshot_GetKeyspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKeyspace(context.Background(), &GetKeyspaceInput{})
+	got, err := svc.GetKeyspace(context.Background(), &GetKeyspaceInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -390,7 +588,10 @@ func TestCheckResponseSnapshot_GetTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTable(context.Background(), &GetTableInput{})
+	got, err := svc.GetTable(context.Background(), &GetTableInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		TableName:    ptr.String("__TableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -505,7 +706,10 @@ func TestCheckResponseSnapshot_GetTableAutoScalingSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableAutoScalingSettings(context.Background(), &GetTableAutoScalingSettingsInput{})
+	got, err := svc.GetTableAutoScalingSettings(context.Background(), &GetTableAutoScalingSettingsInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		TableName:    ptr.String("__TableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -549,7 +753,10 @@ func TestCheckResponseSnapshot_GetType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetType(context.Background(), &GetTypeInput{})
+	got, err := svc.GetType(context.Background(), &GetTypeInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		TypeName:     ptr.String("__TypeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -590,7 +797,10 @@ func TestCheckResponseSnapshot_ListKeyspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKeyspaces(context.Background(), &ListKeyspacesInput{})
+	got, err := svc.ListKeyspaces(context.Background(), &ListKeyspacesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -623,7 +833,11 @@ func TestCheckResponseSnapshot_ListTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTables(context.Background(), &ListTablesInput{})
+	got, err := svc.ListTables(context.Background(), &ListTablesInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -654,7 +868,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -679,7 +897,11 @@ func TestCheckResponseSnapshot_ListTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTypes(context.Background(), &ListTypesInput{})
+	got, err := svc.ListTypes(context.Background(), &ListTypesInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -700,7 +922,99 @@ func TestCheckResponseSnapshot_RestoreTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreTable(context.Background(), &RestoreTableInput{})
+	got, err := svc.RestoreTable(context.Background(), &RestoreTableInput{
+		SourceKeyspaceName: ptr.String("__SourceKeyspaceName__"),
+		SourceTableName:    ptr.String("__SourceTableName__"),
+		TargetKeyspaceName: ptr.String("__TargetKeyspaceName__"),
+		TargetTableName:    ptr.String("__TargetTableName__"),
+		RestoreTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CapacitySpecificationOverride: &types.CapacitySpecification{
+			ThroughputMode:     types.ThroughputMode("PAY_PER_REQUEST"),
+			ReadCapacityUnits:  ptr.Int64(1),
+			WriteCapacityUnits: ptr.Int64(1),
+		},
+		EncryptionSpecificationOverride: &types.EncryptionSpecification{
+			Type:             types.EncryptionType("CUSTOMER_MANAGED_KMS_KEY"),
+			KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		},
+		PointInTimeRecoveryOverride: &types.PointInTimeRecovery{
+			Status: types.PointInTimeRecoveryStatus("ENABLED"),
+		},
+		TagsOverride: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AutoScalingSpecification: &types.AutoScalingSpecification{
+			WriteCapacityAutoScaling: &types.AutoScalingSettings{
+				AutoScalingDisabled: true,
+				MinimumUnits:        ptr.Int64(1),
+				MaximumUnits:        ptr.Int64(1),
+				ScalingPolicy: &types.AutoScalingPolicy{
+					TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+						DisableScaleIn:   true,
+						ScaleInCooldown:  1,
+						ScaleOutCooldown: 1,
+						TargetValue:      1.0,
+					},
+				},
+			},
+			ReadCapacityAutoScaling: &types.AutoScalingSettings{
+				AutoScalingDisabled: true,
+				MinimumUnits:        ptr.Int64(1),
+				MaximumUnits:        ptr.Int64(1),
+				ScalingPolicy: &types.AutoScalingPolicy{
+					TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+						DisableScaleIn:   true,
+						ScaleInCooldown:  1,
+						ScaleOutCooldown: 1,
+						TargetValue:      1.0,
+					},
+				},
+			},
+		},
+		ReplicaSpecifications: []types.ReplicaSpecification{
+			{
+				Region:            ptr.String("__Region__"),
+				ReadCapacityUnits: ptr.Int64(1),
+				ReadCapacityAutoScaling: &types.AutoScalingSettings{
+					AutoScalingDisabled: true,
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					ScalingPolicy: &types.AutoScalingPolicy{
+						TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+							DisableScaleIn:   true,
+							ScaleInCooldown:  1,
+							ScaleOutCooldown: 1,
+							TargetValue:      1.0,
+						},
+					},
+				},
+			},
+			{
+				Region:            ptr.String("__Region__"),
+				ReadCapacityUnits: ptr.Int64(1),
+				ReadCapacityAutoScaling: &types.AutoScalingSettings{
+					AutoScalingDisabled: true,
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					ScalingPolicy: &types.AutoScalingPolicy{
+						TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+							DisableScaleIn:   true,
+							ScaleInCooldown:  1,
+							ScaleOutCooldown: 1,
+							TargetValue:      1.0,
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -719,7 +1033,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -738,7 +1064,19 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -759,7 +1097,19 @@ func TestCheckResponseSnapshot_UpdateKeyspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKeyspace(context.Background(), &UpdateKeyspaceInput{})
+	got, err := svc.UpdateKeyspace(context.Background(), &UpdateKeyspaceInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		ReplicationSpecification: &types.ReplicationSpecification{
+			ReplicationStrategy: types.Rs("SINGLE_REGION"),
+			RegionList: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientSideTimestamps: &types.ClientSideTimestamps{
+			Status: types.ClientSideTimestampsStatus("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -780,7 +1130,122 @@ func TestCheckResponseSnapshot_UpdateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTable(context.Background(), &UpdateTableInput{})
+	got, err := svc.UpdateTable(context.Background(), &UpdateTableInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		TableName:    ptr.String("__TableName__"),
+		AddColumns: []types.ColumnDefinition{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+		CapacitySpecification: &types.CapacitySpecification{
+			ThroughputMode:     types.ThroughputMode("PAY_PER_REQUEST"),
+			ReadCapacityUnits:  ptr.Int64(1),
+			WriteCapacityUnits: ptr.Int64(1),
+		},
+		EncryptionSpecification: &types.EncryptionSpecification{
+			Type:             types.EncryptionType("CUSTOMER_MANAGED_KMS_KEY"),
+			KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		},
+		PointInTimeRecovery: &types.PointInTimeRecovery{
+			Status: types.PointInTimeRecoveryStatus("ENABLED"),
+		},
+		Ttl: &types.TimeToLive{
+			Status: types.TimeToLiveStatus("ENABLED"),
+		},
+		DefaultTimeToLive: ptr.Int32(1),
+		ClientSideTimestamps: &types.ClientSideTimestamps{
+			Status: types.ClientSideTimestampsStatus("ENABLED"),
+		},
+		AutoScalingSpecification: &types.AutoScalingSpecification{
+			WriteCapacityAutoScaling: &types.AutoScalingSettings{
+				AutoScalingDisabled: true,
+				MinimumUnits:        ptr.Int64(1),
+				MaximumUnits:        ptr.Int64(1),
+				ScalingPolicy: &types.AutoScalingPolicy{
+					TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+						DisableScaleIn:   true,
+						ScaleInCooldown:  1,
+						ScaleOutCooldown: 1,
+						TargetValue:      1.0,
+					},
+				},
+			},
+			ReadCapacityAutoScaling: &types.AutoScalingSettings{
+				AutoScalingDisabled: true,
+				MinimumUnits:        ptr.Int64(1),
+				MaximumUnits:        ptr.Int64(1),
+				ScalingPolicy: &types.AutoScalingPolicy{
+					TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+						DisableScaleIn:   true,
+						ScaleInCooldown:  1,
+						ScaleOutCooldown: 1,
+						TargetValue:      1.0,
+					},
+				},
+			},
+		},
+		ReplicaSpecifications: []types.ReplicaSpecification{
+			{
+				Region:            ptr.String("__Region__"),
+				ReadCapacityUnits: ptr.Int64(1),
+				ReadCapacityAutoScaling: &types.AutoScalingSettings{
+					AutoScalingDisabled: true,
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					ScalingPolicy: &types.AutoScalingPolicy{
+						TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+							DisableScaleIn:   true,
+							ScaleInCooldown:  1,
+							ScaleOutCooldown: 1,
+							TargetValue:      1.0,
+						},
+					},
+				},
+			},
+			{
+				Region:            ptr.String("__Region__"),
+				ReadCapacityUnits: ptr.Int64(1),
+				ReadCapacityAutoScaling: &types.AutoScalingSettings{
+					AutoScalingDisabled: true,
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					ScalingPolicy: &types.AutoScalingPolicy{
+						TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+							DisableScaleIn:   true,
+							ScaleInCooldown:  1,
+							ScaleOutCooldown: 1,
+							TargetValue:      1.0,
+						},
+					},
+				},
+			},
+		},
+		CdcSpecification: &types.CdcSpecification{
+			Status:   types.CdcStatus("ENABLED"),
+			ViewType: types.ViewType("NEW_IMAGE"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			PropagateTags: types.CdcPropagateTags("TABLE"),
+		},
+		WarmThroughputSpecification: &types.WarmThroughputSpecification{
+			ReadUnitsPerSecond:  ptr.Int64(1),
+			WriteUnitsPerSecond: ptr.Int64(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -801,7 +1266,26 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKeyspace(context.Background(), &CreateKeyspaceInput{})
+	_, opErr := svc.CreateKeyspace(context.Background(), &CreateKeyspaceInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ReplicationSpecification: &types.ReplicationSpecification{
+			ReplicationStrategy: types.Rs("SINGLE_REGION"),
+			RegionList: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -826,7 +1310,26 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKeyspace(context.Background(), &CreateKeyspaceInput{})
+	_, opErr := svc.CreateKeyspace(context.Background(), &CreateKeyspaceInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ReplicationSpecification: &types.ReplicationSpecification{
+			ReplicationStrategy: types.Rs("SINGLE_REGION"),
+			RegionList: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -851,7 +1354,26 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKeyspace(context.Background(), &CreateKeyspaceInput{})
+	_, opErr := svc.CreateKeyspace(context.Background(), &CreateKeyspaceInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ReplicationSpecification: &types.ReplicationSpecification{
+			ReplicationStrategy: types.Rs("SINGLE_REGION"),
+			RegionList: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -877,7 +1399,163 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTable(context.Background(), &CreateTableInput{})
+	_, opErr := svc.CreateTable(context.Background(), &CreateTableInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		TableName:    ptr.String("__TableName__"),
+		SchemaDefinition: &types.SchemaDefinition{
+			AllColumns: []types.ColumnDefinition{
+				{
+					Name: ptr.String("__Name__"),
+					Type: ptr.String("__Type__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Type: ptr.String("__Type__"),
+				},
+			},
+			PartitionKeys: []types.PartitionKey{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			ClusteringKeys: []types.ClusteringKey{
+				{
+					Name:    ptr.String("__Name__"),
+					OrderBy: types.SortOrder("ASC"),
+				},
+				{
+					Name:    ptr.String("__Name__"),
+					OrderBy: types.SortOrder("ASC"),
+				},
+			},
+			StaticColumns: []types.StaticColumn{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		Comment: &types.Comment{
+			Message: ptr.String("__Message__"),
+		},
+		CapacitySpecification: &types.CapacitySpecification{
+			ThroughputMode:     types.ThroughputMode("PAY_PER_REQUEST"),
+			ReadCapacityUnits:  ptr.Int64(1),
+			WriteCapacityUnits: ptr.Int64(1),
+		},
+		EncryptionSpecification: &types.EncryptionSpecification{
+			Type:             types.EncryptionType("CUSTOMER_MANAGED_KMS_KEY"),
+			KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		},
+		PointInTimeRecovery: &types.PointInTimeRecovery{
+			Status: types.PointInTimeRecoveryStatus("ENABLED"),
+		},
+		Ttl: &types.TimeToLive{
+			Status: types.TimeToLiveStatus("ENABLED"),
+		},
+		DefaultTimeToLive: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientSideTimestamps: &types.ClientSideTimestamps{
+			Status: types.ClientSideTimestampsStatus("ENABLED"),
+		},
+		AutoScalingSpecification: &types.AutoScalingSpecification{
+			WriteCapacityAutoScaling: &types.AutoScalingSettings{
+				AutoScalingDisabled: true,
+				MinimumUnits:        ptr.Int64(1),
+				MaximumUnits:        ptr.Int64(1),
+				ScalingPolicy: &types.AutoScalingPolicy{
+					TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+						DisableScaleIn:   true,
+						ScaleInCooldown:  1,
+						ScaleOutCooldown: 1,
+						TargetValue:      1.0,
+					},
+				},
+			},
+			ReadCapacityAutoScaling: &types.AutoScalingSettings{
+				AutoScalingDisabled: true,
+				MinimumUnits:        ptr.Int64(1),
+				MaximumUnits:        ptr.Int64(1),
+				ScalingPolicy: &types.AutoScalingPolicy{
+					TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+						DisableScaleIn:   true,
+						ScaleInCooldown:  1,
+						ScaleOutCooldown: 1,
+						TargetValue:      1.0,
+					},
+				},
+			},
+		},
+		ReplicaSpecifications: []types.ReplicaSpecification{
+			{
+				Region:            ptr.String("__Region__"),
+				ReadCapacityUnits: ptr.Int64(1),
+				ReadCapacityAutoScaling: &types.AutoScalingSettings{
+					AutoScalingDisabled: true,
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					ScalingPolicy: &types.AutoScalingPolicy{
+						TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+							DisableScaleIn:   true,
+							ScaleInCooldown:  1,
+							ScaleOutCooldown: 1,
+							TargetValue:      1.0,
+						},
+					},
+				},
+			},
+			{
+				Region:            ptr.String("__Region__"),
+				ReadCapacityUnits: ptr.Int64(1),
+				ReadCapacityAutoScaling: &types.AutoScalingSettings{
+					AutoScalingDisabled: true,
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					ScalingPolicy: &types.AutoScalingPolicy{
+						TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+							DisableScaleIn:   true,
+							ScaleInCooldown:  1,
+							ScaleOutCooldown: 1,
+							TargetValue:      1.0,
+						},
+					},
+				},
+			},
+		},
+		CdcSpecification: &types.CdcSpecification{
+			Status:   types.CdcStatus("ENABLED"),
+			ViewType: types.ViewType("NEW_IMAGE"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			PropagateTags: types.CdcPropagateTags("TABLE"),
+		},
+		WarmThroughputSpecification: &types.WarmThroughputSpecification{
+			ReadUnitsPerSecond:  ptr.Int64(1),
+			WriteUnitsPerSecond: ptr.Int64(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -902,7 +1580,26 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKeyspace(context.Background(), &CreateKeyspaceInput{})
+	_, opErr := svc.CreateKeyspace(context.Background(), &CreateKeyspaceInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ReplicationSpecification: &types.ReplicationSpecification{
+			ReplicationStrategy: types.Rs("SINGLE_REGION"),
+			RegionList: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -927,7 +1624,26 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKeyspace(context.Background(), &CreateKeyspaceInput{})
+	_, opErr := svc.CreateKeyspace(context.Background(), &CreateKeyspaceInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ReplicationSpecification: &types.ReplicationSpecification{
+			ReplicationStrategy: types.Rs("SINGLE_REGION"),
+			RegionList: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

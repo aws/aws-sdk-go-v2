@@ -1,0 +1,4 @@
+403
+Content-Type: application/json
+
+{"__type":"IdentityTypeNotSupportedException","Message":"__Message__","RequestId":"__RequestId__"}

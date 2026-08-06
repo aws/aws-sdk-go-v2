@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"displayContent":{"body":"__Body__","title":"__Title__"},"lastModified":"2000-01-01T00:00:00Z","productPageArn":"__ProductPageArn__","productPageId":"__ProductPageId__"}

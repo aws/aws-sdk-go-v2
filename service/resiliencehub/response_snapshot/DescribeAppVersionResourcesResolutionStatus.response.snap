@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appArn":"__AppArn__","appVersion":"__AppVersion__","errorMessage":"__ErrorMessage__","resolutionId":"__ResolutionId__","status":"Pending"}

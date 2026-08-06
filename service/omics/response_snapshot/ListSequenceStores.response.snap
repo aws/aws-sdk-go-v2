@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","sequenceStores":[{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","eTagAlgorithmFamily":"MD5up","fallbackLocation":"__FallbackLocation__","id":"__Id__","name":"__Name__","sseConfig":{"keyArn":"__KeyArn__","type":"KMS"},"status":"CREATING","statusMessage":"__StatusMessage__","updateTime":"2000-01-01T00:00:00Z"},{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","eTagAlgorithmFamily":"MD5up","fallbackLocation":"__FallbackLocation__","id":"__Id__","name":"__Name__","sseConfig":{"keyArn":"__KeyArn__","type":"KMS"},"status":"CREATING","statusMessage":"__StatusMessage__","updateTime":"2000-01-01T00:00:00Z"}]}

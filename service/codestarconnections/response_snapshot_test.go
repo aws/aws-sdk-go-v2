@@ -129,7 +129,21 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{})
+	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		ProviderType:   types.ProviderType("Bitbucket"),
+		ConnectionName: ptr.String("__ConnectionName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		HostArn: ptr.String("__HostArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +174,33 @@ func TestCheckResponseSnapshot_CreateHost(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHost(context.Background(), &CreateHostInput{})
+	got, err := svc.CreateHost(context.Background(), &CreateHostInput{
+		Name:             ptr.String("__Name__"),
+		ProviderType:     types.ProviderType("Bitbucket"),
+		ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
+		VpcConfiguration: &types.VpcConfiguration{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TlsCertificate: ptr.String("__TlsCertificate__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -189,7 +229,22 @@ func TestCheckResponseSnapshot_CreateRepositoryLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{})
+	got, err := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{
+		ConnectionArn:    ptr.String("__ConnectionArn__"),
+		OwnerId:          ptr.String("__OwnerId__"),
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +277,16 @@ func TestCheckResponseSnapshot_CreateSyncConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSyncConfiguration(context.Background(), &CreateSyncConfigurationInput{})
+	got, err := svc.CreateSyncConfiguration(context.Background(), &CreateSyncConfigurationInput{
+		Branch:                  ptr.String("__Branch__"),
+		ConfigFile:              ptr.String("__ConfigFile__"),
+		RepositoryLinkId:        ptr.String("__RepositoryLinkId__"),
+		ResourceName:            ptr.String("__ResourceName__"),
+		RoleArn:                 ptr.String("__RoleArn__"),
+		SyncType:                types.SyncConfigurationType("CFN_STACK_SYNC"),
+		PublishDeploymentStatus: types.PublishDeploymentStatus("ENABLED"),
+		TriggerResourceUpdateOn: types.TriggerResourceUpdateOn("ANY_CHANGE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +305,9 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ConnectionArn: ptr.String("__ConnectionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -260,7 +326,9 @@ func TestCheckResponseSnapshot_DeleteHost(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHost(context.Background(), &DeleteHostInput{})
+	got, err := svc.DeleteHost(context.Background(), &DeleteHostInput{
+		HostArn: ptr.String("__HostArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -279,7 +347,9 @@ func TestCheckResponseSnapshot_DeleteRepositoryLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRepositoryLink(context.Background(), &DeleteRepositoryLinkInput{})
+	got, err := svc.DeleteRepositoryLink(context.Background(), &DeleteRepositoryLinkInput{
+		RepositoryLinkId: ptr.String("__RepositoryLinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +368,10 @@ func TestCheckResponseSnapshot_DeleteSyncConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSyncConfiguration(context.Background(), &DeleteSyncConfigurationInput{})
+	got, err := svc.DeleteSyncConfiguration(context.Background(), &DeleteSyncConfigurationInput{
+		SyncType:     types.SyncConfigurationType("CFN_STACK_SYNC"),
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +399,9 @@ func TestCheckResponseSnapshot_GetConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{})
+	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{
+		ConnectionArn: ptr.String("__ConnectionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -362,7 +437,9 @@ func TestCheckResponseSnapshot_GetHost(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHost(context.Background(), &GetHostInput{})
+	got, err := svc.GetHost(context.Background(), &GetHostInput{
+		HostArn: ptr.String("__HostArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -391,7 +468,9 @@ func TestCheckResponseSnapshot_GetRepositoryLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRepositoryLink(context.Background(), &GetRepositoryLinkInput{})
+	got, err := svc.GetRepositoryLink(context.Background(), &GetRepositoryLinkInput{
+		RepositoryLinkId: ptr.String("__RepositoryLinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -429,7 +508,11 @@ func TestCheckResponseSnapshot_GetRepositorySyncStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRepositorySyncStatus(context.Background(), &GetRepositorySyncStatusInput{})
+	got, err := svc.GetRepositorySyncStatus(context.Background(), &GetRepositorySyncStatusInput{
+		Branch:           ptr.String("__Branch__"),
+		RepositoryLinkId: ptr.String("__RepositoryLinkId__"),
+		SyncType:         types.SyncConfigurationType("CFN_STACK_SYNC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -527,7 +610,10 @@ func TestCheckResponseSnapshot_GetResourceSyncStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceSyncStatus(context.Background(), &GetResourceSyncStatusInput{})
+	got, err := svc.GetResourceSyncStatus(context.Background(), &GetResourceSyncStatusInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		SyncType:     types.SyncConfigurationType("CFN_STACK_SYNC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -591,7 +677,10 @@ func TestCheckResponseSnapshot_GetSyncBlockerSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSyncBlockerSummary(context.Background(), &GetSyncBlockerSummaryInput{})
+	got, err := svc.GetSyncBlockerSummary(context.Background(), &GetSyncBlockerSummaryInput{
+		SyncType:     types.SyncConfigurationType("CFN_STACK_SYNC"),
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -624,7 +713,10 @@ func TestCheckResponseSnapshot_GetSyncConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSyncConfiguration(context.Background(), &GetSyncConfigurationInput{})
+	got, err := svc.GetSyncConfiguration(context.Background(), &GetSyncConfigurationInput{
+		SyncType:     types.SyncConfigurationType("CFN_STACK_SYNC"),
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -663,7 +755,12 @@ func TestCheckResponseSnapshot_ListConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{})
+	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{
+		ProviderTypeFilter: types.ProviderType("Bitbucket"),
+		HostArnFilter:      ptr.String("__HostArnFilter__"),
+		MaxResults:         1,
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -726,7 +823,10 @@ func TestCheckResponseSnapshot_ListHosts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHosts(context.Background(), &ListHostsInput{})
+	got, err := svc.ListHosts(context.Background(), &ListHostsInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -767,7 +867,10 @@ func TestCheckResponseSnapshot_ListRepositoryLinks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRepositoryLinks(context.Background(), &ListRepositoryLinksInput{})
+	got, err := svc.ListRepositoryLinks(context.Background(), &ListRepositoryLinksInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -802,7 +905,10 @@ func TestCheckResponseSnapshot_ListRepositorySyncDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRepositorySyncDefinitions(context.Background(), &ListRepositorySyncDefinitionsInput{})
+	got, err := svc.ListRepositorySyncDefinitions(context.Background(), &ListRepositorySyncDefinitionsInput{
+		RepositoryLinkId: ptr.String("__RepositoryLinkId__"),
+		SyncType:         types.SyncConfigurationType("CFN_STACK_SYNC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -851,7 +957,12 @@ func TestCheckResponseSnapshot_ListSyncConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSyncConfigurations(context.Background(), &ListSyncConfigurationsInput{})
+	got, err := svc.ListSyncConfigurations(context.Background(), &ListSyncConfigurationsInput{
+		MaxResults:       1,
+		NextToken:        ptr.String("__NextToken__"),
+		RepositoryLinkId: ptr.String("__RepositoryLinkId__"),
+		SyncType:         types.SyncConfigurationType("CFN_STACK_SYNC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -881,7 +992,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -900,7 +1013,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -919,7 +1044,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -938,7 +1069,22 @@ func TestCheckResponseSnapshot_UpdateHost(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateHost(context.Background(), &UpdateHostInput{})
+	got, err := svc.UpdateHost(context.Background(), &UpdateHostInput{
+		HostArn:          ptr.String("__HostArn__"),
+		ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
+		VpcConfiguration: &types.VpcConfiguration{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TlsCertificate: ptr.String("__TlsCertificate__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -967,7 +1113,11 @@ func TestCheckResponseSnapshot_UpdateRepositoryLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRepositoryLink(context.Background(), &UpdateRepositoryLinkInput{})
+	got, err := svc.UpdateRepositoryLink(context.Background(), &UpdateRepositoryLinkInput{
+		ConnectionArn:    ptr.String("__ConnectionArn__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		RepositoryLinkId: ptr.String("__RepositoryLinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1008,7 +1158,12 @@ func TestCheckResponseSnapshot_UpdateSyncBlocker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSyncBlocker(context.Background(), &UpdateSyncBlockerInput{})
+	got, err := svc.UpdateSyncBlocker(context.Background(), &UpdateSyncBlockerInput{
+		Id:             ptr.String("__Id__"),
+		SyncType:       types.SyncConfigurationType("CFN_STACK_SYNC"),
+		ResourceName:   ptr.String("__ResourceName__"),
+		ResolvedReason: ptr.String("__ResolvedReason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1041,7 +1196,16 @@ func TestCheckResponseSnapshot_UpdateSyncConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSyncConfiguration(context.Background(), &UpdateSyncConfigurationInput{})
+	got, err := svc.UpdateSyncConfiguration(context.Background(), &UpdateSyncConfigurationInput{
+		Branch:                  ptr.String("__Branch__"),
+		ConfigFile:              ptr.String("__ConfigFile__"),
+		RepositoryLinkId:        ptr.String("__RepositoryLinkId__"),
+		ResourceName:            ptr.String("__ResourceName__"),
+		RoleArn:                 ptr.String("__RoleArn__"),
+		SyncType:                types.SyncConfigurationType("CFN_STACK_SYNC"),
+		PublishDeploymentStatus: types.PublishDeploymentStatus("ENABLED"),
+		TriggerResourceUpdateOn: types.TriggerResourceUpdateOn("ANY_CHANGE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1062,7 +1226,22 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{})
+	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{
+		ConnectionArn:    ptr.String("__ConnectionArn__"),
+		OwnerId:          ptr.String("__OwnerId__"),
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1087,7 +1266,22 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{})
+	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{
+		ConnectionArn:    ptr.String("__ConnectionArn__"),
+		OwnerId:          ptr.String("__OwnerId__"),
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1112,7 +1306,11 @@ func TestCheckResponseSnapshot_Error_ConditionalCheckFailedException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateRepositoryLink(context.Background(), &UpdateRepositoryLinkInput{})
+	_, opErr := svc.UpdateRepositoryLink(context.Background(), &UpdateRepositoryLinkInput{
+		ConnectionArn:    ptr.String("__ConnectionArn__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		RepositoryLinkId: ptr.String("__RepositoryLinkId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1137,7 +1335,22 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateHost(context.Background(), &UpdateHostInput{})
+	_, opErr := svc.UpdateHost(context.Background(), &UpdateHostInput{
+		HostArn:          ptr.String("__HostArn__"),
+		ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
+		VpcConfiguration: &types.VpcConfiguration{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TlsCertificate: ptr.String("__TlsCertificate__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1162,7 +1375,22 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{})
+	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{
+		ConnectionArn:    ptr.String("__ConnectionArn__"),
+		OwnerId:          ptr.String("__OwnerId__"),
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1187,7 +1415,22 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{})
+	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{
+		ConnectionArn:    ptr.String("__ConnectionArn__"),
+		OwnerId:          ptr.String("__OwnerId__"),
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1212,7 +1455,21 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnection(context.Background(), &CreateConnectionInput{})
+	_, opErr := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		ProviderType:   types.ProviderType("Bitbucket"),
+		ConnectionName: ptr.String("__ConnectionName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		HostArn: ptr.String("__HostArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1237,7 +1494,22 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{})
+	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{
+		ConnectionArn:    ptr.String("__ConnectionArn__"),
+		OwnerId:          ptr.String("__OwnerId__"),
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1262,7 +1534,21 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnection(context.Background(), &CreateConnectionInput{})
+	_, opErr := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		ProviderType:   types.ProviderType("Bitbucket"),
+		ConnectionName: ptr.String("__ConnectionName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		HostArn: ptr.String("__HostArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1287,7 +1573,21 @@ func TestCheckResponseSnapshot_Error_ResourceUnavailableException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnection(context.Background(), &CreateConnectionInput{})
+	_, opErr := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		ProviderType:   types.ProviderType("Bitbucket"),
+		ConnectionName: ptr.String("__ConnectionName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		HostArn: ptr.String("__HostArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1312,7 +1612,12 @@ func TestCheckResponseSnapshot_Error_RetryLatestCommitFailedException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateSyncBlocker(context.Background(), &UpdateSyncBlockerInput{})
+	_, opErr := svc.UpdateSyncBlocker(context.Background(), &UpdateSyncBlockerInput{
+		Id:             ptr.String("__Id__"),
+		SyncType:       types.SyncConfigurationType("CFN_STACK_SYNC"),
+		ResourceName:   ptr.String("__ResourceName__"),
+		ResolvedReason: ptr.String("__ResolvedReason__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1337,7 +1642,12 @@ func TestCheckResponseSnapshot_Error_SyncBlockerDoesNotExistException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateSyncBlocker(context.Background(), &UpdateSyncBlockerInput{})
+	_, opErr := svc.UpdateSyncBlocker(context.Background(), &UpdateSyncBlockerInput{
+		Id:             ptr.String("__Id__"),
+		SyncType:       types.SyncConfigurationType("CFN_STACK_SYNC"),
+		ResourceName:   ptr.String("__ResourceName__"),
+		ResolvedReason: ptr.String("__ResolvedReason__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1362,7 +1672,9 @@ func TestCheckResponseSnapshot_Error_SyncConfigurationStillExistsException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRepositoryLink(context.Background(), &DeleteRepositoryLinkInput{})
+	_, opErr := svc.DeleteRepositoryLink(context.Background(), &DeleteRepositoryLinkInput{
+		RepositoryLinkId: ptr.String("__RepositoryLinkId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1387,7 +1699,22 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{})
+	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{
+		ConnectionArn:    ptr.String("__ConnectionArn__"),
+		OwnerId:          ptr.String("__OwnerId__"),
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1412,7 +1739,22 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateHost(context.Background(), &UpdateHostInput{})
+	_, opErr := svc.UpdateHost(context.Background(), &UpdateHostInput{
+		HostArn:          ptr.String("__HostArn__"),
+		ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
+		VpcConfiguration: &types.VpcConfiguration{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TlsCertificate: ptr.String("__TlsCertificate__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1437,7 +1779,9 @@ func TestCheckResponseSnapshot_Error_UnsupportedProviderTypeException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRepositoryLink(context.Background(), &DeleteRepositoryLinkInput{})
+	_, opErr := svc.DeleteRepositoryLink(context.Background(), &DeleteRepositoryLinkInput{
+		RepositoryLinkId: ptr.String("__RepositoryLinkId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1462,7 +1806,11 @@ func TestCheckResponseSnapshot_Error_UpdateOutOfSyncException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateRepositoryLink(context.Background(), &UpdateRepositoryLinkInput{})
+	_, opErr := svc.UpdateRepositoryLink(context.Background(), &UpdateRepositoryLinkInput{
+		ConnectionArn:    ptr.String("__ConnectionArn__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		RepositoryLinkId: ptr.String("__RepositoryLinkId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

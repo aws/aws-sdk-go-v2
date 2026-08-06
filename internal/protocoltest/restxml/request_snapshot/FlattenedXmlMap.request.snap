@@ -1,5 +1,0 @@
-POST /FlattenedXmlMap
-
-Content-Type: application/xml
-
-<FlattenedXmlMapRequest><myMap><key>key0</key><value>Foo</value></myMap></FlattenedXmlMapRequest>

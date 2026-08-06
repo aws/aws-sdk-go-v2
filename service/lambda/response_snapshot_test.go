@@ -120,7 +120,15 @@ func TestCheckResponseSnapshot_AddLayerVersionPermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{})
+	got, err := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{
+		LayerName:      ptr.String("__LayerName__"),
+		VersionNumber:  ptr.Int64(1),
+		StatementId:    ptr.String("__StatementId__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +149,20 @@ func TestCheckResponseSnapshot_AddPermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	got, err := svc.AddPermission(context.Background(), &AddPermissionInput{
+		FunctionName:          ptr.String("__FunctionName__"),
+		StatementId:           ptr.String("__StatementId__"),
+		Action:                ptr.String("__Action__"),
+		Principal:             ptr.String("__Principal__"),
+		SourceArn:             ptr.String("__SourceArn__"),
+		FunctionUrlAuthType:   types.FunctionUrlAuthType("NONE"),
+		InvokedViaFunctionUrl: ptr.Bool(true),
+		SourceAccount:         ptr.String("__SourceAccount__"),
+		EventSourceToken:      ptr.String("__EventSourceToken__"),
+		Qualifier:             ptr.String("__Qualifier__"),
+		RevisionId:            ptr.String("__RevisionId__"),
+		PrincipalOrgID:        ptr.String("__PrincipalOrgID__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -303,7 +324,83 @@ func TestCheckResponseSnapshot_CheckpointDurableExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckpointDurableExecution(context.Background(), &CheckpointDurableExecutionInput{})
+	got, err := svc.CheckpointDurableExecution(context.Background(), &CheckpointDurableExecutionInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+		CheckpointToken:     ptr.String("__CheckpointToken__"),
+		Updates: []types.OperationUpdate{
+			{
+				Id:       ptr.String("__Id__"),
+				ParentId: ptr.String("__ParentId__"),
+				Name:     ptr.String("__Name__"),
+				Type:     types.OperationType("EXECUTION"),
+				SubType:  ptr.String("__SubType__"),
+				Action:   types.OperationAction("START"),
+				Payload:  ptr.String("__Payload__"),
+				Error: &types.ErrorObject{
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ErrorType:    ptr.String("__ErrorType__"),
+					ErrorData:    ptr.String("__ErrorData__"),
+					StackTrace: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ContextOptions: &types.ContextOptions{
+					ReplayChildren: ptr.Bool(true),
+				},
+				StepOptions: &types.StepOptions{
+					NextAttemptDelaySeconds: ptr.Int32(1),
+				},
+				WaitOptions: &types.WaitOptions{
+					WaitSeconds: ptr.Int32(1),
+				},
+				CallbackOptions: &types.CallbackOptions{
+					TimeoutSeconds:          1,
+					HeartbeatTimeoutSeconds: 1,
+				},
+				ChainedInvokeOptions: &types.ChainedInvokeOptions{
+					FunctionName: ptr.String("__FunctionName__"),
+					TenantId:     ptr.String("__TenantId__"),
+				},
+			},
+			{
+				Id:       ptr.String("__Id__"),
+				ParentId: ptr.String("__ParentId__"),
+				Name:     ptr.String("__Name__"),
+				Type:     types.OperationType("EXECUTION"),
+				SubType:  ptr.String("__SubType__"),
+				Action:   types.OperationAction("START"),
+				Payload:  ptr.String("__Payload__"),
+				Error: &types.ErrorObject{
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ErrorType:    ptr.String("__ErrorType__"),
+					ErrorData:    ptr.String("__ErrorData__"),
+					StackTrace: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ContextOptions: &types.ContextOptions{
+					ReplayChildren: ptr.Bool(true),
+				},
+				StepOptions: &types.StepOptions{
+					NextAttemptDelaySeconds: ptr.Int32(1),
+				},
+				WaitOptions: &types.WaitOptions{
+					WaitSeconds: ptr.Int32(1),
+				},
+				CallbackOptions: &types.CallbackOptions{
+					TimeoutSeconds:          1,
+					HeartbeatTimeoutSeconds: 1,
+				},
+				ChainedInvokeOptions: &types.ChainedInvokeOptions{
+					FunctionName: ptr.String("__FunctionName__"),
+					TenantId:     ptr.String("__TenantId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -333,7 +430,17 @@ func TestCheckResponseSnapshot_CreateAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	got, err := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		FunctionName:    ptr.String("__FunctionName__"),
+		Name:            ptr.String("__Name__"),
+		FunctionVersion: ptr.String("__FunctionVersion__"),
+		Description:     ptr.String("__Description__"),
+		RoutingConfig: &types.AliasRoutingConfiguration{
+			AdditionalVersionWeights: map[string]float64{
+				"key0": 1.0,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -412,7 +519,66 @@ func TestCheckResponseSnapshot_CreateCapacityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{})
+	got, err := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{
+		CapacityProviderName: ptr.String("__CapacityProviderName__"),
+		VpcConfig: &types.CapacityProviderVpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PermissionsConfig: &types.CapacityProviderPermissionsConfig{
+			CapacityProviderOperatorRoleArn: ptr.String("__CapacityProviderOperatorRoleArn__"),
+		},
+		InstanceRequirements: &types.InstanceRequirements{
+			Architectures: []types.Architecture{
+				types.Architecture("x86_64"),
+				types.Architecture("x86_64"),
+			},
+			AllowedInstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedInstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CapacityProviderScalingConfig: &types.CapacityProviderScalingConfig{
+			MaxVCpuCount: ptr.Int32(1),
+			ScalingMode:  types.CapacityProviderScalingMode("Auto"),
+			ScalingPolicies: []types.TargetTrackingScalingPolicy{
+				{
+					PredefinedMetricType: types.CapacityProviderPredefinedMetricType("LambdaCapacityProviderAverageCPUUtilization"),
+					TargetValue:          ptr.Float64(1.0),
+				},
+				{
+					PredefinedMetricType: types.CapacityProviderPredefinedMetricType("LambdaCapacityProviderAverageCPUUtilization"),
+					TargetValue:          ptr.Float64(1.0),
+				},
+			},
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PropagateTags: &types.PropagateTags{
+			Mode: types.PropagateTagsMode("None"),
+			ExplicitTags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+			LoggingConfig: &types.CapacityProviderLoggingConfig{
+				SystemLogLevel: types.SystemLogLevel("DEBUG"),
+				LogGroup:       ptr.String("__LogGroup__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -447,7 +613,21 @@ func TestCheckResponseSnapshot_CreateCodeSigningConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCodeSigningConfig(context.Background(), &CreateCodeSigningConfigInput{})
+	got, err := svc.CreateCodeSigningConfig(context.Background(), &CreateCodeSigningConfigInput{
+		Description: ptr.String("__Description__"),
+		AllowedPublishers: &types.AllowedPublishers{
+			SigningProfileVersionArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CodeSigningPolicies: &types.CodeSigningPolicies{
+			UntrustedArtifactOnDeployment: types.CodeSigningPolicy("Warn"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -609,7 +789,144 @@ func TestCheckResponseSnapshot_CreateEventSourceMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEventSourceMapping(context.Background(), &CreateEventSourceMappingInput{})
+	got, err := svc.CreateEventSourceMapping(context.Background(), &CreateEventSourceMappingInput{
+		EventSourceArn: ptr.String("__EventSourceArn__"),
+		FunctionName:   ptr.String("__FunctionName__"),
+		Enabled:        ptr.Bool(true),
+		BatchSize:      ptr.Int32(1),
+		FilterCriteria: &types.FilterCriteria{
+			Filters: []types.Filter{
+				{
+					Pattern: ptr.String("__Pattern__"),
+				},
+				{
+					Pattern: ptr.String("__Pattern__"),
+				},
+			},
+		},
+		KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		MetricsConfig: &types.EventSourceMappingMetricsConfig{
+			Metrics: []types.EventSourceMappingMetric{
+				types.EventSourceMappingMetric("EventCount"),
+				types.EventSourceMappingMetric("EventCount"),
+			},
+		},
+		LoggingConfig: &types.EventSourceMappingLoggingConfig{
+			SystemLogLevel: types.EventSourceMappingSystemLogLevel("DEBUG"),
+		},
+		ScalingConfig: &types.ScalingConfig{
+			MaximumConcurrency: ptr.Int32(1),
+		},
+		MaximumBatchingWindowInSeconds: ptr.Int32(1),
+		ParallelizationFactor:          ptr.Int32(1),
+		StartingPosition:               types.EventSourcePosition("TRIM_HORIZON"),
+		StartingPositionTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DestinationConfig: &types.DestinationConfig{
+			OnSuccess: &types.OnSuccess{
+				Destination: ptr.String("__Destination__"),
+			},
+			OnFailure: &types.OnFailure{
+				Destination: ptr.String("__Destination__"),
+			},
+		},
+		MaximumRecordAgeInSeconds:  ptr.Int32(1),
+		BisectBatchOnFunctionError: ptr.Bool(true),
+		MaximumRetryAttempts:       ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TumblingWindowInSeconds: ptr.Int32(1),
+		Topics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Queues: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceAccessConfigurations: []types.SourceAccessConfiguration{
+			{
+				Type: types.SourceAccessType("BASIC_AUTH"),
+				URI:  ptr.String("__URI__"),
+			},
+			{
+				Type: types.SourceAccessType("BASIC_AUTH"),
+				URI:  ptr.String("__URI__"),
+			},
+		},
+		SelfManagedEventSource: &types.SelfManagedEventSource{
+			Endpoints: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FunctionResponseTypes: []types.FunctionResponseType{
+			types.FunctionResponseType("ReportBatchItemFailures"),
+			types.FunctionResponseType("ReportBatchItemFailures"),
+		},
+		AmazonManagedKafkaEventSourceConfig: &types.AmazonManagedKafkaEventSourceConfig{
+			ConsumerGroupId: ptr.String("__ConsumerGroupId__"),
+			SchemaRegistryConfig: &types.KafkaSchemaRegistryConfig{
+				SchemaRegistryURI: ptr.String("__SchemaRegistryURI__"),
+				EventRecordFormat: types.SchemaRegistryEventRecordFormat("JSON"),
+				AccessConfigs: []types.KafkaSchemaRegistryAccessConfig{
+					{
+						Type: types.KafkaSchemaRegistryAuthType("BASIC_AUTH"),
+						URI:  ptr.String("__URI__"),
+					},
+					{
+						Type: types.KafkaSchemaRegistryAuthType("BASIC_AUTH"),
+						URI:  ptr.String("__URI__"),
+					},
+				},
+				SchemaValidationConfigs: []types.KafkaSchemaValidationConfig{
+					{
+						Attribute: types.KafkaSchemaValidationAttribute("KEY"),
+					},
+					{
+						Attribute: types.KafkaSchemaValidationAttribute("KEY"),
+					},
+				},
+			},
+		},
+		SelfManagedKafkaEventSourceConfig: &types.SelfManagedKafkaEventSourceConfig{
+			ConsumerGroupId: ptr.String("__ConsumerGroupId__"),
+			SchemaRegistryConfig: &types.KafkaSchemaRegistryConfig{
+				SchemaRegistryURI: ptr.String("__SchemaRegistryURI__"),
+				EventRecordFormat: types.SchemaRegistryEventRecordFormat("JSON"),
+				AccessConfigs: []types.KafkaSchemaRegistryAccessConfig{
+					{
+						Type: types.KafkaSchemaRegistryAuthType("BASIC_AUTH"),
+						URI:  ptr.String("__URI__"),
+					},
+					{
+						Type: types.KafkaSchemaRegistryAuthType("BASIC_AUTH"),
+						URI:  ptr.String("__URI__"),
+					},
+				},
+				SchemaValidationConfigs: []types.KafkaSchemaValidationConfig{
+					{
+						Attribute: types.KafkaSchemaValidationAttribute("KEY"),
+					},
+					{
+						Attribute: types.KafkaSchemaValidationAttribute("KEY"),
+					},
+				},
+			},
+		},
+		DocumentDBEventSourceConfig: &types.DocumentDBEventSourceConfig{
+			DatabaseName:   ptr.String("__DatabaseName__"),
+			CollectionName: ptr.String("__CollectionName__"),
+			FullDocument:   types.FullDocument("UpdateLookup"),
+		},
+		ProvisionedPollerConfig: &types.ProvisionedPollerConfig{
+			MinimumPollers:  ptr.Int32(1),
+			MaximumPollers:  ptr.Int32(1),
+			PollerGroupName: ptr.String("__PollerGroupName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -761,7 +1078,110 @@ func TestCheckResponseSnapshot_CreateFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFunction(context.Background(), &CreateFunctionInput{})
+	got, err := svc.CreateFunction(context.Background(), &CreateFunctionInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Runtime:      types.Runtime("nodejs"),
+		Role:         ptr.String("__Role__"),
+		Handler:      ptr.String("__Handler__"),
+		Code: &types.FunctionCode{
+			ZipFile:             []byte("blob"),
+			S3Bucket:            ptr.String("__S3Bucket__"),
+			S3Key:               ptr.String("__S3Key__"),
+			S3ObjectVersion:     ptr.String("__S3ObjectVersion__"),
+			S3ObjectStorageMode: types.S3ObjectStorageMode("COPY"),
+			ImageUri:            ptr.String("__ImageUri__"),
+			SourceKMSKeyArn:     ptr.String("__SourceKMSKeyArn__"),
+		},
+		Description: ptr.String("__Description__"),
+		Timeout:     ptr.Int32(1),
+		MemorySize:  ptr.Int32(1),
+		Publish:     true,
+		PublishTo:   types.FunctionVersionLatestPublished("LATEST_PUBLISHED"),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ipv6AllowedForDualStack: ptr.Bool(true),
+		},
+		PackageType: types.PackageType("Zip"),
+		DeadLetterConfig: &types.DeadLetterConfig{
+			TargetArn: ptr.String("__TargetArn__"),
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		TracingConfig: &types.TracingConfig{
+			Mode: types.TracingMode("Active"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Layers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FileSystemConfigs: []types.FileSystemConfig{
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+		},
+		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
+		ImageConfig: &types.ImageConfig{
+			EntryPoint: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Command: []string{
+				"__Member__",
+				"__Member__",
+			},
+			WorkingDirectory: ptr.String("__WorkingDirectory__"),
+		},
+		Architectures: []types.Architecture{
+			types.Architecture("x86_64"),
+			types.Architecture("x86_64"),
+		},
+		EphemeralStorage: &types.EphemeralStorage{
+			Size: ptr.Int32(1),
+		},
+		SnapStart: &types.SnapStart{
+			ApplyOn: types.SnapStartApplyOn("PublishedVersions"),
+		},
+		LoggingConfig: &types.LoggingConfig{
+			LogFormat:           types.LogFormat("JSON"),
+			ApplicationLogLevel: types.ApplicationLogLevel("TRACE"),
+			SystemLogLevel:      types.SystemLogLevel("DEBUG"),
+			LogGroup:            ptr.String("__LogGroup__"),
+		},
+		TenancyConfig: &types.TenancyConfig{
+			TenantIsolationMode: types.TenantIsolationMode("PER_TENANT"),
+		},
+		CapacityProviderConfig: &types.CapacityProviderConfig{
+			LambdaManagedInstancesCapacityProviderConfig: &types.LambdaManagedInstancesCapacityProviderConfig{
+				CapacityProviderArn:                   ptr.String("__CapacityProviderArn__"),
+				PerExecutionEnvironmentMaxConcurrency: ptr.Int32(1),
+				ExecutionEnvironmentMemoryGiBPerVCpu:  ptr.Float64(1.0),
+			},
+		},
+		DurableConfig: &types.DurableConfig{
+			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			ExecutionTimeout:      ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -806,7 +1226,32 @@ func TestCheckResponseSnapshot_CreateFunctionUrlConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFunctionUrlConfig(context.Background(), &CreateFunctionUrlConfigInput{})
+	got, err := svc.CreateFunctionUrlConfig(context.Background(), &CreateFunctionUrlConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+		AuthType:     types.FunctionUrlAuthType("NONE"),
+		Cors: &types.Cors{
+			AllowCredentials: ptr.Bool(true),
+			AllowHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowMethods: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowOrigins: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExposeHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MaxAge: ptr.Int32(1),
+		},
+		InvokeMode: types.InvokeMode("BUFFERED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -825,7 +1270,10 @@ func TestCheckResponseSnapshot_DeleteAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAlias(context.Background(), &DeleteAliasInput{})
+	got, err := svc.DeleteAlias(context.Background(), &DeleteAliasInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -904,7 +1352,9 @@ func TestCheckResponseSnapshot_DeleteCapacityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCapacityProvider(context.Background(), &DeleteCapacityProviderInput{})
+	got, err := svc.DeleteCapacityProvider(context.Background(), &DeleteCapacityProviderInput{
+		CapacityProviderName: ptr.String("__CapacityProviderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -923,7 +1373,9 @@ func TestCheckResponseSnapshot_DeleteCodeSigningConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCodeSigningConfig(context.Background(), &DeleteCodeSigningConfigInput{})
+	got, err := svc.DeleteCodeSigningConfig(context.Background(), &DeleteCodeSigningConfigInput{
+		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1085,7 +1537,9 @@ func TestCheckResponseSnapshot_DeleteEventSourceMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventSourceMapping(context.Background(), &DeleteEventSourceMappingInput{})
+	got, err := svc.DeleteEventSourceMapping(context.Background(), &DeleteEventSourceMappingInput{
+		UUID: ptr.String("__UUID__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1096,7 +1550,7 @@ func TestCheckResponseSnapshot_DeleteEventSourceMapping(t *testing.T) {
 
 func TestCheckResponseSnapshot_DeleteFunction(t *testing.T) {
 	want := &DeleteFunctionOutput{
-		StatusCode: 1,
+		StatusCode: 200,
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteFunction.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1106,7 +1560,10 @@ func TestCheckResponseSnapshot_DeleteFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{})
+	got, err := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1125,7 +1582,9 @@ func TestCheckResponseSnapshot_DeleteFunctionCodeSigningConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFunctionCodeSigningConfig(context.Background(), &DeleteFunctionCodeSigningConfigInput{})
+	got, err := svc.DeleteFunctionCodeSigningConfig(context.Background(), &DeleteFunctionCodeSigningConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1144,7 +1603,9 @@ func TestCheckResponseSnapshot_DeleteFunctionConcurrency(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFunctionConcurrency(context.Background(), &DeleteFunctionConcurrencyInput{})
+	got, err := svc.DeleteFunctionConcurrency(context.Background(), &DeleteFunctionConcurrencyInput{
+		FunctionName: ptr.String("__FunctionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1163,7 +1624,10 @@ func TestCheckResponseSnapshot_DeleteFunctionEventInvokeConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFunctionEventInvokeConfig(context.Background(), &DeleteFunctionEventInvokeConfigInput{})
+	got, err := svc.DeleteFunctionEventInvokeConfig(context.Background(), &DeleteFunctionEventInvokeConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1182,7 +1646,10 @@ func TestCheckResponseSnapshot_DeleteFunctionUrlConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFunctionUrlConfig(context.Background(), &DeleteFunctionUrlConfigInput{})
+	got, err := svc.DeleteFunctionUrlConfig(context.Background(), &DeleteFunctionUrlConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1201,7 +1668,10 @@ func TestCheckResponseSnapshot_DeleteLayerVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLayerVersion(context.Background(), &DeleteLayerVersionInput{})
+	got, err := svc.DeleteLayerVersion(context.Background(), &DeleteLayerVersionInput{
+		LayerName:     ptr.String("__LayerName__"),
+		VersionNumber: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1220,7 +1690,10 @@ func TestCheckResponseSnapshot_DeleteProvisionedConcurrencyConfig(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProvisionedConcurrencyConfig(context.Background(), &DeleteProvisionedConcurrencyConfigInput{})
+	got, err := svc.DeleteProvisionedConcurrencyConfig(context.Background(), &DeleteProvisionedConcurrencyConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1281,7 +1754,10 @@ func TestCheckResponseSnapshot_GetAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAlias(context.Background(), &GetAliasInput{})
+	got, err := svc.GetAlias(context.Background(), &GetAliasInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1360,7 +1836,9 @@ func TestCheckResponseSnapshot_GetCapacityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCapacityProvider(context.Background(), &GetCapacityProviderInput{})
+	got, err := svc.GetCapacityProvider(context.Background(), &GetCapacityProviderInput{
+		CapacityProviderName: ptr.String("__CapacityProviderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1395,7 +1873,9 @@ func TestCheckResponseSnapshot_GetCodeSigningConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCodeSigningConfig(context.Background(), &GetCodeSigningConfigInput{})
+	got, err := svc.GetCodeSigningConfig(context.Background(), &GetCodeSigningConfigInput{
+		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1442,7 +1922,10 @@ func TestCheckResponseSnapshot_GetDurableExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDurableExecution(context.Background(), &GetDurableExecutionInput{})
+	got, err := svc.GetDurableExecution(context.Background(), &GetDurableExecutionInput{
+		DurableExecutionArn:  ptr.String("__DurableExecutionArn__"),
+		IncludeExecutionData: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1963,7 +2446,13 @@ func TestCheckResponseSnapshot_GetDurableExecutionHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDurableExecutionHistory(context.Background(), &GetDurableExecutionHistoryInput{})
+	got, err := svc.GetDurableExecutionHistory(context.Background(), &GetDurableExecutionHistoryInput{
+		DurableExecutionArn:  ptr.String("__DurableExecutionArn__"),
+		IncludeExecutionData: ptr.Bool(true),
+		MaxItems:             1,
+		Marker:               ptr.String("__Marker__"),
+		ReverseOrder:         ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2122,7 +2611,12 @@ func TestCheckResponseSnapshot_GetDurableExecutionState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDurableExecutionState(context.Background(), &GetDurableExecutionStateInput{})
+	got, err := svc.GetDurableExecutionState(context.Background(), &GetDurableExecutionStateInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+		CheckpointToken:     ptr.String("__CheckpointToken__"),
+		Marker:              ptr.String("__Marker__"),
+		MaxItems:            1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2284,7 +2778,9 @@ func TestCheckResponseSnapshot_GetEventSourceMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventSourceMapping(context.Background(), &GetEventSourceMappingInput{})
+	got, err := svc.GetEventSourceMapping(context.Background(), &GetEventSourceMappingInput{
+		UUID: ptr.String("__UUID__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2464,7 +2960,10 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunction(context.Background(), &GetFunctionInput{})
+	got, err := svc.GetFunction(context.Background(), &GetFunctionInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2486,7 +2985,9 @@ func TestCheckResponseSnapshot_GetFunctionCodeSigningConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunctionCodeSigningConfig(context.Background(), &GetFunctionCodeSigningConfigInput{})
+	got, err := svc.GetFunctionCodeSigningConfig(context.Background(), &GetFunctionCodeSigningConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2507,7 +3008,9 @@ func TestCheckResponseSnapshot_GetFunctionConcurrency(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunctionConcurrency(context.Background(), &GetFunctionConcurrencyInput{})
+	got, err := svc.GetFunctionConcurrency(context.Background(), &GetFunctionConcurrencyInput{
+		FunctionName: ptr.String("__FunctionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2659,7 +3162,10 @@ func TestCheckResponseSnapshot_GetFunctionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunctionConfiguration(context.Background(), &GetFunctionConfigurationInput{})
+	got, err := svc.GetFunctionConfiguration(context.Background(), &GetFunctionConfigurationInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2691,7 +3197,10 @@ func TestCheckResponseSnapshot_GetFunctionEventInvokeConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunctionEventInvokeConfig(context.Background(), &GetFunctionEventInvokeConfigInput{})
+	got, err := svc.GetFunctionEventInvokeConfig(context.Background(), &GetFunctionEventInvokeConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2712,7 +3221,9 @@ func TestCheckResponseSnapshot_GetFunctionRecursionConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunctionRecursionConfig(context.Background(), &GetFunctionRecursionConfigInput{})
+	got, err := svc.GetFunctionRecursionConfig(context.Background(), &GetFunctionRecursionConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2741,7 +3252,10 @@ func TestCheckResponseSnapshot_GetFunctionScalingConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunctionScalingConfig(context.Background(), &GetFunctionScalingConfigInput{})
+	got, err := svc.GetFunctionScalingConfig(context.Background(), &GetFunctionScalingConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2787,7 +3301,10 @@ func TestCheckResponseSnapshot_GetFunctionUrlConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunctionUrlConfig(context.Background(), &GetFunctionUrlConfigInput{})
+	got, err := svc.GetFunctionUrlConfig(context.Background(), &GetFunctionUrlConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2833,7 +3350,10 @@ func TestCheckResponseSnapshot_GetLayerVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLayerVersion(context.Background(), &GetLayerVersionInput{})
+	got, err := svc.GetLayerVersion(context.Background(), &GetLayerVersionInput{
+		LayerName:     ptr.String("__LayerName__"),
+		VersionNumber: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2879,7 +3399,9 @@ func TestCheckResponseSnapshot_GetLayerVersionByArn(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLayerVersionByArn(context.Background(), &GetLayerVersionByArnInput{})
+	got, err := svc.GetLayerVersionByArn(context.Background(), &GetLayerVersionByArnInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2901,7 +3423,10 @@ func TestCheckResponseSnapshot_GetLayerVersionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLayerVersionPolicy(context.Background(), &GetLayerVersionPolicyInput{})
+	got, err := svc.GetLayerVersionPolicy(context.Background(), &GetLayerVersionPolicyInput{
+		LayerName:     ptr.String("__LayerName__"),
+		VersionNumber: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2923,7 +3448,10 @@ func TestCheckResponseSnapshot_GetPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{})
+	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2949,7 +3477,10 @@ func TestCheckResponseSnapshot_GetProvisionedConcurrencyConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProvisionedConcurrencyConfig(context.Background(), &GetProvisionedConcurrencyConfigInput{})
+	got, err := svc.GetProvisionedConcurrencyConfig(context.Background(), &GetProvisionedConcurrencyConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2972,7 +3503,10 @@ func TestCheckResponseSnapshot_GetRuntimeManagementConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRuntimeManagementConfig(context.Background(), &GetRuntimeManagementConfigInput{})
+	got, err := svc.GetRuntimeManagementConfig(context.Background(), &GetRuntimeManagementConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2983,7 +3517,7 @@ func TestCheckResponseSnapshot_GetRuntimeManagementConfig(t *testing.T) {
 
 func TestCheckResponseSnapshot_Invoke(t *testing.T) {
 	want := &InvokeOutput{
-		StatusCode:          1,
+		StatusCode:          200,
 		FunctionError:       ptr.String("__FunctionError__"),
 		LogResult:           ptr.String("__LogResult__"),
 		Payload:             []byte("blob"),
@@ -2998,7 +3532,16 @@ func TestCheckResponseSnapshot_Invoke(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Invoke(context.Background(), &InvokeInput{})
+	got, err := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3009,7 +3552,7 @@ func TestCheckResponseSnapshot_Invoke(t *testing.T) {
 
 func TestCheckResponseSnapshot_InvokeAsync(t *testing.T) {
 	want := &InvokeAsyncOutput{
-		Status: 1,
+		Status: 200,
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvokeAsync.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3019,13 +3562,20 @@ func TestCheckResponseSnapshot_InvokeAsync(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeAsync(context.Background(), &InvokeAsyncInput{})
+	got, err := svc.InvokeAsync(context.Background(), &InvokeAsyncInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		InvokeArgs:   io.NopCloser(bytes.NewReader([]byte("__InvokeArgs__"))),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "InvokeAsync.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_InvokeWithResponseStream(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_ListAliases(t *testing.T) {
@@ -3066,7 +3616,12 @@ func TestCheckResponseSnapshot_ListAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAliases(context.Background(), &ListAliasesInput{})
+	got, err := svc.ListAliases(context.Background(), &ListAliasesInput{
+		FunctionName:    ptr.String("__FunctionName__"),
+		FunctionVersion: ptr.String("__FunctionVersion__"),
+		Marker:          ptr.String("__Marker__"),
+		MaxItems:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3207,7 +3762,11 @@ func TestCheckResponseSnapshot_ListCapacityProviders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCapacityProviders(context.Background(), &ListCapacityProvidersInput{})
+	got, err := svc.ListCapacityProviders(context.Background(), &ListCapacityProvidersInput{
+		State:    types.CapacityProviderState("Pending"),
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3260,7 +3819,10 @@ func TestCheckResponseSnapshot_ListCodeSigningConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCodeSigningConfigs(context.Background(), &ListCodeSigningConfigsInput{})
+	got, err := svc.ListCodeSigningConfigs(context.Background(), &ListCodeSigningConfigsInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3301,7 +3863,20 @@ func TestCheckResponseSnapshot_ListDurableExecutionsByFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDurableExecutionsByFunction(context.Background(), &ListDurableExecutionsByFunctionInput{})
+	got, err := svc.ListDurableExecutionsByFunction(context.Background(), &ListDurableExecutionsByFunctionInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Statuses: []types.ExecutionStatus{
+			types.ExecutionStatus("RUNNING"),
+			types.ExecutionStatus("RUNNING"),
+		},
+		StartedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ReverseOrder:  ptr.Bool(true),
+		Marker:        ptr.String("__Marker__"),
+		MaxItems:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3612,7 +4187,12 @@ func TestCheckResponseSnapshot_ListEventSourceMappings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventSourceMappings(context.Background(), &ListEventSourceMappingsInput{})
+	got, err := svc.ListEventSourceMappings(context.Background(), &ListEventSourceMappingsInput{
+		EventSourceArn: ptr.String("__EventSourceArn__"),
+		FunctionName:   ptr.String("__FunctionName__"),
+		Marker:         ptr.String("__Marker__"),
+		MaxItems:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3663,7 +4243,11 @@ func TestCheckResponseSnapshot_ListFunctionEventInvokeConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFunctionEventInvokeConfigs(context.Background(), &ListFunctionEventInvokeConfigsInput{})
+	got, err := svc.ListFunctionEventInvokeConfigs(context.Background(), &ListFunctionEventInvokeConfigsInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Marker:       ptr.String("__Marker__"),
+		MaxItems:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3742,7 +4326,11 @@ func TestCheckResponseSnapshot_ListFunctionUrlConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFunctionUrlConfigs(context.Background(), &ListFunctionUrlConfigsInput{})
+	got, err := svc.ListFunctionUrlConfigs(context.Background(), &ListFunctionUrlConfigsInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Marker:       ptr.String("__Marker__"),
+		MaxItems:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3774,7 +4362,11 @@ func TestCheckResponseSnapshot_ListFunctionVersionsByCapacityProvider(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFunctionVersionsByCapacityProvider(context.Background(), &ListFunctionVersionsByCapacityProviderInput{})
+	got, err := svc.ListFunctionVersionsByCapacityProvider(context.Background(), &ListFunctionVersionsByCapacityProviderInput{
+		CapacityProviderName: ptr.String("__CapacityProviderName__"),
+		Marker:               ptr.String("__Marker__"),
+		MaxItems:             ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4065,7 +4657,12 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFunctions(context.Background(), &ListFunctionsInput{})
+	got, err := svc.ListFunctions(context.Background(), &ListFunctionsInput{
+		MasterRegion:    ptr.String("__MasterRegion__"),
+		FunctionVersion: types.FunctionVersion("ALL"),
+		Marker:          ptr.String("__Marker__"),
+		MaxItems:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4090,7 +4687,11 @@ func TestCheckResponseSnapshot_ListFunctionsByCodeSigningConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFunctionsByCodeSigningConfig(context.Background(), &ListFunctionsByCodeSigningConfigInput{})
+	got, err := svc.ListFunctionsByCodeSigningConfig(context.Background(), &ListFunctionsByCodeSigningConfigInput{
+		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
+		Marker:               ptr.String("__Marker__"),
+		MaxItems:             ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4143,7 +4744,13 @@ func TestCheckResponseSnapshot_ListLayerVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLayerVersions(context.Background(), &ListLayerVersionsInput{})
+	got, err := svc.ListLayerVersions(context.Background(), &ListLayerVersionsInput{
+		CompatibleArchitecture: types.Architecture("x86_64"),
+		CompatibleRuntime:      types.Runtime("nodejs"),
+		LayerName:              ptr.String("__LayerName__"),
+		Marker:                 ptr.String("__Marker__"),
+		MaxItems:               ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4204,7 +4811,12 @@ func TestCheckResponseSnapshot_ListLayers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLayers(context.Background(), &ListLayersInput{})
+	got, err := svc.ListLayers(context.Background(), &ListLayersInput{
+		CompatibleArchitecture: types.Architecture("x86_64"),
+		CompatibleRuntime:      types.Runtime("nodejs"),
+		Marker:                 ptr.String("__Marker__"),
+		MaxItems:               ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4245,7 +4857,11 @@ func TestCheckResponseSnapshot_ListProvisionedConcurrencyConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProvisionedConcurrencyConfigs(context.Background(), &ListProvisionedConcurrencyConfigsInput{})
+	got, err := svc.ListProvisionedConcurrencyConfigs(context.Background(), &ListProvisionedConcurrencyConfigsInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Marker:       ptr.String("__Marker__"),
+		MaxItems:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4268,7 +4884,9 @@ func TestCheckResponseSnapshot_ListTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTags(context.Background(), &ListTagsInput{})
+	got, err := svc.ListTags(context.Background(), &ListTagsInput{
+		Resource: ptr.String("__Resource__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4559,7 +5177,11 @@ func TestCheckResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVersionsByFunction(context.Background(), &ListVersionsByFunctionInput{})
+	got, err := svc.ListVersionsByFunction(context.Background(), &ListVersionsByFunctionInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Marker:       ptr.String("__Marker__"),
+		MaxItems:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4605,7 +5227,26 @@ func TestCheckResponseSnapshot_PublishLayerVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishLayerVersion(context.Background(), &PublishLayerVersionInput{})
+	got, err := svc.PublishLayerVersion(context.Background(), &PublishLayerVersionInput{
+		LayerName:   ptr.String("__LayerName__"),
+		Description: ptr.String("__Description__"),
+		Content: &types.LayerVersionContentInput{
+			S3Bucket:            ptr.String("__S3Bucket__"),
+			S3Key:               ptr.String("__S3Key__"),
+			S3ObjectVersion:     ptr.String("__S3ObjectVersion__"),
+			S3ObjectStorageMode: types.S3ObjectStorageMode("COPY"),
+			ZipFile:             []byte("blob"),
+		},
+		CompatibleArchitectures: []types.Architecture{
+			types.Architecture("x86_64"),
+			types.Architecture("x86_64"),
+		},
+		CompatibleRuntimes: []types.Runtime{
+			types.Runtime("nodejs"),
+			types.Runtime("nodejs"),
+		},
+		LicenseInfo: ptr.String("__LicenseInfo__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4757,7 +5398,13 @@ func TestCheckResponseSnapshot_PublishVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishVersion(context.Background(), &PublishVersionInput{})
+	got, err := svc.PublishVersion(context.Background(), &PublishVersionInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		CodeSha256:   ptr.String("__CodeSha256__"),
+		Description:  ptr.String("__Description__"),
+		RevisionId:   ptr.String("__RevisionId__"),
+		PublishTo:    types.FunctionVersionLatestPublished("LATEST_PUBLISHED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4779,7 +5426,10 @@ func TestCheckResponseSnapshot_PutFunctionCodeSigningConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFunctionCodeSigningConfig(context.Background(), &PutFunctionCodeSigningConfigInput{})
+	got, err := svc.PutFunctionCodeSigningConfig(context.Background(), &PutFunctionCodeSigningConfigInput{
+		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
+		FunctionName:         ptr.String("__FunctionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4800,7 +5450,10 @@ func TestCheckResponseSnapshot_PutFunctionConcurrency(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFunctionConcurrency(context.Background(), &PutFunctionConcurrencyInput{})
+	got, err := svc.PutFunctionConcurrency(context.Background(), &PutFunctionConcurrencyInput{
+		FunctionName:                 ptr.String("__FunctionName__"),
+		ReservedConcurrentExecutions: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4832,7 +5485,20 @@ func TestCheckResponseSnapshot_PutFunctionEventInvokeConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFunctionEventInvokeConfig(context.Background(), &PutFunctionEventInvokeConfigInput{})
+	got, err := svc.PutFunctionEventInvokeConfig(context.Background(), &PutFunctionEventInvokeConfigInput{
+		FunctionName:             ptr.String("__FunctionName__"),
+		Qualifier:                ptr.String("__Qualifier__"),
+		MaximumRetryAttempts:     ptr.Int32(1),
+		MaximumEventAgeInSeconds: ptr.Int32(1),
+		DestinationConfig: &types.DestinationConfig{
+			OnSuccess: &types.OnSuccess{
+				Destination: ptr.String("__Destination__"),
+			},
+			OnFailure: &types.OnFailure{
+				Destination: ptr.String("__Destination__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4853,7 +5519,10 @@ func TestCheckResponseSnapshot_PutFunctionRecursionConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFunctionRecursionConfig(context.Background(), &PutFunctionRecursionConfigInput{})
+	got, err := svc.PutFunctionRecursionConfig(context.Background(), &PutFunctionRecursionConfigInput{
+		FunctionName:  ptr.String("__FunctionName__"),
+		RecursiveLoop: types.RecursiveLoop("Allow"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4874,7 +5543,14 @@ func TestCheckResponseSnapshot_PutFunctionScalingConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFunctionScalingConfig(context.Background(), &PutFunctionScalingConfigInput{})
+	got, err := svc.PutFunctionScalingConfig(context.Background(), &PutFunctionScalingConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+		FunctionScalingConfig: &types.FunctionScalingConfig{
+			MinExecutionEnvironments: ptr.Int32(1),
+			MaxExecutionEnvironments: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4900,7 +5576,11 @@ func TestCheckResponseSnapshot_PutProvisionedConcurrencyConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutProvisionedConcurrencyConfig(context.Background(), &PutProvisionedConcurrencyConfigInput{})
+	got, err := svc.PutProvisionedConcurrencyConfig(context.Background(), &PutProvisionedConcurrencyConfigInput{
+		FunctionName:                    ptr.String("__FunctionName__"),
+		Qualifier:                       ptr.String("__Qualifier__"),
+		ProvisionedConcurrentExecutions: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4923,7 +5603,12 @@ func TestCheckResponseSnapshot_PutRuntimeManagementConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRuntimeManagementConfig(context.Background(), &PutRuntimeManagementConfigInput{})
+	got, err := svc.PutRuntimeManagementConfig(context.Background(), &PutRuntimeManagementConfigInput{
+		FunctionName:      ptr.String("__FunctionName__"),
+		Qualifier:         ptr.String("__Qualifier__"),
+		UpdateRuntimeOn:   types.UpdateRuntimeOn("Auto"),
+		RuntimeVersionArn: ptr.String("__RuntimeVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4942,7 +5627,12 @@ func TestCheckResponseSnapshot_RemoveLayerVersionPermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveLayerVersionPermission(context.Background(), &RemoveLayerVersionPermissionInput{})
+	got, err := svc.RemoveLayerVersionPermission(context.Background(), &RemoveLayerVersionPermissionInput{
+		LayerName:     ptr.String("__LayerName__"),
+		VersionNumber: ptr.Int64(1),
+		StatementId:   ptr.String("__StatementId__"),
+		RevisionId:    ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4961,7 +5651,12 @@ func TestCheckResponseSnapshot_RemovePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemovePermission(context.Background(), &RemovePermissionInput{})
+	got, err := svc.RemovePermission(context.Background(), &RemovePermissionInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		StatementId:  ptr.String("__StatementId__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+		RevisionId:   ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4980,7 +5675,18 @@ func TestCheckResponseSnapshot_SendDurableExecutionCallbackFailure(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendDurableExecutionCallbackFailure(context.Background(), &SendDurableExecutionCallbackFailureInput{})
+	got, err := svc.SendDurableExecutionCallbackFailure(context.Background(), &SendDurableExecutionCallbackFailureInput{
+		CallbackId: ptr.String("__CallbackId__"),
+		Error: &types.ErrorObject{
+			ErrorMessage: ptr.String("__ErrorMessage__"),
+			ErrorType:    ptr.String("__ErrorType__"),
+			ErrorData:    ptr.String("__ErrorData__"),
+			StackTrace: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4999,7 +5705,9 @@ func TestCheckResponseSnapshot_SendDurableExecutionCallbackHeartbeat(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendDurableExecutionCallbackHeartbeat(context.Background(), &SendDurableExecutionCallbackHeartbeatInput{})
+	got, err := svc.SendDurableExecutionCallbackHeartbeat(context.Background(), &SendDurableExecutionCallbackHeartbeatInput{
+		CallbackId: ptr.String("__CallbackId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5018,7 +5726,10 @@ func TestCheckResponseSnapshot_SendDurableExecutionCallbackSuccess(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendDurableExecutionCallbackSuccess(context.Background(), &SendDurableExecutionCallbackSuccessInput{})
+	got, err := svc.SendDurableExecutionCallbackSuccess(context.Background(), &SendDurableExecutionCallbackSuccessInput{
+		CallbackId: ptr.String("__CallbackId__"),
+		Result:     []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5039,7 +5750,18 @@ func TestCheckResponseSnapshot_StopDurableExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopDurableExecution(context.Background(), &StopDurableExecutionInput{})
+	got, err := svc.StopDurableExecution(context.Background(), &StopDurableExecutionInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+		Error: &types.ErrorObject{
+			ErrorMessage: ptr.String("__ErrorMessage__"),
+			ErrorType:    ptr.String("__ErrorType__"),
+			ErrorData:    ptr.String("__ErrorData__"),
+			StackTrace: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5058,7 +5780,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Resource: ptr.String("__Resource__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5077,7 +5804,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Resource: ptr.String("__Resource__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5107,7 +5840,18 @@ func TestCheckResponseSnapshot_UpdateAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAlias(context.Background(), &UpdateAliasInput{})
+	got, err := svc.UpdateAlias(context.Background(), &UpdateAliasInput{
+		FunctionName:    ptr.String("__FunctionName__"),
+		Name:            ptr.String("__Name__"),
+		FunctionVersion: ptr.String("__FunctionVersion__"),
+		Description:     ptr.String("__Description__"),
+		RoutingConfig: &types.AliasRoutingConfiguration{
+			AdditionalVersionWeights: map[string]float64{
+				"key0": 1.0,
+			},
+		},
+		RevisionId: ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5186,7 +5930,35 @@ func TestCheckResponseSnapshot_UpdateCapacityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCapacityProvider(context.Background(), &UpdateCapacityProviderInput{})
+	got, err := svc.UpdateCapacityProvider(context.Background(), &UpdateCapacityProviderInput{
+		CapacityProviderName: ptr.String("__CapacityProviderName__"),
+		CapacityProviderScalingConfig: &types.CapacityProviderScalingConfig{
+			MaxVCpuCount: ptr.Int32(1),
+			ScalingMode:  types.CapacityProviderScalingMode("Auto"),
+			ScalingPolicies: []types.TargetTrackingScalingPolicy{
+				{
+					PredefinedMetricType: types.CapacityProviderPredefinedMetricType("LambdaCapacityProviderAverageCPUUtilization"),
+					TargetValue:          ptr.Float64(1.0),
+				},
+				{
+					PredefinedMetricType: types.CapacityProviderPredefinedMetricType("LambdaCapacityProviderAverageCPUUtilization"),
+					TargetValue:          ptr.Float64(1.0),
+				},
+			},
+		},
+		PropagateTags: &types.PropagateTags{
+			Mode: types.PropagateTagsMode("None"),
+			ExplicitTags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+			LoggingConfig: &types.CapacityProviderLoggingConfig{
+				SystemLogLevel: types.SystemLogLevel("DEBUG"),
+				LogGroup:       ptr.String("__LogGroup__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5221,7 +5993,19 @@ func TestCheckResponseSnapshot_UpdateCodeSigningConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCodeSigningConfig(context.Background(), &UpdateCodeSigningConfigInput{})
+	got, err := svc.UpdateCodeSigningConfig(context.Background(), &UpdateCodeSigningConfigInput{
+		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
+		Description:          ptr.String("__Description__"),
+		AllowedPublishers: &types.AllowedPublishers{
+			SigningProfileVersionArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CodeSigningPolicies: &types.CodeSigningPolicies{
+			UntrustedArtifactOnDeployment: types.CodeSigningPolicy("Warn"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5383,7 +6167,123 @@ func TestCheckResponseSnapshot_UpdateEventSourceMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEventSourceMapping(context.Background(), &UpdateEventSourceMappingInput{})
+	got, err := svc.UpdateEventSourceMapping(context.Background(), &UpdateEventSourceMappingInput{
+		UUID:         ptr.String("__UUID__"),
+		FunctionName: ptr.String("__FunctionName__"),
+		Enabled:      ptr.Bool(true),
+		BatchSize:    ptr.Int32(1),
+		FilterCriteria: &types.FilterCriteria{
+			Filters: []types.Filter{
+				{
+					Pattern: ptr.String("__Pattern__"),
+				},
+				{
+					Pattern: ptr.String("__Pattern__"),
+				},
+			},
+		},
+		KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		MetricsConfig: &types.EventSourceMappingMetricsConfig{
+			Metrics: []types.EventSourceMappingMetric{
+				types.EventSourceMappingMetric("EventCount"),
+				types.EventSourceMappingMetric("EventCount"),
+			},
+		},
+		LoggingConfig: &types.EventSourceMappingLoggingConfig{
+			SystemLogLevel: types.EventSourceMappingSystemLogLevel("DEBUG"),
+		},
+		ScalingConfig: &types.ScalingConfig{
+			MaximumConcurrency: ptr.Int32(1),
+		},
+		MaximumBatchingWindowInSeconds: ptr.Int32(1),
+		ParallelizationFactor:          ptr.Int32(1),
+		DestinationConfig: &types.DestinationConfig{
+			OnSuccess: &types.OnSuccess{
+				Destination: ptr.String("__Destination__"),
+			},
+			OnFailure: &types.OnFailure{
+				Destination: ptr.String("__Destination__"),
+			},
+		},
+		MaximumRecordAgeInSeconds:  ptr.Int32(1),
+		BisectBatchOnFunctionError: ptr.Bool(true),
+		MaximumRetryAttempts:       ptr.Int32(1),
+		TumblingWindowInSeconds:    ptr.Int32(1),
+		SourceAccessConfigurations: []types.SourceAccessConfiguration{
+			{
+				Type: types.SourceAccessType("BASIC_AUTH"),
+				URI:  ptr.String("__URI__"),
+			},
+			{
+				Type: types.SourceAccessType("BASIC_AUTH"),
+				URI:  ptr.String("__URI__"),
+			},
+		},
+		FunctionResponseTypes: []types.FunctionResponseType{
+			types.FunctionResponseType("ReportBatchItemFailures"),
+			types.FunctionResponseType("ReportBatchItemFailures"),
+		},
+		AmazonManagedKafkaEventSourceConfig: &types.AmazonManagedKafkaEventSourceConfig{
+			ConsumerGroupId: ptr.String("__ConsumerGroupId__"),
+			SchemaRegistryConfig: &types.KafkaSchemaRegistryConfig{
+				SchemaRegistryURI: ptr.String("__SchemaRegistryURI__"),
+				EventRecordFormat: types.SchemaRegistryEventRecordFormat("JSON"),
+				AccessConfigs: []types.KafkaSchemaRegistryAccessConfig{
+					{
+						Type: types.KafkaSchemaRegistryAuthType("BASIC_AUTH"),
+						URI:  ptr.String("__URI__"),
+					},
+					{
+						Type: types.KafkaSchemaRegistryAuthType("BASIC_AUTH"),
+						URI:  ptr.String("__URI__"),
+					},
+				},
+				SchemaValidationConfigs: []types.KafkaSchemaValidationConfig{
+					{
+						Attribute: types.KafkaSchemaValidationAttribute("KEY"),
+					},
+					{
+						Attribute: types.KafkaSchemaValidationAttribute("KEY"),
+					},
+				},
+			},
+		},
+		SelfManagedKafkaEventSourceConfig: &types.SelfManagedKafkaEventSourceConfig{
+			ConsumerGroupId: ptr.String("__ConsumerGroupId__"),
+			SchemaRegistryConfig: &types.KafkaSchemaRegistryConfig{
+				SchemaRegistryURI: ptr.String("__SchemaRegistryURI__"),
+				EventRecordFormat: types.SchemaRegistryEventRecordFormat("JSON"),
+				AccessConfigs: []types.KafkaSchemaRegistryAccessConfig{
+					{
+						Type: types.KafkaSchemaRegistryAuthType("BASIC_AUTH"),
+						URI:  ptr.String("__URI__"),
+					},
+					{
+						Type: types.KafkaSchemaRegistryAuthType("BASIC_AUTH"),
+						URI:  ptr.String("__URI__"),
+					},
+				},
+				SchemaValidationConfigs: []types.KafkaSchemaValidationConfig{
+					{
+						Attribute: types.KafkaSchemaValidationAttribute("KEY"),
+					},
+					{
+						Attribute: types.KafkaSchemaValidationAttribute("KEY"),
+					},
+				},
+			},
+		},
+		DocumentDBEventSourceConfig: &types.DocumentDBEventSourceConfig{
+			DatabaseName:   ptr.String("__DatabaseName__"),
+			CollectionName: ptr.String("__CollectionName__"),
+			FullDocument:   types.FullDocument("UpdateLookup"),
+		},
+		ProvisionedPollerConfig: &types.ProvisionedPollerConfig{
+			MinimumPollers:  ptr.Int32(1),
+			MaximumPollers:  ptr.Int32(1),
+			PollerGroupName: ptr.String("__PollerGroupName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5535,7 +6435,24 @@ func TestCheckResponseSnapshot_UpdateFunctionCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFunctionCode(context.Background(), &UpdateFunctionCodeInput{})
+	got, err := svc.UpdateFunctionCode(context.Background(), &UpdateFunctionCodeInput{
+		FunctionName:        ptr.String("__FunctionName__"),
+		ZipFile:             []byte("blob"),
+		S3Bucket:            ptr.String("__S3Bucket__"),
+		S3Key:               ptr.String("__S3Key__"),
+		S3ObjectVersion:     ptr.String("__S3ObjectVersion__"),
+		S3ObjectStorageMode: types.S3ObjectStorageMode("COPY"),
+		ImageUri:            ptr.String("__ImageUri__"),
+		Architectures: []types.Architecture{
+			types.Architecture("x86_64"),
+			types.Architecture("x86_64"),
+		},
+		Publish:         true,
+		PublishTo:       types.FunctionVersionLatestPublished("LATEST_PUBLISHED"),
+		DryRun:          true,
+		RevisionId:      ptr.String("__RevisionId__"),
+		SourceKMSKeyArn: ptr.String("__SourceKMSKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5687,7 +6604,88 @@ func TestCheckResponseSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFunctionConfiguration(context.Background(), &UpdateFunctionConfigurationInput{})
+	got, err := svc.UpdateFunctionConfiguration(context.Background(), &UpdateFunctionConfigurationInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Role:         ptr.String("__Role__"),
+		Handler:      ptr.String("__Handler__"),
+		Description:  ptr.String("__Description__"),
+		Timeout:      ptr.Int32(1),
+		MemorySize:   ptr.Int32(1),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ipv6AllowedForDualStack: ptr.Bool(true),
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Runtime: types.Runtime("nodejs"),
+		DeadLetterConfig: &types.DeadLetterConfig{
+			TargetArn: ptr.String("__TargetArn__"),
+		},
+		KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		TracingConfig: &types.TracingConfig{
+			Mode: types.TracingMode("Active"),
+		},
+		RevisionId: ptr.String("__RevisionId__"),
+		Layers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FileSystemConfigs: []types.FileSystemConfig{
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+		},
+		ImageConfig: &types.ImageConfig{
+			EntryPoint: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Command: []string{
+				"__Member__",
+				"__Member__",
+			},
+			WorkingDirectory: ptr.String("__WorkingDirectory__"),
+		},
+		EphemeralStorage: &types.EphemeralStorage{
+			Size: ptr.Int32(1),
+		},
+		SnapStart: &types.SnapStart{
+			ApplyOn: types.SnapStartApplyOn("PublishedVersions"),
+		},
+		LoggingConfig: &types.LoggingConfig{
+			LogFormat:           types.LogFormat("JSON"),
+			ApplicationLogLevel: types.ApplicationLogLevel("TRACE"),
+			SystemLogLevel:      types.SystemLogLevel("DEBUG"),
+			LogGroup:            ptr.String("__LogGroup__"),
+		},
+		CapacityProviderConfig: &types.CapacityProviderConfig{
+			LambdaManagedInstancesCapacityProviderConfig: &types.LambdaManagedInstancesCapacityProviderConfig{
+				CapacityProviderArn:                   ptr.String("__CapacityProviderArn__"),
+				PerExecutionEnvironmentMaxConcurrency: ptr.Int32(1),
+				ExecutionEnvironmentMemoryGiBPerVCpu:  ptr.Float64(1.0),
+			},
+		},
+		DurableConfig: &types.DurableConfig{
+			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			ExecutionTimeout:      ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5719,7 +6717,20 @@ func TestCheckResponseSnapshot_UpdateFunctionEventInvokeConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFunctionEventInvokeConfig(context.Background(), &UpdateFunctionEventInvokeConfigInput{})
+	got, err := svc.UpdateFunctionEventInvokeConfig(context.Background(), &UpdateFunctionEventInvokeConfigInput{
+		FunctionName:             ptr.String("__FunctionName__"),
+		Qualifier:                ptr.String("__Qualifier__"),
+		MaximumRetryAttempts:     ptr.Int32(1),
+		MaximumEventAgeInSeconds: ptr.Int32(1),
+		DestinationConfig: &types.DestinationConfig{
+			OnSuccess: &types.OnSuccess{
+				Destination: ptr.String("__Destination__"),
+			},
+			OnFailure: &types.OnFailure{
+				Destination: ptr.String("__Destination__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5765,7 +6776,32 @@ func TestCheckResponseSnapshot_UpdateFunctionUrlConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFunctionUrlConfig(context.Background(), &UpdateFunctionUrlConfigInput{})
+	got, err := svc.UpdateFunctionUrlConfig(context.Background(), &UpdateFunctionUrlConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+		AuthType:     types.FunctionUrlAuthType("NONE"),
+		Cors: &types.Cors{
+			AllowCredentials: ptr.Bool(true),
+			AllowHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowMethods: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowOrigins: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExposeHeaders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MaxAge: ptr.Int32(1),
+		},
+		InvokeMode: types.InvokeMode("BUFFERED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5787,7 +6823,17 @@ func TestCheckResponseSnapshot_Error_AliasLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		FunctionName:    ptr.String("__FunctionName__"),
+		Name:            ptr.String("__Name__"),
+		FunctionVersion: ptr.String("__FunctionVersion__"),
+		Description:     ptr.String("__Description__"),
+		RoutingConfig: &types.AliasRoutingConfiguration{
+			AdditionalVersionWeights: map[string]float64{
+				"key0": 1.0,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5813,7 +6859,18 @@ func TestCheckResponseSnapshot_Error_CallbackTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendDurableExecutionCallbackFailure(context.Background(), &SendDurableExecutionCallbackFailureInput{})
+	_, opErr := svc.SendDurableExecutionCallbackFailure(context.Background(), &SendDurableExecutionCallbackFailureInput{
+		CallbackId: ptr.String("__CallbackId__"),
+		Error: &types.ErrorObject{
+			ErrorMessage: ptr.String("__ErrorMessage__"),
+			ErrorType:    ptr.String("__ErrorType__"),
+			ErrorData:    ptr.String("__ErrorData__"),
+			StackTrace: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5839,7 +6896,66 @@ func TestCheckResponseSnapshot_Error_CapacityProviderLimitExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{})
+	_, opErr := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{
+		CapacityProviderName: ptr.String("__CapacityProviderName__"),
+		VpcConfig: &types.CapacityProviderVpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PermissionsConfig: &types.CapacityProviderPermissionsConfig{
+			CapacityProviderOperatorRoleArn: ptr.String("__CapacityProviderOperatorRoleArn__"),
+		},
+		InstanceRequirements: &types.InstanceRequirements{
+			Architectures: []types.Architecture{
+				types.Architecture("x86_64"),
+				types.Architecture("x86_64"),
+			},
+			AllowedInstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedInstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CapacityProviderScalingConfig: &types.CapacityProviderScalingConfig{
+			MaxVCpuCount: ptr.Int32(1),
+			ScalingMode:  types.CapacityProviderScalingMode("Auto"),
+			ScalingPolicies: []types.TargetTrackingScalingPolicy{
+				{
+					PredefinedMetricType: types.CapacityProviderPredefinedMetricType("LambdaCapacityProviderAverageCPUUtilization"),
+					TargetValue:          ptr.Float64(1.0),
+				},
+				{
+					PredefinedMetricType: types.CapacityProviderPredefinedMetricType("LambdaCapacityProviderAverageCPUUtilization"),
+					TargetValue:          ptr.Float64(1.0),
+				},
+			},
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PropagateTags: &types.PropagateTags{
+			Mode: types.PropagateTagsMode("None"),
+			ExplicitTags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+			LoggingConfig: &types.CapacityProviderLoggingConfig{
+				SystemLogLevel: types.SystemLogLevel("DEBUG"),
+				LogGroup:       ptr.String("__LogGroup__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5865,7 +6981,16 @@ func TestCheckResponseSnapshot_Error_CodeArtifactUserDeletedException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5891,7 +7016,16 @@ func TestCheckResponseSnapshot_Error_CodeArtifactUserFailedException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5917,7 +7051,16 @@ func TestCheckResponseSnapshot_Error_CodeArtifactUserPendingException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5943,7 +7086,110 @@ func TestCheckResponseSnapshot_Error_CodeSigningConfigNotFoundException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{})
+	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Runtime:      types.Runtime("nodejs"),
+		Role:         ptr.String("__Role__"),
+		Handler:      ptr.String("__Handler__"),
+		Code: &types.FunctionCode{
+			ZipFile:             []byte("blob"),
+			S3Bucket:            ptr.String("__S3Bucket__"),
+			S3Key:               ptr.String("__S3Key__"),
+			S3ObjectVersion:     ptr.String("__S3ObjectVersion__"),
+			S3ObjectStorageMode: types.S3ObjectStorageMode("COPY"),
+			ImageUri:            ptr.String("__ImageUri__"),
+			SourceKMSKeyArn:     ptr.String("__SourceKMSKeyArn__"),
+		},
+		Description: ptr.String("__Description__"),
+		Timeout:     ptr.Int32(1),
+		MemorySize:  ptr.Int32(1),
+		Publish:     true,
+		PublishTo:   types.FunctionVersionLatestPublished("LATEST_PUBLISHED"),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ipv6AllowedForDualStack: ptr.Bool(true),
+		},
+		PackageType: types.PackageType("Zip"),
+		DeadLetterConfig: &types.DeadLetterConfig{
+			TargetArn: ptr.String("__TargetArn__"),
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		TracingConfig: &types.TracingConfig{
+			Mode: types.TracingMode("Active"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Layers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FileSystemConfigs: []types.FileSystemConfig{
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+		},
+		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
+		ImageConfig: &types.ImageConfig{
+			EntryPoint: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Command: []string{
+				"__Member__",
+				"__Member__",
+			},
+			WorkingDirectory: ptr.String("__WorkingDirectory__"),
+		},
+		Architectures: []types.Architecture{
+			types.Architecture("x86_64"),
+			types.Architecture("x86_64"),
+		},
+		EphemeralStorage: &types.EphemeralStorage{
+			Size: ptr.Int32(1),
+		},
+		SnapStart: &types.SnapStart{
+			ApplyOn: types.SnapStartApplyOn("PublishedVersions"),
+		},
+		LoggingConfig: &types.LoggingConfig{
+			LogFormat:           types.LogFormat("JSON"),
+			ApplicationLogLevel: types.ApplicationLogLevel("TRACE"),
+			SystemLogLevel:      types.SystemLogLevel("DEBUG"),
+			LogGroup:            ptr.String("__LogGroup__"),
+		},
+		TenancyConfig: &types.TenancyConfig{
+			TenantIsolationMode: types.TenantIsolationMode("PER_TENANT"),
+		},
+		CapacityProviderConfig: &types.CapacityProviderConfig{
+			LambdaManagedInstancesCapacityProviderConfig: &types.LambdaManagedInstancesCapacityProviderConfig{
+				CapacityProviderArn:                   ptr.String("__CapacityProviderArn__"),
+				PerExecutionEnvironmentMaxConcurrency: ptr.Int32(1),
+				ExecutionEnvironmentMemoryGiBPerVCpu:  ptr.Float64(1.0),
+			},
+		},
+		DurableConfig: &types.DurableConfig{
+			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			ExecutionTimeout:      ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5969,7 +7215,110 @@ func TestCheckResponseSnapshot_Error_CodeStorageExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{})
+	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Runtime:      types.Runtime("nodejs"),
+		Role:         ptr.String("__Role__"),
+		Handler:      ptr.String("__Handler__"),
+		Code: &types.FunctionCode{
+			ZipFile:             []byte("blob"),
+			S3Bucket:            ptr.String("__S3Bucket__"),
+			S3Key:               ptr.String("__S3Key__"),
+			S3ObjectVersion:     ptr.String("__S3ObjectVersion__"),
+			S3ObjectStorageMode: types.S3ObjectStorageMode("COPY"),
+			ImageUri:            ptr.String("__ImageUri__"),
+			SourceKMSKeyArn:     ptr.String("__SourceKMSKeyArn__"),
+		},
+		Description: ptr.String("__Description__"),
+		Timeout:     ptr.Int32(1),
+		MemorySize:  ptr.Int32(1),
+		Publish:     true,
+		PublishTo:   types.FunctionVersionLatestPublished("LATEST_PUBLISHED"),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ipv6AllowedForDualStack: ptr.Bool(true),
+		},
+		PackageType: types.PackageType("Zip"),
+		DeadLetterConfig: &types.DeadLetterConfig{
+			TargetArn: ptr.String("__TargetArn__"),
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		TracingConfig: &types.TracingConfig{
+			Mode: types.TracingMode("Active"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Layers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FileSystemConfigs: []types.FileSystemConfig{
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+		},
+		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
+		ImageConfig: &types.ImageConfig{
+			EntryPoint: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Command: []string{
+				"__Member__",
+				"__Member__",
+			},
+			WorkingDirectory: ptr.String("__WorkingDirectory__"),
+		},
+		Architectures: []types.Architecture{
+			types.Architecture("x86_64"),
+			types.Architecture("x86_64"),
+		},
+		EphemeralStorage: &types.EphemeralStorage{
+			Size: ptr.Int32(1),
+		},
+		SnapStart: &types.SnapStart{
+			ApplyOn: types.SnapStartApplyOn("PublishedVersions"),
+		},
+		LoggingConfig: &types.LoggingConfig{
+			LogFormat:           types.LogFormat("JSON"),
+			ApplicationLogLevel: types.ApplicationLogLevel("TRACE"),
+			SystemLogLevel:      types.SystemLogLevel("DEBUG"),
+			LogGroup:            ptr.String("__LogGroup__"),
+		},
+		TenancyConfig: &types.TenancyConfig{
+			TenantIsolationMode: types.TenantIsolationMode("PER_TENANT"),
+		},
+		CapacityProviderConfig: &types.CapacityProviderConfig{
+			LambdaManagedInstancesCapacityProviderConfig: &types.LambdaManagedInstancesCapacityProviderConfig{
+				CapacityProviderArn:                   ptr.String("__CapacityProviderArn__"),
+				PerExecutionEnvironmentMaxConcurrency: ptr.Int32(1),
+				ExecutionEnvironmentMemoryGiBPerVCpu:  ptr.Float64(1.0),
+			},
+		},
+		DurableConfig: &types.DurableConfig{
+			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			ExecutionTimeout:      ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5995,7 +7344,110 @@ func TestCheckResponseSnapshot_Error_CodeVerificationFailedException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{})
+	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Runtime:      types.Runtime("nodejs"),
+		Role:         ptr.String("__Role__"),
+		Handler:      ptr.String("__Handler__"),
+		Code: &types.FunctionCode{
+			ZipFile:             []byte("blob"),
+			S3Bucket:            ptr.String("__S3Bucket__"),
+			S3Key:               ptr.String("__S3Key__"),
+			S3ObjectVersion:     ptr.String("__S3ObjectVersion__"),
+			S3ObjectStorageMode: types.S3ObjectStorageMode("COPY"),
+			ImageUri:            ptr.String("__ImageUri__"),
+			SourceKMSKeyArn:     ptr.String("__SourceKMSKeyArn__"),
+		},
+		Description: ptr.String("__Description__"),
+		Timeout:     ptr.Int32(1),
+		MemorySize:  ptr.Int32(1),
+		Publish:     true,
+		PublishTo:   types.FunctionVersionLatestPublished("LATEST_PUBLISHED"),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ipv6AllowedForDualStack: ptr.Bool(true),
+		},
+		PackageType: types.PackageType("Zip"),
+		DeadLetterConfig: &types.DeadLetterConfig{
+			TargetArn: ptr.String("__TargetArn__"),
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		TracingConfig: &types.TracingConfig{
+			Mode: types.TracingMode("Active"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Layers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FileSystemConfigs: []types.FileSystemConfig{
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+		},
+		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
+		ImageConfig: &types.ImageConfig{
+			EntryPoint: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Command: []string{
+				"__Member__",
+				"__Member__",
+			},
+			WorkingDirectory: ptr.String("__WorkingDirectory__"),
+		},
+		Architectures: []types.Architecture{
+			types.Architecture("x86_64"),
+			types.Architecture("x86_64"),
+		},
+		EphemeralStorage: &types.EphemeralStorage{
+			Size: ptr.Int32(1),
+		},
+		SnapStart: &types.SnapStart{
+			ApplyOn: types.SnapStartApplyOn("PublishedVersions"),
+		},
+		LoggingConfig: &types.LoggingConfig{
+			LogFormat:           types.LogFormat("JSON"),
+			ApplicationLogLevel: types.ApplicationLogLevel("TRACE"),
+			SystemLogLevel:      types.SystemLogLevel("DEBUG"),
+			LogGroup:            ptr.String("__LogGroup__"),
+		},
+		TenancyConfig: &types.TenancyConfig{
+			TenantIsolationMode: types.TenantIsolationMode("PER_TENANT"),
+		},
+		CapacityProviderConfig: &types.CapacityProviderConfig{
+			LambdaManagedInstancesCapacityProviderConfig: &types.LambdaManagedInstancesCapacityProviderConfig{
+				CapacityProviderArn:                   ptr.String("__CapacityProviderArn__"),
+				PerExecutionEnvironmentMaxConcurrency: ptr.Int32(1),
+				ExecutionEnvironmentMemoryGiBPerVCpu:  ptr.Float64(1.0),
+			},
+		},
+		DurableConfig: &types.DurableConfig{
+			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			ExecutionTimeout:      ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6021,7 +7473,16 @@ func TestCheckResponseSnapshot_Error_DurableExecutionAlreadyStartedException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6047,7 +7508,16 @@ func TestCheckResponseSnapshot_Error_EC2AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6073,7 +7543,16 @@ func TestCheckResponseSnapshot_Error_EC2ThrottledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6100,7 +7579,16 @@ func TestCheckResponseSnapshot_Error_EC2UnexpectedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6126,7 +7614,16 @@ func TestCheckResponseSnapshot_Error_EFSIOException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6152,7 +7649,16 @@ func TestCheckResponseSnapshot_Error_EFSMountConnectivityException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6178,7 +7684,16 @@ func TestCheckResponseSnapshot_Error_EFSMountFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6204,7 +7719,16 @@ func TestCheckResponseSnapshot_Error_EFSMountTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6230,7 +7754,16 @@ func TestCheckResponseSnapshot_Error_ENILimitReachedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6256,7 +7789,16 @@ func TestCheckResponseSnapshot_Error_ENINotReadyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6282,7 +7824,110 @@ func TestCheckResponseSnapshot_Error_FunctionVersionsPerCapacityProviderLimitExc
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{})
+	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Runtime:      types.Runtime("nodejs"),
+		Role:         ptr.String("__Role__"),
+		Handler:      ptr.String("__Handler__"),
+		Code: &types.FunctionCode{
+			ZipFile:             []byte("blob"),
+			S3Bucket:            ptr.String("__S3Bucket__"),
+			S3Key:               ptr.String("__S3Key__"),
+			S3ObjectVersion:     ptr.String("__S3ObjectVersion__"),
+			S3ObjectStorageMode: types.S3ObjectStorageMode("COPY"),
+			ImageUri:            ptr.String("__ImageUri__"),
+			SourceKMSKeyArn:     ptr.String("__SourceKMSKeyArn__"),
+		},
+		Description: ptr.String("__Description__"),
+		Timeout:     ptr.Int32(1),
+		MemorySize:  ptr.Int32(1),
+		Publish:     true,
+		PublishTo:   types.FunctionVersionLatestPublished("LATEST_PUBLISHED"),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ipv6AllowedForDualStack: ptr.Bool(true),
+		},
+		PackageType: types.PackageType("Zip"),
+		DeadLetterConfig: &types.DeadLetterConfig{
+			TargetArn: ptr.String("__TargetArn__"),
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		TracingConfig: &types.TracingConfig{
+			Mode: types.TracingMode("Active"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Layers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FileSystemConfigs: []types.FileSystemConfig{
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+		},
+		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
+		ImageConfig: &types.ImageConfig{
+			EntryPoint: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Command: []string{
+				"__Member__",
+				"__Member__",
+			},
+			WorkingDirectory: ptr.String("__WorkingDirectory__"),
+		},
+		Architectures: []types.Architecture{
+			types.Architecture("x86_64"),
+			types.Architecture("x86_64"),
+		},
+		EphemeralStorage: &types.EphemeralStorage{
+			Size: ptr.Int32(1),
+		},
+		SnapStart: &types.SnapStart{
+			ApplyOn: types.SnapStartApplyOn("PublishedVersions"),
+		},
+		LoggingConfig: &types.LoggingConfig{
+			LogFormat:           types.LogFormat("JSON"),
+			ApplicationLogLevel: types.ApplicationLogLevel("TRACE"),
+			SystemLogLevel:      types.SystemLogLevel("DEBUG"),
+			LogGroup:            ptr.String("__LogGroup__"),
+		},
+		TenancyConfig: &types.TenancyConfig{
+			TenantIsolationMode: types.TenantIsolationMode("PER_TENANT"),
+		},
+		CapacityProviderConfig: &types.CapacityProviderConfig{
+			LambdaManagedInstancesCapacityProviderConfig: &types.LambdaManagedInstancesCapacityProviderConfig{
+				CapacityProviderArn:                   ptr.String("__CapacityProviderArn__"),
+				PerExecutionEnvironmentMaxConcurrency: ptr.Int32(1),
+				ExecutionEnvironmentMemoryGiBPerVCpu:  ptr.Float64(1.0),
+			},
+		},
+		DurableConfig: &types.DurableConfig{
+			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			ExecutionTimeout:      ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6308,7 +7953,110 @@ func TestCheckResponseSnapshot_Error_InvalidCodeSignatureException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{})
+	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Runtime:      types.Runtime("nodejs"),
+		Role:         ptr.String("__Role__"),
+		Handler:      ptr.String("__Handler__"),
+		Code: &types.FunctionCode{
+			ZipFile:             []byte("blob"),
+			S3Bucket:            ptr.String("__S3Bucket__"),
+			S3Key:               ptr.String("__S3Key__"),
+			S3ObjectVersion:     ptr.String("__S3ObjectVersion__"),
+			S3ObjectStorageMode: types.S3ObjectStorageMode("COPY"),
+			ImageUri:            ptr.String("__ImageUri__"),
+			SourceKMSKeyArn:     ptr.String("__SourceKMSKeyArn__"),
+		},
+		Description: ptr.String("__Description__"),
+		Timeout:     ptr.Int32(1),
+		MemorySize:  ptr.Int32(1),
+		Publish:     true,
+		PublishTo:   types.FunctionVersionLatestPublished("LATEST_PUBLISHED"),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ipv6AllowedForDualStack: ptr.Bool(true),
+		},
+		PackageType: types.PackageType("Zip"),
+		DeadLetterConfig: &types.DeadLetterConfig{
+			TargetArn: ptr.String("__TargetArn__"),
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		TracingConfig: &types.TracingConfig{
+			Mode: types.TracingMode("Active"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Layers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FileSystemConfigs: []types.FileSystemConfig{
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+			{
+				Arn:            ptr.String("__Arn__"),
+				LocalMountPath: ptr.String("__LocalMountPath__"),
+			},
+		},
+		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
+		ImageConfig: &types.ImageConfig{
+			EntryPoint: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Command: []string{
+				"__Member__",
+				"__Member__",
+			},
+			WorkingDirectory: ptr.String("__WorkingDirectory__"),
+		},
+		Architectures: []types.Architecture{
+			types.Architecture("x86_64"),
+			types.Architecture("x86_64"),
+		},
+		EphemeralStorage: &types.EphemeralStorage{
+			Size: ptr.Int32(1),
+		},
+		SnapStart: &types.SnapStart{
+			ApplyOn: types.SnapStartApplyOn("PublishedVersions"),
+		},
+		LoggingConfig: &types.LoggingConfig{
+			LogFormat:           types.LogFormat("JSON"),
+			ApplicationLogLevel: types.ApplicationLogLevel("TRACE"),
+			SystemLogLevel:      types.SystemLogLevel("DEBUG"),
+			LogGroup:            ptr.String("__LogGroup__"),
+		},
+		TenancyConfig: &types.TenancyConfig{
+			TenantIsolationMode: types.TenantIsolationMode("PER_TENANT"),
+		},
+		CapacityProviderConfig: &types.CapacityProviderConfig{
+			LambdaManagedInstancesCapacityProviderConfig: &types.LambdaManagedInstancesCapacityProviderConfig{
+				CapacityProviderArn:                   ptr.String("__CapacityProviderArn__"),
+				PerExecutionEnvironmentMaxConcurrency: ptr.Int32(1),
+				ExecutionEnvironmentMemoryGiBPerVCpu:  ptr.Float64(1.0),
+			},
+		},
+		DurableConfig: &types.DurableConfig{
+			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			ExecutionTimeout:      ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6334,7 +8082,15 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{})
+	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{
+		LayerName:      ptr.String("__LayerName__"),
+		VersionNumber:  ptr.Int64(1),
+		StatementId:    ptr.String("__StatementId__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6360,7 +8116,16 @@ func TestCheckResponseSnapshot_Error_InvalidRequestContentException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6386,7 +8151,16 @@ func TestCheckResponseSnapshot_Error_InvalidRuntimeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6412,7 +8186,16 @@ func TestCheckResponseSnapshot_Error_InvalidSecurityGroupIDException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6438,7 +8221,16 @@ func TestCheckResponseSnapshot_Error_InvalidSubnetIDException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6464,7 +8256,16 @@ func TestCheckResponseSnapshot_Error_InvalidZipFileException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6490,7 +8291,83 @@ func TestCheckResponseSnapshot_Error_KMSAccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckpointDurableExecution(context.Background(), &CheckpointDurableExecutionInput{})
+	_, opErr := svc.CheckpointDurableExecution(context.Background(), &CheckpointDurableExecutionInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+		CheckpointToken:     ptr.String("__CheckpointToken__"),
+		Updates: []types.OperationUpdate{
+			{
+				Id:       ptr.String("__Id__"),
+				ParentId: ptr.String("__ParentId__"),
+				Name:     ptr.String("__Name__"),
+				Type:     types.OperationType("EXECUTION"),
+				SubType:  ptr.String("__SubType__"),
+				Action:   types.OperationAction("START"),
+				Payload:  ptr.String("__Payload__"),
+				Error: &types.ErrorObject{
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ErrorType:    ptr.String("__ErrorType__"),
+					ErrorData:    ptr.String("__ErrorData__"),
+					StackTrace: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ContextOptions: &types.ContextOptions{
+					ReplayChildren: ptr.Bool(true),
+				},
+				StepOptions: &types.StepOptions{
+					NextAttemptDelaySeconds: ptr.Int32(1),
+				},
+				WaitOptions: &types.WaitOptions{
+					WaitSeconds: ptr.Int32(1),
+				},
+				CallbackOptions: &types.CallbackOptions{
+					TimeoutSeconds:          1,
+					HeartbeatTimeoutSeconds: 1,
+				},
+				ChainedInvokeOptions: &types.ChainedInvokeOptions{
+					FunctionName: ptr.String("__FunctionName__"),
+					TenantId:     ptr.String("__TenantId__"),
+				},
+			},
+			{
+				Id:       ptr.String("__Id__"),
+				ParentId: ptr.String("__ParentId__"),
+				Name:     ptr.String("__Name__"),
+				Type:     types.OperationType("EXECUTION"),
+				SubType:  ptr.String("__SubType__"),
+				Action:   types.OperationAction("START"),
+				Payload:  ptr.String("__Payload__"),
+				Error: &types.ErrorObject{
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ErrorType:    ptr.String("__ErrorType__"),
+					ErrorData:    ptr.String("__ErrorData__"),
+					StackTrace: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ContextOptions: &types.ContextOptions{
+					ReplayChildren: ptr.Bool(true),
+				},
+				StepOptions: &types.StepOptions{
+					NextAttemptDelaySeconds: ptr.Int32(1),
+				},
+				WaitOptions: &types.WaitOptions{
+					WaitSeconds: ptr.Int32(1),
+				},
+				CallbackOptions: &types.CallbackOptions{
+					TimeoutSeconds:          1,
+					HeartbeatTimeoutSeconds: 1,
+				},
+				ChainedInvokeOptions: &types.ChainedInvokeOptions{
+					FunctionName: ptr.String("__FunctionName__"),
+					TenantId:     ptr.String("__TenantId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6516,7 +8393,83 @@ func TestCheckResponseSnapshot_Error_KMSDisabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckpointDurableExecution(context.Background(), &CheckpointDurableExecutionInput{})
+	_, opErr := svc.CheckpointDurableExecution(context.Background(), &CheckpointDurableExecutionInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+		CheckpointToken:     ptr.String("__CheckpointToken__"),
+		Updates: []types.OperationUpdate{
+			{
+				Id:       ptr.String("__Id__"),
+				ParentId: ptr.String("__ParentId__"),
+				Name:     ptr.String("__Name__"),
+				Type:     types.OperationType("EXECUTION"),
+				SubType:  ptr.String("__SubType__"),
+				Action:   types.OperationAction("START"),
+				Payload:  ptr.String("__Payload__"),
+				Error: &types.ErrorObject{
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ErrorType:    ptr.String("__ErrorType__"),
+					ErrorData:    ptr.String("__ErrorData__"),
+					StackTrace: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ContextOptions: &types.ContextOptions{
+					ReplayChildren: ptr.Bool(true),
+				},
+				StepOptions: &types.StepOptions{
+					NextAttemptDelaySeconds: ptr.Int32(1),
+				},
+				WaitOptions: &types.WaitOptions{
+					WaitSeconds: ptr.Int32(1),
+				},
+				CallbackOptions: &types.CallbackOptions{
+					TimeoutSeconds:          1,
+					HeartbeatTimeoutSeconds: 1,
+				},
+				ChainedInvokeOptions: &types.ChainedInvokeOptions{
+					FunctionName: ptr.String("__FunctionName__"),
+					TenantId:     ptr.String("__TenantId__"),
+				},
+			},
+			{
+				Id:       ptr.String("__Id__"),
+				ParentId: ptr.String("__ParentId__"),
+				Name:     ptr.String("__Name__"),
+				Type:     types.OperationType("EXECUTION"),
+				SubType:  ptr.String("__SubType__"),
+				Action:   types.OperationAction("START"),
+				Payload:  ptr.String("__Payload__"),
+				Error: &types.ErrorObject{
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ErrorType:    ptr.String("__ErrorType__"),
+					ErrorData:    ptr.String("__ErrorData__"),
+					StackTrace: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ContextOptions: &types.ContextOptions{
+					ReplayChildren: ptr.Bool(true),
+				},
+				StepOptions: &types.StepOptions{
+					NextAttemptDelaySeconds: ptr.Int32(1),
+				},
+				WaitOptions: &types.WaitOptions{
+					WaitSeconds: ptr.Int32(1),
+				},
+				CallbackOptions: &types.CallbackOptions{
+					TimeoutSeconds:          1,
+					HeartbeatTimeoutSeconds: 1,
+				},
+				ChainedInvokeOptions: &types.ChainedInvokeOptions{
+					FunctionName: ptr.String("__FunctionName__"),
+					TenantId:     ptr.String("__TenantId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6542,7 +8495,83 @@ func TestCheckResponseSnapshot_Error_KMSInvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckpointDurableExecution(context.Background(), &CheckpointDurableExecutionInput{})
+	_, opErr := svc.CheckpointDurableExecution(context.Background(), &CheckpointDurableExecutionInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+		CheckpointToken:     ptr.String("__CheckpointToken__"),
+		Updates: []types.OperationUpdate{
+			{
+				Id:       ptr.String("__Id__"),
+				ParentId: ptr.String("__ParentId__"),
+				Name:     ptr.String("__Name__"),
+				Type:     types.OperationType("EXECUTION"),
+				SubType:  ptr.String("__SubType__"),
+				Action:   types.OperationAction("START"),
+				Payload:  ptr.String("__Payload__"),
+				Error: &types.ErrorObject{
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ErrorType:    ptr.String("__ErrorType__"),
+					ErrorData:    ptr.String("__ErrorData__"),
+					StackTrace: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ContextOptions: &types.ContextOptions{
+					ReplayChildren: ptr.Bool(true),
+				},
+				StepOptions: &types.StepOptions{
+					NextAttemptDelaySeconds: ptr.Int32(1),
+				},
+				WaitOptions: &types.WaitOptions{
+					WaitSeconds: ptr.Int32(1),
+				},
+				CallbackOptions: &types.CallbackOptions{
+					TimeoutSeconds:          1,
+					HeartbeatTimeoutSeconds: 1,
+				},
+				ChainedInvokeOptions: &types.ChainedInvokeOptions{
+					FunctionName: ptr.String("__FunctionName__"),
+					TenantId:     ptr.String("__TenantId__"),
+				},
+			},
+			{
+				Id:       ptr.String("__Id__"),
+				ParentId: ptr.String("__ParentId__"),
+				Name:     ptr.String("__Name__"),
+				Type:     types.OperationType("EXECUTION"),
+				SubType:  ptr.String("__SubType__"),
+				Action:   types.OperationAction("START"),
+				Payload:  ptr.String("__Payload__"),
+				Error: &types.ErrorObject{
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ErrorType:    ptr.String("__ErrorType__"),
+					ErrorData:    ptr.String("__ErrorData__"),
+					StackTrace: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ContextOptions: &types.ContextOptions{
+					ReplayChildren: ptr.Bool(true),
+				},
+				StepOptions: &types.StepOptions{
+					NextAttemptDelaySeconds: ptr.Int32(1),
+				},
+				WaitOptions: &types.WaitOptions{
+					WaitSeconds: ptr.Int32(1),
+				},
+				CallbackOptions: &types.CallbackOptions{
+					TimeoutSeconds:          1,
+					HeartbeatTimeoutSeconds: 1,
+				},
+				ChainedInvokeOptions: &types.ChainedInvokeOptions{
+					FunctionName: ptr.String("__FunctionName__"),
+					TenantId:     ptr.String("__TenantId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6568,7 +8597,83 @@ func TestCheckResponseSnapshot_Error_KMSNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckpointDurableExecution(context.Background(), &CheckpointDurableExecutionInput{})
+	_, opErr := svc.CheckpointDurableExecution(context.Background(), &CheckpointDurableExecutionInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+		CheckpointToken:     ptr.String("__CheckpointToken__"),
+		Updates: []types.OperationUpdate{
+			{
+				Id:       ptr.String("__Id__"),
+				ParentId: ptr.String("__ParentId__"),
+				Name:     ptr.String("__Name__"),
+				Type:     types.OperationType("EXECUTION"),
+				SubType:  ptr.String("__SubType__"),
+				Action:   types.OperationAction("START"),
+				Payload:  ptr.String("__Payload__"),
+				Error: &types.ErrorObject{
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ErrorType:    ptr.String("__ErrorType__"),
+					ErrorData:    ptr.String("__ErrorData__"),
+					StackTrace: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ContextOptions: &types.ContextOptions{
+					ReplayChildren: ptr.Bool(true),
+				},
+				StepOptions: &types.StepOptions{
+					NextAttemptDelaySeconds: ptr.Int32(1),
+				},
+				WaitOptions: &types.WaitOptions{
+					WaitSeconds: ptr.Int32(1),
+				},
+				CallbackOptions: &types.CallbackOptions{
+					TimeoutSeconds:          1,
+					HeartbeatTimeoutSeconds: 1,
+				},
+				ChainedInvokeOptions: &types.ChainedInvokeOptions{
+					FunctionName: ptr.String("__FunctionName__"),
+					TenantId:     ptr.String("__TenantId__"),
+				},
+			},
+			{
+				Id:       ptr.String("__Id__"),
+				ParentId: ptr.String("__ParentId__"),
+				Name:     ptr.String("__Name__"),
+				Type:     types.OperationType("EXECUTION"),
+				SubType:  ptr.String("__SubType__"),
+				Action:   types.OperationAction("START"),
+				Payload:  ptr.String("__Payload__"),
+				Error: &types.ErrorObject{
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ErrorType:    ptr.String("__ErrorType__"),
+					ErrorData:    ptr.String("__ErrorData__"),
+					StackTrace: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ContextOptions: &types.ContextOptions{
+					ReplayChildren: ptr.Bool(true),
+				},
+				StepOptions: &types.StepOptions{
+					NextAttemptDelaySeconds: ptr.Int32(1),
+				},
+				WaitOptions: &types.WaitOptions{
+					WaitSeconds: ptr.Int32(1),
+				},
+				CallbackOptions: &types.CallbackOptions{
+					TimeoutSeconds:          1,
+					HeartbeatTimeoutSeconds: 1,
+				},
+				ChainedInvokeOptions: &types.ChainedInvokeOptions{
+					FunctionName: ptr.String("__FunctionName__"),
+					TenantId:     ptr.String("__TenantId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6594,7 +8699,16 @@ func TestCheckResponseSnapshot_Error_ModeNotSupportedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6620,7 +8734,16 @@ func TestCheckResponseSnapshot_Error_NoPublishedVersionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6646,7 +8769,15 @@ func TestCheckResponseSnapshot_Error_PolicyLengthExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{})
+	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{
+		LayerName:      ptr.String("__LayerName__"),
+		VersionNumber:  ptr.Int64(1),
+		StatementId:    ptr.String("__StatementId__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6672,7 +8803,15 @@ func TestCheckResponseSnapshot_Error_PreconditionFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{})
+	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{
+		LayerName:      ptr.String("__LayerName__"),
+		VersionNumber:  ptr.Int64(1),
+		StatementId:    ptr.String("__StatementId__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6698,7 +8837,10 @@ func TestCheckResponseSnapshot_Error_ProvisionedConcurrencyConfigNotFoundExcepti
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetProvisionedConcurrencyConfig(context.Background(), &GetProvisionedConcurrencyConfigInput{})
+	_, opErr := svc.GetProvisionedConcurrencyConfig(context.Background(), &GetProvisionedConcurrencyConfigInput{
+		FunctionName: ptr.String("__FunctionName__"),
+		Qualifier:    ptr.String("__Qualifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6724,7 +8866,20 @@ func TestCheckResponseSnapshot_Error_PublicPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{
+		FunctionName:          ptr.String("__FunctionName__"),
+		StatementId:           ptr.String("__StatementId__"),
+		Action:                ptr.String("__Action__"),
+		Principal:             ptr.String("__Principal__"),
+		SourceArn:             ptr.String("__SourceArn__"),
+		FunctionUrlAuthType:   types.FunctionUrlAuthType("NONE"),
+		InvokedViaFunctionUrl: ptr.Bool(true),
+		SourceAccount:         ptr.String("__SourceAccount__"),
+		EventSourceToken:      ptr.String("__EventSourceToken__"),
+		Qualifier:             ptr.String("__Qualifier__"),
+		RevisionId:            ptr.String("__RevisionId__"),
+		PrincipalOrgID:        ptr.String("__PrincipalOrgID__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6750,7 +8905,16 @@ func TestCheckResponseSnapshot_Error_RecursiveInvocationException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6776,7 +8940,16 @@ func TestCheckResponseSnapshot_Error_RequestTooLargeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6802,7 +8975,15 @@ func TestCheckResponseSnapshot_Error_ResourceConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{})
+	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{
+		LayerName:      ptr.String("__LayerName__"),
+		VersionNumber:  ptr.Int64(1),
+		StatementId:    ptr.String("__StatementId__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6828,7 +9009,9 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEventSourceMapping(context.Background(), &DeleteEventSourceMappingInput{})
+	_, opErr := svc.DeleteEventSourceMapping(context.Background(), &DeleteEventSourceMappingInput{
+		UUID: ptr.String("__UUID__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6854,7 +9037,15 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{})
+	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{
+		LayerName:      ptr.String("__LayerName__"),
+		VersionNumber:  ptr.Int64(1),
+		StatementId:    ptr.String("__StatementId__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6880,7 +9071,16 @@ func TestCheckResponseSnapshot_Error_ResourceNotReadyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6906,7 +9106,16 @@ func TestCheckResponseSnapshot_Error_S3FilesMountConnectivityException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6932,7 +9141,16 @@ func TestCheckResponseSnapshot_Error_S3FilesMountFailureException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6958,7 +9176,16 @@ func TestCheckResponseSnapshot_Error_S3FilesMountTimeoutException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6984,7 +9211,16 @@ func TestCheckResponseSnapshot_Error_SerializedRequestEntityTooLargeException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7010,7 +9246,15 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{})
+	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{
+		LayerName:      ptr.String("__LayerName__"),
+		VersionNumber:  ptr.Int64(1),
+		StatementId:    ptr.String("__StatementId__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7036,7 +9280,16 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7062,7 +9315,16 @@ func TestCheckResponseSnapshot_Error_SnapStartException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7088,7 +9350,16 @@ func TestCheckResponseSnapshot_Error_SnapStartNotReadyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7114,7 +9385,16 @@ func TestCheckResponseSnapshot_Error_SnapStartRegenerationFailureException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7140,7 +9420,16 @@ func TestCheckResponseSnapshot_Error_SnapStartTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7166,7 +9455,16 @@ func TestCheckResponseSnapshot_Error_SubnetIPAddressLimitReachedException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7194,7 +9492,15 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{})
+	_, opErr := svc.AddLayerVersionPermission(context.Background(), &AddLayerVersionPermissionInput{
+		LayerName:      ptr.String("__LayerName__"),
+		VersionNumber:  ptr.Int64(1),
+		StatementId:    ptr.String("__StatementId__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7220,7 +9526,16 @@ func TestCheckResponseSnapshot_Error_UnsupportedMediaTypeException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Invoke(context.Background(), &InvokeInput{})
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"cases":[{"caseId":"__CaseId__","fields":[{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}},{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}}],"tags":{"key0":"__Value__"},"templateId":"__TemplateId__"},{"caseId":"__CaseId__","fields":[{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}},{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}}],"tags":{"key0":"__Value__"},"templateId":"__TemplateId__"}],"nextToken":"__NextToken__","totalCount":1}

@@ -1,0 +1,4 @@
+413
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>BatchTooLarge</Code><Message>__Message__</Message></Error></ErrorResponse>

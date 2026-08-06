@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","distributionConfigurationArn":"__DistributionConfigurationArn__","requestId":"__RequestId__"}

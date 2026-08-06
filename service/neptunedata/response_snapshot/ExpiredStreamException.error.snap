@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"ExpiredStreamException","code":"ExpiredStreamException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

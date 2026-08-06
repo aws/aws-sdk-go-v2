@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"enabledBaselineDetails":{"arn":"__Arn__","baselineIdentifier":"__BaselineIdentifier__","baselineVersion":"__BaselineVersion__","driftStatusSummary":{"types":{"inheritance":{"status":"IN_SYNC"}}},"parameters":[{"key":"__Key__","value":"__Document__"},{"key":"__Key__","value":"__Document__"}],"parentIdentifier":"__ParentIdentifier__","statusSummary":{"lastOperationIdentifier":"__LastOperationIdentifier__","status":"SUCCEEDED"},"targetIdentifier":"__TargetIdentifier__"}}

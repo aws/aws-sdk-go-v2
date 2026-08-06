@@ -188,7 +188,36 @@ func TestCheckResponseSnapshot_BatchGetTokenBalance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{})
+	got, err := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{
+		GetTokenBalanceInputs: []types.BatchGetTokenBalanceInputItem{
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -219,7 +248,12 @@ func TestCheckResponseSnapshot_GetAssetContract(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssetContract(context.Background(), &GetAssetContractInput{})
+	got, err := svc.GetAssetContract(context.Background(), &GetAssetContractInput{
+		ContractIdentifier: &types.ContractIdentifier{
+			Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+			ContractAddress: ptr.String("__ContractAddress__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -254,7 +288,19 @@ func TestCheckResponseSnapshot_GetTokenBalance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTokenBalance(context.Background(), &GetTokenBalanceInput{})
+	got, err := svc.GetTokenBalance(context.Background(), &GetTokenBalanceInput{
+		TokenIdentifier: &types.TokenIdentifier{
+			Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+			ContractAddress: ptr.String("__ContractAddress__"),
+			TokenId:         ptr.String("__TokenId__"),
+		},
+		OwnerIdentifier: &types.OwnerIdentifier{
+			Address: ptr.String("__Address__"),
+		},
+		AtBlockchainInstant: &types.BlockchainInstant{
+			Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +342,11 @@ func TestCheckResponseSnapshot_GetTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTransaction(context.Background(), &GetTransactionInput{})
+	got, err := svc.GetTransaction(context.Background(), &GetTransactionInput{
+		TransactionHash: ptr.String("__TransactionHash__"),
+		TransactionId:   ptr.String("__TransactionId__"),
+		Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -335,7 +385,15 @@ func TestCheckResponseSnapshot_ListAssetContracts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetContracts(context.Background(), &ListAssetContractsInput{})
+	got, err := svc.ListAssetContracts(context.Background(), &ListAssetContractsInput{
+		ContractFilter: &types.ContractFilter{
+			Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+			TokenStandard:   types.QueryTokenStandard("ERC20"),
+			DeployerAddress: ptr.String("__DeployerAddress__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -398,7 +456,38 @@ func TestCheckResponseSnapshot_ListFilteredTransactionEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFilteredTransactionEvents(context.Background(), &ListFilteredTransactionEventsInput{})
+	got, err := svc.ListFilteredTransactionEvents(context.Background(), &ListFilteredTransactionEventsInput{
+		Network: ptr.String("__Network__"),
+		AddressIdentifierFilter: &types.AddressIdentifierFilter{
+			TransactionEventToAddress: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		TimeFilter: &types.TimeFilter{
+			From: &types.BlockchainInstant{
+				Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			To: &types.BlockchainInstant{
+				Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		VoutFilter: &types.VoutFilter{
+			VoutSpent: ptr.Bool(true),
+		},
+		ConfirmationStatusFilter: &types.ConfirmationStatusFilter{
+			Include: []types.ConfirmationStatus{
+				types.ConfirmationStatus("FINAL"),
+				types.ConfirmationStatus("FINAL"),
+			},
+		},
+		Sort: &types.ListFilteredTransactionEventsSort{
+			SortBy:    types.ListFilteredTransactionEventsSortBy("blockchainInstant"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -455,7 +544,18 @@ func TestCheckResponseSnapshot_ListTokenBalances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTokenBalances(context.Background(), &ListTokenBalancesInput{})
+	got, err := svc.ListTokenBalances(context.Background(), &ListTokenBalancesInput{
+		OwnerFilter: &types.OwnerFilter{
+			Address: ptr.String("__Address__"),
+		},
+		TokenFilter: &types.TokenFilter{
+			Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+			ContractAddress: ptr.String("__ContractAddress__"),
+			TokenId:         ptr.String("__TokenId__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -518,7 +618,13 @@ func TestCheckResponseSnapshot_ListTransactionEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTransactionEvents(context.Background(), &ListTransactionEventsInput{})
+	got, err := svc.ListTransactionEvents(context.Background(), &ListTransactionEventsInput{
+		TransactionHash: ptr.String("__TransactionHash__"),
+		TransactionId:   ptr.String("__TransactionId__"),
+		Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -555,7 +661,28 @@ func TestCheckResponseSnapshot_ListTransactions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTransactions(context.Background(), &ListTransactionsInput{})
+	got, err := svc.ListTransactions(context.Background(), &ListTransactionsInput{
+		Address: ptr.String("__Address__"),
+		Network: types.QueryNetwork("ETHEREUM_MAINNET"),
+		FromBlockchainInstant: &types.BlockchainInstant{
+			Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		ToBlockchainInstant: &types.BlockchainInstant{
+			Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Sort: &types.ListTransactionsSort{
+			SortBy:    types.ListTransactionsSortBy("TRANSACTION_TIMESTAMP"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		ConfirmationStatusFilter: &types.ConfirmationStatusFilter{
+			Include: []types.ConfirmationStatus{
+				types.ConfirmationStatus("FINAL"),
+				types.ConfirmationStatus("FINAL"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -576,7 +703,36 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{})
+	_, opErr := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{
+		GetTokenBalanceInputs: []types.BatchGetTokenBalanceInputItem{
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -602,7 +758,36 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{})
+	_, opErr := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{
+		GetTokenBalanceInputs: []types.BatchGetTokenBalanceInputItem{
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -629,7 +814,36 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{})
+	_, opErr := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{
+		GetTokenBalanceInputs: []types.BatchGetTokenBalanceInputItem{
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -658,7 +872,36 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{})
+	_, opErr := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{
+		GetTokenBalanceInputs: []types.BatchGetTokenBalanceInputItem{
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -686,7 +929,36 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{})
+	_, opErr := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{
+		GetTokenBalanceInputs: []types.BatchGetTokenBalanceInputItem{
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -722,7 +994,36 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{})
+	_, opErr := svc.BatchGetTokenBalance(context.Background(), &BatchGetTokenBalanceInput{
+		GetTokenBalanceInputs: []types.BatchGetTokenBalanceInputItem{
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				TokenIdentifier: &types.TokenIdentifier{
+					Network:         types.QueryNetwork("ETHEREUM_MAINNET"),
+					ContractAddress: ptr.String("__ContractAddress__"),
+					TokenId:         ptr.String("__TokenId__"),
+				},
+				OwnerIdentifier: &types.OwnerIdentifier{
+					Address: ptr.String("__Address__"),
+				},
+				AtBlockchainInstant: &types.BlockchainInstant{
+					Time: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

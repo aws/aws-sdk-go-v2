@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","idp":{"clientId":"__ClientId__","createdAt":"2000-01-01T00:00:00Z","issuerUrl":"__IssuerUrl__","operatorAppRoleArn":"__OperatorAppRoleArn__","provider":"__Provider__","updatedAt":"2000-01-01T00:00:00Z"}}

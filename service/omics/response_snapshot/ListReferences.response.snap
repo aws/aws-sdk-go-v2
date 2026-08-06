@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","references":[{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","id":"__Id__","md5":"__Md5__","name":"__Name__","referenceStoreId":"__ReferenceStoreId__","status":"ACTIVE","updateTime":"2000-01-01T00:00:00Z"},{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","id":"__Id__","md5":"__Md5__","name":"__Name__","referenceStoreId":"__ReferenceStoreId__","status":"ACTIVE","updateTime":"2000-01-01T00:00:00Z"}]}

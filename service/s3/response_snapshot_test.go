@@ -119,7 +119,14 @@ func TestCheckResponseSnapshot_AbortMultipartUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{})
+	got, err := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{
+		Bucket:               ptr.String("__Bucket__"),
+		Key:                  ptr.String("__Key__"),
+		UploadId:             ptr.String("__UploadId__"),
+		RequestPayer:         types.RequestPayer("requester"),
+		ExpectedBucketOwner:  ptr.String("__ExpectedBucketOwner__"),
+		IfMatchInitiatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +167,62 @@ func TestCheckResponseSnapshot_CompleteMultipartUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteMultipartUpload(context.Background(), &CompleteMultipartUploadInput{})
+	got, err := svc.CompleteMultipartUpload(context.Background(), &CompleteMultipartUploadInput{
+		Bucket: ptr.String("__Bucket__"),
+		Key:    ptr.String("__Key__"),
+		MultipartUpload: &types.CompletedMultipartUpload{
+			Parts: []types.CompletedPart{
+				{
+					ETag:              ptr.String("__ETag__"),
+					ChecksumCRC32:     ptr.String("__ChecksumCRC32__"),
+					ChecksumCRC32C:    ptr.String("__ChecksumCRC32C__"),
+					ChecksumCRC64NVME: ptr.String("__ChecksumCRC64NVME__"),
+					ChecksumSHA1:      ptr.String("__ChecksumSHA1__"),
+					ChecksumSHA256:    ptr.String("__ChecksumSHA256__"),
+					ChecksumSHA512:    ptr.String("__ChecksumSHA512__"),
+					ChecksumMD5:       ptr.String("__ChecksumMD5__"),
+					ChecksumXXHASH64:  ptr.String("__ChecksumXXHASH64__"),
+					ChecksumXXHASH3:   ptr.String("__ChecksumXXHASH3__"),
+					ChecksumXXHASH128: ptr.String("__ChecksumXXHASH128__"),
+					PartNumber:        ptr.Int32(1),
+				},
+				{
+					ETag:              ptr.String("__ETag__"),
+					ChecksumCRC32:     ptr.String("__ChecksumCRC32__"),
+					ChecksumCRC32C:    ptr.String("__ChecksumCRC32C__"),
+					ChecksumCRC64NVME: ptr.String("__ChecksumCRC64NVME__"),
+					ChecksumSHA1:      ptr.String("__ChecksumSHA1__"),
+					ChecksumSHA256:    ptr.String("__ChecksumSHA256__"),
+					ChecksumSHA512:    ptr.String("__ChecksumSHA512__"),
+					ChecksumMD5:       ptr.String("__ChecksumMD5__"),
+					ChecksumXXHASH64:  ptr.String("__ChecksumXXHASH64__"),
+					ChecksumXXHASH3:   ptr.String("__ChecksumXXHASH3__"),
+					ChecksumXXHASH128: ptr.String("__ChecksumXXHASH128__"),
+					PartNumber:        ptr.Int32(1),
+				},
+			},
+		},
+		UploadId:             ptr.String("__UploadId__"),
+		ChecksumCRC32:        ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:       ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:    ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:         ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:       ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:       ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:          ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:     ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:      ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:    ptr.String("__ChecksumXXHASH128__"),
+		ChecksumType:         types.ChecksumType("COMPOSITE"),
+		MpuObjectSize:        ptr.Int64(1),
+		RequestPayer:         types.RequestPayer("requester"),
+		ExpectedBucketOwner:  ptr.String("__ExpectedBucketOwner__"),
+		IfMatch:              ptr.String("__IfMatch__"),
+		IfNoneMatch:          ptr.String("__IfNoneMatch__"),
+		SSECustomerAlgorithm: ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:       ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:    ptr.String("__SSECustomerKeyMD5__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -205,7 +267,54 @@ func TestCheckResponseSnapshot_CopyObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyObject(context.Background(), &CopyObjectInput{})
+	got, err := svc.CopyObject(context.Background(), &CopyObjectInput{
+		ACL:                         types.ObjectCannedACL("private"),
+		Bucket:                      ptr.String("__Bucket__"),
+		CacheControl:                ptr.String("__CacheControl__"),
+		ChecksumAlgorithm:           types.ChecksumAlgorithm("CRC32"),
+		ContentDisposition:          ptr.String("__ContentDisposition__"),
+		ContentEncoding:             ptr.String("__ContentEncoding__"),
+		ContentLanguage:             ptr.String("__ContentLanguage__"),
+		ContentType:                 ptr.String("__ContentType__"),
+		CopySource:                  ptr.String("__CopySource__"),
+		CopySourceIfMatch:           ptr.String("__CopySourceIfMatch__"),
+		CopySourceIfModifiedSince:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CopySourceIfNoneMatch:       ptr.String("__CopySourceIfNoneMatch__"),
+		CopySourceIfUnmodifiedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Expires:                     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GrantFullControl:            ptr.String("__GrantFullControl__"),
+		GrantRead:                   ptr.String("__GrantRead__"),
+		GrantReadACP:                ptr.String("__GrantReadACP__"),
+		GrantWriteACP:               ptr.String("__GrantWriteACP__"),
+		IfMatch:                     ptr.String("__IfMatch__"),
+		IfNoneMatch:                 ptr.String("__IfNoneMatch__"),
+		Key:                         ptr.String("__Key__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		MetadataDirective:              types.MetadataDirective("COPY"),
+		TaggingDirective:               types.TaggingDirective("COPY"),
+		AnnotationDirective:            types.AnnotationDirective("COPY"),
+		ServerSideEncryption:           types.ServerSideEncryption("AES256"),
+		StorageClass:                   types.StorageClass("STANDARD"),
+		WebsiteRedirectLocation:        ptr.String("__WebsiteRedirectLocation__"),
+		SSECustomerAlgorithm:           ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:                 ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:              ptr.String("__SSECustomerKeyMD5__"),
+		SSEKMSKeyId:                    ptr.String("__SSEKMSKeyId__"),
+		SSEKMSEncryptionContext:        ptr.String("__SSEKMSEncryptionContext__"),
+		BucketKeyEnabled:               ptr.Bool(true),
+		CopySourceSSECustomerAlgorithm: ptr.String("__CopySourceSSECustomerAlgorithm__"),
+		CopySourceSSECustomerKey:       ptr.String("__CopySourceSSECustomerKey__"),
+		CopySourceSSECustomerKeyMD5:    ptr.String("__CopySourceSSECustomerKeyMD5__"),
+		RequestPayer:                   types.RequestPayer("requester"),
+		Tagging:                        ptr.String("__Tagging__"),
+		ObjectLockMode:                 types.ObjectLockMode("GOVERNANCE"),
+		ObjectLockRetainUntilDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ObjectLockLegalHoldStatus:      types.ObjectLockLegalHoldStatus("ON"),
+		ExpectedBucketOwner:            ptr.String("__ExpectedBucketOwner__"),
+		ExpectedSourceBucketOwner:      ptr.String("__ExpectedSourceBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +336,39 @@ func TestCheckResponseSnapshot_CreateBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBucket(context.Background(), &CreateBucketInput{})
+	got, err := svc.CreateBucket(context.Background(), &CreateBucketInput{
+		ACL:    types.BucketCannedACL("private"),
+		Bucket: ptr.String("__Bucket__"),
+		CreateBucketConfiguration: &types.CreateBucketConfiguration{
+			LocationConstraint: types.BucketLocationConstraint("af-south-1"),
+			Location: &types.LocationInfo{
+				Type: types.LocationType("AvailabilityZone"),
+				Name: ptr.String("__Name__"),
+			},
+			Bucket: &types.BucketInfo{
+				DataRedundancy: types.DataRedundancy("SingleAvailabilityZone"),
+				Type:           types.BucketType("Directory"),
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		GrantFullControl:           ptr.String("__GrantFullControl__"),
+		GrantRead:                  ptr.String("__GrantRead__"),
+		GrantReadACP:               ptr.String("__GrantReadACP__"),
+		GrantWrite:                 ptr.String("__GrantWrite__"),
+		GrantWriteACP:              ptr.String("__GrantWriteACP__"),
+		ObjectLockEnabledForBucket: ptr.Bool(true),
+		ObjectOwnership:            types.ObjectOwnership("BucketOwnerPreferred"),
+		BucketNamespace:            types.BucketNamespace("account-regional"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +387,39 @@ func TestCheckResponseSnapshot_CreateBucketMetadataConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBucketMetadataConfiguration(context.Background(), &CreateBucketMetadataConfigurationInput{})
+	got, err := svc.CreateBucketMetadataConfiguration(context.Background(), &CreateBucketMetadataConfigurationInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		MetadataConfiguration: &types.MetadataConfiguration{
+			JournalTableConfiguration: &types.JournalTableConfiguration{
+				RecordExpiration: &types.RecordExpiration{
+					Expiration: types.ExpirationState("ENABLED"),
+					Days:       ptr.Int32(1),
+				},
+				EncryptionConfiguration: &types.MetadataTableEncryptionConfiguration{
+					SseAlgorithm: types.TableSseAlgorithm("aws:kms"),
+					KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+				},
+			},
+			InventoryTableConfiguration: &types.InventoryTableConfiguration{
+				ConfigurationState: types.InventoryConfigurationState("ENABLED"),
+				EncryptionConfiguration: &types.MetadataTableEncryptionConfiguration{
+					SseAlgorithm: types.TableSseAlgorithm("aws:kms"),
+					KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+				},
+			},
+			AnnotationTableConfiguration: &types.AnnotationTableConfiguration{
+				ConfigurationState: types.AnnotationConfigurationState("ENABLED"),
+				EncryptionConfiguration: &types.MetadataTableEncryptionConfiguration{
+					SseAlgorithm: types.TableSseAlgorithm("aws:kms"),
+					KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+				},
+				Role: ptr.String("__Role__"),
+			},
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -265,7 +438,18 @@ func TestCheckResponseSnapshot_CreateBucketMetadataTableConfiguration(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBucketMetadataTableConfiguration(context.Background(), &CreateBucketMetadataTableConfigurationInput{})
+	got, err := svc.CreateBucketMetadataTableConfiguration(context.Background(), &CreateBucketMetadataTableConfigurationInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		MetadataTableConfiguration: &types.MetadataTableConfiguration{
+			S3TablesDestination: &types.S3TablesDestination{
+				TableBucketArn: ptr.String("__TableBucketArn__"),
+				TableName:      ptr.String("__TableName__"),
+			},
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +483,41 @@ func TestCheckResponseSnapshot_CreateMultipartUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMultipartUpload(context.Background(), &CreateMultipartUploadInput{})
+	got, err := svc.CreateMultipartUpload(context.Background(), &CreateMultipartUploadInput{
+		ACL:                types.ObjectCannedACL("private"),
+		Bucket:             ptr.String("__Bucket__"),
+		CacheControl:       ptr.String("__CacheControl__"),
+		ContentDisposition: ptr.String("__ContentDisposition__"),
+		ContentEncoding:    ptr.String("__ContentEncoding__"),
+		ContentLanguage:    ptr.String("__ContentLanguage__"),
+		ContentType:        ptr.String("__ContentType__"),
+		Expires:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GrantFullControl:   ptr.String("__GrantFullControl__"),
+		GrantRead:          ptr.String("__GrantRead__"),
+		GrantReadACP:       ptr.String("__GrantReadACP__"),
+		GrantWriteACP:      ptr.String("__GrantWriteACP__"),
+		Key:                ptr.String("__Key__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryption:      types.ServerSideEncryption("AES256"),
+		StorageClass:              types.StorageClass("STANDARD"),
+		WebsiteRedirectLocation:   ptr.String("__WebsiteRedirectLocation__"),
+		SSECustomerAlgorithm:      ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:            ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:         ptr.String("__SSECustomerKeyMD5__"),
+		SSEKMSKeyId:               ptr.String("__SSEKMSKeyId__"),
+		SSEKMSEncryptionContext:   ptr.String("__SSEKMSEncryptionContext__"),
+		BucketKeyEnabled:          ptr.Bool(true),
+		RequestPayer:              types.RequestPayer("requester"),
+		Tagging:                   ptr.String("__Tagging__"),
+		ObjectLockMode:            types.ObjectLockMode("GOVERNANCE"),
+		ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ObjectLockLegalHoldStatus: types.ObjectLockLegalHoldStatus("ON"),
+		ExpectedBucketOwner:       ptr.String("__ExpectedBucketOwner__"),
+		ChecksumAlgorithm:         types.ChecksumAlgorithm("CRC32"),
+		ChecksumType:              types.ChecksumType("COMPOSITE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -329,7 +547,14 @@ func TestCheckResponseSnapshot_CreateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSession(context.Background(), &CreateSessionInput{})
+	got, err := svc.CreateSession(context.Background(), &CreateSessionInput{
+		SessionMode:             types.SessionMode("ReadOnly"),
+		Bucket:                  ptr.String("__Bucket__"),
+		ServerSideEncryption:    types.ServerSideEncryption("AES256"),
+		SSEKMSKeyId:             ptr.String("__SSEKMSKeyId__"),
+		SSEKMSEncryptionContext: ptr.String("__SSEKMSEncryptionContext__"),
+		BucketKeyEnabled:        ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -348,7 +573,10 @@ func TestCheckResponseSnapshot_DeleteBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucket(context.Background(), &DeleteBucketInput{})
+	got, err := svc.DeleteBucket(context.Background(), &DeleteBucketInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -367,7 +595,11 @@ func TestCheckResponseSnapshot_DeleteBucketAnalyticsConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketAnalyticsConfiguration(context.Background(), &DeleteBucketAnalyticsConfigurationInput{})
+	got, err := svc.DeleteBucketAnalyticsConfiguration(context.Background(), &DeleteBucketAnalyticsConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Id:                  ptr.String("__Id__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -386,7 +618,10 @@ func TestCheckResponseSnapshot_DeleteBucketCors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketCors(context.Background(), &DeleteBucketCorsInput{})
+	got, err := svc.DeleteBucketCors(context.Background(), &DeleteBucketCorsInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -405,7 +640,10 @@ func TestCheckResponseSnapshot_DeleteBucketEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketEncryption(context.Background(), &DeleteBucketEncryptionInput{})
+	got, err := svc.DeleteBucketEncryption(context.Background(), &DeleteBucketEncryptionInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -424,7 +662,11 @@ func TestCheckResponseSnapshot_DeleteBucketIntelligentTieringConfiguration(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketIntelligentTieringConfiguration(context.Background(), &DeleteBucketIntelligentTieringConfigurationInput{})
+	got, err := svc.DeleteBucketIntelligentTieringConfiguration(context.Background(), &DeleteBucketIntelligentTieringConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Id:                  ptr.String("__Id__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -443,7 +685,11 @@ func TestCheckResponseSnapshot_DeleteBucketInventoryConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketInventoryConfiguration(context.Background(), &DeleteBucketInventoryConfigurationInput{})
+	got, err := svc.DeleteBucketInventoryConfiguration(context.Background(), &DeleteBucketInventoryConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Id:                  ptr.String("__Id__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +708,10 @@ func TestCheckResponseSnapshot_DeleteBucketLifecycle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketLifecycle(context.Background(), &DeleteBucketLifecycleInput{})
+	got, err := svc.DeleteBucketLifecycle(context.Background(), &DeleteBucketLifecycleInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -481,7 +730,10 @@ func TestCheckResponseSnapshot_DeleteBucketMetadataConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketMetadataConfiguration(context.Background(), &DeleteBucketMetadataConfigurationInput{})
+	got, err := svc.DeleteBucketMetadataConfiguration(context.Background(), &DeleteBucketMetadataConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -500,7 +752,10 @@ func TestCheckResponseSnapshot_DeleteBucketMetadataTableConfiguration(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketMetadataTableConfiguration(context.Background(), &DeleteBucketMetadataTableConfigurationInput{})
+	got, err := svc.DeleteBucketMetadataTableConfiguration(context.Background(), &DeleteBucketMetadataTableConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -519,7 +774,11 @@ func TestCheckResponseSnapshot_DeleteBucketMetricsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketMetricsConfiguration(context.Background(), &DeleteBucketMetricsConfigurationInput{})
+	got, err := svc.DeleteBucketMetricsConfiguration(context.Background(), &DeleteBucketMetricsConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Id:                  ptr.String("__Id__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -538,7 +797,10 @@ func TestCheckResponseSnapshot_DeleteBucketOwnershipControls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketOwnershipControls(context.Background(), &DeleteBucketOwnershipControlsInput{})
+	got, err := svc.DeleteBucketOwnershipControls(context.Background(), &DeleteBucketOwnershipControlsInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -557,7 +819,10 @@ func TestCheckResponseSnapshot_DeleteBucketPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketPolicy(context.Background(), &DeleteBucketPolicyInput{})
+	got, err := svc.DeleteBucketPolicy(context.Background(), &DeleteBucketPolicyInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -576,7 +841,10 @@ func TestCheckResponseSnapshot_DeleteBucketReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketReplication(context.Background(), &DeleteBucketReplicationInput{})
+	got, err := svc.DeleteBucketReplication(context.Background(), &DeleteBucketReplicationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -595,7 +863,10 @@ func TestCheckResponseSnapshot_DeleteBucketTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketTagging(context.Background(), &DeleteBucketTaggingInput{})
+	got, err := svc.DeleteBucketTagging(context.Background(), &DeleteBucketTaggingInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -614,7 +885,10 @@ func TestCheckResponseSnapshot_DeleteBucketWebsite(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBucketWebsite(context.Background(), &DeleteBucketWebsiteInput{})
+	got, err := svc.DeleteBucketWebsite(context.Background(), &DeleteBucketWebsiteInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -637,7 +911,18 @@ func TestCheckResponseSnapshot_DeleteObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteObject(context.Background(), &DeleteObjectInput{})
+	got, err := svc.DeleteObject(context.Background(), &DeleteObjectInput{
+		Bucket:                    ptr.String("__Bucket__"),
+		Key:                       ptr.String("__Key__"),
+		MFA:                       ptr.String("__MFA__"),
+		VersionId:                 ptr.String("__VersionId__"),
+		RequestPayer:              types.RequestPayer("requester"),
+		BypassGovernanceRetention: ptr.Bool(true),
+		ExpectedBucketOwner:       ptr.String("__ExpectedBucketOwner__"),
+		IfMatch:                   ptr.String("__IfMatch__"),
+		IfMatchLastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IfMatchSize:               ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -659,7 +944,15 @@ func TestCheckResponseSnapshot_DeleteObjectAnnotation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteObjectAnnotation(context.Background(), &DeleteObjectAnnotationInput{})
+	got, err := svc.DeleteObjectAnnotation(context.Background(), &DeleteObjectAnnotationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		AnnotationName:      ptr.String("__AnnotationName__"),
+		VersionId:           ptr.String("__VersionId__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		ObjectIfMatch:       ptr.String("__ObjectIfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -680,7 +973,12 @@ func TestCheckResponseSnapshot_DeleteObjectTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteObjectTagging(context.Background(), &DeleteObjectTaggingInput{})
+	got, err := svc.DeleteObjectTagging(context.Background(), &DeleteObjectTaggingInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		VersionId:           ptr.String("__VersionId__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -729,7 +1027,33 @@ func TestCheckResponseSnapshot_DeleteObjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteObjects(context.Background(), &DeleteObjectsInput{})
+	got, err := svc.DeleteObjects(context.Background(), &DeleteObjectsInput{
+		Bucket: ptr.String("__Bucket__"),
+		Delete: &types.Delete{
+			Objects: []types.ObjectIdentifier{
+				{
+					Key:              ptr.String("__Key__"),
+					VersionId:        ptr.String("__VersionId__"),
+					ETag:             ptr.String("__ETag__"),
+					LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Size:             ptr.Int64(1),
+				},
+				{
+					Key:              ptr.String("__Key__"),
+					VersionId:        ptr.String("__VersionId__"),
+					ETag:             ptr.String("__ETag__"),
+					LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Size:             ptr.Int64(1),
+				},
+			},
+			Quiet: ptr.Bool(true),
+		},
+		MFA:                       ptr.String("__MFA__"),
+		RequestPayer:              types.RequestPayer("requester"),
+		BypassGovernanceRetention: ptr.Bool(true),
+		ExpectedBucketOwner:       ptr.String("__ExpectedBucketOwner__"),
+		ChecksumAlgorithm:         types.ChecksumAlgorithm("CRC32"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -748,7 +1072,10 @@ func TestCheckResponseSnapshot_DeletePublicAccessBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePublicAccessBlock(context.Background(), &DeletePublicAccessBlockInput{})
+	got, err := svc.DeletePublicAccessBlock(context.Background(), &DeletePublicAccessBlockInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -771,7 +1098,10 @@ func TestCheckResponseSnapshot_GetBucketAbac(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketAbac(context.Background(), &GetBucketAbacInput{})
+	got, err := svc.GetBucketAbac(context.Background(), &GetBucketAbacInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -793,7 +1123,11 @@ func TestCheckResponseSnapshot_GetBucketAccelerateConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketAccelerateConfiguration(context.Background(), &GetBucketAccelerateConfigurationInput{})
+	got, err := svc.GetBucketAccelerateConfiguration(context.Background(), &GetBucketAccelerateConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		RequestPayer:        types.RequestPayer("requester"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -839,7 +1173,10 @@ func TestCheckResponseSnapshot_GetBucketAcl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketAcl(context.Background(), &GetBucketAclInput{})
+	got, err := svc.GetBucketAcl(context.Background(), &GetBucketAclInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -878,7 +1215,11 @@ func TestCheckResponseSnapshot_GetBucketAnalyticsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketAnalyticsConfiguration(context.Background(), &GetBucketAnalyticsConfigurationInput{})
+	got, err := svc.GetBucketAnalyticsConfiguration(context.Background(), &GetBucketAnalyticsConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Id:                  ptr.String("__Id__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -940,7 +1281,10 @@ func TestCheckResponseSnapshot_GetBucketCors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketCors(context.Background(), &GetBucketCorsInput{})
+	got, err := svc.GetBucketCors(context.Background(), &GetBucketCorsInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -990,7 +1334,10 @@ func TestCheckResponseSnapshot_GetBucketEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketEncryption(context.Background(), &GetBucketEncryptionInput{})
+	got, err := svc.GetBucketEncryption(context.Background(), &GetBucketEncryptionInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1044,7 +1391,11 @@ func TestCheckResponseSnapshot_GetBucketIntelligentTieringConfiguration(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketIntelligentTieringConfiguration(context.Background(), &GetBucketIntelligentTieringConfigurationInput{})
+	got, err := svc.GetBucketIntelligentTieringConfiguration(context.Background(), &GetBucketIntelligentTieringConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Id:                  ptr.String("__Id__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1093,7 +1444,11 @@ func TestCheckResponseSnapshot_GetBucketInventoryConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketInventoryConfiguration(context.Background(), &GetBucketInventoryConfigurationInput{})
+	got, err := svc.GetBucketInventoryConfiguration(context.Background(), &GetBucketInventoryConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Id:                  ptr.String("__Id__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1246,7 +1601,10 @@ func TestCheckResponseSnapshot_GetBucketLifecycleConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketLifecycleConfiguration(context.Background(), &GetBucketLifecycleConfigurationInput{})
+	got, err := svc.GetBucketLifecycleConfiguration(context.Background(), &GetBucketLifecycleConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1267,7 +1625,10 @@ func TestCheckResponseSnapshot_GetBucketLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketLocation(context.Background(), &GetBucketLocationInput{})
+	got, err := svc.GetBucketLocation(context.Background(), &GetBucketLocationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1319,7 +1680,10 @@ func TestCheckResponseSnapshot_GetBucketLogging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketLogging(context.Background(), &GetBucketLoggingInput{})
+	got, err := svc.GetBucketLogging(context.Background(), &GetBucketLoggingInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1382,7 +1746,10 @@ func TestCheckResponseSnapshot_GetBucketMetadataConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketMetadataConfiguration(context.Background(), &GetBucketMetadataConfigurationInput{})
+	got, err := svc.GetBucketMetadataConfiguration(context.Background(), &GetBucketMetadataConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1417,7 +1784,10 @@ func TestCheckResponseSnapshot_GetBucketMetadataTableConfiguration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketMetadataTableConfiguration(context.Background(), &GetBucketMetadataTableConfigurationInput{})
+	got, err := svc.GetBucketMetadataTableConfiguration(context.Background(), &GetBucketMetadataTableConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1443,7 +1813,11 @@ func TestCheckResponseSnapshot_GetBucketMetricsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketMetricsConfiguration(context.Background(), &GetBucketMetricsConfigurationInput{})
+	got, err := svc.GetBucketMetricsConfiguration(context.Background(), &GetBucketMetricsConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Id:                  ptr.String("__Id__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1602,7 +1976,10 @@ func TestCheckResponseSnapshot_GetBucketNotificationConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketNotificationConfiguration(context.Background(), &GetBucketNotificationConfigurationInput{})
+	got, err := svc.GetBucketNotificationConfiguration(context.Background(), &GetBucketNotificationConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1632,7 +2009,10 @@ func TestCheckResponseSnapshot_GetBucketOwnershipControls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketOwnershipControls(context.Background(), &GetBucketOwnershipControlsInput{})
+	got, err := svc.GetBucketOwnershipControls(context.Background(), &GetBucketOwnershipControlsInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1653,7 +2033,10 @@ func TestCheckResponseSnapshot_GetBucketPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketPolicy(context.Background(), &GetBucketPolicyInput{})
+	got, err := svc.GetBucketPolicy(context.Background(), &GetBucketPolicyInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1676,7 +2059,10 @@ func TestCheckResponseSnapshot_GetBucketPolicyStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketPolicyStatus(context.Background(), &GetBucketPolicyStatusInput{})
+	got, err := svc.GetBucketPolicyStatus(context.Background(), &GetBucketPolicyStatusInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1827,7 +2213,10 @@ func TestCheckResponseSnapshot_GetBucketReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketReplication(context.Background(), &GetBucketReplicationInput{})
+	got, err := svc.GetBucketReplication(context.Background(), &GetBucketReplicationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1848,7 +2237,10 @@ func TestCheckResponseSnapshot_GetBucketRequestPayment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketRequestPayment(context.Background(), &GetBucketRequestPaymentInput{})
+	got, err := svc.GetBucketRequestPayment(context.Background(), &GetBucketRequestPaymentInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1878,7 +2270,10 @@ func TestCheckResponseSnapshot_GetBucketTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketTagging(context.Background(), &GetBucketTaggingInput{})
+	got, err := svc.GetBucketTagging(context.Background(), &GetBucketTaggingInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1900,7 +2295,10 @@ func TestCheckResponseSnapshot_GetBucketVersioning(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketVersioning(context.Background(), &GetBucketVersioningInput{})
+	got, err := svc.GetBucketVersioning(context.Background(), &GetBucketVersioningInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1958,7 +2356,10 @@ func TestCheckResponseSnapshot_GetBucketWebsite(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketWebsite(context.Background(), &GetBucketWebsiteInput{})
+	got, err := svc.GetBucketWebsite(context.Background(), &GetBucketWebsiteInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1968,68 +2369,7 @@ func TestCheckResponseSnapshot_GetBucketWebsite(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetObject(t *testing.T) {
-	want := &GetObjectOutput{
-		DeleteMarker:            ptr.Bool(true),
-		AcceptRanges:            ptr.String("__AcceptRanges__"),
-		Expiration:              ptr.String("__Expiration__"),
-		Restore:                 ptr.String("__Restore__"),
-		LastModified:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ContentLength:           ptr.Int64(1),
-		ETag:                    ptr.String("__ETag__"),
-		ChecksumCRC32:           ptr.String("__ChecksumCRC32__"),
-		ChecksumCRC32C:          ptr.String("__ChecksumCRC32C__"),
-		ChecksumCRC64NVME:       ptr.String("__ChecksumCRC64NVME__"),
-		ChecksumSHA1:            ptr.String("__ChecksumSHA1__"),
-		ChecksumSHA256:          ptr.String("__ChecksumSHA256__"),
-		ChecksumSHA512:          ptr.String("__ChecksumSHA512__"),
-		ChecksumMD5:             ptr.String("__ChecksumMD5__"),
-		ChecksumXXHASH64:        ptr.String("__ChecksumXXHASH64__"),
-		ChecksumXXHASH3:         ptr.String("__ChecksumXXHASH3__"),
-		ChecksumXXHASH128:       ptr.String("__ChecksumXXHASH128__"),
-		ChecksumType:            types.ChecksumType("COMPOSITE"),
-		MissingMeta:             ptr.Int32(1),
-		VersionId:               ptr.String("__VersionId__"),
-		CacheControl:            ptr.String("__CacheControl__"),
-		ContentDisposition:      ptr.String("__ContentDisposition__"),
-		ContentEncoding:         ptr.String("__ContentEncoding__"),
-		ContentLanguage:         ptr.String("__ContentLanguage__"),
-		ContentRange:            ptr.String("__ContentRange__"),
-		ContentType:             ptr.String("__ContentType__"),
-		Expires:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		WebsiteRedirectLocation: ptr.String("__WebsiteRedirectLocation__"),
-		ServerSideEncryption:    types.ServerSideEncryption("AES256"),
-		Metadata: map[string]string{
-			"key0": "__Value__",
-		},
-		SSECustomerAlgorithm:      ptr.String("__SSECustomerAlgorithm__"),
-		SSECustomerKeyMD5:         ptr.String("__SSECustomerKeyMD5__"),
-		SSEKMSKeyId:               ptr.String("__SSEKMSKeyId__"),
-		BucketKeyEnabled:          ptr.Bool(true),
-		StorageClass:              types.StorageClass("STANDARD"),
-		RequestCharged:            types.RequestCharged("requester"),
-		ReplicationStatus:         types.ReplicationStatus("COMPLETE"),
-		PartsCount:                ptr.Int32(1),
-		TagCount:                  ptr.Int32(1),
-		ObjectLockMode:            types.ObjectLockMode("GOVERNANCE"),
-		ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ObjectLockLegalHoldStatus: types.ObjectLockLegalHoldStatus("ON"),
-		ExpiresString:             ptr.String("__ExpiresString__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetObject.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObject(context.Background(), &GetObjectInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetObject.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetObjectAcl(t *testing.T) {
@@ -2070,7 +2410,13 @@ func TestCheckResponseSnapshot_GetObjectAcl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObjectAcl(context.Background(), &GetObjectAclInput{})
+	got, err := svc.GetObjectAcl(context.Background(), &GetObjectAclInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		VersionId:           ptr.String("__VersionId__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2080,41 +2426,7 @@ func TestCheckResponseSnapshot_GetObjectAcl(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetObjectAnnotation(t *testing.T) {
-	want := &GetObjectAnnotationOutput{
-		ObjectVersionId:      ptr.String("__ObjectVersionId__"),
-		LastModified:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ContentLength:        ptr.Int64(1),
-		ETag:                 ptr.String("__ETag__"),
-		ChecksumCRC32:        ptr.String("__ChecksumCRC32__"),
-		ChecksumCRC32C:       ptr.String("__ChecksumCRC32C__"),
-		ChecksumCRC64NVME:    ptr.String("__ChecksumCRC64NVME__"),
-		ChecksumSHA1:         ptr.String("__ChecksumSHA1__"),
-		ChecksumSHA256:       ptr.String("__ChecksumSHA256__"),
-		ChecksumSHA512:       ptr.String("__ChecksumSHA512__"),
-		ChecksumMD5:          ptr.String("__ChecksumMD5__"),
-		ChecksumXXHASH64:     ptr.String("__ChecksumXXHASH64__"),
-		ChecksumXXHASH3:      ptr.String("__ChecksumXXHASH3__"),
-		ChecksumXXHASH128:    ptr.String("__ChecksumXXHASH128__"),
-		ChecksumType:         types.ChecksumType("COMPOSITE"),
-		ServerSideEncryption: types.ServerSideEncryption("AES256"),
-		RequestCharged:       types.RequestCharged("requester"),
-		ReplicationStatus:    types.ReplicationStatus("COMPLETE"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetObjectAnnotation.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObjectAnnotation(context.Background(), &GetObjectAnnotationInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetObjectAnnotation.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetObjectAttributes(t *testing.T) {
@@ -2185,7 +2497,22 @@ func TestCheckResponseSnapshot_GetObjectAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObjectAttributes(context.Background(), &GetObjectAttributesInput{})
+	got, err := svc.GetObjectAttributes(context.Background(), &GetObjectAttributesInput{
+		Bucket:               ptr.String("__Bucket__"),
+		Key:                  ptr.String("__Key__"),
+		VersionId:            ptr.String("__VersionId__"),
+		MaxParts:             ptr.Int32(1),
+		PartNumberMarker:     ptr.String("__PartNumberMarker__"),
+		SSECustomerAlgorithm: ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:       ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:    ptr.String("__SSECustomerKeyMD5__"),
+		RequestPayer:         types.RequestPayer("requester"),
+		ExpectedBucketOwner:  ptr.String("__ExpectedBucketOwner__"),
+		ObjectAttributes: []types.ObjectAttributes{
+			types.ObjectAttributes("ETag"),
+			types.ObjectAttributes("ETag"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2208,7 +2535,13 @@ func TestCheckResponseSnapshot_GetObjectLegalHold(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObjectLegalHold(context.Background(), &GetObjectLegalHoldInput{})
+	got, err := svc.GetObjectLegalHold(context.Background(), &GetObjectLegalHoldInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		VersionId:           ptr.String("__VersionId__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2238,7 +2571,10 @@ func TestCheckResponseSnapshot_GetObjectLockConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObjectLockConfiguration(context.Background(), &GetObjectLockConfigurationInput{})
+	got, err := svc.GetObjectLockConfiguration(context.Background(), &GetObjectLockConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2262,7 +2598,13 @@ func TestCheckResponseSnapshot_GetObjectRetention(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObjectRetention(context.Background(), &GetObjectRetentionInput{})
+	got, err := svc.GetObjectRetention(context.Background(), &GetObjectRetentionInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		VersionId:           ptr.String("__VersionId__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2293,7 +2635,13 @@ func TestCheckResponseSnapshot_GetObjectTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObjectTagging(context.Background(), &GetObjectTaggingInput{})
+	got, err := svc.GetObjectTagging(context.Background(), &GetObjectTaggingInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		VersionId:           ptr.String("__VersionId__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		RequestPayer:        types.RequestPayer("requester"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2304,6 +2652,7 @@ func TestCheckResponseSnapshot_GetObjectTagging(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetObjectTorrent(t *testing.T) {
 	want := &GetObjectTorrentOutput{
+		Body:           io.NopCloser(bytes.NewReader([]byte("__Body__"))),
 		RequestCharged: types.RequestCharged("requester"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetObjectTorrent.response")
@@ -2314,7 +2663,12 @@ func TestCheckResponseSnapshot_GetObjectTorrent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObjectTorrent(context.Background(), &GetObjectTorrentInput{})
+	got, err := svc.GetObjectTorrent(context.Background(), &GetObjectTorrentInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2340,7 +2694,10 @@ func TestCheckResponseSnapshot_GetPublicAccessBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPublicAccessBlock(context.Background(), &GetPublicAccessBlockInput{})
+	got, err := svc.GetPublicAccessBlock(context.Background(), &GetPublicAccessBlockInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2365,7 +2722,10 @@ func TestCheckResponseSnapshot_HeadBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.HeadBucket(context.Background(), &HeadBucketInput{})
+	got, err := svc.HeadBucket(context.Background(), &HeadBucketInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2375,69 +2735,7 @@ func TestCheckResponseSnapshot_HeadBucket(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_HeadObject(t *testing.T) {
-	want := &HeadObjectOutput{
-		DeleteMarker:            ptr.Bool(true),
-		AcceptRanges:            ptr.String("__AcceptRanges__"),
-		Expiration:              ptr.String("__Expiration__"),
-		Restore:                 ptr.String("__Restore__"),
-		ArchiveStatus:           types.ArchiveStatus("ARCHIVE_ACCESS"),
-		LastModified:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ContentLength:           ptr.Int64(1),
-		ChecksumCRC32:           ptr.String("__ChecksumCRC32__"),
-		ChecksumCRC32C:          ptr.String("__ChecksumCRC32C__"),
-		ChecksumCRC64NVME:       ptr.String("__ChecksumCRC64NVME__"),
-		ChecksumSHA1:            ptr.String("__ChecksumSHA1__"),
-		ChecksumSHA256:          ptr.String("__ChecksumSHA256__"),
-		ChecksumSHA512:          ptr.String("__ChecksumSHA512__"),
-		ChecksumMD5:             ptr.String("__ChecksumMD5__"),
-		ChecksumXXHASH64:        ptr.String("__ChecksumXXHASH64__"),
-		ChecksumXXHASH3:         ptr.String("__ChecksumXXHASH3__"),
-		ChecksumXXHASH128:       ptr.String("__ChecksumXXHASH128__"),
-		ChecksumType:            types.ChecksumType("COMPOSITE"),
-		ETag:                    ptr.String("__ETag__"),
-		MissingMeta:             ptr.Int32(1),
-		VersionId:               ptr.String("__VersionId__"),
-		CacheControl:            ptr.String("__CacheControl__"),
-		ContentDisposition:      ptr.String("__ContentDisposition__"),
-		ContentEncoding:         ptr.String("__ContentEncoding__"),
-		ContentLanguage:         ptr.String("__ContentLanguage__"),
-		ContentType:             ptr.String("__ContentType__"),
-		ContentRange:            ptr.String("__ContentRange__"),
-		Expires:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		WebsiteRedirectLocation: ptr.String("__WebsiteRedirectLocation__"),
-		ServerSideEncryption:    types.ServerSideEncryption("AES256"),
-		Metadata: map[string]string{
-			"key0": "__Value__",
-		},
-		SSECustomerAlgorithm:      ptr.String("__SSECustomerAlgorithm__"),
-		SSECustomerKeyMD5:         ptr.String("__SSECustomerKeyMD5__"),
-		SSEKMSKeyId:               ptr.String("__SSEKMSKeyId__"),
-		BucketKeyEnabled:          ptr.Bool(true),
-		StorageClass:              types.StorageClass("STANDARD"),
-		RequestCharged:            types.RequestCharged("requester"),
-		ReplicationStatus:         types.ReplicationStatus("COMPLETE"),
-		PartsCount:                ptr.Int32(1),
-		TagCount:                  ptr.Int32(1),
-		ObjectLockMode:            types.ObjectLockMode("GOVERNANCE"),
-		ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ObjectLockLegalHoldStatus: types.ObjectLockLegalHoldStatus("ON"),
-		ExpiresString:             ptr.String("__ExpiresString__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("HeadObject.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.HeadObject(context.Background(), &HeadObjectInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "HeadObject.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_ListBucketAnalyticsConfigurations(t *testing.T) {
@@ -2494,7 +2792,11 @@ func TestCheckResponseSnapshot_ListBucketAnalyticsConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBucketAnalyticsConfigurations(context.Background(), &ListBucketAnalyticsConfigurationsInput{})
+	got, err := svc.ListBucketAnalyticsConfigurations(context.Background(), &ListBucketAnalyticsConfigurationsInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ContinuationToken:   ptr.String("__ContinuationToken__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2587,7 +2889,11 @@ func TestCheckResponseSnapshot_ListBucketIntelligentTieringConfigurations(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBucketIntelligentTieringConfigurations(context.Background(), &ListBucketIntelligentTieringConfigurationsInput{})
+	got, err := svc.ListBucketIntelligentTieringConfigurations(context.Background(), &ListBucketIntelligentTieringConfigurationsInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ContinuationToken:   ptr.String("__ContinuationToken__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2670,7 +2976,11 @@ func TestCheckResponseSnapshot_ListBucketInventoryConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBucketInventoryConfigurations(context.Background(), &ListBucketInventoryConfigurationsInput{})
+	got, err := svc.ListBucketInventoryConfigurations(context.Background(), &ListBucketInventoryConfigurationsInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ContinuationToken:   ptr.String("__ContinuationToken__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2707,7 +3017,11 @@ func TestCheckResponseSnapshot_ListBucketMetricsConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBucketMetricsConfigurations(context.Background(), &ListBucketMetricsConfigurationsInput{})
+	got, err := svc.ListBucketMetricsConfigurations(context.Background(), &ListBucketMetricsConfigurationsInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ContinuationToken:   ptr.String("__ContinuationToken__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2747,7 +3061,12 @@ func TestCheckResponseSnapshot_ListBuckets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBuckets(context.Background(), &ListBucketsInput{})
+	got, err := svc.ListBuckets(context.Background(), &ListBucketsInput{
+		MaxBuckets:        ptr.Int32(1),
+		ContinuationToken: ptr.String("__ContinuationToken__"),
+		Prefix:            ptr.String("__Prefix__"),
+		BucketRegion:      ptr.String("__BucketRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2782,7 +3101,10 @@ func TestCheckResponseSnapshot_ListDirectoryBuckets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDirectoryBuckets(context.Background(), &ListDirectoryBucketsInput{})
+	got, err := svc.ListDirectoryBuckets(context.Background(), &ListDirectoryBucketsInput{
+		ContinuationToken:   ptr.String("__ContinuationToken__"),
+		MaxDirectoryBuckets: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2855,7 +3177,17 @@ func TestCheckResponseSnapshot_ListMultipartUploads(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMultipartUploads(context.Background(), &ListMultipartUploadsInput{})
+	got, err := svc.ListMultipartUploads(context.Background(), &ListMultipartUploadsInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Delimiter:           ptr.String("__Delimiter__"),
+		EncodingType:        types.EncodingType("url"),
+		KeyMarker:           ptr.String("__KeyMarker__"),
+		MaxUploads:          ptr.Int32(1),
+		Prefix:              ptr.String("__Prefix__"),
+		UploadIdMarker:      ptr.String("__UploadIdMarker__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		RequestPayer:        types.RequestPayer("requester"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2908,7 +3240,16 @@ func TestCheckResponseSnapshot_ListObjectAnnotations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObjectAnnotations(context.Background(), &ListObjectAnnotationsInput{})
+	got, err := svc.ListObjectAnnotations(context.Background(), &ListObjectAnnotationsInput{
+		Bucket:               ptr.String("__Bucket__"),
+		Key:                  ptr.String("__Key__"),
+		VersionId:            ptr.String("__VersionId__"),
+		MaxAnnotationResults: ptr.Int32(1),
+		AnnotationPrefix:     ptr.String("__AnnotationPrefix__"),
+		ContinuationToken:    ptr.String("__ContinuationToken__"),
+		RequestPayer:         types.RequestPayer("requester"),
+		ExpectedBucketOwner:  ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3015,7 +3356,21 @@ func TestCheckResponseSnapshot_ListObjectVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObjectVersions(context.Background(), &ListObjectVersionsInput{})
+	got, err := svc.ListObjectVersions(context.Background(), &ListObjectVersionsInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Delimiter:           ptr.String("__Delimiter__"),
+		EncodingType:        types.EncodingType("url"),
+		KeyMarker:           ptr.String("__KeyMarker__"),
+		MaxKeys:             ptr.Int32(1),
+		Prefix:              ptr.String("__Prefix__"),
+		VersionIdMarker:     ptr.String("__VersionIdMarker__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		OptionalObjectAttributes: []types.OptionalObjectAttributes{
+			types.OptionalObjectAttributes("RestoreStatus"),
+			types.OptionalObjectAttributes("RestoreStatus"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3094,7 +3449,20 @@ func TestCheckResponseSnapshot_ListObjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObjects(context.Background(), &ListObjectsInput{})
+	got, err := svc.ListObjects(context.Background(), &ListObjectsInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Delimiter:           ptr.String("__Delimiter__"),
+		EncodingType:        types.EncodingType("url"),
+		Marker:              ptr.String("__Marker__"),
+		MaxKeys:             ptr.Int32(1),
+		Prefix:              ptr.String("__Prefix__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		OptionalObjectAttributes: []types.OptionalObjectAttributes{
+			types.OptionalObjectAttributes("RestoreStatus"),
+			types.OptionalObjectAttributes("RestoreStatus"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3175,7 +3543,22 @@ func TestCheckResponseSnapshot_ListObjectsV2(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObjectsV2(context.Background(), &ListObjectsV2Input{})
+	got, err := svc.ListObjectsV2(context.Background(), &ListObjectsV2Input{
+		Bucket:              ptr.String("__Bucket__"),
+		Delimiter:           ptr.String("__Delimiter__"),
+		EncodingType:        types.EncodingType("url"),
+		MaxKeys:             ptr.Int32(1),
+		Prefix:              ptr.String("__Prefix__"),
+		ContinuationToken:   ptr.String("__ContinuationToken__"),
+		FetchOwner:          ptr.Bool(true),
+		StartAfter:          ptr.String("__StartAfter__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		OptionalObjectAttributes: []types.OptionalObjectAttributes{
+			types.OptionalObjectAttributes("RestoreStatus"),
+			types.OptionalObjectAttributes("RestoreStatus"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3250,7 +3633,18 @@ func TestCheckResponseSnapshot_ListParts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListParts(context.Background(), &ListPartsInput{})
+	got, err := svc.ListParts(context.Background(), &ListPartsInput{
+		Bucket:               ptr.String("__Bucket__"),
+		Key:                  ptr.String("__Key__"),
+		MaxParts:             ptr.Int32(1),
+		PartNumberMarker:     ptr.String("__PartNumberMarker__"),
+		UploadId:             ptr.String("__UploadId__"),
+		RequestPayer:         types.RequestPayer("requester"),
+		ExpectedBucketOwner:  ptr.String("__ExpectedBucketOwner__"),
+		SSECustomerAlgorithm: ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:       ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:    ptr.String("__SSECustomerKeyMD5__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3269,7 +3663,15 @@ func TestCheckResponseSnapshot_PutBucketAbac(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketAbac(context.Background(), &PutBucketAbacInput{})
+	got, err := svc.PutBucketAbac(context.Background(), &PutBucketAbacInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		AbacStatus: &types.AbacStatus{
+			Status: types.BucketAbacStatus("Enabled"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3288,7 +3690,14 @@ func TestCheckResponseSnapshot_PutBucketAccelerateConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketAccelerateConfiguration(context.Background(), &PutBucketAccelerateConfigurationInput{})
+	got, err := svc.PutBucketAccelerateConfiguration(context.Background(), &PutBucketAccelerateConfigurationInput{
+		Bucket: ptr.String("__Bucket__"),
+		AccelerateConfiguration: &types.AccelerateConfiguration{
+			Status: types.BucketAccelerateStatus("Enabled"),
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3307,7 +3716,46 @@ func TestCheckResponseSnapshot_PutBucketAcl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketAcl(context.Background(), &PutBucketAclInput{})
+	got, err := svc.PutBucketAcl(context.Background(), &PutBucketAclInput{
+		ACL: types.BucketCannedACL("private"),
+		AccessControlPolicy: &types.AccessControlPolicy{
+			Grants: []types.Grant{
+				{
+					Grantee: &types.Grantee{
+						DisplayName:  ptr.String("__DisplayName__"),
+						EmailAddress: ptr.String("__EmailAddress__"),
+						ID:           ptr.String("__ID__"),
+						URI:          ptr.String("__URI__"),
+						Type:         types.Type("CanonicalUser"),
+					},
+					Permission: types.Permission("FULL_CONTROL"),
+				},
+				{
+					Grantee: &types.Grantee{
+						DisplayName:  ptr.String("__DisplayName__"),
+						EmailAddress: ptr.String("__EmailAddress__"),
+						ID:           ptr.String("__ID__"),
+						URI:          ptr.String("__URI__"),
+						Type:         types.Type("CanonicalUser"),
+					},
+					Permission: types.Permission("FULL_CONTROL"),
+				},
+			},
+			Owner: &types.Owner{
+				DisplayName: ptr.String("__DisplayName__"),
+				ID:          ptr.String("__ID__"),
+			},
+		},
+		Bucket:              ptr.String("__Bucket__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		GrantFullControl:    ptr.String("__GrantFullControl__"),
+		GrantRead:           ptr.String("__GrantRead__"),
+		GrantReadACP:        ptr.String("__GrantReadACP__"),
+		GrantWrite:          ptr.String("__GrantWrite__"),
+		GrantWriteACP:       ptr.String("__GrantWriteACP__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3326,7 +3774,30 @@ func TestCheckResponseSnapshot_PutBucketAnalyticsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketAnalyticsConfiguration(context.Background(), &PutBucketAnalyticsConfigurationInput{})
+	got, err := svc.PutBucketAnalyticsConfiguration(context.Background(), &PutBucketAnalyticsConfigurationInput{
+		Bucket: ptr.String("__Bucket__"),
+		Id:     ptr.String("__Id__"),
+		AnalyticsConfiguration: &types.AnalyticsConfiguration{
+			Id: ptr.String("__Id__"),
+			Filter: &types.AnalyticsFilterMemberPrefix{
+				Value: "__AnalyticsFilterMemberPrefix__",
+			},
+			StorageClassAnalysis: &types.StorageClassAnalysis{
+				DataExport: &types.StorageClassAnalysisDataExport{
+					OutputSchemaVersion: types.StorageClassAnalysisSchemaVersion("V_1"),
+					Destination: &types.AnalyticsExportDestination{
+						S3BucketDestination: &types.AnalyticsS3BucketDestination{
+							Format:          types.AnalyticsS3ExportFileFormat("CSV"),
+							BucketAccountId: ptr.String("__BucketAccountId__"),
+							Bucket:          ptr.String("__Bucket__"),
+							Prefix:          ptr.String("__Prefix__"),
+						},
+					},
+				},
+			},
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3345,7 +3816,56 @@ func TestCheckResponseSnapshot_PutBucketCors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketCors(context.Background(), &PutBucketCorsInput{})
+	got, err := svc.PutBucketCors(context.Background(), &PutBucketCorsInput{
+		Bucket: ptr.String("__Bucket__"),
+		CORSConfiguration: &types.CORSConfiguration{
+			CORSRules: []types.CORSRule{
+				{
+					ID: ptr.String("__ID__"),
+					AllowedHeaders: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedMethods: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedOrigins: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExposeHeaders: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MaxAgeSeconds: ptr.Int32(1),
+				},
+				{
+					ID: ptr.String("__ID__"),
+					AllowedHeaders: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedMethods: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedOrigins: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExposeHeaders: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MaxAgeSeconds: ptr.Int32(1),
+				},
+			},
+		},
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3364,7 +3884,42 @@ func TestCheckResponseSnapshot_PutBucketEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketEncryption(context.Background(), &PutBucketEncryptionInput{})
+	got, err := svc.PutBucketEncryption(context.Background(), &PutBucketEncryptionInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			Rules: []types.ServerSideEncryptionRule{
+				{
+					ApplyServerSideEncryptionByDefault: &types.ServerSideEncryptionByDefault{
+						SSEAlgorithm:   types.ServerSideEncryption("AES256"),
+						KMSMasterKeyID: ptr.String("__KMSMasterKeyID__"),
+					},
+					BucketKeyEnabled: ptr.Bool(true),
+					BlockedEncryptionTypes: &types.BlockedEncryptionTypes{
+						EncryptionType: []types.EncryptionType{
+							types.EncryptionType("NONE"),
+							types.EncryptionType("NONE"),
+						},
+					},
+				},
+				{
+					ApplyServerSideEncryptionByDefault: &types.ServerSideEncryptionByDefault{
+						SSEAlgorithm:   types.ServerSideEncryption("AES256"),
+						KMSMasterKeyID: ptr.String("__KMSMasterKeyID__"),
+					},
+					BucketKeyEnabled: ptr.Bool(true),
+					BlockedEncryptionTypes: &types.BlockedEncryptionTypes{
+						EncryptionType: []types.EncryptionType{
+							types.EncryptionType("NONE"),
+							types.EncryptionType("NONE"),
+						},
+					},
+				},
+			},
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3383,7 +3938,45 @@ func TestCheckResponseSnapshot_PutBucketIntelligentTieringConfiguration(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketIntelligentTieringConfiguration(context.Background(), &PutBucketIntelligentTieringConfigurationInput{})
+	got, err := svc.PutBucketIntelligentTieringConfiguration(context.Background(), &PutBucketIntelligentTieringConfigurationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Id:                  ptr.String("__Id__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		IntelligentTieringConfiguration: &types.IntelligentTieringConfiguration{
+			Id: ptr.String("__Id__"),
+			Filter: &types.IntelligentTieringFilter{
+				Prefix: ptr.String("__Prefix__"),
+				Tag: &types.Tag{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				And: &types.IntelligentTieringAndOperator{
+					Prefix: ptr.String("__Prefix__"),
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			Status: types.IntelligentTieringStatus("Enabled"),
+			Tierings: []types.Tiering{
+				{
+					Days:       ptr.Int32(1),
+					AccessTier: types.IntelligentTieringAccessTier("ARCHIVE_ACCESS"),
+				},
+				{
+					Days:       ptr.Int32(1),
+					AccessTier: types.IntelligentTieringAccessTier("ARCHIVE_ACCESS"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3402,7 +3995,40 @@ func TestCheckResponseSnapshot_PutBucketInventoryConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketInventoryConfiguration(context.Background(), &PutBucketInventoryConfigurationInput{})
+	got, err := svc.PutBucketInventoryConfiguration(context.Background(), &PutBucketInventoryConfigurationInput{
+		Bucket: ptr.String("__Bucket__"),
+		Id:     ptr.String("__Id__"),
+		InventoryConfiguration: &types.InventoryConfiguration{
+			Destination: &types.InventoryDestination{
+				S3BucketDestination: &types.InventoryS3BucketDestination{
+					AccountId: ptr.String("__AccountId__"),
+					Bucket:    ptr.String("__Bucket__"),
+					Format:    types.InventoryFormat("CSV"),
+					Prefix:    ptr.String("__Prefix__"),
+					Encryption: &types.InventoryEncryption{
+						SSES3: &types.SSES3{},
+						SSEKMS: &types.SSEKMS{
+							KeyId: ptr.String("__KeyId__"),
+						},
+					},
+				},
+			},
+			IsEnabled: ptr.Bool(true),
+			Filter: &types.InventoryFilter{
+				Prefix: ptr.String("__Prefix__"),
+			},
+			Id:                     ptr.String("__Id__"),
+			IncludedObjectVersions: types.InventoryIncludedObjectVersions("All"),
+			OptionalFields: []types.InventoryOptionalField{
+				types.InventoryOptionalField("Size"),
+				types.InventoryOptionalField("Size"),
+			},
+			Schedule: &types.InventorySchedule{
+				Frequency: types.InventoryFrequency("Daily"),
+			},
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3423,7 +4049,146 @@ func TestCheckResponseSnapshot_PutBucketLifecycleConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketLifecycleConfiguration(context.Background(), &PutBucketLifecycleConfigurationInput{})
+	got, err := svc.PutBucketLifecycleConfiguration(context.Background(), &PutBucketLifecycleConfigurationInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		LifecycleConfiguration: &types.BucketLifecycleConfiguration{
+			Rules: []types.LifecycleRule{
+				{
+					Expiration: &types.LifecycleExpiration{
+						Date:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Days:                      ptr.Int32(1),
+						ExpiredObjectDeleteMarker: ptr.Bool(true),
+					},
+					ID:     ptr.String("__ID__"),
+					Prefix: ptr.String("__Prefix__"),
+					Filter: &types.LifecycleRuleFilter{
+						Prefix: ptr.String("__Prefix__"),
+						Tag: &types.Tag{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						ObjectSizeGreaterThan: ptr.Int64(1),
+						ObjectSizeLessThan:    ptr.Int64(1),
+						And: &types.LifecycleRuleAndOperator{
+							Prefix: ptr.String("__Prefix__"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							ObjectSizeGreaterThan: ptr.Int64(1),
+							ObjectSizeLessThan:    ptr.Int64(1),
+						},
+					},
+					Status: types.ExpirationStatus("Enabled"),
+					Transitions: []types.Transition{
+						{
+							Date:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Days:         ptr.Int32(1),
+							StorageClass: types.TransitionStorageClass("GLACIER"),
+						},
+						{
+							Date:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Days:         ptr.Int32(1),
+							StorageClass: types.TransitionStorageClass("GLACIER"),
+						},
+					},
+					NoncurrentVersionTransitions: []types.NoncurrentVersionTransition{
+						{
+							NoncurrentDays:          ptr.Int32(1),
+							StorageClass:            types.TransitionStorageClass("GLACIER"),
+							NewerNoncurrentVersions: ptr.Int32(1),
+						},
+						{
+							NoncurrentDays:          ptr.Int32(1),
+							StorageClass:            types.TransitionStorageClass("GLACIER"),
+							NewerNoncurrentVersions: ptr.Int32(1),
+						},
+					},
+					NoncurrentVersionExpiration: &types.NoncurrentVersionExpiration{
+						NoncurrentDays:          ptr.Int32(1),
+						NewerNoncurrentVersions: ptr.Int32(1),
+					},
+					AbortIncompleteMultipartUpload: &types.AbortIncompleteMultipartUpload{
+						DaysAfterInitiation: ptr.Int32(1),
+					},
+				},
+				{
+					Expiration: &types.LifecycleExpiration{
+						Date:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Days:                      ptr.Int32(1),
+						ExpiredObjectDeleteMarker: ptr.Bool(true),
+					},
+					ID:     ptr.String("__ID__"),
+					Prefix: ptr.String("__Prefix__"),
+					Filter: &types.LifecycleRuleFilter{
+						Prefix: ptr.String("__Prefix__"),
+						Tag: &types.Tag{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						ObjectSizeGreaterThan: ptr.Int64(1),
+						ObjectSizeLessThan:    ptr.Int64(1),
+						And: &types.LifecycleRuleAndOperator{
+							Prefix: ptr.String("__Prefix__"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							ObjectSizeGreaterThan: ptr.Int64(1),
+							ObjectSizeLessThan:    ptr.Int64(1),
+						},
+					},
+					Status: types.ExpirationStatus("Enabled"),
+					Transitions: []types.Transition{
+						{
+							Date:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Days:         ptr.Int32(1),
+							StorageClass: types.TransitionStorageClass("GLACIER"),
+						},
+						{
+							Date:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Days:         ptr.Int32(1),
+							StorageClass: types.TransitionStorageClass("GLACIER"),
+						},
+					},
+					NoncurrentVersionTransitions: []types.NoncurrentVersionTransition{
+						{
+							NoncurrentDays:          ptr.Int32(1),
+							StorageClass:            types.TransitionStorageClass("GLACIER"),
+							NewerNoncurrentVersions: ptr.Int32(1),
+						},
+						{
+							NoncurrentDays:          ptr.Int32(1),
+							StorageClass:            types.TransitionStorageClass("GLACIER"),
+							NewerNoncurrentVersions: ptr.Int32(1),
+						},
+					},
+					NoncurrentVersionExpiration: &types.NoncurrentVersionExpiration{
+						NoncurrentDays:          ptr.Int32(1),
+						NewerNoncurrentVersions: ptr.Int32(1),
+					},
+					AbortIncompleteMultipartUpload: &types.AbortIncompleteMultipartUpload{
+						DaysAfterInitiation: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ExpectedBucketOwner:                ptr.String("__ExpectedBucketOwner__"),
+		TransitionDefaultMinimumObjectSize: types.TransitionDefaultMinimumObjectSize("varies_by_storage_class"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3442,7 +4207,46 @@ func TestCheckResponseSnapshot_PutBucketLogging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketLogging(context.Background(), &PutBucketLoggingInput{})
+	got, err := svc.PutBucketLogging(context.Background(), &PutBucketLoggingInput{
+		Bucket: ptr.String("__Bucket__"),
+		BucketLoggingStatus: &types.BucketLoggingStatus{
+			LoggingEnabled: &types.LoggingEnabled{
+				TargetBucket: ptr.String("__TargetBucket__"),
+				TargetGrants: []types.TargetGrant{
+					{
+						Grantee: &types.Grantee{
+							DisplayName:  ptr.String("__DisplayName__"),
+							EmailAddress: ptr.String("__EmailAddress__"),
+							ID:           ptr.String("__ID__"),
+							URI:          ptr.String("__URI__"),
+							Type:         types.Type("CanonicalUser"),
+						},
+						Permission: types.BucketLogsPermission("FULL_CONTROL"),
+					},
+					{
+						Grantee: &types.Grantee{
+							DisplayName:  ptr.String("__DisplayName__"),
+							EmailAddress: ptr.String("__EmailAddress__"),
+							ID:           ptr.String("__ID__"),
+							URI:          ptr.String("__URI__"),
+							Type:         types.Type("CanonicalUser"),
+						},
+						Permission: types.BucketLogsPermission("FULL_CONTROL"),
+					},
+				},
+				TargetPrefix: ptr.String("__TargetPrefix__"),
+				TargetObjectKeyFormat: &types.TargetObjectKeyFormat{
+					SimplePrefix: &types.SimplePrefix{},
+					PartitionedPrefix: &types.PartitionedPrefix{
+						PartitionDateSource: types.PartitionDateSource("EventTime"),
+					},
+				},
+			},
+		},
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3461,7 +4265,17 @@ func TestCheckResponseSnapshot_PutBucketMetricsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketMetricsConfiguration(context.Background(), &PutBucketMetricsConfigurationInput{})
+	got, err := svc.PutBucketMetricsConfiguration(context.Background(), &PutBucketMetricsConfigurationInput{
+		Bucket: ptr.String("__Bucket__"),
+		Id:     ptr.String("__Id__"),
+		MetricsConfiguration: &types.MetricsConfiguration{
+			Id: ptr.String("__Id__"),
+			Filter: &types.MetricsFilterMemberPrefix{
+				Value: "__MetricsFilterMemberPrefix__",
+			},
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3480,7 +4294,152 @@ func TestCheckResponseSnapshot_PutBucketNotificationConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketNotificationConfiguration(context.Background(), &PutBucketNotificationConfigurationInput{})
+	got, err := svc.PutBucketNotificationConfiguration(context.Background(), &PutBucketNotificationConfigurationInput{
+		Bucket: ptr.String("__Bucket__"),
+		NotificationConfiguration: &types.NotificationConfiguration{
+			TopicConfigurations: []types.TopicConfiguration{
+				{
+					Id:       ptr.String("__Id__"),
+					TopicArn: ptr.String("__TopicArn__"),
+					Events: []types.Event{
+						types.Event("s3:ReducedRedundancyLostObject"),
+						types.Event("s3:ReducedRedundancyLostObject"),
+					},
+					Filter: &types.NotificationConfigurationFilter{
+						Key: &types.S3KeyFilter{
+							FilterRules: []types.FilterRule{
+								{
+									Name:  types.FilterRuleName("prefix"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  types.FilterRuleName("prefix"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+				{
+					Id:       ptr.String("__Id__"),
+					TopicArn: ptr.String("__TopicArn__"),
+					Events: []types.Event{
+						types.Event("s3:ReducedRedundancyLostObject"),
+						types.Event("s3:ReducedRedundancyLostObject"),
+					},
+					Filter: &types.NotificationConfigurationFilter{
+						Key: &types.S3KeyFilter{
+							FilterRules: []types.FilterRule{
+								{
+									Name:  types.FilterRuleName("prefix"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  types.FilterRuleName("prefix"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			QueueConfigurations: []types.QueueConfiguration{
+				{
+					Id:       ptr.String("__Id__"),
+					QueueArn: ptr.String("__QueueArn__"),
+					Events: []types.Event{
+						types.Event("s3:ReducedRedundancyLostObject"),
+						types.Event("s3:ReducedRedundancyLostObject"),
+					},
+					Filter: &types.NotificationConfigurationFilter{
+						Key: &types.S3KeyFilter{
+							FilterRules: []types.FilterRule{
+								{
+									Name:  types.FilterRuleName("prefix"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  types.FilterRuleName("prefix"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+				{
+					Id:       ptr.String("__Id__"),
+					QueueArn: ptr.String("__QueueArn__"),
+					Events: []types.Event{
+						types.Event("s3:ReducedRedundancyLostObject"),
+						types.Event("s3:ReducedRedundancyLostObject"),
+					},
+					Filter: &types.NotificationConfigurationFilter{
+						Key: &types.S3KeyFilter{
+							FilterRules: []types.FilterRule{
+								{
+									Name:  types.FilterRuleName("prefix"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  types.FilterRuleName("prefix"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			LambdaFunctionConfigurations: []types.LambdaFunctionConfiguration{
+				{
+					Id:                ptr.String("__Id__"),
+					LambdaFunctionArn: ptr.String("__LambdaFunctionArn__"),
+					Events: []types.Event{
+						types.Event("s3:ReducedRedundancyLostObject"),
+						types.Event("s3:ReducedRedundancyLostObject"),
+					},
+					Filter: &types.NotificationConfigurationFilter{
+						Key: &types.S3KeyFilter{
+							FilterRules: []types.FilterRule{
+								{
+									Name:  types.FilterRuleName("prefix"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  types.FilterRuleName("prefix"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+				{
+					Id:                ptr.String("__Id__"),
+					LambdaFunctionArn: ptr.String("__LambdaFunctionArn__"),
+					Events: []types.Event{
+						types.Event("s3:ReducedRedundancyLostObject"),
+						types.Event("s3:ReducedRedundancyLostObject"),
+					},
+					Filter: &types.NotificationConfigurationFilter{
+						Key: &types.S3KeyFilter{
+							FilterRules: []types.FilterRule{
+								{
+									Name:  types.FilterRuleName("prefix"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  types.FilterRuleName("prefix"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			EventBridgeConfiguration: &types.EventBridgeConfiguration{},
+		},
+		ExpectedBucketOwner:       ptr.String("__ExpectedBucketOwner__"),
+		SkipDestinationValidation: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3499,7 +4458,22 @@ func TestCheckResponseSnapshot_PutBucketOwnershipControls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketOwnershipControls(context.Background(), &PutBucketOwnershipControlsInput{})
+	got, err := svc.PutBucketOwnershipControls(context.Background(), &PutBucketOwnershipControlsInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		OwnershipControls: &types.OwnershipControls{
+			Rules: []types.OwnershipControlsRule{
+				{
+					ObjectOwnership: types.ObjectOwnership("BucketOwnerPreferred"),
+				},
+				{
+					ObjectOwnership: types.ObjectOwnership("BucketOwnerPreferred"),
+				},
+			},
+		},
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3518,7 +4492,14 @@ func TestCheckResponseSnapshot_PutBucketPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketPolicy(context.Background(), &PutBucketPolicyInput{})
+	got, err := svc.PutBucketPolicy(context.Background(), &PutBucketPolicyInput{
+		Bucket:                        ptr.String("__Bucket__"),
+		ContentMD5:                    ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm:             types.ChecksumAlgorithm("CRC32"),
+		ConfirmRemoveSelfBucketAccess: ptr.Bool(true),
+		Policy:                        ptr.String("__Policy__"),
+		ExpectedBucketOwner:           ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3537,7 +4518,144 @@ func TestCheckResponseSnapshot_PutBucketReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketReplication(context.Background(), &PutBucketReplicationInput{})
+	got, err := svc.PutBucketReplication(context.Background(), &PutBucketReplicationInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		ReplicationConfiguration: &types.ReplicationConfiguration{
+			Role: ptr.String("__Role__"),
+			Rules: []types.ReplicationRule{
+				{
+					ID:       ptr.String("__ID__"),
+					Priority: ptr.Int32(1),
+					Prefix:   ptr.String("__Prefix__"),
+					Filter: &types.ReplicationRuleFilter{
+						Prefix: ptr.String("__Prefix__"),
+						Tag: &types.Tag{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						And: &types.ReplicationRuleAndOperator{
+							Prefix: ptr.String("__Prefix__"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Status: types.ReplicationRuleStatus("Enabled"),
+					SourceSelectionCriteria: &types.SourceSelectionCriteria{
+						SseKmsEncryptedObjects: &types.SseKmsEncryptedObjects{
+							Status: types.SseKmsEncryptedObjectsStatus("Enabled"),
+						},
+						ReplicaModifications: &types.ReplicaModifications{
+							Status: types.ReplicaModificationsStatus("Enabled"),
+						},
+					},
+					ExistingObjectReplication: &types.ExistingObjectReplication{
+						Status: types.ExistingObjectReplicationStatus("Enabled"),
+					},
+					Destination: &types.Destination{
+						Bucket:       ptr.String("__Bucket__"),
+						Account:      ptr.String("__Account__"),
+						StorageClass: types.StorageClass("STANDARD"),
+						AccessControlTranslation: &types.AccessControlTranslation{
+							Owner: types.OwnerOverride("Destination"),
+						},
+						EncryptionConfiguration: &types.EncryptionConfiguration{
+							ReplicaKmsKeyID: ptr.String("__ReplicaKmsKeyID__"),
+						},
+						ReplicationTime: &types.ReplicationTime{
+							Status: types.ReplicationTimeStatus("Enabled"),
+							Time: &types.ReplicationTimeValue{
+								Minutes: ptr.Int32(1),
+							},
+						},
+						Metrics: &types.Metrics{
+							Status: types.MetricsStatus("Enabled"),
+							EventThreshold: &types.ReplicationTimeValue{
+								Minutes: ptr.Int32(1),
+							},
+						},
+					},
+					DeleteMarkerReplication: &types.DeleteMarkerReplication{
+						Status: types.DeleteMarkerReplicationStatus("Enabled"),
+					},
+				},
+				{
+					ID:       ptr.String("__ID__"),
+					Priority: ptr.Int32(1),
+					Prefix:   ptr.String("__Prefix__"),
+					Filter: &types.ReplicationRuleFilter{
+						Prefix: ptr.String("__Prefix__"),
+						Tag: &types.Tag{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						And: &types.ReplicationRuleAndOperator{
+							Prefix: ptr.String("__Prefix__"),
+							Tags: []types.Tag{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Status: types.ReplicationRuleStatus("Enabled"),
+					SourceSelectionCriteria: &types.SourceSelectionCriteria{
+						SseKmsEncryptedObjects: &types.SseKmsEncryptedObjects{
+							Status: types.SseKmsEncryptedObjectsStatus("Enabled"),
+						},
+						ReplicaModifications: &types.ReplicaModifications{
+							Status: types.ReplicaModificationsStatus("Enabled"),
+						},
+					},
+					ExistingObjectReplication: &types.ExistingObjectReplication{
+						Status: types.ExistingObjectReplicationStatus("Enabled"),
+					},
+					Destination: &types.Destination{
+						Bucket:       ptr.String("__Bucket__"),
+						Account:      ptr.String("__Account__"),
+						StorageClass: types.StorageClass("STANDARD"),
+						AccessControlTranslation: &types.AccessControlTranslation{
+							Owner: types.OwnerOverride("Destination"),
+						},
+						EncryptionConfiguration: &types.EncryptionConfiguration{
+							ReplicaKmsKeyID: ptr.String("__ReplicaKmsKeyID__"),
+						},
+						ReplicationTime: &types.ReplicationTime{
+							Status: types.ReplicationTimeStatus("Enabled"),
+							Time: &types.ReplicationTimeValue{
+								Minutes: ptr.Int32(1),
+							},
+						},
+						Metrics: &types.Metrics{
+							Status: types.MetricsStatus("Enabled"),
+							EventThreshold: &types.ReplicationTimeValue{
+								Minutes: ptr.Int32(1),
+							},
+						},
+					},
+					DeleteMarkerReplication: &types.DeleteMarkerReplication{
+						Status: types.DeleteMarkerReplicationStatus("Enabled"),
+					},
+				},
+			},
+		},
+		Token:               ptr.String("__Token__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3556,7 +4674,15 @@ func TestCheckResponseSnapshot_PutBucketRequestPayment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketRequestPayment(context.Background(), &PutBucketRequestPaymentInput{})
+	got, err := svc.PutBucketRequestPayment(context.Background(), &PutBucketRequestPaymentInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		RequestPaymentConfiguration: &types.RequestPaymentConfiguration{
+			Payer: types.Payer("Requester"),
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3575,7 +4701,24 @@ func TestCheckResponseSnapshot_PutBucketTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketTagging(context.Background(), &PutBucketTaggingInput{})
+	got, err := svc.PutBucketTagging(context.Background(), &PutBucketTaggingInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		Tagging: &types.Tagging{
+			TagSet: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3594,7 +4737,17 @@ func TestCheckResponseSnapshot_PutBucketVersioning(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketVersioning(context.Background(), &PutBucketVersioningInput{})
+	got, err := svc.PutBucketVersioning(context.Background(), &PutBucketVersioningInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		MFA:               ptr.String("__MFA__"),
+		VersioningConfiguration: &types.VersioningConfiguration{
+			MFADelete: types.MFADelete("Enabled"),
+			Status:    types.BucketVersioningStatus("Enabled"),
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3613,7 +4766,52 @@ func TestCheckResponseSnapshot_PutBucketWebsite(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBucketWebsite(context.Background(), &PutBucketWebsiteInput{})
+	got, err := svc.PutBucketWebsite(context.Background(), &PutBucketWebsiteInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		WebsiteConfiguration: &types.WebsiteConfiguration{
+			ErrorDocument: &types.ErrorDocument{
+				Key: ptr.String("__Key__"),
+			},
+			IndexDocument: &types.IndexDocument{
+				Suffix: ptr.String("__Suffix__"),
+			},
+			RedirectAllRequestsTo: &types.RedirectAllRequestsTo{
+				HostName: ptr.String("__HostName__"),
+				Protocol: types.Protocol("http"),
+			},
+			RoutingRules: []types.RoutingRule{
+				{
+					Condition: &types.Condition{
+						HttpErrorCodeReturnedEquals: ptr.String("__HttpErrorCodeReturnedEquals__"),
+						KeyPrefixEquals:             ptr.String("__KeyPrefixEquals__"),
+					},
+					Redirect: &types.Redirect{
+						HostName:             ptr.String("__HostName__"),
+						HttpRedirectCode:     ptr.String("__HttpRedirectCode__"),
+						Protocol:             types.Protocol("http"),
+						ReplaceKeyPrefixWith: ptr.String("__ReplaceKeyPrefixWith__"),
+						ReplaceKeyWith:       ptr.String("__ReplaceKeyWith__"),
+					},
+				},
+				{
+					Condition: &types.Condition{
+						HttpErrorCodeReturnedEquals: ptr.String("__HttpErrorCodeReturnedEquals__"),
+						KeyPrefixEquals:             ptr.String("__KeyPrefixEquals__"),
+					},
+					Redirect: &types.Redirect{
+						HostName:             ptr.String("__HostName__"),
+						HttpRedirectCode:     ptr.String("__HttpRedirectCode__"),
+						Protocol:             types.Protocol("http"),
+						ReplaceKeyPrefixWith: ptr.String("__ReplaceKeyPrefixWith__"),
+						ReplaceKeyWith:       ptr.String("__ReplaceKeyWith__"),
+					},
+				},
+			},
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3655,7 +4853,56 @@ func TestCheckResponseSnapshot_PutObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutObject(context.Background(), &PutObjectInput{})
+	got, err := svc.PutObject(context.Background(), &PutObjectInput{
+		ACL:                types.ObjectCannedACL("private"),
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
+		Bucket:             ptr.String("__Bucket__"),
+		CacheControl:       ptr.String("__CacheControl__"),
+		ContentDisposition: ptr.String("__ContentDisposition__"),
+		ContentEncoding:    ptr.String("__ContentEncoding__"),
+		ContentLanguage:    ptr.String("__ContentLanguage__"),
+		ContentLength:      ptr.Int64(1),
+		ContentMD5:         ptr.String("__ContentMD5__"),
+		ContentType:        ptr.String("__ContentType__"),
+		ChecksumAlgorithm:  types.ChecksumAlgorithm("CRC32"),
+		ChecksumCRC32:      ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:     ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:  ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:       ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:     ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:     ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:        ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:   ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:    ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:  ptr.String("__ChecksumXXHASH128__"),
+		Expires:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IfMatch:            ptr.String("__IfMatch__"),
+		IfNoneMatch:        ptr.String("__IfNoneMatch__"),
+		GrantFullControl:   ptr.String("__GrantFullControl__"),
+		GrantRead:          ptr.String("__GrantRead__"),
+		GrantReadACP:       ptr.String("__GrantReadACP__"),
+		GrantWriteACP:      ptr.String("__GrantWriteACP__"),
+		Key:                ptr.String("__Key__"),
+		WriteOffsetBytes:   ptr.Int64(1),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryption:      types.ServerSideEncryption("AES256"),
+		StorageClass:              types.StorageClass("STANDARD"),
+		WebsiteRedirectLocation:   ptr.String("__WebsiteRedirectLocation__"),
+		SSECustomerAlgorithm:      ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:            ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:         ptr.String("__SSECustomerKeyMD5__"),
+		SSEKMSKeyId:               ptr.String("__SSEKMSKeyId__"),
+		SSEKMSEncryptionContext:   ptr.String("__SSEKMSEncryptionContext__"),
+		BucketKeyEnabled:          ptr.Bool(true),
+		RequestPayer:              types.RequestPayer("requester"),
+		Tagging:                   ptr.String("__Tagging__"),
+		ObjectLockMode:            types.ObjectLockMode("GOVERNANCE"),
+		ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ObjectLockLegalHoldStatus: types.ObjectLockLegalHoldStatus("ON"),
+		ExpectedBucketOwner:       ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3676,7 +4923,49 @@ func TestCheckResponseSnapshot_PutObjectAcl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutObjectAcl(context.Background(), &PutObjectAclInput{})
+	got, err := svc.PutObjectAcl(context.Background(), &PutObjectAclInput{
+		ACL: types.ObjectCannedACL("private"),
+		AccessControlPolicy: &types.AccessControlPolicy{
+			Grants: []types.Grant{
+				{
+					Grantee: &types.Grantee{
+						DisplayName:  ptr.String("__DisplayName__"),
+						EmailAddress: ptr.String("__EmailAddress__"),
+						ID:           ptr.String("__ID__"),
+						URI:          ptr.String("__URI__"),
+						Type:         types.Type("CanonicalUser"),
+					},
+					Permission: types.Permission("FULL_CONTROL"),
+				},
+				{
+					Grantee: &types.Grantee{
+						DisplayName:  ptr.String("__DisplayName__"),
+						EmailAddress: ptr.String("__EmailAddress__"),
+						ID:           ptr.String("__ID__"),
+						URI:          ptr.String("__URI__"),
+						Type:         types.Type("CanonicalUser"),
+					},
+					Permission: types.Permission("FULL_CONTROL"),
+				},
+			},
+			Owner: &types.Owner{
+				DisplayName: ptr.String("__DisplayName__"),
+				ID:          ptr.String("__ID__"),
+			},
+		},
+		Bucket:              ptr.String("__Bucket__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		GrantFullControl:    ptr.String("__GrantFullControl__"),
+		GrantRead:           ptr.String("__GrantRead__"),
+		GrantReadACP:        ptr.String("__GrantReadACP__"),
+		GrantWrite:          ptr.String("__GrantWrite__"),
+		GrantWriteACP:       ptr.String("__GrantWriteACP__"),
+		Key:                 ptr.String("__Key__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		VersionId:           ptr.String("__VersionId__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3713,7 +5002,28 @@ func TestCheckResponseSnapshot_PutObjectAnnotation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutObjectAnnotation(context.Background(), &PutObjectAnnotationInput{})
+	got, err := svc.PutObjectAnnotation(context.Background(), &PutObjectAnnotationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		VersionId:           ptr.String("__VersionId__"),
+		AnnotationName:      ptr.String("__AnnotationName__"),
+		AnnotationPayload:   io.NopCloser(bytes.NewReader([]byte("__AnnotationPayload__"))),
+		ObjectIfMatch:       ptr.String("__ObjectIfMatch__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		ChecksumCRC32:       ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:      ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:   ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:        ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:      ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:      ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:         ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:    ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:     ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:   ptr.String("__ChecksumXXHASH128__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3734,7 +5044,18 @@ func TestCheckResponseSnapshot_PutObjectLegalHold(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutObjectLegalHold(context.Background(), &PutObjectLegalHoldInput{})
+	got, err := svc.PutObjectLegalHold(context.Background(), &PutObjectLegalHoldInput{
+		Bucket: ptr.String("__Bucket__"),
+		Key:    ptr.String("__Key__"),
+		LegalHold: &types.ObjectLockLegalHold{
+			Status: types.ObjectLockLegalHoldStatus("ON"),
+		},
+		RequestPayer:        types.RequestPayer("requester"),
+		VersionId:           ptr.String("__VersionId__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3755,7 +5076,24 @@ func TestCheckResponseSnapshot_PutObjectLockConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutObjectLockConfiguration(context.Background(), &PutObjectLockConfigurationInput{})
+	got, err := svc.PutObjectLockConfiguration(context.Background(), &PutObjectLockConfigurationInput{
+		Bucket: ptr.String("__Bucket__"),
+		ObjectLockConfiguration: &types.ObjectLockConfiguration{
+			ObjectLockEnabled: types.ObjectLockEnabled("Enabled"),
+			Rule: &types.ObjectLockRule{
+				DefaultRetention: &types.DefaultRetention{
+					Mode:  types.ObjectLockRetentionMode("GOVERNANCE"),
+					Days:  ptr.Int32(1),
+					Years: ptr.Int32(1),
+				},
+			},
+		},
+		RequestPayer:        types.RequestPayer("requester"),
+		Token:               ptr.String("__Token__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3776,7 +5114,20 @@ func TestCheckResponseSnapshot_PutObjectRetention(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutObjectRetention(context.Background(), &PutObjectRetentionInput{})
+	got, err := svc.PutObjectRetention(context.Background(), &PutObjectRetentionInput{
+		Bucket: ptr.String("__Bucket__"),
+		Key:    ptr.String("__Key__"),
+		Retention: &types.ObjectLockRetention{
+			Mode:            types.ObjectLockRetentionMode("GOVERNANCE"),
+			RetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		RequestPayer:              types.RequestPayer("requester"),
+		VersionId:                 ptr.String("__VersionId__"),
+		BypassGovernanceRetention: ptr.Bool(true),
+		ContentMD5:                ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm:         types.ChecksumAlgorithm("CRC32"),
+		ExpectedBucketOwner:       ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3797,7 +5148,27 @@ func TestCheckResponseSnapshot_PutObjectTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutObjectTagging(context.Background(), &PutObjectTaggingInput{})
+	got, err := svc.PutObjectTagging(context.Background(), &PutObjectTaggingInput{
+		Bucket:            ptr.String("__Bucket__"),
+		Key:               ptr.String("__Key__"),
+		VersionId:         ptr.String("__VersionId__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		Tagging: &types.Tagging{
+			TagSet: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		RequestPayer:        types.RequestPayer("requester"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3816,7 +5187,18 @@ func TestCheckResponseSnapshot_PutPublicAccessBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPublicAccessBlock(context.Background(), &PutPublicAccessBlockInput{})
+	got, err := svc.PutPublicAccessBlock(context.Background(), &PutPublicAccessBlockInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		PublicAccessBlockConfiguration: &types.PublicAccessBlockConfiguration{
+			BlockPublicAcls:       ptr.Bool(true),
+			IgnorePublicAcls:      ptr.Bool(true),
+			BlockPublicPolicy:     ptr.Bool(true),
+			RestrictPublicBuckets: ptr.Bool(true),
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3835,7 +5217,20 @@ func TestCheckResponseSnapshot_RenameObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RenameObject(context.Background(), &RenameObjectInput{})
+	got, err := svc.RenameObject(context.Background(), &RenameObjectInput{
+		Bucket:                       ptr.String("__Bucket__"),
+		Key:                          ptr.String("__Key__"),
+		RenameSource:                 ptr.String("__RenameSource__"),
+		DestinationIfMatch:           ptr.String("__DestinationIfMatch__"),
+		DestinationIfNoneMatch:       ptr.String("__DestinationIfNoneMatch__"),
+		DestinationIfModifiedSince:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DestinationIfUnmodifiedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SourceIfMatch:                ptr.String("__SourceIfMatch__"),
+		SourceIfNoneMatch:            ptr.String("__SourceIfNoneMatch__"),
+		SourceIfModifiedSince:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SourceIfUnmodifiedSince:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:                  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3857,13 +5252,122 @@ func TestCheckResponseSnapshot_RestoreObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreObject(context.Background(), &RestoreObjectInput{})
+	got, err := svc.RestoreObject(context.Background(), &RestoreObjectInput{
+		Bucket:    ptr.String("__Bucket__"),
+		Key:       ptr.String("__Key__"),
+		VersionId: ptr.String("__VersionId__"),
+		RestoreRequest: &types.RestoreRequest{
+			Days: ptr.Int32(1),
+			GlacierJobParameters: &types.GlacierJobParameters{
+				Tier: types.Tier("Standard"),
+			},
+			Type:        types.RestoreRequestType("SELECT"),
+			Tier:        types.Tier("Standard"),
+			Description: ptr.String("__Description__"),
+			SelectParameters: &types.SelectParameters{
+				InputSerialization: &types.InputSerialization{
+					CSV: &types.CSVInput{
+						FileHeaderInfo:             types.FileHeaderInfo("USE"),
+						Comments:                   ptr.String("__Comments__"),
+						QuoteEscapeCharacter:       ptr.String("__QuoteEscapeCharacter__"),
+						RecordDelimiter:            ptr.String("__RecordDelimiter__"),
+						FieldDelimiter:             ptr.String("__FieldDelimiter__"),
+						QuoteCharacter:             ptr.String("__QuoteCharacter__"),
+						AllowQuotedRecordDelimiter: ptr.Bool(true),
+					},
+					CompressionType: types.CompressionType("NONE"),
+					JSON: &types.JSONInput{
+						Type: types.JSONType("DOCUMENT"),
+					},
+					Parquet: &types.ParquetInput{},
+				},
+				ExpressionType: types.ExpressionType("SQL"),
+				Expression:     ptr.String("__Expression__"),
+				OutputSerialization: &types.OutputSerialization{
+					CSV: &types.CSVOutput{
+						QuoteFields:          types.QuoteFields("ALWAYS"),
+						QuoteEscapeCharacter: ptr.String("__QuoteEscapeCharacter__"),
+						RecordDelimiter:      ptr.String("__RecordDelimiter__"),
+						FieldDelimiter:       ptr.String("__FieldDelimiter__"),
+						QuoteCharacter:       ptr.String("__QuoteCharacter__"),
+					},
+					JSON: &types.JSONOutput{
+						RecordDelimiter: ptr.String("__RecordDelimiter__"),
+					},
+				},
+			},
+			OutputLocation: &types.OutputLocation{
+				S3: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+					Encryption: &types.Encryption{
+						EncryptionType: types.ServerSideEncryption("AES256"),
+						KMSKeyId:       ptr.String("__KMSKeyId__"),
+						KMSContext:     ptr.String("__KMSContext__"),
+					},
+					CannedACL: types.ObjectCannedACL("private"),
+					AccessControlList: []types.Grant{
+						{
+							Grantee: &types.Grantee{
+								DisplayName:  ptr.String("__DisplayName__"),
+								EmailAddress: ptr.String("__EmailAddress__"),
+								ID:           ptr.String("__ID__"),
+								URI:          ptr.String("__URI__"),
+								Type:         types.Type("CanonicalUser"),
+							},
+							Permission: types.Permission("FULL_CONTROL"),
+						},
+						{
+							Grantee: &types.Grantee{
+								DisplayName:  ptr.String("__DisplayName__"),
+								EmailAddress: ptr.String("__EmailAddress__"),
+								ID:           ptr.String("__ID__"),
+								URI:          ptr.String("__URI__"),
+								Type:         types.Type("CanonicalUser"),
+							},
+							Permission: types.Permission("FULL_CONTROL"),
+						},
+					},
+					Tagging: &types.Tagging{
+						TagSet: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					UserMetadata: []types.MetadataEntry{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					StorageClass: types.StorageClass("STANDARD"),
+				},
+			},
+		},
+		RequestPayer:        types.RequestPayer("requester"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RestoreObject.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_SelectObjectContent(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_UpdateBucketMetadataAnnotationTableConfiguration(t *testing.T) {
@@ -3876,7 +5380,20 @@ func TestCheckResponseSnapshot_UpdateBucketMetadataAnnotationTableConfiguration(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBucketMetadataAnnotationTableConfiguration(context.Background(), &UpdateBucketMetadataAnnotationTableConfigurationInput{})
+	got, err := svc.UpdateBucketMetadataAnnotationTableConfiguration(context.Background(), &UpdateBucketMetadataAnnotationTableConfigurationInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		AnnotationTableConfiguration: &types.AnnotationTableConfigurationUpdates{
+			ConfigurationState: types.AnnotationConfigurationState("ENABLED"),
+			EncryptionConfiguration: &types.MetadataTableEncryptionConfiguration{
+				SseAlgorithm: types.TableSseAlgorithm("aws:kms"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			},
+			Role: ptr.String("__Role__"),
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3895,7 +5412,19 @@ func TestCheckResponseSnapshot_UpdateBucketMetadataInventoryTableConfiguration(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBucketMetadataInventoryTableConfiguration(context.Background(), &UpdateBucketMetadataInventoryTableConfigurationInput{})
+	got, err := svc.UpdateBucketMetadataInventoryTableConfiguration(context.Background(), &UpdateBucketMetadataInventoryTableConfigurationInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		InventoryTableConfiguration: &types.InventoryTableConfigurationUpdates{
+			ConfigurationState: types.InventoryConfigurationState("ENABLED"),
+			EncryptionConfiguration: &types.MetadataTableEncryptionConfiguration{
+				SseAlgorithm: types.TableSseAlgorithm("aws:kms"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			},
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3914,7 +5443,18 @@ func TestCheckResponseSnapshot_UpdateBucketMetadataJournalTableConfiguration(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBucketMetadataJournalTableConfiguration(context.Background(), &UpdateBucketMetadataJournalTableConfigurationInput{})
+	got, err := svc.UpdateBucketMetadataJournalTableConfiguration(context.Background(), &UpdateBucketMetadataJournalTableConfigurationInput{
+		Bucket:            ptr.String("__Bucket__"),
+		ContentMD5:        ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
+		JournalTableConfiguration: &types.JournalTableConfigurationUpdates{
+			RecordExpiration: &types.RecordExpiration{
+				Expiration: types.ExpirationState("ENABLED"),
+				Days:       ptr.Int32(1),
+			},
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3935,7 +5475,21 @@ func TestCheckResponseSnapshot_UpdateObjectEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateObjectEncryption(context.Background(), &UpdateObjectEncryptionInput{})
+	got, err := svc.UpdateObjectEncryption(context.Background(), &UpdateObjectEncryptionInput{
+		Bucket:    ptr.String("__Bucket__"),
+		Key:       ptr.String("__Key__"),
+		VersionId: ptr.String("__VersionId__"),
+		ObjectEncryption: &types.ObjectEncryptionMemberSSEKMS{
+			Value: types.SSEKMSEncryption{
+				KMSKeyArn:        ptr.String("__KMSKeyArn__"),
+				BucketKeyEnabled: ptr.Bool(true),
+			},
+		},
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3972,7 +5526,31 @@ func TestCheckResponseSnapshot_UploadPart(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UploadPart(context.Background(), &UploadPartInput{})
+	got, err := svc.UploadPart(context.Background(), &UploadPartInput{
+		Body:                 io.NopCloser(bytes.NewReader([]byte("__Body__"))),
+		Bucket:               ptr.String("__Bucket__"),
+		ContentLength:        ptr.Int64(1),
+		ContentMD5:           ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm:    types.ChecksumAlgorithm("CRC32"),
+		ChecksumCRC32:        ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:       ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:    ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:         ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:       ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:       ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:          ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:     ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:      ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:    ptr.String("__ChecksumXXHASH128__"),
+		Key:                  ptr.String("__Key__"),
+		PartNumber:           ptr.Int32(1),
+		UploadId:             ptr.String("__UploadId__"),
+		SSECustomerAlgorithm: ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:       ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:    ptr.String("__SSECustomerKeyMD5__"),
+		RequestPayer:         types.RequestPayer("requester"),
+		ExpectedBucketOwner:  ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4013,7 +5591,27 @@ func TestCheckResponseSnapshot_UploadPartCopy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UploadPartCopy(context.Background(), &UploadPartCopyInput{})
+	got, err := svc.UploadPartCopy(context.Background(), &UploadPartCopyInput{
+		Bucket:                         ptr.String("__Bucket__"),
+		CopySource:                     ptr.String("__CopySource__"),
+		CopySourceIfMatch:              ptr.String("__CopySourceIfMatch__"),
+		CopySourceIfModifiedSince:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CopySourceIfNoneMatch:          ptr.String("__CopySourceIfNoneMatch__"),
+		CopySourceIfUnmodifiedSince:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CopySourceRange:                ptr.String("__CopySourceRange__"),
+		Key:                            ptr.String("__Key__"),
+		PartNumber:                     ptr.Int32(1),
+		UploadId:                       ptr.String("__UploadId__"),
+		SSECustomerAlgorithm:           ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:                 ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:              ptr.String("__SSECustomerKeyMD5__"),
+		CopySourceSSECustomerAlgorithm: ptr.String("__CopySourceSSECustomerAlgorithm__"),
+		CopySourceSSECustomerKey:       ptr.String("__CopySourceSSECustomerKey__"),
+		CopySourceSSECustomerKeyMD5:    ptr.String("__CopySourceSSECustomerKeyMD5__"),
+		RequestPayer:                   types.RequestPayer("requester"),
+		ExpectedBucketOwner:            ptr.String("__ExpectedBucketOwner__"),
+		ExpectedSourceBucketOwner:      ptr.String("__ExpectedSourceBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4032,7 +5630,56 @@ func TestCheckResponseSnapshot_WriteGetObjectResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.WriteGetObjectResponse(context.Background(), &WriteGetObjectResponseInput{})
+	got, err := svc.WriteGetObjectResponse(context.Background(), &WriteGetObjectResponseInput{
+		RequestRoute:       ptr.String("RequestRoute-value"),
+		RequestToken:       ptr.String("__RequestToken__"),
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
+		StatusCode:         ptr.Int32(1),
+		ErrorCode:          ptr.String("__ErrorCode__"),
+		ErrorMessage:       ptr.String("__ErrorMessage__"),
+		AcceptRanges:       ptr.String("__AcceptRanges__"),
+		CacheControl:       ptr.String("__CacheControl__"),
+		ContentDisposition: ptr.String("__ContentDisposition__"),
+		ContentEncoding:    ptr.String("__ContentEncoding__"),
+		ContentLanguage:    ptr.String("__ContentLanguage__"),
+		ContentLength:      ptr.Int64(1),
+		ContentRange:       ptr.String("__ContentRange__"),
+		ContentType:        ptr.String("__ContentType__"),
+		ChecksumCRC32:      ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:     ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:  ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:       ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:     ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:     ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:        ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:   ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:    ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:  ptr.String("__ChecksumXXHASH128__"),
+		DeleteMarker:       ptr.Bool(true),
+		ETag:               ptr.String("__ETag__"),
+		Expires:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Expiration:         ptr.String("__Expiration__"),
+		LastModified:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MissingMeta:        ptr.Int32(1),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ObjectLockMode:            types.ObjectLockMode("GOVERNANCE"),
+		ObjectLockLegalHoldStatus: types.ObjectLockLegalHoldStatus("ON"),
+		ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PartsCount:                ptr.Int32(1),
+		ReplicationStatus:         types.ReplicationStatus("COMPLETE"),
+		RequestCharged:            types.RequestCharged("requester"),
+		Restore:                   ptr.String("__Restore__"),
+		ServerSideEncryption:      types.ServerSideEncryption("AES256"),
+		SSECustomerAlgorithm:      ptr.String("__SSECustomerAlgorithm__"),
+		SSEKMSKeyId:               ptr.String("__SSEKMSKeyId__"),
+		SSECustomerKeyMD5:         ptr.String("__SSECustomerKeyMD5__"),
+		StorageClass:              types.StorageClass("STANDARD"),
+		TagCount:                  ptr.Int32(1),
+		VersionId:                 ptr.String("__VersionId__"),
+		BucketKeyEnabled:          ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4053,7 +5700,21 @@ func TestCheckResponseSnapshot_Error_AccessDenied(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateObjectEncryption(context.Background(), &UpdateObjectEncryptionInput{})
+	_, opErr := svc.UpdateObjectEncryption(context.Background(), &UpdateObjectEncryptionInput{
+		Bucket:    ptr.String("__Bucket__"),
+		Key:       ptr.String("__Key__"),
+		VersionId: ptr.String("__VersionId__"),
+		ObjectEncryption: &types.ObjectEncryptionMemberSSEKMS{
+			Value: types.SSEKMSEncryption{
+				KMSKeyArn:        ptr.String("__KMSKeyArn__"),
+				BucketKeyEnabled: ptr.Bool(true),
+			},
+		},
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4078,7 +5739,28 @@ func TestCheckResponseSnapshot_Error_AnnotationLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutObjectAnnotation(context.Background(), &PutObjectAnnotationInput{})
+	_, opErr := svc.PutObjectAnnotation(context.Background(), &PutObjectAnnotationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		VersionId:           ptr.String("__VersionId__"),
+		AnnotationName:      ptr.String("__AnnotationName__"),
+		AnnotationPayload:   io.NopCloser(bytes.NewReader([]byte("__AnnotationPayload__"))),
+		ObjectIfMatch:       ptr.String("__ObjectIfMatch__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		ChecksumCRC32:       ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:      ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:   ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:        ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:      ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:      ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:         ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:    ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:     ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:   ptr.String("__ChecksumXXHASH128__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4103,7 +5785,28 @@ func TestCheckResponseSnapshot_Error_AnnotationNameTooLong(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutObjectAnnotation(context.Background(), &PutObjectAnnotationInput{})
+	_, opErr := svc.PutObjectAnnotation(context.Background(), &PutObjectAnnotationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		VersionId:           ptr.String("__VersionId__"),
+		AnnotationName:      ptr.String("__AnnotationName__"),
+		AnnotationPayload:   io.NopCloser(bytes.NewReader([]byte("__AnnotationPayload__"))),
+		ObjectIfMatch:       ptr.String("__ObjectIfMatch__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		ChecksumCRC32:       ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:      ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:   ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:        ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:      ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:      ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:         ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:    ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:     ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:   ptr.String("__ChecksumXXHASH128__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4128,7 +5831,39 @@ func TestCheckResponseSnapshot_Error_BucketAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBucket(context.Background(), &CreateBucketInput{})
+	_, opErr := svc.CreateBucket(context.Background(), &CreateBucketInput{
+		ACL:    types.BucketCannedACL("private"),
+		Bucket: ptr.String("__Bucket__"),
+		CreateBucketConfiguration: &types.CreateBucketConfiguration{
+			LocationConstraint: types.BucketLocationConstraint("af-south-1"),
+			Location: &types.LocationInfo{
+				Type: types.LocationType("AvailabilityZone"),
+				Name: ptr.String("__Name__"),
+			},
+			Bucket: &types.BucketInfo{
+				DataRedundancy: types.DataRedundancy("SingleAvailabilityZone"),
+				Type:           types.BucketType("Directory"),
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		GrantFullControl:           ptr.String("__GrantFullControl__"),
+		GrantRead:                  ptr.String("__GrantRead__"),
+		GrantReadACP:               ptr.String("__GrantReadACP__"),
+		GrantWrite:                 ptr.String("__GrantWrite__"),
+		GrantWriteACP:              ptr.String("__GrantWriteACP__"),
+		ObjectLockEnabledForBucket: ptr.Bool(true),
+		ObjectOwnership:            types.ObjectOwnership("BucketOwnerPreferred"),
+		BucketNamespace:            types.BucketNamespace("account-regional"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4153,7 +5888,39 @@ func TestCheckResponseSnapshot_Error_BucketAlreadyOwnedByYou(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBucket(context.Background(), &CreateBucketInput{})
+	_, opErr := svc.CreateBucket(context.Background(), &CreateBucketInput{
+		ACL:    types.BucketCannedACL("private"),
+		Bucket: ptr.String("__Bucket__"),
+		CreateBucketConfiguration: &types.CreateBucketConfiguration{
+			LocationConstraint: types.BucketLocationConstraint("af-south-1"),
+			Location: &types.LocationInfo{
+				Type: types.LocationType("AvailabilityZone"),
+				Name: ptr.String("__Name__"),
+			},
+			Bucket: &types.BucketInfo{
+				DataRedundancy: types.DataRedundancy("SingleAvailabilityZone"),
+				Type:           types.BucketType("Directory"),
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		GrantFullControl:           ptr.String("__GrantFullControl__"),
+		GrantRead:                  ptr.String("__GrantRead__"),
+		GrantReadACP:               ptr.String("__GrantReadACP__"),
+		GrantWrite:                 ptr.String("__GrantWrite__"),
+		GrantWriteACP:              ptr.String("__GrantWriteACP__"),
+		ObjectLockEnabledForBucket: ptr.Bool(true),
+		ObjectOwnership:            types.ObjectOwnership("BucketOwnerPreferred"),
+		BucketNamespace:            types.BucketNamespace("account-regional"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4178,7 +5945,56 @@ func TestCheckResponseSnapshot_Error_EncryptionTypeMismatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutObject(context.Background(), &PutObjectInput{})
+	_, opErr := svc.PutObject(context.Background(), &PutObjectInput{
+		ACL:                types.ObjectCannedACL("private"),
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
+		Bucket:             ptr.String("__Bucket__"),
+		CacheControl:       ptr.String("__CacheControl__"),
+		ContentDisposition: ptr.String("__ContentDisposition__"),
+		ContentEncoding:    ptr.String("__ContentEncoding__"),
+		ContentLanguage:    ptr.String("__ContentLanguage__"),
+		ContentLength:      ptr.Int64(1),
+		ContentMD5:         ptr.String("__ContentMD5__"),
+		ContentType:        ptr.String("__ContentType__"),
+		ChecksumAlgorithm:  types.ChecksumAlgorithm("CRC32"),
+		ChecksumCRC32:      ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:     ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:  ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:       ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:     ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:     ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:        ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:   ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:    ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:  ptr.String("__ChecksumXXHASH128__"),
+		Expires:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IfMatch:            ptr.String("__IfMatch__"),
+		IfNoneMatch:        ptr.String("__IfNoneMatch__"),
+		GrantFullControl:   ptr.String("__GrantFullControl__"),
+		GrantRead:          ptr.String("__GrantRead__"),
+		GrantReadACP:       ptr.String("__GrantReadACP__"),
+		GrantWriteACP:      ptr.String("__GrantWriteACP__"),
+		Key:                ptr.String("__Key__"),
+		WriteOffsetBytes:   ptr.Int64(1),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryption:      types.ServerSideEncryption("AES256"),
+		StorageClass:              types.StorageClass("STANDARD"),
+		WebsiteRedirectLocation:   ptr.String("__WebsiteRedirectLocation__"),
+		SSECustomerAlgorithm:      ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:            ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:         ptr.String("__SSECustomerKeyMD5__"),
+		SSEKMSKeyId:               ptr.String("__SSEKMSKeyId__"),
+		SSEKMSEncryptionContext:   ptr.String("__SSEKMSEncryptionContext__"),
+		BucketKeyEnabled:          ptr.Bool(true),
+		RequestPayer:              types.RequestPayer("requester"),
+		Tagging:                   ptr.String("__Tagging__"),
+		ObjectLockMode:            types.ObjectLockMode("GOVERNANCE"),
+		ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ObjectLockLegalHoldStatus: types.ObjectLockLegalHoldStatus("ON"),
+		ExpectedBucketOwner:       ptr.String("__ExpectedBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4203,7 +6019,20 @@ func TestCheckResponseSnapshot_Error_IdempotencyParameterMismatch(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RenameObject(context.Background(), &RenameObjectInput{})
+	_, opErr := svc.RenameObject(context.Background(), &RenameObjectInput{
+		Bucket:                       ptr.String("__Bucket__"),
+		Key:                          ptr.String("__Key__"),
+		RenameSource:                 ptr.String("__RenameSource__"),
+		DestinationIfMatch:           ptr.String("__DestinationIfMatch__"),
+		DestinationIfNoneMatch:       ptr.String("__DestinationIfNoneMatch__"),
+		DestinationIfModifiedSince:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DestinationIfUnmodifiedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SourceIfMatch:                ptr.String("__SourceIfMatch__"),
+		SourceIfNoneMatch:            ptr.String("__SourceIfNoneMatch__"),
+		SourceIfModifiedSince:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SourceIfUnmodifiedSince:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:                  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4228,7 +6057,28 @@ func TestCheckResponseSnapshot_Error_InvalidAnnotationName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutObjectAnnotation(context.Background(), &PutObjectAnnotationInput{})
+	_, opErr := svc.PutObjectAnnotation(context.Background(), &PutObjectAnnotationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		VersionId:           ptr.String("__VersionId__"),
+		AnnotationName:      ptr.String("__AnnotationName__"),
+		AnnotationPayload:   io.NopCloser(bytes.NewReader([]byte("__AnnotationPayload__"))),
+		ObjectIfMatch:       ptr.String("__ObjectIfMatch__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		ChecksumCRC32:       ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:      ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:   ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:        ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:      ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:      ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:         ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:    ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:     ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:   ptr.String("__ChecksumXXHASH128__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4238,33 +6088,6 @@ func TestCheckResponseSnapshot_Error_InvalidAnnotationName(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidAnnotationName.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_InvalidObjectState(t *testing.T) {
-	want := &types.InvalidObjectState{
-		StorageClass: types.StorageClass("STANDARD"),
-		AccessTier:   types.IntelligentTieringAccessTier("ARCHIVE_ACCESS"),
-		Message:      ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("InvalidObjectState.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetObject(context.Background(), &GetObjectInput{})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.InvalidObjectState
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.InvalidObjectState, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidObjectState.error", err)
 	}
 }
 
@@ -4280,7 +6103,16 @@ func TestCheckResponseSnapshot_Error_InvalidPrefix(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListObjectAnnotations(context.Background(), &ListObjectAnnotationsInput{})
+	_, opErr := svc.ListObjectAnnotations(context.Background(), &ListObjectAnnotationsInput{
+		Bucket:               ptr.String("__Bucket__"),
+		Key:                  ptr.String("__Key__"),
+		VersionId:            ptr.String("__VersionId__"),
+		MaxAnnotationResults: ptr.Int32(1),
+		AnnotationPrefix:     ptr.String("__AnnotationPrefix__"),
+		ContinuationToken:    ptr.String("__ContinuationToken__"),
+		RequestPayer:         types.RequestPayer("requester"),
+		ExpectedBucketOwner:  ptr.String("__ExpectedBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4305,7 +6137,56 @@ func TestCheckResponseSnapshot_Error_InvalidRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutObject(context.Background(), &PutObjectInput{})
+	_, opErr := svc.PutObject(context.Background(), &PutObjectInput{
+		ACL:                types.ObjectCannedACL("private"),
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
+		Bucket:             ptr.String("__Bucket__"),
+		CacheControl:       ptr.String("__CacheControl__"),
+		ContentDisposition: ptr.String("__ContentDisposition__"),
+		ContentEncoding:    ptr.String("__ContentEncoding__"),
+		ContentLanguage:    ptr.String("__ContentLanguage__"),
+		ContentLength:      ptr.Int64(1),
+		ContentMD5:         ptr.String("__ContentMD5__"),
+		ContentType:        ptr.String("__ContentType__"),
+		ChecksumAlgorithm:  types.ChecksumAlgorithm("CRC32"),
+		ChecksumCRC32:      ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:     ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:  ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:       ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:     ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:     ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:        ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:   ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:    ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:  ptr.String("__ChecksumXXHASH128__"),
+		Expires:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IfMatch:            ptr.String("__IfMatch__"),
+		IfNoneMatch:        ptr.String("__IfNoneMatch__"),
+		GrantFullControl:   ptr.String("__GrantFullControl__"),
+		GrantRead:          ptr.String("__GrantRead__"),
+		GrantReadACP:       ptr.String("__GrantReadACP__"),
+		GrantWriteACP:      ptr.String("__GrantWriteACP__"),
+		Key:                ptr.String("__Key__"),
+		WriteOffsetBytes:   ptr.Int64(1),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryption:      types.ServerSideEncryption("AES256"),
+		StorageClass:              types.StorageClass("STANDARD"),
+		WebsiteRedirectLocation:   ptr.String("__WebsiteRedirectLocation__"),
+		SSECustomerAlgorithm:      ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:            ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:         ptr.String("__SSECustomerKeyMD5__"),
+		SSEKMSKeyId:               ptr.String("__SSEKMSKeyId__"),
+		SSEKMSEncryptionContext:   ptr.String("__SSEKMSEncryptionContext__"),
+		BucketKeyEnabled:          ptr.Bool(true),
+		RequestPayer:              types.RequestPayer("requester"),
+		Tagging:                   ptr.String("__Tagging__"),
+		ObjectLockMode:            types.ObjectLockMode("GOVERNANCE"),
+		ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ObjectLockLegalHoldStatus: types.ObjectLockLegalHoldStatus("ON"),
+		ExpectedBucketOwner:       ptr.String("__ExpectedBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4330,7 +6211,56 @@ func TestCheckResponseSnapshot_Error_InvalidWriteOffset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutObject(context.Background(), &PutObjectInput{})
+	_, opErr := svc.PutObject(context.Background(), &PutObjectInput{
+		ACL:                types.ObjectCannedACL("private"),
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
+		Bucket:             ptr.String("__Bucket__"),
+		CacheControl:       ptr.String("__CacheControl__"),
+		ContentDisposition: ptr.String("__ContentDisposition__"),
+		ContentEncoding:    ptr.String("__ContentEncoding__"),
+		ContentLanguage:    ptr.String("__ContentLanguage__"),
+		ContentLength:      ptr.Int64(1),
+		ContentMD5:         ptr.String("__ContentMD5__"),
+		ContentType:        ptr.String("__ContentType__"),
+		ChecksumAlgorithm:  types.ChecksumAlgorithm("CRC32"),
+		ChecksumCRC32:      ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:     ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:  ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:       ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:     ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:     ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:        ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:   ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:    ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:  ptr.String("__ChecksumXXHASH128__"),
+		Expires:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IfMatch:            ptr.String("__IfMatch__"),
+		IfNoneMatch:        ptr.String("__IfNoneMatch__"),
+		GrantFullControl:   ptr.String("__GrantFullControl__"),
+		GrantRead:          ptr.String("__GrantRead__"),
+		GrantReadACP:       ptr.String("__GrantReadACP__"),
+		GrantWriteACP:      ptr.String("__GrantWriteACP__"),
+		Key:                ptr.String("__Key__"),
+		WriteOffsetBytes:   ptr.Int64(1),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryption:      types.ServerSideEncryption("AES256"),
+		StorageClass:              types.StorageClass("STANDARD"),
+		WebsiteRedirectLocation:   ptr.String("__WebsiteRedirectLocation__"),
+		SSECustomerAlgorithm:      ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:            ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:         ptr.String("__SSECustomerKeyMD5__"),
+		SSEKMSKeyId:               ptr.String("__SSEKMSKeyId__"),
+		SSEKMSEncryptionContext:   ptr.String("__SSEKMSEncryptionContext__"),
+		BucketKeyEnabled:          ptr.Bool(true),
+		RequestPayer:              types.RequestPayer("requester"),
+		Tagging:                   ptr.String("__Tagging__"),
+		ObjectLockMode:            types.ObjectLockMode("GOVERNANCE"),
+		ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ObjectLockLegalHoldStatus: types.ObjectLockLegalHoldStatus("ON"),
+		ExpectedBucketOwner:       ptr.String("__ExpectedBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4340,31 +6270,6 @@ func TestCheckResponseSnapshot_Error_InvalidWriteOffset(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidWriteOffset.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_NoSuchAnnotation(t *testing.T) {
-	want := &types.NoSuchAnnotation{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("NoSuchAnnotation.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetObjectAnnotation(context.Background(), &GetObjectAnnotationInput{})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.NoSuchAnnotation
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.NoSuchAnnotation, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "NoSuchAnnotation.error", err)
 	}
 }
 
@@ -4380,7 +6285,14 @@ func TestCheckResponseSnapshot_Error_NoSuchBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSession(context.Background(), &CreateSessionInput{})
+	_, opErr := svc.CreateSession(context.Background(), &CreateSessionInput{
+		SessionMode:             types.SessionMode("ReadOnly"),
+		Bucket:                  ptr.String("__Bucket__"),
+		ServerSideEncryption:    types.ServerSideEncryption("AES256"),
+		SSEKMSKeyId:             ptr.String("__SSEKMSKeyId__"),
+		SSEKMSEncryptionContext: ptr.String("__SSEKMSEncryptionContext__"),
+		BucketKeyEnabled:        ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4405,7 +6317,15 @@ func TestCheckResponseSnapshot_Error_NoSuchKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteObjectAnnotation(context.Background(), &DeleteObjectAnnotationInput{})
+	_, opErr := svc.DeleteObjectAnnotation(context.Background(), &DeleteObjectAnnotationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		AnnotationName:      ptr.String("__AnnotationName__"),
+		VersionId:           ptr.String("__VersionId__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		ObjectIfMatch:       ptr.String("__ObjectIfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4430,7 +6350,14 @@ func TestCheckResponseSnapshot_Error_NoSuchUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{})
+	_, opErr := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{
+		Bucket:               ptr.String("__Bucket__"),
+		Key:                  ptr.String("__Key__"),
+		UploadId:             ptr.String("__UploadId__"),
+		RequestPayer:         types.RequestPayer("requester"),
+		ExpectedBucketOwner:  ptr.String("__ExpectedBucketOwner__"),
+		IfMatchInitiatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4455,7 +6382,10 @@ func TestCheckResponseSnapshot_Error_NotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.HeadBucket(context.Background(), &HeadBucketInput{})
+	_, opErr := svc.HeadBucket(context.Background(), &HeadBucketInput{
+		Bucket:              ptr.String("__Bucket__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4480,7 +6410,112 @@ func TestCheckResponseSnapshot_Error_ObjectAlreadyInActiveTierError(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RestoreObject(context.Background(), &RestoreObjectInput{})
+	_, opErr := svc.RestoreObject(context.Background(), &RestoreObjectInput{
+		Bucket:    ptr.String("__Bucket__"),
+		Key:       ptr.String("__Key__"),
+		VersionId: ptr.String("__VersionId__"),
+		RestoreRequest: &types.RestoreRequest{
+			Days: ptr.Int32(1),
+			GlacierJobParameters: &types.GlacierJobParameters{
+				Tier: types.Tier("Standard"),
+			},
+			Type:        types.RestoreRequestType("SELECT"),
+			Tier:        types.Tier("Standard"),
+			Description: ptr.String("__Description__"),
+			SelectParameters: &types.SelectParameters{
+				InputSerialization: &types.InputSerialization{
+					CSV: &types.CSVInput{
+						FileHeaderInfo:             types.FileHeaderInfo("USE"),
+						Comments:                   ptr.String("__Comments__"),
+						QuoteEscapeCharacter:       ptr.String("__QuoteEscapeCharacter__"),
+						RecordDelimiter:            ptr.String("__RecordDelimiter__"),
+						FieldDelimiter:             ptr.String("__FieldDelimiter__"),
+						QuoteCharacter:             ptr.String("__QuoteCharacter__"),
+						AllowQuotedRecordDelimiter: ptr.Bool(true),
+					},
+					CompressionType: types.CompressionType("NONE"),
+					JSON: &types.JSONInput{
+						Type: types.JSONType("DOCUMENT"),
+					},
+					Parquet: &types.ParquetInput{},
+				},
+				ExpressionType: types.ExpressionType("SQL"),
+				Expression:     ptr.String("__Expression__"),
+				OutputSerialization: &types.OutputSerialization{
+					CSV: &types.CSVOutput{
+						QuoteFields:          types.QuoteFields("ALWAYS"),
+						QuoteEscapeCharacter: ptr.String("__QuoteEscapeCharacter__"),
+						RecordDelimiter:      ptr.String("__RecordDelimiter__"),
+						FieldDelimiter:       ptr.String("__FieldDelimiter__"),
+						QuoteCharacter:       ptr.String("__QuoteCharacter__"),
+					},
+					JSON: &types.JSONOutput{
+						RecordDelimiter: ptr.String("__RecordDelimiter__"),
+					},
+				},
+			},
+			OutputLocation: &types.OutputLocation{
+				S3: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+					Encryption: &types.Encryption{
+						EncryptionType: types.ServerSideEncryption("AES256"),
+						KMSKeyId:       ptr.String("__KMSKeyId__"),
+						KMSContext:     ptr.String("__KMSContext__"),
+					},
+					CannedACL: types.ObjectCannedACL("private"),
+					AccessControlList: []types.Grant{
+						{
+							Grantee: &types.Grantee{
+								DisplayName:  ptr.String("__DisplayName__"),
+								EmailAddress: ptr.String("__EmailAddress__"),
+								ID:           ptr.String("__ID__"),
+								URI:          ptr.String("__URI__"),
+								Type:         types.Type("CanonicalUser"),
+							},
+							Permission: types.Permission("FULL_CONTROL"),
+						},
+						{
+							Grantee: &types.Grantee{
+								DisplayName:  ptr.String("__DisplayName__"),
+								EmailAddress: ptr.String("__EmailAddress__"),
+								ID:           ptr.String("__ID__"),
+								URI:          ptr.String("__URI__"),
+								Type:         types.Type("CanonicalUser"),
+							},
+							Permission: types.Permission("FULL_CONTROL"),
+						},
+					},
+					Tagging: &types.Tagging{
+						TagSet: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					UserMetadata: []types.MetadataEntry{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					StorageClass: types.StorageClass("STANDARD"),
+				},
+			},
+		},
+		RequestPayer:        types.RequestPayer("requester"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4505,7 +6540,54 @@ func TestCheckResponseSnapshot_Error_ObjectNotInActiveTierError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyObject(context.Background(), &CopyObjectInput{})
+	_, opErr := svc.CopyObject(context.Background(), &CopyObjectInput{
+		ACL:                         types.ObjectCannedACL("private"),
+		Bucket:                      ptr.String("__Bucket__"),
+		CacheControl:                ptr.String("__CacheControl__"),
+		ChecksumAlgorithm:           types.ChecksumAlgorithm("CRC32"),
+		ContentDisposition:          ptr.String("__ContentDisposition__"),
+		ContentEncoding:             ptr.String("__ContentEncoding__"),
+		ContentLanguage:             ptr.String("__ContentLanguage__"),
+		ContentType:                 ptr.String("__ContentType__"),
+		CopySource:                  ptr.String("__CopySource__"),
+		CopySourceIfMatch:           ptr.String("__CopySourceIfMatch__"),
+		CopySourceIfModifiedSince:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CopySourceIfNoneMatch:       ptr.String("__CopySourceIfNoneMatch__"),
+		CopySourceIfUnmodifiedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Expires:                     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GrantFullControl:            ptr.String("__GrantFullControl__"),
+		GrantRead:                   ptr.String("__GrantRead__"),
+		GrantReadACP:                ptr.String("__GrantReadACP__"),
+		GrantWriteACP:               ptr.String("__GrantWriteACP__"),
+		IfMatch:                     ptr.String("__IfMatch__"),
+		IfNoneMatch:                 ptr.String("__IfNoneMatch__"),
+		Key:                         ptr.String("__Key__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		MetadataDirective:              types.MetadataDirective("COPY"),
+		TaggingDirective:               types.TaggingDirective("COPY"),
+		AnnotationDirective:            types.AnnotationDirective("COPY"),
+		ServerSideEncryption:           types.ServerSideEncryption("AES256"),
+		StorageClass:                   types.StorageClass("STANDARD"),
+		WebsiteRedirectLocation:        ptr.String("__WebsiteRedirectLocation__"),
+		SSECustomerAlgorithm:           ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:                 ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:              ptr.String("__SSECustomerKeyMD5__"),
+		SSEKMSKeyId:                    ptr.String("__SSEKMSKeyId__"),
+		SSEKMSEncryptionContext:        ptr.String("__SSEKMSEncryptionContext__"),
+		BucketKeyEnabled:               ptr.Bool(true),
+		CopySourceSSECustomerAlgorithm: ptr.String("__CopySourceSSECustomerAlgorithm__"),
+		CopySourceSSECustomerKey:       ptr.String("__CopySourceSSECustomerKey__"),
+		CopySourceSSECustomerKeyMD5:    ptr.String("__CopySourceSSECustomerKeyMD5__"),
+		RequestPayer:                   types.RequestPayer("requester"),
+		Tagging:                        ptr.String("__Tagging__"),
+		ObjectLockMode:                 types.ObjectLockMode("GOVERNANCE"),
+		ObjectLockRetainUntilDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ObjectLockLegalHoldStatus:      types.ObjectLockLegalHoldStatus("ON"),
+		ExpectedBucketOwner:            ptr.String("__ExpectedBucketOwner__"),
+		ExpectedSourceBucketOwner:      ptr.String("__ExpectedSourceBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4530,7 +6612,56 @@ func TestCheckResponseSnapshot_Error_TooManyParts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutObject(context.Background(), &PutObjectInput{})
+	_, opErr := svc.PutObject(context.Background(), &PutObjectInput{
+		ACL:                types.ObjectCannedACL("private"),
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
+		Bucket:             ptr.String("__Bucket__"),
+		CacheControl:       ptr.String("__CacheControl__"),
+		ContentDisposition: ptr.String("__ContentDisposition__"),
+		ContentEncoding:    ptr.String("__ContentEncoding__"),
+		ContentLanguage:    ptr.String("__ContentLanguage__"),
+		ContentLength:      ptr.Int64(1),
+		ContentMD5:         ptr.String("__ContentMD5__"),
+		ContentType:        ptr.String("__ContentType__"),
+		ChecksumAlgorithm:  types.ChecksumAlgorithm("CRC32"),
+		ChecksumCRC32:      ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:     ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:  ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:       ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:     ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:     ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:        ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:   ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:    ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:  ptr.String("__ChecksumXXHASH128__"),
+		Expires:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IfMatch:            ptr.String("__IfMatch__"),
+		IfNoneMatch:        ptr.String("__IfNoneMatch__"),
+		GrantFullControl:   ptr.String("__GrantFullControl__"),
+		GrantRead:          ptr.String("__GrantRead__"),
+		GrantReadACP:       ptr.String("__GrantReadACP__"),
+		GrantWriteACP:      ptr.String("__GrantWriteACP__"),
+		Key:                ptr.String("__Key__"),
+		WriteOffsetBytes:   ptr.Int64(1),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryption:      types.ServerSideEncryption("AES256"),
+		StorageClass:              types.StorageClass("STANDARD"),
+		WebsiteRedirectLocation:   ptr.String("__WebsiteRedirectLocation__"),
+		SSECustomerAlgorithm:      ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:            ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:         ptr.String("__SSECustomerKeyMD5__"),
+		SSEKMSKeyId:               ptr.String("__SSEKMSKeyId__"),
+		SSEKMSEncryptionContext:   ptr.String("__SSEKMSEncryptionContext__"),
+		BucketKeyEnabled:          ptr.Bool(true),
+		RequestPayer:              types.RequestPayer("requester"),
+		Tagging:                   ptr.String("__Tagging__"),
+		ObjectLockMode:            types.ObjectLockMode("GOVERNANCE"),
+		ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ObjectLockLegalHoldStatus: types.ObjectLockLegalHoldStatus("ON"),
+		ExpectedBucketOwner:       ptr.String("__ExpectedBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4555,7 +6686,28 @@ func TestCheckResponseSnapshot_Error_UnsupportedMediaType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutObjectAnnotation(context.Background(), &PutObjectAnnotationInput{})
+	_, opErr := svc.PutObjectAnnotation(context.Background(), &PutObjectAnnotationInput{
+		Bucket:              ptr.String("__Bucket__"),
+		Key:                 ptr.String("__Key__"),
+		VersionId:           ptr.String("__VersionId__"),
+		AnnotationName:      ptr.String("__AnnotationName__"),
+		AnnotationPayload:   io.NopCloser(bytes.NewReader([]byte("__AnnotationPayload__"))),
+		ObjectIfMatch:       ptr.String("__ObjectIfMatch__"),
+		ChecksumAlgorithm:   types.ChecksumAlgorithm("CRC32"),
+		ChecksumCRC32:       ptr.String("__ChecksumCRC32__"),
+		ChecksumCRC32C:      ptr.String("__ChecksumCRC32C__"),
+		ChecksumCRC64NVME:   ptr.String("__ChecksumCRC64NVME__"),
+		ChecksumSHA1:        ptr.String("__ChecksumSHA1__"),
+		ChecksumSHA256:      ptr.String("__ChecksumSHA256__"),
+		ChecksumSHA512:      ptr.String("__ChecksumSHA512__"),
+		ChecksumMD5:         ptr.String("__ChecksumMD5__"),
+		ChecksumXXHASH64:    ptr.String("__ChecksumXXHASH64__"),
+		ChecksumXXHASH3:     ptr.String("__ChecksumXXHASH3__"),
+		ChecksumXXHASH128:   ptr.String("__ChecksumXXHASH128__"),
+		ContentMD5:          ptr.String("__ContentMD5__"),
+		RequestPayer:        types.RequestPayer("requester"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

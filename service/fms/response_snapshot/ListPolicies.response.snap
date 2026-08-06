@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSFMS_20180101.ListPolicies
+
+{"NextToken":"__NextToken__","PolicyList":[{"DeleteUnusedFMManagedResources":true,"PolicyArn":"__PolicyArn__","PolicyId":"__PolicyId__","PolicyName":"__PolicyName__","PolicyStatus":"ACTIVE","RemediationEnabled":true,"ResourceType":"__ResourceType__","SecurityServiceType":"WAF"},{"DeleteUnusedFMManagedResources":true,"PolicyArn":"__PolicyArn__","PolicyId":"__PolicyId__","PolicyName":"__PolicyName__","PolicyStatus":"ACTIVE","RemediationEnabled":true,"ResourceType":"__ResourceType__","SecurityServiceType":"WAF"}]}

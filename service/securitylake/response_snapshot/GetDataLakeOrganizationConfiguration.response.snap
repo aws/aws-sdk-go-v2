@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"autoEnableNewAccount":[{"region":"__Region__","sources":[{"sourceName":"ROUTE53","sourceVersion":"__SourceVersion__"},{"sourceName":"ROUTE53","sourceVersion":"__SourceVersion__"}]},{"region":"__Region__","sources":[{"sourceName":"ROUTE53","sourceVersion":"__SourceVersion__"},{"sourceName":"ROUTE53","sourceVersion":"__SourceVersion__"}]}]}

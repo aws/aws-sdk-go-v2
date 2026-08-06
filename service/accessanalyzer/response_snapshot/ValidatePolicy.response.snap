@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"findings":[{"findingDetails":"__FindingDetails__","findingType":"ERROR","issueCode":"__IssueCode__","learnMoreLink":"__LearnMoreLink__","locations":[{"path":[{"index":1},{"index":1}],"span":{"end":{"column":1,"line":1,"offset":1},"start":{"column":1,"line":1,"offset":1}}},{"path":[{"index":1},{"index":1}],"span":{"end":{"column":1,"line":1,"offset":1},"start":{"column":1,"line":1,"offset":1}}}]},{"findingDetails":"__FindingDetails__","findingType":"ERROR","issueCode":"__IssueCode__","learnMoreLink":"__LearnMoreLink__","locations":[{"path":[{"index":1},{"index":1}],"span":{"end":{"column":1,"line":1,"offset":1},"start":{"column":1,"line":1,"offset":1}}},{"path":[{"index":1},{"index":1}],"span":{"end":{"column":1,"line":1,"offset":1},"start":{"column":1,"line":1,"offset":1}}}]}],"nextToken":"__NextToken__"}

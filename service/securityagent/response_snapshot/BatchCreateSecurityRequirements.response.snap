@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"code":"__Code__","message":"__Message__","securityRequirementName":"__SecurityRequirementName__"},{"code":"__Code__","message":"__Message__","securityRequirementName":"__SecurityRequirementName__"}],"securityRequirements":[{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","domain":"__Domain__","evaluation":"__Evaluation__","name":"__Name__","packId":"__PackId__","remediation":"__Remediation__","updatedAt":"2000-01-01T00:00:00Z"},{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","domain":"__Domain__","evaluation":"__Evaluation__","name":"__Name__","packId":"__PackId__","remediation":"__Remediation__","updatedAt":"2000-01-01T00:00:00Z"}]}

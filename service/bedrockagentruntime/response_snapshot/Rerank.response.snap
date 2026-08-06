@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","results":[{"document":{"jsonDocument":"__Document__","textDocument":{"text":"__Text__"},"type":"TEXT"},"index":1,"relevanceScore":1},{"document":{"jsonDocument":"__Document__","textDocument":{"text":"__Text__"},"type":"TEXT"},"index":1,"relevanceScore":1}]}

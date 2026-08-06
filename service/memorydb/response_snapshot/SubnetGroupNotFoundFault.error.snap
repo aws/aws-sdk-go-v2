@@ -1,0 +1,5 @@
+404
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.CreateCluster
+
+{"__type":"SubnetGroupNotFoundFault","message":"__Message__"}

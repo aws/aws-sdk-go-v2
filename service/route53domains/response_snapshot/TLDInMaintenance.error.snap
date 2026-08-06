@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Domains_v20140515.CheckDomainAvailability
+
+{"__type":"TLDInMaintenance","message":"__Message__","tld":"__Tld__"}

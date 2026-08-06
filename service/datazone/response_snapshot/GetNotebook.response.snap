@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"cellOrder":[{},{}],"computeId":"__ComputeId__","createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","environmentConfiguration":{"imageVersion":"__ImageVersion__","packageConfig":{"packageManager":"UV","packageSpecification":"__PackageSpecification__"}},"error":{"message":"__Message__"},"gitMetadata":{"branch":"__Branch__","commitHash":"__CommitHash__","commitMessage":"__CommitMessage__","committedAt":946684800,"connectionId":"__ConnectionId__","fileName":"__FileName__","repository":"__Repository__"},"id":"__Id__","lockExpiresAt":946684800,"lockedAt":946684800,"lockedBy":"__LockedBy__","metadata":{"key0":"__Value__"},"name":"__Name__","owningProjectId":"__OwningProjectId__","parameters":{"key0":"__Value__"},"status":"ACTIVE","updatedAt":946684800,"updatedBy":"__UpdatedBy__"}

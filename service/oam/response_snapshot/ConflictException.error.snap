@@ -1,0 +1,5 @@
+409
+Content-Type: application/json
+X-Amzn-Errortype: ConflictException
+
+{"__type":"ConflictException","Message":"__Message__"}

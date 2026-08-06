@@ -116,7 +116,9 @@ func TestCheckResponseSnapshot_DeregisterSubscriptionProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterSubscriptionProvider(context.Background(), &DeregisterSubscriptionProviderInput{})
+	got, err := svc.DeregisterSubscriptionProvider(context.Background(), &DeregisterSubscriptionProviderInput{
+		SubscriptionProviderArn: ptr.String("__SubscriptionProviderArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -142,7 +144,9 @@ func TestCheckResponseSnapshot_GetRegisteredSubscriptionProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRegisteredSubscriptionProvider(context.Background(), &GetRegisteredSubscriptionProviderInput{})
+	got, err := svc.GetRegisteredSubscriptionProvider(context.Background(), &GetRegisteredSubscriptionProviderInput{
+		SubscriptionProviderArn: ptr.String("__SubscriptionProviderArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +245,28 @@ func TestCheckResponseSnapshot_ListLinuxSubscriptionInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLinuxSubscriptionInstances(context.Background(), &ListLinuxSubscriptionInstancesInput{})
+	got, err := svc.ListLinuxSubscriptionInstances(context.Background(), &ListLinuxSubscriptionInstancesInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.Operator("Equal"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.Operator("Equal"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +299,28 @@ func TestCheckResponseSnapshot_ListLinuxSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLinuxSubscriptions(context.Background(), &ListLinuxSubscriptionsInput{})
+	got, err := svc.ListLinuxSubscriptions(context.Background(), &ListLinuxSubscriptionsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.Operator("Equal"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.Operator("Equal"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +359,14 @@ func TestCheckResponseSnapshot_ListRegisteredSubscriptionProviders(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRegisteredSubscriptionProviders(context.Background(), &ListRegisteredSubscriptionProvidersInput{})
+	got, err := svc.ListRegisteredSubscriptionProviders(context.Background(), &ListRegisteredSubscriptionProvidersInput{
+		SubscriptionProviderSources: []types.SubscriptionProviderSource{
+			types.SubscriptionProviderSource("RedHat"),
+			types.SubscriptionProviderSource("RedHat"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -336,7 +389,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -359,7 +414,13 @@ func TestCheckResponseSnapshot_RegisterSubscriptionProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterSubscriptionProvider(context.Background(), &RegisterSubscriptionProviderInput{})
+	got, err := svc.RegisterSubscriptionProvider(context.Background(), &RegisterSubscriptionProviderInput{
+		SubscriptionProviderSource: types.SubscriptionProviderSource("RedHat"),
+		SecretArn:                  ptr.String("__SecretArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -378,7 +439,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -397,7 +463,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -433,7 +505,17 @@ func TestCheckResponseSnapshot_UpdateServiceSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceSettings(context.Background(), &UpdateServiceSettingsInput{})
+	got, err := svc.UpdateServiceSettings(context.Background(), &UpdateServiceSettingsInput{
+		LinuxSubscriptionsDiscovery: types.LinuxSubscriptionsDiscovery("Enabled"),
+		LinuxSubscriptionsDiscoverySettings: &types.LinuxSubscriptionsDiscoverySettings{
+			SourceRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationIntegration: types.OrganizationIntegration("Enabled"),
+		},
+		AllowUpdate: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -454,7 +536,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterSubscriptionProvider(context.Background(), &DeregisterSubscriptionProviderInput{})
+	_, opErr := svc.DeregisterSubscriptionProvider(context.Background(), &DeregisterSubscriptionProviderInput{
+		SubscriptionProviderArn: ptr.String("__SubscriptionProviderArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -479,7 +563,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterSubscriptionProvider(context.Background(), &DeregisterSubscriptionProviderInput{})
+	_, opErr := svc.DeregisterSubscriptionProvider(context.Background(), &DeregisterSubscriptionProviderInput{
+		SubscriptionProviderArn: ptr.String("__SubscriptionProviderArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -504,7 +590,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterSubscriptionProvider(context.Background(), &DeregisterSubscriptionProviderInput{})
+	_, opErr := svc.DeregisterSubscriptionProvider(context.Background(), &DeregisterSubscriptionProviderInput{
+		SubscriptionProviderArn: ptr.String("__SubscriptionProviderArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -529,7 +617,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterSubscriptionProvider(context.Background(), &DeregisterSubscriptionProviderInput{})
+	_, opErr := svc.DeregisterSubscriptionProvider(context.Background(), &DeregisterSubscriptionProviderInput{
+		SubscriptionProviderArn: ptr.String("__SubscriptionProviderArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

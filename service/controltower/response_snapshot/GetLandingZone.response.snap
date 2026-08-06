@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"landingZone":{"arn":"__Arn__","driftStatus":{"status":"DRIFTED"},"latestAvailableVersion":"__LatestAvailableVersion__","manifest":"__Document__","remediationTypes":["INHERITANCE_DRIFT","INHERITANCE_DRIFT"],"status":"ACTIVE","version":"__Version__"}}

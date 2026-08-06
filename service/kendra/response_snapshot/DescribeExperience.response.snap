@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.DescribeExperience
+
+{"Configuration":{"ContentSourceConfiguration":{"DataSourceIds":["__Member__","__Member__"],"DirectPutContent":true,"FaqIds":["__Member__","__Member__"]},"UserIdentityConfiguration":{"IdentityAttributeName":"__IdentityAttributeName__"}},"CreatedAt":946684800,"Description":"__Description__","Endpoints":[{"Endpoint":"__Endpoint__","EndpointType":"HOME"},{"Endpoint":"__Endpoint__","EndpointType":"HOME"}],"ErrorMessage":"__ErrorMessage__","Id":"__Id__","IndexId":"__IndexId__","Name":"__Name__","RoleArn":"__RoleArn__","Status":"CREATING","UpdatedAt":946684800}

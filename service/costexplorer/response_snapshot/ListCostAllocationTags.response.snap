@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.ListCostAllocationTags
+
+{"CostAllocationTags":[{"LastUpdatedDate":"__LastUpdatedDate__","LastUsedDate":"__LastUsedDate__","Status":"Active","TagKey":"__TagKey__","Type":"AWSGenerated"},{"LastUpdatedDate":"__LastUpdatedDate__","LastUsedDate":"__LastUsedDate__","Status":"Active","TagKey":"__TagKey__","Type":"AWSGenerated"}],"NextToken":"__NextToken__"}

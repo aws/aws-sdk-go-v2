@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"action":"__Document__","agentSpaceId":"__AgentSpaceId__","condition":{"schedule":{"expression":"__Expression__"}},"createdAt":946684800,"status":"__Status__","triggerId":"__TriggerId__","type":"__Type__","updatedAt":946684800},{"action":"__Document__","agentSpaceId":"__AgentSpaceId__","condition":{"schedule":{"expression":"__Expression__"}},"createdAt":946684800,"status":"__Status__","triggerId":"__TriggerId__","type":"__Type__","updatedAt":946684800}],"nextToken":"__NextToken__"}

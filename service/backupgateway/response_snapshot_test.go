@@ -119,7 +119,10 @@ func TestCheckResponseSnapshot_AssociateGatewayToServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateGatewayToServer(context.Background(), &AssociateGatewayToServerInput{})
+	got, err := svc.AssociateGatewayToServer(context.Background(), &AssociateGatewayToServerInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		ServerArn:  ptr.String("__ServerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +143,21 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGateway(context.Background(), &CreateGatewayInput{})
+	got, err := svc.CreateGateway(context.Background(), &CreateGatewayInput{
+		ActivationKey:      ptr.String("__ActivationKey__"),
+		GatewayDisplayName: ptr.String("__GatewayDisplayName__"),
+		GatewayType:        types.GatewayType("BACKUP_VM"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +178,9 @@ func TestCheckResponseSnapshot_DeleteGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGateway(context.Background(), &DeleteGatewayInput{})
+	got, err := svc.DeleteGateway(context.Background(), &DeleteGatewayInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +201,9 @@ func TestCheckResponseSnapshot_DeleteHypervisor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHypervisor(context.Background(), &DeleteHypervisorInput{})
+	got, err := svc.DeleteHypervisor(context.Background(), &DeleteHypervisorInput{
+		HypervisorArn: ptr.String("__HypervisorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +224,9 @@ func TestCheckResponseSnapshot_DisassociateGatewayFromServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateGatewayFromServer(context.Background(), &DisassociateGatewayFromServerInput{})
+	got, err := svc.DisassociateGatewayFromServer(context.Background(), &DisassociateGatewayFromServerInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -248,7 +271,9 @@ func TestCheckResponseSnapshot_GetBandwidthRateLimitSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBandwidthRateLimitSchedule(context.Background(), &GetBandwidthRateLimitScheduleInput{})
+	got, err := svc.GetBandwidthRateLimitSchedule(context.Background(), &GetBandwidthRateLimitScheduleInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -285,7 +310,9 @@ func TestCheckResponseSnapshot_GetGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGateway(context.Background(), &GetGatewayInput{})
+	got, err := svc.GetGateway(context.Background(), &GetGatewayInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -316,7 +343,9 @@ func TestCheckResponseSnapshot_GetHypervisor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHypervisor(context.Background(), &GetHypervisorInput{})
+	got, err := svc.GetHypervisor(context.Background(), &GetHypervisorInput{
+		HypervisorArn: ptr.String("__HypervisorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -352,7 +381,9 @@ func TestCheckResponseSnapshot_GetHypervisorPropertyMappings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHypervisorPropertyMappings(context.Background(), &GetHypervisorPropertyMappingsInput{})
+	got, err := svc.GetHypervisorPropertyMappings(context.Background(), &GetHypervisorPropertyMappingsInput{
+		HypervisorArn: ptr.String("__HypervisorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +423,9 @@ func TestCheckResponseSnapshot_GetVirtualMachine(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVirtualMachine(context.Background(), &GetVirtualMachineInput{})
+	got, err := svc.GetVirtualMachine(context.Background(), &GetVirtualMachineInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -413,7 +446,23 @@ func TestCheckResponseSnapshot_ImportHypervisorConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportHypervisorConfiguration(context.Background(), &ImportHypervisorConfigurationInput{})
+	got, err := svc.ImportHypervisorConfiguration(context.Background(), &ImportHypervisorConfigurationInput{
+		Name:      ptr.String("__Name__"),
+		Host:      ptr.String("__Host__"),
+		Username:  ptr.String("__Username__"),
+		Password:  ptr.String("__Password__"),
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -450,7 +499,10 @@ func TestCheckResponseSnapshot_ListGateways(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGateways(context.Background(), &ListGatewaysInput{})
+	got, err := svc.ListGateways(context.Background(), &ListGatewaysInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -487,7 +539,10 @@ func TestCheckResponseSnapshot_ListHypervisors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHypervisors(context.Background(), &ListHypervisorsInput{})
+	got, err := svc.ListHypervisors(context.Background(), &ListHypervisorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -518,7 +573,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -557,7 +614,11 @@ func TestCheckResponseSnapshot_ListVirtualMachines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVirtualMachines(context.Background(), &ListVirtualMachinesInput{})
+	got, err := svc.ListVirtualMachines(context.Background(), &ListVirtualMachinesInput{
+		HypervisorArn: ptr.String("__HypervisorArn__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -578,7 +639,33 @@ func TestCheckResponseSnapshot_PutBandwidthRateLimitSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBandwidthRateLimitSchedule(context.Background(), &PutBandwidthRateLimitScheduleInput{})
+	got, err := svc.PutBandwidthRateLimitSchedule(context.Background(), &PutBandwidthRateLimitScheduleInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		BandwidthRateLimitIntervals: []types.BandwidthRateLimitInterval{
+			{
+				AverageUploadRateLimitInBitsPerSec: ptr.Int64(1),
+				StartHourOfDay:                     ptr.Int32(1),
+				EndHourOfDay:                       ptr.Int32(1),
+				StartMinuteOfHour:                  ptr.Int32(1),
+				EndMinuteOfHour:                    ptr.Int32(1),
+				DaysOfWeek: []int32{
+					1,
+					1,
+				},
+			},
+			{
+				AverageUploadRateLimitInBitsPerSec: ptr.Int64(1),
+				StartHourOfDay:                     ptr.Int32(1),
+				EndHourOfDay:                       ptr.Int32(1),
+				StartMinuteOfHour:                  ptr.Int32(1),
+				EndMinuteOfHour:                    ptr.Int32(1),
+				DaysOfWeek: []int32{
+					1,
+					1,
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -599,7 +686,24 @@ func TestCheckResponseSnapshot_PutHypervisorPropertyMappings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutHypervisorPropertyMappings(context.Background(), &PutHypervisorPropertyMappingsInput{})
+	got, err := svc.PutHypervisorPropertyMappings(context.Background(), &PutHypervisorPropertyMappingsInput{
+		HypervisorArn: ptr.String("__HypervisorArn__"),
+		VmwareToAwsTagMappings: []types.VmwareToAwsTagMapping{
+			{
+				VmwareCategory: ptr.String("__VmwareCategory__"),
+				VmwareTagName:  ptr.String("__VmwareTagName__"),
+				AwsTagKey:      ptr.String("__AwsTagKey__"),
+				AwsTagValue:    ptr.String("__AwsTagValue__"),
+			},
+			{
+				VmwareCategory: ptr.String("__VmwareCategory__"),
+				VmwareTagName:  ptr.String("__VmwareTagName__"),
+				AwsTagKey:      ptr.String("__AwsTagKey__"),
+				AwsTagValue:    ptr.String("__AwsTagValue__"),
+			},
+		},
+		IamRoleArn: ptr.String("__IamRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -620,7 +724,13 @@ func TestCheckResponseSnapshot_PutMaintenanceStartTime(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMaintenanceStartTime(context.Background(), &PutMaintenanceStartTimeInput{})
+	got, err := svc.PutMaintenanceStartTime(context.Background(), &PutMaintenanceStartTimeInput{
+		GatewayArn:   ptr.String("__GatewayArn__"),
+		HourOfDay:    ptr.Int32(1),
+		MinuteOfHour: ptr.Int32(1),
+		DayOfWeek:    ptr.Int32(1),
+		DayOfMonth:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -641,7 +751,9 @@ func TestCheckResponseSnapshot_StartVirtualMachinesMetadataSync(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartVirtualMachinesMetadataSync(context.Background(), &StartVirtualMachinesMetadataSyncInput{})
+	got, err := svc.StartVirtualMachinesMetadataSync(context.Background(), &StartVirtualMachinesMetadataSyncInput{
+		HypervisorArn: ptr.String("__HypervisorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -662,7 +774,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -681,7 +805,12 @@ func TestCheckResponseSnapshot_TestHypervisorConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestHypervisorConfiguration(context.Background(), &TestHypervisorConfigurationInput{})
+	got, err := svc.TestHypervisorConfiguration(context.Background(), &TestHypervisorConfigurationInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		Host:       ptr.String("__Host__"),
+		Username:   ptr.String("__Username__"),
+		Password:   ptr.String("__Password__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -702,7 +831,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -723,7 +858,10 @@ func TestCheckResponseSnapshot_UpdateGatewayInformation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGatewayInformation(context.Background(), &UpdateGatewayInformationInput{})
+	got, err := svc.UpdateGatewayInformation(context.Background(), &UpdateGatewayInformationInput{
+		GatewayArn:         ptr.String("__GatewayArn__"),
+		GatewayDisplayName: ptr.String("__GatewayDisplayName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -744,7 +882,9 @@ func TestCheckResponseSnapshot_UpdateGatewaySoftwareNow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGatewaySoftwareNow(context.Background(), &UpdateGatewaySoftwareNowInput{})
+	got, err := svc.UpdateGatewaySoftwareNow(context.Background(), &UpdateGatewaySoftwareNowInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -765,7 +905,14 @@ func TestCheckResponseSnapshot_UpdateHypervisor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateHypervisor(context.Background(), &UpdateHypervisorInput{})
+	got, err := svc.UpdateHypervisor(context.Background(), &UpdateHypervisorInput{
+		HypervisorArn: ptr.String("__HypervisorArn__"),
+		Host:          ptr.String("__Host__"),
+		Username:      ptr.String("__Username__"),
+		Password:      ptr.String("__Password__"),
+		Name:          ptr.String("__Name__"),
+		LogGroupArn:   ptr.String("__LogGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -787,7 +934,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteHypervisor(context.Background(), &DeleteHypervisorInput{})
+	_, opErr := svc.DeleteHypervisor(context.Background(), &DeleteHypervisorInput{
+		HypervisorArn: ptr.String("__HypervisorArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -813,7 +962,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateGatewayToServer(context.Background(), &AssociateGatewayToServerInput{})
+	_, opErr := svc.AssociateGatewayToServer(context.Background(), &AssociateGatewayToServerInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		ServerArn:  ptr.String("__ServerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -839,7 +991,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateGatewayToServer(context.Background(), &AssociateGatewayToServerInput{})
+	_, opErr := svc.AssociateGatewayToServer(context.Background(), &AssociateGatewayToServerInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		ServerArn:  ptr.String("__ServerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -865,7 +1020,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteGateway(context.Background(), &DeleteGatewayInput{})
+	_, opErr := svc.DeleteGateway(context.Background(), &DeleteGatewayInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -891,7 +1048,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateGatewayToServer(context.Background(), &AssociateGatewayToServerInput{})
+	_, opErr := svc.AssociateGatewayToServer(context.Background(), &AssociateGatewayToServerInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		ServerArn:  ptr.String("__ServerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -917,7 +1077,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateGatewayToServer(context.Background(), &AssociateGatewayToServerInput{})
+	_, opErr := svc.AssociateGatewayToServer(context.Background(), &AssociateGatewayToServerInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		ServerArn:  ptr.String("__ServerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

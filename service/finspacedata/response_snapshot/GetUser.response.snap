@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"apiAccess":"ENABLED","apiAccessPrincipalArn":"__ApiAccessPrincipalArn__","createTime":1,"emailAddress":"__EmailAddress__","firstName":"__FirstName__","lastDisabledTime":1,"lastEnabledTime":1,"lastLoginTime":1,"lastModifiedTime":1,"lastName":"__LastName__","status":"CREATING","type":"SUPER_USER","userId":"__UserId__"}

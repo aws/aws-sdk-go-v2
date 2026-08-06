@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"deploymentPatternVersions":[{"deploymentPatternName":"__DeploymentPatternName__","deploymentPatternVersionName":"__DeploymentPatternVersionName__","description":"__Description__","documentationUrl":"__DocumentationUrl__","workloadName":"__WorkloadName__"},{"deploymentPatternName":"__DeploymentPatternName__","deploymentPatternVersionName":"__DeploymentPatternVersionName__","description":"__Description__","documentationUrl":"__DocumentationUrl__","workloadName":"__WorkloadName__"}],"nextToken":"__NextToken__"}

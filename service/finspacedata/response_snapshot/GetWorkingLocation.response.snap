@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"s3Bucket":"__S3Bucket__","s3Path":"__S3Path__","s3Uri":"__S3Uri__"}

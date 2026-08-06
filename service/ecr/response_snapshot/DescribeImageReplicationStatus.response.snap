@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.DescribeImageReplicationStatus
+
+{"imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"},"replicationStatuses":[{"failureCode":"__FailureCode__","region":"__Region__","registryId":"__RegistryId__","status":"IN_PROGRESS"},{"failureCode":"__FailureCode__","region":"__Region__","registryId":"__RegistryId__","status":"IN_PROGRESS"}],"repositoryName":"__RepositoryName__"}

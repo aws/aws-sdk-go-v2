@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.UpdateProgramManagementAccount
+
+{"programManagementAccountDetail":{"arn":"__Arn__","displayName":"__DisplayName__","id":"__Id__","revision":"__Revision__"}}

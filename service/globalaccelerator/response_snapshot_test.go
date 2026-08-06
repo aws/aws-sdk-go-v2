@@ -127,7 +127,19 @@ func TestCheckResponseSnapshot_AddCustomRoutingEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{})
+	got, err := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{
+		EndpointConfigurations: []types.CustomRoutingEndpointConfiguration{
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+		},
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +176,23 @@ func TestCheckResponseSnapshot_AddEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddEndpoints(context.Background(), &AddEndpointsInput{})
+	got, err := svc.AddEndpoints(context.Background(), &AddEndpointsInput{
+		EndpointConfigurations: []types.EndpointConfiguration{
+			{
+				EndpointId:                  ptr.String("__EndpointId__"),
+				Weight:                      ptr.Int32(1),
+				ClientIPPreservationEnabled: ptr.Bool(true),
+				AttachmentArn:               ptr.String("__AttachmentArn__"),
+			},
+			{
+				EndpointId:                  ptr.String("__EndpointId__"),
+				Weight:                      ptr.Int32(1),
+				ClientIPPreservationEnabled: ptr.Bool(true),
+				AttachmentArn:               ptr.String("__AttachmentArn__"),
+			},
+		},
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -198,7 +226,9 @@ func TestCheckResponseSnapshot_AdvertiseByoipCidr(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AdvertiseByoipCidr(context.Background(), &AdvertiseByoipCidrInput{})
+	got, err := svc.AdvertiseByoipCidr(context.Background(), &AdvertiseByoipCidrInput{
+		Cidr: ptr.String("__Cidr__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -217,7 +247,19 @@ func TestCheckResponseSnapshot_AllowCustomRoutingTraffic(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AllowCustomRoutingTraffic(context.Background(), &AllowCustomRoutingTrafficInput{})
+	got, err := svc.AllowCustomRoutingTraffic(context.Background(), &AllowCustomRoutingTrafficInput{
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+		EndpointId:       ptr.String("__EndpointId__"),
+		DestinationAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DestinationPorts: []int32{
+			1,
+			1,
+		},
+		AllowAllTrafficToEndpoint: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -276,7 +318,26 @@ func TestCheckResponseSnapshot_CreateAccelerator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccelerator(context.Background(), &CreateAcceleratorInput{})
+	got, err := svc.CreateAccelerator(context.Background(), &CreateAcceleratorInput{
+		Name:          ptr.String("__Name__"),
+		IpAddressType: types.IpAddressType("IPV4"),
+		IpAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled:          ptr.Bool(true),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -318,7 +379,36 @@ func TestCheckResponseSnapshot_CreateCrossAccountAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCrossAccountAttachment(context.Background(), &CreateCrossAccountAttachmentInput{})
+	got, err := svc.CreateCrossAccountAttachment(context.Background(), &CreateCrossAccountAttachmentInput{
+		Name: ptr.String("__Name__"),
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Resources: []types.Resource{
+			{
+				EndpointId: ptr.String("__EndpointId__"),
+				Cidr:       ptr.String("__Cidr__"),
+				Region:     ptr.String("__Region__"),
+			},
+			{
+				EndpointId: ptr.String("__EndpointId__"),
+				Cidr:       ptr.String("__Cidr__"),
+				Region:     ptr.String("__Region__"),
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -366,7 +456,26 @@ func TestCheckResponseSnapshot_CreateCustomRoutingAccelerator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomRoutingAccelerator(context.Background(), &CreateCustomRoutingAcceleratorInput{})
+	got, err := svc.CreateCustomRoutingAccelerator(context.Background(), &CreateCustomRoutingAcceleratorInput{
+		Name:          ptr.String("__Name__"),
+		IpAddressType: types.IpAddressType("IPV4"),
+		IpAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled:          ptr.Bool(true),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -416,7 +525,29 @@ func TestCheckResponseSnapshot_CreateCustomRoutingEndpointGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomRoutingEndpointGroup(context.Background(), &CreateCustomRoutingEndpointGroupInput{})
+	got, err := svc.CreateCustomRoutingEndpointGroup(context.Background(), &CreateCustomRoutingEndpointGroupInput{
+		ListenerArn:         ptr.String("__ListenerArn__"),
+		EndpointGroupRegion: ptr.String("__EndpointGroupRegion__"),
+		DestinationConfigurations: []types.CustomRoutingDestinationConfiguration{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				Protocols: []types.CustomRoutingProtocol{
+					types.CustomRoutingProtocol("TCP"),
+					types.CustomRoutingProtocol("TCP"),
+				},
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				Protocols: []types.CustomRoutingProtocol{
+					types.CustomRoutingProtocol("TCP"),
+					types.CustomRoutingProtocol("TCP"),
+				},
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -449,7 +580,20 @@ func TestCheckResponseSnapshot_CreateCustomRoutingListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomRoutingListener(context.Background(), &CreateCustomRoutingListenerInput{})
+	got, err := svc.CreateCustomRoutingListener(context.Background(), &CreateCustomRoutingListenerInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+		PortRanges: []types.PortRange{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -505,7 +649,41 @@ func TestCheckResponseSnapshot_CreateEndpointGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEndpointGroup(context.Background(), &CreateEndpointGroupInput{})
+	got, err := svc.CreateEndpointGroup(context.Background(), &CreateEndpointGroupInput{
+		ListenerArn:         ptr.String("__ListenerArn__"),
+		EndpointGroupRegion: ptr.String("__EndpointGroupRegion__"),
+		EndpointConfigurations: []types.EndpointConfiguration{
+			{
+				EndpointId:                  ptr.String("__EndpointId__"),
+				Weight:                      ptr.Int32(1),
+				ClientIPPreservationEnabled: ptr.Bool(true),
+				AttachmentArn:               ptr.String("__AttachmentArn__"),
+			},
+			{
+				EndpointId:                  ptr.String("__EndpointId__"),
+				Weight:                      ptr.Int32(1),
+				ClientIPPreservationEnabled: ptr.Bool(true),
+				AttachmentArn:               ptr.String("__AttachmentArn__"),
+			},
+		},
+		TrafficDialPercentage:      ptr.Float32(1.0),
+		HealthCheckPort:            ptr.Int32(1),
+		HealthCheckProtocol:        types.HealthCheckProtocol("TCP"),
+		HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+		HealthCheckIntervalSeconds: ptr.Int32(1),
+		ThresholdCount:             ptr.Int32(1),
+		IdempotencyToken:           ptr.String("__IdempotencyToken__"),
+		PortOverrides: []types.PortOverride{
+			{
+				ListenerPort: ptr.Int32(1),
+				EndpointPort: ptr.Int32(1),
+			},
+			{
+				ListenerPort: ptr.Int32(1),
+				EndpointPort: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -540,7 +718,22 @@ func TestCheckResponseSnapshot_CreateListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	got, err := svc.CreateListener(context.Background(), &CreateListenerInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+		PortRanges: []types.PortRange{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+			},
+		},
+		Protocol:         types.Protocol("TCP"),
+		ClientAffinity:   types.ClientAffinity("NONE"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -559,7 +752,9 @@ func TestCheckResponseSnapshot_DeleteAccelerator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccelerator(context.Background(), &DeleteAcceleratorInput{})
+	got, err := svc.DeleteAccelerator(context.Background(), &DeleteAcceleratorInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -578,7 +773,9 @@ func TestCheckResponseSnapshot_DeleteCrossAccountAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCrossAccountAttachment(context.Background(), &DeleteCrossAccountAttachmentInput{})
+	got, err := svc.DeleteCrossAccountAttachment(context.Background(), &DeleteCrossAccountAttachmentInput{
+		AttachmentArn: ptr.String("__AttachmentArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -597,7 +794,9 @@ func TestCheckResponseSnapshot_DeleteCustomRoutingAccelerator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomRoutingAccelerator(context.Background(), &DeleteCustomRoutingAcceleratorInput{})
+	got, err := svc.DeleteCustomRoutingAccelerator(context.Background(), &DeleteCustomRoutingAcceleratorInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -616,7 +815,9 @@ func TestCheckResponseSnapshot_DeleteCustomRoutingEndpointGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomRoutingEndpointGroup(context.Background(), &DeleteCustomRoutingEndpointGroupInput{})
+	got, err := svc.DeleteCustomRoutingEndpointGroup(context.Background(), &DeleteCustomRoutingEndpointGroupInput{
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -635,7 +836,9 @@ func TestCheckResponseSnapshot_DeleteCustomRoutingListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomRoutingListener(context.Background(), &DeleteCustomRoutingListenerInput{})
+	got, err := svc.DeleteCustomRoutingListener(context.Background(), &DeleteCustomRoutingListenerInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -654,7 +857,9 @@ func TestCheckResponseSnapshot_DeleteEndpointGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEndpointGroup(context.Background(), &DeleteEndpointGroupInput{})
+	got, err := svc.DeleteEndpointGroup(context.Background(), &DeleteEndpointGroupInput{
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -673,7 +878,9 @@ func TestCheckResponseSnapshot_DeleteListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteListener(context.Background(), &DeleteListenerInput{})
+	got, err := svc.DeleteListener(context.Background(), &DeleteListenerInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -692,7 +899,19 @@ func TestCheckResponseSnapshot_DenyCustomRoutingTraffic(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DenyCustomRoutingTraffic(context.Background(), &DenyCustomRoutingTrafficInput{})
+	got, err := svc.DenyCustomRoutingTraffic(context.Background(), &DenyCustomRoutingTrafficInput{
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+		EndpointId:       ptr.String("__EndpointId__"),
+		DestinationAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DestinationPorts: []int32{
+			1,
+			1,
+		},
+		DenyAllTrafficToEndpoint: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -726,7 +945,9 @@ func TestCheckResponseSnapshot_DeprovisionByoipCidr(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeprovisionByoipCidr(context.Background(), &DeprovisionByoipCidrInput{})
+	got, err := svc.DeprovisionByoipCidr(context.Background(), &DeprovisionByoipCidrInput{
+		Cidr: ptr.String("__Cidr__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -785,7 +1006,9 @@ func TestCheckResponseSnapshot_DescribeAccelerator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccelerator(context.Background(), &DescribeAcceleratorInput{})
+	got, err := svc.DescribeAccelerator(context.Background(), &DescribeAcceleratorInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -810,7 +1033,9 @@ func TestCheckResponseSnapshot_DescribeAcceleratorAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAcceleratorAttributes(context.Background(), &DescribeAcceleratorAttributesInput{})
+	got, err := svc.DescribeAcceleratorAttributes(context.Background(), &DescribeAcceleratorAttributesInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -852,7 +1077,9 @@ func TestCheckResponseSnapshot_DescribeCrossAccountAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCrossAccountAttachment(context.Background(), &DescribeCrossAccountAttachmentInput{})
+	got, err := svc.DescribeCrossAccountAttachment(context.Background(), &DescribeCrossAccountAttachmentInput{
+		AttachmentArn: ptr.String("__AttachmentArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -900,7 +1127,9 @@ func TestCheckResponseSnapshot_DescribeCustomRoutingAccelerator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCustomRoutingAccelerator(context.Background(), &DescribeCustomRoutingAcceleratorInput{})
+	got, err := svc.DescribeCustomRoutingAccelerator(context.Background(), &DescribeCustomRoutingAcceleratorInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -925,7 +1154,9 @@ func TestCheckResponseSnapshot_DescribeCustomRoutingAcceleratorAttributes(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCustomRoutingAcceleratorAttributes(context.Background(), &DescribeCustomRoutingAcceleratorAttributesInput{})
+	got, err := svc.DescribeCustomRoutingAcceleratorAttributes(context.Background(), &DescribeCustomRoutingAcceleratorAttributesInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -975,7 +1206,9 @@ func TestCheckResponseSnapshot_DescribeCustomRoutingEndpointGroup(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCustomRoutingEndpointGroup(context.Background(), &DescribeCustomRoutingEndpointGroupInput{})
+	got, err := svc.DescribeCustomRoutingEndpointGroup(context.Background(), &DescribeCustomRoutingEndpointGroupInput{
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1008,7 +1241,9 @@ func TestCheckResponseSnapshot_DescribeCustomRoutingListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCustomRoutingListener(context.Background(), &DescribeCustomRoutingListenerInput{})
+	got, err := svc.DescribeCustomRoutingListener(context.Background(), &DescribeCustomRoutingListenerInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1064,7 +1299,9 @@ func TestCheckResponseSnapshot_DescribeEndpointGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEndpointGroup(context.Background(), &DescribeEndpointGroupInput{})
+	got, err := svc.DescribeEndpointGroup(context.Background(), &DescribeEndpointGroupInput{
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1099,7 +1336,9 @@ func TestCheckResponseSnapshot_DescribeListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeListener(context.Background(), &DescribeListenerInput{})
+	got, err := svc.DescribeListener(context.Background(), &DescribeListenerInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1200,7 +1439,10 @@ func TestCheckResponseSnapshot_ListAccelerators(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccelerators(context.Background(), &ListAcceleratorsInput{})
+	got, err := svc.ListAccelerators(context.Background(), &ListAcceleratorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1251,7 +1493,10 @@ func TestCheckResponseSnapshot_ListByoipCidrs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListByoipCidrs(context.Background(), &ListByoipCidrsInput{})
+	got, err := svc.ListByoipCidrs(context.Background(), &ListByoipCidrsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1318,7 +1563,10 @@ func TestCheckResponseSnapshot_ListCrossAccountAttachments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCrossAccountAttachments(context.Background(), &ListCrossAccountAttachmentsInput{})
+	got, err := svc.ListCrossAccountAttachments(context.Background(), &ListCrossAccountAttachmentsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1375,7 +1623,12 @@ func TestCheckResponseSnapshot_ListCrossAccountResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCrossAccountResources(context.Background(), &ListCrossAccountResourcesInput{})
+	got, err := svc.ListCrossAccountResources(context.Background(), &ListCrossAccountResourcesInput{
+		AcceleratorArn:            ptr.String("__AcceleratorArn__"),
+		ResourceOwnerAwsAccountId: ptr.String("__ResourceOwnerAwsAccountId__"),
+		MaxResults:                ptr.Int32(1),
+		NextToken:                 ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1454,7 +1707,10 @@ func TestCheckResponseSnapshot_ListCustomRoutingAccelerators(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomRoutingAccelerators(context.Background(), &ListCustomRoutingAcceleratorsInput{})
+	got, err := svc.ListCustomRoutingAccelerators(context.Background(), &ListCustomRoutingAcceleratorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1537,7 +1793,11 @@ func TestCheckResponseSnapshot_ListCustomRoutingEndpointGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomRoutingEndpointGroups(context.Background(), &ListCustomRoutingEndpointGroupsInput{})
+	got, err := svc.ListCustomRoutingEndpointGroups(context.Background(), &ListCustomRoutingEndpointGroupsInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1586,7 +1846,11 @@ func TestCheckResponseSnapshot_ListCustomRoutingListeners(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomRoutingListeners(context.Background(), &ListCustomRoutingListenersInput{})
+	got, err := svc.ListCustomRoutingListeners(context.Background(), &ListCustomRoutingListenersInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1637,7 +1901,12 @@ func TestCheckResponseSnapshot_ListCustomRoutingPortMappings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomRoutingPortMappings(context.Background(), &ListCustomRoutingPortMappingsInput{})
+	got, err := svc.ListCustomRoutingPortMappings(context.Background(), &ListCustomRoutingPortMappingsInput{
+		AcceleratorArn:   ptr.String("__AcceleratorArn__"),
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1704,7 +1973,12 @@ func TestCheckResponseSnapshot_ListCustomRoutingPortMappingsByDestination(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomRoutingPortMappingsByDestination(context.Background(), &ListCustomRoutingPortMappingsByDestinationInput{})
+	got, err := svc.ListCustomRoutingPortMappingsByDestination(context.Background(), &ListCustomRoutingPortMappingsByDestinationInput{
+		EndpointId:         ptr.String("__EndpointId__"),
+		DestinationAddress: ptr.String("__DestinationAddress__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1799,7 +2073,11 @@ func TestCheckResponseSnapshot_ListEndpointGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEndpointGroups(context.Background(), &ListEndpointGroupsInput{})
+	got, err := svc.ListEndpointGroups(context.Background(), &ListEndpointGroupsInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1852,7 +2130,11 @@ func TestCheckResponseSnapshot_ListListeners(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListListeners(context.Background(), &ListListenersInput{})
+	got, err := svc.ListListeners(context.Background(), &ListListenersInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1882,7 +2164,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1916,7 +2200,13 @@ func TestCheckResponseSnapshot_ProvisionByoipCidr(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ProvisionByoipCidr(context.Background(), &ProvisionByoipCidrInput{})
+	got, err := svc.ProvisionByoipCidr(context.Background(), &ProvisionByoipCidrInput{
+		Cidr: ptr.String("__Cidr__"),
+		CidrAuthorizationContext: &types.CidrAuthorizationContext{
+			Message:   ptr.String("__Message__"),
+			Signature: ptr.String("__Signature__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1935,7 +2225,13 @@ func TestCheckResponseSnapshot_RemoveCustomRoutingEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveCustomRoutingEndpoints(context.Background(), &RemoveCustomRoutingEndpointsInput{})
+	got, err := svc.RemoveCustomRoutingEndpoints(context.Background(), &RemoveCustomRoutingEndpointsInput{
+		EndpointIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1954,7 +2250,19 @@ func TestCheckResponseSnapshot_RemoveEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveEndpoints(context.Background(), &RemoveEndpointsInput{})
+	got, err := svc.RemoveEndpoints(context.Background(), &RemoveEndpointsInput{
+		EndpointIdentifiers: []types.EndpointIdentifier{
+			{
+				EndpointId:                  ptr.String("__EndpointId__"),
+				ClientIPPreservationEnabled: ptr.Bool(true),
+			},
+			{
+				EndpointId:                  ptr.String("__EndpointId__"),
+				ClientIPPreservationEnabled: ptr.Bool(true),
+			},
+		},
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1973,7 +2281,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1992,7 +2312,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2051,7 +2377,16 @@ func TestCheckResponseSnapshot_UpdateAccelerator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccelerator(context.Background(), &UpdateAcceleratorInput{})
+	got, err := svc.UpdateAccelerator(context.Background(), &UpdateAcceleratorInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+		Name:           ptr.String("__Name__"),
+		IpAddressType:  types.IpAddressType("IPV4"),
+		IpAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2076,7 +2411,12 @@ func TestCheckResponseSnapshot_UpdateAcceleratorAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAcceleratorAttributes(context.Background(), &UpdateAcceleratorAttributesInput{})
+	got, err := svc.UpdateAcceleratorAttributes(context.Background(), &UpdateAcceleratorAttributesInput{
+		AcceleratorArn:   ptr.String("__AcceleratorArn__"),
+		FlowLogsEnabled:  ptr.Bool(true),
+		FlowLogsS3Bucket: ptr.String("__FlowLogsS3Bucket__"),
+		FlowLogsS3Prefix: ptr.String("__FlowLogsS3Prefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2118,7 +2458,42 @@ func TestCheckResponseSnapshot_UpdateCrossAccountAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCrossAccountAttachment(context.Background(), &UpdateCrossAccountAttachmentInput{})
+	got, err := svc.UpdateCrossAccountAttachment(context.Background(), &UpdateCrossAccountAttachmentInput{
+		AttachmentArn: ptr.String("__AttachmentArn__"),
+		Name:          ptr.String("__Name__"),
+		AddPrincipals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemovePrincipals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AddResources: []types.Resource{
+			{
+				EndpointId: ptr.String("__EndpointId__"),
+				Cidr:       ptr.String("__Cidr__"),
+				Region:     ptr.String("__Region__"),
+			},
+			{
+				EndpointId: ptr.String("__EndpointId__"),
+				Cidr:       ptr.String("__Cidr__"),
+				Region:     ptr.String("__Region__"),
+			},
+		},
+		RemoveResources: []types.Resource{
+			{
+				EndpointId: ptr.String("__EndpointId__"),
+				Cidr:       ptr.String("__Cidr__"),
+				Region:     ptr.String("__Region__"),
+			},
+			{
+				EndpointId: ptr.String("__EndpointId__"),
+				Cidr:       ptr.String("__Cidr__"),
+				Region:     ptr.String("__Region__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2166,7 +2541,16 @@ func TestCheckResponseSnapshot_UpdateCustomRoutingAccelerator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCustomRoutingAccelerator(context.Background(), &UpdateCustomRoutingAcceleratorInput{})
+	got, err := svc.UpdateCustomRoutingAccelerator(context.Background(), &UpdateCustomRoutingAcceleratorInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+		Name:           ptr.String("__Name__"),
+		IpAddressType:  types.IpAddressType("IPV4"),
+		IpAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2191,7 +2575,12 @@ func TestCheckResponseSnapshot_UpdateCustomRoutingAcceleratorAttributes(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCustomRoutingAcceleratorAttributes(context.Background(), &UpdateCustomRoutingAcceleratorAttributesInput{})
+	got, err := svc.UpdateCustomRoutingAcceleratorAttributes(context.Background(), &UpdateCustomRoutingAcceleratorAttributesInput{
+		AcceleratorArn:   ptr.String("__AcceleratorArn__"),
+		FlowLogsEnabled:  ptr.Bool(true),
+		FlowLogsS3Bucket: ptr.String("__FlowLogsS3Bucket__"),
+		FlowLogsS3Prefix: ptr.String("__FlowLogsS3Prefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2224,7 +2613,19 @@ func TestCheckResponseSnapshot_UpdateCustomRoutingListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCustomRoutingListener(context.Background(), &UpdateCustomRoutingListenerInput{})
+	got, err := svc.UpdateCustomRoutingListener(context.Background(), &UpdateCustomRoutingListenerInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		PortRanges: []types.PortRange{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2280,7 +2681,39 @@ func TestCheckResponseSnapshot_UpdateEndpointGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEndpointGroup(context.Background(), &UpdateEndpointGroupInput{})
+	got, err := svc.UpdateEndpointGroup(context.Background(), &UpdateEndpointGroupInput{
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+		EndpointConfigurations: []types.EndpointConfiguration{
+			{
+				EndpointId:                  ptr.String("__EndpointId__"),
+				Weight:                      ptr.Int32(1),
+				ClientIPPreservationEnabled: ptr.Bool(true),
+				AttachmentArn:               ptr.String("__AttachmentArn__"),
+			},
+			{
+				EndpointId:                  ptr.String("__EndpointId__"),
+				Weight:                      ptr.Int32(1),
+				ClientIPPreservationEnabled: ptr.Bool(true),
+				AttachmentArn:               ptr.String("__AttachmentArn__"),
+			},
+		},
+		TrafficDialPercentage:      ptr.Float32(1.0),
+		HealthCheckPort:            ptr.Int32(1),
+		HealthCheckProtocol:        types.HealthCheckProtocol("TCP"),
+		HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+		HealthCheckIntervalSeconds: ptr.Int32(1),
+		ThresholdCount:             ptr.Int32(1),
+		PortOverrides: []types.PortOverride{
+			{
+				ListenerPort: ptr.Int32(1),
+				EndpointPort: ptr.Int32(1),
+			},
+			{
+				ListenerPort: ptr.Int32(1),
+				EndpointPort: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2315,7 +2748,21 @@ func TestCheckResponseSnapshot_UpdateListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateListener(context.Background(), &UpdateListenerInput{})
+	got, err := svc.UpdateListener(context.Background(), &UpdateListenerInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		PortRanges: []types.PortRange{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+			},
+		},
+		Protocol:       types.Protocol("TCP"),
+		ClientAffinity: types.ClientAffinity("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2349,7 +2796,9 @@ func TestCheckResponseSnapshot_WithdrawByoipCidr(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.WithdrawByoipCidr(context.Background(), &WithdrawByoipCidrInput{})
+	got, err := svc.WithdrawByoipCidr(context.Background(), &WithdrawByoipCidrInput{
+		Cidr: ptr.String("__Cidr__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2370,7 +2819,9 @@ func TestCheckResponseSnapshot_Error_AcceleratorNotDisabledException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAccelerator(context.Background(), &DeleteAcceleratorInput{})
+	_, opErr := svc.DeleteAccelerator(context.Background(), &DeleteAcceleratorInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2395,7 +2846,29 @@ func TestCheckResponseSnapshot_Error_AcceleratorNotFoundException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomRoutingEndpointGroup(context.Background(), &CreateCustomRoutingEndpointGroupInput{})
+	_, opErr := svc.CreateCustomRoutingEndpointGroup(context.Background(), &CreateCustomRoutingEndpointGroupInput{
+		ListenerArn:         ptr.String("__ListenerArn__"),
+		EndpointGroupRegion: ptr.String("__EndpointGroupRegion__"),
+		DestinationConfigurations: []types.CustomRoutingDestinationConfiguration{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				Protocols: []types.CustomRoutingProtocol{
+					types.CustomRoutingProtocol("TCP"),
+					types.CustomRoutingProtocol("TCP"),
+				},
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				Protocols: []types.CustomRoutingProtocol{
+					types.CustomRoutingProtocol("TCP"),
+					types.CustomRoutingProtocol("TCP"),
+				},
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2420,7 +2893,19 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{})
+	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{
+		EndpointConfigurations: []types.CustomRoutingEndpointConfiguration{
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+		},
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2445,7 +2930,9 @@ func TestCheckResponseSnapshot_Error_AssociatedEndpointGroupFoundException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCustomRoutingListener(context.Background(), &DeleteCustomRoutingListenerInput{})
+	_, opErr := svc.DeleteCustomRoutingListener(context.Background(), &DeleteCustomRoutingListenerInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2470,7 +2957,9 @@ func TestCheckResponseSnapshot_Error_AssociatedListenerFoundException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAccelerator(context.Background(), &DeleteAcceleratorInput{})
+	_, opErr := svc.DeleteAccelerator(context.Background(), &DeleteAcceleratorInput{
+		AcceleratorArn: ptr.String("__AcceleratorArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2495,7 +2984,9 @@ func TestCheckResponseSnapshot_Error_AttachmentNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCrossAccountAttachment(context.Background(), &DeleteCrossAccountAttachmentInput{})
+	_, opErr := svc.DeleteCrossAccountAttachment(context.Background(), &DeleteCrossAccountAttachmentInput{
+		AttachmentArn: ptr.String("__AttachmentArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2520,7 +3011,9 @@ func TestCheckResponseSnapshot_Error_ByoipCidrNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdvertiseByoipCidr(context.Background(), &AdvertiseByoipCidrInput{})
+	_, opErr := svc.AdvertiseByoipCidr(context.Background(), &AdvertiseByoipCidrInput{
+		Cidr: ptr.String("__Cidr__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2545,7 +3038,19 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{})
+	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{
+		EndpointConfigurations: []types.CustomRoutingEndpointConfiguration{
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+		},
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2570,7 +3075,19 @@ func TestCheckResponseSnapshot_Error_EndpointAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{})
+	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{
+		EndpointConfigurations: []types.CustomRoutingEndpointConfiguration{
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+		},
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2595,7 +3112,29 @@ func TestCheckResponseSnapshot_Error_EndpointGroupAlreadyExistsException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomRoutingEndpointGroup(context.Background(), &CreateCustomRoutingEndpointGroupInput{})
+	_, opErr := svc.CreateCustomRoutingEndpointGroup(context.Background(), &CreateCustomRoutingEndpointGroupInput{
+		ListenerArn:         ptr.String("__ListenerArn__"),
+		EndpointGroupRegion: ptr.String("__EndpointGroupRegion__"),
+		DestinationConfigurations: []types.CustomRoutingDestinationConfiguration{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				Protocols: []types.CustomRoutingProtocol{
+					types.CustomRoutingProtocol("TCP"),
+					types.CustomRoutingProtocol("TCP"),
+				},
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				Protocols: []types.CustomRoutingProtocol{
+					types.CustomRoutingProtocol("TCP"),
+					types.CustomRoutingProtocol("TCP"),
+				},
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2620,7 +3159,19 @@ func TestCheckResponseSnapshot_Error_EndpointGroupNotFoundException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{})
+	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{
+		EndpointConfigurations: []types.CustomRoutingEndpointConfiguration{
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+		},
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2645,7 +3196,12 @@ func TestCheckResponseSnapshot_Error_EndpointNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListCustomRoutingPortMappingsByDestination(context.Background(), &ListCustomRoutingPortMappingsByDestinationInput{})
+	_, opErr := svc.ListCustomRoutingPortMappingsByDestination(context.Background(), &ListCustomRoutingPortMappingsByDestinationInput{
+		EndpointId:         ptr.String("__EndpointId__"),
+		DestinationAddress: ptr.String("__DestinationAddress__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2670,7 +3226,9 @@ func TestCheckResponseSnapshot_Error_IncorrectCidrStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdvertiseByoipCidr(context.Background(), &AdvertiseByoipCidrInput{})
+	_, opErr := svc.AdvertiseByoipCidr(context.Background(), &AdvertiseByoipCidrInput{
+		Cidr: ptr.String("__Cidr__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2695,7 +3253,19 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{})
+	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{
+		EndpointConfigurations: []types.CustomRoutingEndpointConfiguration{
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+		},
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2720,7 +3290,19 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{})
+	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{
+		EndpointConfigurations: []types.CustomRoutingEndpointConfiguration{
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+		},
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2745,7 +3327,10 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListAccelerators(context.Background(), &ListAcceleratorsInput{})
+	_, opErr := svc.ListAccelerators(context.Background(), &ListAcceleratorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2770,7 +3355,29 @@ func TestCheckResponseSnapshot_Error_InvalidPortRangeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomRoutingEndpointGroup(context.Background(), &CreateCustomRoutingEndpointGroupInput{})
+	_, opErr := svc.CreateCustomRoutingEndpointGroup(context.Background(), &CreateCustomRoutingEndpointGroupInput{
+		ListenerArn:         ptr.String("__ListenerArn__"),
+		EndpointGroupRegion: ptr.String("__EndpointGroupRegion__"),
+		DestinationConfigurations: []types.CustomRoutingDestinationConfiguration{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				Protocols: []types.CustomRoutingProtocol{
+					types.CustomRoutingProtocol("TCP"),
+					types.CustomRoutingProtocol("TCP"),
+				},
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				Protocols: []types.CustomRoutingProtocol{
+					types.CustomRoutingProtocol("TCP"),
+					types.CustomRoutingProtocol("TCP"),
+				},
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2795,7 +3402,19 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{})
+	_, opErr := svc.AddCustomRoutingEndpoints(context.Background(), &AddCustomRoutingEndpointsInput{
+		EndpointConfigurations: []types.CustomRoutingEndpointConfiguration{
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+			{
+				EndpointId:    ptr.String("__EndpointId__"),
+				AttachmentArn: ptr.String("__AttachmentArn__"),
+			},
+		},
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2820,7 +3439,29 @@ func TestCheckResponseSnapshot_Error_ListenerNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomRoutingEndpointGroup(context.Background(), &CreateCustomRoutingEndpointGroupInput{})
+	_, opErr := svc.CreateCustomRoutingEndpointGroup(context.Background(), &CreateCustomRoutingEndpointGroupInput{
+		ListenerArn:         ptr.String("__ListenerArn__"),
+		EndpointGroupRegion: ptr.String("__EndpointGroupRegion__"),
+		DestinationConfigurations: []types.CustomRoutingDestinationConfiguration{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				Protocols: []types.CustomRoutingProtocol{
+					types.CustomRoutingProtocol("TCP"),
+					types.CustomRoutingProtocol("TCP"),
+				},
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				Protocols: []types.CustomRoutingProtocol{
+					types.CustomRoutingProtocol("TCP"),
+					types.CustomRoutingProtocol("TCP"),
+				},
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2845,7 +3486,23 @@ func TestCheckResponseSnapshot_Error_TransactionInProgressException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddEndpoints(context.Background(), &AddEndpointsInput{})
+	_, opErr := svc.AddEndpoints(context.Background(), &AddEndpointsInput{
+		EndpointConfigurations: []types.EndpointConfiguration{
+			{
+				EndpointId:                  ptr.String("__EndpointId__"),
+				Weight:                      ptr.Int32(1),
+				ClientIPPreservationEnabled: ptr.Bool(true),
+				AttachmentArn:               ptr.String("__AttachmentArn__"),
+			},
+			{
+				EndpointId:                  ptr.String("__EndpointId__"),
+				Weight:                      ptr.Int32(1),
+				ClientIPPreservationEnabled: ptr.Bool(true),
+				AttachmentArn:               ptr.String("__AttachmentArn__"),
+			},
+		},
+		EndpointGroupArn: ptr.String("__EndpointGroupArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

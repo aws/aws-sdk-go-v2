@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DeliverabilityTestStatus":"IN_PROGRESS","ReportId":"__ReportId__"}

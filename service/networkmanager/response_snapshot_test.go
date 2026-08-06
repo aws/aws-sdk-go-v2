@@ -189,7 +189,9 @@ func TestCheckResponseSnapshot_AcceptAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{})
+	got, err := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -216,7 +218,12 @@ func TestCheckResponseSnapshot_AssociateConnectPeer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateConnectPeer(context.Background(), &AssociateConnectPeerInput{})
+	got, err := svc.AssociateConnectPeer(context.Background(), &AssociateConnectPeerInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		ConnectPeerId:   ptr.String("__ConnectPeerId__"),
+		DeviceId:        ptr.String("__DeviceId__"),
+		LinkId:          ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -243,7 +250,12 @@ func TestCheckResponseSnapshot_AssociateCustomerGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateCustomerGateway(context.Background(), &AssociateCustomerGatewayInput{})
+	got, err := svc.AssociateCustomerGateway(context.Background(), &AssociateCustomerGatewayInput{
+		CustomerGatewayArn: ptr.String("__CustomerGatewayArn__"),
+		GlobalNetworkId:    ptr.String("__GlobalNetworkId__"),
+		DeviceId:           ptr.String("__DeviceId__"),
+		LinkId:             ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -269,7 +281,11 @@ func TestCheckResponseSnapshot_AssociateLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateLink(context.Background(), &AssociateLinkInput{})
+	got, err := svc.AssociateLink(context.Background(), &AssociateLinkInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		DeviceId:        ptr.String("__DeviceId__"),
+		LinkId:          ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +312,12 @@ func TestCheckResponseSnapshot_AssociateTransitGatewayConnectPeer(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateTransitGatewayConnectPeer(context.Background(), &AssociateTransitGatewayConnectPeerInput{})
+	got, err := svc.AssociateTransitGatewayConnectPeer(context.Background(), &AssociateTransitGatewayConnectPeerInput{
+		GlobalNetworkId:              ptr.String("__GlobalNetworkId__"),
+		TransitGatewayConnectPeerArn: ptr.String("__TransitGatewayConnectPeerArn__"),
+		DeviceId:                     ptr.String("__DeviceId__"),
+		LinkId:                       ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -393,7 +414,26 @@ func TestCheckResponseSnapshot_CreateConnectAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnectAttachment(context.Background(), &CreateConnectAttachmentInput{})
+	got, err := svc.CreateConnectAttachment(context.Background(), &CreateConnectAttachmentInput{
+		CoreNetworkId:         ptr.String("__CoreNetworkId__"),
+		EdgeLocation:          ptr.String("__EdgeLocation__"),
+		TransportAttachmentId: ptr.String("__TransportAttachmentId__"),
+		RoutingPolicyLabel:    ptr.String("__RoutingPolicyLabel__"),
+		Options: &types.ConnectAttachmentOptions{
+			Protocol: types.TunnelProtocol("GRE"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +509,30 @@ func TestCheckResponseSnapshot_CreateConnectPeer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnectPeer(context.Background(), &CreateConnectPeerInput{})
+	got, err := svc.CreateConnectPeer(context.Background(), &CreateConnectPeerInput{
+		ConnectAttachmentId: ptr.String("__ConnectAttachmentId__"),
+		CoreNetworkAddress:  ptr.String("__CoreNetworkAddress__"),
+		PeerAddress:         ptr.String("__PeerAddress__"),
+		BgpOptions: &types.BgpOptions{
+			PeerAsn: ptr.Int64(1),
+		},
+		InsideCidrBlocks: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		SubnetArn:   ptr.String("__SubnetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -511,7 +574,24 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{})
+	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		GlobalNetworkId:   ptr.String("__GlobalNetworkId__"),
+		DeviceId:          ptr.String("__DeviceId__"),
+		ConnectedDeviceId: ptr.String("__ConnectedDeviceId__"),
+		LinkId:            ptr.String("__LinkId__"),
+		ConnectedLinkId:   ptr.String("__ConnectedLinkId__"),
+		Description:       ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -627,7 +707,22 @@ func TestCheckResponseSnapshot_CreateCoreNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCoreNetwork(context.Background(), &CreateCoreNetworkInput{})
+	got, err := svc.CreateCoreNetwork(context.Background(), &CreateCoreNetworkInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		Description:     ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PolicyDocument: ptr.String("__PolicyDocument__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -650,7 +745,12 @@ func TestCheckResponseSnapshot_CreateCoreNetworkPrefixListAssociation(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCoreNetworkPrefixListAssociation(context.Background(), &CreateCoreNetworkPrefixListAssociationInput{})
+	got, err := svc.CreateCoreNetworkPrefixListAssociation(context.Background(), &CreateCoreNetworkPrefixListAssociationInput{
+		CoreNetworkId:   ptr.String("__CoreNetworkId__"),
+		PrefixListArn:   ptr.String("__PrefixListArn__"),
+		PrefixListAlias: ptr.String("__PrefixListAlias__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -702,7 +802,34 @@ func TestCheckResponseSnapshot_CreateDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDevice(context.Background(), &CreateDeviceInput{})
+	got, err := svc.CreateDevice(context.Background(), &CreateDeviceInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		AWSLocation: &types.AWSLocation{
+			Zone:      ptr.String("__Zone__"),
+			SubnetArn: ptr.String("__SubnetArn__"),
+		},
+		Description:  ptr.String("__Description__"),
+		Type:         ptr.String("__Type__"),
+		Vendor:       ptr.String("__Vendor__"),
+		Model:        ptr.String("__Model__"),
+		SerialNumber: ptr.String("__SerialNumber__"),
+		Location: &types.Location{
+			Address:   ptr.String("__Address__"),
+			Latitude:  ptr.String("__Latitude__"),
+			Longitude: ptr.String("__Longitude__"),
+		},
+		SiteId: ptr.String("__SiteId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -796,7 +923,26 @@ func TestCheckResponseSnapshot_CreateDirectConnectGatewayAttachment(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDirectConnectGatewayAttachment(context.Background(), &CreateDirectConnectGatewayAttachmentInput{})
+	got, err := svc.CreateDirectConnectGatewayAttachment(context.Background(), &CreateDirectConnectGatewayAttachmentInput{
+		CoreNetworkId:           ptr.String("__CoreNetworkId__"),
+		DirectConnectGatewayArn: ptr.String("__DirectConnectGatewayArn__"),
+		RoutingPolicyLabel:      ptr.String("__RoutingPolicyLabel__"),
+		EdgeLocations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -833,7 +979,19 @@ func TestCheckResponseSnapshot_CreateGlobalNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGlobalNetwork(context.Background(), &CreateGlobalNetworkInput{})
+	got, err := svc.CreateGlobalNetwork(context.Background(), &CreateGlobalNetworkInput{
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -878,7 +1036,27 @@ func TestCheckResponseSnapshot_CreateLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLink(context.Background(), &CreateLinkInput{})
+	got, err := svc.CreateLink(context.Background(), &CreateLinkInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		Description:     ptr.String("__Description__"),
+		Type:            ptr.String("__Type__"),
+		Bandwidth: &types.Bandwidth{
+			UploadSpeed:   ptr.Int32(1),
+			DownloadSpeed: ptr.Int32(1),
+		},
+		Provider: ptr.String("__Provider__"),
+		SiteId:   ptr.String("__SiteId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1099,25 @@ func TestCheckResponseSnapshot_CreateSite(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSite(context.Background(), &CreateSiteInput{})
+	got, err := svc.CreateSite(context.Background(), &CreateSiteInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		Description:     ptr.String("__Description__"),
+		Location: &types.Location{
+			Address:   ptr.String("__Address__"),
+			Latitude:  ptr.String("__Latitude__"),
+			Longitude: ptr.String("__Longitude__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1015,7 +1211,22 @@ func TestCheckResponseSnapshot_CreateSiteToSiteVpnAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSiteToSiteVpnAttachment(context.Background(), &CreateSiteToSiteVpnAttachmentInput{})
+	got, err := svc.CreateSiteToSiteVpnAttachment(context.Background(), &CreateSiteToSiteVpnAttachmentInput{
+		CoreNetworkId:      ptr.String("__CoreNetworkId__"),
+		VpnConnectionArn:   ptr.String("__VpnConnectionArn__"),
+		RoutingPolicyLabel: ptr.String("__RoutingPolicyLabel__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1080,7 +1291,21 @@ func TestCheckResponseSnapshot_CreateTransitGatewayPeering(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTransitGatewayPeering(context.Background(), &CreateTransitGatewayPeeringInput{})
+	got, err := svc.CreateTransitGatewayPeering(context.Background(), &CreateTransitGatewayPeeringInput{
+		CoreNetworkId:     ptr.String("__CoreNetworkId__"),
+		TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1175,7 +1400,22 @@ func TestCheckResponseSnapshot_CreateTransitGatewayRouteTableAttachment(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTransitGatewayRouteTableAttachment(context.Background(), &CreateTransitGatewayRouteTableAttachmentInput{})
+	got, err := svc.CreateTransitGatewayRouteTableAttachment(context.Background(), &CreateTransitGatewayRouteTableAttachmentInput{
+		PeeringId:                   ptr.String("__PeeringId__"),
+		TransitGatewayRouteTableArn: ptr.String("__TransitGatewayRouteTableArn__"),
+		RoutingPolicyLabel:          ptr.String("__RoutingPolicyLabel__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1278,7 +1518,32 @@ func TestCheckResponseSnapshot_CreateVpcAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVpcAttachment(context.Background(), &CreateVpcAttachmentInput{})
+	got, err := svc.CreateVpcAttachment(context.Background(), &CreateVpcAttachmentInput{
+		CoreNetworkId: ptr.String("__CoreNetworkId__"),
+		VpcArn:        ptr.String("__VpcArn__"),
+		SubnetArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Options: &types.VpcOptions{
+			Ipv6Support:                     ptr.Bool(true),
+			ApplianceModeSupport:            ptr.Bool(true),
+			DnsSupport:                      ptr.Bool(true),
+			SecurityGroupReferencingSupport: ptr.Bool(true),
+		},
+		RoutingPolicyLabel: ptr.String("__RoutingPolicyLabel__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1369,7 +1634,9 @@ func TestCheckResponseSnapshot_DeleteAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAttachment(context.Background(), &DeleteAttachmentInput{})
+	got, err := svc.DeleteAttachment(context.Background(), &DeleteAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1445,7 +1712,9 @@ func TestCheckResponseSnapshot_DeleteConnectPeer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnectPeer(context.Background(), &DeleteConnectPeerInput{})
+	got, err := svc.DeleteConnectPeer(context.Background(), &DeleteConnectPeerInput{
+		ConnectPeerId: ptr.String("__ConnectPeerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1487,7 +1756,10 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		ConnectionId:    ptr.String("__ConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1603,7 +1875,9 @@ func TestCheckResponseSnapshot_DeleteCoreNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCoreNetwork(context.Background(), &DeleteCoreNetworkInput{})
+	got, err := svc.DeleteCoreNetwork(context.Background(), &DeleteCoreNetworkInput{
+		CoreNetworkId: ptr.String("__CoreNetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1644,7 +1918,10 @@ func TestCheckResponseSnapshot_DeleteCoreNetworkPolicyVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCoreNetworkPolicyVersion(context.Background(), &DeleteCoreNetworkPolicyVersionInput{})
+	got, err := svc.DeleteCoreNetworkPolicyVersion(context.Background(), &DeleteCoreNetworkPolicyVersionInput{
+		CoreNetworkId:   ptr.String("__CoreNetworkId__"),
+		PolicyVersionId: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1666,7 +1943,10 @@ func TestCheckResponseSnapshot_DeleteCoreNetworkPrefixListAssociation(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCoreNetworkPrefixListAssociation(context.Background(), &DeleteCoreNetworkPrefixListAssociationInput{})
+	got, err := svc.DeleteCoreNetworkPrefixListAssociation(context.Background(), &DeleteCoreNetworkPrefixListAssociationInput{
+		CoreNetworkId: ptr.String("__CoreNetworkId__"),
+		PrefixListArn: ptr.String("__PrefixListArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1718,7 +1998,10 @@ func TestCheckResponseSnapshot_DeleteDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDevice(context.Background(), &DeleteDeviceInput{})
+	got, err := svc.DeleteDevice(context.Background(), &DeleteDeviceInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		DeviceId:        ptr.String("__DeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1755,7 +2038,9 @@ func TestCheckResponseSnapshot_DeleteGlobalNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGlobalNetwork(context.Background(), &DeleteGlobalNetworkInput{})
+	got, err := svc.DeleteGlobalNetwork(context.Background(), &DeleteGlobalNetworkInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1800,7 +2085,10 @@ func TestCheckResponseSnapshot_DeleteLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLink(context.Background(), &DeleteLinkInput{})
+	got, err := svc.DeleteLink(context.Background(), &DeleteLinkInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		LinkId:          ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1861,7 +2149,9 @@ func TestCheckResponseSnapshot_DeletePeering(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePeering(context.Background(), &DeletePeeringInput{})
+	got, err := svc.DeletePeering(context.Background(), &DeletePeeringInput{
+		PeeringId: ptr.String("__PeeringId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1880,7 +2170,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1923,7 +2215,10 @@ func TestCheckResponseSnapshot_DeleteSite(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSite(context.Background(), &DeleteSiteInput{})
+	got, err := svc.DeleteSite(context.Background(), &DeleteSiteInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		SiteId:          ptr.String("__SiteId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1951,7 +2246,10 @@ func TestCheckResponseSnapshot_DeregisterTransitGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterTransitGateway(context.Background(), &DeregisterTransitGatewayInput{})
+	got, err := svc.DeregisterTransitGateway(context.Background(), &DeregisterTransitGatewayInput{
+		GlobalNetworkId:   ptr.String("__GlobalNetworkId__"),
+		TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2008,7 +2306,14 @@ func TestCheckResponseSnapshot_DescribeGlobalNetworks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGlobalNetworks(context.Background(), &DescribeGlobalNetworksInput{})
+	got, err := svc.DescribeGlobalNetworks(context.Background(), &DescribeGlobalNetworksInput{
+		GlobalNetworkIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2035,7 +2340,10 @@ func TestCheckResponseSnapshot_DisassociateConnectPeer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateConnectPeer(context.Background(), &DisassociateConnectPeerInput{})
+	got, err := svc.DisassociateConnectPeer(context.Background(), &DisassociateConnectPeerInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		ConnectPeerId:   ptr.String("__ConnectPeerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2062,7 +2370,10 @@ func TestCheckResponseSnapshot_DisassociateCustomerGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateCustomerGateway(context.Background(), &DisassociateCustomerGatewayInput{})
+	got, err := svc.DisassociateCustomerGateway(context.Background(), &DisassociateCustomerGatewayInput{
+		GlobalNetworkId:    ptr.String("__GlobalNetworkId__"),
+		CustomerGatewayArn: ptr.String("__CustomerGatewayArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2088,7 +2399,11 @@ func TestCheckResponseSnapshot_DisassociateLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateLink(context.Background(), &DisassociateLinkInput{})
+	got, err := svc.DisassociateLink(context.Background(), &DisassociateLinkInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		DeviceId:        ptr.String("__DeviceId__"),
+		LinkId:          ptr.String("__LinkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2115,7 +2430,10 @@ func TestCheckResponseSnapshot_DisassociateTransitGatewayConnectPeer(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateTransitGatewayConnectPeer(context.Background(), &DisassociateTransitGatewayConnectPeerInput{})
+	got, err := svc.DisassociateTransitGatewayConnectPeer(context.Background(), &DisassociateTransitGatewayConnectPeerInput{
+		GlobalNetworkId:              ptr.String("__GlobalNetworkId__"),
+		TransitGatewayConnectPeerArn: ptr.String("__TransitGatewayConnectPeerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2134,7 +2452,10 @@ func TestCheckResponseSnapshot_ExecuteCoreNetworkChangeSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteCoreNetworkChangeSet(context.Background(), &ExecuteCoreNetworkChangeSetInput{})
+	got, err := svc.ExecuteCoreNetworkChangeSet(context.Background(), &ExecuteCoreNetworkChangeSetInput{
+		CoreNetworkId:   ptr.String("__CoreNetworkId__"),
+		PolicyVersionId: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2231,7 +2552,9 @@ func TestCheckResponseSnapshot_GetConnectAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectAttachment(context.Background(), &GetConnectAttachmentInput{})
+	got, err := svc.GetConnectAttachment(context.Background(), &GetConnectAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2307,7 +2630,9 @@ func TestCheckResponseSnapshot_GetConnectPeer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectPeer(context.Background(), &GetConnectPeerInput{})
+	got, err := svc.GetConnectPeer(context.Background(), &GetConnectPeerInput{
+		ConnectPeerId: ptr.String("__ConnectPeerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2344,7 +2669,15 @@ func TestCheckResponseSnapshot_GetConnectPeerAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectPeerAssociations(context.Background(), &GetConnectPeerAssociationsInput{})
+	got, err := svc.GetConnectPeerAssociations(context.Background(), &GetConnectPeerAssociationsInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		ConnectPeerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2411,7 +2744,16 @@ func TestCheckResponseSnapshot_GetConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnections(context.Background(), &GetConnectionsInput{})
+	got, err := svc.GetConnections(context.Background(), &GetConnectionsInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		ConnectionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeviceId:   ptr.String("__DeviceId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2527,7 +2869,9 @@ func TestCheckResponseSnapshot_GetCoreNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCoreNetwork(context.Background(), &GetCoreNetworkInput{})
+	got, err := svc.GetCoreNetwork(context.Background(), &GetCoreNetworkInput{
+		CoreNetworkId: ptr.String("__CoreNetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2626,7 +2970,12 @@ func TestCheckResponseSnapshot_GetCoreNetworkChangeEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCoreNetworkChangeEvents(context.Background(), &GetCoreNetworkChangeEventsInput{})
+	got, err := svc.GetCoreNetworkChangeEvents(context.Background(), &GetCoreNetworkChangeEventsInput{
+		CoreNetworkId:   ptr.String("__CoreNetworkId__"),
+		PolicyVersionId: ptr.Int32(1),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3257,7 +3606,12 @@ func TestCheckResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCoreNetworkChangeSet(context.Background(), &GetCoreNetworkChangeSetInput{})
+	got, err := svc.GetCoreNetworkChangeSet(context.Background(), &GetCoreNetworkChangeSetInput{
+		CoreNetworkId:   ptr.String("__CoreNetworkId__"),
+		PolicyVersionId: ptr.Int32(1),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3298,7 +3652,11 @@ func TestCheckResponseSnapshot_GetCoreNetworkPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCoreNetworkPolicy(context.Background(), &GetCoreNetworkPolicyInput{})
+	got, err := svc.GetCoreNetworkPolicy(context.Background(), &GetCoreNetworkPolicyInput{
+		CoreNetworkId:   ptr.String("__CoreNetworkId__"),
+		PolicyVersionId: ptr.Int32(1),
+		Alias:           types.CoreNetworkPolicyAlias("LIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3335,7 +3693,15 @@ func TestCheckResponseSnapshot_GetCustomerGatewayAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCustomerGatewayAssociations(context.Background(), &GetCustomerGatewayAssociationsInput{})
+	got, err := svc.GetCustomerGatewayAssociations(context.Background(), &GetCustomerGatewayAssociationsInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		CustomerGatewayArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3422,7 +3788,16 @@ func TestCheckResponseSnapshot_GetDevices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDevices(context.Background(), &GetDevicesInput{})
+	got, err := svc.GetDevices(context.Background(), &GetDevicesInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		DeviceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SiteId:     ptr.String("__SiteId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3516,7 +3891,9 @@ func TestCheckResponseSnapshot_GetDirectConnectGatewayAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDirectConnectGatewayAttachment(context.Background(), &GetDirectConnectGatewayAttachmentInput{})
+	got, err := svc.GetDirectConnectGatewayAttachment(context.Background(), &GetDirectConnectGatewayAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3551,7 +3928,13 @@ func TestCheckResponseSnapshot_GetLinkAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLinkAssociations(context.Background(), &GetLinkAssociationsInput{})
+	got, err := svc.GetLinkAssociations(context.Background(), &GetLinkAssociationsInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		DeviceId:        ptr.String("__DeviceId__"),
+		LinkId:          ptr.String("__LinkId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3624,7 +4007,18 @@ func TestCheckResponseSnapshot_GetLinks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLinks(context.Background(), &GetLinksInput{})
+	got, err := svc.GetLinks(context.Background(), &GetLinksInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		LinkIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SiteId:     ptr.String("__SiteId__"),
+		Type:       ptr.String("__Type__"),
+		Provider:   ptr.String("__Provider__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3655,7 +4049,12 @@ func TestCheckResponseSnapshot_GetNetworkResourceCounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNetworkResourceCounts(context.Background(), &GetNetworkResourceCountsInput{})
+	got, err := svc.GetNetworkResourceCounts(context.Background(), &GetNetworkResourceCountsInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		ResourceType:    ptr.String("__ResourceType__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3686,7 +4085,17 @@ func TestCheckResponseSnapshot_GetNetworkResourceRelationships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNetworkResourceRelationships(context.Background(), &GetNetworkResourceRelationshipsInput{})
+	got, err := svc.GetNetworkResourceRelationships(context.Background(), &GetNetworkResourceRelationshipsInput{
+		GlobalNetworkId:      ptr.String("__GlobalNetworkId__"),
+		CoreNetworkId:        ptr.String("__CoreNetworkId__"),
+		RegisteredGatewayArn: ptr.String("__RegisteredGatewayArn__"),
+		AwsRegion:            ptr.String("__AwsRegion__"),
+		AccountId:            ptr.String("__AccountId__"),
+		ResourceType:         ptr.String("__ResourceType__"),
+		ResourceArn:          ptr.String("__ResourceArn__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3757,7 +4166,17 @@ func TestCheckResponseSnapshot_GetNetworkResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNetworkResources(context.Background(), &GetNetworkResourcesInput{})
+	got, err := svc.GetNetworkResources(context.Background(), &GetNetworkResourcesInput{
+		GlobalNetworkId:      ptr.String("__GlobalNetworkId__"),
+		CoreNetworkId:        ptr.String("__CoreNetworkId__"),
+		RegisteredGatewayArn: ptr.String("__RegisteredGatewayArn__"),
+		AwsRegion:            ptr.String("__AwsRegion__"),
+		AccountId:            ptr.String("__AccountId__"),
+		ResourceType:         ptr.String("__ResourceType__"),
+		ResourceArn:          ptr.String("__ResourceArn__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3839,7 +4258,56 @@ func TestCheckResponseSnapshot_GetNetworkRoutes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNetworkRoutes(context.Background(), &GetNetworkRoutesInput{})
+	got, err := svc.GetNetworkRoutes(context.Background(), &GetNetworkRoutesInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		RouteTableIdentifier: &types.RouteTableIdentifier{
+			TransitGatewayRouteTableArn: ptr.String("__TransitGatewayRouteTableArn__"),
+			CoreNetworkSegmentEdge: &types.CoreNetworkSegmentEdgeIdentifier{
+				CoreNetworkId: ptr.String("__CoreNetworkId__"),
+				SegmentName:   ptr.String("__SegmentName__"),
+				EdgeLocation:  ptr.String("__EdgeLocation__"),
+			},
+			CoreNetworkNetworkFunctionGroup: &types.CoreNetworkNetworkFunctionGroupIdentifier{
+				CoreNetworkId:            ptr.String("__CoreNetworkId__"),
+				NetworkFunctionGroupName: ptr.String("__NetworkFunctionGroupName__"),
+				EdgeLocation:             ptr.String("__EdgeLocation__"),
+			},
+		},
+		ExactCidrMatches: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LongestPrefixMatches: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetOfMatches: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SupernetOfMatches: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PrefixListIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		States: []types.RouteState{
+			types.RouteState("ACTIVE"),
+			types.RouteState("ACTIVE"),
+		},
+		Types: []types.RouteType{
+			types.RouteType("PROPAGATED"),
+			types.RouteType("PROPAGATED"),
+		},
+		DestinationFilters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3892,7 +4360,17 @@ func TestCheckResponseSnapshot_GetNetworkTelemetry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNetworkTelemetry(context.Background(), &GetNetworkTelemetryInput{})
+	got, err := svc.GetNetworkTelemetry(context.Background(), &GetNetworkTelemetryInput{
+		GlobalNetworkId:      ptr.String("__GlobalNetworkId__"),
+		CoreNetworkId:        ptr.String("__CoreNetworkId__"),
+		RegisteredGatewayArn: ptr.String("__RegisteredGatewayArn__"),
+		AwsRegion:            ptr.String("__AwsRegion__"),
+		AccountId:            ptr.String("__AccountId__"),
+		ResourceType:         ptr.String("__ResourceType__"),
+		ResourceArn:          ptr.String("__ResourceArn__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3913,7 +4391,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4022,7 +4502,10 @@ func TestCheckResponseSnapshot_GetRouteAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRouteAnalysis(context.Background(), &GetRouteAnalysisInput{})
+	got, err := svc.GetRouteAnalysis(context.Background(), &GetRouteAnalysisInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		RouteAnalysisId: ptr.String("__RouteAnalysisId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4116,7 +4599,9 @@ func TestCheckResponseSnapshot_GetSiteToSiteVpnAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSiteToSiteVpnAttachment(context.Background(), &GetSiteToSiteVpnAttachmentInput{})
+	got, err := svc.GetSiteToSiteVpnAttachment(context.Background(), &GetSiteToSiteVpnAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4185,7 +4670,15 @@ func TestCheckResponseSnapshot_GetSites(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSites(context.Background(), &GetSitesInput{})
+	got, err := svc.GetSites(context.Background(), &GetSitesInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		SiteIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4222,7 +4715,15 @@ func TestCheckResponseSnapshot_GetTransitGatewayConnectPeerAssociations(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTransitGatewayConnectPeerAssociations(context.Background(), &GetTransitGatewayConnectPeerAssociationsInput{})
+	got, err := svc.GetTransitGatewayConnectPeerAssociations(context.Background(), &GetTransitGatewayConnectPeerAssociationsInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		TransitGatewayConnectPeerArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4287,7 +4788,9 @@ func TestCheckResponseSnapshot_GetTransitGatewayPeering(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTransitGatewayPeering(context.Background(), &GetTransitGatewayPeeringInput{})
+	got, err := svc.GetTransitGatewayPeering(context.Background(), &GetTransitGatewayPeeringInput{
+		PeeringId: ptr.String("__PeeringId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4326,7 +4829,15 @@ func TestCheckResponseSnapshot_GetTransitGatewayRegistrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTransitGatewayRegistrations(context.Background(), &GetTransitGatewayRegistrationsInput{})
+	got, err := svc.GetTransitGatewayRegistrations(context.Background(), &GetTransitGatewayRegistrationsInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		TransitGatewayArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4421,7 +4932,9 @@ func TestCheckResponseSnapshot_GetTransitGatewayRouteTableAttachment(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTransitGatewayRouteTableAttachment(context.Background(), &GetTransitGatewayRouteTableAttachmentInput{})
+	got, err := svc.GetTransitGatewayRouteTableAttachment(context.Background(), &GetTransitGatewayRouteTableAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4524,7 +5037,9 @@ func TestCheckResponseSnapshot_GetVpcAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVpcAttachment(context.Background(), &GetVpcAttachmentInput{})
+	got, err := svc.GetVpcAttachment(context.Background(), &GetVpcAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4571,7 +5086,12 @@ func TestCheckResponseSnapshot_ListAttachmentRoutingPolicyAssociations(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAttachmentRoutingPolicyAssociations(context.Background(), &ListAttachmentRoutingPolicyAssociationsInput{})
+	got, err := svc.ListAttachmentRoutingPolicyAssociations(context.Background(), &ListAttachmentRoutingPolicyAssociationsInput{
+		CoreNetworkId: ptr.String("__CoreNetworkId__"),
+		AttachmentId:  ptr.String("__AttachmentId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4736,7 +5256,14 @@ func TestCheckResponseSnapshot_ListAttachments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAttachments(context.Background(), &ListAttachmentsInput{})
+	got, err := svc.ListAttachments(context.Background(), &ListAttachmentsInput{
+		CoreNetworkId:  ptr.String("__CoreNetworkId__"),
+		AttachmentType: types.AttachmentType("CONNECT"),
+		EdgeLocation:   ptr.String("__EdgeLocation__"),
+		State:          types.AttachmentState("REJECTED"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4797,7 +5324,12 @@ func TestCheckResponseSnapshot_ListConnectPeers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectPeers(context.Background(), &ListConnectPeersInput{})
+	got, err := svc.ListConnectPeers(context.Background(), &ListConnectPeersInput{
+		CoreNetworkId:       ptr.String("__CoreNetworkId__"),
+		ConnectAttachmentId: ptr.String("__ConnectAttachmentId__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4836,7 +5368,11 @@ func TestCheckResponseSnapshot_ListCoreNetworkPolicyVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCoreNetworkPolicyVersions(context.Background(), &ListCoreNetworkPolicyVersionsInput{})
+	got, err := svc.ListCoreNetworkPolicyVersions(context.Background(), &ListCoreNetworkPolicyVersionsInput{
+		CoreNetworkId: ptr.String("__CoreNetworkId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4869,7 +5405,12 @@ func TestCheckResponseSnapshot_ListCoreNetworkPrefixListAssociations(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCoreNetworkPrefixListAssociations(context.Background(), &ListCoreNetworkPrefixListAssociationsInput{})
+	got, err := svc.ListCoreNetworkPrefixListAssociations(context.Background(), &ListCoreNetworkPrefixListAssociationsInput{
+		CoreNetworkId: ptr.String("__CoreNetworkId__"),
+		PrefixListArn: ptr.String("__PrefixListArn__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4934,7 +5475,35 @@ func TestCheckResponseSnapshot_ListCoreNetworkRoutingInformation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCoreNetworkRoutingInformation(context.Background(), &ListCoreNetworkRoutingInformationInput{})
+	got, err := svc.ListCoreNetworkRoutingInformation(context.Background(), &ListCoreNetworkRoutingInformationInput{
+		CoreNetworkId: ptr.String("__CoreNetworkId__"),
+		SegmentName:   ptr.String("__SegmentName__"),
+		EdgeLocation:  ptr.String("__EdgeLocation__"),
+		NextHopFilters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		LocalPreferenceMatches: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExactAsPathMatches: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MedMatches: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CommunityMatches: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4993,7 +5562,10 @@ func TestCheckResponseSnapshot_ListCoreNetworks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCoreNetworks(context.Background(), &ListCoreNetworksInput{})
+	got, err := svc.ListCoreNetworks(context.Background(), &ListCoreNetworksInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5029,7 +5601,10 @@ func TestCheckResponseSnapshot_ListOrganizationServiceAccessStatus(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrganizationServiceAccessStatus(context.Background(), &ListOrganizationServiceAccessStatusInput{})
+	got, err := svc.ListOrganizationServiceAccessStatus(context.Background(), &ListOrganizationServiceAccessStatusInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5134,7 +5709,14 @@ func TestCheckResponseSnapshot_ListPeerings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPeerings(context.Background(), &ListPeeringsInput{})
+	got, err := svc.ListPeerings(context.Background(), &ListPeeringsInput{
+		CoreNetworkId: ptr.String("__CoreNetworkId__"),
+		PeeringType:   types.PeeringType("TRANSIT_GATEWAY"),
+		EdgeLocation:  ptr.String("__EdgeLocation__"),
+		State:         types.PeeringState("CREATING"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5164,7 +5746,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5187,7 +5771,12 @@ func TestCheckResponseSnapshot_PutAttachmentRoutingPolicyLabel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAttachmentRoutingPolicyLabel(context.Background(), &PutAttachmentRoutingPolicyLabelInput{})
+	got, err := svc.PutAttachmentRoutingPolicyLabel(context.Background(), &PutAttachmentRoutingPolicyLabelInput{
+		CoreNetworkId:      ptr.String("__CoreNetworkId__"),
+		AttachmentId:       ptr.String("__AttachmentId__"),
+		RoutingPolicyLabel: ptr.String("__RoutingPolicyLabel__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5228,7 +5817,13 @@ func TestCheckResponseSnapshot_PutCoreNetworkPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutCoreNetworkPolicy(context.Background(), &PutCoreNetworkPolicyInput{})
+	got, err := svc.PutCoreNetworkPolicy(context.Background(), &PutCoreNetworkPolicyInput{
+		CoreNetworkId:   ptr.String("__CoreNetworkId__"),
+		PolicyDocument:  ptr.String("__PolicyDocument__"),
+		Description:     ptr.String("__Description__"),
+		LatestVersionId: ptr.Int32(1),
+		ClientToken:     ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5247,7 +5842,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		PolicyDocument: ptr.String("__PolicyDocument__"),
+		ResourceArn:    ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5275,7 +5873,10 @@ func TestCheckResponseSnapshot_RegisterTransitGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterTransitGateway(context.Background(), &RegisterTransitGatewayInput{})
+	got, err := svc.RegisterTransitGateway(context.Background(), &RegisterTransitGatewayInput{
+		GlobalNetworkId:   ptr.String("__GlobalNetworkId__"),
+		TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5366,7 +5967,9 @@ func TestCheckResponseSnapshot_RejectAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectAttachment(context.Background(), &RejectAttachmentInput{})
+	got, err := svc.RejectAttachment(context.Background(), &RejectAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5389,7 +5992,10 @@ func TestCheckResponseSnapshot_RemoveAttachmentRoutingPolicyLabel(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveAttachmentRoutingPolicyLabel(context.Background(), &RemoveAttachmentRoutingPolicyLabelInput{})
+	got, err := svc.RemoveAttachmentRoutingPolicyLabel(context.Background(), &RemoveAttachmentRoutingPolicyLabelInput{
+		CoreNetworkId: ptr.String("__CoreNetworkId__"),
+		AttachmentId:  ptr.String("__AttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5430,7 +6036,10 @@ func TestCheckResponseSnapshot_RestoreCoreNetworkPolicyVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreCoreNetworkPolicyVersion(context.Background(), &RestoreCoreNetworkPolicyVersionInput{})
+	got, err := svc.RestoreCoreNetworkPolicyVersion(context.Background(), &RestoreCoreNetworkPolicyVersionInput{
+		CoreNetworkId:   ptr.String("__CoreNetworkId__"),
+		PolicyVersionId: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5465,7 +6074,9 @@ func TestCheckResponseSnapshot_StartOrganizationServiceAccessUpdate(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartOrganizationServiceAccessUpdate(context.Background(), &StartOrganizationServiceAccessUpdateInput{})
+	got, err := svc.StartOrganizationServiceAccessUpdate(context.Background(), &StartOrganizationServiceAccessUpdateInput{
+		Action: ptr.String("__Action__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5574,7 +6185,19 @@ func TestCheckResponseSnapshot_StartRouteAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRouteAnalysis(context.Background(), &StartRouteAnalysisInput{})
+	got, err := svc.StartRouteAnalysis(context.Background(), &StartRouteAnalysisInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		Source: &types.RouteAnalysisEndpointOptionsSpecification{
+			TransitGatewayAttachmentArn: ptr.String("__TransitGatewayAttachmentArn__"),
+			IpAddress:                   ptr.String("__IpAddress__"),
+		},
+		Destination: &types.RouteAnalysisEndpointOptionsSpecification{
+			TransitGatewayAttachmentArn: ptr.String("__TransitGatewayAttachmentArn__"),
+			IpAddress:                   ptr.String("__IpAddress__"),
+		},
+		IncludeReturnPath: true,
+		UseMiddleboxes:    true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5593,7 +6216,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5612,7 +6247,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5654,7 +6295,13 @@ func TestCheckResponseSnapshot_UpdateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnection(context.Background(), &UpdateConnectionInput{})
+	got, err := svc.UpdateConnection(context.Background(), &UpdateConnectionInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		ConnectionId:    ptr.String("__ConnectionId__"),
+		LinkId:          ptr.String("__LinkId__"),
+		ConnectedLinkId: ptr.String("__ConnectedLinkId__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5770,7 +6417,10 @@ func TestCheckResponseSnapshot_UpdateCoreNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCoreNetwork(context.Background(), &UpdateCoreNetworkInput{})
+	got, err := svc.UpdateCoreNetwork(context.Background(), &UpdateCoreNetworkInput{
+		CoreNetworkId: ptr.String("__CoreNetworkId__"),
+		Description:   ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5822,7 +6472,25 @@ func TestCheckResponseSnapshot_UpdateDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDevice(context.Background(), &UpdateDeviceInput{})
+	got, err := svc.UpdateDevice(context.Background(), &UpdateDeviceInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		DeviceId:        ptr.String("__DeviceId__"),
+		AWSLocation: &types.AWSLocation{
+			Zone:      ptr.String("__Zone__"),
+			SubnetArn: ptr.String("__SubnetArn__"),
+		},
+		Description:  ptr.String("__Description__"),
+		Type:         ptr.String("__Type__"),
+		Vendor:       ptr.String("__Vendor__"),
+		Model:        ptr.String("__Model__"),
+		SerialNumber: ptr.String("__SerialNumber__"),
+		Location: &types.Location{
+			Address:   ptr.String("__Address__"),
+			Latitude:  ptr.String("__Latitude__"),
+			Longitude: ptr.String("__Longitude__"),
+		},
+		SiteId: ptr.String("__SiteId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5916,7 +6584,13 @@ func TestCheckResponseSnapshot_UpdateDirectConnectGatewayAttachment(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDirectConnectGatewayAttachment(context.Background(), &UpdateDirectConnectGatewayAttachmentInput{})
+	got, err := svc.UpdateDirectConnectGatewayAttachment(context.Background(), &UpdateDirectConnectGatewayAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+		EdgeLocations: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5953,7 +6627,10 @@ func TestCheckResponseSnapshot_UpdateGlobalNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGlobalNetwork(context.Background(), &UpdateGlobalNetworkInput{})
+	got, err := svc.UpdateGlobalNetwork(context.Background(), &UpdateGlobalNetworkInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5998,7 +6675,17 @@ func TestCheckResponseSnapshot_UpdateLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLink(context.Background(), &UpdateLinkInput{})
+	got, err := svc.UpdateLink(context.Background(), &UpdateLinkInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		LinkId:          ptr.String("__LinkId__"),
+		Description:     ptr.String("__Description__"),
+		Type:            ptr.String("__Type__"),
+		Bandwidth: &types.Bandwidth{
+			UploadSpeed:   ptr.Int32(1),
+			DownloadSpeed: ptr.Int32(1),
+		},
+		Provider: ptr.String("__Provider__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6022,7 +6709,13 @@ func TestCheckResponseSnapshot_UpdateNetworkResourceMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNetworkResourceMetadata(context.Background(), &UpdateNetworkResourceMetadataInput{})
+	got, err := svc.UpdateNetworkResourceMetadata(context.Background(), &UpdateNetworkResourceMetadataInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		ResourceArn:     ptr.String("__ResourceArn__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6065,7 +6758,16 @@ func TestCheckResponseSnapshot_UpdateSite(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSite(context.Background(), &UpdateSiteInput{})
+	got, err := svc.UpdateSite(context.Background(), &UpdateSiteInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		SiteId:          ptr.String("__SiteId__"),
+		Description:     ptr.String("__Description__"),
+		Location: &types.Location{
+			Address:   ptr.String("__Address__"),
+			Latitude:  ptr.String("__Latitude__"),
+			Longitude: ptr.String("__Longitude__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6168,7 +6870,23 @@ func TestCheckResponseSnapshot_UpdateVpcAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVpcAttachment(context.Background(), &UpdateVpcAttachmentInput{})
+	got, err := svc.UpdateVpcAttachment(context.Background(), &UpdateVpcAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+		AddSubnetArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveSubnetArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Options: &types.VpcOptions{
+			Ipv6Support:                     ptr.Bool(true),
+			ApplianceModeSupport:            ptr.Bool(true),
+			DnsSupport:                      ptr.Bool(true),
+			SecurityGroupReferencingSupport: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6189,7 +6907,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{})
+	_, opErr := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6216,7 +6936,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{})
+	_, opErr := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6253,7 +6975,22 @@ func TestCheckResponseSnapshot_Error_CoreNetworkPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCoreNetwork(context.Background(), &CreateCoreNetworkInput{})
+	_, opErr := svc.CreateCoreNetwork(context.Background(), &CreateCoreNetworkInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		Description:     ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PolicyDocument: ptr.String("__PolicyDocument__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6279,7 +7016,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{})
+	_, opErr := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6309,7 +7048,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{})
+	_, opErr := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6338,7 +7079,12 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateConnectPeer(context.Background(), &AssociateConnectPeerInput{})
+	_, opErr := svc.AssociateConnectPeer(context.Background(), &AssociateConnectPeerInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		ConnectPeerId:   ptr.String("__ConnectPeerId__"),
+		DeviceId:        ptr.String("__DeviceId__"),
+		LinkId:          ptr.String("__LinkId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6364,7 +7110,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{})
+	_, opErr := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6400,7 +7148,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{})
+	_, opErr := svc.AcceptAttachment(context.Background(), &AcceptAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

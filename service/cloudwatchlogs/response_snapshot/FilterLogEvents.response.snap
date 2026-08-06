@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.FilterLogEvents
+
+{"events":[{"eventId":"__EventId__","ingestionTime":1,"logStreamName":"__LogStreamName__","message":"__Message__","timestamp":1},{"eventId":"__EventId__","ingestionTime":1,"logStreamName":"__LogStreamName__","message":"__Message__","timestamp":1}],"nextToken":"__NextToken__","searchedLogStreams":[{"logStreamName":"__LogStreamName__","searchedCompletely":true},{"logStreamName":"__LogStreamName__","searchedCompletely":true}]}

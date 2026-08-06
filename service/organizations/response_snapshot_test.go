@@ -154,7 +154,9 @@ func TestCheckResponseSnapshot_AcceptHandshake(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	got, err := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,7 +175,10 @@ func TestCheckResponseSnapshot_AttachPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachPolicy(context.Background(), &AttachPolicyInput{})
+	got, err := svc.AttachPolicy(context.Background(), &AttachPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -229,7 +234,9 @@ func TestCheckResponseSnapshot_CancelHandshake(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelHandshake(context.Background(), &CancelHandshakeInput{})
+	got, err := svc.CancelHandshake(context.Background(), &CancelHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -248,7 +255,9 @@ func TestCheckResponseSnapshot_CloseAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CloseAccount(context.Background(), &CloseAccountInput{})
+	got, err := svc.CloseAccount(context.Background(), &CloseAccountInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +287,22 @@ func TestCheckResponseSnapshot_CreateAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccount(context.Background(), &CreateAccountInput{})
+	got, err := svc.CreateAccount(context.Background(), &CreateAccountInput{
+		Email:                  ptr.String("__Email__"),
+		AccountName:            ptr.String("__AccountName__"),
+		RoleName:               ptr.String("__RoleName__"),
+		IamUserAccessToBilling: types.IAMUserAccessToBilling("ALLOW"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -308,7 +332,22 @@ func TestCheckResponseSnapshot_CreateGovCloudAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGovCloudAccount(context.Background(), &CreateGovCloudAccountInput{})
+	got, err := svc.CreateGovCloudAccount(context.Background(), &CreateGovCloudAccountInput{
+		Email:                  ptr.String("__Email__"),
+		AccountName:            ptr.String("__AccountName__"),
+		RoleName:               ptr.String("__RoleName__"),
+		IamUserAccessToBilling: types.IAMUserAccessToBilling("ALLOW"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +385,9 @@ func TestCheckResponseSnapshot_CreateOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOrganization(context.Background(), &CreateOrganizationInput{})
+	got, err := svc.CreateOrganization(context.Background(), &CreateOrganizationInput{
+		FeatureSet: types.OrganizationFeatureSet("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -372,7 +413,20 @@ func TestCheckResponseSnapshot_CreateOrganizationalUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOrganizationalUnit(context.Background(), &CreateOrganizationalUnitInput{})
+	got, err := svc.CreateOrganizationalUnit(context.Background(), &CreateOrganizationalUnitInput{
+		ParentId: ptr.String("__ParentId__"),
+		Name:     ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -403,7 +457,22 @@ func TestCheckResponseSnapshot_CreatePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePolicy(context.Background(), &CreatePolicyInput{})
+	got, err := svc.CreatePolicy(context.Background(), &CreatePolicyInput{
+		Content:     ptr.String("__Content__"),
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.PolicyType("SERVICE_CONTROL_POLICY"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -459,7 +528,9 @@ func TestCheckResponseSnapshot_DeclineHandshake(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeclineHandshake(context.Background(), &DeclineHandshakeInput{})
+	got, err := svc.DeclineHandshake(context.Background(), &DeclineHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -497,7 +568,9 @@ func TestCheckResponseSnapshot_DeleteOrganizationalUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOrganizationalUnit(context.Background(), &DeleteOrganizationalUnitInput{})
+	got, err := svc.DeleteOrganizationalUnit(context.Background(), &DeleteOrganizationalUnitInput{
+		OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -516,7 +589,9 @@ func TestCheckResponseSnapshot_DeletePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePolicy(context.Background(), &DeletePolicyInput{})
+	got, err := svc.DeletePolicy(context.Background(), &DeletePolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +629,10 @@ func TestCheckResponseSnapshot_DeregisterDelegatedAdministrator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterDelegatedAdministrator(context.Background(), &DeregisterDelegatedAdministratorInput{})
+	got, err := svc.DeregisterDelegatedAdministrator(context.Background(), &DeregisterDelegatedAdministratorInput{
+		AccountId:        ptr.String("__AccountId__"),
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -588,7 +666,9 @@ func TestCheckResponseSnapshot_DescribeAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccount(context.Background(), &DescribeAccountInput{})
+	got, err := svc.DescribeAccount(context.Background(), &DescribeAccountInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -618,7 +698,9 @@ func TestCheckResponseSnapshot_DescribeCreateAccountStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCreateAccountStatus(context.Background(), &DescribeCreateAccountStatusInput{})
+	got, err := svc.DescribeCreateAccountStatus(context.Background(), &DescribeCreateAccountStatusInput{
+		CreateAccountRequestId: ptr.String("__CreateAccountRequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -644,7 +726,10 @@ func TestCheckResponseSnapshot_DescribeEffectivePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEffectivePolicy(context.Background(), &DescribeEffectivePolicyInput{})
+	got, err := svc.DescribeEffectivePolicy(context.Background(), &DescribeEffectivePolicyInput{
+		PolicyType: types.EffectivePolicyType("TAG_POLICY"),
+		TargetId:   ptr.String("__TargetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -700,7 +785,9 @@ func TestCheckResponseSnapshot_DescribeHandshake(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeHandshake(context.Background(), &DescribeHandshakeInput{})
+	got, err := svc.DescribeHandshake(context.Background(), &DescribeHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -764,7 +851,9 @@ func TestCheckResponseSnapshot_DescribeOrganizationalUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrganizationalUnit(context.Background(), &DescribeOrganizationalUnitInput{})
+	got, err := svc.DescribeOrganizationalUnit(context.Background(), &DescribeOrganizationalUnitInput{
+		OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -795,7 +884,9 @@ func TestCheckResponseSnapshot_DescribePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePolicy(context.Background(), &DescribePolicyInput{})
+	got, err := svc.DescribePolicy(context.Background(), &DescribePolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -860,7 +951,9 @@ func TestCheckResponseSnapshot_DescribeResponsibilityTransfer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResponsibilityTransfer(context.Background(), &DescribeResponsibilityTransferInput{})
+	got, err := svc.DescribeResponsibilityTransfer(context.Background(), &DescribeResponsibilityTransferInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -879,7 +972,10 @@ func TestCheckResponseSnapshot_DetachPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachPolicy(context.Background(), &DetachPolicyInput{})
+	got, err := svc.DetachPolicy(context.Background(), &DetachPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -898,7 +994,9 @@ func TestCheckResponseSnapshot_DisableAWSServiceAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableAWSServiceAccess(context.Background(), &DisableAWSServiceAccessInput{})
+	got, err := svc.DisableAWSServiceAccess(context.Background(), &DisableAWSServiceAccessInput{
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -933,7 +1031,10 @@ func TestCheckResponseSnapshot_DisablePolicyType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisablePolicyType(context.Background(), &DisablePolicyTypeInput{})
+	got, err := svc.DisablePolicyType(context.Background(), &DisablePolicyTypeInput{
+		RootId:     ptr.String("__RootId__"),
+		PolicyType: types.PolicyType("SERVICE_CONTROL_POLICY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -952,7 +1053,9 @@ func TestCheckResponseSnapshot_EnableAWSServiceAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableAWSServiceAccess(context.Background(), &EnableAWSServiceAccessInput{})
+	got, err := svc.EnableAWSServiceAccess(context.Background(), &EnableAWSServiceAccessInput{
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1043,7 +1146,10 @@ func TestCheckResponseSnapshot_EnablePolicyType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnablePolicyType(context.Background(), &EnablePolicyTypeInput{})
+	got, err := svc.EnablePolicyType(context.Background(), &EnablePolicyTypeInput{
+		RootId:     ptr.String("__RootId__"),
+		PolicyType: types.PolicyType("SERVICE_CONTROL_POLICY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1099,7 +1205,23 @@ func TestCheckResponseSnapshot_InviteAccountToOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InviteAccountToOrganization(context.Background(), &InviteAccountToOrganizationInput{})
+	got, err := svc.InviteAccountToOrganization(context.Background(), &InviteAccountToOrganizationInput{
+		Target: &types.HandshakeParty{
+			Id:   ptr.String("__Id__"),
+			Type: types.HandshakePartyType("ACCOUNT"),
+		},
+		Notes: ptr.String("__Notes__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1155,7 +1277,26 @@ func TestCheckResponseSnapshot_InviteOrganizationToTransferResponsibility(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InviteOrganizationToTransferResponsibility(context.Background(), &InviteOrganizationToTransferResponsibilityInput{})
+	got, err := svc.InviteOrganizationToTransferResponsibility(context.Background(), &InviteOrganizationToTransferResponsibilityInput{
+		Type: types.ResponsibilityTransferType("BILLING"),
+		Target: &types.HandshakeParty{
+			Id:   ptr.String("__Id__"),
+			Type: types.HandshakePartyType("ACCOUNT"),
+		},
+		Notes:          ptr.String("__Notes__"),
+		StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SourceName:     ptr.String("__SourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1205,7 +1346,10 @@ func TestCheckResponseSnapshot_ListAWSServiceAccessForOrganization(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAWSServiceAccessForOrganization(context.Background(), &ListAWSServiceAccessForOrganizationInput{})
+	got, err := svc.ListAWSServiceAccessForOrganization(context.Background(), &ListAWSServiceAccessForOrganizationInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1256,7 +1400,10 @@ func TestCheckResponseSnapshot_ListAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccounts(context.Background(), &ListAccountsInput{})
+	got, err := svc.ListAccounts(context.Background(), &ListAccountsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1307,7 +1454,11 @@ func TestCheckResponseSnapshot_ListAccountsForParent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountsForParent(context.Background(), &ListAccountsForParentInput{})
+	got, err := svc.ListAccountsForParent(context.Background(), &ListAccountsForParentInput{
+		ParentId:   ptr.String("__ParentId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1359,7 +1510,11 @@ func TestCheckResponseSnapshot_ListAccountsWithInvalidEffectivePolicy(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountsWithInvalidEffectivePolicy(context.Background(), &ListAccountsWithInvalidEffectivePolicyInput{})
+	got, err := svc.ListAccountsWithInvalidEffectivePolicy(context.Background(), &ListAccountsWithInvalidEffectivePolicyInput{
+		PolicyType: types.EffectivePolicyType("TAG_POLICY"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1390,7 +1545,12 @@ func TestCheckResponseSnapshot_ListChildren(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChildren(context.Background(), &ListChildrenInput{})
+	got, err := svc.ListChildren(context.Background(), &ListChildrenInput{
+		ParentId:   ptr.String("__ParentId__"),
+		ChildType:  types.ChildType("ACCOUNT"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1433,7 +1593,14 @@ func TestCheckResponseSnapshot_ListCreateAccountStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCreateAccountStatus(context.Background(), &ListCreateAccountStatusInput{})
+	got, err := svc.ListCreateAccountStatus(context.Background(), &ListCreateAccountStatusInput{
+		States: []types.CreateAccountState{
+			types.CreateAccountState("IN_PROGRESS"),
+			types.CreateAccountState("IN_PROGRESS"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1478,7 +1645,11 @@ func TestCheckResponseSnapshot_ListDelegatedAdministrators(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDelegatedAdministrators(context.Background(), &ListDelegatedAdministratorsInput{})
+	got, err := svc.ListDelegatedAdministrators(context.Background(), &ListDelegatedAdministratorsInput{
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1509,7 +1680,11 @@ func TestCheckResponseSnapshot_ListDelegatedServicesForAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDelegatedServicesForAccount(context.Background(), &ListDelegatedServicesForAccountInput{})
+	got, err := svc.ListDelegatedServicesForAccount(context.Background(), &ListDelegatedServicesForAccountInput{
+		AccountId:  ptr.String("__AccountId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1554,7 +1729,12 @@ func TestCheckResponseSnapshot_ListEffectivePolicyValidationErrors(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEffectivePolicyValidationErrors(context.Background(), &ListEffectivePolicyValidationErrorsInput{})
+	got, err := svc.ListEffectivePolicyValidationErrors(context.Background(), &ListEffectivePolicyValidationErrorsInput{
+		AccountId:  ptr.String("__AccountId__"),
+		PolicyType: types.EffectivePolicyType("TAG_POLICY"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1649,7 +1829,14 @@ func TestCheckResponseSnapshot_ListHandshakesForAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHandshakesForAccount(context.Background(), &ListHandshakesForAccountInput{})
+	got, err := svc.ListHandshakesForAccount(context.Background(), &ListHandshakesForAccountInput{
+		Filter: &types.HandshakeFilter{
+			ActionType:        types.ActionType("INVITE"),
+			ParentHandshakeId: ptr.String("__ParentHandshakeId__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1744,7 +1931,14 @@ func TestCheckResponseSnapshot_ListHandshakesForOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHandshakesForOrganization(context.Background(), &ListHandshakesForOrganizationInput{})
+	got, err := svc.ListHandshakesForOrganization(context.Background(), &ListHandshakesForOrganizationInput{
+		Filter: &types.HandshakeFilter{
+			ActionType:        types.ActionType("INVITE"),
+			ParentHandshakeId: ptr.String("__ParentHandshakeId__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1803,7 +1997,12 @@ func TestCheckResponseSnapshot_ListInboundResponsibilityTransfers(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInboundResponsibilityTransfers(context.Background(), &ListInboundResponsibilityTransfersInput{})
+	got, err := svc.ListInboundResponsibilityTransfers(context.Background(), &ListInboundResponsibilityTransfersInput{
+		Type:       types.ResponsibilityTransferType("BILLING"),
+		Id:         ptr.String("__Id__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1838,7 +2037,11 @@ func TestCheckResponseSnapshot_ListOrganizationalUnitsForParent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrganizationalUnitsForParent(context.Background(), &ListOrganizationalUnitsForParentInput{})
+	got, err := svc.ListOrganizationalUnitsForParent(context.Background(), &ListOrganizationalUnitsForParentInput{
+		ParentId:   ptr.String("__ParentId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1897,7 +2100,11 @@ func TestCheckResponseSnapshot_ListOutboundResponsibilityTransfers(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOutboundResponsibilityTransfers(context.Background(), &ListOutboundResponsibilityTransfersInput{})
+	got, err := svc.ListOutboundResponsibilityTransfers(context.Background(), &ListOutboundResponsibilityTransfersInput{
+		Type:       types.ResponsibilityTransferType("BILLING"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1928,7 +2135,11 @@ func TestCheckResponseSnapshot_ListParents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListParents(context.Background(), &ListParentsInput{})
+	got, err := svc.ListParents(context.Background(), &ListParentsInput{
+		ChildId:    ptr.String("__ChildId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1967,7 +2178,11 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPolicies(context.Background(), &ListPoliciesInput{})
+	got, err := svc.ListPolicies(context.Background(), &ListPoliciesInput{
+		Filter:     types.PolicyType("SERVICE_CONTROL_POLICY"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2006,7 +2221,12 @@ func TestCheckResponseSnapshot_ListPoliciesForTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPoliciesForTarget(context.Background(), &ListPoliciesForTargetInput{})
+	got, err := svc.ListPoliciesForTarget(context.Background(), &ListPoliciesForTargetInput{
+		TargetId:   ptr.String("__TargetId__"),
+		Filter:     types.PolicyType("SERVICE_CONTROL_POLICY"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2059,7 +2279,10 @@ func TestCheckResponseSnapshot_ListRoots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRoots(context.Background(), &ListRootsInput{})
+	got, err := svc.ListRoots(context.Background(), &ListRootsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2090,7 +2313,10 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2125,7 +2351,11 @@ func TestCheckResponseSnapshot_ListTargetsForPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTargetsForPolicy(context.Background(), &ListTargetsForPolicyInput{})
+	got, err := svc.ListTargetsForPolicy(context.Background(), &ListTargetsForPolicyInput{
+		PolicyId:   ptr.String("__PolicyId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2144,7 +2374,11 @@ func TestCheckResponseSnapshot_MoveAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MoveAccount(context.Background(), &MoveAccountInput{})
+	got, err := svc.MoveAccount(context.Background(), &MoveAccountInput{
+		AccountId:           ptr.String("__AccountId__"),
+		SourceParentId:      ptr.String("__SourceParentId__"),
+		DestinationParentId: ptr.String("__DestinationParentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2171,7 +2405,19 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		Content: ptr.String("__Content__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2190,7 +2436,10 @@ func TestCheckResponseSnapshot_RegisterDelegatedAdministrator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterDelegatedAdministrator(context.Background(), &RegisterDelegatedAdministratorInput{})
+	got, err := svc.RegisterDelegatedAdministrator(context.Background(), &RegisterDelegatedAdministratorInput{
+		AccountId:        ptr.String("__AccountId__"),
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2209,7 +2458,9 @@ func TestCheckResponseSnapshot_RemoveAccountFromOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveAccountFromOrganization(context.Background(), &RemoveAccountFromOrganizationInput{})
+	got, err := svc.RemoveAccountFromOrganization(context.Background(), &RemoveAccountFromOrganizationInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2228,7 +2479,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2266,7 +2529,10 @@ func TestCheckResponseSnapshot_TerminateResponsibilityTransfer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateResponsibilityTransfer(context.Background(), &TerminateResponsibilityTransferInput{})
+	got, err := svc.TerminateResponsibilityTransfer(context.Background(), &TerminateResponsibilityTransferInput{
+		Id:           ptr.String("__Id__"),
+		EndTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2285,7 +2551,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2311,7 +2583,10 @@ func TestCheckResponseSnapshot_UpdateOrganizationalUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOrganizationalUnit(context.Background(), &UpdateOrganizationalUnitInput{})
+	got, err := svc.UpdateOrganizationalUnit(context.Background(), &UpdateOrganizationalUnitInput{
+		OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+		Name:                 ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2342,7 +2617,12 @@ func TestCheckResponseSnapshot_UpdatePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePolicy(context.Background(), &UpdatePolicyInput{})
+	got, err := svc.UpdatePolicy(context.Background(), &UpdatePolicyInput{
+		PolicyId:    ptr.String("__PolicyId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Content:     ptr.String("__Content__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2380,7 +2660,10 @@ func TestCheckResponseSnapshot_UpdateResponsibilityTransfer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResponsibilityTransfer(context.Background(), &UpdateResponsibilityTransferInput{})
+	got, err := svc.UpdateResponsibilityTransfer(context.Background(), &UpdateResponsibilityTransferInput{
+		Id:   ptr.String("__Id__"),
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2401,7 +2684,9 @@ func TestCheckResponseSnapshot_Error_AWSOrganizationsNotInUseException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2426,7 +2711,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2452,7 +2739,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedForDependencyException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2477,7 +2766,9 @@ func TestCheckResponseSnapshot_Error_AccountAlreadyClosedException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CloseAccount(context.Background(), &CloseAccountInput{})
+	_, opErr := svc.CloseAccount(context.Background(), &CloseAccountInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2502,7 +2793,10 @@ func TestCheckResponseSnapshot_Error_AccountAlreadyRegisteredException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterDelegatedAdministrator(context.Background(), &RegisterDelegatedAdministratorInput{})
+	_, opErr := svc.RegisterDelegatedAdministrator(context.Background(), &RegisterDelegatedAdministratorInput{
+		AccountId:        ptr.String("__AccountId__"),
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2527,7 +2821,9 @@ func TestCheckResponseSnapshot_Error_AccountNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CloseAccount(context.Background(), &CloseAccountInput{})
+	_, opErr := svc.CloseAccount(context.Background(), &CloseAccountInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2552,7 +2848,10 @@ func TestCheckResponseSnapshot_Error_AccountNotRegisteredException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterDelegatedAdministrator(context.Background(), &DeregisterDelegatedAdministratorInput{})
+	_, opErr := svc.DeregisterDelegatedAdministrator(context.Background(), &DeregisterDelegatedAdministratorInput{
+		AccountId:        ptr.String("__AccountId__"),
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2577,7 +2876,23 @@ func TestCheckResponseSnapshot_Error_AccountOwnerNotVerifiedException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InviteAccountToOrganization(context.Background(), &InviteAccountToOrganizationInput{})
+	_, opErr := svc.InviteAccountToOrganization(context.Background(), &InviteAccountToOrganizationInput{
+		Target: &types.HandshakeParty{
+			Id:   ptr.String("__Id__"),
+			Type: types.HandshakePartyType("ACCOUNT"),
+		},
+		Notes: ptr.String("__Notes__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2602,7 +2917,9 @@ func TestCheckResponseSnapshot_Error_AlreadyInOrganizationException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOrganization(context.Background(), &CreateOrganizationInput{})
+	_, opErr := svc.CreateOrganization(context.Background(), &CreateOrganizationInput{
+		FeatureSet: types.OrganizationFeatureSet("ALL"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2627,7 +2944,11 @@ func TestCheckResponseSnapshot_Error_ChildNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListParents(context.Background(), &ListParentsInput{})
+	_, opErr := svc.ListParents(context.Background(), &ListParentsInput{
+		ChildId:    ptr.String("__ChildId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2652,7 +2973,9 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2677,7 +3000,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CloseAccount(context.Background(), &CloseAccountInput{})
+	_, opErr := svc.CloseAccount(context.Background(), &CloseAccountInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2703,7 +3028,9 @@ func TestCheckResponseSnapshot_Error_ConstraintViolationException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2728,7 +3055,9 @@ func TestCheckResponseSnapshot_Error_CreateAccountStatusNotFoundException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeCreateAccountStatus(context.Background(), &DescribeCreateAccountStatusInput{})
+	_, opErr := svc.DescribeCreateAccountStatus(context.Background(), &DescribeCreateAccountStatusInput{
+		CreateAccountRequestId: ptr.String("__CreateAccountRequestId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2753,7 +3082,11 @@ func TestCheckResponseSnapshot_Error_DestinationParentNotFoundException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.MoveAccount(context.Background(), &MoveAccountInput{})
+	_, opErr := svc.MoveAccount(context.Background(), &MoveAccountInput{
+		AccountId:           ptr.String("__AccountId__"),
+		SourceParentId:      ptr.String("__SourceParentId__"),
+		DestinationParentId: ptr.String("__DestinationParentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2778,7 +3111,11 @@ func TestCheckResponseSnapshot_Error_DuplicateAccountException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.MoveAccount(context.Background(), &MoveAccountInput{})
+	_, opErr := svc.MoveAccount(context.Background(), &MoveAccountInput{
+		AccountId:           ptr.String("__AccountId__"),
+		SourceParentId:      ptr.String("__SourceParentId__"),
+		DestinationParentId: ptr.String("__DestinationParentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2803,7 +3140,23 @@ func TestCheckResponseSnapshot_Error_DuplicateHandshakeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InviteAccountToOrganization(context.Background(), &InviteAccountToOrganizationInput{})
+	_, opErr := svc.InviteAccountToOrganization(context.Background(), &InviteAccountToOrganizationInput{
+		Target: &types.HandshakeParty{
+			Id:   ptr.String("__Id__"),
+			Type: types.HandshakePartyType("ACCOUNT"),
+		},
+		Notes: ptr.String("__Notes__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2828,7 +3181,20 @@ func TestCheckResponseSnapshot_Error_DuplicateOrganizationalUnitException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOrganizationalUnit(context.Background(), &CreateOrganizationalUnitInput{})
+	_, opErr := svc.CreateOrganizationalUnit(context.Background(), &CreateOrganizationalUnitInput{
+		ParentId: ptr.String("__ParentId__"),
+		Name:     ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2853,7 +3219,10 @@ func TestCheckResponseSnapshot_Error_DuplicatePolicyAttachmentException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{})
+	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2878,7 +3247,22 @@ func TestCheckResponseSnapshot_Error_DuplicatePolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePolicy(context.Background(), &CreatePolicyInput{})
+	_, opErr := svc.CreatePolicy(context.Background(), &CreatePolicyInput{
+		Content:     ptr.String("__Content__"),
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.PolicyType("SERVICE_CONTROL_POLICY"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2903,7 +3287,10 @@ func TestCheckResponseSnapshot_Error_EffectivePolicyNotFoundException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeEffectivePolicy(context.Background(), &DescribeEffectivePolicyInput{})
+	_, opErr := svc.DescribeEffectivePolicy(context.Background(), &DescribeEffectivePolicyInput{
+		PolicyType: types.EffectivePolicyType("TAG_POLICY"),
+		TargetId:   ptr.String("__TargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2928,7 +3315,22 @@ func TestCheckResponseSnapshot_Error_FinalizingOrganizationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccount(context.Background(), &CreateAccountInput{})
+	_, opErr := svc.CreateAccount(context.Background(), &CreateAccountInput{
+		Email:                  ptr.String("__Email__"),
+		AccountName:            ptr.String("__AccountName__"),
+		RoleName:               ptr.String("__RoleName__"),
+		IamUserAccessToBilling: types.IAMUserAccessToBilling("ALLOW"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2953,7 +3355,9 @@ func TestCheckResponseSnapshot_Error_HandshakeAlreadyInStateException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2979,7 +3383,9 @@ func TestCheckResponseSnapshot_Error_HandshakeConstraintViolationException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3004,7 +3410,9 @@ func TestCheckResponseSnapshot_Error_HandshakeNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3029,7 +3437,9 @@ func TestCheckResponseSnapshot_Error_InvalidHandshakeTransitionException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3055,7 +3465,9 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3080,7 +3492,10 @@ func TestCheckResponseSnapshot_Error_InvalidResponsibilityTransferTransitionExce
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TerminateResponsibilityTransfer(context.Background(), &TerminateResponsibilityTransferInput{})
+	_, opErr := svc.TerminateResponsibilityTransfer(context.Background(), &TerminateResponsibilityTransferInput{
+		Id:           ptr.String("__Id__"),
+		EndTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3105,7 +3520,22 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePolicy(context.Background(), &CreatePolicyInput{})
+	_, opErr := svc.CreatePolicy(context.Background(), &CreatePolicyInput{
+		Content:     ptr.String("__Content__"),
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.PolicyType("SERVICE_CONTROL_POLICY"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3130,7 +3560,9 @@ func TestCheckResponseSnapshot_Error_MasterCannotLeaveOrganizationException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3180,7 +3612,9 @@ func TestCheckResponseSnapshot_Error_OrganizationalUnitNotEmptyException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteOrganizationalUnit(context.Background(), &DeleteOrganizationalUnitInput{})
+	_, opErr := svc.DeleteOrganizationalUnit(context.Background(), &DeleteOrganizationalUnitInput{
+		OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3205,7 +3639,9 @@ func TestCheckResponseSnapshot_Error_OrganizationalUnitNotFoundException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteOrganizationalUnit(context.Background(), &DeleteOrganizationalUnitInput{})
+	_, opErr := svc.DeleteOrganizationalUnit(context.Background(), &DeleteOrganizationalUnitInput{
+		OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3230,7 +3666,20 @@ func TestCheckResponseSnapshot_Error_ParentNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOrganizationalUnit(context.Background(), &CreateOrganizationalUnitInput{})
+	_, opErr := svc.CreateOrganizationalUnit(context.Background(), &CreateOrganizationalUnitInput{
+		ParentId: ptr.String("__ParentId__"),
+		Name:     ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3255,7 +3704,10 @@ func TestCheckResponseSnapshot_Error_PolicyChangesInProgressException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{})
+	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3280,7 +3732,9 @@ func TestCheckResponseSnapshot_Error_PolicyInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeletePolicy(context.Background(), &DeletePolicyInput{})
+	_, opErr := svc.DeletePolicy(context.Background(), &DeletePolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3305,7 +3759,10 @@ func TestCheckResponseSnapshot_Error_PolicyNotAttachedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DetachPolicy(context.Background(), &DetachPolicyInput{})
+	_, opErr := svc.DetachPolicy(context.Background(), &DetachPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3330,7 +3787,10 @@ func TestCheckResponseSnapshot_Error_PolicyNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{})
+	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3355,7 +3815,10 @@ func TestCheckResponseSnapshot_Error_PolicyTypeAlreadyEnabledException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.EnablePolicyType(context.Background(), &EnablePolicyTypeInput{})
+	_, opErr := svc.EnablePolicyType(context.Background(), &EnablePolicyTypeInput{
+		RootId:     ptr.String("__RootId__"),
+		PolicyType: types.PolicyType("SERVICE_CONTROL_POLICY"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3380,7 +3843,22 @@ func TestCheckResponseSnapshot_Error_PolicyTypeNotAvailableForOrganizationExcept
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePolicy(context.Background(), &CreatePolicyInput{})
+	_, opErr := svc.CreatePolicy(context.Background(), &CreatePolicyInput{
+		Content:     ptr.String("__Content__"),
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.PolicyType("SERVICE_CONTROL_POLICY"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3405,7 +3883,10 @@ func TestCheckResponseSnapshot_Error_PolicyTypeNotEnabledException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{})
+	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3455,7 +3936,10 @@ func TestCheckResponseSnapshot_Error_ResponsibilityTransferAlreadyInStatusExcept
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TerminateResponsibilityTransfer(context.Background(), &TerminateResponsibilityTransferInput{})
+	_, opErr := svc.TerminateResponsibilityTransfer(context.Background(), &TerminateResponsibilityTransferInput{
+		Id:           ptr.String("__Id__"),
+		EndTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3480,7 +3964,9 @@ func TestCheckResponseSnapshot_Error_ResponsibilityTransferNotFoundException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeResponsibilityTransfer(context.Background(), &DescribeResponsibilityTransferInput{})
+	_, opErr := svc.DescribeResponsibilityTransfer(context.Background(), &DescribeResponsibilityTransferInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3505,7 +3991,10 @@ func TestCheckResponseSnapshot_Error_RootNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisablePolicyType(context.Background(), &DisablePolicyTypeInput{})
+	_, opErr := svc.DisablePolicyType(context.Background(), &DisablePolicyTypeInput{
+		RootId:     ptr.String("__RootId__"),
+		PolicyType: types.PolicyType("SERVICE_CONTROL_POLICY"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3530,7 +4019,9 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3555,7 +4046,11 @@ func TestCheckResponseSnapshot_Error_SourceParentNotFoundException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.MoveAccount(context.Background(), &MoveAccountInput{})
+	_, opErr := svc.MoveAccount(context.Background(), &MoveAccountInput{
+		AccountId:           ptr.String("__AccountId__"),
+		SourceParentId:      ptr.String("__SourceParentId__"),
+		DestinationParentId: ptr.String("__DestinationParentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3580,7 +4075,10 @@ func TestCheckResponseSnapshot_Error_TargetNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{})
+	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3606,7 +4104,9 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{})
+	_, opErr := svc.AcceptHandshake(context.Background(), &AcceptHandshakeInput{
+		HandshakeId: ptr.String("__HandshakeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3631,7 +4131,10 @@ func TestCheckResponseSnapshot_Error_UnsupportedAPIEndpointException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{})
+	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+		TargetId: ptr.String("__TargetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

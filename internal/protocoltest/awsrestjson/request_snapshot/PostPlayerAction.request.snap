@@ -1,5 +1,0 @@
-POST /PostPlayerAction
-
-Content-Type: application/json
-
-{"action":{"quit":{}}}

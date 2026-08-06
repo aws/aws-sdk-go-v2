@@ -193,7 +193,12 @@ func TestCheckResponseSnapshot_BatchGetChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetChannel(context.Background(), &BatchGetChannelInput{})
+	got, err := svc.BatchGetChannel(context.Background(), &BatchGetChannelInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +255,12 @@ func TestCheckResponseSnapshot_BatchGetStreamKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetStreamKey(context.Background(), &BatchGetStreamKeyInput{})
+	got, err := svc.BatchGetStreamKey(context.Background(), &BatchGetStreamKeyInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -291,7 +301,20 @@ func TestCheckResponseSnapshot_BatchStartViewerSessionRevocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchStartViewerSessionRevocation(context.Background(), &BatchStartViewerSessionRevocationInput{})
+	got, err := svc.BatchStartViewerSessionRevocation(context.Background(), &BatchStartViewerSessionRevocationInput{
+		ViewerSessions: []types.BatchStartViewerSessionRevocationViewerSession{
+			{
+				ChannelArn:                             ptr.String("__ChannelArn__"),
+				ViewerId:                               ptr.String("__ViewerId__"),
+				ViewerSessionVersionsLessThanOrEqualTo: 1,
+			},
+			{
+				ChannelArn:                             ptr.String("__ChannelArn__"),
+				ViewerId:                               ptr.String("__ViewerId__"),
+				ViewerSessionVersionsLessThanOrEqualTo: 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -330,7 +353,24 @@ func TestCheckResponseSnapshot_CreateAdConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAdConfiguration(context.Background(), &CreateAdConfigurationInput{})
+	got, err := svc.CreateAdConfiguration(context.Background(), &CreateAdConfigurationInput{
+		Name: ptr.String("__Name__"),
+		MediaTailorPlaybackConfigurations: []types.MediaTailorPlaybackConfiguration{
+			{
+				PlaybackConfigurationArn: ptr.String("__PlaybackConfigurationArn__"),
+			},
+			{
+				PlaybackConfigurationArn: ptr.String("__PlaybackConfigurationArn__"),
+			},
+		},
+		PostRollConfiguration: &types.PostRollConfiguration{
+			DurationSeconds: ptr.Int32(1),
+			Enabled:         true,
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -385,7 +425,26 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		Name:                      ptr.String("__Name__"),
+		LatencyMode:               types.ChannelLatencyMode("NORMAL"),
+		Type:                      types.ChannelType("BASIC"),
+		Authorized:                true,
+		RecordingConfigurationArn: ptr.String("__RecordingConfigurationArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		InsecureIngest:               true,
+		Preset:                       types.TranscodePreset("HIGHER_BANDWIDTH_DELIVERY"),
+		PlaybackRestrictionPolicyArn: ptr.String("__PlaybackRestrictionPolicyArn__"),
+		MultitrackInputConfiguration: &types.MultitrackInputConfiguration{
+			Enabled:           true,
+			Policy:            types.MultitrackPolicy("ALLOW"),
+			MaximumResolution: types.MultitrackMaximumResolution("SD"),
+		},
+		ContainerFormat:    types.ContainerFormat("TS"),
+		AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +480,21 @@ func TestCheckResponseSnapshot_CreatePlaybackRestrictionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePlaybackRestrictionPolicy(context.Background(), &CreatePlaybackRestrictionPolicyInput{})
+	got, err := svc.CreatePlaybackRestrictionPolicy(context.Background(), &CreatePlaybackRestrictionPolicyInput{
+		AllowedCountries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowedOrigins: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EnableStrictOriginEnforcement: ptr.Bool(true),
+		Name:                          ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -471,7 +544,34 @@ func TestCheckResponseSnapshot_CreateRecordingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRecordingConfiguration(context.Background(), &CreateRecordingConfigurationInput{})
+	got, err := svc.CreateRecordingConfiguration(context.Background(), &CreateRecordingConfigurationInput{
+		Name: ptr.String("__Name__"),
+		DestinationConfiguration: &types.DestinationConfiguration{
+			S3: &types.S3DestinationConfiguration{
+				BucketName: ptr.String("__BucketName__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ThumbnailConfiguration: &types.ThumbnailConfiguration{
+			RecordingMode:         types.RecordingMode("DISABLED"),
+			TargetIntervalSeconds: ptr.Int64(1),
+			Resolution:            types.ThumbnailConfigurationResolution("SD"),
+			Storage: []types.ThumbnailConfigurationStorage{
+				types.ThumbnailConfigurationStorage("SEQUENTIAL"),
+				types.ThumbnailConfigurationStorage("SEQUENTIAL"),
+			},
+		},
+		RecordingReconnectWindowSeconds: 1,
+		RenditionConfiguration: &types.RenditionConfiguration{
+			RenditionSelection: types.RenditionConfigurationRenditionSelection("ALL"),
+			Renditions: []types.RenditionConfigurationRendition{
+				types.RenditionConfigurationRendition("SD"),
+				types.RenditionConfigurationRendition("SD"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -499,7 +599,12 @@ func TestCheckResponseSnapshot_CreateStreamKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStreamKey(context.Background(), &CreateStreamKeyInput{})
+	got, err := svc.CreateStreamKey(context.Background(), &CreateStreamKeyInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -518,7 +623,9 @@ func TestCheckResponseSnapshot_DeleteAdConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAdConfiguration(context.Background(), &DeleteAdConfigurationInput{})
+	got, err := svc.DeleteAdConfiguration(context.Background(), &DeleteAdConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -537,7 +644,9 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{})
+	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -556,7 +665,9 @@ func TestCheckResponseSnapshot_DeletePlaybackKeyPair(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePlaybackKeyPair(context.Background(), &DeletePlaybackKeyPairInput{})
+	got, err := svc.DeletePlaybackKeyPair(context.Background(), &DeletePlaybackKeyPairInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -575,7 +686,9 @@ func TestCheckResponseSnapshot_DeletePlaybackRestrictionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePlaybackRestrictionPolicy(context.Background(), &DeletePlaybackRestrictionPolicyInput{})
+	got, err := svc.DeletePlaybackRestrictionPolicy(context.Background(), &DeletePlaybackRestrictionPolicyInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -594,7 +707,9 @@ func TestCheckResponseSnapshot_DeleteRecordingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRecordingConfiguration(context.Background(), &DeleteRecordingConfigurationInput{})
+	got, err := svc.DeleteRecordingConfiguration(context.Background(), &DeleteRecordingConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -613,7 +728,9 @@ func TestCheckResponseSnapshot_DeleteStreamKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStreamKey(context.Background(), &DeleteStreamKeyInput{})
+	got, err := svc.DeleteStreamKey(context.Background(), &DeleteStreamKeyInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,7 +769,9 @@ func TestCheckResponseSnapshot_GetAdConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAdConfiguration(context.Background(), &GetAdConfigurationInput{})
+	got, err := svc.GetAdConfiguration(context.Background(), &GetAdConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -699,7 +818,9 @@ func TestCheckResponseSnapshot_GetChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannel(context.Background(), &GetChannelInput{})
+	got, err := svc.GetChannel(context.Background(), &GetChannelInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -727,7 +848,9 @@ func TestCheckResponseSnapshot_GetPlaybackKeyPair(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPlaybackKeyPair(context.Background(), &GetPlaybackKeyPairInput{})
+	got, err := svc.GetPlaybackKeyPair(context.Background(), &GetPlaybackKeyPairInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -763,7 +886,9 @@ func TestCheckResponseSnapshot_GetPlaybackRestrictionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPlaybackRestrictionPolicy(context.Background(), &GetPlaybackRestrictionPolicyInput{})
+	got, err := svc.GetPlaybackRestrictionPolicy(context.Background(), &GetPlaybackRestrictionPolicyInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -813,7 +938,9 @@ func TestCheckResponseSnapshot_GetRecordingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecordingConfiguration(context.Background(), &GetRecordingConfigurationInput{})
+	got, err := svc.GetRecordingConfiguration(context.Background(), &GetRecordingConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -842,7 +969,9 @@ func TestCheckResponseSnapshot_GetStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStream(context.Background(), &GetStreamInput{})
+	got, err := svc.GetStream(context.Background(), &GetStreamInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -870,7 +999,9 @@ func TestCheckResponseSnapshot_GetStreamKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStreamKey(context.Background(), &GetStreamKeyInput{})
+	got, err := svc.GetStreamKey(context.Background(), &GetStreamKeyInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1034,7 +1165,10 @@ func TestCheckResponseSnapshot_GetStreamSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStreamSession(context.Background(), &GetStreamSessionInput{})
+	got, err := svc.GetStreamSession(context.Background(), &GetStreamSessionInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		StreamId:   ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1062,7 +1196,13 @@ func TestCheckResponseSnapshot_ImportPlaybackKeyPair(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportPlaybackKeyPair(context.Background(), &ImportPlaybackKeyPairInput{})
+	got, err := svc.ImportPlaybackKeyPair(context.Background(), &ImportPlaybackKeyPairInput{
+		PublicKeyMaterial: ptr.String("__PublicKeyMaterial__"),
+		Name:              ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1083,7 +1223,10 @@ func TestCheckResponseSnapshot_InsertAdBreak(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InsertAdBreak(context.Background(), &InsertAdBreakInput{})
+	got, err := svc.InsertAdBreak(context.Background(), &InsertAdBreakInput{
+		ChannelArn:      ptr.String("__ChannelArn__"),
+		DurationSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1144,7 +1287,10 @@ func TestCheckResponseSnapshot_ListAdConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAdConfigurations(context.Background(), &ListAdConfigurationsInput{})
+	got, err := svc.ListAdConfigurations(context.Background(), &ListAdConfigurationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1197,7 +1343,14 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{})
+	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{
+		FilterByName:                         ptr.String("__FilterByName__"),
+		FilterByRecordingConfigurationArn:    ptr.String("__FilterByRecordingConfigurationArn__"),
+		FilterByPlaybackRestrictionPolicyArn: ptr.String("__FilterByPlaybackRestrictionPolicyArn__"),
+		FilterByAdConfigurationArn:           ptr.String("__FilterByAdConfigurationArn__"),
+		NextToken:                            ptr.String("__NextToken__"),
+		MaxResults:                           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1234,7 +1387,10 @@ func TestCheckResponseSnapshot_ListPlaybackKeyPairs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlaybackKeyPairs(context.Background(), &ListPlaybackKeyPairsInput{})
+	got, err := svc.ListPlaybackKeyPairs(context.Background(), &ListPlaybackKeyPairsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1289,7 +1445,10 @@ func TestCheckResponseSnapshot_ListPlaybackRestrictionPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlaybackRestrictionPolicies(context.Background(), &ListPlaybackRestrictionPoliciesInput{})
+	got, err := svc.ListPlaybackRestrictionPolicies(context.Background(), &ListPlaybackRestrictionPoliciesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1338,7 +1497,10 @@ func TestCheckResponseSnapshot_ListRecordingConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecordingConfigurations(context.Background(), &ListRecordingConfigurationsInput{})
+	got, err := svc.ListRecordingConfigurations(context.Background(), &ListRecordingConfigurationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1375,7 +1537,11 @@ func TestCheckResponseSnapshot_ListStreamKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreamKeys(context.Background(), &ListStreamKeysInput{})
+	got, err := svc.ListStreamKeys(context.Background(), &ListStreamKeysInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1410,7 +1576,11 @@ func TestCheckResponseSnapshot_ListStreamSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreamSessions(context.Background(), &ListStreamSessionsInput{})
+	got, err := svc.ListStreamSessions(context.Background(), &ListStreamSessionsInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1449,7 +1619,13 @@ func TestCheckResponseSnapshot_ListStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreams(context.Background(), &ListStreamsInput{})
+	got, err := svc.ListStreams(context.Background(), &ListStreamsInput{
+		FilterBy: &types.StreamFilters{
+			Health: types.StreamHealth("HEALTHY"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1472,7 +1648,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1491,7 +1669,10 @@ func TestCheckResponseSnapshot_PutMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMetadata(context.Background(), &PutMetadataInput{})
+	got, err := svc.PutMetadata(context.Background(), &PutMetadataInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		Metadata:   ptr.String("__Metadata__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1510,7 +1691,11 @@ func TestCheckResponseSnapshot_StartViewerSessionRevocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartViewerSessionRevocation(context.Background(), &StartViewerSessionRevocationInput{})
+	got, err := svc.StartViewerSessionRevocation(context.Background(), &StartViewerSessionRevocationInput{
+		ChannelArn:                             ptr.String("__ChannelArn__"),
+		ViewerId:                               ptr.String("__ViewerId__"),
+		ViewerSessionVersionsLessThanOrEqualTo: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1529,7 +1714,9 @@ func TestCheckResponseSnapshot_StopStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopStream(context.Background(), &StopStreamInput{})
+	got, err := svc.StopStream(context.Background(), &StopStreamInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1548,7 +1735,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1567,7 +1759,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1606,7 +1804,22 @@ func TestCheckResponseSnapshot_UpdateAdConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAdConfiguration(context.Background(), &UpdateAdConfigurationInput{})
+	got, err := svc.UpdateAdConfiguration(context.Background(), &UpdateAdConfigurationInput{
+		Arn:  ptr.String("__Arn__"),
+		Name: ptr.String("__Name__"),
+		MediaTailorPlaybackConfigurations: []types.MediaTailorPlaybackConfiguration{
+			{
+				PlaybackConfigurationArn: ptr.String("__PlaybackConfigurationArn__"),
+			},
+			{
+				PlaybackConfigurationArn: ptr.String("__PlaybackConfigurationArn__"),
+			},
+		},
+		PostRollConfiguration: &types.PostRollConfiguration{
+			DurationSeconds: ptr.Int32(1),
+			Enabled:         true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1653,7 +1866,24 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{})
+	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{
+		Arn:                          ptr.String("__Arn__"),
+		Name:                         ptr.String("__Name__"),
+		LatencyMode:                  types.ChannelLatencyMode("NORMAL"),
+		Type:                         types.ChannelType("BASIC"),
+		Authorized:                   true,
+		RecordingConfigurationArn:    ptr.String("__RecordingConfigurationArn__"),
+		InsecureIngest:               true,
+		Preset:                       types.TranscodePreset("HIGHER_BANDWIDTH_DELIVERY"),
+		PlaybackRestrictionPolicyArn: ptr.String("__PlaybackRestrictionPolicyArn__"),
+		MultitrackInputConfiguration: &types.MultitrackInputConfiguration{
+			Enabled:           true,
+			Policy:            types.MultitrackPolicy("ALLOW"),
+			MaximumResolution: types.MultitrackMaximumResolution("SD"),
+		},
+		ContainerFormat:    types.ContainerFormat("TS"),
+		AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1689,7 +1919,19 @@ func TestCheckResponseSnapshot_UpdatePlaybackRestrictionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePlaybackRestrictionPolicy(context.Background(), &UpdatePlaybackRestrictionPolicyInput{})
+	got, err := svc.UpdatePlaybackRestrictionPolicy(context.Background(), &UpdatePlaybackRestrictionPolicyInput{
+		Arn: ptr.String("__Arn__"),
+		AllowedCountries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowedOrigins: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EnableStrictOriginEnforcement: ptr.Bool(true),
+		Name:                          ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1707,7 +1949,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("AccessDeniedException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
@@ -1718,7 +1960,12 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetChannel(context.Background(), &BatchGetChannelInput{})
+	_, opErr := svc.BatchGetChannel(context.Background(), &BatchGetChannelInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1740,7 +1987,7 @@ func TestCheckResponseSnapshot_Error_ChannelNotBroadcasting(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("ChannelNotBroadcasting"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ChannelNotBroadcasting.error")
@@ -1751,7 +1998,9 @@ func TestCheckResponseSnapshot_Error_ChannelNotBroadcasting(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetStream(context.Background(), &GetStreamInput{})
+	_, opErr := svc.GetStream(context.Background(), &GetStreamInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1773,7 +2022,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("ConflictException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
@@ -1784,7 +2033,24 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdConfiguration(context.Background(), &CreateAdConfigurationInput{})
+	_, opErr := svc.CreateAdConfiguration(context.Background(), &CreateAdConfigurationInput{
+		Name: ptr.String("__Name__"),
+		MediaTailorPlaybackConfigurations: []types.MediaTailorPlaybackConfiguration{
+			{
+				PlaybackConfigurationArn: ptr.String("__PlaybackConfigurationArn__"),
+			},
+			{
+				PlaybackConfigurationArn: ptr.String("__PlaybackConfigurationArn__"),
+			},
+		},
+		PostRollConfiguration: &types.PostRollConfiguration{
+			DurationSeconds: ptr.Int32(1),
+			Enabled:         true,
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1806,7 +2072,7 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("InternalServerException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServerException.error")
@@ -1817,7 +2083,24 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdConfiguration(context.Background(), &CreateAdConfigurationInput{})
+	_, opErr := svc.CreateAdConfiguration(context.Background(), &CreateAdConfigurationInput{
+		Name: ptr.String("__Name__"),
+		MediaTailorPlaybackConfigurations: []types.MediaTailorPlaybackConfiguration{
+			{
+				PlaybackConfigurationArn: ptr.String("__PlaybackConfigurationArn__"),
+			},
+			{
+				PlaybackConfigurationArn: ptr.String("__PlaybackConfigurationArn__"),
+			},
+		},
+		PostRollConfiguration: &types.PostRollConfiguration{
+			DurationSeconds: ptr.Int32(1),
+			Enabled:         true,
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1839,7 +2122,7 @@ func TestCheckResponseSnapshot_Error_PendingVerification(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("PendingVerification"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("PendingVerification.error")
@@ -1850,7 +2133,20 @@ func TestCheckResponseSnapshot_Error_PendingVerification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchStartViewerSessionRevocation(context.Background(), &BatchStartViewerSessionRevocationInput{})
+	_, opErr := svc.BatchStartViewerSessionRevocation(context.Background(), &BatchStartViewerSessionRevocationInput{
+		ViewerSessions: []types.BatchStartViewerSessionRevocationViewerSession{
+			{
+				ChannelArn:                             ptr.String("__ChannelArn__"),
+				ViewerId:                               ptr.String("__ViewerId__"),
+				ViewerSessionVersionsLessThanOrEqualTo: 1,
+			},
+			{
+				ChannelArn:                             ptr.String("__ChannelArn__"),
+				ViewerId:                               ptr.String("__ViewerId__"),
+				ViewerSessionVersionsLessThanOrEqualTo: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1872,7 +2168,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("ResourceNotFoundException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
@@ -1883,7 +2179,24 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdConfiguration(context.Background(), &CreateAdConfigurationInput{})
+	_, opErr := svc.CreateAdConfiguration(context.Background(), &CreateAdConfigurationInput{
+		Name: ptr.String("__Name__"),
+		MediaTailorPlaybackConfigurations: []types.MediaTailorPlaybackConfiguration{
+			{
+				PlaybackConfigurationArn: ptr.String("__PlaybackConfigurationArn__"),
+			},
+			{
+				PlaybackConfigurationArn: ptr.String("__PlaybackConfigurationArn__"),
+			},
+		},
+		PostRollConfiguration: &types.PostRollConfiguration{
+			DurationSeconds: ptr.Int32(1),
+			Enabled:         true,
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1905,7 +2218,7 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("ServiceQuotaExceededException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceQuotaExceededException.error")
@@ -1916,7 +2229,24 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdConfiguration(context.Background(), &CreateAdConfigurationInput{})
+	_, opErr := svc.CreateAdConfiguration(context.Background(), &CreateAdConfigurationInput{
+		Name: ptr.String("__Name__"),
+		MediaTailorPlaybackConfigurations: []types.MediaTailorPlaybackConfiguration{
+			{
+				PlaybackConfigurationArn: ptr.String("__PlaybackConfigurationArn__"),
+			},
+			{
+				PlaybackConfigurationArn: ptr.String("__PlaybackConfigurationArn__"),
+			},
+		},
+		PostRollConfiguration: &types.PostRollConfiguration{
+			DurationSeconds: ptr.Int32(1),
+			Enabled:         true,
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1938,7 +2268,7 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailable(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("ServiceUnavailable"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceUnavailable.error")
@@ -1949,7 +2279,12 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetChannel(context.Background(), &BatchGetChannelInput{})
+	_, opErr := svc.BatchGetChannel(context.Background(), &BatchGetChannelInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1971,7 +2306,7 @@ func TestCheckResponseSnapshot_Error_StreamUnavailable(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("StreamUnavailable"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("StreamUnavailable.error")
@@ -1982,7 +2317,9 @@ func TestCheckResponseSnapshot_Error_StreamUnavailable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StopStream(context.Background(), &StopStreamInput{})
+	_, opErr := svc.StopStream(context.Background(), &StopStreamInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2004,7 +2341,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("ThrottlingException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ThrottlingException.error")
@@ -2015,7 +2352,20 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchStartViewerSessionRevocation(context.Background(), &BatchStartViewerSessionRevocationInput{})
+	_, opErr := svc.BatchStartViewerSessionRevocation(context.Background(), &BatchStartViewerSessionRevocationInput{
+		ViewerSessions: []types.BatchStartViewerSessionRevocationViewerSession{
+			{
+				ChannelArn:                             ptr.String("__ChannelArn__"),
+				ViewerId:                               ptr.String("__ViewerId__"),
+				ViewerSessionVersionsLessThanOrEqualTo: 1,
+			},
+			{
+				ChannelArn:                             ptr.String("__ChannelArn__"),
+				ViewerId:                               ptr.String("__ViewerId__"),
+				ViewerSessionVersionsLessThanOrEqualTo: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2037,7 +2387,7 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("ValidationException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
@@ -2048,7 +2398,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetChannel(context.Background(), &BatchGetChannelInput{})
+	_, opErr := svc.BatchGetChannel(context.Background(), &BatchGetChannelInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"OrgConfiguration":{"AWSServiceAccessStatus":"ENABLED","ServiceLinkedRole":"__ServiceLinkedRole__"}}

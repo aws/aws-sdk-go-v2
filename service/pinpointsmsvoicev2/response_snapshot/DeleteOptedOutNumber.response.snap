@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DeleteOptedOutNumber
+
+{"EndUserOptedOut":true,"OptOutListArn":"__OptOutListArn__","OptOutListName":"__OptOutListName__","OptedOutNumber":"__OptedOutNumber__","OptedOutTimestamp":946684800}

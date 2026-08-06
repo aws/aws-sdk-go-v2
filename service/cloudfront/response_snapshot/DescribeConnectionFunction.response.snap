@@ -1,0 +1,5 @@
+200
+Content-Type: application/xml
+Etag: __ETag__
+
+<ConnectionFunctionSummary xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><ConnectionFunctionArn>__ConnectionFunctionArn__</ConnectionFunctionArn><ConnectionFunctionConfig><Comment>__Comment__</Comment><KeyValueStoreAssociations><Items><KeyValueStoreAssociation><KeyValueStoreARN>__KeyValueStoreARN__</KeyValueStoreARN></KeyValueStoreAssociation><KeyValueStoreAssociation><KeyValueStoreARN>__KeyValueStoreARN__</KeyValueStoreARN></KeyValueStoreAssociation></Items><Quantity>1</Quantity></KeyValueStoreAssociations><Runtime>cloudfront-js-1.0</Runtime></ConnectionFunctionConfig><CreatedTime>2000-01-01T00:00:00Z</CreatedTime><Id>__Id__</Id><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><Name>__Name__</Name><Stage>DEVELOPMENT</Stage><Status>__Status__</Status></ConnectionFunctionSummary>

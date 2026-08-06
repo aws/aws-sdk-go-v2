@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Network":{"Arn":"__Arn__","CreationDate":"2000-01-01T00:00:00Z","Description":"__Description__","Framework":"HYPERLEDGER_FABRIC","FrameworkAttributes":{"Ethereum":{"ChainId":"__ChainId__"},"Fabric":{"Edition":"STARTER","OrderingServiceEndpoint":"__OrderingServiceEndpoint__"}},"FrameworkVersion":"__FrameworkVersion__","Id":"__Id__","Name":"__Name__","Status":"CREATING","Tags":{"key0":"__Value__"},"VotingPolicy":{"ApprovalThresholdPolicy":{"ProposalDurationInHours":1,"ThresholdComparator":"GREATER_THAN","ThresholdPercentage":1}},"VpcEndpointServiceName":"__VpcEndpointServiceName__"}}

@@ -119,7 +119,121 @@ func TestCheckResponseSnapshot_CreateSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSchedule(context.Background(), &CreateScheduleInput{})
+	got, err := svc.CreateSchedule(context.Background(), &CreateScheduleInput{
+		Name:                       ptr.String("__Name__"),
+		GroupName:                  ptr.String("__GroupName__"),
+		ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+		StartDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:                ptr.String("__Description__"),
+		ScheduleExpressionTimezone: ptr.String("__ScheduleExpressionTimezone__"),
+		State:                      types.ScheduleState("ENABLED"),
+		KmsKeyArn:                  ptr.String("__KmsKeyArn__"),
+		Target: &types.Target{
+			Arn:     ptr.String("__Arn__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			DeadLetterConfig: &types.DeadLetterConfig{
+				Arn: ptr.String("__Arn__"),
+			},
+			RetryPolicy: &types.RetryPolicy{
+				MaximumEventAgeInSeconds: ptr.Int32(1),
+				MaximumRetryAttempts:     ptr.Int32(1),
+			},
+			Input: ptr.String("__Input__"),
+			EcsParameters: &types.EcsParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: ptr.Bool(true),
+				EnableExecuteCommand: ptr.Bool(true),
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Tags: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+			},
+			EventBridgeParameters: &types.EventBridgeParameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			KinesisParameters: &types.KinesisParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			SageMakerPipelineParameters: &types.SageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			SqsParameters: &types.SqsParameters{
+				MessageGroupId: ptr.String("__MessageGroupId__"),
+			},
+		},
+		FlexibleTimeWindow: &types.FlexibleTimeWindow{
+			Mode:                   types.FlexibleTimeWindowMode("OFF"),
+			MaximumWindowInMinutes: ptr.Int32(1),
+		},
+		ClientToken:           ptr.String("__ClientToken__"),
+		ActionAfterCompletion: types.ActionAfterCompletion("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +254,20 @@ func TestCheckResponseSnapshot_CreateScheduleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateScheduleGroup(context.Background(), &CreateScheduleGroupInput{})
+	got, err := svc.CreateScheduleGroup(context.Background(), &CreateScheduleGroupInput{
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +286,11 @@ func TestCheckResponseSnapshot_DeleteSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSchedule(context.Background(), &DeleteScheduleInput{})
+	got, err := svc.DeleteSchedule(context.Background(), &DeleteScheduleInput{
+		Name:        ptr.String("__Name__"),
+		GroupName:   ptr.String("__GroupName__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +309,10 @@ func TestCheckResponseSnapshot_DeleteScheduleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScheduleGroup(context.Background(), &DeleteScheduleGroupInput{})
+	got, err := svc.DeleteScheduleGroup(context.Background(), &DeleteScheduleGroupInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +447,10 @@ func TestCheckResponseSnapshot_GetSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSchedule(context.Background(), &GetScheduleInput{})
+	got, err := svc.GetSchedule(context.Background(), &GetScheduleInput{
+		Name:      ptr.String("__Name__"),
+		GroupName: ptr.String("__GroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -338,7 +475,9 @@ func TestCheckResponseSnapshot_GetScheduleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetScheduleGroup(context.Background(), &GetScheduleGroupInput{})
+	got, err := svc.GetScheduleGroup(context.Background(), &GetScheduleGroupInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -375,7 +514,11 @@ func TestCheckResponseSnapshot_ListScheduleGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListScheduleGroups(context.Background(), &ListScheduleGroupsInput{})
+	got, err := svc.ListScheduleGroups(context.Background(), &ListScheduleGroupsInput{
+		NamePrefix: ptr.String("__NamePrefix__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -420,7 +563,13 @@ func TestCheckResponseSnapshot_ListSchedules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSchedules(context.Background(), &ListSchedulesInput{})
+	got, err := svc.ListSchedules(context.Background(), &ListSchedulesInput{
+		GroupName:  ptr.String("__GroupName__"),
+		NamePrefix: ptr.String("__NamePrefix__"),
+		State:      types.ScheduleState("ENABLED"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -450,7 +599,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +620,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -488,7 +651,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -509,7 +678,121 @@ func TestCheckResponseSnapshot_UpdateSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSchedule(context.Background(), &UpdateScheduleInput{})
+	got, err := svc.UpdateSchedule(context.Background(), &UpdateScheduleInput{
+		Name:                       ptr.String("__Name__"),
+		GroupName:                  ptr.String("__GroupName__"),
+		ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+		StartDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:                ptr.String("__Description__"),
+		ScheduleExpressionTimezone: ptr.String("__ScheduleExpressionTimezone__"),
+		State:                      types.ScheduleState("ENABLED"),
+		KmsKeyArn:                  ptr.String("__KmsKeyArn__"),
+		Target: &types.Target{
+			Arn:     ptr.String("__Arn__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			DeadLetterConfig: &types.DeadLetterConfig{
+				Arn: ptr.String("__Arn__"),
+			},
+			RetryPolicy: &types.RetryPolicy{
+				MaximumEventAgeInSeconds: ptr.Int32(1),
+				MaximumRetryAttempts:     ptr.Int32(1),
+			},
+			Input: ptr.String("__Input__"),
+			EcsParameters: &types.EcsParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: ptr.Bool(true),
+				EnableExecuteCommand: ptr.Bool(true),
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Tags: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+			},
+			EventBridgeParameters: &types.EventBridgeParameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			KinesisParameters: &types.KinesisParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			SageMakerPipelineParameters: &types.SageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			SqsParameters: &types.SqsParameters{
+				MessageGroupId: ptr.String("__MessageGroupId__"),
+			},
+		},
+		FlexibleTimeWindow: &types.FlexibleTimeWindow{
+			Mode:                   types.FlexibleTimeWindowMode("OFF"),
+			MaximumWindowInMinutes: ptr.Int32(1),
+		},
+		ClientToken:           ptr.String("__ClientToken__"),
+		ActionAfterCompletion: types.ActionAfterCompletion("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -530,7 +813,121 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSchedule(context.Background(), &CreateScheduleInput{})
+	_, opErr := svc.CreateSchedule(context.Background(), &CreateScheduleInput{
+		Name:                       ptr.String("__Name__"),
+		GroupName:                  ptr.String("__GroupName__"),
+		ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+		StartDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:                ptr.String("__Description__"),
+		ScheduleExpressionTimezone: ptr.String("__ScheduleExpressionTimezone__"),
+		State:                      types.ScheduleState("ENABLED"),
+		KmsKeyArn:                  ptr.String("__KmsKeyArn__"),
+		Target: &types.Target{
+			Arn:     ptr.String("__Arn__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			DeadLetterConfig: &types.DeadLetterConfig{
+				Arn: ptr.String("__Arn__"),
+			},
+			RetryPolicy: &types.RetryPolicy{
+				MaximumEventAgeInSeconds: ptr.Int32(1),
+				MaximumRetryAttempts:     ptr.Int32(1),
+			},
+			Input: ptr.String("__Input__"),
+			EcsParameters: &types.EcsParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: ptr.Bool(true),
+				EnableExecuteCommand: ptr.Bool(true),
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Tags: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+			},
+			EventBridgeParameters: &types.EventBridgeParameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			KinesisParameters: &types.KinesisParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			SageMakerPipelineParameters: &types.SageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			SqsParameters: &types.SqsParameters{
+				MessageGroupId: ptr.String("__MessageGroupId__"),
+			},
+		},
+		FlexibleTimeWindow: &types.FlexibleTimeWindow{
+			Mode:                   types.FlexibleTimeWindowMode("OFF"),
+			MaximumWindowInMinutes: ptr.Int32(1),
+		},
+		ClientToken:           ptr.String("__ClientToken__"),
+		ActionAfterCompletion: types.ActionAfterCompletion("NONE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -555,7 +952,121 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSchedule(context.Background(), &CreateScheduleInput{})
+	_, opErr := svc.CreateSchedule(context.Background(), &CreateScheduleInput{
+		Name:                       ptr.String("__Name__"),
+		GroupName:                  ptr.String("__GroupName__"),
+		ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+		StartDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:                ptr.String("__Description__"),
+		ScheduleExpressionTimezone: ptr.String("__ScheduleExpressionTimezone__"),
+		State:                      types.ScheduleState("ENABLED"),
+		KmsKeyArn:                  ptr.String("__KmsKeyArn__"),
+		Target: &types.Target{
+			Arn:     ptr.String("__Arn__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			DeadLetterConfig: &types.DeadLetterConfig{
+				Arn: ptr.String("__Arn__"),
+			},
+			RetryPolicy: &types.RetryPolicy{
+				MaximumEventAgeInSeconds: ptr.Int32(1),
+				MaximumRetryAttempts:     ptr.Int32(1),
+			},
+			Input: ptr.String("__Input__"),
+			EcsParameters: &types.EcsParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: ptr.Bool(true),
+				EnableExecuteCommand: ptr.Bool(true),
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Tags: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+			},
+			EventBridgeParameters: &types.EventBridgeParameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			KinesisParameters: &types.KinesisParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			SageMakerPipelineParameters: &types.SageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			SqsParameters: &types.SqsParameters{
+				MessageGroupId: ptr.String("__MessageGroupId__"),
+			},
+		},
+		FlexibleTimeWindow: &types.FlexibleTimeWindow{
+			Mode:                   types.FlexibleTimeWindowMode("OFF"),
+			MaximumWindowInMinutes: ptr.Int32(1),
+		},
+		ClientToken:           ptr.String("__ClientToken__"),
+		ActionAfterCompletion: types.ActionAfterCompletion("NONE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -580,7 +1091,121 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSchedule(context.Background(), &CreateScheduleInput{})
+	_, opErr := svc.CreateSchedule(context.Background(), &CreateScheduleInput{
+		Name:                       ptr.String("__Name__"),
+		GroupName:                  ptr.String("__GroupName__"),
+		ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+		StartDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:                ptr.String("__Description__"),
+		ScheduleExpressionTimezone: ptr.String("__ScheduleExpressionTimezone__"),
+		State:                      types.ScheduleState("ENABLED"),
+		KmsKeyArn:                  ptr.String("__KmsKeyArn__"),
+		Target: &types.Target{
+			Arn:     ptr.String("__Arn__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			DeadLetterConfig: &types.DeadLetterConfig{
+				Arn: ptr.String("__Arn__"),
+			},
+			RetryPolicy: &types.RetryPolicy{
+				MaximumEventAgeInSeconds: ptr.Int32(1),
+				MaximumRetryAttempts:     ptr.Int32(1),
+			},
+			Input: ptr.String("__Input__"),
+			EcsParameters: &types.EcsParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: ptr.Bool(true),
+				EnableExecuteCommand: ptr.Bool(true),
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Tags: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+			},
+			EventBridgeParameters: &types.EventBridgeParameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			KinesisParameters: &types.KinesisParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			SageMakerPipelineParameters: &types.SageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			SqsParameters: &types.SqsParameters{
+				MessageGroupId: ptr.String("__MessageGroupId__"),
+			},
+		},
+		FlexibleTimeWindow: &types.FlexibleTimeWindow{
+			Mode:                   types.FlexibleTimeWindowMode("OFF"),
+			MaximumWindowInMinutes: ptr.Int32(1),
+		},
+		ClientToken:           ptr.String("__ClientToken__"),
+		ActionAfterCompletion: types.ActionAfterCompletion("NONE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -605,7 +1230,121 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSchedule(context.Background(), &CreateScheduleInput{})
+	_, opErr := svc.CreateSchedule(context.Background(), &CreateScheduleInput{
+		Name:                       ptr.String("__Name__"),
+		GroupName:                  ptr.String("__GroupName__"),
+		ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+		StartDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:                ptr.String("__Description__"),
+		ScheduleExpressionTimezone: ptr.String("__ScheduleExpressionTimezone__"),
+		State:                      types.ScheduleState("ENABLED"),
+		KmsKeyArn:                  ptr.String("__KmsKeyArn__"),
+		Target: &types.Target{
+			Arn:     ptr.String("__Arn__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			DeadLetterConfig: &types.DeadLetterConfig{
+				Arn: ptr.String("__Arn__"),
+			},
+			RetryPolicy: &types.RetryPolicy{
+				MaximumEventAgeInSeconds: ptr.Int32(1),
+				MaximumRetryAttempts:     ptr.Int32(1),
+			},
+			Input: ptr.String("__Input__"),
+			EcsParameters: &types.EcsParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: ptr.Bool(true),
+				EnableExecuteCommand: ptr.Bool(true),
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Tags: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+			},
+			EventBridgeParameters: &types.EventBridgeParameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			KinesisParameters: &types.KinesisParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			SageMakerPipelineParameters: &types.SageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			SqsParameters: &types.SqsParameters{
+				MessageGroupId: ptr.String("__MessageGroupId__"),
+			},
+		},
+		FlexibleTimeWindow: &types.FlexibleTimeWindow{
+			Mode:                   types.FlexibleTimeWindowMode("OFF"),
+			MaximumWindowInMinutes: ptr.Int32(1),
+		},
+		ClientToken:           ptr.String("__ClientToken__"),
+		ActionAfterCompletion: types.ActionAfterCompletion("NONE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -630,7 +1369,121 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSchedule(context.Background(), &CreateScheduleInput{})
+	_, opErr := svc.CreateSchedule(context.Background(), &CreateScheduleInput{
+		Name:                       ptr.String("__Name__"),
+		GroupName:                  ptr.String("__GroupName__"),
+		ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+		StartDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:                ptr.String("__Description__"),
+		ScheduleExpressionTimezone: ptr.String("__ScheduleExpressionTimezone__"),
+		State:                      types.ScheduleState("ENABLED"),
+		KmsKeyArn:                  ptr.String("__KmsKeyArn__"),
+		Target: &types.Target{
+			Arn:     ptr.String("__Arn__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			DeadLetterConfig: &types.DeadLetterConfig{
+				Arn: ptr.String("__Arn__"),
+			},
+			RetryPolicy: &types.RetryPolicy{
+				MaximumEventAgeInSeconds: ptr.Int32(1),
+				MaximumRetryAttempts:     ptr.Int32(1),
+			},
+			Input: ptr.String("__Input__"),
+			EcsParameters: &types.EcsParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: ptr.Bool(true),
+				EnableExecuteCommand: ptr.Bool(true),
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Tags: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+			},
+			EventBridgeParameters: &types.EventBridgeParameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			KinesisParameters: &types.KinesisParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			SageMakerPipelineParameters: &types.SageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			SqsParameters: &types.SqsParameters{
+				MessageGroupId: ptr.String("__MessageGroupId__"),
+			},
+		},
+		FlexibleTimeWindow: &types.FlexibleTimeWindow{
+			Mode:                   types.FlexibleTimeWindowMode("OFF"),
+			MaximumWindowInMinutes: ptr.Int32(1),
+		},
+		ClientToken:           ptr.String("__ClientToken__"),
+		ActionAfterCompletion: types.ActionAfterCompletion("NONE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -655,7 +1508,121 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSchedule(context.Background(), &CreateScheduleInput{})
+	_, opErr := svc.CreateSchedule(context.Background(), &CreateScheduleInput{
+		Name:                       ptr.String("__Name__"),
+		GroupName:                  ptr.String("__GroupName__"),
+		ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+		StartDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:                ptr.String("__Description__"),
+		ScheduleExpressionTimezone: ptr.String("__ScheduleExpressionTimezone__"),
+		State:                      types.ScheduleState("ENABLED"),
+		KmsKeyArn:                  ptr.String("__KmsKeyArn__"),
+		Target: &types.Target{
+			Arn:     ptr.String("__Arn__"),
+			RoleArn: ptr.String("__RoleArn__"),
+			DeadLetterConfig: &types.DeadLetterConfig{
+				Arn: ptr.String("__Arn__"),
+			},
+			RetryPolicy: &types.RetryPolicy{
+				MaximumEventAgeInSeconds: ptr.Int32(1),
+				MaximumRetryAttempts:     ptr.Int32(1),
+			},
+			Input: ptr.String("__Input__"),
+			EcsParameters: &types.EcsParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: ptr.Bool(true),
+				EnableExecuteCommand: ptr.Bool(true),
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Tags: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
+			},
+			EventBridgeParameters: &types.EventBridgeParameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			KinesisParameters: &types.KinesisParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			SageMakerPipelineParameters: &types.SageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			SqsParameters: &types.SqsParameters{
+				MessageGroupId: ptr.String("__MessageGroupId__"),
+			},
+		},
+		FlexibleTimeWindow: &types.FlexibleTimeWindow{
+			Mode:                   types.FlexibleTimeWindowMode("OFF"),
+			MaximumWindowInMinutes: ptr.Int32(1),
+		},
+		ClientToken:           ptr.String("__ClientToken__"),
+		ActionAfterCompletion: types.ActionAfterCompletion("NONE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

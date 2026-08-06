@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","OperationEvents":[{"Description":"__Description__","Resource":{"ResourceArn":"__ResourceArn__","ResourceType":"__ResourceType__"},"Status":"IN_PROGRESS","StatusMessage":"__StatusMessage__","Timestamp":946684800},{"Description":"__Description__","Resource":{"ResourceArn":"__ResourceArn__","ResourceType":"__ResourceType__"},"Status":"IN_PROGRESS","StatusMessage":"__StatusMessage__","Timestamp":946684800}]}

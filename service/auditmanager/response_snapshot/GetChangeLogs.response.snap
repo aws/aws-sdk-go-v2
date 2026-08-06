@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"changeLogs":[{"action":"CREATE","createdAt":946684800,"createdBy":"__CreatedBy__","objectName":"__ObjectName__","objectType":"ASSESSMENT"},{"action":"CREATE","createdAt":946684800,"createdBy":"__CreatedBy__","objectName":"__ObjectName__","objectType":"ASSESSMENT"}],"nextToken":"__NextToken__"}

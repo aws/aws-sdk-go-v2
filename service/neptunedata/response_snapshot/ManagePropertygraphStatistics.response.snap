@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"payload":{"statisticsId":"__StatisticsId__"},"status":"__Status__"}

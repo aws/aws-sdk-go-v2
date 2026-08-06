@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SpencerFrontendService.CompleteLayerUpload
+
+{"layerDigest":"__LayerDigest__","registryId":"__RegistryId__","repositoryName":"__RepositoryName__","uploadId":"__UploadId__"}

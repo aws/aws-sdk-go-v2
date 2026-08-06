@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CancelledChangeIds":["__Member__","__Member__"],"CancelledChangeProperties":[{"ActiveValue":"__ActiveValue__","CancelledValue":"__CancelledValue__","PropertyName":"__PropertyName__"},{"ActiveValue":"__ActiveValue__","CancelledValue":"__CancelledValue__","PropertyName":"__PropertyName__"}],"DryRun":true}

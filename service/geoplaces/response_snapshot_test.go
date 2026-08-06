@@ -740,7 +740,44 @@ func TestCheckResponseSnapshot_Autocomplete(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Autocomplete(context.Background(), &AutocompleteInput{})
+	got, err := svc.Autocomplete(context.Background(), &AutocompleteInput{
+		QueryText:  ptr.String("__QueryText__"),
+		MaxResults: ptr.Int32(1),
+		BiasPosition: []float64{
+			1.0,
+			1.0,
+		},
+		Filter: &types.AutocompleteFilter{
+			BoundingBox: []float64{
+				1.0,
+				1.0,
+			},
+			Circle: &types.FilterCircle{
+				Center: []float64{
+					1.0,
+					1.0,
+				},
+				Radius: ptr.Int64(1),
+			},
+			IncludeCountries: []string{
+				"__Member__",
+				"__Member__",
+			},
+			IncludePlaceTypes: []types.AutocompleteFilterPlaceType{
+				types.AutocompleteFilterPlaceType("Locality"),
+				types.AutocompleteFilterPlaceType("Locality"),
+			},
+		},
+		PostalCodeMode: types.PostalCodeMode("MergeAllSpannedLocalities"),
+		AdditionalFeatures: []types.AutocompleteAdditionalFeature{
+			types.AutocompleteAdditionalFeature("Core"),
+			types.AutocompleteAdditionalFeature("Core"),
+		},
+		Language:      ptr.String("__Language__"),
+		PoliticalView: ptr.String("__PoliticalView__"),
+		IntendedUse:   types.AutocompleteIntendedUse("SingleUse"),
+		Key:           ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2815,7 +2852,48 @@ func TestCheckResponseSnapshot_Geocode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Geocode(context.Background(), &GeocodeInput{})
+	got, err := svc.Geocode(context.Background(), &GeocodeInput{
+		QueryText: ptr.String("__QueryText__"),
+		QueryComponents: &types.GeocodeQueryComponents{
+			Country:       ptr.String("__Country__"),
+			Region:        ptr.String("__Region__"),
+			SubRegion:     ptr.String("__SubRegion__"),
+			Locality:      ptr.String("__Locality__"),
+			District:      ptr.String("__District__"),
+			Street:        ptr.String("__Street__"),
+			AddressNumber: ptr.String("__AddressNumber__"),
+			PostalCode:    ptr.String("__PostalCode__"),
+		},
+		MaxResults: ptr.Int32(1),
+		BiasPosition: []float64{
+			1.0,
+			1.0,
+		},
+		Filter: &types.GeocodeFilter{
+			IncludeCountries: []string{
+				"__Member__",
+				"__Member__",
+			},
+			IncludePlaceTypes: []types.GeocodeFilterPlaceType{
+				types.GeocodeFilterPlaceType("Locality"),
+				types.GeocodeFilterPlaceType("Locality"),
+			},
+		},
+		AdditionalFeatures: []types.GeocodeAdditionalFeature{
+			types.GeocodeAdditionalFeature("TimeZone"),
+			types.GeocodeAdditionalFeature("TimeZone"),
+		},
+		Language:       ptr.String("__Language__"),
+		PoliticalView:  ptr.String("__PoliticalView__"),
+		IntendedUse:    types.GeocodeIntendedUse("SingleUse"),
+		Key:            ptr.String("__Key__"),
+		PostalCodeMode: types.PostalCodeMode("MergeAllSpannedLocalities"),
+		AddressTranslations: []types.AddressTranslationComponent{
+			types.AddressTranslationComponent("District"),
+			types.AddressTranslationComponent("District"),
+		},
+		AddressNamesMode: types.GeocodeAddressNamesMode("Matched"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3692,7 +3770,18 @@ func TestCheckResponseSnapshot_GetPlace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPlace(context.Background(), &GetPlaceInput{})
+	got, err := svc.GetPlace(context.Background(), &GetPlaceInput{
+		PlaceId: ptr.String("__PlaceId__"),
+		AdditionalFeatures: []types.GetPlaceAdditionalFeature{
+			types.GetPlaceAdditionalFeature("TimeZone"),
+			types.GetPlaceAdditionalFeature("TimeZone"),
+		},
+		Language:         ptr.String("__Language__"),
+		PoliticalView:    ptr.String("__PoliticalView__"),
+		IntendedUse:      types.GetPlaceIntendedUse("SingleUse"),
+		Key:              ptr.String("__Key__"),
+		AddressNamesMode: types.GetPlaceAddressNamesMode("Administrative"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4585,7 +4674,30 @@ func TestCheckResponseSnapshot_ReverseGeocode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReverseGeocode(context.Background(), &ReverseGeocodeInput{})
+	got, err := svc.ReverseGeocode(context.Background(), &ReverseGeocodeInput{
+		QueryPosition: []float64{
+			1.0,
+			1.0,
+		},
+		QueryRadius: ptr.Int64(1),
+		MaxResults:  ptr.Int32(1),
+		Filter: &types.ReverseGeocodeFilter{
+			IncludePlaceTypes: []types.ReverseGeocodeFilterPlaceType{
+				types.ReverseGeocodeFilterPlaceType("Locality"),
+				types.ReverseGeocodeFilterPlaceType("Locality"),
+			},
+		},
+		AdditionalFeatures: []types.ReverseGeocodeAdditionalFeature{
+			types.ReverseGeocodeAdditionalFeature("TimeZone"),
+			types.ReverseGeocodeAdditionalFeature("TimeZone"),
+		},
+		Language:         ptr.String("__Language__"),
+		PoliticalView:    ptr.String("__PoliticalView__"),
+		IntendedUse:      types.ReverseGeocodeIntendedUse("SingleUse"),
+		Key:              ptr.String("__Key__"),
+		Heading:          1.0,
+		AddressNamesMode: types.ReverseGeocodeAddressNamesMode("Administrative"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5733,7 +5845,57 @@ func TestCheckResponseSnapshot_SearchNearby(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchNearby(context.Background(), &SearchNearbyInput{})
+	got, err := svc.SearchNearby(context.Background(), &SearchNearbyInput{
+		QueryPosition: []float64{
+			1.0,
+			1.0,
+		},
+		QueryRadius: ptr.Int64(1),
+		MaxResults:  ptr.Int32(1),
+		Filter: &types.SearchNearbyFilter{
+			BoundingBox: []float64{
+				1.0,
+				1.0,
+			},
+			IncludeCountries: []string{
+				"__Member__",
+				"__Member__",
+			},
+			IncludeCategories: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeCategories: []string{
+				"__Member__",
+				"__Member__",
+			},
+			IncludeBusinessChains: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeBusinessChains: []string{
+				"__Member__",
+				"__Member__",
+			},
+			IncludeFoodTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeFoodTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		AdditionalFeatures: []types.SearchNearbyAdditionalFeature{
+			types.SearchNearbyAdditionalFeature("TimeZone"),
+			types.SearchNearbyAdditionalFeature("TimeZone"),
+		},
+		Language:      ptr.String("__Language__"),
+		PoliticalView: ptr.String("__PoliticalView__"),
+		IntendedUse:   types.SearchNearbyIntendedUse("SingleUse"),
+		NextToken:     ptr.String("__NextToken__"),
+		Key:           ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6881,7 +7043,42 @@ func TestCheckResponseSnapshot_SearchText(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchText(context.Background(), &SearchTextInput{})
+	got, err := svc.SearchText(context.Background(), &SearchTextInput{
+		QueryText:  ptr.String("__QueryText__"),
+		QueryId:    ptr.String("__QueryId__"),
+		MaxResults: ptr.Int32(1),
+		BiasPosition: []float64{
+			1.0,
+			1.0,
+		},
+		Filter: &types.SearchTextFilter{
+			BoundingBox: []float64{
+				1.0,
+				1.0,
+			},
+			Circle: &types.FilterCircle{
+				Center: []float64{
+					1.0,
+					1.0,
+				},
+				Radius: ptr.Int64(1),
+			},
+			IncludeCountries: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		AdditionalFeatures: []types.SearchTextAdditionalFeature{
+			types.SearchTextAdditionalFeature("TimeZone"),
+			types.SearchTextAdditionalFeature("TimeZone"),
+		},
+		Language:      ptr.String("__Language__"),
+		PoliticalView: ptr.String("__PoliticalView__"),
+		IntendedUse:   types.SearchTextIntendedUse("SingleUse"),
+		NextToken:     ptr.String("__NextToken__"),
+		TravelMode:    types.SearchTextTravelMode("Car"),
+		Key:           ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7666,7 +7863,41 @@ func TestCheckResponseSnapshot_Suggest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Suggest(context.Background(), &SuggestInput{})
+	got, err := svc.Suggest(context.Background(), &SuggestInput{
+		QueryText:           ptr.String("__QueryText__"),
+		MaxResults:          ptr.Int32(1),
+		MaxQueryRefinements: ptr.Int32(1),
+		BiasPosition: []float64{
+			1.0,
+			1.0,
+		},
+		Filter: &types.SuggestFilter{
+			BoundingBox: []float64{
+				1.0,
+				1.0,
+			},
+			Circle: &types.FilterCircle{
+				Center: []float64{
+					1.0,
+					1.0,
+				},
+				Radius: ptr.Int64(1),
+			},
+			IncludeCountries: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		AdditionalFeatures: []types.SuggestAdditionalFeature{
+			types.SuggestAdditionalFeature("Core"),
+			types.SuggestAdditionalFeature("Core"),
+		},
+		Language:      ptr.String("__Language__"),
+		PoliticalView: ptr.String("__PoliticalView__"),
+		IntendedUse:   types.SuggestIntendedUse("SingleUse"),
+		TravelMode:    types.SuggestTravelMode("Car"),
+		Key:           ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7687,7 +7918,44 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Autocomplete(context.Background(), &AutocompleteInput{})
+	_, opErr := svc.Autocomplete(context.Background(), &AutocompleteInput{
+		QueryText:  ptr.String("__QueryText__"),
+		MaxResults: ptr.Int32(1),
+		BiasPosition: []float64{
+			1.0,
+			1.0,
+		},
+		Filter: &types.AutocompleteFilter{
+			BoundingBox: []float64{
+				1.0,
+				1.0,
+			},
+			Circle: &types.FilterCircle{
+				Center: []float64{
+					1.0,
+					1.0,
+				},
+				Radius: ptr.Int64(1),
+			},
+			IncludeCountries: []string{
+				"__Member__",
+				"__Member__",
+			},
+			IncludePlaceTypes: []types.AutocompleteFilterPlaceType{
+				types.AutocompleteFilterPlaceType("Locality"),
+				types.AutocompleteFilterPlaceType("Locality"),
+			},
+		},
+		PostalCodeMode: types.PostalCodeMode("MergeAllSpannedLocalities"),
+		AdditionalFeatures: []types.AutocompleteAdditionalFeature{
+			types.AutocompleteAdditionalFeature("Core"),
+			types.AutocompleteAdditionalFeature("Core"),
+		},
+		Language:      ptr.String("__Language__"),
+		PoliticalView: ptr.String("__PoliticalView__"),
+		IntendedUse:   types.AutocompleteIntendedUse("SingleUse"),
+		Key:           ptr.String("__Key__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7712,7 +7980,44 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Autocomplete(context.Background(), &AutocompleteInput{})
+	_, opErr := svc.Autocomplete(context.Background(), &AutocompleteInput{
+		QueryText:  ptr.String("__QueryText__"),
+		MaxResults: ptr.Int32(1),
+		BiasPosition: []float64{
+			1.0,
+			1.0,
+		},
+		Filter: &types.AutocompleteFilter{
+			BoundingBox: []float64{
+				1.0,
+				1.0,
+			},
+			Circle: &types.FilterCircle{
+				Center: []float64{
+					1.0,
+					1.0,
+				},
+				Radius: ptr.Int64(1),
+			},
+			IncludeCountries: []string{
+				"__Member__",
+				"__Member__",
+			},
+			IncludePlaceTypes: []types.AutocompleteFilterPlaceType{
+				types.AutocompleteFilterPlaceType("Locality"),
+				types.AutocompleteFilterPlaceType("Locality"),
+			},
+		},
+		PostalCodeMode: types.PostalCodeMode("MergeAllSpannedLocalities"),
+		AdditionalFeatures: []types.AutocompleteAdditionalFeature{
+			types.AutocompleteAdditionalFeature("Core"),
+			types.AutocompleteAdditionalFeature("Core"),
+		},
+		Language:      ptr.String("__Language__"),
+		PoliticalView: ptr.String("__PoliticalView__"),
+		IntendedUse:   types.AutocompleteIntendedUse("SingleUse"),
+		Key:           ptr.String("__Key__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7737,7 +8042,44 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Autocomplete(context.Background(), &AutocompleteInput{})
+	_, opErr := svc.Autocomplete(context.Background(), &AutocompleteInput{
+		QueryText:  ptr.String("__QueryText__"),
+		MaxResults: ptr.Int32(1),
+		BiasPosition: []float64{
+			1.0,
+			1.0,
+		},
+		Filter: &types.AutocompleteFilter{
+			BoundingBox: []float64{
+				1.0,
+				1.0,
+			},
+			Circle: &types.FilterCircle{
+				Center: []float64{
+					1.0,
+					1.0,
+				},
+				Radius: ptr.Int64(1),
+			},
+			IncludeCountries: []string{
+				"__Member__",
+				"__Member__",
+			},
+			IncludePlaceTypes: []types.AutocompleteFilterPlaceType{
+				types.AutocompleteFilterPlaceType("Locality"),
+				types.AutocompleteFilterPlaceType("Locality"),
+			},
+		},
+		PostalCodeMode: types.PostalCodeMode("MergeAllSpannedLocalities"),
+		AdditionalFeatures: []types.AutocompleteAdditionalFeature{
+			types.AutocompleteAdditionalFeature("Core"),
+			types.AutocompleteAdditionalFeature("Core"),
+		},
+		Language:      ptr.String("__Language__"),
+		PoliticalView: ptr.String("__PoliticalView__"),
+		IntendedUse:   types.AutocompleteIntendedUse("SingleUse"),
+		Key:           ptr.String("__Key__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7773,7 +8115,44 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Autocomplete(context.Background(), &AutocompleteInput{})
+	_, opErr := svc.Autocomplete(context.Background(), &AutocompleteInput{
+		QueryText:  ptr.String("__QueryText__"),
+		MaxResults: ptr.Int32(1),
+		BiasPosition: []float64{
+			1.0,
+			1.0,
+		},
+		Filter: &types.AutocompleteFilter{
+			BoundingBox: []float64{
+				1.0,
+				1.0,
+			},
+			Circle: &types.FilterCircle{
+				Center: []float64{
+					1.0,
+					1.0,
+				},
+				Radius: ptr.Int64(1),
+			},
+			IncludeCountries: []string{
+				"__Member__",
+				"__Member__",
+			},
+			IncludePlaceTypes: []types.AutocompleteFilterPlaceType{
+				types.AutocompleteFilterPlaceType("Locality"),
+				types.AutocompleteFilterPlaceType("Locality"),
+			},
+		},
+		PostalCodeMode: types.PostalCodeMode("MergeAllSpannedLocalities"),
+		AdditionalFeatures: []types.AutocompleteAdditionalFeature{
+			types.AutocompleteAdditionalFeature("Core"),
+			types.AutocompleteAdditionalFeature("Core"),
+		},
+		Language:      ptr.String("__Language__"),
+		PoliticalView: ptr.String("__PoliticalView__"),
+		IntendedUse:   types.AutocompleteIntendedUse("SingleUse"),
+		Key:           ptr.String("__Key__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

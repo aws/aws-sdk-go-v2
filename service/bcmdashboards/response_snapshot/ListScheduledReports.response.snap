@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMDashboardsService.ListScheduledReports
+
+{"nextToken":"__NextToken__","scheduledReports":[{"arn":"__Arn__","dashboardArn":"__DashboardArn__","healthStatus":{"lastRefreshedAt":946684800,"statusCode":"HEALTHY","statusReasons":["DATA_SOURCE_ACCESS_DENIED","DATA_SOURCE_ACCESS_DENIED"]},"name":"__Name__","scheduleExpression":"__ScheduleExpression__","scheduleExpressionTimeZone":"__ScheduleExpressionTimeZone__","state":"ENABLED","widgetIds":["__Member__","__Member__"]},{"arn":"__Arn__","dashboardArn":"__DashboardArn__","healthStatus":{"lastRefreshedAt":946684800,"statusCode":"HEALTHY","statusReasons":["DATA_SOURCE_ACCESS_DENIED","DATA_SOURCE_ACCESS_DENIED"]},"name":"__Name__","scheduleExpression":"__ScheduleExpression__","scheduleExpressionTimeZone":"__ScheduleExpressionTimeZone__","state":"ENABLED","widgetIds":["__Member__","__Member__"]}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"awayFrom":"__AwayFrom__","comment":"__Comment__","expiryTime":946684800,"resourceIdentifier":"__ResourceIdentifier__","startTime":946684800,"status":"ACTIVE","zonalShiftId":"__ZonalShiftId__"}

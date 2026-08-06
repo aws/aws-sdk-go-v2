@@ -3,3 +3,4 @@ POST /v1/package/version/publish?asset=__AssetName__&domain=__Domain__&domain-ow
 Content-Type: application/octet-stream
 X-Amz-Content-Sha256: __AssetSHA256__
 
+__AssetContent__

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<InvalidationList xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><IsTruncated>true</IsTruncated><Items><InvalidationSummary><CreateTime>2000-01-01T00:00:00Z</CreateTime><Id>__Id__</Id><Status>__Status__</Status></InvalidationSummary><InvalidationSummary><CreateTime>2000-01-01T00:00:00Z</CreateTime><Id>__Id__</Id><Status>__Status__</Status></InvalidationSummary></Items><Marker>__Marker__</Marker><MaxItems>1</MaxItems><NextMarker>__NextMarker__</NextMarker><Quantity>1</Quantity></InvalidationList>

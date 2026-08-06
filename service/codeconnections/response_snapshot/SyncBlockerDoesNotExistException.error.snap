@@ -1,0 +1,5 @@
+404
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CodeConnections_20231201.UpdateSyncBlocker
+
+{"__type":"SyncBlockerDoesNotExistException","Message":"__Message__"}

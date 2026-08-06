@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"job":{"completionTime":"2000-01-01T00:00:00Z","creationTime":"2000-01-01T00:00:00Z","entityType":"VOCABULARY","errorMessage":"__ErrorMessage__","errorType":"__ErrorType__","jobArn":"__JobArn__","jobStatus":"IN_PROGRESS","operationType":"UPSERT","outputConfiguration":{"s3Uri":"__S3Uri__"}}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"transaction":{"blockHash":"__BlockHash__","blockNumber":"__BlockNumber__","confirmationStatus":"FINAL","contractAddress":"__ContractAddress__","cumulativeGasUsed":"__CumulativeGasUsed__","effectiveGasPrice":"__EffectiveGasPrice__","executionStatus":"FAILED","from":"__From__","gasUsed":"__GasUsed__","network":"ETHEREUM_MAINNET","numberOfTransactions":1,"signatureR":"__SignatureR__","signatureS":"__SignatureS__","signatureV":1,"to":"__To__","transactionFee":"__TransactionFee__","transactionHash":"__TransactionHash__","transactionId":"__TransactionId__","transactionIndex":1,"transactionTimestamp":946684800}}

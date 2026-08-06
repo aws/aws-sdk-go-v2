@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.ListProtectConfigurationRuleSetNumberOverrides
+
+{"NextToken":"__NextToken__","ProtectConfigurationArn":"__ProtectConfigurationArn__","ProtectConfigurationId":"__ProtectConfigurationId__","RuleSetNumberOverrides":[{"Action":"ALLOW","CreatedTimestamp":946684800,"DestinationPhoneNumber":"__DestinationPhoneNumber__","ExpirationTimestamp":946684800,"IsoCountryCode":"__IsoCountryCode__"},{"Action":"ALLOW","CreatedTimestamp":946684800,"DestinationPhoneNumber":"__DestinationPhoneNumber__","ExpirationTimestamp":946684800,"IsoCountryCode":"__IsoCountryCode__"}]}

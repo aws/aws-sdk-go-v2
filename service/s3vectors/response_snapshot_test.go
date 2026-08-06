@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/document"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -119,7 +120,27 @@ func TestCheckResponseSnapshot_CreateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		IndexName:        ptr.String("__IndexName__"),
+		DataType:         types.DataType("float32"),
+		Dimension:        ptr.Int32(1),
+		DistanceMetric:   types.DistanceMetric("euclidean"),
+		MetadataConfiguration: &types.MetadataConfiguration{
+			NonFilterableMetadataKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseType:   types.SseType("AES256"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +161,16 @@ func TestCheckResponseSnapshot_CreateVectorBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVectorBucket(context.Background(), &CreateVectorBucketInput{})
+	got, err := svc.CreateVectorBucket(context.Background(), &CreateVectorBucketInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseType:   types.SseType("AES256"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +189,11 @@ func TestCheckResponseSnapshot_DeleteIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIndex(context.Background(), &DeleteIndexInput{})
+	got, err := svc.DeleteIndex(context.Background(), &DeleteIndexInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +212,10 @@ func TestCheckResponseSnapshot_DeleteVectorBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVectorBucket(context.Background(), &DeleteVectorBucketInput{})
+	got, err := svc.DeleteVectorBucket(context.Background(), &DeleteVectorBucketInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -197,7 +234,10 @@ func TestCheckResponseSnapshot_DeleteVectorBucketPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVectorBucketPolicy(context.Background(), &DeleteVectorBucketPolicyInput{})
+	got, err := svc.DeleteVectorBucketPolicy(context.Background(), &DeleteVectorBucketPolicyInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -216,7 +256,15 @@ func TestCheckResponseSnapshot_DeleteVectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVectors(context.Background(), &DeleteVectorsInput{})
+	got, err := svc.DeleteVectors(context.Background(), &DeleteVectorsInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		Keys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -255,7 +303,11 @@ func TestCheckResponseSnapshot_GetIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIndex(context.Background(), &GetIndexInput{})
+	got, err := svc.GetIndex(context.Background(), &GetIndexInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -284,7 +336,10 @@ func TestCheckResponseSnapshot_GetVectorBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVectorBucket(context.Background(), &GetVectorBucketInput{})
+	got, err := svc.GetVectorBucket(context.Background(), &GetVectorBucketInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -305,7 +360,10 @@ func TestCheckResponseSnapshot_GetVectorBucketPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVectorBucketPolicy(context.Background(), &GetVectorBucketPolicyInput{})
+	got, err := svc.GetVectorBucketPolicy(context.Background(), &GetVectorBucketPolicyInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -325,7 +383,7 @@ func TestCheckResponseSnapshot_GetVectors(t *testing.T) {
 						1.0,
 					},
 				},
-				Metadata: nil,
+				Metadata: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Key: ptr.String("__Key__"),
@@ -335,7 +393,7 @@ func TestCheckResponseSnapshot_GetVectors(t *testing.T) {
 						1.0,
 					},
 				},
-				Metadata: nil,
+				Metadata: document.NewLazyDocument("__Document__"),
 			},
 		},
 	}
@@ -347,7 +405,17 @@ func TestCheckResponseSnapshot_GetVectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVectors(context.Background(), &GetVectorsInput{})
+	got, err := svc.GetVectors(context.Background(), &GetVectorsInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		Keys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ReturnData:     true,
+		ReturnMetadata: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -382,7 +450,13 @@ func TestCheckResponseSnapshot_ListIndexes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIndexes(context.Background(), &ListIndexesInput{})
+	got, err := svc.ListIndexes(context.Background(), &ListIndexesInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		Prefix:           ptr.String("__Prefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -405,7 +479,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -438,7 +514,11 @@ func TestCheckResponseSnapshot_ListVectorBuckets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVectorBuckets(context.Background(), &ListVectorBucketsInput{})
+	got, err := svc.ListVectorBuckets(context.Background(), &ListVectorBucketsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Prefix:     ptr.String("__Prefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -459,7 +539,7 @@ func TestCheckResponseSnapshot_ListVectors(t *testing.T) {
 						1.0,
 					},
 				},
-				Metadata: nil,
+				Metadata: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Key: ptr.String("__Key__"),
@@ -469,7 +549,7 @@ func TestCheckResponseSnapshot_ListVectors(t *testing.T) {
 						1.0,
 					},
 				},
-				Metadata: nil,
+				Metadata: document.NewLazyDocument("__Document__"),
 			},
 		},
 	}
@@ -481,7 +561,17 @@ func TestCheckResponseSnapshot_ListVectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVectors(context.Background(), &ListVectorsInput{})
+	got, err := svc.ListVectors(context.Background(), &ListVectorsInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		SegmentCount:     ptr.Int32(1),
+		SegmentIndex:     1,
+		ReturnData:       true,
+		ReturnMetadata:   true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -500,7 +590,11 @@ func TestCheckResponseSnapshot_PutVectorBucketPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutVectorBucketPolicy(context.Background(), &PutVectorBucketPolicyInput{})
+	got, err := svc.PutVectorBucketPolicy(context.Background(), &PutVectorBucketPolicyInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		Policy:           ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -519,7 +613,33 @@ func TestCheckResponseSnapshot_PutVectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutVectors(context.Background(), &PutVectorsInput{})
+	got, err := svc.PutVectors(context.Background(), &PutVectorsInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		Vectors: []types.PutInputVector{
+			{
+				Key: ptr.String("__Key__"),
+				Data: &types.VectorDataMemberFloat32{
+					Value: []float32{
+						1.0,
+						1.0,
+					},
+				},
+				Metadata: document.NewLazyDocument("__Document__"),
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Data: &types.VectorDataMemberFloat32{
+					Value: []float32{
+						1.0,
+						1.0,
+					},
+				},
+				Metadata: document.NewLazyDocument("__Document__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -534,12 +654,12 @@ func TestCheckResponseSnapshot_QueryVectors(t *testing.T) {
 			{
 				Distance: ptr.Float32(1.0),
 				Key:      ptr.String("__Key__"),
-				Metadata: nil,
+				Metadata: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Distance: ptr.Float32(1.0),
 				Key:      ptr.String("__Key__"),
-				Metadata: nil,
+				Metadata: document.NewLazyDocument("__Document__"),
 			},
 		},
 		DistanceMetric: types.DistanceMetric("euclidean"),
@@ -553,7 +673,22 @@ func TestCheckResponseSnapshot_QueryVectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryVectors(context.Background(), &QueryVectorsInput{})
+	got, err := svc.QueryVectors(context.Background(), &QueryVectorsInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		TopK:             ptr.Int32(1),
+		QueryVector: &types.VectorDataMemberFloat32{
+			Value: []float32{
+				1.0,
+				1.0,
+			},
+		},
+		Filter:         document.NewLazyDocument("__Document__"),
+		ReturnMetadata: true,
+		ReturnDistance: true,
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -572,7 +707,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -591,7 +731,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -612,7 +758,27 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		IndexName:        ptr.String("__IndexName__"),
+		DataType:         types.DataType("float32"),
+		Dimension:        ptr.Int32(1),
+		DistanceMetric:   types.DistanceMetric("euclidean"),
+		MetadataConfiguration: &types.MetadataConfiguration{
+			NonFilterableMetadataKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseType:   types.SseType("AES256"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -637,7 +803,27 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		IndexName:        ptr.String("__IndexName__"),
+		DataType:         types.DataType("float32"),
+		Dimension:        ptr.Int32(1),
+		DistanceMetric:   types.DistanceMetric("euclidean"),
+		MetadataConfiguration: &types.MetadataConfiguration{
+			NonFilterableMetadataKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseType:   types.SseType("AES256"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -662,7 +848,27 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		IndexName:        ptr.String("__IndexName__"),
+		DataType:         types.DataType("float32"),
+		Dimension:        ptr.Int32(1),
+		DistanceMetric:   types.DistanceMetric("euclidean"),
+		MetadataConfiguration: &types.MetadataConfiguration{
+			NonFilterableMetadataKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseType:   types.SseType("AES256"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -687,7 +893,15 @@ func TestCheckResponseSnapshot_Error_KmsDisabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteVectors(context.Background(), &DeleteVectorsInput{})
+	_, opErr := svc.DeleteVectors(context.Background(), &DeleteVectorsInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		Keys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -712,7 +926,15 @@ func TestCheckResponseSnapshot_Error_KmsInvalidKeyUsageException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteVectors(context.Background(), &DeleteVectorsInput{})
+	_, opErr := svc.DeleteVectors(context.Background(), &DeleteVectorsInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		Keys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -737,7 +959,15 @@ func TestCheckResponseSnapshot_Error_KmsInvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteVectors(context.Background(), &DeleteVectorsInput{})
+	_, opErr := svc.DeleteVectors(context.Background(), &DeleteVectorsInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		Keys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -762,7 +992,15 @@ func TestCheckResponseSnapshot_Error_KmsNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteVectors(context.Background(), &DeleteVectorsInput{})
+	_, opErr := svc.DeleteVectors(context.Background(), &DeleteVectorsInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		Keys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -787,7 +1025,27 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		IndexName:        ptr.String("__IndexName__"),
+		DataType:         types.DataType("float32"),
+		Dimension:        ptr.Int32(1),
+		DistanceMetric:   types.DistanceMetric("euclidean"),
+		MetadataConfiguration: &types.MetadataConfiguration{
+			NonFilterableMetadataKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseType:   types.SseType("AES256"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -812,7 +1070,27 @@ func TestCheckResponseSnapshot_Error_RequestTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		IndexName:        ptr.String("__IndexName__"),
+		DataType:         types.DataType("float32"),
+		Dimension:        ptr.Int32(1),
+		DistanceMetric:   types.DistanceMetric("euclidean"),
+		MetadataConfiguration: &types.MetadataConfiguration{
+			NonFilterableMetadataKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseType:   types.SseType("AES256"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -837,7 +1115,27 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		IndexName:        ptr.String("__IndexName__"),
+		DataType:         types.DataType("float32"),
+		Dimension:        ptr.Int32(1),
+		DistanceMetric:   types.DistanceMetric("euclidean"),
+		MetadataConfiguration: &types.MetadataConfiguration{
+			NonFilterableMetadataKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseType:   types.SseType("AES256"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -862,7 +1160,27 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		IndexName:        ptr.String("__IndexName__"),
+		DataType:         types.DataType("float32"),
+		Dimension:        ptr.Int32(1),
+		DistanceMetric:   types.DistanceMetric("euclidean"),
+		MetadataConfiguration: &types.MetadataConfiguration{
+			NonFilterableMetadataKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseType:   types.SseType("AES256"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -887,7 +1205,27 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		IndexName:        ptr.String("__IndexName__"),
+		DataType:         types.DataType("float32"),
+		Dimension:        ptr.Int32(1),
+		DistanceMetric:   types.DistanceMetric("euclidean"),
+		MetadataConfiguration: &types.MetadataConfiguration{
+			NonFilterableMetadataKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseType:   types.SseType("AES256"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -922,7 +1260,27 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		IndexName:        ptr.String("__IndexName__"),
+		DataType:         types.DataType("float32"),
+		Dimension:        ptr.Int32(1),
+		DistanceMetric:   types.DistanceMetric("euclidean"),
+		MetadataConfiguration: &types.MetadataConfiguration{
+			NonFilterableMetadataKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseType:   types.SseType("AES256"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

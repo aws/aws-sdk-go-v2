@@ -130,7 +130,21 @@ func TestCheckResponseSnapshot_SimpleScalarProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SimpleScalarProperties(context.Background(), &SimpleScalarPropertiesInput{})
+	got, err := svc.SimpleScalarProperties(context.Background(), &SimpleScalarPropertiesInput{
+		Foo:               ptr.String("__Foo__"),
+		StringValue:       ptr.String("__StringValue__"),
+		TrueBooleanValue:  ptr.Bool(true),
+		FalseBooleanValue: ptr.Bool(true),
+		ByteValue:         ptr.Int8(1),
+		ShortValue:        ptr.Int16(1),
+		IntegerValue:      ptr.Int32(1),
+		LongValue:         ptr.Int64(1),
+		FloatValue:        ptr.Float32(1.0),
+		Nested: &types.NestedWithNamespace{
+			AttrField: ptr.String("__AttrField__"),
+		},
+		DoubleValue: ptr.Float64(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
