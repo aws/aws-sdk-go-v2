@@ -32,6 +32,106 @@
         "com.amazonaws.backup#ARN": {
             "type": "string"
         },
+        "com.amazonaws.backup#AccessPointArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(arn:aws[a-z-]*:backup:[a-z-\\d]+:\\d{12}:accesspoint/)[\\da-z]{1}[\\da-z-]{1,48}[\\da-z]{1}(?<!-s3alias)(?<!-ext-s3alias)$"
+            }
+        },
+        "com.amazonaws.backup#AccessPointMetadataMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.backup#AccessPointMetadataMapKeyString"
+            },
+            "value": {
+                "target": "com.amazonaws.backup#AccessPointMetadataMapValueString"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.backup#AccessPointMetadataMapKeyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.backup#AccessPointMetadataMapValueString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.backup#AccessPointName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[\\da-z]{1}[\\da-z-]{1,48}[\\da-z]{1}(?<!-s3alias)(?<!-ext-s3alias)$"
+            }
+        },
+        "com.amazonaws.backup#AccessPointPolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200000
+                }
+            }
+        },
+        "com.amazonaws.backup#AccessPointStatus": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DISASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATED"
+                    }
+                },
+                "DISASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATING"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.backup#AccountId": {
             "type": "string",
             "traits": {
@@ -213,6 +313,12 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#BackupAccessPoints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#ListAccessPointsMember"
             }
         },
         "com.amazonaws.backup#BackupJob": {
@@ -1104,6 +1210,9 @@
                 "smithy.api#documentation": "<p>Contains metadata about a <code>BackupSelection</code> object.</p>"
             }
         },
+        "com.amazonaws.backup#BackupVaultArn": {
+            "type": "string"
+        },
         "com.amazonaws.backup#BackupVaultEvent": {
             "type": "enum",
             "members": {
@@ -1250,6 +1359,42 @@
                     "traits": {
                         "smithy.api#enumValue": "EKS_BACKUP_OBJECT_FAILED"
                     }
+                },
+                "ACCESS_POINT_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_POINT_AVAILABLE"
+                    }
+                },
+                "ACCESS_POINT_CREATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_POINT_CREATION_FAILED"
+                    }
+                },
+                "ACCESS_POINT_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_POINT_DELETED"
+                    }
+                },
+                "ACCESS_POINT_DELETION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_POINT_DELETION_FAILED"
+                    }
+                },
+                "ACCESS_POINT_EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_POINT_EXPIRED"
+                    }
+                },
+                "ACCESS_POINT_DISASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_POINT_DISASSOCIATED"
+                    }
                 }
             }
         },
@@ -1314,7 +1459,7 @@
                     "target": "com.amazonaws.backup#Long2",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of recovery points that are stored in a backup vault.</p>"
+                        "smithy.api#documentation": "<p>The number of recovery points that are stored in a backup vault. Recovery point count\n         value displayed in the console can be an approximation.</p>"
                     }
                 },
                 "Locked": {
@@ -2040,6 +2185,112 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.backup#CopyJob"
+            }
+        },
+        "com.amazonaws.backup#CreateBackupAccessPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#CreateBackupAccessPointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#CreateBackupAccessPointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.backup#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a backup access point for an Amazon S3 recovery point. A backup access point provides\n         on-demand, read-only access to the backup data in a recovery point through an Amazon S3 access point,\n         without initiating a restore.</p>\n         <p>While a backup access point is active for a recovery point, Backup pauses lifecycle transitions\n         and blocks deletion of that recovery point.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/backup-access-point/create",
+                    "code": 201
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#CreateBackupAccessPointRequest": {
+            "type": "structure",
+            "members": {
+                "AccessPointMetadata": {
+                    "target": "com.amazonaws.backup#AccessPointMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata for the backup access point. For continuous (point-in-time) recovery points, you must include an\n         <code>AccessPointInTime</code> timestamp (in format <code>2021-11-27T03:30:27Z</code>). The access point\n         provides access to the content present in the backup at that specific time. You can specify any time\n         within the continuous backup's retention period, up to the latest restorable time. For snapshot recovery\n         points, do not include <code>AccessPointInTime</code>.</p>"
+                    }
+                },
+                "AccessPointPolicy": {
+                    "target": "com.amazonaws.backup#AccessPointPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional resource-based policy, in JSON format, to apply to the underlying Amazon S3 access\n         point. The policy controls how backup data can be accessed through the access point. If you do not specify\n         a policy, access is governed by the caller's IAM permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html\">Configuring IAM policies\n            for using access points</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.backup#AccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup access point. This name is shared with the Amazon S3 access point namespace.\n         It must be unique within your account and Region and cannot conflict with an existing Amazon S3 access\n         point. For more information about access point naming, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-restrictions-limitations-naming-rules.html\">Access points naming rules, restrictions, and limitations</a> in the <i>Amazon S3 User\n         Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecoveryPointArn": {
+                    "target": "com.amazonaws.backup#RecoveryPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recovery point for which to create the backup access point. The\n         recovery point must be an Amazon S3 recovery point in the <code>AVAILABLE</code>, <code>STOPPED</code>,\n         or <code>COMPLETED</code> state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.backup#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the backup access point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#CreateBackupAccessPointResponse": {
+            "type": "structure",
+            "members": {
+                "AccessPointArn": {
+                    "target": "com.amazonaws.backup#AccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the created backup access point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.backup#AccessPointStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the backup access point. A newly created backup access point begins in the\n         <code>CREATING</code> state and becomes usable when it reaches <code>AVAILABLE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#CreateBackupPlan": {
@@ -3196,6 +3447,9 @@
                     "target": "com.amazonaws.backup#CancelLegalHold"
                 },
                 {
+                    "target": "com.amazonaws.backup#CreateBackupAccessPoint"
+                },
+                {
                     "target": "com.amazonaws.backup#CreateBackupPlan"
                 },
                 {
@@ -3227,6 +3481,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#CreateTieringConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.backup#DeleteBackupAccessPoint"
                 },
                 {
                     "target": "com.amazonaws.backup#DeleteBackupPlan"
@@ -3263,6 +3520,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#DeleteTieringConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.backup#DescribeBackupAccessPoint"
                 },
                 {
                     "target": "com.amazonaws.backup#DescribeBackupJob"
@@ -3359,6 +3619,15 @@
                 },
                 {
                     "target": "com.amazonaws.backup#GetTieringConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.backup#ListBackupAccessPoints"
+                },
+                {
+                    "target": "com.amazonaws.backup#ListBackupAccessPointsByRecoveryPoint"
+                },
+                {
+                    "target": "com.amazonaws.backup#ListBackupAccessPointsByResource"
                 },
                 {
                     "target": "com.amazonaws.backup#ListBackupJobs"
@@ -4626,6 +4895,57 @@
                 "smithy.api#documentation": "<p>This is a resource filter containing FromDate: DateTime \n         and ToDate: DateTime. Both values are required. Future DateTime \n         values are not permitted.</p>\n         <p>The date and time are in Unix format and Coordinated \n         Universal Time (UTC), and it is accurate to milliseconds \n         ((milliseconds are optional). \n         For example, the value 1516925490.087 represents Friday, January \n         26, 2018 12:11:30.087 AM.</p>"
             }
         },
+        "com.amazonaws.backup#DeleteBackupAccessPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#DeleteBackupAccessPointInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a backup access point. This deletes the underlying Amazon S3 access point and, if no other\n         backup access points remain for the recovery point, resumes lifecycle transitions for that recovery point.</p>\n         <p>Always delete backup access points using this operation rather than deleting the underlying Amazon S3\n         access point directly.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/backup-access-point/delete/{AccessPointArn}",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#DeleteBackupAccessPointInput": {
+            "type": "structure",
+            "members": {
+                "AccessPointArn": {
+                    "target": "com.amazonaws.backup#AccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the backup access point to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.backup#DeleteBackupPlan": {
             "type": "operation",
             "input": {
@@ -5296,6 +5616,139 @@
             "traits": {
                 "smithy.api#documentation": "<p>A dependent Amazon Web Services service or resource returned an error to the Backup service, and the action cannot be completed.</p>",
                 "smithy.api#error": "server"
+            }
+        },
+        "com.amazonaws.backup#DescribeBackupAccessPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#DescribeBackupAccessPointInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#DescribeBackupAccessPointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns metadata about a backup access point, including its status and the details of the underlying\n         Amazon S3 access point.</p>\n         <p>After a backup access point reaches the <code>AVAILABLE</code> status, use this operation to retrieve the\n         Amazon S3 access point ARN and alias that you need to read the backup data.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/backup-access-point/{AccessPointArn}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.backup#DescribeBackupAccessPointInput": {
+            "type": "structure",
+            "members": {
+                "AccessPointArn": {
+                    "target": "com.amazonaws.backup#AccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the backup access point to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#DescribeBackupAccessPointResponse": {
+            "type": "structure",
+            "members": {
+                "AccessPointArn": {
+                    "target": "com.amazonaws.backup#AccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the backup access point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccessPointMetadata": {
+                    "target": "com.amazonaws.backup#AccessPointMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata for the backup access point. After the backup access point reaches the <code>AVAILABLE</code>\n         status, this map contains <code>S3AccessPointArn</code> and <code>S3AccessPointAlias</code>, which you use with\n         standard Amazon S3 read APIs to access the backup data. For continuous recovery points, this map also\n         contains <code>AccessPointInTime</code> (in format <code>2021-11-27T03:30:27Z</code>). The access point\n         provides access to the content present in the backup at that specific time.</p>"
+                    }
+                },
+                "BackupVaultArn": {
+                    "target": "com.amazonaws.backup#BackupVaultArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the backup vault that contains the recovery point.</p>"
+                    }
+                },
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup vault that contains the recovery point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the backup access point was created, in Unix format and Coordinated Universal Time\n         (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For example, the value\n         1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.backup#AccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup access point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecoveryPointArn": {
+                    "target": "com.amazonaws.backup#RecoveryPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recovery point that the backup access point provides access to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.backup#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that was backed up, such as an Amazon S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource associated with the recovery point. For example, <code>S3</code> for\n        Amazon Simple Storage Service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.backup#AccessPointStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the backup access point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that provides additional detail about the status of the backup access point, such as the reason a\n         creation or deletion attempt failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DescribeBackupJob": {
@@ -9026,6 +9479,360 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.backup#ListAccessPointsMember": {
+            "type": "structure",
+            "members": {
+                "AccessPointArn": {
+                    "target": "com.amazonaws.backup#AccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the backup access point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccessPointMetadata": {
+                    "target": "com.amazonaws.backup#AccessPointMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata for the backup access point. After the backup access point reaches the <code>AVAILABLE</code>\n         status, this map contains <code>S3AccessPointArn</code> and <code>S3AccessPointAlias</code>, which you use with\n         standard Amazon S3 read APIs to access the backup data. For continuous recovery points, this map also\n         contains <code>AccessPointInTime</code> (in format <code>2021-11-27T03:30:27Z</code>). The access point\n         provides access to the content present in the backup at that specific time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackupVaultArn": {
+                    "target": "com.amazonaws.backup#BackupVaultArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the backup vault that contains the recovery point.</p>"
+                    }
+                },
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup vault that contains the recovery point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the backup access point was created, in Unix format and Coordinated Universal Time\n         (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For example, the value\n         1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.backup#AccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup access point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecoveryPointArn": {
+                    "target": "com.amazonaws.backup#RecoveryPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recovery point that the backup access point provides access to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.backup#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that was backed up, such as an Amazon S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource associated with the recovery point. For example, <code>S3</code> for\n        Amazon Simple Storage Service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.backup#AccessPointStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the backup access point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that provides additional detail about the status of the backup access point, such as the reason a\n         creation or deletion attempt failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a backup access point.</p>"
+            }
+        },
+        "com.amazonaws.backup#ListBackupAccessPoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListBackupAccessPointsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListBackupAccessPointsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the backup access points in your account and Region.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/backup-access-point",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "BackupAccessPoints",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.backup#ListBackupAccessPointsByRecoveryPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListBackupAccessPointsByRecoveryPointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListBackupAccessPointsByRecoveryPointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the backup access points associated with the specified recovery point.</p>\n         <p>If you own the recovery point and have shared it with other accounts, the response includes backup access\n         points created by those accounts.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backup-access-point/recovery-point/{RecoveryPointArn}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "BackupAccessPoints",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.backup#ListBackupAccessPointsByRecoveryPointRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#ListBackupAccessPointsByRecoveryPointRequestMaxResultsInteger",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of items to be returned.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is made to return\n         <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list\n         starting at the location pointed to by the next token.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "RecoveryPointArn": {
+                    "target": "com.amazonaws.backup#RecoveryPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recovery point whose backup access points you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#ListBackupAccessPointsByRecoveryPointRequestMaxResultsInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.backup#ListBackupAccessPointsByRecoveryPointResponse": {
+            "type": "structure",
+            "members": {
+                "BackupAccessPoints": {
+                    "target": "com.amazonaws.backup#BackupAccessPoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of backup access points, each containing metadata such as its name, ARN, status, and associated\n         recovery point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is made to return\n         <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list\n         starting at the location pointed to by the next token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#ListBackupAccessPointsByResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListBackupAccessPointsByResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListBackupAccessPointsByResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the backup access points associated with the specified resource, such as an Amazon S3\n         bucket.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backup-access-point/resource/{ResourceArn}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "BackupAccessPoints",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.backup#ListBackupAccessPointsByResourceRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#ListBackupAccessPointsByResourceRequestMaxResultsInteger",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of items to be returned.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is made to return\n         <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list\n         starting at the location pointed to by the next token.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.backup#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource whose backup access points you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#ListBackupAccessPointsByResourceRequestMaxResultsInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.backup#ListBackupAccessPointsByResourceResponse": {
+            "type": "structure",
+            "members": {
+                "BackupAccessPoints": {
+                    "target": "com.amazonaws.backup#BackupAccessPoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of backup access points, each containing metadata such as its name, ARN, status, and associated\n         recovery point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is made to return\n         <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list\n         starting at the location pointed to by the next token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#ListBackupAccessPointsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#ListBackupAccessPointsRequestMaxResultsInteger",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of items to be returned.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is made to return\n         <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list\n         starting at the location pointed to by the next token.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#ListBackupAccessPointsRequestMaxResultsInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.backup#ListBackupAccessPointsResponse": {
+            "type": "structure",
+            "members": {
+                "BackupAccessPoints": {
+                    "target": "com.amazonaws.backup#BackupAccessPoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of backup access points, each containing metadata such as its name, ARN, status, and associated\n         recovery point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is made to return\n         <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list\n         starting at the location pointed to by the next token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.backup#ListBackupJobSummaries": {
             "type": "operation",
             "input": {
@@ -10278,7 +11085,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of resources successfully backed up by Backup, including\n         the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a\n         resource type.</p>",
+                "smithy.api#documentation": "<p>Returns an array of resources with recovery points created by Backup\n         (regardless of the recovery point's <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DescribeRecoveryPoint.html#Backup-DescribeRecoveryPoint-response-Status\">status</a>),\n         including the time the resource was saved, an Amazon Resource Name (ARN) of the resource,\n         and a resource type.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/resources",
@@ -10715,7 +11522,7 @@
                     "target": "com.amazonaws.backup#Boolean2",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>This attribute filters recovery points based on ownership.</p>\n         <p>If this is \n         set to <code>TRUE</code>, the response will contain recovery points associated \n         with the selected resources that are managed by Backup.</p>\n         <p>If this is set to <code>FALSE</code>, the response will contain all \n         recovery points associated with the selected resource.</p>\n         <p>Type: Boolean</p>",
+                        "smithy.api#documentation": "<p>This attribute filters recovery points based on ownership.</p>\n         <p>If this is \n         set to <code>TRUE</code>, the response will contain recovery points associated \n         with the selected resources that are managed by Backup.</p>\n         <p>If this is set to <code>FALSE</code>, the response will contain all \n         recovery points associated with the selected resource, except for EBS\n         snapshots copied within the same Region and account.</p>\n         <p>Type: Boolean</p>",
                         "smithy.api#httpQuery": "managedByAWSBackupOnly"
                     }
                 }
@@ -12437,6 +13244,12 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.backup#RecoveryPointArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(arn:aws[a-z-]*:[a-z-\\d]+:[a-z-\\d]+:).+$"
+            }
+        },
         "com.amazonaws.backup#RecoveryPointByBackupVault": {
             "type": "structure",
             "members": {
@@ -13143,6 +13956,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.backup#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(arn:aws[a-z-]*:[a-z-\\d]+:).+$"
             }
         },
         "com.amazonaws.backup#ResourceArns": {
@@ -15565,6 +16384,40 @@
             },
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.backup#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.backup#TagMapKeyString"
+            },
+            "value": {
+                "target": "com.amazonaws.backup#TagMapValueString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.backup#TagMapKeyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.backup#TagMapValueString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.backup#TagResource": {

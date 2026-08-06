@@ -24843,7 +24843,9 @@
                 "Ipv4CidrBlock": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 CIDR block for the secondary network. The CIDR block size must be between /12 and /28.</p>"
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The IPv4 CIDR block for the secondary network. The CIDR block size must be between /12 and /28.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "NetworkType": {
@@ -70328,6 +70330,12 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>"
+                    }
+                },
+                "IncludeLocalZones": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify <code>true</code> so that the response returns scores that include Local Zones. Otherwise, the response ignores Local Zones.</p>\n         <p>When you request regional scores, Local Zone capacity counts toward its parent Region.</p>"
                     }
                 }
             },

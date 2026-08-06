@@ -667,6 +667,41 @@
                 "smithy.api#pattern": "^([1-9][0-9]{0,4})$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#AgentRuntimeVersionSummary": {
+            "type": "structure",
+            "members": {
+                "agentRuntimeArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AgentRuntimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent runtime.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentRuntimeVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AgentRuntimeVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the agent runtime.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AgentRuntimeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the agent runtime version.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about an agent runtime version associated with a capacity provider. This is returned by <code>ListAgentRuntimeVersionsByCapacityProvider</code>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#AgentRuntimeVersionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#AgentRuntimeVersionSummary"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#AgentRuntimes": {
             "type": "list",
             "member": {
@@ -891,6 +926,9 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#BrowserResource"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderResource"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcorecontrol#CodeInterpreterResource"
                 },
                 {
@@ -901,6 +939,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#Evaluator"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitResource"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayResource"
@@ -2239,6 +2280,136 @@
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#BatchPutGatewayRateLimits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#BatchPutGatewayRateLimitsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#BatchPutGatewayRateLimitsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Atomically creates or updates multiple rate limits for a gateway. The operation updates existing limits with matching keys and creates new limits for new keys. If the operation fails, the service applies no changes. Retry the request after resolving the issue.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/gateways/{gatewayIdentifier}/rate-limits/batch"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#BatchPutGatewayRateLimitsRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayIdentifier": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "rateLimits": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#BatchPutLimitEntries",
+                    "traits": {
+                        "smithy.api#documentation": "Complete set of rate limits for this gateway. Replaces all existing limits atomically.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#BatchPutGatewayRateLimitsResponse": {
+            "type": "structure",
+            "members": {
+                "rateLimits": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimits",
+                    "traits": {
+                        "smithy.api#documentation": "The resulting set of rate limits after the batch operation.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#BatchPutLimitEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#BatchPutLimitEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#BatchPutLimitEntry": {
+            "type": "structure",
+            "members": {
+                "rateLimitId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
+                    "traits": {
+                        "smithy.api#documentation": "Optional — if provided, used for upsert matching against existing limits."
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                    }
+                },
+                "dimensionKeys": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKeys",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "entries": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A limit definition within a BatchPut request (rateLimitId used for upsert matching)"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#BedrockAgentcoreResourceArn": {
             "type": "string",
             "traits": {
@@ -2699,6 +2870,324 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains summary information about a browser. A browser enables Amazon Bedrock AgentCore Agent to interact with web content.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityProviderArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::BedrockAgentCore::CapacityProvider"
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:capacity-provider/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityProviderConfiguration": {
+            "type": "structure",
+            "members": {
+                "capacityProviderArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the capacity provider to use for the AgentCore Runtime.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for customer-managed compute capacity for the AgentCore Runtime. A capacity provider runs the AgentCore Runtime on the Instances compute type, using Amazon Web Services managed compute in your account.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityProviderId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 59
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityProviderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderSummary"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityProviderName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 48
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityProviderResource": {
+            "type": "resource",
+            "identifiers": {
+                "capacityProviderId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CreateCapacityProvider"
+            },
+            "read": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetCapacityProvider"
+            },
+            "update": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#UpdateCapacityProvider"
+            },
+            "delete": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DeleteCapacityProvider"
+            },
+            "list": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListCapacityProviders"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ListAgentRuntimeVersionsByCapacityProvider"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityProviderStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a capacity provider. Possible values:</p> <ul> <li> <p> <code>CREATING</code> – The service is creating the capacity provider and validating its configuration.</p> </li> <li> <p> <code>CREATE_FAILED</code> – The service could not create the capacity provider. For details, see <code>statusCode</code> and <code>statusReason</code>.</p> </li> <li> <p> <code>UPDATING</code> – The service is updating the capacity provider.</p> </li> <li> <p> <code>UPDATE_FAILED</code> – The service could not update the capacity provider. For details, see <code>statusCode</code> and <code>statusReason</code>.</p> </li> <li> <p> <code>READY</code> – The capacity provider is available for use.</p> </li> <li> <p> <code>DELETING</code> – The service is deleting the capacity provider.</p> </li> <li> <p> <code>DELETE_FAILED</code> – The service could not delete the capacity provider. You can retry the deletion.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityProviderStatusCode": {
+            "type": "enum",
+            "members": {
+                "VALIDATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION_ERROR"
+                    }
+                },
+                "QUOTA_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUOTA_EXCEEDED"
+                    }
+                },
+                "THROTTLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THROTTLED"
+                    }
+                },
+                "INTERNAL_SERVER_EXCEPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVER_EXCEPTION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reason code for a capacity provider that is not in the <code>READY</code> state. Possible values:</p> <ul> <li> <p> <code>VALIDATION_ERROR</code> – A configuration error prevented the operation. For example, missing permissions, invalid parameters, or a naming conflict.</p> </li> <li> <p> <code>QUOTA_EXCEEDED</code> – An Amazon EC2 resource quota was exceeded. Request a limit increase or remove unused resources.</p> </li> <li> <p> <code>THROTTLED</code> – The request was throttled. Retry after a short delay.</p> </li> <li> <p> <code>INTERNAL_SERVER_EXCEPTION</code> – An internal error occurred.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityProviderSummary": {
+            "type": "structure",
+            "members": {
+                "capacityProviderId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capacityProviderArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the capacity provider. For possible values, see <code>CapacityProviderStatus</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the capacity provider was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a capacity provider, as returned by <code>ListCapacityProviders</code>. Each summary includes the capacity provider identifier, Amazon Resource Name (ARN), name, status, and last-updated timestamp.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityProviderVolumeConfiguration": {
+            "type": "structure",
+            "members": {
+                "volumeName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderVolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical name of the capacity provider volume to mount. This name must match a volume that is defined in the capacity provider's list of volumes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mountPath": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MountPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mount path for the capacity provider volume inside the AgentCore Runtime. The path must be under <code>/mnt</code> with exactly one subdirectory level (for example, <code>/mnt/data</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a capacity provider volume mounted into the AgentCore Runtime. This references a persistent volume by its logical name, as defined in the capacity provider's list of volumes.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityProviderVolumeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The logical name of a capacity provider volume. This name must match a volume that is defined in the capacity provider's list of volumes.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 48
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,47}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityReservationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^cr-[0-9a-z]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityReservationPreference": {
+            "type": "enum",
+            "members": {
+                "CAPACITY_RESERVATIONS_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-reservations-only"
+                    }
+                },
+                "OPEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "open"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityReservationResourceGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:resource-groups:[a-z0-9-]+:[0-9]{12}:group/[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityReservationSpecification": {
+            "type": "structure",
+            "members": {
+                "capacityReservationPreference": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityReservationPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Capacity Reservation preference for the instances.</p>"
+                    }
+                },
+                "capacityReservationTarget": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityReservationTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target Capacity Reservation or Capacity Reservation group for the instances.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Capacity Reservation targeting option for the instances.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CapacityReservationTarget": {
+            "type": "structure",
+            "members": {
+                "capacityReservationId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityReservationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Capacity Reservation in which to run the instances.</p>"
+                    }
+                },
+                "capacityReservationResourceGroupArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityReservationResourceGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Capacity Reservation resource group in which to run the instances.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the target Capacity Reservation or Capacity Reservation group for the instances.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CategoricalScaleDefinition": {
@@ -3369,6 +3858,20 @@
                 "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_:/.\\-]{0,2047}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ComputeConfiguration": {
+            "type": "union",
+            "members": {
+                "ec2Configuration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Ec2Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 compute configuration for the capacity provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The compute configuration for a capacity provider. This structure defines the type and settings of the compute resources used to launch instances.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ConcurrentModificationException": {
             "type": "structure",
             "members": {
@@ -3789,7 +4292,7 @@
         "com.amazonaws.bedrockagentcorecontrol#ConnectorParameterValue": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The value of a connector parameter.</p>",
+                "smithy.api#documentation": "<p>The value of a connector parameter. Length: 1–1,024 characters.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1024
@@ -4162,8 +4665,7 @@
                 "networkConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#NetworkConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network configuration for the AgentCore Runtime.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The network configuration for the AgentCore Runtime.</p>"
                     }
                 },
                 "clientToken": {
@@ -4210,6 +4712,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#FilesystemConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>The filesystem configurations to mount into the AgentCore Runtime. Use filesystem configurations to provide persistent storage to your AgentCore Runtime sessions.</p>"
+                    }
+                },
+                "capacityProviderConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity provider configuration for the AgentCore Runtime. Use a capacity provider to run the AgentCore Runtime on the Instances compute type, which provisions Amazon Web Services managed compute in your account.</p>"
                     }
                 },
                 "tags": {
@@ -4663,6 +5171,134 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#BrowserStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the browser.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateCapacityProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CreateCapacityProviderInput"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CreateCapacityProviderOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RetryableConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a capacity provider. A capacity provider defines the Amazon EC2 infrastructure for AgentCore Runtime, including the operating system, allowed instance types, networking, and storage. It also specifies the IAM permissions that AgentCore uses to manage those instances.</p> <p>The capacity provider name must be unique within your account. After you create the capacity provider, it enters a <code>CREATING</code> state and transitions to <code>READY</code> when it is available for use.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/capacity-providers",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateCapacityProviderInput": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity provider. The name must be unique within your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the capacity provider. If you don't specify a description, the service creates the capacity provider without one.</p>"
+                    }
+                },
+                "permissionsConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PermissionsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions configuration for the capacity provider. This specifies the IAM role that AgentCore uses to manage the Amazon EC2 instances on your behalf.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of tag keys and values to associate with the capacity provider. If you don't specify tags, the capacity provider is created with no tags.</p>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration for the capacity provider. This defines the Amazon EC2 compute resources used to launch instances: the operating system, allowed instance types, networking, and storage.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateCapacityProviderOutput": {
+            "type": "structure",
+            "members": {
+                "capacityProviderId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the created capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capacityProviderArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the capacity provider. For possible values, see <code>CapacityProviderStatus</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5345,6 +5981,156 @@
                     "uri": "/gateways/"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateGatewayRateLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CreateGatewayRateLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CreateGatewayRateLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a rate limit for a gateway. Rate limits define throttling rules for each dimension that control request rates, token consumption rates, and concurrent connections through the gateway.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/gateways/{gatewayIdentifier}/rate-limits"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateGatewayRateLimitRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayIdentifier": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway to create the rate limit for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "rateLimitId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
+                    "traits": {
+                        "smithy.api#documentation": "Optional customer-defined limit ID. If not provided, system generates one."
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                    }
+                },
+                "dimensionKeys": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKeys",
+                    "traits": {
+                        "smithy.api#documentation": "Ordered list of dimension names defining the scope of this limit.\nUnique per gateway — no two limits can share the same dimensionKeys.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entries": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
+                    "traits": {
+                        "smithy.api#documentation": "Rule entries mapping dimension values to rate configurations.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateGatewayRateLimitResponse": {
+            "type": "structure",
+            "members": {
+                "rateLimitId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "gatewayIdentifier": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                    }
+                },
+                "dimensionKeys": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKeys",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "entries": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitStatus",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the rate limit was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the rate limit was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Shared fields for GatewayRateLimit responses",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CreateGatewayRequest": {
@@ -9025,7 +9811,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon Bedrock AgentCore Runtime.</p>",
+                "smithy.api#documentation": "<p>Deletes an Amazon Bedrock AgentCore Runtime, or a single version of an AgentCore Runtime when you provide the version qualifier.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "DELETE",
@@ -9060,7 +9846,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an AAgentCore Runtime endpoint.</p>",
+                "smithy.api#documentation": "<p>Deletes an AgentCore Runtime endpoint.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "DELETE",
@@ -9139,6 +9925,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "agentRuntimeVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AgentRuntimeVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the AgentCore Runtime to delete. When you provide this value, only that version is deleted. When you omit it, the entire AgentCore Runtime and all of its versions are deleted.</p>",
+                        "smithy.api#httpQuery": "version"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
                     "traits": {
@@ -9166,6 +9959,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#AgentRuntimeId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the AgentCore Runtime.</p>"
+                    }
+                },
+                "agentRuntimeVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AgentRuntimeVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the AgentCore Runtime that was deleted. This value is present only when you delete a single version.</p>"
                     }
                 }
             },
@@ -9424,6 +10223,93 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the browser was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteCapacityProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DeleteCapacityProviderInput"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DeleteCapacityProviderOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RetryableConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a capacity provider. Before you delete a capacity provider, disassociate all agent runtimes and runtime versions that reference it. If any references remain, the operation fails.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/capacity-providers/{capacityProviderId}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteCapacityProviderInput": {
+            "type": "structure",
+            "members": {
+                "capacityProviderId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the capacity provider to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteCapacityProviderOutput": {
+            "type": "structure",
+            "members": {
+                "capacityProviderId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the deleted capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the capacity provider. For possible values, see <code>CapacityProviderStatus</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9939,6 +10825,88 @@
                     "uri": "/gateways/{gatewayIdentifier}/"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteGatewayRateLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DeleteGatewayRateLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DeleteGatewayRateLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a gateway rate limit.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/gateways/{gatewayIdentifier}/rate-limits/{rateLimitId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteGatewayRateLimitRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayIdentifier": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "rateLimitId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the rate limit to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteGatewayRateLimitResponse": {
+            "type": "structure",
+            "members": {
+                "rateLimitId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitStatus",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#DeleteGatewayRequest": {
@@ -11423,6 +12391,66 @@
                 "smithy.api#documentation": "<p>Contains descriptor-type-specific configurations for a registry record. Only the descriptor matching the record's <code>descriptorType</code> should be populated.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#DeviceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9/._-]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DimensionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A dimension key specifying the scope dimension for rate limiting.\nAllowed values: \"targetName\", \"toolName\", \"qualifiedModelId\",\nor context-path expressions: \"$.context.iam.principal\", \"$.context.iam.sourceIdentity\",\n\"$.context.jwt.<claim>\" where <claim> is a JWT claim name (e.g., \"$.context.jwt.sub\").\nValidated server-side to enforce allowed prefixes and patterns.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "smithy.api#pattern": "^(targetName|toolName|qualifiedModelId|\\$\\.context\\.iam\\.principal|\\$\\.context\\.iam\\.sourceIdentity|\\$\\.context\\.jwt\\.[a-zA-Z_][a-zA-Z0-9_\\-\\.]{0,61}[a-zA-Z0-9_])$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DimensionKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKey"
+            },
+            "traits": {
+                "smithy.api#documentation": "Ordered list of dimension key names defining the scope of a limit",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DimensionValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A dimension value in a rule entry (exact value or \"*\" wildcard)",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#Dimensions": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKey"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DimensionValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "Map of dimension name to dimension value for a rule entry",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#DiscoveryUrl": {
             "type": "string",
             "traits": {
@@ -11464,6 +12492,191 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Publish synchronization state of the DRAFT working copy. </p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EC2InstanceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EbsCardIndex": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EbsSnapshotId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 13,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^snap-[a-f0-9]{8,17}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EbsVolumeConfiguration": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical name of the volume. Use this name to reference the volume when you mount it into an agent runtime.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sizeGiB": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VolumeSizeGiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the volume, in GiB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "volumeType": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EbsVolumeType",
+                    "traits": {
+                        "smithy.api#default": "gp3",
+                        "smithy.api#documentation": "<p>The Amazon EBS volume type. If you do not specify a type, the default is <code>gp3</code>.</p>"
+                    }
+                },
+                "iops": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VolumeIops",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of IOPS to provision. Valid only for <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes.</p>"
+                    }
+                },
+                "throughput": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VolumeThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The throughput, in MiB/s. Valid only for <code>gp3</code> volumes.</p>"
+                    }
+                },
+                "encrypted": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to encrypt the volume. If <code>true</code>, the service encrypts the volume with the KMS key that you specify in <code>kmsKeyId</code>, or the default KMS key for Amazon EBS if you do not specify one. The default is <code>true</code>.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the KMS key to use for encryption.</p>"
+                    }
+                },
+                "snapshotId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EbsSnapshotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional Amazon EBS snapshot ID. If provided, the volume is initialized from this snapshot the first time it is created. On subsequent restarts, the existing volume is used and the snapshot is ignored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an Amazon EBS-backed persistent volume. The service creates persistent volumes when a session first launches, and the volumes survive instance termination. The volumes persist until you delete the session.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EbsVolumeInitializationRate": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 100,
+                    "max": 300
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EbsVolumeType": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard"
+                    }
+                },
+                "IO1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "io1"
+                    }
+                },
+                "IO2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "io2"
+                    }
+                },
+                "GP2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gp2"
+                    }
+                },
+                "SC1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sc1"
+                    }
+                },
+                "ST1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "st1"
+                    }
+                },
+                "GP3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gp3"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of Amazon EBS volume.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#Ec2Configuration": {
+            "type": "structure",
+            "members": {
+                "launchTemplateSource": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LaunchTemplateSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the launch template configuration that defines how instances are launched.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpcConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration for launching instances, including subnets and security groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "volumes": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VolumeConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The named persistent Amazon EBS volumes for the capacity provider. A capacity provider can define up to five volumes.</p>"
+                    }
+                },
+                "lifecycleConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InstanceLifecycleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle configuration for instances in the capacity provider.</p>"
+                    }
+                },
+                "rootVolume": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RootVolumeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the instance root volume. Specify the amount of free space to guarantee and, optionally, the Amazon EBS performance and encryption settings. The device name and delete-on-termination behavior are not configurable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for Amazon EC2-based compute, including the launch template source, networking, storage volumes, and instance lifecycle settings.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#EfsAccessPointArn": {
@@ -11647,6 +12860,106 @@
                     "max": 50
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EphemeralBlockDeviceMapping": {
+            "type": "structure",
+            "members": {
+                "deviceName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DeviceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device name, for example <code>/dev/sdh</code> or <code>xvdh</code>.</p>"
+                    }
+                },
+                "virtualName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VirtualDeviceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The virtual device name (<code>ephemeralN</code>). Instance store volumes are numbered starting from 0. The number of available instance store volumes depends on the instance type. After you connect to the instance, you must mount the volume.</p>"
+                    }
+                },
+                "ebs": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EphemeralEBSVolumeConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A block device mapping for an instance store (ephemeral) volume.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EphemeralBlockDeviceMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#EphemeralBlockDeviceMapping"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EphemeralEBSVolumeConfiguration": {
+            "type": "structure",
+            "members": {
+                "volumeType": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EbsVolumeType",
+                    "traits": {
+                        "smithy.api#default": "gp3",
+                        "smithy.api#documentation": "<p>The Amazon EBS volume type. If you do not specify a type, the default is <code>gp3</code>.</p>"
+                    }
+                },
+                "iops": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VolumeIops",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of IOPS to provision. For <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes, this is the number of IOPS provisioned for the volume. For <code>gp2</code> volumes, this sets the baseline IOPS performance. It also controls the rate at which the volume accumulates I/O credits for bursting. Supported values: <code>gp3</code>, 3,000–80,000; <code>io1</code>, 100–64,000; <code>io2</code>, 100–256,000.</p>"
+                    }
+                },
+                "throughput": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VolumeThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The throughput to provision, in MiB/s. Valid only for <code>gp3</code> volumes. Valid range: 125–2,000 MiB/s.</p>",
+                        "smithy.api#range": {
+                            "min": 125,
+                            "max": 2000
+                        }
+                    }
+                },
+                "encrypted": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to encrypt the volume. Encrypted volumes can be attached only to instances that support Amazon EBS encryption. If you create a volume from a snapshot, you cannot specify an encryption value.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key to use for Amazon EBS encryption.</p>"
+                    }
+                },
+                "snapshotId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EbsSnapshotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the snapshot.</p>"
+                    }
+                },
+                "volumeSize": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VolumeSizeGiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the volume, in GiB. You must specify either a snapshot ID or a volume size. Supported sizes: <code>gp2</code>, 1–16,384; <code>gp3</code>, 1–65,536; <code>io1</code>, 4–16,384; <code>io2</code>, 4–65,536.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 65536
+                        }
+                    }
+                },
+                "volumeInitializationRate": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EbsVolumeInitializationRate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate at which the volume is initialized after creation, in MiB/s. Supported only for volumes created from snapshots. Valid range: 100–300 MiB/s.</p>"
+                    }
+                },
+                "ebsCardIndex": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EbsCardIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the Amazon EBS card. Applies to instances with multiple Amazon EBS cards.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The shared Amazon EBS performance and encryption properties for a volume. These properties are common across the different volume configurations for a capacity provider.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#EpisodicConsolidationOverride": {
@@ -12374,6 +13687,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for an Amazon EFS access point to mount into the AgentCore Runtime.</p>"
                     }
+                },
+                "capacityProviderVolume": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderVolumeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for a capacity provider volume to mount into the AgentCore Runtime. This mounts a persistent volume that is defined on the capacity provider, referenced by its logical name.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12850,6 +14169,166 @@
                         "smithy.api#enumValue": "MCP"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Optional human-readable description for a gateway limit.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDetail": {
+            "type": "structure",
+            "members": {
+                "rateLimitId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "gatewayIdentifier": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                    }
+                },
+                "dimensionKeys": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKeys",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "entries": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitStatus",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the rate limit was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the rate limit was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Shared fields for GatewayRateLimit responses"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Limit identifier. Optional on Create (system-generates if not provided by customer).\nAlways present in responses.",
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_\\.]{0,62}[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^\\S*$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#BatchPutGatewayRateLimits"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CreateGatewayRateLimit"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DeleteGatewayRateLimit"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GetGatewayRateLimit"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ListGatewayRateLimits"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRateLimit"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Status of a gateway limit"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimits": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDetail"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#GatewayResource": {
@@ -13632,6 +15111,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The filesystem configurations mounted into the AgentCore Runtime.</p>"
                     }
+                },
+                "capacityProviderConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity provider configuration for the AgentCore Runtime.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14021,6 +15506,139 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the browser was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetCapacityProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetCapacityProviderInput"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetCapacityProviderOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a capacity provider, including its status, permissions configuration, and compute configuration.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/capacity-providers/{capacityProviderId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetCapacityProviderInput": {
+            "type": "structure",
+            "members": {
+                "capacityProviderId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the capacity provider.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetCapacityProviderOutput": {
+            "type": "structure",
+            "members": {
+                "capacityProviderId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capacityProviderArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the capacity provider. For possible values, see <code>CapacityProviderStatus</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the capacity provider, if one was provided.</p>"
+                    }
+                },
+                "statusCode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A reason code for a capacity provider that is not in the <code>READY</code> state. Use this code for programmatic error handling.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable message that describes why the capacity provider is not in the <code>READY</code> state. Because these messages can change, use <code>statusCode</code> for programmatic error handling.</p>"
+                    }
+                },
+                "permissionsConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PermissionsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions configuration for the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration for the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the capacity provider was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the capacity provider was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -14776,6 +16394,125 @@
                     "uri": "/gateways/{gatewayIdentifier}/"
                 },
                 "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetGatewayRateLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetGatewayRateLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetGatewayRateLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a gateway rate limit.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/gateways/{gatewayIdentifier}/rate-limits/{rateLimitId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetGatewayRateLimitRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayIdentifier": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "rateLimitId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the rate limit to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetGatewayRateLimitResponse": {
+            "type": "structure",
+            "members": {
+                "rateLimitId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "gatewayIdentifier": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                    }
+                },
+                "dimensionKeys": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKeys",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "entries": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitStatus",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the rate limit was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the rate limit was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Shared fields for GatewayRateLimit responses",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#GetGatewayRequest": {
@@ -20211,6 +21948,69 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#InstanceLifecycleConfiguration": {
+            "type": "structure",
+            "members": {
+                "idleInstanceTimeout": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds an instance can remain idle before it is stopped. An instance is considered idle when all of its agents are idle. The default is 900 seconds (15 minutes).</p>",
+                        "smithy.api#range": {
+                            "min": 60,
+                            "max": 1209600
+                        }
+                    }
+                },
+                "maxLifetime": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum lifetime of an instance, in seconds. When an instance reaches this limit, the service terminates it regardless of activity. The default is 28800 seconds (8 hours). The maximum is 1209600 seconds (14 days).</p>",
+                        "smithy.api#range": {
+                            "min": 60,
+                            "max": 1209600
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that manages the lifecycle of instances in a capacity provider, including idle timeout and maximum lifetime.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InstanceProfileArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:instance-profile/([!-~]{1,510}/)?([\\w+=,.@-]{1,128})$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InstanceRequirements": {
+            "type": "structure",
+            "members": {
+                "allowedInstanceTypes": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InstanceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of allowed instance types. You can specify up to 30 instance types.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 30
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requirements for Amazon EC2 instance types in a capacity provider.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InstanceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#EC2InstanceType"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#InterceptorConfiguration": {
             "type": "union",
             "members": {
@@ -20433,6 +22233,16 @@
                 "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#KmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#KmsKeySourceType": {
             "type": "structure",
             "members": {
@@ -20518,6 +22328,121 @@
                 "smithy.api#documentation": "<p>The Lambda configuration for custom transformations. This structure defines the Lambda function that the gateway invokes to transform data.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#LaunchParameters": {
+            "type": "structure",
+            "members": {
+                "operatingSystem": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#OperatingSystem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system and CPU architecture for the instances.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "instanceRequirements": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InstanceRequirements",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requirements that determine which instance types can be launched.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ephemeralVolumes": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EphemeralBlockDeviceMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The block device mappings for instance store (ephemeral) volumes. You can specify up to five mappings.</p>",
+                        "smithy.api#length": {
+                            "max": 5
+                        }
+                    }
+                },
+                "monitoring": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Monitoring",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The monitoring level for the instances.</p>"
+                    }
+                },
+                "licenseSpecifications": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LicenseSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The license configurations to associate with the instances. You can specify up to five configurations.</p>",
+                        "smithy.api#length": {
+                            "max": 5
+                        }
+                    }
+                },
+                "capacityReservationSpecification": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityReservationSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Capacity Reservation targeting option for the instances.</p>"
+                    }
+                },
+                "sshKeyName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#SSHKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the SSH key pair to configure on the instances for SSH connectivity.</p>"
+                    }
+                },
+                "instanceProfileArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InstanceProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM instance profile to associate with launched instances. If provided, this overrides the default instance profile.</p>"
+                    }
+                },
+                "propagatedTags": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to propagate to all Amazon EC2 resources (instances, volumes, and network interfaces) that the capacity provider creates.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters for launching Amazon EC2 instances in a capacity provider.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LaunchTemplateSource": {
+            "type": "union",
+            "members": {
+                "launchParameters": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LaunchParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters that AgentCore uses to create the launch template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of the launch template configuration for a capacity provider. The <code>launchParameters</code> member specifies the operating system, instance requirements, and other settings used to launch instances.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LicenseConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:license-manager:[a-z0-9-]+:[0-9]{12}:license-configuration:[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LicenseSpecification": {
+            "type": "structure",
+            "members": {
+                "licenseConfigurationArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LicenseConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the license configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A license configuration to associate with the instances.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LicenseSpecificationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#LicenseSpecification"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration": {
             "type": "structure",
             "members": {
@@ -20527,7 +22452,7 @@
                         "smithy.api#documentation": "<p>Timeout in seconds for idle runtime sessions. When a session remains idle for this duration, it will be automatically terminated. Default: 900 seconds (15 minutes).</p>",
                         "smithy.api#range": {
                             "min": 60,
-                            "max": 28800
+                            "max": 1209600
                         }
                     }
                 },
@@ -20537,13 +22462,63 @@
                         "smithy.api#documentation": "<p>Maximum lifetime for the instance in seconds. Once reached, instances will be automatically terminated and replaced. Default: 28800 seconds (8 hours).</p>",
                         "smithy.api#range": {
                             "min": 60,
-                            "max": 28800
+                            "max": 1209600
                         }
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>LifecycleConfiguration lets you manage the lifecycle of runtime sessions and resources in AgentCore Runtime. This configuration helps optimize resource utilization by automatically cleaning up idle sessions and preventing long-running instances from consuming resources indefinitely.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LimitEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntry"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of rule entries within a limit",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LimitEntry": {
+            "type": "structure",
+            "members": {
+                "dimensions": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Dimensions",
+                    "traits": {
+                        "smithy.api#documentation": "Map of dimension name to dimension value, matching the parent limit's dimensionKeys.\nKeys must exactly match the dimensionKeys. Values may be \"*\" as a wildcard.\n\"*\" may only appear at trailing positions (based on dimensionKeys ordering).",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "requests": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RateConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "Request rate limits (RPS or RPM). Limited to 1 entry for now."
+                    }
+                },
+                "tokens": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RateConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "Token rate limits (TPM). Limited to 1 entry for now. — P1"
+                    }
+                },
+                "connections": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RateConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "Connection rate limits (per second only). Limited to 1 entry for now. — P2"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A single rule entry within a limit, mapping dimension values to rate configurations"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#LinkedinOauth2ProviderConfigInput": {
@@ -20729,6 +22704,95 @@
                     "items": "agentRuntimes"
                 },
                 "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListAgentRuntimeVersionsByCapacityProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListAgentRuntimeVersionsByCapacityProviderInput"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListAgentRuntimeVersionsByCapacityProviderOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the agent runtime versions that are associated with a capacity provider. Use this operation to identify the runtimes you must disassociate before you can delete the capacity provider. Results are paginated; use the <code>nextToken</code> parameter to retrieve additional results.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/capacity-providers/{capacityProviderId}/runtime-versions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "agentRuntimes"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListAgentRuntimeVersionsByCapacityProviderInput": {
+            "type": "structure",
+            "members": {
+                "capacityProviderId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the capacity provider.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the <code>nextToken</code> field when making another request to return the next batch of results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListAgentRuntimeVersionsByCapacityProviderOutput": {
+            "type": "structure",
+            "members": {
+                "agentRuntimes": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AgentRuntimeVersionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of agent runtime versions that are associated with the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ListAgentRuntimeVersionsRequest": {
@@ -21117,6 +23181,87 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListCapacityProviders": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListCapacityProvidersInput"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListCapacityProvidersOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the capacity providers in your account and returns summary information for each one. To retrieve the full configuration for a specific capacity provider, use <code>GetCapacityProvider</code>. Results are paginated; use the <code>nextToken</code> parameter to retrieve additional results.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/capacity-providers",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "capacityProviders"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListCapacityProvidersInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the <code>nextToken</code> field when making another request to return the next batch of results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListCapacityProvidersOutput": {
+            "type": "structure",
+            "members": {
+                "capacityProviders": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of capacity provider summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>"
                     }
                 }
             },
@@ -21785,6 +23930,98 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p> The pagination token to use in a subsequent request to retrieve the next page of results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListGatewayRateLimits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListGatewayRateLimitsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListGatewayRateLimitsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all rate limits for a gateway. Results are paginated. Use the <code>nextToken</code> parameter to retrieve additional results.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/gateways/{gatewayIdentifier}/rate-limits"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "rateLimits"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListGatewayRateLimitsRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayIdentifier": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the <code>nextToken</code> field when making another request to return the next batch of results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. Use the value returned in a previous <code>ListGatewayRateLimits</code> response.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListGatewayRateLimitsResponse": {
+            "type": "structure",
+            "members": {
+                "rateLimits": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of rate limits for the gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results. If this value is absent, there are no more results to retrieve.</p>"
                     }
                 }
             },
@@ -25308,6 +27545,23 @@
                 "smithy.api#documentation": "<p>Contains information for modifying a strategy configuration.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#Monitoring": {
+            "type": "enum",
+            "members": {
+                "BASIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASIC"
+                    }
+                },
+                "DETAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DETAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#MountPath": {
             "type": "string",
             "traits": {
@@ -26217,6 +28471,26 @@
                 "smithy.api#documentation": "<p> The configuration for using models served through the OpenResponses API in evaluator assessments, including model selection and inference parameters. </p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#OperatingSystem": {
+            "type": "enum",
+            "members": {
+                "LINUX_X86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINUX_X86_64"
+                    }
+                },
+                "LINUX_ARM64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINUX_ARM64"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operating system and CPU architecture for capacity provider instances.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#OutputConfig": {
             "type": "structure",
             "members": {
@@ -26897,6 +29171,41 @@
                     "max": 4096
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9\\s]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#Period": {
+            "type": "enum",
+            "members": {
+                "SECOND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "second"
+                    }
+                },
+                "MINUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "minute"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Time period for rate limiting"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PermissionsConfiguration": {
+            "type": "structure",
+            "members": {
+                "capacityProviderOperatorRoleArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that AgentCore assumes to manage the capacity provider, including launching, tagging, and terminating instances and their network interfaces. We recommend scoping this role to the minimum permissions that your workloads require.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The permissions configuration for a capacity provider. This specifies the IAM role that AgentCore uses to manage the Amazon EC2 instances for the capacity provider on your behalf.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#Policies": {
@@ -28084,6 +30393,44 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#RateConfig": {
+            "type": "structure",
+            "members": {
+                "rate": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate value for the limit. For request limits, this is the number of requests allowed per period. For token limits, this is the number of tokens allowed per period. For connection limits, this is the number of concurrent connections allowed.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 10000000
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "period": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Period",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Rate configuration for a metric (requests or tokens)"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#RateConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#RateConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of rate configs (limited to 1 for now, array for future multi-period support)",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#RatingScale": {
             "type": "union",
             "members": {
@@ -28950,6 +31297,23 @@
                 "target": "com.amazonaws.bedrockagentcorecontrol#RestApiMethod"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#RetryableConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation failed because of a conflicting request. Retry the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409,
+                "smithy.api#retryable": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#RoleArn": {
             "type": "string",
             "traits": {
@@ -28958,6 +31322,59 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#RootVolumeConfiguration": {
+            "type": "structure",
+            "members": {
+                "volumeType": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EbsVolumeType",
+                    "traits": {
+                        "smithy.api#default": "gp3",
+                        "smithy.api#documentation": "<p>The Amazon EBS volume type. If you do not specify a type, the default is <code>gp3</code>.</p>"
+                    }
+                },
+                "iops": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VolumeIops",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of IOPS to provision. For <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes, this is the number of IOPS provisioned for the volume. For <code>gp2</code> volumes, this sets the baseline IOPS performance. It also controls the rate at which the volume accumulates I/O credits for bursting. Supported values: <code>gp3</code>, 3,000–80,000; <code>io1</code>, 100–64,000; <code>io2</code>, 100–256,000.</p>"
+                    }
+                },
+                "throughput": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VolumeThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The throughput to provision, in MiB/s. Valid only for <code>gp3</code> volumes. Valid range: 125–2,000 MiB/s.</p>",
+                        "smithy.api#range": {
+                            "min": 125,
+                            "max": 2000
+                        }
+                    }
+                },
+                "encrypted": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to encrypt the volume. Encrypted volumes can be attached only to instances that support Amazon EBS encryption. If you create a volume from a snapshot, you cannot specify an encryption value.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key to use for Amazon EBS encryption.</p>"
+                    }
+                },
+                "freeSpaceGiB": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VolumeSizeGiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The free space guaranteed on the root volume, in GiB. AgentCore adds the operating system overhead on top of this value. The default is 8 GiB.</p>",
+                        "smithy.api#range": {
+                            "min": 2,
+                            "max": 65000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the root volume of a capacity provider instance. Specify the amount of free space to guarantee on the root volume. The device name and delete-on-termination settings are fixed and cannot be changed.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#RouteToTargetAction": {
@@ -29236,6 +31653,16 @@
             "traits": {
                 "smithy.api#documentation": "<p> Amazon S3 URI string in the format <code>s3://bucket/key</code>. </p>",
                 "smithy.api#pattern": "^s3://[a-z0-9][a-z0-9.\\-]{1,61}[a-z0-9]/.{1,1024}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#SSHKeyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[!-~][ -~]*[!-~]$|^[!-~]$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#SalesforceOauth2ProviderConfigInput": {
@@ -29555,6 +31982,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^sg-[0-9a-zA-Z]{8,17}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#SecurityGroupIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#SecurityGroupId"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#SecurityGroupIdentifier": {
@@ -30872,6 +33305,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^subnet-[0-9a-zA-Z]{8,17}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#SubnetIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#SubnetId"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#SubnetIds": {
@@ -32386,8 +34825,7 @@
                 "networkConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#NetworkConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated network configuration for the AgentCore Runtime.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The updated network configuration for the AgentCore Runtime.</p>"
                     }
                 },
                 "description": {
@@ -32433,6 +34871,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#FilesystemConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated filesystem configurations to mount into the AgentCore Runtime.</p>"
+                    }
+                },
+                "capacityProviderConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated capacity provider configuration for the AgentCore Runtime.</p>"
                     }
                 },
                 "clientToken": {
@@ -32638,6 +35082,126 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the API key credential provider was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateCapacityProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#UpdateCapacityProviderInput"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#UpdateCapacityProviderOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RetryableConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a capacity provider. Only the description can be changed. To change other configuration, such as instance types, networking, or storage, create a new capacity provider.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/capacity-providers/{capacityProviderId}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateCapacityProviderInput": {
+            "type": "structure",
+            "members": {
+                "capacityProviderId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the capacity provider to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#UpdatedDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated description of the capacity provider.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateCapacityProviderOutput": {
+            "type": "structure",
+            "members": {
+                "capacityProviderId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capacityProviderArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the capacity provider. For possible values, see <code>CapacityProviderStatus</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the capacity provider was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the capacity provider was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -33172,6 +35736,140 @@
                     "uri": "/gateways/{gatewayIdentifier}/"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRateLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRateLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRateLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the entries of a gateway rate limit. The dimension keys are immutable after creation.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/gateways/{gatewayIdentifier}/rate-limits/{rateLimitId}"
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRateLimitRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayIdentifier": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "rateLimitId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the rate limit to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                    }
+                },
+                "entries": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
+                    "traits": {
+                        "smithy.api#documentation": "Updated rule entries. key and dimensionKeys are immutable and cannot be changed.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRateLimitResponse": {
+            "type": "structure",
+            "members": {
+                "rateLimitId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "gatewayIdentifier": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                    }
+                },
+                "dimensionKeys": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKeys",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "entries": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitStatus",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the rate limit was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the rate limit was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Shared fields for GatewayRateLimit responses",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRequest": {
@@ -36469,6 +39167,78 @@
                 "smithy.api#documentation": "<p>The version lineage metadata that tracks parent versions and creation source. Supports git-like two-parent merges for branch management.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#VirtualDeviceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^ephemeral[0-9]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#VolumeConfiguration": {
+            "type": "union",
+            "members": {
+                "ebsConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EbsVolumeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for an Amazon EBS-backed persistent volume.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a persistent volume attached to a capacity provider. This structure defines the storage backing for the persistent volumes used by agents that run on capacity provider instances.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#VolumeConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#VolumeConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#VolumeIops": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 100,
+                    "max": 256000
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#VolumeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 48
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,47}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#VolumeSizeGiB": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 65536
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#VolumeThroughput": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 125,
+                    "max": 2000
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#VpcConfig": {
             "type": "structure",
             "members": {
@@ -36495,6 +39265,36 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>VpcConfig for the Agent.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#VpcConfiguration": {
+            "type": "structure",
+            "members": {
+                "subnets": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#SubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the subnets in which to launch instances. You must specify at least one subnet.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 16
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "securityGroups": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#SecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the security groups to associate with the instances. You must specify at least one security group.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 16
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPC configuration for launching Amazon EC2 instances.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#VpcIdentifier": {

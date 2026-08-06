@@ -482,6 +482,9 @@
                     "target": "com.amazonaws.bedrockagentcore#BrowserSessionResource"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcore#CapacityProviderResource"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcore#CodeInterpreterSessionResource"
                 },
                 {
@@ -2424,6 +2427,80 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcore#CapacityProviderArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::BedrockAgentCore::CapacityProvider"
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:capacity-provider/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#CapacityProviderId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Capacity provider identifier. Pattern matches MiskiModel definition.",
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 59
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#CapacityProviderResource": {
+            "type": "resource",
+            "identifiers": {
+                "capacityProviderId": {
+                    "target": "com.amazonaws.bedrockagentcore#CapacityProviderId"
+                }
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#DeleteCapacityProviderSession"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockagentcore#CapacityProviderSessionStatus": {
+            "type": "enum",
+            "members": {
+                "PROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Provisioning"
+                    }
+                },
+                "DEPROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deprovisioning"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleted"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcore#Certificate": {
             "type": "structure",
             "members": {
@@ -4206,6 +4283,94 @@
                     "target": "com.amazonaws.bedrockagentcore#BatchEvaluationStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the batch evaluation deletion operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DeleteCapacityProviderSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#DeleteCapacityProviderSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#DeleteCapacityProviderSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a session associated with a capacity provider in Amazon Bedrock AgentCore and makes the session unavailable for further use. To delete a capacity provider session, specify both the capacity provider identifier and the session ID. After you delete a session, you cannot restart it.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/capacity-providers/{capacityProviderId}/sessions/{sessionId}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DeleteCapacityProviderSessionRequest": {
+            "type": "structure",
+            "members": {
+                "capacityProviderId": {
+                    "target": "com.amazonaws.bedrockagentcore#CapacityProviderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the capacity provider associated with the session.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentcore#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the capacity provider session to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DeleteCapacityProviderSessionResponse": {
+            "type": "structure",
+            "members": {
+                "capacityProviderArn": {
+                    "target": "com.amazonaws.bedrockagentcore#CapacityProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the capacity provider associated with the deleted session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentcore#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the deleted capacity provider session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcore#CapacityProviderSessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the capacity provider session. When the status is <code>Deleting</code>, the session is being deleted and is not available. When the status is <code>Deleted</code>, the session is no longer available.</p>",
                         "smithy.api#required": {}
                     }
                 }

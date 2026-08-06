@@ -2404,13 +2404,6 @@
                         "smithy.api#documentation": "<p>The display name of the offer. This is free-form text provided by the seller.</p>"
                     }
                 },
-                "agreementProposalId": {
-                    "target": "com.amazonaws.marketplacediscovery#AgreementResourceId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>An encoded string to be passed by the acceptor of the terms when creating an agreement.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "expirationTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -2427,6 +2420,20 @@
                     "target": "com.amazonaws.marketplacediscovery#SellerInformation",
                     "traits": {
                         "smithy.api#documentation": "<p>The entity responsible for selling the product under this offer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "associatedEntities": {
+                    "target": "com.amazonaws.marketplacediscovery#OfferAssociatedEntityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The products and offer sets associated with this offer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agreementProposalId": {
+                    "target": "com.amazonaws.marketplacediscovery#AgreementResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An encoded string to be passed by the acceptor of the terms when creating an agreement.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2447,13 +2454,6 @@
                     "target": "com.amazonaws.marketplacediscovery#PurchaseOptionBadgeList",
                     "traits": {
                         "smithy.api#documentation": "<p>Badges indicating special attributes of the offer, such as private pricing, future dated, or replacement offer.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "associatedEntities": {
-                    "target": "com.amazonaws.marketplacediscovery#OfferAssociatedEntityList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The products and offer sets associated with this offer.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3047,6 +3047,23 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "title": "GetOfferTerms for net payment term",
+                        "input": {
+                            "offerId": "offer-sampleNetPaymentId"
+                        },
+                        "output": {
+                            "offerTerms": [
+                                {
+                                    "netPaymentTerm": {
+                                        "id": "term-netpay-001",
+                                        "type": "NetPaymentTerm",
+                                        "paymentDuePeriod": "P30D"
+                                    }
+                                }
+                            ]
+                        }
                     }
                 ],
                 "smithy.api#http": {
@@ -3057,7 +3074,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "offerTerms"
+                    "items": "offerTerms",
+                    "pageSize": "maxResults"
                 },
                 "smithy.api#readonly": {},
                 "smithy.test#smokeTests": [
@@ -3429,6 +3447,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "manufacturer": {
+                    "target": "com.amazonaws.marketplacediscovery#SellerInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity who manufactured the product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "deployedOnAws": {
                     "target": "com.amazonaws.marketplacediscovery#DeployedOnAwsStatus",
                     "traits": {
@@ -3450,13 +3475,6 @@
                         "smithy.api#length": {
                             "max": 32768
                         },
-                        "smithy.api#required": {}
-                    }
-                },
-                "manufacturer": {
-                    "target": "com.amazonaws.marketplacediscovery#SellerInformation",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The entity who manufactured the product.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4580,6 +4598,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "fulfillmentOptionSummaries": {
+                    "target": "com.amazonaws.marketplacediscovery#FulfillmentOptionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of fulfillment options available for the listing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "catalog": {
                     "target": "com.amazonaws.marketplacediscovery#Catalog",
                     "traits": {
@@ -4605,13 +4630,6 @@
                     "target": "com.amazonaws.marketplacediscovery#CategoryList",
                     "traits": {
                         "smithy.api#documentation": "<p>The categories used to classify this listing into logical groups.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "fulfillmentOptionSummaries": {
-                    "target": "com.amazonaws.marketplacediscovery#FulfillmentOptionSummaryList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A summary of fulfillment options available for the listing.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4694,6 +4712,35 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.marketplacediscovery#NetPaymentTerm": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.marketplacediscovery#TermId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the term.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.marketplacediscovery#TermType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the term.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "paymentDuePeriod": {
+                    "target": "com.amazonaws.marketplacediscovery#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration after invoice date by which payment is due.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a net payment term that sets how many days after the invoice date the payment is due.</p>"
             }
         },
         "com.amazonaws.marketplacediscovery#NextToken": {
@@ -4905,6 +4952,12 @@
                 },
                 "variablePaymentTerm": {
                     "target": "com.amazonaws.marketplacediscovery#VariablePaymentTerm"
+                },
+                "netPaymentTerm": {
+                    "target": "com.amazonaws.marketplacediscovery#NetPaymentTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A net payment term.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6971,6 +7024,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "VariablePaymentTerm"
+                    }
+                },
+                "NET_PAYMENT_TERM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetPaymentTerm"
                     }
                 }
             }

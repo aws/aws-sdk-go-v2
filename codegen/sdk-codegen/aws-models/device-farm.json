@@ -5061,6 +5061,32 @@
                 "target": "com.amazonaws.devicefarm#IncompatibilityMessage"
             }
         },
+        "com.amazonaws.devicefarm#InsightsType": {
+            "type": "enum",
+            "members": {
+                "TEST_REPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_REPORT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of insights to generate.</p>"
+            }
+        },
+        "com.amazonaws.devicefarm#InsightsTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devicefarm#InsightsType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.devicefarm#InstallToRemoteAccessSession": {
             "type": "operation",
             "input": {
@@ -5378,10 +5404,130 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This value is set to true if video capture is enabled. Otherwise, it is set to false.</p>"
                     }
+                },
+                "insights": {
+                    "target": "com.amazonaws.devicefarm#JobInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The insights for the job, including the report status and test-level metrics. This field contains data only if you specified <code>insightsTypes</code> when you scheduled the run.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents a device.</p>"
+            }
+        },
+        "com.amazonaws.devicefarm#JobInsights": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.devicefarm#ReportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the insights report for the job.</p>"
+                    }
+                },
+                "testReport": {
+                    "target": "com.amazonaws.devicefarm#TestReport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The test-level aggregated report for the job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains insights for a job, including report status, and test-level aggregated metrics such as per test execution time and median test execution time.</p>"
+            }
+        },
+        "com.amazonaws.devicefarm#JobReport": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.devicefarm#ReportMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message associated with the job report.</p>"
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.devicefarm#JobReportMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregated job-level metrics for the run.</p>"
+                    }
+                },
+                "jobDetailsUrl": {
+                    "target": "com.amazonaws.devicefarm#SensitiveURL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL to the detailed job results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains aggregated job-level metrics for a run.</p>"
+            }
+        },
+        "com.amazonaws.devicefarm#JobReportMetrics": {
+            "type": "structure",
+            "members": {
+                "jobsTotal": {
+                    "target": "com.amazonaws.devicefarm#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of jobs in the run.</p>"
+                    }
+                },
+                "jobsPassed": {
+                    "target": "com.amazonaws.devicefarm#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of jobs that passed.</p>"
+                    }
+                },
+                "jobsFailed": {
+                    "target": "com.amazonaws.devicefarm#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of jobs that failed.</p>"
+                    }
+                },
+                "jobsSkipped": {
+                    "target": "com.amazonaws.devicefarm#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of jobs that were skipped.</p>"
+                    }
+                },
+                "jobsErrored": {
+                    "target": "com.amazonaws.devicefarm#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of jobs that errored.</p>"
+                    }
+                },
+                "jobsStopped": {
+                    "target": "com.amazonaws.devicefarm#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of jobs that were stopped.</p>"
+                    }
+                },
+                "jobsPassedPercentage": {
+                    "target": "com.amazonaws.devicefarm#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of jobs that passed.</p>"
+                    }
+                },
+                "totalJobExecutionDurationSeconds": {
+                    "target": "com.amazonaws.devicefarm#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total execution duration of all jobs in the run, in seconds.</p>"
+                    }
+                },
+                "averageJobExecutionDurationSeconds": {
+                    "target": "com.amazonaws.devicefarm#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The average execution duration of jobs in the run, in seconds.</p>"
+                    }
+                },
+                "medianJobExecutionDurationSeconds": {
+                    "target": "com.amazonaws.devicefarm#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The median execution duration of jobs in the run, in seconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains aggregated metrics across all jobs in a run.</p>"
             }
         },
         "com.amazonaws.devicefarm#JobTimeoutMinutes": {
@@ -8352,6 +8498,53 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.devicefarm#ReportMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.devicefarm#ReportStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIPPED"
+                    }
+                },
+                "ERRORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERRORED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of an insights report. Possible values are:</p>\n         <ul>\n            <li>\n               <p>PENDING: The service has queued the report and generation has not started.</p>\n            </li>\n            <li>\n               <p>RUNNING: The service is generating the report.</p>\n            </li>\n            <li>\n               <p>COMPLETED: The service successfully generated the report.</p>\n            </li>\n            <li>\n               <p>SKIPPED: The service did not generate the report because the necessary conditions were not met. For more information about why the service could not generate the report, view the <code>message</code> field in <code>TestReport</code> or <code>JobReport</code>.</p>\n            </li>\n            <li>\n               <p>ERRORED: An error occurred while generating the report. For more information about why the service could not generate the report, view the <code>message</code> field in <code>TestReport</code> or <code>JobReport</code>.</p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.devicefarm#Resolution": {
             "type": "structure",
             "members": {
@@ -8699,10 +8892,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Environment variables associated with the run.</p>"
                     }
+                },
+                "insightsTypes": {
+                    "target": "com.amazonaws.devicefarm#InsightsTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of insights requested for the run.</p>"
+                    }
+                },
+                "insights": {
+                    "target": "com.amazonaws.devicefarm#RunInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The insights for the run, including the report status and job-level metrics. This field contains data only if you specified <code>insightsTypes</code> when you scheduled the run.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents a test run on a set of devices with a given app package, test parameters, and so\n            on.</p>"
+            }
+        },
+        "com.amazonaws.devicefarm#RunInsights": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.devicefarm#ReportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the insights report for the run.</p>"
+                    }
+                },
+                "jobReport": {
+                    "target": "com.amazonaws.devicefarm#JobReport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job-level aggregated report for the run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains insights for a run, including report status, and job-level aggregated metrics such as per job execution time and median job execution time.</p>"
             }
         },
         "com.amazonaws.devicefarm#Runs": {
@@ -8970,6 +9195,12 @@
                     "target": "com.amazonaws.devicefarm#AmazonRoleResourceName",
                     "traits": {
                         "smithy.api#documentation": "<p>An IAM role to be assumed by the test host for the run.</p>"
+                    }
+                },
+                "insightsTypes": {
+                    "target": "com.amazonaws.devicefarm#InsightsTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of insights to generate for a run. Specify one or more values to opt in to\n            insights generation when scheduling a run.</p>\n         <p>Insights are currently supported for custom mode runs with Instrumentation, Appium Java TestNG,\n            and XCTest UI test types.</p>"
                     }
                 }
             },
@@ -9947,6 +10178,94 @@
             },
             "value": {
                 "target": "com.amazonaws.devicefarm#String"
+            }
+        },
+        "com.amazonaws.devicefarm#TestReport": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.devicefarm#ReportMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message associated with the test report.</p>"
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.devicefarm#TestReportMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregated test-level metrics for the job.</p>"
+                    }
+                },
+                "testDetailsUrl": {
+                    "target": "com.amazonaws.devicefarm#SensitiveURL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL to the detailed test results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains aggregated test-level metrics for a job.</p>"
+            }
+        },
+        "com.amazonaws.devicefarm#TestReportMetrics": {
+            "type": "structure",
+            "members": {
+                "testsTotal": {
+                    "target": "com.amazonaws.devicefarm#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of tests in the job.</p>"
+                    }
+                },
+                "testsPassed": {
+                    "target": "com.amazonaws.devicefarm#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tests that passed.</p>"
+                    }
+                },
+                "testsFailed": {
+                    "target": "com.amazonaws.devicefarm#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tests that failed.</p>"
+                    }
+                },
+                "testsSkipped": {
+                    "target": "com.amazonaws.devicefarm#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tests that were skipped.</p>"
+                    }
+                },
+                "testsErrored": {
+                    "target": "com.amazonaws.devicefarm#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tests that errored.</p>"
+                    }
+                },
+                "testsOther": {
+                    "target": "com.amazonaws.devicefarm#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tests with other result types.</p>"
+                    }
+                },
+                "testsPassedPercentage": {
+                    "target": "com.amazonaws.devicefarm#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of tests that passed.</p>"
+                    }
+                },
+                "totalTestExecutionDurationSeconds": {
+                    "target": "com.amazonaws.devicefarm#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total execution duration of all tests in the job, in seconds.</p>"
+                    }
+                },
+                "medianTestExecutionDurationSeconds": {
+                    "target": "com.amazonaws.devicefarm#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The median execution duration of tests in the job, in seconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains aggregated metrics across all tests in a job.</p>"
             }
         },
         "com.amazonaws.devicefarm#TestType": {

@@ -296,6 +296,50 @@
                 }
             }
         },
+        "com.amazonaws.securityhub#AccountFreeTrialStatus": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.securityhub#FreeTrialAccountId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Web Services account identifier that the free trial statuses apply to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EvaluatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time at which Security Hub evaluated the free trial statuses for this account. Every status in <code>FreeTrialStatuses</code> reflects this point in time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FreeTrialStatuses": {
+                    "target": "com.amazonaws.securityhub#FreeTrialStatusList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array of free trial statuses, one for each feature that has a free trial period for the account. The array is empty if the account has no free trial to report.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The free trial status of each Security Hub feature for an account.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AccountFreeTrialStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AccountFreeTrialStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.securityhub#AccountId": {
             "type": "string"
         },
@@ -28773,6 +28817,122 @@
                 "target": "com.amazonaws.securityhub#FirewallPolicyStatelessRuleGroupReferencesDetails"
             }
         },
+        "com.amazonaws.securityhub#FreeTrialAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.securityhub#FreeTrialAccountIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#FreeTrialAccountId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.securityhub#FreeTrialStatus": {
+            "type": "structure",
+            "members": {
+                "FeatureType": {
+                    "target": "com.amazonaws.securityhub#FreeTrialType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The feature that the free trial period applies to. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SECURITY_HUB_V2</code> specifies Security Hub.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SECURITY_HUB_V2_MULTI_CLOUD_AZURE</code> specifies Security Hub coverage for Microsoft Azure resources.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.securityhub#FreeTrialStatusValue",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Whether the free trial period is currently active. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> specifies that the free trial period is ongoing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> specifies that the free trial period has ended, or that it never started.</p>\n            </li>\n         </ul>\n         <p>To determine whether a trial has expired, compare <code>ExpiresAt</code> to the current time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time at which the free trial period began.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time at which the free trial period ends.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The free trial period for a Security Hub feature, and whether the trial is currently active.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#FreeTrialStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#FreeTrialStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.securityhub#FreeTrialStatusValue": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#FreeTrialStatusValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#FreeTrialStatusValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.securityhub#FreeTrialType": {
+            "type": "enum",
+            "members": {
+                "SECURITY_HUB_V2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECURITY_HUB_V2"
+                    }
+                },
+                "SECURITY_HUB_V2_MULTI_CLOUD_AZURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECURITY_HUB_V2_MULTI_CLOUD_AZURE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityhub#GenerateRecommendedPolicyV2": {
             "type": "operation",
             "input": {
@@ -33469,6 +33629,100 @@
                     "target": "com.amazonaws.securityhub#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If there are more results, this is the token to provide in the next call to <code>ListFindingAggregators</code>.</p>\n         <p>This operation currently only returns a single result.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#ListFreeTrialStatusesV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#ListFreeTrialStatusesV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#ListFreeTrialStatusesV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the free trial status of Security Hub features. A delegated Security Hub administrator can list the status for accounts in its organization. Any other account can list the status only for itself. Free trial status remains available after a feature is disabled.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/freetrial/statusv2/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AccountFreeTrialStatuses",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ListFreeTrialStatusesV2Request": {
+            "type": "structure",
+            "members": {
+                "AccountIds": {
+                    "target": "com.amazonaws.securityhub#FreeTrialAccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account identifiers to list free trial status for. You can specify accounts other than your own only if you are a delegated Security Hub administrator.</p>"
+                    }
+                },
+                "Statuses": {
+                    "target": "com.amazonaws.securityhub#FreeTrialStatusValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The free trial statuses to filter the results by. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> returns only features with an ongoing free trial period.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> returns only features whose free trial period has ended, or that never started.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return. If you don't specify a value, Security Hub returns up to 100 results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to request the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#ListFreeTrialStatusesV2Response": {
+            "type": "structure",
+            "members": {
+                "AccountFreeTrialStatuses": {
+                    "target": "com.amazonaws.securityhub#AccountFreeTrialStatusList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array of free trial statuses, one for each account in scope.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to request the next page of results. If there are no additional results, this value is null.</p>"
                     }
                 }
             },
@@ -40215,6 +40469,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityhub#ListFindingAggregators"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ListFreeTrialStatusesV2"
                 },
                 {
                     "target": "com.amazonaws.securityhub#ListInvitations"

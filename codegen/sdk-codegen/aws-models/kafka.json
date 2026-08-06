@@ -72,6 +72,35 @@
                 "smithy.api#documentation": "<p>Details of an Apache Kafka Cluster.</p>"
             }
         },
+        "com.amazonaws.kafka#AuthorizerLogs": {
+            "type": "structure",
+            "members": {
+                "CloudWatchLogs": {
+                    "target": "com.amazonaws.kafka#CloudWatchLogs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the CloudWatch Logs destination for authorizer logs.</p>",
+                        "smithy.api#jsonName": "cloudWatchLogs"
+                    }
+                },
+                "Firehose": {
+                    "target": "com.amazonaws.kafka#Firehose",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the Kinesis Data Firehose delivery stream that is the destination for authorizer logs.</p>",
+                        "smithy.api#jsonName": "firehose"
+                    }
+                },
+                "S3": {
+                    "target": "com.amazonaws.kafka#S3",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the Amazon S3 destination for authorizer logs.</p>",
+                        "smithy.api#jsonName": "s3"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The authorizer logs configuration for this MSK cluster.</p>"
+            }
+        },
         "com.amazonaws.kafka#BadRequestException": {
             "type": "structure",
             "members": {
@@ -8534,6 +8563,13 @@
         "com.amazonaws.kafka#LoggingInfo": {
             "type": "structure",
             "members": {
+                "AuthorizerLogs": {
+                    "target": "com.amazonaws.kafka#AuthorizerLogs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can configure your MSK cluster to send authorizer logs to different destination types.</p>",
+                        "smithy.api#jsonName": "authorizerLogs"
+                    }
+                },
                 "BrokerLogs": {
                     "target": "com.amazonaws.kafka#BrokerLogs",
                     "traits": {
