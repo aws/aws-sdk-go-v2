@@ -649,6 +649,44 @@ func (FindingsTrendsStringField) Values() []FindingsTrendsStringField {
 	}
 }
 
+type FreeTrialStatusValue string
+
+// Enum values for FreeTrialStatusValue
+const (
+	FreeTrialStatusValueActive   FreeTrialStatusValue = "ACTIVE"
+	FreeTrialStatusValueInactive FreeTrialStatusValue = "INACTIVE"
+)
+
+// Values returns all known values for FreeTrialStatusValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FreeTrialStatusValue) Values() []FreeTrialStatusValue {
+	return []FreeTrialStatusValue{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
+type FreeTrialType string
+
+// Enum values for FreeTrialType
+const (
+	FreeTrialTypeSecurityHubV2                FreeTrialType = "SECURITY_HUB_V2"
+	FreeTrialTypeSecurityHubV2MultiCloudAzure FreeTrialType = "SECURITY_HUB_V2_MULTI_CLOUD_AZURE"
+)
+
+// Values returns all known values for FreeTrialType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FreeTrialType) Values() []FreeTrialType {
+	return []FreeTrialType{
+		"SECURITY_HUB_V2",
+		"SECURITY_HUB_V2_MULTI_CLOUD_AZURE",
+	}
+}
+
 type GranularityField string
 
 // Enum values for GranularityField

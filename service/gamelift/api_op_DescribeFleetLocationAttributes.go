@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This API works with the following fleet types: EC2, Container
+//	This API works with the following fleet types: EC2, Anywhere, Container
 //
 // Retrieves information on a fleet's remote locations, including life-cycle
 // status and any suspended fleet activity.

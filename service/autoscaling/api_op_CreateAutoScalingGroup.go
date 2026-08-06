@@ -282,6 +282,13 @@ type CreateAutoScalingGroupInput struct {
 	// [Use instance scale-in protection]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html
 	NewInstancesProtectedFromScaleIn *bool
 
+	// The entity that manages the Auto Scaling group. If you specify this parameter,
+	// Amazon EC2 Auto Scaling passes the operator identity to EC2 for instance
+	// launches and only allows the designated operator to make changes to the Auto
+	// Scaling group. All mutating API calls from non-operator callers are rejected
+	// with an AccessDenied exception.
+	Operator *types.Operator
+
 	// The name of the placement group into which to launch your instances. For more
 	// information, see [Placement groups]in the Amazon EC2 User Guide.
 	//

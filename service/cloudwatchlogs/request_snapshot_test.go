@@ -1394,6 +1394,10 @@ func TestCheckRequestSnapshot_DescribeFieldIndexes(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		IndexCategories: []types.IndexCategory{
+			types.IndexCategory("DEFAULT"),
+			types.IndexCategory("DEFAULT"),
+		},
 		NextToken: ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -5794,6 +5798,10 @@ func TestUpdateRequestSnapshot_DescribeFieldIndexes(t *testing.T) {
 		LogGroupIdentifiers: []string{
 			"__Member__",
 			"__Member__",
+		},
+		IndexCategories: []types.IndexCategory{
+			types.IndexCategory("DEFAULT"),
+			types.IndexCategory("DEFAULT"),
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}

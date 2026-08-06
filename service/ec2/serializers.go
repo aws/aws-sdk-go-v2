@@ -85894,6 +85894,11 @@ func awsEc2query_serializeOpDocumentGetSpotPlacementScoresInput(v *GetSpotPlacem
 		objectKey.Boolean(*v.DryRun)
 	}
 
+	if v.IncludeLocalZones != nil {
+		objectKey := object.Key("IncludeLocalZones")
+		objectKey.Boolean(*v.IncludeLocalZones)
+	}
+
 	if v.InstanceRequirementsWithMetadata != nil {
 		objectKey := object.Key("InstanceRequirementsWithMetadata")
 		if err := awsEc2query_serializeDocumentInstanceRequirementsWithMetadataRequest(v.InstanceRequirementsWithMetadata, objectKey); err != nil {

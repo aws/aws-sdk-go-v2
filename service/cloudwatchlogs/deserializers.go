@@ -17934,6 +17934,15 @@ func awsAwsjson11_deserializeDocumentFieldIndex(v **types.FieldIndex, value inte
 				sv.FirstEventTime = ptr.Int64(i64)
 			}
 
+		case "indexCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IndexCategory to be of type string, got %T instead", value)
+				}
+				sv.IndexCategory = types.IndexCategory(jtv)
+			}
+
 		case "lastEventTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)

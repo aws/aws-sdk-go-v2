@@ -34,6 +34,22 @@ type ApacheKafkaCluster struct {
 	noSmithyDocumentSerde
 }
 
+// The authorizer logs configuration for this MSK cluster.
+type AuthorizerLogs struct {
+
+	// Details of the CloudWatch Logs destination for authorizer logs.
+	CloudWatchLogs *CloudWatchLogs
+
+	// Details of the Kinesis Data Firehose delivery stream that is the destination
+	// for authorizer logs.
+	Firehose *Firehose
+
+	// Details of the Amazon S3 destination for authorizer logs.
+	S3 *S3
+
+	noSmithyDocumentSerde
+}
+
 // Information regarding UpdateBrokerCount.
 type BrokerCountUpdateInfo struct {
 
@@ -1125,6 +1141,10 @@ type LoggingInfo struct {
 
 	// This member is required.
 	BrokerLogs *BrokerLogs
+
+	// You can configure your MSK cluster to send authorizer logs to different
+	// destination types.
+	AuthorizerLogs *AuthorizerLogs
 
 	noSmithyDocumentSerde
 }

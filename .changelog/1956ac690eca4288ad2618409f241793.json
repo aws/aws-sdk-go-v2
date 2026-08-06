@@ -1,0 +1,8 @@
+{
+    "id": "1956ac69-0eca-4288-ad26-18409f241793",
+    "type": "feature",
+    "description": "Adds support for service generated insights across runs, jobs, and tests.",
+    "modules": [
+        "service/devicefarm"
+    ]
+}

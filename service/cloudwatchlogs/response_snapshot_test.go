@@ -1252,6 +1252,7 @@ func TestCheckResponseSnapshot_DescribeFieldIndexes(t *testing.T) {
 				FirstEventTime:     ptr.Int64(1),
 				LastEventTime:      ptr.Int64(1),
 				Type:               types.IndexType("FACET"),
+				IndexCategory:      types.IndexCategory("DEFAULT"),
 			},
 			{
 				LogGroupIdentifier: ptr.String("__LogGroupIdentifier__"),
@@ -1260,6 +1261,7 @@ func TestCheckResponseSnapshot_DescribeFieldIndexes(t *testing.T) {
 				FirstEventTime:     ptr.Int64(1),
 				LastEventTime:      ptr.Int64(1),
 				Type:               types.IndexType("FACET"),
+				IndexCategory:      types.IndexCategory("DEFAULT"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

@@ -1,0 +1,5 @@
+404
+Content-Type: application/json
+X-Amzn-Errortype: ResourceNotFoundException
+
+{"message":"__Message__"}

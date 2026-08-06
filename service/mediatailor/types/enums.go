@@ -271,6 +271,7 @@ type FunctionType string
 const (
 	FunctionTypeHttpRequest        FunctionType = "HTTP_REQUEST"
 	FunctionTypeCustomOutput       FunctionType = "CUSTOM_OUTPUT"
+	FunctionTypeConcurrentExecutor FunctionType = "CONCURRENT_EXECUTOR"
 	FunctionTypeSequentialExecutor FunctionType = "SEQUENTIAL_EXECUTOR"
 )
 
@@ -282,6 +283,7 @@ func (FunctionType) Values() []FunctionType {
 	return []FunctionType{
 		"HTTP_REQUEST",
 		"CUSTOM_OUTPUT",
+		"CONCURRENT_EXECUTOR",
 		"SEQUENTIAL_EXECUTOR",
 	}
 }

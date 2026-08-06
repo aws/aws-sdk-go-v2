@@ -124,6 +124,11 @@ type LinkedWhatsAppBusinessAccount struct {
 	// This member is required.
 	WabaName *string
 
+	// The Meta Conversions API dataset ID associated with this WhatsApp Business
+	// Account. This value is a numeric string of 10 to 20 digits. This field is not
+	// present when no dataset has been created for this account.
+	DatasetId *string
+
 	// The onboarding status for the Marketing Messages API. This value is fetched
 	// from Meta and indicates whether the WhatsApp Business Account is onboarded for
 	// Meta's Marketing Messages API.
@@ -189,6 +194,11 @@ type LinkedWhatsAppBusinessAccountSummary struct {
 	//
 	// This member is required.
 	WabaName *string
+
+	// The Meta Conversions API dataset ID associated with this WhatsApp Business
+	// Account. This value is a numeric string of 10 to 20 digits. This field is not
+	// present when no dataset has been created for this account.
+	DatasetId *string
 
 	// The onboarding status for the Marketing Messages API. This value is fetched
 	// from Meta and indicates whether the WhatsApp Business Account is onboarded for

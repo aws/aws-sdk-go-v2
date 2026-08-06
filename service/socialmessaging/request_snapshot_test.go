@@ -271,6 +271,33 @@ func TestCheckRequestSnapshot_AssociateWhatsAppBusinessAccount(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateWhatsAppDataset(t *testing.T) {
+	input := &CreateWhatsAppDatasetInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateWhatsAppDataset(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateWhatsAppDataset"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateWhatsAppFlow(t *testing.T) {
 	input := &CreateWhatsAppFlowInput{
 		Id:       ptr.String("__Id__"),
@@ -1039,6 +1066,35 @@ func TestCheckRequestSnapshot_PutWhatsAppBusinessAccountEventDestinations(t *tes
 	}
 }
 
+func TestCheckRequestSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
+	input := &SendWhatsAppConversionEventInput{
+		Id:        ptr.String("__Id__"),
+		DatasetId: ptr.String("__DatasetId__"),
+		EventData: []byte("blob"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SendWhatsAppConversionEvent(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SendWhatsAppConversionEvent"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_SendWhatsAppMessage(t *testing.T) {
 	input := &SendWhatsAppMessageInput{
 		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
@@ -1316,6 +1372,33 @@ func TestUpdateRequestSnapshot_AssociateWhatsAppBusinessAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateWhatsAppBusinessAccount"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateWhatsAppDataset(t *testing.T) {
+	input := &CreateWhatsAppDatasetInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateWhatsAppDataset(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateWhatsAppDataset"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2084,6 +2167,35 @@ func TestUpdateRequestSnapshot_PutWhatsAppBusinessAccountEventDestinations(t *te
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutWhatsAppBusinessAccountEventDestinations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
+	input := &SendWhatsAppConversionEventInput{
+		Id:        ptr.String("__Id__"),
+		DatasetId: ptr.String("__DatasetId__"),
+		EventData: []byte("blob"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SendWhatsAppConversionEvent(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SendWhatsAppConversionEvent"); err != nil {
 		t.Fatal(err)
 	}
 }

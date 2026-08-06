@@ -1,0 +1,8 @@
+{
+    "id": "2e8a7297-2072-407e-9fde-499b5d24027e",
+    "type": "feature",
+    "description": "This release adds index category support to the CloudWatch Logs DescribeFieldIndexes API. Customers can filter and identify DEFAULT, CUSTOM, AUTO, and INACTIVE field indexes.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

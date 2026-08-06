@@ -1,0 +1,8 @@
+{
+    "id": "a62847d1-c3d3-4d80-99d7-3a5212e988fa",
+    "type": "feature",
+    "description": "GetAgreementTerms now returns a new term variant in AcceptedTerm, netPaymentTerm, with a paymentDuePeriod field (example \"P30D\").",
+    "modules": [
+        "service/marketplaceagreement"
+    ]
+}

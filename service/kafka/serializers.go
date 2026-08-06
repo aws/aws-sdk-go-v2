@@ -5870,6 +5870,34 @@ func awsRestjson1_serializeDocumentApacheKafkaCluster(v *types.ApacheKafkaCluste
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAuthorizerLogs(v *types.AuthorizerLogs, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloudWatchLogs != nil {
+		ok := object.Key("cloudWatchLogs")
+		if err := awsRestjson1_serializeDocumentCloudWatchLogs(v.CloudWatchLogs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Firehose != nil {
+		ok := object.Key("firehose")
+		if err := awsRestjson1_serializeDocumentFirehose(v.Firehose, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3 != nil {
+		ok := object.Key("s3")
+		if err := awsRestjson1_serializeDocumentS3(v.S3, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBrokerEBSVolumeInfo(v *types.BrokerEBSVolumeInfo, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6563,6 +6591,13 @@ func awsRestjson1_serializeDocumentLogDelivery(v *types.LogDelivery, value smith
 func awsRestjson1_serializeDocumentLoggingInfo(v *types.LoggingInfo, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AuthorizerLogs != nil {
+		ok := object.Key("authorizerLogs")
+		if err := awsRestjson1_serializeDocumentAuthorizerLogs(v.AuthorizerLogs, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.BrokerLogs != nil {
 		ok := object.Key("brokerLogs")

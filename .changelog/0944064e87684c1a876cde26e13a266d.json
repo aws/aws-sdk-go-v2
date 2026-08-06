@@ -1,0 +1,8 @@
+{
+    "id": "0944064e-8768-4c1a-876c-de26e13a266d",
+    "type": "feature",
+    "description": "Agent Registry's Public Preview release",
+    "modules": [
+        "service/agentregistrycontrol"
+    ]
+}

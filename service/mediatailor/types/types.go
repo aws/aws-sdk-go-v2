@@ -507,6 +507,54 @@ type ClipRange struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a CONCURRENT_EXECUTOR function. A CONCURRENT_EXECUTOR
+// runs a set of child functions in parallel, up to a maximum concurrency, and
+// combines their output when all functions complete. For more information about
+// functions, see [Working with functions]in the MediaTailor User Guide.
+//
+// [Working with functions]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html
+type ConcurrentExecutorConfiguration struct {
+
+	// The list of child functions that MediaTailor runs in parallel. Each entry
+	// specifies a child function to execute and an optional run condition expression
+	// that controls whether the function runs.
+	//
+	// This member is required.
+	FunctionList []FunctionRef
+
+	// The maximum number of child functions that MediaTailor runs simultaneously.
+	// When the list contains more functions than MaxConcurrency , MediaTailor starts
+	// additional functions as running ones complete, so that no more than
+	// MaxConcurrency functions run at the same time.
+	//
+	// This member is required.
+	MaxConcurrency *int32
+
+	// A map of output bindings that controls which bindings the executor commits to
+	// the session state after all child functions complete. Each key is a namespaced
+	// output path, and each value is an expression that MediaTailor evaluates against
+	// the combined results of the child functions.
+	//
+	// This member is required.
+	Output map[string]string
+
+	// The expression language used to evaluate expressions in the function
+	// configuration. Set this to JSONata .
+	//
+	// This member is required.
+	Runtime RuntimeType
+
+	// The maximum time, in milliseconds, for all child functions to complete. This
+	// timeout covers every function in the list, including any HTTP calls the child
+	// functions make. If the executor exceeds this timeout, MediaTailor discards all
+	// output from the executor and proceeds with default behavior.
+	//
+	// This member is required.
+	TimeoutMilliseconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a CUSTOM_OUTPUT function. MediaTailor evaluates the
 // output expressions against the current session state and commits the results as
 // output bindings. CUSTOM_OUTPUT functions do not make external calls. For more
@@ -642,6 +690,9 @@ type Function struct {
 	// The Amazon Resource Name (ARN) of the function.
 	Arn *string
 
+	// The configuration for a CONCURRENT_EXECUTOR function.
+	ConcurrentExecutorConfiguration *ConcurrentExecutorConfiguration
+
 	// The configuration for a CUSTOM_OUTPUT function.
 	CustomOutputConfiguration *CustomOutputConfiguration
 
@@ -666,6 +717,10 @@ type Function struct {
 
 // A reference to a child function within a SEQUENTIAL_EXECUTOR function.
 type FunctionRef struct {
+
+	// An optional alternate name for the function within the executor. If omitted,
+	// MediaTailor uses the function identifier.
+	Alias *string
 
 	// The identifier of the child function to execute in this step.
 	FunctionId *string

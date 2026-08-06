@@ -161,6 +161,27 @@ func TestCheckResponseSnapshot_AssociateWhatsAppBusinessAccount(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateWhatsAppDataset(t *testing.T) {
+	want := &CreateWhatsAppDatasetOutput{
+		DatasetId: ptr.String("__DatasetId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateWhatsAppDataset.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateWhatsAppDataset(context.Background(), &CreateWhatsAppDatasetInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateWhatsAppDataset.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateWhatsAppFlow(t *testing.T) {
 	want := &CreateWhatsAppFlowOutput{
 		FlowId: ptr.String("__FlowId__"),
@@ -370,6 +391,7 @@ func TestCheckResponseSnapshot_GetLinkedWhatsAppBusinessAccount(t *testing.T) {
 				},
 			},
 			MarketingMessagesOnboardingStatus: ptr.String("__MarketingMessagesOnboardingStatus__"),
+			DatasetId:                         ptr.String("__DatasetId__"),
 			PhoneNumbers: []types.WhatsAppPhoneNumberSummary{
 				{
 					Arn:                    ptr.String("__Arn__"),
@@ -596,6 +618,7 @@ func TestCheckResponseSnapshot_ListLinkedWhatsAppBusinessAccounts(t *testing.T) 
 					},
 				},
 				MarketingMessagesOnboardingStatus: ptr.String("__MarketingMessagesOnboardingStatus__"),
+				DatasetId:                         ptr.String("__DatasetId__"),
 			},
 			{
 				Arn:                ptr.String("__Arn__"),
@@ -615,6 +638,7 @@ func TestCheckResponseSnapshot_ListLinkedWhatsAppBusinessAccounts(t *testing.T) 
 					},
 				},
 				MarketingMessagesOnboardingStatus: ptr.String("__MarketingMessagesOnboardingStatus__"),
+				DatasetId:                         ptr.String("__DatasetId__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -974,6 +998,27 @@ func TestCheckResponseSnapshot_PutWhatsAppBusinessAccountEventDestinations(t *te
 	}
 }
 
+func TestCheckResponseSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
+	want := &SendWhatsAppConversionEventOutput{
+		RequestId: ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SendWhatsAppConversionEvent.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SendWhatsAppConversionEvent(context.Background(), &SendWhatsAppConversionEventInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SendWhatsAppConversionEvent.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_SendWhatsAppMessage(t *testing.T) {
 	want := &SendWhatsAppMessageOutput{
 		MessageId: ptr.String("__MessageId__"),
@@ -1111,7 +1156,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedByMetaException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWhatsAppFlow(context.Background(), &CreateWhatsAppFlowInput{})
+	_, opErr := svc.CreateWhatsAppDataset(context.Background(), &CreateWhatsAppDatasetInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1186,7 +1231,7 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWhatsAppFlow(context.Background(), &CreateWhatsAppFlowInput{})
+	_, opErr := svc.CreateWhatsAppDataset(context.Background(), &CreateWhatsAppDatasetInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1261,7 +1306,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWhatsAppFlow(context.Background(), &CreateWhatsAppFlowInput{})
+	_, opErr := svc.CreateWhatsAppDataset(context.Background(), &CreateWhatsAppDatasetInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

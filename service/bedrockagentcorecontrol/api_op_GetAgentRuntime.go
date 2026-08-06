@@ -97,6 +97,9 @@ type GetAgentRuntimeOutput struct {
 	// The authorizer configuration for the AgentCore Runtime.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
+	// The capacity provider configuration for the AgentCore Runtime.
+	CapacityProviderConfiguration *types.CapacityProviderConfiguration
+
 	// The description of the AgentCore Runtime.
 	Description *string
 

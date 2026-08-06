@@ -1,0 +1,8 @@
+{
+    "id": "0725e528-70f6-4df0-b3a9-fff6d6a9719f",
+    "type": "feature",
+    "description": "GetOfferTerms now returns netPaymentTerm in offerTerms, specifying payment due period after invoice date. The paymentDuePeriod field uses ISO 8601 duration format (e.g., \"P30D\" for net 30 days). This is a backward-compatible addition. See API documentation for full structure and examples.",
+    "modules": [
+        "service/marketplacediscovery"
+    ]
+}

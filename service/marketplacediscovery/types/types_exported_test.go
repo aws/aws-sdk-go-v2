@@ -88,6 +88,9 @@ func ExampleOfferTerm_outputUsage() {
 	case *types.OfferTermMemberLegalTerm:
 		_ = v.Value // Value is types.LegalTerm
 
+	case *types.OfferTermMemberNetPaymentTerm:
+		_ = v.Value // Value is types.NetPaymentTerm
+
 	case *types.OfferTermMemberPaymentScheduleTerm:
 		_ = v.Value // Value is types.PaymentScheduleTerm
 
@@ -118,18 +121,19 @@ func ExampleOfferTerm_outputUsage() {
 	}
 }
 
+var _ *types.NetPaymentTerm
 var _ *types.RecurringPaymentTerm
 var _ *types.ValidityTerm
-var _ *types.FreeTrialPricingTerm
-var _ *types.RenewalTerm
 var _ *types.VariablePaymentTerm
-var _ *types.ConfigurableUpfrontPricingTerm
 var _ *types.ByolPricingTerm
-var _ *types.UsageBasedPricingTerm
-var _ *types.PaymentScheduleTerm
 var _ *types.FixedUpfrontPricingTerm
 var _ *types.LegalTerm
 var _ *types.SupportTerm
+var _ *types.FreeTrialPricingTerm
+var _ *types.RenewalTerm
+var _ *types.ConfigurableUpfrontPricingTerm
+var _ *types.UsageBasedPricingTerm
+var _ *types.PaymentScheduleTerm
 
 func ExamplePromotionalMedia_outputUsage() {
 	var union types.PromotionalMedia

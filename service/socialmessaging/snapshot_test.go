@@ -74,6 +74,18 @@ func TestCheckSnapshot_AssociateWhatsAppBusinessAccount(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateWhatsAppDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWhatsAppDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateWhatsAppDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateWhatsAppFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateWhatsAppFlow(context.Background(), nil, func(o *Options) {
@@ -362,6 +374,18 @@ func TestCheckSnapshot_PutWhatsAppBusinessAccountEventDestinations(t *testing.T)
 	}
 }
 
+func TestCheckSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendWhatsAppConversionEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendWhatsAppConversionEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SendWhatsAppMessage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendWhatsAppMessage(context.Background(), nil, func(o *Options) {
@@ -438,6 +462,18 @@ func TestUpdateSnapshot_AssociateWhatsAppBusinessAccount(t *testing.T) {
 	_, err := svc.AssociateWhatsAppBusinessAccount(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateWhatsAppBusinessAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateWhatsAppDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWhatsAppDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateWhatsAppDataset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -726,6 +762,18 @@ func TestUpdateSnapshot_PutWhatsAppBusinessAccountEventDestinations(t *testing.T
 	_, err := svc.PutWhatsAppBusinessAccountEventDestinations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutWhatsAppBusinessAccountEventDestinations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendWhatsAppConversionEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendWhatsAppConversionEvent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

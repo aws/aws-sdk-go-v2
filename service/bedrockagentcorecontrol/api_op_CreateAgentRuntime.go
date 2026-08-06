@@ -39,11 +39,6 @@ type CreateAgentRuntimeInput struct {
 	// This member is required.
 	AgentRuntimeName *string
 
-	// The network configuration for the AgentCore Runtime.
-	//
-	// This member is required.
-	NetworkConfiguration *types.NetworkConfiguration
-
 	// The IAM role ARN that provides permissions for the AgentCore Runtime.
 	//
 	// This member is required.
@@ -51,6 +46,11 @@ type CreateAgentRuntimeInput struct {
 
 	// The authorizer configuration for the AgentCore Runtime.
 	AuthorizerConfiguration types.AuthorizerConfiguration
+
+	// The capacity provider configuration for the AgentCore Runtime. Use a capacity
+	// provider to run the AgentCore Runtime on the Instances compute type, which
+	// provisions Amazon Web Services managed compute in your account.
+	CapacityProviderConfiguration *types.CapacityProviderConfiguration
 
 	// A unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
@@ -68,6 +68,9 @@ type CreateAgentRuntimeInput struct {
 
 	// The life cycle configuration for the AgentCore Runtime.
 	LifecycleConfiguration *types.LifecycleConfiguration
+
+	// The network configuration for the AgentCore Runtime.
+	NetworkConfiguration *types.NetworkConfiguration
 
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.

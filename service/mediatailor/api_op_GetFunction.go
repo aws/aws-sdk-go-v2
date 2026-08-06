@@ -55,6 +55,9 @@ type GetFunctionOutput struct {
 	// The Amazon Resource Name (ARN) of the function.
 	Arn *string
 
+	// The configuration for a CONCURRENT_EXECUTOR function.
+	ConcurrentExecutorConfiguration *types.ConcurrentExecutorConfiguration
+
 	// The configuration for a CUSTOM_OUTPUT function.
 	CustomOutputConfiguration *types.CustomOutputConfiguration
 

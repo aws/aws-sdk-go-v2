@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This API works with the following fleet types: EC2, Anywhere, Container
+//	This API works with the following fleet types: EC2, Anywhere
 //
 // Retrieves current usage data for a fleet location. Utilization data provides a
 // snapshot of current game hosting activity at the requested location. Use this

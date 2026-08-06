@@ -242,6 +242,10 @@ type AutoScalingGroup struct {
 	// [Use instance scale-in protection]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html
 	NewInstancesProtectedFromScaleIn *bool
 
+	// The entity that manages the Auto Scaling group, if applicable. When set, only
+	// the designated operator can make changes to the group configuration.
+	Operator *Operator
+
 	// The name of the placement group into which to launch EC2 instances for the Auto
 	// Scaling group.
 	PlacementGroup *string
@@ -389,7 +393,7 @@ type AvailabilityZoneDistribution struct {
 	//   Scaling will attempt to launch in another healthy Availability Zone instead.
 	//
 	//   - reservations-then-balanced - Auto Scaling will first attempt to launch into
-	//   your Capacity Reservations, and then balance any remaining capacity across the
+	//   your Capacity Reservations, and then balance any remaining capacity across
 	//   healthy Availability Zones.
 	CapacityDistributionStrategy CapacityDistributionStrategy
 
@@ -2453,6 +2457,19 @@ type NotificationConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic.
 	TopicARN *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the entity that manages an Auto Scaling group.
+type Operator struct {
+
+	// The service principal that is authorized to manage the Auto Scaling group. When
+	// an operator is specified, only the designated operator service principal can
+	// make mutating changes to the Auto Scaling group.
+	//
+	// This member is required.
+	Principal *string
 
 	noSmithyDocumentSerde
 }

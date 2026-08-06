@@ -514,6 +514,7 @@ const (
 	TermTypeSupportTerm                    TermType = "SupportTerm"
 	TermTypeValidityTerm                   TermType = "ValidityTerm"
 	TermTypeVariablePaymentTerm            TermType = "VariablePaymentTerm"
+	TermTypeNetPaymentTerm                 TermType = "NetPaymentTerm"
 )
 
 // Values returns all known values for TermType. Note that this can be expanded in
@@ -534,6 +535,7 @@ func (TermType) Values() []TermType {
 		"SupportTerm",
 		"ValidityTerm",
 		"VariablePaymentTerm",
+		"NetPaymentTerm",
 	}
 }
 

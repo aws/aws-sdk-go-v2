@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This API works with the following fleet types: EC2, Anywhere, Container
+//	This API works with the following fleet types: EC2, Anywhere
 //
 // Deletes all resources and information related to a fleet and shuts down any
 // currently running fleet instances, including those in remote locations.

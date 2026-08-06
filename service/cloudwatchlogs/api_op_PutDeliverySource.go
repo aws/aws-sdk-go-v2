@@ -67,6 +67,9 @@ type PutDeliverySourceInput struct {
 
 	// Defines the type of log that the source is sending.
 	//
+	//   - For Application Load Balancer, the valid values are ALB_ACCESS_LOGS ,
+	//   ALB_CONNECTION_LOGS , and ALB_HEALTH_CHECK_LOGS .
+	//
 	//   - For Amazon Bedrock Agents, the valid values are APPLICATION_LOGS and
 	//   EVENT_LOGS .
 	//

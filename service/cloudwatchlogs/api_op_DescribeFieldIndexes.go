@@ -9,8 +9,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of custom and default field indexes which are discovered in log
-// data. For more information about field index policies, see [PutIndexPolicy].
+// Returns a list of field indexes discovered in log data. By default, the
+// response includes the DEFAULT , CUSTOM , and INACTIVE index categories. To
+// return indexes from other categories, use the indexCategories parameter.
+//
+// For more information about field index policies, see [PutIndexPolicy].
 //
 // [PutIndexPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html
 func (c *Client) DescribeFieldIndexes(ctx context.Context, params *DescribeFieldIndexesInput, optFns ...func(*Options)) (*DescribeFieldIndexesOutput, error) {
@@ -35,6 +38,34 @@ type DescribeFieldIndexesInput struct {
 	//
 	// This member is required.
 	LogGroupIdentifiers []string
+
+	// The index categories to return. The following values are supported:
+	//
+	//   - DEFAULT : Fields that CloudWatch Logs indexes by default. Examples include
+	//   @logStream and @data_format .
+	//
+	//   - CUSTOM : Fields that you added manually to the field index policy.
+	//   CloudWatch Logs always indexes these fields. These fields count toward the quota
+	//   of 20 fields for each log group.
+	//
+	//   - AUTO : Fields that CloudWatch Logs indexes automatically based on your query
+	//   patterns and usage. These fields do not count toward the field index quota.
+	//   CloudWatch Logs might update these fields based on changes in your query
+	//   patterns. To keep a field indexed permanently, add it to an account-level or
+	//   log-group level field index policy.
+	//
+	//   - INACTIVE : Fields that CloudWatch Logs indexed before but does not index
+	//   now. This happens if you remove a field from the field index policy or if
+	//   CloudWatch Logs automatically selects a different field based on your queries.
+	//
+	// If you omit this parameter, the response includes the DEFAULT , CUSTOM , and
+	// INACTIVE categories.
+	//
+	// For more information about automatically indexed fields and using the AUTO
+	// category, see [Automatically indexed fields].
+	//
+	// [Automatically indexed fields]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Automatic.html
+	IndexCategories []types.IndexCategory
 
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string

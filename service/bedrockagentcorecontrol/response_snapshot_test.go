@@ -137,6 +137,196 @@ func TestCheckResponseSnapshot_AddDatasetExamples(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_BatchPutGatewayRateLimits(t *testing.T) {
+	want := &BatchPutGatewayRateLimitsOutput{
+		RateLimits: []types.GatewayRateLimitDetail{
+			{
+				RateLimitId:       ptr.String("__RateLimitId__"),
+				GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+				Description:       ptr.String("__Description__"),
+				DimensionKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Entries: []types.LimitEntry{
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+				},
+				Status:    types.GatewayRateLimitStatus("CREATING"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				RateLimitId:       ptr.String("__RateLimitId__"),
+				GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+				Description:       ptr.String("__Description__"),
+				DimensionKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Entries: []types.LimitEntry{
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+				},
+				Status:    types.GatewayRateLimitStatus("CREATING"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchPutGatewayRateLimits.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchPutGatewayRateLimits(context.Background(), &BatchPutGatewayRateLimitsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchPutGatewayRateLimits.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateAgentRuntime(t *testing.T) {
 	want := &CreateAgentRuntimeOutput{
 		AgentRuntimeArn: ptr.String("__AgentRuntimeArn__"),
@@ -264,6 +454,30 @@ func TestCheckResponseSnapshot_CreateBrowserProfile(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateBrowserProfile.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateCapacityProvider(t *testing.T) {
+	want := &CreateCapacityProviderOutput{
+		CapacityProviderId:  ptr.String("__CapacityProviderId__"),
+		CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+		Name:                ptr.String("__Name__"),
+		Status:              types.CapacityProviderStatus("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateCapacityProvider.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateCapacityProvider.response", err)
 	}
 }
 
@@ -583,6 +797,108 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateGateway.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateGatewayRateLimit(t *testing.T) {
+	want := &CreateGatewayRateLimitOutput{
+		RateLimitId:       ptr.String("__RateLimitId__"),
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		Description:       ptr.String("__Description__"),
+		DimensionKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Entries: []types.LimitEntry{
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+		},
+		Status:    types.GatewayRateLimitStatus("CREATING"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateGatewayRateLimit.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateGatewayRateLimit(context.Background(), &CreateGatewayRateLimitInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateGatewayRateLimit.response", err)
 	}
 }
 
@@ -1803,8 +2119,9 @@ func TestCheckResponseSnapshot_CreateWorkloadIdentity(t *testing.T) {
 
 func TestCheckResponseSnapshot_DeleteAgentRuntime(t *testing.T) {
 	want := &DeleteAgentRuntimeOutput{
-		Status:         types.AgentRuntimeStatus("CREATING"),
-		AgentRuntimeId: ptr.String("__AgentRuntimeId__"),
+		Status:              types.AgentRuntimeStatus("CREATING"),
+		AgentRuntimeId:      ptr.String("__AgentRuntimeId__"),
+		AgentRuntimeVersion: ptr.String("__AgentRuntimeVersion__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteAgentRuntime.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1910,6 +2227,28 @@ func TestCheckResponseSnapshot_DeleteBrowserProfile(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteBrowserProfile.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteCapacityProvider(t *testing.T) {
+	want := &DeleteCapacityProviderOutput{
+		CapacityProviderId: ptr.String("__CapacityProviderId__"),
+		Status:             types.CapacityProviderStatus("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteCapacityProvider.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteCapacityProvider(context.Background(), &DeleteCapacityProviderInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteCapacityProvider.response", err)
 	}
 }
 
@@ -2054,6 +2393,28 @@ func TestCheckResponseSnapshot_DeleteGateway(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteGateway.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteGatewayRateLimit(t *testing.T) {
+	want := &DeleteGatewayRateLimitOutput{
+		RateLimitId: ptr.String("__RateLimitId__"),
+		Status:      types.GatewayRateLimitStatus("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteGatewayRateLimit.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteGatewayRateLimit(context.Background(), &DeleteGatewayRateLimitInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteGatewayRateLimit.response", err)
 	}
 }
 
@@ -2794,6 +3155,9 @@ func TestCheckResponseSnapshot_GetAgentRuntime(t *testing.T) {
 				},
 			},
 		},
+		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
+			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAgentRuntime.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3007,6 +3371,154 @@ func TestCheckResponseSnapshot_GetBrowserProfile(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetBrowserProfile.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetCapacityProvider(t *testing.T) {
+	want := &GetCapacityProviderOutput{
+		CapacityProviderId:  ptr.String("__CapacityProviderId__"),
+		CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+		Name:                ptr.String("__Name__"),
+		Status:              types.CapacityProviderStatus("CREATING"),
+		Description:         ptr.String("__Description__"),
+		StatusCode:          types.CapacityProviderStatusCode("VALIDATION_ERROR"),
+		StatusReason:        ptr.String("__StatusReason__"),
+		PermissionsConfiguration: &types.PermissionsConfiguration{
+			CapacityProviderOperatorRoleArn: ptr.String("__CapacityProviderOperatorRoleArn__"),
+		},
+		ComputeConfiguration: &types.ComputeConfigurationMemberEc2Configuration{
+			Value: types.Ec2Configuration{
+				LaunchTemplateSource: &types.LaunchTemplateSourceMemberLaunchParameters{
+					Value: types.LaunchParameters{
+						OperatingSystem: types.OperatingSystem("LINUX_X86_64"),
+						InstanceRequirements: &types.InstanceRequirements{
+							AllowedInstanceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						EphemeralVolumes: []types.EphemeralBlockDeviceMapping{
+							{
+								DeviceName:  ptr.String("__DeviceName__"),
+								VirtualName: ptr.String("__VirtualName__"),
+								Ebs: &types.EphemeralEBSVolumeConfiguration{
+									VolumeType:               types.EbsVolumeType("standard"),
+									Iops:                     ptr.Int32(1),
+									Throughput:               ptr.Int32(1),
+									Encrypted:                ptr.Bool(true),
+									KmsKeyId:                 ptr.String("__KmsKeyId__"),
+									SnapshotId:               ptr.String("__SnapshotId__"),
+									VolumeSize:               ptr.Int32(1),
+									VolumeInitializationRate: ptr.Int32(1),
+									EbsCardIndex:             ptr.Int32(1),
+								},
+							},
+							{
+								DeviceName:  ptr.String("__DeviceName__"),
+								VirtualName: ptr.String("__VirtualName__"),
+								Ebs: &types.EphemeralEBSVolumeConfiguration{
+									VolumeType:               types.EbsVolumeType("standard"),
+									Iops:                     ptr.Int32(1),
+									Throughput:               ptr.Int32(1),
+									Encrypted:                ptr.Bool(true),
+									KmsKeyId:                 ptr.String("__KmsKeyId__"),
+									SnapshotId:               ptr.String("__SnapshotId__"),
+									VolumeSize:               ptr.Int32(1),
+									VolumeInitializationRate: ptr.Int32(1),
+									EbsCardIndex:             ptr.Int32(1),
+								},
+							},
+						},
+						Monitoring: types.Monitoring("BASIC"),
+						LicenseSpecifications: []types.LicenseSpecification{
+							{
+								LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+							},
+							{
+								LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+							},
+						},
+						CapacityReservationSpecification: &types.CapacityReservationSpecification{
+							CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
+							CapacityReservationTarget: &types.CapacityReservationTarget{
+								CapacityReservationId:               ptr.String("__CapacityReservationId__"),
+								CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+							},
+						},
+						SshKeyName:         ptr.String("__SshKeyName__"),
+						InstanceProfileArn: ptr.String("__InstanceProfileArn__"),
+						PropagatedTags: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				VpcConfiguration: &types.VpcConfiguration{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Volumes: []types.VolumeConfiguration{
+					&types.VolumeConfigurationMemberEbsConfiguration{
+						Value: types.EbsVolumeConfiguration{
+							Name:       ptr.String("__Name__"),
+							SizeGiB:    ptr.Int32(1),
+							VolumeType: types.EbsVolumeType("standard"),
+							Iops:       ptr.Int32(1),
+							Throughput: ptr.Int32(1),
+							Encrypted:  ptr.Bool(true),
+							KmsKeyId:   ptr.String("__KmsKeyId__"),
+							SnapshotId: ptr.String("__SnapshotId__"),
+						},
+					},
+					&types.VolumeConfigurationMemberEbsConfiguration{
+						Value: types.EbsVolumeConfiguration{
+							Name:       ptr.String("__Name__"),
+							SizeGiB:    ptr.Int32(1),
+							VolumeType: types.EbsVolumeType("standard"),
+							Iops:       ptr.Int32(1),
+							Throughput: ptr.Int32(1),
+							Encrypted:  ptr.Bool(true),
+							KmsKeyId:   ptr.String("__KmsKeyId__"),
+							SnapshotId: ptr.String("__SnapshotId__"),
+						},
+					},
+				},
+				LifecycleConfiguration: &types.InstanceLifecycleConfiguration{
+					IdleInstanceTimeout: ptr.Int32(1),
+					MaxLifetime:         ptr.Int32(1),
+				},
+				RootVolume: &types.RootVolumeConfiguration{
+					VolumeType:   types.EbsVolumeType("standard"),
+					Iops:         ptr.Int32(1),
+					Throughput:   ptr.Int32(1),
+					Encrypted:    ptr.Bool(true),
+					KmsKeyId:     ptr.String("__KmsKeyId__"),
+					FreeSpaceGiB: ptr.Int32(1),
+				},
+			},
+		},
+		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCapacityProvider.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCapacityProvider(context.Background(), &GetCapacityProviderInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCapacityProvider.response", err)
 	}
 }
 
@@ -3472,6 +3984,108 @@ func TestCheckResponseSnapshot_GetGateway(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetGateway.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetGatewayRateLimit(t *testing.T) {
+	want := &GetGatewayRateLimitOutput{
+		RateLimitId:       ptr.String("__RateLimitId__"),
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		Description:       ptr.String("__Description__"),
+		DimensionKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Entries: []types.LimitEntry{
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+		},
+		Status:    types.GatewayRateLimitStatus("CREATING"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetGatewayRateLimit.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetGatewayRateLimit(context.Background(), &GetGatewayRateLimitInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetGatewayRateLimit.response", err)
 	}
 }
 
@@ -5192,6 +5806,39 @@ func TestCheckResponseSnapshot_ListAgentRuntimeVersions(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListAgentRuntimeVersionsByCapacityProvider(t *testing.T) {
+	want := &ListAgentRuntimeVersionsByCapacityProviderOutput{
+		AgentRuntimes: []types.AgentRuntimeVersionSummary{
+			{
+				AgentRuntimeArn:     ptr.String("__AgentRuntimeArn__"),
+				AgentRuntimeVersion: ptr.String("__AgentRuntimeVersion__"),
+				Status:              types.AgentRuntimeStatus("CREATING"),
+			},
+			{
+				AgentRuntimeArn:     ptr.String("__AgentRuntimeArn__"),
+				AgentRuntimeVersion: ptr.String("__AgentRuntimeVersion__"),
+				Status:              types.AgentRuntimeStatus("CREATING"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAgentRuntimeVersionsByCapacityProvider.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAgentRuntimeVersionsByCapacityProvider(context.Background(), &ListAgentRuntimeVersionsByCapacityProviderInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAgentRuntimeVersionsByCapacityProvider.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListAgentRuntimes(t *testing.T) {
 	want := &ListAgentRuntimesOutput{
 		AgentRuntimes: []types.AgentRuntime{
@@ -5353,6 +6000,43 @@ func TestCheckResponseSnapshot_ListBrowsers(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListBrowsers.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListCapacityProviders(t *testing.T) {
+	want := &ListCapacityProvidersOutput{
+		CapacityProviders: []types.CapacityProviderSummary{
+			{
+				CapacityProviderId:  ptr.String("__CapacityProviderId__"),
+				CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+				Name:                ptr.String("__Name__"),
+				Status:              types.CapacityProviderStatus("CREATING"),
+				LastUpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				CapacityProviderId:  ptr.String("__CapacityProviderId__"),
+				CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+				Name:                ptr.String("__Name__"),
+				Status:              types.CapacityProviderStatus("CREATING"),
+				LastUpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListCapacityProviders.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListCapacityProviders(context.Background(), &ListCapacityProvidersInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListCapacityProviders.response", err)
 	}
 }
 
@@ -5647,6 +6331,197 @@ func TestCheckResponseSnapshot_ListEvaluators(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListEvaluators.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListGatewayRateLimits(t *testing.T) {
+	want := &ListGatewayRateLimitsOutput{
+		RateLimits: []types.GatewayRateLimitDetail{
+			{
+				RateLimitId:       ptr.String("__RateLimitId__"),
+				GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+				Description:       ptr.String("__Description__"),
+				DimensionKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Entries: []types.LimitEntry{
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+				},
+				Status:    types.GatewayRateLimitStatus("CREATING"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				RateLimitId:       ptr.String("__RateLimitId__"),
+				GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+				Description:       ptr.String("__Description__"),
+				DimensionKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Entries: []types.LimitEntry{
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+				},
+				Status:    types.GatewayRateLimitStatus("CREATING"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListGatewayRateLimits.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListGatewayRateLimits(context.Background(), &ListGatewayRateLimitsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListGatewayRateLimits.response", err)
 	}
 }
 
@@ -7271,6 +8146,32 @@ func TestCheckResponseSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateCapacityProvider(t *testing.T) {
+	want := &UpdateCapacityProviderOutput{
+		CapacityProviderId:  ptr.String("__CapacityProviderId__"),
+		CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+		Name:                ptr.String("__Name__"),
+		Status:              types.CapacityProviderStatus("CREATING"),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastUpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateCapacityProvider.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateCapacityProvider(context.Background(), &UpdateCapacityProviderInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCapacityProvider.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateConfigurationBundle(t *testing.T) {
 	want := &UpdateConfigurationBundleOutput{
 		BundleArn: ptr.String("__BundleArn__"),
@@ -7562,6 +8463,108 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateGateway.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateGatewayRateLimit(t *testing.T) {
+	want := &UpdateGatewayRateLimitOutput{
+		RateLimitId:       ptr.String("__RateLimitId__"),
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		Description:       ptr.String("__Description__"),
+		DimensionKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Entries: []types.LimitEntry{
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+		},
+		Status:    types.GatewayRateLimitStatus("CREATING"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateGatewayRateLimit.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateGatewayRateLimit(context.Background(), &UpdateGatewayRateLimitInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateGatewayRateLimit.response", err)
 	}
 }
 
@@ -9093,6 +10096,31 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ResourceNotFoundException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_RetryableConflictException(t *testing.T) {
+	want := &types.RetryableConflictException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RetryableConflictException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.RetryableConflictException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.RetryableConflictException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "RetryableConflictException.error", err)
 	}
 }
 

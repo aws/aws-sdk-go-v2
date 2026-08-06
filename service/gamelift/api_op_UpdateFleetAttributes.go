@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This API works with the following fleet types: EC2, Anywhere, Container
+//	This API works with the following fleet types: EC2, Anywhere
 //
 // Updates a fleet's mutable attributes, such as game session protection and
 // resource creation limits.

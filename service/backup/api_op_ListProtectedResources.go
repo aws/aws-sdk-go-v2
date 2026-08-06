@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of resources successfully backed up by Backup, including the
-// time the resource was saved, an Amazon Resource Name (ARN) of the resource, and
-// a resource type.
+// Returns an array of resources with recovery points created by Backup
+// (regardless of the recovery point's [status]), including the time the resource was
+// saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
+//
+// [status]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DescribeRecoveryPoint.html#Backup-DescribeRecoveryPoint-response-Status
 func (c *Client) ListProtectedResources(ctx context.Context, params *ListProtectedResourcesInput, optFns ...func(*Options)) (*ListProtectedResourcesOutput, error) {
 	if params == nil {
 		params = &ListProtectedResourcesInput{}

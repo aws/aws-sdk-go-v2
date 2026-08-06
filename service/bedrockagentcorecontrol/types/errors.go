@@ -217,6 +217,32 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The operation failed because of a conflicting request. Retry the request.
+type RetryableConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RetryableConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RetryableConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RetryableConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RetryableConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RetryableConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An internal error occurred.
 type ServiceException struct {
 	Message *string

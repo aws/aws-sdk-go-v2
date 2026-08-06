@@ -1,0 +1,8 @@
+{
+    "id": "42e9990c-6e7f-42be-96ae-e3af79712268",
+    "type": "feature",
+    "description": "Add support for Gateway rate limits and Runtime instances in Amazon Bedrock AgentCore. Customers can now configure rate limits scoped to control request rates, token consumption rates, and active connection rates. Customers can now create capacity providers to launch runtimes on their EC2 instances.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

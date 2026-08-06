@@ -150,6 +150,8 @@ type FilterLogEventsInput struct {
 
 	// The start of the time range, expressed as the number of milliseconds after Jan
 	// 1, 1970 00:00:00 UTC . Events with a timestamp before this time are not returned.
+	//
+	// Set startTime explicitly to reduce the chances of empty pages in the response.
 	StartTime *int64
 
 	// Specify true to display the log event fields with all sensitive data unmasked

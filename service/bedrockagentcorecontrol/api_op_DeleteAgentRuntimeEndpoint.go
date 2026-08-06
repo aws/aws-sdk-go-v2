@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AAgentCore Runtime endpoint.
+// Deletes an AgentCore Runtime endpoint.
 func (c *Client) DeleteAgentRuntimeEndpoint(ctx context.Context, params *DeleteAgentRuntimeEndpointInput, optFns ...func(*Options)) (*DeleteAgentRuntimeEndpointOutput, error) {
 	if params == nil {
 		params = &DeleteAgentRuntimeEndpointInput{}

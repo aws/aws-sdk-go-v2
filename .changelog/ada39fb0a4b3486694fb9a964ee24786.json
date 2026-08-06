@@ -1,0 +1,8 @@
+{
+    "id": "ada39fb0-a4b3-4866-94fb-9a964ee24786",
+    "type": "feature",
+    "description": "Releases new Model Customization SequenceLength parameter for Training and g7 instance types for Training and Processing.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

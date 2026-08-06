@@ -16137,6 +16137,9 @@ func validateOpCreateSecondaryNetworkInput(v *CreateSecondaryNetworkInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSecondaryNetworkInput"}
+	if v.Ipv4CidrBlock == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ipv4CidrBlock"))
+	}
 	if len(v.NetworkType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkType"))
 	}

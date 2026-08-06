@@ -51,6 +51,11 @@ type PutFunctionInput struct {
 	// This member is required.
 	FunctionType types.FunctionType
 
+	// The configuration for a CONCURRENT_EXECUTOR function. Specifies the list of
+	// child functions to run in parallel, the maximum concurrency, an optional output
+	// block, and a timeout. Required when FunctionType is CONCURRENT_EXECUTOR .
+	ConcurrentExecutorConfiguration *types.ConcurrentExecutorConfiguration
+
 	// The configuration for a CUSTOM_OUTPUT function. Specifies the runtime and
 	// output expressions. Required when FunctionType is CUSTOM_OUTPUT .
 	CustomOutputConfiguration *types.CustomOutputConfiguration
@@ -93,6 +98,9 @@ type PutFunctionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the function.
 	Arn *string
+
+	// The configuration for a CONCURRENT_EXECUTOR function.
+	ConcurrentExecutorConfiguration *types.ConcurrentExecutorConfiguration
 
 	// The configuration for a CUSTOM_OUTPUT function.
 	CustomOutputConfiguration *types.CustomOutputConfiguration

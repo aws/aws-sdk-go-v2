@@ -49,6 +49,13 @@ type GetSpotPlacementScoresInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
+	// Specify true so that the response returns scores that include Local Zones.
+	// Otherwise, the response ignores Local Zones.
+	//
+	// When you request regional scores, Local Zone capacity counts toward its parent
+	// Region.
+	IncludeLocalZones *bool
+
 	// The attributes for the instance types. When you specify instance attributes,
 	// Amazon EC2 will identify instance types with those attributes.
 	//

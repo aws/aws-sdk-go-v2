@@ -946,6 +946,27 @@ const (
 	EC2InstanceTypeR7a24xlarge   EC2InstanceType = "r7a.24xlarge"
 	EC2InstanceTypeR7a32xlarge   EC2InstanceType = "r7a.32xlarge"
 	EC2InstanceTypeR7a48xlarge   EC2InstanceType = "r7a.48xlarge"
+	EC2InstanceTypeC8aMedium     EC2InstanceType = "c8a.medium"
+	EC2InstanceTypeC8aLarge      EC2InstanceType = "c8a.large"
+	EC2InstanceTypeC8aXlarge     EC2InstanceType = "c8a.xlarge"
+	EC2InstanceTypeC8a2xlarge    EC2InstanceType = "c8a.2xlarge"
+	EC2InstanceTypeC8iLarge      EC2InstanceType = "c8i.large"
+	EC2InstanceTypeC8iXlarge     EC2InstanceType = "c8i.xlarge"
+	EC2InstanceTypeC8i2xlarge    EC2InstanceType = "c8i.2xlarge"
+	EC2InstanceTypeC9gMedium     EC2InstanceType = "c9g.medium"
+	EC2InstanceTypeC9gLarge      EC2InstanceType = "c9g.large"
+	EC2InstanceTypeC9gXlarge     EC2InstanceType = "c9g.xlarge"
+	EC2InstanceTypeC9g2xlarge    EC2InstanceType = "c9g.2xlarge"
+	EC2InstanceTypeM8aMedium     EC2InstanceType = "m8a.medium"
+	EC2InstanceTypeM8aLarge      EC2InstanceType = "m8a.large"
+	EC2InstanceTypeM8aXlarge     EC2InstanceType = "m8a.xlarge"
+	EC2InstanceTypeM8a2xlarge    EC2InstanceType = "m8a.2xlarge"
+	EC2InstanceTypeM8iLarge      EC2InstanceType = "m8i.large"
+	EC2InstanceTypeM8iXlarge     EC2InstanceType = "m8i.xlarge"
+	EC2InstanceTypeM8i2xlarge    EC2InstanceType = "m8i.2xlarge"
+	EC2InstanceTypeM9gLarge      EC2InstanceType = "m9g.large"
+	EC2InstanceTypeM9gXlarge     EC2InstanceType = "m9g.xlarge"
+	EC2InstanceTypeM9g2xlarge    EC2InstanceType = "m9g.2xlarge"
 )
 
 // Values returns all known values for EC2InstanceType. Note that this can be
@@ -1459,6 +1480,27 @@ func (EC2InstanceType) Values() []EC2InstanceType {
 		"r7a.24xlarge",
 		"r7a.32xlarge",
 		"r7a.48xlarge",
+		"c8a.medium",
+		"c8a.large",
+		"c8a.xlarge",
+		"c8a.2xlarge",
+		"c8i.large",
+		"c8i.xlarge",
+		"c8i.2xlarge",
+		"c9g.medium",
+		"c9g.large",
+		"c9g.xlarge",
+		"c9g.2xlarge",
+		"m8a.medium",
+		"m8a.large",
+		"m8a.xlarge",
+		"m8a.2xlarge",
+		"m8i.large",
+		"m8i.xlarge",
+		"m8i.2xlarge",
+		"m9g.large",
+		"m9g.xlarge",
+		"m9g.2xlarge",
 	}
 }
 

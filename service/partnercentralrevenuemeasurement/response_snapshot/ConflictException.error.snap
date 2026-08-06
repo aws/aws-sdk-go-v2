@@ -3,4 +3,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
-£gMessagek__Message__fReasonuCONFLICT_CLIENT_TOKENf__typeqConflictException
+£f__typeqConflictExceptiongMessagek__Message__fReasonuCONFLICT_CLIENT_TOKEN

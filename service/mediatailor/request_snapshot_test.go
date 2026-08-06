@@ -2005,6 +2005,26 @@ func TestCheckRequestSnapshot_PutFunction(t *testing.T) {
 				"key0": "__Value__",
 			},
 		},
+		ConcurrentExecutorConfiguration: &types.ConcurrentExecutorConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			FunctionList: []types.FunctionRef{
+				{
+					RunCondition: ptr.String("__RunCondition__"),
+					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
+				},
+				{
+					RunCondition: ptr.String("__RunCondition__"),
+					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
+				},
+			},
+			TimeoutMilliseconds: ptr.Int32(1),
+			MaxConcurrency:      ptr.Int32(1),
+		},
 		SequentialExecutorConfiguration: &types.SequentialExecutorConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
 			Output: map[string]string{
@@ -2014,10 +2034,12 @@ func TestCheckRequestSnapshot_PutFunction(t *testing.T) {
 				{
 					RunCondition: ptr.String("__RunCondition__"),
 					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
 				},
 				{
 					RunCondition: ptr.String("__RunCondition__"),
 					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
 				},
 			},
 			TimeoutMilliseconds: ptr.Int32(1),
@@ -4868,6 +4890,26 @@ func TestUpdateRequestSnapshot_PutFunction(t *testing.T) {
 				"key0": "__Value__",
 			},
 		},
+		ConcurrentExecutorConfiguration: &types.ConcurrentExecutorConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			FunctionList: []types.FunctionRef{
+				{
+					RunCondition: ptr.String("__RunCondition__"),
+					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
+				},
+				{
+					RunCondition: ptr.String("__RunCondition__"),
+					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
+				},
+			},
+			TimeoutMilliseconds: ptr.Int32(1),
+			MaxConcurrency:      ptr.Int32(1),
+		},
 		SequentialExecutorConfiguration: &types.SequentialExecutorConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
 			Output: map[string]string{
@@ -4877,10 +4919,12 @@ func TestUpdateRequestSnapshot_PutFunction(t *testing.T) {
 				{
 					RunCondition: ptr.String("__RunCondition__"),
 					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
 				},
 				{
 					RunCondition: ptr.String("__RunCondition__"),
 					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
 				},
 			},
 			TimeoutMilliseconds: ptr.Int32(1),

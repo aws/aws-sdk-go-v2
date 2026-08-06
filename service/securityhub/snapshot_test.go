@@ -1166,6 +1166,18 @@ func TestCheckSnapshot_ListFindingAggregators(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListFreeTrialStatusesV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFreeTrialStatusesV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFreeTrialStatusesV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListInvitations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListInvitations(context.Background(), nil, func(o *Options) {
@@ -2550,6 +2562,18 @@ func TestUpdateSnapshot_ListFindingAggregators(t *testing.T) {
 	_, err := svc.ListFindingAggregators(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFindingAggregators")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFreeTrialStatusesV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFreeTrialStatusesV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFreeTrialStatusesV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

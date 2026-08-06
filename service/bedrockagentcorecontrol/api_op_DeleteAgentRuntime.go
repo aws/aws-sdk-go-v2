@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Bedrock AgentCore Runtime.
+// Deletes an Amazon Bedrock AgentCore Runtime, or a single version of an
+// AgentCore Runtime when you provide the version qualifier.
 func (c *Client) DeleteAgentRuntime(ctx context.Context, params *DeleteAgentRuntimeInput, optFns ...func(*Options)) (*DeleteAgentRuntimeOutput, error) {
 	if params == nil {
 		params = &DeleteAgentRuntimeInput{}
@@ -33,6 +34,11 @@ type DeleteAgentRuntimeInput struct {
 	// This member is required.
 	AgentRuntimeId *string
 
+	// The version of the AgentCore Runtime to delete. When you provide this value,
+	// only that version is deleted. When you omit it, the entire AgentCore Runtime and
+	// all of its versions are deleted.
+	AgentRuntimeVersion *string
+
 	// A unique, case-sensitive identifier to ensure that the operation completes no
 	// more than one time. If this token matches a previous request, the service
 	// ignores the request but does not return an error.
@@ -50,6 +56,10 @@ type DeleteAgentRuntimeOutput struct {
 
 	// The unique identifier of the AgentCore Runtime.
 	AgentRuntimeId *string
+
+	// The version of the AgentCore Runtime that was deleted. This value is present
+	// only when you delete a single version.
+	AgentRuntimeVersion *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

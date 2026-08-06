@@ -95759,6 +95759,15 @@ func awsAwsjson11_deserializeDocumentServerlessJobConfig(v **types.ServerlessJob
 				sv.Peft = types.Peft(jtv)
 			}
 
+		case "SequenceLength":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SequenceLength to be of type string, got %T instead", value)
+				}
+				sv.SequenceLength = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

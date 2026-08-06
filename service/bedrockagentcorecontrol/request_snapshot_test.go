@@ -219,6 +219,196 @@ func TestCheckRequestSnapshot_AddDatasetExamples(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_BatchPutGatewayRateLimits(t *testing.T) {
+	input := &BatchPutGatewayRateLimitsInput{
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+		RateLimits: []types.BatchPutLimitEntry{
+			{
+				RateLimitId: ptr.String("__RateLimitId__"),
+				Description: ptr.String("__Description__"),
+				DimensionKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Entries: []types.LimitEntry{
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+				},
+			},
+			{
+				RateLimitId: ptr.String("__RateLimitId__"),
+				Description: ptr.String("__Description__"),
+				DimensionKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Entries: []types.LimitEntry{
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchPutGatewayRateLimits(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchPutGatewayRateLimits"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 	input := &CreateAgentRuntimeInput{
 		AgentRuntimeName: ptr.String("__AgentRuntimeName__"),
@@ -350,6 +540,9 @@ func TestCheckRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 					MountPath: ptr.String("__MountPath__"),
 				},
 			},
+		},
+		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
+			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -588,6 +781,157 @@ func TestCheckRequestSnapshot_CreateBrowserProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBrowserProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateCapacityProvider(t *testing.T) {
+	input := &CreateCapacityProviderInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		PermissionsConfiguration: &types.PermissionsConfiguration{
+			CapacityProviderOperatorRoleArn: ptr.String("__CapacityProviderOperatorRoleArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ComputeConfiguration: &types.ComputeConfigurationMemberEc2Configuration{
+			Value: types.Ec2Configuration{
+				LaunchTemplateSource: &types.LaunchTemplateSourceMemberLaunchParameters{
+					Value: types.LaunchParameters{
+						OperatingSystem: types.OperatingSystem("LINUX_X86_64"),
+						InstanceRequirements: &types.InstanceRequirements{
+							AllowedInstanceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						EphemeralVolumes: []types.EphemeralBlockDeviceMapping{
+							{
+								DeviceName:  ptr.String("__DeviceName__"),
+								VirtualName: ptr.String("__VirtualName__"),
+								Ebs: &types.EphemeralEBSVolumeConfiguration{
+									VolumeType:               types.EbsVolumeType("standard"),
+									Iops:                     ptr.Int32(1),
+									Throughput:               ptr.Int32(1),
+									Encrypted:                ptr.Bool(true),
+									KmsKeyId:                 ptr.String("__KmsKeyId__"),
+									SnapshotId:               ptr.String("__SnapshotId__"),
+									VolumeSize:               ptr.Int32(1),
+									VolumeInitializationRate: ptr.Int32(1),
+									EbsCardIndex:             ptr.Int32(1),
+								},
+							},
+							{
+								DeviceName:  ptr.String("__DeviceName__"),
+								VirtualName: ptr.String("__VirtualName__"),
+								Ebs: &types.EphemeralEBSVolumeConfiguration{
+									VolumeType:               types.EbsVolumeType("standard"),
+									Iops:                     ptr.Int32(1),
+									Throughput:               ptr.Int32(1),
+									Encrypted:                ptr.Bool(true),
+									KmsKeyId:                 ptr.String("__KmsKeyId__"),
+									SnapshotId:               ptr.String("__SnapshotId__"),
+									VolumeSize:               ptr.Int32(1),
+									VolumeInitializationRate: ptr.Int32(1),
+									EbsCardIndex:             ptr.Int32(1),
+								},
+							},
+						},
+						Monitoring: types.Monitoring("BASIC"),
+						LicenseSpecifications: []types.LicenseSpecification{
+							{
+								LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+							},
+							{
+								LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+							},
+						},
+						CapacityReservationSpecification: &types.CapacityReservationSpecification{
+							CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
+							CapacityReservationTarget: &types.CapacityReservationTarget{
+								CapacityReservationId:               ptr.String("__CapacityReservationId__"),
+								CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+							},
+						},
+						SshKeyName:         ptr.String("__SshKeyName__"),
+						InstanceProfileArn: ptr.String("__InstanceProfileArn__"),
+						PropagatedTags: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				VpcConfiguration: &types.VpcConfiguration{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Volumes: []types.VolumeConfiguration{
+					&types.VolumeConfigurationMemberEbsConfiguration{
+						Value: types.EbsVolumeConfiguration{
+							Name:       ptr.String("__Name__"),
+							SizeGiB:    ptr.Int32(1),
+							VolumeType: types.EbsVolumeType("standard"),
+							Iops:       ptr.Int32(1),
+							Throughput: ptr.Int32(1),
+							Encrypted:  ptr.Bool(true),
+							KmsKeyId:   ptr.String("__KmsKeyId__"),
+							SnapshotId: ptr.String("__SnapshotId__"),
+						},
+					},
+					&types.VolumeConfigurationMemberEbsConfiguration{
+						Value: types.EbsVolumeConfiguration{
+							Name:       ptr.String("__Name__"),
+							SizeGiB:    ptr.Int32(1),
+							VolumeType: types.EbsVolumeType("standard"),
+							Iops:       ptr.Int32(1),
+							Throughput: ptr.Int32(1),
+							Encrypted:  ptr.Bool(true),
+							KmsKeyId:   ptr.String("__KmsKeyId__"),
+							SnapshotId: ptr.String("__SnapshotId__"),
+						},
+					},
+				},
+				LifecycleConfiguration: &types.InstanceLifecycleConfiguration{
+					IdleInstanceTimeout: ptr.Int32(1),
+					MaxLifetime:         ptr.Int32(1),
+				},
+				RootVolume: &types.RootVolumeConfiguration{
+					VolumeType:   types.EbsVolumeType("standard"),
+					Iops:         ptr.Int32(1),
+					Throughput:   ptr.Int32(1),
+					Encrypted:    ptr.Bool(true),
+					KmsKeyId:     ptr.String("__KmsKeyId__"),
+					FreeSpaceGiB: ptr.Int32(1),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateCapacityProvider(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCapacityProvider"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1035,6 +1379,112 @@ func TestCheckRequestSnapshot_CreateGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateGatewayRateLimit(t *testing.T) {
+	input := &CreateGatewayRateLimitInput{
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+		RateLimitId:       ptr.String("__RateLimitId__"),
+		Description:       ptr.String("__Description__"),
+		DimensionKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Entries: []types.LimitEntry{
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateGatewayRateLimit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGatewayRateLimit"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2390,8 +2840,9 @@ func TestCheckRequestSnapshot_CreateWorkloadIdentity(t *testing.T) {
 
 func TestCheckRequestSnapshot_DeleteAgentRuntime(t *testing.T) {
 	input := &DeleteAgentRuntimeInput{
-		AgentRuntimeId: ptr.String("__AgentRuntimeId__"),
-		ClientToken:    ptr.String("__ClientToken__"),
+		AgentRuntimeId:      ptr.String("__AgentRuntimeId__"),
+		AgentRuntimeVersion: ptr.String("__AgentRuntimeVersion__"),
+		ClientToken:         ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2524,6 +2975,34 @@ func TestCheckRequestSnapshot_DeleteBrowserProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBrowserProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteCapacityProvider(t *testing.T) {
+	input := &DeleteCapacityProviderInput{
+		CapacityProviderId: ptr.String("__CapacityProviderId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteCapacityProvider(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCapacityProvider"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2693,6 +3172,34 @@ func TestCheckRequestSnapshot_DeleteGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteGatewayRateLimit(t *testing.T) {
+	input := &DeleteGatewayRateLimitInput{
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		RateLimitId:       ptr.String("__RateLimitId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteGatewayRateLimit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGatewayRateLimit"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3278,6 +3785,33 @@ func TestCheckRequestSnapshot_GetBrowserProfile(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetCapacityProvider(t *testing.T) {
+	input := &GetCapacityProviderInput{
+		CapacityProviderId: ptr.String("__CapacityProviderId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCapacityProvider(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCapacityProvider"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetCodeInterpreter(t *testing.T) {
 	input := &GetCodeInterpreterInput{
 		CodeInterpreterId: ptr.String("__CodeInterpreterId__"),
@@ -3440,6 +3974,34 @@ func TestCheckRequestSnapshot_GetGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetGatewayRateLimit(t *testing.T) {
+	input := &GetGatewayRateLimitInput{
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		RateLimitId:       ptr.String("__RateLimitId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetGatewayRateLimit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGatewayRateLimit"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4108,6 +4670,35 @@ func TestCheckRequestSnapshot_ListAgentRuntimeVersions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListAgentRuntimeVersionsByCapacityProvider(t *testing.T) {
+	input := &ListAgentRuntimeVersionsByCapacityProviderInput{
+		CapacityProviderId: ptr.String("__CapacityProviderId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentRuntimeVersionsByCapacityProvider(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRuntimeVersionsByCapacityProvider"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListApiKeyCredentialProviders(t *testing.T) {
 	input := &ListApiKeyCredentialProvidersInput{
 		NextToken:  ptr.String("__NextToken__"),
@@ -4190,6 +4781,34 @@ func TestCheckRequestSnapshot_ListBrowsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBrowsers"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListCapacityProviders(t *testing.T) {
+	input := &ListCapacityProvidersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListCapacityProviders(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCapacityProviders"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4396,6 +5015,35 @@ func TestCheckRequestSnapshot_ListEvaluators(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEvaluators"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListGatewayRateLimits(t *testing.T) {
+	input := &ListGatewayRateLimitsInput{
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListGatewayRateLimits(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGatewayRateLimits"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5410,6 +6058,9 @@ func TestCheckRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 				},
 			},
 		},
+		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
+			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -5495,6 +6146,37 @@ func TestCheckRequestSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateApiKeyCredentialProvider"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateCapacityProvider(t *testing.T) {
+	input := &UpdateCapacityProviderInput{
+		CapacityProviderId: ptr.String("__CapacityProviderId__"),
+		Description: &types.UpdatedDescription{
+			OptionalValue: ptr.String("__OptionalValue__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCapacityProvider(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCapacityProvider"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5858,6 +6540,107 @@ func TestCheckRequestSnapshot_UpdateGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateGatewayRateLimit(t *testing.T) {
+	input := &UpdateGatewayRateLimitInput{
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		RateLimitId:       ptr.String("__RateLimitId__"),
+		Description:       ptr.String("__Description__"),
+		Entries: []types.LimitEntry{
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateGatewayRateLimit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGatewayRateLimit"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7505,6 +8288,196 @@ func TestUpdateRequestSnapshot_AddDatasetExamples(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_BatchPutGatewayRateLimits(t *testing.T) {
+	input := &BatchPutGatewayRateLimitsInput{
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+		RateLimits: []types.BatchPutLimitEntry{
+			{
+				RateLimitId: ptr.String("__RateLimitId__"),
+				Description: ptr.String("__Description__"),
+				DimensionKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Entries: []types.LimitEntry{
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+				},
+			},
+			{
+				RateLimitId: ptr.String("__RateLimitId__"),
+				Description: ptr.String("__Description__"),
+				DimensionKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Entries: []types.LimitEntry{
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+					{
+						Dimensions: map[string]string{
+							"key0": "__Value__",
+						},
+						Requests: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Tokens: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+						Connections: []types.RateConfig{
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+							{
+								Rate:   ptr.Float64(1.0),
+								Period: types.Period("second"),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchPutGatewayRateLimits(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchPutGatewayRateLimits"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 	input := &CreateAgentRuntimeInput{
 		AgentRuntimeName: ptr.String("__AgentRuntimeName__"),
@@ -7636,6 +8609,9 @@ func TestUpdateRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 					MountPath: ptr.String("__MountPath__"),
 				},
 			},
+		},
+		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
+			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -7874,6 +8850,157 @@ func TestUpdateRequestSnapshot_CreateBrowserProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBrowserProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateCapacityProvider(t *testing.T) {
+	input := &CreateCapacityProviderInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		PermissionsConfiguration: &types.PermissionsConfiguration{
+			CapacityProviderOperatorRoleArn: ptr.String("__CapacityProviderOperatorRoleArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ComputeConfiguration: &types.ComputeConfigurationMemberEc2Configuration{
+			Value: types.Ec2Configuration{
+				LaunchTemplateSource: &types.LaunchTemplateSourceMemberLaunchParameters{
+					Value: types.LaunchParameters{
+						OperatingSystem: types.OperatingSystem("LINUX_X86_64"),
+						InstanceRequirements: &types.InstanceRequirements{
+							AllowedInstanceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						EphemeralVolumes: []types.EphemeralBlockDeviceMapping{
+							{
+								DeviceName:  ptr.String("__DeviceName__"),
+								VirtualName: ptr.String("__VirtualName__"),
+								Ebs: &types.EphemeralEBSVolumeConfiguration{
+									VolumeType:               types.EbsVolumeType("standard"),
+									Iops:                     ptr.Int32(1),
+									Throughput:               ptr.Int32(1),
+									Encrypted:                ptr.Bool(true),
+									KmsKeyId:                 ptr.String("__KmsKeyId__"),
+									SnapshotId:               ptr.String("__SnapshotId__"),
+									VolumeSize:               ptr.Int32(1),
+									VolumeInitializationRate: ptr.Int32(1),
+									EbsCardIndex:             ptr.Int32(1),
+								},
+							},
+							{
+								DeviceName:  ptr.String("__DeviceName__"),
+								VirtualName: ptr.String("__VirtualName__"),
+								Ebs: &types.EphemeralEBSVolumeConfiguration{
+									VolumeType:               types.EbsVolumeType("standard"),
+									Iops:                     ptr.Int32(1),
+									Throughput:               ptr.Int32(1),
+									Encrypted:                ptr.Bool(true),
+									KmsKeyId:                 ptr.String("__KmsKeyId__"),
+									SnapshotId:               ptr.String("__SnapshotId__"),
+									VolumeSize:               ptr.Int32(1),
+									VolumeInitializationRate: ptr.Int32(1),
+									EbsCardIndex:             ptr.Int32(1),
+								},
+							},
+						},
+						Monitoring: types.Monitoring("BASIC"),
+						LicenseSpecifications: []types.LicenseSpecification{
+							{
+								LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+							},
+							{
+								LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+							},
+						},
+						CapacityReservationSpecification: &types.CapacityReservationSpecification{
+							CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
+							CapacityReservationTarget: &types.CapacityReservationTarget{
+								CapacityReservationId:               ptr.String("__CapacityReservationId__"),
+								CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+							},
+						},
+						SshKeyName:         ptr.String("__SshKeyName__"),
+						InstanceProfileArn: ptr.String("__InstanceProfileArn__"),
+						PropagatedTags: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				VpcConfiguration: &types.VpcConfiguration{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Volumes: []types.VolumeConfiguration{
+					&types.VolumeConfigurationMemberEbsConfiguration{
+						Value: types.EbsVolumeConfiguration{
+							Name:       ptr.String("__Name__"),
+							SizeGiB:    ptr.Int32(1),
+							VolumeType: types.EbsVolumeType("standard"),
+							Iops:       ptr.Int32(1),
+							Throughput: ptr.Int32(1),
+							Encrypted:  ptr.Bool(true),
+							KmsKeyId:   ptr.String("__KmsKeyId__"),
+							SnapshotId: ptr.String("__SnapshotId__"),
+						},
+					},
+					&types.VolumeConfigurationMemberEbsConfiguration{
+						Value: types.EbsVolumeConfiguration{
+							Name:       ptr.String("__Name__"),
+							SizeGiB:    ptr.Int32(1),
+							VolumeType: types.EbsVolumeType("standard"),
+							Iops:       ptr.Int32(1),
+							Throughput: ptr.Int32(1),
+							Encrypted:  ptr.Bool(true),
+							KmsKeyId:   ptr.String("__KmsKeyId__"),
+							SnapshotId: ptr.String("__SnapshotId__"),
+						},
+					},
+				},
+				LifecycleConfiguration: &types.InstanceLifecycleConfiguration{
+					IdleInstanceTimeout: ptr.Int32(1),
+					MaxLifetime:         ptr.Int32(1),
+				},
+				RootVolume: &types.RootVolumeConfiguration{
+					VolumeType:   types.EbsVolumeType("standard"),
+					Iops:         ptr.Int32(1),
+					Throughput:   ptr.Int32(1),
+					Encrypted:    ptr.Bool(true),
+					KmsKeyId:     ptr.String("__KmsKeyId__"),
+					FreeSpaceGiB: ptr.Int32(1),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateCapacityProvider(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCapacityProvider"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8321,6 +9448,112 @@ func TestUpdateRequestSnapshot_CreateGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateGatewayRateLimit(t *testing.T) {
+	input := &CreateGatewayRateLimitInput{
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+		RateLimitId:       ptr.String("__RateLimitId__"),
+		Description:       ptr.String("__Description__"),
+		DimensionKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Entries: []types.LimitEntry{
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateGatewayRateLimit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGatewayRateLimit"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -9676,8 +10909,9 @@ func TestUpdateRequestSnapshot_CreateWorkloadIdentity(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DeleteAgentRuntime(t *testing.T) {
 	input := &DeleteAgentRuntimeInput{
-		AgentRuntimeId: ptr.String("__AgentRuntimeId__"),
-		ClientToken:    ptr.String("__ClientToken__"),
+		AgentRuntimeId:      ptr.String("__AgentRuntimeId__"),
+		AgentRuntimeVersion: ptr.String("__AgentRuntimeVersion__"),
+		ClientToken:         ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9810,6 +11044,34 @@ func TestUpdateRequestSnapshot_DeleteBrowserProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBrowserProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteCapacityProvider(t *testing.T) {
+	input := &DeleteCapacityProviderInput{
+		CapacityProviderId: ptr.String("__CapacityProviderId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteCapacityProvider(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCapacityProvider"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -9979,6 +11241,34 @@ func TestUpdateRequestSnapshot_DeleteGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteGatewayRateLimit(t *testing.T) {
+	input := &DeleteGatewayRateLimitInput{
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		RateLimitId:       ptr.String("__RateLimitId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteGatewayRateLimit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGatewayRateLimit"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10564,6 +11854,33 @@ func TestUpdateRequestSnapshot_GetBrowserProfile(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetCapacityProvider(t *testing.T) {
+	input := &GetCapacityProviderInput{
+		CapacityProviderId: ptr.String("__CapacityProviderId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCapacityProvider(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCapacityProvider"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetCodeInterpreter(t *testing.T) {
 	input := &GetCodeInterpreterInput{
 		CodeInterpreterId: ptr.String("__CodeInterpreterId__"),
@@ -10726,6 +12043,34 @@ func TestUpdateRequestSnapshot_GetGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetGatewayRateLimit(t *testing.T) {
+	input := &GetGatewayRateLimitInput{
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		RateLimitId:       ptr.String("__RateLimitId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetGatewayRateLimit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGatewayRateLimit"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -11394,6 +12739,35 @@ func TestUpdateRequestSnapshot_ListAgentRuntimeVersions(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListAgentRuntimeVersionsByCapacityProvider(t *testing.T) {
+	input := &ListAgentRuntimeVersionsByCapacityProviderInput{
+		CapacityProviderId: ptr.String("__CapacityProviderId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentRuntimeVersionsByCapacityProvider(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRuntimeVersionsByCapacityProvider"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListApiKeyCredentialProviders(t *testing.T) {
 	input := &ListApiKeyCredentialProvidersInput{
 		NextToken:  ptr.String("__NextToken__"),
@@ -11476,6 +12850,34 @@ func TestUpdateRequestSnapshot_ListBrowsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBrowsers"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListCapacityProviders(t *testing.T) {
+	input := &ListCapacityProvidersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListCapacityProviders(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCapacityProviders"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -11682,6 +13084,35 @@ func TestUpdateRequestSnapshot_ListEvaluators(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEvaluators"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListGatewayRateLimits(t *testing.T) {
+	input := &ListGatewayRateLimitsInput{
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListGatewayRateLimits(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGatewayRateLimits"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -12696,6 +14127,9 @@ func TestUpdateRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 				},
 			},
 		},
+		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
+			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -12781,6 +14215,37 @@ func TestUpdateRequestSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateApiKeyCredentialProvider"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateCapacityProvider(t *testing.T) {
+	input := &UpdateCapacityProviderInput{
+		CapacityProviderId: ptr.String("__CapacityProviderId__"),
+		Description: &types.UpdatedDescription{
+			OptionalValue: ptr.String("__OptionalValue__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCapacityProvider(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCapacityProvider"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -13144,6 +14609,107 @@ func TestUpdateRequestSnapshot_UpdateGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateGatewayRateLimit(t *testing.T) {
+	input := &UpdateGatewayRateLimitInput{
+		GatewayIdentifier: ptr.String("__GatewayIdentifier__"),
+		RateLimitId:       ptr.String("__RateLimitId__"),
+		Description:       ptr.String("__Description__"),
+		Entries: []types.LimitEntry{
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+			{
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Requests: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Tokens: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+				Connections: []types.RateConfig{
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+					{
+						Rate:   ptr.Float64(1.0),
+						Period: types.Period("second"),
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateGatewayRateLimit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGatewayRateLimit"); err != nil {
 		t.Fatal(err)
 	}
 }

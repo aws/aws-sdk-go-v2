@@ -44,8 +44,9 @@ type UpdateLookupTableInput struct {
 	// use an Amazon Web Services-owned key instead, specify an empty string.
 	KmsKeyId *string
 
-	// The ID of a completed CloudWatch Logs query whose results replace the lookup
-	// table content.
+	// The ID of a completed or cancelled CloudWatch Logs query whose results replace
+	// the lookup table content. A cancelled query replaces the content with the
+	// partial results that were available when the query was stopped.
 	//
 	// You must specify either tableBody or queryId , but not both.
 	QueryId *string

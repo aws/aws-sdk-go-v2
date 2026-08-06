@@ -26,6 +26,9 @@ func ExampleAcceptedTerm_outputUsage() {
 	case *types.AcceptedTermMemberLegalTerm:
 		_ = v.Value // Value is types.LegalTerm
 
+	case *types.AcceptedTermMemberNetPaymentTerm:
+		_ = v.Value // Value is types.NetPaymentTerm
+
 	case *types.AcceptedTermMemberPaymentScheduleTerm:
 		_ = v.Value // Value is types.PaymentScheduleTerm
 
@@ -56,18 +59,19 @@ func ExampleAcceptedTerm_outputUsage() {
 	}
 }
 
-var _ *types.PaymentScheduleTerm
 var _ *types.FixedUpfrontPricingTerm
-var _ *types.ValidityTerm
-var _ *types.RecurringPaymentTerm
 var _ *types.UsageBasedPricingTerm
 var _ *types.RenewalTerm
-var _ *types.VariablePaymentTerm
 var _ *types.FreeTrialPricingTerm
 var _ *types.LegalTerm
-var _ *types.ConfigurableUpfrontPricingTerm
 var _ *types.ByolPricingTerm
 var _ *types.SupportTerm
+var _ *types.PaymentScheduleTerm
+var _ *types.ValidityTerm
+var _ *types.RecurringPaymentTerm
+var _ *types.NetPaymentTerm
+var _ *types.VariablePaymentTerm
+var _ *types.ConfigurableUpfrontPricingTerm
 
 func ExampleRequestedTermConfiguration_outputUsage() {
 	var union types.RequestedTermConfiguration

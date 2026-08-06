@@ -499,6 +499,29 @@ func TestCheckResponseSnapshot_DeleteBatchEvaluation(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteCapacityProviderSession(t *testing.T) {
+	want := &DeleteCapacityProviderSessionOutput{
+		CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+		SessionId:           ptr.String("__SessionId__"),
+		Status:              types.CapacityProviderSessionStatus("Provisioning"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteCapacityProviderSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteCapacityProviderSession(context.Background(), &DeleteCapacityProviderSessionInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteCapacityProviderSession.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteEvent(t *testing.T) {
 	want := &DeleteEventOutput{
 		EventId: ptr.String("__EventId__"),

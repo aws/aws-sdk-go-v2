@@ -1,0 +1,8 @@
+{
+    "id": "c374ae63-11f8-495d-bc44-a7b29bea1bb7",
+    "type": "feature",
+    "description": "EC2 Auto Scaling now supports being managed by other AWS services via the operator field.",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

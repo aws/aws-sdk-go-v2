@@ -100,6 +100,7 @@
         "api_op_ListConnectorsV2.go",
         "api_op_ListEnabledProductsForImport.go",
         "api_op_ListFindingAggregators.go",
+        "api_op_ListFreeTrialStatusesV2.go",
         "api_op_ListInvitations.go",
         "api_op_ListMembers.go",
         "api_op_ListOrganizationAdminAccounts.go",

@@ -210,6 +210,26 @@ func (m *validateOpDeleteBatchEvaluation) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteCapacityProviderSession struct {
+}
+
+func (*validateOpDeleteCapacityProviderSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCapacityProviderSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCapacityProviderSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCapacityProviderSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEvent struct {
 }
 
@@ -1288,6 +1308,10 @@ func addOpDeleteABTestValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteBatchEvaluationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBatchEvaluation{}, middleware.After)
+}
+
+func addOpDeleteCapacityProviderSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCapacityProviderSession{}, middleware.After)
 }
 
 func addOpDeleteEventValidationMiddleware(stack *middleware.Stack) error {
@@ -4344,6 +4368,24 @@ func validateOpDeleteBatchEvaluationInput(v *DeleteBatchEvaluationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBatchEvaluationInput"}
 	if v.BatchEvaluationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BatchEvaluationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCapacityProviderSessionInput(v *DeleteCapacityProviderSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCapacityProviderSessionInput"}
+	if v.CapacityProviderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityProviderId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

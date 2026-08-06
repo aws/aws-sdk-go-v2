@@ -39,11 +39,6 @@ type UpdateAgentRuntimeInput struct {
 	// This member is required.
 	AgentRuntimeId *string
 
-	// The updated network configuration for the AgentCore Runtime.
-	//
-	// This member is required.
-	NetworkConfiguration *types.NetworkConfiguration
-
 	// The updated IAM role ARN that provides permissions for the AgentCore Runtime.
 	//
 	// This member is required.
@@ -51,6 +46,9 @@ type UpdateAgentRuntimeInput struct {
 
 	// The updated authorizer configuration for the AgentCore Runtime.
 	AuthorizerConfiguration types.AuthorizerConfiguration
+
+	// The updated capacity provider configuration for the AgentCore Runtime.
+	CapacityProviderConfiguration *types.CapacityProviderConfiguration
 
 	// A unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
@@ -70,6 +68,9 @@ type UpdateAgentRuntimeInput struct {
 	// The updated configuration for microVM Metadata Service (MMDS) settings for the
 	// AgentCore Runtime.
 	MetadataConfiguration *types.RuntimeMetadataConfiguration
+
+	// The updated network configuration for the AgentCore Runtime.
+	NetworkConfiguration *types.NetworkConfiguration
 
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.

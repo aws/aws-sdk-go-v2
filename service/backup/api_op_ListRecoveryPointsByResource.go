@@ -44,7 +44,8 @@ type ListRecoveryPointsByResourceInput struct {
 	// with the selected resources that are managed by Backup.
 	//
 	// If this is set to FALSE , the response will contain all recovery points
-	// associated with the selected resource.
+	// associated with the selected resource, except for EBS snapshots copied within
+	// the same Region and account.
 	//
 	// Type: Boolean
 	ManagedByAWSBackupOnly bool

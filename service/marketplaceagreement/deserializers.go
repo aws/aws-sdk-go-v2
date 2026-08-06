@@ -3434,6 +3434,16 @@ loop:
 			uv = &types.AcceptedTermMemberLegalTerm{Value: mv}
 			break loop
 
+		case "netPaymentTerm":
+			var mv types.NetPaymentTerm
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentNetPaymentTerm(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AcceptedTermMemberNetPaymentTerm{Value: mv}
+			break loop
+
 		case "paymentScheduleTerm":
 			var mv types.PaymentScheduleTerm
 			destAddr := &mv
@@ -6128,6 +6138,64 @@ func awsAwsjson10_deserializeDocumentLegalTerm(v **types.LegalTerm, value interf
 					return fmt.Errorf("expected TermId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UnversionedTermType to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentNetPaymentTerm(v **types.NetPaymentTerm, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetPaymentTerm
+	if *v == nil {
+		sv = &types.NetPaymentTerm{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TermId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "paymentDuePeriod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedString to be of type string, got %T instead", value)
+				}
+				sv.PaymentDuePeriod = ptr.String(jtv)
 			}
 
 		case "type":

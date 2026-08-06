@@ -5136,6 +5136,64 @@ func awsRestjson1_deserializeDocumentListingSummaryList(v *[]types.ListingSummar
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNetPaymentTerm(v **types.NetPaymentTerm, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetPaymentTerm
+	if *v == nil {
+		sv = &types.NetPaymentTerm{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TermId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "paymentDuePeriod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedString to be of type string, got %T instead", value)
+				}
+				sv.PaymentDuePeriod = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TermType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.TermType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOfferAssociatedEntity(v **types.OfferAssociatedEntity, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5453,6 +5511,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.OfferTermMemberLegalTerm{Value: mv}
+			break loop
+
+		case "netPaymentTerm":
+			var mv types.NetPaymentTerm
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentNetPaymentTerm(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OfferTermMemberNetPaymentTerm{Value: mv}
 			break loop
 
 		case "paymentScheduleTerm":

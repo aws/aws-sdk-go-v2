@@ -106,6 +106,8 @@ type GetLogEventsInput struct {
 	// 1, 1970 00:00:00 UTC . Events with a timestamp equal to this time or later than
 	// this time are included. Events with a timestamp earlier than this time are not
 	// included.
+	//
+	// Set startTime explicitly to reduce the chances of empty pages in the response.
 	StartTime *int64
 
 	// Specify true to display the log event fields with all sensitive data unmasked

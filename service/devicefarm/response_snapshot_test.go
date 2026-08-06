@@ -1395,6 +1395,24 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 			},
 			VideoEndpoint: ptr.String("__VideoEndpoint__"),
 			VideoCapture:  ptr.Bool(true),
+			Insights: &types.JobInsights{
+				Status: types.ReportStatus("PENDING"),
+				TestReport: &types.TestReport{
+					Message: ptr.String("__Message__"),
+					Metrics: &types.TestReportMetrics{
+						TestsTotal:                         ptr.Int32(1),
+						TestsPassed:                        ptr.Int32(1),
+						TestsFailed:                        ptr.Int32(1),
+						TestsSkipped:                       ptr.Int32(1),
+						TestsErrored:                       ptr.Int32(1),
+						TestsOther:                         ptr.Int32(1),
+						TestsPassedPercentage:              ptr.Float64(1.0),
+						TotalTestExecutionDurationSeconds:  ptr.Float64(1.0),
+						MedianTestExecutionDurationSeconds: ptr.Float64(1.0),
+					},
+					TestDetailsUrl: ptr.String("__TestDetailsUrl__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetJob.response")
@@ -1834,6 +1852,29 @@ func TestCheckResponseSnapshot_GetRun(t *testing.T) {
 				{
 					Name:  ptr.String("__Name__"),
 					Value: ptr.String("__Value__"),
+				},
+			},
+			InsightsTypes: []types.InsightsType{
+				types.InsightsType("TEST_REPORT"),
+				types.InsightsType("TEST_REPORT"),
+			},
+			Insights: &types.RunInsights{
+				Status: types.ReportStatus("PENDING"),
+				JobReport: &types.JobReport{
+					Message: ptr.String("__Message__"),
+					Metrics: &types.JobReportMetrics{
+						JobsTotal:                          ptr.Int32(1),
+						JobsPassed:                         ptr.Int32(1),
+						JobsFailed:                         ptr.Int32(1),
+						JobsSkipped:                        ptr.Int32(1),
+						JobsErrored:                        ptr.Int32(1),
+						JobsStopped:                        ptr.Int32(1),
+						JobsPassedPercentage:               ptr.Float64(1.0),
+						TotalJobExecutionDurationSeconds:   ptr.Float64(1.0),
+						AverageJobExecutionDurationSeconds: ptr.Float64(1.0),
+						MedianJobExecutionDurationSeconds:  ptr.Float64(1.0),
+					},
+					JobDetailsUrl: ptr.String("__JobDetailsUrl__"),
 				},
 			},
 		},
@@ -2581,6 +2622,24 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 				},
 				VideoEndpoint: ptr.String("__VideoEndpoint__"),
 				VideoCapture:  ptr.Bool(true),
+				Insights: &types.JobInsights{
+					Status: types.ReportStatus("PENDING"),
+					TestReport: &types.TestReport{
+						Message: ptr.String("__Message__"),
+						Metrics: &types.TestReportMetrics{
+							TestsTotal:                         ptr.Int32(1),
+							TestsPassed:                        ptr.Int32(1),
+							TestsFailed:                        ptr.Int32(1),
+							TestsSkipped:                       ptr.Int32(1),
+							TestsErrored:                       ptr.Int32(1),
+							TestsOther:                         ptr.Int32(1),
+							TestsPassedPercentage:              ptr.Float64(1.0),
+							TotalTestExecutionDurationSeconds:  ptr.Float64(1.0),
+							MedianTestExecutionDurationSeconds: ptr.Float64(1.0),
+						},
+						TestDetailsUrl: ptr.String("__TestDetailsUrl__"),
+					},
+				},
 			},
 			{
 				Arn:     ptr.String("__Arn__"),
@@ -2682,6 +2741,24 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 				},
 				VideoEndpoint: ptr.String("__VideoEndpoint__"),
 				VideoCapture:  ptr.Bool(true),
+				Insights: &types.JobInsights{
+					Status: types.ReportStatus("PENDING"),
+					TestReport: &types.TestReport{
+						Message: ptr.String("__Message__"),
+						Metrics: &types.TestReportMetrics{
+							TestsTotal:                         ptr.Int32(1),
+							TestsPassed:                        ptr.Int32(1),
+							TestsFailed:                        ptr.Int32(1),
+							TestsSkipped:                       ptr.Int32(1),
+							TestsErrored:                       ptr.Int32(1),
+							TestsOther:                         ptr.Int32(1),
+							TestsPassedPercentage:              ptr.Float64(1.0),
+							TotalTestExecutionDurationSeconds:  ptr.Float64(1.0),
+							MedianTestExecutionDurationSeconds: ptr.Float64(1.0),
+						},
+						TestDetailsUrl: ptr.String("__TestDetailsUrl__"),
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3405,6 +3482,29 @@ func TestCheckResponseSnapshot_ListRuns(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				InsightsTypes: []types.InsightsType{
+					types.InsightsType("TEST_REPORT"),
+					types.InsightsType("TEST_REPORT"),
+				},
+				Insights: &types.RunInsights{
+					Status: types.ReportStatus("PENDING"),
+					JobReport: &types.JobReport{
+						Message: ptr.String("__Message__"),
+						Metrics: &types.JobReportMetrics{
+							JobsTotal:                          ptr.Int32(1),
+							JobsPassed:                         ptr.Int32(1),
+							JobsFailed:                         ptr.Int32(1),
+							JobsSkipped:                        ptr.Int32(1),
+							JobsErrored:                        ptr.Int32(1),
+							JobsStopped:                        ptr.Int32(1),
+							JobsPassedPercentage:               ptr.Float64(1.0),
+							TotalJobExecutionDurationSeconds:   ptr.Float64(1.0),
+							AverageJobExecutionDurationSeconds: ptr.Float64(1.0),
+							MedianJobExecutionDurationSeconds:  ptr.Float64(1.0),
+						},
+						JobDetailsUrl: ptr.String("__JobDetailsUrl__"),
+					},
+				},
 			},
 			{
 				Arn:      ptr.String("__Arn__"),
@@ -3529,6 +3629,29 @@ func TestCheckResponseSnapshot_ListRuns(t *testing.T) {
 					{
 						Name:  ptr.String("__Name__"),
 						Value: ptr.String("__Value__"),
+					},
+				},
+				InsightsTypes: []types.InsightsType{
+					types.InsightsType("TEST_REPORT"),
+					types.InsightsType("TEST_REPORT"),
+				},
+				Insights: &types.RunInsights{
+					Status: types.ReportStatus("PENDING"),
+					JobReport: &types.JobReport{
+						Message: ptr.String("__Message__"),
+						Metrics: &types.JobReportMetrics{
+							JobsTotal:                          ptr.Int32(1),
+							JobsPassed:                         ptr.Int32(1),
+							JobsFailed:                         ptr.Int32(1),
+							JobsSkipped:                        ptr.Int32(1),
+							JobsErrored:                        ptr.Int32(1),
+							JobsStopped:                        ptr.Int32(1),
+							JobsPassedPercentage:               ptr.Float64(1.0),
+							TotalJobExecutionDurationSeconds:   ptr.Float64(1.0),
+							AverageJobExecutionDurationSeconds: ptr.Float64(1.0),
+							MedianJobExecutionDurationSeconds:  ptr.Float64(1.0),
+						},
+						JobDetailsUrl: ptr.String("__JobDetailsUrl__"),
 					},
 				},
 			},
@@ -4657,6 +4780,29 @@ func TestCheckResponseSnapshot_ScheduleRun(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
+			InsightsTypes: []types.InsightsType{
+				types.InsightsType("TEST_REPORT"),
+				types.InsightsType("TEST_REPORT"),
+			},
+			Insights: &types.RunInsights{
+				Status: types.ReportStatus("PENDING"),
+				JobReport: &types.JobReport{
+					Message: ptr.String("__Message__"),
+					Metrics: &types.JobReportMetrics{
+						JobsTotal:                          ptr.Int32(1),
+						JobsPassed:                         ptr.Int32(1),
+						JobsFailed:                         ptr.Int32(1),
+						JobsSkipped:                        ptr.Int32(1),
+						JobsErrored:                        ptr.Int32(1),
+						JobsStopped:                        ptr.Int32(1),
+						JobsPassedPercentage:               ptr.Float64(1.0),
+						TotalJobExecutionDurationSeconds:   ptr.Float64(1.0),
+						AverageJobExecutionDurationSeconds: ptr.Float64(1.0),
+						MedianJobExecutionDurationSeconds:  ptr.Float64(1.0),
+					},
+					JobDetailsUrl: ptr.String("__JobDetailsUrl__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ScheduleRun.response")
@@ -4778,6 +4924,24 @@ func TestCheckResponseSnapshot_StopJob(t *testing.T) {
 			},
 			VideoEndpoint: ptr.String("__VideoEndpoint__"),
 			VideoCapture:  ptr.Bool(true),
+			Insights: &types.JobInsights{
+				Status: types.ReportStatus("PENDING"),
+				TestReport: &types.TestReport{
+					Message: ptr.String("__Message__"),
+					Metrics: &types.TestReportMetrics{
+						TestsTotal:                         ptr.Int32(1),
+						TestsPassed:                        ptr.Int32(1),
+						TestsFailed:                        ptr.Int32(1),
+						TestsSkipped:                       ptr.Int32(1),
+						TestsErrored:                       ptr.Int32(1),
+						TestsOther:                         ptr.Int32(1),
+						TestsPassedPercentage:              ptr.Float64(1.0),
+						TotalTestExecutionDurationSeconds:  ptr.Float64(1.0),
+						MedianTestExecutionDurationSeconds: ptr.Float64(1.0),
+					},
+					TestDetailsUrl: ptr.String("__TestDetailsUrl__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StopJob.response")
@@ -5056,6 +5220,29 @@ func TestCheckResponseSnapshot_StopRun(t *testing.T) {
 				{
 					Name:  ptr.String("__Name__"),
 					Value: ptr.String("__Value__"),
+				},
+			},
+			InsightsTypes: []types.InsightsType{
+				types.InsightsType("TEST_REPORT"),
+				types.InsightsType("TEST_REPORT"),
+			},
+			Insights: &types.RunInsights{
+				Status: types.ReportStatus("PENDING"),
+				JobReport: &types.JobReport{
+					Message: ptr.String("__Message__"),
+					Metrics: &types.JobReportMetrics{
+						JobsTotal:                          ptr.Int32(1),
+						JobsPassed:                         ptr.Int32(1),
+						JobsFailed:                         ptr.Int32(1),
+						JobsSkipped:                        ptr.Int32(1),
+						JobsErrored:                        ptr.Int32(1),
+						JobsStopped:                        ptr.Int32(1),
+						JobsPassedPercentage:               ptr.Float64(1.0),
+						TotalJobExecutionDurationSeconds:   ptr.Float64(1.0),
+						AverageJobExecutionDurationSeconds: ptr.Float64(1.0),
+						MedianJobExecutionDurationSeconds:  ptr.Float64(1.0),
+					},
+					JobDetailsUrl: ptr.String("__JobDetailsUrl__"),
 				},
 			},
 		},

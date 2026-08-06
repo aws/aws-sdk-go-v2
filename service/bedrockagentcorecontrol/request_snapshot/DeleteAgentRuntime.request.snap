@@ -1,3 +1,3 @@
-DELETE /runtimes/__AgentRuntimeId__/?clientToken=__ClientToken__
+DELETE /runtimes/__AgentRuntimeId__/?clientToken=__ClientToken__&version=__AgentRuntimeVersion__
 
 

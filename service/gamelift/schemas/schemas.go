@@ -1335,7 +1335,7 @@ var _ContainerVcpu = smithy.NewSchema(smithy.ShapeID{
 var _CustomEventData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "CustomEventData",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _CustomInputLocationStringModel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -1475,7 +1475,7 @@ var _EC2InstanceLimitList_member *smithy.Schema
 var EC2InstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "EC2InstanceType",
-}, smithy.ShapeTypeEnum, 505)
+}, smithy.ShapeTypeEnum, 526)
 var EC2InstanceType_t2_micro *smithy.Schema
 
 var EC2InstanceType_t2_small *smithy.Schema
@@ -2486,6 +2486,48 @@ var EC2InstanceType_r7a_32xlarge *smithy.Schema
 
 var EC2InstanceType_r7a_48xlarge *smithy.Schema
 
+var EC2InstanceType_c8a_medium *smithy.Schema
+
+var EC2InstanceType_c8a_large *smithy.Schema
+
+var EC2InstanceType_c8a_xlarge *smithy.Schema
+
+var EC2InstanceType_c8a_2xlarge *smithy.Schema
+
+var EC2InstanceType_c8i_large *smithy.Schema
+
+var EC2InstanceType_c8i_xlarge *smithy.Schema
+
+var EC2InstanceType_c8i_2xlarge *smithy.Schema
+
+var EC2InstanceType_c9g_medium *smithy.Schema
+
+var EC2InstanceType_c9g_large *smithy.Schema
+
+var EC2InstanceType_c9g_xlarge *smithy.Schema
+
+var EC2InstanceType_c9g_2xlarge *smithy.Schema
+
+var EC2InstanceType_m8a_medium *smithy.Schema
+
+var EC2InstanceType_m8a_large *smithy.Schema
+
+var EC2InstanceType_m8a_xlarge *smithy.Schema
+
+var EC2InstanceType_m8a_2xlarge *smithy.Schema
+
+var EC2InstanceType_m8i_large *smithy.Schema
+
+var EC2InstanceType_m8i_xlarge *smithy.Schema
+
+var EC2InstanceType_m8i_2xlarge *smithy.Schema
+
+var EC2InstanceType_m9g_large *smithy.Schema
+
+var EC2InstanceType_m9g_xlarge *smithy.Schema
+
+var EC2InstanceType_m9g_2xlarge *smithy.Schema
+
 var Event = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "Event",
@@ -2929,7 +2971,7 @@ var _GamePropertyList_member *smithy.Schema
 var _GamePropertyValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "GamePropertyValue",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var GameServer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -3030,7 +3072,7 @@ var _GameServerContainerGroupsPerInstance = smithy.NewSchema(smithy.ShapeID{
 var _GameServerData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "GameServerData",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var GameServerGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -3467,7 +3509,7 @@ var GameSessionCreationLimitPolicy_PolicyPeriodInMinutes *smithy.Schema
 var _GameSessionData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "GameSessionData",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var GameSessionDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -3819,7 +3861,7 @@ var _IpRange = smithy.NewSchema(smithy.ShapeID{
 var _LargeGameSessionData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "LargeGameSessionData",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _LatencyMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -4149,7 +4191,7 @@ var _MatchedPlayerSessionList_member *smithy.Schema
 var _MatchmakerData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "MatchmakerData",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _MatchmakingAcceptanceTimeoutInteger = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -4553,7 +4595,7 @@ var _PlayerConnectionEndpointList_member *smithy.Schema
 var _PlayerData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "PlayerData",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _PlayerDataMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -4768,7 +4810,7 @@ var _QueueArnsList_member *smithy.Schema
 var _QueueCustomEventData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "QueueCustomEventData",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _QueueSnsArnStringModel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -8593,6 +8635,48 @@ func init() {
 	EC2InstanceType_r7a_32xlarge = EC2InstanceType.AddMember("r7a_32xlarge", smithyprelude.Unit)
 
 	EC2InstanceType_r7a_48xlarge = EC2InstanceType.AddMember("r7a_48xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c8a_medium = EC2InstanceType.AddMember("c8a_medium", smithyprelude.Unit)
+
+	EC2InstanceType_c8a_large = EC2InstanceType.AddMember("c8a_large", smithyprelude.Unit)
+
+	EC2InstanceType_c8a_xlarge = EC2InstanceType.AddMember("c8a_xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c8a_2xlarge = EC2InstanceType.AddMember("c8a_2xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c8i_large = EC2InstanceType.AddMember("c8i_large", smithyprelude.Unit)
+
+	EC2InstanceType_c8i_xlarge = EC2InstanceType.AddMember("c8i_xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c8i_2xlarge = EC2InstanceType.AddMember("c8i_2xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c9g_medium = EC2InstanceType.AddMember("c9g_medium", smithyprelude.Unit)
+
+	EC2InstanceType_c9g_large = EC2InstanceType.AddMember("c9g_large", smithyprelude.Unit)
+
+	EC2InstanceType_c9g_xlarge = EC2InstanceType.AddMember("c9g_xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c9g_2xlarge = EC2InstanceType.AddMember("c9g_2xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m8a_medium = EC2InstanceType.AddMember("m8a_medium", smithyprelude.Unit)
+
+	EC2InstanceType_m8a_large = EC2InstanceType.AddMember("m8a_large", smithyprelude.Unit)
+
+	EC2InstanceType_m8a_xlarge = EC2InstanceType.AddMember("m8a_xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m8a_2xlarge = EC2InstanceType.AddMember("m8a_2xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m8i_large = EC2InstanceType.AddMember("m8i_large", smithyprelude.Unit)
+
+	EC2InstanceType_m8i_xlarge = EC2InstanceType.AddMember("m8i_xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m8i_2xlarge = EC2InstanceType.AddMember("m8i_2xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m9g_large = EC2InstanceType.AddMember("m9g_large", smithyprelude.Unit)
+
+	EC2InstanceType_m9g_xlarge = EC2InstanceType.AddMember("m9g_xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m9g_2xlarge = EC2InstanceType.AddMember("m9g_2xlarge", smithyprelude.Unit)
 
 	ContainerAttribute_ContainerName = ContainerAttribute.AddMember("ContainerName", _NonZeroAnd128MaxAsciiString)
 

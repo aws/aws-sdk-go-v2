@@ -739,6 +739,11 @@ type Job struct {
 	// Represents the total (metered or unmetered) minutes used by the job.
 	DeviceMinutes *DeviceMinutes
 
+	// The insights for the job, including the report status and test-level metrics.
+	// This field contains data only if you specified insightsTypes when you scheduled
+	// the run.
+	Insights *JobInsights
+
 	// The ARN of the instance.
 	InstanceArn *string
 
@@ -835,6 +840,70 @@ type Job struct {
 
 	// The endpoint for streaming device video.
 	VideoEndpoint *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains insights for a job, including report status, and test-level aggregated
+// metrics such as per test execution time and median test execution time.
+type JobInsights struct {
+
+	// The status of the insights report for the job.
+	Status ReportStatus
+
+	// The test-level aggregated report for the job.
+	TestReport *TestReport
+
+	noSmithyDocumentSerde
+}
+
+// Contains aggregated job-level metrics for a run.
+type JobReport struct {
+
+	// A URL to the detailed job results.
+	JobDetailsUrl *string
+
+	// A message associated with the job report.
+	Message *string
+
+	// The aggregated job-level metrics for the run.
+	Metrics *JobReportMetrics
+
+	noSmithyDocumentSerde
+}
+
+// Contains aggregated metrics across all jobs in a run.
+type JobReportMetrics struct {
+
+	// The average execution duration of jobs in the run, in seconds.
+	AverageJobExecutionDurationSeconds *float64
+
+	// The number of jobs that errored.
+	JobsErrored *int32
+
+	// The number of jobs that failed.
+	JobsFailed *int32
+
+	// The number of jobs that passed.
+	JobsPassed *int32
+
+	// The percentage of jobs that passed.
+	JobsPassedPercentage *float64
+
+	// The number of jobs that were skipped.
+	JobsSkipped *int32
+
+	// The number of jobs that were stopped.
+	JobsStopped *int32
+
+	// The total number of jobs in the run.
+	JobsTotal *int32
+
+	// The median execution duration of jobs in the run, in seconds.
+	MedianJobExecutionDurationSeconds *float64
+
+	// The total execution duration of all jobs in the run, in seconds.
+	TotalJobExecutionDurationSeconds *float64
 
 	noSmithyDocumentSerde
 }
@@ -1382,6 +1451,14 @@ type Run struct {
 	// The IAM role associated with the run.
 	ExecutionRoleArn *string
 
+	// The insights for the run, including the report status and job-level metrics.
+	// This field contains data only if you specified insightsTypes when you scheduled
+	// the run.
+	Insights *RunInsights
+
+	// The types of insights requested for the run.
+	InsightsTypes []InsightsType
+
 	// The number of minutes the job executes before it times out.
 	JobTimeoutMinutes *int32
 
@@ -1530,6 +1607,19 @@ type Run struct {
 	noSmithyDocumentSerde
 }
 
+// Contains insights for a run, including report status, and job-level aggregated
+// metrics such as per job execution time and median job execution time.
+type RunInsights struct {
+
+	// The job-level aggregated report for the run.
+	JobReport *JobReport
+
+	// The status of the insights report for the run.
+	Status ReportStatus
+
+	noSmithyDocumentSerde
+}
+
 // Represents a sample of performance data.
 type Sample struct {
 
@@ -1617,6 +1707,13 @@ type ScheduleRunConfiguration struct {
 	// The ARN of the extra data for the run. The extra data is a .zip file that AWS
 	// Device Farm extracts to external data for Android or the app's sandbox for iOS.
 	ExtraDataPackageArn *string
+
+	// The types of insights to generate for a run. Specify one or more values to opt
+	// in to insights generation when scheduling a run.
+	//
+	// Insights are currently supported for custom mode runs with Instrumentation,
+	// Appium Java TestNG, and XCTest UI test types.
+	InsightsTypes []InsightsType
 
 	// Information about the locale that is used for the run.
 	Locale *string
@@ -2076,6 +2173,54 @@ type TestGridVpcConfig struct {
 	//
 	// This member is required.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains aggregated test-level metrics for a job.
+type TestReport struct {
+
+	// A message associated with the test report.
+	Message *string
+
+	// The aggregated test-level metrics for the job.
+	Metrics *TestReportMetrics
+
+	// A URL to the detailed test results.
+	TestDetailsUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains aggregated metrics across all tests in a job.
+type TestReportMetrics struct {
+
+	// The median execution duration of tests in the job, in seconds.
+	MedianTestExecutionDurationSeconds *float64
+
+	// The number of tests that errored.
+	TestsErrored *int32
+
+	// The number of tests that failed.
+	TestsFailed *int32
+
+	// The number of tests with other result types.
+	TestsOther *int32
+
+	// The number of tests that passed.
+	TestsPassed *int32
+
+	// The percentage of tests that passed.
+	TestsPassedPercentage *float64
+
+	// The number of tests that were skipped.
+	TestsSkipped *int32
+
+	// The total number of tests in the job.
+	TestsTotal *int32
+
+	// The total execution duration of all tests in the job, in seconds.
+	TotalTestExecutionDurationSeconds *float64
 
 	noSmithyDocumentSerde
 }

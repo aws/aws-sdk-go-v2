@@ -4106,6 +4106,11 @@ func awsRestjson1_deserializeOpDocumentGetFunctionOutput(v **GetFunctionOutput, 
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "ConcurrentExecutorConfiguration":
+			if err := awsRestjson1_deserializeDocumentConcurrentExecutorConfiguration(&sv.ConcurrentExecutorConfiguration, value); err != nil {
+				return err
+			}
+
 		case "CustomOutputConfiguration":
 			if err := awsRestjson1_deserializeDocumentCustomOutputConfiguration(&sv.CustomOutputConfiguration, value); err != nil {
 				return err
@@ -6345,6 +6350,11 @@ func awsRestjson1_deserializeOpDocumentPutFunctionOutput(v **PutFunctionOutput, 
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "ConcurrentExecutorConfiguration":
+			if err := awsRestjson1_deserializeDocumentConcurrentExecutorConfiguration(&sv.ConcurrentExecutorConfiguration, value); err != nil {
+				return err
 			}
 
 		case "CustomOutputConfiguration":
@@ -10348,6 +10358,82 @@ func awsRestjson1_deserializeDocumentClipRange(v **types.ClipRange, value interf
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentConcurrentExecutorConfiguration(v **types.ConcurrentExecutorConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConcurrentExecutorConfiguration
+	if *v == nil {
+		sv = &types.ConcurrentExecutorConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FunctionList":
+			if err := awsRestjson1_deserializeDocument__listOfFunctionsRef(&sv.FunctionList, value); err != nil {
+				return err
+			}
+
+		case "MaxConcurrency":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxConcurrency = ptr.Int32(int32(i64))
+			}
+
+		case "Output":
+			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Output, value); err != nil {
+				return err
+			}
+
+		case "Runtime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuntimeType to be of type string, got %T instead", value)
+				}
+				sv.Runtime = types.RuntimeType(jtv)
+			}
+
+		case "TimeoutMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutMilliseconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConfigurationAliasesResponse(v *map[string]map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10648,6 +10734,11 @@ func awsRestjson1_deserializeDocumentFunction(v **types.Function, value interfac
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "ConcurrentExecutorConfiguration":
+			if err := awsRestjson1_deserializeDocumentConcurrentExecutorConfiguration(&sv.ConcurrentExecutorConfiguration, value); err != nil {
+				return err
+			}
+
 		case "CustomOutputConfiguration":
 			if err := awsRestjson1_deserializeDocumentCustomOutputConfiguration(&sv.CustomOutputConfiguration, value); err != nil {
 				return err
@@ -10762,6 +10853,15 @@ func awsRestjson1_deserializeDocumentFunctionRef(v **types.FunctionRef, value in
 
 	for key, value := range shape {
 		switch key {
+		case "Alias":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Alias = ptr.String(jtv)
+			}
+
 		case "FunctionId":
 			if value != nil {
 				jtv, ok := value.(string)

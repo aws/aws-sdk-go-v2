@@ -7157,6 +7157,12 @@ const (
 	ProcessingInstanceTypeMlG7e12xlarge  ProcessingInstanceType = "ml.g7e.12xlarge"
 	ProcessingInstanceTypeMlG7e24xlarge  ProcessingInstanceType = "ml.g7e.24xlarge"
 	ProcessingInstanceTypeMlG7e48xlarge  ProcessingInstanceType = "ml.g7e.48xlarge"
+	ProcessingInstanceTypeMlG72xlarge    ProcessingInstanceType = "ml.g7.2xlarge"
+	ProcessingInstanceTypeMlG74xlarge    ProcessingInstanceType = "ml.g7.4xlarge"
+	ProcessingInstanceTypeMlG78xlarge    ProcessingInstanceType = "ml.g7.8xlarge"
+	ProcessingInstanceTypeMlG712xlarge   ProcessingInstanceType = "ml.g7.12xlarge"
+	ProcessingInstanceTypeMlG724xlarge   ProcessingInstanceType = "ml.g7.24xlarge"
+	ProcessingInstanceTypeMlG748xlarge   ProcessingInstanceType = "ml.g7.48xlarge"
 )
 
 // Values returns all known values for ProcessingInstanceType. Note that this can
@@ -7292,6 +7298,12 @@ func (ProcessingInstanceType) Values() []ProcessingInstanceType {
 		"ml.g7e.12xlarge",
 		"ml.g7e.24xlarge",
 		"ml.g7e.48xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
 	}
 }
 
@@ -10131,6 +10143,12 @@ const (
 	TrainingInstanceTypeMlG7e12xlarge      TrainingInstanceType = "ml.g7e.12xlarge"
 	TrainingInstanceTypeMlG7e24xlarge      TrainingInstanceType = "ml.g7e.24xlarge"
 	TrainingInstanceTypeMlG7e48xlarge      TrainingInstanceType = "ml.g7e.48xlarge"
+	TrainingInstanceTypeMlG72xlarge        TrainingInstanceType = "ml.g7.2xlarge"
+	TrainingInstanceTypeMlG74xlarge        TrainingInstanceType = "ml.g7.4xlarge"
+	TrainingInstanceTypeMlG78xlarge        TrainingInstanceType = "ml.g7.8xlarge"
+	TrainingInstanceTypeMlG712xlarge       TrainingInstanceType = "ml.g7.12xlarge"
+	TrainingInstanceTypeMlG724xlarge       TrainingInstanceType = "ml.g7.24xlarge"
+	TrainingInstanceTypeMlG748xlarge       TrainingInstanceType = "ml.g7.48xlarge"
 )
 
 // Values returns all known values for TrainingInstanceType. Note that this can be
@@ -10284,6 +10302,12 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.g7e.12xlarge",
 		"ml.g7e.24xlarge",
 		"ml.g7e.48xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
 	}
 }
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This API works with the following fleet types: EC2, Container
+//	This API works with the following fleet types: EC2, Anywhere, Container
 //
 // Adds remote locations to an EC2 and begins populating the new locations with
 // instances. The new instances conform to the fleet's instance type, auto-scaling,

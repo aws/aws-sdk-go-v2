@@ -1,0 +1,8 @@
+{
+    "id": "8b5d344d-d219-4089-98cd-161150ff2750",
+    "type": "feature",
+    "description": "AWS Backup now lets you create read-only access points for Amazon S3 recovery points, enabling you to access backup data using S3 APIs without initiating a restore.",
+    "modules": [
+        "service/backup"
+    ]
+}

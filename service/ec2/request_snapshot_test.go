@@ -27790,9 +27790,10 @@ func TestCheckRequestSnapshot_GetSpotPlacementScores(t *testing.T) {
 				RequireEncryptionInTransit: ptr.Bool(true),
 			},
 		},
-		DryRun:     ptr.Bool(true),
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		DryRun:            ptr.Bool(true),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		IncludeLocalZones: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -66339,9 +66340,10 @@ func TestUpdateRequestSnapshot_GetSpotPlacementScores(t *testing.T) {
 				RequireEncryptionInTransit: ptr.Bool(true),
 			},
 		},
-		DryRun:     ptr.Bool(true),
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		DryRun:            ptr.Bool(true),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		IncludeLocalZones: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
