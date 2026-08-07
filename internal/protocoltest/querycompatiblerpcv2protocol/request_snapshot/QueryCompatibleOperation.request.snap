@@ -1,0 +1,6 @@
+POST /service/QueryCompatibleRpcV2Protocol/operation/QueryCompatibleOperation
+
+Accept: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+X-Amzn-Query-Mode: true
+

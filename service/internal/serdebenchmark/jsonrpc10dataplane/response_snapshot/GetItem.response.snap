@@ -1,5 +1,5 @@
 200
 Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AwsJsonRpc10DataPlane.
+X-Amz-Target: AwsJsonRpc10DataPlane.GetItem
 
 {"ConsumedCapacity":{"CapacityUnits":1,"ReadCapacityUnits":1,"TableName":"__TableName__","WriteCapacityUnits":1},"Item":{"key0":{"S":"__AttributeValueMemberS__"}}}

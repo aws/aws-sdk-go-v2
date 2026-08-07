@@ -1,11 +1,8 @@
 GetObject
 	Initialize stack step
 		AWSChecksum:SetupOutputContext
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		S3Shared:ARNLookup
-		SetLogger
 		OperationInputValidation
+		S3Shared:ARNLookup
 	Serialize stack step
 		putBucketContext
 		setOperationInput
@@ -41,7 +38,6 @@ GetObject
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer

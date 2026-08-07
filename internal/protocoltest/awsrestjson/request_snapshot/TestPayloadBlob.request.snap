@@ -1,0 +1,5 @@
+POST /blob_payload
+
+Content-Type: __ContentType__
+
+blob

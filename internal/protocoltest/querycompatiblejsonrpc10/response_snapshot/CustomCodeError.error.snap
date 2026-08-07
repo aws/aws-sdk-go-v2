@@ -1,0 +1,7 @@
+400
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: QueryCompatibleJsonRpc10.QueryCompatibleOperation
+X-Amzn-Errortype: CustomCodeError
+X-Amzn-Query-Mode: true
+
+{"message":"__Message__"}

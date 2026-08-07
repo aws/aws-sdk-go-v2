@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=PutWithContentEncoding&Version=2020-01-08&data=__Data__&encoding=__Encoding__

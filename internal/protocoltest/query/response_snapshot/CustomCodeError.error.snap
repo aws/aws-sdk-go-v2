@@ -1,0 +1,4 @@
+400
+Content-Type: application/x-www-form-urlencoded
+
+<ErrorResponse><Error><Code>Customized</Code></Error></ErrorResponse>

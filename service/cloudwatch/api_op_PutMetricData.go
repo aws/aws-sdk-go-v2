@@ -9,7 +9,6 @@ import (
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Publishes metric data to Amazon CloudWatch. CloudWatch associates the data with
@@ -197,9 +196,6 @@ func (c *Client) addOperationPutMetricDataMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -210,12 +206,6 @@ func (c *Client) addOperationPutMetricDataMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addIsRequestCompressionUserAgent(stack, options); err != nil {
@@ -231,9 +221,6 @@ func (c *Client) addOperationPutMetricDataMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpPutMetricDataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutMetricData"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

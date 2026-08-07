@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=QueryTimestamps&EpochMember=946684800&EpochTarget=946684800&NormalFormat=2000-01-01T00%3A00%3A00Z&Version=2020-01-08

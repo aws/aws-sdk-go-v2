@@ -1,0 +1,5 @@
+POST /MalformedContentTypeWithPayload
+
+Content-Type: image/jpeg
+
+blob

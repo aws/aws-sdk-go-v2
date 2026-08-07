@@ -1,0 +1,5 @@
+PUT /DocumentType
+
+Content-Type: application/json
+
+{"documentValue":null,"stringValue":"__StringValue__"}

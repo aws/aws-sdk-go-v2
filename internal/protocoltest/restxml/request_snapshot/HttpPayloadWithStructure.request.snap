@@ -1,0 +1,5 @@
+PUT /HttpPayloadWithStructure
+
+Content-Type: application/xml
+
+<NestedPayload><greeting>__Greeting__</greeting><name>__Name__</name></NestedPayload>

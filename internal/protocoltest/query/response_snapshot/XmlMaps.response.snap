@@ -1,0 +1,4 @@
+200
+Content-Type: application/x-www-form-urlencoded
+
+Action=XmlMaps&Version=2020-01-08&myMap.entry.1.key=key0&myMap.entry.1.value.hi=__Hi__

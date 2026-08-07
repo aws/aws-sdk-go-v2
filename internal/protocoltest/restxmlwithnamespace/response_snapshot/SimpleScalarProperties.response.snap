@@ -1,0 +1,5 @@
+200
+Content-Type: application/xml
+X-Foo: __Foo__
+
+<SimpleScalarPropertiesResponse xmlns="https://example.com"><Nested xmlns:xsi="https://example.com" xsi:someName="__AttrField__"></Nested><byteValue>1</byteValue><DoubleDribble>1</DoubleDribble><falseBooleanValue>true</falseBooleanValue><floatValue>1</floatValue><integerValue>1</integerValue><longValue>1</longValue><shortValue>1</shortValue><stringValue>__StringValue__</stringValue><trueBooleanValue>true</trueBooleanValue></SimpleScalarPropertiesResponse>

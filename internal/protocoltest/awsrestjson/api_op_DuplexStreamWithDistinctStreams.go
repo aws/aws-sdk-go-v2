@@ -91,9 +91,6 @@ func (c *Client) addOperationDuplexStreamWithDistinctStreamsMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -107,9 +104,6 @@ func (c *Client) addOperationDuplexStreamWithDistinctStreamsMiddlewares(stack *m
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DuplexStreamWithDistinctStreams"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

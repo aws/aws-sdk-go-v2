@@ -1,0 +1,5 @@
+POST /JsonTimestamps
+
+Content-Type: application/json
+
+{"dateTime":"2000-01-01T00:00:00Z","dateTimeOnTarget":"2000-01-01T00:00:00Z","epochSeconds":946684800,"epochSecondsOnTarget":946684800,"httpDate":"Sat, 01 Jan 2000 00:00:00 GMT","httpDateOnTarget":"Sat, 01 Jan 2000 00:00:00 GMT","normal":946684800}

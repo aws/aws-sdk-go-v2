@@ -1,0 +1,5 @@
+POST /MalformedUnion
+
+Content-Type: application/json
+
+{"union":{"int":1}}

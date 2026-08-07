@@ -118,9 +118,6 @@ func (c *Client) addOperationInvokeEndpointWithBidirectionalStreamMiddlewares(st
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamInvokeEndpointWithBidirectionalStreamMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -149,9 +146,6 @@ func (c *Client) addOperationInvokeEndpointWithBidirectionalStreamMiddlewares(st
 		return err
 	}
 	if err = addOpInvokeEndpointWithBidirectionalStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "InvokeEndpointWithBidirectionalStream"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

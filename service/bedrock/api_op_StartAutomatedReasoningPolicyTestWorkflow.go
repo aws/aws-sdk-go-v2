@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates a test workflow to validate Automated Reasoning policy tests. The
@@ -76,9 +75,6 @@ func (c *Client) addOperationStartAutomatedReasoningPolicyTestWorkflowMiddleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -91,12 +87,6 @@ func (c *Client) addOperationStartAutomatedReasoningPolicyTestWorkflowMiddleware
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -104,9 +94,6 @@ func (c *Client) addOperationStartAutomatedReasoningPolicyTestWorkflowMiddleware
 		return err
 	}
 	if err = addOpStartAutomatedReasoningPolicyTestWorkflowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartAutomatedReasoningPolicyTestWorkflow"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

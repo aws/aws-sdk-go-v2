@@ -174,9 +174,6 @@ func (c *Client) addOperationInvokeModelWithResponseStreamMiddlewares(stack *mid
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamInvokeModelWithResponseStreamMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -196,9 +193,6 @@ func (c *Client) addOperationInvokeModelWithResponseStreamMiddlewares(stack *mid
 		return err
 	}
 	if err = addOpInvokeModelWithResponseStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "InvokeModelWithResponseStream"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
