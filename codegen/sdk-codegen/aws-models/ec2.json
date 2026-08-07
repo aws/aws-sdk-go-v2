@@ -2824,6 +2824,9 @@
                     "target": "com.amazonaws.ec2#AuthorizeSecurityGroupIngress"
                 },
                 {
+                    "target": "com.amazonaws.ec2#BatchModifyIpamRoutingPolicyRegistrations"
+                },
+                {
                     "target": "com.amazonaws.ec2#BundleInstance"
                 },
                 {
@@ -2962,6 +2965,9 @@
                     "target": "com.amazonaws.ec2#CreateIpamExternalResourceVerificationToken"
                 },
                 {
+                    "target": "com.amazonaws.ec2#CreateIpamInternetRegistryAssociation"
+                },
+                {
                     "target": "com.amazonaws.ec2#CreateIpamPolicy"
                 },
                 {
@@ -2975,6 +2981,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#CreateIpamResourceDiscovery"
+                },
+                {
+                    "target": "com.amazonaws.ec2#CreateIpamRoutingPolicyRegistration"
                 },
                 {
                     "target": "com.amazonaws.ec2#CreateIpamScope"
@@ -3253,6 +3262,9 @@
                     "target": "com.amazonaws.ec2#DeleteIpamExternalResourceVerificationToken"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DeleteIpamInternetRegistryAssociation"
+                },
+                {
                     "target": "com.amazonaws.ec2#DeleteIpamPolicy"
                 },
                 {
@@ -3266,6 +3278,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteIpamResourceDiscovery"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DeleteIpamRoutingPolicyRegistration"
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteIpamScope"
@@ -3734,6 +3749,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeIpamExternalResourceVerificationTokens"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DescribeIpamInternetRegistryAssociations"
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeIpamPolicies"
@@ -4261,6 +4279,9 @@
                     "target": "com.amazonaws.ec2#EnableInstanceSqlHaStandbyDetections"
                 },
                 {
+                    "target": "com.amazonaws.ec2#EnableIpamInternetRegistryAssociation"
+                },
+                {
                     "target": "com.amazonaws.ec2#EnableIpamOrganizationAdminAccount"
                 },
                 {
@@ -4402,6 +4423,15 @@
                     "target": "com.amazonaws.ec2#GetIpamDiscoveredResourceCidrs"
                 },
                 {
+                    "target": "com.amazonaws.ec2#GetIpamDiscoveredRoutes"
+                },
+                {
+                    "target": "com.amazonaws.ec2#GetIpamInternetRegistryAssociationAsns"
+                },
+                {
+                    "target": "com.amazonaws.ec2#GetIpamInternetRegistryAssociationCidrs"
+                },
+                {
                     "target": "com.amazonaws.ec2#GetIpamPolicyAllocationRules"
                 },
                 {
@@ -4424,6 +4454,18 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#GetIpamResourceCidrs"
+                },
+                {
+                    "target": "com.amazonaws.ec2#GetIpamRouteOriginAuthorizations"
+                },
+                {
+                    "target": "com.amazonaws.ec2#GetIpamRouteProtectionFindings"
+                },
+                {
+                    "target": "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationDeltas"
+                },
+                {
+                    "target": "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrations"
                 },
                 {
                     "target": "com.amazonaws.ec2#GetLaunchTemplateData"
@@ -4652,6 +4694,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyIpamResourceDiscovery"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyIpamRoutingPolicyRegistration"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyIpamScope"
@@ -7591,6 +7636,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides authorization for Amazon to bring an Autonomous System Number (ASN) to a specific Amazon Web Services account using bring your own ASN (BYOASN). \n            For details on the format of the message and signature, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html\">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AsnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
             }
         },
         "com.amazonaws.ec2#AsnState": {
@@ -11486,6 +11540,77 @@
         "com.amazonaws.ec2#BaselineThroughputInMBps": {
             "type": "double"
         },
+        "com.amazonaws.ec2#BatchModifyIpamRoutingPolicyRegistrations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#BatchModifyIpamRoutingPolicyRegistrationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#BatchModifyIpamRoutingPolicyRegistrationsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies multiple routing policy registrations in a single operation. You can create, update, or delete Route Origin Authorizations (ROAs) in batch.</p>"
+            }
+        },
+        "com.amazonaws.ec2#BatchModifyIpamRoutingPolicyRegistrationsRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamInternetRegistryAssociationId": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM internet registry association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeltaJson": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The batch modifications to apply, in JSON format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Force": {
+                    "target": "com.amazonaws.ec2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Forces the batch modification even if individual changes conflict with announced routes. Default: <code>false</code>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the operation ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#BatchModifyIpamRoutingPolicyRegistrationsResult": {
+            "type": "structure",
+            "members": {
+                "IpamRoutingPolicyRegistrationDelta": {
+                    "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistrationDelta",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamRoutingPolicyRegistrationDelta",
+                        "smithy.api#documentation": "<p>Information about the routing policy registration delta created by this batch operation.</p>",
+                        "smithy.api#xmlName": "ipamRoutingPolicyRegistrationDelta"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#BatchState": {
             "type": "enum",
             "members": {
@@ -12142,6 +12267,22 @@
                         "aws.protocols#ec2QueryName": "AdvertisementType",
                         "smithy.api#documentation": "<p>Specifies the advertisement method for the BYOIP CIDR. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>unicast</code>: IP is advertised from a single location (regional services like EC2)</p>\n            </li>\n            <li>\n               <p>\n                  <code>anycast</code>: IP is advertised from multiple global locations simultaneously (global services like CloudFront)</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoip-cloudfront.html\">Bring your own IP to CloudFront using IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>",
                         "smithy.api#xmlName": "advertisementType"
+                    }
+                },
+                "PoolId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PoolId",
+                        "smithy.api#documentation": "<p>The ID of the address pool associated with the CIDR.</p>",
+                        "smithy.api#xmlName": "poolId"
+                    }
+                },
+                "IpamPoolId": {
+                    "target": "com.amazonaws.ec2#IpamPoolId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamPoolId",
+                        "smithy.api#documentation": "<p>The ID of the IPAM pool associated with the CIDR.</p>",
+                        "smithy.api#xmlName": "ipamPoolId"
                     }
                 }
             },
@@ -15913,6 +16054,26 @@
         "com.amazonaws.ec2#CertificateId": {
             "type": "string"
         },
+        "com.amazonaws.ec2#ChronologicalOrder": {
+            "type": "enum",
+            "members": {
+                "forward": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "forward"
+                    }
+                },
+                "reverse": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "reverse"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The chronological order for returning results.</p>"
+            }
+        },
         "com.amazonaws.ec2#CidrAuthorizationContext": {
             "type": "structure",
             "members": {
@@ -18654,7 +18815,7 @@
                 "target": "com.amazonaws.ec2#CreateApplicationStatusCheckResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates an application status check for monitoring the health of applications running on your instances. You can configure the protocol, port, path, and thresholds for the health check. The following rules apply:</p>\n         <ul>\n            <li>\n               <p>You can create a maximum of 50 application status checks per account.</p>\n            </li>\n            <li>\n               <p>Health checks do not start until you associate the check with instances or tags using <code>AssociateApplicationStatusCheck</code>.</p>\n            </li>\n            <li>\n               <p>The <code>Timeout</code> value must be less than the <code>Interval</code> value.</p>\n            </li>\n            <li>\n               <p>The <code>Path</code> must start with a forward slash (<code>/</code>). Default: <code>/</code>.</p>\n            </li>\n            <li>\n               <p>If you do not specify <code>Aggregation</code>, it defaults to <code>included</code>, which means the check contributes to the instance-level application status.</p>\n            </li>\n            <li>\n               <p>Default values: <code>Interval</code> is 60 seconds, <code>Timeout</code> is 6 seconds, <code>FailureThreshold</code> is 2, <code>SuccessThreshold</code> is 5, <code>StatusCodeMatcher</code> is <code>200</code>, <code>InitializationGracePeriodSeconds</code> is 300 seconds.</p>\n            </li>\n            <li>\n               <p>You can tag the application status check during creation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tag your Amazon EC2 resources</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates an application status check for monitoring the health of applications running on your instances. You can configure the protocol, port, path, and thresholds for the health check. The following rules apply:</p>\n         <ul>\n            <li>\n               <p>You can create a maximum of 50 application status checks per account.</p>\n            </li>\n            <li>\n               <p>Health checks do not start until you associate the check with instances or tags using <code>AssociateApplicationStatusCheck</code>.</p>\n            </li>\n            <li>\n               <p>The <code>Timeout</code> value must be less than the <code>Interval</code> value.</p>\n            </li>\n            <li>\n               <p>The <code>Path</code> must start with a forward slash (<code>/</code>). Default: <code>/</code>.</p>\n            </li>\n            <li>\n               <p>If you do not specify <code>Aggregation</code>, it defaults to <code>included</code>, which means the check contributes to the instance-level application status.</p>\n            </li>\n            <li>\n               <p>Default values: <code>Interval</code> is 60 seconds, <code>Timeout</code> is 6 seconds, <code>FailureThreshold</code> is 2, <code>SuccessThreshold</code> is 2, <code>StatusCodeMatcher</code> is <code>200</code>, <code>InitializationGracePeriodSeconds</code> is 300 seconds.</p>\n            </li>\n            <li>\n               <p>You can tag the application status check during creation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tag your Amazon EC2 resources</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
                         "title": "To create an application status check",
@@ -18672,9 +18833,9 @@
                                 "Port": 80,
                                 "Path": "/health",
                                 "Aggregation": "included",
-                                "Interval": 10,
-                                "Timeout": 5,
-                                "FailureThreshold": 3,
+                                "Interval": 60,
+                                "Timeout": 6,
+                                "FailureThreshold": 2,
                                 "SuccessThreshold": 2
                             }
                         }
@@ -21480,6 +21641,92 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#CreateIpamInternetRegistryAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateIpamInternetRegistryAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateIpamInternetRegistryAssociationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an association between an IPAM and a Regional Internet Registry (RIR) for Resource Public Key Infrastructure (RPKI) management. You can use this association to create Route Origin Authorizations (ROAs) for IP address prefixes registered with the internet registry. Your IPAM must be in the Advanced tier to use this feature.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateIpamInternetRegistryAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamId": {
+                    "target": "com.amazonaws.ec2#IpamId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM to associate with the internet registry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rir": {
+                    "target": "com.amazonaws.ec2#Rir",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Regional Internet Registry to associate with. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ripe</code> - RIPE NCC (Europe, the Middle East, and Central Asia).</p>\n            </li>\n            <li>\n               <p>\n                  <code>apnic</code> - APNIC (Asia Pacific).</p>\n            </li>\n            <li>\n               <p>\n                  <code>arin</code> - ARIN (North America).</p>\n            </li>\n            <li>\n               <p>\n                  <code>lacnic</code> - LACNIC (Latin America and the Caribbean).</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OrganizationHandle": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The organization handle at the internet registry (for example, a RIPE NCC organization ID or ARIN Org ID).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the internet registry association.</p>"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the internet registry association.</p>",
+                        "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the operation ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateIpamInternetRegistryAssociationResult": {
+            "type": "structure",
+            "members": {
+                "IpamInternetRegistryAssociation": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociation",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamInternetRegistryAssociation",
+                        "smithy.api#documentation": "<p>Information about the internet registry association.</p>",
+                        "smithy.api#xmlName": "ipamInternetRegistryAssociation"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#CreateIpamPolicy": {
             "type": "operation",
             "input": {
@@ -22005,6 +22252,104 @@
                         "aws.protocols#ec2QueryName": "Ipam",
                         "smithy.api#documentation": "<p>Information about the IPAM created.</p>",
                         "smithy.api#xmlName": "ipam"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateIpamRoutingPolicyRegistration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateIpamRoutingPolicyRegistrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateIpamRoutingPolicyRegistrationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a routing policy registration and publishes Route Origin Authorizations (ROAs) to the RPKI for the specified CIDR prefix and ASNs.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateIpamRoutingPolicyRegistrationRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamInternetRegistryAssociationId": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM internet registry association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Cidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The IP address prefix in CIDR notation to authorize in the ROA.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Asns": {
+                    "target": "com.amazonaws.ec2#AsnList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Autonomous System Numbers (ASNs) authorized to originate the prefix.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "Asn"
+                    }
+                },
+                "PermitMoreSpecificAnnouncements": {
+                    "target": "com.amazonaws.ec2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to permit more specific route announcements than the CIDR prefix. When enabled, ASNs can announce sub-prefixes of the authorized CIDR up to the specified maximum length. Default: <code>false</code>.</p>"
+                    }
+                },
+                "MaxLength": {
+                    "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistrationMaxLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum prefix length that the ASNs are authorized to announce. Must be greater than or equal to the prefix length of the CIDR. If not specified, defaults to the prefix length of the CIDR (exact match only).</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the routing policy registration.</p>"
+                    }
+                },
+                "Force": {
+                    "target": "com.amazonaws.ec2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Forces the creation of the routing policy registration even if it conflicts with an announced route. Default: <code>false</code>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the operation ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateIpamRoutingPolicyRegistrationResult": {
+            "type": "structure",
+            "members": {
+                "IpamRoutingPolicyRegistrationDelta": {
+                    "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistrationDelta",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamRoutingPolicyRegistrationDelta",
+                        "smithy.api#documentation": "<p>Information about the routing policy registration delta created by this operation.</p>",
+                        "smithy.api#xmlName": "ipamRoutingPolicyRegistrationDelta"
                     }
                 }
             },
@@ -30950,6 +31295,56 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#DeleteIpamInternetRegistryAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DeleteIpamInternetRegistryAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DeleteIpamInternetRegistryAssociationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an IPAM internet registry association. Before deleting, you must remove all routing policy registrations associated with the internet registry.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DeleteIpamInternetRegistryAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamInternetRegistryAssociationId": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM internet registry association to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteIpamInternetRegistryAssociationResult": {
+            "type": "structure",
+            "members": {
+                "IpamInternetRegistryAssociation": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociation",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamInternetRegistryAssociation",
+                        "smithy.api#documentation": "<p>Information about the deleted internet registry association.</p>",
+                        "smithy.api#xmlName": "ipamInternetRegistryAssociation"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#DeleteIpamPolicy": {
             "type": "operation",
             "input": {
@@ -31243,6 +31638,77 @@
                         "aws.protocols#ec2QueryName": "Ipam",
                         "smithy.api#documentation": "<p>Information about the results of the deletion.</p>",
                         "smithy.api#xmlName": "ipam"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteIpamRoutingPolicyRegistration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DeleteIpamRoutingPolicyRegistrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DeleteIpamRoutingPolicyRegistrationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a routing policy registration for a specified CIDR prefix.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DeleteIpamRoutingPolicyRegistrationRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamInternetRegistryAssociationId": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM internet registry association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Cidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The IP address prefix in CIDR notation identifying the routing policy registration to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Force": {
+                    "target": "com.amazonaws.ec2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Forces the deletion even if it conflicts with an announced route. Default: <code>false</code>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the operation ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteIpamRoutingPolicyRegistrationResult": {
+            "type": "structure",
+            "members": {
+                "IpamRoutingPolicyRegistrationDelta": {
+                    "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistrationDelta",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamRoutingPolicyRegistrationDelta",
+                        "smithy.api#documentation": "<p>Information about the routing policy registration delta created by this deletion.</p>",
+                        "smithy.api#xmlName": "ipamRoutingPolicyRegistrationDelta"
                     }
                 }
             },
@@ -36301,7 +36767,85 @@
                 "target": "com.amazonaws.ec2#DescribeApplicationStatusResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the application status for the specified instances. Returns the aggregated application health status for each instance. The following rules apply:</p>\n         <ul>\n            <li>\n               <p>The instance-level status is derived from all application status checks with the aggregation setting set to <code>included</code>.</p>\n            </li>\n            <li>\n               <p>Use <code>DescribeApplicationStatusChecks</code> to view the configuration of individual checks.</p>\n            </li>\n            <li>\n               <p>Use <code>EnableApplicationStatusCheckSuppression</code> to temporarily suppress health check results from affecting the instance-level status.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Describes the application status for the specified instances. Returns the aggregated application health status for each instance. The following rules apply:</p>\n         <ul>\n            <li>\n               <p>The instance-level status is derived from all application status checks with the aggregation setting set to <code>included</code>.</p>\n            </li>\n            <li>\n               <p>Use <code>DescribeApplicationStatusChecks</code> to view the configuration of individual checks.</p>\n            </li>\n            <li>\n               <p>Use <code>EnableApplicationStatusCheckSuppression</code> to temporarily suppress health check results from affecting the instance-level status.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe application status for instances",
+                        "documentation": "This example describes the application status for the specified instance.",
+                        "input": {
+                            "InstanceIds": [
+                                "i-0123456789abcdef0"
+                            ]
+                        },
+                        "output": {
+                            "ApplicationStatuses": {
+                                "Instances": [
+                                    {
+                                        "InstanceId": "i-0123456789abcdef0",
+                                        "ApplicationStatus": {
+                                            "Status": "ok",
+                                            "Details": [
+                                                {
+                                                    "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                                                    "Aggregation": "included",
+                                                    "Status": "passed",
+                                                    "Reason": {
+                                                        "Code": "ResponseCodeMatched",
+                                                        "StatusCode": 200,
+                                                        "Protocol": "HTTP"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "title": "To describe application status using filters",
+                        "documentation": "This example uses a filter to describe impaired application status in a specific Availability Zone.",
+                        "input": {
+                            "Filters": [
+                                {
+                                    "Name": "availability-zone-id",
+                                    "Values": [
+                                        "use1-az1"
+                                    ]
+                                },
+                                {
+                                    "Name": "status",
+                                    "Values": [
+                                        "impaired"
+                                    ]
+                                }
+                            ],
+                            "MaxResults": 10
+                        },
+                        "output": {
+                            "ApplicationStatuses": {
+                                "Instances": [
+                                    {
+                                        "InstanceId": "i-0123456789abcdef0",
+                                        "ApplicationStatus": {
+                                            "Status": "impaired",
+                                            "Details": [
+                                                {
+                                                    "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                                                    "Aggregation": "included",
+                                                    "Status": "failed",
+                                                    "Reason": {
+                                                        "Code": "ConnectionTimeout"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ec2#DescribeApplicationStatusCheckAssociations": {
@@ -36313,7 +36857,35 @@
                 "target": "com.amazonaws.ec2#DescribeApplicationStatusCheckAssociationsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the associations for one or more application status checks. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-application-status-checks.html\">Application\n                status checks</a>. To avoid timeouts and retrieve complete results, use the\n            pagination parameters.</p>\n         <note>\n            <p>The order of the elements in the response, including those within nested\n                structures, might vary.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes the associations for one or more application status checks. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-application-status-checks.html\">Application\n                status checks</a>. To avoid timeouts and retrieve complete results, use the\n            pagination parameters.</p>\n         <note>\n            <p>The order of the elements in the response, including those within nested\n                structures, might vary.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe application status check associations",
+                        "documentation": "This example describes instance ID associations for the specified application status check.",
+                        "input": {
+                            "ApplicationStatusCheckIds": [
+                                "asc-0123456789abcdef0"
+                            ],
+                            "Filters": [
+                                {
+                                    "Name": "association-type",
+                                    "Values": [
+                                        "instance-id"
+                                    ]
+                                }
+                            ]
+                        },
+                        "output": {
+                            "Associations": [
+                                {
+                                    "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                                    "AssociationType": "instance-id",
+                                    "Value": "i-0123456789abcdef0"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ec2#DescribeApplicationStatusCheckAssociationsMaxResults": {
@@ -36424,9 +36996,9 @@
                                     "Port": 80,
                                     "Path": "/health",
                                     "Aggregation": "included",
-                                    "Interval": 10,
-                                    "Timeout": 5,
-                                    "FailureThreshold": 3,
+                                    "Interval": 60,
+                                    "Timeout": 6,
+                                    "FailureThreshold": 2,
                                     "SuccessThreshold": 2
                                 }
                             ]
@@ -36434,13 +37006,13 @@
                     },
                     {
                         "title": "To describe application status checks using filters",
-                        "documentation": "This example uses filters to describe application status checks with a specific tag.",
+                        "documentation": "This example uses a filter to describe application status checks included in aggregation.",
                         "input": {
                             "Filters": [
                                 {
-                                    "Name": "tag:Environment",
+                                    "Name": "aggregation",
                                     "Values": [
-                                        "Production"
+                                        "included"
                                     ]
                                 }
                             ],
@@ -36454,9 +37026,9 @@
                                     "Port": 80,
                                     "Path": "/health",
                                     "Aggregation": "included",
-                                    "Interval": 10,
-                                    "Timeout": 5,
-                                    "FailureThreshold": 3,
+                                    "Interval": 60,
+                                    "Timeout": 6,
+                                    "FailureThreshold": 2,
                                     "SuccessThreshold": 2
                                 }
                             ]
@@ -43477,6 +44049,82 @@
                         "aws.protocols#ec2QueryName": "IpamExternalResourceVerificationTokenSet",
                         "smithy.api#documentation": "<p>Verification tokens.</p>",
                         "smithy.api#xmlName": "ipamExternalResourceVerificationTokenSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeIpamInternetRegistryAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeIpamInternetRegistryAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeIpamInternetRegistryAssociationsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more IPAM internet registry associations. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DescribeIpamInternetRegistryAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamInternetRegistryAssociationIds": {
+                    "target": "com.amazonaws.ec2#ValueStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the internet registry associations to describe.</p>",
+                        "smithy.api#xmlName": "IpamInternetRegistryAssociationId"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#IpamMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. If not specified, all available results are returned. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters to apply to the results.</p>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeIpamInternetRegistryAssociationsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                },
+                "IpamInternetRegistryAssociations": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamInternetRegistryAssociationSet",
+                        "smithy.api#documentation": "<p>The internet registry associations.</p>",
+                        "smithy.api#xmlName": "ipamInternetRegistryAssociationSet"
                     }
                 }
             },
@@ -61490,6 +62138,103 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#EnableIpamInternetRegistryAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#EnableIpamInternetRegistryAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#EnableIpamInternetRegistryAssociationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables Resource Public Key Infrastructure (RPKI) on an existing IPAM internet registry association by providing BGP Public Key Infrastructure (BPKI) certificate details. After enabling, you can create Route Origin Authorizations (ROAs) for prefixes registered with the internet registry.</p>"
+            }
+        },
+        "com.amazonaws.ec2#EnableIpamInternetRegistryAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamInternetRegistryAssociationId": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM internet registry association to enable.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RpkiVersion": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The RPKI version to use from the Parent Response XML.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceUri": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The RPKI service URI for the publication point from the Parent Response XML.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChildHandle": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The child handle for the BPKI certificate hierarchy from the Parent Response XML.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ParentHandle": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The parent handle for the BPKI certificate hierarchy from the Parent Response XML.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ParentBpkiTa": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The parent BPKI Trust Anchor certificate in PEM format from the Parent Response XML.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the operation ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#EnableIpamInternetRegistryAssociationResult": {
+            "type": "structure",
+            "members": {
+                "IpamInternetRegistryAssociation": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociation",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamInternetRegistryAssociation",
+                        "smithy.api#documentation": "<p>Information about the enabled internet registry association.</p>",
+                        "smithy.api#xmlName": "ipamInternetRegistryAssociation"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#EnableIpamOrganizationAdminAccount": {
             "type": "operation",
             "input": {
@@ -68475,6 +69220,245 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#GetIpamDiscoveredRoutes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetIpamDiscoveredRoutesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetIpamDiscoveredRoutesResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves Border Gateway Protocol (BGP) routes discovered by IPAM resource discovery for a specified Region. Use this operation to view the Bring Your Own IP (BYOIP) address ranges that are currently advertised through BGP. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetIpamDiscoveredRoutesRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamResourceDiscoveryId": {
+                    "target": "com.amazonaws.ec2#IpamResourceDiscoveryId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM resource discovery.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceRegion": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region to retrieve discovered routes for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters to apply to the results.</p>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#IpamMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. If not specified, all available results are returned. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamDiscoveredRoutesResult": {
+            "type": "structure",
+            "members": {
+                "IpamDiscoveredRoutes": {
+                    "target": "com.amazonaws.ec2#IpamDiscoveredRouteSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamDiscoveredRouteSet",
+                        "smithy.api#documentation": "<p>The discovered BGP routes.</p>",
+                        "smithy.api#xmlName": "ipamDiscoveredRouteSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamInternetRegistryAssociationAsns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetIpamInternetRegistryAssociationAsnsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetIpamInternetRegistryAssociationAsnsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves Autonomous System Numbers (ASNs) registered with an internet registry for an IPAM internet registry association. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetIpamInternetRegistryAssociationAsnsRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamInternetRegistryAssociationId": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM internet registry association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#IpamMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. If not specified, all available results are returned. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters to apply to the results.</p>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamInternetRegistryAssociationAsnsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                },
+                "IpamInternetRegistryAssociationAsns": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationAsnSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamInternetRegistryAssociationAsnSet",
+                        "smithy.api#documentation": "<p>The ASNs registered with the internet registry.</p>",
+                        "smithy.api#xmlName": "ipamInternetRegistryAssociationAsnSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamInternetRegistryAssociationCidrs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetIpamInternetRegistryAssociationCidrsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetIpamInternetRegistryAssociationCidrsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves IP address CIDRs registered with an internet registry for an IPAM internet registry association. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetIpamInternetRegistryAssociationCidrsRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamInternetRegistryAssociationId": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM internet registry association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#IpamMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. If not specified, all available results are returned. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters to apply to the results.</p>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamInternetRegistryAssociationCidrsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                },
+                "IpamInternetRegistryAssociationCidrs": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationCidrSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamInternetRegistryAssociationCidrSet",
+                        "smithy.api#documentation": "<p>The CIDRs registered with the internet registry.</p>",
+                        "smithy.api#xmlName": "ipamInternetRegistryAssociationCidrSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#GetIpamPolicyAllocationRules": {
             "type": "operation",
             "input": {
@@ -69185,6 +70169,337 @@
                         "aws.protocols#ec2QueryName": "IpamResourceCidrSet",
                         "smithy.api#documentation": "<p>The resource CIDRs.</p>",
                         "smithy.api#xmlName": "ipamResourceCidrSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamRouteOriginAuthorizations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetIpamRouteOriginAuthorizationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetIpamRouteOriginAuthorizationsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current Route Origin Authorizations (ROAs) published to the RPKI for an IPAM internet registry association. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetIpamRouteOriginAuthorizationsRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamInternetRegistryAssociationId": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM internet registry association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Cidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results to a specific CIDR prefix.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#IpamMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. If not specified, all available results are returned. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamRouteOriginAuthorizationsResult": {
+            "type": "structure",
+            "members": {
+                "IpamRouteOriginAuthorizations": {
+                    "target": "com.amazonaws.ec2#IpamRouteOriginAuthorizationInfoSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamRouteOriginAuthorizationSet",
+                        "smithy.api#documentation": "<p>The Route Origin Authorizations published to the RPKI.</p>",
+                        "smithy.api#xmlName": "ipamRouteOriginAuthorizationSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamRouteProtectionFindings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetIpamRouteProtectionFindingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetIpamRouteProtectionFindingsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves route protection findings for an IPAM. Route protection findings show the Resource Public Key Infrastructure (RPKI) validation status of your Bring Your Own IP (BYOIP) routes. Findings identify routes that have valid, invalid, or unknown validation states. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetIpamRouteProtectionFindingsRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamId": {
+                    "target": "com.amazonaws.ec2#IpamId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM to retrieve route protection findings for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters to apply to the results.</p>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#IpamMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. If not specified, all available results are returned. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamRouteProtectionFindingsResult": {
+            "type": "structure",
+            "members": {
+                "IpamId": {
+                    "target": "com.amazonaws.ec2#IpamId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamId",
+                        "smithy.api#documentation": "<p>The ID of the IPAM.</p>",
+                        "smithy.api#xmlName": "ipamId"
+                    }
+                },
+                "RouteProtectionFindings": {
+                    "target": "com.amazonaws.ec2#IpamRouteProtectionFindingSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RouteProtectionFindingSet",
+                        "smithy.api#documentation": "<p>The route protection findings.</p>",
+                        "smithy.api#xmlName": "routeProtectionFindingSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationDeltas": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationDeltasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationDeltasResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the history of routing policy registration changes for an IPAM internet registry association. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationDeltasRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamInternetRegistryAssociationId": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM internet registry association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeltaId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results to a specific delta ID.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time range to filter deltas by.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time range to filter deltas by.</p>"
+                    }
+                },
+                "ChronologicalOrder": {
+                    "target": "com.amazonaws.ec2#ChronologicalOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The chronological order to return results in. Valid values: <code>forward</code> | <code>reverse</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#IpamMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. If not specified, all available results are returned. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationDeltasResult": {
+            "type": "structure",
+            "members": {
+                "IpamRoutingPolicyRegistrationDeltas": {
+                    "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistrationDeltaSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamRoutingPolicyRegistrationDeltaSet",
+                        "smithy.api#documentation": "<p>The routing policy registration deltas.</p>",
+                        "smithy.api#xmlName": "ipamRoutingPolicyRegistrationDeltaSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves routing policy registrations for an IPAM internet registry association. Each registration represents a Route Origin Authorization (ROA) that has been created or is pending publication to the RPKI. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationsRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamInternetRegistryAssociationId": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM internet registry association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Cidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results to a specific CIDR prefix.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#IpamMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. If not specified, all available results are returned. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationsResult": {
+            "type": "structure",
+            "members": {
+                "IpamRoutingPolicyRegistrations": {
+                    "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistrationSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamRoutingPolicyRegistrationSet",
+                        "smithy.api#documentation": "<p>The routing policy registrations.</p>",
+                        "smithy.api#xmlName": "ipamRoutingPolicyRegistrationSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>",
+                        "smithy.api#xmlName": "nextToken"
                     }
                 }
             },
@@ -90097,6 +91412,94 @@
                 }
             }
         },
+        "com.amazonaws.ec2#IpamByoipAdvertisementType": {
+            "type": "enum",
+            "members": {
+                "regional": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "regional"
+                    }
+                },
+                "global": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "global"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The advertisement type of a BYOIP route.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamByoipCidrState": {
+            "type": "enum",
+            "members": {
+                "advertised": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "advertised"
+                    }
+                },
+                "deprovisioned": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deprovisioned"
+                    }
+                },
+                "failed_deprovision": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed-deprovision"
+                    }
+                },
+                "failed_provision": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed-provision"
+                    }
+                },
+                "pending_advertising": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending-advertising"
+                    }
+                },
+                "pending_deprovision": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending-deprovision"
+                    }
+                },
+                "pending_provision": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending-provision"
+                    }
+                },
+                "pending_withdrawal": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending-withdrawal"
+                    }
+                },
+                "provisioned": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "provisioned"
+                    }
+                },
+                "provisioned_not_publicly_advertisable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "provisioned-not-publicly-advertisable"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of a BYOIP CIDR.</p>"
+            }
+        },
         "com.amazonaws.ec2#IpamCidrAuthorizationContext": {
             "type": "structure",
             "members": {
@@ -90509,6 +91912,111 @@
                 }
             }
         },
+        "com.amazonaws.ec2#IpamDiscoveredRoute": {
+            "type": "structure",
+            "members": {
+                "IpamResourceDiscoveryId": {
+                    "target": "com.amazonaws.ec2#IpamResourceDiscoveryId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamResourceDiscoveryId",
+                        "smithy.api#documentation": "<p>The ID of the IPAM resource discovery that discovered the route.</p>",
+                        "smithy.api#xmlName": "ipamResourceDiscoveryId"
+                    }
+                },
+                "ResourceRegion": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceRegion",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the route was discovered.</p>",
+                        "smithy.api#xmlName": "resourceRegion"
+                    }
+                },
+                "ResourceOwnerId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceOwnerId",
+                        "smithy.api#documentation": "<p>The ID of the resource owner.</p>",
+                        "smithy.api#xmlName": "resourceOwnerId"
+                    }
+                },
+                "Cidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Cidr",
+                        "smithy.api#documentation": "<p>The IP address prefix of the discovered route in CIDR notation.</p>",
+                        "smithy.api#xmlName": "cidr"
+                    }
+                },
+                "Asn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Asn",
+                        "smithy.api#documentation": "<p>The Autonomous System Number (ASN) that originates the route.</p>",
+                        "smithy.api#xmlName": "asn"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#IpamByoipCidrState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The state of the BYOIP CIDR. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>advertised</code> - The CIDR is being advertised.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deprovisioned</code> - The CIDR has been deprovisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failed-deprovision</code> - Deprovisioning failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failed-provision</code> - Provisioning failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending-deprovision</code> - Deprovisioning is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending-provision</code> - Provisioning is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>provisioned</code> - The CIDR is provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>provisioned-not-publicly-advertisable</code> - The CIDR is provisioned but not publicly advertisable.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "state"
+                    }
+                },
+                "AdvertisementType": {
+                    "target": "com.amazonaws.ec2#IpamByoipAdvertisementType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AdvertisementType",
+                        "smithy.api#documentation": "<p>The advertisement type of the route. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>regional</code> - The IP address is advertised from a single location (regional services such as Amazon EC2).</p>\n            </li>\n            <li>\n               <p>\n                  <code>global</code> - The IP address is advertised from multiple global locations simultaneously (global services such as Amazon CloudFront).</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "advertisementType"
+                    }
+                },
+                "NetworkBorderGroup": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NetworkBorderGroup",
+                        "smithy.api#documentation": "<p>The network border group for the route.</p>",
+                        "smithy.api#xmlName": "networkBorderGroup"
+                    }
+                },
+                "PoolId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PoolId",
+                        "smithy.api#documentation": "<p>The ID of the BYOIP pool associated with the route.</p>",
+                        "smithy.api#xmlName": "poolId"
+                    }
+                },
+                "IpamPoolId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamPoolId",
+                        "smithy.api#documentation": "<p>The ID of the IPAM pool associated with the route.</p>",
+                        "smithy.api#xmlName": "ipamPoolId"
+                    }
+                },
+                "SampleTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SampleTime",
+                        "smithy.api#documentation": "<p>The time when the route was last sampled.</p>",
+                        "smithy.api#xmlName": "sampleTime"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a BGP route discovered by IPAM resource discovery.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamDiscoveredRouteSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#IpamDiscoveredRoute",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#IpamDiscoveryFailureCode": {
             "type": "enum",
             "members": {
@@ -90707,6 +92215,242 @@
         },
         "com.amazonaws.ec2#IpamId": {
             "type": "string"
+        },
+        "com.amazonaws.ec2#IpamInternetRegistryAssociation": {
+            "type": "structure",
+            "members": {
+                "OwnerId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OwnerId",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the internet registry association.</p>",
+                        "smithy.api#xmlName": "ownerId"
+                    }
+                },
+                "IpamInternetRegistryAssociationId": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamInternetRegistryAssociationId",
+                        "smithy.api#documentation": "<p>The ID of the internet registry association.</p>",
+                        "smithy.api#xmlName": "ipamInternetRegistryAssociationId"
+                    }
+                },
+                "IpamInternetRegistryAssociationArn": {
+                    "target": "com.amazonaws.ec2#ResourceArn",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamInternetRegistryAssociationArn",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the internet registry association.</p>",
+                        "smithy.api#xmlName": "ipamInternetRegistryAssociationArn"
+                    }
+                },
+                "IpamId": {
+                    "target": "com.amazonaws.ec2#IpamId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamId",
+                        "smithy.api#documentation": "<p>The ID of the associated IPAM.</p>",
+                        "smithy.api#xmlName": "ipamId"
+                    }
+                },
+                "IpamRegion": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamRegion",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the IPAM.</p>",
+                        "smithy.api#xmlName": "ipamRegion"
+                    }
+                },
+                "Rir": {
+                    "target": "com.amazonaws.ec2#Rir",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Rir",
+                        "smithy.api#documentation": "<p>The Regional Internet Registry. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ripe</code> - RIPE NCC (Europe, the Middle East, and Central Asia).</p>\n            </li>\n            <li>\n               <p>\n                  <code>apnic</code> - APNIC (Asia Pacific).</p>\n            </li>\n            <li>\n               <p>\n                  <code>arin</code> - ARIN (North America).</p>\n            </li>\n            <li>\n               <p>\n                  <code>lacnic</code> - LACNIC (Latin America and the Caribbean).</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "rir"
+                    }
+                },
+                "OrganizationHandle": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OrganizationHandle",
+                        "smithy.api#documentation": "<p>The organization handle at the internet registry.</p>",
+                        "smithy.api#xmlName": "organizationHandle"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Description",
+                        "smithy.api#documentation": "<p>The description of the internet registry association.</p>",
+                        "smithy.api#xmlName": "description"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The state of the internet registry association. Valid values: <code>pending-activation</code> | <code>pending-enable</code> | <code>create-in-progress</code> | <code>create-failed</code> | <code>enable-in-progress</code> | <code>enable-complete</code> | <code>enable-failed</code> | <code>delete-in-progress</code> | <code>delete-complete</code> | <code>delete-failed</code>.</p>",
+                        "smithy.api#xmlName": "state"
+                    }
+                },
+                "ChildRequestXml": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ChildRequestXml",
+                        "smithy.api#documentation": "<p>The XML content for the child request to be submitted to the internet registry to complete the BPKI setup.</p>",
+                        "smithy.api#xmlName": "childRequestXml"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags assigned to the internet registry association.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an association between an IPAM and a Regional Internet Registry (RIR) for delegated RPKI management.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamInternetRegistryAssociationAsn": {
+            "type": "structure",
+            "members": {
+                "Asn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Asn",
+                        "smithy.api#documentation": "<p>The Autonomous System Number.</p>",
+                        "smithy.api#xmlName": "asn"
+                    }
+                },
+                "LastObservedAt": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LastObservedAt",
+                        "smithy.api#documentation": "<p>The time when the ASN was last observed at the internet registry.</p>",
+                        "smithy.api#xmlName": "lastObservedAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an Autonomous System Number (ASN) registered at an internet registry and associated with an IPAM.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamInternetRegistryAssociationAsnSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationAsn",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#IpamInternetRegistryAssociationCidr": {
+            "type": "structure",
+            "members": {
+                "Cidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Cidr",
+                        "smithy.api#documentation": "<p>The IP address prefix in CIDR notation.</p>",
+                        "smithy.api#xmlName": "cidr"
+                    }
+                },
+                "LastObservedAt": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LastObservedAt",
+                        "smithy.api#documentation": "<p>The time when the CIDR was last observed at the internet registry.</p>",
+                        "smithy.api#xmlName": "lastObservedAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an IP address CIDR registered at an internet registry and associated with an IPAM.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamInternetRegistryAssociationCidrSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationCidr",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#IpamInternetRegistryAssociationId": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#IpamInternetRegistryAssociationSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#IpamInternetRegistryAssociation",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#IpamInternetRegistryAssociationState": {
+            "type": "enum",
+            "members": {
+                "pending_enable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending-enable"
+                    }
+                },
+                "create_in_progress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "create-in-progress"
+                    }
+                },
+                "create_failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "create-failed"
+                    }
+                },
+                "enable_in_progress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enable-in-progress"
+                    }
+                },
+                "enable_complete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enable-complete"
+                    }
+                },
+                "enable_failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enable-failed"
+                    }
+                },
+                "delete_in_progress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "delete-in-progress"
+                    }
+                },
+                "delete_complete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "delete-complete"
+                    }
+                },
+                "delete_failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "delete-failed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of an IPAM internet registry association.</p>"
+            }
         },
         "com.amazonaws.ec2#IpamManagementState": {
             "type": "enum",
@@ -93460,6 +95204,547 @@
                         "smithy.api#enumValue": "anycast-ip-list"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ec2#IpamRouteOriginAuthorization": {
+            "type": "structure",
+            "members": {
+                "Asn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Asn",
+                        "smithy.api#documentation": "<p>The Autonomous System Number (ASN) authorized by the ROA.</p>",
+                        "smithy.api#xmlName": "asn"
+                    }
+                },
+                "Prefix": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Prefix",
+                        "smithy.api#documentation": "<p>The IP address prefix authorized by the ROA in CIDR notation.</p>",
+                        "smithy.api#xmlName": "prefix"
+                    }
+                },
+                "MaxLength": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MaxLength",
+                        "smithy.api#documentation": "<p>The maximum prefix length that the ASN is authorized to announce.</p>",
+                        "smithy.api#xmlName": "maxLength"
+                    }
+                },
+                "Match": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Match",
+                        "smithy.api#documentation": "<p>Specifies whether the ROA matches the route announcement.</p>",
+                        "smithy.api#xmlName": "match"
+                    }
+                },
+                "Expiration": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Expiration",
+                        "smithy.api#documentation": "<p>The expiration date of the ROA.</p>",
+                        "smithy.api#xmlName": "expiration"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a Route Origin Authorization (ROA) published in the RPKI. A ROA cryptographically attests that a specific ASN is authorized to originate a specific IP address prefix.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamRouteOriginAuthorizationInfo": {
+            "type": "structure",
+            "members": {
+                "Cidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Cidr",
+                        "smithy.api#documentation": "<p>The IP address prefix in CIDR notation authorized by the ROA.</p>",
+                        "smithy.api#xmlName": "cidr"
+                    }
+                },
+                "Asn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Asn",
+                        "smithy.api#documentation": "<p>The Autonomous System Number (ASN) authorized to originate the prefix.</p>",
+                        "smithy.api#xmlName": "asn"
+                    }
+                },
+                "MaxLength": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MaxLength",
+                        "smithy.api#documentation": "<p>The maximum prefix length that the ASN is authorized to announce.</p>",
+                        "smithy.api#xmlName": "maxLength"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a Route Origin Authorization (ROA) currently published in the RPKI.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamRouteOriginAuthorizationInfoSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#IpamRouteOriginAuthorizationInfo",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#IpamRouteOriginAuthorizationSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#IpamRouteOriginAuthorization",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#IpamRouteOverlap": {
+            "type": "structure",
+            "members": {
+                "Prefix": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Prefix",
+                        "smithy.api#documentation": "<p>The overlapping IP address prefix in CIDR notation.</p>",
+                        "smithy.api#xmlName": "prefix"
+                    }
+                },
+                "Asn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Asn",
+                        "smithy.api#documentation": "<p>The ASN originating the overlapping route.</p>",
+                        "smithy.api#xmlName": "asn"
+                    }
+                },
+                "DetectedAt": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DetectedAt",
+                        "smithy.api#documentation": "<p>The time when the overlap was detected.</p>",
+                        "smithy.api#xmlName": "detectedAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an overlapping route detected for a BYOIP prefix.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamRouteOverlapSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#IpamRouteOverlap",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ec2#IpamRouteProtectionFinding": {
+            "type": "structure",
+            "members": {
+                "ResourceOwnerId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceOwnerId",
+                        "smithy.api#documentation": "<p>The ID of the resource owner.</p>",
+                        "smithy.api#xmlName": "resourceOwnerId"
+                    }
+                },
+                "ResourceRegion": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceRegion",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the resource.</p>",
+                        "smithy.api#xmlName": "resourceRegion"
+                    }
+                },
+                "IpamPoolId": {
+                    "target": "com.amazonaws.ec2#IpamPoolId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamPoolId",
+                        "smithy.api#documentation": "<p>The ID of the IPAM pool associated with the finding.</p>",
+                        "smithy.api#xmlName": "ipamPoolId"
+                    }
+                },
+                "Cidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Cidr",
+                        "smithy.api#documentation": "<p>The IP address prefix in CIDR notation.</p>",
+                        "smithy.api#xmlName": "cidr"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#IpamByoipCidrState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The state of the BYOIP CIDR. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>advertised</code> - The CIDR is being advertised.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deprovisioned</code> - The CIDR has been deprovisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failed-deprovision</code> - Deprovisioning failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failed-provision</code> - Provisioning failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending-deprovision</code> - Deprovisioning is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending-provision</code> - Provisioning is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>provisioned</code> - The CIDR is provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>provisioned-not-publicly-advertisable</code> - The CIDR is provisioned but not publicly advertisable.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "state"
+                    }
+                },
+                "AdvertisementType": {
+                    "target": "com.amazonaws.ec2#IpamByoipAdvertisementType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AdvertisementType",
+                        "smithy.api#documentation": "<p>The advertisement type. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>regional</code> - The IP address is advertised from a single location (regional services such as Amazon EC2).</p>\n            </li>\n            <li>\n               <p>\n                  <code>global</code> - The IP address is advertised from multiple global locations simultaneously (global services such as Amazon CloudFront).</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "advertisementType"
+                    }
+                },
+                "NetworkBorderGroup": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NetworkBorderGroup",
+                        "smithy.api#documentation": "<p>The network border group.</p>",
+                        "smithy.api#xmlName": "networkBorderGroup"
+                    }
+                },
+                "PoolId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PoolId",
+                        "smithy.api#documentation": "<p>The ID of the BYOIP pool.</p>",
+                        "smithy.api#xmlName": "poolId"
+                    }
+                },
+                "Asn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Asn",
+                        "smithy.api#documentation": "<p>The Autonomous System Number (ASN) that originates the route.</p>",
+                        "smithy.api#xmlName": "asn"
+                    }
+                },
+                "RpkiStatus": {
+                    "target": "com.amazonaws.ec2#IpamRpkiStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RpkiStatus",
+                        "smithy.api#documentation": "<p>The RPKI validation status of the route. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>valid</code> - The route has a matching ROA that covers the prefix and origin ASN.</p>\n            </li>\n            <li>\n               <p>\n                  <code>invalid</code> - The route has a ROA for the prefix, but the origin ASN or prefix length does not match.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code> - No ROA exists for the prefix, so RPKI validation cannot be performed.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "rpkiStatus"
+                    }
+                },
+                "RpkiStrength": {
+                    "target": "com.amazonaws.ec2#IpamRpkiStrength",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RpkiStrength",
+                        "smithy.api#documentation": "<p>The RPKI enforcement strength for the route. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>strict</code> - Invalid routes are rejected.</p>\n            </li>\n            <li>\n               <p>\n                  <code>permissive</code> - Invalid routes are accepted but flagged.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "rpkiStrength"
+                    }
+                },
+                "Roas": {
+                    "target": "com.amazonaws.ec2#IpamRouteOriginAuthorizationSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RoaSet",
+                        "smithy.api#documentation": "<p>The Route Origin Authorizations (ROAs) that cover the prefix.</p>",
+                        "smithy.api#xmlName": "roaSet"
+                    }
+                },
+                "RouteOverlaps": {
+                    "target": "com.amazonaws.ec2#IpamRouteOverlapSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RouteOverlapSet",
+                        "smithy.api#documentation": "<p>The overlapping routes detected for this prefix.</p>",
+                        "smithy.api#xmlName": "routeOverlapSet"
+                    }
+                },
+                "SampleTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SampleTime",
+                        "smithy.api#documentation": "<p>The time when the route was last sampled.</p>",
+                        "smithy.api#xmlName": "sampleTime"
+                    }
+                },
+                "RoaSampleTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RoaSampleTime",
+                        "smithy.api#documentation": "<p>The time when the ROA data was last sampled.</p>",
+                        "smithy.api#xmlName": "roaSampleTime"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a route protection finding, including the RPKI validation status of a BYOIP route announcement.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamRouteProtectionFindingSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#IpamRouteProtectionFinding",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#IpamRoutingPolicyRegistration": {
+            "type": "structure",
+            "members": {
+                "Cidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Cidr",
+                        "smithy.api#documentation": "<p>The IP address prefix in CIDR notation authorized by the ROA.</p>",
+                        "smithy.api#xmlName": "cidr"
+                    }
+                },
+                "Asns": {
+                    "target": "com.amazonaws.ec2#AsnList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AsnSet",
+                        "smithy.api#documentation": "<p>The Autonomous System Numbers (ASNs) authorized to originate the prefix.</p>",
+                        "smithy.api#xmlName": "asnSet"
+                    }
+                },
+                "PermitMoreSpecificAnnouncements": {
+                    "target": "com.amazonaws.ec2#BoxedBoolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PermitMoreSpecificAnnouncements",
+                        "smithy.api#documentation": "<p>Specifies whether to permit more specific route announcements than the CIDR prefix. When enabled, ASNs can announce sub-prefixes of the authorized CIDR up to the specified maximum length. Default: <code>false</code>.</p>",
+                        "smithy.api#xmlName": "permitMoreSpecificAnnouncements"
+                    }
+                },
+                "MaxLength": {
+                    "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistrationMaxLength",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MaxLength",
+                        "smithy.api#documentation": "<p>The maximum prefix length that the ASNs are authorized to announce.</p>",
+                        "smithy.api#xmlName": "maxLength"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Description",
+                        "smithy.api#documentation": "<p>The description of the routing policy registration.</p>",
+                        "smithy.api#xmlName": "description"
+                    }
+                },
+                "LatestDeltaId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LatestDeltaId",
+                        "smithy.api#documentation": "<p>The ID of the most recent delta that modified this registration.</p>",
+                        "smithy.api#xmlName": "latestDeltaId"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistrationState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The state of the routing policy registration. Valid values: <code>pending-activate</code> | <code>activate-failed</code> | <code>create-in-progress</code> | <code>create-complete</code> | <code>update-in-progress</code> | <code>update-complete</code> | <code>delete-in-progress</code> | <code>delete-complete</code>.</p>",
+                        "smithy.api#xmlName": "state"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a routing policy registration that represents a Route Origin Authorization (ROA) managed through IPAM.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamRoutingPolicyRegistrationDelta": {
+            "type": "structure",
+            "members": {
+                "DeltaId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DeltaId",
+                        "smithy.api#documentation": "<p>The unique identifier of the delta.</p>",
+                        "smithy.api#xmlName": "deltaId"
+                    }
+                },
+                "DeltaJson": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DeltaJson",
+                        "smithy.api#documentation": "<p>The JSON specification describing the changes applied in this delta.</p>",
+                        "smithy.api#xmlName": "deltaJson"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistrationDeltaState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The state of the delta. Valid values: <code>pending</code> | <code>published</code> | <code>failed</code>.</p>",
+                        "smithy.api#xmlName": "state"
+                    }
+                },
+                "StateMessage": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StateMessage",
+                        "smithy.api#documentation": "<p>A message describing the current state, including error information if the delta failed.</p>",
+                        "smithy.api#xmlName": "stateMessage"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a routing policy registration change, including the changes applied and their publication state.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamRoutingPolicyRegistrationDeltaSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistrationDelta",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#IpamRoutingPolicyRegistrationDeltaState": {
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "published": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "published"
+                    }
+                },
+                "failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of a routing policy registration delta.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamRoutingPolicyRegistrationMaxLength": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 48
+                }
+            }
+        },
+        "com.amazonaws.ec2#IpamRoutingPolicyRegistrationSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistration",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#IpamRoutingPolicyRegistrationState": {
+            "type": "enum",
+            "members": {
+                "pending_activate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending-activate"
+                    }
+                },
+                "activate_failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "activate-failed"
+                    }
+                },
+                "create_in_progress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "create-in-progress"
+                    }
+                },
+                "create_complete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "create-complete"
+                    }
+                },
+                "update_in_progress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "update-in-progress"
+                    }
+                },
+                "update_complete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "update-complete"
+                    }
+                },
+                "delete_in_progress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "delete-in-progress"
+                    }
+                },
+                "delete_complete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "delete-complete"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of a routing policy registration.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamRpkiStatus": {
+            "type": "enum",
+            "members": {
+                "valid": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "valid"
+                    }
+                },
+                "invalid": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "invalid"
+                    }
+                },
+                "unknown": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknown"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The RPKI validation status of a BGP route.</p>"
+            }
+        },
+        "com.amazonaws.ec2#IpamRpkiStrength": {
+            "type": "enum",
+            "members": {
+                "strict": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "strict"
+                    }
+                },
+                "permissive": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "permissive"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The RPKI enforcement strength for route protection.</p>"
             }
         },
         "com.amazonaws.ec2#IpamScope": {
@@ -100005,9 +102290,9 @@
                                 "Port": 8080,
                                 "Path": "/healthv2",
                                 "Aggregation": "included",
-                                "Interval": 10,
-                                "Timeout": 5,
-                                "FailureThreshold": 3,
+                                "Interval": 60,
+                                "Timeout": 6,
+                                "FailureThreshold": 2,
                                 "SuccessThreshold": 2
                             }
                         }
@@ -102731,6 +105016,104 @@
                         "aws.protocols#ec2QueryName": "Ipam",
                         "smithy.api#documentation": "<p>The results of the modification.</p>",
                         "smithy.api#xmlName": "ipam"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyIpamRoutingPolicyRegistration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyIpamRoutingPolicyRegistrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyIpamRoutingPolicyRegistrationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies an existing routing policy registration. You can update the authorized ASNs, maximum prefix length, and other properties of a Route Origin Authorization (ROA).</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyIpamRoutingPolicyRegistrationRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "IpamInternetRegistryAssociationId": {
+                    "target": "com.amazonaws.ec2#IpamInternetRegistryAssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the IPAM internet registry association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Cidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The IP address prefix in CIDR notation identifying the routing policy registration to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Asns": {
+                    "target": "com.amazonaws.ec2#AsnList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The updated list of Autonomous System Numbers (ASNs) authorized to originate the prefix.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "Asn"
+                    }
+                },
+                "PermitMoreSpecificAnnouncements": {
+                    "target": "com.amazonaws.ec2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to permit more specific route announcements than the CIDR prefix. Default: <code>false</code>.</p>"
+                    }
+                },
+                "MaxLength": {
+                    "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistrationMaxLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new maximum prefix length that the ASNs are authorized to announce. Must be greater than or equal to the prefix length of the CIDR.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new description for the routing policy registration.</p>"
+                    }
+                },
+                "Force": {
+                    "target": "com.amazonaws.ec2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Forces the modification even if it conflicts with an announced route. Default: <code>false</code>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the operation ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyIpamRoutingPolicyRegistrationResult": {
+            "type": "structure",
+            "members": {
+                "IpamRoutingPolicyRegistrationDelta": {
+                    "target": "com.amazonaws.ec2#IpamRoutingPolicyRegistrationDelta",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpamRoutingPolicyRegistrationDelta",
+                        "smithy.api#documentation": "<p>Information about the routing policy registration delta created by this modification.</p>",
+                        "smithy.api#xmlName": "ipamRoutingPolicyRegistrationDelta"
                     }
                 }
             },
@@ -119617,6 +122000,12 @@
                         "smithy.api#enumValue": "ipam-prefix-list-resolver-target"
                     }
                 },
+                "ipam_internet_registry_association": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipam-internet-registry-association"
+                    }
+                },
                 "secondary_interface": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -120953,6 +123342,38 @@
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
+            }
+        },
+        "com.amazonaws.ec2#Rir": {
+            "type": "enum",
+            "members": {
+                "ripe": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ripe"
+                    }
+                },
+                "apnic": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "apnic"
+                    }
+                },
+                "arin": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "arin"
+                    }
+                },
+                "lacnic": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lacnic"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Regional Internet Registry (RIR).</p>"
             }
         },
         "com.amazonaws.ec2#RoleId": {

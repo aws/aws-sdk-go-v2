@@ -2272,6 +2272,9 @@
                     "target": "com.amazonaws.connect#UpdateContactSchedule"
                 },
                 {
+                    "target": "com.amazonaws.connect#UpdateContactTaskTemplate"
+                },
+                {
                     "target": "com.amazonaws.connect#UpdateDataTableAttribute"
                 },
                 {
@@ -5457,7 +5460,7 @@
                 "AssociatedResourceArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only current supported\n   resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>, and \n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Task</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>"
                     }
                 },
                 "Tags": {
@@ -7078,7 +7081,7 @@
                 "AssociatedResourceArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>, and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Task</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
                         "smithy.api#httpQuery": "associatedResourceArn",
                         "smithy.api#required": {}
                     }
@@ -8213,7 +8216,7 @@
                 "AssociatedResourceArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>, and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Task</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
                         "smithy.api#httpQuery": "associatedResourceArn",
                         "smithy.api#required": {}
                     }
@@ -10097,7 +10100,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The contact has not been disconnected and is not in a terminated state. PII can be deleted\n   only from a contact that has been disconnected. This error is returned with an HTTP 409 status\n   code.</p>",
+                "smithy.api#documentation": "<p>The contact has not been disconnected and is not in a terminated state. To delete PII,\n   disconnect the contact first. Wait for it to reach the terminated state, then retry the\n   request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -16753,7 +16756,7 @@
                 "AssociatedResourceArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only current supported\n   resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>, and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Task</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
                         "smithy.api#httpQuery": "associatedResourceArn",
                         "smithy.api#required": {}
                     }
@@ -16801,7 +16804,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified fields containing personally identifiable information (PII) from a\n   contact in the specified Connect Customer instance. This operation redacts PII (such as\n   customer endpoints, additional email recipients, and the email subject) from the contact and its\n   associated contact trace record (CTR). The contact must be in a terminated state.</p>\n         <important>\n            <p>This operation performs a hard deletion of the specified PII and cannot be undone. There is\n    no retention period; after the data is deleted, it cannot be recovered. Only fields that\n    Connect Customer identifies and stores as PII are removed. Any PII that you place in fields\n    outside the scope of this operation remains your responsibility to remove.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Deletes the specified fields containing personally identifiable information (PII) from a\n   contact in the specified Connect Customer instance. We redact PII (such as\n   customer endpoints, additional email recipients, and the email subject) from the contact and its\n   associated contact trace record (CTR). The contact must be in a terminated state.</p>\n         <important>\n            <p>\n               <b>This deletion is permanent and cannot be undone.</b> Performing this\n    operation permanently deletes the specified PII. There is\n    no retention period; you cannot recover the data after deletion. We remove only the fields\n    that Connect Customer identifies and stores as PII. Any PII that you place in fields\n    outside the scope of this operation remains your responsibility to remove.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/delete/{InstanceId}/{ContactId}",
@@ -16823,7 +16826,7 @@
                 "ContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the contact. PII can be deleted only from a contact that has been\n   disconnected (is in a terminated state).</p>",
+                        "smithy.api#documentation": "<p>The identifier of the contact. You can delete PII only from a contact that has been\n   disconnected (is in a terminated state).</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -16831,7 +16834,7 @@
                 "ContactFields": {
                     "target": "com.amazonaws.connect#ContactFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The categories of PII to redact from the contact. Valid values are\n   <code>CUSTOMER_ENDPOINT</code>, <code>ADDITIONAL_EMAIL_RECIPIENTS</code>, and\n   <code>EMAIL_SUBJECT</code>. <code>ADDITIONAL_EMAIL_RECIPIENTS</code> and <code>EMAIL_SUBJECT</code>\n   are supported only for contacts in the email channel.</p>",
+                        "smithy.api#documentation": "<p>The categories of PII to redact from the contact. Specify one or more of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CUSTOMER_ENDPOINT</code> – The customer's contact endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADDITIONAL_EMAIL_RECIPIENTS</code> – Additional recipients on an email contact (email channel only).</p>\n            </li>\n            <li>\n               <p>\n                  <code>EMAIL_SUBJECT</code> – The subject line of an email contact (email channel only).</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -28665,7 +28668,7 @@
                 "AssociatedResourceArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>, and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Task</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
                         "smithy.api#httpQuery": "associatedResourceArn",
                         "smithy.api#required": {}
                     }
@@ -28719,7 +28722,7 @@
                 "AssociatedResourceArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only current supported\n   resource.</p>"
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>, and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Task</a>.</p>"
                     }
                 },
                 "FileUseCaseType": {
@@ -45302,6 +45305,12 @@
                     "traits": {
                         "smithy.api#enumValue": "NOT_SUPPORTED"
                     }
+                },
+                "TYPE_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TYPE_MISMATCH"
+                    }
                 }
             }
         },
@@ -53934,7 +53943,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading your content.</p>\n         <important>\n            <p>You may only use this API to upload attachments to an <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Connect Customer Case</a> or <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Connect Customer Email</a>. </p>\n         </important>",
+                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading your content.</p>\n         <important>\n            <p>You may only use this API to upload attachments to a <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Connect Customer Case</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Connect Customer Email</a>, or\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Connect Customer Task</a>. </p>\n         </important>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/attached-files/{InstanceId}",
@@ -53990,7 +53999,7 @@
                 "AssociatedResourceArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>, and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Task</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
                         "smithy.api#httpQuery": "associatedResourceArn",
                         "smithy.api#required": {}
                     }
@@ -59938,6 +59947,82 @@
             }
         },
         "com.amazonaws.connect#UpdateContactScheduleResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateContactTaskTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateContactTaskTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateContactTaskTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#PropertyValidationException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the task template association on an existing task contact. You can update the task template on a contact\n   before assignment to support tasks that are created without a template (for example <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-rules.html\">Rules</a> or <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-disconnect-flow.html\">disconnect flows</a>) or change the agent interaction\n   form to represent the latest task data (for example an initial request that was submitted as a refund gets updated to\n   an account cancellation and requires a new template).</p>\n         <p>This operation can only be used with task contacts that are in progress and not connected to an agent. A task\n   template can be updated a maximum of 5 times per contact.</p>\n         <p>The task's references must be compatible with the fields of the target task template. If the target template has\n   a required field, the task must have a corresponding reference with a matching name and compatible type. The\n   following task template field types map to reference types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TEXT</code>, <code>TEXT_AREA</code>, <code>BOOLEAN</code>, and <code>SINGLE_SELECT</code> map to\n     references of type <code>STRING</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NUMBER</code> maps to references of type <code>NUMBER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DATE_TIME</code> maps to references of type <code>DATE</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>URL</code> maps to references of type <code>URL</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EMAIL</code> maps to references of type <code>EMAIL</code>.</p>\n            </li>\n         </ul>\n         <p>References corresponding to <code>TEXT</code> fields must be fewer than 512 characters.\n   <code>TEXT_AREA</code> fields must be fewer than 4,096 characters. <code>BOOLEAN</code> fields must have a value\n   of <code>true</code> or <code>false</code>.</p>\n         <p>An <code>InvalidRequestException</code> occurs when <code>UpdateContactTaskTemplate</code> is called on a\n   connected or terminated task, when it is called on non-task contacts, and when the task contact already uses the\n   provided task template. A <code>PropertyValidationException</code> occurs when the task's references conflict with\n   the task template's fields, for example if the task is missing a reference that matches a required field, or if the\n   task has a reference that matches a required field's name but not its datatype.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/contact/task-template",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateContactTaskTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskTemplateId": {
+                    "target": "com.amazonaws.connect#TaskTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the task template. For more information about task templates, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/task-templates.html\">Task templates</a> in the <i>Connect Customer Administrator Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Connect Customer. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateContactTaskTemplateResponse": {
             "type": "structure",
             "members": {},
             "traits": {

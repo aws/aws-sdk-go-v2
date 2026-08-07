@@ -117,6 +117,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the actor.</p>"
                     }
+                },
+                "enableEmailMfa": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether email-based MFA is enabled for this actor.</p>"
+                    }
+                },
+                "mfaForwardingAddress": {
+                    "target": "com.amazonaws.securityagent#SensitiveEmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Server-generated email forwarding address for receiving MFA codes.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11877,6 +11889,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>Sensitive email address.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#SensitiveEmailAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.securityagent#ServiceManagedInput": {

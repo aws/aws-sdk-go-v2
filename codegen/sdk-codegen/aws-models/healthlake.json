@@ -1722,6 +1722,13 @@
         "com.amazonaws.healthlake#DateTime": {
             "type": "timestamp"
         },
+        "com.amazonaws.healthlake#DefaultEnabledBoolean": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": true,
+                "smithy.api#documentation": "<p>Specifies whether the feature is enabled. Defaults to true when not specified.</p>"
+            }
+        },
         "com.amazonaws.healthlake#DefaultProfiles": {
             "type": "list",
             "member": {
@@ -5426,6 +5433,13 @@
                     "target": "com.amazonaws.healthlake#HealthLakeBoolean",
                     "traits": {
                         "smithy.api#default": false
+                    }
+                },
+                "ProvenanceEnabled": {
+                    "target": "com.amazonaws.healthlake#DefaultEnabledBoolean",
+                    "traits": {
+                        "smithy.api#default": true,
+                        "smithy.api#documentation": "<p>Specifies whether to enable provenance for the import job.</p>"
                     }
                 }
             },

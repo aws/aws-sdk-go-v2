@@ -63752,6 +63752,18 @@
                     "traits": {
                         "smithy.api#enumValue": "Updating"
                     }
+                },
+                "PendingMaintenance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PendingMaintenance"
+                    }
+                },
+                "InMaintenance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InMaintenance"
+                    }
                 }
             }
         },
