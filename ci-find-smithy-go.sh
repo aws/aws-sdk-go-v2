@@ -54,9 +54,12 @@ while [ -n "$branch" ] && [[ "$branch" == *-* ]]; do
 done
 
 if [ -z "$matched_branch" ]; then
-    # default to main but don't modreplace so we can use release but codegen ci
-    # still works
+    # default to SMITHY_GO_CODEGEN_VERSION so CI uses the same smithy-go as prod
+    # strip any trailing whitespace/newlines that editors may add to the file
+    codegen_version=$(tr -d '[:space:]' < SMITHY_GO_CODEGEN_VERSION)
+    echo "no matching branch, checking out smithy-go at SMITHY_GO_CODEGEN_VERSION=${codegen_version}"
     git clone "$repository" "$RUNNER_TMPDIR"/smithy-go
+    git -C "$RUNNER_TMPDIR"/smithy-go checkout "$codegen_version"
     exit 0
 fi
 
