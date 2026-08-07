@@ -7,7 +7,6 @@ import (
 	"log"
 	"math/big"
 	"sort"
-	"strconv"
 	"strings"
 	"text/template"
 
@@ -138,44 +137,6 @@ func (m *Modifier) UnmarshalJSON(data []byte) error {
 // BaseConfiguration is the set of configuration keys and their deserialized json value.
 type BaseConfiguration map[string]interface{}
 
-// SchemaVersion is a versioned JSON document. The version field may be
-// an integer (e.g. 1) or a string (e.g. "1.1")
-type SchemaVersion struct {
-	Version SchemaVersionValue `json:"version"`
-}
-
-// SchemaVersionValue handles both integer and string version values.
-type SchemaVersionValue struct {
-	Major int
-	Raw   string
-}
-
-func (v *SchemaVersionValue) UnmarshalJSON(data []byte) error {
-	// Try integer first
-	var intVal int
-	if err := json.Unmarshal(data, &intVal); err == nil {
-		v.Major = intVal
-		v.Raw = fmt.Sprintf("%d", intVal)
-		return nil
-	}
-
-	// Fall back to string (e.g. "1.1")
-	var strVal string
-	if err := json.Unmarshal(data, &strVal); err != nil {
-		return fmt.Errorf("version must be an integer or string, got: %s", string(data))
-	}
-	v.Raw = strVal
-
-	// Extract major version from string like "1.1" -> 1
-	parts := strings.SplitN(strVal, ".", 2)
-	major, err := strconv.Atoi(parts[0])
-	if err != nil {
-		return fmt.Errorf("failed to parse major version from %q: %w", strVal, err)
-	}
-	v.Major = major
-	return nil
-}
-
 // SDKDefaultConfig is a default configuration descriptor.
 type SDKDefaultConfig struct {
 	Base          BaseConfiguration      `json:"base"`
@@ -184,8 +145,6 @@ type SDKDefaultConfig struct {
 		Modes         map[string]string `json:"modes"`
 		Configuration map[string]string `json:"configuration"`
 	} `json:"documentation"`
-
-	SchemaVersion
 }
 
 func numberToBigFloat(value json.Number) (*big.Float, error) {
