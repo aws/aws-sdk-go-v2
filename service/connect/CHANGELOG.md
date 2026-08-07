@@ -1,3 +1,7 @@
+# v1.185.0 (2026-08-07)
+
+* **Feature**: Supports updating the task template associated with in-progress task contacts using the new UpdateContactTaskTemplate API. This enables supervisors and developers to dynamically reassign task templates without creating a new task.
+
 # v1.184.4 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

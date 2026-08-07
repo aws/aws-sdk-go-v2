@@ -1,8 +1,0 @@
-{
-    "id": "a51a1268-999b-4f33-8775-ee976fe99f91",
-    "type": "feature",
-    "description": "Amazon SageMaker adds maintenance lifecycle statuses for Notebook Instances",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

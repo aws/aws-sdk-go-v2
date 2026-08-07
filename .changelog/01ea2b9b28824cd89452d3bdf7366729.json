@@ -1,8 +1,0 @@
-{
-    "id": "01ea2b9b-2882-4cd8-9452-d3bdf7366729",
-    "type": "feature",
-    "description": "Increased the maximum allowed length of the oauthToken parameter in the CreateApp and UpdateApp APIs to support longer OAuth tokens issued by third-party Git providers.",
-    "modules": [
-        "service/amplify"
-    ]
-}

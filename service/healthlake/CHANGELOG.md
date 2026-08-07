@@ -1,3 +1,7 @@
+# v1.43.0 (2026-08-07)
+
+* **Feature**: Adds provenanceEnabled to StartFHIRImportJob
+
 # v1.42.4 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

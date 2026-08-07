@@ -1,3 +1,7 @@
+# v1.265.0 (2026-08-07)
+
+* **Feature**: Amazon SageMaker adds maintenance lifecycle statuses for Notebook Instances
+
 # v1.264.0 (2026-08-06)
 
 * **Feature**: Releases new Model Customization SequenceLength parameter for Training and g7 instance types for Training and Processing.

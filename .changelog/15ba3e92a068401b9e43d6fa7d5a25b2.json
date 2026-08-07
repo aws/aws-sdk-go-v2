@@ -1,8 +1,0 @@
-{
-    "id": "15ba3e92-a068-401b-9e43-d6fa7d5a25b2",
-    "type": "feature",
-    "description": "Supports updating the task template associated with in-progress task contacts using the new UpdateContactTaskTemplate API. This enables supervisors and developers to dynamically reassign task templates without creating a new task.",
-    "modules": [
-        "service/connect"
-    ]
-}

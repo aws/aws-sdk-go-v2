@@ -1,3 +1,21 @@
+# Release (2026-08-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.185.0](service/connect/CHANGELOG.md#v11850-2026-08-07)
+  * **Feature**: Supports updating the task template associated with in-progress task contacts using the new UpdateContactTaskTemplate API. This enables supervisors and developers to dynamically reassign task templates without creating a new task.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.321.0](service/ec2/CHANGELOG.md#v13210-2026-08-07)
+  * **Feature**: This release adds support for BGP route protection in Amazon VPC IP Address Manager (IPAM), including route discovery, RPKI route protection findings, and delegated RPKI (Internet Registry Associations, routing policy registrations, and ROA management) for BYOIP prefixes.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.43.0](service/healthlake/CHANGELOG.md#v1430-2026-08-07)
+  * **Feature**: Adds provenanceEnabled to StartFHIRImportJob
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.44.0](service/mediapackagev2/CHANGELOG.md#v1440-2026-08-07)
+  * **Feature**: StreamNameOutputMode - a new optional field on MediaPackageV2 OriginEndpoints that lets customers choose whether egress manifests use numeric stream indices (default) or encoder-assigned stream names from the input
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.65.0](service/mediatailor/CHANGELOG.md#v1650-2026-08-07)
+  * **Feature**: Added support for inserting ads via the VAST Ad Buffet standard. You can now configure MediaTailor to insert ads in sequence order using the AdSequencingMode setting in your playback configuration. Standalone ads are used as fallbacks when a sequenced ad is unavailable.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.265.0](service/sagemaker/CHANGELOG.md#v12650-2026-08-07)
+  * **Feature**: Amazon SageMaker adds maintenance lifecycle statuses for Notebook Instances
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.10.0](service/securityagent/CHANGELOG.md#v1100-2026-08-07)
+  * **Feature**: Added enableEmailMfa input field on Actor to enable email-based MFA during penetration tests. When enabled, a server-generated mfaForwardingAddress is returned. Set up a forwarding rule in your email provider to forward MFA emails to this address so the agent can complete email-based MFA login flows
+
 # Release (2026-08-06)
 
 ## General Highlights
