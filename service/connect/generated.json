@@ -337,6 +337,7 @@
         "api_op_UpdateContactFlowName.go",
         "api_op_UpdateContactRoutingData.go",
         "api_op_UpdateContactSchedule.go",
+        "api_op_UpdateContactTaskTemplate.go",
         "api_op_UpdateDataTableAttribute.go",
         "api_op_UpdateDataTableMetadata.go",
         "api_op_UpdateDataTablePrimaryValues.go",

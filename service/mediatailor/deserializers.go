@@ -9385,6 +9385,11 @@ func awsRestjson1_deserializeDocumentAdDecisionServerConfiguration(v **types.AdD
 				return err
 			}
 
+		case "VastResponse":
+			if err := awsRestjson1_deserializeDocumentVastResponse(&sv.VastResponse, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -11343,6 +11348,11 @@ func awsRestjson1_deserializeDocumentLivePreRollConfiguration(v **types.LivePreR
 
 	for key, value := range shape {
 		switch key {
+		case "AdDecisionServerConfiguration":
+			if err := awsRestjson1_deserializeDocumentPreRollAdDecisionServerConfiguration(&sv.AdDecisionServerConfiguration, value); err != nil {
+				return err
+			}
+
 		case "AdDecisionServerUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12140,6 +12150,82 @@ func awsRestjson1_deserializeDocumentPrefetchSchedule(v **types.PrefetchSchedule
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPreRollAdDecisionServerConfiguration(v **types.PreRollAdDecisionServerConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PreRollAdDecisionServerConfiguration
+	if *v == nil {
+		sv = &types.PreRollAdDecisionServerConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "VastResponse":
+			if err := awsRestjson1_deserializeDocumentPreRollVastResponse(&sv.VastResponse, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPreRollVastResponse(v **types.PreRollVastResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PreRollVastResponse
+	if *v == nil {
+		sv = &types.PreRollVastResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdSequencingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PreRollAdSequencingMode to be of type string, got %T instead", value)
+				}
+				sv.AdSequencingMode = types.PreRollAdSequencingMode(jtv)
 			}
 
 		default:
@@ -13442,6 +13528,46 @@ func awsRestjson1_deserializeDocumentTrafficShapingTpsConfiguration(v **types.Tr
 					return err
 				}
 				sv.PeakTps = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVastResponse(v **types.VastResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VastResponse
+	if *v == nil {
+		sv = &types.VastResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdSequencingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdSequencingMode to be of type string, got %T instead", value)
+				}
+				sv.AdSequencingMode = types.AdSequencingMode(jtv)
 			}
 
 		default:

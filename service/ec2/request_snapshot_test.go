@@ -2135,6 +2135,37 @@ func TestCheckRequestSnapshot_AuthorizeSecurityGroupIngress(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_BatchModifyIpamRoutingPolicyRegistrations(t *testing.T) {
+	input := &BatchModifyIpamRoutingPolicyRegistrationsInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		DeltaJson:                         ptr.String("__DeltaJson__"),
+		Force:                             ptr.Bool(true),
+		ClientToken:                       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchModifyIpamRoutingPolicyRegistrations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchModifyIpamRoutingPolicyRegistrations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BundleInstance(t *testing.T) {
 	input := &BundleInstanceInput{
 		InstanceId: ptr.String("__InstanceId__"),
@@ -5321,6 +5352,66 @@ func TestCheckRequestSnapshot_CreateIpamExternalResourceVerificationToken(t *tes
 	}
 }
 
+func TestCheckRequestSnapshot_CreateIpamInternetRegistryAssociation(t *testing.T) {
+	input := &CreateIpamInternetRegistryAssociationInput{
+		DryRun:             ptr.Bool(true),
+		IpamId:             ptr.String("__IpamId__"),
+		Rir:                types.Rir("ripe"),
+		OrganizationHandle: ptr.String("__OrganizationHandle__"),
+		Description:        ptr.String("__Description__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateIpamInternetRegistryAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIpamInternetRegistryAssociation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateIpamPolicy(t *testing.T) {
 	input := &CreateIpamPolicyInput{
 		DryRun: ptr.Bool(true),
@@ -5709,6 +5800,44 @@ func TestCheckRequestSnapshot_CreateIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateIpamRoutingPolicyRegistration(t *testing.T) {
+	input := &CreateIpamRoutingPolicyRegistrationInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		Cidr:                              ptr.String("__Cidr__"),
+		Asns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PermitMoreSpecificAnnouncements: ptr.Bool(true),
+		MaxLength:                       ptr.Int32(1),
+		Description:                     ptr.String("__Description__"),
+		Force:                           ptr.Bool(true),
+		ClientToken:                     ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateIpamRoutingPolicyRegistration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIpamRoutingPolicyRegistration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -12096,6 +12225,34 @@ func TestCheckRequestSnapshot_DeleteIpamExternalResourceVerificationToken(t *tes
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteIpamInternetRegistryAssociation(t *testing.T) {
+	input := &DeleteIpamInternetRegistryAssociationInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteIpamInternetRegistryAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteIpamInternetRegistryAssociation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteIpamPolicy(t *testing.T) {
 	input := &DeleteIpamPolicyInput{
 		DryRun:       ptr.Bool(true),
@@ -12233,6 +12390,37 @@ func TestCheckRequestSnapshot_DeleteIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteIpamRoutingPolicyRegistration(t *testing.T) {
+	input := &DeleteIpamRoutingPolicyRegistrationInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		Cidr:                              ptr.String("__Cidr__"),
+		Force:                             ptr.Bool(true),
+		ClientToken:                       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteIpamRoutingPolicyRegistration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteIpamRoutingPolicyRegistration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -17980,6 +18168,55 @@ func TestCheckRequestSnapshot_DescribeIpamExternalResourceVerificationTokens(t *
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeIpamExternalResourceVerificationTokens"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeIpamInternetRegistryAssociations(t *testing.T) {
+	input := &DescribeIpamInternetRegistryAssociationsInput{
+		DryRun: ptr.Bool(true),
+		IpamInternetRegistryAssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeIpamInternetRegistryAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeIpamInternetRegistryAssociations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -25198,6 +25435,40 @@ func TestCheckRequestSnapshot_EnableInstanceSqlHaStandbyDetections(t *testing.T)
 	}
 }
 
+func TestCheckRequestSnapshot_EnableIpamInternetRegistryAssociation(t *testing.T) {
+	input := &EnableIpamInternetRegistryAssociationInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		RpkiVersion:                       ptr.String("__RpkiVersion__"),
+		ServiceUri:                        ptr.String("__ServiceUri__"),
+		ChildHandle:                       ptr.String("__ChildHandle__"),
+		ParentHandle:                      ptr.String("__ParentHandle__"),
+		ParentBpkiTa:                      ptr.String("__ParentBpkiTa__"),
+		ClientToken:                       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.EnableIpamInternetRegistryAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableIpamInternetRegistryAssociation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_EnableIpamOrganizationAdminAccount(t *testing.T) {
 	input := &EnableIpamOrganizationAdminAccountInput{
 		DryRun:                  ptr.Bool(true),
@@ -26863,6 +27134,145 @@ func TestCheckRequestSnapshot_GetIpamDiscoveredResourceCidrs(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetIpamDiscoveredRoutes(t *testing.T) {
+	input := &GetIpamDiscoveredRoutesInput{
+		DryRun:                  ptr.Bool(true),
+		IpamResourceDiscoveryId: ptr.String("__IpamResourceDiscoveryId__"),
+		ResourceRegion:          ptr.String("__ResourceRegion__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamDiscoveredRoutes(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamDiscoveredRoutes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetIpamInternetRegistryAssociationAsns(t *testing.T) {
+	input := &GetIpamInternetRegistryAssociationAsnsInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		MaxResults:                        ptr.Int32(1),
+		NextToken:                         ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamInternetRegistryAssociationAsns(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamInternetRegistryAssociationAsns"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetIpamInternetRegistryAssociationCidrs(t *testing.T) {
+	input := &GetIpamInternetRegistryAssociationCidrsInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		MaxResults:                        ptr.Int32(1),
+		NextToken:                         ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamInternetRegistryAssociationCidrs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamInternetRegistryAssociationCidrs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetIpamPolicyAllocationRules(t *testing.T) {
 	input := &GetIpamPolicyAllocationRulesInput{
 		DryRun:       ptr.Bool(true),
@@ -27227,6 +27637,148 @@ func TestCheckRequestSnapshot_GetIpamResourceCidrs(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamResourceCidrs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetIpamRouteOriginAuthorizations(t *testing.T) {
+	input := &GetIpamRouteOriginAuthorizationsInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		Cidr:                              ptr.String("__Cidr__"),
+		MaxResults:                        ptr.Int32(1),
+		NextToken:                         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamRouteOriginAuthorizations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamRouteOriginAuthorizations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetIpamRouteProtectionFindings(t *testing.T) {
+	input := &GetIpamRouteProtectionFindingsInput{
+		DryRun: ptr.Bool(true),
+		IpamId: ptr.String("__IpamId__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamRouteProtectionFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamRouteProtectionFindings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetIpamRoutingPolicyRegistrationDeltas(t *testing.T) {
+	input := &GetIpamRoutingPolicyRegistrationDeltasInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		DeltaId:                           ptr.String("__DeltaId__"),
+		StartTime:                         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ChronologicalOrder:                types.ChronologicalOrder("forward"),
+		MaxResults:                        ptr.Int32(1),
+		NextToken:                         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamRoutingPolicyRegistrationDeltas(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamRoutingPolicyRegistrationDeltas"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetIpamRoutingPolicyRegistrations(t *testing.T) {
+	input := &GetIpamRoutingPolicyRegistrationsInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		Cidr:                              ptr.String("__Cidr__"),
+		MaxResults:                        ptr.Int32(1),
+		NextToken:                         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamRoutingPolicyRegistrations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamRoutingPolicyRegistrations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -31087,6 +31639,44 @@ func TestCheckRequestSnapshot_ModifyIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ModifyIpamRoutingPolicyRegistration(t *testing.T) {
+	input := &ModifyIpamRoutingPolicyRegistrationInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		Cidr:                              ptr.String("__Cidr__"),
+		Asns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PermitMoreSpecificAnnouncements: ptr.Bool(true),
+		MaxLength:                       ptr.Int32(1),
+		Description:                     ptr.String("__Description__"),
+		Force:                           ptr.Bool(true),
+		ClientToken:                     ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyIpamRoutingPolicyRegistration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyIpamRoutingPolicyRegistration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -40685,6 +41275,37 @@ func TestUpdateRequestSnapshot_AuthorizeSecurityGroupIngress(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_BatchModifyIpamRoutingPolicyRegistrations(t *testing.T) {
+	input := &BatchModifyIpamRoutingPolicyRegistrationsInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		DeltaJson:                         ptr.String("__DeltaJson__"),
+		Force:                             ptr.Bool(true),
+		ClientToken:                       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchModifyIpamRoutingPolicyRegistrations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchModifyIpamRoutingPolicyRegistrations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_BundleInstance(t *testing.T) {
 	input := &BundleInstanceInput{
 		InstanceId: ptr.String("__InstanceId__"),
@@ -43871,6 +44492,66 @@ func TestUpdateRequestSnapshot_CreateIpamExternalResourceVerificationToken(t *te
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateIpamInternetRegistryAssociation(t *testing.T) {
+	input := &CreateIpamInternetRegistryAssociationInput{
+		DryRun:             ptr.Bool(true),
+		IpamId:             ptr.String("__IpamId__"),
+		Rir:                types.Rir("ripe"),
+		OrganizationHandle: ptr.String("__OrganizationHandle__"),
+		Description:        ptr.String("__Description__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateIpamInternetRegistryAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIpamInternetRegistryAssociation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateIpamPolicy(t *testing.T) {
 	input := &CreateIpamPolicyInput{
 		DryRun: ptr.Bool(true),
@@ -44259,6 +44940,44 @@ func TestUpdateRequestSnapshot_CreateIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateIpamRoutingPolicyRegistration(t *testing.T) {
+	input := &CreateIpamRoutingPolicyRegistrationInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		Cidr:                              ptr.String("__Cidr__"),
+		Asns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PermitMoreSpecificAnnouncements: ptr.Bool(true),
+		MaxLength:                       ptr.Int32(1),
+		Description:                     ptr.String("__Description__"),
+		Force:                           ptr.Bool(true),
+		ClientToken:                     ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateIpamRoutingPolicyRegistration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIpamRoutingPolicyRegistration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -50646,6 +51365,34 @@ func TestUpdateRequestSnapshot_DeleteIpamExternalResourceVerificationToken(t *te
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteIpamInternetRegistryAssociation(t *testing.T) {
+	input := &DeleteIpamInternetRegistryAssociationInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteIpamInternetRegistryAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteIpamInternetRegistryAssociation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteIpamPolicy(t *testing.T) {
 	input := &DeleteIpamPolicyInput{
 		DryRun:       ptr.Bool(true),
@@ -50783,6 +51530,37 @@ func TestUpdateRequestSnapshot_DeleteIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteIpamRoutingPolicyRegistration(t *testing.T) {
+	input := &DeleteIpamRoutingPolicyRegistrationInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		Cidr:                              ptr.String("__Cidr__"),
+		Force:                             ptr.Bool(true),
+		ClientToken:                       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteIpamRoutingPolicyRegistration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteIpamRoutingPolicyRegistration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -56530,6 +57308,55 @@ func TestUpdateRequestSnapshot_DescribeIpamExternalResourceVerificationTokens(t 
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeIpamExternalResourceVerificationTokens"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeIpamInternetRegistryAssociations(t *testing.T) {
+	input := &DescribeIpamInternetRegistryAssociationsInput{
+		DryRun: ptr.Bool(true),
+		IpamInternetRegistryAssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeIpamInternetRegistryAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeIpamInternetRegistryAssociations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -63748,6 +64575,40 @@ func TestUpdateRequestSnapshot_EnableInstanceSqlHaStandbyDetections(t *testing.T
 	}
 }
 
+func TestUpdateRequestSnapshot_EnableIpamInternetRegistryAssociation(t *testing.T) {
+	input := &EnableIpamInternetRegistryAssociationInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		RpkiVersion:                       ptr.String("__RpkiVersion__"),
+		ServiceUri:                        ptr.String("__ServiceUri__"),
+		ChildHandle:                       ptr.String("__ChildHandle__"),
+		ParentHandle:                      ptr.String("__ParentHandle__"),
+		ParentBpkiTa:                      ptr.String("__ParentBpkiTa__"),
+		ClientToken:                       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.EnableIpamInternetRegistryAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableIpamInternetRegistryAssociation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_EnableIpamOrganizationAdminAccount(t *testing.T) {
 	input := &EnableIpamOrganizationAdminAccountInput{
 		DryRun:                  ptr.Bool(true),
@@ -65413,6 +66274,145 @@ func TestUpdateRequestSnapshot_GetIpamDiscoveredResourceCidrs(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetIpamDiscoveredRoutes(t *testing.T) {
+	input := &GetIpamDiscoveredRoutesInput{
+		DryRun:                  ptr.Bool(true),
+		IpamResourceDiscoveryId: ptr.String("__IpamResourceDiscoveryId__"),
+		ResourceRegion:          ptr.String("__ResourceRegion__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamDiscoveredRoutes(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamDiscoveredRoutes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetIpamInternetRegistryAssociationAsns(t *testing.T) {
+	input := &GetIpamInternetRegistryAssociationAsnsInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		MaxResults:                        ptr.Int32(1),
+		NextToken:                         ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamInternetRegistryAssociationAsns(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamInternetRegistryAssociationAsns"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetIpamInternetRegistryAssociationCidrs(t *testing.T) {
+	input := &GetIpamInternetRegistryAssociationCidrsInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		MaxResults:                        ptr.Int32(1),
+		NextToken:                         ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamInternetRegistryAssociationCidrs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamInternetRegistryAssociationCidrs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetIpamPolicyAllocationRules(t *testing.T) {
 	input := &GetIpamPolicyAllocationRulesInput{
 		DryRun:       ptr.Bool(true),
@@ -65777,6 +66777,148 @@ func TestUpdateRequestSnapshot_GetIpamResourceCidrs(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamResourceCidrs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetIpamRouteOriginAuthorizations(t *testing.T) {
+	input := &GetIpamRouteOriginAuthorizationsInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		Cidr:                              ptr.String("__Cidr__"),
+		MaxResults:                        ptr.Int32(1),
+		NextToken:                         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamRouteOriginAuthorizations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamRouteOriginAuthorizations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetIpamRouteProtectionFindings(t *testing.T) {
+	input := &GetIpamRouteProtectionFindingsInput{
+		DryRun: ptr.Bool(true),
+		IpamId: ptr.String("__IpamId__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamRouteProtectionFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamRouteProtectionFindings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetIpamRoutingPolicyRegistrationDeltas(t *testing.T) {
+	input := &GetIpamRoutingPolicyRegistrationDeltasInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		DeltaId:                           ptr.String("__DeltaId__"),
+		StartTime:                         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ChronologicalOrder:                types.ChronologicalOrder("forward"),
+		MaxResults:                        ptr.Int32(1),
+		NextToken:                         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamRoutingPolicyRegistrationDeltas(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamRoutingPolicyRegistrationDeltas"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetIpamRoutingPolicyRegistrations(t *testing.T) {
+	input := &GetIpamRoutingPolicyRegistrationsInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		Cidr:                              ptr.String("__Cidr__"),
+		MaxResults:                        ptr.Int32(1),
+		NextToken:                         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIpamRoutingPolicyRegistrations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIpamRoutingPolicyRegistrations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -69637,6 +70779,44 @@ func TestUpdateRequestSnapshot_ModifyIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ModifyIpamRoutingPolicyRegistration(t *testing.T) {
+	input := &ModifyIpamRoutingPolicyRegistrationInput{
+		DryRun:                            ptr.Bool(true),
+		IpamInternetRegistryAssociationId: ptr.String("__IpamInternetRegistryAssociationId__"),
+		Cidr:                              ptr.String("__Cidr__"),
+		Asns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PermitMoreSpecificAnnouncements: ptr.Bool(true),
+		MaxLength:                       ptr.Int32(1),
+		Description:                     ptr.String("__Description__"),
+		Force:                           ptr.Bool(true),
+		ClientToken:                     ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyIpamRoutingPolicyRegistration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyIpamRoutingPolicyRegistration"); err != nil {
 		t.Fatal(err)
 	}
 }

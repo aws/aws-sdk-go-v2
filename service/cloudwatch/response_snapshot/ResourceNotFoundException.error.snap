@@ -4,4 +4,4 @@ Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 X-Amzn-Query-Mode: true
 
-¤lResourceTypep__ResourceType__f__typexResourceNotFoundExceptiongMessagek__Message__jResourceIdn__ResourceId__
+¤f__typexResourceNotFoundExceptiongMessagek__Message__jResourceIdn__ResourceId__lResourceTypep__ResourceType__

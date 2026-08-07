@@ -15998,6 +15998,15 @@ func awsRestjson1_deserializeDocumentActor(v **types.Actor, value interface{}) e
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "enableEmailMfa":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableEmailMfa = ptr.Bool(jtv)
+			}
+
 		case "identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16005,6 +16014,15 @@ func awsRestjson1_deserializeDocumentActor(v **types.Actor, value interface{}) e
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Identifier = ptr.String(jtv)
+			}
+
+		case "mfaForwardingAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveEmailAddress to be of type string, got %T instead", value)
+				}
+				sv.MfaForwardingAddress = ptr.String(jtv)
 			}
 
 		case "uris":

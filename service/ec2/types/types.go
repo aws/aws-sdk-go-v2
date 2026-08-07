@@ -1561,6 +1561,9 @@ type ByoipCidr struct {
 	// The description of the address range.
 	Description *string
 
+	// The ID of the IPAM pool associated with the CIDR.
+	IpamPoolId *string
+
 	// If you have [Local Zones] enabled, you can choose a network border group for Local Zones
 	// when you provision and advertise a BYOIPv4 CIDR. Choose the network border group
 	// carefully as the EIP and the Amazon Web Services resource it is associated with
@@ -1580,6 +1583,9 @@ type ByoipCidr struct {
 	//
 	// [Local Zones]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
 	NetworkBorderGroup *string
+
+	// The ID of the address pool associated with the CIDR.
+	PoolId *string
 
 	// The state of the address range.
 	//
@@ -12004,6 +12010,68 @@ type IpamDiscoveredResourceCidr struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a BGP route discovered by IPAM resource discovery.
+type IpamDiscoveredRoute struct {
+
+	// The advertisement type of the route. Possible values:
+	//
+	//   - regional - The IP address is advertised from a single location (regional
+	//   services such as Amazon EC2).
+	//
+	//   - global - The IP address is advertised from multiple global locations
+	//   simultaneously (global services such as Amazon CloudFront).
+	AdvertisementType IpamByoipAdvertisementType
+
+	// The Autonomous System Number (ASN) that originates the route.
+	Asn *string
+
+	// The IP address prefix of the discovered route in CIDR notation.
+	Cidr *string
+
+	// The ID of the IPAM pool associated with the route.
+	IpamPoolId *string
+
+	// The ID of the IPAM resource discovery that discovered the route.
+	IpamResourceDiscoveryId *string
+
+	// The network border group for the route.
+	NetworkBorderGroup *string
+
+	// The ID of the BYOIP pool associated with the route.
+	PoolId *string
+
+	// The ID of the resource owner.
+	ResourceOwnerId *string
+
+	// The Amazon Web Services Region where the route was discovered.
+	ResourceRegion *string
+
+	// The time when the route was last sampled.
+	SampleTime *time.Time
+
+	// The state of the BYOIP CIDR. Possible values:
+	//
+	//   - advertised - The CIDR is being advertised.
+	//
+	//   - deprovisioned - The CIDR has been deprovisioned.
+	//
+	//   - failed-deprovision - Deprovisioning failed.
+	//
+	//   - failed-provision - Provisioning failed.
+	//
+	//   - pending-deprovision - Deprovisioning is in progress.
+	//
+	//   - pending-provision - Provisioning is in progress.
+	//
+	//   - provisioned - The CIDR is provisioned.
+	//
+	//   - provisioned-not-publicly-advertisable - The CIDR is provisioned but not
+	//   publicly advertisable.
+	State IpamByoipCidrState
+
+	noSmithyDocumentSerde
+}
+
 // The discovery failure reason.
 type IpamDiscoveryFailureReason struct {
 
@@ -12073,6 +12141,85 @@ type IpamExternalResourceVerificationToken struct {
 
 	// Token value.
 	TokenValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an association between an IPAM and a Regional
+// Internet Registry (RIR) for delegated RPKI management.
+type IpamInternetRegistryAssociation struct {
+
+	// The XML content for the child request to be submitted to the internet registry
+	// to complete the BPKI setup.
+	ChildRequestXml *string
+
+	// The description of the internet registry association.
+	Description *string
+
+	// The ID of the associated IPAM.
+	IpamId *string
+
+	// The Amazon Resource Name (ARN) of the internet registry association.
+	IpamInternetRegistryAssociationArn *string
+
+	// The ID of the internet registry association.
+	IpamInternetRegistryAssociationId *string
+
+	// The Amazon Web Services Region of the IPAM.
+	IpamRegion *string
+
+	// The organization handle at the internet registry.
+	OrganizationHandle *string
+
+	// The ID of the Amazon Web Services account that owns the internet registry
+	// association.
+	OwnerId *string
+
+	// The Regional Internet Registry. Possible values:
+	//
+	//   - ripe - RIPE NCC (Europe, the Middle East, and Central Asia).
+	//
+	//   - apnic - APNIC (Asia Pacific).
+	//
+	//   - arin - ARIN (North America).
+	//
+	//   - lacnic - LACNIC (Latin America and the Caribbean).
+	Rir Rir
+
+	// The state of the internet registry association. Valid values: pending-activation
+	// | pending-enable | create-in-progress | create-failed | enable-in-progress |
+	// enable-complete | enable-failed | delete-in-progress | delete-complete |
+	// delete-failed .
+	State IpamInternetRegistryAssociationState
+
+	// The tags assigned to the internet registry association.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an Autonomous System Number (ASN) registered at an
+// internet registry and associated with an IPAM.
+type IpamInternetRegistryAssociationAsn struct {
+
+	// The Autonomous System Number.
+	Asn *string
+
+	// The time when the ASN was last observed at the internet registry.
+	LastObservedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an IP address CIDR registered at an internet
+// registry and associated with an IPAM.
+type IpamInternetRegistryAssociationCidr struct {
+
+	// The IP address prefix in CIDR notation.
+	Cidr *string
+
+	// The time when the CIDR was last observed at the internet registry.
+	LastObservedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -13208,6 +13355,199 @@ type IpamResourceTag struct {
 
 	// The value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a Route Origin Authorization (ROA) published in the
+// RPKI. A ROA cryptographically attests that a specific ASN is authorized to
+// originate a specific IP address prefix.
+type IpamRouteOriginAuthorization struct {
+
+	// The Autonomous System Number (ASN) authorized by the ROA.
+	Asn *string
+
+	// The expiration date of the ROA.
+	Expiration *time.Time
+
+	// Specifies whether the ROA matches the route announcement.
+	Match *bool
+
+	// The maximum prefix length that the ASN is authorized to announce.
+	MaxLength *int32
+
+	// The IP address prefix authorized by the ROA in CIDR notation.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a Route Origin Authorization (ROA) currently
+// published in the RPKI.
+type IpamRouteOriginAuthorizationInfo struct {
+
+	// The Autonomous System Number (ASN) authorized to originate the prefix.
+	Asn *string
+
+	// The IP address prefix in CIDR notation authorized by the ROA.
+	Cidr *string
+
+	// The maximum prefix length that the ASN is authorized to announce.
+	MaxLength *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an overlapping route detected for a BYOIP prefix.
+type IpamRouteOverlap struct {
+
+	// The ASN originating the overlapping route.
+	Asn *string
+
+	// The time when the overlap was detected.
+	DetectedAt *time.Time
+
+	// The overlapping IP address prefix in CIDR notation.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a route protection finding, including the RPKI
+// validation status of a BYOIP route announcement.
+type IpamRouteProtectionFinding struct {
+
+	// The advertisement type. Possible values:
+	//
+	//   - regional - The IP address is advertised from a single location (regional
+	//   services such as Amazon EC2).
+	//
+	//   - global - The IP address is advertised from multiple global locations
+	//   simultaneously (global services such as Amazon CloudFront).
+	AdvertisementType IpamByoipAdvertisementType
+
+	// The Autonomous System Number (ASN) that originates the route.
+	Asn *string
+
+	// The IP address prefix in CIDR notation.
+	Cidr *string
+
+	// The ID of the IPAM pool associated with the finding.
+	IpamPoolId *string
+
+	// The network border group.
+	NetworkBorderGroup *string
+
+	// The ID of the BYOIP pool.
+	PoolId *string
+
+	// The ID of the resource owner.
+	ResourceOwnerId *string
+
+	// The Amazon Web Services Region of the resource.
+	ResourceRegion *string
+
+	// The time when the ROA data was last sampled.
+	RoaSampleTime *time.Time
+
+	// The Route Origin Authorizations (ROAs) that cover the prefix.
+	Roas []IpamRouteOriginAuthorization
+
+	// The overlapping routes detected for this prefix.
+	RouteOverlaps []IpamRouteOverlap
+
+	// The RPKI validation status of the route. Possible values:
+	//
+	//   - valid - The route has a matching ROA that covers the prefix and origin ASN.
+	//
+	//   - invalid - The route has a ROA for the prefix, but the origin ASN or prefix
+	//   length does not match.
+	//
+	//   - unknown - No ROA exists for the prefix, so RPKI validation cannot be
+	//   performed.
+	RpkiStatus IpamRpkiStatus
+
+	// The RPKI enforcement strength for the route. Possible values:
+	//
+	//   - strict - Invalid routes are rejected.
+	//
+	//   - permissive - Invalid routes are accepted but flagged.
+	RpkiStrength IpamRpkiStrength
+
+	// The time when the route was last sampled.
+	SampleTime *time.Time
+
+	// The state of the BYOIP CIDR. Possible values:
+	//
+	//   - advertised - The CIDR is being advertised.
+	//
+	//   - deprovisioned - The CIDR has been deprovisioned.
+	//
+	//   - failed-deprovision - Deprovisioning failed.
+	//
+	//   - failed-provision - Provisioning failed.
+	//
+	//   - pending-deprovision - Deprovisioning is in progress.
+	//
+	//   - pending-provision - Provisioning is in progress.
+	//
+	//   - provisioned - The CIDR is provisioned.
+	//
+	//   - provisioned-not-publicly-advertisable - The CIDR is provisioned but not
+	//   publicly advertisable.
+	State IpamByoipCidrState
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a routing policy registration that represents a
+// Route Origin Authorization (ROA) managed through IPAM.
+type IpamRoutingPolicyRegistration struct {
+
+	// The Autonomous System Numbers (ASNs) authorized to originate the prefix.
+	Asns []string
+
+	// The IP address prefix in CIDR notation authorized by the ROA.
+	Cidr *string
+
+	// The description of the routing policy registration.
+	Description *string
+
+	// The ID of the most recent delta that modified this registration.
+	LatestDeltaId *string
+
+	// The maximum prefix length that the ASNs are authorized to announce.
+	MaxLength *int32
+
+	// Specifies whether to permit more specific route announcements than the CIDR
+	// prefix. When enabled, ASNs can announce sub-prefixes of the authorized CIDR up
+	// to the specified maximum length. Default: false .
+	PermitMoreSpecificAnnouncements *bool
+
+	// The state of the routing policy registration. Valid values: pending-activate |
+	// activate-failed | create-in-progress | create-complete | update-in-progress |
+	// update-complete | delete-in-progress | delete-complete .
+	State IpamRoutingPolicyRegistrationState
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a routing policy registration change, including the
+// changes applied and their publication state.
+type IpamRoutingPolicyRegistrationDelta struct {
+
+	// The unique identifier of the delta.
+	DeltaId *string
+
+	// The JSON specification describing the changes applied in this delta.
+	DeltaJson *string
+
+	// The state of the delta. Valid values: pending | published | failed .
+	State IpamRoutingPolicyRegistrationDeltaState
+
+	// A message describing the current state, including error information if the
+	// delta failed.
+	StateMessage *string
 
 	noSmithyDocumentSerde
 }

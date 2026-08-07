@@ -1,0 +1,8 @@
+{
+    "id": "d0c72d01-49b8-456d-9b0c-edad823c64aa",
+    "type": "feature",
+    "description": "Adds provenanceEnabled to StartFHIRImportJob",
+    "modules": [
+        "service/healthlake"
+    ]
+}

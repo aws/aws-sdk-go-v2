@@ -132,6 +132,9 @@ type GetOriginEndpointOutput struct {
 	// content that falls within the window.
 	StartoverWindowSeconds *int32
 
+	// The output mode for stream names in egress manifests for this origin endpoint.
+	StreamNameOutputMode types.StreamNameOutputMode
+
 	// The comma-separated list of tag key:value pairs assigned to the origin endpoint.
 	Tags map[string]string
 

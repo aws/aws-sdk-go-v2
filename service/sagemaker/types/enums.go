@@ -6533,13 +6533,15 @@ type NotebookInstanceStatus string
 
 // Enum values for NotebookInstanceStatus
 const (
-	NotebookInstanceStatusPending   NotebookInstanceStatus = "Pending"
-	NotebookInstanceStatusInService NotebookInstanceStatus = "InService"
-	NotebookInstanceStatusStopping  NotebookInstanceStatus = "Stopping"
-	NotebookInstanceStatusStopped   NotebookInstanceStatus = "Stopped"
-	NotebookInstanceStatusFailed    NotebookInstanceStatus = "Failed"
-	NotebookInstanceStatusDeleting  NotebookInstanceStatus = "Deleting"
-	NotebookInstanceStatusUpdating  NotebookInstanceStatus = "Updating"
+	NotebookInstanceStatusPending            NotebookInstanceStatus = "Pending"
+	NotebookInstanceStatusInService          NotebookInstanceStatus = "InService"
+	NotebookInstanceStatusStopping           NotebookInstanceStatus = "Stopping"
+	NotebookInstanceStatusStopped            NotebookInstanceStatus = "Stopped"
+	NotebookInstanceStatusFailed             NotebookInstanceStatus = "Failed"
+	NotebookInstanceStatusDeleting           NotebookInstanceStatus = "Deleting"
+	NotebookInstanceStatusUpdating           NotebookInstanceStatus = "Updating"
+	NotebookInstanceStatusPendingMaintenance NotebookInstanceStatus = "PendingMaintenance"
+	NotebookInstanceStatusInMaintenance      NotebookInstanceStatus = "InMaintenance"
 )
 
 // Values returns all known values for NotebookInstanceStatus. Note that this can
@@ -6555,6 +6557,8 @@ func (NotebookInstanceStatus) Values() []NotebookInstanceStatus {
 		"Failed",
 		"Deleting",
 		"Updating",
+		"PendingMaintenance",
+		"InMaintenance",
 	}
 }
 

@@ -10,16 +10,16 @@ import (
 )
 
 // Deletes the specified fields containing personally identifiable information
-// (PII) from a contact in the specified Connect Customer instance. This operation
-// redacts PII (such as customer endpoints, additional email recipients, and the
-// email subject) from the contact and its associated contact trace record (CTR).
-// The contact must be in a terminated state.
+// (PII) from a contact in the specified Connect Customer instance. We redact PII
+// (such as customer endpoints, additional email recipients, and the email subject)
+// from the contact and its associated contact trace record (CTR). The contact must
+// be in a terminated state.
 //
-// This operation performs a hard deletion of the specified PII and cannot be
-// undone. There is no retention period; after the data is deleted, it cannot be
-// recovered. Only fields that Connect Customer identifies and stores as PII are
-// removed. Any PII that you place in fields outside the scope of this operation
-// remains your responsibility to remove.
+// This deletion is permanent and cannot be undone. Performing this operation
+// permanently deletes the specified PII. There is no retention period; you cannot
+// recover the data after deletion. We remove only the fields that Connect Customer
+// identifies and stores as PII. Any PII that you place in fields outside the scope
+// of this operation remains your responsibility to remove.
 func (c *Client) DeleteContactData(ctx context.Context, params *DeleteContactDataInput, optFns ...func(*Options)) (*DeleteContactDataOutput, error) {
 	if params == nil {
 		params = &DeleteContactDataInput{}
@@ -37,15 +37,20 @@ func (c *Client) DeleteContactData(ctx context.Context, params *DeleteContactDat
 
 type DeleteContactDataInput struct {
 
-	// The categories of PII to redact from the contact. Valid values are
-	// CUSTOMER_ENDPOINT , ADDITIONAL_EMAIL_RECIPIENTS , and EMAIL_SUBJECT .
-	// ADDITIONAL_EMAIL_RECIPIENTS and EMAIL_SUBJECT are supported only for contacts
-	// in the email channel.
+	// The categories of PII to redact from the contact. Specify one or more of the
+	// following values:
+	//
+	//   - CUSTOMER_ENDPOINT – The customer's contact endpoint.
+	//
+	//   - ADDITIONAL_EMAIL_RECIPIENTS – Additional recipients on an email contact
+	//   (email channel only).
+	//
+	//   - EMAIL_SUBJECT – The subject line of an email contact (email channel only).
 	//
 	// This member is required.
 	ContactFields []types.ContactField
 
-	// The identifier of the contact. PII can be deleted only from a contact that has
+	// The identifier of the contact. You can delete PII only from a contact that has
 	// been disconnected (is in a terminated state).
 	//
 	// This member is required.

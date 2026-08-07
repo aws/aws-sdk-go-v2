@@ -6490,6 +6490,26 @@ func (m *validateOpUpdateContactSchedule) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateContactTaskTemplate struct {
+}
+
+func (*validateOpUpdateContactTaskTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContactTaskTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContactTaskTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContactTaskTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDataTableAttribute struct {
 }
 
@@ -8784,6 +8804,10 @@ func addOpUpdateContactRoutingDataValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateContactScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateContactSchedule{}, middleware.After)
+}
+
+func addOpUpdateContactTaskTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContactTaskTemplate{}, middleware.After)
 }
 
 func addOpUpdateDataTableAttributeValidationMiddleware(stack *middleware.Stack) error {
@@ -19148,6 +19172,27 @@ func validateOpUpdateContactScheduleInput(v *UpdateContactScheduleInput) error {
 	}
 	if v.ScheduledTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScheduledTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateContactTaskTemplateInput(v *UpdateContactTaskTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContactTaskTemplateInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.TaskTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskTemplateId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

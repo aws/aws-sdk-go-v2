@@ -2100,6 +2100,11 @@ func TestCheckRequestSnapshot_PutPlaybackConfiguration(t *testing.T) {
 		LivePreRollConfiguration: &types.LivePreRollConfiguration{
 			AdDecisionServerUrl: ptr.String("__AdDecisionServerUrl__"),
 			MaxDurationSeconds:  ptr.Int32(1),
+			AdDecisionServerConfiguration: &types.PreRollAdDecisionServerConfiguration{
+				VastResponse: &types.PreRollVastResponse{
+					AdSequencingMode: types.PreRollAdSequencingMode("FOLLOW_AD_SEQUENCE"),
+				},
+			},
 		},
 		ManifestProcessingRules: &types.ManifestProcessingRules{
 			AdMarkerPassthrough: &types.AdMarkerPassthrough{
@@ -2125,6 +2130,9 @@ func TestCheckRequestSnapshot_PutPlaybackConfiguration(t *testing.T) {
 					"key0": "__Value__",
 				},
 				CompressRequest: types.CompressionMethod("NONE"),
+			},
+			VastResponse: &types.VastResponse{
+				AdSequencingMode: types.AdSequencingMode("FOLLOW_AD_SEQUENCE"),
 			},
 		},
 		FunctionMapping: map[string]string{
@@ -4985,6 +4993,11 @@ func TestUpdateRequestSnapshot_PutPlaybackConfiguration(t *testing.T) {
 		LivePreRollConfiguration: &types.LivePreRollConfiguration{
 			AdDecisionServerUrl: ptr.String("__AdDecisionServerUrl__"),
 			MaxDurationSeconds:  ptr.Int32(1),
+			AdDecisionServerConfiguration: &types.PreRollAdDecisionServerConfiguration{
+				VastResponse: &types.PreRollVastResponse{
+					AdSequencingMode: types.PreRollAdSequencingMode("FOLLOW_AD_SEQUENCE"),
+				},
+			},
 		},
 		ManifestProcessingRules: &types.ManifestProcessingRules{
 			AdMarkerPassthrough: &types.AdMarkerPassthrough{
@@ -5010,6 +5023,9 @@ func TestUpdateRequestSnapshot_PutPlaybackConfiguration(t *testing.T) {
 					"key0": "__Value__",
 				},
 				CompressRequest: types.CompressionMethod("NONE"),
+			},
+			VastResponse: &types.VastResponse{
+				AdSequencingMode: types.AdSequencingMode("FOLLOW_AD_SEQUENCE"),
 			},
 		},
 		FunctionMapping: map[string]string{

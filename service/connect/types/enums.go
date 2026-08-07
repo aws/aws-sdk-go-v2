@@ -3463,6 +3463,7 @@ const (
 	PropertyValidationExceptionReasonResourceNameAlreadyExists  PropertyValidationExceptionReason = "RESOURCE_NAME_ALREADY_EXISTS"
 	PropertyValidationExceptionReasonRequiredPropertyMissing    PropertyValidationExceptionReason = "REQUIRED_PROPERTY_MISSING"
 	PropertyValidationExceptionReasonNotSupported               PropertyValidationExceptionReason = "NOT_SUPPORTED"
+	PropertyValidationExceptionReasonTypeMismatch               PropertyValidationExceptionReason = "TYPE_MISMATCH"
 )
 
 // Values returns all known values for PropertyValidationExceptionReason. Note
@@ -3478,6 +3479,7 @@ func (PropertyValidationExceptionReason) Values() []PropertyValidationExceptionR
 		"RESOURCE_NAME_ALREADY_EXISTS",
 		"REQUIRED_PROPERTY_MISSING",
 		"NOT_SUPPORTED",
+		"TYPE_MISMATCH",
 	}
 }
 

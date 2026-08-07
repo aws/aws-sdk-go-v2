@@ -95,6 +95,11 @@ type UpdateOriginEndpointInput struct {
 	// seconds (14 days).
 	StartoverWindowSeconds *int32
 
+	// The output mode for stream names in egress manifests. If you provide a value,
+	// it must match the current value. You can't change the stream name output mode
+	// after you create the endpoint.
+	StreamNameOutputMode types.StreamNameOutputMode
+
 	// The separator character to use in generated URIs for this origin endpoint. This
 	// setting applies to all manifest types on the endpoint. If you don't specify a
 	// value in the update request, the current value is preserved.
@@ -178,6 +183,9 @@ type UpdateOriginEndpointOutput struct {
 	// that's available for on-demand viewing. Viewers can start-over or catch-up on
 	// content that falls within the window.
 	StartoverWindowSeconds *int32
+
+	// The output mode for stream names in egress manifests for this origin endpoint.
+	StreamNameOutputMode types.StreamNameOutputMode
 
 	// The comma-separated list of tag key:value pairs assigned to the origin endpoint.
 	Tags map[string]string

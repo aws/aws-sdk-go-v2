@@ -65,6 +65,9 @@ type StartFHIRImportJobInput struct {
 	// A bounded-length string value.
 	ProfileId *string
 
+	// Specifies whether to enable provenance for the import job.
+	ProvenanceEnabled *bool
+
 	// The validation level of the import job.
 	ValidationLevel types.ValidationLevel
 

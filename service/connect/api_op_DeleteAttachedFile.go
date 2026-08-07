@@ -29,12 +29,14 @@ func (c *Client) DeleteAttachedFile(ctx context.Context, params *DeleteAttachedF
 // Request to DeleteAttachedFile API
 type DeleteAttachedFileInput struct {
 
-	// The resource to which the attached file is (being) uploaded to. [Cases] are the only
-	// current supported resource.
+	// The resource to which the attached file is (being) uploaded to. The supported
+	// resources are [Cases], [Email], and [Task].
 	//
 	// This value must be a valid ARN.
 	//
-	// [Cases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+	// [Task]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html
+	// [Email]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
+	// [Cases]: https://docs.aws.amazon.com/connect/latest/adminguide/cases.html
 	//
 	// This member is required.
 	AssociatedResourceArn *string

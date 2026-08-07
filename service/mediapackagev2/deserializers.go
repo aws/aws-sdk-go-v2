@@ -1244,6 +1244,15 @@ func awsRestjson1_deserializeOpDocumentCreateOriginEndpointOutput(v **CreateOrig
 				sv.StartoverWindowSeconds = ptr.Int32(int32(i64))
 			}
 
+		case "StreamNameOutputMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamNameOutputMode to be of type string, got %T instead", value)
+				}
+				sv.StreamNameOutputMode = types.StreamNameOutputMode(jtv)
+			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
@@ -3075,6 +3084,15 @@ func awsRestjson1_deserializeOpDocumentGetOriginEndpointOutput(v **GetOriginEndp
 					return err
 				}
 				sv.StartoverWindowSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "StreamNameOutputMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamNameOutputMode to be of type string, got %T instead", value)
+				}
+				sv.StreamNameOutputMode = types.StreamNameOutputMode(jtv)
 			}
 
 		case "Tags":
@@ -5767,6 +5785,15 @@ func awsRestjson1_deserializeOpDocumentUpdateOriginEndpointOutput(v **UpdateOrig
 					return err
 				}
 				sv.StartoverWindowSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "StreamNameOutputMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamNameOutputMode to be of type string, got %T instead", value)
+				}
+				sv.StreamNameOutputMode = types.StreamNameOutputMode(jtv)
 			}
 
 		case "tags":
@@ -9395,6 +9422,15 @@ func awsRestjson1_deserializeDocumentOriginEndpointListConfiguration(v **types.O
 					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
 				}
 				sv.OriginEndpointName = ptr.String(jtv)
+			}
+
+		case "StreamNameOutputMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamNameOutputMode to be of type string, got %T instead", value)
+				}
+				sv.StreamNameOutputMode = types.StreamNameOutputMode(jtv)
 			}
 
 		case "UriSeparator":

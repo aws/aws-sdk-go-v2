@@ -1,0 +1,8 @@
+{
+    "id": "4fff1537-d753-4cf4-b171-86c9b80ac77e",
+    "type": "feature",
+    "description": "Added support for inserting ads via the VAST Ad Buffet standard. You can now configure MediaTailor to insert ads in sequence order using the AdSequencingMode setting in your playback configuration. Standalone ads are used as fallbacks when a sequenced ad is unavailable.",
+    "modules": [
+        "service/mediatailor"
+    ]
+}

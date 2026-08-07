@@ -1,0 +1,8 @@
+{
+    "id": "b9ce4695-d7e5-416b-80f0-ccd2238526af",
+    "type": "feature",
+    "description": "StreamNameOutputMode - a new optional field on MediaPackageV2 OriginEndpoints that lets customers choose whether egress manifests use numeric stream indices (default) or encoder-assigned stream names from the input",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

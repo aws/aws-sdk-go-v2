@@ -31,10 +31,11 @@ func (c *Client) GetAttachedFile(ctx context.Context, params *GetAttachedFileInp
 type GetAttachedFileInput struct {
 
 	// The resource to which the attached file is (being) uploaded to. The supported
-	// resources are [Cases]and [Email].
+	// resources are [Cases], [Email], and [Task].
 	//
 	// This value must be a valid ARN.
 	//
+	// [Task]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html
 	// [Email]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
 	// [Cases]: https://docs.aws.amazon.com/connect/latest/adminguide/cases.html
 	//
@@ -66,10 +67,12 @@ type GetAttachedFileOutput struct {
 	// This member is required.
 	FileSizeInBytes *int64
 
-	// The resource to which the attached file is (being) uploaded to. [Cases] are the only
-	// current supported resource.
+	// The resource to which the attached file is (being) uploaded to. The supported
+	// resources are [Cases], [Email], and [Task].
 	//
-	// [Cases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+	// [Task]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html
+	// [Email]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
+	// [Cases]: https://docs.aws.amazon.com/connect/latest/adminguide/cases.html
 	AssociatedResourceArn *string
 
 	// Represents the identity that created the file.

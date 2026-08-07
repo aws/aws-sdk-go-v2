@@ -824,6 +824,7 @@ func TestCheckRequestSnapshot_StartFHIRImportJob(t *testing.T) {
 		ProfileId:             ptr.String("__ProfileId__"),
 		InputFormat:           ptr.String("__InputFormat__"),
 		DriftDetectionEnabled: true,
+		ProvenanceEnabled:     ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1666,6 +1667,7 @@ func TestUpdateRequestSnapshot_StartFHIRImportJob(t *testing.T) {
 		ProfileId:             ptr.String("__ProfileId__"),
 		InputFormat:           ptr.String("__InputFormat__"),
 		DriftDetectionEnabled: true,
+		ProvenanceEnabled:     ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

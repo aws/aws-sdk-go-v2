@@ -153,6 +153,10 @@ type AdDecisionServerConfiguration struct {
 	// The HTTP request configuration parameters for the ad decision server.
 	HttpRequest *HttpRequest
 
+	// The settings that control how MediaTailor processes VAST responses from the ad
+	// decision server.
+	VastResponse *VastResponse
+
 	noSmithyDocumentSerde
 }
 
@@ -901,6 +905,11 @@ type KeyValuePair struct {
 // The configuration for pre-roll ad insertion.
 type LivePreRollConfiguration struct {
 
+	// The configuration for the ad decision server (ADS) for live pre-roll ads. The
+	// configuration contains settings that control how MediaTailor processes VAST
+	// responses for pre-roll ad breaks.
+	AdDecisionServerConfiguration *PreRollAdDecisionServerConfiguration
+
 	// The URL for the ad decision server (ADS) for pre-roll ads. This includes the
 	// specification of static parameters and placeholders for dynamic parameters. AWS
 	// Elemental MediaTailor substitutes player-specific and session-specific
@@ -1316,6 +1325,32 @@ type PrefetchSchedule struct {
 	//
 	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The ad decision server configuration for live pre-roll ads. It contains
+// settings that control how MediaTailor processes VAST responses for pre-roll ad
+// breaks.
+type PreRollAdDecisionServerConfiguration struct {
+
+	// The settings that control how MediaTailor processes VAST responses for live
+	// pre-roll ad breaks.
+	VastResponse *PreRollVastResponse
+
+	noSmithyDocumentSerde
+}
+
+// The settings that control how MediaTailor processes VAST responses from the ad
+// decision server for live pre-roll ad breaks.
+type PreRollVastResponse struct {
+
+	// The ad sequencing mode for live pre-roll ads. FOLLOW_AD_SEQUENCE inserts
+	// sequenced ads in increasing order and uses standalone ads only as replacements
+	// when a sequenced ad fails. IGNORE_AD_SEQUENCE inserts ads in the order they
+	// appear in the VAST response, regardless of sequence attributes. The default
+	// behavior is IGNORE_AD_SEQUENCE .
+	AdSequencingMode PreRollAdSequencingMode
 
 	noSmithyDocumentSerde
 }
@@ -1875,6 +1910,23 @@ type UpdateProgramTransition struct {
 
 	// The date and time that the program is scheduled to start, in epoch milliseconds.
 	ScheduledStartTimeMillis *int64
+
+	noSmithyDocumentSerde
+}
+
+// The settings that control how MediaTailor processes VAST responses from the ad
+// decision server.
+type VastResponse struct {
+
+	// The ad sequencing mode that controls how MediaTailor handles sequenced and
+	// standalone ads in VAST responses. FOLLOW_AD_SEQUENCE inserts sequenced ads in
+	// increasing order for both live and VOD workflows, using standalone ads only as
+	// replacements when a sequenced ad fails. FOLLOW_AD_SEQUENCE_ONLY_LIVE enables ad
+	// sequencing for live workflows only. FOLLOW_AD_SEQUENCE_ONLY_VOD enables ad
+	// sequencing for VOD workflows only. IGNORE_AD_SEQUENCE inserts ads in the order
+	// they appear in the VAST response, regardless of sequence attributes. The default
+	// behavior is IGNORE_AD_SEQUENCE .
+	AdSequencingMode AdSequencingMode
 
 	noSmithyDocumentSerde
 }

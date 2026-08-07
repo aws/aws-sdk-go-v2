@@ -27,7 +27,7 @@ import (
 //     the check contributes to the instance-level application status.
 //
 //   - Default values: Interval is 60 seconds, Timeout is 6 seconds,
-//     FailureThreshold is 2, SuccessThreshold is 5, StatusCodeMatcher is 200 ,
+//     FailureThreshold is 2, SuccessThreshold is 2, StatusCodeMatcher is 200 ,
 //     InitializationGracePeriodSeconds is 300 seconds.
 //
 //   - You can tag the application status check during creation. For more
