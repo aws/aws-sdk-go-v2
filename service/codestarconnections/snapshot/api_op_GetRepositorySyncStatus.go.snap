@@ -1,8 +1,5 @@
 GetRepositorySyncStatus
 	Initialize stack step
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		setOperationInput
@@ -29,8 +26,6 @@ GetRepositorySyncStatus
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

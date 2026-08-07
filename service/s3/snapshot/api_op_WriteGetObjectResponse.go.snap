@@ -1,10 +1,7 @@
 WriteGetObjectResponse
 	Initialize stack step
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		S3Shared:ARNLookup
-		SetLogger
 		OperationInputValidation
+		S3Shared:ARNLookup
 	Serialize stack step
 		putBucketContext
 		setOperationInput
@@ -40,8 +37,6 @@ WriteGetObjectResponse
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer

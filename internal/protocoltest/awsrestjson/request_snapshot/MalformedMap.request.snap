@@ -1,0 +1,5 @@
+POST /MalformedMap
+
+Content-Type: application/json
+
+{"bodyMap":{"key0":"__Value__"}}

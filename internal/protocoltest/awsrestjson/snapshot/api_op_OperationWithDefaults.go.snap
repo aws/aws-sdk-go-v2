@@ -1,8 +1,5 @@
 OperationWithDefaults
 	Initialize stack step
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 	Serialize stack step
 		setOperationInput
 		ResolveEndpoint
@@ -28,8 +25,6 @@ OperationWithDefaults
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

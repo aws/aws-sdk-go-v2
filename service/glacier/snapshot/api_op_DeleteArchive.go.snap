@@ -1,9 +1,6 @@
 DeleteArchive
 	Initialize stack step
 		Glacier:DefaultAccountID
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		Glacier:APIVersion
@@ -32,8 +29,6 @@ DeleteArchive
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

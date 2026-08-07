@@ -62,9 +62,6 @@ func (c *Client) addOperationCreateQueueFleetAssociationMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -77,12 +74,6 @@ func (c *Client) addOperationCreateQueueFleetAssociationMiddlewares(stack *middl
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -90,9 +81,6 @@ func (c *Client) addOperationCreateQueueFleetAssociationMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpCreateQueueFleetAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateQueueFleetAssociation"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

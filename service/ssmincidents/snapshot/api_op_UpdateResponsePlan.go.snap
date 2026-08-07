@@ -1,9 +1,6 @@
 UpdateResponsePlan
 	Initialize stack step
-		RegisterServiceMetadata
 		OperationIdempotencyTokenAutoFill
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		setOperationInput
@@ -30,8 +27,6 @@ UpdateResponsePlan
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

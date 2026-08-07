@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update deletion protection to either allow or deny deletion of the final Region
@@ -62,9 +61,6 @@ func (c *Client) addOperationUpdateDeletionProtectionMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -77,12 +73,6 @@ func (c *Client) addOperationUpdateDeletionProtectionMiddlewares(stack *middlewa
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -90,9 +80,6 @@ func (c *Client) addOperationUpdateDeletionProtectionMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpUpdateDeletionProtectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateDeletionProtection"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

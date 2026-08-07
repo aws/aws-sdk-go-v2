@@ -141,9 +141,6 @@ func (c *Client) addOperationInvokeHarnessMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamInvokeHarnessMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -166,9 +163,6 @@ func (c *Client) addOperationInvokeHarnessMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpInvokeHarnessValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "InvokeHarness"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

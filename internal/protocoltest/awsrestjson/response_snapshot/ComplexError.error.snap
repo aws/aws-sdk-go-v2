@@ -1,0 +1,6 @@
+403
+Content-Type: application/json
+X-Amzn-Errortype: ComplexError
+X-Header: __Header__
+
+{"Nested":{"Fooooo":"__Foo__"},"TopLevel":"__TopLevel__"}

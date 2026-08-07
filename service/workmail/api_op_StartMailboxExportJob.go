@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a mailbox export job to export MIME-format email messages and calendar
@@ -107,9 +106,6 @@ func (c *Client) addOperationStartMailboxExportJobMiddlewares(stack *middleware.
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -122,12 +118,6 @@ func (c *Client) addOperationStartMailboxExportJobMiddlewares(stack *middleware.
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -135,9 +125,6 @@ func (c *Client) addOperationStartMailboxExportJobMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpStartMailboxExportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartMailboxExportJob"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

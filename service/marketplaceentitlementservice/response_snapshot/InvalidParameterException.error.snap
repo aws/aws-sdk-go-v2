@@ -3,4 +3,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
-¢gmessagek__Message__f__typexInvalidParameterException
+¢f__typexInvalidParameterExceptiongmessagek__Message__

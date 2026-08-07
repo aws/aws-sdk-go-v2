@@ -1,0 +1,7 @@
+POST /service/RpcV2Protocol/operation/OptionalInputOutput
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿evaluei__Value__ÿ

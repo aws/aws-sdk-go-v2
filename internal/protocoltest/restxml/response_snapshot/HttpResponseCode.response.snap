@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<HttpResponseCodeOutput><Status>1</Status></HttpResponseCodeOutput>

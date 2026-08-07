@@ -84,9 +84,6 @@ func (c *Client) addOperationDescribeAssetModelInterfaceRelationshipMiddlewares(
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -99,12 +96,6 @@ func (c *Client) addOperationDescribeAssetModelInterfaceRelationshipMiddlewares(
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -112,9 +103,6 @@ func (c *Client) addOperationDescribeAssetModelInterfaceRelationshipMiddlewares(
 		return err
 	}
 	if err = addOpDescribeAssetModelInterfaceRelationshipValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeAssetModelInterfaceRelationship"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

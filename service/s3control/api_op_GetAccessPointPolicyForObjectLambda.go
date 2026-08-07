@@ -84,9 +84,6 @@ func (c *Client) addOperationGetAccessPointPolicyForObjectLambdaMiddlewares(stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -99,12 +96,6 @@ func (c *Client) addOperationGetAccessPointPolicyForObjectLambdaMiddlewares(stac
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = s3controlcust.AddUpdateOutpostARN(stack); err != nil {
 		return err
 	}
@@ -115,9 +106,6 @@ func (c *Client) addOperationGetAccessPointPolicyForObjectLambdaMiddlewares(stac
 		return err
 	}
 	if err = addOpGetAccessPointPolicyForObjectLambdaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetAccessPointPolicyForObjectLambda"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

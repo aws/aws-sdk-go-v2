@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an anomaly detection model for a CloudWatch metric. You can use the
@@ -191,9 +190,6 @@ func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -206,12 +202,6 @@ func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Sta
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
@@ -219,9 +209,6 @@ func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpPutAnomalyDetectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutAnomalyDetector"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

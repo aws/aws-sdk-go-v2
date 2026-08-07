@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Permanently deletes the specified Contributor Insights rules.
@@ -91,9 +90,6 @@ func (c *Client) addOperationDeleteInsightRulesMiddlewares(stack *middleware.Sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -106,12 +102,6 @@ func (c *Client) addOperationDeleteInsightRulesMiddlewares(stack *middleware.Sta
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
@@ -119,9 +109,6 @@ func (c *Client) addOperationDeleteInsightRulesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpDeleteInsightRulesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteInsightRules"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

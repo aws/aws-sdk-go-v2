@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=FlattenedXmlMapWithXmlNamespace&Version=2020-01-08

@@ -94,9 +94,6 @@ func (c *Client) addOperationDescribeJobMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -109,12 +106,6 @@ func (c *Client) addOperationDescribeJobMiddlewares(stack *middleware.Stack, opt
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = s3controlcust.AddUpdateOutpostARN(stack); err != nil {
 		return err
 	}
@@ -125,9 +116,6 @@ func (c *Client) addOperationDescribeJobMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpDescribeJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeJob"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

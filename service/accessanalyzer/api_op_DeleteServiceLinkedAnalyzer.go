@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a service-linked analyzer. This operation can be invoked by both
@@ -63,9 +62,6 @@ func (c *Client) addOperationDeleteServiceLinkedAnalyzerMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -78,12 +74,6 @@ func (c *Client) addOperationDeleteServiceLinkedAnalyzerMiddlewares(stack *middl
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -91,9 +81,6 @@ func (c *Client) addOperationDeleteServiceLinkedAnalyzerMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpDeleteServiceLinkedAnalyzerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteServiceLinkedAnalyzer"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

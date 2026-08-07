@@ -1,0 +1,6 @@
+POST /body
+
+Content-Type: application/json
+X-Amz-Test-Id: __TestId__
+
+{"testConfig":{"timeout":1}}

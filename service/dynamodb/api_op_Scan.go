@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The Scan operation returns one or more items and item attributes by accessing
@@ -395,9 +394,6 @@ func (c *Client) addOperationScanMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -410,12 +406,6 @@ func (c *Client) addOperationScanMiddlewares(stack *middleware.Stack, options Op
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addOpScanDiscoverEndpointMiddleware(stack, options, c); err != nil {
 		return err
 	}
@@ -426,9 +416,6 @@ func (c *Client) addOperationScanMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	if err = addOpScanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "Scan"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

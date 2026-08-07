@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Kinesis Video Stream pool for use with media stream pipelines.
@@ -87,9 +86,6 @@ func (c *Client) addOperationCreateMediaPipelineKinesisVideoStreamPoolMiddleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -102,12 +98,6 @@ func (c *Client) addOperationCreateMediaPipelineKinesisVideoStreamPoolMiddleware
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -115,9 +105,6 @@ func (c *Client) addOperationCreateMediaPipelineKinesisVideoStreamPoolMiddleware
 		return err
 	}
 	if err = addOpCreateMediaPipelineKinesisVideoStreamPoolValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateMediaPipelineKinesisVideoStreamPool"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

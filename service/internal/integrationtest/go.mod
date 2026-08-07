@@ -13,7 +13,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.46.4
 	github.com/aws/aws-sdk-go-v2/service/sts v1.45.4
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.38.1
-	github.com/aws/smithy-go v1.27.6
+	github.com/aws/smithy-go v1.27.7
 )
 
 require (

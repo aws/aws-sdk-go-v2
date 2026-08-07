@@ -1,9 +1,6 @@
 CreateAggregatorV2
 	Initialize stack step
-		RegisterServiceMetadata
 		OperationIdempotencyTokenAutoFill
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		setOperationInput
@@ -30,8 +27,6 @@ CreateAggregatorV2
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
